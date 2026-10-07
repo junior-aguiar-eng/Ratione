@@ -1,0 +1,25 @@
+{
+  "name": "ratione",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ratione — Plataforma de Inteligência e Rigor Jurídico: Argumenta, NormaViva, TeseMap e PrazoZero",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter \"@ratione/*\" build && pnpm --filter web build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "keywords": [
+    "legaltech",
+    "direito",
+    "prazos-processuais",
+    "argumentacao-juridica",
+    "vigencia-normativa",
+    "jurisprudencia",
+    "stf",
+    "stj",
+    "cpc"
+  ],
+  "author": "Junior Aguiar",
+  "license": "MIT"
+}
