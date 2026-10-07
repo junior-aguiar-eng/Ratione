@@ -71,6 +71,9 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 2. **Ponto facultativo no meio do prazo.** O STF informa que prazos "que se iniciarem ou se encerrarem" nesses dias são prorrogados; a Portaria do STJ os lista "para os fins dos arts. 219 e 224, § 1º". O motor trata esses dias como **sem expediente** (não computados, CPC art. 216). Confirmar se, no meio do prazo, o dia conta.
 3. **Prazo em dobro com prazo próprio** (CPC 180, § 2º; 183, § 2º; 186, § 4º): o campo "Prazo em dobro" da tela não distingue. Não há como o motor saber se a lei fixou prazo próprio.
 4. **TST e TSE** (seção 2).
+5. **Mandado de segurança: vencimento em dia sem expediente.** A Lei 12.016, art. 23, não prevê prorrogação e o Código Civil, art. 132, § 1º, só a prevê para feriado. O motor mostra o 120º dia como data-limite e a prorrogação ao dia útil como alternativa. A jurisprudência sobre fim de semana e ponto facultativo não foi verificada.
+6. **Mandado de segurança e a ADI 4296.** A página do Planalto marca o art. 23 com "Vide ADIN 4296". O efeito dessa ação sobre o prazo de 120 dias não foi verificado.
+7. **Ação rescisória em 29/02.** O art. 132, § 3º, do Código Civil manda expirar "no imediato" se faltar correspondência: o motor adota 28/02 (a mais cedo) e avisa que a leitura literal seria 1º/03.
 
 ## 8. Auditoria da regra de versão (07/10/2026)
 
@@ -125,7 +128,16 @@ Os eventos ficam em `packages/prazozero/src/calendario/eventos.ts`, cada um com 
 Correções que a leitura trouxe: (1) o **TJSP suspende o expediente em 8/12** em 2026, ao contrário do que um cenário meu afirmava (o cenário foi reescrito); (2) o **9 de julho no TJSP é feriado conferido** em 2026 (Lei Estadual 9.497/1997), e continua pendente nos anos sem provimento; (3) no TJMG a **Quarta-feira de Cinzas é suspensa por inteiro**, e não apenas até as 14h como em STF, STJ e TJSP.
 Limites: feriados **municipais** nunca entram (CPC, art. 1.003, § 6º); o TJSP publica ainda suspensões por comarca, não modeladas; as páginas do TJSP e do TJAL só abrem com JavaScript, então foram lidas pelo navegador do app, e não pelo script.
 
-## 12. Como repetir esta verificação
+## 12. Prazos materiais (F2-14), lido em 07/10/2026
+
+Código em `packages/prazozero/src/motor/materiais.ts`, fora do motor processual porque decadência não se suspende (CC, art. 207).
+
+| Prazo | Texto lido | Regra implementada |
+|---|---|---|
+| **Mandado de segurança** | Lei 12.016/2009, art. 23 (página anotada do Planalto, texto não tachado) e Código Civil, arts. 132 e 207 (compilado) | 120 dias corridos contados da ciência do ato, sem o dia da ciência. Não suspende no recesso. Se o 120º dia não tem expediente, a data-limite continua sendo o 120º dia e a prorrogação aparece como alternativa (dúvida 5) |
+| **Ação rescisória** | CPC, art. 975 (compilado) e Código Civil, art. 132, § 3º | Mesmo dia e mês, 2 anos depois do trânsito em julgado. Prorroga ao primeiro dia útil se expirar em férias forenses, recesso, feriado ou dia sem expediente (art. 975, § 1º), usando o calendário do tribunal escolhido. Os §§ 2º (prova nova) e 3º (simulação ou colusão) só geram aviso |
+
+## 13. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm
