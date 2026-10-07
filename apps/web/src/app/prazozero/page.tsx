@@ -341,6 +341,38 @@ export default function PrazoZeroPage() {
                   </Notice>
                 )}
 
+                {resultado.alternativa && (
+                  <Notice tom="warn" titulo={`Pode vencer só em ${dataCurta(resultado.alternativa.dataVencimentoFinal)}`}>
+                    Mostramos a data mais cedo, para você não perder o prazo. Se{' '}
+                    {resultado.alternativa.eventosPendentes.map(e => `${dataCurta(e.data)} (${e.nome})`).join('; ')}{' '}
+                    {resultado.alternativa.eventosPendentes.length === 1 ? 'for confirmado' : 'forem confirmados'} como dia sem
+                    expediente neste tribunal, o vencimento passa para essa data. Confirme no ato do tribunal antes de contar com ela.
+                  </Notice>
+                )}
+
+                {resultado.calendarioVerificado && resultado.fontesCalendario ? (
+                  <Notice tom="info" titulo={`Calendário do ${tribunalId} conferido contra o ato oficial`}>
+                    <ul className="space-y-1">
+                      {resultado.fontesCalendario.map(f => (
+                        <li key={f.url}>
+                          <a href={f.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+                            {f.ato}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-2">{resultado.avisos[0]}</p>
+                  </Notice>
+                ) : (
+                  <Notice tom="info" titulo="Calendário do tribunal em conferência">
+                    {resultado.avisos.filter(a => !a.includes('modo conservador')).map(a => (
+                      <p key={a} className="mb-1 last:mb-0">
+                        {a}
+                      </p>
+                    ))}
+                  </Notice>
+                )}
+
                 <div className="flex flex-wrap gap-2 no-print">
                   <button type="button" onClick={copiarCertidao} className="btn-secondary">
                     {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
@@ -383,7 +415,7 @@ export default function PrazoZeroPage() {
                     <ul className="space-y-1.5 text-ink-soft leading-snug">
                       <li>Fins de semana: {resumo.fins || 'nenhum'}</li>
                       <li>
-                        Recesso forense (CPC, art. 220):{' '}
+                        Recesso e férias (suspensão de prazos):{' '}
                         {resumo.recesso ? `${resumo.recesso} ${resumo.recesso === 1 ? 'dia' : 'dias'}` : 'nenhum'}
                       </li>
                       {resumo.feriados.length === 0 ? (
