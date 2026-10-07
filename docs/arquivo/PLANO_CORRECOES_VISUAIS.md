@@ -1,3 +1,5 @@
+> **ARQUIVADO. Plano concluído; mantido apenas como histórico.** O estado atual do projeto está em [`docs/plano/STATUS.md`](../plano/STATUS.md).
+
 # RATIONE — PLANO DE CORREÇÕES VISUAIS E DE PRODUTO
 
 ## Objetivo

@@ -3,6 +3,7 @@
 > **Plataforma de Inteligência e Rigor Jurídico**  
 > *Quatro motores especializados, determinísticos e conectados para a prática forense de alto padrão.*
 
+[![CI](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml/badge.svg)](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
@@ -35,9 +36,20 @@ Ratione/
 │   ├── normaviva/              # Parser LC 95/98 e motor temporal de dispositivos legais
 │   ├── argumenta/              # Tipologia do Art. 489 CPC e pipeline de reconstrução lógica
 │   └── tesemap/                # Modelagem do grafo de precedentes qualificados e arestas semânticas
-├── Plano Mestre — Argumenta, NormaViva, TeseMap e PrazoZero.md # Diretriz fundamental
+├── docs/
+│   ├── plano/                  # PLANO_MESTRE (visão), PLANO_EXECUCAO (caminho) e STATUS (estado vivo)
+│   ├── produto/                # Método do calendário, fontes, verificação, IA e precificação
+│   ├── juridico/               # Minutas (termos, privacidade, cookies, IA) para revisão por advogado
+│   └── arquivo/                # Planos concluídos
+├── .github/workflows/ci.yml    # Tipos, testes, gabarito dos cenários e build
 └── package.json
 ```
+
+---
+
+## 📍 Onde estamos
+
+O estado de cada item e a ordem de trabalho ficam em [`docs/plano/STATUS.md`](docs/plano/STATUS.md). A visão está no [Plano Mestre](docs/plano/PLANO_MESTRE.md) e o caminho no [Plano de Execução](docs/plano/PLANO_EXECUCAO.md).
 
 ---
 
