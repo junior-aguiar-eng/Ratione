@@ -2810,16 +2810,50 @@
     "alternativaEsperada": null
   },
   {
-    "id": "jef-recesso-conservador",
-    "categoria": "pendente",
-    "descricao": "JEF: a suspensão de 20/12 a 20/01 é pendente; o modo conservador conta o recesso",
-    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)",
+    "id": "jef-recesso",
+    "categoria": "jef",
+    "descricao": "JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)",
+    "fundamento": "Res. CNJ 244/2016, art. 3º; CPC, art. 220; Lei 9.099/1995, art. 12-A",
     "entrada": {
       "dataEvento": "2025-12-15",
       "tipoEvento": "publicacao",
       "diasPrazo": 10,
       "tribunalId": "TJSP",
       "regime": "jef_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "jef-recesso-desligado",
+    "categoria": "jef",
+    "descricao": "JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)",
+    "fundamento": "Opção do usuário; ver Res. CNJ 244/2016, art. 3º",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis",
+      "suspensaoRecesso": false
     },
     "esperado": {
       "dataPublicacao": "2025-12-15",
@@ -2845,32 +2879,69 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-01-28"
+    "alternativaEsperada": null
   },
   {
-    "id": "jef-recesso-completo",
-    "categoria": "pendente",
-    "descricao": "JEF: no modo completo a suspensão de 20/12 a 20/01 vale",
-    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)",
+    "id": "cpp-stj-ferias-julho",
+    "categoria": "cpp",
+    "descricao": "CPP no STJ: as férias de julho não suspendem prazo criminal; vencimento em domingo vai à segunda 06/07",
+    "fundamento": "CPP, art. 798, caput e § 3º; Portaria STJ/GP 280/2023",
     "entrada": {
-      "dataEvento": "2025-12-15",
+      "dataEvento": "2026-06-30",
       "tipoEvento": "publicacao",
-      "diasPrazo": 10,
-      "tribunalId": "TJSP",
-      "regime": "jef_dias_uteis",
-      "modo": "completo"
+      "diasPrazo": 5,
+      "tribunalId": "STJ",
+      "regime": "cpp_dias_corridos"
     },
     "esperado": {
-      "dataPublicacao": "2025-12-15",
-      "dataTermoInicial": "2025-12-16",
-      "dataVencimentoFinal": "2026-01-28",
-      "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "dataPublicacao": "2026-06-30",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-07-06",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 12,
-        "suspensaoDias": 22,
-        "suspensaoDe": "2025-12-22",
-        "suspensaoAte": "2026-01-20",
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-05",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-stf-ferias-janeiro",
+    "categoria": "cpp",
+    "descricao": "CPP no STF: depois de 20/01 o prazo criminal corre mesmo nas férias de janeiro",
+    "fundamento": "CPP, arts. 798, caput, e 798-A; RISTF, art. 105; comunicado do STF (Portaria GDG 218/2024)",
+    "entrada": {
+      "dataEvento": "2026-01-22",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STF",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-22",
+      "dataTermoInicial": "2026-01-23",
+      "dataVencimentoFinal": "2026-01-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
         "diasNaoUteis": []
       }
     },
@@ -2878,33 +2949,38 @@
       "status": "pendente",
       "por": null,
       "em": null
-    }
+    },
+    "alternativaEsperada": null
   },
   {
-    "id": "jef-recesso-explicito",
-    "categoria": "jef",
-    "descricao": "JEF: suspensão ligada explicitamente pelo usuário vale em qualquer modo",
-    "fundamento": "CPC, art. 220",
+    "id": "cpp-stj-recesso-798a",
+    "categoria": "cpp",
+    "descricao": "CPP no STJ: suspenso até 20/01 (não até 31/01); retoma em 21/01 e o vencimento de domingo vai à segunda",
+    "fundamento": "CPP, art. 798-A; Portaria STJ/GP 584/2022",
     "entrada": {
-      "dataEvento": "2025-12-15",
+      "dataEvento": "2025-12-19",
       "tipoEvento": "publicacao",
-      "diasPrazo": 10,
-      "tribunalId": "TJSP",
-      "regime": "jef_dias_uteis",
-      "suspensaoRecesso": true
+      "diasPrazo": 5,
+      "tribunalId": "STJ",
+      "regime": "cpp_dias_corridos"
     },
     "esperado": {
-      "dataPublicacao": "2025-12-15",
-      "dataTermoInicial": "2025-12-16",
-      "dataVencimentoFinal": "2026-01-28",
-      "foiProrrogadoTermoFinal": false,
+      "dataPublicacao": "2025-12-19",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-26",
+      "foiProrrogadoTermoFinal": true,
       "calendarioVerificado": false,
       "rastro": {
-        "fimsDeSemana": 12,
-        "suspensaoDias": 22,
-        "suspensaoDe": "2025-12-22",
+        "fimsDeSemana": 0,
+        "suspensaoDias": 32,
+        "suspensaoDe": "2025-12-20",
         "suspensaoAte": "2026-01-20",
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-01-25",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
       }
     },
     "validacao": {

@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **100** · validados: **0** · pendentes: **100**
+> Cenários: **102** · validados: **0** · pendentes: **102**
 
 ## Como revisar
 
@@ -16,8 +16,8 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.
 - **Feriados estaduais e municipais**: só aparecem como pendentes (SP, 9 de julho) e o município nunca é calculado (CPC, art. 1.003, § 6º).
 - **Calendário de STF e STJ fora de 2026**, e de TRFs e TJs além da Lei 5.010 e dos feriados nacionais.
-- **Recesso no JEF** (suspensão de 20/12 a 20/01): sem texto primário; tratado como pendente.
-- **Férias coletivas de janeiro e julho de STF e STJ para prazos criminais**: não conferidas.
+- **Calendário de TRFs e TJs** além da Lei 5.010 e dos feriados nacionais (portarias anuais de cada tribunal).
+- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.
 
 ## Resumo
 
@@ -30,12 +30,12 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | Prazo em dobro | 7 |
 | Ano bissexto | 2 |
 | CLT | 4 |
-| CPP (prazos criminais) | 12 |
+| CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
-| Dias ainda pendentes de conferência | 21 |
+| Dias ainda pendentes de conferência | 19 |
 | Calendário verificado (STF, STJ, TRFs) | 17 |
 | Intimação eletrônica | 5 |
-| Juizados Especiais | 5 |
+| Juizados Especiais | 6 |
 
 ## Disponibilização no DJe
 
@@ -645,7 +645,43 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 50. `cpp-8d-sabado`
+### 50. `cpp-stj-ferias-julho`
+
+**CPP no STJ: as férias de julho não suspendem prazo criminal; vencimento em domingo vai à segunda 06/07**
+
+- **Entrada:** publicação em **30/06/2026 (terça-feira)** · prazo de **5 dias** (CPP, dias corridos) · tribunal **STJ** · modo conservador
+- **Publicação / dia do começo:** 30/06/2026 (terça-feira) · **início da contagem:** 01/07/2026 (quarta-feira)
+- **Vencimento esperado:** **06/07/2026 (segunda-feira)** · prorrogado
+- **Como foi contado (dias excluídos):** 05/07/2026 vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)
+- **Fundamento:** CPP, art. 798, caput e § 3º; Portaria STJ/GP 280/2023
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 51. `cpp-stf-ferias-janeiro`
+
+**CPP no STF: depois de 20/01 o prazo criminal corre mesmo nas férias de janeiro**
+
+- **Entrada:** publicação em **22/01/2026 (quinta-feira)** · prazo de **5 dias** (CPP, dias corridos) · tribunal **STF** · modo conservador
+- **Publicação / dia do começo:** 22/01/2026 (quinta-feira) · **início da contagem:** 23/01/2026 (sexta-feira)
+- **Vencimento esperado:** **27/01/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** nenhum além do dia do começo
+- **Fundamento:** CPP, arts. 798, caput, e 798-A; RISTF, art. 105; comunicado do STF (Portaria GDG 218/2024)
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 52. `cpp-stj-recesso-798a`
+
+**CPP no STJ: suspenso até 20/01 (não até 31/01); retoma em 21/01 e o vencimento de domingo vai à segunda**
+
+- **Entrada:** publicação em **19/12/2025 (sexta-feira)** · prazo de **5 dias** (CPP, dias corridos) · tribunal **STJ** · modo conservador
+- **Publicação / dia do começo:** 19/12/2025 (sexta-feira) · **início da contagem:** 21/01/2026 (quarta-feira)
+- **Vencimento esperado:** **26/01/2026 (segunda-feira)** · prorrogado
+- **Como foi contado (dias excluídos):** suspensão de 32 dias (20/12/2025 a 20/01/2026); 25/01/2026 vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)
+- **Fundamento:** CPP, art. 798-A; Portaria STJ/GP 584/2022
+- **Calendário do tribunal verificado:** não
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 53. `cpp-8d-sabado`
 
 **CPP: 8 dias corridos vencem no sábado 14/03 e vão para a segunda 16/03**
 
@@ -657,7 +693,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 51. `cpp-vence-aparecida`
+### 54. `cpp-vence-aparecida`
 
 **CPP: 3 dias corridos vencem em 12/10 (segunda, feriado) e vão para 13/10**
 
@@ -671,7 +707,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Tribunais superiores
 
-### 52. `stf-sem-uf`
+### 55. `stf-sem-uf`
 
 **STF (sem UF): calendário 2026 verificado**
 
@@ -685,7 +721,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Dias ainda pendentes de conferência
 
-### 53. `carnaval-2026-conservador`
+### 56. `carnaval-2026-conservador`
 
 **Carnaval 2026 ignorado no modo conservador (data mais cedo)**
 
@@ -698,7 +734,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 54. `carnaval-2026-completo`
+### 57. `carnaval-2026-completo`
 
 **Carnaval 2026 considerado; Quarta de Cinzas protrai o dia do começo**
 
@@ -710,7 +746,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 55. `cinzas-meio-conservador`
+### 58. `cinzas-meio-conservador`
 
 **Quarta de Cinzas no meio do prazo (conservador)**
 
@@ -723,7 +759,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 56. `cinzas-meio-completo`
+### 59. `cinzas-meio-completo`
 
 **Quarta de Cinzas no meio do prazo conta normalmente**
 
@@ -735,7 +771,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 57. `cinzas-vencimento-conservador`
+### 60. `cinzas-vencimento-conservador`
 
 **Prazo de 4 dias; sem Carnaval vence na segunda 16/02**
 
@@ -748,7 +784,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 58. `cinzas-vencimento-completo`
+### 61. `cinzas-vencimento-completo`
 
 **Prazo de 4 dias; vencimento cairia na Quarta de Cinzas e é protraído**
 
@@ -760,7 +796,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 59. `carnaval-2028-completo`
+### 62. `carnaval-2028-completo`
 
 **Carnaval 2028 em 28 e 29/02 (bissexto), Cinzas em 01/03**
 
@@ -772,7 +808,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 60. `corpus-christi-conservador`
+### 63. `corpus-christi-conservador`
 
 **Corpus Christi 2026 (04/06) ignorado no modo conservador**
 
@@ -785,7 +821,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 61. `corpus-christi-completo`
+### 64. `corpus-christi-completo`
 
 **Corpus Christi 2026 considerado**
 
@@ -797,7 +833,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 62. `sexta-santa-conservador`
+### 65. `sexta-santa-conservador`
 
 **Sexta-feira Santa 2026 (03/04) ignorada no modo conservador**
 
@@ -810,7 +846,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 63. `sexta-santa-completo`
+### 66. `sexta-santa-completo`
 
 **Sexta-feira Santa 2026 considerada (TJSP)**
 
@@ -822,7 +858,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 64. `onze-agosto-tjsp-completo`
+### 67. `onze-agosto-tjsp-completo`
 
 **11 de agosto não é feriado forense no TJSP**
 
@@ -834,7 +870,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 65. `sp-9-julho-conservador`
+### 68. `sp-9-julho-conservador`
 
 **9 de julho ignorado no modo conservador**
 
@@ -847,7 +883,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 66. `sp-9-julho-completo`
+### 69. `sp-9-julho-completo`
 
 **9 de julho considerado em SP**
 
@@ -859,7 +895,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 67. `consciencia-negra-2023-completo`
+### 70. `consciencia-negra-2023-completo`
 
 **20/11/2023 considerado (lei local, pendente)**
 
@@ -871,7 +907,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 68. `dobro-sexta-santa-completo`
+### 71. `dobro-sexta-santa-completo`
 
 **Prazo em dobro com Sexta-feira Santa considerada**
 
@@ -883,7 +919,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 69. `cpp-sexta-santa-completo`
+### 72. `cpp-sexta-santa-completo`
 
 **CPP: vencimento na Sexta-feira Santa (completo) é prorrogado**
 
@@ -895,7 +931,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 70. `tst-semana-santa-conservador`
+### 73. `tst-semana-santa-conservador`
 
 **TST: art. 62 cita 'Tribunais Superiores', mas não há ato do TST conferido (conservador)**
 
@@ -908,32 +944,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 71. `jef-recesso-conservador`
-
-**JEF: a suspensão de 20/12 a 20/01 é pendente; o modo conservador conta o recesso**
-
-- **Entrada:** publicação em **15/12/2025 (segunda-feira)** · prazo de **10 dias** (JEF, dias úteis) · tribunal **TJSP** · modo conservador
-- **Publicação / dia do começo:** 15/12/2025 (segunda-feira) · **início da contagem:** 16/12/2025 (terça-feira)
-- **Vencimento esperado:** **30/12/2025 (terça-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 28/01/2026 (quarta-feira)
-- **Como foi contado (dias excluídos):** 4 sábados/domingos; 25/12/2025 Natal
-- **Fundamento:** Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)
-- **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 72. `jef-recesso-completo`
-
-**JEF: no modo completo a suspensão de 20/12 a 20/01 vale**
-
-- **Entrada:** publicação em **15/12/2025 (segunda-feira)** · prazo de **10 dias** (JEF, dias úteis) · tribunal **TJSP** · modo completo
-- **Publicação / dia do começo:** 15/12/2025 (segunda-feira) · **início da contagem:** 16/12/2025 (terça-feira)
-- **Vencimento esperado:** **28/01/2026 (quarta-feira)**
-- **Como foi contado (dias excluídos):** 12 sábados/domingos; suspensão de 22 dias (22/12/2025 a 20/01/2026)
-- **Fundamento:** Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)
-- **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 73. `trf3-carnaval-conservador`
+### 74. `trf3-carnaval-conservador`
 
 **TRF3: Carnaval é feriado (Lei 5.010); Quarta de Cinzas ainda sem ato do TRF3 (conservador)**
 
@@ -948,7 +959,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Calendário verificado (STF, STJ, TRFs)
 
-### 74. `stj-semana-santa-2026`
+### 75. `stj-semana-santa-2026`
 
 **STJ: Quarta, Quinta e Sexta Santas de 2026 não contam**
 
@@ -960,7 +971,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 75. `trf3-semana-santa-2026`
+### 76. `trf3-semana-santa-2026`
 
 **TRF3: Semana Santa é feriado forense pela Lei 5.010 (Justiça Federal)**
 
@@ -972,7 +983,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 76. `stj-onze-agosto-2026`
+### 77. `stj-onze-agosto-2026`
 
 **STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam**
 
@@ -984,7 +995,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 77. `stj-corpus-christi-2026`
+### 78. `stj-corpus-christi-2026`
 
 **STJ: Corpus Christi e 05/06 sem expediente em 2026**
 
@@ -996,7 +1007,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 78. `stf-corpus-christi-2026`
+### 79. `stf-corpus-christi-2026`
 
 **STF: Corpus Christi e 05/06 sem expediente em 2026**
 
@@ -1008,7 +1019,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 79. `stj-cinzas-comeco-2026`
+### 80. `stj-cinzas-comeco-2026`
 
 **STJ: Carnaval e Quarta de Cinzas (até 14h) protraem o dia do começo**
 
@@ -1020,7 +1031,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 80. `stf-ponto-facultativo-30-out`
+### 81. `stf-ponto-facultativo-30-out`
 
 **STF: 30/10/2026 (transferência do Dia do Servidor) e Finados não contam**
 
@@ -1032,7 +1043,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 81. `stj-ferias-julho-5d`
+### 82. `stj-ferias-julho-5d`
 
 **STJ: prazos suspensos de 2 a 31 de julho; retoma em 03/08**
 
@@ -1044,7 +1055,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 82. `stj-ferias-julho-8d`
+### 83. `stj-ferias-julho-8d`
 
 **STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam**
 
@@ -1056,7 +1067,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 83. `stf-ferias-julho-5d`
+### 84. `stf-ferias-julho-5d`
 
 **STF: prazos não correm nas férias de julho**
 
@@ -1068,7 +1079,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 84. `tjsp-sem-ferias-julho`
+### 85. `tjsp-sem-ferias-julho`
 
 **TJSP não tem férias coletivas em julho (contraste com STJ/STF)**
 
@@ -1080,7 +1091,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 85. `stj-recesso-ate-31-jan`
+### 86. `stj-recesso-ate-31-jan`
 
 **STJ: prazos suspensos de 20/12 a 31/01 (não a 20/01) e Cinzas protrai o vencimento**
 
@@ -1092,7 +1103,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 86. `stf-recesso-ate-31-jan`
+### 87. `stf-recesso-ate-31-jan`
 
 **STF: prazos não correm de 20/12 a 31/01**
 
@@ -1104,7 +1115,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 87. `stf-dje-ferias-janeiro`
+### 88. `stf-dje-ferias-janeiro`
 
 **STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02**
 
@@ -1116,7 +1127,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 88. `stj-dje-semana-santa`
+### 89. `stj-dje-semana-santa`
 
 **STJ: disponibilização em 31/03/2026; 1 a 3/04 são feriados, publicação na segunda 06/04**
 
@@ -1128,7 +1139,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 89. `trf3-finados`
+### 90. `trf3-finados`
 
 **TRF3: 2 de novembro (segunda) não conta**
 
@@ -1140,7 +1151,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 90. `stj-7-e-8-dezembro`
+### 91. `stj-7-e-8-dezembro`
 
 **STJ: 7/12 (ponto facultativo) e 8/12 (Dia da Justiça) não contam**
 
@@ -1154,7 +1165,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Intimação eletrônica
 
-### 91. `portal-segunda`
+### 92. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -1166,7 +1177,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 92. `portal-sexta`
+### 93. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -1178,7 +1189,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 93. `portal-sabado`
+### 94. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado (leitura literal do art. 231, V; ver nota de revisão)**
 
@@ -1190,7 +1201,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 94. `portal-feriado`
+### 95. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -1202,7 +1213,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 95. `portal-recesso`
+### 96. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -1216,7 +1227,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 96. `jef-5d-embargos`
+### 97. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -1228,7 +1239,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 97. `jef-10d-recurso`
+### 98. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -1240,7 +1251,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 98. `jef-dobro-ignorado`
+### 99. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -1252,19 +1263,31 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 99. `jef-recesso-explicito`
+### 100. `jef-recesso`
 
-**JEF: suspensão ligada explicitamente pelo usuário vale em qualquer modo**
+**JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
-- **Entrada:** publicação em **15/12/2025 (segunda-feira)** · prazo de **10 dias** (JEF, dias úteis) · tribunal **TJSP** · modo conservador · suspensão ligada pelo usuário
+- **Entrada:** publicação em **15/12/2025 (segunda-feira)** · prazo de **10 dias** (JEF, dias úteis) · tribunal **TJSP** · modo conservador
 - **Publicação / dia do começo:** 15/12/2025 (segunda-feira) · **início da contagem:** 16/12/2025 (terça-feira)
 - **Vencimento esperado:** **28/01/2026 (quarta-feira)**
 - **Como foi contado (dias excluídos):** 12 sábados/domingos; suspensão de 22 dias (22/12/2025 a 20/01/2026)
-- **Fundamento:** CPC, art. 220
+- **Fundamento:** Res. CNJ 244/2016, art. 3º; CPC, art. 220; Lei 9.099/1995, art. 12-A
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 100. `jef-dje-sexta`
+### 101. `jef-recesso-desligado`
+
+**JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
+
+- **Entrada:** publicação em **15/12/2025 (segunda-feira)** · prazo de **10 dias** (JEF, dias úteis) · tribunal **TJSP** · modo conservador · suspensão desligada pelo usuário
+- **Publicação / dia do começo:** 15/12/2025 (segunda-feira) · **início da contagem:** 16/12/2025 (terça-feira)
+- **Vencimento esperado:** **30/12/2025 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 25/12/2025 Natal
+- **Fundamento:** Opção do usuário; ver Res. CNJ 244/2016, art. 3º
+- **Calendário do tribunal verificado:** não
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 102. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 

@@ -62,7 +62,7 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 
 - **Feriados estaduais** (tabela do código): nenhum conferido. A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a **data magna** fixada em lei estadual. Há entradas suspeitas: ES (Nossa Senhora da Penha varia com a Páscoa), MT 20/11 (já é nacional), GO 24/10 (aniversário de Goiânia, municipal).
 - **Feriados municipais:** não calculados (CPC, art. 1.003, § 6º).
-- **Carnaval, Corpus Christi, Cinzas e pontos facultativos** de TJs e demais tribunais; calendário de **STF e STJ de outros anos** (só 2026 foi lido).
+- **Carnaval, Corpus Christi, Cinzas e pontos facultativos** de TJs e demais tribunais; calendário de **STF e STJ de 2027** (os tribunais só divulgam o ano seguinte no fim do ano; por isso a suíte e o selo cobrem apenas 2026).
 - **Portarias de suspensão por indisponibilidade** do sistema (CPC, art. 224, § 1º, parte final).
 
 ## 7. Dúvidas jurídicas para o revisor
@@ -98,7 +98,19 @@ Ressalvas: a Lei 5.010/1966, art. 62, tem o inciso IV antigo tachado e o vigente
 Achados da leitura: o art. 1.030 do CPC tem o caput antigo tachado e o vigente mantém os 15 dias; o art. 1.042 foi reescrito em **2026** (Lei 15.484/2026, "relevância da questão de direito federal infraconstitucional"), sem mudar o prazo de 15 dias.
 Fora do catálogo, por não terem sido lidos: recurso de revista e embargos à SDI (CLT/Lei 5.584), embargos de declaração de sentença criminal (CPP, art. 382), habeas corpus, recursos dos Juizados Especiais Federais e demais ritos especiais.
 
-## 10. Como repetir esta verificação
+## 10. Recesso no JEF e prazos criminais em STF e STJ (F2-15), lido em 07/10/2026
+
+| Ponto | Fonte lida | Conclusão |
+|---|---|---|
+| Suspensão de 20/12 a 20/01 no JEF | **Res. CNJ 244/2016, art. 3º** (situação: vigente, atos.cnj.jus.br): "Será suspensa a contagem dos prazos processuais em todos os órgãos do Poder Judiciário, inclusive da União, entre 20 de dezembro a 20 de janeiro … art. 220 do CPC, independentemente da fixação ou não do recesso" | Vale nos Juizados. Confirmado por ato de tribunal: Portaria Presi 431/2016 do TRF1 ("2º Grau, 1º Grau, Juizados Especiais Federais e Turmas Recursais") e Portaria Conjunta 1.512/2023 do TJMG (suspensão em 1ª e 2ª instâncias, citando Juizados e Turmas Recursais nas urgências) |
+| Enunciado 165 do FONAJE | Artigo de doutrina (Empório do Direito, 2018) | Trata de contagem contínua de prazos, **não** do recesso; superado pelo art. 12-A da Lei 9.099 |
+| STJ, prazos criminais, recesso e férias de janeiro | Comunicado do STJ de 16/12/2022 sobre a **Portaria STJ/GP 584/2022** | Suspensão de 20/12 a 31/01 "excetua os prazos processuais em matéria penal, em razão do art. 798-A do CPP" |
+| STJ, prazos criminais, férias de julho | Comunicado do STJ de 29/06/2023 sobre a **Portaria STJ/GP 280/2023** | Suspensão de 2 a 31/07; "nos penais, o art. 798, §§ 1º e 3º, do CPP" (contínuos, prorrogando só o vencimento em dia sem expediente) |
+| STF, prazos criminais | Comunicado do STF de 06/12/2024 sobre a **Portaria GDG 218/2024** | Prazos suspensos de 20/12 a 31/01 "com exceção das regras aplicáveis a processos penais, previstas no CPP"; o RISTF, art. 105, remete ao CPP, art. 798, caput ("correm nas férias") |
+
+Limites: as portarias do STJ e do STF foram lidas pelos **comunicados oficiais** do tribunal, não pelo inteiro teor. Calendários de STF e STJ para 2027 ainda não existem (os tribunais divulgam o ano seguinte no fim do ano).
+
+## 11. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm

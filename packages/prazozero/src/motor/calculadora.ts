@@ -254,6 +254,13 @@ export class MotorPrazoZero {
           : 'Prazo criminal suspenso de 20/12 a 20/01 (CPP, art. 798-A). Não se suspende em processo com réu preso, na Lei Maria da Penha ' +
             'nem em medida urgente: marque a exceção se for o caso.'
       );
+      const tribunal = p.tribunalId?.toUpperCase();
+      if (tribunal === 'STF' || tribunal === 'STJ') {
+        avisos.push(
+          `No ${tribunal}, as férias coletivas (21 a 31 de janeiro e 2 a 31 de julho) não suspendem prazos criminais: valem o CPP, art. 798, caput e § 3º ` +
+            '(Portarias STJ/GP 584/2022 e 280/2023; comunicado do STF sobre a Portaria GDG 218/2024).'
+        );
+      }
     }
 
     if (p.litisconsortesComAdvogadosDistintos) {
@@ -331,14 +338,10 @@ export class MotorPrazoZero {
     incluirPendentes: boolean
   ): Omit<ResultadoCalculoPrazo, 'modo' | 'calendarioVerificado' | 'avisos' | 'alternativa'> {
     const regime = p.regime || 'cpc_dias_uteis';
-    // No JEF a aplicação do art. 220 do CPC é controvertida e não foi conferida: o modo conservador não suspende;
-    // o modo completo suspende, e a diferença aparece como data alternativa.
+    // A suspensão de 20/12 a 20/01 vale em todos os órgãos do Judiciário, inclusive no JEF (Res. CNJ 244/2016, art. 3º).
+    // No CPP ela segue o art. 798-A, com as exceções de réu preso, Maria da Penha e medida urgente.
     const suspensaoRecesso =
-      p.suspensaoRecesso ??
-      (regime === 'cpc_dias_uteis' ||
-        regime === 'clt_dias_uteis' ||
-        (regime === 'cpp_dias_corridos' && !p.excecaoSuspensaoCriminal) ||
-        (regime === 'jef_dias_uteis' && incluirPendentes));
+      p.suspensaoRecesso ?? (regime !== 'cpp_dias_corridos' || !p.excecaoSuspensaoCriminal);
     const multiplicador = p.prazoEmDobro && regime !== 'jef_dias_uteis' ? 2 : 1;
     const diasPrazoEfetivo = p.diasPrazo * multiplicador;
 
@@ -415,9 +418,7 @@ export class MotorPrazoZero {
       const dataIso = formatIso(cursor);
       const diaSemana = DIAS_SEMANA_NOMES[cursor.getUTCDay()];
       const analise = this.verificarDiaUtil(dataIso, contextConfig);
-      const verificacao: FeriadoLegal['verificacao'] | undefined =
-        analise.detalheFeriado?.verificacao ??
-        (analise.motivoNaoUtil === 'recesso_forense' && regime === 'jef_dias_uteis' ? 'pendente' : undefined);
+      const verificacao: FeriadoLegal['verificacao'] | undefined = analise.detalheFeriado?.verificacao;
 
       if (regime !== 'cpp_dias_corridos') {
         // Expediente parcial só protrai o dia do começo e o do vencimento (CPC, art. 224, § 1º);

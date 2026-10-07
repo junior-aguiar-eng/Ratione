@@ -345,7 +345,7 @@ export function suspensaoDePrazos(
       regime === 'clt_dias_uteis'
         ? 'CLT, art. 775-A'
         : regime === 'jef_dias_uteis'
-          ? 'CPC, art. 220 (aplicação subsidiária ao JEF, a conferir)'
+          ? 'CPC, art. 220; Res. CNJ 244/2016, art. 3º (todos os órgãos do Judiciário, inclusive Juizados)'
           : 'CPC, art. 220'
   };
 }

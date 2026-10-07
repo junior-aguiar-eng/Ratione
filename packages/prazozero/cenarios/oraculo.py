@@ -128,8 +128,9 @@ def calcular(e: dict, completo: bool) -> dict:
     regime = e.get("regime", "cpc_dias_uteis")
     trib = e.get("tribunalId", "")
     uf = e.get("uf") or UF_DO_TRIBUNAL.get(trib, "")
-    # JEF: a suspensão de 20/12 a 20/01 é controvertida e não foi conferida (pendente): só o modo completo suspende.
-    recesso = e.get("suspensaoRecesso", regime in ("cpc_dias_uteis", "clt_dias_uteis") or (regime == "jef_dias_uteis" and completo) or (regime == "cpp_dias_corridos" and not e.get("excecaoSuspensaoCriminal")))
+    # Suspensão de 20/12 a 20/01 em todos os órgãos do Judiciário, inclusive no JEF (Res. CNJ 244/2016, art. 3º);
+    # no CPP segue o art. 798-A, salvo réu preso, Maria da Penha ou medida urgente.
+    recesso = e.get("suspensaoRecesso", regime != "cpp_dias_corridos" or not e.get("excecaoSuspensaoCriminal"))
     # JEF: sem prazo diferenciado para entes públicos (Leis 10.259/2001, art. 9º, e 12.153/2009, art. 7º)
     efetivo = e["diasPrazo"] * (2 if e.get("prazoEmDobro") and regime != "jef_dias_uteis" else 1)
     ctx = Ctx(trib, uf, regime, recesso, completo)
@@ -379,12 +380,16 @@ add("jef-10d-recurso", "jef", "JEF: recurso inominado em 10 dias úteis (Lei 9.0
     entrada("2026-03-10", "publicacao", 10, regime="jef_dias_uteis"))
 add("jef-dobro-ignorado", "jef", "JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)", JEF + "; Lei 10.259/2001, art. 9º; Lei 12.153/2009, art. 7º",
     entrada("2026-03-10", "publicacao", 10, regime="jef_dias_uteis", prazoEmDobro=True))
-add("jef-recesso-conservador", "pendente", "JEF: a suspensão de 20/12 a 20/01 é pendente; o modo conservador conta o recesso", PEND + "; CPC, art. 220 (aplicação ao JEF a conferir)",
+add("jef-recesso", "jef", "JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)", "Res. CNJ 244/2016, art. 3º; CPC, art. 220; Lei 9.099/1995, art. 12-A",
     entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis"))
-add("jef-recesso-completo", "pendente", "JEF: no modo completo a suspensão de 20/12 a 20/01 vale", PEND + "; CPC, art. 220 (aplicação ao JEF a conferir)",
-    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis", modo="completo"))
-add("jef-recesso-explicito", "jef", "JEF: suspensão ligada explicitamente pelo usuário vale em qualquer modo", "CPC, art. 220",
-    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis", suspensaoRecesso=True))
+add("jef-recesso-desligado", "jef", "JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)", "Opção do usuário; ver Res. CNJ 244/2016, art. 3º",
+    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis", suspensaoRecesso=False))
+add("cpp-stj-ferias-julho", "cpp", "CPP no STJ: as férias de julho não suspendem prazo criminal; vencimento em domingo vai à segunda 06/07", "CPP, art. 798, caput e § 3º; Portaria STJ/GP 280/2023",
+    entrada("2026-06-30", "publicacao", 5, "STJ", regime="cpp_dias_corridos"))
+add("cpp-stf-ferias-janeiro", "cpp", "CPP no STF: depois de 20/01 o prazo criminal corre mesmo nas férias de janeiro", "CPP, arts. 798, caput, e 798-A; RISTF, art. 105; comunicado do STF (Portaria GDG 218/2024)",
+    entrada("2026-01-22", "publicacao", 5, "STF", regime="cpp_dias_corridos"))
+add("cpp-stj-recesso-798a", "cpp", "CPP no STJ: suspenso até 20/01 (não até 31/01); retoma em 21/01 e o vencimento de domingo vai à segunda", "CPP, art. 798-A; Portaria STJ/GP 584/2022",
+    entrada("2025-12-19", "publicacao", 5, "STJ", regime="cpp_dias_corridos"))
 add("dobro-mp-intimacao-pessoal", "dobro", "Ministério Público: 15 dias em dobro (30 úteis) a partir da intimação pessoal por carga", "CPC, arts. 180 e 183, § 1º",
     entrada("2026-03-10", "carga_ou_audiencia", 15, prazoEmDobro=True))
 add("dobro-defensoria-embargos", "dobro", "Defensoria Pública: embargos de declaração em dobro (10 úteis)", "CPC, art. 186",
@@ -504,8 +509,8 @@ def gerar_revisao(cenarios):
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
     L.append("- **Feriados estaduais e municipais**: só aparecem como pendentes (SP, 9 de julho) e o município nunca é calculado (CPC, art. 1.003, § 6º).")
     L.append("- **Calendário de STF e STJ fora de 2026**, e de TRFs e TJs além da Lei 5.010 e dos feriados nacionais.")
-    L.append("- **Recesso no JEF** (suspensão de 20/12 a 20/01): sem texto primário; tratado como pendente.")
-    L.append("- **Férias coletivas de janeiro e julho de STF e STJ para prazos criminais**: não conferidas.")
+    L.append("- **Calendário de TRFs e TJs** além da Lei 5.010 e dos feriados nacionais (portarias anuais de cada tribunal).")
+    L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")
     L.append("")

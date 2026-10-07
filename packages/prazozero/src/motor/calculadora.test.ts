@@ -174,15 +174,22 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.ok(!r.certidaoAuditavel.includes('Prazo em Dobro'));
   });
 
-  it('JEF: a suspensão de 20/12 a 20/01 é pendente e aparece como uma única data alternativa', () => {
+  it('JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)', () => {
     const r = motor.calcularPrazo({
       dataEvento: '2025-12-15', tipoEvento: 'publicacao', diasPrazo: 10, tribunalId: 'TJSP', regime: 'jef_dias_uteis'
     });
-    assert.strictEqual(r.dataVencimentoFinal, '2025-12-30');
-    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-01-28');
-    assert.strictEqual(r.alternativa?.eventosPendentes.length, 1, 'o recesso inteiro entra como um evento só');
-    assert.ok(r.alternativa?.eventosPendentes[0].nome.includes('Suspensão de prazos'));
-    assert.ok(r.alternativa?.eventosPendentes[0].fundamentoLegal.includes('a conferir'));
+    assert.strictEqual(r.dataVencimentoFinal, '2026-01-28');
+    assert.strictEqual(r.alternativa, undefined, 'não há mais dia pendente: nenhuma data alternativa');
+    assert.ok(r.memoriaCalculo.some(m => m.status === 'recesso_forense' && m.fundamentoLegal.includes('244/2016')));
+  });
+
+  it('CPP no STF e no STJ: as férias não suspendem prazo criminal, e o aviso diz isso', () => {
+    const jan = motor.calcularPrazo({ dataEvento: '2026-01-22', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'STF', regime: 'cpp_dias_corridos' });
+    assert.strictEqual(jan.dataVencimentoFinal, '2026-01-27', 'depois de 20/01 o prazo criminal corre');
+    assert.ok(jan.avisos.some(a => a.startsWith('No STF, as férias coletivas') && a.includes('798')));
+    const jul = motor.calcularPrazo({ dataEvento: '2026-06-30', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'STJ', regime: 'cpp_dias_corridos' });
+    assert.strictEqual(jul.dataVencimentoFinal, '2026-07-06', 'julho não suspende; vencimento de domingo vai à segunda');
+    assert.ok(jul.avisos.some(a => a.startsWith('No STJ, as férias coletivas')));
   });
 
   it('CPP: o prazo criminal é suspenso de 20/12 a 20/01 (art. 798-A), salvo réu preso, Maria da Penha ou urgência', () => {
