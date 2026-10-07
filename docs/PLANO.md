@@ -25,7 +25,7 @@
 
 1. **Nada é implementado fora do §10.** Ideia nova entra no §10 como item, com "pronto quando", antes de virar código.
 2. **Um item por branch** (`feat/<id>-resumo`), apagada depois de entrar na `main`. A `main` só recebe com o CI verde.
-3. **Dado jurídico só entra com fonte** (ato, URL, data de leitura), registrada em [`produto/VERIFICACAO_FONTES.md`](produto/VERIFICACAO_FONTES.md). Sem fonte, o dado fica `pendente` e o resultado avisa.
+3. **Dado jurídico só entra com fonte** (ato, URL, data de leitura), registrada em [`produto/VERIFICACAO_FONTES.md`](produto/VERIFICACAO_FONTES.md). Sem fonte, o dado fica `pendente` e o resultado avisa. Só se verifica a **versão compilada** da lei, que já não traz o texto revogado. No Planalto, usar a URL `...compilado.htm` quando existir (códigos e decretos-lei, ex.: `del3689compilado.htm`); onde o Planalto só publica a página anotada, vale o texto que **não** está tachado: o `fetch_oficial.py` marca o tachado com `~~`, e trecho entre `~~` nunca é fonte de regra. Registrar a versão lida e a data.
 4. **Mudou regra ou calendário? Rodou a suíte inteira.** O CI faz isso a cada push.
 5. **Este arquivo é atualizado no mesmo commit** que muda o estado de um item. Estados: **feito**, **em curso**, **parcial**, **não iniciado**.
 6. **Cada módulo funciona sozinho.** Um módulo usa o núcleo comum, mas não precisa de outro para funcionar.
@@ -405,7 +405,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ## 12. Decisões do responsável
 
-**Tomadas (07/10/2026):** público (profissionais do Direito e concurseiros); tribunais prioritários (STF e STJ); calendário parte dos prazos dos códigos, cruza com feriados nacionais e levanta tribunal a tribunal; sem plano empresarial; IA por API multiprovedor, sem tornar o site exclusivamente de IA; marca sem registro prévio; documentos jurídicos redigidos por Claude e revisados pelo responsável; integrações DataJud (metadados) e API de Legislação do Senado; manter um único plano; art. 229 do CPC só como aviso de atenção, porque os autos eletrônicos são a regra.
+**Tomadas (07/10/2026):** público (profissionais do Direito e concurseiros); tribunais prioritários (STF e STJ); calendário parte dos prazos dos códigos, cruza com feriados nacionais e levanta tribunal a tribunal; sem plano empresarial; IA por API multiprovedor, sem tornar o site exclusivamente de IA; marca sem registro prévio; documentos jurídicos redigidos por Claude e revisados pelo responsável; integrações DataJud (metadados) e API de Legislação do Senado; manter um único plano; art. 229 do CPC só como aviso de atenção, porque os autos eletrônicos são a regra; só versões compiladas das leis são verificadas (§1, regra 3).
 
 **Abertas**
 

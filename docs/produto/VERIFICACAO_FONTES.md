@@ -3,6 +3,7 @@
 > Conferido em **07/10/2026**, lendo o texto oficial (Planalto, STJ, STF) com `~/.claude/scripts/fetch_oficial.py`.
 > "Verificado" aqui significa **texto lido na fonte**; não substitui a **validação jurídica** (coluna final), que cabe ao revisor.
 > Regra de ouro (METODO_CALENDARIO_FORENSE.md): sem ato e URL, o dia não entra no cálculo conservador.
+> **Regra de versão (decidida em 07/10/2026):** Só se verifica a **versão compilada** da lei, que já não traz o texto revogado. No Planalto, usar a URL `...compilado.htm` quando existir (códigos e decretos-lei, ex.: `del3689compilado.htm`); onde o Planalto só publica a página anotada, vale o texto que **não** está tachado: o `fetch_oficial.py` marca o tachado com `~~`, e trecho entre `~~` nunca é fonte de regra. Registrar a versão lida e a data.
 
 ## 1. Feriados nacionais (lei federal)
 
@@ -71,10 +72,16 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 3. **Prazo em dobro com prazo próprio** (CPC 180, § 2º; 183, § 2º; 186, § 4º): o campo "Prazo em dobro" da tela não distingue. Não há como o motor saber se a lei fixou prazo próprio.
 4. **TST e TSE** (seção 2).
 
-## 8. Como repetir esta verificação
+## 8. Auditoria da regra de versão (07/10/2026)
+
+Os 24 artigos em que o motor se apoia foram relidos com o script que marca o tachado (`~~`). **Nenhum** tem texto tachado nem "(Revogado)":
+CPC 180, 183, 186, 216, 219, 220, 224, 229, 231 · Lei 662/1949 art. 1º · Lei 6.802/1980 art. 1º · Lei 9.093/1995 arts. 1º e 2º · Lei 14.759/2023 art. 1º · CLT (compilada) 775 e 775-A · CPP (compilado) 798 e 798-A · Lei 11.419/2006 art. 5º · LC 35/1979 art. 66 · Lei 9.099/1995 arts. 12-A, 42 e 49 · Lei 10.259/2001 art. 9º · Lei 12.153/2009 art. 7º.
+Ressalvas: a Lei 5.010/1966, art. 62, tem o inciso IV antigo tachado e o vigente (Lei 6.741/1979) logo abaixo, e o motor usa o vigente. Na Lei 9.099, o art. 50 (vizinho do 49) aparece tachado e não é usado.
+
+## 9. Como repetir esta verificação
 
 ```bash
-python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/leis/l5010.htm
+python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm
 ```
 
 PDFs (portarias, RISTF) são salvos e lidos à parte. Calendário de outro tribunal ou de outro ano: baixar o ato, registrar aqui (ato, URL, data) e só então incluir em `CALENDARIO_VERIFICADO` (`packages/prazozero/src/calendario/feriados.ts`).
