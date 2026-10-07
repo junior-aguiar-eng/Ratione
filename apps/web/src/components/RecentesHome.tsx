@@ -28,7 +28,7 @@ export default function RecentesHome() {
       <ul className="divide-y divide-line border-y border-line">
         {itens.map(item => (
           <li key={item.id}>
-            <Link href={item.url} className="flex items-baseline justify-between gap-4 py-4 hover:bg-surface-2/60 px-2 -mx-2 rounded">
+            <Link href={item.url} className="flex items-baseline justify-between gap-4 py-4 hover:bg-surface-2/60 px-2 -mx-2 rounded-sm">
               <span className="text-base font-medium text-ink">{item.titulo}</span>
               <span className="text-sm text-ink-mute whitespace-nowrap">
                 {item.modulo} · {tempoRelativo(item.criadoEm)}

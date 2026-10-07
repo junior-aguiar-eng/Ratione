@@ -203,7 +203,7 @@ export default function ArgumentaPage() {
                 >
                   {a.rotulo}
                   {a.id === 'fragilidades' && vulnerabilidades.length > 0 && (
-                    <span className="tag-danger !px-1.5">{vulnerabilidades.length}</span>
+                    <span className="tag-danger px-1.5!">{vulnerabilidades.length}</span>
                   )}
                   {ativa && <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-brand" />}
                 </button>
@@ -412,21 +412,21 @@ export default function ArgumentaPage() {
 
             {aba === 'estrategia' && (
               <ul className="divide-y divide-line border-y border-line">
-                <li className="py-6 space-y-2">
+                <li className="py-6">
                   <h2 className="font-serif text-xl font-semibold text-ink">Opor embargos de declaração</h2>
-                  <p className="text-base text-ink-soft leading-relaxed">
+                  <p className="mt-2 text-base text-ink-soft leading-relaxed">
                     Suscitar a omissão quanto à alegação de entrega do código OTP pelo correntista a terceiro.
                   </p>
-                  <Link href="/prazozero" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2">
+                  <Link href="/prazozero" className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2">
                     Calcular o prazo <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </li>
-                <li className="py-6 space-y-2">
+                <li className="py-6">
                   <h2 className="font-serif text-xl font-semibold text-ink">Contrarrazões com o Tema 1.076/STJ</h2>
-                  <p className="text-base text-ink-soft leading-relaxed">
+                  <p className="mt-2 text-base text-ink-soft leading-relaxed">
                     Sustentar a manutenção dos honorários fixados em percentual objetivo sobre a condenação.
                   </p>
-                  <Link href="/tesemap" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2">
+                  <Link href="/tesemap" className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2">
                     Ver o precedente no TeseMap <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </li>

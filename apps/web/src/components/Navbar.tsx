@@ -14,7 +14,7 @@ export default function Navbar() {
   const meuEspacoAtivo = pathname.startsWith('/meu-espaco');
 
   return (
-    <header className="sticky top-0 z-50 bg-canvas/90 backdrop-blur border-b border-line">
+    <header className="sticky top-0 z-50 bg-canvas/90 backdrop-blur-sm border-b border-line">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <Link href="/" aria-label="Ratione, página inicial" onClick={() => setAberto(false)}>
           <Logo />

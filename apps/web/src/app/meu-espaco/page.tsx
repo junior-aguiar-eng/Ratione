@@ -69,7 +69,7 @@ export default function MeuEspacoPage() {
             onChange={e => setBusca(e.target.value)}
             placeholder="Pesquisar nos registros"
             aria-label="Pesquisar nos registros"
-            className="field !pl-9"
+            className="field pl-9!"
           />
         </div>
       </div>

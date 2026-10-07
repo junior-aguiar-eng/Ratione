@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ratione/core": "workspace:*",
-    "@ratione/prazozero": "workspace:*",
     "@ratione/argumenta": "workspace:*",
+    "@ratione/core": "workspace:*",
     "@ratione/normaviva": "workspace:*",
+    "@ratione/prazozero": "workspace:*",
     "@ratione/tesemap": "workspace:*",
     "@xyflow/react": "^12.4.4",
     "clsx": "^2.1.1",
@@ -24,12 +24,12 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.20",
     "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.8.2"
   }
 }

@@ -157,7 +157,7 @@ export default function PrazoZeroPage() {
           aria-label="Dados do cálculo"
         >
           <fieldset className="space-y-3">
-            <legend className="label !mb-0">1. Qual prazo deseja calcular?</legend>
+            <legend className="label mb-3">1. Qual prazo deseja calcular?</legend>
             <div className="grid grid-cols-2 gap-2">
               {ATOS.map(a => {
                 const ativo = a.id === atoId;
@@ -308,7 +308,7 @@ export default function PrazoZeroPage() {
               <section className="space-y-5">
                 <div>
                   <p className="text-sm font-medium text-ink-mute">Prazo final</p>
-                  <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight mt-1">
+                  <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight sm:leading-none mt-1">
                     {dataLonga(resultado.dataVencimentoFinal)}
                   </p>
                   <p className="text-base text-ink-soft mt-2">

@@ -118,7 +118,7 @@ export default function NormaVivaPage() {
             onChange={e => setBusca(e.target.value)}
             placeholder="Pesquisar lei, artigo ou assunto. Ex.: art. 489 CPC"
             aria-label="Pesquisar lei, artigo ou assunto"
-            className="field !pl-11 !py-3 text-base"
+            className="field pl-11! py-3! text-base"
           />
         </div>
 
@@ -186,7 +186,7 @@ export default function NormaVivaPage() {
                 aria-label="Escolher data"
                 value={dataConsulta}
                 onChange={e => e.target.value && setDataConsulta(e.target.value)}
-                className="field !w-auto"
+                className="field w-auto!"
               />
             </div>
           </header>
@@ -195,7 +195,7 @@ export default function NormaVivaPage() {
             <div className="h-48 rounded-lg bg-surface-2 animate-pulse" aria-hidden />
           ) : versao ? (
             <>
-              <blockquote className="font-serif text-lg sm:text-xl leading-[1.75] text-ink border-l-2 border-brand pl-6">
+              <blockquote className="font-serif text-lg sm:text-xl leading-[1.75] sm:leading-7 text-ink border-l-2 border-brand pl-6">
                 {versao.texto}
               </blockquote>
 
@@ -240,7 +240,7 @@ export default function NormaVivaPage() {
                 return (
                   <li key={v.id} className="pl-6 relative">
                     <span
-                      className={`absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas ${
+                      className={`absolute left-[-7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas ${
                         ativa ? 'bg-brand' : 'bg-ink-mute'
                       }`}
                     />
@@ -251,7 +251,7 @@ export default function NormaVivaPage() {
                 );
               })}
               <li className="pl-6 relative">
-                <span className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas bg-ok" />
+                <span className="absolute left-[-7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas bg-ok" />
                 <p className="text-sm font-semibold text-ink">Hoje</p>
                 <p className="text-sm text-ink-mute">
                   {linhaDoTempo.at(-1)?.dataFimVigencia === null ? 'Vigente' : 'Sem vigência'}

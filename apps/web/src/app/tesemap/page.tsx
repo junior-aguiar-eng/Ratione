@@ -241,7 +241,7 @@ export default function TeseMapPage() {
                     Consultar no site do STJ
                   </a>
                 )}
-                <button type="button" onClick={salvar} className="btn-secondary w-full mt-2">
+                <button type="button" onClick={salvar} className="btn-secondary w-full first:mt-2">
                   {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
                   {salvo ? 'Salvo em Meu espaço' : 'Salvar tema em Meu espaço'}
                 </button>

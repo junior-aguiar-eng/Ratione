@@ -38,7 +38,7 @@ function Secao({
           <span className="eyebrow">{nome}</span>
           {status && status !== 'Disponível' && <span className="tag-neutral">{status}</span>}
         </div>
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-[1.15]">{titulo}</h2>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-[1.15] sm:leading-10">{titulo}</h2>
         <p className="text-base text-ink-soft leading-relaxed max-w-md">{descricao}</p>
         <Link href={href} className="btn-primary">
           <span>{cta}</span>
@@ -257,7 +257,7 @@ function VisualPrazoZero() {
     <div className="space-y-6">
       <div>
         <p className="text-sm text-ink-mute">Prazo final</p>
-        <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink mt-1 leading-tight">{dataLonga(r.dataVencimentoFinal)}</p>
+        <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink mt-1 leading-tight sm:leading-none">{dataLonga(r.dataVencimentoFinal)}</p>
         <p className="text-base text-ink-soft mt-2">
           {diaDaSemana(r.dataVencimentoFinal)} · {r.diasTotaisComputados} dias úteis · Apelação Cível · TJSP
         </p>
@@ -285,10 +285,10 @@ export default function HomePage() {
   return (
     <div>
       <section className="pt-10 sm:pt-16 pb-16 max-w-3xl space-y-6">
-        <h1 className="font-serif text-5xl sm:text-6xl font-semibold tracking-tight text-ink leading-[1.05]">
+        <h1 className="font-serif text-5xl sm:text-6xl font-semibold tracking-tight text-ink leading-[1.05] sm:leading-none">
           Direito, estruturado.
         </h1>
-        <p className="text-lg sm:text-xl text-ink-soft leading-relaxed">
+        <p className="text-lg sm:text-xl text-ink-soft leading-relaxed sm:leading-7">
           Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular
           prazos.
         </p>
