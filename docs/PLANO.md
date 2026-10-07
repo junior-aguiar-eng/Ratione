@@ -261,7 +261,7 @@ Sem transformar desenvolvimento em homologação interminável: validação auto
 
 | Módulo | Suíte | Estado |
 |---|---|---|
-| PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 73 gerados, **0 validados por jurista** |
+| PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 82 gerados, **0 validados por jurista** |
 | NormaViva | ~30 normas com histórico conhecido (`data A → redação A`, `data B → redação B`) | não iniciado |
 | Argumenta | ~30 decisões públicas com dispositivo, questão, tese principal e fundamentos; avalia-se a **extração estrutural**, não a concordância perfeita da IA | não iniciado |
 | TeseMap | Grafo pequeno e conhecido (`A cita B`, `B interpreta C`, `D distingue B`), sem depender de terceiros | não iniciado |
@@ -302,15 +302,15 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 83 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 97 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (tabela com fonte, vigência, verificação) e painel de curadoria | não iniciado | Hoje são constantes no código |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | não iniciado | Lei 5.010 já verificada para TRFs; faltam pontos facultativos por tribunal |
 | F2-05 | Feriados estaduais e municipais | não iniciado | A tabela atual **não está conferida**; municipal exige comprovação |
 | F2-06 | Aviso de prazo próprio no prazo em dobro (CPC 180 §2º, 183 §2º, 186 §4º) | feito | O resultado avisa que o benefício não vale quando a lei fixa prazo próprio e, se a origem for o Diário, que o prazo em dobro só começa com a intimação pessoal (art. 183 §1º). Texto dos artigos lido no Planalto; 2 testes novos |
-| F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 no JEF fica **pendente** (modo conservador não suspende). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | em curso | Regime JEF no motor e na tela; aviso do art. 229 na tela; cenários de JEF e de dobro no oráculo; leis lidas no Planalto |
+| F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 no JEF fica **pendente** (modo conservador não suspende). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | feito | Regime JEF no motor e na tela; aviso do art. 229; 9 cenários novos no oráculo (JEF, MP, Defensoria, litisconsórcio); leis lidas no Planalto. **Pendente:** a suspensão de 20/12 a 20/01 no JEF (aplicação do art. 220 do CPC controvertida; enunciados do FONAJE não conferidos) |
 | F2-08 | Catálogo de prazos com base legal | não iniciado | Hoje a tela tem 5 atos; catálogo em `METODO_CALENDARIO_FORENSE.md` §2.2 |
-| F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | 73 gerados, 0 validados; faltam 27 e a validação |
+| F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | 82 gerados, 0 validados; faltam 18 e a validação |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
 | F2-11 | Dúvidas jurídicas abertas | em curso | 4 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
 | F2-12 | Relatório "o que pode alterar este prazo" | não iniciado | Lista, por cálculo, os atos que podem mudar a data |
@@ -380,7 +380,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F2-07**, **F2-08**: regras do PrazoZero que faltam.
+1. **F2-08**: catálogo de prazos com base legal.
 2. **F2-09**: completar os 100 cenários e entregar ao revisor.
 3. **F2-03**: calendário como dado.
 4. **F0-06 em diante**, conforme as decisões do responsável (§12).

@@ -105,7 +105,7 @@ class Ctx:
         """Dia útil para termo inicial/final (expediente parcial NÃO é útil)."""
         if self.fim_de_semana(d):
             return False
-        if self.recesso and self.regime in ("cpc_dias_uteis", "clt_dias_uteis") and self.em_suspensao(d):
+        if self.recesso and self.regime != "cpp_dias_corridos" and self.em_suspensao(d):
             return False
         nu, pa = self.cal(d.year)
         return d not in nu and d not in pa
@@ -121,8 +121,10 @@ def calcular(e: dict, completo: bool) -> dict:
     regime = e.get("regime", "cpc_dias_uteis")
     trib = e.get("tribunalId", "")
     uf = e.get("uf") or UF_DO_TRIBUNAL.get(trib, "")
-    recesso = e.get("suspensaoRecesso", regime in ("cpc_dias_uteis", "clt_dias_uteis"))
-    efetivo = e["diasPrazo"] * (2 if e.get("prazoEmDobro") else 1)
+    # JEF: a suspensão de 20/12 a 20/01 é controvertida e não foi conferida (pendente): só o modo completo suspende.
+    recesso = e.get("suspensaoRecesso", regime in ("cpc_dias_uteis", "clt_dias_uteis") or (regime == "jef_dias_uteis" and completo))
+    # JEF: sem prazo diferenciado para entes públicos (Leis 10.259/2001, art. 9º, e 12.153/2009, art. 7º)
+    efetivo = e["diasPrazo"] * (2 if e.get("prazoEmDobro") and regime != "jef_dias_uteis" else 1)
     ctx = Ctx(trib, uf, regime, recesso, completo)
 
     evento = date.fromisoformat(e["dataEvento"])
@@ -333,6 +335,28 @@ add("portal-sabado", "portal", "Intimação eletrônica: consulta no sábado (le
     entrada("2026-03-14", "intimacao_portal", 5))
 add("portal-feriado", "portal", "Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte", "CPC, art. 231, V; Lei 662/1949, art. 1º",
     entrada("2026-04-20", "intimacao_portal", 5))
+
+
+# ---- JEF, MP, Defensoria e litisconsórcio (F2-07) ----
+JEF = "Lei 9.099/1995, art. 12-A (dias úteis)"
+add("jef-5d-embargos", "jef", "JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)", JEF + "; art. 49",
+    entrada("2026-03-10", "publicacao", 5, regime="jef_dias_uteis"))
+add("jef-10d-recurso", "jef", "JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)", JEF + "; art. 42",
+    entrada("2026-03-10", "publicacao", 10, regime="jef_dias_uteis"))
+add("jef-dobro-ignorado", "jef", "JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)", JEF + "; Lei 10.259/2001, art. 9º; Lei 12.153/2009, art. 7º",
+    entrada("2026-03-10", "publicacao", 10, regime="jef_dias_uteis", prazoEmDobro=True))
+add("jef-recesso-conservador", "pendente", "JEF: a suspensão de 20/12 a 20/01 é pendente; o modo conservador conta o recesso", PEND + "; CPC, art. 220 (aplicação ao JEF a conferir)",
+    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis"))
+add("jef-recesso-completo", "pendente", "JEF: no modo completo a suspensão de 20/12 a 20/01 vale", PEND + "; CPC, art. 220 (aplicação ao JEF a conferir)",
+    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis", modo="completo"))
+add("jef-recesso-explicito", "jef", "JEF: suspensão ligada explicitamente pelo usuário vale em qualquer modo", "CPC, art. 220",
+    entrada("2025-12-15", "publicacao", 10, regime="jef_dias_uteis", suspensaoRecesso=True))
+add("dobro-mp-intimacao-pessoal", "dobro", "Ministério Público: 15 dias em dobro (30 úteis) a partir da intimação pessoal por carga", "CPC, arts. 180 e 183, § 1º",
+    entrada("2026-03-10", "carga_ou_audiencia", 15, prazoEmDobro=True))
+add("dobro-defensoria-embargos", "dobro", "Defensoria Pública: embargos de declaração em dobro (10 úteis)", "CPC, art. 186",
+    entrada("2026-03-10", "carga_ou_audiencia", 5, prazoEmDobro=True))
+add("litisconsorcio-sem-dobro", "dobro", "Litisconsortes com advogados distintos: o art. 229 gera aviso e não duplica o prazo", "CPC, art. 229 e § 2º (autos eletrônicos)",
+    entrada("2026-03-10", "publicacao", 15, litisconsortesComAdvogadosDistintos=True))
 
 
 def gerar():

@@ -1838,5 +1838,241 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "jef-5d-embargos",
+    "categoria": "jef",
+    "descricao": "JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)",
+    "fundamento": "Lei 9.099/1995, art. 12-A (dias úteis); art. 49",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "jef-10d-recurso",
+    "categoria": "jef",
+    "descricao": "JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)",
+    "fundamento": "Lei 9.099/1995, art. 12-A (dias úteis); art. 42",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "jef-dobro-ignorado",
+    "categoria": "jef",
+    "descricao": "JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)",
+    "fundamento": "Lei 9.099/1995, art. 12-A (dias úteis); Lei 10.259/2001, art. 9º; Lei 12.153/2009, art. 7º",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "jef-recesso-conservador",
+    "categoria": "pendente",
+    "descricao": "JEF: a suspensão de 20/12 a 20/01 é pendente; o modo conservador conta o recesso",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2025-12-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-01-28"
+  },
+  {
+    "id": "jef-recesso-completo",
+    "categoria": "pendente",
+    "descricao": "JEF: no modo completo a suspensão de 20/12 a 20/01 vale",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 220 (aplicação ao JEF a conferir)",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "jef-recesso-explicito",
+    "categoria": "jef",
+    "descricao": "JEF: suspensão ligada explicitamente pelo usuário vale em qualquer modo",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis",
+      "suspensaoRecesso": true
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dobro-mp-intimacao-pessoal",
+    "categoria": "dobro",
+    "descricao": "Ministério Público: 15 dias em dobro (30 úteis) a partir da intimação pessoal por carga",
+    "fundamento": "CPC, arts. 180 e 183, § 1º",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "carga_ou_audiencia",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "dobro-defensoria-embargos",
+    "categoria": "dobro",
+    "descricao": "Defensoria Pública: embargos de declaração em dobro (10 úteis)",
+    "fundamento": "CPC, art. 186",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "carga_ou_audiencia",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "litisconsorcio-sem-dobro",
+    "categoria": "dobro",
+    "descricao": "Litisconsortes com advogados distintos: o art. 229 gera aviso e não duplica o prazo",
+    "fundamento": "CPC, art. 229 e § 2º (autos eletrônicos)",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP",
+      "litisconsortesComAdvogadosDistintos": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-31",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

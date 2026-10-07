@@ -59,6 +59,7 @@ export default function PrazoZeroPage() {
   const [tribunalId, setTribunalId] = useState('TJSP');
   const [regime, setRegime] = useState<RegimeContagem>('cpc_dias_uteis');
   const [prazoEmDobro, setPrazoEmDobro] = useState(false);
+  const [litisconsortes, setLitisconsortes] = useState(false);
 
   const [memoriaAberta, setMemoriaAberta] = useState(false);
   const [copiado, setCopiado] = useState(false);
@@ -82,13 +83,14 @@ export default function PrazoZeroPage() {
         regime,
         tribunalId,
         prazoEmDobro,
+        litisconsortesComAdvogadosDistintos: litisconsortes,
         nomeAto
       };
       return motor.calcularPrazo(params);
     } catch {
       return null;
     }
-  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, nomeAto]);
+  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, nomeAto]);
 
   // Resumos derivados da própria memória de cálculo
   const resumo = useMemo(() => {
@@ -276,6 +278,7 @@ export default function PrazoZeroPage() {
                 >
                   <option value="cpc_dias_uteis">CPC · dias úteis, com recesso forense</option>
                   <option value="clt_dias_uteis">CLT · dias úteis</option>
+                  <option value="jef_dias_uteis">JEF · dias úteis (Lei 9.099, art. 12-A)</option>
                   <option value="cpp_dias_corridos">CPP · dias corridos</option>
                 </select>
               </div>
@@ -289,6 +292,18 @@ export default function PrazoZeroPage() {
                 <span>
                   <span className="block text-sm font-medium text-ink">Prazo em dobro</span>
                   <span className="block text-sm text-ink-mute">Fazenda Pública, Ministério Público ou Defensoria</span>
+                </span>
+              </label>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={litisconsortes}
+                  onChange={e => setLitisconsortes(e.target.checked)}
+                  className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
+                />
+                <span>
+                  <span className="block text-sm font-medium text-ink">Litisconsortes com advogados distintos</span>
+                  <span className="block text-sm text-ink-mute">Só gera um aviso: o dobro do art. 229 não vale em autos eletrônicos</span>
                 </span>
               </label>
             </div>
@@ -356,6 +371,12 @@ export default function PrazoZeroPage() {
                   </Notice>
                 )}
 
+                {litisconsortes && (
+                  <Notice tom="warn" titulo="Litisconsórcio (art. 229): o prazo não foi duplicado">
+                    {resultado.avisos.find(a => a.startsWith('Litisconsortes'))}
+                  </Notice>
+                )}
+
                 {resultado.calendarioVerificado && resultado.fontesCalendario ? (
                   <Notice tom="info" titulo={`Calendário do ${tribunalId} conferido contra o ato oficial`}>
                     <ul className="space-y-1">
@@ -371,7 +392,7 @@ export default function PrazoZeroPage() {
                   </Notice>
                 ) : (
                   <Notice tom="info" titulo="Calendário do tribunal em conferência">
-                    {resultado.avisos.filter(a => !a.includes('modo conservador') && !a.startsWith('Prazo em dobro')).map(a => (
+                    {resultado.avisos.filter(a => !a.includes('modo conservador') && !a.startsWith('Prazo em dobro') && !a.startsWith('Litisconsortes')).map(a => (
                       <p key={a} className="mb-1 last:mb-0">
                         {a}
                       </p>

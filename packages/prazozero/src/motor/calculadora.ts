@@ -11,6 +11,7 @@ export type TipoEventoOrigem =
 export type RegimeContagem =
   | 'cpc_dias_uteis'           // Art. 219 CPC/15 (Dias úteis + suspensão art. 220)
   | 'clt_dias_uteis'           // Art. 775 CLT (Dias úteis)
+  | 'jef_dias_uteis'           // Lei 9.099/1995, art. 12-A (dias úteis); sem prazo diferenciado para entes públicos
   | 'cpp_dias_corridos';       // Art. 798 CPP (Dias corridos, término prorroga se não útil)
 
 /**
@@ -27,7 +28,8 @@ export interface ParametrosCalculoPrazo {
   regime?: RegimeContagem;     // Padrão: 'cpc_dias_uteis'
   tribunalId?: string;         // Ex: 'TJSP', 'STJ'
   uf?: string;                 // Ex: 'SP'
-  prazoEmDobro?: boolean;      // Fazenda Pública (art. 183), MP (art. 180), Defensoria (art. 186)
+  prazoEmDobro?: boolean;      // Fazenda Pública (art. 183), MP (art. 180), Defensoria (art. 186); ignorado no JEF
+  litisconsortesComAdvogadosDistintos?: boolean; // CPC, art. 229: não duplica o prazo, só gera aviso (autos eletrônicos são a regra)
   suspensaoRecesso?: boolean;  // Suspensão de 20/dez a 20/jan (art. 220 CPC)
   nomeAto?: string;            // Ex: "Apelação Cível", "Embargos de Declaração"
   modo?: ModoCalculo;          // Padrão: 'conservador'
@@ -170,7 +172,7 @@ export class MotorPrazoZero {
     }
 
     // 2. Suspensão de prazos: recesso e férias (CPC, art. 220; CLT, art. 775-A; STF e STJ têm janela própria)
-    if (params.suspensaoRecesso && (params.regime === 'cpc_dias_uteis' || params.regime === 'clt_dias_uteis')) {
+    if (params.suspensaoRecesso && params.regime !== 'cpp_dias_corridos') {
       const s = suspensaoDePrazos(dataIso, params.tribunalId, params.regime);
       if (s.suspenso) {
         return {
@@ -227,7 +229,12 @@ export class MotorPrazoZero {
         'confira o calendário do tribunal e comprove feriado local (CPC, art. 1.003, § 6º).'
     ];
 
-    if (p.prazoEmDobro) {
+    if (p.prazoEmDobro && p.regime === 'jef_dias_uteis') {
+      avisos.push(
+        'Prazo em dobro não aplicado: nos Juizados Especiais não há prazo diferenciado para as pessoas jurídicas de direito público, ' +
+          'inclusive para recursos (Lei 10.259/2001, art. 9º; Lei 12.153/2009, art. 7º).'
+      );
+    } else if (p.prazoEmDobro) {
       let aviso =
         'Prazo em dobro aplicado (CPC, arts. 180, 183 e 186). O benefício não vale quando a lei fixa, de forma expressa, ' +
         'prazo próprio para o ente (arts. 180, § 2º; 183, § 2º; 186, § 4º): confira se este é o prazo geral do CPC.';
@@ -239,14 +246,30 @@ export class MotorPrazoZero {
       avisos.push(aviso);
     }
 
+    if (p.litisconsortesComAdvogadosDistintos) {
+      avisos.push(
+        'Litisconsortes com advogados de escritórios distintos: o prazo em dobro do art. 229 do CPC não foi aplicado. ' +
+          'Ele não vale em autos eletrônicos (§ 2º) e cessa se, havendo só dois réus, apenas um deles apresenta defesa (§ 1º).'
+      );
+    }
+
     const principal = this.executar(p, modo === 'completo');
     let alternativa: AlternativaPrazo | undefined;
 
     if (modo === 'conservador') {
       const completo = this.executar(p, true);
       if (completo.dataVencimentoFinal !== principal.dataVencimentoFinal) {
+        let recessoJaListado = false;
         const eventosPendentes = completo.memoriaCalculo
-          .filter(i => i.verificacao === 'pendente' && (i.status === 'feriado' || i.status === 'expediente_parcial'))
+          .filter(i => {
+            if (i.verificacao !== 'pendente') return false;
+            if (i.status === 'recesso_forense') {
+              if (recessoJaListado) return false;
+              recessoJaListado = true;
+              return true;
+            }
+            return i.status === 'feriado' || i.status === 'expediente_parcial';
+          })
           .map(i => ({
             data: i.data,
             nome: i.descricao.replace(/ \(não computado\)$/, '').replace(` (${i.fundamentoLegal})`, ''),
@@ -298,8 +321,11 @@ export class MotorPrazoZero {
     incluirPendentes: boolean
   ): Omit<ResultadoCalculoPrazo, 'modo' | 'calendarioVerificado' | 'avisos' | 'alternativa'> {
     const regime = p.regime || 'cpc_dias_uteis';
-    const suspensaoRecesso = p.suspensaoRecesso ?? (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis');
-    const multiplicador = p.prazoEmDobro ? 2 : 1;
+    // No JEF a aplicação do art. 220 do CPC é controvertida e não foi conferida: o modo conservador não suspende;
+    // o modo completo suspende, e a diferença aparece como data alternativa.
+    const suspensaoRecesso =
+      p.suspensaoRecesso ?? (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis' || (regime === 'jef_dias_uteis' && incluirPendentes));
+    const multiplicador = p.prazoEmDobro && regime !== 'jef_dias_uteis' ? 2 : 1;
     const diasPrazoEfetivo = p.diasPrazo * multiplicador;
 
     // Resolver UF a partir do Tribunal se não informada
@@ -375,9 +401,11 @@ export class MotorPrazoZero {
       const dataIso = formatIso(cursor);
       const diaSemana = DIAS_SEMANA_NOMES[cursor.getUTCDay()];
       const analise = this.verificarDiaUtil(dataIso, contextConfig);
-      const verificacao = analise.detalheFeriado?.verificacao;
+      const verificacao: FeriadoLegal['verificacao'] | undefined =
+        analise.detalheFeriado?.verificacao ??
+        (analise.motivoNaoUtil === 'recesso_forense' && regime === 'jef_dias_uteis' ? 'pendente' : undefined);
 
-      if (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis') {
+      if (regime !== 'cpp_dias_corridos') {
         // Expediente parcial só protrai o dia do começo e o do vencimento (CPC, art. 224, § 1º);
         // no meio do prazo o dia é contado normalmente.
         const parcial = analise.motivoNaoUtil === 'expediente_parcial';
@@ -400,7 +428,7 @@ export class MotorPrazoZero {
               (parcial ? ` — expediente parcial: ${analise.detalheFeriado!.nome}` : ''),
             fundamentoLegal: parcial
               ? analise.detalheFeriado!.fundamentoLegal
-              : regime === 'cpc_dias_uteis' ? 'CPC, art. 219' : 'CLT, art. 775',
+              : regime === 'cpc_dias_uteis' ? 'CPC, art. 219' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : 'Lei 9.099/1995, art. 12-A',
             diaContadoNumero: diasContados,
             ...(parcial ? { verificacao } : {})
           });
@@ -427,7 +455,7 @@ export class MotorPrazoZero {
             descricao: `${analise.descricao} (não computado)`,
             fundamentoLegal: analise.fundamentoLegal || analise.detalheFeriado?.fundamentoLegal || 'CPC, art. 219',
             diaContadoNumero: null,
-            ...(analise.detalheFeriado ? { verificacao } : {})
+            ...(verificacao ? { verificacao } : {})
           });
         }
       } else {
@@ -444,7 +472,7 @@ export class MotorPrazoZero {
             : `${diasContados}º dia corrido computado`,
           fundamentoLegal: 'CPP, art. 798, caput',
           diaContadoNumero: diasContados,
-          ...(analise.detalheFeriado ? { verificacao } : {})
+          ...(verificacao ? { verificacao } : {})
         });
 
         if (ehUltimo) {
@@ -485,14 +513,14 @@ export class MotorPrazoZero {
       `MEMÓRIA DESCRITIVA DE CÁLCULO DE TEMPESTIVIDADE FORENSE`,
       `Plataforma: Ratione — Módulo PrazoZero (Motor Determinístico)`,
       `Órgão Judiciário: ${tribunalNome} ${uf ? `(UF: ${uf})` : ''}`,
-      `Ato Processual: ${p.nomeAto || 'Prazo em dias'} (${diasPrazoEfetivo} dias ${regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis'}${p.prazoEmDobro ? ' - Prazo em Dobro' : ''})`,
+      `Ato Processual: ${p.nomeAto || 'Prazo em dias'} (${diasPrazoEfetivo} dias ${regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis'}${multiplicador > 1 ? ' - Prazo em Dobro' : ''})`,
       dataDisponibilizacao ? `• Disponibilização (DJe): ${dataDisponibilizacao} (CPC, art. 224, § 2º)` : '',
       `• Publicação Oficial: ${dataPublicacao}`,
       `• Termo Inicial da Contagem: ${dataTermoInicial} (CPC, art. 224, § 3º)`,
       `• TERMO AD QUEM (VENCIMENTO FINAL): ${dataFinalVencimento}`,
       `• Total de dias corridos transcorridos: ${diasCorridosTotais} dias`,
       foiProrrogadoTermoFinal ? `• Observação de Prorrogação: ${motivoProrrogacao}` : '',
-      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : 'CPP, art. 798'}.`
+      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : regime === 'jef_dias_uteis' ? 'Lei 9.099/1995, art. 12-A (dias úteis)' : 'CPP, art. 798'}.`
     ].filter(Boolean).join('\n');
 
     return {

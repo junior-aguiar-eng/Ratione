@@ -310,7 +310,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
 export function suspensaoDePrazos(
   dataIso: string,
   tribunalId: string | undefined,
-  regime: 'cpc_dias_uteis' | 'clt_dias_uteis'
+  regime: 'cpc_dias_uteis' | 'clt_dias_uteis' | 'jef_dias_uteis'
 ): { suspenso: boolean; descricao: string; fundamentoLegal: string } {
   const mes = parseInt(dataIso.slice(5, 7), 10);
   const dia = parseInt(dataIso.slice(8, 10), 10);
@@ -331,7 +331,12 @@ export function suspensaoDePrazos(
   return {
     suspenso,
     descricao: 'Suspensão de prazos processuais e recesso forense',
-    fundamentoLegal: regime === 'clt_dias_uteis' ? 'CLT, art. 775-A' : 'CPC, art. 220'
+    fundamentoLegal:
+      regime === 'clt_dias_uteis'
+        ? 'CLT, art. 775-A'
+        : regime === 'jef_dias_uteis'
+          ? 'CPC, art. 220 (aplicação subsidiária ao JEF, a conferir)'
+          : 'CPC, art. 220'
   };
 }
 

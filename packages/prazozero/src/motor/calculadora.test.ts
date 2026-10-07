@@ -149,6 +149,42 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     }
   });
 
+  it('art. 229 do CPC só gera aviso: não duplica o prazo e lembra que não vale em autos eletrônicos', () => {
+    const base = { dataEvento: '2026-03-10', tipoEvento: 'publicacao' as const, diasPrazo: 15, tribunalId: 'TJSP' };
+    const sem = motor.calcularPrazo(base);
+    const com = motor.calcularPrazo({ ...base, litisconsortesComAdvogadosDistintos: true });
+    assert.strictEqual(com.dataVencimentoFinal, sem.dataVencimentoFinal);
+    assert.strictEqual(com.diasTotaisComputados, 15);
+    const aviso = com.avisos.find(a => a.startsWith('Litisconsortes'));
+    assert.ok(aviso?.includes('autos eletrônicos') && aviso.includes('§ 2º') && aviso.includes('§ 1º'));
+    assert.ok(!sem.avisos.some(a => a.startsWith('Litisconsortes')));
+  });
+
+  it('JEF: dias úteis, sem prazo em dobro para ente público e aviso com as duas leis', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-03-10', tipoEvento: 'publicacao', diasPrazo: 10, tribunalId: 'TJSP',
+      regime: 'jef_dias_uteis', prazoEmDobro: true
+    });
+    assert.strictEqual(r.diasTotaisComputados, 10, 'o dobro não se aplica no JEF');
+    assert.strictEqual(r.dataVencimentoFinal, '2026-03-24');
+    const aviso = r.avisos.find(a => a.startsWith('Prazo em dobro'));
+    assert.ok(aviso?.includes('não aplicado') && aviso.includes('10.259') && aviso.includes('12.153'));
+    assert.ok(!r.avisos.some(a => a.includes('Prazo em dobro aplicado')));
+    assert.ok(r.certidaoAuditavel.includes('Lei 9.099/1995, art. 12-A'));
+    assert.ok(!r.certidaoAuditavel.includes('Prazo em Dobro'));
+  });
+
+  it('JEF: a suspensão de 20/12 a 20/01 é pendente e aparece como uma única data alternativa', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2025-12-15', tipoEvento: 'publicacao', diasPrazo: 10, tribunalId: 'TJSP', regime: 'jef_dias_uteis'
+    });
+    assert.strictEqual(r.dataVencimentoFinal, '2025-12-30');
+    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-01-28');
+    assert.strictEqual(r.alternativa?.eventosPendentes.length, 1, 'o recesso inteiro entra como um evento só');
+    assert.ok(r.alternativa?.eventosPendentes[0].nome.includes('Suspensão de prazos'));
+    assert.ok(r.alternativa?.eventosPendentes[0].fundamentoLegal.includes('a conferir'));
+  });
+
   it('rejeita entrada inválida em vez de calcular em silêncio', () => {
     const base = { dataEvento: '2026-03-10', tipoEvento: 'publicacao' as const, diasPrazo: 5 };
     assert.throws(() => motor.calcularPrazo({ ...base, dataEvento: '2026-02-30' }), /dataEvento inválida/);
