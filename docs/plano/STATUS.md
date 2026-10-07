@@ -45,12 +45,14 @@ Legenda: **feito** · **em curso** · **parcial** · **não iniciado**.
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
 | E0-01 | Monorepo pnpm (web + 5 pacotes) | feito | `pnpm install && pnpm build` passam |
-| E0-02 | CI no GitHub (tipos, testes, gabarito, build) | em curso | Push na `main` roda o workflow e ele fica verde; falha de teste reprova |
+| E0-02 | CI no GitHub (tipos, testes, gabarito, build) | feito | Verde na `main` (execução 37657804387, 07/10/2026). A primeira execução falhou por falta de `@types/node` no pacote e foi corrigida |
 | E0-03 | Banco, login e armazenamento (Supabase, região São Paulo, RLS) | não iniciado | Login funciona; usuário A não lê dado do usuário B (teste automatizado) |
 | E0-04 | Design system com shadcn/ui | não iniciado | Hoje há tokens e componentes caseiros |
 | E0-05 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | E0-06 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
 | E0-07 | Núcleo de datas civis puras no motor | não iniciado | Motor sem `Date`/UTC; suíte inalterada |
+| E0-08 | Alertas de dependências (GitHub informou 6: 3 altos, 3 moderados, ao receber a `main`) | não iniciado | Alertas analisados e resolvidos ou justificados; não foram examinados |
+| E0-09 | Manutenção do workflow | não iniciado | O GitHub avisa que `ubuntu-latest` migra para Ubuntu 26 em 19/10/2026 e que as actions v4 usam Node 20 (obsoleto); confirmar que o CI segue verde e subir as versões |
 
 ### E1 — PrazoZero
 
@@ -82,11 +84,10 @@ CNPJ e forma de cobrança, busca de marca por radical e fonética, revisão das 
 
 ## Próximos passos, em ordem
 
-1. **E0-02** CI (em curso).
-2. **E1-06** aviso de prazo próprio no dobro (pequeno, regra já lida no CPC).
-3. **E1-07** litisconsórcio, JEF, MP e Defensoria.
-4. **E1-08** catálogo de prazos com base legal.
-5. **E1-09** completar os 100 cenários e entregar ao revisor.
-6. **E1-03** calendário como dado.
+1. **E1-06** aviso de prazo próprio no dobro (pequeno, regra já lida no CPC).
+2. **E1-07** litisconsórcio, JEF, MP e Defensoria.
+3. **E1-08** catálogo de prazos com base legal.
+4. **E1-09** completar os 100 cenários e entregar ao revisor.
+5. **E1-03** calendário como dado.
 
-Itens E0-03 em diante dependem de decisões do responsável (conta no Supabase, domínio, CNPJ).
+Os itens E0-03 a E0-06 dependem de decisões do responsável (conta no Supabase, domínio, CNPJ). Os alertas E0-08 devem ser vistos antes do primeiro deploy.
