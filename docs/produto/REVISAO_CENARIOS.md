@@ -15,7 +15,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.
 - **Feriados estaduais e municipais**: só TJSP e TJMG (2026) têm ato lido; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).
-- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** só em parte (Ato Normativo 03/2026 pela notícia oficial; Lei 6.564/2005 pendente).
+- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.
 - **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.
 
 ## Resumo
@@ -978,7 +978,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Alternativa (se os dias pendentes forem confirmados):** 07/07/2026 (terça-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Lei estadual AL 6.564/2005, art. 37; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar
-- **Calendário do tribunal verificado:** não
+- **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ## Calendário verificado (STF, STJ, TRFs)
@@ -1280,7 +1280,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **23/04/2026 (quinta-feira)**
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJAL: Ato Normativo 03/2026; 21/04/2026 Tiradentes
 - **Fundamento:** Ato Normativo TJAL 03/2026 (notícia oficial do tribunal)
-- **Calendário do tribunal verificado:** não
+- **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ## Intimação eletrônica

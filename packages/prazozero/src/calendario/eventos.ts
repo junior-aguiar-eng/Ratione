@@ -80,15 +80,15 @@ export const FONTES_CALENDARIO = {
     lidoEm: LIDO
   },
   'tjal-an-03-2026': {
-    ato: 'Ato Normativo nº 03/2026 do TJAL: feriados de 2026',
+    ato: 'Ato Normativo nº 03/2026 do TJAL: feriados de 2026 (DJE, Caderno Administrativo, ed. 3944, 28/01/2026, p. 7)',
     url: 'https://tjal.jus.br/noticia/tribunal-de-justica-de-alagoas-regulamenta-feriados-de-2026/visualizar',
-    lido: 'notícia oficial do tribunal sobre o ato; o ato em si não foi lido',
+    lido: 'página do Diário Oficial com o texto do ato (arts. 1º a 6º), fornecida pelo responsável; o número do ato está na página anterior, que não foi lida (o 03/2026 vem da notícia oficial)',
     lidoEm: LIDO
   },
   'tjal-lei-6564': {
     ato: 'Lei estadual nº 6.564/2005 (Código de Organização Judiciária de Alagoas), arts. 36 e 37',
-    url: 'https://www.tjal.jus.br/organizacao/Lei6564de050105.pdf',
-    lido: 'PDF do texto original; a redação atualizada não foi confirmada (por isso fica pendente)',
+    url: 'https://www.tjal.jus.br/organizacao/Lei.n.6.564.de.05.01.05.COoDIGO.DE.ORG.JUDICIaRIA.pdf',
+    lido: 'texto consolidado no site do TJAL, com o cabeçalho "alterada até a Lei nº 8.850/2021"; arts. 35 a 38 sem marca de alteração; alterações posteriores a 2021 não verificadas',
     lidoEm: LIDO
   }
 } satisfies Record<string, FonteCalendario>;
@@ -173,7 +173,7 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJMG'], inicio: '2026-06-04', fim: '2026-06-04', nome: 'Corpus Christi: feriado municipal em Belo Horizonte e em comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Informe do TJMG de 14/01/2026; depende de lei municipal', fonte: 'tjmg-pc-1764' },
   { tribunais: ['TJMG'], inicio: '2026-06-05', fim: '2026-06-05', nome: 'Emenda de Corpus Christi: só Belo Horizonte e comarcas com feriado municipal (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria Conjunta 1.764/PR/2026, art. 1º, IV', fonte: 'tjmg-pc-1764' },
 
-  // ---------- TJAL, 2026: Ato Normativo 03/2026 (notícia oficial do tribunal) ----------
+  // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
     ['2026-06-04', 'Corpus Christi'],
@@ -189,23 +189,24 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     nome,
     efeito: 'nao_util' as const,
     verificacao: 'ato_do_tribunal' as const,
-    fundamento: 'Ato Normativo TJAL 03/2026',
+    fundamento: 'Ato Normativo TJAL 03/2026, arts. 1º, 2º, 3º e 5º',
     fonte: 'tjal-an-03-2026' as const
-  }))
+  })),
+  { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' }
 ];
 
-/** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente; as do TJAL ficam pendentes (texto atual não confirmado). */
+/** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente e as do TJAL da Lei estadual 6.564/2005 (consolidada); só o recesso de 23/06 a 01/07 do TJAL fica pendente. */
 export const REGRAS_ANUAIS: RegraAnual[] = [
   { tribunais: ['TJMG'], nome: 'Carnaval (segunda a quarta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, III', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
   { tribunais: ['TJMG'], nome: 'Semana Santa (quarta a sexta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, IV', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
   { tribunais: ['TJMG'], nome: 'Dia da Justiça (8 de dezembro)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, V', fonte: 'tjmg-res-458', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
 
-  { tribunais: ['TJAL'], nome: 'Carnaval (segunda a quarta-feira de cinzas)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 36, III', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
-  { tribunais: ['TJAL'], nome: 'Semana Santa (quarta a domingo de Páscoa)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 36, I', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
-  { tribunais: ['TJAL'], nome: '11 de agosto', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [8, 11], ate: [8, 11] } },
-  { tribunais: ['TJAL'], nome: '8 de dezembro', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
+  { tribunais: ['TJAL'], nome: 'Carnaval (segunda a quarta-feira de cinzas)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, III', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
+  { tribunais: ['TJAL'], nome: 'Semana Santa (quarta a domingo de Páscoa)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, I', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
+  { tribunais: ['TJAL'], nome: '11 de agosto', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [8, 11], ate: [8, 11] } },
+  { tribunais: ['TJAL'], nome: '8 de dezembro', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
   { tribunais: ['TJAL'], nome: 'Feriados forenses de 23 de junho a 1º de julho', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 37 (vigência atual não confirmada)', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [6, 23], ate: [7, 1] } },
-  { tribunais: ['TJAL'], nome: 'Feriados forenses de 20 a 31 de dezembro', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 37', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 20], ate: [12, 31] } }
+  { tribunais: ['TJAL'], nome: 'Feriados forenses de 20 a 31 de dezembro', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 37', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 20], ate: [12, 31] } }
 ];
 
 /**
@@ -216,5 +217,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   STJ: { anos: [2026], fontes: ['stj-gdg-1010', 'stj-horarios'] },
   STF: { anos: [2026], fontes: ['stf-cal-2026'] },
   TJSP: { anos: [2026], fontes: ['tjsp-csm-2813'] },
-  TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] }
+  TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] },
+  TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] }
 };

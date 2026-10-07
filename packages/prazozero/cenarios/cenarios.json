@@ -4008,7 +4008,7 @@
       "dataTermoInicial": "2026-04-17",
       "dataVencimentoFinal": "2026-04-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -4049,7 +4049,7 @@
       "dataTermoInicial": "2026-06-22",
       "dataVencimentoFinal": "2026-06-26",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
