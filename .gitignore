@@ -40,3 +40,6 @@ coverage/
 uploads/
 temp/
 scratch/
+
+# TypeScript build info
+*.tsbuildinfo
