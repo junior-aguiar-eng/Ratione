@@ -3,59 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --background: #080c14;
-  --foreground: #f1f5f9;
-  --gold: #c59b27;
-  --gold-hover: #e8c547;
+  --background: #0B0F14;
+  --surface: #11161D;
+  --surface-hover: #161C24;
+  --border: #232B35;
+  --text: #F2F4F7;
+  --text-muted: #A8B0BB;
+  --text-dim: #737E8C;
+  --teal: #2B6F6A;
+  --teal-light: #4A918B;
+  --gold: #B18A3B;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Glassmorphism & Custom Accents */
-.glass-panel {
-  background: rgba(15, 22, 38, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Superfícies Limpas e Editoriais (sem glassmorphism nem gradientes decorativos) */
+.surface-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
-.glass-panel-hover:hover {
-  background: rgba(20, 30, 52, 0.85);
-  border-color: rgba(197, 155, 39, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.surface-hover:hover {
+  background-color: var(--surface-hover);
+  border-color: #2F3946;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.gold-gradient-text {
-  background: linear-gradient(135deg, #f3d889 0%, #c59b27 50%, #9e7a17 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.legal-border {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Custom Scrollbars */
+/* Scrollbar Discreta */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #080c14;
+  background: #0B0F14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #1C232C;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2B3542;
+}
+
+/* Foco Acessível e Discreto */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
 }

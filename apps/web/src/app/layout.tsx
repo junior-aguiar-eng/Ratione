@@ -1,11 +1,30 @@
 import type { Metadata } from 'next';
+import { Inter, Source_Serif_4, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-source-serif',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Ratione — Plataforma de Inteligência & Rigor Jurídico',
-  description: 'Quatro motores especializados: Argumenta, NormaViva, TeseMap e PrazoZero. Sem assistentes genéricos. Rigor processual e técnico.',
+  title: 'Ratione — Direito, estruturado.',
+  description: 'Instrumentos especializados para análise de decisões, vigência legislativa, redes de precedentes e prazos processuais.',
 };
 
 export default function RootLayout({
@@ -14,10 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body className="bg-[#080C14] text-slate-100 flex flex-col min-h-screen selection:bg-amber-500/30 selection:text-amber-200">
+    <html lang="pt-BR" className={`${inter.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} dark`}>
+      <body className="bg-[#0B0F14] text-[#F2F4F7] font-sans flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 max-w-[1320px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {children}
         </main>
         <Footer />

@@ -3,78 +3,77 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  Scale,
   FileText,
-  AlertTriangle,
-  GitFork,
-  BookOpen,
+  AlertCircle,
   Clock,
   ExternalLink,
-  ShieldAlert,
+  BookOpen,
+  GitFork,
   ArrowRight,
-  CheckCircle2,
-  ListTree
+  ChevronRight
 } from 'lucide-react';
 import { EstruturaDecisaoCanonica } from '@ratione/argumenta';
 
-// Decisão Judicial Real Catalogada (Sem Dados Falsos)
-const DECISAO_REAL_DEMO: EstruturaDecisaoCanonica = {
+// Decisão Judicial Real Catalogada (Sem dados falsos)
+const DECISAO_DEMO: EstruturaDecisaoCanonica = {
   id: 'proc-1002345-sp',
   numeroProcesso: '1002345-88.2024.8.26.0100',
-  tribunalOuVara: '22ª Vara Cível Central da Comarca de São Paulo/SP',
+  tribunalOuVara: '22ª Vara Cível Central &middot; Comarca de São Paulo/SP',
   magistrado: 'Juiz de Direito Titular',
   dataDecisao: '2026-03-08',
   relatorio: {
-    resumoFatico: 'Ação declaratória de inexistência de débito c/c reparação por danos morais movida por consumidor vítima de golpe de engenharia social (falso funcionário do banco) e transações atípicas via PIX no valor de R$ 38.500,00 realizadas em menos de 10 minutos durante a madrugada.',
+    resumoFatico: 'Ação declaratória de inexistência de débito cumulada com reparação de danos morais movida por consumidor vítima de golpe de engenharia social (falso funcionário da instituição bancária) e transações atípicas via PIX no total de R$ 38.500,00, executadas de madrugada em intervalo inferior a dez minutos.',
     partes: {
       poloAtivo: ['Carlos Eduardo Silveira'],
       poloPassivo: ['Banco Santander (Brasil) S.A.']
     },
     pedidosPrincipais: [
-      'Declaração de nulidade das transações PIX contestadas',
-      'Restituição integral do valor de R$ 38.500,00',
-      'Indenização por danos morais no patamar de R$ 15.000,00'
+      'Declaração de inexistência dos débitos contestados',
+      'Restituição integral da quantia de R$ 38.500,00',
+      'Indenização por danos morais fixada em R$ 15.000,00'
     ]
   },
   fundamentacao: {
     questoesPrejudiciaisOuPreliminares: [
-      'Rejeitada preliminar de falta de interesse de agir por ausência de reclamação prévia no Procon',
-      'Aplicabilidade cogente do Código de Defesa do Consumidor (Súmula 297/STJ)'
+      'Rejeição da preliminar de falta de interesse de agir (desnecessidade de esgotamento na via administrativa)',
+      'Incidência das normas de ordem pública do Código de Defesa do Consumidor (Súmula 297/STJ)'
     ],
     tesesIdentificadas: [
       {
         id: 'tese-1',
-        titulo: 'Responsabilidade Objetiva da Instituição Financeira por Fortuito Interno',
-        conclusao: 'O banco responde objetivamente pelos danos decorrentes de transações atípicas que violam seu próprio perfil de segurança e algoritmos antifraude.',
+        titulo: 'Responsabilidade objetiva da instituição financeira por fortuito interno',
+        conclusao: 'A instituição financeira responde objetivamente pelos danos oriundos de fraudes praticadas por terceiros no âmbito de operações bancárias atípicas.',
         premissas: [
           {
             id: 'p1',
             tipo: 'norma_positivada',
-            descricao: 'Art. 14, caput e § 1º do Código de Defesa do Consumidor (defeito na prestação do serviço)',
-            fonteCitada: 'CDC, art. 14'
+            descricao: 'Art. 14 do Código de Defesa do Consumidor (defeito na segurança do serviço)',
+            fonteCitada: 'CDC, art. 14',
+            paginaDoc: 3
           },
           {
             id: 'p2',
             tipo: 'precedente_judicial',
-            descricao: 'Súmula 479 do Superior Tribunal de Justiça: responsabilidade objetiva por fortuito interno em fraudes bancárias',
-            fonteCitada: 'STJ, Súmula 479'
+            descricao: 'Súmula 479 do STJ (fortuito interno inerente ao risco do empreendimento financeiro)',
+            fonteCitada: 'STJ, Súmula 479',
+            paginaDoc: 4
           },
           {
             id: 'p3',
             tipo: 'fato_provado',
-            descricao: 'Transações vultosas fora do horário habitual de consumo do correntista sem acionamento dos bloqueios cautelares',
-            paginaDoc: 4
+            descricao: 'Transações vultosas fora do horário habitual do correntista sem bloqueio cautelar pelos sistemas antifraude',
+            paginaDoc: 5
           }
         ],
         dispositivosLegais: ['CDC, art. 14', 'CPC, art. 373, II'],
-        precedentesCitados: ['STJ, Súmula 479', 'STJ, REsp 1.999.876/SP'],
+        precedentesCitados: ['STJ, Súmula 479'],
         vulnerabilidades: [
           {
             id: 'vuln-1',
             tipoInciso: 'IV_NAO_ENFRENTAMENTO_ARGUMENTO_CAPAZ',
-            titulo: 'Omissão sobre a alegação de envio voluntário do código OTP (Art. 489, § 1º, IV)',
-            explicacao: 'A sentença deixou de apreciar a contestação do banco quanto à entrega expressa de senha e token OTP pelo próprio autor, o que infirmaria o dever exclusivo de segurança do sistema.',
-            trechoTexto: '“Rejeito genericamente os argumentos da defesa de que houve culpa do correntista, porquanto incide o risco da atividade financeira.”',
+            titulo: 'Ausência de enfrentamento sobre envio voluntário de token OTP',
+            explicacao: 'A decisão não apreciou o argumento defensivo do banco quanto à entrega consciente das chaves de segurança pelo correntista a terceiro.',
+            trechoTexto: '“Rejeito os argumentos da defesa de que houve culpa do correntista, porquanto incide de forma irrestrita o risco da atividade financeira.”',
             pagina: 6,
             paragrafo: 14,
             remedioProcessualSugerido: 'embargos_declaracao_omissao'
@@ -83,20 +82,22 @@ const DECISAO_REAL_DEMO: EstruturaDecisaoCanonica = {
       },
       {
         id: 'tese-2',
-        titulo: 'Fixação de Honorários Advocatícios Sucumbenciais',
-        conclusao: 'Condenação da instituição financeira ao pagamento de honorários fixados em 15% sobre o valor da condenação.',
+        titulo: 'Fixação de honorários advocatícios sucumbenciais',
+        conclusao: 'Condenação ao pagamento de honorários em 15% sobre o valor atualizado da condenação.',
         premissas: [
           {
             id: 'p4',
             tipo: 'norma_positivada',
-            descricao: 'Art. 85, § 2º do CPC: fixação objetiva entre 10% e 20% sobre a condenação',
-            fonteCitada: 'CPC, art. 85, § 2º'
+            descricao: 'Art. 85, § 2º do CPC: fixação objetiva vinculada à condenação',
+            fonteCitada: 'CPC, art. 85, § 2º',
+            paginaDoc: 7
           },
           {
             id: 'p5',
             tipo: 'precedente_judicial',
-            descricao: 'Tema 1.076/STJ: vinculação obrigatória aos percentuais do art. 85, § 2º, vedada equidade fora do § 8º',
-            fonteCitada: 'STJ, Tema 1.076'
+            descricao: 'Tema 1.076/STJ: vedação de equidade fora das hipóteses do § 8º',
+            fonteCitada: 'STJ, Tema 1.076',
+            paginaDoc: 7
           }
         ],
         dispositivosLegais: ['CPC, art. 85, § 2º'],
@@ -107,309 +108,322 @@ const DECISAO_REAL_DEMO: EstruturaDecisaoCanonica = {
   },
   dispositivo: {
     resultado: 'procedente',
-    conteudoDispositivo: 'JULGO PROCEDENTES OS PEDIDOS formulados na inicial, resolvendo o mérito nos termos do art. 487, I, do CPC, para declarar a inexigibilidade dos débitos, condenar o réu à restituição de R$ 38.500,00 acrescidos de correção monetária e juros de mora de 1% ao mês a partir do evento danoso, além de R$ 10.000,00 a título de danos morais.',
-    sucumbencia: 'Custas processuais e despesas pelo requerido.',
-    honorarios: 'Honorários advocatícios sucumbenciais fixados em 15% sobre o valor total da condenação atualizado (CPC, art. 85, § 2º).'
+    conteudoDispositivo: 'JULGO PROCEDENTES OS PEDIDOS formulados na inicial, com resolução do mérito (CPC, art. 487, I), para declarar a inexigibilidade dos débitos impugnados, condenar a instituição requerida à restituição simples de R$ 38.500,00 corrigidos e acrescidos de juros de mora legais, bem como ao pagamento de R$ 10.000,00 a título de compensação por danos morais.',
+    sucumbencia: 'Custas e despesas processuais atribuídas ao réu.',
+    honorarios: 'Honorários advocatícios sucumbenciais fixados em 15% sobre o valor da condenação (CPC, art. 85, § 2º).'
   }
 };
 
 export default function ArgumentaPage() {
-  const [abaAtiva, setAbaAtiva] = useState<'geral' | 'estrutura' | 'teses' | 'mapa' | 'fragilidades' | 'estrategias'>('geral');
-  const [decisao] = useState<EstruturaDecisaoCanonica>(DECISAO_REAL_DEMO);
+  const [decisao] = useState<EstruturaDecisaoCanonica>(DECISAO_DEMO);
+  const [abaAtiva, setAbaAtiva] = useState<'geral' | 'teses' | 'estrutura' | 'fragilidades' | 'estrategia'>('geral');
+  const [paginaDocSelecionada, setPaginaDocSelecionada] = useState<number>(1);
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {/* 8.4 Cabeçalho: Análise da Decisão */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-wider">
-            <Scale className="w-4 h-4" />
-            <span>Argumenta &middot; Anatomia e Auditoria de Decisões</span>
-          </div>
-          <h1 className="text-3xl font-serif font-bold text-white mt-1">
-            Análise Estrutural da Decisão Judicial
+        <div className="space-y-1">
+          <span className="text-xs font-medium text-[#4A918B] uppercase tracking-wider">
+            Argumenta &middot; Análise da decisão
+          </span>
+          <h1 className="text-3xl font-serif font-semibold text-[#F2F4F7]">
+            Análise da Decisão Judicial
           </h1>
-          <p className="text-slate-400 text-sm">
-            Processo nº <span className="font-mono text-slate-200">{decisao.numeroProcesso}</span> &middot; {decisao.tribunalOuVara}
+          <p className="text-xs text-[#A8B0BB]">
+            Processo <span className="font-mono text-[#F2F4F7]">{decisao.numeroProcesso}</span> &middot; 22ª Vara Cível Central de São Paulo
           </p>
         </div>
 
-        {/* Integrações Contextuais Rápidas */}
-        <div className="flex items-center gap-2">
-          <Link
-            href="/prazozero"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-medium transition-colors"
-          >
-            <Clock className="w-3.5 h-3.5" />
-            <span>Calcular Prazo Recursal</span>
-          </Link>
-        </div>
+        <Link
+          href="/prazozero"
+          className="inline-flex items-center gap-2 text-xs font-medium text-[#F2F4F7] bg-[#161C24] hover:bg-[#2B6F6A] px-3.5 py-2 rounded border border-[#232B35] transition-colors self-start sm:self-auto"
+        >
+          <Clock className="w-3.5 h-3.5 text-[#A8B0BB]" />
+          <span>Calcular prazo recursal</span>
+        </Link>
       </div>
 
-      {/* Navegação entre as 6 Abas */}
-      <div className="border-b border-slate-800 flex items-center gap-1 sm:gap-4 overflow-x-auto pb-1 text-sm">
-        {[
-          { id: 'geral', label: '1. Visão Geral' },
-          { id: 'estrutura', label: '2. Estrutura' },
-          { id: 'teses', label: '3. Teses Identificadas' },
-          { id: 'mapa', label: '4. Mapa Lógico' },
-          { id: 'fragilidades', label: '5. Fragilidades (Art. 489 CPC)', badge: '1' },
-          { id: 'estrategias', label: '6. Estratégias Processuais' }
-        ].map(aba => (
-          <button
-            key={aba.id}
-            onClick={() => setAbaAtiva(aba.id as any)}
-            className={`px-3 py-2 border-b-2 font-medium transition-all whitespace-nowrap flex items-center gap-2 ${
-              abaAtiva === aba.id
-                ? 'border-amber-400 text-amber-400'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <span>{aba.label}</span>
-            {aba.badge && (
-              <span className="px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-mono font-bold">
-                {aba.badge}
+      {/* 8.1 Bancada de Análise Documental (Layout em Duas Colunas) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Coluna Esquerda: Navegação do Documento e Páginas */}
+        <div className="lg:col-span-4 bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-5">
+          <div className="space-y-1">
+            <span className="text-[11px] font-medium text-[#737E8C] uppercase tracking-wider block">
+              Documento sob análise
+            </span>
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[#4A918B]" />
+              <span className="text-xs font-medium text-[#F2F4F7] truncate">
+                Sentenca_Merito_1002345.pdf
               </span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Conteúdo da Aba */}
-      <div className="space-y-6">
-        {/* ABA 1: VISÃO GERAL */}
-        {abaAtiva === 'geral' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 glass-panel p-6 rounded-xl space-y-6">
-              <div>
-                <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Resumo da Lide</h3>
-                <p className="text-slate-200 text-sm leading-relaxed">{decisao.relatorio.resumoFatico}</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800 text-xs">
-                <div>
-                  <span className="text-slate-400 block mb-1">Polo Ativo (Autor)</span>
-                  <span className="text-slate-200 font-medium">{decisao.relatorio.partes.poloAtivo.join(', ')}</span>
-                </div>
-                <div>
-                  <span className="text-slate-400 block mb-1">Polo Passivo (Réu)</span>
-                  <span className="text-slate-200 font-medium">{decisao.relatorio.partes.poloPassivo.join(', ')}</span>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-800">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Pedidos Formulados</h4>
-                <ul className="space-y-1.5 text-xs text-slate-300">
-                  {decisao.relatorio.pedidosPrincipais.map((p, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-amber-400">&bull;</span>
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
-
-            {/* Resultado do Dispositivo */}
-            <div className="glass-panel p-6 rounded-xl space-y-4 border-emerald-500/30">
-              <div className="flex items-center gap-2 text-emerald-400 text-xs font-mono uppercase font-semibold">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Resultado: {decisao.dispositivo.resultado}</span>
-              </div>
-              <h3 className="font-serif text-xl font-bold text-white">Dispositivo Sentencial</h3>
-              <p className="text-xs text-slate-300 leading-relaxed font-mono bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-                {decisao.dispositivo.conteudoDispositivo}
-              </p>
-              <div className="space-y-2 text-xs pt-2">
-                <div>
-                  <span className="text-slate-400">Honorários:</span>{' '}
-                  <span className="text-slate-200 font-medium">{decisao.dispositivo.honorarios}</span>
-                </div>
-                <div className="pt-3 border-t border-slate-800">
-                  <Link
-                    href="/prazozero"
-                    className="flex items-center justify-between text-amber-400 hover:text-amber-300 font-medium"
-                  >
-                    <span>Calcular prazo de 15 dias para Apelação</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <span className="text-[11px] text-[#737E8C] block">
+              8 páginas &middot; Publicada em 08/03/2026
+            </span>
           </div>
-        )}
 
-        {/* ABA 2: ESTRUTURA */}
-        {abaAtiva === 'estrutura' && (
-          <div className="space-y-4">
-            <div className="glass-panel p-6 rounded-xl space-y-3">
-              <span className="text-xs font-mono uppercase text-blue-400 font-semibold">1. Relatório</span>
-              <p className="text-xs text-slate-300 leading-relaxed">{decisao.relatorio.resumoFatico}</p>
-            </div>
-            <div className="glass-panel p-6 rounded-xl space-y-3">
-              <span className="text-xs font-mono uppercase text-amber-400 font-semibold">2. Preliminares & Prejudiciais</span>
-              <ul className="text-xs text-slate-300 space-y-1">
-                {decisao.fundamentacao.questoesPrejudiciaisOuPreliminares.map((q, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className="text-amber-400">&bull;</span>
-                    <span>{q}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="glass-panel p-6 rounded-xl space-y-3 border-amber-500/30">
-              <span className="text-xs font-mono uppercase text-amber-400 font-semibold">3. Fundamentação & Dispositivo</span>
-              <p className="text-xs text-slate-300 leading-relaxed">{decisao.dispositivo.conteudoDispositivo}</p>
-            </div>
-          </div>
-        )}
-
-        {/* ABA 3: TESES */}
-        {abaAtiva === 'teses' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {decisao.fundamentacao.tesesIdentificadas.map(tese => (
-              <div key={tese.id} className="glass-panel p-6 rounded-xl space-y-4 border-slate-800 hover:border-amber-500/40 transition-colors">
-                <div className="flex items-start justify-between">
-                  <h3 className="font-serif text-lg font-bold text-white">{tese.titulo}</h3>
-                  <span className="text-[10px] font-mono text-slate-400 px-2 py-0.5 rounded bg-slate-900 border border-slate-800">
-                    {tese.premissas.length} premissas
-                  </span>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-lg border border-slate-800">
-                  <strong className="text-amber-400">Conclusão:</strong> {tese.conclusao}
-                </p>
-
-                <div className="space-y-2 text-xs">
-                  <span className="font-semibold text-slate-400 block uppercase font-mono text-[11px]">Bases Normativas & Precedentes</span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {tese.dispositivosLegais.map(d => (
-                      <Link
-                        key={d}
-                        href="/normaviva"
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-950/40 text-blue-300 border border-blue-900/50 hover:border-blue-500 transition-colors"
-                      >
-                        <BookOpen className="w-3 h-3" />
-                        <span>{d}</span>
-                      </Link>
-                    ))}
-                    {tese.precedentesCitados.map(p => (
-                      <Link
-                        key={p}
-                        href="/tesemap"
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-900/50 hover:border-emerald-500 transition-colors"
-                      >
-                        <GitFork className="w-3 h-3" />
-                        <span>{p}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ABA 4: MAPA LÓGICO */}
-        {abaAtiva === 'mapa' && (
-          <div className="glass-panel p-6 rounded-xl space-y-6">
-            <div className="flex items-center gap-2 text-xs font-mono text-amber-400">
-              <ListTree className="w-4 h-4" />
-              <span>Cadeia Lógica Argumentativa da Decisão</span>
-            </div>
-
-            <div className="space-y-4 max-w-xl mx-auto py-4">
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs">
-                <span className="text-amber-400 font-mono font-bold block mb-1">1. FATO PROVADO</span>
-                <span>Transações PIX anômalas de R$ 38.500,00 na madrugada fora do padrão do consumidor.</span>
-              </div>
-              <div className="w-0.5 h-6 bg-slate-700 mx-auto" />
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs">
-                <span className="text-blue-400 font-mono font-bold block mb-1">2. NORMA APLICADA</span>
-                <span>Art. 14, caput e § 1º do CDC (Dever de segurança e risco do empreendimento).</span>
-              </div>
-              <div className="w-0.5 h-6 bg-slate-700 mx-auto" />
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs">
-                <span className="text-emerald-400 font-mono font-bold block mb-1">3. PRECEDENTE QUALIFICADO</span>
-                <span>Súmula 479 do STJ (Fraude praticada por terceiros constitui fortuito interno).</span>
-              </div>
-              <div className="w-0.5 h-6 bg-slate-700 mx-auto" />
-              <div className="p-3 rounded-lg bg-slate-900 border border-amber-500/40 text-xs shadow-md">
-                <span className="text-amber-400 font-mono font-bold block mb-1">4. CONCLUSÃO CONDENATÓRIA</span>
-                <span>Banco condenado a restituir R$ 38.500,00 e pagar danos morais de R$ 10.000,00.</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ABA 5: FRAGILIDADES (ART. 489, § 1º DO CPC) */}
-        {abaAtiva === 'fragilidades' && (
-          <div className="space-y-6">
-            <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/50 flex items-start gap-3">
-              <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div className="text-xs text-amber-200/90 leading-relaxed">
-                As fragilidades identificadas seguem estritamente a tipicidade do <strong>Artigo 489, § 1º do Código de Processo Civil</strong>. Cada vulnerabilidade aponta o vício insanável de fundamentação que enseja Embargos de Declaração ou nulidade recursal.
-              </div>
-            </div>
-
-            {decisao.fundamentacao.tesesIdentificadas.flatMap(t => t.vulnerabilidades).map(v => (
-              <div key={v.id} className="glass-panel p-6 rounded-xl border-amber-500/40 space-y-4">
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <span className="px-2 py-0.5 rounded bg-red-950/60 text-red-300 font-mono text-[11px] border border-red-800/60 font-semibold">
-                      Art. 489, § 1º, IV do CPC
-                    </span>
-                    <h3 className="text-base font-serif font-bold text-white mt-1">{v.titulo}</h3>
-                  </div>
-                  <span className="text-xs font-mono text-slate-400">Página {v.pagina}, § {v.paragrafo}</span>
-                </div>
-
-                <p className="text-xs text-slate-300 leading-relaxed">{v.explicacao}</p>
-
-                <div className="p-3 rounded bg-slate-900/80 border border-slate-800 text-xs italic text-slate-400 font-serif">
-                  Trecho da Decisão: {v.trechoTexto}
-                </div>
-
-                <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-800">
-                  <span className="text-slate-400">
-                    Remédio processual cabível: <strong className="text-amber-400 font-mono">{v.remedioProcessualSugerido}</strong>
-                  </span>
-                  <Link
-                    href="/prazozero"
-                    className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 font-medium"
-                  >
-                    <span>Calcular prazo de 5 dias (EDcl)</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ABA 6: ESTRATÉGIAS */}
-        {abaAtiva === 'estrategias' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="glass-panel p-6 rounded-xl space-y-3 border-slate-800 hover:border-amber-500/40 transition-colors">
-              <h3 className="font-serif font-bold text-white text-base">Atacar Tese Condenatória</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Opor Embargos de Declaração por omissão (Art. 1.022 c/c Art. 489, § 1º, IV CPC) requerendo expressa manifestação sobre a entrega voluntária de token OTP pelo autor.
-              </p>
-              <button className="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-xs text-amber-300 border border-slate-700">
-                Minutar Tese de Embargos
+          {/* Índice de Páginas */}
+          <div className="space-y-1.5 pt-3 border-t border-[#1C232C]">
+            <span className="text-[11px] text-[#737E8C] block mb-2 font-medium">Seções do Documento</span>
+            {[
+              { pag: 1, label: 'Págs. 1–2: Relatório e Partes' },
+              { pag: 3, label: 'Págs. 3–4: Preliminares e CDC' },
+              { pag: 5, label: 'Págs. 5–6: Fundamentação e Súmula 479' },
+              { pag: 7, label: 'Págs. 7–8: Dispositivo e Sucumbência' }
+            ].map(item => (
+              <button
+                key={item.pag}
+                onClick={() => setPaginaDocSelecionada(item.pag)}
+                className={`w-full text-left px-3 py-2 rounded text-xs transition-colors flex items-center justify-between ${
+                  paginaDocSelecionada === item.pag
+                    ? 'bg-[#161C24] text-[#F2F4F7] border border-[#2B6F6A]'
+                    : 'text-[#A8B0BB] hover:bg-[#161C24]/60 hover:text-[#F2F4F7] border border-transparent'
+                }`}
+              >
+                <span>{item.label}</span>
+                <ChevronRight className="w-3.5 h-3.5 text-[#737E8C]" />
               </button>
-            </div>
+            ))}
+          </div>
 
-            <div className="glass-panel p-6 rounded-xl space-y-3 border-slate-800 hover:border-amber-500/40 transition-colors">
-              <h3 className="font-serif font-bold text-white text-base">Sustentar Acórdão no TeseMap</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Buscar teses de fortuito interno e precedentes análogos no TJSP e STJ para instruir as contrarrazões de apelação.
-              </p>
-              <Link href="/tesemap" className="inline-block px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-800 text-xs text-emerald-300 border border-slate-700">
-                Explorar Precedentes Relacionados
+          {/* Relações com Fontes Externas */}
+          <div className="pt-4 border-t border-[#1C232C] space-y-2">
+            <span className="text-[11px] text-[#737E8C] block font-medium">Fontes citadas</span>
+            <div className="flex flex-col gap-1.5 text-xs">
+              <Link
+                href="/normaviva"
+                className="flex items-center justify-between p-2 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
+              >
+                <span>Art. 14 do CDC</span>
+                <ExternalLink className="w-3 h-3 text-[#737E8C]" />
+              </Link>
+              <Link
+                href="/tesemap"
+                className="flex items-center justify-between p-2 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
+              >
+                <span>Súmula 479 do STJ</span>
+                <ExternalLink className="w-3 h-3 text-[#737E8C]" />
               </Link>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Coluna Principal: Análise Estruturada e Abas Reduzidas */}
+        <div className="lg:col-span-8 space-y-6">
+          {/* 8.2 Cinco Abas Limpas */}
+          <div className="flex items-center gap-6 border-b border-[#232B35] pb-2 text-sm overflow-x-auto">
+            {[
+              { id: 'geral', label: 'Visão geral' },
+              { id: 'teses', label: 'Teses' },
+              { id: 'estrutura', label: 'Estrutura' },
+              { id: 'fragilidades', label: 'Fragilidades da fundamentação', badge: '1' },
+              { id: 'estrategia', label: 'Estratégia' }
+            ].map(aba => (
+              <button
+                key={aba.id}
+                onClick={() => setAbaAtiva(aba.id as any)}
+                className={`text-xs font-medium pb-1.5 transition-colors relative whitespace-nowrap flex items-center gap-1.5 ${
+                  abaAtiva === aba.id
+                    ? 'text-[#F2F4F7]'
+                    : 'text-[#A8B0BB] hover:text-[#F2F4F7]'
+                }`}
+              >
+                <span>{aba.label}</span>
+                {aba.badge && (
+                  <span className="px-1.5 py-0.2 rounded bg-[#B95D5D]/20 text-[#B95D5D] text-[10px] font-medium">
+                    {aba.badge}
+                  </span>
+                )}
+                {abaAtiva === aba.id && (
+                  <span className="absolute bottom-[-9px] left-0 right-0 h-[2px] bg-[#2B6F6A] rounded-full" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Conteúdo da Aba Ativa */}
+          <div className="space-y-6">
+            {/* 1. VISÃO GERAL */}
+            {abaAtiva === 'geral' && (
+              <div className="space-y-5">
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-4">
+                  <h3 className="text-xs font-medium uppercase tracking-wider text-[#737E8C]">
+                    Resumo do caso
+                  </h3>
+                  <p className="text-sm text-[#F2F4F7] leading-relaxed">
+                    {decisao.relatorio.resumoFatico}
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#1C232C] text-xs">
+                    <div>
+                      <span className="text-[#737E8C] block mb-0.5">Autor</span>
+                      <span className="text-[#F2F4F7] font-medium">{decisao.relatorio.partes.poloAtivo.join(', ')}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#737E8C] block mb-0.5">Réu</span>
+                      <span className="text-[#F2F4F7] font-medium">{decisao.relatorio.partes.poloPassivo.join(', ')}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dispositivo Sentencial */}
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium uppercase tracking-wider text-[#737E8C]">
+                      Dispositivo
+                    </span>
+                    <span className="text-xs text-[#3E8F70] font-medium">
+                      Procedente
+                    </span>
+                  </div>
+                  <div className="p-3.5 bg-[#0B0F14] border border-[#232B35] rounded text-xs text-[#F2F4F7] leading-relaxed font-serif">
+                    {decisao.dispositivo.conteudoDispositivo}
+                  </div>
+                  <div className="text-xs text-[#A8B0BB] pt-1">
+                    Honorários: {decisao.dispositivo.honorarios}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 2. TESES (com mapa lógico integrado) */}
+            {abaAtiva === 'teses' && (
+              <div className="space-y-6">
+                {decisao.fundamentacao.tesesIdentificadas.map(tese => (
+                  <div key={tese.id} className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-4">
+                    <div>
+                      <span className="text-[11px] text-[#4A918B] font-medium uppercase tracking-wider block mb-1">
+                        Tese Identificada
+                      </span>
+                      <h3 className="font-serif text-lg font-semibold text-[#F2F4F7]">
+                        {tese.titulo}
+                      </h3>
+                      <p className="text-xs text-[#A8B0BB] mt-1">
+                        {tese.conclusao}
+                      </p>
+                    </div>
+
+                    {/* Cadeia de Premissas e Trechos */}
+                    <div className="space-y-2 pt-3 border-t border-[#1C232C]">
+                      <span className="text-[11px] text-[#737E8C] font-medium block">
+                        Cadeia de Premissas e Evidências
+                      </span>
+                      <div className="space-y-2">
+                        {tese.premissas.map(p => (
+                          <div
+                            key={p.id}
+                            className="p-3 rounded bg-[#0B0F14] border border-[#232B35] text-xs space-y-1"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-[#F2F4F7] font-medium">
+                                {p.descricao}
+                              </span>
+                              {p.paginaDoc && (
+                                <span className="text-[10px] text-[#737E8C] font-mono">
+                                  Pág. {p.paginaDoc}
+                                </span>
+                              )}
+                            </div>
+                            {p.fonteCitada && (
+                              <span className="text-[10px] text-[#4F7FC8] block">
+                                Fonte: {p.fonteCitada}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 3. ESTRUTURA */}
+            {abaAtiva === 'estrutura' && (
+              <div className="space-y-4">
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-2">
+                  <span className="text-xs text-[#737E8C] font-medium uppercase block">Relatório</span>
+                  <p className="text-xs text-[#F2F4F7] leading-relaxed">{decisao.relatorio.resumoFatico}</p>
+                </div>
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-2">
+                  <span className="text-xs text-[#737E8C] font-medium uppercase block">Questões Preliminares</span>
+                  <ul className="text-xs text-[#F2F4F7] space-y-1 list-disc list-inside">
+                    {decisao.fundamentacao.questoesPrejudiciaisOuPreliminares.map((q, i) => (
+                      <li key={i}>{q}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-2">
+                  <span className="text-xs text-[#737E8C] font-medium uppercase block">Dispositivo</span>
+                  <p className="text-xs text-[#F2F4F7] leading-relaxed font-serif">{decisao.dispositivo.conteudoDispositivo}</p>
+                </div>
+              </div>
+            )}
+
+            {/* 4. FRAGILIDADES DA FUNDAMENTAÇÃO */}
+            {abaAtiva === 'fragilidades' && (
+              <div className="space-y-4">
+                <p className="text-xs text-[#A8B0BB] leading-relaxed">
+                  Apontamentos analíticos sobre a consistência argumentativa da decisão em face do dever de fundamentação analítica.
+                </p>
+
+                {decisao.fundamentacao.tesesIdentificadas.flatMap(t => t.vulnerabilidades).map(v => (
+                  <div key={v.id} className="bg-[#11161D] border border-[#B95D5D]/40 rounded-lg p-6 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <span className="text-[10px] text-[#B95D5D] font-medium uppercase tracking-wider block mb-1">
+                          Ponto de atenção &middot; Art. 489, § 1º, IV do CPC
+                        </span>
+                        <h4 className="font-serif text-base font-semibold text-[#F2F4F7]">
+                          {v.titulo}
+                        </h4>
+                      </div>
+                      <span className="text-[10px] text-[#737E8C] font-mono">
+                        Pág. {v.pagina}, § {v.paragrafo}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-[#A8B0BB] leading-relaxed">
+                      {v.explicacao}
+                    </p>
+
+                    <div className="p-3 rounded bg-[#0B0F14] border border-[#232B35] text-xs font-serif text-[#F2F4F7] italic">
+                      {v.trechoTexto}
+                    </div>
+
+                    <div className="pt-2 text-xs text-[#737E8C] flex items-center justify-between">
+                      <span>Remédio processual: Embargos de Declaração por omissão</span>
+                      <Link href="/prazozero" className="text-[#4A918B] hover:text-[#F2F4F7] flex items-center gap-1 font-medium">
+                        <span>Calcular prazo de 5 dias</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 5. ESTRATÉGIA */}
+            {abaAtiva === 'estrategia' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-2">
+                  <h4 className="text-sm font-semibold text-[#F2F4F7]">Opor Embargos de Declaração</h4>
+                  <p className="text-xs text-[#A8B0BB] leading-relaxed">
+                    Suscitar omissão quanto à alegação de fornecimento do código OTP pelo correntista a terceiro.
+                  </p>
+                </div>
+
+                <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 space-y-2">
+                  <h4 className="text-sm font-semibold text-[#F2F4F7]">Contrarrazões com Tema 1.076</h4>
+                  <p className="text-xs text-[#A8B0BB] leading-relaxed">
+                    Sustentar a manutenção dos honorários fixados em percentual objetivo sobre a condenação.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

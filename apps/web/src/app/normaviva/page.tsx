@@ -3,25 +3,31 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import {
-  BookOpen,
-  Calendar,
-  History,
   GitFork,
   ExternalLink,
-  ShieldCheck,
-  CheckCircle,
-  FileCode,
-  ArrowRight
+  Calendar,
+  Check,
+  History
 } from 'lucide-react';
-import { MotorNormaViva, HISTORICO_DISPOSITIVOS_EXEMPLO } from '@ratione/normaviva';
+import { MotorNormaViva } from '@ratione/normaviva';
 
 export default function NormaVivaPage() {
   const motor = useMemo(() => new MotorNormaViva(), []);
 
   const [dispositivoSelecionadoId, setDispositivoSelecionadoId] = useState('CPC-ART-85-P2');
   const [dataConsulta, setDataConsulta] = useState('2026-10-06');
+  const [usandoDataAtual, setUsandoDataAtual] = useState(true);
 
-  // Consulta point-in-time real
+  const selecionarDataAtual = () => {
+    setDataConsulta('2026-10-06');
+    setUsandoDataAtual(true);
+  };
+
+  const selecionarOutraData = (novaData: string) => {
+    setDataConsulta(novaData);
+    setUsandoDataAtual(novaData === '2026-10-06');
+  };
+
   const versaoVigente = useMemo(() => {
     return motor.consultarDispositivoNaData(dispositivoSelecionadoId, dataConsulta);
   }, [motor, dispositivoSelecionadoId, dataConsulta]);
@@ -31,147 +37,149 @@ export default function NormaVivaPage() {
   }, [motor, dispositivoSelecionadoId]);
 
   return (
-    <div className="space-y-10">
-      {/* Header */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-xs font-mono text-blue-400 uppercase tracking-wider">
-          <BookOpen className="w-4 h-4" />
-          <span>NormaViva &middot; Vigência e Histórico Legislativo Point-in-Time</span>
-        </div>
-        <h1 className="text-3xl font-serif font-bold text-white">
-          A Norma no Tempo: Como Ela Realmente Vigora
+    <div className="space-y-8">
+      {/* 9.4 Cabeçalho: Edição Legislativa */}
+      <div className="space-y-1">
+        <span className="text-xs font-medium text-[#4F7FC8] uppercase tracking-wider">
+          NormaViva &middot; Histórico da norma
+        </span>
+        <h1 className="text-3xl font-serif font-semibold text-[#F2F4F7]">
+          Edição e Vigência Legislativa
         </h1>
-        <p className="text-slate-400 text-sm max-w-2xl">
-          Consulte o texto exato em qualquer momento histórico. Rastreabilidade de leis modificadoras conforme a Lei Complementar nº 95/1998.
+        <p className="text-sm text-[#A8B0BB] max-w-2xl">
+          Texto normativo contextualizado e histórico de redações em determinada data.
         </p>
       </div>
 
-      {/* Barra de Filtro e Data Point-in-Time */}
-      <div className="glass-panel p-6 rounded-xl grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
-        <div className="md:col-span-7 space-y-1.5">
-          <label className="text-xs font-medium text-slate-300">
-            Dispositivo Legal Selecionado
+      {/* 9.3 Barra de Seleção e Data */}
+      <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Seletor de Artigo */}
+        <div className="space-y-1 flex-1 max-w-md">
+          <label className="text-[11px] font-medium text-[#737E8C] block uppercase tracking-wider">
+            Dispositivo
           </label>
           <select
             value={dispositivoSelecionadoId}
             onChange={e => setDispositivoSelecionadoId(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500"
+            className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
           >
-            <option value="CPC-ART-85-P2">Art. 85, § 2º &middot; CPC/15 (Honorários Advocatícios Objetivos)</option>
-            <option value="CPC-ART-85-P6A">Art. 85, § 6º-A &middot; CPC/15 (Inovação da Lei 14.365/2022)</option>
-            <option value="CPC-ART-489-P1">Art. 489, § 1º &middot; CPC/15 (Dever de Fundamentação Analítica)</option>
-            <option value="CPC-ART-219">Art. 219 &middot; CPC/15 (Contagem em Dias Úteis)</option>
+            <option value="CPC-ART-85-P2">Art. 85, § 2º &middot; CPC/15 (Fixação objetiva de honorários)</option>
+            <option value="CPC-ART-85-P6A">Art. 85, § 6º-A &middot; CPC/15 (Inclusão pela Lei 14.365/2022)</option>
+            <option value="CPC-ART-489-P1">Art. 489, § 1º &middot; CPC/15 (Dever de fundamentação analítica)</option>
+            <option value="CPC-ART-219">Art. 219 &middot; CPC/15 (Contagem em dias úteis)</option>
           </select>
         </div>
 
-        <div className="md:col-span-5 space-y-1.5">
-          <label className="text-xs font-medium text-slate-300 flex items-center justify-between">
-            <span>Data de Consulta (Point-in-Time)</span>
-            <span className="text-[11px] font-mono text-blue-400">Estado histórico</span>
-          </label>
-          <div className="flex gap-2">
-            <input
-              type="date"
-              value={dataConsulta}
-              onChange={e => setDataConsulta(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500"
-            />
+        {/* 9.3 Ver redação em: [ Hoje ] [ escolher data ] */}
+        <div className="space-y-1">
+          <span className="text-[11px] font-medium text-[#737E8C] block uppercase tracking-wider">
+            Ver redação em:
+          </span>
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setDataConsulta('2026-10-06')}
-              className="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 shrink-0"
+              type="button"
+              onClick={selecionarDataAtual}
+              className={`px-3 py-2 rounded text-xs font-medium transition-colors border ${
+                usandoDataAtual
+                  ? 'bg-[#161C24] text-[#F2F4F7] border-[#2B6F6A]'
+                  : 'bg-[#0B0F14] text-[#A8B0BB] border-[#232B35] hover:text-[#F2F4F7]'
+              }`}
             >
               Hoje
             </button>
+
+            <div className="relative">
+              <input
+                type="date"
+                value={dataConsulta}
+                onChange={e => selecionarOutraData(e.target.value)}
+                className={`bg-[#0B0F14] border rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A] ${
+                  !usandoDataAtual ? 'border-[#2B6F6A]' : 'border-[#232B35]'
+                }`}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Resultado da Vigência */}
+      {/* 9.1 Estrutura: Centro (Texto Normativo) + Lateral (Histórico) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Painel do Texto Vigente */}
-        <div className="lg:col-span-8 space-y-6">
-          <div className="glass-panel p-6 rounded-xl border-blue-500/30 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
-                  {versaoVigente?.dispositivoRotulo}
-                </span>
-                <span className="text-xs text-slate-400 font-mono">
-                  {versaoVigente?.normaNome}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
-                <CheckCircle className="w-3.5 h-3.5" />
-                <span>Vigente em {new Date(dataConsulta + 'T12:00:00Z').toLocaleDateString('pt-BR')}</span>
-              </div>
+        {/* Centro: Texto Normativo Editorial */}
+        <div className="lg:col-span-8 bg-[#11161D] border border-[#232B35] rounded-lg p-7 space-y-6">
+          <div className="flex items-start justify-between">
+            <div className="space-y-1">
+              <span className="text-xs font-serif font-bold text-[#4F7FC8]">
+                {versaoVigente?.normaNome}
+              </span>
+              <h2 className="font-serif text-2xl font-semibold text-[#F2F4F7]">
+                {versaoVigente?.dispositivoRotulo}
+              </h2>
             </div>
 
-            {/* Texto Literal */}
-            <div className="p-5 rounded-lg bg-slate-900/90 border border-slate-800 font-serif text-base text-slate-100 leading-relaxed shadow-inner">
-              {versaoVigente?.texto}
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#3E8F70]/15 text-[#3E8F70] text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#3E8F70]" />
+              <span>Vigente em {new Date(dataConsulta + 'T12:00:00Z').toLocaleDateString('pt-BR')}</span>
             </div>
+          </div>
 
-            {/* Metadados da Versão */}
-            <div className="pt-4 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div>
-                <span className="text-slate-400 block mb-0.5">Ato Modificador</span>
-                <span className="text-slate-200 font-medium">{versaoVigente?.atoModificador.rotulo}</span>
-              </div>
-              <div>
-                <span className="text-slate-400 block mb-0.5">Início da Vigência</span>
-                <span className="text-slate-200 font-mono">{versaoVigente?.dataInicioVigencia}</span>
-              </div>
-              <div>
-                <span className="text-slate-400 block mb-0.5">Término da Vigência</span>
-                <span className="text-slate-200 font-mono">
-                  {versaoVigente?.dataFimVigencia ? versaoVigente.dataFimVigencia : 'Indeterminado (Atual)'}
-                </span>
-              </div>
-            </div>
+          {/* Texto da Lei com Tipografia Editorial Limpa */}
+          <div className="p-6 bg-[#0B0F14] border border-[#232B35] rounded font-serif text-base text-[#F2F4F7] leading-relaxed tracking-wide">
+            {versaoVigente?.texto}
+          </div>
 
-            {/* Link Cruzado Inteligente para TeseMap */}
-            <div className="pt-2 flex items-center justify-between text-xs">
-              <span className="text-slate-400">Dúvidas sobre a interpretação jurisprudencial vinculante deste artigo?</span>
-              <Link
-                href="/tesemap"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium transition-colors"
-              >
-                <GitFork className="w-3.5 h-3.5" />
-                <span>Ver teses no TeseMap</span>
-                <ExternalLink className="w-3 h-3" />
-              </Link>
+          {/* Metadados da Redação */}
+          <div className="pt-4 border-t border-[#1C232C] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#A8B0BB]">
+            <div>
+              <span className="text-[#737E8C] block text-[11px]">Ato modificador</span>
+              <span className="text-[#F2F4F7] font-medium">{versaoVigente?.atoModificador.rotulo}</span>
             </div>
+            <div>
+              <span className="text-[#737E8C] block text-[11px]">Início da vigência</span>
+              <span className="font-mono text-[#F2F4F7]">{versaoVigente?.dataInicioVigencia}</span>
+            </div>
+          </div>
+
+          {/* Relação contextual limpa com o TeseMap */}
+          <div className="pt-4 border-t border-[#1C232C] flex items-center justify-between text-xs text-[#737E8C]">
+            <span>Jurisprudência vinculante associada a este dispositivo</span>
+            <Link
+              href="/tesemap"
+              className="inline-flex items-center gap-1 text-[#4A918B] hover:text-[#F2F4F7] font-medium"
+            >
+              <span>Explorar no TeseMap</span>
+              <ExternalLink className="w-3 h-3" />
+            </Link>
           </div>
         </div>
 
-        {/* Linha do Tempo e Evolução Legislativa */}
-        <div className="lg:col-span-4 glass-panel p-6 rounded-xl space-y-4">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-300">
-            <History className="w-4 h-4 text-amber-400" />
-            <span>Linha do Tempo do Dispositivo</span>
+        {/* Lateral: 9.2 Linha do Tempo e Relações */}
+        <div className="lg:col-span-4 bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-5">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-[#737E8C]">
+            <History className="w-4 h-4 text-[#4A918B]" />
+            <span>Linha do Tempo da Norma</span>
           </div>
 
-          <div className="space-y-4 py-2">
-            {linhaDoTempo.map((item, idx) => (
-              <div key={item.id} className="relative pl-6 pb-4 border-l border-slate-800 last:border-0 last:pb-0">
-                <div className="absolute -left-1.5 top-0.5 w-3 h-3 rounded-full bg-blue-500 border-2 border-slate-900" />
-                <div className="text-xs space-y-1">
-                  <span className="font-mono text-blue-400 font-semibold block">
+          <div className="space-y-4 py-1">
+            {linhaDoTempo.map(item => (
+              <div key={item.id} className="relative pl-5 pb-4 border-l border-[#232B35] last:border-0 last:pb-0">
+                <div className="absolute -left-1 top-1 w-2 h-2 rounded-full bg-[#4F7FC8]" />
+                <div className="text-xs space-y-0.5">
+                  <span className="font-mono text-[11px] text-[#A8B0BB] block">
                     {item.dataInicioVigencia}
                   </span>
-                  <p className="text-slate-200 font-medium">
+                  <span className="text-[#F2F4F7] font-medium block">
                     {item.atoModificador.rotulo}
-                  </p>
-                  <span className="text-[11px] text-slate-400 block">
-                    Tipo: {item.tipoAlteracao === 'redacao_original' ? 'Redação Original' : 'Alteração Legislativa'}
+                  </span>
+                  <span className="text-[10px] text-[#737E8C] block">
+                    {item.tipoAlteracao === 'redacao_original' ? 'Redação original' : 'Alteração legislativa'}
                   </span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400">
-            Fonte: Corpus Legislativo Federal LexML e Legislação Oficial da Presidência da República.
+          <div className="pt-4 border-t border-[#1C232C] text-[11px] text-[#737E8C] leading-relaxed">
+            Texto consolidado com base em fontes oficiais da legislação federal e LexML.
           </div>
         </div>
       </div>

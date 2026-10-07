@@ -11,22 +11,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        juridico: {
-          dark: '#080C14',
-          card: '#0F1626',
-          cardHover: '#141E34',
-          border: '#1E293B',
-          gold: '#C59B27',
-          goldLight: '#E8C547',
-          goldDark: '#8F6E16',
-          accent: '#1E3A8A',
-          cream: '#F8F9FA'
+        ratione: {
+          bg: '#0B0F14',
+          surface: '#11161D',
+          surfaceHover: '#161C24',
+          border: '#232B35',
+          text: '#F2F4F7',
+          textMuted: '#A8B0BB',
+          textDim: '#737E8C',
+          teal: '#2B6F6A',
+          tealLight: '#4A918B',
+          gold: '#B18A3B',
+          norma: '#4F7FC8',
+          vigente: '#3E8F70',
+          atencao: '#C8903D',
+          fragilidade: '#B95D5D',
+          relacao: '#8069B0'
         }
       },
       fontFamily: {
-        serif: ['Georgia', 'Cambria', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+        sans: ['var(--font-inter)', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        serif: ['var(--font-source-serif)', 'Source Serif 4', 'Georgia', 'serif'],
+        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace']
       }
     },
   },

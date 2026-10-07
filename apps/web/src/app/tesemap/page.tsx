@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   ReactFlow,
@@ -12,71 +12,77 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import {
-  GitFork,
-  BookOpen,
-  Scale,
   ExternalLink,
-  ShieldCheck,
-  Info,
-  Maximize2
+  BookOpen,
+  Scale
 } from 'lucide-react';
 import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo } from '@ratione/tesemap';
 
 export default function TeseMapPage() {
   const [temaSelecionadoChave, setTemaSelecionadoChave] = useState<string>('tema-1076-stj');
-  const [noSelecionado, setNoSelecionado] = useState<NoGrafo | null>(null);
 
   const dadosGrafo = useMemo(() => {
     return GRAFOS_PRECEDENTES_CATALOGADOS[temaSelecionadoChave];
   }, [temaSelecionadoChave]);
 
-  // Converter Nós do TeseMap em Nós do xyflow com coordenadas limpas
+  // 10.2 Painel lateral: nunca deixar vazio (iniciar com nó principal selecionado)
+  const [noSelecionado, setNoSelecionado] = useState<NoGrafo | null>(null);
+
+  useEffect(() => {
+    if (dadosGrafo && dadosGrafo.nos.length > 0) {
+      // Pré-selecionar o nó vinculante ou central
+      const principal = dadosGrafo.nos.find(n => n.tipo === 'tese_vinculante') || dadosGrafo.nos[0];
+      setNoSelecionado(principal);
+    }
+  }, [dadosGrafo]);
+
+  // Nós com proporções discretas e cores semânticas conforme 10.3
   const initialNodes: Node[] = useMemo(() => {
     if (!dadosGrafo) return [];
 
     const positions: Record<string, { x: number; y: number }> = {
       // Tema 1076
-      'tema-central': { x: 300, y: 30 },
-      'cpc-art85-p2': { x: 80, y: 160 },
-      'cpc-art85-p8': { x: 520, y: 160 },
-      'tema-1076-stj': { x: 80, y: 310 },
-      'lei-14365': { x: 80, y: 460 },
-      'distinguishing-fazenda': { x: 520, y: 310 },
+      'tema-central': { x: 280, y: 30 },
+      'cpc-art85-p2': { x: 70, y: 150 },
+      'cpc-art85-p8': { x: 490, y: 150 },
+      'tema-1076-stj': { x: 70, y: 290 },
+      'lei-14365': { x: 70, y: 430 },
+      'distinguishing-fazenda': { x: 490, y: 290 },
 
       // Súmula 479
-      'tema-fraude-bancaria': { x: 300, y: 40 },
-      'cdc-art14': { x: 300, y: 180 },
-      'sumula-479-stj': { x: 300, y: 320 },
-      'distinguishing-culpa-exclusiva': { x: 540, y: 320 }
+      'tema-fraude-bancaria': { x: 280, y: 40 },
+      'cdc-art14': { x: 280, y: 170 },
+      'sumula-479-stj': { x: 280, y: 300 },
+      'distinguishing-culpa-exclusiva': { x: 500, y: 300 }
     };
 
     return dadosGrafo.nos.map(n => {
-      const pos = positions[n.id] || { x: 250, y: 250 };
+      const pos = positions[n.id] || { x: 200, y: 200 };
       const ehVinculante = n.tipo === 'tese_vinculante';
       const ehDispositivo = n.tipo === 'dispositivo_legal';
       const ehDistinguishing = n.tipo === 'distinguishing';
       const ehLegislativo = n.tipo === 'inovacao_legislativa';
 
-      let bg = '#0f172a';
-      let border = '#334155';
-      let text = '#f1f5f9';
+      let bg = '#11161D';
+      let border = '#232B35';
+      let text = '#F2F4F7';
 
       if (ehVinculante) {
-        bg = '#1a1405';
-        border = '#c59b27';
-        text = '#fef08a';
+        bg = '#14120D';
+        border = '#C8903D';
+        text = '#F2F4F7';
       } else if (ehDispositivo) {
-        bg = '#0b192e';
-        border = '#3b82f6';
-        text = '#bfdbfe';
+        bg = '#0D141F';
+        border = '#4F7FC8';
+        text = '#F2F4F7';
       } else if (ehDistinguishing) {
-        bg = '#1f132b';
-        border = '#a855f7';
-        text = '#e9d5ff';
+        bg = '#16121E';
+        border = '#8069B0';
+        text = '#F2F4F7';
       } else if (ehLegislativo) {
-        bg = '#08211b';
-        border = '#10b981';
-        text = '#a7f3d0';
+        bg = '#0E1714';
+        border = '#3E8F70';
+        text = '#F2F4F7';
       }
 
       return {
@@ -84,22 +90,23 @@ export default function TeseMapPage() {
         position: pos,
         data: { label: n.label, original: n },
         style: {
-          background: bg,
+          backgroundColor: bg,
           borderColor: border,
           color: text,
-          borderWidth: '1.5px',
-          borderRadius: '10px',
-          padding: '12px 16px',
+          borderWidth: '1px',
+          borderRadius: '6px',
+          padding: '10px 14px',
           fontSize: '12px',
-          fontWeight: 600,
-          width: 220,
-          boxShadow: '0 4px 14px rgba(0,0,0,0.4)'
+          fontFamily: 'Inter, sans-serif',
+          fontWeight: 500,
+          width: 210,
+          boxShadow: 'none'
         }
       };
     });
   }, [dadosGrafo]);
 
-  // Converter Arestas com Labels semânticos
+  // Arestas com estilo neutro e pontas direcionadas
   const initialEdges: Edge[] = useMemo(() => {
     if (!dadosGrafo) return [];
 
@@ -108,75 +115,62 @@ export default function TeseMapPage() {
       source: a.source,
       target: a.target,
       label: a.label,
-      animated: a.tipo === 'interpreta',
       markerEnd: {
         type: MarkerType.ArrowClosed,
-        color: '#64748b'
+        color: '#4B5563',
+        width: 14,
+        height: 14
       },
       style: {
-        stroke: '#475569',
-        strokeWidth: 1.5
+        stroke: '#2F3946',
+        strokeWidth: 1.2
       },
       labelStyle: {
-        fill: '#94a3b8',
+        fill: '#A8B0BB',
         fontSize: 10,
-        fontWeight: 500
+        fontWeight: 400
       },
       labelBgStyle: {
-        fill: '#090d16',
-        fillOpacity: 0.85
+        fill: '#0B0F14',
+        fillOpacity: 0.95
       }
     }));
   }, [dadosGrafo]);
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {/* 10.4 Cabeçalho: Rede de Precedentes */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider">
-            <GitFork className="w-4 h-4" />
-            <span>TeseMap &middot; Grafo Topológico de Precedentes (Art. 927 CPC)</span>
-          </div>
-          <h1 className="text-3xl font-serif font-bold text-white mt-1">
-            Rede Jurisprudencial & Distinções
+        <div className="space-y-1">
+          <span className="text-xs font-medium text-[#8069B0] uppercase tracking-wider">
+            TeseMap &middot; Rede de precedentes
+          </span>
+          <h1 className="text-3xl font-serif font-semibold text-[#F2F4F7]">
+            Mapa da Tese e Jurisprudência
           </h1>
-          <p className="text-slate-400 text-sm max-w-2xl">
-            Navegue por teses vinculantes, conexões normativas e hipóteses de distinguishing sem perder a visão do conjunto.
+          <p className="text-sm text-[#A8B0BB] max-w-2xl">
+            Navegação por precedentes vinculantes, distinções (distinguishing) e dispositivos legais interpretados.
           </p>
         </div>
 
-        {/* Seletor de Caso Precedente */}
+        {/* Seletor de Tema */}
         <div className="w-full sm:w-72">
+          <label className="text-[10px] text-[#737E8C] block uppercase mb-1">Tema selecionado</label>
           <select
             value={temaSelecionadoChave}
-            onChange={e => {
-              setTemaSelecionadoChave(e.target.value);
-              setNoSelecionado(null);
-            }}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500"
+            onChange={e => setTemaSelecionadoChave(e.target.value)}
+            className="w-full bg-[#11161D] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
           >
-            <option value="tema-1076-stj">Tema 1.076/STJ &middot; Honorários e Equidade</option>
-            <option value="sumula-479-stj">Súmula 479/STJ &middot; Fraude Bancária</option>
+            <option value="tema-1076-stj">Tema 1.076 / STJ &middot; Honorários e Equidade</option>
+            <option value="sumula-479-stj">Súmula 479 / STJ &middot; Fraude Bancária</option>
           </select>
         </div>
       </div>
 
-      {/* Tema Central Banner */}
-      <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-400 uppercase font-mono text-[11px]">Tema em Exibição:</span>
-          <span className="text-slate-200 font-medium">{dadosGrafo.temaPrincipal}</span>
-        </div>
-        <span className="text-slate-400 text-[11px] font-mono">
-          {dadosGrafo.nos.length} nós &middot; {dadosGrafo.arestas.length} arestas
-        </span>
-      </div>
-
-      {/* Canvas Interativo do Grafo + Painel de Inspeção */}
+      {/* Canvas do Grafo e Painel Lateral Preenchido */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[580px]">
         {/* Grafo React Flow */}
-        <div className="lg:col-span-8 rounded-xl border border-slate-800 overflow-hidden bg-[#070b12] relative">
+        <div className="lg:col-span-8 rounded-lg border border-[#232B35] overflow-hidden bg-[#0B0F14] relative">
           <ReactFlow
             nodes={initialNodes}
             edges={initialEdges}
@@ -184,80 +178,76 @@ export default function TeseMapPage() {
               setNoSelecionado(node.data.original as NoGrafo);
             }}
             fitView
-            className="bg-[#070B12]"
+            className="bg-[#0B0F14]"
           >
-            <Background color="#1e293b" gap={20} size={1} />
-            <Controls className="bg-slate-900 border-slate-800 text-slate-300" />
+            <Background color="#161C24" gap={18} size={1} />
+            <Controls className="bg-[#11161D] border-[#232B35] text-[#A8B0BB]" />
           </ReactFlow>
 
-          {/* Legenda Flutuante */}
-          <div className="absolute bottom-4 left-4 p-2.5 rounded-lg bg-slate-950/85 backdrop-blur-md border border-slate-800 text-[11px] flex flex-wrap gap-3">
-            <span className="flex items-center gap-1.5 text-amber-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Precedente Vinculante
+          {/* 10.3 Legenda Semântica Discreta */}
+          <div className="absolute bottom-3 left-3 p-2 rounded bg-[#11161D]/90 border border-[#232B35] text-[10px] flex items-center gap-4 text-[#A8B0BB]">
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#C8903D]" /> Precedente Vinculante
             </span>
-            <span className="flex items-center gap-1.5 text-blue-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> Dispositivo Legal
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#4F7FC8]" /> Dispositivo Legal
             </span>
-            <span className="flex items-center gap-1.5 text-emerald-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Inovação Legislativa
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#3E8F70]" /> Alteração Legislativa
             </span>
-            <span className="flex items-center gap-1.5 text-purple-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-500" /> Distinguishing
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#8069B0]" /> Distinguishing
             </span>
           </div>
         </div>
 
-        {/* Inspetor do Nó Selecionado */}
-        <div className="lg:col-span-4 glass-panel p-6 rounded-xl overflow-y-auto flex flex-col justify-between">
-          {noSelecionado ? (
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-slate-800 text-slate-300 font-bold">
+        {/* 10.2 Painel Lateral Sempre Ativo e Informativo */}
+        <div className="lg:col-span-4 bg-[#11161D] border border-[#232B35] rounded-lg p-6 overflow-y-auto flex flex-col justify-between">
+          {noSelecionado && (
+            <div className="space-y-5">
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-mono text-[#737E8C] uppercase tracking-wider block">
                   {noSelecionado.tipo.replace('_', ' ')}
                 </span>
-                <h3 className="font-serif text-lg font-bold text-white mt-1">
+                <h3 className="font-serif text-lg font-semibold text-[#F2F4F7]">
                   {noSelecionado.label}
                 </h3>
                 {noSelecionado.tribunal && (
-                  <span className="text-xs text-amber-400 font-mono block">
-                    Tribunal: {noSelecionado.tribunal} {noSelecionado.numeroReferencia ? `(${noSelecionado.numeroReferencia})` : ''}
+                  <span className="text-xs text-[#C8903D] block">
+                    {noSelecionado.tribunal} {noSelecionado.numeroReferencia ? `&middot; ${noSelecionado.numeroReferencia}` : ''}
                   </span>
                 )}
               </div>
 
-              <div className="p-3.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans">
+              <div className="p-3.5 rounded bg-[#0B0F14] border border-[#232B35] text-xs text-[#F2F4F7] leading-relaxed">
                 {noSelecionado.descricao}
               </div>
 
-              {/* Ações Rápidas Conectadas */}
-              <div className="space-y-2 pt-4 border-t border-slate-800 text-xs">
+              {/* Relações e Ações */}
+              <div className="pt-4 border-t border-[#1C232C] space-y-2 text-xs">
+                <span className="text-[11px] text-[#737E8C] block font-medium">Ações contextuais</span>
                 <Link
                   href="/normaviva"
-                  className="flex items-center justify-between p-2.5 rounded bg-blue-950/30 hover:bg-blue-950/60 border border-blue-900/50 text-blue-300 transition-colors"
+                  className="flex items-center justify-between p-2.5 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <BookOpen className="w-3.5 h-3.5" />
-                    <span>Ver dispositivos no NormaViva</span>
+                    <BookOpen className="w-3.5 h-3.5 text-[#4F7FC8]" />
+                    <span>Ver artigo no NormaViva</span>
                   </span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3 h-3 text-[#737E8C]" />
                 </Link>
 
                 <Link
                   href="/argumenta"
-                  className="flex items-center justify-between p-2.5 rounded bg-amber-950/30 hover:bg-amber-950/60 border border-amber-900/50 text-amber-300 transition-colors"
+                  className="flex items-center justify-between p-2.5 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <Scale className="w-3.5 h-3.5" />
+                    <Scale className="w-3.5 h-3.5 text-[#4A918B]" />
                     <span>Aplicar tese no Argumenta</span>
                   </span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3 h-3 text-[#737E8C]" />
                 </Link>
               </div>
-            </div>
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center text-slate-400 text-xs space-y-2">
-              <Info className="w-8 h-8 text-slate-600" />
-              <p>Clique em qualquer nó do grafo ao lado para inspecionar os enunciados, ratio decidendi e conexões normativas.</p>
             </div>
           )}
         </div>
