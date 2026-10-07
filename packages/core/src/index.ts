@@ -59,6 +59,7 @@ export const TRIBUNAIS_BRASIL: Record<string, Tribunal> = {
   TJGO: { id: 'TJGO', nome: 'Tribunal de Justiça do Estado de Goiás', sigla: 'TJGO', esfera: 'estadual', uf: 'GO', sede: 'Goiânia/GO', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
   TJPE: { id: 'TJPE', nome: 'Tribunal de Justiça do Estado de Pernambuco', sigla: 'TJPE', esfera: 'estadual', uf: 'PE', sede: 'Recife/PE', fusoHorario: 'America/Recife', horarioExpedienteFim: '17:00', peticionamentoEletronicoFim: '23:59:59' },
   TJCE: { id: 'TJCE', nome: 'Tribunal de Justiça do Estado do Ceará', sigla: 'TJCE', esfera: 'estadual', uf: 'CE', sede: 'Fortaleza/CE', fusoHorario: 'America/Fortaleza', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
+  TJAL: { id: 'TJAL', nome: 'Tribunal de Justiça do Estado de Alagoas', sigla: 'TJAL', esfera: 'estadual', uf: 'AL', sede: 'Maceió/AL', fusoHorario: 'America/Maceio', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
   TJES: { id: 'TJES', nome: 'Tribunal de Justiça do Estado do Espírito Santo', sigla: 'TJES', esfera: 'estadual', uf: 'ES', sede: 'Vitória/ES', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' }
 };
 

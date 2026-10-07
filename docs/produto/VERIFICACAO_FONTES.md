@@ -60,7 +60,7 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 
 ## 6. O que continua `pendente`
 
-- **Feriados estaduais** (tabela do código): nenhum conferido. A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a **data magna** fixada em lei estadual. Há entradas suspeitas: ES (Nossa Senhora da Penha varia com a Páscoa), MT 20/11 (já é nacional), GO 24/10 (aniversário de Goiânia, municipal).
+- **Feriados estaduais** (tabela do código): nenhum conferido, exceto onde há ato lido (TJSP e TJMG em 2026, seção 11). A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a **data magna** fixada em lei estadual. Há entradas suspeitas: ES (Nossa Senhora da Penha varia com a Páscoa), MT 20/11 (já é nacional), GO 24/10 (aniversário de Goiânia, municipal).
 - **Feriados municipais:** não calculados (CPC, art. 1.003, § 6º).
 - **Carnaval, Corpus Christi, Cinzas e pontos facultativos** de TJs e demais tribunais; calendário de **STF e STJ de 2027** (os tribunais só divulgam o ano seguinte no fim do ano; por isso a suíte e o selo cobrem apenas 2026).
 - **Portarias de suspensão por indisponibilidade** do sistema (CPC, art. 224, § 1º, parte final).
@@ -110,7 +110,22 @@ Fora do catálogo, por não terem sido lidos: recurso de revista e embargos à S
 
 Limites: as portarias do STJ e do STF foram lidas pelos **comunicados oficiais** do tribunal, não pelo inteiro teor. Calendários de STF e STJ para 2027 ainda não existem (os tribunais divulgam o ano seguinte no fim do ano).
 
-## 11. Como repetir esta verificação
+## 11. Calendário dos tribunais estaduais (F2-03 e F2-04), lido em 07/10/2026
+
+Os eventos ficam em `packages/prazozero/src/calendario/eventos.ts`, cada um com a sua fonte. O selo "calendário conferido" só vale para tribunal e ano com cobertura declarada.
+
+| Tribunal | Fonte lida | O que entrou | Selo |
+|---|---|---|---|
+| **TJSP** | **Provimento CSM nº 2.813/2025** (DJE 25/11/2025), inteiro teor no portal de legislação do TJSP | 16 e 17/02 (Carnaval), 02 e 03/04, 20/04, 04 e 05/06, **09/07 (Data Magna, Lei Estadual 9.497/1997)** e 10/07, 07 e **08/12**, 30/10 (Dia do Servidor, transferido de 28/10 pelo Provimento CSM 2.845/2026, **citado no próprio provimento mas não lido**), recesso de 1º a 6/01 e de 20 a 31/12, e Quarta de Cinzas (18/02) com jornada começando 3 horas depois (expediente parcial) | 2026 |
+| **TJMG** | **Portaria Conjunta nº 1.764/PR/2026** (DJe 13/01/2026) e **Resolução OE nº 458/2004** (alterada pela 1.081/2024), art. 1º | 2026: 16 a 18/02 (Quarta de Cinzas **inteira**), 01 a 03/04, 20/04, 30/10, 07/12. Permanente (Res. 458): Carnaval de segunda a quarta, Semana Santa de quarta a sexta, 8/12. **Pendentes por comarca:** 04 e 05/06 (Corpus Christi, feriado municipal em Belo Horizonte e em outras comarcas) | 2026 |
+| **TJAL** | **Notícia oficial do TJAL** sobre o **Ato Normativo nº 03/2026** (o ato em si não foi lido); **Lei estadual nº 6.564/2005**, arts. 36 e 37 (PDF do texto original) | Verificados (2026): 20/04, 04 e 05/06, 10 e 11/08, 07 e 08/12. **Pendentes:** Carnaval (segunda a quarta), Semana Santa, 11/08, 8/12 e, sobretudo, o **art. 37: "feriados forenses" de 23/06 a 01/07 e de 20 a 31/12**, cuja vigência atual não confirmei (o PDF parece ser o texto original de 2005, e a regra deste documento é só versão atualizada) | não |
+| **TJRJ** | Os PDFs de 2026 do TJRJ ("suspensão de prazos e de expediente forense") **não abriram** (erro de conexão) | nada | não |
+| TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES | **não pesquisados nesta rodada** (o TJCE publicou portaria de feriados e pontos facultativos de 2026; o TJDFT, o TJPE e o TJCE têm atos próprios) | nada | não |
+
+Correções que a leitura trouxe: (1) o **TJSP suspende o expediente em 8/12** em 2026, ao contrário do que um cenário meu afirmava (o cenário foi reescrito); (2) o **9 de julho no TJSP é feriado conferido** em 2026 (Lei Estadual 9.497/1997), e continua pendente nos anos sem provimento; (3) no TJMG a **Quarta-feira de Cinzas é suspensa por inteiro**, e não apenas até as 14h como em STF, STJ e TJSP.
+Limites: feriados **municipais** nunca entram (CPC, art. 1.003, § 6º); o TJSP publica ainda suspensões por comarca, não modeladas; as páginas do TJSP e do TJAL só abrem com JavaScript, então foram lidas pelo navegador do app, e não pelo script.
+
+## 12. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm

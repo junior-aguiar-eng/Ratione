@@ -22,7 +22,17 @@ UF_DO_TRIBUNAL = {"TJSP": "SP", "TRF3": "SP", "TJRJ": "RJ", "TJMG": "MG"}
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}}
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}}
+
+# Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
+#  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
+#  TJMG: Portaria Conjunta 1.764/PR/2026, art. 1º; permanentes: Res. OE 458/2004, art. 1º
+#  TJAL: Ato Normativo 03/2026 (notícia oficial); permanentes pendentes: Lei estadual 6.564/2005, arts. 36 e 37
+TJSP_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "07-09", "07-10", "10-30", "12-07", "12-08"]
+TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
+TJMG_2026_NU = [("02-16", "02-18"), ("04-01", "04-03"), ("04-20", "04-20"), ("10-30", "10-30"), ("12-07", "12-07")]
+TJMG_2026_PENDENTE = ["06-04", "06-05"]
+TJAL_2026_NU = ["04-20", "06-04", "06-05", "08-10", "08-11", "12-07", "12-08"]
 
 
 def pascoa(ano: int) -> date:
@@ -83,7 +93,55 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             else:
                 nao_util.add(d)
                 nomes[d] = "Ponto facultativo (ato do tribunal)"
-    if uf == "SP" and completo:
+    def ev(d, verificado, nome):
+        """Evento de tribunal: o pendente só entra no modo completo e nunca apaga um dia já conferido."""
+        if not verificado and (d in nao_util or not completo):
+            return
+        nao_util.add(d)
+        parcial.discard(d)
+        nomes[d] = nome
+
+    def dia(mmdd):
+        m, dd = mmdd.split("-")
+        return date(ano, int(m), int(dd))
+
+    def intervalo(de, ate):
+        d = de
+        while d <= ate:
+            yield d
+            d += timedelta(1)
+
+    if ano == 2026 and trib == "TJSP":
+        for s in TJSP_2026_NU:
+            ev(dia(s), True, "TJSP: " + s)
+        for m1, d1, m2, d2 in TJSP_2026_RECESSO:
+            for d in intervalo(date(ano, m1, d1), date(ano, m2, d2)):
+                ev(d, True, "TJSP: recesso forense")
+        parcial.add(dia("02-18"))
+        nomes[dia("02-18")] = "Quarta-feira de Cinzas (TJSP: jornada começa 3 horas depois)"
+    if ano == 2026 and trib == "TJMG":
+        for de, ate in TJMG_2026_NU:
+            for d in intervalo(dia(de), dia(ate)):
+                ev(d, True, "TJMG: suspensão de expediente")
+        for s in TJMG_2026_PENDENTE:
+            ev(dia(s), False, "TJMG: depende da comarca")
+    if trib == "TJMG":  # Res. OE 458/2004, art. 1º, III a V: permanente
+        for off in (-48, -47, -46, -4, -3, -2):
+            ev(p + timedelta(off), True, "TJMG: Carnaval/Semana Santa (Res. 458/2004)")
+        ev(date(ano, 12, 8), True, "TJMG: Dia da Justiça (Res. 458/2004)")
+    if ano == 2026 and trib == "TJAL":
+        for s in TJAL_2026_NU:
+            ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
+    if trib == "TJAL":  # Lei estadual 6.564/2005: texto atual não confirmado (pendente)
+        for off in (-48, -47, -46, -4, -3, -2):
+            ev(p + timedelta(off), False, "TJAL: Carnaval/Semana Santa (Lei 6.564/2005)")
+        ev(date(ano, 8, 11), False, "TJAL: 11 de agosto (Lei 6.564/2005)")
+        ev(date(ano, 12, 8), False, "TJAL: 8 de dezembro (Lei 6.564/2005)")
+        for d in intervalo(date(ano, 6, 23), date(ano, 7, 1)):
+            ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
+        for d in intervalo(date(ano, 12, 20), date(ano, 12, 31)):
+            ev(d, False, "TJAL: feriados forenses de dezembro (Lei 6.564/2005, art. 37)")
+    if uf == "SP" and completo and date(ano, 7, 9) not in nao_util:
         nao_util.add(date(ano, 7, 9))
         nomes[date(ano, 7, 9)] = "Revolução Constitucionalista (estadual, pendente)"
     return nao_util, parcial, nomes
@@ -261,7 +319,7 @@ add("recesso-desligado", "recesso", "Recesso desligado explicitamente (suspensao
 add("recesso-pre-dezembro", "recesso", "15 dias úteis a partir de 01/12/2025: o 15º dia cai após o recesso", "CPC, art. 220",
     entrada("2025-12-01", "publicacao", 15))
 add("dobro-30d", "dobro", "Fazenda Pública: 15 dias em dobro (30 úteis)", "CPC, arts. 183 e 219",
-    entrada("2026-03-02", "publicacao", 15, prazoEmDobro=True))
+    entrada("2026-03-02", "publicacao", 15, "TJPR", prazoEmDobro=True))
 add("dobro-recesso", "dobro", "Prazo em dobro atravessando o recesso", "CPC, arts. 183 e 220",
     entrada("2025-12-10", "publicacao", 10, prazoEmDobro=True))
 add("bissexto-2024", "bissexto", "Fevereiro de 2024 (bissexto): 29/02 é dia útil", CPC,
@@ -286,39 +344,39 @@ add("stf-sem-uf", "tribunal", "STF (sem UF): calendário 2026 verificado", "Cale
 # Cenários que dependem de dias ainda pendentes de conferência: conservador mostra a data mais cedo.
 PEND = "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar"
 add("carnaval-2026-conservador", "pendente", "Carnaval 2026 ignorado no modo conservador (data mais cedo)", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-13", "publicacao", 5))
+    entrada("2026-02-13", "publicacao", 5, "TJPR"))
 add("carnaval-2026-completo", "pendente", "Carnaval 2026 considerado; Quarta de Cinzas protrai o dia do começo", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-13", "publicacao", 5, modo="completo"))
+    entrada("2026-02-13", "publicacao", 5, "TJPR", modo="completo"))
 add("cinzas-meio-conservador", "pendente", "Quarta de Cinzas no meio do prazo (conservador)", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-12", "publicacao", 5))
+    entrada("2026-02-12", "publicacao", 5, "TJPR"))
 add("cinzas-meio-completo", "pendente", "Quarta de Cinzas no meio do prazo conta normalmente", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-12", "publicacao", 5, modo="completo"))
+    entrada("2026-02-12", "publicacao", 5, "TJPR", modo="completo"))
 add("cinzas-vencimento-conservador", "pendente", "Prazo de 4 dias; sem Carnaval vence na segunda 16/02", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-10", "publicacao", 4))
+    entrada("2026-02-10", "publicacao", 4, "TJPR"))
 add("cinzas-vencimento-completo", "pendente", "Prazo de 4 dias; vencimento cairia na Quarta de Cinzas e é protraído", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-10", "publicacao", 4, modo="completo"))
+    entrada("2026-02-10", "publicacao", 4, "TJPR", modo="completo"))
 add("carnaval-2028-completo", "pendente", "Carnaval 2028 em 28 e 29/02 (bissexto), Cinzas em 01/03", PEND + "; CPC, art. 224, § 1º",
     entrada("2028-02-25", "publicacao", 5, modo="completo"))
 add("corpus-christi-conservador", "pendente", "Corpus Christi 2026 (04/06) ignorado no modo conservador", PEND,
-    entrada("2026-06-02", "publicacao", 5))
+    entrada("2026-06-02", "publicacao", 5, "TJPR"))
 add("corpus-christi-completo", "pendente", "Corpus Christi 2026 considerado", PEND,
-    entrada("2026-06-02", "publicacao", 5, modo="completo"))
+    entrada("2026-06-02", "publicacao", 5, "TJPR", modo="completo"))
 add("sexta-santa-conservador", "pendente", "Sexta-feira Santa 2026 (03/04) ignorada no modo conservador", PEND + "; Lei 9.093/1995, art. 2º",
-    entrada("2026-04-01", "publicacao", 3))
+    entrada("2026-04-01", "publicacao", 3, "TJPR"))
 add("sexta-santa-completo", "pendente", "Sexta-feira Santa 2026 considerada (TJSP)", PEND + "; Lei 9.093/1995, art. 2º",
-    entrada("2026-04-01", "publicacao", 3, modo="completo"))
+    entrada("2026-04-01", "publicacao", 3, "TJPR", modo="completo"))
 add("onze-agosto-tjsp-completo", "pendente", "11 de agosto não é feriado forense no TJSP", PEND,
     entrada("2026-08-07", "publicacao", 3, "TJSP", modo="completo"))
-add("sp-9-julho-conservador", "pendente", "9 de julho ignorado no modo conservador", PEND + "; lei estadual a conferir",
-    entrada("2026-07-08", "publicacao", 5))
-add("sp-9-julho-completo", "pendente", "9 de julho considerado em SP", PEND + "; lei estadual a conferir",
-    entrada("2026-07-08", "publicacao", 5, modo="completo"))
+add("sp-9-julho-conservador", "pendente", "TJSP 2027 (sem provimento publicado): 9 de julho ignorado no modo conservador", PEND + "; lei estadual a conferir",
+    entrada("2027-07-08", "publicacao", 5))
+add("sp-9-julho-completo", "pendente", "TJSP 2027 (sem provimento publicado): 9 de julho considerado no modo completo", PEND + "; lei estadual a conferir",
+    entrada("2027-07-08", "publicacao", 5, modo="completo"))
 add("consciencia-negra-2023-completo", "pendente", "20/11/2023 considerado (lei local, pendente)", PEND,
     entrada("2023-11-17", "publicacao", 2, modo="completo"))
 add("dobro-sexta-santa-completo", "pendente", "Prazo em dobro com Sexta-feira Santa considerada", PEND,
-    entrada("2026-03-02", "publicacao", 15, prazoEmDobro=True, modo="completo"))
+    entrada("2026-03-02", "publicacao", 15, "TJPR", prazoEmDobro=True, modo="completo"))
 add("cpp-sexta-santa-completo", "pendente", "CPP: vencimento na Sexta-feira Santa (completo) é prorrogado", PEND + "; CPP, art. 798, § 3º",
-    entrada("2026-03-30", "publicacao", 4, regime="cpp_dias_corridos", modo="completo"))
+    entrada("2026-03-30", "publicacao", 4, "TJPR", regime="cpp_dias_corridos", modo="completo"))
 
 # ---- Calendário verificado (fontes primárias lidas em 07/10/2026) ----
 P1010 = "Portaria STJ/GDG 1.010/2025"
@@ -354,7 +412,7 @@ add("clt-recesso-775a", "clt", "CLT: o recesso de 20/12 a 20/01 também suspende
     entrada("2025-12-15", "publicacao", 8, "TST", regime="clt_dias_uteis"))
 add("cpp-trf3-reu-preso", "cpp", "CPP, réu preso no TRF3: sem suspensão (art. 798-A, I); vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01", "CPP, arts. 798, § 3º, e 798-A, I; Lei 5.010/1966, art. 62, I",
     entrada("2026-12-15", "publicacao", 5, "TRF3", regime="cpp_dias_corridos", excecaoSuspensaoCriminal=True))
-add("cpp-tjsp-reu-preso", "cpp", "CPP, réu preso no TJSP: sem suspensão; vencimento de domingo vai à segunda 21/12", "CPP, arts. 798, § 3º, e 798-A, I",
+add("cpp-tjsp-reu-preso", "cpp", "CPP, réu preso no TJSP: sem suspensão; vence no domingo 20/12 e, com 21 a 31/12 em recesso sem expediente, vai a 04/01/2027 (o recesso de 1º a 6/01/2027 ainda não está carregado: sem selo)", "CPP, arts. 798, § 3º, e 798-A, I",
     entrada("2026-12-15", "publicacao", 5, "TJSP", regime="cpp_dias_corridos", excecaoSuspensaoCriminal=True))
 add("cpp-recesso-suspende", "cpp", "CPP: prazo de 5 dias que atravessa 20/12 fica suspenso até 20/01 e retoma em 21/01", "CPP, art. 798-A (Lei 14.365/2022)",
     entrada("2026-12-15", "publicacao", 5, "TJSP", regime="cpp_dias_corridos"))
@@ -413,7 +471,7 @@ add("trf3-carnaval-conservador", "pendente", "TRF3: Carnaval é feriado (Lei 5.0
     entrada("2026-02-13", "publicacao", 3, "TRF3"))
 add("trf3-finados", "verificado", "TRF3: 2 de novembro (segunda) não conta", "Lei 662/1949, art. 1º",
     entrada("2026-10-30", "publicacao", 3, "TRF3"))
-add("tjsp-8-dezembro", "feriado", "TJSP: 8 de dezembro não é feriado forense (a Lei 5.010 vale para a Justiça Federal)", "Lei 5.010/1966, art. 62 (Justiça Federal); sem ato do TJSP",
+add("tjsp-8-dezembro", "feriado", "TJSP 2026: 7/12 (suspensão do expediente) e 8/12 (Dia da Justiça) não contam", "Provimento CSM 2.813/2025, art. 1º",
     entrada("2026-12-04", "publicacao", 3, "TJSP"))
 add("stj-7-e-8-dezembro", "verificado", "STJ: 7/12 (ponto facultativo) e 8/12 (Dia da Justiça) não contam", P1010 + ", art. 1º, XVII e XVIII",
     entrada("2026-12-04", "publicacao", 3, "STJ"))
@@ -429,6 +487,31 @@ add("dobro-embargos-feriado", "dobro", "Fazenda: embargos de declaração em dob
     entrada("2026-04-14", "carga_ou_audiencia", 5, prazoEmDobro=True))
 add("um-dia-vespera-feriado", "basico", "Prazo de 1 dia útil com publicação na quinta 30/04: sexta 1º/05 é feriado e vence na segunda 04/05", "CPC, art. 219; Lei 662/1949, art. 1º",
     entrada("2026-04-30", "publicacao", 1))
+
+
+# ---- Calendários dos tribunais estaduais (F2-04): TJSP e TJMG com ato lido; TJAL parcial ----
+PROV = "Provimento CSM 2.813/2025 (TJSP)"
+PCTJMG = "Portaria Conjunta 1.764/PR/2026 (TJMG)"
+add("tjsp-cinzas-2026", "verificado", "TJSP 2026: Carnaval (16 e 17/02) e Quarta de Cinzas com expediente parcial protraem o dia do começo", PROV + ", arts. 1º e 2º; CPC, art. 224, § 1º",
+    entrada("2026-02-13", "publicacao", 3, "TJSP"))
+add("tjsp-9-julho-2026", "verificado", "TJSP 2026: 9 de julho (Data Magna, Lei Estadual 9.497/1997) e 10/07 (suspensão) não contam", PROV + ", art. 1º",
+    entrada("2026-07-08", "publicacao", 3, "TJSP"))
+add("tjsp-semana-santa-2026", "verificado", "TJSP 2026: Endoenças (02/04) e Sexta-feira da Paixão (03/04) não contam", PROV + ", art. 1º",
+    entrada("2026-04-01", "publicacao", 3, "TJSP"))
+add("tjsp-dje-recesso-2026", "verificado", "TJSP: disponibilização em 18/12/2026; recesso até 20/01/2027; 2027 ainda sem provimento (sem selo)", PROV + ", art. 1º, § 1º; CPC, art. 220",
+    entrada("2026-12-18", "disponibilizacao_dje", 5, "TJSP"))
+add("tjmg-carnaval-2026", "verificado", "TJMG 2026: segunda, terça e quarta-feira de cinzas (16 a 18/02) suspensas por inteiro", PCTJMG + ", art. 1º, I; Res. OE 458/2004, art. 1º, III",
+    entrada("2026-02-13", "publicacao", 3, "TJMG"))
+add("tjmg-semana-santa-2026", "verificado", "TJMG 2026: quarta a sexta-feira da Semana Santa (01 a 03/04) suspensas", PCTJMG + ", art. 1º, II; Res. OE 458/2004, art. 1º, IV",
+    entrada("2026-03-31", "publicacao", 3, "TJMG"))
+add("tjmg-permanente-2028", "verificado", "TJMG 2028 (sem portaria anual): Carnaval de segunda a quarta (28/02 a 01/03) pela resolução permanente; sem selo", "Res. OE TJMG 458/2004, art. 1º, III",
+    entrada("2028-02-25", "publicacao", 3, "TJMG"))
+add("tjmg-corpus-christi-comarca", "pendente", "TJMG: 4 e 5/06 dependem da comarca (feriado municipal em Belo Horizonte e em outras): pendente", PCTJMG + ", art. 1º, IV; " + PEND,
+    entrada("2026-06-02", "publicacao", 3, "TJMG"))
+add("tjal-atos-2026", "verificado", "TJAL 2026: 20/04 (Tiradentes, suspensão) e 21/04 não contam", "Ato Normativo TJAL 03/2026 (notícia oficial do tribunal)",
+    entrada("2026-04-16", "publicacao", 3, "TJAL"))
+add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 (feriados forenses de 23/06 a 01/07) ainda não teve a vigência confirmada: data alternativa grande", "Lei estadual AL 6.564/2005, art. 37; " + PEND,
+    entrada("2026-06-19", "publicacao", 5, "TJAL"))
 
 
 def validacoes_existentes(destino):
@@ -507,9 +590,8 @@ def gerar_revisao(cenarios):
     L.append("## O que esta suíte não cobre")
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
-    L.append("- **Feriados estaduais e municipais**: só aparecem como pendentes (SP, 9 de julho) e o município nunca é calculado (CPC, art. 1.003, § 6º).")
-    L.append("- **Calendário de STF e STJ fora de 2026**, e de TRFs e TJs além da Lei 5.010 e dos feriados nacionais.")
-    L.append("- **Calendário de TRFs e TJs** além da Lei 5.010 e dos feriados nacionais (portarias anuais de cada tribunal).")
+    L.append("- **Feriados estaduais e municipais**: só TJSP e TJMG (2026) têm ato lido; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
+    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** só em parte (Ato Normativo 03/2026 pela notícia oficial; Lei 6.564/2005 pendente).")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")

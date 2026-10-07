@@ -105,7 +105,7 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -137,7 +137,7 @@
       "dataTermoInicial": "2026-04-23",
       "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -165,22 +165,17 @@
       "tribunalId": "TJSP"
     },
     "esperado": {
-      "dataPublicacao": "2026-04-20",
-      "dataTermoInicial": "2026-04-22",
-      "dataVencimentoFinal": "2026-04-28",
+      "dataPublicacao": "2026-04-22",
+      "dataTermoInicial": "2026-04-23",
+      "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": [
-          {
-            "data": "2026-04-21",
-            "motivo": "Tiradentes"
-          }
-        ]
+        "diasNaoUteis": []
       }
     },
     "validacao": {
@@ -207,7 +202,7 @@
       "dataTermoInicial": "2026-03-12",
       "dataVencimentoFinal": "2026-04-01",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 6,
         "suspensaoDias": 0,
@@ -239,7 +234,7 @@
       "dataTermoInicial": "2026-03-16",
       "dataVencimentoFinal": "2026-03-20",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 1,
         "suspensaoDias": 0,
@@ -271,7 +266,7 @@
       "dataTermoInicial": "2026-03-16",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -303,7 +298,7 @@
       "dataTermoInicial": "2026-04-10",
       "dataVencimentoFinal": "2026-04-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -333,15 +328,19 @@
     "esperado": {
       "dataPublicacao": "2026-04-14",
       "dataTermoInicial": "2026-04-15",
-      "dataVencimentoFinal": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJSP: 04-20"
+          },
           {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
@@ -372,7 +371,7 @@
       "dataTermoInicial": "2026-04-30",
       "dataVencimentoFinal": "2026-05-05",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -409,7 +408,7 @@
       "dataTermoInicial": "2026-09-04",
       "dataVencimentoFinal": "2026-09-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -483,7 +482,7 @@
       "dataTermoInicial": "2026-11-03",
       "dataVencimentoFinal": "2026-11-04",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -520,7 +519,7 @@
       "dataTermoInicial": "2026-11-19",
       "dataVencimentoFinal": "2026-11-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -685,7 +684,7 @@
       "dataTermoInicial": "2026-01-22",
       "dataVencimentoFinal": "2026-01-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -717,7 +716,7 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 2,
@@ -839,7 +838,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "prazoEmDobro": true
     },
     "esperado": {
@@ -1010,7 +1009,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -1048,7 +1047,7 @@
       "dataTermoInicial": "2026-03-10",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -1086,7 +1085,7 @@
       "dataTermoInicial": "2026-03-05",
       "dataVencimentoFinal": "2026-03-09",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -1119,7 +1118,7 @@
       "dataTermoInicial": "2026-04-17",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -1157,7 +1156,7 @@
       "dataTermoInicial": "2026-03-03",
       "dataVencimentoFinal": "2026-03-12",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -1219,7 +1218,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP"
+      "tribunalId": "TJPR"
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
@@ -1251,7 +1250,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "modo": "completo"
     },
     "esperado": {
@@ -1296,7 +1295,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP"
+      "tribunalId": "TJPR"
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
@@ -1328,7 +1327,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "modo": "completo"
     },
     "esperado": {
@@ -1369,7 +1368,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSP"
+      "tribunalId": "TJPR"
     },
     "esperado": {
       "dataPublicacao": "2026-02-10",
@@ -1401,7 +1400,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "modo": "completo"
     },
     "esperado": {
@@ -1491,7 +1490,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP"
+      "tribunalId": "TJPR"
     },
     "esperado": {
       "dataPublicacao": "2026-06-02",
@@ -1523,7 +1522,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "modo": "completo"
     },
     "esperado": {
@@ -1560,7 +1559,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJSP"
+      "tribunalId": "TJPR"
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
@@ -1592,7 +1591,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "modo": "completo"
     },
     "esperado": {
@@ -1637,7 +1636,7 @@
       "dataTermoInicial": "2026-08-10",
       "dataVencimentoFinal": "2026-08-12",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -1655,18 +1654,18 @@
   {
     "id": "sp-9-julho-conservador",
     "categoria": "pendente",
-    "descricao": "9 de julho ignorado no modo conservador",
+    "descricao": "TJSP 2027 (sem provimento publicado): 9 de julho ignorado no modo conservador",
     "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; lei estadual a conferir",
     "entrada": {
-      "dataEvento": "2026-07-08",
+      "dataEvento": "2027-07-08",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
       "tribunalId": "TJSP"
     },
     "esperado": {
-      "dataPublicacao": "2026-07-08",
-      "dataTermoInicial": "2026-07-09",
-      "dataVencimentoFinal": "2026-07-15",
+      "dataPublicacao": "2027-07-08",
+      "dataTermoInicial": "2027-07-09",
+      "dataVencimentoFinal": "2027-07-15",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": false,
       "rastro": {
@@ -1682,24 +1681,24 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-07-16"
+    "alternativaEsperada": "2027-07-16"
   },
   {
     "id": "sp-9-julho-completo",
     "categoria": "pendente",
-    "descricao": "9 de julho considerado em SP",
+    "descricao": "TJSP 2027 (sem provimento publicado): 9 de julho considerado no modo completo",
     "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; lei estadual a conferir",
     "entrada": {
-      "dataEvento": "2026-07-08",
+      "dataEvento": "2027-07-08",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
       "tribunalId": "TJSP",
       "modo": "completo"
     },
     "esperado": {
-      "dataPublicacao": "2026-07-08",
-      "dataTermoInicial": "2026-07-10",
-      "dataVencimentoFinal": "2026-07-16",
+      "dataPublicacao": "2027-07-08",
+      "dataTermoInicial": "2027-07-12",
+      "dataVencimentoFinal": "2027-07-16",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": false,
       "rastro": {
@@ -1709,7 +1708,7 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
-            "data": "2026-07-09",
+            "data": "2027-07-09",
             "motivo": "Revolução Constitucionalista (estadual, pendente)"
           }
         ]
@@ -1767,7 +1766,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "prazoEmDobro": true,
       "modo": "completo"
     },
@@ -1805,7 +1804,7 @@
       "dataEvento": "2026-03-30",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSP",
+      "tribunalId": "TJPR",
       "regime": "cpp_dias_corridos",
       "modo": "completo"
     },
@@ -2278,7 +2277,7 @@
       "dataTermoInicial": "2026-07-01",
       "dataVencimentoFinal": "2026-07-07",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2446,7 +2445,7 @@
   {
     "id": "cpp-tjsp-reu-preso",
     "categoria": "cpp",
-    "descricao": "CPP, réu preso no TJSP: sem suspensão; vencimento de domingo vai à segunda 21/12",
+    "descricao": "CPP, réu preso no TJSP: sem suspensão; vence no domingo 20/12 e, com 21 a 31/12 em recesso sem expediente, vai a 04/01/2027 (o recesso de 1º a 6/01/2027 ainda não está carregado: sem selo)",
     "fundamento": "CPP, arts. 798, § 3º, e 798-A, I",
     "entrada": {
       "dataEvento": "2026-12-15",
@@ -2459,7 +2458,7 @@
     "esperado": {
       "dataPublicacao": "2026-12-15",
       "dataTermoInicial": "2026-12-16",
-      "dataVencimentoFinal": "2026-12-21",
+      "dataVencimentoFinal": "2027-01-04",
       "foiProrrogadoTermoFinal": true,
       "calendarioVerificado": false,
       "rastro": {
@@ -2597,7 +2596,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-17",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2629,7 +2628,7 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2661,7 +2660,7 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2693,7 +2692,7 @@
       "dataTermoInicial": "2026-04-23",
       "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2726,7 +2725,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-17",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -2759,7 +2758,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
@@ -2793,7 +2792,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
@@ -3005,15 +3004,27 @@
     "esperado": {
       "dataPublicacao": "2026-03-10",
       "dataTermoInicial": "2026-03-11",
-      "dataVencimentoFinal": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-27",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 12,
+        "fimsDeSemana": 14,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJSP: 04-02"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJSP: 04-03"
+          },
+          {
+            "data": "2026-04-20",
+            "motivo": "TJSP: 04-20"
+          },
           {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
@@ -3026,7 +3037,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-04-23"
+    "alternativaEsperada": null
   },
   {
     "id": "dobro-defensoria-embargos",
@@ -3045,7 +3056,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
@@ -3078,7 +3089,7 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-31",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 6,
         "suspensaoDias": 0,
@@ -3356,8 +3367,8 @@
   {
     "id": "tjsp-8-dezembro",
     "categoria": "feriado",
-    "descricao": "TJSP: 8 de dezembro não é feriado forense (a Lei 5.010 vale para a Justiça Federal)",
-    "fundamento": "Lei 5.010/1966, art. 62 (Justiça Federal); sem ato do TJSP",
+    "descricao": "TJSP 2026: 7/12 (suspensão do expediente) e 8/12 (Dia da Justiça) não contam",
+    "fundamento": "Provimento CSM 2.813/2025, art. 1º",
     "entrada": {
       "dataEvento": "2026-12-04",
       "tipoEvento": "publicacao",
@@ -3366,16 +3377,25 @@
     },
     "esperado": {
       "dataPublicacao": "2026-12-04",
-      "dataTermoInicial": "2026-12-07",
-      "dataVencimentoFinal": "2026-12-09",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJSP: 12-07"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJSP: 12-08"
+          }
+        ]
       }
     },
     "validacao": {
@@ -3443,7 +3463,7 @@
       "dataTermoInicial": "2026-03-09",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -3481,7 +3501,7 @@
       "dataTermoInicial": "2026-10-13",
       "dataVencimentoFinal": "2026-10-13",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 0,
         "suspensaoDias": 0,
@@ -3519,7 +3539,7 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-30",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
@@ -3551,7 +3571,7 @@
       "dataTermoInicial": "2026-01-22",
       "dataVencimentoFinal": "2026-01-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -3582,15 +3602,19 @@
     "esperado": {
       "dataPublicacao": "2026-04-14",
       "dataTermoInicial": "2026-04-15",
-      "dataVencimentoFinal": "2026-04-29",
+      "dataVencimentoFinal": "2026-04-30",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJSP: 04-20"
+          },
           {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
@@ -3621,7 +3645,7 @@
       "dataTermoInicial": "2026-05-04",
       "dataVencimentoFinal": "2026-05-04",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -3641,5 +3665,404 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-cinzas-2026",
+    "categoria": "verificado",
+    "descricao": "TJSP 2026: Carnaval (16 e 17/02) e Quarta de Cinzas com expediente parcial protraem o dia do começo",
+    "fundamento": "Provimento CSM 2.813/2025 (TJSP), arts. 1º e 2º; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJSP: 02-16"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJSP: 02-17"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (TJSP: jornada começa 3 horas depois): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-9-julho-2026",
+    "categoria": "verificado",
+    "descricao": "TJSP 2026: 9 de julho (Data Magna, Lei Estadual 9.497/1997) e 10/07 (suspensão) não contam",
+    "fundamento": "Provimento CSM 2.813/2025 (TJSP), art. 1º",
+    "entrada": {
+      "dataEvento": "2026-07-08",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-08",
+      "dataTermoInicial": "2026-07-13",
+      "dataVencimentoFinal": "2026-07-15",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-09",
+            "motivo": "TJSP: 07-09"
+          },
+          {
+            "data": "2026-07-10",
+            "motivo": "TJSP: 07-10"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-semana-santa-2026",
+    "categoria": "verificado",
+    "descricao": "TJSP 2026: Endoenças (02/04) e Sexta-feira da Paixão (03/04) não contam",
+    "fundamento": "Provimento CSM 2.813/2025 (TJSP), art. 1º",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJSP: 04-02"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJSP: 04-03"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-dje-recesso-2026",
+    "categoria": "verificado",
+    "descricao": "TJSP: disponibilização em 18/12/2026; recesso até 20/01/2027; 2027 ainda sem provimento (sem selo)",
+    "fundamento": "Provimento CSM 2.813/2025 (TJSP), art. 1º, § 1º; CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2026-12-18",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2027-01-21",
+      "dataTermoInicial": "2027-01-22",
+      "dataVencimentoFinal": "2027-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmg-carnaval-2026",
+    "categoria": "verificado",
+    "descricao": "TJMG 2026: segunda, terça e quarta-feira de cinzas (16 a 18/02) suspensas por inteiro",
+    "fundamento": "Portaria Conjunta 1.764/PR/2026 (TJMG), art. 1º, I; Res. OE 458/2004, art. 1º, III",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMG"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmg-semana-santa-2026",
+    "categoria": "verificado",
+    "descricao": "TJMG 2026: quarta a sexta-feira da Semana Santa (01 a 03/04) suspensas",
+    "fundamento": "Portaria Conjunta 1.764/PR/2026 (TJMG), art. 1º, II; Res. OE 458/2004, art. 1º, IV",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMG"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmg-permanente-2028",
+    "categoria": "verificado",
+    "descricao": "TJMG 2028 (sem portaria anual): Carnaval de segunda a quarta (28/02 a 01/03) pela resolução permanente; sem selo",
+    "fundamento": "Res. OE TJMG 458/2004, art. 1º, III",
+    "entrada": {
+      "dataEvento": "2028-02-25",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMG"
+    },
+    "esperado": {
+      "dataPublicacao": "2028-02-25",
+      "dataTermoInicial": "2028-03-02",
+      "dataVencimentoFinal": "2028-03-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2028-02-28",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2028-02-29",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          },
+          {
+            "data": "2028-03-01",
+            "motivo": "TJMG: Carnaval/Semana Santa (Res. 458/2004)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmg-corpus-christi-comarca",
+    "categoria": "pendente",
+    "descricao": "TJMG: 4 e 5/06 dependem da comarca (feriado municipal em Belo Horizonte e em outras): pendente",
+    "fundamento": "Portaria Conjunta 1.764/PR/2026 (TJMG), art. 1º, IV; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMG"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjal-atos-2026",
+    "categoria": "verificado",
+    "descricao": "TJAL 2026: 20/04 (Tiradentes, suspensão) e 21/04 não contam",
+    "fundamento": "Ato Normativo TJAL 03/2026 (notícia oficial do tribunal)",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAL"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJAL: Ato Normativo 03/2026"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjal-junho-art37-pendente",
+    "categoria": "pendente",
+    "descricao": "TJAL: o art. 37 da Lei 6.564/2005 (feriados forenses de 23/06 a 01/07) ainda não teve a vigência confirmada: data alternativa grande",
+    "fundamento": "Lei estadual AL 6.564/2005, art. 37; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-06-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJAL"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-19",
+      "dataTermoInicial": "2026-06-22",
+      "dataVencimentoFinal": "2026-06-26",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-07-07"
   }
 ]

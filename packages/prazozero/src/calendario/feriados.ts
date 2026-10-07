@@ -1,3 +1,5 @@
+import { COBERTURA_CALENDARIO, EVENTOS_CALENDARIO, FONTES_CALENDARIO, REGRAS_ANUAIS } from './eventos';
+
 export interface FeriadoLegal {
   data: string; // ISO "YYYY-MM-DD"
   nome: string;
@@ -18,60 +20,20 @@ export interface FeriadoLegal {
 }
 
 /**
- * Tribunais cujo calendário anual foi conferido contra o ato oficial, e os anos cobertos.
- * Fora disso o resultado nunca é apresentado como calendário verificado.
+ * Tribunais cujo calendário anual foi conferido contra o ato oficial, e os anos cobertos
+ * (derivado de `eventos.ts`). Fora disso o resultado nunca é apresentado como calendário verificado.
  */
-export const CALENDARIO_VERIFICADO: Record<string, { anos: number[]; fontes: Array<{ ato: string; url: string }> }> = {
-  STJ: {
-    anos: [2026],
-    fontes: [
-      {
-        ato: 'Portaria STJ/GDG nº 1.010/2025 (DJe 26/12/2025): feriados e pontos facultativos de 2026',
-        url: 'https://bdjur.stj.jus.br/server/api/core/bitstreams/6257b5ff-8c9d-408f-a7d5-c6d7064af8eb/content'
-      },
-      {
-        ato: 'STJ, Horários de funcionamento: feriados, pontos facultativos e recesso',
-        url: 'https://www.stj.jus.br/sites/portalp/Contato-e-ajuda/Fale-conosco/Horarios-de-funcionamento'
-      }
-    ]
-  },
-  STF: {
-    anos: [2026],
-    fontes: [
-      {
-        ato: 'Calendário oficial do STF 2026 (Portaria GDG/STF nº 189/2025; RISTF, art. 78)',
-        url: 'https://www.stf.jus.br/arquivo/cms/processoCalendarioStf/anexo/CalendarioSTFOficial2026.pdf'
-      }
-    ]
-  }
-};
+export const CALENDARIO_VERIFICADO: Record<string, { anos: number[]; fontes: Array<{ ato: string; url: string }> }> = Object.fromEntries(
+  Object.entries(COBERTURA_CALENDARIO).map(([trib, c]) => [
+    trib,
+    { anos: c.anos, fontes: c.fontes.map(id => ({ ato: FONTES_CALENDARIO[id].ato, url: FONTES_CALENDARIO[id].url })) }
+  ])
+);
 
 /** Justiça Federal e tribunais que aplicam a Lei 5.010/1966, art. 62 (texto da lei e atos de STF e STJ de 2026, conferidos em 07/10/2026). */
 const APLICAM_LEI_5010_ART_62 = new Set(['STF', 'STJ', 'TRF1', 'TRF2', 'TRF3', 'TRF4', 'TRF5', 'TRF6']);
 /** O art. 62 menciona "Tribunais Superiores", mas não há ato próprio conferido para estes. */
 const OUTROS_SUPERIORES = new Set(['TST', 'TSE']);
-
-const FONTE_STJ_2026 = {
-  ato: 'Portaria STJ/GDG nº 1.010/2025',
-  url: CALENDARIO_VERIFICADO.STJ.fontes[0].url,
-  verificadoEm: '2026-10-07'
-};
-const FONTE_STF_2026 = {
-  ato: 'Calendário oficial do STF 2026 (Portaria GDG/STF nº 189/2025)',
-  url: CALENDARIO_VERIFICADO.STF.fontes[0].url,
-  verificadoEm: '2026-10-07'
-};
-
-/** Pontos facultativos de 2026, idênticos em STF e STJ (lidos nos dois atos). */
-const PONTOS_FACULTATIVOS_2026: Array<{ data: string; nome: string; parcial?: boolean }> = [
-  { data: '2026-02-18', nome: 'Quarta-feira de Cinzas (ponto facultativo até as 14h)', parcial: true },
-  { data: '2026-04-20', nome: 'Ponto facultativo' },
-  { data: '2026-06-04', nome: 'Corpus Christi (ponto facultativo)' },
-  { data: '2026-06-05', nome: 'Ponto facultativo' },
-  { data: '2026-08-10', nome: 'Ponto facultativo' },
-  { data: '2026-10-30', nome: 'Ponto facultativo (transferência do Dia do Servidor, 28/10)' },
-  { data: '2026-12-07', nome: 'Ponto facultativo' }
-];
 
 /**
  * Cálculo astronômico e eclesiástico determinístico do Domingo de Páscoa (Algoritmo de Meeus/Jones/Butcher)
@@ -268,18 +230,46 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
     }
   }
 
-  // 4. Pontos facultativos de 2026 de STF e STJ, lidos nos atos oficiais
-  if (ano === 2026 && (trib === 'STF' || trib === 'STJ')) {
-    const fonte = trib === 'STJ' ? FONTE_STJ_2026 : FONTE_STF_2026;
-    for (const pf of PONTOS_FACULTATIVOS_2026) {
-      registrar(pf.data, {
-        nome: pf.nome,
+  // 4. Calendário como dado (eventos.ts): eventos do ano e regras anuais do tribunal.
+  //    Um dia pendente nunca apaga um dia já conferido.
+  if (trib) {
+    const pesa = (v: FeriadoLegal['verificacao']) => (v === 'pendente' ? 0 : 1);
+    const aplicar = (
+      dataIso: string,
+      d: { nome: string; efeito: FeriadoLegal['efeito']; verificacao: FeriadoLegal['verificacao']; fundamento: string; fonte: keyof typeof FONTES_CALENDARIO }
+    ) => {
+      const atual = mapa.get(dataIso);
+      if (atual && pesa(atual.verificacao) > pesa(d.verificacao)) return;
+      const f = FONTES_CALENDARIO[d.fonte];
+      registrar(dataIso, {
+        nome: d.nome,
         tipo: 'forense',
-        efeito: pf.parcial ? 'expediente_parcial' : 'nao_util',
-        verificacao: 'ato_do_tribunal',
-        fundamentoLegal: fonte.ato,
-        fonte
+        efeito: d.efeito,
+        verificacao: d.verificacao,
+        fundamentoLegal: d.fundamento,
+        ...(d.verificacao === 'ato_do_tribunal' ? { fonte: { ato: f.ato, url: f.url, verificadoEm: f.lidoEm } } : {})
       });
+    };
+    const percorrer = (de: Date, ate: Date, fn: (iso: string) => void) => {
+      for (let c = de; c.getTime() <= ate.getTime(); c = somarDias(c, 1)) {
+        if (c.getUTCFullYear() === ano) fn(formatarDataIso(c));
+      }
+    };
+    for (const ev of EVENTOS_CALENDARIO) {
+      if (!ev.tribunais.includes(trib)) continue;
+      const [ai, mi, di] = ev.inicio.split('-').map(Number);
+      const [af, mf, df] = ev.fim.split('-').map(Number);
+      percorrer(new Date(Date.UTC(ai, mi - 1, di)), new Date(Date.UTC(af, mf - 1, df)), iso => aplicar(iso, ev));
+    }
+    for (const regra of REGRAS_ANUAIS) {
+      if (!regra.tribunais.includes(trib)) continue;
+      if (regra.quando.tipo === 'pascoa') {
+        for (const desloc of regra.quando.deslocamentos) aplicar(formatarDataIso(somarDias(pascoa, desloc)), regra);
+      } else {
+        const [mi, di] = regra.quando.de;
+        const [mf, df] = regra.quando.ate;
+        percorrer(new Date(Date.UTC(ano, mi - 1, di)), new Date(Date.UTC(ano, mf - 1, df)), iso => aplicar(iso, regra));
+      }
     }
   }
 

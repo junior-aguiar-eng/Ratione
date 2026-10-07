@@ -71,40 +71,45 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.ok(dataFim.startsWith('2026-02-'), `Vencimento deveria ser em fevereiro de 2026, foi ${dataFim}`);
   });
 
-  it('deve considerar feriado estadual específico de SP (09 de Julho - Revolução Constitucionalista)', () => {
-    // 08/07/2026 é Quarta-feira
-    // Publicação em 08/07/2026
-    // 09/07/2026 é Feriado Estadual em SP -> NÃO computado!
-    // Início da contagem efetiva em 10/07/2026 (Sexta)
+  it('9 de julho no TJSP: em 2026 é feriado conferido no Provimento CSM 2.813/2025 (Lei Estadual 9.497/1997)', () => {
     const resultado = motor.calcularPrazo({
       dataEvento: '2026-07-08',
       tipoEvento: 'publicacao',
       diasPrazo: 5, // Embargos de Declaração
       tribunalId: 'TJSP',
-      uf: 'SP',
-      modo: 'completo' // o feriado estadual ainda está pendente de conferência; só entra no modo completo
+      uf: 'SP'
     });
 
     const item09Jul = resultado.memoriaCalculo.find(m => m.data === '2026-07-09');
     assert.ok(item09Jul, 'Deveria registrar 09 de Julho');
     assert.strictEqual(item09Jul.diaUtil, false);
     assert.strictEqual(item09Jul.status, 'feriado');
-    assert.strictEqual(item09Jul.verificacao, 'pendente');
-    assert.ok(item09Jul.descricao.includes('Revolução Constitucionalista'));
+    assert.strictEqual(item09Jul.verificacao, 'ato_do_tribunal');
+    assert.ok(item09Jul.descricao.includes('Data Magna'));
+    assert.strictEqual(resultado.alternativa, undefined, 'nada pendente: sem data alternativa');
+    assert.strictEqual(resultado.calendarioVerificado, true);
+  });
+
+  it('9 de julho no TJSP em 2027: sem provimento publicado, o dia segue pendente (tabela estadual)', () => {
+    const r = motor.calcularPrazo({ dataEvento: '2027-07-08', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'TJSP', modo: 'completo' });
+    const item = r.memoriaCalculo.find(m => m.data === '2027-07-09');
+    assert.strictEqual(item?.status, 'feriado');
+    assert.strictEqual(item?.verificacao, 'pendente');
+    assert.strictEqual(r.calendarioVerificado, false);
   });
 
   it('modo conservador (padrão) mostra a data mais cedo e descreve a alternativa com o dia pendente', () => {
     const r = motor.calcularPrazo({
-      dataEvento: '2026-07-08',
+      dataEvento: '2027-07-08',
       tipoEvento: 'publicacao',
       diasPrazo: 5,
       tribunalId: 'TJSP'
     });
 
     assert.strictEqual(r.modo, 'conservador');
-    assert.strictEqual(r.dataVencimentoFinal, '2026-07-15');
-    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-07-16');
-    assert.deepStrictEqual(r.alternativa?.eventosPendentes.map(e => e.data), ['2026-07-09']);
+    assert.strictEqual(r.dataVencimentoFinal, '2027-07-15');
+    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2027-07-16');
+    assert.deepStrictEqual(r.alternativa?.eventosPendentes.map(e => e.data), ['2027-07-09']);
     assert.ok(r.avisos.some(a => a.includes('data mais cedo')));
     assert.ok(r.certidaoAuditavel.includes('Atenção'));
     assert.strictEqual(r.calendarioVerificado, false);
@@ -200,7 +205,7 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.ok(suspenso.avisos.some(a => a.startsWith('Prazo criminal suspenso de 20/12 a 20/01 (CPP, art. 798-A)') && a.includes('Não se suspende em processo com réu preso')));
 
     const preso = motor.calcularPrazo({ ...base, excecaoSuspensaoCriminal: true });
-    assert.strictEqual(preso.dataVencimentoFinal, '2026-12-21', 'sem suspensão: vence no domingo 20/12 e vai à segunda');
+    assert.strictEqual(preso.dataVencimentoFinal, '2027-01-04', 'sem suspensão: vence no domingo 20/12; 21 a 31/12 são recesso sem expediente no TJSP');
     assert.ok(preso.avisos.some(a => a.startsWith('Exceção do CPP, art. 798-A')));
     assert.ok(!preso.memoriaCalculo.some(m => m.status === 'recesso_forense'));
   });
