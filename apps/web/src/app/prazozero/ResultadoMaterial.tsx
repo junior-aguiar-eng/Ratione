@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Bookmark, CalendarPlus, Check, Copy } from 'lucide-react';
+import { Bookmark, CalendarPlus, Check, Copy, FileDown } from 'lucide-react';
 import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
 import { gerarIcs } from '../../lib/ics';
+import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 
 export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string }) {
   const [copiado, setCopiado] = useState(false);
@@ -39,6 +40,8 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
     URL.revokeObjectURL(url);
   };
 
+  const exportar = () => exportarPdf(`prazozero-${nomeArquivoSeguro(titulo)}-${resultado.dataLimite}`);
+
   const salvar = () => {
     salvarRegistro({
       modulo: 'PrazoZero',
@@ -53,6 +56,10 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
 
   return (
     <section className="space-y-5">
+      <div className="hidden print:block border-b border-line pb-3 text-sm text-ink-soft">
+        <p className="font-semibold text-ink">Ratione · PrazoZero: memória de cálculo</p>
+        <p>Gerado em {new Date().toLocaleString('pt-BR')}. Instrumento de apoio: confira o calendário do tribunal.</p>
+      </div>
       <div>
         <p className="text-sm font-medium text-ink-mute">Último dia para propor a ação</p>
         <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight sm:leading-none mt-1">
@@ -111,6 +118,10 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
       </div>
 
       <div className="flex flex-wrap gap-2 no-print">
+        <button type="button" onClick={exportar} className="btn-secondary">
+          <FileDown className="w-4 h-4" />
+          Exportar PDF
+        </button>
         <button type="button" onClick={copiar} className="btn-secondary">
           {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
           {copiado ? 'Copiado' : 'Copiar memória de cálculo'}
