@@ -102,7 +102,7 @@ Onde os planos antigos divergiam, ficou assim. Qualquer item pode ser revisto pe
 | Camada | Escolha | Observação |
 |---|---|---|
 | Monorepo | pnpm workspaces | `apps/web` + `packages/{core,prazozero,normaviva,tesemap,argumenta}`; pnpm 11.19.0 fixado |
-| Web | Next.js (App Router) + React + TypeScript | Tailwind 3 hoje; shadcn/ui + Radix para acessibilidade (F0-07) |
+| Web | Next.js (App Router) + React + TypeScript | Tailwind 4 (F0-11); shadcn/ui + Radix para acessibilidade (F0-07) |
 | Grafo | React Flow (xyflow) | Não criar canvas próprio |
 | Banco, login, arquivos | PostgreSQL + Supabase (região São Paulo), RLS | Documentos de um usuário nunca acessíveis a outro; testes automatizados de RLS |
 | Migrações | Drizzle (SQL explícito) | Esquema bitemporal do NormaViva |
@@ -279,7 +279,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 |---|---|---|---|
 | F0-01 | Monorepo pnpm (web + 5 pacotes) | feito | `pnpm install && pnpm build` passam |
 | F0-02 | CI no GitHub (tipos, testes, gabarito dos cenários, build) | feito | Verde na `main`; falha de teste reprova |
-| F0-03 | Alertas de dependências (Dependabot) | parcial | 5 de 6 corrigidos em 07/10/2026 (`postcss`, `postcss-selector-parser`). **Aberto: `braces`** (alto, sem versão corrigida; só na toolchain de dev do Tailwind 3) |
+| F0-03 | Alertas de dependências (Dependabot) | parcial | 5 de 6 corrigidos em 07/10/2026 (`postcss`, `postcss-selector-parser`). **Aberto: `braces`** (alto, sem versão corrigida; só na toolchain de dev do Tailwind 3). Resolvido pela F0-11 |
 | F0-04 | Manutenção do workflow | feito | Actions v7 (Node 24), runner `ubuntu-24.04`, Node 24 |
 | F0-05 | Núcleo comum: entidades, tribunais, procedência | parcial | Esquemas Zod e 22 tribunais existem; faltam procedência e adaptadores |
 | F0-06 | Banco, login e armazenamento (Supabase, São Paulo, RLS) | não iniciado | Login funciona; usuário A não lê dado do B (teste automatizado) |
@@ -287,6 +287,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F0-08 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | F0-09 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
 | F0-10 | Núcleo de datas civis puras no motor | não iniciado | Motor sem `Date`/UTC; suíte inalterada |
+| F0-11 | Migrar Tailwind 3 para 4, antes de o estilo crescer | em curso | Build, tipos, testes e CI verdes; **visual equivalente**: estilos computados e geometria iguais em 9 páginas × claro/escuro × 2 larguras (diferenças só se justificadas); `braces` e o override de `postcss-selector-parser` somem do lockfile; `autoprefixer` removido |
 
 ### F1 — Casca do produto
 
@@ -377,7 +378,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F0-03** decidir o alerta do `braces` (§12).
+1. **F0-11** migração para o Tailwind 4 (em curso).
 2. **F2-06**, **F2-07**, **F2-08**: regras do PrazoZero que faltam.
 3. **F2-09**: completar os 100 cenários e entregar ao revisor.
 4. **F2-03**: calendário como dado.
@@ -408,7 +409,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 | # | Decisão | Recomendação |
 |---|---|---|
-| 1 | **Alerta `braces`** (alto, sem versão corrigida) | Dispensar o alerta com justificativa (código só roda na ferramenta de build do Tailwind, sobre padrões nossos); resolver de vez ao migrar para o Tailwind 4 |
+| 1 | ~~Alerta `braces`~~ | **Decidido em 07/10/2026:** migrar para o Tailwind 4 agora (F0-11), em vez de dispensar o alerta. Migrar depois, com o estilo grande, seria quase recomeçar |
 | 2 | Pessoa jurídica ou autônomo para cobrar | Definir com contador; beta gratuito até lá |
 | 3 | Preços e teto mensal de IA | Depois da planilha de custo e do beta |
 | 4 | Horas semanais para validar calendário e cenários | Reservar horário fixo |
