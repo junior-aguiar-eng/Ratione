@@ -475,7 +475,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ### 36. `clt-8d`
 
-**Embargos na CLT: 8 dias úteis**
+**Recurso ordinário na CLT: 8 dias úteis (CLT, art. 895)**
 
 - **Entrada:** publicação em **04/03/2026 (quarta-feira)** · prazo de **8 dias** (CLT, dias úteis) · tribunal **TST** · modo conservador
 - **Publicação / dia do começo:** 04/03/2026 (quarta-feira) · **início da contagem:** 05/03/2026 (quinta-feira)
