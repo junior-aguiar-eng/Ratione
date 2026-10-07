@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { MotorNormaViva, HISTORICO_DISPOSITIVOS_EXEMPLO } from './index';
+import { MotorNormaViva, HISTORICO_DISPOSITIVOS_EXEMPLO, VersaoDispositivoSchema } from './index';
 
 describe('NormaViva (prévia)', () => {
   const motor = new MotorNormaViva();
@@ -25,6 +25,7 @@ describe('NormaViva (prévia)', () => {
 
   it('toda versão tem texto, ato modificador e vigência coerente', () => {
     for (const v of HISTORICO_DISPOSITIVOS_EXEMPLO) {
+      assert.ok(VersaoDispositivoSchema.safeParse(v).success, v.id);
       assert.ok(v.texto.length > 20, v.id);
       assert.ok(v.dataFimVigencia === null || v.dataFimVigencia >= v.dataInicioVigencia, v.id);
       assert.ok(v.atoModificador.dataPublicacao <= v.dataInicioVigencia, v.id);
