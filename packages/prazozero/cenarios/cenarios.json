@@ -4195,5 +4195,212 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjpe-data-magna",
+    "categoria": "verificado",
+    "descricao": "TJPE: 6 de março (Data Magna, Lei estadual PE 16.241/2017, art. 49) não conta em nenhum ano",
+    "fundamento": "Lei 9.093/1995, art. 1º, II; CPC, art. 216; Lei PE 16.241/2017, art. 49",
+    "entrada": {
+      "dataEvento": "2026-03-05",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-05",
+      "dataTermoInicial": "2026-03-09",
+      "dataVencimentoFinal": "2026-03-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-06",
+            "motivo": "TJPE: Data Magna (Lei estadual PE 16.241/2017, art. 49)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrs-20-setembro",
+    "categoria": "verificado",
+    "descricao": "TJRS: 20 de setembro (data magna, Constituição estadual, art. 6º; Decreto 36.180/1995) não conta",
+    "fundamento": "Lei 9.093/1995, art. 1º, II; CPC, art. 216; Decreto RS 36.180/1995",
+    "entrada": {
+      "dataEvento": "2027-09-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRS"
+    },
+    "esperado": {
+      "dataPublicacao": "2027-09-17",
+      "dataTermoInicial": "2027-09-21",
+      "dataVencimentoFinal": "2027-09-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2027-09-20",
+            "motivo": "TJRS: data magna (Constituição estadual, art. 6º; Decreto 36.180/1995)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-24-outubro",
+    "categoria": "verificado",
+    "descricao": "TJGO: 24 de outubro (pedra fundamental de Goiânia, feriado estadual) não conta",
+    "fundamento": "Lei 9.093/1995, art. 1º, II; CPC, art. 216; Lei GO 19.850/2017, art. 1º",
+    "entrada": {
+      "dataEvento": "2028-10-23",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2028-10-23",
+      "dataTermoInicial": "2028-10-25",
+      "dataVencimentoFinal": "2028-10-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2028-10-24",
+            "motivo": "TJGO: pedra fundamental de Goiânia (Lei estadual GO 19.850/2017)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-penha-pendente",
+    "categoria": "pendente",
+    "descricao": "TJES: Nossa Senhora da Penha (segunda após a oitava da Páscoa, Lei ES 11.010/2019, texto não lido): só data alternativa",
+    "fundamento": "Lei 9.093/1995, art. 1º, II; CPC, art. 216; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2027-04-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2027-04-02",
+      "dataTermoInicial": "2027-04-05",
+      "dataVencimentoFinal": "2027-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2027-04-08"
+  },
+  {
+    "id": "tjpr-19-dezembro-nao-feriado",
+    "categoria": "verificado",
+    "descricao": "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil",
+    "fundamento": "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
+    "entrada": {
+      "dataEvento": "2025-12-18",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 1,
+      "tribunalId": "TJPR"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-18",
+      "dataTermoInicial": "2025-12-19",
+      "dataVencimentoFinal": "2025-12-19",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjdf-dia-evangelico-util",
+    "categoria": "verificado",
+    "descricao": "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal",
+    "fundamento": "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",
+    "entrada": {
+      "dataEvento": "2026-11-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJDF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-11-27",
+      "dataTermoInicial": "2026-11-30",
+      "dataVencimentoFinal": "2026-12-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

@@ -78,8 +78,9 @@ export default function MetodologiaPage() {
           <ul className="list-disc pl-5 space-y-2">
             <li>
               <strong className="text-ink">Calendário conferido hoje:</strong> STF, STJ, TJSP, TJMG e TJAL, só para 2026.
-              O TJRJ está carregado até outubro de 2026, sem selo. Nos demais tribunais entram os feriados nacionais e,
-              na Justiça Federal, a Lei 5.010; o resto fica como dia pendente e aparece só como data alternativa.
+              O TJRJ está carregado até outubro de 2026, sem selo. Nos demais tribunais entram os feriados nacionais, a Lei 5.010
+              na Justiça Federal e o feriado estadual fixado em lei em PE, RS e GO; o resto fica como dia pendente e aparece só como
+              data alternativa.
             </li>
             <li>
               <strong className="text-ink">Anos futuros:</strong> os tribunais divulgam o calendário do ano seguinte perto

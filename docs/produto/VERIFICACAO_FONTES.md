@@ -157,7 +157,29 @@ Conferido e correto: Tema 1.076/STJ no TeseMap (Corte Especial, REsp 1.850.512-S
 
 Não corrigido (fica no PLANO): validação jurídica dos cenários (F2-09), calendário dos demais TJs e TRFs (F2-04), feriados estaduais ainda sem ato (F2-05), versões maiores das dependências (F0-12), conferência do TeseMap e do NormaViva além dos itens do exemplo (F3 e F4).
 
-## 14. Como repetir esta verificação
+## 14. Feriados estaduais por lei (F2-05), lido em 07/10/2026
+
+Marco legal lido no Planalto: Lei 9.093/1995, art. 1º, II ("a data magna do Estado fixada em lei estadual" é feriado civil; só uma por Estado) e CPC, art. 216 ("além dos declarados em lei, são feriados, para efeito forense, os sábados, os domingos e os dias em que não haja expediente forense"). Feriado religioso depende de lei municipal (Lei 9.093, art. 2º) e nunca entra no cálculo. Nova categoria de verificação no código: `lei_estadual` (norma lida na fonte oficial; vale em todo ano).
+
+| UF / tribunal | Data | Resultado | Fonte lida |
+|---|---|---|---|
+| **PE / TJPE** | 6 de março | **conferido** (`lei_estadual`) | Lei estadual 16.241/2017, art. 49, na base da Alepe (a Lei 16.059/2017, que a tabela citava, foi **revogada** pelo art. 426, CCCLXVII, da 16.241) |
+| **RS / TJRS** | 20 de setembro | **conferido** (`lei_estadual`) | Decreto estadual 36.180/1995 (Assembleia Legislativa), que cita a Constituição Estadual, art. 6º, parágrafo único; o texto da Constituição não foi lido |
+| **GO / TJGO** | 24 de outubro | **conferido** (`lei_estadual`) | Lei estadual 19.850/2017, art. 1º ("feriado estadual de 24 de outubro"); a lei que o instituiu não foi lida |
+| **SP / TJSP** | 9 de julho | conferido em 2026 (Provimento CSM 2.813/2025, F2-04); nos outros anos, pendente | seção 11 |
+| **RJ / TJRJ** | 23 de abril | conferido em 2026 (informativo do TJRJ, que cita a Lei estadual 5.198/2008); nos outros anos, pendente | seção 11 |
+| **ES / TJES** | segunda-feira após a oitava da Páscoa | pendente, **com a data corrigida** (a tabela tinha 17/04 fixo; a regra é Páscoa + 8 dias) | Aviso do TJES de 14/04/2023, que cita a Lei estadual 11.010/2019; texto da lei não lido |
+| **CE / TJCE** | 25 de março | pendente, **data corrigida** (a tabela tinha 19/03, São José, que é só ponto facultativo) | Constituição Estadual, art. 18, parágrafo único (EC 73/2011), por imprensa; o texto no site da Assembleia está desatualizado (até a EC 56/2004) |
+| **BA / TJBA** | 2 de julho | pendente | Constituição da Bahia, por imprensa; o PDF da Sefaz está até a EC 14/2010 e o portal Legisla Bahia recusou a conexão (falha de TLS) |
+| **AL / TJAL** | 16 de setembro | pendente | nenhuma lei encontrada; só decretos anuais e municípios |
+| **PR / TJPR** | 19 de dezembro | **removido**: não é feriado civil | Lei estadual 18.384/2014, art. 1º, conforme o Decreto Judiciário TJPR 759/2018 (que suspende o expediente em 19/12/2018 por ato próprio, com base no art. 2º, ponto facultativo) |
+| **DF / TJDF** | 30 de novembro | **removido** para o TJDFT | Aviso do TJDFT de 26/11/2020: Dia do Evangélico (Lei distrital 963/1995) não é feriado para o TJDFT, órgão federal (Lei 9.093, art. 1º) |
+| **SC / TJSC** | 11 de agosto | **removido** | A Lei 12.906/2004 (página do ALESC toda tachada, superada pelas consolidações 16.719/2015 e 17.335/2017) e a Lei 13.408/2005 mandam transferir o feriado para o domingo seguinte quando cair em dia útil; o texto vigente não foi lido |
+| MT, MS, RO, AC, AP, RR, TO, PA, AM, MA, RN, PB, SE, PI | vários | pendentes, **não pesquisados** (citação não conferida) | tabela provisória em `feriados.ts` |
+
+Efeito prático: nos tribunais de PE, RS e GO esses dias passam a contar como sem expediente em todo ano, também no modo conservador; nos demais, só no modo completo (data alternativa). Nenhum ganhou selo de calendário: o selo continua exigindo o ato anual do tribunal.
+
+## 15. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm

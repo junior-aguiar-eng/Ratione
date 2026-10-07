@@ -59,13 +59,8 @@ def pascoa(ano: int) -> date:
 FERIADOS_ESTADUAIS_PENDENTES = {
     "SP": (7, 9, "Revolução Constitucionalista de 1932"),
     "RJ": (4, 23, "Dia de São Jorge"),
-    "RS": (9, 20, "Revolução Farroupilha (Dia do Gaúcho)"),
     "BA": (7, 2, "Independência da Bahia"),
-    "PE": (3, 6, "Data Magna de Pernambuco"),
-    "CE": (3, 19, "Dia de São José (Padroeiro do Ceará)"),
-    "PR": (12, 19, "Emancipação Política do Paraná"),
-    "SC": (8, 11, "Criação da Capitania de Santa Catarina"),
-    "DF": (11, 30, "Dia do Evangélico"),
+    "CE": (3, 25, "Data Magna do Ceará (abolição no Estado)"),
     "PA": (8, 15, "Adesão do Grão-Pará à Independência"),
     "AM": (9, 5, "Elevação do Amazonas à Categoria de Província"),
     "MA": (7, 28, "Adesão do Maranhão à Independência"),
@@ -74,8 +69,6 @@ FERIADOS_ESTADUAIS_PENDENTES = {
     "AL": (9, 16, "Emancipação Política de Alagoas"),
     "SE": (7, 8, "Emancipação Política de Sergipe"),
     "PI": (10, 19, "Dia do Piauí"),
-    "ES": (4, 17, "Nossa Senhora da Penha (segunda-feira pós-oitava da Páscoa)"),
-    "GO": (10, 24, "Pedra Fundamental de Goiânia"),
     "MT": (11, 20, "Consciência Negra Estadual (Histórico)"),
     "MS": (10, 11, "Criação do Estado de Mato Grosso do Sul"),
     "RO": (1, 4, "Criação do Estado de Rondônia"),
@@ -172,6 +165,15 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         for s in TJAL_2026_NU:
             ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
         ev(date(2026, 8, 28), False, "TJAL: 28/08 só nos municípios que preveem o feriado")
+    # Feriados civis por lei estadual lidos (Lei 9.093/1995, art. 1º, II): valem em todo ano
+    if trib == "TJPE":
+        ev(date(ano, 3, 6), True, "TJPE: Data Magna (Lei estadual PE 16.241/2017, art. 49)")
+    if trib == "TJRS":
+        ev(date(ano, 9, 20), True, "TJRS: data magna (Constituição estadual, art. 6º; Decreto 36.180/1995)")
+    if trib == "TJGO":
+        ev(date(ano, 10, 24), True, "TJGO: pedra fundamental de Goiânia (Lei estadual GO 19.850/2017)")
+    if trib == "TJES":  # Lei estadual 11.010/2019: texto não lido (pendente)
+        ev(p + timedelta(8), False, "TJES: Nossa Senhora da Penha (Lei estadual ES 11.010/2019)")
     if trib == "TJAL":  # Lei estadual 6.564/2005 consolidada (até a Lei 8.850/2021), arts. 36 e 37
         for off in (-48, -47, -46, -4, -3, -2):
             ev(p + timedelta(off), True, "TJAL: Carnaval/Semana Santa (Lei 6.564/2005)")
@@ -566,6 +568,21 @@ add("tjrj-sao-jorge-2026", "verificado", "TJRJ 2026: 23/04 (São Jorge, feriado 
 add("tjrj-copa-2026", "verificado", "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam", INFRJ + "; Atos Executivos 96 e 103/2026",
     entrada("2026-06-23", "publicacao", 3, "TJRJ"))
 
+# ---- Feriados estaduais por lei (F2-05): PE, RS e GO com norma lida; ES, PR e DF corrigidos ----
+LEIEST = "Lei 9.093/1995, art. 1º, II; CPC, art. 216"
+add("tjpe-data-magna", "verificado", "TJPE: 6 de março (Data Magna, Lei estadual PE 16.241/2017, art. 49) não conta em nenhum ano", LEIEST + "; Lei PE 16.241/2017, art. 49",
+    entrada("2026-03-05", "publicacao", 3, "TJPE"))
+add("tjrs-20-setembro", "verificado", "TJRS: 20 de setembro (data magna, Constituição estadual, art. 6º; Decreto 36.180/1995) não conta", LEIEST + "; Decreto RS 36.180/1995",
+    entrada("2027-09-17", "publicacao", 3, "TJRS"))
+add("tjgo-24-outubro", "verificado", "TJGO: 24 de outubro (pedra fundamental de Goiânia, feriado estadual) não conta", LEIEST + "; Lei GO 19.850/2017, art. 1º",
+    entrada("2028-10-23", "publicacao", 3, "TJGO"))
+add("tjes-penha-pendente", "pendente", "TJES: Nossa Senhora da Penha (segunda após a oitava da Páscoa, Lei ES 11.010/2019, texto não lido): só data alternativa", LEIEST + "; " + PEND,
+    entrada("2027-04-02", "publicacao", 3, "TJES"))
+add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil", "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
+    entrada("2025-12-18", "publicacao", 1, "TJPR"))
+add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",
+    entrada("2026-11-27", "publicacao", 2, "TJDF"))
+
 def validacoes_existentes(destino):
     """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
     if not destino.exists():
@@ -642,7 +659,7 @@ def gerar_revisao(cenarios):
     L.append("## O que esta suíte não cobre")
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
-    L.append("- **Feriados estaduais e municipais**: só TJSP e TJMG (2026) têm ato lido; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
+    L.append("- **Feriados estaduais e municipais**: TJSP, TJMG e TJRJ (2026) têm ato lido e PE, RS e GO têm feriado estadual lido em lei; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
     L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
@@ -698,7 +715,7 @@ def gerar_aleatorios(n=600, semente=20261007):
     """Entradas pseudoaleatórias (semente fixa) com o resultado do oráculo: o teste compara motor e oráculo em todas."""
     import random
     r = random.Random(semente)
-    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF3", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", None]
+    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF3", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", None]
     regimes = ["cpc_dias_uteis", "clt_dias_uteis", "jef_dias_uteis", "cpp_dias_corridos"]
     tipos = ["disponibilizacao_dje", "publicacao", "intimacao_portal", "carga_ou_audiencia"]
     saida = []

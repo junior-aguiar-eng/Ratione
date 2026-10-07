@@ -13,10 +13,11 @@ export interface FeriadoLegal {
   /**
    * `lei_federal`: texto de lei federal conferido no Planalto; entra em qualquer cálculo.
    * `ato_do_tribunal`: ato do próprio tribunal lido na fonte oficial (ver `fonte`); vale para o ano do ato.
+   * `lei_estadual`: feriado civil fixado em lei estadual (Lei 9.093/1995, art. 1º, II), com a norma lida na fonte oficial (ver `fonte`); vale em todo ano.
    * `pendente`: ainda sem ato e URL conferidos (METODO_CALENDARIO_FORENSE.md); só entra no modo `completo`.
    */
-  verificacao: 'lei_federal' | 'ato_do_tribunal' | 'pendente';
-  /** Ato e URL de onde o dia foi conferido (presente quando `verificacao` é `ato_do_tribunal`). */
+  verificacao: 'lei_federal' | 'ato_do_tribunal' | 'lei_estadual' | 'pendente';
+  /** Ato e URL de onde o dia foi conferido (presente quando `verificacao` é `ato_do_tribunal` ou `lei_estadual`). */
   fonte?: { ato: string; url: string; verificadoEm: string };
 }
 
@@ -40,20 +41,17 @@ const OUTROS_SUPERIORES = new Set(['TST', 'TSE']);
 export const calcularPascoa = pascoaIso;
 
 /**
- * Feriados estaduais AINDA NÃO conferidos ato a ato (todos `pendente`).
- * A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a data magna fixada em lei estadual;
- * a lista abaixo é hipótese de trabalho e há itens suspeitos (ES varia com a Páscoa; MT 20/11 já é nacional).
+ * Feriados estaduais AINDA NÃO conferidos (todos `pendente`). Os já conferidos estão em `eventos.ts` (`REGRAS_ANUAIS`).
+ * A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a data magna fixada em lei estadual.
+ * Saíram desta lista, por erro de fato verificado em 07/10/2026: PR (a Lei 18.384/2014 diz que 19/12 não é feriado civil),
+ * DF (o TJDFT, órgão federal, não observa o Dia do Evangélico) e SC (a data magna se transfere para o domingo).
+ * Itens ainda suspeitos: MT 20/11 já é nacional desde 2024.
  */
 const FERIADOS_ESTADUAIS_TABELA: Record<string, Array<{ mes: number; dia: number; nome: string; fundamento: string }>> = {
   SP: [{ mes: 7, dia: 9, nome: 'Revolução Constitucionalista de 1932', fundamento: 'Lei Estadual nº 9.497/1997' }],
   RJ: [{ mes: 4, dia: 23, nome: 'Dia de São Jorge', fundamento: 'Lei Estadual nº 5.198/2008' }],
-  RS: [{ mes: 9, dia: 20, nome: 'Revolução Farroupilha (Dia do Gaúcho)', fundamento: 'Lei Estadual nº 8.423/1987 e Lei nº 9.093/1995' }],
   BA: [{ mes: 7, dia: 2, nome: 'Independência da Bahia', fundamento: 'Constituição do Estado da Bahia e Lei Estadual nº 9.093/1995' }],
-  PE: [{ mes: 3, dia: 6, nome: 'Data Magna de Pernambuco', fundamento: 'Lei Estadual nº 16.059/2017' }],
-  CE: [{ mes: 3, dia: 19, nome: 'Dia de São José (Padroeiro do Ceará)', fundamento: 'Lei Estadual nº 11.264/1986 e Decreto Estadual' }],
-  PR: [{ mes: 12, dia: 19, nome: 'Emancipação Política do Paraná', fundamento: 'Lei Estadual nº 4.658/1962' }],
-  SC: [{ mes: 8, dia: 11, nome: 'Criação da Capitania de Santa Catarina', fundamento: 'Lei Estadual nº 12.906/2004' }],
-  DF: [{ mes: 11, dia: 30, nome: 'Dia do Evangélico', fundamento: 'Lei Distrital nº 893/1995' }],
+  CE: [{ mes: 3, dia: 25, nome: 'Data Magna do Ceará (abolição no Estado)', fundamento: 'Constituição do Estado do Ceará, art. 18, parágrafo único (EC 73/2011); texto atualizado não lido' }],
   PA: [{ mes: 8, dia: 15, nome: 'Adesão do Grão-Pará à Independência', fundamento: 'Lei Estadual nº 5.999/1996' }],
   AM: [{ mes: 9, dia: 5, nome: 'Elevação do Amazonas à Categoria de Província', fundamento: 'Lei Estadual nº 1.540/1982' }],
   MA: [{ mes: 7, dia: 28, nome: 'Adesão do Maranhão à Independência', fundamento: 'Lei Estadual nº 2.457/1964' }],
@@ -62,8 +60,6 @@ const FERIADOS_ESTADUAIS_TABELA: Record<string, Array<{ mes: number; dia: number
   AL: [{ mes: 9, dia: 16, nome: 'Emancipação Política de Alagoas', fundamento: 'Lei Estadual nº 5.724/1995' }],
   SE: [{ mes: 7, dia: 8, nome: 'Emancipação Política de Sergipe', fundamento: 'Lei Estadual nº 1.303/1963' }],
   PI: [{ mes: 10, dia: 19, nome: 'Dia do Piauí', fundamento: 'Lei Estadual nº 176/1937' }],
-  ES: [{ mes: 4, dia: 17, nome: 'Nossa Senhora da Penha (segunda-feira pós-oitava da Páscoa)', fundamento: 'Lei Estadual nº 11.010/2019' }],
-  GO: [{ mes: 10, dia: 24, nome: 'Pedra Fundamental de Goiânia', fundamento: 'Lei Estadual nº 11.111 e Tradição Judiciária' }],
   MT: [{ mes: 11, dia: 20, nome: 'Consciência Negra Estadual (Histórico)', fundamento: 'Lei Estadual nº 7.879/2002' }],
   MS: [{ mes: 10, dia: 11, nome: 'Criação do Estado de Mato Grosso do Sul', fundamento: 'Lei Estadual nº 10/1979' }],
   RO: [{ mes: 1, dia: 4, nome: 'Criação do Estado de Rondônia', fundamento: 'Lei Estadual nº 229/1989' }],
@@ -215,7 +211,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
         efeito: d.efeito,
         verificacao: d.verificacao,
         fundamentoLegal: d.fundamento,
-        ...(d.verificacao === 'ato_do_tribunal' ? { fonte: { ato: f.ato, url: f.url, verificadoEm: f.lidoEm } } : {})
+        ...(d.verificacao !== 'pendente' ? { fonte: { ato: f.ato, url: f.url, verificadoEm: f.lidoEm } } : {})
       });
     };
     const percorrer = (de: string, ate: string, fn: (iso: string) => void) => {
