@@ -261,7 +261,7 @@ Sem transformar desenvolvimento em homologação interminável: validação auto
 
 | Módulo | Suíte | Estado |
 |---|---|---|
-| PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 85 gerados, **0 validados por jurista** |
+| PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 100 gerados, **0 validados por jurista** |
 | NormaViva | ~30 normas com histórico conhecido (`data A → redação A`, `data B → redação B`) | não iniciado |
 | Argumenta | ~30 decisões públicas com dispositivo, questão, tese principal e fundamentos; avalia-se a **extração estrutural**, não a concordância perfeita da IA | não iniciado |
 | TeseMap | Grafo pequeno e conhecido (`A cita B`, `B interpreta C`, `D distingue B`), sem depender de terceiros | não iniciado |
@@ -302,7 +302,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 105 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 120 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (tabela com fonte, vigência, verificação) e painel de curadoria | não iniciado | Hoje são constantes no código |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | não iniciado | Lei 5.010 já verificada para TRFs; faltam pontos facultativos por tribunal |
@@ -311,7 +311,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 no JEF fica **pendente** (modo conservador não suspende). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | feito | Regime JEF no motor e na tela; aviso do art. 229; 9 cenários novos no oráculo (JEF, MP, Defensoria, litisconsórcio); leis lidas no Planalto. **Pendente:** a suspensão de 20/12 a 20/01 no JEF. Consultado em 07/10/2026: o Enunciado 165 do FONAJE trata de contagem contínua (superado pelo art. 12-A) e não do recesso; não achei texto primário sobre o recesso no JEF (o Enunciado 198 do FONAJEF só foi visto em resumo de busca) |
 | F2-08 | Catálogo de prazos com base legal | feito | 26 prazos (24 processuais em CPC, CLT, CPP e JEF; 2 materiais fora do cálculo), cada um com base legal, versão lida e data; seletor agrupado na tela que ajusta o regime e mostra a base legal; 4 testes. Lido no texto vigente em 07/10/2026 |
 | F2-14 | Prazos materiais (decadência): mandado de segurança (120 dias) e ação rescisória (2 anos) | não iniciado | Estão no catálogo, mas a tela não os calcula; contagem própria (CPC art. 975, § 1º prorroga ao dia útil) |
-| F2-09 | Suíte de 100 cenários **validados por jurista** | em curso | 85 gerados, 0 validados; faltam 15 e a validação |
+| F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | **100 gerados** e documento de revisão pronto ([`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md)); **0 validados**: falta a validação do revisor jurídico |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
 | F2-11 | Dúvidas jurídicas abertas | em curso | 4 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
 | F2-13 | CPP: suspensão de 20/12 a 20/01 (art. 798-A, Lei 14.365/2022), salvo réu preso, Maria da Penha e medida urgente | feito | Defeito do F2-01 corrigido (a primeira leitura usou o CPP não compilado). Exceção marcável na tela e aviso; 4 cenários novos e 2 reescritos. **Em aberto:** as férias coletivas de janeiro e julho de STF e STJ não foram conferidas para prazos criminais |
@@ -382,7 +382,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F2-09**: completar os 100 cenários e entregar ao revisor.
+1. **F2-09**: validação dos 100 cenários pelo revisor jurídico (depende do responsável).
 2. **F2-03**: calendário como dado.
 3. **F0-06 em diante**, conforme as decisões do responsável (§12).
 
@@ -427,6 +427,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 |---|---|
 | [`produto/METODO_CALENDARIO_FORENSE.md`](produto/METODO_CALENDARIO_FORENSE.md) | Camadas do calendário, checklist por tribunal, catálogo inicial de prazos, manutenção |
 | [`produto/VERIFICACAO_FONTES.md`](produto/VERIFICACAO_FONTES.md) | Fontes lidas em 07/10/2026, correções feitas e dúvidas para o revisor jurídico |
+| [`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md) | Os 100 cenários do PrazoZero para o revisor jurídico validar (gerado pelo oráculo; não editar à mão) |
 | [`produto/FONTES_E_PIPELINES.md`](produto/FONTES_E_PIPELINES.md) | Viabilidade das fontes e testes de bancada |
 | [`produto/IA_E_PRECIFICACAO.md`](produto/IA_E_PRECIFICACAO.md) | Uso de IA, créditos, planos e custos |
 | [`juridico/`](juridico/) | Minutas de termos, privacidade, cookies, uso de IA e aviso legal |

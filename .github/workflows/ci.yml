@@ -43,10 +43,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Gabarito dos cenários em sincronia com o oráculo
+      - name: Gabarito e documento de revisão em sincronia com o oráculo
         run: |
           python packages/prazozero/cenarios/oraculo.py
-          git diff --exit-code -- packages/prazozero/cenarios/cenarios.json
+          git diff --exit-code -- packages/prazozero/cenarios/cenarios.json docs/produto/REVISAO_CENARIOS.md
 
       - name: Build
         run: pnpm build

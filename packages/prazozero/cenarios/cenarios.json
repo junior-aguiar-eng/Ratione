@@ -15,7 +15,27 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-04-09",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 6,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "Semana Santa (quarta)"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (quinta)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -40,7 +60,27 @@
       "dataTermoInicial": "2026-03-16",
       "dataVencimentoFinal": "2026-04-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 8,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "Semana Santa (quarta)"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (quinta)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -65,7 +105,14 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -90,7 +137,14 @@
       "dataTermoInicial": "2026-04-23",
       "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -115,7 +169,19 @@
       "dataTermoInicial": "2026-04-22",
       "dataVencimentoFinal": "2026-04-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -141,7 +207,14 @@
       "dataTermoInicial": "2026-03-12",
       "dataVencimentoFinal": "2026-04-01",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 6,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -166,7 +239,14 @@
       "dataTermoInicial": "2026-03-16",
       "dataVencimentoFinal": "2026-03-20",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 1,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -191,7 +271,14 @@
       "dataTermoInicial": "2026-03-16",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -216,7 +303,14 @@
       "dataTermoInicial": "2026-04-10",
       "dataVencimentoFinal": "2026-04-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -241,7 +335,19 @@
       "dataTermoInicial": "2026-04-15",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -266,7 +372,19 @@
       "dataTermoInicial": "2026-04-30",
       "dataVencimentoFinal": "2026-05-05",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-01",
+            "motivo": "Dia do Trabalho"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -291,7 +409,19 @@
       "dataTermoInicial": "2026-09-04",
       "dataVencimentoFinal": "2026-09-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-09-07",
+            "motivo": "Independência"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -316,7 +446,19 @@
       "dataTermoInicial": "2026-10-02",
       "dataVencimentoFinal": "2026-10-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 6,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-12",
+            "motivo": "Nossa Senhora Aparecida"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -341,7 +483,19 @@
       "dataTermoInicial": "2026-11-03",
       "dataVencimentoFinal": "2026-11-04",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -366,7 +520,19 @@
       "dataTermoInicial": "2026-11-19",
       "dataVencimentoFinal": "2026-11-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-20",
+            "motivo": "Consciência Negra"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -391,7 +557,14 @@
       "dataTermoInicial": "2023-11-20",
       "dataVencimentoFinal": "2023-11-21",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -416,7 +589,14 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2026-02-04",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 14,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -441,7 +621,14 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-27",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -466,7 +653,14 @@
       "dataTermoInicial": "2027-01-21",
       "dataVencimentoFinal": "2027-01-27",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 23,
+        "suspensaoDe": "2026-12-21",
+        "suspensaoAte": "2027-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -491,7 +685,14 @@
       "dataTermoInicial": "2026-01-22",
       "dataVencimentoFinal": "2026-01-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -516,7 +717,14 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 2,
+        "suspensaoDe": "2026-01-19",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -541,7 +749,14 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-21",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 10,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -567,7 +782,14 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2025-12-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -592,7 +814,14 @@
       "dataTermoInicial": "2025-12-02",
       "dataVencimentoFinal": "2026-01-21",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 14,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -618,7 +847,14 @@
       "dataTermoInicial": "2026-03-03",
       "dataVencimentoFinal": "2026-04-13",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -644,7 +880,14 @@
       "dataTermoInicial": "2025-12-11",
       "dataVencimentoFinal": "2026-02-06",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 16,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -669,7 +912,14 @@
       "dataTermoInicial": "2024-02-28",
       "dataVencimentoFinal": "2024-03-05",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -694,7 +944,14 @@
       "dataTermoInicial": "2028-02-28",
       "dataVencimentoFinal": "2028-03-03",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -720,7 +977,14 @@
       "dataTermoInicial": "2026-03-05",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -746,7 +1010,19 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-15",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -772,7 +1048,19 @@
       "dataTermoInicial": "2026-03-10",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-14",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -798,7 +1086,14 @@
       "dataTermoInicial": "2026-03-05",
       "dataVencimentoFinal": "2026-03-09",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -824,7 +1119,19 @@
       "dataTermoInicial": "2026-04-17",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "vencimento em dia não útil (Tiradentes), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -850,7 +1157,14 @@
       "dataTermoInicial": "2026-03-03",
       "dataVencimentoFinal": "2026-03-12",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -875,7 +1189,19 @@
       "dataTermoInicial": "2026-09-08",
       "dataVencimentoFinal": "2026-09-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 8,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-09-07",
+            "motivo": "Independência"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -900,7 +1226,14 @@
       "dataTermoInicial": "2026-02-16",
       "dataVencimentoFinal": "2026-02-20",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -926,7 +1259,27 @@
       "dataTermoInicial": "2026-02-19",
       "dataVencimentoFinal": "2026-02-25",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (expediente parcial): protrai o dia do começo"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -950,7 +1303,14 @@
       "dataTermoInicial": "2026-02-13",
       "dataVencimentoFinal": "2026-02-19",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -976,7 +1336,23 @@
       "dataTermoInicial": "2026-02-13",
       "dataVencimentoFinal": "2026-02-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1000,7 +1376,14 @@
       "dataTermoInicial": "2026-02-11",
       "dataVencimentoFinal": "2026-02-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1026,7 +1409,27 @@
       "dataTermoInicial": "2026-02-11",
       "dataVencimentoFinal": "2026-02-19",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (expediente parcial): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1051,7 +1454,27 @@
       "dataTermoInicial": "2028-03-02",
       "dataVencimentoFinal": "2028-03-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2028-02-28",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2028-02-29",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2028-03-01",
+            "motivo": "Quarta-feira de Cinzas (expediente parcial): protrai o dia do começo"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1075,7 +1498,14 @@
       "dataTermoInicial": "2026-06-03",
       "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1101,7 +1531,19 @@
       "dataTermoInicial": "2026-06-03",
       "dataVencimentoFinal": "2026-06-10",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1125,7 +1567,14 @@
       "dataTermoInicial": "2026-04-02",
       "dataVencimentoFinal": "2026-04-06",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1151,7 +1600,19 @@
       "dataTermoInicial": "2026-04-02",
       "dataVencimentoFinal": "2026-04-07",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1176,7 +1637,14 @@
       "dataTermoInicial": "2026-08-10",
       "dataVencimentoFinal": "2026-08-12",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1200,7 +1668,14 @@
       "dataTermoInicial": "2026-07-09",
       "dataVencimentoFinal": "2026-07-15",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1226,7 +1701,19 @@
       "dataTermoInicial": "2026-07-10",
       "dataVencimentoFinal": "2026-07-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-09",
+            "motivo": "Revolução Constitucionalista (estadual, pendente)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1251,7 +1738,19 @@
       "dataTermoInicial": "2023-11-21",
       "dataVencimentoFinal": "2023-11-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2023-11-20",
+            "motivo": "Consciência Negra"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1277,7 +1776,19 @@
       "dataTermoInicial": "2026-03-03",
       "dataVencimentoFinal": "2026-04-14",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1303,7 +1814,19 @@
       "dataTermoInicial": "2026-03-31",
       "dataVencimentoFinal": "2026-04-06",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-03",
+            "motivo": "vencimento em dia não útil (Sexta-feira Santa), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1327,7 +1850,23 @@
       "dataTermoInicial": "2026-04-06",
       "dataVencimentoFinal": "2026-04-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (quinta)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1352,7 +1891,23 @@
       "dataTermoInicial": "2026-04-06",
       "dataVencimentoFinal": "2026-04-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (quinta)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1377,7 +1932,14 @@
       "dataTermoInicial": "2026-04-02",
       "dataVencimentoFinal": "2026-04-06",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1402,7 +1964,23 @@
       "dataTermoInicial": "2026-08-12",
       "dataVencimentoFinal": "2026-08-14",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1427,7 +2005,23 @@
       "dataTermoInicial": "2026-06-03",
       "dataVencimentoFinal": "2026-06-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1452,7 +2046,23 @@
       "dataTermoInicial": "2026-06-03",
       "dataVencimentoFinal": "2026-06-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1477,7 +2087,27 @@
       "dataTermoInicial": "2026-02-19",
       "dataVencimentoFinal": "2026-02-25",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1502,7 +2132,23 @@
       "dataTermoInicial": "2026-10-29",
       "dataVencimentoFinal": "2026-11-03",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1527,7 +2173,14 @@
       "dataTermoInicial": "2026-07-01",
       "dataVencimentoFinal": "2026-08-06",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 10,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2026-07-02",
+        "suspensaoAte": "2026-07-31",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1552,7 +2205,23 @@
       "dataTermoInicial": "2026-07-01",
       "dataVencimentoFinal": "2026-08-13",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2026-07-02",
+        "suspensaoAte": "2026-07-31",
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1577,7 +2246,14 @@
       "dataTermoInicial": "2026-07-01",
       "dataVencimentoFinal": "2026-08-06",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": true
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 10,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2026-07-02",
+        "suspensaoAte": "2026-07-31",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1602,7 +2278,14 @@
       "dataTermoInicial": "2026-07-01",
       "dataVencimentoFinal": "2026-07-07",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1627,7 +2310,27 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2026-02-19",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 18,
+        "suspensaoDias": 30,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-30",
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1652,7 +2355,14 @@
       "dataTermoInicial": "2026-02-02",
       "dataVencimentoFinal": "2026-02-03",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 14,
+        "suspensaoDias": 30,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-30",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1678,7 +2388,14 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2026-01-26",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1705,7 +2422,19 @@
       "dataTermoInicial": "2026-12-16",
       "dataVencimentoFinal": "2027-01-07",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-20",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1732,7 +2461,19 @@
       "dataTermoInicial": "2026-12-16",
       "dataVencimentoFinal": "2026-12-21",
       "foiProrrogadoTermoFinal": true,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-20",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1758,7 +2499,14 @@
       "dataTermoInicial": "2026-12-16",
       "dataVencimentoFinal": "2027-01-21",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 32,
+        "suspensaoDe": "2026-12-20",
+        "suspensaoAte": "2027-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1784,7 +2532,14 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-30",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 32,
+        "suspensaoDe": "2025-12-20",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1810,7 +2565,14 @@
       "dataTermoInicial": "2026-12-16",
       "dataVencimentoFinal": "2027-01-21",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 32,
+        "suspensaoDe": "2026-12-20",
+        "suspensaoAte": "2027-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1835,7 +2597,14 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-17",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1860,7 +2629,14 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1885,7 +2661,14 @@
       "dataTermoInicial": "2026-03-17",
       "dataVencimentoFinal": "2026-03-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1910,7 +2693,14 @@
       "dataTermoInicial": "2026-04-23",
       "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1936,7 +2726,14 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-17",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1962,7 +2759,14 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -1989,7 +2793,14 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2015,7 +2826,19 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2025-12-30",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2025-12-25",
+            "motivo": "Natal"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2042,7 +2865,14 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2026-01-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2068,7 +2898,14 @@
       "dataTermoInicial": "2025-12-16",
       "dataVencimentoFinal": "2026-01-28",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2025-12-22",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2094,7 +2931,19 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 12,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2120,7 +2969,14 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-24",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
     },
     "validacao": {
       "status": "pendente",
@@ -2146,7 +3002,562 @@
       "dataTermoInicial": "2026-03-11",
       "dataVencimentoFinal": "2026-03-31",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 6,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "clt-ed-5d-feriado",
+    "categoria": "clt",
+    "descricao": "CLT: embargos de declaração em 5 dias úteis atravessando 7 de setembro",
+    "fundamento": "CLT, arts. 775 e 897-A; Lei 662/1949, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-09-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TST",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-09-03",
+      "dataTermoInicial": "2026-09-04",
+      "dataVencimentoFinal": "2026-09-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-09-07",
+            "motivo": "Independência"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "clt-recesso-borda-20-jan",
+    "categoria": "clt",
+    "descricao": "CLT: publicação em 16/01/2026; 19 e 20/01 ainda são recesso e a contagem retoma em 21/01",
+    "fundamento": "CLT, art. 775-A",
+    "entrada": {
+      "dataEvento": "2026-01-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TST",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-16",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 2,
+        "suspensaoDe": "2026-01-19",
+        "suspensaoAte": "2026-01-20",
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-dobro-ferias-julho",
+    "categoria": "dobro",
+    "descricao": "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08",
+    "fundamento": "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "STJ",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-29",
+      "dataVencimentoFinal": "2026-09-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 22,
+        "suspensaoDias": 22,
+        "suspensaoDe": "2026-07-02",
+        "suspensaoAte": "2026-07-31",
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
+          },
+          {
+            "data": "2026-09-07",
+            "motivo": "Independência"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-dje-ferias-janeiro",
+    "categoria": "verificado",
+    "descricao": "STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02",
+    "fundamento": "RISTF, arts. 78 e 105; CPC, art. 224, § 2º; Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)",
+    "entrada": {
+      "dataEvento": "2026-01-30",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-02",
+      "dataTermoInicial": "2026-02-03",
+      "dataVencimentoFinal": "2026-02-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-dje-semana-santa",
+    "categoria": "verificado",
+    "descricao": "STJ: disponibilização em 31/03/2026; 1 a 3/04 são feriados, publicação na segunda 06/04",
+    "fundamento": "CPC, art. 224, § 2º; Portaria STJ/GDG 1.010/2025, art. 1º, IV",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 3,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-06",
+      "dataTermoInicial": "2026-04-07",
+      "dataVencimentoFinal": "2026-04-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-carnaval-conservador",
+    "categoria": "pendente",
+    "descricao": "TRF3: Carnaval é feriado (Lei 5.010); Quarta de Cinzas ainda sem ato do TRF3 (conservador)",
+    "fundamento": "Lei 5.010/1966, art. 62, III; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar (Cinzas)",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-18",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-23"
+  },
+  {
+    "id": "trf3-finados",
+    "categoria": "verificado",
+    "descricao": "TRF3: 2 de novembro (segunda) não conta",
+    "fundamento": "Lei 662/1949, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-10-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-30",
+      "dataTermoInicial": "2026-11-03",
+      "dataVencimentoFinal": "2026-11-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-8-dezembro",
+    "categoria": "feriado",
+    "descricao": "TJSP: 8 de dezembro não é feriado forense (a Lei 5.010 vale para a Justiça Federal)",
+    "fundamento": "Lei 5.010/1966, art. 62 (Justiça Federal); sem ato do TJSP",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-7-e-8-dezembro",
+    "categoria": "verificado",
+    "descricao": "STJ: 7/12 (ponto facultativo) e 8/12 (Dia da Justiça) não contam",
+    "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, XVII e XVIII",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "Ponto facultativo (ato do tribunal)"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "Dia da Justiça (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-8d-sabado",
+    "categoria": "cpp",
+    "descricao": "CPP: 8 dias corridos vencem no sábado 14/03 e vão para a segunda 16/03",
+    "fundamento": "CPP, art. 798, caput e § 3º",
+    "entrada": {
+      "dataEvento": "2026-03-06",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 8,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-06",
+      "dataTermoInicial": "2026-03-09",
+      "dataVencimentoFinal": "2026-03-16",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-14",
+            "motivo": "vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-vence-aparecida",
+    "categoria": "cpp",
+    "descricao": "CPP: 3 dias corridos vencem em 12/10 (segunda, feriado) e vão para 13/10",
+    "fundamento": "CPP, art. 798, § 3º; Lei 6.802/1980, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-10-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-09",
+      "dataTermoInicial": "2026-10-13",
+      "dataVencimentoFinal": "2026-10-13",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-12",
+            "motivo": "vencimento em dia não útil (Nossa Senhora Aparecida), prorrogado (CPP, art. 798, § 3º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "jef-dje-sexta",
+    "categoria": "jef",
+    "descricao": "JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis",
+    "fundamento": "Lei 9.099/1995, arts. 42 e 12-A; CPC, art. 224, § 2º",
+    "entrada": {
+      "dataEvento": "2026-03-13",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "jef_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-16",
+      "dataTermoInicial": "2026-03-17",
+      "dataVencimentoFinal": "2026-03-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "portal-recesso",
+    "categoria": "portal",
+    "descricao": "Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso",
+    "fundamento": "CPC, arts. 220 e 231, V; Lei 11.419/2006, art. 5º",
+    "entrada": {
+      "dataEvento": "2025-12-19",
+      "tipoEvento": "intimacao_portal",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-21",
+      "dataTermoInicial": "2026-01-22",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dobro-embargos-feriado",
+    "categoria": "dobro",
+    "descricao": "Fazenda: embargos de declaração em dobro (10 úteis) atravessando Tiradentes",
+    "fundamento": "CPC, arts. 183 e 1.023",
+    "entrada": {
+      "dataEvento": "2026-04-14",
+      "tipoEvento": "carga_ou_audiencia",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-14",
+      "dataTermoInicial": "2026-04-15",
+      "dataVencimentoFinal": "2026-04-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "um-dia-vespera-feriado",
+    "categoria": "basico",
+    "descricao": "Prazo de 1 dia útil com publicação na quinta 30/04: sexta 1º/05 é feriado e vence na segunda 04/05",
+    "fundamento": "CPC, art. 219; Lei 662/1949, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-04-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 1,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-30",
+      "dataTermoInicial": "2026-05-04",
+      "dataVencimentoFinal": "2026-05-04",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-01",
+            "motivo": "Dia do Trabalho"
+          }
+        ]
+      }
     },
     "validacao": {
       "status": "pendente",

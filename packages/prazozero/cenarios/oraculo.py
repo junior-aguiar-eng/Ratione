@@ -41,45 +41,52 @@ def pascoa(ano: int) -> date:
 
 
 def calendario(ano: int, trib: str, uf: str, completo: bool):
-    """Retorna (nao_util, parcial) do ano. `completo` inclui os dias ainda pendentes de conferência."""
-    nao_util, parcial = set(), set()
+    """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
+    nao_util, parcial, nomes = set(), set(), {}
 
-    def nu(d, verificado):
+    def nu(d, verificado, nome):
         if verificado or completo:
             nao_util.add(d)
+            nomes[d] = nome
 
-    for mes, dia in FIXOS_VERIFICADOS:
-        nao_util.add(date(ano, mes, dia))
-    nu(date(ano, 11, 20), ano >= 2024)
+    fixos = {(1, 1): "Confraternização Universal", (4, 21): "Tiradentes", (5, 1): "Dia do Trabalho", (9, 7): "Independência",
+             (10, 12): "Nossa Senhora Aparecida", (11, 2): "Finados", (11, 15): "Proclamação da República", (12, 25): "Natal"}
+    for (mes, dia), nome in fixos.items():
+        nu(date(ano, mes, dia), True, nome)
+    nu(date(ano, 11, 20), ano >= 2024, "Consciência Negra")
 
     p = pascoa(ano)
     aplica = trib in LEI_5010
-    nu(p - timedelta(2), aplica)            # Sexta-feira Santa
-    nu(p - timedelta(48), aplica)           # Carnaval, segunda
-    nu(p - timedelta(47), aplica)           # Carnaval, terça
-    nu(p + timedelta(60), False)            # Corpus Christi
+    nu(p - timedelta(2), aplica, "Sexta-feira Santa")
+    nu(p - timedelta(48), aplica, "Carnaval (segunda)")
+    nu(p - timedelta(47), aplica, "Carnaval (terça)")
+    nu(p + timedelta(60), False, "Corpus Christi")
     if completo:
-        parcial.add(p - timedelta(46))      # Quarta-feira de Cinzas
+        parcial.add(p - timedelta(46))
+        nomes[p - timedelta(46)] = "Quarta-feira de Cinzas (expediente parcial)"
     if aplica or trib in SUPERIORES_SEM_ATO:
-        nu(p - timedelta(4), aplica)
-        nu(p - timedelta(3), aplica)
-        nu(date(ano, 8, 11), aplica)
-        nu(date(ano, 11, 1), aplica)
-        nu(date(ano, 12, 8), aplica)
+        nu(p - timedelta(4), aplica, "Semana Santa (quarta)")
+        nu(p - timedelta(3), aplica, "Semana Santa (quinta)")
+        nu(date(ano, 8, 11), aplica, "11 de agosto (Lei 5.010, art. 62, IV)")
+        nu(date(ano, 11, 1), aplica, "Todos os Santos (Lei 5.010, art. 62, IV)")
+        nu(date(ano, 12, 8), aplica, "Dia da Justiça (Lei 5.010, art. 62, IV)")
         for dia in range(20, 32):
-            nu(date(ano, 12, dia), aplica)  # recesso, art. 62, I
+            nu(date(ano, 12, dia), aplica, "Recesso (Lei 5.010, art. 62, I)")
         for dia in range(2, 7):
-            nu(date(ano, 1, dia), aplica)
+            nu(date(ano, 1, dia), aplica, "Recesso (Lei 5.010, art. 62, I)")
     if ano == 2026 and trib in ("STF", "STJ"):
         for mes, dia, eh_parcial in PF_2026:
             d = date(ano, mes, dia)
             if eh_parcial:
                 parcial.add(d)
+                nomes[d] = "Quarta-feira de Cinzas (ponto facultativo até as 14h)"
             else:
                 nao_util.add(d)
+                nomes[d] = "Ponto facultativo (ato do tribunal)"
     if uf == "SP" and completo:
         nao_util.add(date(ano, 7, 9))
-    return nao_util, parcial
+        nomes[date(ano, 7, 9)] = "Revolução Constitucionalista (estadual, pendente)"
+    return nao_util, parcial, nomes
 
 
 class Ctx:
@@ -107,7 +114,7 @@ class Ctx:
             return False
         if self.recesso and self.em_suspensao(d):
             return False
-        nu, pa = self.cal(d.year)
+        nu, pa, _ = self.cal(d.year)
         return d not in nu and d not in pa
 
     def proximo_util(self, d):
@@ -133,31 +140,45 @@ def calcular(e: dict, completo: bool) -> dict:
     termo_inicial = ctx.proximo_util(pub)
     prorrogado = False
 
+    rastro = {"fimsDeSemana": 0, "suspensaoDias": 0, "suspensaoDe": None, "suspensaoAte": None, "diasNaoUteis": []}
+
+    def marca_suspensao(d):
+        rastro["suspensaoDias"] += 1
+        rastro["suspensaoDe"] = rastro["suspensaoDe"] or d.isoformat()
+        rastro["suspensaoAte"] = d.isoformat()
+
     if regime == "cpp_dias_corridos":
         # CPP, art. 798-A: dias de 20/12 a 20/01 não contam (salvo exceção)
         contados, fim = 0, pub
         while contados < efetivo:
             fim += timedelta(1)
             if recesso and ctx.em_suspensao(fim):
+                marca_suspensao(fim)
                 continue
             contados += 1
         if not ctx.util(fim):
             prorrogado = True
+            _, _, nomes_fim = ctx.cal(fim.year)
+            rastro["diasNaoUteis"].append({"data": fim.isoformat(), "motivo": "vencimento em dia não útil (" + ("fim de semana" if ctx.fim_de_semana(fim) else nomes_fim.get(fim, "sem expediente")) + "), prorrogado (CPP, art. 798, § 3º)"})
             fim = ctx.proximo_util(fim)
     else:
         contados, d = 0, pub
         while True:
             d += timedelta(1)
             if ctx.fim_de_semana(d):
+                rastro["fimsDeSemana"] += 1
                 continue
             if recesso and ctx.em_suspensao(d):
+                marca_suspensao(d)
                 continue
-            nu, pa = ctx.cal(d.year)
+            nu, pa, nomes_ano = ctx.cal(d.year)
             if d in nu:
+                rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "sem expediente")})
                 continue
             if d in pa and (contados == 0 or contados + 1 == efetivo):
                 if contados != 0 and contados + 1 == efetivo:
                     prorrogado = True
+                rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "expediente parcial") + (": protrai o dia do começo" if contados == 0 else ": protrai o vencimento (CPC, art. 224, § 1º)")})
                 continue
             contados += 1
             if contados == efetivo:
@@ -172,6 +193,7 @@ def calcular(e: dict, completo: bool) -> dict:
         "dataVencimentoFinal": fim.isoformat(),
         "foiProrrogadoTermoFinal": prorrogado,
         "calendarioVerificado": verificado,
+        "rastro": rastro,
     }
 
 
@@ -371,7 +393,51 @@ add("litisconsorcio-sem-dobro", "dobro", "Litisconsortes com advogados distintos
     entrada("2026-03-10", "publicacao", 15, litisconsortesComAdvogadosDistintos=True))
 
 
-def gerar():
+# ---- Cenários para completar a suíte (F2-09): lacunas de CLT, STF/STJ, TRFs, CPP, JEF, portal e dobro ----
+add("clt-ed-5d-feriado", "clt", "CLT: embargos de declaração em 5 dias úteis atravessando 7 de setembro", "CLT, arts. 775 e 897-A; Lei 662/1949, art. 1º",
+    entrada("2026-09-03", "publicacao", 5, "TST", regime="clt_dias_uteis"))
+add("clt-recesso-borda-20-jan", "clt", "CLT: publicação em 16/01/2026; 19 e 20/01 ainda são recesso e a contagem retoma em 21/01", "CLT, art. 775-A",
+    entrada("2026-01-16", "publicacao", 3, "TST", regime="clt_dias_uteis"))
+add("stj-dobro-ferias-julho", "dobro", "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08", "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; " + P1010,
+    entrada("2026-06-26", "publicacao", 15, "STJ", prazoEmDobro=True))
+add("stf-dje-ferias-janeiro", "verificado", "STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02", "RISTF, arts. 78 e 105; CPC, art. 224, § 2º; " + CAL_STF,
+    entrada("2026-01-30", "disponibilizacao_dje", 5, "STF"))
+add("stj-dje-semana-santa", "verificado", "STJ: disponibilização em 31/03/2026; 1 a 3/04 são feriados, publicação na segunda 06/04", "CPC, art. 224, § 2º; " + P1010 + ", art. 1º, IV",
+    entrada("2026-03-31", "disponibilizacao_dje", 3, "STJ"))
+add("trf3-carnaval-conservador", "pendente", "TRF3: Carnaval é feriado (Lei 5.010); Quarta de Cinzas ainda sem ato do TRF3 (conservador)", "Lei 5.010/1966, art. 62, III; " + PEND + " (Cinzas)",
+    entrada("2026-02-13", "publicacao", 3, "TRF3"))
+add("trf3-finados", "verificado", "TRF3: 2 de novembro (segunda) não conta", "Lei 662/1949, art. 1º",
+    entrada("2026-10-30", "publicacao", 3, "TRF3"))
+add("tjsp-8-dezembro", "feriado", "TJSP: 8 de dezembro não é feriado forense (a Lei 5.010 vale para a Justiça Federal)", "Lei 5.010/1966, art. 62 (Justiça Federal); sem ato do TJSP",
+    entrada("2026-12-04", "publicacao", 3, "TJSP"))
+add("stj-7-e-8-dezembro", "verificado", "STJ: 7/12 (ponto facultativo) e 8/12 (Dia da Justiça) não contam", P1010 + ", art. 1º, XVII e XVIII",
+    entrada("2026-12-04", "publicacao", 3, "STJ"))
+add("cpp-8d-sabado", "cpp", "CPP: 8 dias corridos vencem no sábado 14/03 e vão para a segunda 16/03", "CPP, art. 798, caput e § 3º",
+    entrada("2026-03-06", "publicacao", 8, regime="cpp_dias_corridos"))
+add("cpp-vence-aparecida", "cpp", "CPP: 3 dias corridos vencem em 12/10 (segunda, feriado) e vão para 13/10", "CPP, art. 798, § 3º; Lei 6.802/1980, art. 1º",
+    entrada("2026-10-09", "publicacao", 3, regime="cpp_dias_corridos"))
+add("jef-dje-sexta", "jef", "JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis", "Lei 9.099/1995, arts. 42 e 12-A; CPC, art. 224, § 2º",
+    entrada("2026-03-13", "disponibilizacao_dje", 10, regime="jef_dias_uteis"))
+add("portal-recesso", "portal", "Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso", "CPC, arts. 220 e 231, V; Lei 11.419/2006, art. 5º",
+    entrada("2025-12-19", "intimacao_portal", 5))
+add("dobro-embargos-feriado", "dobro", "Fazenda: embargos de declaração em dobro (10 úteis) atravessando Tiradentes", "CPC, arts. 183 e 1.023",
+    entrada("2026-04-14", "carga_ou_audiencia", 5, prazoEmDobro=True))
+add("um-dia-vespera-feriado", "basico", "Prazo de 1 dia útil com publicação na quinta 30/04: sexta 1º/05 é feriado e vence na segunda 04/05", "CPC, art. 219; Lei 662/1949, art. 1º",
+    entrada("2026-04-30", "publicacao", 1))
+
+
+def validacoes_existentes(destino):
+    """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
+    if not destino.exists():
+        return {}
+    try:
+        return {c["id"]: c["validacao"] for c in json.loads(destino.read_text(encoding="utf-8"))}
+    except Exception:
+        return {}
+
+
+def gerar(preservar=None):
+    preservar = preservar or {}
     saida = []
     for cid, cat, desc, fund, ent in C:
         modo = ent.get("modo", "conservador")
@@ -383,7 +449,7 @@ def gerar():
             "fundamento": fund,
             "entrada": ent,
             "esperado": principal,
-            "validacao": {"status": "pendente", "por": None, "em": None},
+            "validacao": preservar.get(cid, {"status": "pendente", "por": None, "em": None}),
         }
         if modo == "conservador":
             completo = calcular(ent, completo=True)
@@ -396,12 +462,107 @@ def gerar():
     return saida
 
 
+DIAS_SEMANA = ["segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado", "domingo"]
+ROTULO_TIPO = {"disponibilizacao_dje": "disponibilização no DJe", "publicacao": "publicação", "intimacao_portal": "consulta à intimação eletrônica",
+               "carga_ou_audiencia": "ciência pessoal (carga ou audiência)", "manual": "início manual"}
+ROTULO_REGIME = {"cpc_dias_uteis": "CPC, dias úteis", "clt_dias_uteis": "CLT, dias úteis", "cpp_dias_corridos": "CPP, dias corridos", "jef_dias_uteis": "JEF, dias úteis"}
+ROTULO_CAT = {"basico": "Contagem básica", "dje": "Disponibilização no DJe", "feriado": "Feriados nacionais", "recesso": "Recesso e suspensão de prazos",
+              "dobro": "Prazo em dobro", "bissexto": "Ano bissexto", "clt": "CLT", "cpp": "CPP (prazos criminais)", "jef": "Juizados Especiais",
+              "portal": "Intimação eletrônica", "tribunal": "Tribunais superiores", "verificado": "Calendário verificado (STF, STJ, TRFs)",
+              "pendente": "Dias ainda pendentes de conferência"}
+
+
+def br(iso):
+    d = date.fromisoformat(iso)
+    return f"{d.strftime('%d/%m/%Y')} ({DIAS_SEMANA[d.weekday()]})"
+
+
+def gerar_revisao(cenarios):
+    por_cat = {}
+    for c in cenarios:
+        por_cat.setdefault(c["categoria"], []).append(c)
+    validados = sum(1 for c in cenarios if c["validacao"]["status"] == "validado")
+    L = []
+    L.append("# RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO")
+    L.append("")
+    L.append("> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.")
+    L.append(f"> Cenários: **{len(cenarios)}** · validados: **{validados}** · pendentes: **{len(cenarios) - validados}**")
+    L.append("")
+    L.append("## Como revisar")
+    L.append("")
+    L.append("Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **fundamento**, (2) a **data de publicação e o início da contagem** e (3) o **vencimento**. "
+             "O item *Como foi contado* lista os dias que o cálculo excluiu e por quê; fins de semana e a suspensão de 20/12 a 20/01 vêm agregados.")
+    L.append("")
+    L.append("**Para registrar a validação**, no `cenarios.json` troque, no cenário conferido, `\"validacao\": {\"status\": \"pendente\", \"por\": null, \"em\": null}` por "
+             "`{\"status\": \"validado\", \"por\": \"seu nome\", \"em\": \"AAAA-MM-DD\"}`. Se discordar, anote o motivo no próprio cenário e me avise; o resultado esperado é do oráculo, não é verdade jurídica até você conferir.")
+    L.append("")
+    L.append("**Convenções.** *Modo conservador*: só dias com base verificada (data mais cedo). *Modo completo*: inclui os dias ainda pendentes. "
+             "*Alternativa*: data que valeria se os dias pendentes fossem confirmados. *Dia do começo*: o dia excluído da contagem (CPC, art. 224, caput).")
+    L.append("")
+    L.append("## O que esta suíte não cobre")
+    L.append("")
+    L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
+    L.append("- **Feriados estaduais e municipais**: só aparecem como pendentes (SP, 9 de julho) e o município nunca é calculado (CPC, art. 1.003, § 6º).")
+    L.append("- **Calendário de STF e STJ fora de 2026**, e de TRFs e TJs além da Lei 5.010 e dos feriados nacionais.")
+    L.append("- **Recesso no JEF** (suspensão de 20/12 a 20/01): sem texto primário; tratado como pendente.")
+    L.append("- **Férias coletivas de janeiro e julho de STF e STJ para prazos criminais**: não conferidas.")
+    L.append("")
+    L.append("## Resumo")
+    L.append("")
+    L.append("| Grupo | Cenários |")
+    L.append("|---|---|")
+    for cat, itens in por_cat.items():
+        L.append(f"| {ROTULO_CAT.get(cat, cat)} | {len(itens)} |")
+    L.append("")
+    n = 0
+    for cat, itens in por_cat.items():
+        L.append(f"## {ROTULO_CAT.get(cat, cat)}")
+        L.append("")
+        for c in itens:
+            n += 1
+            e, x = c["entrada"], c["esperado"]
+            opcoes = []
+            if e.get("prazoEmDobro"): opcoes.append("prazo em dobro")
+            if e.get("litisconsortesComAdvogadosDistintos"): opcoes.append("litisconsortes com advogados distintos (aviso)")
+            if e.get("excecaoSuspensaoCriminal"): opcoes.append("exceção do CPP, art. 798-A (réu preso/Maria da Penha/urgência)")
+            if e.get("suspensaoRecesso") is not None: opcoes.append("suspensão " + ("ligada" if e["suspensaoRecesso"] else "desligada") + " pelo usuário")
+            modo = e.get("modo", "conservador")
+            L.append(f"### {n}. `{c['id']}`")
+            L.append("")
+            L.append(f"**{c['descricao']}**")
+            L.append("")
+            L.append(f"- **Entrada:** {ROTULO_TIPO[e['tipoEvento']]} em **{br(e['dataEvento'])}** · prazo de **{e['diasPrazo']} dias** ({ROTULO_REGIME[e.get('regime', 'cpc_dias_uteis')]}) · tribunal **{e.get('tribunalId', '')}** · modo {modo}" + (" · " + "; ".join(opcoes) if opcoes else ""))
+            L.append(f"- **Publicação / dia do começo:** {br(x['dataPublicacao'])} · **início da contagem:** {br(x['dataTermoInicial'])}")
+            L.append(f"- **Vencimento esperado:** **{br(x['dataVencimentoFinal'])}**" + (" · prorrogado" if x["foiProrrogadoTermoFinal"] else ""))
+            alt = c.get("alternativaEsperada")
+            if alt:
+                L.append(f"- **Alternativa (se os dias pendentes forem confirmados):** {br(alt)}")
+            r = x["rastro"]
+            partes = []
+            if r["fimsDeSemana"]: partes.append(f"{r['fimsDeSemana']} sábados/domingos")
+            if r["suspensaoDias"]: partes.append(f"suspensão de {r['suspensaoDias']} dias ({date.fromisoformat(r['suspensaoDe']).strftime('%d/%m/%Y')} a {date.fromisoformat(r['suspensaoAte']).strftime('%d/%m/%Y')})")
+            for d in r["diasNaoUteis"]:
+                partes.append(f"{date.fromisoformat(d['data']).strftime('%d/%m/%Y')} {d['motivo']}")
+            L.append("- **Como foi contado (dias excluídos):** " + ("; ".join(partes) if partes else "nenhum além do dia do começo"))
+            L.append(f"- **Fundamento:** {c['fundamento']}")
+            L.append(f"- **Calendário do tribunal verificado:** {'sim' if x['calendarioVerificado'] else 'não'}")
+            v = c["validacao"]
+            if v["status"] == "validado":
+                L.append(f"- **Validação jurídica:** ☑ validado por {v['por']} em {v['em']}")
+            else:
+                L.append("- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____")
+            L.append("")
+    return "\n".join(L) + "\n"
+
+
 if __name__ == "__main__":
     # Checagem da Páscoa contra datas conhecidas antes de gerar qualquer gabarito
     conhecidas = {2023: (4, 9), 2024: (3, 31), 2025: (4, 20), 2026: (4, 5), 2027: (3, 28), 2028: (4, 16), 2029: (4, 1), 2030: (4, 21)}
     for ano, (m, d) in conhecidas.items():
         assert pascoa(ano) == date(ano, m, d), f"Páscoa {ano} divergente"
-    cenarios = gerar()
     destino = Path(__file__).with_name("cenarios.json")
+    cenarios = gerar(validacoes_existentes(destino))
     destino.write_text(json.dumps(cenarios, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(f"{len(cenarios)} cenários gravados em {destino.name}")
+    doc = Path(__file__).resolve().parents[3] / "docs" / "produto" / "REVISAO_CENARIOS.md"
+    doc.write_text(gerar_revisao(cenarios), encoding="utf-8", newline="\n")
+    print(f"{len(cenarios)} cenários gravados em {destino.name} e {doc.name}")
