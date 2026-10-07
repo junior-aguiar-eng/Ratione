@@ -307,7 +307,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-03 | Calendário como dado (tabela com fonte, vigência, verificação) e painel de curadoria | não iniciado | Hoje são constantes no código |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | não iniciado | Lei 5.010 já verificada para TRFs; faltam pontos facultativos por tribunal |
 | F2-05 | Feriados estaduais e municipais | não iniciado | A tabela atual **não está conferida**; municipal exige comprovação |
-| F2-06 | Aviso de prazo próprio no prazo em dobro (CPC 180 §2º, 183 §2º, 186 §4º) | não iniciado | A tela avisa que o benefício não vale quando a lei fixa prazo próprio |
+| F2-06 | Aviso de prazo próprio no prazo em dobro (CPC 180 §2º, 183 §2º, 186 §4º) | feito | O resultado avisa que o benefício não vale quando a lei fixa prazo próprio e, se a origem for o Diário, que o prazo em dobro só começa com a intimação pessoal (art. 183 §1º). Texto dos artigos lido no Planalto; 2 testes novos |
 | F2-07 | Litisconsórcio (art. 229), JEF, MP e Defensoria | não iniciado | Cenários validados para cada regra |
 | F2-08 | Catálogo de prazos com base legal | não iniciado | Hoje a tela tem 5 atos; catálogo em `METODO_CALENDARIO_FORENSE.md` §2.2 |
 | F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | 73 gerados, 0 validados; faltam 27 e a validação |
@@ -380,7 +380,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F2-06**, **F2-07**, **F2-08**: regras do PrazoZero que faltam.
+1. **F2-07**, **F2-08**: regras do PrazoZero que faltam.
 2. **F2-09**: completar os 100 cenários e entregar ao revisor.
 3. **F2-03**: calendário como dado.
 4. **F0-06 em diante**, conforme as decisões do responsável (§12).

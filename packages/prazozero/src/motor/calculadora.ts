@@ -227,6 +227,18 @@ export class MotorPrazoZero {
         'confira o calendário do tribunal e comprove feriado local (CPC, art. 1.003, § 6º).'
     ];
 
+    if (p.prazoEmDobro) {
+      let aviso =
+        'Prazo em dobro aplicado (CPC, arts. 180, 183 e 186). O benefício não vale quando a lei fixa, de forma expressa, ' +
+        'prazo próprio para o ente (arts. 180, § 2º; 183, § 2º; 186, § 4º): confira se este é o prazo geral do CPC.';
+      if (p.tipoEvento === 'disponibilizacao_dje' || p.tipoEvento === 'publicacao') {
+        aviso +=
+          ' O prazo em dobro só começa com a intimação pessoal, por carga, remessa ou meio eletrônico (art. 183, § 1º); ' +
+          'a publicação no Diário não basta.';
+      }
+      avisos.push(aviso);
+    }
+
     const principal = this.executar(p, modo === 'completo');
     let alternativa: AlternativaPrazo | undefined;
 

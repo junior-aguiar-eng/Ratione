@@ -128,6 +128,27 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.strictEqual(r.memoriaCalculo.find(m => m.data === '2026-02-18')?.status, 'expediente_parcial');
   });
 
+  it('prazo em dobro avisa que não vale quando a lei fixa prazo próprio (CPC 180 §2º, 183 §2º, 186 §4º)', () => {
+    const base = { dataEvento: '2026-03-10', diasPrazo: 15, tribunalId: 'TJSP' };
+    const comDobro = motor.calcularPrazo({ ...base, tipoEvento: 'carga_ou_audiencia', prazoEmDobro: true });
+    const aviso = comDobro.avisos.find(a => a.startsWith('Prazo em dobro'));
+    assert.ok(aviso, 'deveria avisar sobre o prazo em dobro');
+    assert.ok(aviso.includes('prazo próprio') && aviso.includes('183, § 2º') && aviso.includes('186, § 4º'));
+    assert.ok(!aviso.includes('intimação pessoal'), 'carga/ciência pessoal já é intimação pessoal: sem esse alerta');
+    assert.strictEqual(comDobro.diasTotaisComputados, 30);
+
+    const semDobro = motor.calcularPrazo({ ...base, tipoEvento: 'carga_ou_audiencia' });
+    assert.ok(!semDobro.avisos.some(a => a.startsWith('Prazo em dobro')), 'sem dobro, sem esse aviso');
+  });
+
+  it('prazo em dobro com origem no Diário avisa que só começa com a intimação pessoal (CPC 183 §1º)', () => {
+    for (const tipoEvento of ['disponibilizacao_dje', 'publicacao'] as const) {
+      const r = motor.calcularPrazo({ dataEvento: '2026-03-10', tipoEvento, diasPrazo: 15, tribunalId: 'TJSP', prazoEmDobro: true });
+      const aviso = r.avisos.find(a => a.startsWith('Prazo em dobro'));
+      assert.ok(aviso?.includes('intimação pessoal') && aviso.includes('183, § 1º'), tipoEvento);
+    }
+  });
+
   it('rejeita entrada inválida em vez de calcular em silêncio', () => {
     const base = { dataEvento: '2026-03-10', tipoEvento: 'publicacao' as const, diasPrazo: 5 };
     assert.throws(() => motor.calcularPrazo({ ...base, dataEvento: '2026-02-30' }), /dataEvento inválida/);

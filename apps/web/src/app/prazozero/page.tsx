@@ -350,6 +350,12 @@ export default function PrazoZeroPage() {
                   </Notice>
                 )}
 
+                {prazoEmDobro && (
+                  <Notice tom="warn" titulo="Prazo em dobro: confira antes de contar com ele">
+                    {resultado.avisos.find(a => a.startsWith('Prazo em dobro'))}
+                  </Notice>
+                )}
+
                 {resultado.calendarioVerificado && resultado.fontesCalendario ? (
                   <Notice tom="info" titulo={`Calendário do ${tribunalId} conferido contra o ato oficial`}>
                     <ul className="space-y-1">
@@ -365,7 +371,7 @@ export default function PrazoZeroPage() {
                   </Notice>
                 ) : (
                   <Notice tom="info" titulo="Calendário do tribunal em conferência">
-                    {resultado.avisos.filter(a => !a.includes('modo conservador')).map(a => (
+                    {resultado.avisos.filter(a => !a.includes('modo conservador') && !a.startsWith('Prazo em dobro')).map(a => (
                       <p key={a} className="mb-1 last:mb-0">
                         {a}
                       </p>
