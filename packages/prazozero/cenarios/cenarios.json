@@ -4064,5 +4064,136 @@
       "em": null
     },
     "alternativaEsperada": "2026-07-07"
+  },
+  {
+    "id": "tjrj-carnaval-2026",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: ponto facultativo de 13/02 e Carnaval (16 a 18/02) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-13",
+            "motivo": "TJRJ: 02-13"
+          },
+          {
+            "data": "2026-02-16",
+            "motivo": "TJRJ: 02-16"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJRJ: 02-17"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJRJ: 02-18"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrj-sao-jorge-2026",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026",
+    "entrada": {
+      "dataEvento": "2026-04-22",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-22",
+      "dataTermoInicial": "2026-04-27",
+      "dataVencimentoFinal": "2026-04-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-23",
+            "motivo": "TJRJ: 04-23"
+          },
+          {
+            "data": "2026-04-24",
+            "motivo": "TJRJ: 04-24"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrj-copa-2026",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Atos Executivos 96 e 103/2026",
+    "entrada": {
+      "dataEvento": "2026-06-23",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-23",
+      "dataTermoInicial": "2026-06-25",
+      "dataVencimentoFinal": "2026-06-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJRJ: 06-24"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJRJ: 06-29"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

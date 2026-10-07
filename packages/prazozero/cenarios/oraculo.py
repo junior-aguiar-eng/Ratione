@@ -32,6 +32,9 @@ TJSP_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "
 TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 TJMG_2026_NU = [("02-16", "02-18"), ("04-01", "04-03"), ("04-20", "04-20"), ("10-30", "10-30"), ("12-07", "12-07")]
 TJMG_2026_PENDENTE = ["06-04", "06-05"]
+# TJRJ 2026: informativo oficial (ocorrências de todo o Estado); sem selo, o ano ainda não terminou
+TJRJ_2026_NU = ["02-05", "02-13", "02-16", "02-17", "02-18", "02-27", "03-27", "04-02", "04-03", "04-23", "04-24",
+                "06-04", "06-05", "06-24", "06-29", "07-29", "08-07", "08-11", "09-04", "09-11"]
 TJAL_2026_NU = ["04-20", "06-04", "06-05", "08-10", "08-11", "12-07", "12-08"]
 
 
@@ -129,6 +132,9 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         for off in (-48, -47, -46, -4, -3, -2):
             ev(p + timedelta(off), True, "TJMG: Carnaval/Semana Santa (Res. 458/2004)")
         ev(date(ano, 12, 8), True, "TJMG: Dia da Justiça (Res. 458/2004)")
+    if ano == 2026 and trib == "TJRJ":
+        for s in TJRJ_2026_NU:
+            ev(dia(s), True, "TJRJ: " + s)
     if ano == 2026 and trib == "TJAL":
         for s in TJAL_2026_NU:
             ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
@@ -515,6 +521,15 @@ add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 
     entrada("2026-06-19", "publicacao", 5, "TJAL"))
 
 
+# ---- TJRJ 2026 (F2-04): informativo oficial, sem selo ----
+INFRJ = "TJRJ, informativo de suspensão de prazos 2026 (cita o ato)"
+add("tjrj-carnaval-2026", "verificado", "TJRJ 2026: ponto facultativo de 13/02 e Carnaval (16 a 18/02) não contam", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+    entrada("2026-02-12", "publicacao", 3, "TJRJ"))
+add("tjrj-sao-jorge-2026", "verificado", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo) não contam", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
+    entrada("2026-04-22", "publicacao", 3, "TJRJ"))
+add("tjrj-copa-2026", "verificado", "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam", INFRJ + "; Atos Executivos 96 e 103/2026",
+    entrada("2026-06-23", "publicacao", 3, "TJRJ"))
+
 def validacoes_existentes(destino):
     """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
     if not destino.exists():
@@ -592,7 +607,7 @@ def gerar_revisao(cenarios):
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
     L.append("- **Feriados estaduais e municipais**: só TJSP e TJMG (2026) têm ato lido; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
-    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
+    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")
