@@ -3,8 +3,3 @@ packages:
   - 'packages/*'
 allowBuilds:
   esbuild: true
-
-# Correção de segurança (Dependabot). Remover quando o Next trouxer o postcss corrigido:
-# - next@15 fixa postcss@8.4.31 (corrigido em >= 8.5.23; o Next 16 já usa 8.5.23).
-overrides:
-  "next>postcss": "^8.5.23"
