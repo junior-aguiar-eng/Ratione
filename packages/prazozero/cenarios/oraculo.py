@@ -371,7 +371,7 @@ add("bissexto-2024", "bissexto", "Fevereiro de 2024 (bissexto): 29/02 é dia út
     entrada("2024-02-27", "publicacao", 5))
 add("bissexto-2028", "bissexto", "Fevereiro de 2028 (bissexto), Carnaval em 28 e 29/02", CPC,
     entrada("2028-02-25", "publicacao", 5))
-add("clt-8d", "clt", "Embargos na CLT: 8 dias úteis", "CLT, art. 775",
+add("clt-8d", "clt", "Recurso ordinário na CLT: 8 dias úteis (CLT, art. 895)", "CLT, art. 775",
     entrada("2026-03-04", "publicacao", 8, "TST", regime="clt_dias_uteis"))
 add("cpp-5d-domingo", "cpp", "CPP: 5 dias corridos terminam no domingo, prorrogado para segunda", "CPP, art. 798, caput e § 3º",
     entrada("2026-03-10", "publicacao", 5, regime="cpp_dias_corridos"))
