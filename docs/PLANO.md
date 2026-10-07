@@ -303,7 +303,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 160 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 171 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (eventos com tribunal, período, efeito e fonte) | feito | `calendario/eventos.ts`: fontes, eventos e regras anuais separados do código; STF e STJ migrados sem mudar resultado e TJSP, TJMG e TJAL carregados por cima. O painel de curadoria (CRUD) fica para depois do banco (F0-06) |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | parcial | **TJSP e TJMG (2026) com ato lido e selo**; **TJAL com selo 2026** ( 23/06 a 01/07 e 28/08 pendentes); **TJRJ carregado (sem selo)** pelo informativo oficial de 05/10/2026, atos não lidos; TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE e TJES não pesquisados. Ver `VERIFICACAO_FONTES.md` §11 |
@@ -318,7 +318,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
 | F2-11 | Dúvidas jurídicas abertas | em curso | 7 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
 | F2-13 | CPP: suspensão de 20/12 a 20/01 (art. 798-A, Lei 14.365/2022), salvo réu preso, Maria da Penha e medida urgente | feito | Defeito do F2-01 corrigido (a primeira leitura usou o CPP não compilado). Exceção marcável na tela e aviso; 4 cenários novos e 2 reescritos. Férias de STF e STJ nos prazos criminais: ver F2-15 |
-| F2-12 | Relatório "o que pode alterar este prazo" | não iniciado | Lista, por cálculo, os atos que podem mudar a data |
+| F2-12 | Relatório "o que pode alterar este prazo" | feito | `motor/relatorio.ts` e seção recolhível na tela. Mostra, com a data que resultaria: dias ainda não conferidos, prazo em dobro (CPC 180, 183, 186; CLT: DL 779/1969), exceção criminal (CPP 798-A) e indisponibilidade do sistema no último dia (Lei 11.419, art. 10); e, sem data, calendário não conferido, consulta do portal (Lei 11.419, art. 5º), suspensão do prazo (CPC 221 e 313), justa causa (223), prorrogação pelo juiz (222) e feriado local (1.003, § 6º). Textos lidos no compilado em 07/10/2026; 11 testes |
 | F2-17 | Auditoria do que foi feito (07/10/2026) | feito | Achados e correções na seção "Auditoria" de `produto/VERIFICACAO_FONTES.md` (§ 13). Segue aberta a validação jurídica (F2-09) |
 
 **Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada; beta fechado com 10 usuários sem erro de cálculo reportado.
