@@ -18,7 +18,9 @@ from pathlib import Path
 # STF e STJ: confirmado nos atos de 2026 (Portaria STJ/GDG 1.010/2025; calendário STF 2026, Portaria GDG/STF 189/2025).
 LEI_5010 = {"STF", "STJ", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6"}
 SUPERIORES_SEM_ATO = {"TST", "TSE"}  # citados no art. 62, sem ato próprio conferido: pendente
-UF_DO_TRIBUNAL = {"TJSP": "SP", "TRF3": "SP", "TJRJ": "RJ", "TJMG": "MG"}
+# Só tribunais estaduais: a Justiça Federal segue a Lei 5.010, art. 62, e não a tabela estadual.
+UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR": "PR", "TJSC": "SC", "TJBA": "BA", "TJDF": "DF",
+                  "TJGO": "GO", "TJPE": "PE", "TJCE": "CE", "TJAL": "AL", "TJES": "ES"}
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
@@ -51,6 +53,37 @@ def pascoa(ano: int) -> date:
     mes = (h + l - 7 * m + 114) // 31
     dia = (h + l - 7 * m + 114) % 31 + 1
     return date(ano, mes, dia)
+
+
+# Tabela estadual PROVISÓRIA (todos pendentes), transcrita de feriados.ts: dado, não lógica. O teste diferencial acusa se divergirem.
+FERIADOS_ESTADUAIS_PENDENTES = {
+    "SP": (7, 9, "Revolução Constitucionalista de 1932"),
+    "RJ": (4, 23, "Dia de São Jorge"),
+    "RS": (9, 20, "Revolução Farroupilha (Dia do Gaúcho)"),
+    "BA": (7, 2, "Independência da Bahia"),
+    "PE": (3, 6, "Data Magna de Pernambuco"),
+    "CE": (3, 19, "Dia de São José (Padroeiro do Ceará)"),
+    "PR": (12, 19, "Emancipação Política do Paraná"),
+    "SC": (8, 11, "Criação da Capitania de Santa Catarina"),
+    "DF": (11, 30, "Dia do Evangélico"),
+    "PA": (8, 15, "Adesão do Grão-Pará à Independência"),
+    "AM": (9, 5, "Elevação do Amazonas à Categoria de Província"),
+    "MA": (7, 28, "Adesão do Maranhão à Independência"),
+    "RN": (10, 3, "Mártires de Cunhaú e Uruuaçu"),
+    "PB": (7, 26, "Homenagem à Memória de João Pessoa"),
+    "AL": (9, 16, "Emancipação Política de Alagoas"),
+    "SE": (7, 8, "Emancipação Política de Sergipe"),
+    "PI": (10, 19, "Dia do Piauí"),
+    "ES": (4, 17, "Nossa Senhora da Penha (segunda-feira pós-oitava da Páscoa)"),
+    "GO": (10, 24, "Pedra Fundamental de Goiânia"),
+    "MT": (11, 20, "Consciência Negra Estadual (Histórico)"),
+    "MS": (10, 11, "Criação do Estado de Mato Grosso do Sul"),
+    "RO": (1, 4, "Criação do Estado de Rondônia"),
+    "AC": (6, 15, "Aniversário do Estado do Acre"),
+    "AP": (3, 19, "Dia de São José"),
+    "RR": (10, 5, "Criação do Estado de Roraima"),
+    "TO": (10, 5, "Criação do Estado do Tocantins"),
+}
 
 
 def calendario(ano: int, trib: str, uf: str, completo: bool):
@@ -148,9 +181,12 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
         for d in intervalo(date(ano, 12, 20), date(ano, 12, 31)):
             ev(d, True, "TJAL: feriados forenses de dezembro (Lei 6.564/2005, art. 37)")
-    if uf == "SP" and completo and date(ano, 7, 9) not in nao_util:
-        nao_util.add(date(ano, 7, 9))
-        nomes[date(ano, 7, 9)] = "Revolução Constitucionalista (estadual, pendente)"
+    if completo and uf in FERIADOS_ESTADUAIS_PENDENTES:
+        m, dd, nome = FERIADOS_ESTADUAIS_PENDENTES[uf]
+        d = date(ano, m, dd)
+        if d not in nao_util and d not in parcial:
+            nao_util.add(d)
+            nomes[d] = nome + " (estadual, pendente)"
     return nao_util, parcial, nomes
 
 
@@ -658,6 +694,38 @@ def gerar_revisao(cenarios):
     return "\n".join(L) + "\n"
 
 
+def gerar_aleatorios(n=600, semente=20261007):
+    """Entradas pseudoaleatórias (semente fixa) com o resultado do oráculo: o teste compara motor e oráculo em todas."""
+    import random
+    r = random.Random(semente)
+    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF3", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", None]
+    regimes = ["cpc_dias_uteis", "clt_dias_uteis", "jef_dias_uteis", "cpp_dias_corridos"]
+    tipos = ["disponibilizacao_dje", "publicacao", "intimacao_portal", "carga_ou_audiencia"]
+    saida = []
+    for i in range(n):
+        ano = 2024 + r.randrange(5)
+        e = {
+            "dataEvento": (date(ano, 1, 1) + timedelta(r.randrange(365))).isoformat(),
+            "tipoEvento": r.choice(tipos),
+            "diasPrazo": r.choice([1, 2, 5, 8, 10, 15, 30]),
+            "regime": r.choice(regimes),
+            "prazoEmDobro": r.random() < 0.2,
+            "excecaoSuspensaoCriminal": r.random() < 0.3,
+        }
+        trib = r.choice(tribunais)
+        if trib:
+            e["tribunalId"] = trib
+        principal = calcular(e, completo=False)
+        completo = calcular(e, completo=True)
+        saida.append({
+            "id": f"aleatorio-{i + 1:04d}",
+            "entrada": e,
+            "esperado": {k: principal[k] for k in ("dataPublicacao", "dataTermoInicial", "dataVencimentoFinal", "foiProrrogadoTermoFinal", "calendarioVerificado")},
+            "alternativaEsperada": completo["dataVencimentoFinal"] if completo["dataVencimentoFinal"] != principal["dataVencimentoFinal"] else None,
+        })
+    return saida
+
+
 if __name__ == "__main__":
     # Checagem da Páscoa contra datas conhecidas antes de gerar qualquer gabarito
     conhecidas = {2023: (4, 9), 2024: (3, 31), 2025: (4, 20), 2026: (4, 5), 2027: (3, 28), 2028: (4, 16), 2029: (4, 1), 2030: (4, 21)}
@@ -668,4 +736,6 @@ if __name__ == "__main__":
     destino.write_text(json.dumps(cenarios, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     doc = Path(__file__).resolve().parents[3] / "docs" / "produto" / "REVISAO_CENARIOS.md"
     doc.write_text(gerar_revisao(cenarios), encoding="utf-8", newline="\n")
-    print(f"{len(cenarios)} cenários gravados em {destino.name} e {doc.name}")
+    aleatorios = Path(__file__).with_name("cenarios_aleatorios.json")
+    aleatorios.write_text(json.dumps(gerar_aleatorios(), ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
+    print(f"{len(cenarios)} cenários gravados em {destino.name} e {doc.name}; {aleatorios.name} atualizado")

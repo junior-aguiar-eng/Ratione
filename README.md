@@ -1,13 +1,12 @@
 # Ratione
 
 > **Plataforma de Inteligência e Rigor Jurídico**  
-> *Quatro motores especializados, determinísticos e conectados para a prática forense de alto padrão.*
+> *Quatro ferramentas especializadas para a prática forense, com cálculo determinístico onde há regra e fonte à vista onde há dado.*
 
 [![CI](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml/badge.svg)](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
-[![CPC](https://img.shields.io/badge/CPC%2F15-Conforme%20Art.%20219%20e%20489-darkred.svg)](#)
 
 ---
 
@@ -17,7 +16,7 @@ O Ratione rejeita o modelo de "assistente genérico de chat" e entrega quatro fe
 
 | Módulo | Missão | Natureza | Fundamento Legal / Técnico |
 |---|---|---|---|
-| **[PrazoZero](apps/web/src/app/prazozero)** | Cálculo de prazos com memória auditável | **100% Determinístico** (Sem IA) | Arts. 219 e 224 do CPC, Res. CNJ 455/2022, Lei 10.607/02, Feriados Nacionais/Estaduais |
+| **[PrazoZero](apps/web/src/app/prazozero)** | Cálculo de prazos com memória auditável | **100% Determinístico** (Sem IA) | CPC (arts. 219, 220, 224, 231, 975), CLT, CPP, Lei 9.099/95, Res. CNJ 244/2016 e 455/2022, feriados nacionais e calendário de cada tribunal lido no ato oficial |
 | **[Argumenta](apps/web/src/app/argumenta)** | Destrinchar sentenças e testar teses | **Estrutural & Cognitivo** | Art. 489, § 1º do CPC (Incisos I a VI: omissões, saltos e distinções), Docling Layout |
 | **[NormaViva](apps/web/src/app/normaviva)** | O estado da norma no tempo (*Point-in-Time*) | **Bitemporal Determinístico** | LC 95/1998, Corpus LexML / Legalize-BR, Diff legislativo |
 | **[TeseMap](apps/web/src/app/tesemap)** | Grafo topológico de precedentes | **Grafo Direcionado** | Art. 927 do CPC, STF Repercussão Geral, STJ Repetitivos, React Flow (`xyflow`) |
@@ -59,8 +58,12 @@ O produto, as decisões, o roteiro e o estado de cada item estão em um só luga
 # Instalar dependências
 pnpm install
 
-# Executar suíte de testes de integridade e contagem processual
+# Testes (motor, oráculo, propriedades) e checagem de tipos
 pnpm test
+pnpm typecheck
+
+# Regenerar o gabarito do oráculo (Python 3), depois de mudar regra ou calendário
+python packages/prazozero/cenarios/oraculo.py
 
 # Iniciar ambiente de desenvolvimento
 pnpm dev
@@ -70,6 +73,7 @@ pnpm dev
 
 ## ⚖️ Filosofia de Engenharia: "Sem Mock"
 
-- **Prazos:** Testados contra cenários reais de jurisprudência do STJ e tribunais pátrios.
-- **Feriados:** Ingestão de leis federais e estaduais com citação expressa do ato normativo instituidor.
-- **Auditoria:** O usuário recebe a fundamentação exata para comprovação tempestiva (Art. 1.003, § 6º do CPC).
+- **Prazos:** conferidos por um oráculo independente (Python, sem código em comum com o motor) em 115 cenários fixos e 600 entradas aleatórias, mais testes de propriedades. Os cenários **ainda não foram validados por revisão jurídica** (ver `docs/produto/REVISAO_CENARIOS.md`).
+- **Calendário:** cada dia não útil aponta o ato de onde foi lido (ato, URL e data). Só STF, STJ, TJSP, TJMG e TJAL (2026) têm o calendário conferido; o resto fica `pendente` e aparece só como data alternativa. Registro em `docs/produto/VERIFICACAO_FONTES.md`.
+- **Auditoria:** o usuário recebe a memória de cálculo dia a dia, com o fundamento de cada dia excluído (art. 1.003, § 6º do CPC, para feriado local).
+- **Dados de exemplo:** NormaViva, TeseMap e Argumenta usam um conjunto pequeno de dados digitados à mão e conferidos, rotulados como prévia ou demonstração na tela.

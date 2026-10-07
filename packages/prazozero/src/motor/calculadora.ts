@@ -235,6 +235,12 @@ export class MotorPrazoZero {
         'Prazo em dobro não aplicado: nos Juizados Especiais não há prazo diferenciado para as pessoas jurídicas de direito público, ' +
           'inclusive para recursos (Lei 10.259/2001, art. 9º; Lei 12.153/2009, art. 7º).'
       );
+    } else if (p.prazoEmDobro && p.regime === 'clt_dias_uteis') {
+      avisos.push(
+        'Prazo em dobro aplicado. Na Justiça do Trabalho a base é o Decreto-Lei 779/1969, art. 1º, III: o dobro vale só para recurso e só para União, ' +
+          'Estados, Distrito Federal, Municípios e autarquias ou fundações de direito público. Para outro ato, ou para outra parte, ' +
+          'o benefício não foi verificado: desmarque a opção se não se aplicar.'
+      );
     } else if (p.prazoEmDobro) {
       let aviso =
         'Prazo em dobro aplicado (CPC, arts. 180, 183 e 186). O benefício não vale quando a lei fixa, de forma expressa, ' +
@@ -550,7 +556,7 @@ export class MotorPrazoZero {
       `• TERMO AD QUEM (VENCIMENTO FINAL): ${dataFinalVencimento}`,
       `• Total de dias corridos transcorridos: ${diasCorridosTotais} dias`,
       foiProrrogadoTermoFinal ? `• Observação de Prorrogação: ${motivoProrrogacao}` : '',
-      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : regime === 'jef_dias_uteis' ? 'Lei 9.099/1995, art. 12-A (dias úteis)' : 'CPP, arts. 798 e 798-A'}.`
+      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, arts. 775 e 775-A' : regime === 'jef_dias_uteis' ? 'Lei 9.099/1995, art. 12-A (dias úteis); CPC, art. 220 e Res. CNJ 244/2016, art. 3º (suspensão de 20/12 a 20/01)' : 'CPP, arts. 798 e 798-A'}.`
     ].filter(Boolean).join('\n');
 
     return {

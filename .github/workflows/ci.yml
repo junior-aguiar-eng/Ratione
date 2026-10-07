@@ -46,7 +46,7 @@ jobs:
       - name: Gabarito e documento de revisão em sincronia com o oráculo
         run: |
           python packages/prazozero/cenarios/oraculo.py
-          git diff --exit-code -- packages/prazozero/cenarios/cenarios.json docs/produto/REVISAO_CENARIOS.md
+          git diff --exit-code -- packages/prazozero/cenarios/cenarios.json packages/prazozero/cenarios/cenarios_aleatorios.json docs/produto/REVISAO_CENARIOS.md
 
       - name: Build
         run: pnpm build

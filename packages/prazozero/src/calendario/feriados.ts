@@ -273,8 +273,8 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
     }
   }
 
-  // 5. Feriados estaduais (pendentes de conferência)
-  if (uf && FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
+  // 5. Feriados estaduais (pendentes de conferência). Não valem para a Justiça Federal, que segue a Lei 5.010, art. 62.
+  if (uf && !aplica5010 && FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
     for (const fe of FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
       const dataIso = `${ano}-${String(fe.mes).padStart(2, '0')}-${String(fe.dia).padStart(2, '0')}`;
       if (!mapa.has(dataIso)) {
@@ -282,7 +282,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
           nome: fe.nome,
           tipo: 'estadual',
           uf: uf.toUpperCase(),
-          fundamentoLegal: fe.fundamento
+          fundamentoLegal: `${fe.fundamento} (citação não conferida)`
         });
       }
     }

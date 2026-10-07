@@ -175,7 +175,7 @@ Detalhe e testes de bancada em [`produto/FONTES_E_PIPELINES.md`](produto/FONTES_
 - **Determinístico.** A IA pode, no máximo, converter "recebi uma intimação para apelar" em (evento = intimação, ato = apelação, prazo = 15, regime = dias úteis); quem soma os dias é código.
 - **Modo conservador (padrão):** mostra a data mais cedo, usando só dias com base verificada; se um dia ainda pendente a alterasse, devolve a data alternativa e qual dia a causaria. O modo `completo` inclui os pendentes.
 - Cada dia não útil informa sua base: `lei_federal`, `ato_do_tribunal` ou `pendente`. O selo "calendário conferido" só aparece quando todos os anos do cálculo estão cobertos.
-- Regimes: CPC (dias úteis), CLT (dias úteis, art. 775), CPP (corridos, art. 798). Prazos próprios de STF e STJ (recesso e férias coletivas) e de cada tribunal.
+- Regimes: CPC (dias úteis), CLT (dias úteis, arts. 775 e 775-A), JEF (dias úteis, Lei 9.099, art. 12-A), CPP (corridos, arts. 798 e 798-A). Prazos próprios de STF e STJ (recesso e férias coletivas) e de cada tribunal. **Prazos materiais** (mandado de segurança e ação rescisória) têm cálculo à parte (`motor/materiais.ts`): decadência não se suspende.
 
 **Calendário forense em camadas** (da mais geral à mais específica): regras de contagem · catálogo de prazos · prazos diferenciados (Fazenda, MP, Defensoria, litisconsortes) · dias não úteis nacionais · por esfera (Lei 5.010, art. 62) · suspensões e recesso · eventos locais e extraordinários. **Cada evento tem fonte (ato e URL), abrangência, vigência e verificação.** Método completo, checklist por tribunal e catálogo inicial de prazos: [`produto/METODO_CALENDARIO_FORENSE.md`](produto/METODO_CALENDARIO_FORENSE.md). Fontes já lidas e dúvidas para o revisor: [`produto/VERIFICACAO_FONTES.md`](produto/VERIFICACAO_FONTES.md).
 
@@ -287,6 +287,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F0-08 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | F0-09 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
 | F0-10 | Núcleo de datas civis puras no motor | não iniciado | Motor sem `Date`/UTC; suíte inalterada |
+| F0-12 | Atualizar versões maiores: Next 16, Zod 4 e TypeScript 7 | não iniciado | Uma atualização por branch, com a suíte e a comparação visual; hoje Next 15.5, Zod 3.25, TypeScript 5.9 |
 | F0-11 | Migrar Tailwind 3 para 4, antes de o estilo crescer | feito | Tailwind 4.3.3. Visual comparado nos dois builds (estilos computados e geometria de todos os elementos, 9 páginas × claro/escuro × 2 larguras + 18 estados: abas do Argumenta, nós do TeseMap, opções do PrazoZero). Diferenças restantes, todas explicadas: campo de data 2 px mais baixo (preflight do v4), `divide-y` e `ring` com mecanismo novo e traço igual. `braces`, `autoprefixer` e o override de `postcss-selector-parser` saíram |
 | F1-03 | Tipografia: decidir o `leading-*` declarado | não iniciado | No v3, `sm:text-*` anulava o `leading-*` do código a partir de `sm`; o v4 aplica o declarado. A migração **preservou o v3** com `sm:leading-*` em 6 elementos (home, resultado do PrazoZero, citação do NormaViva). Decidir se passa a valer o declarado (a data do resultado iria de 48 para 60 px) |
 | F1-04 | Espaçamento: trocar `space-y-*` por `flex flex-col gap-*` | não iniciado | No v4, `space-y` é margem inferior: não vale em filho inline, não funciona com `<legend>` e soma com `mt-*` do filho. Cinco telas foram ajustadas na migração; converter o restante quando cada tela for revisitada (junto com F0-07) |
@@ -302,7 +303,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 148 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 160 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (eventos com tribunal, período, efeito e fonte) | feito | `calendario/eventos.ts`: fontes, eventos e regras anuais separados do código; STF e STJ migrados sem mudar resultado e TJSP, TJMG e TJAL carregados por cima. O painel de curadoria (CRUD) fica para depois do banco (F0-06) |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | parcial | **TJSP e TJMG (2026) com ato lido e selo**; **TJAL com selo 2026** ( 23/06 a 01/07 e 28/08 pendentes); **TJRJ carregado (sem selo)** pelo informativo oficial de 05/10/2026, atos não lidos; TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE e TJES não pesquisados. Ver `VERIFICACAO_FONTES.md` §11 |
@@ -313,11 +314,12 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-08 | Catálogo de prazos com base legal | feito | 26 prazos (24 processuais em CPC, CLT, CPP e JEF; 2 materiais fora do cálculo), cada um com base legal, versão lida e data; seletor agrupado na tela que ajusta o regime e mostra a base legal; 4 testes. Lido no texto vigente em 07/10/2026 |
 | F2-15 | Recesso no JEF e prazos criminais em STF e STJ (férias de janeiro e julho) | feito | **JEF:** a suspensão de 20/12 a 20/01 vale em todos os órgãos do Judiciário (Res. CNJ 244/2016, art. 3º, vigente; o ato do TRF1, Portaria Presi 431, cita expressamente Juizados Especiais Federais e Turmas Recursais). **STF e STJ, prazos criminais:** seguem o CPP; a suspensão é a do art. 798-A (20/12 a 20/01) e as férias (21 a 31/01 e julho) **não suspendem** (Portarias STJ/GP 584/2022 e 280/2023; comunicado do STF sobre a Portaria GDG 218/2024). Motor, aviso, 5 cenários e 2 testes |
 | F2-14 | Prazos materiais (decadência): mandado de segurança (120 dias) e ação rescisória (2 anos) | feito | `motor/materiais.ts` e tela (o formulário muda: data de ciência ou de trânsito e tribunal). 11 testes. Lido no texto compilado em 07/10/2026; 3 dúvidas para o revisor (`VERIFICACAO_FONTES.md` §7, itens 5 a 7) |
-| F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | **115 gerados** e documento de revisão pronto ([`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md)); **0 validados**: falta a validação do revisor jurídico |
+| F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | **115 gerados (mais 600 entradas aleatórias conferidas contra o oráculo)** e documento de revisão pronto ([`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md)); **0 validados**: falta a validação do revisor jurídico |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
 | F2-11 | Dúvidas jurídicas abertas | em curso | 7 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
 | F2-13 | CPP: suspensão de 20/12 a 20/01 (art. 798-A, Lei 14.365/2022), salvo réu preso, Maria da Penha e medida urgente | feito | Defeito do F2-01 corrigido (a primeira leitura usou o CPP não compilado). Exceção marcável na tela e aviso; 4 cenários novos e 2 reescritos. Férias de STF e STJ nos prazos criminais: ver F2-15 |
 | F2-12 | Relatório "o que pode alterar este prazo" | não iniciado | Lista, por cálculo, os atos que podem mudar a data |
+| F2-17 | Auditoria do que foi feito (07/10/2026) | feito | Achados e correções na seção "Auditoria" de `produto/VERIFICACAO_FONTES.md` (§ 13). Segue aberta a validação jurídica (F2-09) |
 
 **Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada; beta fechado com 10 usuários sem erro de cálculo reportado.
 

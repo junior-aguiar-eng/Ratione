@@ -137,7 +137,27 @@ Código em `packages/prazozero/src/motor/materiais.ts`, fora do motor processual
 | **Mandado de segurança** | Lei 12.016/2009, art. 23 (página anotada do Planalto, texto não tachado) e Código Civil, arts. 132 e 207 (compilado) | 120 dias corridos contados da ciência do ato, sem o dia da ciência. Não suspende no recesso. Se o 120º dia não tem expediente, a data-limite continua sendo o 120º dia e a prorrogação aparece como alternativa (dúvida 5) |
 | **Ação rescisória** | CPC, art. 975 (compilado) e Código Civil, art. 132, § 3º | Mesmo dia e mês, 2 anos depois do trânsito em julgado. Prorroga ao primeiro dia útil se expirar em férias forenses, recesso, feriado ou dia sem expediente (art. 975, § 1º), usando o calendário do tribunal escolhido. Os §§ 2º (prova nova) e 3º (simulação ou colusão) só geram aviso |
 
-## 13. Como repetir esta verificação
+## 13. Auditoria (07/10/2026, F2-17)
+
+Método: leitura do código e dos textos públicos contra o que foi verificado, conferência dos dados digitados à mão contra a versão compilada, e dois testes novos que procuram defeitos fora dos cenários escritos: **invariantes** em 4.000 entradas aleatórias (contagem de N dias em sequência, vencimento fora de fim de semana e de suspensão, modo conservador nunca depois do completo, monotonicidade, dobro) e **confronto diferencial** do motor com o oráculo Python em 600 entradas aleatórias.
+
+| # | Achado | Gravidade | Correção |
+|---|---|---|---|
+| 1 | **NormaViva: o texto do art. 85, § 6º-A do CPC estava errado** (paráfrase digitada de memória). O texto compilado diz que, sendo líquido ou liquidável o valor da condenação, do proveito ou da causa, é proibida a apreciação equitativa, salvo as hipóteses do § 8º | alta (texto de lei exibido ao usuário) | Texto trocado pelo do Planalto; arts. 85, § 2º, 219 e 489, § 1º conferidos e corretos; 4 testes novos (vigência de 03/06/2022 confirmada na Lei 14.365/2022, art. 5º) |
+| 2 | **Página pública de metodologia afirmava que Carnaval, Cinzas e Corpus Christi "são tratados como dias não úteis em todos os tribunais"**, que atos de tribunal "não são cadastrados" e que os feriados estaduais estavam catalogados | alta (afirmação jurídica falsa) | Página reescrita: modo conservador, calendário conferido por tribunal e ano, limites reais, validação jurídica pendente |
+| 3 | **README: "testados contra cenários reais de jurisprudência" e "ingestão de leis estaduais"** | média (promessa sem base) | Reescrito com o que existe de fato |
+| 4 | **Prazo em dobro no CLT usava o texto do CPC.** Na Justiça do Trabalho a base é o Decreto-Lei 779/1969, art. 1º, III: dobro só para recurso e só para União, Estados, DF, Municípios e autarquias ou fundações de direito público (texto lido no Planalto) | média | Aviso próprio quando o regime é CLT |
+| 5 | **Feriados estaduais provisórios eram aplicados a tribunais federais** (TRF3 em São Paulo recebia o 9 de julho como dia pendente, TRF4 o 20 de setembro etc.), embora a Justiça Federal siga a Lei 5.010 | média (data alternativa enganosa) | A tabela estadual só vale para tribunais estaduais; o oráculo ganhou a mesma tabela e o mapa de UF de todos os TJs |
+| 6 | Citações de lei estadual da tabela provisória apareciam como se fossem conferidas | média | A memória de cálculo passa a dizer "(citação não conferida)" |
+| 7 | Certidão de cálculo citava só CLT 775 e, no JEF, só a Lei 9.099 | baixa | Inclui CLT 775-A e, no JEF, CPC 220 e Res. CNJ 244/2016 |
+| 8 | `fetch_oficial.py` devolvia 752 caracteres do Código Civil (o HTML do Planalto tem `</html>` prematuro e o `lxml` para ali) | média (ferramenta de verificação) | Usa `html.parser` e escolhe o corpo certo quando o `lxml` perde texto; Constituição inalterada |
+| 9 | CI não conferia o novo gabarito aleatório; `pnpm lint` não fazia nada; `@types/node` 22 com Node 24; sem `.gitattributes` | baixa | CI confere `cenarios_aleatorios.json`; script trocado por `typecheck`; `@types/node` 24; `.gitattributes` com `eol=lf`; NormaViva ganhou script de teste |
+
+Conferido e correto: Tema 1.076/STJ no TeseMap (Corte Especial, REsp 1.850.512-SP, julgado em 16/03/2022, tese em duas partes; fonte: notícia do STJ de 16/03/2022 e Informativo 730). O motor passou nos 4.000 casos de invariantes. Os dois testes não encontraram defeito de contagem; a única divergência com o oráculo era a tabela estadual (item 5).
+
+Não corrigido (fica no PLANO): validação jurídica dos cenários (F2-09), calendário dos demais TJs e TRFs (F2-04), feriados estaduais ainda sem ato (F2-05), versões maiores das dependências (F0-12), conferência do TeseMap e do NormaViva além dos itens do exemplo (F3 e F4).
+
+## 14. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm
