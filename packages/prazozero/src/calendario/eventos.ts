@@ -80,9 +80,9 @@ export const FONTES_CALENDARIO = {
     lidoEm: LIDO
   },
   'tjal-an-03-2026': {
-    ato: 'Ato Normativo nº 03/2026 do TJAL: feriados de 2026',
+    ato: 'Ato Normativo nº 03/2026 do TJAL: feriados de 2026 (DJE, Caderno Administrativo, ed. 3944, 28/01/2026, p. 7)',
     url: 'https://tjal.jus.br/noticia/tribunal-de-justica-de-alagoas-regulamenta-feriados-de-2026/visualizar',
-    lido: 'notícia oficial do tribunal sobre o ato; o ato em si não foi lido',
+    lido: 'página do Diário Oficial com o texto do ato (arts. 1º a 6º), fornecida pelo responsável; o número do ato está na página anterior, que não foi lida (o 03/2026 vem da notícia oficial)',
     lidoEm: LIDO
   },
   'tjal-lei-6564': {
@@ -173,7 +173,7 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJMG'], inicio: '2026-06-04', fim: '2026-06-04', nome: 'Corpus Christi: feriado municipal em Belo Horizonte e em comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Informe do TJMG de 14/01/2026; depende de lei municipal', fonte: 'tjmg-pc-1764' },
   { tribunais: ['TJMG'], inicio: '2026-06-05', fim: '2026-06-05', nome: 'Emenda de Corpus Christi: só Belo Horizonte e comarcas com feriado municipal (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria Conjunta 1.764/PR/2026, art. 1º, IV', fonte: 'tjmg-pc-1764' },
 
-  // ---------- TJAL, 2026: Ato Normativo 03/2026 (notícia oficial do tribunal) ----------
+  // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
     ['2026-06-04', 'Corpus Christi'],
@@ -189,9 +189,10 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     nome,
     efeito: 'nao_util' as const,
     verificacao: 'ato_do_tribunal' as const,
-    fundamento: 'Ato Normativo TJAL 03/2026',
+    fundamento: 'Ato Normativo TJAL 03/2026, arts. 1º, 2º, 3º e 5º',
     fonte: 'tjal-an-03-2026' as const
-  }))
+  })),
+  { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' }
 ];
 
 /** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente; as do TJAL ficam pendentes (texto atual não confirmado). */

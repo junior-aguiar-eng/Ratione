@@ -27,7 +27,7 @@ ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
 #  TJMG: Portaria Conjunta 1.764/PR/2026, art. 1º; permanentes: Res. OE 458/2004, art. 1º
-#  TJAL: Ato Normativo 03/2026 (notícia oficial); permanentes pendentes: Lei estadual 6.564/2005, arts. 36 e 37
+#  TJAL: Ato Normativo 03/2026 (DJE 28/01/2026, p. 7; 28/08 só em municípios: pendente); permanentes pendentes: Lei estadual 6.564/2005, arts. 36 e 37
 TJSP_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "07-09", "07-10", "10-30", "12-07", "12-08"]
 TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 TJMG_2026_NU = [("02-16", "02-18"), ("04-01", "04-03"), ("04-20", "04-20"), ("10-30", "10-30"), ("12-07", "12-07")]
@@ -132,6 +132,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJAL":
         for s in TJAL_2026_NU:
             ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
+        ev(date(2026, 8, 28), False, "TJAL: 28/08 só nos municípios que preveem o feriado")
     if trib == "TJAL":  # Lei estadual 6.564/2005: texto atual não confirmado (pendente)
         for off in (-48, -47, -46, -4, -3, -2):
             ev(p + timedelta(off), False, "TJAL: Carnaval/Semana Santa (Lei 6.564/2005)")
@@ -591,7 +592,7 @@ def gerar_revisao(cenarios):
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
     L.append("- **Feriados estaduais e municipais**: só TJSP e TJMG (2026) têm ato lido; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
-    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** só em parte (Ato Normativo 03/2026 pela notícia oficial; Lei 6.564/2005 pendente).")
+    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRJ, TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJAL** só em parte (ato lido no DJE de 28/01/2026; Lei 6.564/2005 pendente).")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")
