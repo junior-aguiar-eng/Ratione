@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Bookmark, CalendarPlus, Check, ChevronDown, Copy, ExternalLink } from 'lucide-react';
+import { Bookmark, CalendarPlus, Check, ChevronDown, Copy, ExternalLink, FileDown } from 'lucide-react';
 import {
   MotorPrazoZero,
   ParametrosCalculoPrazo,
@@ -23,6 +23,7 @@ import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
 import { gerarIcs } from '../../lib/ics';
+import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import ResultadoMaterial from './ResultadoMaterial';
 import RelatorioAlteracoes from './RelatorioAlteracoes';
 
@@ -164,6 +165,21 @@ export default function PrazoZeroPage() {
     URL.revokeObjectURL(url);
   };
 
+  const exportar = () => {
+    if (!resultado) return;
+    exportarPdf(`prazozero-${nomeArquivoSeguro(tituloCalculo)}-${resultado.dataVencimentoFinal}`, () => {
+      const aberta = memoriaAberta;
+      setMemoriaAberta(true);
+      const detalhes = Array.from(document.querySelectorAll<HTMLDetailsElement>('details[data-imprimir]'));
+      const abertos = detalhes.map(d => d.open);
+      detalhes.forEach(d => (d.open = true));
+      return () => {
+        setMemoriaAberta(aberta);
+        detalhes.forEach((d, i) => (d.open = abertos[i]));
+      };
+    });
+  };
+
   const salvar = () => {
     if (!resultado) return;
     salvarRegistro({
@@ -185,10 +201,10 @@ export default function PrazoZeroPage() {
         description="Informe o prazo, a intimação e o tribunal. O resultado mostra o prazo final e como cada dia foi contado."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start print:block">
         {/* Fluxo guiado */}
         <form
-          className="lg:col-span-5 lg:sticky lg:top-24 card p-6 space-y-7"
+          className="lg:col-span-5 lg:sticky lg:top-24 card p-6 space-y-7 print:hidden"
           onSubmit={e => e.preventDefault()}
           aria-label="Dados do cálculo"
         >
@@ -363,7 +379,7 @@ export default function PrazoZeroPage() {
         </form>
 
         {/* Resultado */}
-        <div className="lg:col-span-7 space-y-9" aria-live="polite">
+        <div className="lg:col-span-7 space-y-9 print:space-y-6" aria-live="polite">
           {material ? (
             resultadoMaterial ? (
               <ResultadoMaterial resultado={resultadoMaterial} titulo={nomeAto} tribunalId={tribunalId} />
@@ -382,6 +398,13 @@ export default function PrazoZeroPage() {
             </div>
           ) : (
             <>
+              <div className="hidden print:block border-b border-line pb-3 text-sm text-ink-soft">
+                <p className="font-semibold text-ink">Ratione · PrazoZero: memória de cálculo</p>
+                <p>
+                  Gerado em {new Date().toLocaleString('pt-BR')}. Instrumento de apoio: confira o calendário do tribunal e os atos que possam
+                  alterar o prazo.
+                </p>
+              </div>
               <section className="space-y-5">
                 <div>
                   <p className="text-sm font-medium text-ink-mute">Prazo final</p>
@@ -469,6 +492,10 @@ export default function PrazoZeroPage() {
                 {relatorio && <RelatorioAlteracoes relatorio={relatorio} />}
 
                 <div className="flex flex-wrap gap-2 no-print">
+                  <button type="button" onClick={exportar} className="btn-secondary">
+                    <FileDown className="w-4 h-4" />
+                    Exportar PDF
+                  </button>
                   <button type="button" onClick={copiarCertidao} className="btn-secondary">
                     {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
                     {copiado ? 'Copiado' : 'Copiar memória de cálculo'}

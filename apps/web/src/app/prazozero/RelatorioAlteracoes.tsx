@@ -10,7 +10,7 @@ export default function RelatorioAlteracoes({ relatorio }: { relatorio: Relatori
   const semData = relatorio.itens.filter(i => !i.dataSeAplicar);
 
   return (
-    <details className="group border border-line rounded-lg">
+    <details data-imprimir className="group border border-line rounded-lg">
       <summary className="flex items-center justify-between gap-3 cursor-pointer list-none px-4 py-3 text-sm font-medium text-ink hover:bg-surface-2 rounded-lg">
         <span>
           O que pode alterar este prazo
