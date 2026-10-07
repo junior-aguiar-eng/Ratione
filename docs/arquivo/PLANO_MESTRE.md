@@ -1,3 +1,4 @@
+> **ARQUIVADO. Substituído por [`docs/PLANO.md`](../PLANO.md), o plano único.** Mantido só como origem do conteúdo; não é seguido.
 
 # PLANO MESTRE DA PLATAFORMA JURÍDICA
 

@@ -37,10 +37,10 @@ Ratione/
 │   ├── argumenta/              # Tipologia do Art. 489 CPC e pipeline de reconstrução lógica
 │   └── tesemap/                # Modelagem do grafo de precedentes qualificados e arestas semânticas
 ├── docs/
-│   ├── plano/                  # PLANO_MESTRE (visão), PLANO_EXECUCAO (caminho) e STATUS (estado vivo)
+│   ├── PLANO.md                # Plano único: produto, decisões, roteiro e estado
 │   ├── produto/                # Método do calendário, fontes, verificação, IA e precificação
 │   ├── juridico/               # Minutas (termos, privacidade, cookies, IA) para revisão por advogado
-│   └── arquivo/                # Planos concluídos
+│   └── arquivo/                # Planos anteriores (origem do conteúdo; não são seguidos)
 ├── .github/workflows/ci.yml    # Tipos, testes, gabarito dos cenários e build
 └── package.json
 ```
@@ -49,7 +49,7 @@ Ratione/
 
 ## 📍 Onde estamos
 
-O estado de cada item e a ordem de trabalho ficam em [`docs/plano/STATUS.md`](docs/plano/STATUS.md). A visão está no [Plano Mestre](docs/plano/PLANO_MESTRE.md) e o caminho no [Plano de Execução](docs/plano/PLANO_EXECUCAO.md).
+O produto, as decisões, o roteiro e o estado de cada item estão em um só lugar: [`docs/PLANO.md`](docs/PLANO.md).
 
 ---
 

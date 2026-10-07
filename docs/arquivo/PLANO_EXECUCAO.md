@@ -1,9 +1,7 @@
 # RATIONE — PLANO DE EXECUÇÃO (do protótipo ao produto no ar)
 
-> **Estado atual de cada item: ver [`STATUS.md`](STATUS.md).** O §0 abaixo é o diagnóstico da manhã de 07/10/2026 e está superado por ele.
->
-> Este documento **substitui** o `PLANO_CORRECOES_VISUAIS.md` (concluído; agora em `docs/arquivo/`) como prioridade.
-> O [Plano Mestre](PLANO_MESTRE.md) continua válido como visão; aqui está o **caminho executável**.
+> **ARQUIVADO. Substituído por [`docs/PLANO.md`](../PLANO.md), o plano único.** Mantido só como origem do conteúdo; não é seguido.
+
 > Estimativas de prazo são para **1 desenvolvedor com assistência de IA** e são hipóteses a recalibrar ao fim da Fase 0.
 >
 > **Documentos complementares (07/10/2026):**
