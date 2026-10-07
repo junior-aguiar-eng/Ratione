@@ -31,6 +31,10 @@ jobs:
       - name: Instalar dependências
         run: pnpm install --frozen-lockfile
 
+      # next-env.d.ts e os tipos de rota são gerados pelo Next e não ficam no repositório
+      - name: Tipos de rota do Next
+        run: pnpm --filter web exec next typegen
+
       - name: Tipos
         run: pnpm -r exec tsc --noEmit
 
