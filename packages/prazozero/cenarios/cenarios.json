@@ -1,0 +1,1842 @@
+[
+  {
+    "id": "dje-sexta",
+    "categoria": "dje",
+    "descricao": "Disponibilização na sexta: publicação na segunda, contagem na terça",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-13",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 15,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-16",
+      "dataTermoInicial": "2026-03-17",
+      "dataVencimentoFinal": "2026-04-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dje-quinta",
+    "categoria": "dje",
+    "descricao": "Disponibilização na quinta: publicação na sexta",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-12",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 15,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-13",
+      "dataTermoInicial": "2026-03-16",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dje-sabado",
+    "categoria": "dje",
+    "descricao": "Disponibilização no sábado: publicação na segunda",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-14",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-16",
+      "dataTermoInicial": "2026-03-17",
+      "dataVencimentoFinal": "2026-03-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dje-vespera-feriado",
+    "categoria": "feriado",
+    "descricao": "Disponibilização na segunda; terça é Tiradentes: publicação na quarta",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-04-20",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-22",
+      "dataTermoInicial": "2026-04-23",
+      "dataVencimentoFinal": "2026-04-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dje-sexta-antes-feriado",
+    "categoria": "feriado",
+    "descricao": "Disponibilização na sexta; segunda útil; termo inicial na terça é Tiradentes",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-20",
+      "dataTermoInicial": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dje-tjsp-exemplo",
+    "categoria": "dje",
+    "descricao": "Apelação no TJSP: disponibilização 10/03/2026, 15 dias úteis",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP",
+      "nomeAto": "Apelação"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-11",
+      "dataTermoInicial": "2026-03-12",
+      "dataVencimentoFinal": "2026-04-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "publicacao-sabado",
+    "categoria": "dje",
+    "descricao": "Publicação em sábado: contagem inicia na segunda",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-14",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-14",
+      "dataTermoInicial": "2026-03-16",
+      "dataVencimentoFinal": "2026-03-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "um-dia-sexta",
+    "categoria": "basico",
+    "descricao": "Prazo de 1 dia com publicação na sexta vence na segunda",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-03-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 1,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-13",
+      "dataTermoInicial": "2026-03-16",
+      "dataVencimentoFinal": "2026-03-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "vence-antes-feriado",
+    "categoria": "feriado",
+    "descricao": "Prazo que termina antes do feriado não é afetado",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-04-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-09",
+      "dataTermoInicial": "2026-04-10",
+      "dataVencimentoFinal": "2026-04-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "atravessa-tiradentes",
+    "categoria": "feriado",
+    "descricao": "Prazo atravessa Tiradentes (terça 21/04/2026)",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-04-14",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-14",
+      "dataTermoInicial": "2026-04-15",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "atravessa-trabalho",
+    "categoria": "feriado",
+    "descricao": "Prazo atravessa 1º de maio (sexta)",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-04-29",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-29",
+      "dataTermoInicial": "2026-04-30",
+      "dataVencimentoFinal": "2026-05-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "atravessa-independencia",
+    "categoria": "feriado",
+    "descricao": "Prazo atravessa 7 de setembro (segunda)",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-09-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-09-03",
+      "dataTermoInicial": "2026-09-04",
+      "dataVencimentoFinal": "2026-09-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "atravessa-aparecida",
+    "categoria": "feriado",
+    "descricao": "Disponibilização 30/09/2026, 15 dias; 12/10 (segunda) não conta",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 6.802/1980",
+    "entrada": {
+      "dataEvento": "2026-09-30",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 15,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-01",
+      "dataTermoInicial": "2026-10-02",
+      "dataVencimentoFinal": "2026-10-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "finados",
+    "categoria": "feriado",
+    "descricao": "Prazo atravessa Finados (segunda 02/11/2026)",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-10-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-30",
+      "dataTermoInicial": "2026-11-03",
+      "dataVencimentoFinal": "2026-11-04",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "consciencia-negra-2026",
+    "categoria": "feriado",
+    "descricao": "Consciência Negra (sexta 20/11/2026) é feriado nacional desde 2024",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º; Lei 14.759/2023",
+    "entrada": {
+      "dataEvento": "2026-11-18",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-11-18",
+      "dataTermoInicial": "2026-11-19",
+      "dataVencimentoFinal": "2026-11-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "consciencia-negra-2023",
+    "categoria": "feriado",
+    "descricao": "Em 2023 o 20/11 ainda não era nacional: depende de lei local (pendente)",
+    "fundamento": "Lei 14.759/2023 (vigência a partir de 2024)",
+    "entrada": {
+      "dataEvento": "2023-11-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2023-11-17",
+      "dataTermoInicial": "2023-11-20",
+      "dataVencimentoFinal": "2023-11-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2023-11-22"
+  },
+  {
+    "id": "recesso-15d",
+    "categoria": "recesso",
+    "descricao": "15 dias úteis atravessam o recesso de 20/12 a 20/01",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-02-04",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-5d-sexta",
+    "categoria": "recesso",
+    "descricao": "Publicação na sexta 19/12/2025: contagem só retoma em 21/01/2026",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2025-12-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-19",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-virada-ano",
+    "categoria": "recesso",
+    "descricao": "Publicação em 18/12/2026: virada de ano, retomada em 21/01/2027",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2026-12-18",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-18",
+      "dataTermoInicial": "2027-01-21",
+      "dataVencimentoFinal": "2027-01-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-dje-dentro",
+    "categoria": "recesso",
+    "descricao": "Disponibilização dentro do recesso: publicação em 21/01/2026",
+    "fundamento": "CPC, arts. 220 e 224, § 2º",
+    "entrada": {
+      "dataEvento": "2025-12-22",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-21",
+      "dataTermoInicial": "2026-01-22",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-borda-20-jan",
+    "categoria": "recesso",
+    "descricao": "Publicação em 16/01/2026: 19 e 20/01 ainda são recesso",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2026-01-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-16",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-1-dia",
+    "categoria": "recesso",
+    "descricao": "1 dia útil com publicação em 19/12/2025 vence em 21/01/2026",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2025-12-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 1,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-19",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-desligado",
+    "categoria": "recesso",
+    "descricao": "Recesso desligado explicitamente (suspensaoRecesso=false)",
+    "fundamento": "CPC, art. 220 (não aplicado)",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "suspensaoRecesso": false
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2025-12-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "recesso-pre-dezembro",
+    "categoria": "recesso",
+    "descricao": "15 dias úteis a partir de 01/12/2025: o 15º dia cai após o recesso",
+    "fundamento": "CPC, art. 220",
+    "entrada": {
+      "dataEvento": "2025-12-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-01",
+      "dataTermoInicial": "2025-12-02",
+      "dataVencimentoFinal": "2026-01-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "dobro-30d",
+    "categoria": "dobro",
+    "descricao": "Fazenda Pública: 15 dias em dobro (30 úteis)",
+    "fundamento": "CPC, arts. 183 e 219",
+    "entrada": {
+      "dataEvento": "2026-03-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-02",
+      "dataTermoInicial": "2026-03-03",
+      "dataVencimentoFinal": "2026-04-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-14"
+  },
+  {
+    "id": "dobro-recesso",
+    "categoria": "dobro",
+    "descricao": "Prazo em dobro atravessando o recesso",
+    "fundamento": "CPC, arts. 183 e 220",
+    "entrada": {
+      "dataEvento": "2025-12-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-10",
+      "dataTermoInicial": "2025-12-11",
+      "dataVencimentoFinal": "2026-02-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "bissexto-2024",
+    "categoria": "bissexto",
+    "descricao": "Fevereiro de 2024 (bissexto): 29/02 é dia útil",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2024-02-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2024-02-27",
+      "dataTermoInicial": "2024-02-28",
+      "dataVencimentoFinal": "2024-03-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "bissexto-2028",
+    "categoria": "bissexto",
+    "descricao": "Fevereiro de 2028 (bissexto), Carnaval em 28 e 29/02",
+    "fundamento": "CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2028-02-25",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2028-02-25",
+      "dataTermoInicial": "2028-02-28",
+      "dataVencimentoFinal": "2028-03-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2028-03-08"
+  },
+  {
+    "id": "clt-8d",
+    "categoria": "clt",
+    "descricao": "Embargos na CLT: 8 dias úteis",
+    "fundamento": "CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-03-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 8,
+      "tribunalId": "TST",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-04",
+      "dataTermoInicial": "2026-03-05",
+      "dataVencimentoFinal": "2026-03-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-5d-domingo",
+    "categoria": "cpp",
+    "descricao": "CPP: 5 dias corridos terminam no domingo, prorrogado para segunda",
+    "fundamento": "CPP, art. 798, caput e § 3º",
+    "entrada": {
+      "dataEvento": "2026-03-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-16",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-5d-sabado",
+    "categoria": "cpp",
+    "descricao": "CPP: 5 dias corridos terminam no sábado, prorrogado para segunda",
+    "fundamento": "CPP, art. 798, caput e § 3º",
+    "entrada": {
+      "dataEvento": "2026-03-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-09",
+      "dataTermoInicial": "2026-03-10",
+      "dataVencimentoFinal": "2026-03-16",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-5d-util",
+    "categoria": "cpp",
+    "descricao": "CPP: 5 dias corridos terminam em dia útil, sem prorrogação",
+    "fundamento": "CPP, art. 798, caput",
+    "entrada": {
+      "dataEvento": "2026-03-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-04",
+      "dataTermoInicial": "2026-03-05",
+      "dataVencimentoFinal": "2026-03-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-feriado",
+    "categoria": "cpp",
+    "descricao": "CPP: vencimento em Tiradentes, prorrogado para o dia útil seguinte",
+    "fundamento": "CPP, art. 798, § 3º; Lei 10.607/2002",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-10d",
+    "categoria": "cpp",
+    "descricao": "CPP: 10 dias corridos atravessando fins de semana",
+    "fundamento": "CPP, art. 798, caput",
+    "entrada": {
+      "dataEvento": "2026-03-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-02",
+      "dataTermoInicial": "2026-03-03",
+      "dataVencimentoFinal": "2026-03-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-sem-uf",
+    "categoria": "tribunal",
+    "descricao": "STF (sem UF): calendário 2026 verificado",
+    "fundamento": "Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025); CPC, arts. 219 e 224, §§ 2º e 3º",
+    "entrada": {
+      "dataEvento": "2026-09-03",
+      "tipoEvento": "disponibilizacao_dje",
+      "diasPrazo": 15,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-09-04",
+      "dataTermoInicial": "2026-09-08",
+      "dataVencimentoFinal": "2026-09-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "carnaval-2026-conservador",
+    "categoria": "pendente",
+    "descricao": "Carnaval 2026 ignorado no modo conservador (data mais cedo)",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-16",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-25"
+  },
+  {
+    "id": "carnaval-2026-completo",
+    "categoria": "pendente",
+    "descricao": "Carnaval 2026 considerado; Quarta de Cinzas protrai o dia do começo",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "cinzas-meio-conservador",
+    "categoria": "pendente",
+    "descricao": "Quarta de Cinzas no meio do prazo (conservador)",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-23"
+  },
+  {
+    "id": "cinzas-meio-completo",
+    "categoria": "pendente",
+    "descricao": "Quarta de Cinzas no meio do prazo conta normalmente",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "cinzas-vencimento-conservador",
+    "categoria": "pendente",
+    "descricao": "Prazo de 4 dias; sem Carnaval vence na segunda 16/02",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 4,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-10",
+      "dataTermoInicial": "2026-02-11",
+      "dataVencimentoFinal": "2026-02-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-19"
+  },
+  {
+    "id": "cinzas-vencimento-completo",
+    "categoria": "pendente",
+    "descricao": "Prazo de 4 dias; vencimento cairia na Quarta de Cinzas e é protraído",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 4,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-10",
+      "dataTermoInicial": "2026-02-11",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "carnaval-2028-completo",
+    "categoria": "pendente",
+    "descricao": "Carnaval 2028 em 28 e 29/02 (bissexto), Cinzas em 01/03",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2028-02-25",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2028-02-25",
+      "dataTermoInicial": "2028-03-02",
+      "dataVencimentoFinal": "2028-03-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "corpus-christi-conservador",
+    "categoria": "pendente",
+    "descricao": "Corpus Christi 2026 (04/06) ignorado no modo conservador",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-10"
+  },
+  {
+    "id": "corpus-christi-completo",
+    "categoria": "pendente",
+    "descricao": "Corpus Christi 2026 considerado",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "sexta-santa-conservador",
+    "categoria": "pendente",
+    "descricao": "Sexta-feira Santa 2026 (03/04) ignorada no modo conservador",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; Lei 9.093/1995, art. 2º",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-02",
+      "dataVencimentoFinal": "2026-04-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-07"
+  },
+  {
+    "id": "sexta-santa-completo",
+    "categoria": "pendente",
+    "descricao": "Sexta-feira Santa 2026 considerada (TJSP)",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; Lei 9.093/1995, art. 2º",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-02",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "onze-agosto-tjsp-completo",
+    "categoria": "pendente",
+    "descricao": "11 de agosto não é feriado forense no TJSP",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "sp-9-julho-conservador",
+    "categoria": "pendente",
+    "descricao": "9 de julho ignorado no modo conservador",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; lei estadual a conferir",
+    "entrada": {
+      "dataEvento": "2026-07-08",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-08",
+      "dataTermoInicial": "2026-07-09",
+      "dataVencimentoFinal": "2026-07-15",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-07-16"
+  },
+  {
+    "id": "sp-9-julho-completo",
+    "categoria": "pendente",
+    "descricao": "9 de julho considerado em SP",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; lei estadual a conferir",
+    "entrada": {
+      "dataEvento": "2026-07-08",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-08",
+      "dataTermoInicial": "2026-07-10",
+      "dataVencimentoFinal": "2026-07-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "consciencia-negra-2023-completo",
+    "categoria": "pendente",
+    "descricao": "20/11/2023 considerado (lei local, pendente)",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2023-11-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSP",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2023-11-17",
+      "dataTermoInicial": "2023-11-21",
+      "dataVencimentoFinal": "2023-11-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "dobro-sexta-santa-completo",
+    "categoria": "pendente",
+    "descricao": "Prazo em dobro com Sexta-feira Santa considerada",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "entrada": {
+      "dataEvento": "2026-03-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "TJSP",
+      "prazoEmDobro": true,
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-02",
+      "dataTermoInicial": "2026-03-03",
+      "dataVencimentoFinal": "2026-04-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "cpp-sexta-santa-completo",
+    "categoria": "pendente",
+    "descricao": "CPP: vencimento na Sexta-feira Santa (completo) é prorrogado",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; CPP, art. 798, § 3º",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 4,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-06",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "stj-semana-santa-2026",
+    "categoria": "verificado",
+    "descricao": "STJ: Quarta, Quinta e Sexta Santas de 2026 não contam",
+    "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, IV; Lei 5.010/1966, art. 62, II",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-semana-santa-2026",
+    "categoria": "verificado",
+    "descricao": "TRF3: Semana Santa é feriado forense pela Lei 5.010 (Justiça Federal)",
+    "fundamento": "Lei 5.010/1966, art. 62, II",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tst-semana-santa-conservador",
+    "categoria": "pendente",
+    "descricao": "TST: art. 62 cita 'Tribunais Superiores', mas não há ato do TST conferido (conservador)",
+    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; Lei 5.010/1966, art. 62, II",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TST"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-02",
+      "dataVencimentoFinal": "2026-04-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-08"
+  },
+  {
+    "id": "stj-onze-agosto-2026",
+    "categoria": "verificado",
+    "descricao": "STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam",
+    "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, X e XI",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-corpus-christi-2026",
+    "categoria": "verificado",
+    "descricao": "STJ: Corpus Christi e 05/06 sem expediente em 2026",
+    "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, VIII e IX",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-corpus-christi-2026",
+    "categoria": "verificado",
+    "descricao": "STF: Corpus Christi e 05/06 sem expediente em 2026",
+    "fundamento": "Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-cinzas-comeco-2026",
+    "categoria": "verificado",
+    "descricao": "STJ: Carnaval e Quarta de Cinzas (até 14h) protraem o dia do começo",
+    "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, II e III; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-ponto-facultativo-30-out",
+    "categoria": "verificado",
+    "descricao": "STF: 30/10/2026 (transferência do Dia do Servidor) e Finados não contam",
+    "fundamento": "Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)",
+    "entrada": {
+      "dataEvento": "2026-10-28",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-28",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-ferias-julho-5d",
+    "categoria": "verificado",
+    "descricao": "STJ: prazos suspensos de 2 a 31 de julho; retoma em 03/08",
+    "fundamento": "LC 35/1979, art. 66, § 1º; RISTJ, arts. 81 e 106; Portaria STJ/GP 455/2026",
+    "entrada": {
+      "dataEvento": "2026-06-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-30",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-08-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-ferias-julho-8d",
+    "categoria": "verificado",
+    "descricao": "STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam",
+    "fundamento": "LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
+    "entrada": {
+      "dataEvento": "2026-06-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 8,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-30",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-ferias-julho-5d",
+    "categoria": "verificado",
+    "descricao": "STF: prazos não correm nas férias de julho",
+    "fundamento": "LC 35/1979, art. 66, § 1º; RISTF, arts. 78 e 105",
+    "entrada": {
+      "dataEvento": "2026-06-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-30",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-08-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsp-sem-ferias-julho",
+    "categoria": "verificado",
+    "descricao": "TJSP não tem férias coletivas em julho (contraste com STJ/STF)",
+    "fundamento": "CF, art. 93, XII (vedadas férias coletivas em 2º grau)",
+    "entrada": {
+      "dataEvento": "2026-06-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-30",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-07-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stj-recesso-ate-31-jan",
+    "categoria": "verificado",
+    "descricao": "STJ: prazos suspensos de 20/12 a 31/01 (não a 20/01) e Cinzas protrai o vencimento",
+    "fundamento": "LC 35/1979, art. 66, § 1º; RISTJ, arts. 81 e 106; Portaria STJ/GP 941/2025",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 15,
+      "tribunalId": "STJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "stf-recesso-ate-31-jan",
+    "categoria": "verificado",
+    "descricao": "STF: prazos não correm de 20/12 a 31/01",
+    "fundamento": "RISTF, arts. 78 e 105; LC 35/1979, art. 66, § 1º",
+    "entrada": {
+      "dataEvento": "2025-12-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "STF"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-19",
+      "dataTermoInicial": "2026-02-02",
+      "dataVencimentoFinal": "2026-02-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "clt-recesso-775a",
+    "categoria": "clt",
+    "descricao": "CLT: o recesso de 20/12 a 20/01 também suspende os prazos",
+    "fundamento": "CLT, art. 775-A (Lei 13.545/2017)",
+    "entrada": {
+      "dataEvento": "2025-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 8,
+      "tribunalId": "TST",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-15",
+      "dataTermoInicial": "2025-12-16",
+      "dataVencimentoFinal": "2026-01-26",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-trf3-recesso",
+    "categoria": "cpp",
+    "descricao": "CPP no TRF3: vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01",
+    "fundamento": "CPP, art. 798, § 3º; Lei 5.010/1966, art. 62, I",
+    "entrada": {
+      "dataEvento": "2026-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRF3",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-15",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2027-01-07",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-tjsp-fim-ano",
+    "categoria": "cpp",
+    "descricao": "CPP no TJSP: sem recesso federal, vencimento de domingo vai à segunda 21/12",
+    "fundamento": "CPP, art. 798, § 3º",
+    "entrada": {
+      "dataEvento": "2026-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-15",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2026-12-21",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "portal-segunda",
+    "categoria": "portal",
+    "descricao": "Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta",
+    "fundamento": "CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º",
+    "entrada": {
+      "dataEvento": "2026-03-09",
+      "tipoEvento": "intimacao_portal",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-10",
+      "dataTermoInicial": "2026-03-11",
+      "dataVencimentoFinal": "2026-03-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "portal-sexta",
+    "categoria": "portal",
+    "descricao": "Intimação eletrônica: consulta na sexta; dia do começo na segunda",
+    "fundamento": "CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º",
+    "entrada": {
+      "dataEvento": "2026-03-13",
+      "tipoEvento": "intimacao_portal",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-16",
+      "dataTermoInicial": "2026-03-17",
+      "dataVencimentoFinal": "2026-03-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "portal-sabado",
+    "categoria": "portal",
+    "descricao": "Intimação eletrônica: consulta no sábado (leitura literal do art. 231, V; ver nota de revisão)",
+    "fundamento": "CPC, art. 231, V; Lei 11.419/2006, art. 5º, § 2º",
+    "entrada": {
+      "dataEvento": "2026-03-14",
+      "tipoEvento": "intimacao_portal",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-16",
+      "dataTermoInicial": "2026-03-17",
+      "dataVencimentoFinal": "2026-03-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "portal-feriado",
+    "categoria": "portal",
+    "descricao": "Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte",
+    "fundamento": "CPC, art. 231, V; Lei 662/1949, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-04-20",
+      "tipoEvento": "intimacao_portal",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-22",
+      "dataTermoInicial": "2026-04-23",
+      "dataVencimentoFinal": "2026-04-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  }
+]

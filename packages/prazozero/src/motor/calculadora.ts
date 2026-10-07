@@ -1,10 +1,10 @@
-import { obterFeriadosAno, estaEmRecessoForenseCpc, FeriadoLegal } from '../calendario/feriados';
+import { obterFeriadosAno, suspensaoDePrazos, CALENDARIO_VERIFICADO, FeriadoLegal } from '../calendario/feriados';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 
 export type TipoEventoOrigem =
   | 'disponibilizacao_dje'     // DJe / DJEN (Regra Canônica: pub no 1º dia útil seg; contagem no 1º útil pós-pub)
   | 'publicacao'               // Já publicado no Diário
-  | 'intimacao_portal'         // Intimação no sistema/portal eletrônico (Lei 11.419/06)
+  | 'intimacao_portal'         // Data da CONSULTA ao teor (ou do fim dos 10 dias): dia do começo = dia útil seguinte (CPC, art. 231, V)
   | 'carga_ou_audiencia'       // Carga dos autos, mandado cumprido ou ciência em audiência
   | 'manual';                  // Início da contagem direto
 
@@ -12,6 +12,13 @@ export type RegimeContagem =
   | 'cpc_dias_uteis'           // Art. 219 CPC/15 (Dias úteis + suspensão art. 220)
   | 'clt_dias_uteis'           // Art. 775 CLT (Dias úteis)
   | 'cpp_dias_corridos';       // Art. 798 CPP (Dias corridos, término prorroga se não útil)
+
+/**
+ * `conservador` (padrão): só dias não úteis com base verificada (lei federal, fins de semana, recesso do art. 220).
+ * Mostra a data mais cedo e, se um dia pendente de conferência a alterasse, informa a alternativa.
+ * `completo`: considera também os dias ainda pendentes de conferência (estaduais, Carnaval, Corpus Christi etc.).
+ */
+export type ModoCalculo = 'conservador' | 'completo';
 
 export interface ParametrosCalculoPrazo {
   dataEvento: string;          // ISO "YYYY-MM-DD"
@@ -23,6 +30,7 @@ export interface ParametrosCalculoPrazo {
   prazoEmDobro?: boolean;      // Fazenda Pública (art. 183), MP (art. 180), Defensoria (art. 186)
   suspensaoRecesso?: boolean;  // Suspensão de 20/dez a 20/jan (art. 220 CPC)
   nomeAto?: string;            // Ex: "Apelação Cível", "Embargos de Declaração"
+  modo?: ModoCalculo;          // Padrão: 'conservador'
 }
 
 export interface ItemMemoriaCalculo {
@@ -38,11 +46,21 @@ export interface ItemMemoriaCalculo {
     | 'fim_de_semana'
     | 'feriado'
     | 'recesso_forense'
+    | 'expediente_parcial'
     | 'vencimento_prorrogado'
     | 'termo_final';
   descricao: string;
   fundamentoLegal: string;
   diaContadoNumero: number | null; // 1, 2, ..., N
+  /** Presente nos dias de feriado/expediente parcial: se o dia tem base verificada ou ainda está pendente. */
+  verificacao?: FeriadoLegal['verificacao'];
+}
+
+export interface AlternativaPrazo {
+  dataVencimentoFinal: string;
+  descricao: string;
+  /** Dias pendentes de conferência que, se confirmados, produzem a data alternativa. */
+  eventosPendentes: Array<{ data: string; nome: string; fundamentoLegal: string }>;
 }
 
 export interface ResultadoCalculoPrazo {
@@ -61,6 +79,13 @@ export interface ResultadoCalculoPrazo {
   motivoProrrogacao?: string;
   memoriaCalculo: ItemMemoriaCalculo[];
   certidaoAuditavel: string;
+  modo: ModoCalculo;
+  /** `true` só quando o tribunal tem calendário conferido contra o ato oficial para todos os anos percorridos pelo cálculo. */
+  calendarioVerificado: boolean;
+  avisos: string[];
+  alternativa?: AlternativaPrazo;
+  /** Atos e URLs do calendário verificado do tribunal (presente apenas quando `calendarioVerificado` é true). */
+  fontesCalendario?: Array<{ ato: string; url: string }>;
 }
 
 const DIAS_SEMANA_NOMES = [
@@ -72,6 +97,8 @@ const DIAS_SEMANA_NOMES = [
   'Sexta-feira',
   'Sábado'
 ];
+
+const MAX_DIAS_PRAZO = 3650;
 
 function parseIso(isoStr: string): Date {
   const [ano, mes, dia] = isoStr.split('-').map(Number);
@@ -91,6 +118,23 @@ function somarDias(date: Date, dias: number): Date {
   return d;
 }
 
+function validarEntrada(p: ParametrosCalculoPrazo): void {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(p.dataEvento) || formatIso(parseIso(p.dataEvento)) !== p.dataEvento) {
+    throw new Error(`dataEvento inválida: "${p.dataEvento}" (esperado uma data real no formato AAAA-MM-DD)`);
+  }
+  if (!Number.isInteger(p.diasPrazo) || p.diasPrazo < 1 || p.diasPrazo > MAX_DIAS_PRAZO) {
+    throw new Error(`diasPrazo inválido: ${p.diasPrazo} (esperado inteiro entre 1 e ${MAX_DIAS_PRAZO})`);
+  }
+}
+
+interface ContextoDia {
+  uf?: string;
+  tribunalId?: string;
+  regime: RegimeContagem;
+  suspensaoRecesso: boolean;
+  incluirPendentes?: boolean;
+}
+
 export class MotorPrazoZero {
   private cacheFeriados = new Map<string, Map<string, FeriadoLegal>>();
 
@@ -103,12 +147,14 @@ export class MotorPrazoZero {
   }
 
   /**
-   * Avalia determinística e legalmente se uma data é dia útil forense
+   * Avalia determinística e legalmente se uma data é dia útil forense.
+   * Sem `incluirPendentes`, ignora os dias ainda não conferidos contra o ato oficial.
    */
-  public verificarDiaUtil(dataIso: string, params: { uf?: string; tribunalId?: string; regime: RegimeContagem; suspensaoRecesso: boolean }): {
+  public verificarDiaUtil(dataIso: string, params: ContextoDia): {
     diaUtil: boolean;
-    motivoNaoUtil?: 'fim_de_semana' | 'feriado' | 'recesso_forense';
+    motivoNaoUtil?: 'fim_de_semana' | 'feriado' | 'recesso_forense' | 'expediente_parcial';
     detalheFeriado?: FeriadoLegal;
+    fundamentoLegal?: string;
     descricao: string;
   } {
     const data = parseIso(dataIso);
@@ -123,24 +169,26 @@ export class MotorPrazoZero {
       };
     }
 
-    // 2. Recesso Forense (Art. 220 CPC)
+    // 2. Suspensão de prazos: recesso e férias (CPC, art. 220; CLT, art. 775-A; STF e STJ têm janela própria)
     if (params.suspensaoRecesso && (params.regime === 'cpc_dias_uteis' || params.regime === 'clt_dias_uteis')) {
-      if (estaEmRecessoForenseCpc(dataIso)) {
+      const s = suspensaoDePrazos(dataIso, params.tribunalId, params.regime);
+      if (s.suspenso) {
         return {
           diaUtil: false,
           motivoNaoUtil: 'recesso_forense',
-          descricao: 'Suspensão de prazos processuais e recesso forense (CPC, art. 220)'
+          fundamentoLegal: s.fundamentoLegal,
+          descricao: `${s.descricao} (${s.fundamentoLegal})`
         };
       }
     }
 
-    // 3. Feriados e Pontos Facultativos Forenses
+    // 3. Feriados e expediente parcial
     const feriadosAno = this.obterFeriados(data.getUTCFullYear(), params.uf, params.tribunalId);
-    if (feriadosAno.has(dataIso)) {
-      const f = feriadosAno.get(dataIso)!;
+    const f = feriadosAno.get(dataIso);
+    if (f && (params.incluirPendentes || f.verificacao !== 'pendente')) {
       return {
         diaUtil: false,
-        motivoNaoUtil: 'feriado',
+        motivoNaoUtil: f.efeito === 'expediente_parcial' ? 'expediente_parcial' : 'feriado',
         detalheFeriado: f,
         descricao: `${f.nome} (${f.fundamentoLegal})`
       };
@@ -155,7 +203,7 @@ export class MotorPrazoZero {
   /**
    * Avança determinística até o próximo dia útil
    */
-  public obterProximoDiaUtil(dataIso: string, params: { uf?: string; tribunalId?: string; regime: RegimeContagem; suspensaoRecesso: boolean }): string {
+  public obterProximoDiaUtil(dataIso: string, params: ContextoDia): string {
     let atual = somarDias(parseIso(dataIso), 1);
     while (true) {
       const iso = formatIso(atual);
@@ -168,11 +216,77 @@ export class MotorPrazoZero {
   }
 
   /**
-   * Executa a contagem com rigor processual canônico
+   * Calcula o prazo. No modo conservador (padrão) devolve a data mais cedo e, se dias ainda
+   * pendentes de conferência a alterassem, descreve a alternativa em `alternativa`.
    */
   public calcularPrazo(p: ParametrosCalculoPrazo): ResultadoCalculoPrazo {
+    validarEntrada(p);
+    const modo: ModoCalculo = p.modo ?? 'conservador';
+    const avisos: string[] = [
+      'Atos específicos do tribunal (portarias de suspensão, indisponibilidade do sistema) e feriados municipais não são considerados; ' +
+        'confira o calendário do tribunal e comprove feriado local (CPC, art. 1.003, § 6º).'
+    ];
+
+    const principal = this.executar(p, modo === 'completo');
+    let alternativa: AlternativaPrazo | undefined;
+
+    if (modo === 'conservador') {
+      const completo = this.executar(p, true);
+      if (completo.dataVencimentoFinal !== principal.dataVencimentoFinal) {
+        const eventosPendentes = completo.memoriaCalculo
+          .filter(i => i.verificacao === 'pendente' && (i.status === 'feriado' || i.status === 'expediente_parcial'))
+          .map(i => ({
+            data: i.data,
+            nome: i.descricao.replace(/ \(não computado\)$/, '').replace(` (${i.fundamentoLegal})`, ''),
+            fundamentoLegal: i.fundamentoLegal
+          }));
+        alternativa = {
+          dataVencimentoFinal: completo.dataVencimentoFinal,
+          descricao: `Se os dias pendentes de conferência forem confirmados para este tribunal, o vencimento passa para ${completo.dataVencimentoFinal}.`,
+          eventosPendentes
+        };
+        avisos.push(
+          `Exibida a data mais cedo (modo conservador). ${alternativa.descricao} Confirme no ato do tribunal antes de contar com a data posterior.`
+        );
+      }
+    }
+
+    const certidao = alternativa
+      ? `${principal.certidaoAuditavel}\n• Atenção: ${alternativa.descricao}`
+      : principal.certidaoAuditavel;
+
+    const anoInicio = parseInt(principal.dataPublicacao.slice(0, 4), 10);
+    const anoFim = parseInt(principal.dataVencimentoFinal.slice(0, 4), 10);
+    const cobertura = p.tribunalId ? CALENDARIO_VERIFICADO[p.tribunalId.toUpperCase()] : undefined;
+    const calendarioVerificado =
+      !!cobertura && Array.from({ length: anoFim - anoInicio + 1 }, (_, i) => anoInicio + i).every(a => cobertura.anos.includes(a));
+    if (cobertura && !calendarioVerificado) {
+      avisos.push(
+        `O calendário de ${p.tribunalId} foi conferido apenas para ${cobertura.anos.join(', ')}; este cálculo percorre ${anoInicio === anoFim ? anoInicio : `${anoInicio} a ${anoFim}`}. ` +
+          'Pontos facultativos e portarias dos demais anos não estão carregados.'
+      );
+    }
+
+    return {
+      ...principal,
+      certidaoAuditavel: certidao,
+      modo,
+      calendarioVerificado,
+      avisos,
+      alternativa,
+      ...(calendarioVerificado ? { fontesCalendario: cobertura!.fontes } : {})
+    };
+  }
+
+  /**
+   * Executa a contagem com rigor processual canônico
+   */
+  private executar(
+    p: ParametrosCalculoPrazo,
+    incluirPendentes: boolean
+  ): Omit<ResultadoCalculoPrazo, 'modo' | 'calendarioVerificado' | 'avisos' | 'alternativa'> {
     const regime = p.regime || 'cpc_dias_uteis';
-    const suspensaoRecesso = p.suspensaoRecesso ?? (regime === 'cpc_dias_uteis');
+    const suspensaoRecesso = p.suspensaoRecesso ?? (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis');
     const multiplicador = p.prazoEmDobro ? 2 : 1;
     const diasPrazoEfetivo = p.diasPrazo * multiplicador;
 
@@ -182,14 +296,15 @@ export class MotorPrazoZero {
       uf = TRIBUNAIS_BRASIL[p.tribunalId].uf;
     }
 
-    const contextConfig = { uf, tribunalId: p.tribunalId, regime, suspensaoRecesso };
+    const contextConfig: ContextoDia = { uf, tribunalId: p.tribunalId, regime, suspensaoRecesso, incluirPendentes };
     const memoria: ItemMemoriaCalculo[] = [];
 
     let dataDisponibilizacao: string | undefined = undefined;
     let dataPublicacao = p.dataEvento;
 
     // Etapa 1: Resolução de Disponibilização e Publicação
-    if (p.tipoEvento === 'disponibilizacao_dje') {
+    const viaPortal = p.tipoEvento === 'intimacao_portal';
+    if (p.tipoEvento === 'disponibilizacao_dje' || viaPortal) {
       dataDisponibilizacao = p.dataEvento;
       const dataDispDate = parseIso(dataDisponibilizacao);
       memoria.push({
@@ -197,8 +312,12 @@ export class MotorPrazoZero {
         diaSemana: DIAS_SEMANA_NOMES[dataDispDate.getUTCDay()],
         diaUtil: this.verificarDiaUtil(dataDisponibilizacao, contextConfig).diaUtil,
         status: 'disponibilizacao',
-        descricao: 'Disponibilização da intimação no Diário de Justiça eletrônico (DJe/DJEN)',
-        fundamentoLegal: 'CPC, art. 224, § 2º e Resolução CNJ nº 455/2022',
+        descricao: viaPortal
+          ? 'Consulta ao teor da intimação eletrônica (ou término dos 10 dias para a consulta)'
+          : 'Disponibilização da intimação no Diário de Justiça eletrônico (DJe/DJEN)',
+        fundamentoLegal: viaPortal
+          ? 'Lei 11.419/2006, art. 5º, §§ 1º a 3º'
+          : 'CPC, art. 224, § 2º e Resolução CNJ nº 455/2022',
         diaContadoNumero: null
       });
 
@@ -210,8 +329,10 @@ export class MotorPrazoZero {
         diaSemana: DIAS_SEMANA_NOMES[dataPubDate.getUTCDay()],
         diaUtil: true,
         status: 'publicacao',
-        descricao: 'Data considerada de publicação oficial do ato',
-        fundamentoLegal: 'CPC, art. 224, § 2º (1º dia útil seguinte à disponibilização)',
+        descricao: viaPortal ? 'Dia do começo do prazo (dia útil seguinte à consulta)' : 'Data considerada de publicação oficial do ato',
+        fundamentoLegal: viaPortal
+          ? 'CPC, art. 231, V (dia útil seguinte à consulta); o dia do começo é excluído (art. 224, caput)'
+          : 'CPC, art. 224, § 2º (1º dia útil seguinte à disponibilização)',
         diaContadoNumero: null
       });
     } else {
@@ -221,10 +342,8 @@ export class MotorPrazoZero {
         diaSemana: DIAS_SEMANA_NOMES[dataPubDate.getUTCDay()],
         diaUtil: this.verificarDiaUtil(dataPublicacao, contextConfig).diaUtil,
         status: 'publicacao',
-        descricao: p.tipoEvento === 'intimacao_portal'
-          ? 'Intimação eletrônica aperfeiçoada no portal'
-          : 'Comunicação oficial do ato processual',
-        fundamentoLegal: p.tipoEvento === 'intimacao_portal' ? 'Lei Federal nº 11.419/2006, art. 5º' : 'CPC, art. 231',
+        descricao: 'Dia do começo do prazo (comunicação do ato)',
+        fundamentoLegal: 'CPC, art. 231',
         diaContadoNumero: null
       });
     }
@@ -244,9 +363,18 @@ export class MotorPrazoZero {
       const dataIso = formatIso(cursor);
       const diaSemana = DIAS_SEMANA_NOMES[cursor.getUTCDay()];
       const analise = this.verificarDiaUtil(dataIso, contextConfig);
+      const verificacao = analise.detalheFeriado?.verificacao;
 
       if (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis') {
-        if (analise.diaUtil) {
+        // Expediente parcial só protrai o dia do começo e o do vencimento (CPC, art. 224, § 1º);
+        // no meio do prazo o dia é contado normalmente.
+        const parcial = analise.motivoNaoUtil === 'expediente_parcial';
+        const ehDiaDoComeco = diasContados === 0;
+        const ehDiaDoVencimento = diasContados + 1 === diasPrazoEfetivo;
+        const parcialProtraido = parcial && (ehDiaDoComeco || ehDiaDoVencimento);
+        const contaComoUtil = analise.diaUtil || (parcial && !parcialProtraido);
+
+        if (contaComoUtil) {
           diasContados++;
           const ehUltimo = diasContados === diasPrazoEfetivo;
           memoria.push({
@@ -254,17 +382,25 @@ export class MotorPrazoZero {
             diaSemana,
             diaUtil: true,
             status: ehUltimo ? 'termo_final' : 'contagem_dia_util',
-            descricao: ehUltimo
+            descricao: (ehUltimo
               ? `Termo Ad Quem alcançado (${diasContados}º dia útil)`
-              : `${diasContados}º dia útil computado no prazo`,
-            fundamentoLegal: regime === 'cpc_dias_uteis' ? 'CPC, art. 219' : 'CLT, art. 775',
-            diaContadoNumero: diasContados
+              : `${diasContados}º dia útil computado no prazo`) +
+              (parcial ? ` — expediente parcial: ${analise.detalheFeriado!.nome}` : ''),
+            fundamentoLegal: parcial
+              ? analise.detalheFeriado!.fundamentoLegal
+              : regime === 'cpc_dias_uteis' ? 'CPC, art. 219' : 'CLT, art. 775',
+            diaContadoNumero: diasContados,
+            ...(parcial ? { verificacao } : {})
           });
           if (ehUltimo) {
             dataFinalVencimento = dataIso;
             break;
           }
         } else {
+          if (parcialProtraido && ehDiaDoVencimento && !ehDiaDoComeco) {
+            foiProrrogadoTermoFinal = true;
+            motivoProrrogacao = `Vencimento protraído por expediente parcial (${analise.detalheFeriado!.nome}), CPC, art. 224, § 1º`;
+          }
           memoria.push({
             data: dataIso,
             diaSemana,
@@ -273,10 +409,13 @@ export class MotorPrazoZero {
               ? 'fim_de_semana'
               : analise.motivoNaoUtil === 'recesso_forense'
               ? 'recesso_forense'
+              : parcialProtraido
+              ? 'expediente_parcial'
               : 'feriado',
             descricao: `${analise.descricao} (não computado)`,
-            fundamentoLegal: analise.detalheFeriado?.fundamentoLegal || 'CPC, art. 219',
-            diaContadoNumero: null
+            fundamentoLegal: analise.fundamentoLegal || analise.detalheFeriado?.fundamentoLegal || 'CPC, art. 219',
+            diaContadoNumero: null,
+            ...(analise.detalheFeriado ? { verificacao } : {})
           });
         }
       } else {
@@ -292,7 +431,8 @@ export class MotorPrazoZero {
             ? `Último dia do prazo processual penal (${diasContados}º dia corrido)`
             : `${diasContados}º dia corrido computado`,
           fundamentoLegal: 'CPP, art. 798, caput',
-          diaContadoNumero: diasContados
+          diaContadoNumero: diasContados,
+          ...(analise.detalheFeriado ? { verificacao } : {})
         });
 
         if (ehUltimo) {

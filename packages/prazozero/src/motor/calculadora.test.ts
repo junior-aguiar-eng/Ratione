@@ -81,14 +81,60 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
       tipoEvento: 'publicacao',
       diasPrazo: 5, // Embargos de Declaração
       tribunalId: 'TJSP',
-      uf: 'SP'
+      uf: 'SP',
+      modo: 'completo' // o feriado estadual ainda está pendente de conferência; só entra no modo completo
     });
 
     const item09Jul = resultado.memoriaCalculo.find(m => m.data === '2026-07-09');
     assert.ok(item09Jul, 'Deveria registrar 09 de Julho');
     assert.strictEqual(item09Jul.diaUtil, false);
     assert.strictEqual(item09Jul.status, 'feriado');
+    assert.strictEqual(item09Jul.verificacao, 'pendente');
     assert.ok(item09Jul.descricao.includes('Revolução Constitucionalista'));
+  });
+
+  it('modo conservador (padrão) mostra a data mais cedo e descreve a alternativa com o dia pendente', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-07-08',
+      tipoEvento: 'publicacao',
+      diasPrazo: 5,
+      tribunalId: 'TJSP'
+    });
+
+    assert.strictEqual(r.modo, 'conservador');
+    assert.strictEqual(r.dataVencimentoFinal, '2026-07-15');
+    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-07-16');
+    assert.deepStrictEqual(r.alternativa?.eventosPendentes.map(e => e.data), ['2026-07-09']);
+    assert.ok(r.avisos.some(a => a.includes('data mais cedo')));
+    assert.ok(r.certidaoAuditavel.includes('Atenção'));
+    assert.strictEqual(r.calendarioVerificado, false);
+  });
+
+  it('sem dia pendente no intervalo não há alternativa', () => {
+    const r = motor.calcularPrazo({ dataEvento: '2026-03-10', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'TJSP' });
+    assert.strictEqual(r.alternativa, undefined);
+  });
+
+  it('Quarta-feira de Cinzas só protrai o dia do vencimento, não os dias do meio (CPC, art. 224, § 1º)', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-02-10',
+      tipoEvento: 'publicacao',
+      diasPrazo: 4,
+      tribunalId: 'TJSP',
+      modo: 'completo'
+    });
+    assert.strictEqual(r.dataVencimentoFinal, '2026-02-19');
+    assert.strictEqual(r.foiProrrogadoTermoFinal, true);
+    assert.strictEqual(r.memoriaCalculo.find(m => m.data === '2026-02-18')?.status, 'expediente_parcial');
+  });
+
+  it('rejeita entrada inválida em vez de calcular em silêncio', () => {
+    const base = { dataEvento: '2026-03-10', tipoEvento: 'publicacao' as const, diasPrazo: 5 };
+    assert.throws(() => motor.calcularPrazo({ ...base, dataEvento: '2026-02-30' }), /dataEvento inválida/);
+    assert.throws(() => motor.calcularPrazo({ ...base, dataEvento: '10/03/2026' }), /dataEvento inválida/);
+    assert.throws(() => motor.calcularPrazo({ ...base, diasPrazo: 0 }), /diasPrazo inválido/);
+    assert.throws(() => motor.calcularPrazo({ ...base, diasPrazo: 2.5 }), /diasPrazo inválido/);
+    assert.throws(() => motor.calcularPrazo({ ...base, diasPrazo: 100000 }), /diasPrazo inválido/);
   });
 
   it('deve prorrogar termo final do CPP se cair em domingo (Art. 798, § 3º)', () => {
