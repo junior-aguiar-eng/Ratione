@@ -27,7 +27,7 @@ export const NoGrafoSchema = z.object({
   tribunal: z.string().optional(),
   numeroReferencia: z.string().optional(),
   descricao: z.string(),
-  detalhes: z.record(z.any()).optional()
+  detalhes: z.record(z.string(), z.any()).optional()
 });
 export type NoGrafo = z.infer<typeof NoGrafoSchema>;
 
