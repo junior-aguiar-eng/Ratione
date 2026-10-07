@@ -8,7 +8,9 @@ import {
   ParametrosCalculoPrazo,
   ResultadoCalculoPrazo,
   TipoEventoOrigem,
-  RegimeContagem
+  RegimeContagem,
+  prazosCalculaveis,
+  buscarPrazo
 } from '@ratione/prazozero';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import PageHeader from '../../components/PageHeader';
@@ -17,13 +19,9 @@ import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
 
-const ATOS = [
-  { id: 'apelacao', rotulo: 'Apelação', nome: 'Apelação Cível', dias: 15 },
-  { id: 'agravo', rotulo: 'Agravo', nome: 'Agravo de Instrumento', dias: 15 },
-  { id: 'embargos', rotulo: 'Embargos de declaração', nome: 'Embargos de Declaração', dias: 5 },
-  { id: 'contestacao', rotulo: 'Contestação', nome: 'Contestação', dias: 15 },
-  { id: 'outro', rotulo: 'Outro prazo', nome: 'Prazo personalizado', dias: 15 }
-] as const;
+const CATALOGO = prazosCalculaveis();
+const GRUPOS = Array.from(new Set(CATALOGO.map(p => p.grupo)));
+const unidade = (regime?: RegimeContagem) => (regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis');
 
 function gerarIcs(resultado: ResultadoCalculoPrazo, titulo: string): string {
   const inicio = resultado.dataVencimentoFinal.replace(/-/g, '');
@@ -51,7 +49,7 @@ function gerarIcs(resultado: ResultadoCalculoPrazo, titulo: string): string {
 export default function PrazoZeroPage() {
   const motor = useMemo(() => new MotorPrazoZero(), []);
 
-  const [atoId, setAtoId] = useState<(typeof ATOS)[number]['id']>('apelacao');
+  const [atoId, setAtoId] = useState<string>('apelacao');
   const [diasOutro, setDiasOutro] = useState(15);
   const [nomeOutro, setNomeOutro] = useState('');
   const [tipoEvento, setTipoEvento] = useState<TipoEventoOrigem>('disponibilizacao_dje');
@@ -70,9 +68,19 @@ export default function PrazoZeroPage() {
     setDataEvento(hojeIso());
   }, []);
 
-  const ato = ATOS.find(a => a.id === atoId)!;
-  const dias = atoId === 'outro' ? Math.min(Math.max(Math.trunc(diasOutro) || 1, 1), 365) : ato.dias;
-  const nomeAto = atoId === 'outro' ? nomeOutro.trim() || ato.nome : ato.nome;
+  const prazo = atoId === 'outro' ? undefined : buscarPrazo(atoId);
+  const dias = prazo ? prazo.dias : Math.min(Math.max(Math.trunc(diasOutro) || 1, 1), 365);
+  const nomeAto = prazo
+    ? prazo.grupo.startsWith('Cível')
+      ? prazo.ato
+      : `${prazo.ato} (${prazo.grupo})`
+    : nomeOutro.trim() || 'Prazo personalizado';
+
+  const escolherAto = (id: string) => {
+    setAtoId(id);
+    const escolhido = buscarPrazo(id);
+    if (escolhido?.regime) setRegime(escolhido.regime);
+  };
 
   const resultado = useMemo<ResultadoCalculoPrazo | null>(() => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dataEvento)) return null;
@@ -166,29 +174,29 @@ export default function PrazoZeroPage() {
         >
           <fieldset className="space-y-3">
             <legend className="label mb-3">1. Qual prazo deseja calcular?</legend>
-            <div className="grid grid-cols-2 gap-2">
-              {ATOS.map(a => {
-                const ativo = a.id === atoId;
-                return (
-                  <button
-                    type="button"
-                    key={a.id}
-                    aria-pressed={ativo}
-                    onClick={() => setAtoId(a.id)}
-                    className={`text-left rounded-md border px-3.5 py-3 transition-colors ${
-                      ativo
-                        ? 'border-brand bg-brand-tint'
-                        : 'border-line-strong bg-surface hover:bg-surface-2'
-                    }`}
-                  >
-                    <span className="block text-sm font-medium text-ink">{a.rotulo}</span>
-                    <span className="block text-sm text-ink-mute mt-0.5">
-                      {a.id === 'outro' ? 'Personalizado' : `${a.dias} dias úteis`}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <select
+              id="ato"
+              aria-label="Prazo a calcular"
+              value={atoId}
+              onChange={e => escolherAto(e.target.value)}
+              className="field"
+            >
+              {GRUPOS.map(g => (
+                <optgroup key={g} label={g}>
+                  {CATALOGO.filter(p => p.grupo === g).map(p => (
+                    <option key={p.id} value={p.id}>
+                      {p.ato} · {p.dias} dias {unidade(p.regime)}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+              <option value="outro">Outro prazo (personalizado)</option>
+            </select>
+            {prazo && (
+              <p className="text-sm text-ink-mute leading-snug">
+                Base legal: {prazo.baseLegal}.{prazo.observacao ? ` ${prazo.observacao}` : ''}
+              </p>
+            )}
 
             {atoId === 'outro' && (
               <div className="grid grid-cols-3 gap-3 pt-1">

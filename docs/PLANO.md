@@ -302,14 +302,15 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 101 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 105 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (tabela com fonte, vigência, verificação) e painel de curadoria | não iniciado | Hoje são constantes no código |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | não iniciado | Lei 5.010 já verificada para TRFs; faltam pontos facultativos por tribunal |
 | F2-05 | Feriados estaduais e municipais | não iniciado | A tabela atual **não está conferida**; municipal exige comprovação |
 | F2-06 | Aviso de prazo próprio no prazo em dobro (CPC 180 §2º, 183 §2º, 186 §4º) | feito | O resultado avisa que o benefício não vale quando a lei fixa prazo próprio e, se a origem for o Diário, que o prazo em dobro só começa com a intimação pessoal (art. 183 §1º). Texto dos artigos lido no Planalto; 2 testes novos |
 | F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 no JEF fica **pendente** (modo conservador não suspende). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | feito | Regime JEF no motor e na tela; aviso do art. 229; 9 cenários novos no oráculo (JEF, MP, Defensoria, litisconsórcio); leis lidas no Planalto. **Pendente:** a suspensão de 20/12 a 20/01 no JEF. Consultado em 07/10/2026: o Enunciado 165 do FONAJE trata de contagem contínua (superado pelo art. 12-A) e não do recesso; não achei texto primário sobre o recesso no JEF (o Enunciado 198 do FONAJEF só foi visto em resumo de busca) |
-| F2-08 | Catálogo de prazos com base legal | em curso | Hoje a tela tem 5 atos; catálogo em `METODO_CALENDARIO_FORENSE.md` §2.2 |
+| F2-08 | Catálogo de prazos com base legal | feito | 26 prazos (24 processuais em CPC, CLT, CPP e JEF; 2 materiais fora do cálculo), cada um com base legal, versão lida e data; seletor agrupado na tela que ajusta o regime e mostra a base legal; 4 testes. Lido no texto vigente em 07/10/2026 |
+| F2-14 | Prazos materiais (decadência): mandado de segurança (120 dias) e ação rescisória (2 anos) | não iniciado | Estão no catálogo, mas a tela não os calcula; contagem própria (CPC art. 975, § 1º prorroga ao dia útil) |
 | F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | 85 gerados, 0 validados; faltam 15 e a validação |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
 | F2-11 | Dúvidas jurídicas abertas | em curso | 4 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
@@ -381,10 +382,9 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F2-08**: catálogo de prazos com base legal.
-2. **F2-09**: completar os 100 cenários e entregar ao revisor.
-3. **F2-03**: calendário como dado.
-4. **F0-06 em diante**, conforme as decisões do responsável (§12).
+1. **F2-09**: completar os 100 cenários e entregar ao revisor.
+2. **F2-03**: calendário como dado.
+3. **F0-06 em diante**, conforme as decisões do responsável (§12).
 
 ---
 

@@ -78,7 +78,27 @@ Os 24 artigos em que o motor se apoia foram relidos com o script que marca o tac
 CPC 180, 183, 186, 216, 219, 220, 224, 229, 231 · Lei 662/1949 art. 1º · Lei 6.802/1980 art. 1º · Lei 9.093/1995 arts. 1º e 2º · Lei 14.759/2023 art. 1º · CLT (compilada) 775 e 775-A · CPP (compilado) 798 e 798-A · Lei 11.419/2006 art. 5º · LC 35/1979 art. 66 · Lei 9.099/1995 arts. 12-A, 42 e 49 · Lei 10.259/2001 art. 9º · Lei 12.153/2009 art. 7º.
 Ressalvas: a Lei 5.010/1966, art. 62, tem o inciso IV antigo tachado e o vigente (Lei 6.741/1979) logo abaixo, e o motor usa o vigente. Na Lei 9.099, o art. 50 (vizinho do 49) aparece tachado e não é usado.
 
-## 9. Como repetir esta verificação
+## 9. Catálogo de prazos (F2-08), lido em 07/10/2026
+
+| Prazo | Dias | Base lida | Versão |
+|---|---|---|---|
+| Recursos cíveis em geral (apelação, agravo de instrumento, agravo interno, RE, REsp, agravo em RE/REsp, embargos de divergência, recurso ordinário, contrarrazões) | 15 | CPC, art. 1.003, § 5º (15 dias para interpor e responder, exceto embargos de declaração) | anotada, não tachado |
+| Embargos de declaração (CPC) | 5 | CPC, art. 1.023 e § 2º | anotada |
+| Contrarrazões à apelação; ao RE/REsp | 15 | CPC, art. 1.010, § 1º; art. 1.030 (redação da Lei 13.256/2016) | anotada |
+| Contestação; réplica; impugnação ao cumprimento | 15 | CPC, arts. 335, 350 e 351, 525 | anotada |
+| Prazo supletivo | 5 | CPC, art. 218, § 3º | anotada |
+| CLT: recurso ordinário; agravo de petição; agravo de instrumento | 8 | CLT, arts. 895 e 897, a e b | compilada |
+| CLT: embargos de declaração | 5 | CLT, art. 897-A | compilada |
+| CPP: apelação; recurso em sentido estrito | 5 | CPP, arts. 593 e 586 | compilado |
+| CPP: razões de apelação; embargos de declaração contra acórdão | 8; 2 | CPP, arts. 600 e 619 | compilado |
+| JEF: recurso inominado; embargos | 10; 5 | Lei 9.099/1995, arts. 42 e 49 (e 12-A) | anotada |
+| Mandado de segurança (material) | 120 | Lei 12.016/2009, art. 23 | anotada |
+| Ação rescisória (material) | 2 anos | CPC, art. 975 e § 1º | anotada |
+
+Achados da leitura: o art. 1.030 do CPC tem o caput antigo tachado e o vigente mantém os 15 dias; o art. 1.042 foi reescrito em **2026** (Lei 15.484/2026, "relevância da questão de direito federal infraconstitucional"), sem mudar o prazo de 15 dias.
+Fora do catálogo, por não terem sido lidos: recurso de revista e embargos à SDI (CLT/Lei 5.584), embargos de declaração de sentença criminal (CPP, art. 382), habeas corpus, recursos dos Juizados Especiais Federais e demais ritos especiais.
+
+## 10. Como repetir esta verificação
 
 ```bash
 python ~/.claude/scripts/fetch_oficial.py https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm
