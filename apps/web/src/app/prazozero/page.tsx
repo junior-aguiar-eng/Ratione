@@ -12,6 +12,7 @@ import {
   CATALOGO_PRAZOS,
   buscarPrazo,
   calcularPrazoMaterial,
+  relatorioAlteracoes,
   ResultadoPrazoMaterial,
   TipoPrazoMaterial
 } from '@ratione/prazozero';
@@ -23,6 +24,7 @@ import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
 import { gerarIcs } from '../../lib/ics';
 import ResultadoMaterial from './ResultadoMaterial';
+import RelatorioAlteracoes from './RelatorioAlteracoes';
 
 const CATALOGO = CATALOGO_PRAZOS;
 const GRUPOS = Array.from(new Set(CATALOGO.map(p => p.grupo)));
@@ -97,6 +99,28 @@ export default function PrazoZeroPage() {
       return null;
     }
   }, [motor, material, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, excecaoCriminal, nomeAto]);
+
+  const relatorio = useMemo(() => {
+    if (!resultado) return null;
+    try {
+      return relatorioAlteracoes(
+        {
+          dataEvento,
+          tipoEvento,
+          diasPrazo: dias,
+          regime,
+          tribunalId,
+          prazoEmDobro,
+          litisconsortesComAdvogadosDistintos: litisconsortes,
+          excecaoSuspensaoCriminal: regime === 'cpp_dias_corridos' && excecaoCriminal,
+          nomeAto
+        },
+        resultado
+      );
+    } catch {
+      return null;
+    }
+  }, [resultado, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, excecaoCriminal, nomeAto]);
 
   // Resumos derivados da própria memória de cálculo
   const resumo = useMemo(() => {
@@ -441,6 +465,8 @@ export default function PrazoZeroPage() {
                     ))}
                   </Notice>
                 )}
+
+                {relatorio && <RelatorioAlteracoes relatorio={relatorio} />}
 
                 <div className="flex flex-wrap gap-2 no-print">
                   <button type="button" onClick={copiarCertidao} className="btn-secondary">
