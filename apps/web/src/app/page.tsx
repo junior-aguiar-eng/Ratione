@@ -1,256 +1,363 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { MotorPrazoZero } from '@ratione/prazozero';
+import { MotorNormaViva } from '@ratione/normaviva';
+import { GRAFOS_PRECEDENTES_CATALOGADOS } from '@ratione/tesemap';
+import RecentesHome from '../components/RecentesHome';
+import { MODULOS } from '../lib/modulos';
+import { DECISAO_DEMO } from '../lib/decisaoDemo';
+import { dataCurta, dataLonga, diaDaSemana } from '../lib/datas';
 
-export default function HomePage() {
-  const [itensRecentes, setItensRecentes] = useState<Array<{ titulo: string; modulo: string; url: string; data: string }>>([]);
+function Secao({
+  id,
+  nome,
+  titulo,
+  descricao,
+  cta,
+  href,
+  legenda,
+  invertido,
+  children
+}: {
+  id: string;
+  nome: string;
+  titulo: string;
+  descricao: string;
+  cta: string;
+  href: string;
+  legenda: string;
+  invertido?: boolean;
+  children: React.ReactNode;
+}) {
+  const status = MODULOS.find(m => m.href === href)?.status;
+  return (
+    <section id={id} className="py-14 border-t border-line grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <div className={`lg:col-span-5 space-y-5 ${invertido ? 'lg:order-2' : ''}`}>
+        <div className="flex items-center gap-3">
+          <span className="eyebrow">{nome}</span>
+          {status && status !== 'Disponível' && <span className="tag-neutral">{status}</span>}
+        </div>
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-[1.15]">{titulo}</h2>
+        <p className="text-base text-ink-soft leading-relaxed max-w-md">{descricao}</p>
+        <Link href={href} className="btn-primary">
+          <span>{cta}</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
 
-  useEffect(() => {
-    // Ler histórico real salvo pelo usuário caso exista
-    try {
-      const historico = localStorage.getItem('ratione_historico_recente');
-      if (historico) {
-        setItensRecentes(JSON.parse(historico));
-      }
-    } catch {
-      // Ignorar caso sem acesso ao localStorage
-    }
-  }, []);
+      <div className={`lg:col-span-7 ${invertido ? 'lg:order-1' : ''}`}>
+        <div className="bg-surface border border-line rounded-xl p-6 sm:p-8">{children}</div>
+        <p className="text-sm text-ink-mute mt-3">{legenda}</p>
+      </div>
+    </section>
+  );
+}
+
+function VisualArgumenta() {
+  const tese = DECISAO_DEMO.fundamentacao.tesesIdentificadas[0];
+  const etapas = [
+    { rotulo: 'Decisão', texto: 'Sentença cível · Fraude bancária e transações via PIX', tom: 'bg-surface-2 text-ink-soft' },
+    { rotulo: 'Tese', texto: tese.titulo, tom: 'bg-brand-tint text-brand-text' },
+    { rotulo: 'Fundamento', texto: 'CDC, art. 14 · Súmula 479/STJ', tom: 'bg-info-tint text-info-text' },
+    { rotulo: 'Conclusão', texto: 'Pedidos julgados procedentes', tom: 'bg-ok-tint text-ok-text' }
+  ];
 
   return (
-    <div className="space-y-16 py-8">
-      {/* 7.1 Hero Sóbrio e Editorial */}
-      <div className="max-w-3xl space-y-3">
-        <h1 className="font-serif text-4xl sm:text-5xl font-semibold tracking-tight text-[#F2F4F7] leading-tight">
-          Direito, estruturado.
-        </h1>
-        <p className="text-base sm:text-lg text-[#A8B0BB] leading-relaxed font-sans">
-          Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular prazos.
+    <div className="space-y-6">
+      <ol className="space-y-0">
+        {etapas.map((e, i) => (
+          <li key={e.rotulo} className="flex gap-4">
+            <div className="flex flex-col items-center">
+              <span className={`tag ${e.tom} w-24 justify-center`}>{e.rotulo}</span>
+              {i < etapas.length - 1 && <span className="w-px flex-1 bg-line-strong my-1" />}
+            </div>
+            <p className="text-base text-ink pb-5 pt-0.5 leading-snug">{e.texto}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="rounded-lg bg-danger-tint border border-danger/30 p-4 text-sm text-danger-text leading-relaxed">
+        <span className="font-semibold">Ponto de atenção:</span> argumento defensivo não enfrentado (CPC, art. 489, § 1º,
+        IV), à p. 6 da decisão.
+      </div>
+    </div>
+  );
+}
+
+function VisualNormaViva() {
+  const motor = new MotorNormaViva();
+  const id = 'CPC-ART-85-P6A';
+  const versao = motor.obterLinhaDoTempo(id)[0];
+  const antes = motor.consultarDispositivoNaData(id, '2020-01-01');
+
+  const pontos = [
+    {
+      rotulo: antes ? 'Antes' : 'Antes de ' + dataCurta(versao.dataInicioVigencia),
+      detalhe: antes ? 'Redação anterior' : 'Dispositivo inexistente',
+      cor: 'bg-ink-mute'
+    },
+    {
+      rotulo: dataCurta(versao.dataInicioVigencia),
+      detalhe: `Acrescentado pela ${versao.atoModificador.rotulo}`,
+      cor: 'bg-info'
+    },
+    { rotulo: 'Hoje', detalhe: versao.dataFimVigencia === null ? 'Vigente' : 'Sem vigência', cor: 'bg-ok' }
+  ];
+
+  return (
+    <div className="space-y-7">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-sm text-ink-mute">{versao.normaNome}</p>
+          <h3 className="font-serif text-2xl font-semibold text-ink mt-0.5">{versao.dispositivoRotulo}</h3>
+        </div>
+        <span className="tag-ok">Vigente</span>
+      </div>
+
+      <ol className="grid grid-cols-3 gap-4 relative">
+        <span aria-hidden className="absolute left-0 right-0 top-[7px] h-px bg-line-strong" />
+        {pontos.map(p => (
+          <li key={p.rotulo} className="relative pt-6">
+            <span className={`absolute top-0 left-0 w-3.5 h-3.5 rounded-full ring-4 ring-surface ${p.cor}`} />
+            <p className="text-sm font-semibold text-ink">{p.rotulo}</p>
+            <p className="text-sm text-ink-soft leading-snug mt-0.5">{p.detalhe}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div className="flex flex-wrap items-center gap-2 pt-1 text-sm">
+        <span className="text-ink-soft">Ver redação em:</span>
+        <span className="px-3 py-1.5 rounded-md bg-brand-tint text-brand-text font-medium">Hoje</span>
+        <span className="px-3 py-1.5 rounded-md border border-line-strong text-ink-soft">{dataCurta('2020-01-01')}</span>
+      </div>
+    </div>
+  );
+}
+
+function VisualTeseMap() {
+  const grafo = GRAFOS_PRECEDENTES_CATALOGADOS['tema-1076-stj'];
+  const no = (id: string) => grafo.nos.find(n => n.id === id)!;
+
+  // Posições (viewBox 640x300). Colunas: legislação/tese/distinção à esquerda; dispositivos à direita.
+  const L = { x: 10, w: 250, h: 62 };
+  const R = { x: 380, w: 250, h: 62 };
+  const layout: Record<string, { x: number; y: number; w: number; tipo: 'info' | 'warn' | 'ok' | 'rel' }> = {
+    'lei-14365': { x: L.x, y: 8, w: L.w, tipo: 'ok' },
+    'tema-1076-stj': { x: L.x, y: 118, w: L.w, tipo: 'warn' },
+    'distinguishing-fazenda': { x: L.x, y: 228, w: L.w, tipo: 'rel' },
+    'cpc-art85-p2': { x: R.x, y: 8, w: R.w, tipo: 'info' },
+    'cpc-art85-p8': { x: R.x, y: 173, w: R.w, tipo: 'info' }
+  };
+  const cor: Record<string, string> = {
+    info: 'rgb(var(--info))',
+    warn: 'rgb(var(--warn))',
+    ok: 'rgb(var(--ok))',
+    rel: 'rgb(var(--rel))'
+  };
+  const arestas = grafo.arestas.filter(a => layout[a.source] && layout[a.target]);
+  const centro = (id: string, lado: 'dir' | 'esq') => {
+    const n = layout[id];
+    return { x: lado === 'dir' ? n.x + n.w : n.x, y: n.y + 31 };
+  };
+
+  const textoRelacoes = arestas.map(a => ({
+    id: a.id,
+    de: no(a.source).label,
+    rel: a.label,
+    para: no(a.target).label
+  }));
+
+  return (
+    <div>
+      <svg viewBox="0 0 640 300" className="w-full h-auto hidden sm:block" role="img" aria-label="Mapa do Tema 1.076/STJ">
+        <defs>
+          <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0L10 5L0 10z" fill="rgb(var(--ink-mute))" />
+          </marker>
+        </defs>
+        {arestas.map(a => {
+          const origem = layout[a.source];
+          const destino = layout[a.target];
+          const mesmaColuna = origem.x === destino.x;
+          const p1 = mesmaColuna
+            ? { x: origem.x + origem.w / 2, y: origem.y + (origem.y < destino.y ? 62 : 0) }
+            : centro(a.source, origem.x < destino.x ? 'dir' : 'esq');
+          const p2 = mesmaColuna
+            ? { x: destino.x + destino.w / 2, y: destino.y + (origem.y < destino.y ? 0 : 62) }
+            : centro(a.target, origem.x < destino.x ? 'esq' : 'dir');
+          return (
+            <line
+              key={a.id}
+              x1={p1.x}
+              y1={p1.y}
+              x2={p2.x}
+              y2={p2.y}
+              stroke="rgb(var(--ink-mute))"
+              strokeWidth="1.5"
+              markerEnd="url(#seta)"
+            />
+          );
+        })}
+        {Object.entries(layout).map(([id, p]) => (
+          <g key={id}>
+            <rect x={p.x} y={p.y} width={p.w} height={62} rx="8" fill="rgb(var(--surface))" stroke="rgb(var(--line-strong))" />
+            <rect x={p.x} y={p.y} width="5" height="62" rx="2.5" fill={cor[p.tipo]} />
+            <foreignObject x={p.x + 16} y={p.y} width={p.w - 24} height="62">
+              <div
+                style={{ height: 62, display: 'flex', alignItems: 'center', fontSize: 14, lineHeight: 1.3, fontWeight: 500, color: 'rgb(var(--ink))' }}
+              >
+                {no(id).label}
+              </div>
+            </foreignObject>
+          </g>
+        ))}
+      </svg>
+
+      <ul className="sm:hidden space-y-3">
+        {textoRelacoes.map(r => (
+          <li key={r.id} className="text-sm leading-snug text-ink-soft">
+            <span className="font-medium text-ink">{r.de}</span> <span className="text-brand-text">{r.rel.toLowerCase()}</span>{' '}
+            <span className="font-medium text-ink">{r.para}</span>
+          </li>
+        ))}
+      </ul>
+
+      <ul className="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm text-ink-soft">
+        {[
+          ['bg-warn', 'Precedente vinculante'],
+          ['bg-info', 'Dispositivo legal'],
+          ['bg-ok', 'Alteração legislativa'],
+          ['bg-rel', 'Distinguishing']
+        ].map(([c, t]) => (
+          <li key={t} className="flex items-center gap-2">
+            <span className={`w-2.5 h-2.5 rounded-full ${c}`} /> {t}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function VisualPrazoZero() {
+  const r = new MotorPrazoZero().calcularPrazo({
+    dataEvento: '2026-03-10',
+    tipoEvento: 'disponibilizacao_dje',
+    diasPrazo: 15,
+    tribunalId: 'TJSP',
+    nomeAto: 'Apelação Cível'
+  });
+
+  const linhas = [
+    ['Disponibilização no DJe', r.dataDisponibilizacao!],
+    ['Publicação considerada', r.dataPublicacao],
+    ['Início da contagem', r.dataTermoInicial]
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm text-ink-mute">Prazo final</p>
+        <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink mt-1 leading-tight">{dataLonga(r.dataVencimentoFinal)}</p>
+        <p className="text-base text-ink-soft mt-2">
+          {diaDaSemana(r.dataVencimentoFinal)} · {r.diasTotaisComputados} dias úteis · Apelação Cível · TJSP
         </p>
       </div>
 
-      {/* 7.2 Quatro Ferramentas com Representações Visuais Únicas e Distintas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* 1. ARGUMENTA: Representação Visual da Cadeia de Decisão */}
-        <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 flex flex-col justify-between hover:border-[#2F3946] transition-colors group">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#4A918B] uppercase tracking-wider">
-                Argumenta
-              </span>
-              <span className="text-xs text-[#737E8C]">Análise de Decisões</span>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl font-semibold text-[#F2F4F7]">
-                Entenda como uma decisão foi construída.
-              </h2>
-              <p className="text-xs text-[#A8B0BB] mt-1 leading-relaxed">
-                Decomposição de sentenças e acórdãos em teses, premissas e análise crítica de fundamentação.
-              </p>
-            </div>
-
-            {/* Representação visual específica: Decisão -> Tese -> Fundamento -> Conclusão */}
-            <div className="bg-[#0B0F14] border border-[#232B35] rounded p-3.5 my-3 space-y-2">
-              <div className="flex items-center justify-between text-[11px] text-[#A8B0BB]">
-                <span className="text-[#F2F4F7] font-medium">Decisão analisada</span>
-                <span className="text-[#737E8C]">Sentença Cível</span>
-              </div>
-              <div className="grid grid-cols-3 gap-2 text-[11px] pt-1 border-t border-[#1C232C]">
-                <div className="bg-[#161C24] p-1.5 rounded border border-[#232B35] text-center">
-                  <span className="block text-[#737E8C] text-[10px]">Tese</span>
-                  <span className="text-[#F2F4F7] font-medium truncate block">Resp. Objetiva</span>
-                </div>
-                <div className="bg-[#161C24] p-1.5 rounded border border-[#232B35] text-center">
-                  <span className="block text-[#737E8C] text-[10px]">Fundamento</span>
-                  <span className="text-[#4F7FC8] font-medium truncate block">Art. 14 CDC</span>
-                </div>
-                <div className="bg-[#161C24] p-1.5 rounded border border-[#232B35] text-center">
-                  <span className="block text-[#737E8C] text-[10px]">Conclusão</span>
-                  <span className="text-[#3E8F70] font-medium truncate block">Procedente</span>
-                </div>
-              </div>
-            </div>
+      <dl className="divide-y divide-line border-y border-line">
+        {linhas.map(([rotulo, data]) => (
+          <div key={rotulo} className="flex items-baseline justify-between py-3">
+            <dt className="text-sm text-ink-soft">{rotulo}</dt>
+            <dd className="text-base font-medium text-ink num">
+              {dataCurta(data)} <span className="text-sm font-normal text-ink-mute">· {diaDaSemana(data)}</span>
+            </dd>
           </div>
+        ))}
+      </dl>
 
-          <div className="pt-4 mt-2 border-t border-[#1C232C]">
-            <Link
-              href="/argumenta"
-              className="inline-flex items-center gap-2 text-xs font-medium text-[#F2F4F7] bg-[#161C24] hover:bg-[#2B6F6A] px-3.5 py-2 rounded border border-[#232B35] hover:border-[#2B6F6A] transition-all"
-            >
-              <span>Analisar decisão</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+      <p className="text-sm text-ink-soft">
+        Base legal: CPC, arts. 219, 220 e 224. Cada dia contado ou excluído aparece na memória de cálculo.
+      </p>
+    </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <div>
+      <section className="pt-10 sm:pt-16 pb-16 max-w-3xl space-y-6">
+        <h1 className="font-serif text-5xl sm:text-6xl font-semibold tracking-tight text-ink leading-[1.05]">
+          Direito, estruturado.
+        </h1>
+        <p className="text-lg sm:text-xl text-ink-soft leading-relaxed">
+          Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular
+          prazos.
+        </p>
+        <div className="flex flex-wrap gap-3 pt-2">
+          <Link href="/prazozero" className="btn-primary">
+            <span>Calcular prazo</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link href="#ferramentas" className="btn-secondary">
+            Ver as ferramentas
+          </Link>
         </div>
+      </section>
 
-        {/* 2. NORMAVIVA: Representação de Artigo, Linha do Tempo e Versões */}
-        <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 flex flex-col justify-between hover:border-[#2F3946] transition-colors group">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#4F7FC8] uppercase tracking-wider">
-                NormaViva
-              </span>
-              <span className="text-xs text-[#737E8C]">Edição Legislativa</span>
-            </div>
+      <div id="ferramentas" className="scroll-mt-20">
+        <h2 className="sr-only">O que você quer fazer?</h2>
 
-            <div>
-              <h2 className="font-serif text-2xl font-semibold text-[#F2F4F7]">
-                Veja a lei como ela realmente vigora.
-              </h2>
-              <p className="text-xs text-[#A8B0BB] mt-1 leading-relaxed">
-                Texto normativo contextualizado, linha do tempo legislativa e histórico de redações em qualquer data.
-              </p>
-            </div>
+        <Secao
+          id="argumenta"
+          nome="Argumenta"
+          titulo="Entenda como uma decisão foi construída."
+          descricao="Decomposição de decisões em teses, premissas e conclusões, com os pontos de atenção da fundamentação."
+          cta="Analisar decisão"
+          href="/argumenta"
+          legenda="Exemplo ilustrativo de análise."
+        >
+          <VisualArgumenta />
+        </Secao>
 
-            {/* Representação visual específica: Artigo + Linha do Tempo */}
-            <div className="bg-[#0B0F14] border border-[#232B35] rounded p-3.5 my-3 space-y-2">
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-[#F2F4F7] font-medium">Art. 85, § 2º &middot; CPC</span>
-                <span className="text-[#3E8F70] bg-[#3E8F70]/10 px-1.5 py-0.2 rounded text-[10px]">Vigente</span>
-              </div>
-              <div className="flex items-center justify-between text-[10px] text-[#737E8C] pt-2 border-t border-[#1C232C]">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#737E8C]" /> 2015: Redação Original
-                </span>
-                <span className="text-[#737E8C]">&rarr;</span>
-                <span className="flex items-center gap-1.5 text-[#4F7FC8]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4F7FC8]" /> 2022: Lei 14.365
-                </span>
-                <span className="text-[#737E8C]">&rarr;</span>
-                <span className="flex items-center gap-1.5 text-[#3E8F70]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3E8F70]" /> Hoje
-                </span>
-              </div>
-            </div>
-          </div>
+        <Secao
+          id="normaviva"
+          nome="NormaViva"
+          titulo="Veja a lei como ela realmente vigora."
+          descricao="Texto normativo, linha do tempo legislativa e a redação do dispositivo em qualquer data."
+          cta="Consultar norma"
+          href="/normaviva"
+          legenda="Exemplo com dados do módulo."
+          invertido
+        >
+          <VisualNormaViva />
+        </Secao>
 
-          <div className="pt-4 mt-2 border-t border-[#1C232C]">
-            <Link
-              href="/normaviva"
-              className="inline-flex items-center gap-2 text-xs font-medium text-[#F2F4F7] bg-[#161C24] hover:bg-[#2B6F6A] px-3.5 py-2 rounded border border-[#232B35] hover:border-[#2B6F6A] transition-all"
-            >
-              <span>Consultar norma</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
+        <Secao
+          id="tesemap"
+          nome="TeseMap"
+          titulo="Explore como uma tese se conecta à jurisprudência."
+          descricao="Precedentes vinculantes, dispositivos legais e distinções reunidos em um mapa navegável."
+          cta="Explorar tese"
+          href="/tesemap"
+          legenda="Exemplo com dados do módulo: Tema 1.076/STJ."
+        >
+          <VisualTeseMap />
+        </Secao>
 
-        {/* 3. TESEMAP: Representação de Rede de Precedentes e Distinções */}
-        <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 flex flex-col justify-between hover:border-[#2F3946] transition-colors group">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#8069B0] uppercase tracking-wider">
-                TeseMap
-              </span>
-              <span className="text-xs text-[#737E8C]">Rede Jurisprudencial</span>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl font-semibold text-[#F2F4F7]">
-                Explore como uma tese se conecta à jurisprudência.
-              </h2>
-              <p className="text-xs text-[#A8B0BB] mt-1 leading-relaxed">
-                Navegação por precedentes vinculantes, distinções (distinguishing) e evolução de entendimentos.
-              </p>
-            </div>
-
-            {/* Representação visual específica: Nós + Distinção */}
-            <div className="bg-[#0B0F14] border border-[#232B35] rounded p-3.5 my-3 space-y-2">
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-[#C8903D] font-medium">Tema 1.076 / STJ</span>
-                <span className="text-[#737E8C] text-[10px]">Corte Especial</span>
-              </div>
-              <div className="flex items-center gap-2 text-[10px] pt-2 border-t border-[#1C232C]">
-                <span className="px-2 py-0.5 rounded bg-[#161C24] border border-[#4F7FC8] text-[#4F7FC8]">
-                  Art. 85, § 2º
-                </span>
-                <span className="text-[#737E8C]">&harr;</span>
-                <span className="px-2 py-0.5 rounded bg-[#161C24] border border-[#8069B0] text-[#8069B0]">
-                  Distinguishing: Inestimável
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-4 mt-2 border-t border-[#1C232C]">
-            <Link
-              href="/tesemap"
-              className="inline-flex items-center gap-2 text-xs font-medium text-[#F2F4F7] bg-[#161C24] hover:bg-[#2B6F6A] px-3.5 py-2 rounded border border-[#232B35] hover:border-[#2B6F6A] transition-all"
-            >
-              <span>Explorar tese</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* 4. PRAZOZERO: Representação de Calendário, Contagem e Vencimento */}
-        <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 flex flex-col justify-between hover:border-[#2F3946] transition-colors group">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#2B6F6A] uppercase tracking-wider">
-                PrazoZero
-              </span>
-              <span className="text-xs text-[#737E8C]">Cálculo Verificável</span>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl font-semibold text-[#F2F4F7]">
-                Calcule um prazo e veja exatamente como ele foi contado.
-              </h2>
-              <p className="text-xs text-[#A8B0BB] mt-1 leading-relaxed">
-                Determinação objetiva de termo inicial e final, com memória de cálculo detalhada dia a dia.
-              </p>
-            </div>
-
-            {/* Representação visual específica: Calendário + Vencimento Final */}
-            <div className="bg-[#0B0F14] border border-[#232B35] rounded p-3.5 my-3 flex items-center justify-between">
-              <div>
-                <span className="text-[10px] text-[#737E8C] uppercase block">Prazo Final Calculado</span>
-                <span className="font-serif text-lg font-bold text-[#F2F4F7]">01 de abril de 2026</span>
-              </div>
-              <div className="text-right">
-                <span className="text-[10px] text-[#A8B0BB] block">15 dias úteis</span>
-                <span className="text-[10px] text-[#4A918B]">Memória verificável &rarr;</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-4 mt-2 border-t border-[#1C232C]">
-            <Link
-              href="/prazozero"
-              className="inline-flex items-center gap-2 text-xs font-medium text-[#F2F4F7] bg-[#161C24] hover:bg-[#2B6F6A] px-3.5 py-2 rounded border border-[#232B35] hover:border-[#2B6F6A] transition-all"
-            >
-              <span>Calcular prazo</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
+        <Secao
+          id="prazozero"
+          nome="PrazoZero"
+          titulo="Calcule um prazo e veja exatamente como ele foi contado."
+          descricao="Prazo final, base legal e memória de cálculo dia a dia, para conferir cada etapa da contagem."
+          cta="Calcular prazo"
+          href="/prazozero"
+          legenda="Resultado real do cálculo para uma intimação disponibilizada em 10/03/2026."
+          invertido
+        >
+          <VisualPrazoZero />
+        </Secao>
       </div>
 
-      {/* 7.3 Recentes: Exibir apenas quando houver dados reais do usuário (se vazio, ocultar) */}
-      {itensRecentes.length > 0 && (
-        <div className="pt-6 border-t border-[#1C232C]">
-          <h3 className="text-xs font-medium uppercase tracking-wider text-[#737E8C] mb-4">
-            Recentes
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {itensRecentes.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.url}
-                className="p-3 rounded bg-[#11161D] border border-[#232B35] hover:border-[#2F3946] transition-colors block"
-              >
-                <span className="text-[10px] text-[#4A918B] block mb-0.5">{item.modulo}</span>
-                <span className="text-xs text-[#F2F4F7] font-medium block truncate">{item.titulo}</span>
-                <span className="text-[10px] text-[#737E8C] block mt-1">{item.data}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      <RecentesHome />
     </div>
   );
 }

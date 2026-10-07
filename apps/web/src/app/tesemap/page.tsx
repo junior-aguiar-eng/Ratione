@@ -1,256 +1,260 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import {
-  ReactFlow,
-  Background,
-  Controls,
-  Node,
-  Edge,
-  MarkerType
-} from '@xyflow/react';
+import { ReactFlow, Background, Controls, Node, Edge, MarkerType } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import {
-  ExternalLink,
-  BookOpen,
-  Scale
-} from 'lucide-react';
-import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo } from '@ratione/tesemap';
+import { BookOpen, Bookmark, Check, ExternalLink, Scale } from 'lucide-react';
+import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo, TipoNoGrafo } from '@ratione/tesemap';
+import PageHeader from '../../components/PageHeader';
+import Notice from '../../components/Notice';
+import { salvarRegistro } from '../../lib/historico';
+
+const TEMAS = [
+  { id: 'tema-1076-stj', rotulo: 'Tema 1.076/STJ · Honorários e equidade' },
+  { id: 'sumula-479-stj', rotulo: 'Súmula 479/STJ · Fraude bancária' }
+];
+
+// Layout hierárquico: as fontes ficam acima dos itens que elas alteram, interpretam ou distinguem.
+const POSICOES: Record<string, { x: number; y: number }> = {
+  // Tema 1.076/STJ
+  'lei-14365': { x: 150, y: 0 },
+  'distinguishing-fazenda': { x: 580, y: 0 },
+  'tema-1076-stj': { x: 150, y: 160 },
+  'cpc-art85-p2': { x: 150, y: 330 },
+  'cpc-art85-p8': { x: 480, y: 410 },
+  'tema-central': { x: 150, y: 490 },
+  // Súmula 479/STJ
+  'distinguishing-culpa-exclusiva': { x: 0, y: 0 },
+  'sumula-479-stj': { x: 0, y: 160 },
+  'cdc-art14': { x: 0, y: 330 },
+  'tema-fraude-bancaria': { x: 330, y: 410 }
+};
+
+const ESTILO_TIPO: Record<TipoNoGrafo, { rotulo: string; cor: string; tag: string; ponto: string }> = {
+  tema_central: { rotulo: 'Tema', cor: 'rgb(var(--brand))', tag: 'tag-brand', ponto: 'bg-brand' },
+  tese_vinculante: { rotulo: 'Precedente vinculante', cor: 'rgb(var(--warn))', tag: 'tag-warn', ponto: 'bg-warn' },
+  dispositivo_legal: { rotulo: 'Dispositivo legal', cor: 'rgb(var(--info))', tag: 'tag-info', ponto: 'bg-info' },
+  distinguishing: { rotulo: 'Distinguishing', cor: 'rgb(var(--rel))', tag: 'tag-rel', ponto: 'bg-rel' },
+  inovacao_legislativa: { rotulo: 'Alteração legislativa', cor: 'rgb(var(--ok))', tag: 'tag-ok', ponto: 'bg-ok' },
+  acordao_paradigma: { rotulo: 'Acórdão paradigma', cor: 'rgb(var(--warn))', tag: 'tag-warn', ponto: 'bg-warn' }
+};
 
 export default function TeseMapPage() {
-  const [temaSelecionadoChave, setTemaSelecionadoChave] = useState<string>('tema-1076-stj');
-
-  const dadosGrafo = useMemo(() => {
-    return GRAFOS_PRECEDENTES_CATALOGADOS[temaSelecionadoChave];
-  }, [temaSelecionadoChave]);
-
-  // 10.2 Painel lateral: nunca deixar vazio (iniciar com nó principal selecionado)
+  const [temaId, setTemaId] = useState(TEMAS[0].id);
   const [noSelecionado, setNoSelecionado] = useState<NoGrafo | null>(null);
+  const [salvo, setSalvo] = useState(false);
+
+  const grafo = GRAFOS_PRECEDENTES_CATALOGADOS[temaId];
 
   useEffect(() => {
-    if (dadosGrafo && dadosGrafo.nos.length > 0) {
-      // Pré-selecionar o nó vinculante ou central
-      const principal = dadosGrafo.nos.find(n => n.tipo === 'tese_vinculante') || dadosGrafo.nos[0];
-      setNoSelecionado(principal);
+    if (grafo?.nos.length) {
+      setNoSelecionado(grafo.nos.find(n => n.tipo === 'tese_vinculante') ?? grafo.nos[0]);
     }
-  }, [dadosGrafo]);
+  }, [grafo]);
 
-  // Nós com proporções discretas e cores semânticas conforme 10.3
-  const initialNodes: Node[] = useMemo(() => {
-    if (!dadosGrafo) return [];
-
-    const positions: Record<string, { x: number; y: number }> = {
-      // Tema 1076
-      'tema-central': { x: 280, y: 30 },
-      'cpc-art85-p2': { x: 70, y: 150 },
-      'cpc-art85-p8': { x: 490, y: 150 },
-      'tema-1076-stj': { x: 70, y: 290 },
-      'lei-14365': { x: 70, y: 430 },
-      'distinguishing-fazenda': { x: 490, y: 290 },
-
-      // Súmula 479
-      'tema-fraude-bancaria': { x: 280, y: 40 },
-      'cdc-art14': { x: 280, y: 170 },
-      'sumula-479-stj': { x: 280, y: 300 },
-      'distinguishing-culpa-exclusiva': { x: 500, y: 300 }
-    };
-
-    return dadosGrafo.nos.map(n => {
-      const pos = positions[n.id] || { x: 200, y: 200 };
-      const ehVinculante = n.tipo === 'tese_vinculante';
-      const ehDispositivo = n.tipo === 'dispositivo_legal';
-      const ehDistinguishing = n.tipo === 'distinguishing';
-      const ehLegislativo = n.tipo === 'inovacao_legislativa';
-
-      let bg = '#11161D';
-      let border = '#232B35';
-      let text = '#F2F4F7';
-
-      if (ehVinculante) {
-        bg = '#14120D';
-        border = '#C8903D';
-        text = '#F2F4F7';
-      } else if (ehDispositivo) {
-        bg = '#0D141F';
-        border = '#4F7FC8';
-        text = '#F2F4F7';
-      } else if (ehDistinguishing) {
-        bg = '#16121E';
-        border = '#8069B0';
-        text = '#F2F4F7';
-      } else if (ehLegislativo) {
-        bg = '#0E1714';
-        border = '#3E8F70';
-        text = '#F2F4F7';
-      }
-
+  const nodes: Node[] = useMemo(() => {
+    if (!grafo) return [];
+    return grafo.nos.map(n => {
+      const estilo = ESTILO_TIPO[n.tipo];
+      const selecionado = noSelecionado?.id === n.id;
       return {
         id: n.id,
-        position: pos,
+        position: POSICOES[n.id] ?? { x: 200, y: 200 },
         data: { label: n.label, original: n },
         style: {
-          backgroundColor: bg,
-          borderColor: border,
-          color: text,
-          borderWidth: '1px',
-          borderRadius: '6px',
-          padding: '10px 14px',
-          fontSize: '12px',
-          fontFamily: 'Inter, sans-serif',
+          width: 230,
+          padding: '12px 14px',
+          borderRadius: 8,
+          background: 'rgb(var(--surface))',
+          color: 'rgb(var(--ink))',
+          border: '1px solid rgb(var(--line-strong))',
+          borderLeft: `5px solid ${estilo.cor}`,
+          fontSize: 14,
+          lineHeight: 1.35,
           fontWeight: 500,
-          width: 210,
-          boxShadow: 'none'
+          textAlign: 'left' as const,
+          boxShadow: selecionado ? '0 0 0 2px rgb(var(--brand))' : 'none'
         }
       };
     });
-  }, [dadosGrafo]);
+  }, [grafo, noSelecionado]);
 
-  // Arestas com estilo neutro e pontas direcionadas
-  const initialEdges: Edge[] = useMemo(() => {
-    if (!dadosGrafo) return [];
-
-    return dadosGrafo.arestas.map(a => ({
+  const edges: Edge[] = useMemo(() => {
+    if (!grafo) return [];
+    // Invertida para que arestas retas sejam desenhadas por último e seus rótulos fiquem sobre as demais.
+    return [...grafo.arestas].reverse().map(a => ({
       id: a.id,
       source: a.source,
       target: a.target,
       label: a.label,
-      markerEnd: {
-        type: MarkerType.ArrowClosed,
-        color: '#4B5563',
-        width: 14,
-        height: 14
-      },
-      style: {
-        stroke: '#2F3946',
-        strokeWidth: 1.2
-      },
-      labelStyle: {
-        fill: '#A8B0BB',
-        fontSize: 10,
-        fontWeight: 400
-      },
-      labelBgStyle: {
-        fill: '#0B0F14',
-        fillOpacity: 0.95
-      }
+      type: 'smoothstep',
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#7b8794', width: 16, height: 16 },
+      style: { stroke: '#7b8794', strokeWidth: 1.5 },
+      labelStyle: { fill: 'rgb(var(--ink-soft))', fontSize: 12, fontWeight: 500 },
+      labelBgStyle: { fill: 'rgb(var(--canvas))', fillOpacity: 1 },
+      labelBgPadding: [6, 3] as [number, number]
     }));
-  }, [dadosGrafo]);
+  }, [grafo]);
+
+  const relacoes = useMemo(() => {
+    if (!grafo || !noSelecionado) return [];
+    const por = (id: string) => grafo.nos.find(n => n.id === id)!;
+    return grafo.arestas
+      .filter(a => a.source === noSelecionado.id || a.target === noSelecionado.id)
+      .map(a => {
+        const saida = a.source === noSelecionado.id;
+        return { id: a.id, saida, rotulo: a.label, outro: por(saida ? a.target : a.source) };
+      });
+  }, [grafo, noSelecionado]);
+
+  const tiposPresentes = useMemo(
+    () => Array.from(new Set((grafo?.nos ?? []).map(n => n.tipo))),
+    [grafo]
+  );
+
+  const salvar = () => {
+    if (!grafo) return;
+    const tema = TEMAS.find(t => t.id === temaId)!;
+    salvarRegistro({
+      modulo: 'TeseMap',
+      tipo: 'tese',
+      titulo: tema.rotulo.split(' · ')[0],
+      detalhe: grafo.temaPrincipal,
+      url: '/tesemap'
+    });
+    setSalvo(true);
+    setTimeout(() => setSalvo(false), 2000);
+  };
 
   return (
-    <div className="space-y-8">
-      {/* 10.4 Cabeçalho: Rede de Precedentes */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="space-y-1">
-          <span className="text-xs font-medium text-[#8069B0] uppercase tracking-wider">
-            TeseMap &middot; Rede de precedentes
-          </span>
-          <h1 className="text-3xl font-serif font-semibold text-[#F2F4F7]">
-            Mapa da Tese e Jurisprudência
-          </h1>
-          <p className="text-sm text-[#A8B0BB] max-w-2xl">
-            Navegação por precedentes vinculantes, distinções (distinguishing) e dispositivos legais interpretados.
-          </p>
+    <div>
+      <PageHeader
+        eyebrow="TeseMap"
+        title="Mapa da tese"
+        description="Veja como um precedente se relaciona com os dispositivos que interpreta, as alterações legislativas e as distinções possíveis."
+        actions={
+          <div className="w-full sm:w-80">
+            <label htmlFor="tema" className="label">
+              Tema
+            </label>
+            <select id="tema" value={temaId} onChange={e => setTemaId(e.target.value)} className="field">
+              {TEMAS.map(t => (
+                <option key={t.id} value={t.id}>
+                  {t.rotulo}
+                </option>
+              ))}
+            </select>
+          </div>
+        }
+      />
+
+      <p className="text-lg font-serif text-ink mb-6 max-w-3xl">{grafo?.temaPrincipal}</p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="lg:col-span-8 space-y-4">
+          <div className="h-[600px] rounded-lg border border-line overflow-hidden bg-canvas">
+            <ReactFlow
+              key={temaId}
+              nodes={nodes}
+              edges={edges}
+              onNodeClick={(_, node) => setNoSelecionado(node.data.original as NoGrafo)}
+              fitView
+              fitViewOptions={{ padding: 0.12 }}
+              minZoom={0.4}
+              nodesDraggable={false}
+              nodesConnectable={false}
+              aria-label="Mapa de relações do precedente"
+            >
+              <Background gap={20} size={1} color="rgb(217 222 229 / 0.7)" />
+              <Controls showInteractive={false} />
+            </ReactFlow>
+          </div>
+
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft" aria-label="Legenda">
+            {tiposPresentes.map(t => (
+              <li key={t} className="flex items-center gap-2">
+                <span className={`w-2.5 h-2.5 rounded-full ${ESTILO_TIPO[t].ponto}`} />
+                {ESTILO_TIPO[t].rotulo}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Seletor de Tema */}
-        <div className="w-full sm:w-72">
-          <label className="text-[10px] text-[#737E8C] block uppercase mb-1">Tema selecionado</label>
-          <select
-            value={temaSelecionadoChave}
-            onChange={e => setTemaSelecionadoChave(e.target.value)}
-            className="w-full bg-[#11161D] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
-          >
-            <option value="tema-1076-stj">Tema 1.076 / STJ &middot; Honorários e Equidade</option>
-            <option value="sumula-479-stj">Súmula 479 / STJ &middot; Fraude Bancária</option>
-          </select>
-        </div>
+        <aside className="lg:col-span-4 lg:sticky lg:top-24 card p-6 space-y-6" aria-label="Detalhe do item selecionado">
+          {noSelecionado && (
+            <>
+              <div className="space-y-3">
+                <span className={ESTILO_TIPO[noSelecionado.tipo].tag}>{ESTILO_TIPO[noSelecionado.tipo].rotulo}</span>
+                <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{noSelecionado.label}</h2>
+                {noSelecionado.tribunal && (
+                  <p className="text-sm text-ink-mute">
+                    {noSelecionado.tribunal}
+                    {noSelecionado.numeroReferencia ? ` · ${noSelecionado.numeroReferencia}` : ''}
+                  </p>
+                )}
+                <p className="text-base text-ink-soft leading-relaxed">{noSelecionado.descricao}</p>
+              </div>
+
+              {relacoes.length > 0 && (
+                <div className="border-t border-line pt-5">
+                  <h3 className="text-sm font-semibold text-ink mb-3">Relações</h3>
+                  <ul className="space-y-2.5">
+                    {relacoes.map(r => (
+                      <li key={r.id} className="text-sm leading-snug">
+                        <span className="text-ink-mute">{r.saida ? r.rotulo : `${r.rotulo} (recebida)`}</span>
+                        <br />
+                        <button
+                          type="button"
+                          onClick={() => setNoSelecionado(r.outro)}
+                          className="text-left font-medium text-brand-text hover:underline underline-offset-2"
+                        >
+                          {r.outro.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="border-t border-line pt-5 space-y-2 text-sm">
+                {noSelecionado.id.startsWith('cpc-art85') && (
+                  <Link href="/normaviva" className="flex items-center gap-2.5 py-1.5 text-ink hover:text-brand-text">
+                    <BookOpen className="w-4 h-4 text-info-text" />
+                    Ver o dispositivo no NormaViva
+                  </Link>
+                )}
+                {noSelecionado.tipo === 'tese_vinculante' && (
+                  <Link href="/argumenta" className="flex items-center gap-2.5 py-1.5 text-ink hover:text-brand-text">
+                    <Scale className="w-4 h-4 text-brand-text" />
+                    Ver aplicação em uma decisão (Argumenta)
+                  </Link>
+                )}
+                {noSelecionado.tribunal === 'STJ' && (
+                  <a
+                    href="https://www.stj.jus.br/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 py-1.5 text-ink hover:text-brand-text"
+                  >
+                    <ExternalLink className="w-4 h-4 text-ink-mute" />
+                    Consultar no site do STJ
+                  </a>
+                )}
+                <button type="button" onClick={salvar} className="btn-secondary w-full mt-2">
+                  {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
+                  {salvo ? 'Salvo em Meu espaço' : 'Salvar tema em Meu espaço'}
+                </button>
+              </div>
+            </>
+          )}
+        </aside>
       </div>
 
-      {/* Canvas do Grafo e Painel Lateral Preenchido */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[580px]">
-        {/* Grafo React Flow */}
-        <div className="lg:col-span-8 rounded-lg border border-[#232B35] overflow-hidden bg-[#0B0F14] relative">
-          <ReactFlow
-            nodes={initialNodes}
-            edges={initialEdges}
-            onNodeClick={(_, node) => {
-              setNoSelecionado(node.data.original as NoGrafo);
-            }}
-            fitView
-            className="bg-[#0B0F14]"
-          >
-            <Background color="#161C24" gap={18} size={1} />
-            <Controls className="bg-[#11161D] border-[#232B35] text-[#A8B0BB]" />
-          </ReactFlow>
-
-          {/* 10.3 Legenda Semântica Discreta */}
-          <div className="absolute bottom-3 left-3 p-2 rounded bg-[#11161D]/90 border border-[#232B35] text-[10px] flex items-center gap-4 text-[#A8B0BB]">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#C8903D]" /> Precedente Vinculante
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#4F7FC8]" /> Dispositivo Legal
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#3E8F70]" /> Alteração Legislativa
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#8069B0]" /> Distinguishing
-            </span>
-          </div>
-        </div>
-
-        {/* 10.2 Painel Lateral Sempre Ativo e Informativo */}
-        <div className="lg:col-span-4 bg-[#11161D] border border-[#232B35] rounded-lg p-6 overflow-y-auto flex flex-col justify-between">
-          {noSelecionado && (
-            <div className="space-y-5">
-              <div className="space-y-1.5">
-                <span className="text-[10px] font-mono text-[#737E8C] uppercase tracking-wider block">
-                  {noSelecionado.tipo.replace('_', ' ')}
-                </span>
-                <h3 className="font-serif text-lg font-semibold text-[#F2F4F7]">
-                  {noSelecionado.label}
-                </h3>
-                {noSelecionado.tribunal && (
-                  <span className="text-xs text-[#C8903D] block">
-                    {noSelecionado.tribunal} {noSelecionado.numeroReferencia ? `&middot; ${noSelecionado.numeroReferencia}` : ''}
-                  </span>
-                )}
-              </div>
-
-              <div className="p-3.5 rounded bg-[#0B0F14] border border-[#232B35] text-xs text-[#F2F4F7] leading-relaxed">
-                {noSelecionado.descricao}
-              </div>
-
-              {/* Relações e Ações */}
-              <div className="pt-4 border-t border-[#1C232C] space-y-2 text-xs">
-                <span className="text-[11px] text-[#737E8C] block font-medium">Ações contextuais</span>
-                <Link
-                  href="/normaviva"
-                  className="flex items-center justify-between p-2.5 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
-                    <BookOpen className="w-3.5 h-3.5 text-[#4F7FC8]" />
-                    <span>Ver artigo no NormaViva</span>
-                  </span>
-                  <ExternalLink className="w-3 h-3 text-[#737E8C]" />
-                </Link>
-
-                <Link
-                  href="/argumenta"
-                  className="flex items-center justify-between p-2.5 rounded bg-[#0B0F14] border border-[#232B35] text-[#A8B0BB] hover:text-[#F2F4F7] hover:border-[#2F3946] transition-colors"
-                >
-                  <span className="flex items-center gap-2">
-                    <Scale className="w-3.5 h-3.5 text-[#4A918B]" />
-                    <span>Aplicar tese no Argumenta</span>
-                  </span>
-                  <ExternalLink className="w-3 h-3 text-[#737E8C]" />
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+      <div className="mt-12 max-w-3xl">
+        <Notice tom="info" titulo="Prévia">
+          O mapa reúne dois temas catalogados. Confira o enunciado e a tese na fonte oficial do tribunal antes de citá-los.
+        </Notice>
       </div>
     </div>
   );

@@ -2,63 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tokens: modo claro (plano §18) e modo escuro (plano §3). Valores em RGB para suportar opacidade. */
 :root {
-  --background: #0B0F14;
-  --surface: #11161D;
-  --surface-hover: #161C24;
-  --border: #232B35;
-  --text: #F2F4F7;
-  --text-muted: #A8B0BB;
-  --text-dim: #737E8C;
-  --teal: #2B6F6A;
-  --teal-light: #4A918B;
-  --gold: #B18A3B;
+  --canvas: 245 246 248; /* #F5F6F8 */
+  --surface: 255 255 255;
+  --surface-2: 238 241 245;
+  --line: 217 222 229; /* #D9DEE5 */
+  --line-strong: 190 198 208;
+  --ink: 23 32 42; /* #17202A */
+  --ink-soft: 66 77 91;
+  --ink-mute: 95 107 122;
+
+  --brand: 43 111 106; /* #2B6F6A azul-petróleo */
+  --brand-strong: 33 90 86;
+  --brand-text: 43 111 106;
+  --brand-tint: 226 239 238;
+
+  --info: 79 127 200; /* #4F7FC8 */
+  --info-text: 53 99 168;
+  --info-tint: 232 238 249;
+  --ok: 62 143 112; /* #3E8F70 */
+  --ok-text: 47 116 89;
+  --ok-tint: 228 241 234;
+  --warn: 200 144 61; /* #C8903D */
+  --warn-text: 138 90 11;
+  --warn-tint: 248 239 220;
+  --danger: 185 93 93; /* #B95D5D */
+  --danger-text: 154 59 59;
+  --danger-tint: 248 230 228;
+  --rel: 128 105 176; /* #8069B0 */
+  --rel-text: 101 80 154;
+  --rel-tint: 238 234 247;
 }
 
-body {
-  color: var(--text);
-  background-color: var(--background);
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  overflow-x: hidden;
+[data-theme='dark'] {
+  --canvas: 11 15 20; /* #0B0F14 */
+  --surface: 17 22 29; /* #11161D */
+  --surface-2: 22 28 36; /* #161C24 */
+  --line: 35 43 53; /* #232B35 */
+  --line-strong: 52 63 76;
+  --ink: 242 244 247; /* #F2F4F7 */
+  --ink-soft: 168 176 187; /* #A8B0BB */
+  --ink-mute: 130 141 154;
+
+  --brand: 43 111 106;
+  --brand-strong: 56 128 122;
+  --brand-text: 74 145 139; /* #4A918B */
+  --brand-tint: 20 40 41;
+
+  --info-text: 111 150 214;
+  --info-tint: 18 28 44;
+  --ok-text: 74 160 128;
+  --ok-tint: 17 36 30;
+  --warn-text: 214 160 80;
+  --warn-tint: 40 31 15;
+  --danger-text: 215 120 120;
+  --danger-tint: 42 22 22;
+  --rel-text: 160 138 205;
+  --rel-tint: 30 24 42;
 }
 
-/* Superfícies Limpas e Editoriais (sem glassmorphism nem gradientes decorativos) */
-.surface-panel {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  [data-theme='dark'] {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: rgb(var(--brand));
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand-text));
+    outline-offset: 2px;
+  }
 }
 
-.surface-hover:hover {
-  background-color: var(--surface-hover);
-  border-color: #2F3946;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+@layer components {
+  .card {
+    @apply bg-surface border border-line rounded-lg;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-brand-text;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-ink mb-1.5;
+  }
+
+  .field {
+    @apply w-full bg-surface border border-line-strong rounded-md px-3 py-2.5 text-sm text-ink placeholder:text-ink-mute focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors bg-brand text-white hover:bg-brand-strong;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors bg-surface text-ink border border-line-strong hover:bg-surface-2;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-xs font-medium;
+  }
+
+  .tag-neutral {
+    @apply tag bg-surface-2 text-ink-soft;
+  }
+
+  .tag-brand {
+    @apply tag bg-brand-tint text-brand-text;
+  }
+
+  .tag-info {
+    @apply tag bg-info-tint text-info-text;
+  }
+
+  .tag-ok {
+    @apply tag bg-ok-tint text-ok-text;
+  }
+
+  .tag-warn {
+    @apply tag bg-warn-tint text-warn-text;
+  }
+
+  .tag-danger {
+    @apply tag bg-danger-tint text-danger-text;
+  }
+
+  .tag-rel {
+    @apply tag bg-rel-tint text-rel-text;
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
-/* Scrollbar Discreta */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* React Flow acompanha o tema */
+html .react-flow,
+html .react-flow.light,
+html .react-flow.dark {
+  --xy-background-color-default: rgb(var(--canvas));
+  --xy-edge-stroke-default: rgb(var(--ink-mute));
+  --xy-edge-label-color-default: rgb(var(--ink-soft));
+  --xy-edge-label-background-color-default: rgb(var(--canvas));
+  --xy-controls-button-background-color-default: rgb(var(--surface));
+  --xy-controls-button-background-color-hover-default: rgb(var(--surface-2));
+  --xy-controls-button-color-default: rgb(var(--ink-soft));
+  --xy-controls-button-border-color-default: rgb(var(--line));
+  --xy-attribution-background-color-default: transparent;
 }
 
-::-webkit-scrollbar-track {
-  background: #0B0F14;
+html .react-flow__controls-button svg {
+  fill: currentColor;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1C232C;
-  border-radius: 3px;
-}
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #2B3542;
-}
-
-/* Foco Acessível e Discreto */
-:focus-visible {
-  outline: 2px solid var(--teal);
-  outline-offset: 2px;
+  body {
+    background: #fff;
+  }
 }

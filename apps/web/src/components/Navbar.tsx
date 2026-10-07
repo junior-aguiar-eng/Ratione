@@ -1,78 +1,85 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
+import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
+import { MODULOS } from '../lib/modulos';
 
 export default function Navbar() {
   const pathname = usePathname();
-
-  const ferramentas = [
-    { href: '/argumenta', label: 'Argumenta' },
-    { href: '/normaviva', label: 'NormaViva' },
-    { href: '/tesemap', label: 'TeseMap' },
-    { href: '/prazozero', label: 'PrazoZero' }
-  ];
+  const [aberto, setAberto] = useState(false);
+  const meuEspacoAtivo = pathname.startsWith('/meu-espaco');
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0F14]/90 backdrop-blur-sm border-b border-[#232B35]">
-      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        {/* Marca: Símbolo Abstrato de Estrutura Lógica + Nome */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded bg-[#161C24] border border-[#232B35] flex items-center justify-center text-[#4A918B] group-hover:border-[#2B6F6A] transition-colors">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              {/* Símbolo Abstrato: Grafo / Ramificação Estrutural de Decisão */}
-              <circle cx="6" cy="6" r="2.5" />
-              <circle cx="18" cy="6" r="2.5" />
-              <circle cx="18" cy="18" r="2.5" />
-              <circle cx="6" cy="18" r="2.5" />
-              <path d="M6 8.5v7" />
-              <path d="M8.5 6h7" />
-              <path d="M8.5 18h7" />
-              <path d="M8.5 8.5l7 7" />
-            </svg>
-          </div>
-          <span className="font-serif text-lg tracking-wider font-semibold text-[#F2F4F7]">
-            RATIONE
-          </span>
+    <header className="sticky top-0 z-50 bg-canvas/90 backdrop-blur border-b border-line">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+        <Link href="/" aria-label="Ratione, página inicial" onClick={() => setAberto(false)}>
+          <Logo />
         </Link>
 
-        {/* Navegação Central Textual (sem botões dourados, com indicador sutil em petróleo) */}
-        <nav className="hidden sm:flex items-center gap-6">
-          {ferramentas.map(item => {
-            const isActive = pathname.startsWith(item.href);
+        <nav className="hidden md:flex items-center gap-9" aria-label="Ferramentas">
+          {MODULOS.map(item => {
+            const ativo = pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors relative py-1 ${
-                  isActive
-                    ? 'text-[#F2F4F7]'
-                    : 'text-[#A8B0BB] hover:text-[#F2F4F7]'
+                aria-current={ativo ? 'page' : undefined}
+                className={`relative py-5 text-sm font-medium transition-colors ${
+                  ativo ? 'text-ink' : 'text-ink-soft hover:text-ink'
                 }`}
               >
-                <span>{item.label}</span>
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#2B6F6A] rounded-full" />
-                )}
+                {item.nome}
+                {ativo && <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-brand" />}
               </Link>
             );
           })}
         </nav>
 
-        {/* Direita: Meu espaço */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1.5">
+          <ThemeToggle />
           <Link
             href="/meu-espaco"
-            className={`text-sm font-medium transition-colors px-3 py-1.5 rounded border ${
-              pathname === '/meu-espaco'
-                ? 'bg-[#161C24] text-[#F2F4F7] border-[#2B6F6A]'
-                : 'text-[#A8B0BB] hover:text-[#F2F4F7] border-[#232B35] hover:bg-[#11161D]'
+            aria-current={meuEspacoAtivo ? 'page' : undefined}
+            className={`hidden md:inline-flex text-sm font-medium px-3 py-2 rounded-md transition-colors ${
+              meuEspacoAtivo ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
             }`}
           >
             Meu espaço
           </Link>
+          <button
+            type="button"
+            className="md:hidden p-2 text-ink"
+            aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={aberto}
+            onClick={() => setAberto(v => !v)}
+          >
+            {aberto ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
+
+      {aberto && (
+        <nav className="md:hidden border-t border-line bg-canvas px-5 py-2" aria-label="Menu">
+          {[...MODULOS.map(m => ({ href: m.href, nome: m.nome })), { href: '/meu-espaco', nome: 'Meu espaço' }].map(
+            item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setAberto(false)}
+                className={`block py-3.5 text-base border-b border-line last:border-0 ${
+                  pathname.startsWith(item.href) ? 'text-brand-text font-semibold' : 'text-ink-soft'
+                }`}
+              >
+                {item.nome}
+              </Link>
+            )
+          )}
+        </nav>
+      )}
     </header>
   );
 }

@@ -1,411 +1,463 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { Bookmark, CalendarPlus, Check, ChevronDown, Copy, ExternalLink } from 'lucide-react';
 import {
-  Calendar,
-  Check,
-  Copy,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-  SlidersHorizontal,
-  Info
-} from 'lucide-react';
-import { MotorPrazoZero, ParametrosCalculoPrazo, TipoEventoOrigem, RegimeContagem } from '@ratione/prazozero';
+  MotorPrazoZero,
+  ParametrosCalculoPrazo,
+  ResultadoCalculoPrazo,
+  TipoEventoOrigem,
+  RegimeContagem
+} from '@ratione/prazozero';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
+import PageHeader from '../../components/PageHeader';
+import Notice from '../../components/Notice';
+import EmptyState from '../../components/EmptyState';
+import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
+import { salvarRegistro } from '../../lib/historico';
+
+const ATOS = [
+  { id: 'apelacao', rotulo: 'Apelação', nome: 'Apelação Cível', dias: 15 },
+  { id: 'agravo', rotulo: 'Agravo', nome: 'Agravo de Instrumento', dias: 15 },
+  { id: 'embargos', rotulo: 'Embargos de declaração', nome: 'Embargos de Declaração', dias: 5 },
+  { id: 'contestacao', rotulo: 'Contestação', nome: 'Contestação', dias: 15 },
+  { id: 'outro', rotulo: 'Outro prazo', nome: 'Prazo personalizado', dias: 15 }
+] as const;
+
+function gerarIcs(resultado: ResultadoCalculoPrazo, titulo: string): string {
+  const inicio = resultado.dataVencimentoFinal.replace(/-/g, '');
+  const fim = new Date(`${resultado.dataVencimentoFinal}T12:00:00Z`);
+  fim.setUTCDate(fim.getUTCDate() + 1);
+  const fimStr = fim.toISOString().slice(0, 10).replace(/-/g, '');
+  const carimbo = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const escapar = (t: string) => t.replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Ratione//PrazoZero//PT',
+    'BEGIN:VEVENT',
+    `UID:${inicio}-${Math.random().toString(36).slice(2, 10)}@ratione`,
+    `DTSTAMP:${carimbo}`,
+    `DTSTART;VALUE=DATE:${inicio}`,
+    `DTEND;VALUE=DATE:${fimStr}`,
+    `SUMMARY:${escapar(`Prazo final: ${titulo}`)}`,
+    `DESCRIPTION:${escapar(resultado.certidaoAuditavel)}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+}
 
 export default function PrazoZeroPage() {
   const motor = useMemo(() => new MotorPrazoZero(), []);
 
-  // Estado do Fluxo Guiado
-  const [atoSelecionado, setAtoSelecionado] = useState('apelacao');
-  const [diasPrazo, setDiasPrazo] = useState<number>(15);
-  const [nomeAto, setNomeAto] = useState('Apelação Cível');
-
+  const [atoId, setAtoId] = useState<(typeof ATOS)[number]['id']>('apelacao');
+  const [diasOutro, setDiasOutro] = useState(15);
+  const [nomeOutro, setNomeOutro] = useState('');
   const [tipoEvento, setTipoEvento] = useState<TipoEventoOrigem>('disponibilizacao_dje');
-  const [dataEvento, setDataEvento] = useState('2026-03-10');
+  const [dataEvento, setDataEvento] = useState('');
   const [tribunalId, setTribunalId] = useState('TJSP');
-
-  // Opções Avançadas (recolhidas por padrão)
-  const [mostrarAvancadas, setMostrarAvancadas] = useState(false);
   const [regime, setRegime] = useState<RegimeContagem>('cpc_dias_uteis');
   const [prazoEmDobro, setPrazoEmDobro] = useState(false);
 
-  // Memória de cálculo expansível
-  const [mostrarMemoriaCompleta, setMostrarMemoriaCompleta] = useState(false);
+  const [memoriaAberta, setMemoriaAberta] = useState(false);
   const [copiado, setCopiado] = useState(false);
+  const [salvo, setSalvo] = useState(false);
 
-  // Execução do cálculo
-  const resultado = useMemo(() => {
+  useEffect(() => {
+    setDataEvento(hojeIso());
+  }, []);
+
+  const ato = ATOS.find(a => a.id === atoId)!;
+  const dias = atoId === 'outro' ? Math.min(Math.max(Math.trunc(diasOutro) || 1, 1), 365) : ato.dias;
+  const nomeAto = atoId === 'outro' ? nomeOutro.trim() || ato.nome : ato.nome;
+
+  const resultado = useMemo<ResultadoCalculoPrazo | null>(() => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dataEvento)) return null;
     try {
       const params: ParametrosCalculoPrazo = {
         dataEvento,
         tipoEvento,
-        diasPrazo: Number(diasPrazo) || 1,
+        diasPrazo: dias,
         regime,
         tribunalId,
         prazoEmDobro,
         nomeAto
       };
       return motor.calcularPrazo(params);
-    } catch (e) {
-      console.error(e);
+    } catch {
       return null;
     }
-  }, [motor, dataEvento, tipoEvento, diasPrazo, regime, tribunalId, prazoEmDobro, nomeAto]);
+  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, nomeAto]);
 
-  const selecionarAto = (chave: string, dias: number, nome: string) => {
-    setAtoSelecionado(chave);
-    setDiasPrazo(dias);
-    setNomeAto(nome);
+  // Resumos derivados da própria memória de cálculo
+  const resumo = useMemo(() => {
+    if (!resultado) return null;
+    const m = resultado.memoriaCalculo;
+    const limpar = (t: string) => t.replace(/ \(não computado\)$/, '');
+    return {
+      fins: m.filter(i => i.status === 'fim_de_semana').length,
+      recesso: m.filter(i => i.status === 'recesso_forense').length,
+      feriados: m.filter(i => i.status === 'feriado').map(i => `${dataCurta(i.data)}: ${limpar(i.descricao)}`),
+      base: Array.from(new Set(m.map(i => i.fundamentoLegal)))
+    };
+  }, [resultado]);
+
+  const tipoDias = resultado?.regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis';
+  const tituloCalculo = `${nomeAto} · ${tribunalId}`;
+
+  const copiarCertidao = async () => {
+    if (!resultado) return;
+    try {
+      await navigator.clipboard.writeText(resultado.certidaoAuditavel);
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch {
+      // área de transferência indisponível
+    }
   };
 
-  const copiarCertidao = () => {
+  const adicionarAoCalendario = () => {
     if (!resultado) return;
-    navigator.clipboard.writeText(resultado.certidaoAuditavel);
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 2000);
+    const blob = new Blob([gerarIcs(resultado, tituloCalculo)], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `prazo-final-${resultado.dataVencimentoFinal}.ics`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const salvar = () => {
+    if (!resultado) return;
+    salvarRegistro({
+      modulo: 'PrazoZero',
+      tipo: 'prazo',
+      titulo: `${nomeAto} · ${resultado.diasTotaisComputados} dias ${tipoDias}`,
+      detalhe: `${tribunalId} · prazo final em ${dataCurta(resultado.dataVencimentoFinal)}`,
+      url: '/prazozero'
+    });
+    setSalvo(true);
+    setTimeout(() => setSalvo(false), 2000);
   };
 
   return (
-    <div className="space-y-10">
-      {/* Cabeçalho Sóbrio */}
-      <div className="space-y-1">
-        <span className="text-xs font-medium text-[#4A918B] uppercase tracking-wider">
-          PrazoZero &middot; Cálculo verificável
-        </span>
-        <h1 className="text-3xl font-serif font-semibold text-[#F2F4F7]">
-          Cálculo de Prazo Processual
-        </h1>
-        <p className="text-sm text-[#A8B0BB] max-w-2xl">
-          Contagem transparente de prazos com memória dia a dia e fundamentação legal.
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        eyebrow="PrazoZero"
+        title="Calcule um prazo"
+        description="Informe o prazo, a intimação e o tribunal. O resultado mostra o prazo final e como cada dia foi contado."
+      />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Coluna 1: Fluxo Guiado (4 Etapas Simples) */}
-        <div className="lg:col-span-5 bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-6">
-          {/* Etapa 1: Qual prazo deseja calcular? */}
-          <div className="space-y-2">
-            <label className="text-xs font-medium text-[#F2F4F7] block">
-              1. Qual prazo deseja calcular?
-            </label>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                type="button"
-                onClick={() => selecionarAto('apelacao', 15, 'Apelação Cível')}
-                className={`p-2.5 rounded text-left border transition-colors ${
-                  atoSelecionado === 'apelacao'
-                    ? 'bg-[#161C24] border-[#2B6F6A] text-[#F2F4F7]'
-                    : 'bg-[#0B0F14] border-[#232B35] text-[#A8B0BB] hover:border-[#2F3946]'
-                }`}
-              >
-                <span className="font-medium block text-[#F2F4F7]">Apelação / Recurso</span>
-                <span className="text-[10px] text-[#737E8C]">15 dias úteis</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => selecionarAto('embargos', 5, 'Embargos de Declaração')}
-                className={`p-2.5 rounded text-left border transition-colors ${
-                  atoSelecionado === 'embargos'
-                    ? 'bg-[#161C24] border-[#2B6F6A] text-[#F2F4F7]'
-                    : 'bg-[#0B0F14] border-[#232B35] text-[#A8B0BB] hover:border-[#2F3946]'
-                }`}
-              >
-                <span className="font-medium block text-[#F2F4F7]">Embargos de Declaração</span>
-                <span className="text-[10px] text-[#737E8C]">5 dias úteis</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => selecionarAto('contestacao', 15, 'Contestação')}
-                className={`p-2.5 rounded text-left border transition-colors ${
-                  atoSelecionado === 'contestacao'
-                    ? 'bg-[#161C24] border-[#2B6F6A] text-[#F2F4F7]'
-                    : 'bg-[#0B0F14] border-[#232B35] text-[#A8B0BB] hover:border-[#2F3946]'
-                }`}
-              >
-                <span className="font-medium block text-[#F2F4F7]">Contestação</span>
-                <span className="text-[10px] text-[#737E8C]">15 dias úteis</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => selecionarAto('outro', diasPrazo, nomeAto)}
-                className={`p-2.5 rounded text-left border transition-colors ${
-                  atoSelecionado === 'outro'
-                    ? 'bg-[#161C24] border-[#2B6F6A] text-[#F2F4F7]'
-                    : 'bg-[#0B0F14] border-[#232B35] text-[#A8B0BB] hover:border-[#2F3946]'
-                }`}
-              >
-                <span className="font-medium block text-[#F2F4F7]">Outro prazo</span>
-                <span className="text-[10px] text-[#737E8C]">Personalizado</span>
-              </button>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Fluxo guiado */}
+        <form
+          className="lg:col-span-5 lg:sticky lg:top-24 card p-6 space-y-7"
+          onSubmit={e => e.preventDefault()}
+          aria-label="Dados do cálculo"
+        >
+          <fieldset className="space-y-3">
+            <legend className="label !mb-0">1. Qual prazo deseja calcular?</legend>
+            <div className="grid grid-cols-2 gap-2">
+              {ATOS.map(a => {
+                const ativo = a.id === atoId;
+                return (
+                  <button
+                    type="button"
+                    key={a.id}
+                    aria-pressed={ativo}
+                    onClick={() => setAtoId(a.id)}
+                    className={`text-left rounded-md border px-3.5 py-3 transition-colors ${
+                      ativo
+                        ? 'border-brand bg-brand-tint'
+                        : 'border-line-strong bg-surface hover:bg-surface-2'
+                    }`}
+                  >
+                    <span className="block text-sm font-medium text-ink">{a.rotulo}</span>
+                    <span className="block text-sm text-ink-mute mt-0.5">
+                      {a.id === 'outro' ? 'Personalizado' : `${a.dias} dias úteis`}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            {atoSelecionado === 'outro' && (
-              <div className="grid grid-cols-3 gap-2 pt-2">
+            {atoId === 'outro' && (
+              <div className="grid grid-cols-3 gap-3 pt-1">
                 <div>
-                  <label className="text-[10px] text-[#737E8C] block mb-1">Dias</label>
+                  <label htmlFor="dias" className="label">
+                    Dias
+                  </label>
                   <input
+                    id="dias"
                     type="number"
-                    min="1"
-                    max="180"
-                    value={diasPrazo}
-                    onChange={e => setDiasPrazo(parseInt(e.target.value, 10) || 1)}
-                    className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-2.5 py-1.5 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
+                    min={1}
+                    max={365}
+                    value={diasOutro}
+                    onChange={e => setDiasOutro(parseInt(e.target.value, 10) || 1)}
+                    className="field"
                   />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-[10px] text-[#737E8C] block mb-1">Nome do ato</label>
+                  <label htmlFor="nome-ato" className="label">
+                    Nome do ato
+                  </label>
                   <input
+                    id="nome-ato"
                     type="text"
-                    value={nomeAto}
-                    onChange={e => setNomeAto(e.target.value)}
-                    placeholder="Ex: Agravo de Instrumento"
-                    className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-2.5 py-1.5 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
+                    value={nomeOutro}
+                    onChange={e => setNomeOutro(e.target.value)}
+                    placeholder="Ex.: Agravo interno"
+                    className="field"
                   />
                 </div>
               </div>
             )}
-          </div>
+          </fieldset>
 
-          {/* Etapa 2: Como ocorreu a intimação? */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-[#F2F4F7] block">
+          <div>
+            <label htmlFor="tipo-evento" className="label">
               2. Como ocorreu a intimação?
             </label>
             <select
+              id="tipo-evento"
               value={tipoEvento}
               onChange={e => setTipoEvento(e.target.value as TipoEventoOrigem)}
-              className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
+              className="field"
             >
-              <option value="disponibilizacao_dje">
-                Disponibilização no DJe/DJEN (publicação no dia útil seguinte)
-              </option>
-              <option value="publicacao">
-                Publicação oficial já considerada no Diário
-              </option>
-              <option value="intimacao_portal">
-                Intimação eletrônica no Portal (Lei 11.419/06)
-              </option>
-              <option value="carga_ou_audiencia">
-                Ciência pessoal em audiência ou mandado cumprido
-              </option>
+              <option value="disponibilizacao_dje">Disponibilização no Diário de Justiça eletrônico</option>
+              <option value="publicacao">Publicação já considerada no Diário</option>
+              <option value="intimacao_portal">Intimação eletrônica no portal do tribunal</option>
+              <option value="carga_ou_audiencia">Ciência pessoal, em audiência ou por mandado</option>
             </select>
           </div>
 
-          {/* Etapa 3: Quando ocorreu? */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-[#F2F4F7] block">
+          <div>
+            <label htmlFor="data-evento" className="label">
               3. Quando ocorreu?
             </label>
             <input
+              id="data-evento"
               type="date"
               value={dataEvento}
               onChange={e => setDataEvento(e.target.value)}
-              className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
+              className="field"
             />
           </div>
 
-          {/* Etapa 4: Em qual tribunal? */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-[#F2F4F7] block">
+          <div>
+            <label htmlFor="tribunal" className="label">
               4. Em qual tribunal?
             </label>
-            <select
-              value={tribunalId}
-              onChange={e => setTribunalId(e.target.value)}
-              className="w-full bg-[#0B0F14] border border-[#232B35] rounded px-3 py-2 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
-            >
+            <select id="tribunal" value={tribunalId} onChange={e => setTribunalId(e.target.value)} className="field">
               {Object.values(TRIBUNAIS_BRASIL).map(t => (
                 <option key={t.id} value={t.id}>
-                  {t.sigla} &middot; {t.nome} {t.uf ? `(${t.uf})` : ''}
+                  {t.sigla} · {t.nome}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* 11.2 Opções Avançadas (recolhidas) */}
-          <div className="pt-2 border-t border-[#1C232C]">
-            <button
-              type="button"
-              onClick={() => setMostrarAvancadas(!mostrarAvancadas)}
-              className="flex items-center justify-between w-full text-xs text-[#A8B0BB] hover:text-[#F2F4F7] py-1 transition-colors"
-            >
-              <span className="flex items-center gap-1.5">
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>Opções avançadas</span>
-              </span>
-              {mostrarAvancadas ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-            </button>
-
-            {mostrarAvancadas && (
-              <div className="mt-3 space-y-3 p-3 bg-[#0B0F14] border border-[#232B35] rounded text-xs">
-                <div>
-                  <label className="text-[#737E8C] block mb-1">Regime legal</label>
-                  <select
-                    value={regime}
-                    onChange={e => setRegime(e.target.value as RegimeContagem)}
-                    className="w-full bg-[#11161D] border border-[#232B35] rounded px-2.5 py-1.5 text-xs text-[#F2F4F7] focus:outline-none focus:border-[#2B6F6A]"
-                  >
-                    <option value="cpc_dias_uteis">CPC &middot; Dias úteis com recesso forense (art. 220)</option>
-                    <option value="clt_dias_uteis">CLT &middot; Dias úteis (art. 775)</option>
-                    <option value="cpp_dias_corridos">CPP &middot; Dias corridos (art. 798)</option>
-                  </select>
-                </div>
-
-                <div className="flex items-center justify-between pt-1">
-                  <div>
-                    <span className="text-[#F2F4F7] block">Prazo em dobro</span>
-                    <span className="text-[10px] text-[#737E8C]">Fazenda Pública, MP ou Defensoria</span>
-                  </div>
-                  <input
-                    type="checkbox"
-                    checked={prazoEmDobro}
-                    onChange={e => setPrazoEmDobro(e.target.checked)}
-                    className="rounded border-[#232B35] bg-[#11161D] text-[#2B6F6A] focus:ring-0"
-                  />
-                </div>
+          <details className="group border-t border-line pt-4">
+            <summary className="flex items-center justify-between cursor-pointer text-sm font-medium text-ink-soft hover:text-ink list-none">
+              <span>Opções avançadas</span>
+              <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+            </summary>
+            <div className="space-y-5 pt-4">
+              <div>
+                <label htmlFor="regime" className="label">
+                  Regime de contagem
+                </label>
+                <select
+                  id="regime"
+                  value={regime}
+                  onChange={e => setRegime(e.target.value as RegimeContagem)}
+                  className="field"
+                >
+                  <option value="cpc_dias_uteis">CPC · dias úteis, com recesso forense</option>
+                  <option value="clt_dias_uteis">CLT · dias úteis</option>
+                  <option value="cpp_dias_corridos">CPP · dias corridos</option>
+                </select>
               </div>
-            )}
-          </div>
-        </div>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={prazoEmDobro}
+                  onChange={e => setPrazoEmDobro(e.target.checked)}
+                  className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
+                />
+                <span>
+                  <span className="block text-sm font-medium text-ink">Prazo em dobro</span>
+                  <span className="block text-sm text-ink-mute">Fazenda Pública, Ministério Público ou Defensoria</span>
+                </span>
+              </label>
+            </div>
+          </details>
+        </form>
 
-        {/* Coluna 2: Resultado Prioritário e Memória de Cálculo */}
-        <div className="lg:col-span-7 space-y-6">
-          {resultado && (
+        {/* Resultado */}
+        <div className="lg:col-span-7 space-y-9" aria-live="polite">
+          {!resultado || !resumo ? (
+            <div className="card">
+              <EmptyState titulo="Informe a data para calcular">
+                Escolha o prazo, a forma de intimação e a data do evento. O resultado aparece aqui.
+              </EmptyState>
+            </div>
+          ) : (
             <>
-              {/* 11.1 Resultado Prioritário no Topo */}
-              <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-5">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-[#737E8C] block mb-1">
-                      Prazo final
-                    </span>
-                    <div className="font-serif text-3xl sm:text-4xl font-semibold text-[#F2F4F7]">
-                      {new Date(resultado.dataVencimentoFinal + 'T12:00:00Z').toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: 'long',
-                        year: 'numeric',
-                        weekday: 'long'
-                      })}
-                    </div>
-                    <span className="text-xs text-[#A8B0BB] mt-1 block">
-                      {resultado.diasTotaisComputados} dias {resultado.regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis'} &middot; {nomeAto}
-                    </span>
-                  </div>
+              <section className="space-y-5">
+                <div>
+                  <p className="text-sm font-medium text-ink-mute">Prazo final</p>
+                  <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight mt-1">
+                    {dataLonga(resultado.dataVencimentoFinal)}
+                  </p>
+                  <p className="text-base text-ink-soft mt-2">
+                    {diaDaSemana(resultado.dataVencimentoFinal)} · {resultado.diasTotaisComputados} dias {tipoDias} ·{' '}
+                    {nomeAto} · {tribunalId}
+                  </p>
+                </div>
 
-                  <button
-                    onClick={copiarCertidao}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#161C24] hover:bg-[#2B6F6A] text-xs font-medium text-[#F2F4F7] border border-[#232B35] hover:border-[#2B6F6A] transition-colors"
-                  >
-                    {copiado ? <Check className="w-3.5 h-3.5 text-[#3E8F70]" /> : <Copy className="w-3.5 h-3.5 text-[#A8B0BB]" />}
-                    <span>{copiado ? 'Copiado' : 'Copiar certidão'}</span>
+                <dl className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-line border border-line rounded-lg overflow-hidden">
+                  {[
+                    resultado.dataDisponibilizacao
+                      ? ['Disponibilização', resultado.dataDisponibilizacao]
+                      : null,
+                    ['Publicação considerada', resultado.dataPublicacao],
+                    ['Início da contagem', resultado.dataTermoInicial]
+                  ]
+                    .filter((x): x is string[] => x !== null)
+                    .map(([rotulo, data]) => (
+                      <div key={rotulo} className="bg-surface p-4">
+                        <dt className="text-sm text-ink-mute">{rotulo}</dt>
+                        <dd className="text-lg font-semibold text-ink num mt-0.5">{dataCurta(data)}</dd>
+                        <dd className="text-sm text-ink-soft">{diaDaSemana(data)}</dd>
+                      </div>
+                    ))}
+                </dl>
+
+                {resultado.foiProrrogadoTermoFinal && resultado.motivoProrrogacao && (
+                  <Notice tom="warn" titulo="Vencimento prorrogado">
+                    {resultado.motivoProrrogacao}
+                  </Notice>
+                )}
+
+                <div className="flex flex-wrap gap-2 no-print">
+                  <button type="button" onClick={copiarCertidao} className="btn-secondary">
+                    {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
+                    {copiado ? 'Copiado' : 'Copiar memória de cálculo'}
+                  </button>
+                  <button type="button" onClick={adicionarAoCalendario} className="btn-secondary">
+                    <CalendarPlus className="w-4 h-4" />
+                    Adicionar ao calendário
+                  </button>
+                  <button type="button" onClick={salvar} className="btn-secondary">
+                    {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
+                    {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
                   </button>
                 </div>
+              </section>
 
-                {/* 11.3 Resumo das Datas Chave */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-[#1C232C] text-xs">
-                  {resultado.dataDisponibilizacao && (
-                    <div>
-                      <span className="text-[#737E8C] block text-[11px]">Disponibilização</span>
-                      <span className="font-mono text-[#F2F4F7] text-[11px]">{resultado.dataDisponibilizacao}</span>
-                    </div>
-                  )}
+              <section className="border-t border-line pt-7 space-y-5">
+                <div className="flex items-end justify-between gap-4">
                   <div>
-                    <span className="text-[#737E8C] block text-[11px]">Publicação considerada</span>
-                    <span className="font-mono text-[#F2F4F7] text-[11px]">{resultado.dataPublicacao}</span>
-                  </div>
-                  <div>
-                    <span className="text-[#737E8C] block text-[11px]">Início da contagem</span>
-                    <span className="font-mono text-[#F2F4F7] text-[11px]">{resultado.dataTermoInicial}</span>
-                  </div>
-                </div>
-
-                {resultado.foiProrrogadoTermoFinal && (
-                  <div className="p-3 rounded bg-[#C8903D]/10 border border-[#C8903D]/30 text-xs text-[#C8903D] flex items-center gap-2">
-                    <Info className="w-4 h-4 shrink-0" />
-                    <span>{resultado.motivoProrrogacao}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* 11.3 Memória de Cálculo Expansível */}
-              <div className="bg-[#11161D] border border-[#232B35] rounded-lg p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-semibold text-[#F2F4F7]">
-                      Memória de cálculo
-                    </h3>
-                    <p className="text-xs text-[#737E8C]">
-                      {resultado.diasCorridosTotais} dias corridos no período &middot; {resultado.diasTotaisComputados} computados
+                    <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>
+                    <p className="text-sm text-ink-soft mt-1">
+                      {resultado.diasCorridosTotais} dias corridos entre o evento e o prazo final;{' '}
+                      {resultado.diasTotaisComputados} dias {tipoDias} computados.
                     </p>
                   </div>
-
                   <button
-                    onClick={() => setMostrarMemoriaCompleta(!mostrarMemoriaCompleta)}
-                    className="flex items-center gap-1 text-xs text-[#4A918B] hover:text-[#F2F4F7] font-medium"
+                    type="button"
+                    onClick={() => setMemoriaAberta(v => !v)}
+                    aria-expanded={memoriaAberta}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2 whitespace-nowrap no-print"
                   >
-                    <span>{mostrarMemoriaCompleta ? 'Ocultar detalhes' : 'Ver cálculo completo'}</span>
-                    {mostrarMemoriaCompleta ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                    {memoriaAberta ? 'Ocultar cálculo' : 'Ver cálculo completo'}
+                    <ChevronDown className={`w-4 h-4 transition-transform ${memoriaAberta ? 'rotate-180' : ''}`} />
                   </button>
                 </div>
 
-                {mostrarMemoriaCompleta && (
-                  <div className="space-y-1.5 pt-2 border-t border-[#1C232C] max-h-96 overflow-y-auto pr-1">
-                    {resultado.memoriaCalculo.map((item, idx) => {
-                      const ehVencimento = item.status === 'termo_final' || item.status === 'vencimento_prorrogado';
-                      const ehUtilContado = item.diaContadoNumero !== null;
-                      const ehNaoUtil = !item.diaUtil;
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
+                  <div>
+                    <h3 className="font-semibold text-ink mb-2">Eventos considerados</h3>
+                    <ul className="space-y-1.5 text-ink-soft leading-snug">
+                      <li>Fins de semana: {resumo.fins || 'nenhum'}</li>
+                      <li>
+                        Recesso forense (CPC, art. 220):{' '}
+                        {resumo.recesso ? `${resumo.recesso} ${resumo.recesso === 1 ? 'dia' : 'dias'}` : 'nenhum'}
+                      </li>
+                      {resumo.feriados.length === 0 ? (
+                        <li>Feriados: nenhum</li>
+                      ) : (
+                        resumo.feriados.map(f => <li key={f}>{f}</li>)
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-ink mb-2">Base utilizada</h3>
+                    <ul className="space-y-1.5 text-ink-soft leading-snug">
+                      {resumo.base.map(b => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
 
-                      return (
-                        <div
-                          key={idx}
-                          className={`p-2.5 rounded border text-xs flex items-center justify-between gap-3 ${
-                            ehVencimento
-                              ? 'bg-[#161C24] border-[#2B6F6A] text-[#F2F4F7] font-medium'
-                              : ehUtilContado
-                              ? 'bg-[#0B0F14] border-[#232B35] text-[#F2F4F7]'
-                              : 'bg-[#0B0F14]/50 border-transparent text-[#737E8C]'
-                          }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <span className="font-mono text-[11px] w-20 text-[#A8B0BB]">{item.data}</span>
-                            <span className="w-24 text-[11px]">{item.diaSemana}</span>
-                            <span className="truncate max-w-xs">{item.descricao}</span>
-                          </div>
-
-                          <div className="shrink-0 flex items-center gap-2">
-                            <span className="text-[10px] text-[#737E8C] hidden sm:inline">
-                              {item.fundamentoLegal}
-                            </span>
-                            {item.diaContadoNumero && (
-                              <span className="px-1.5 py-0.2 rounded bg-[#161C24] text-[#4A918B] text-[10px] font-medium">
-                                Dia {item.diaContadoNumero}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
+                {memoriaAberta && (
+                  <div className="overflow-x-auto border border-line rounded-lg">
+                    <table className="w-full text-sm min-w-[640px]">
+                      <thead>
+                        <tr className="bg-surface-2 text-left text-ink-soft">
+                          <th className="font-medium px-4 py-2.5">Data</th>
+                          <th className="font-medium px-4 py-2.5">Dia</th>
+                          <th className="font-medium px-4 py-2.5">Contado</th>
+                          <th className="font-medium px-4 py-2.5">Descrição e fundamento</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-line">
+                        {resultado.memoriaCalculo.map((item, i) => {
+                          const final = item.status === 'termo_final' || item.status === 'vencimento_prorrogado';
+                          const contado = item.diaContadoNumero !== null;
+                          return (
+                            <tr key={i} className={final ? 'bg-brand-tint' : contado ? '' : 'text-ink-mute'}>
+                              <td className="px-4 py-2.5 num whitespace-nowrap font-medium">{dataCurta(item.data)}</td>
+                              <td className="px-4 py-2.5 whitespace-nowrap">{item.diaSemana}</td>
+                              <td className="px-4 py-2.5 whitespace-nowrap">
+                                {contado ? <span className="tag-brand">{item.diaContadoNumero}º dia</span> : 'Não'}
+                              </td>
+                              <td className="px-4 py-2.5">
+                                <span className={final ? 'font-semibold text-ink' : ''}>
+                                  {item.descricao.replace(/ \(não computado\)$/, '').replace('Termo Ad Quem alcançado', 'Prazo final alcançado')}
+                                </span>
+                                <span className="block text-xs text-ink-mute mt-0.5">{item.fundamentoLegal}</span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 )}
-              </div>
+              </section>
 
-              {/* Relação contextual discreta com NormaViva */}
-              <div className="flex items-center justify-between text-xs text-[#737E8C] px-1">
-                <span>Fundamentação: Arts. 219, 220 e 224 do CPC</span>
+              <Notice tom="info" titulo="Confira o calendário do tribunal">
+                Feriados municipais e atos específicos de cada tribunal não são considerados. O feriado local deve ser
+                comprovado no ato de interposição do recurso (CPC, art. 1.003, § 6º).{' '}
+                <Link href="/metodologia" className="underline underline-offset-2 font-medium">
+                  Limitações conhecidas
+                </Link>
+                .
+              </Notice>
+
+              <p className="text-sm text-ink-soft no-print">
                 <Link
                   href="/normaviva"
-                  className="text-[#4A918B] hover:text-[#F2F4F7] flex items-center gap-1"
+                  className="inline-flex items-center gap-1.5 text-brand-text font-medium hover:underline underline-offset-2"
                 >
-                  <span>Ver artigos no NormaViva</span>
-                  <ExternalLink className="w-3 h-3" />
+                  Ver o fundamento legal no NormaViva
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
-              </div>
+              </p>
             </>
           )}
         </div>
