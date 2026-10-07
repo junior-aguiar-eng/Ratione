@@ -3,6 +3,9 @@
 > Este documento **substitui** o `PLANO_CORRECOES_VISUAIS_RATIONE.md` como prioridade.
 > O Plano Mestre continua válido como visão; aqui está o **caminho executável**.
 > Estimativas de prazo são para **1 desenvolvedor com assistência de IA** e são hipóteses a recalibrar ao fim da Fase 0.
+>
+> **Documentos complementares (07/10/2026):**
+> `docs/produto/IA_E_PRECIFICACAO.md` · `docs/produto/METODO_CALENDARIO_FORENSE.md` · `docs/produto/FONTES_E_PIPELINES.md` · `docs/juridico/` (minutas para revisão)
 
 ---
 
@@ -42,8 +45,11 @@ Regras obrigatórias antes de abrir ao público:
 - Aviso permanente de conferência do calendário do tribunal; feriado local exige comprovação (CPC, art. 1.003, § 6º).
 - Validação jurídica documentada: **≥ 100 cenários** conferidos por jurista (você é o validador natural; registrar autoria e data).
 
-### 1.3 Quem é o usuário-alvo? (decisão pendente, ver §11)
-Recomendação: **advogados e assessores (contencioso cível/trabalhista)** como alvo inicial; **estudantes e concurseiros** como segmento secundário (NormaViva e TeseMap têm forte uso de estudo). Isso define linguagem, preço e tribunais prioritários.
+### 1.3 Público-alvo (decidido)
+**Profissionais do Direito, incluindo concurseiros**, em um meio-termo: linguagem técnica e precisa, sem jargão de software. Há dois planos pagos, **Pro** e **Pro Estudo** (ver `docs/produto/IA_E_PRECIFICACAO.md`). **Tribunais prioritários: STF e STJ**; depois TRFs e TJs.
+
+### 1.4 IA como recurso, não como produto (decidido)
+O site **não é exclusivamente de IA**. Ferramentas **sem IA** (PrazoZero, NormaViva, TeseMap) formam a base; a IA entra de forma **opcional e medida** (Argumenta é o único módulo centrado nela). API multiprovedor (**Gemini, Claude, ChatGPT**) atrás de uma camada única, com limites e créditos.
 
 ---
 
@@ -53,10 +59,10 @@ Verificado em pesquisa em 07/10/2026. **Reconfirmar termos de uso antes de integ
 
 | Fonte | O que oferece | Acesso | Limitações / risco | Uso no Ratione |
 |---|---|---|---|---|
-| **DataJud (CNJ)** | Metadados e movimentos processuais por tribunal | API pública com **chave pública**; `POST` em endpoint por tribunal (`api-publica.datajud.cnj.jus.br/api_publica_<tribunal>/_search`); [Wiki](https://datajud-wiki.cnj.jus.br/) | Metadados, **não inteiro teor**; sem garantia de tempo real; sujeito a mudança de chave e cotas | Validar número de processo/classe/órgão; futuro: sugerir prazo a partir de movimentos |
+| **DataJud (CNJ)** | Metadados e movimentos processuais por tribunal | API pública com **chave pública**; `POST` em endpoint por tribunal (`api-publica.datajud.cnj.jus.br/api_publica_<tribunal>/_search`); [Wiki](https://datajud-wiki.cnj.jus.br/) | Metadados, **não inteiro teor**; sem garantia de tempo real; sujeito a mudança de chave e cotas | **Chave de ligação** (processo, órgão, classe, movimentos). **Não traz ementa**: a ementa vem de outra fonte (STJ: espelhos dos dados abertos). Ver `FONTES_E_PIPELINES.md` |
 | **Comunica API / DJEN (CNJ)** | Comunicações e intimações publicadas | [Swagger](https://comunicaapi.pje.jus.br/swagger/index.html); **exige credenciais** do sistema corporativo CNJ | Acesso restrito; requer habilitação formal | Fase tardia: importar intimações por OAB. Iniciar contato com o CNJ cedo |
 | **Câmara dos Deputados** | Proposições, tramitação, votações | REST aberta (`dadosabertos.camara.leg.br/api/v2`), JSON/XML, sem autenticação | Trata de **projetos**, não do texto vigente | Alertas de mudanças legislativas **em andamento** |
-| **Senado Federal** | Matérias, votações; resolvedor LexML de normas | REST aberta (`legis.senado.leg.br/dadosabertos`), XML/JSON, [docs](https://legis.senado.leg.br/dadosabertos/docs/) | XML por padrão; cobertura de histórico de alterações a confirmar | Metadados e histórico de normas; alertas |
+| **Senado Federal** | Matérias, votações; resolvedor LexML de normas | REST aberta (`legis.senado.leg.br/dadosabertos`), XML/JSON, [docs](https://legis.senado.leg.br/dadosabertos/docs/) | XML por padrão; cobertura de histórico de alterações a confirmar | API de **Legislação** indicada pelo usuário: testar se traz **texto** ou só metadados/histórico (**não verificado**: rede bloqueada) |
 | **LexML Brasil** | Identificador padronizado (URN:LEX), metadados, OAI-PMH/SRU | Resolvedor `lexml.gov.br/urn`; protocolos OAI-PMH e SRU | Foco em metadados/identificação; texto vem das fontes originárias | Identidade canônica das normas |
 | **Planalto** | **Texto oficial e consolidado**, com anotações "Redação dada pela Lei…" | HTML público | Sem API; exige parser próprio e vigilância de mudanças de layout | **Fonte primária do texto** e das versões no NormaViva |
 | **STJ — Dados Abertos** | 13 conjuntos (espelhos de acórdãos, precedentes qualificados, decisões, movimentação) | **Download de arquivos** ([portal](https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/20052022-Novo-Portal-de-Dados-Abertos-amplia-transparencia-de-acoes-realizadas-no-STJ.aspx)); há Termo de Uso | Sem API em tempo real; atualização defasada; inteiro teor limitado (confirmar) | Temas repetitivos, súmulas, precedentes qualificados no TeseMap |
@@ -128,12 +134,15 @@ auditoria(id, quem, o_que, quando)   -- imutável
 - Fase posterior: **escritório (multiusuário)** com papéis.
 
 ### 4.2 Planos e cobrança (hipóteses a validar)
-| Plano | Conteúdo (hipótese) |
+| Plano | Conteúdo (hipótese; detalhes em `IA_E_PRECIFICACAO.md`) |
 |---|---|
-| Gratuito | PrazoZero com limite mensal; NormaViva básico; sem salvar além de N itens |
-| Profissional | Ilimitado nos módulos disponíveis, alertas por e-mail, exportação PDF/.ics, histórico |
-| Escritório | Vários usuários, relatórios, suporte prioritário |
-- **Preços:** definir após entrevistas com 10–15 usuários-alvo; não fixar antes.
+| Gratuito | Ferramentas sem IA com uso razoável; bônus pequeno de IA |
+| Pro | Uso ampliado, alertas por e-mail, `.ics`/PDF, histórico, créditos de IA mensais, pacotes avulsos |
+| Pro Estudo | Para concurseiros: mesmas ferramentas, pacote menor de créditos, preço menor |
+| ~~Escritório/empresarial~~ | **Fora do escopo agora** (decidido) |
+- **IA medida em créditos**; teto global de gasto com IA; limites técnicos por plano.
+- **Preços:** definir após preencher a planilha de custo por provedor e medir o beta.
+- **Beta gratuito** enquanto não houver meio regular de cobrança e emissão fiscal.
 - **Cobrança:** gateway com **Pix Automático + cartão + boleto + NFS-e** (ex.: Asaas; Stripe resolve cartão, mas o Pix e a nota fiscal pesam no Brasil). **Confirmar taxas e emissão de NFS-e** antes de decidir.
 - Regras de consumo: informações claras e canal de cancelamento (Decreto 7.962/2013); **direito de arrependimento de 7 dias** em contratação à distância (CDC, art. 49).
 
@@ -158,7 +167,7 @@ Ambientes `dev` → `staging` → `prod`; deploy automático por PR; migrações
 ### FASE 1 — PrazoZero em produção (≈ 6–8 semanas)
 **Entregáveis**
 1. **Calendário forense como dado** (`calendario_eventos`), com painel interno de curadoria (CRUD + fonte + verificação).
-2. Cobertura inicial: STF, STJ, TST, TRFs, e os **TJs priorizados pelo seu público** (sugestão: TJAL, TJSP, TJRJ, TJMG, TJPE, TJBA… definir com o usuário-alvo).
+2. Cobertura inicial: **STF e STJ** (prioridade decidida), com método em `docs/produto/METODO_CALENDARIO_FORENSE.md`; depois TRFs e TJs (ordem a definir).
 3. Regras: CPC (arts. 219–224, 183, 180, 186, 229), CLT, CPP, JEF/Lei 9.099; **catálogo de prazos com base legal** (recursos, defesas, manifestações).
 4. Correção dos defeitos conhecidos: feriados por esfera (Carnaval/Quarta de Cinzas/Corpus Christi), tabela estadual verificada ato a ato, intimação por portal (Lei 11.419, art. 5º), validação de entrada.
 5. **Suíte de ≥ 100 cenários** validados + testes de propriedade (ex.: o vencimento nunca cai em dia não útil; monotonicidade).
@@ -217,8 +226,8 @@ Escritório/multiusuário, API pública do Ratione (Fastify), integração Comun
 
 | Item | Ação |
 |---|---|
-| Pessoa jurídica | Constituir empresa (ME/Simples) com contador; CNAE de desenvolvimento/licenciamento de software; emitir NFS-e |
-| Marca | Busca de anterioridade e **registro no INPI** de "Ratione" (classes de software/serviços jurídicos); checar domínio e redes |
+| Pessoa jurídica | **Ainda não há.** Decidir com contador antes da cobrança (CNAE de software, NFS-e). Até lá, **beta gratuito** |
+| Marca | **Busca exata "RATIONE" no INPI em 07/10/2026 01:31: nenhum resultado** (base atualizada até 06/10/2026). Isso **não garante registrabilidade**. Próximos passos: busca por **radical e fonética** (RATIO, RACION, RAZION…), classes a confirmar (**9, 41, 42, 45**), e **depósito pelo e-INPI** (definir titular PF ou PJ com o contador); checar domínio e redes |
 | Termos de Uso | Redigir e **revisar por advogado de direito digital** |
 | Contrato de assinatura | Planos, cobrança, cancelamento, SLA, limitação de responsabilidade, foro |
 | Política de Privacidade (LGPD) | Bases legais por finalidade, direitos do titular, retenção, canal do titular |
@@ -263,32 +272,48 @@ Escritório/multiusuário, API pública do Ratione (Fastify), integração Comun
 ## 10. Backlog imediato (primeiros 10 passos)
 
 1. Responder às **decisões em aberto** (§11).
-2. Criar a empresa e registrar domínio/marca.
+2. **Registrar domínio** (checar `ratione.com.br`/`.app.br`) e **depositar a marca** após a busca por radical/fonética.
 3. Configurar CI no GitHub e ambientes `staging`/`prod`.
 4. Criar o projeto Supabase (São Paulo) com RLS e autenticação.
 5. Migrar a UI para componentes **shadcn/ui** (mantendo os tokens atuais).
 6. Reescrever o motor de datas (datas civis puras) e adicionar testes de propriedade.
 7. Modelar `calendario_eventos` e construir o painel de curadoria.
-8. Levantar, com fonte, o calendário de **STF, STJ, TRFs e dos 5 primeiros TJs**.
+8. Levantar, com fonte, o calendário de **STF e STJ** (checklist em `METODO_CALENDARIO_FORENSE.md`).
 9. Escrever os **100 cenários** de prazo (você valida; eu implemento os testes).
-10. Redigir minutas de Termos/Privacidade para revisão jurídica.
+10. **Revisar as minutas** de `docs/juridico/` (você é o advogado revisor) e fechar os campos `[ ]`.
+11. Rodar os **testes de bancada T1–T7** (`FONTES_E_PIPELINES.md`) assim que a rede liberar os hosts.
+12. Preencher a **planilha de custo de IA** e definir o teto mensal.
 
 ---
 
-## 11. Decisões em aberto (preciso de você)
+## 11. Decisões registradas (07/10/2026) e pendências
 
-| # | Decisão | Minha recomendação |
+### Decididas
+| # | Decisão |
+|---|---|
+| 1 | **Público:** profissionais do Direito, incluindo concurseiros (meio-termo) |
+| 2 | **Tribunais prioritários:** STF e STJ |
+| 3 | **Calendário forense:** parte dos prazos dos grandes códigos, cruza com feriados nacionais e levanta o calendário de cada tribunal |
+| 4 | **Sem plano empresarial** no momento |
+| 5 | **IA via API multiprovedor** (Gemini, Claude, ChatGPT); site **não** exclusivamente de IA; precisa de política de preços e limites (feita em `IA_E_PRECIFICACAO.md`) |
+| 6 | **Marca:** busca exata no INPI sem resultados; **sem registro prévio** |
+| 7 | **Documentos jurídicos:** eu redijo; **você, advogado, revisa** |
+| 8 | **Integrações:** DataJud (metadados) e API de Legislação do Senado |
+
+### Ajustes técnicos decorrentes (importante)
+- **DataJud não fornece ementa.** Ele identifica o processo; a ementa vem de outra fonte (STJ: espelhos dos dados abertos). STF não tem API de jurisprudência. Ver `FONTES_E_PIPELINES.md`.
+- **Senado:** não consegui abrir o swagger (host bloqueado). Entra nos testes de bancada.
+
+### Pendentes
+| # | Pendência | Recomendação |
 |---|---|---|
-| 1 | Público-alvo inicial | Advogados/assessores; concurseiros como segundo segmento |
-| 2 | Quem valida juridicamente os 100 cenários e o calendário | Você, com registro de autoria; avaliar um segundo revisor |
-| 3 | Tribunais prioritários | Definir pelo público (inclua TJAL se esse for o seu mercado) |
-| 4 | Aceita a ordem PrazoZero → NormaViva → TeseMap → Argumenta? | Sim |
-| 5 | Aceita a stack (Next.js + Supabase + worker; Fastify só depois)? | Sim |
-| 6 | Existe orçamento (empresa, advogado, nuvem, IA, seguro)? | Definir teto mensal antes da Fase 1 |
-| 7 | Acesso ao ForgeLex e ao seu repositório | Conectar; hoje o conector exige autorização |
-| 8 | Nome "Ratione": confirmar disponibilidade de marca/domínio | Fazer a busca no INPI antes de investir em identidade |
-| 9 | Modelo de cobrança (assinatura mensal x anual, teste grátis) | Decidir após entrevistas com usuários |
-| 10 | Disponibilidade semanal para validação e curadoria | Reservar horas fixas: é o gargalo real do PrazoZero |
+| 1 | **Pessoa jurídica ou autônomo** para cobrar | Definir com contador; beta gratuito até lá |
+| 2 | **Preços** do Pro e Pro Estudo | Após planilha de custo e beta |
+| 3 | **Teto mensal de IA** no beta | Definir valor em reais |
+| 4 | **Liberar hosts** para os testes de bancada | Ver `FONTES_E_PIPELINES.md` §5 |
+| 5 | Horas semanais para **validação do calendário e dos 100 cenários** | Reservar horário fixo |
+| 6 | Busca de marca **por radical/fonética** e escolha das classes | Antes de investir mais em identidade |
+| 7 | Acesso ao **ForgeLex** | Conectar quando for útil ao TeseMap |
 
 ---
 
