@@ -5,7 +5,7 @@
  * se o ano estiver completo, declarar a cobertura (o resultado passa a exibir o selo de calendário conferido).
  */
 export type EfeitoEvento = 'nao_util' | 'expediente_parcial';
-export type VerificacaoEvento = 'ato_do_tribunal' | 'pendente';
+export type VerificacaoEvento = 'ato_do_tribunal' | 'lei_estadual' | 'pendente';
 
 export interface FonteCalendario {
   ato: string;
@@ -83,6 +83,30 @@ export const FONTES_CALENDARIO = {
     ato: 'TJRJ, Informativo de suspensão de prazos e de expediente forense, calendário de feriados 2026 (atualizado em 05/10/2026), que cita cada ato (Lei estadual 10.633/2024, art. 83; Atos Executivos TJ 20, 60, 79, 91, 96, 103, 114, 116, 129, 159 e 162/2026)',
     url: 'https://www.tjrj.jus.br/documents/d/portal-conhecimento/suspensao-prazos-1a-e-2a-instancia_2026_seesc',
     lido: 'informativo oficial do tribunal (PDF, lido no navegador porque o servidor envia cadeia de certificados incompleta); diz ser meramente informativo e não substituir a publicação oficial; os atos em si não foram lidos; só ocorrências de todo o Estado, as de comarca não entram',
+    lidoEm: LIDO
+  },
+  'pe-lei-16241': {
+    ato: 'Lei estadual de Pernambuco nº 16.241/2017, art. 49: 6 de março, Data Magna e feriado civil (consolida a Lei 16.059/2017, revogada)',
+    url: 'https://legis.alepe.pe.gov.br/?lo162412017',
+    lido: 'texto na base Alepe Legis; alterações posteriores não verificadas',
+    lidoEm: LIDO
+  },
+  'rs-decreto-36180': {
+    ato: 'Decreto estadual do Rio Grande do Sul nº 36.180/1995, que cita a Constituição Estadual, art. 6º, parágrafo único (20 de setembro, data magna), e fixa o feriado',
+    url: 'http://www.al.rs.gov.br/legis/M010/M0100099.ASP?Hid_IDNorma=11624',
+    lido: 'decreto no sistema Legis da Assembleia; o texto da Constituição Estadual não foi lido, só a citação do decreto',
+    lidoEm: LIDO
+  },
+  'go-lei-19850': {
+    ato: 'Lei estadual de Goiás nº 19.850/2017, art. 1º, que trata o 24 de outubro como "feriado estadual" (pedra fundamental de Goiânia)',
+    url: 'https://legisla.casacivil.go.gov.br/api/v2/pesquisa/legislacoes/99533/pdf',
+    lido: 'lei que antecipa o feriado só para o sistema de educação em 2017; a lei que o instituiu não foi lida',
+    lidoEm: LIDO
+  },
+  'tjes-aviso-penha-2023': {
+    ato: 'TJES, aviso de plantão no feriado de Nossa Senhora da Penha (14/04/2023), que cita a Lei estadual ES 11.010/2019',
+    url: 'https://www.tjes.jus.br/?p=161451',
+    lido: 'notícia oficial do tribunal; o texto da lei não foi lido e a regra da data (segunda-feira após a oitava da Páscoa) vem de imprensa',
     lidoEm: LIDO
   },
   'tjal-an-03-2026': {
@@ -239,6 +263,13 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
   { tribunais: ['TJMG'], nome: 'Carnaval (segunda a quarta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, III', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
   { tribunais: ['TJMG'], nome: 'Semana Santa (quarta a sexta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, IV', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
   { tribunais: ['TJMG'], nome: 'Dia da Justiça (8 de dezembro)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, V', fonte: 'tjmg-res-458', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
+
+  // Feriados civis por lei estadual (Lei 9.093/1995, art. 1º, II: data magna do Estado fixada em lei estadual); CPC, art. 216: feriados declarados em lei
+  { tribunais: ['TJPE'], nome: 'Data Magna de Pernambuco (6 de março)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual PE 16.241/2017, art. 49', fonte: 'pe-lei-16241', quando: { tipo: 'intervalo', de: [3, 6], ate: [3, 6] } },
+  { tribunais: ['TJRS'], nome: 'Data magna do Rio Grande do Sul (20 de setembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Constituição do Estado do RS, art. 6º, parágrafo único; Decreto estadual 36.180/1995', fonte: 'rs-decreto-36180', quando: { tipo: 'intervalo', de: [9, 20], ate: [9, 20] } },
+  { tribunais: ['TJGO'], nome: 'Pedra fundamental de Goiânia (24 de outubro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual GO 19.850/2017, art. 1º (feriado estadual)', fonte: 'go-lei-19850', quando: { tipo: 'intervalo', de: [10, 24], ate: [10, 24] } },
+
+  { tribunais: ['TJES'], nome: 'Nossa Senhora da Penha (segunda-feira após a oitava da Páscoa)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual ES 11.010/2019 (texto não lido)', fonte: 'tjes-aviso-penha-2023', quando: { tipo: 'pascoa', deslocamentos: [8] } },
 
   { tribunais: ['TJAL'], nome: 'Carnaval (segunda a quarta-feira de cinzas)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, III', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
   { tribunais: ['TJAL'], nome: 'Semana Santa (quarta a domingo de Páscoa)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, I', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },

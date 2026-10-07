@@ -16,7 +16,7 @@ function gerador(semente: number) {
   };
 }
 
-const TRIBUNAIS = ['STF', 'STJ', 'TST', 'TRF1', 'TRF3', 'TJSP', 'TJMG', 'TJRJ', 'TJAL', 'TJPR', 'TJDF', undefined];
+const TRIBUNAIS = ['STF', 'STJ', 'TST', 'TRF1', 'TRF3', 'TJSP', 'TJMG', 'TJRJ', 'TJAL', 'TJPR', 'TJDF', 'TJPE', 'TJRS', 'TJGO', 'TJES', 'TJCE', undefined];
 const REGIMES: RegimeContagem[] = ['cpc_dias_uteis', 'clt_dias_uteis', 'jef_dias_uteis', 'cpp_dias_corridos'];
 const TIPOS: TipoEventoOrigem[] = ['disponibilizacao_dje', 'publicacao', 'intimacao_portal', 'carga_ou_audiencia'];
 const PRAZOS = [1, 2, 5, 8, 10, 15, 30];
