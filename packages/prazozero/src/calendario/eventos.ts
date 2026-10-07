@@ -79,6 +79,12 @@ export const FONTES_CALENDARIO = {
     lido: 'inteiro teor (PDF)',
     lidoEm: LIDO
   },
+  'tjrj-informativo-2026': {
+    ato: 'TJRJ, Informativo de suspensão de prazos e de expediente forense, calendário de feriados 2026 (atualizado em 05/10/2026), que cita cada ato (Lei estadual 10.633/2024, art. 83; Atos Executivos TJ 20, 60, 79, 91, 96, 103, 114, 116, 129, 159 e 162/2026)',
+    url: 'https://www.tjrj.jus.br/documents/d/portal-conhecimento/suspensao-prazos-1a-e-2a-instancia_2026_seesc',
+    lido: 'informativo oficial do tribunal (PDF, lido no navegador porque o servidor envia cadeia de certificados incompleta); diz ser meramente informativo e não substituir a publicação oficial; os atos em si não foram lidos; só ocorrências de todo o Estado, as de comarca não entram',
+    lidoEm: LIDO
+  },
   'tjal-an-03-2026': {
     ato: 'Ato Normativo nº 03/2026 do TJAL: feriados de 2026 (DJE, Caderno Administrativo, ed. 3944, 28/01/2026, p. 7)',
     url: 'https://tjal.jus.br/noticia/tribunal-de-justica-de-alagoas-regulamenta-feriados-de-2026/visualizar',
@@ -172,6 +178,39 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJMG'], inicio: '2026-12-07', fim: '2026-12-07', nome: 'Emenda do Dia da Justiça', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta 1.764/PR/2026, art. 1º, VI', fonte: 'tjmg-pc-1764' },
   { tribunais: ['TJMG'], inicio: '2026-06-04', fim: '2026-06-04', nome: 'Corpus Christi: feriado municipal em Belo Horizonte e em comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Informe do TJMG de 14/01/2026; depende de lei municipal', fonte: 'tjmg-pc-1764' },
   { tribunais: ['TJMG'], inicio: '2026-06-05', fim: '2026-06-05', nome: 'Emenda de Corpus Christi: só Belo Horizonte e comarcas com feriado municipal (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria Conjunta 1.764/PR/2026, art. 1º, IV', fonte: 'tjmg-pc-1764' },
+
+  // ---------- TJRJ, 2026: informativo oficial (ocorrências de todo o Estado até 12/10/2026) ----------
+  ...[
+    ['2026-02-05', 'Prorrogação dos prazos de processos eletrônicos (indisponibilidade do sistema), Ato Executivo 24/2026'],
+    ['2026-02-13', 'Ponto facultativo antes do Carnaval, Ato Executivo 20/2026'],
+    ['2026-02-16', 'Carnaval (Lei 10.633/2024, art. 83, III)'],
+    ['2026-02-17', 'Carnaval (Lei 10.633/2024, art. 83, III)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (Lei 10.633/2024, art. 83, III)'],
+    ['2026-02-27', 'Suspensão de prazos por chuvas na 1ª e 2ª instâncias, Ato Executivo 60/2026'],
+    ['2026-03-27', 'Prorrogação dos prazos de processos eletrônicos (indisponibilidade do sistema), Ato Executivo 73/2026'],
+    ['2026-04-02', 'Semana Santa (Lei 10.633/2024, art. 83, IV)'],
+    ['2026-04-03', 'Sexta-feira da Paixão (Lei 10.633/2024, art. 83, IV)'],
+    ['2026-04-23', 'Dia de São Jorge (Lei estadual 5.198/2008)'],
+    ['2026-04-24', 'Ponto facultativo, Ato Executivo 79/2026'],
+    ['2026-06-04', 'Corpus Christi (Lei estadual 11.002/2025)'],
+    ['2026-06-05', 'Ponto facultativo, Ato Executivo 91/2026'],
+    ['2026-06-24', 'Jogo da Seleção na Copa: prazos suspensos, expediente das 11h às 15h, Ato Executivo 96/2026'],
+    ['2026-06-29', 'Jogo da Seleção na Copa: expediente e prazos suspensos, Ato Executivo 103/2026'],
+    ['2026-07-29', 'Suspensão de prazos, Ato Executivo 116/2026'],
+    ['2026-08-07', 'Condições climáticas: prazos suspensos, Ato Executivo 129/2026'],
+    ['2026-08-11', 'Dia do Advogado: prazos suspensos em todo o Estado, Ato Executivo 114/2026'],
+    ['2026-09-04', 'Expediente das 11h às 15h, prazos suspensos, Ato Executivo 159/2026'],
+    ['2026-09-11', 'Expediente das 11h às 15h, prazos suspensos, Ato Executivo 162/2026']
+  ].map(([data, nome]) => ({
+    tribunais: ['TJRJ'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: 'TJRJ, informativo de suspensão de prazos 2026 (cita o ato)',
+    fonte: 'tjrj-informativo-2026' as const
+  })),
 
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
