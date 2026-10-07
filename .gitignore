@@ -43,3 +43,7 @@ scratch/
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Gerados pelo Next (variam entre dev e build)
+apps/web/next-env.d.ts
+apps/web/AGENTS.md
