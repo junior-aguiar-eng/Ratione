@@ -1,4 +1,5 @@
 import { MotorPrazoZero } from './calculadora';
+import { civil, deDias, ehDataIsoValida, formatarCivil, paraDias, somarDiasIso } from '../datas/civil';
 
 /**
  * Prazos materiais (decadência), calculados fora do motor processual (PLANO F2-14).
@@ -46,23 +47,8 @@ const AVISO_CALENDARIO =
   'Atos específicos do tribunal (portarias de suspensão, indisponibilidade do sistema) e feriados municipais não são considerados; ' +
   'confira o calendário do tribunal e comprove feriado local (CPC, art. 1.003, § 6º).';
 
-function parse(iso: string): Date {
-  const [a, m, d] = iso.split('-').map(Number);
-  return new Date(Date.UTC(a, m - 1, d));
-}
-
-function fmt(d: Date): string {
-  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
-}
-
-function somarDias(d: Date, n: number): Date {
-  const r = new Date(d.getTime());
-  r.setUTCDate(r.getUTCDate() + n);
-  return r;
-}
-
 function validar(iso: string): void {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso) || fmt(parse(iso)) !== iso) {
+  if (!ehDataIsoValida(iso)) {
     throw new Error(`dataInicio inválida: "${iso}" (esperado uma data real no formato AAAA-MM-DD)`);
   }
 }
@@ -76,7 +62,7 @@ export function calcularPrazoMaterial(p: ParametrosPrazoMaterial): ResultadoPraz
 
 function mandadoSeguranca(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   const BASE = 'Lei 12.016/2009, art. 23; Código Civil, arts. 132 e 207';
-  const limite = fmt(somarDias(parse(p.dataInicio), 120));
+  const limite = somarDiasIso(p.dataInicio, 120);
   // Sem suspensão: o recesso não suspende a decadência (CC, art. 207). Só dias sem expediente conferidos.
   const ctx = { uf: p.uf, tribunalId: p.tribunalId, regime: 'cpc_dias_uteis' as const, suspensaoRecesso: false };
   const util = motor.verificarDiaUtil(limite, ctx);
@@ -111,13 +97,15 @@ function mandadoSeguranca(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   return r;
 }
 
-/** Soma 2 anos: dia de igual número, ou o imediato anterior se faltar correspondência (data mais cedo). */
+/** Soma 2 anos: dia de igual número, ou o dia mais cedo se faltar correspondência (só 29/02). */
 function maisDoisAnos(iso: string): { data: string; semCorrespondencia: boolean; imediato?: string } {
-  const [a, m, d] = iso.split('-').map(Number);
-  const alvo = new Date(Date.UTC(a + 2, m - 1, d));
-  if (alvo.getUTCMonth() === m - 1) return { data: fmt(alvo), semCorrespondencia: false };
+  const { ano: a, mes: m, dia: d } = civil(iso);
+  if (ehDataIsoValida(formatarCivil({ ano: a + 2, mes: m, dia: d }))) {
+    return { data: formatarCivil({ ano: a + 2, mes: m, dia: d }), semCorrespondencia: false };
+  }
   // 29/02 sem equivalente: o dia imediato é 1º/03 (leitura literal) ou 28/02 (último dia do mês). Fica o mais cedo.
-  return { data: fmt(new Date(Date.UTC(a + 2, m, 0))), semCorrespondencia: true, imediato: fmt(new Date(Date.UTC(a + 2, m, 1))) };
+  const primeiroMarco = paraDias(a + 2, m + 1, 1);
+  return { data: formatarCivil(deDias(primeiroMarco - 1)), semCorrespondencia: true, imediato: formatarCivil(deDias(primeiroMarco)) };
 }
 
 function acaoRescisoria(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {

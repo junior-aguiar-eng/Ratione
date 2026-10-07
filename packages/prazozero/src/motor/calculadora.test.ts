@@ -9,15 +9,15 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
   it('deve calcular a Páscoa astronomicamente com exatidão para múltiplos anos', () => {
     // 2024: 31 de Março
     const p2024 = calcularPascoa(2024);
-    assert.strictEqual(p2024.toISOString().slice(0, 10), '2024-03-31');
+    assert.strictEqual(p2024, '2024-03-31');
 
     // 2025: 20 de Abril
     const p2025 = calcularPascoa(2025);
-    assert.strictEqual(p2025.toISOString().slice(0, 10), '2025-04-20');
+    assert.strictEqual(p2025, '2025-04-20');
 
     // 2026: 05 de Abril
     const p2026 = calcularPascoa(2026);
-    assert.strictEqual(p2026.toISOString().slice(0, 10), '2026-04-05');
+    assert.strictEqual(p2026, '2026-04-05');
   });
 
   it('deve aplicar a regra Canônica DJe: disponibilização na quarta-feira (10/03/2026)', () => {

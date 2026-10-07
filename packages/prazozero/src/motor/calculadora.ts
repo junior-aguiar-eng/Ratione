@@ -1,6 +1,8 @@
 import { obterFeriadosAno, suspensaoDePrazos, CALENDARIO_VERIFICADO, FeriadoLegal } from '../calendario/feriados';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 
+import { anoDe, diaDaSemanaIso, diferencaDiasIso, ehDataIsoValida, somarDiasIso } from '../datas/civil';
+
 export type TipoEventoOrigem =
   | 'disponibilizacao_dje'     // DJe / DJEN (Regra Canônica: pub no 1º dia útil seg; contagem no 1º útil pós-pub)
   | 'publicacao'               // Já publicado no Diário
@@ -103,26 +105,8 @@ const DIAS_SEMANA_NOMES = [
 
 const MAX_DIAS_PRAZO = 3650;
 
-function parseIso(isoStr: string): Date {
-  const [ano, mes, dia] = isoStr.split('-').map(Number);
-  return new Date(Date.UTC(ano, mes - 1, dia));
-}
-
-function formatIso(date: Date): string {
-  const y = date.getUTCFullYear();
-  const m = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const d = String(date.getUTCDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-function somarDias(date: Date, dias: number): Date {
-  const d = new Date(date.getTime());
-  d.setUTCDate(d.getUTCDate() + dias);
-  return d;
-}
-
 function validarEntrada(p: ParametrosCalculoPrazo): void {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(p.dataEvento) || formatIso(parseIso(p.dataEvento)) !== p.dataEvento) {
+  if (!ehDataIsoValida(p.dataEvento)) {
     throw new Error(`dataEvento inválida: "${p.dataEvento}" (esperado uma data real no formato AAAA-MM-DD)`);
   }
   if (!Number.isInteger(p.diasPrazo) || p.diasPrazo < 1 || p.diasPrazo > MAX_DIAS_PRAZO) {
@@ -160,8 +144,7 @@ export class MotorPrazoZero {
     fundamentoLegal?: string;
     descricao: string;
   } {
-    const data = parseIso(dataIso);
-    const diaSemanaIndex = data.getUTCDay();
+    const diaSemanaIndex = diaDaSemanaIso(dataIso);
 
     // 1. Fim de semana (Sábado ou Domingo)
     if (diaSemanaIndex === 0 || diaSemanaIndex === 6) {
@@ -186,7 +169,7 @@ export class MotorPrazoZero {
     }
 
     // 3. Feriados e expediente parcial
-    const feriadosAno = this.obterFeriados(data.getUTCFullYear(), params.uf, params.tribunalId);
+    const feriadosAno = this.obterFeriados(anoDe(dataIso), params.uf, params.tribunalId);
     const f = feriadosAno.get(dataIso);
     if (f && (params.incluirPendentes || f.verificacao !== 'pendente')) {
       return {
@@ -207,14 +190,12 @@ export class MotorPrazoZero {
    * Avança determinística até o próximo dia útil
    */
   public obterProximoDiaUtil(dataIso: string, params: ContextoDia): string {
-    let atual = somarDias(parseIso(dataIso), 1);
+    let iso = somarDiasIso(dataIso, 1);
     while (true) {
-      const iso = formatIso(atual);
-      const res = this.verificarDiaUtil(iso, params);
-      if (res.diaUtil) {
+      if (this.verificarDiaUtil(iso, params).diaUtil) {
         return iso;
       }
-      atual = somarDias(atual, 1);
+      iso = somarDiasIso(iso, 1);
     }
   }
 
@@ -367,10 +348,9 @@ export class MotorPrazoZero {
     const viaPortal = p.tipoEvento === 'intimacao_portal';
     if (p.tipoEvento === 'disponibilizacao_dje' || viaPortal) {
       dataDisponibilizacao = p.dataEvento;
-      const dataDispDate = parseIso(dataDisponibilizacao);
       memoria.push({
         data: dataDisponibilizacao,
-        diaSemana: DIAS_SEMANA_NOMES[dataDispDate.getUTCDay()],
+        diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(dataDisponibilizacao)],
         diaUtil: this.verificarDiaUtil(dataDisponibilizacao, contextConfig).diaUtil,
         status: 'disponibilizacao',
         descricao: viaPortal
@@ -384,10 +364,9 @@ export class MotorPrazoZero {
 
       // A publicação ocorre no 1º dia útil seguinte
       dataPublicacao = this.obterProximoDiaUtil(dataDisponibilizacao, contextConfig);
-      const dataPubDate = parseIso(dataPublicacao);
       memoria.push({
         data: dataPublicacao,
-        diaSemana: DIAS_SEMANA_NOMES[dataPubDate.getUTCDay()],
+        diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(dataPublicacao)],
         diaUtil: true,
         status: 'publicacao',
         descricao: viaPortal ? 'Dia do começo do prazo (dia útil seguinte à consulta)' : 'Data considerada de publicação oficial do ato',
@@ -397,10 +376,9 @@ export class MotorPrazoZero {
         diaContadoNumero: null
       });
     } else {
-      const dataPubDate = parseIso(dataPublicacao);
       memoria.push({
         data: dataPublicacao,
-        diaSemana: DIAS_SEMANA_NOMES[dataPubDate.getUTCDay()],
+        diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(dataPublicacao)],
         diaUtil: this.verificarDiaUtil(dataPublicacao, contextConfig).diaUtil,
         status: 'publicacao',
         descricao: 'Dia do começo do prazo (comunicação do ato)',
@@ -414,15 +392,15 @@ export class MotorPrazoZero {
     const dataTermoInicial = this.obterProximoDiaUtil(dataPublicacao, contextConfig);
 
     // Etapa 3: Iteração determinística dia a dia
-    let cursor = somarDias(parseIso(dataPublicacao), 1);
+    let cursor = somarDiasIso(dataPublicacao, 1);
     let diasContados = 0;
     let dataFinalVencimento = '';
     let foiProrrogadoTermoFinal = false;
     let motivoProrrogacao: string | undefined = undefined;
 
     while (diasContados < diasPrazoEfetivo) {
-      const dataIso = formatIso(cursor);
-      const diaSemana = DIAS_SEMANA_NOMES[cursor.getUTCDay()];
+      const dataIso = cursor;
+      const diaSemana = DIAS_SEMANA_NOMES[diaDaSemanaIso(cursor)];
       const analise = this.verificarDiaUtil(dataIso, contextConfig);
       const verificacao: FeriadoLegal['verificacao'] | undefined = analise.detalheFeriado?.verificacao;
 
@@ -493,7 +471,7 @@ export class MotorPrazoZero {
             fundamentoLegal: suspensao.fundamentoLegal,
             diaContadoNumero: null
           });
-          cursor = somarDias(cursor, 1);
+          cursor = somarDiasIso(cursor, 1);
           continue;
         }
         diasContados++;
@@ -518,10 +496,9 @@ export class MotorPrazoZero {
             motivoProrrogacao = `Vencimento em dia não útil (${analise.descricao}) prorrogado nos termos do CPP, art. 798, § 3º`;
             const proxUtil = this.obterProximoDiaUtil(dataIso, contextConfig);
             dataFinalVencimento = proxUtil;
-            const proxDate = parseIso(proxUtil);
             memoria.push({
               data: proxUtil,
-              diaSemana: DIAS_SEMANA_NOMES[proxDate.getUTCDay()],
+              diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(proxUtil)],
               diaUtil: true,
               status: 'vencimento_prorrogado',
               descricao: `Prorrogação do vencimento final: ${motivoProrrogacao}`,
@@ -535,13 +512,10 @@ export class MotorPrazoZero {
         }
       }
 
-      cursor = somarDias(cursor, 1);
+      cursor = somarDiasIso(cursor, 1);
     }
 
-    const dataInicioDate = parseIso(p.dataEvento);
-    const dataFimDate = parseIso(dataFinalVencimento);
-    const diffMs = dataFimDate.getTime() - dataInicioDate.getTime();
-    const diasCorridosTotais = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    const diasCorridosTotais = diferencaDiasIso(p.dataEvento, dataFinalVencimento);
 
     // Certidão Textual Auditável Formatada
     const tribunalNome = p.tribunalId ? (TRIBUNAIS_BRASIL[p.tribunalId]?.nome || p.tribunalId) : 'Poder Judiciário';
