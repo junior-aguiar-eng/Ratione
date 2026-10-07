@@ -308,7 +308,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | não iniciado | Lei 5.010 já verificada para TRFs; faltam pontos facultativos por tribunal |
 | F2-05 | Feriados estaduais e municipais | não iniciado | A tabela atual **não está conferida**; municipal exige comprovação |
 | F2-06 | Aviso de prazo próprio no prazo em dobro (CPC 180 §2º, 183 §2º, 186 §4º) | feito | O resultado avisa que o benefício não vale quando a lei fixa prazo próprio e, se a origem for o Diário, que o prazo em dobro só começa com a intimação pessoal (art. 183 §1º). Texto dos artigos lido no Planalto; 2 testes novos |
-| F2-07 | Litisconsórcio (art. 229), JEF, MP e Defensoria | não iniciado | Cenários validados para cada regra |
+| F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 no JEF fica **pendente** (modo conservador não suspende). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | em curso | Regime JEF no motor e na tela; aviso do art. 229 na tela; cenários de JEF e de dobro no oráculo; leis lidas no Planalto |
 | F2-08 | Catálogo de prazos com base legal | não iniciado | Hoje a tela tem 5 atos; catálogo em `METODO_CALENDARIO_FORENSE.md` §2.2 |
 | F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | 73 gerados, 0 validados; faltam 27 e a validação |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
@@ -404,7 +404,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ## 12. Decisões do responsável
 
-**Tomadas (07/10/2026):** público (profissionais do Direito e concurseiros); tribunais prioritários (STF e STJ); calendário parte dos prazos dos códigos, cruza com feriados nacionais e levanta tribunal a tribunal; sem plano empresarial; IA por API multiprovedor, sem tornar o site exclusivamente de IA; marca sem registro prévio; documentos jurídicos redigidos por Claude e revisados pelo responsável; integrações DataJud (metadados) e API de Legislação do Senado; manter um único plano.
+**Tomadas (07/10/2026):** público (profissionais do Direito e concurseiros); tribunais prioritários (STF e STJ); calendário parte dos prazos dos códigos, cruza com feriados nacionais e levanta tribunal a tribunal; sem plano empresarial; IA por API multiprovedor, sem tornar o site exclusivamente de IA; marca sem registro prévio; documentos jurídicos redigidos por Claude e revisados pelo responsável; integrações DataJud (metadados) e API de Legislação do Senado; manter um único plano; art. 229 do CPC só como aviso de atenção, porque os autos eletrônicos são a regra.
 
 **Abertas**
 
