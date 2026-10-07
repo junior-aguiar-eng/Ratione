@@ -27,7 +27,9 @@ export const VersaoDispositivoSchema = z.object({
 export type VersaoDispositivo = z.infer<typeof VersaoDispositivoSchema>;
 
 /**
- * Repositório Canônico de Dispositivos e Históricos Normativos Reais
+ * Dispositivos de exemplo da prévia do NormaViva. Os textos foram conferidos com a versão compilada do CPC no Planalto
+ * (https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105compilada.htm, lida em 07/10/2026) e a vigência
+ * do § 6º-A com a Lei 14.365/2022, art. 5º (vigência na publicação, DOU de 03/06/2022). Não é uma base completa.
  */
 export const HISTORICO_DISPOSITIVOS_EXEMPLO: VersaoDispositivo[] = [
   // Art. 85, § 2º do CPC (Honorários Advocatícios e fixação objetiva)
@@ -51,7 +53,7 @@ export const HISTORICO_DISPOSITIVOS_EXEMPLO: VersaoDispositivo[] = [
     dispositivoId: 'CPC-ART-85-P6A',
     dispositivoRotulo: 'art. 85, § 6º-A',
     normaNome: 'Código de Processo Civil (Lei nº 13.105/2015)',
-    texto: 'Quando o valor da condenação, da causa ou o proveito econômico for liquidado ou não, os honorários serão fixados nos termos dos §§ 2º ou 3º deste artigo, não sendo admissível a fixação por equidade fora das hipóteses expressamente previstas no § 8º deste artigo.',
+    texto: 'Quando o valor da condenação ou do proveito econômico obtido ou o valor atualizado da causa for líquido ou liquidável, para fins de fixação dos honorários advocatícios, nos termos dos §§ 2º e 3º, é proibida a apreciação equitativa, salvo nas hipóteses expressamente previstas no § 8º deste artigo.',
     dataInicioVigencia: '2022-06-03',
     dataFimVigencia: null,
     tipoAlteracao: 'acrescentado',

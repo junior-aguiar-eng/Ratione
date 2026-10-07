@@ -1,5 +1,7 @@
 # RATIONE — MÉTODO DO CALENDÁRIO FORENSE E CATÁLOGO DE PRAZOS
 
+> **Estado (07/10/2026):** este documento é o método original. O que foi feito e o que falta está em [`../PLANO.md`](../PLANO.md) (§ 10) e em [`VERIFICACAO_FONTES.md`](VERIFICACAO_FONTES.md). Os itens marcados **[VERIFICAR]** abaixo foram resolvidos para o catálogo de prazos (F2-08), STF e STJ (F2-02), JEF e criminais (F2-15), prazos materiais (F2-14) e TJSP, TJMG, TJAL e TJRJ (F2-04); o catálogo da seção 2.2 não é mais a fonte, vale `packages/prazozero/src/catalogo/prazos.ts`.
+>
 > Abordagem definida: partir dos **prazos previstos nos grandes códigos**, cruzar com os **feriados nacionais** e acrescentar, tribunal a tribunal, os **calendários forenses**. **Prioridade: STF e STJ**; depois TRFs e TJs.
 > Tudo que está marcado **[VERIFICAR]** é hipótese de trabalho e **não pode ir à produção sem fonte** (ato, URL e data de verificação).
 

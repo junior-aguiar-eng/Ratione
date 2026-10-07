@@ -888,7 +888,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **08/07/2027 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSP** · modo completo
 - **Publicação / dia do começo:** 08/07/2027 (quinta-feira) · **início da contagem:** 12/07/2027 (segunda-feira)
 - **Vencimento esperado:** **16/07/2027 (sexta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 09/07/2027 Revolução Constitucionalista (estadual, pendente)
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 09/07/2027 Revolução Constitucionalista de 1932 (estadual, pendente)
 - **Fundamento:** Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; lei estadual a conferir
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
