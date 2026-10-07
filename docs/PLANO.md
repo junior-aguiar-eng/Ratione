@@ -279,7 +279,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 |---|---|---|---|
 | F0-01 | Monorepo pnpm (web + 5 pacotes) | feito | `pnpm install && pnpm build` passam |
 | F0-02 | CI no GitHub (tipos, testes, gabarito dos cenários, build) | feito | Verde na `main`; falha de teste reprova |
-| F0-03 | Alertas de dependências (Dependabot) | parcial | 5 de 6 corrigidos em 07/10/2026 (`postcss`, `postcss-selector-parser`). **Aberto: `braces`** (alto, sem versão corrigida; só na toolchain de dev do Tailwind 3). Resolvido pela F0-11 |
+| F0-03 | Alertas de dependências (Dependabot) | feito | 6 de 6 em 07/10/2026: `postcss` e `postcss-selector-parser` por override; `braces` saiu do lockfile com a F0-11 (o Tailwind 4 não usa `micromatch`, `fast-glob` nem `chokidar`) |
 | F0-04 | Manutenção do workflow | feito | Actions v7 (Node 24), runner `ubuntu-24.04`, Node 24 |
 | F0-05 | Núcleo comum: entidades, tribunais, procedência | parcial | Esquemas Zod e 22 tribunais existem; faltam procedência e adaptadores |
 | F0-06 | Banco, login e armazenamento (Supabase, São Paulo, RLS) | não iniciado | Login funciona; usuário A não lê dado do B (teste automatizado) |
@@ -287,7 +287,9 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F0-08 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | F0-09 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
 | F0-10 | Núcleo de datas civis puras no motor | não iniciado | Motor sem `Date`/UTC; suíte inalterada |
-| F0-11 | Migrar Tailwind 3 para 4, antes de o estilo crescer | em curso | Build, tipos, testes e CI verdes; **visual equivalente**: estilos computados e geometria iguais em 9 páginas × claro/escuro × 2 larguras (diferenças só se justificadas); `braces` e o override de `postcss-selector-parser` somem do lockfile; `autoprefixer` removido |
+| F0-11 | Migrar Tailwind 3 para 4, antes de o estilo crescer | feito | Tailwind 4.3.3. Visual comparado nos dois builds (estilos computados e geometria de todos os elementos, 9 páginas × claro/escuro × 2 larguras + 18 estados: abas do Argumenta, nós do TeseMap, opções do PrazoZero). Diferenças restantes, todas explicadas: campo de data 2 px mais baixo (preflight do v4), `divide-y` e `ring` com mecanismo novo e traço igual. `braces`, `autoprefixer` e o override de `postcss-selector-parser` saíram |
+| F1-03 | Tipografia: decidir o `leading-*` declarado | não iniciado | No v3, `sm:text-*` anulava o `leading-*` do código a partir de `sm`; o v4 aplica o declarado. A migração **preservou o v3** com `sm:leading-*` em 6 elementos (home, resultado do PrazoZero, citação do NormaViva). Decidir se passa a valer o declarado (a data do resultado iria de 48 para 60 px) |
+| F1-04 | Espaçamento: trocar `space-y-*` por `flex flex-col gap-*` | não iniciado | No v4, `space-y` é margem inferior: não vale em filho inline, não funciona com `<legend>` e soma com `mt-*` do filho. Cinco telas foram ajustadas na migração; converter o restante quando cada tela for revisitada (junto com F0-07) |
 
 ### F1 — Casca do produto
 
@@ -378,11 +380,10 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **F0-11** migração para o Tailwind 4 (em curso).
-2. **F2-06**, **F2-07**, **F2-08**: regras do PrazoZero que faltam.
-3. **F2-09**: completar os 100 cenários e entregar ao revisor.
-4. **F2-03**: calendário como dado.
-5. **F0-06 em diante**, conforme as decisões do responsável (§12).
+1. **F2-06**, **F2-07**, **F2-08**: regras do PrazoZero que faltam.
+2. **F2-09**: completar os 100 cenários e entregar ao revisor.
+3. **F2-03**: calendário como dado.
+4. **F0-06 em diante**, conforme as decisões do responsável (§12).
 
 ---
 
