@@ -94,7 +94,7 @@ class Ctx:
 
     def em_suspensao(self, d):
         """STF e STJ: 20/12 a 31/01 e 02/07 a 31/07. Demais: 20/12 a 20/01 (CPC 220; CLT 775-A)."""
-        if self.trib in ("STF", "STJ"):
+        if self.regime != "cpp_dias_corridos" and self.trib in ("STF", "STJ"):
             return (d.month == 12 and d.day >= 20) or d.month == 1 or (d.month == 7 and d.day >= 2)
         return (d.month == 12 and d.day >= 20) or (d.month == 1 and d.day <= 20)
 
@@ -105,7 +105,7 @@ class Ctx:
         """Dia útil para termo inicial/final (expediente parcial NÃO é útil)."""
         if self.fim_de_semana(d):
             return False
-        if self.recesso and self.regime != "cpp_dias_corridos" and self.em_suspensao(d):
+        if self.recesso and self.em_suspensao(d):
             return False
         nu, pa = self.cal(d.year)
         return d not in nu and d not in pa
@@ -122,7 +122,7 @@ def calcular(e: dict, completo: bool) -> dict:
     trib = e.get("tribunalId", "")
     uf = e.get("uf") or UF_DO_TRIBUNAL.get(trib, "")
     # JEF: a suspensão de 20/12 a 20/01 é controvertida e não foi conferida (pendente): só o modo completo suspende.
-    recesso = e.get("suspensaoRecesso", regime in ("cpc_dias_uteis", "clt_dias_uteis") or (regime == "jef_dias_uteis" and completo))
+    recesso = e.get("suspensaoRecesso", regime in ("cpc_dias_uteis", "clt_dias_uteis") or (regime == "jef_dias_uteis" and completo) or (regime == "cpp_dias_corridos" and not e.get("excecaoSuspensaoCriminal")))
     # JEF: sem prazo diferenciado para entes públicos (Leis 10.259/2001, art. 9º, e 12.153/2009, art. 7º)
     efetivo = e["diasPrazo"] * (2 if e.get("prazoEmDobro") and regime != "jef_dias_uteis" else 1)
     ctx = Ctx(trib, uf, regime, recesso, completo)
@@ -134,7 +134,13 @@ def calcular(e: dict, completo: bool) -> dict:
     prorrogado = False
 
     if regime == "cpp_dias_corridos":
-        fim = pub + timedelta(efetivo)
+        # CPP, art. 798-A: dias de 20/12 a 20/01 não contam (salvo exceção)
+        contados, fim = 0, pub
+        while contados < efetivo:
+            fim += timedelta(1)
+            if recesso and ctx.em_suspensao(fim):
+                continue
+            contados += 1
         if not ctx.util(fim):
             prorrogado = True
             fim = ctx.proximo_util(fim)
@@ -323,10 +329,16 @@ add("stf-recesso-ate-31-jan", "verificado", "STF: prazos não correm de 20/12 a 
     entrada("2025-12-19", "publicacao", 2, "STF"))
 add("clt-recesso-775a", "clt", "CLT: o recesso de 20/12 a 20/01 também suspende os prazos", "CLT, art. 775-A (Lei 13.545/2017)",
     entrada("2025-12-15", "publicacao", 8, "TST", regime="clt_dias_uteis"))
-add("cpp-trf3-recesso", "cpp", "CPP no TRF3: vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01", "CPP, art. 798, § 3º; Lei 5.010/1966, art. 62, I",
-    entrada("2026-12-15", "publicacao", 5, "TRF3", regime="cpp_dias_corridos"))
-add("cpp-tjsp-fim-ano", "cpp", "CPP no TJSP: sem recesso federal, vencimento de domingo vai à segunda 21/12", "CPP, art. 798, § 3º",
+add("cpp-trf3-reu-preso", "cpp", "CPP, réu preso no TRF3: sem suspensão (art. 798-A, I); vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01", "CPP, arts. 798, § 3º, e 798-A, I; Lei 5.010/1966, art. 62, I",
+    entrada("2026-12-15", "publicacao", 5, "TRF3", regime="cpp_dias_corridos", excecaoSuspensaoCriminal=True))
+add("cpp-tjsp-reu-preso", "cpp", "CPP, réu preso no TJSP: sem suspensão; vencimento de domingo vai à segunda 21/12", "CPP, arts. 798, § 3º, e 798-A, I",
+    entrada("2026-12-15", "publicacao", 5, "TJSP", regime="cpp_dias_corridos", excecaoSuspensaoCriminal=True))
+add("cpp-recesso-suspende", "cpp", "CPP: prazo de 5 dias que atravessa 20/12 fica suspenso até 20/01 e retoma em 21/01", "CPP, art. 798-A (Lei 14.365/2022)",
     entrada("2026-12-15", "publicacao", 5, "TJSP", regime="cpp_dias_corridos"))
+add("cpp-recesso-10d", "cpp", "CPP: publicação em 19/12/2025, 10 dias corridos contados só depois de 20/01", "CPP, art. 798-A (Lei 14.365/2022)",
+    entrada("2025-12-19", "publicacao", 10, "TJSP", regime="cpp_dias_corridos"))
+add("cpp-recesso-trf3", "cpp", "CPP no TRF3: suspensão até 20/01; a retomada em 21/01 é dia útil, sem prorrogação", "CPP, art. 798-A; Lei 5.010/1966, art. 62, I",
+    entrada("2026-12-15", "publicacao", 5, "TRF3", regime="cpp_dias_corridos"))
 add("portal-segunda", "portal", "Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta", "CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º",
     entrada("2026-03-09", "intimacao_portal", 5))
 add("portal-sexta", "portal", "Intimação eletrônica: consulta na sexta; dia do começo na segunda", "CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º",

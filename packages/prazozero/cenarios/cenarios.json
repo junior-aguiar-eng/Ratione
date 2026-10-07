@@ -1688,16 +1688,17 @@
     "alternativaEsperada": null
   },
   {
-    "id": "cpp-trf3-recesso",
+    "id": "cpp-trf3-reu-preso",
     "categoria": "cpp",
-    "descricao": "CPP no TRF3: vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01",
-    "fundamento": "CPP, art. 798, § 3º; Lei 5.010/1966, art. 62, I",
+    "descricao": "CPP, réu preso no TRF3: sem suspensão (art. 798-A, I); vencimento em 20/12 cai em feriado forense (Lei 5.010, art. 62, I) e vai a 07/01",
+    "fundamento": "CPP, arts. 798, § 3º, e 798-A, I; Lei 5.010/1966, art. 62, I",
     "entrada": {
       "dataEvento": "2026-12-15",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
       "tribunalId": "TRF3",
-      "regime": "cpp_dias_corridos"
+      "regime": "cpp_dias_corridos",
+      "excecaoSuspensaoCriminal": true
     },
     "esperado": {
       "dataPublicacao": "2026-12-15",
@@ -1714,10 +1715,37 @@
     "alternativaEsperada": null
   },
   {
-    "id": "cpp-tjsp-fim-ano",
+    "id": "cpp-tjsp-reu-preso",
     "categoria": "cpp",
-    "descricao": "CPP no TJSP: sem recesso federal, vencimento de domingo vai à segunda 21/12",
-    "fundamento": "CPP, art. 798, § 3º",
+    "descricao": "CPP, réu preso no TJSP: sem suspensão; vencimento de domingo vai à segunda 21/12",
+    "fundamento": "CPP, arts. 798, § 3º, e 798-A, I",
+    "entrada": {
+      "dataEvento": "2026-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos",
+      "excecaoSuspensaoCriminal": true
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-15",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2026-12-21",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-recesso-suspende",
+    "categoria": "cpp",
+    "descricao": "CPP: prazo de 5 dias que atravessa 20/12 fica suspenso até 20/01 e retoma em 21/01",
+    "fundamento": "CPP, art. 798-A (Lei 14.365/2022)",
     "entrada": {
       "dataEvento": "2026-12-15",
       "tipoEvento": "publicacao",
@@ -1728,8 +1756,60 @@
     "esperado": {
       "dataPublicacao": "2026-12-15",
       "dataTermoInicial": "2026-12-16",
-      "dataVencimentoFinal": "2026-12-21",
-      "foiProrrogadoTermoFinal": true,
+      "dataVencimentoFinal": "2027-01-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-recesso-10d",
+    "categoria": "cpp",
+    "descricao": "CPP: publicação em 19/12/2025, 10 dias corridos contados só depois de 20/01",
+    "fundamento": "CPP, art. 798-A (Lei 14.365/2022)",
+    "entrada": {
+      "dataEvento": "2025-12-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 10,
+      "tribunalId": "TJSP",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2025-12-19",
+      "dataTermoInicial": "2026-01-21",
+      "dataVencimentoFinal": "2026-01-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "cpp-recesso-trf3",
+    "categoria": "cpp",
+    "descricao": "CPP no TRF3: suspensão até 20/01; a retomada em 21/01 é dia útil, sem prorrogação",
+    "fundamento": "CPP, art. 798-A; Lei 5.010/1966, art. 62, I",
+    "entrada": {
+      "dataEvento": "2026-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRF3",
+      "regime": "cpp_dias_corridos"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-15",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2027-01-21",
+      "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": false
     },
     "validacao": {

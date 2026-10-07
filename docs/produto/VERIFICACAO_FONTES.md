@@ -54,6 +54,7 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 | CLT, art. 775 (compilada) | dias úteis, com a redação da Lei 13.467/2017 | Corresponde |
 | CLT, art. 775-A | recesso de 20/12 a 20/01 suspende os prazos | **Corrigido:** o motor não aplicava o recesso na CLT |
 | CPP, art. 798 (caput, §§ 1º e 3º) | prazos contínuos, não se interrompem por férias; término em domingo ou feriado prorroga | Corresponde |
+| CPP, art. 798-A (Lei 14.365/2022) | suspende o prazo de 20/12 a 20/01, **salvo** réu preso, Lei Maria da Penha e medida urgente | **Corrigido em 07/10/2026:** o motor contava o CPP sem suspensão. A primeira leitura usou o CPP **não compilado** (`del3689.htm`), que não traz o 798-A; a versão correta é `del3689compilado.htm`. Achado a partir da Res. TRF4 nº 228/2022, que cita o 798-A |
 | CF, art. 93, XII | vedadas férias coletivas em 2º grau | Fundamenta a diferença entre STJ/STF e os TJs/TRFs (**texto não lido nesta rodada**) |
 
 ## 6. O que continua `pendente`

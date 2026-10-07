@@ -185,6 +185,19 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.ok(r.alternativa?.eventosPendentes[0].fundamentoLegal.includes('a conferir'));
   });
 
+  it('CPP: o prazo criminal é suspenso de 20/12 a 20/01 (art. 798-A), salvo réu preso, Maria da Penha ou urgência', () => {
+    const base = { dataEvento: '2026-12-15', tipoEvento: 'publicacao' as const, diasPrazo: 5, tribunalId: 'TJSP', regime: 'cpp_dias_corridos' as const };
+    const suspenso = motor.calcularPrazo(base);
+    assert.strictEqual(suspenso.dataVencimentoFinal, '2027-01-21', '4 dias antes de 20/12; o 5º é 21/01');
+    assert.ok(suspenso.memoriaCalculo.some(m => m.status === 'recesso_forense' && m.fundamentoLegal.includes('798-A')));
+    assert.ok(suspenso.avisos.some(a => a.startsWith('Prazo criminal suspenso de 20/12 a 20/01 (CPP, art. 798-A)') && a.includes('Não se suspende em processo com réu preso')));
+
+    const preso = motor.calcularPrazo({ ...base, excecaoSuspensaoCriminal: true });
+    assert.strictEqual(preso.dataVencimentoFinal, '2026-12-21', 'sem suspensão: vence no domingo 20/12 e vai à segunda');
+    assert.ok(preso.avisos.some(a => a.startsWith('Exceção do CPP, art. 798-A')));
+    assert.ok(!preso.memoriaCalculo.some(m => m.status === 'recesso_forense'));
+  });
+
   it('rejeita entrada inválida em vez de calcular em silêncio', () => {
     const base = { dataEvento: '2026-03-10', tipoEvento: 'publicacao' as const, diasPrazo: 5 };
     assert.throws(() => motor.calcularPrazo({ ...base, dataEvento: '2026-02-30' }), /dataEvento inválida/);

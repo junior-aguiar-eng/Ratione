@@ -310,11 +310,21 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
 export function suspensaoDePrazos(
   dataIso: string,
   tribunalId: string | undefined,
-  regime: 'cpc_dias_uteis' | 'clt_dias_uteis' | 'jef_dias_uteis'
+  regime: 'cpc_dias_uteis' | 'clt_dias_uteis' | 'jef_dias_uteis' | 'cpp_dias_corridos'
 ): { suspenso: boolean; descricao: string; fundamentoLegal: string } {
   const mes = parseInt(dataIso.slice(5, 7), 10);
   const dia = parseInt(dataIso.slice(8, 10), 10);
   const trib = tribunalId?.toUpperCase();
+
+  // Prazos criminais: CPP, art. 798-A (Lei 14.365/2022), 20/12 a 20/01, em qualquer tribunal.
+  // As férias coletivas de janeiro e julho de STF e STJ não foram conferidas para prazos criminais (CPP, art. 798, caput).
+  if (regime === 'cpp_dias_corridos') {
+    return {
+      suspenso: (mes === 12 && dia >= 20) || (mes === 1 && dia <= 20),
+      descricao: 'Suspensão de prazos criminais (20/12 a 20/01)',
+      fundamentoLegal: 'CPP, art. 798-A (Lei 14.365/2022)'
+    };
+  }
 
   if (trib === 'STF' || trib === 'STJ') {
     const suspenso = (mes === 12 && dia >= 20) || mes === 1 || (mes === 7 && dia >= 2);

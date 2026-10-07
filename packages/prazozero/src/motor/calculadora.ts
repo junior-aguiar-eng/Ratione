@@ -29,6 +29,7 @@ export interface ParametrosCalculoPrazo {
   tribunalId?: string;         // Ex: 'TJSP', 'STJ'
   uf?: string;                 // Ex: 'SP'
   prazoEmDobro?: boolean;      // Fazenda Pública (art. 183), MP (art. 180), Defensoria (art. 186); ignorado no JEF
+  excecaoSuspensaoCriminal?: boolean; // CPP, art. 798-A, I a III: réu preso, Lei Maria da Penha ou medida urgente (não suspende)
   litisconsortesComAdvogadosDistintos?: boolean; // CPC, art. 229: não duplica o prazo, só gera aviso (autos eletrônicos são a regra)
   suspensaoRecesso?: boolean;  // Suspensão de 20/dez a 20/jan (art. 220 CPC)
   nomeAto?: string;            // Ex: "Apelação Cível", "Embargos de Declaração"
@@ -172,7 +173,7 @@ export class MotorPrazoZero {
     }
 
     // 2. Suspensão de prazos: recesso e férias (CPC, art. 220; CLT, art. 775-A; STF e STJ têm janela própria)
-    if (params.suspensaoRecesso && params.regime !== 'cpp_dias_corridos') {
+    if (params.suspensaoRecesso) {
       const s = suspensaoDePrazos(dataIso, params.tribunalId, params.regime);
       if (s.suspenso) {
         return {
@@ -244,6 +245,15 @@ export class MotorPrazoZero {
           'a publicação no Diário não basta.';
       }
       avisos.push(aviso);
+    }
+
+    if (p.regime === 'cpp_dias_corridos') {
+      avisos.push(
+        p.excecaoSuspensaoCriminal
+          ? 'Exceção do CPP, art. 798-A marcada (réu preso, Lei Maria da Penha ou medida urgente): o prazo não foi suspenso de 20/12 a 20/01.'
+          : 'Prazo criminal suspenso de 20/12 a 20/01 (CPP, art. 798-A). Não se suspende em processo com réu preso, na Lei Maria da Penha ' +
+            'nem em medida urgente: marque a exceção se for o caso.'
+      );
     }
 
     if (p.litisconsortesComAdvogadosDistintos) {
@@ -324,7 +334,11 @@ export class MotorPrazoZero {
     // No JEF a aplicação do art. 220 do CPC é controvertida e não foi conferida: o modo conservador não suspende;
     // o modo completo suspende, e a diferença aparece como data alternativa.
     const suspensaoRecesso =
-      p.suspensaoRecesso ?? (regime === 'cpc_dias_uteis' || regime === 'clt_dias_uteis' || (regime === 'jef_dias_uteis' && incluirPendentes));
+      p.suspensaoRecesso ??
+      (regime === 'cpc_dias_uteis' ||
+        regime === 'clt_dias_uteis' ||
+        (regime === 'cpp_dias_corridos' && !p.excecaoSuspensaoCriminal) ||
+        (regime === 'jef_dias_uteis' && incluirPendentes));
     const multiplicador = p.prazoEmDobro && regime !== 'jef_dias_uteis' ? 2 : 1;
     const diasPrazoEfetivo = p.diasPrazo * multiplicador;
 
@@ -459,7 +473,22 @@ export class MotorPrazoZero {
           });
         }
       } else {
-        // CPP (Dias corridos)
+        // CPP (Dias corridos). A suspensão de 20/12 a 20/01 (art. 798-A) não conta dias.
+        // (a suspensão vale também para sábados e domingos da janela, que verificarDiaUtil classifica antes como fim de semana)
+        const suspensao = suspensaoRecesso ? suspensaoDePrazos(dataIso, p.tribunalId, regime) : undefined;
+        if (suspensao?.suspenso) {
+          memoria.push({
+            data: dataIso,
+            diaSemana,
+            diaUtil: false,
+            status: 'recesso_forense',
+            descricao: `${suspensao.descricao} (${suspensao.fundamentoLegal}) (não computado)`,
+            fundamentoLegal: suspensao.fundamentoLegal,
+            diaContadoNumero: null
+          });
+          cursor = somarDias(cursor, 1);
+          continue;
+        }
         diasContados++;
         const ehUltimo = diasContados === diasPrazoEfetivo;
         memoria.push({
@@ -520,7 +549,7 @@ export class MotorPrazoZero {
       `• TERMO AD QUEM (VENCIMENTO FINAL): ${dataFinalVencimento}`,
       `• Total de dias corridos transcorridos: ${diasCorridosTotais} dias`,
       foiProrrogadoTermoFinal ? `• Observação de Prorrogação: ${motivoProrrogacao}` : '',
-      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : regime === 'jef_dias_uteis' ? 'Lei 9.099/1995, art. 12-A (dias úteis)' : 'CPP, art. 798'}.`
+      `Fundamentação Legal: ${regime === 'cpc_dias_uteis' ? 'CPC/2015, arts. 219, 220 e 224' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : regime === 'jef_dias_uteis' ? 'Lei 9.099/1995, art. 12-A (dias úteis)' : 'CPP, arts. 798 e 798-A'}.`
     ].filter(Boolean).join('\n');
 
     return {

@@ -60,6 +60,7 @@ export default function PrazoZeroPage() {
   const [regime, setRegime] = useState<RegimeContagem>('cpc_dias_uteis');
   const [prazoEmDobro, setPrazoEmDobro] = useState(false);
   const [litisconsortes, setLitisconsortes] = useState(false);
+  const [excecaoCriminal, setExcecaoCriminal] = useState(false);
 
   const [memoriaAberta, setMemoriaAberta] = useState(false);
   const [copiado, setCopiado] = useState(false);
@@ -84,13 +85,14 @@ export default function PrazoZeroPage() {
         tribunalId,
         prazoEmDobro,
         litisconsortesComAdvogadosDistintos: litisconsortes,
+        excecaoSuspensaoCriminal: regime === 'cpp_dias_corridos' && excecaoCriminal,
         nomeAto
       };
       return motor.calcularPrazo(params);
     } catch {
       return null;
     }
-  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, nomeAto]);
+  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, excecaoCriminal, nomeAto]);
 
   // Resumos derivados da própria memória de cálculo
   const resumo = useMemo(() => {
@@ -106,6 +108,10 @@ export default function PrazoZeroPage() {
   }, [resultado]);
 
   const tipoDias = resultado?.regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis';
+  // Os avisos de dobro, litisconsórcio e data alternativa têm destaque próprio; os demais aparecem juntos, em qualquer calendário.
+  const avisosGerais = (resultado?.avisos ?? []).filter(
+    a => !a.includes('modo conservador') && !a.startsWith('Prazo em dobro') && !a.startsWith('Litisconsortes')
+  );
   const tituloCalculo = `${nomeAto} · ${tribunalId}`;
 
   const copiarCertidao = async () => {
@@ -294,6 +300,20 @@ export default function PrazoZeroPage() {
                   <span className="block text-sm text-ink-mute">Fazenda Pública, Ministério Público ou Defensoria</span>
                 </span>
               </label>
+              {regime === 'cpp_dias_corridos' && (
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={excecaoCriminal}
+                    onChange={e => setExcecaoCriminal(e.target.checked)}
+                    className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
+                  />
+                  <span>
+                    <span className="block text-sm font-medium text-ink">Réu preso, Maria da Penha ou medida urgente</span>
+                    <span className="block text-sm text-ink-mute">Nesses casos o prazo não se suspende de 20/12 a 20/01 (CPP, art. 798-A)</span>
+                  </span>
+                </label>
+              )}
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -388,11 +408,15 @@ export default function PrazoZeroPage() {
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-2">{resultado.avisos[0]}</p>
+                    {avisosGerais.map(a => (
+                      <p key={a} className="mt-2">
+                        {a}
+                      </p>
+                    ))}
                   </Notice>
                 ) : (
                   <Notice tom="info" titulo="Calendário do tribunal em conferência">
-                    {resultado.avisos.filter(a => !a.includes('modo conservador') && !a.startsWith('Prazo em dobro') && !a.startsWith('Litisconsortes')).map(a => (
+                    {avisosGerais.map(a => (
                       <p key={a} className="mb-1 last:mb-0">
                         {a}
                       </p>
