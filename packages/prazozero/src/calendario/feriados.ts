@@ -1,4 +1,5 @@
 import { COBERTURA_CALENDARIO, EVENTOS_CALENDARIO, FONTES_CALENDARIO, REGRAS_ANUAIS } from './eventos';
+import { anoDe, diferencaDiasIso, formatarCivil, pascoaIso, somarDiasIso } from '../datas/civil';
 
 export interface FeriadoLegal {
   data: string; // ISO "YYYY-MM-DD"
@@ -35,41 +36,8 @@ const APLICAM_LEI_5010_ART_62 = new Set(['STF', 'STJ', 'TRF1', 'TRF2', 'TRF3', '
 /** O art. 62 menciona "Tribunais Superiores", mas não há ato próprio conferido para estes. */
 const OUTROS_SUPERIORES = new Set(['TST', 'TSE']);
 
-/**
- * Cálculo astronômico e eclesiástico determinístico do Domingo de Páscoa (Algoritmo de Meeus/Jones/Butcher)
- * Válido para qualquer ano do calendário gregoriano.
- */
-export function calcularPascoa(ano: number): Date {
-  const a = ano % 19;
-  const b = Math.floor(ano / 100);
-  const c = ano % 100;
-  const d = Math.floor(b / 4);
-  const e = b % 4;
-  const f = Math.floor((b + 8) / 25);
-  const g = Math.floor((b - f + 1) / 3);
-  const h = (19 * a + b - d - g + 15) % 30;
-  const i = Math.floor(c / 4);
-  const k = c % 4;
-  const l = (32 + 2 * e + 2 * i - h - k) % 7;
-  const m = Math.floor((a + 11 * h + 22 * l) / 451);
-  const mes = Math.floor((h + l - 7 * m + 114) / 31); // 3 = Março, 4 = Abril
-  const dia = ((h + l - 7 * m + 114) % 31) + 1;
-
-  return new Date(Date.UTC(ano, mes - 1, dia));
-}
-
-function formatarDataIso(data: Date): string {
-  const y = data.getUTCFullYear();
-  const m = String(data.getUTCMonth() + 1).padStart(2, '0');
-  const d = String(data.getUTCDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-function somarDias(dataBase: Date, dias: number): Date {
-  const d = new Date(dataBase.getTime());
-  d.setUTCDate(d.getUTCDate() + dias);
-  return d;
-}
+/** Domingo de Páscoa (ISO), calendário gregoriano: ver `datas/civil.ts`. */
+export const calcularPascoa = pascoaIso;
 
 /**
  * Feriados estaduais AINDA NÃO conferidos ato a ato (todos `pendente`).
@@ -157,7 +125,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
 
   // Sexta-feira da Paixão: a Lei 9.093/1995, art. 2º, a trata como feriado religioso de lei municipal.
   // Na Justiça Federal e nos tribunais que aplicam a Lei 5.010, vale como Semana Santa (art. 62, II).
-  registrar(formatarDataIso(somarDias(pascoa, -2)), {
+  registrar(somarDiasIso(pascoa, -2), {
     nome: 'Paixão de Cristo (Sexta-feira Santa)',
     tipo: aplica5010 ? 'forense' : 'nacional',
     verificacao: verif5010,
@@ -165,25 +133,25 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
       ? `${L5010}, II (Semana Santa)`
       : 'Lei Federal nº 9.093/1995, art. 2º (feriado religioso de lei municipal); conferir ato do tribunal'
   });
-  registrar(formatarDataIso(somarDias(pascoa, -48)), {
+  registrar(somarDiasIso(pascoa, -48), {
     nome: 'Carnaval (Segunda-feira)',
     tipo: 'forense',
     verificacao: verif5010,
     fundamentoLegal: `${L5010}, III${nota5010}`
   });
-  registrar(formatarDataIso(somarDias(pascoa, -47)), {
+  registrar(somarDiasIso(pascoa, -47), {
     nome: 'Carnaval (Terça-feira)',
     tipo: 'forense',
     verificacao: verif5010,
     fundamentoLegal: `${L5010}, III${nota5010}`
   });
-  registrar(formatarDataIso(somarDias(pascoa, -46)), {
+  registrar(somarDiasIso(pascoa, -46), {
     nome: 'Quarta-feira de Cinzas (expediente a partir das 14h)',
     tipo: 'forense',
     efeito: 'expediente_parcial',
     fundamentoLegal: 'CPC, art. 224, § 1º (protrai apenas o dia do começo e o do vencimento); horário conforme ato do tribunal'
   });
-  registrar(formatarDataIso(somarDias(pascoa, 60)), {
+  registrar(somarDiasIso(pascoa, 60), {
     nome: 'Corpus Christi',
     tipo: 'nacional',
     fundamentoLegal: 'Ponto facultativo; a suspensão do expediente depende de ato do tribunal'
@@ -191,13 +159,13 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
 
   // 3. Lei 5.010/1966, art. 62: Justiça Federal e tribunais que a aplicam (texto conferido no Planalto)
   if (aplica5010 || superiorSemAto) {
-    registrar(formatarDataIso(somarDias(pascoa, -4)), {
+    registrar(somarDiasIso(pascoa, -4), {
       nome: 'Semana Santa (Quarta-feira)',
       tipo: 'forense',
       verificacao: verif5010,
       fundamentoLegal: `${L5010}, II${nota5010}`
     });
-    registrar(formatarDataIso(somarDias(pascoa, -3)), {
+    registrar(somarDiasIso(pascoa, -3), {
       nome: 'Semana Santa (Quinta-feira)',
       tipo: 'forense',
       verificacao: verif5010,
@@ -250,25 +218,23 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
         ...(d.verificacao === 'ato_do_tribunal' ? { fonte: { ato: f.ato, url: f.url, verificadoEm: f.lidoEm } } : {})
       });
     };
-    const percorrer = (de: Date, ate: Date, fn: (iso: string) => void) => {
-      for (let c = de; c.getTime() <= ate.getTime(); c = somarDias(c, 1)) {
-        if (c.getUTCFullYear() === ano) fn(formatarDataIso(c));
+    const percorrer = (de: string, ate: string, fn: (iso: string) => void) => {
+      for (let c = de; c <= ate; c = somarDiasIso(c, 1)) {
+        if (anoDe(c) === ano) fn(c);
       }
     };
     for (const ev of EVENTOS_CALENDARIO) {
       if (!ev.tribunais.includes(trib)) continue;
-      const [ai, mi, di] = ev.inicio.split('-').map(Number);
-      const [af, mf, df] = ev.fim.split('-').map(Number);
-      percorrer(new Date(Date.UTC(ai, mi - 1, di)), new Date(Date.UTC(af, mf - 1, df)), iso => aplicar(iso, ev));
+      percorrer(ev.inicio, ev.fim, iso => aplicar(iso, ev));
     }
     for (const regra of REGRAS_ANUAIS) {
       if (!regra.tribunais.includes(trib)) continue;
       if (regra.quando.tipo === 'pascoa') {
-        for (const desloc of regra.quando.deslocamentos) aplicar(formatarDataIso(somarDias(pascoa, desloc)), regra);
+        for (const desloc of regra.quando.deslocamentos) aplicar(somarDiasIso(pascoa, desloc), regra);
       } else {
         const [mi, di] = regra.quando.de;
         const [mf, df] = regra.quando.ate;
-        percorrer(new Date(Date.UTC(ano, mi - 1, di)), new Date(Date.UTC(ano, mf - 1, df)), iso => aplicar(iso, regra));
+        percorrer(formatarCivil({ ano, mes: mi, dia: di }), formatarCivil({ ano, mes: mf, dia: df }), iso => aplicar(iso, regra));
       }
     }
   }

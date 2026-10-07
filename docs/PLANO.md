@@ -109,7 +109,7 @@ Onde os planos antigos divergiam, ficou assim. Qualquer item pode ser revisto pe
 | Jobs | `apps/worker` (Node) + pg-boss | Ingestões agendadas e análises longas (fila → processamento → resultado) |
 | Documentos | Docling em worker Python isolado | Só quando o Argumenta começar; não criar antes |
 | IA | Camada única com saída estruturada (Zod) | Instruções por tarefa (`argumenta.extrair_teses`, `tesemap.classificar_relacao` etc.), cada uma com objetivo, entradas, schema, regras, exemplos e versão |
-| Datas | Datas civis puras (F0-10) | Hoje o motor usa UTC controlado; funciona e é testado |
+| Datas | Datas civis puras (F0-10) | **Feito:** o motor não usa `Date`, UTC nem fuso |
 | Testes | `node:test` + tsx hoje; Vitest, fast-check e Playwright planejados | |
 | Observabilidade | Sentry, logs estruturados, uptime | F0-09 |
 | E-mail | Resend (ou equivalente) | Transacional e alertas |
@@ -286,7 +286,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F0-07 | Design system com shadcn/ui | não iniciado | Hoje há tokens e componentes caseiros |
 | F0-08 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | F0-09 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
-| F0-10 | Núcleo de datas civis puras no motor | não iniciado | Motor sem `Date`/UTC; suíte inalterada |
+| F0-10 | Núcleo de datas civis puras no motor | feito | `datas/civil.ts`: datas ISO e aritmética por número de dias desde 1970 (algoritmos de Hinnant), sem `Date`, fuso ou horário. Motor, prazos materiais e calendário migrados; nenhum `Date` no código de produção do PrazoZero. Suíte inalterada (115 cenários, 600 aleatórios, 4.000 invariantes) e idêntica em fusos opostos; 6 testes novos conferem o núcleo com o `Date` em todos os dias de 1600 a 2600 |
 | F0-12 | Atualizar versões maiores: Next 16, Zod 4 e TypeScript 7 | feito | **Zod 4.6.5** (único ajuste: `z.record` com chave; testes conferem os dados contra os esquemas). **Next 16.4.0** com Turbopack (removidos o override do `postcss` e o `next lint`; `next-env.d.ts` e `AGENTS.md`, gerados pelo Next, saíram do repositório e o CI roda `next typegen` antes dos tipos). **TypeScript 7.0.2** (o TS 7 não carrega `@types/*` sozinho: `"types": ["node"]` nos pacotes com testes). Suíte, build e conferência da tela sem diferença |
 | F0-11 | Migrar Tailwind 3 para 4, antes de o estilo crescer | feito | Tailwind 4.3.3. Visual comparado nos dois builds (estilos computados e geometria de todos os elementos, 9 páginas × claro/escuro × 2 larguras + 18 estados: abas do Argumenta, nós do TeseMap, opções do PrazoZero). Diferenças restantes, todas explicadas: campo de data 2 px mais baixo (preflight do v4), `divide-y` e `ring` com mecanismo novo e traço igual. `braces`, `autoprefixer` e o override de `postcss-selector-parser` saíram |
 | F1-03 | Tipografia: decidir o `leading-*` declarado | não iniciado | No v3, `sm:text-*` anulava o `leading-*` do código a partir de `sm`; o v4 aplica o declarado. A migração **preservou o v3** com `sm:leading-*` em 6 elementos (home, resultado do PrazoZero, citação do NormaViva). Decidir se passa a valer o declarado (a data do resultado iria de 48 para 60 px) |
@@ -303,7 +303,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 175 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 181 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (eventos com tribunal, período, efeito e fonte) | feito | `calendario/eventos.ts`: fontes, eventos e regras anuais separados do código; STF e STJ migrados sem mudar resultado e TJSP, TJMG e TJAL carregados por cima. O painel de curadoria (CRUD) fica para depois do banco (F0-06) |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | parcial | **TJSP e TJMG (2026) com ato lido e selo**; **TJAL com selo 2026** ( 23/06 a 01/07 e 28/08 pendentes); **TJRJ carregado (sem selo)** pelo informativo oficial de 05/10/2026, atos não lidos; TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE e TJES não pesquisados. Ver `VERIFICACAO_FONTES.md` §11 |
