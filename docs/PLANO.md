@@ -302,7 +302,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 137 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 148 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (eventos com tribunal, período, efeito e fonte) | feito | `calendario/eventos.ts`: fontes, eventos e regras anuais separados do código; STF e STJ migrados sem mudar resultado e TJSP, TJMG e TJAL carregados por cima. O painel de curadoria (CRUD) fica para depois do banco (F0-06) |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | parcial | **TJSP e TJMG (2026) com ato lido e selo**; **TJAL com selo 2026** ( 23/06 a 01/07 e 28/08 pendentes); **TJRJ carregado (sem selo)** pelo informativo oficial de 05/10/2026, atos não lidos; TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE e TJES não pesquisados. Ver `VERIFICACAO_FONTES.md` §11 |
@@ -312,10 +312,10 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-07 | JEF e litisconsórcio. **JEF:** regime próprio, dias úteis (Lei 9.099, art. 12-A) e sem prazo em dobro para entes públicos (Lei 10.259, art. 9º; Lei 12.153, art. 7º); a suspensão de 20/12 a 20/01 vale no JEF (Res. CNJ 244/2016, art. 3º; verificado no F2-15). **Art. 229:** só aviso, porque o dobro não vale em autos eletrônicos (§2º), que são a regra. **MP e Defensoria:** já cobertos pelo prazo em dobro (F2-06) | feito | Regime JEF no motor e na tela; aviso do art. 229; 9 cenários novos no oráculo (JEF, MP, Defensoria, litisconsórcio); leis lidas no Planalto. |
 | F2-08 | Catálogo de prazos com base legal | feito | 26 prazos (24 processuais em CPC, CLT, CPP e JEF; 2 materiais fora do cálculo), cada um com base legal, versão lida e data; seletor agrupado na tela que ajusta o regime e mostra a base legal; 4 testes. Lido no texto vigente em 07/10/2026 |
 | F2-15 | Recesso no JEF e prazos criminais em STF e STJ (férias de janeiro e julho) | feito | **JEF:** a suspensão de 20/12 a 20/01 vale em todos os órgãos do Judiciário (Res. CNJ 244/2016, art. 3º, vigente; o ato do TRF1, Portaria Presi 431, cita expressamente Juizados Especiais Federais e Turmas Recursais). **STF e STJ, prazos criminais:** seguem o CPP; a suspensão é a do art. 798-A (20/12 a 20/01) e as férias (21 a 31/01 e julho) **não suspendem** (Portarias STJ/GP 584/2022 e 280/2023; comunicado do STF sobre a Portaria GDG 218/2024). Motor, aviso, 5 cenários e 2 testes |
-| F2-14 | Prazos materiais (decadência): mandado de segurança (120 dias) e ação rescisória (2 anos) | não iniciado | Estão no catálogo, mas a tela não os calcula; contagem própria (CPC art. 975, § 1º prorroga ao dia útil) |
+| F2-14 | Prazos materiais (decadência): mandado de segurança (120 dias) e ação rescisória (2 anos) | feito | `motor/materiais.ts` e tela (o formulário muda: data de ciência ou de trânsito e tribunal). 11 testes. Lido no texto compilado em 07/10/2026; 3 dúvidas para o revisor (`VERIFICACAO_FONTES.md` §7, itens 5 a 7) |
 | F2-09 | Suíte de 100 cenários **validados por jurista** | parcial | **115 gerados** e documento de revisão pronto ([`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md)); **0 validados**: falta a validação do revisor jurídico |
 | F2-10 | Salvar cálculo, exportar PDF e `.ics`, alerta por e-mail (D-3, D-1) | parcial | `.ics` e salvar local existem; PDF e e-mail não |
-| F2-11 | Dúvidas jurídicas abertas | em curso | 4 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
+| F2-11 | Dúvidas jurídicas abertas | em curso | 7 em `VERIFICACAO_FONTES.md` §7, aguardando o revisor |
 | F2-13 | CPP: suspensão de 20/12 a 20/01 (art. 798-A, Lei 14.365/2022), salvo réu preso, Maria da Penha e medida urgente | feito | Defeito do F2-01 corrigido (a primeira leitura usou o CPP não compilado). Exceção marcável na tela e aviso; 4 cenários novos e 2 reescritos. Férias de STF e STJ nos prazos criminais: ver F2-15 |
 | F2-12 | Relatório "o que pode alterar este prazo" | não iniciado | Lista, por cálculo, os atos que podem mudar a data |
 

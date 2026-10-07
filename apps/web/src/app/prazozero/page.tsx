@@ -9,8 +9,11 @@ import {
   ResultadoCalculoPrazo,
   TipoEventoOrigem,
   RegimeContagem,
-  prazosCalculaveis,
-  buscarPrazo
+  CATALOGO_PRAZOS,
+  buscarPrazo,
+  calcularPrazoMaterial,
+  ResultadoPrazoMaterial,
+  TipoPrazoMaterial
 } from '@ratione/prazozero';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import PageHeader from '../../components/PageHeader';
@@ -18,33 +21,16 @@ import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
+import { gerarIcs } from '../../lib/ics';
+import ResultadoMaterial from './ResultadoMaterial';
 
-const CATALOGO = prazosCalculaveis();
+const CATALOGO = CATALOGO_PRAZOS;
 const GRUPOS = Array.from(new Set(CATALOGO.map(p => p.grupo)));
 const unidade = (regime?: RegimeContagem) => (regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis');
-
-function gerarIcs(resultado: ResultadoCalculoPrazo, titulo: string): string {
-  const inicio = resultado.dataVencimentoFinal.replace(/-/g, '');
-  const fim = new Date(`${resultado.dataVencimentoFinal}T12:00:00Z`);
-  fim.setUTCDate(fim.getUTCDate() + 1);
-  const fimStr = fim.toISOString().slice(0, 10).replace(/-/g, '');
-  const carimbo = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
-  const escapar = (t: string) => t.replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
-  return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Ratione//PrazoZero//PT',
-    'BEGIN:VEVENT',
-    `UID:${inicio}-${Math.random().toString(36).slice(2, 10)}@ratione`,
-    `DTSTAMP:${carimbo}`,
-    `DTSTART;VALUE=DATE:${inicio}`,
-    `DTEND;VALUE=DATE:${fimStr}`,
-    `SUMMARY:${escapar(`Prazo final: ${titulo}`)}`,
-    `DESCRIPTION:${escapar(resultado.certidaoAuditavel)}`,
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-}
+const MATERIAL: Record<string, { tipo: TipoPrazoMaterial; medida: string; pergunta: string }> = {
+  'mandado-seguranca': { tipo: 'mandado_seguranca', medida: '120 dias corridos', pergunta: 'Quando o impetrante teve ciência do ato impugnado?' },
+  'acao-rescisoria': { tipo: 'acao_rescisoria', medida: '2 anos', pergunta: 'Quando transitou em julgado a última decisão?' }
+};
 
 export default function PrazoZeroPage() {
   const motor = useMemo(() => new MotorPrazoZero(), []);
@@ -69,9 +55,10 @@ export default function PrazoZeroPage() {
   }, []);
 
   const prazo = atoId === 'outro' ? undefined : buscarPrazo(atoId);
+  const material = prazo?.natureza === 'material' ? MATERIAL[prazo.id] : undefined;
   const dias = prazo ? prazo.dias : Math.min(Math.max(Math.trunc(diasOutro) || 1, 1), 365);
   const nomeAto = prazo
-    ? prazo.grupo.startsWith('Cível')
+    ? prazo.grupo.startsWith('Cível') || prazo.natureza === 'material'
       ? prazo.ato
       : `${prazo.ato} (${prazo.grupo})`
     : nomeOutro.trim() || 'Prazo personalizado';
@@ -82,8 +69,17 @@ export default function PrazoZeroPage() {
     if (escolhido?.regime) setRegime(escolhido.regime);
   };
 
+  const resultadoMaterial = useMemo<ResultadoPrazoMaterial | null>(() => {
+    if (!material || !/^\d{4}-\d{2}-\d{2}$/.test(dataEvento)) return null;
+    try {
+      return calcularPrazoMaterial({ tipo: material.tipo, dataInicio: dataEvento, tribunalId });
+    } catch {
+      return null;
+    }
+  }, [material, dataEvento, tribunalId]);
+
   const resultado = useMemo<ResultadoCalculoPrazo | null>(() => {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(dataEvento)) return null;
+    if (material || !/^\d{4}-\d{2}-\d{2}$/.test(dataEvento)) return null;
     try {
       const params: ParametrosCalculoPrazo = {
         dataEvento,
@@ -100,7 +96,7 @@ export default function PrazoZeroPage() {
     } catch {
       return null;
     }
-  }, [motor, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, excecaoCriminal, nomeAto]);
+  }, [motor, material, dataEvento, tipoEvento, dias, regime, tribunalId, prazoEmDobro, litisconsortes, excecaoCriminal, nomeAto]);
 
   // Resumos derivados da própria memória de cálculo
   const resumo = useMemo(() => {
@@ -135,7 +131,7 @@ export default function PrazoZeroPage() {
 
   const adicionarAoCalendario = () => {
     if (!resultado) return;
-    const blob = new Blob([gerarIcs(resultado, tituloCalculo)], { type: 'text/calendar;charset=utf-8' });
+    const blob = new Blob([gerarIcs(resultado.dataVencimentoFinal, resultado.certidaoAuditavel, tituloCalculo)], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -185,7 +181,7 @@ export default function PrazoZeroPage() {
                 <optgroup key={g} label={g}>
                   {CATALOGO.filter(p => p.grupo === g).map(p => (
                     <option key={p.id} value={p.id}>
-                      {p.ato} · {p.dias} dias {unidade(p.regime)}
+                      {p.ato} · {MATERIAL[p.id]?.medida ?? `${p.dias} dias ${unidade(p.regime)}`}
                     </option>
                   ))}
                 </optgroup>
@@ -231,6 +227,7 @@ export default function PrazoZeroPage() {
             )}
           </fieldset>
 
+          {!material && (
           <div>
             <label htmlFor="tipo-evento" className="label">
               2. Como ocorreu a intimação?
@@ -247,10 +244,11 @@ export default function PrazoZeroPage() {
               <option value="carga_ou_audiencia">Ciência pessoal, em audiência ou por mandado</option>
             </select>
           </div>
+          )}
 
           <div>
             <label htmlFor="data-evento" className="label">
-              3. Quando ocorreu?
+              {material ? '2. ' + material.pergunta : '3. Quando ocorreu?'}
             </label>
             <input
               id="data-evento"
@@ -263,7 +261,7 @@ export default function PrazoZeroPage() {
 
           <div>
             <label htmlFor="tribunal" className="label">
-              4. Em qual tribunal?
+              {material ? '3. Em qual tribunal será proposta a ação?' : '4. Em qual tribunal?'}
             </label>
             <select id="tribunal" value={tribunalId} onChange={e => setTribunalId(e.target.value)} className="field">
               {Object.values(TRIBUNAIS_BRASIL).map(t => (
@@ -274,6 +272,7 @@ export default function PrazoZeroPage() {
             </select>
           </div>
 
+          {!material && (
           <details className="group border-t border-line pt-4">
             <summary className="flex items-center justify-between cursor-pointer text-sm font-medium text-ink-soft hover:text-ink list-none">
               <span>Opções avançadas</span>
@@ -336,11 +335,22 @@ export default function PrazoZeroPage() {
               </label>
             </div>
           </details>
+          )}
         </form>
 
         {/* Resultado */}
         <div className="lg:col-span-7 space-y-9" aria-live="polite">
-          {!resultado || !resumo ? (
+          {material ? (
+            resultadoMaterial ? (
+              <ResultadoMaterial resultado={resultadoMaterial} titulo={nomeAto} tribunalId={tribunalId} />
+            ) : (
+              <div className="card">
+                <EmptyState titulo="Informe a data para calcular">
+                  {material.pergunta} O resultado aparece aqui.
+                </EmptyState>
+              </div>
+            )
+          ) : !resultado || !resumo ? (
             <div className="card">
               <EmptyState titulo="Informe a data para calcular">
                 Escolha o prazo, a forma de intimação e a data do evento. O resultado aparece aqui.
