@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Tipos, testes, gabarito e build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Mesma versão do pnpm fixada em package.json ("packageManager")
+      - name: Instalar pnpm
+        run: npm install -g pnpm@11.19.0
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Tipos
+        run: pnpm -r exec tsc --noEmit
+
+      - name: Testes
+        run: pnpm test
+
+      # O gabarito dos cenários vem do oráculo independente em Python; se o JSON versionado
+      # divergir do que o oráculo gera, alguém mudou um sem o outro.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gabarito dos cenários em sincronia com o oráculo
+        run: |
+          python packages/prazozero/cenarios/oraculo.py
+          git diff --exit-code -- packages/prazozero/cenarios/cenarios.json
+
+      - name: Build
+        run: pnpm build

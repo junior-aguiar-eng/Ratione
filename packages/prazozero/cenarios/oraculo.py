@@ -367,5 +367,5 @@ if __name__ == "__main__":
         assert pascoa(ano) == date(ano, m, d), f"Páscoa {ano} divergente"
     cenarios = gerar()
     destino = Path(__file__).with_name("cenarios.json")
-    destino.write_text(json.dumps(cenarios, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    destino.write_text(json.dumps(cenarios, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"{len(cenarios)} cenários gravados em {destino.name}")

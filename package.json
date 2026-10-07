@@ -2,6 +2,7 @@
   "name": "ratione",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.19.0",
   "description": "Ratione — Plataforma de Inteligência e Rigor Jurídico: Argumenta, NormaViva, TeseMap e PrazoZero",
   "scripts": {
     "dev": "pnpm --filter web dev",
