@@ -73,7 +73,7 @@ pnpm dev
 
 ## ⚖️ Filosofia de Engenharia: "Sem Mock"
 
-- **Prazos:** conferidos por um oráculo independente (Python, sem código em comum com o motor) em 121 cenários fixos e 600 entradas aleatórias, mais testes de propriedades. Os cenários **ainda não foram validados por revisão jurídica** (ver `docs/produto/REVISAO_CENARIOS.md`).
+- **Prazos:** conferidos por um oráculo independente (Python, sem código em comum com o motor) em 121 cenários fixos e 600 entradas aleatórias, mais testes de propriedades. **8 dos 121 cenários foram validados por revisão jurídica** em 07/10/2026 (mais 2 prazos materiais); os outros 113 seguem pendentes (ver `docs/produto/REVISAO_CENARIOS.md`).
 - **Calendário:** cada dia não útil aponta o ato de onde foi lido (ato, URL e data). Só STF, STJ, TJSP, TJMG e TJAL (2026) têm o calendário conferido; o resto fica `pendente` e aparece só como data alternativa. Registro em `docs/produto/VERIFICACAO_FONTES.md`.
 - **Auditoria:** o usuário recebe a memória de cálculo dia a dia, com o fundamento de cada dia excluído (art. 1.003, § 6º do CPC, para feriado local).
 - **Dados de exemplo:** NormaViva, TeseMap e Argumenta usam um conjunto pequeno de dados digitados à mão e conferidos, rotulados como prévia ou demonstração na tela.
