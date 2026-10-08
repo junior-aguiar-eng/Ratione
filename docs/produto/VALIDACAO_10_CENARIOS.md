@@ -1,5 +1,7 @@
 # Validação dos 10 cenários mais importantes
 
+> **Resultado (07/10/2026): os 10 foram validados como CERTOS por Junior Aguiar (revisor jurídico).** Os casos 1 a 8 correspondem aos cenários `dje-tjsp-exemplo`, `atravessa-tiradentes`, `recesso-15d`, `dobro-defensoria-embargos`, `clt-8d`, `cpp-5d-domingo`, `jef-10d-recurso` e `stj-ferias-julho-5d`, agora marcados `validado` no gabarito. Os casos 9 e 10 (prazos materiais) estão cobertos por testes em `materiais.test.ts`, fora do gabarito do oráculo. Os demais 113 cenários continuam `pendentes`: só contam como validados os que o revisor conferiu um a um.
+
 > Para quem é: o revisor jurídico (você). Tempo estimado: 15 a 20 minutos.
 > O que fazer: em cada caso abaixo, confira a **regra**, refaça a contagem olhando o calendário, e diga se a data do sistema está **certa** ou **errada**. Se errada, diga a data certa e o motivo.
 > O que NÃO é preciso: ler código, nem conferir o calendário de feriados do tribunal (isso já foi lido nos atos oficiais, ver `VERIFICACAO_FONTES.md`). Aqui se valida a **regra de contagem**.
