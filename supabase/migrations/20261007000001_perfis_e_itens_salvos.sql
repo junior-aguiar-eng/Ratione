@@ -56,9 +56,12 @@ $$;
 create trigger usuarios_novo_perfil after insert on auth.users
 for each row execute function public.criar_perfil();
 
--- Acesso: nada para visitantes; só as próprias linhas para quem está logado
-revoke all on public.perfis from anon;
-revoke all on public.itens_salvos from anon;
+-- Acesso: nada para visitantes; só as próprias linhas para quem está logado.
+-- As permissões são explícitas e mínimas: o Supabase concede privilégios a mais (TRUNCATE, REFERENCES, TRIGGER) por padrão.
+revoke all on public.perfis from anon, authenticated;
+revoke all on public.itens_salvos from anon, authenticated;
+grant select, update on public.perfis to authenticated;
+grant select, insert, update, delete on public.itens_salvos to authenticated;
 revoke all on function public.criar_perfil() from public, anon, authenticated;
 revoke all on function public.marcar_atualizacao() from public, anon, authenticated;
 

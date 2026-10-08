@@ -82,10 +82,9 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
   it('perfil não pode ser criado nem apagado pelo usuário (nasce no cadastro e some com a conta)', async () => {
     await assert.rejects(
       como(db, ana, tx => tx.query('insert into public.perfis (id) values (gen_random_uuid())')),
-      /row-level security|foreign key/
+      /permission denied/
     );
-    const del = await como(db, ana, tx => tx.query('delete from public.perfis where id = $1', [ana]));
-    assert.strictEqual(del.affectedRows, 0);
+    await assert.rejects(como(db, ana, tx => tx.query('delete from public.perfis where id = $1', [ana])), /permission denied/);
   });
 
   it('restrições de dados: módulo, URL interna, tamanhos, UF e profissão', async () => {
@@ -112,6 +111,16 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
     await db.query('delete from auth.users where id = $1', [carla]);
     assert.strictEqual((await db.query('select 1 from public.perfis where id = $1', [carla])).rows.length, 0);
     assert.strictEqual((await db.query('select 1 from public.itens_salvos where usuario_id = $1', [carla])).rows.length, 0);
+  });
+
+  it('privilégios mínimos: authenticated só tem o necessário e anon não tem nenhum', async () => {
+    const q = await db.query<{ grantee: string; tabela: string; privilegios: string }>(
+      "select grantee, table_name as tabela, string_agg(privilege_type, ',' order by privilege_type) as privilegios from information_schema.role_table_grants where table_schema = 'public' and grantee in ('anon', 'authenticated') group by grantee, table_name order by 1, 2"
+    );
+    assert.deepStrictEqual(
+      q.rows.map(x => `${x.grantee} ${x.tabela}: ${x.privilegios}`),
+      ['authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE', 'authenticated perfis: SELECT,UPDATE']
+    );
   });
 
   it('todas as tabelas do schema public têm RLS ligada', async () => {

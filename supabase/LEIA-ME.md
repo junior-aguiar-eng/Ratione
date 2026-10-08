@@ -1,6 +1,6 @@
 # Supabase do Ratione: passo a passo
 
-Este diretório guarda o esquema do banco (`migrations/`). Os testes de segurança (um usuário não acessa dado de outro) ficam em `packages/db` e rodam sem internet: `pnpm --filter @ratione/db test`.
+Este diretório guarda o esquema do banco (`migrations/`). O projeto real: `ratione`, região São Paulo (`sa-east-1`), criado em 08/10/2026 com a Data API ligada, "expor tabelas novas" desligado e RLS automática ligada. A migração foi aplicada e conferida no catálogo do banco. Os testes de segurança (um usuário não acessa dado de outro) ficam em `packages/db` e rodam sem internet: `pnpm --filter @ratione/db test`.
 
 ## O que você faz no painel do Supabase (uma vez, uns 10 minutos)
 
@@ -12,16 +12,16 @@ Este diretório guarda o esquema do banco (`migrations/`). Os testes de seguran�
 3. **Ligar o login por e-mail.** *Authentication* → *Providers* → *Email* ligado, com *Confirm email* ligado. Em *URL Configuration*, *Site URL* = `http://localhost:3000` (depois trocamos pelo endereço de produção).
 4. **Copiar duas informações públicas.** *Project Settings* → *API*:
    - **Project URL** (algo como `https://xxxx.supabase.co`);
-   - a chave **anon / publishable**.
+   - a chave **publicável** (`sb_publishable_...`, em *API Keys*). A chave *secret* nunca vai para o `.env.local`.
 5. **Colocar no seu computador, não no GitHub.** Copie `apps/web/.env.example` para `apps/web/.env.local` e preencha as duas linhas. O `.env.local` já é ignorado pelo Git.
 
 ## O que NÃO compartilhar
 
-- A chave **`service_role`** (dá acesso total e ignora a RLS).
+- A chave **secret** / **`service_role`** (dá acesso total e ignora a RLS).
 - A senha do banco.
 - Qualquer chave que o painel marque como *secret*.
 
-A chave **anon/publishable** e a URL são feitas para ficar no navegador; a segurança vem das regras de RLS testadas aqui. Mesmo assim, prefira não colá-las em conversas: basta eu saber que o `.env.local` está preenchido.
+A chave **publicável** e a URL são feitas para ficar no navegador; a segurança vem das regras de RLS testadas aqui. Mesmo assim, prefira não colá-las em conversas: basta eu saber que o `.env.local` está preenchido.
 
 ## Depois
 
