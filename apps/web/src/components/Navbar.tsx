@@ -7,11 +7,14 @@ import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { MODULOS } from '../lib/modulos';
+import { useSessao } from '../lib/useSessao';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [aberto, setAberto] = useState(false);
   const meuEspacoAtivo = pathname.startsWith('/meu-espaco');
+  const { usuario, contaDisponivel } = useSessao();
+  const contaAtiva = pathname.startsWith('/conta') || pathname.startsWith('/entrar');
 
   return (
     <header className="sticky top-0 z-50 bg-canvas/90 backdrop-blur-sm border-b border-line">
@@ -50,6 +53,17 @@ export default function Navbar() {
           >
             Meu espaço
           </Link>
+          {contaDisponivel && (
+            <Link
+              href={usuario ? '/conta' : '/entrar'}
+              aria-current={contaAtiva ? 'page' : undefined}
+              className={`hidden md:inline-flex text-sm font-medium px-3 py-2 rounded-md transition-colors ${
+                contaAtiva ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
+              }`}
+            >
+              {usuario ? 'Minha conta' : 'Entrar'}
+            </Link>
+          )}
           <button
             type="button"
             className="md:hidden p-2 text-ink"
@@ -64,7 +78,11 @@ export default function Navbar() {
 
       {aberto && (
         <nav className="md:hidden border-t border-line bg-canvas px-5 py-2" aria-label="Menu">
-          {[...MODULOS.map(m => ({ href: m.href, nome: m.nome })), { href: '/meu-espaco', nome: 'Meu espaço' }].map(
+          {[
+            ...MODULOS.map(m => ({ href: m.href, nome: m.nome })),
+            { href: '/meu-espaco', nome: 'Meu espaço' },
+            ...(contaDisponivel ? [{ href: usuario ? '/conta' : '/entrar', nome: usuario ? 'Minha conta' : 'Entrar' }] : [])
+          ].map(
             item => (
               <Link
                 key={item.href}

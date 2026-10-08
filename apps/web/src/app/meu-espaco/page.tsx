@@ -5,7 +5,17 @@ import Link from 'next/link';
 import { Search, Trash2 } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import EmptyState from '../../components/EmptyState';
-import { lerHistorico, removerRegistro, RegistroHistorico, TipoHistorico } from '../../lib/historico';
+import Notice from '../../components/Notice';
+import { useSessao } from '../../lib/useSessao';
+import {
+  carregarHistorico,
+  importarNavegadorParaConta,
+  lerHistorico,
+  removerDaConta,
+  removerRegistro,
+  RegistroHistorico,
+  TipoHistorico
+} from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
 
 const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
@@ -19,13 +29,42 @@ const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
 export default function MeuEspacoPage() {
   const [registros, setRegistros] = useState<RegistroHistorico[]>([]);
   const [carregado, setCarregado] = useState(false);
+  const { usuario, carregando } = useSessao();
+  const [origem, setOrigem] = useState<'conta' | 'navegador'>('navegador');
+  const [locais, setLocais] = useState(0);
+  const [importando, setImportando] = useState(false);
+  const [resultadoImportacao, setResultadoImportacao] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<'todos' | TipoHistorico>('todos');
   const [busca, setBusca] = useState('');
 
-  useEffect(() => {
-    setRegistros(lerHistorico());
+  const recarregar = async () => {
+    const h = await carregarHistorico();
+    setRegistros(h.itens);
+    setOrigem(h.origem);
+    setLocais(lerHistorico().length);
     setCarregado(true);
-  }, []);
+  };
+
+  useEffect(() => {
+    if (carregando) return;
+    void recarregar();
+  }, [carregando, usuario]);
+
+  const importar = async () => {
+    setImportando(true);
+    const n = await importarNavegadorParaConta();
+    setImportando(false);
+    setResultadoImportacao(n > 0 ? `${n} ${n === 1 ? 'registro enviado' : 'registros enviados'} para a sua conta e removidos deste navegador.` : 'Não foi possível enviar agora. Seus registros continuam neste navegador.');
+    await recarregar();
+  };
+
+  const remover = async (r: RegistroHistorico) => {
+    if (origem === 'conta') {
+      if (await removerDaConta(r.id)) setRegistros(atuais => atuais.filter(x => x.id !== r.id));
+    } else {
+      setRegistros(removerRegistro(r.id));
+    }
+  };
 
   const visiveis = useMemo(() => {
     const q = busca.trim().toLowerCase();
@@ -41,8 +80,31 @@ export default function MeuEspacoPage() {
       <PageHeader
         eyebrow="Biblioteca pessoal"
         title="Meu espaço"
-        description="Os cálculos, normas, teses e análises que você salvou. Os registros ficam apenas neste navegador."
+        description={
+          origem === 'conta'
+            ? 'Os cálculos, normas, teses e análises que você salvou. Os registros ficam guardados na sua conta.'
+            : 'Os cálculos, normas, teses e análises que você salvou. Sem conta, os registros ficam apenas neste navegador.'
+        }
       />
+
+      {usuario && locais > 0 && (
+        <div className="mb-6">
+          <Notice tom="info" titulo={`${locais} ${locais === 1 ? 'registro está salvo' : 'registros estão salvos'} só neste navegador`}>
+            Deseja enviá-los para a sua conta? Eles passam a acompanhar você em outros dispositivos e são removidos deste navegador. Se preferir, deixe
+            como está.
+            <div className="mt-3">
+              <button type="button" onClick={importar} disabled={importando} className="btn-secondary disabled:opacity-60">
+                {importando ? 'Enviando…' : 'Enviar para a minha conta'}
+              </button>
+            </div>
+          </Notice>
+        </div>
+      )}
+      {resultadoImportacao && (
+        <div className="mb-6" aria-live="polite">
+          <Notice tom="info">{resultadoImportacao}</Notice>
+        </div>
+      )}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div className="flex flex-wrap gap-1" role="group" aria-label="Filtrar por tipo">
@@ -102,7 +164,7 @@ export default function MeuEspacoPage() {
               </div>
               <button
                 type="button"
-                onClick={() => setRegistros(removerRegistro(r.id))}
+                onClick={() => void remover(r)}
                 aria-label={`Remover ${r.titulo}`}
                 className="p-2 rounded-md text-ink-mute hover:text-danger-text hover:bg-danger-tint transition-colors shrink-0"
               >

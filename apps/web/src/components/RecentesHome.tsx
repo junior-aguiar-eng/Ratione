@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { lerHistorico, RegistroHistorico } from '../lib/historico';
+import { carregarHistorico, RegistroHistorico } from '../lib/historico';
 import { tempoRelativo } from '../lib/datas';
 
 /** Exibe somente registros reais do usuário; se não houver, não renderiza nada (plano §7.3). */
@@ -10,7 +10,11 @@ export default function RecentesHome() {
   const [itens, setItens] = useState<RegistroHistorico[]>([]);
 
   useEffect(() => {
-    setItens(lerHistorico().slice(0, 4));
+    let ativo = true;
+    carregarHistorico(4).then(h => ativo && setItens(h.itens.slice(0, 4)));
+    return () => {
+      ativo = false;
+    };
   }, []);
 
   if (itens.length === 0) return null;
