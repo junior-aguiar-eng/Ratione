@@ -410,6 +410,8 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ## 12. Decisões do responsável
 
+**Tomadas (08/10/2026):** **conta obrigatória** para usar as ferramentas (o produto não é gratuito; há período de beta gratuito), com a decisão no servidor (`proxy.ts`) e o início do uso só depois do login; páginas públicas: inicial, metodologia, termos, privacidade e entrada.
+
 **Tomadas (07/10/2026):** público (profissionais do Direito e concurseiros); tribunais prioritários (STF e STJ); calendário parte dos prazos dos códigos, cruza com feriados nacionais e levanta tribunal a tribunal; sem plano empresarial; IA por API multiprovedor, sem tornar o site exclusivamente de IA; marca sem registro prévio; documentos jurídicos redigidos por Claude e revisados pelo responsável; integrações DataJud (metadados) e API de Legislação do Senado; manter um único plano; art. 229 do CPC só como aviso de atenção, porque os autos eletrônicos são a regra; só versões compiladas das leis são verificadas (§1, regra 3).
 
 **Abertas**
