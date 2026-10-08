@@ -1,0 +1,16 @@
+{
+  "name": "@ratione/db",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Esquema do banco (Supabase) e testes de segurança por linha (RLS)",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^7.0.2"
+  }
+}
