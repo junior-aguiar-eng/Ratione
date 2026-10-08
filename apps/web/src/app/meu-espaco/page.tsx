@@ -83,7 +83,7 @@ export default function MeuEspacoPage() {
         description={
           origem === 'conta'
             ? 'Os cálculos, normas, teses e análises que você salvou. Os registros ficam guardados na sua conta.'
-            : 'Os cálculos, normas, teses e análises que você salvou. Sem conta, os registros ficam apenas neste navegador.'
+            : 'Os cálculos, normas, teses e análises que você salvou. Nesta instalação, sem login configurado, os registros ficam neste navegador.'
         }
       />
 

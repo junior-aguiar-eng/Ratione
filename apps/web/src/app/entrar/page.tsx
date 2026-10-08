@@ -3,7 +3,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
@@ -27,9 +26,13 @@ function Formulario() {
     if (params.get('erro') === 'link') setErro('O link de confirmação é inválido ou expirou. Entre com a senha ou peça um novo link.');
   }, [params]);
 
+  // Depois de entrar, volta para onde o usuário queria ir (só caminhos internos)
+  const pedido = params.get('proximo') ?? '';
+  const proximo = pedido.startsWith('/') && !pedido.startsWith('//') && !pedido.startsWith('/entrar') ? pedido : '/prazozero';
+
   useEffect(() => {
-    if (usuario) router.replace('/meu-espaco');
-  }, [usuario, router]);
+    if (usuario) router.replace(proximo);
+  }, [usuario, router, proximo]);
 
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,18 +71,20 @@ function Formulario() {
 
   if (!carregando && !contaDisponivel) {
     return (
-      <Notice tom="info" titulo="Conta indisponível nesta instalação">
-        O login ainda não está configurado neste ambiente. Você pode usar todas as ferramentas normalmente; os registros de Meu espaço ficam
-        neste navegador.
-      </Notice>
+      <div className="max-w-md mx-auto">
+        <Notice tom="info" titulo="Conta indisponível nesta instalação">
+          O login ainda não está configurado neste ambiente (falta o arquivo .env.local do projeto). Nesta instalação de desenvolvimento as
+          ferramentas abrem sem login.
+        </Notice>
+      </div>
     );
   }
 
   const titulos: Record<Modo, string> = { entrar: 'Entrar', cadastrar: 'Criar conta', recuperar: 'Recuperar a senha' };
 
   return (
-    <div className="max-w-md">
-      <div className="flex gap-1 mb-6" role="group" aria-label="Escolha uma opção">
+    <div className="max-w-md mx-auto">
+      <div className="flex justify-center gap-1 mb-6" role="group" aria-label="Escolha uma opção">
         {(['entrar', 'cadastrar'] as const).map(m => (
           <button
             key={m}
@@ -185,9 +190,9 @@ function Formulario() {
         )}
       </form>
 
-      <p className="text-sm text-ink-mute mt-5 leading-relaxed">
-        A conta é opcional. Com ela, seus registros de Meu espaço ficam guardados no seu perfil (servidor no Brasil) e acompanham você em outros
-        dispositivos. Sem ela, tudo continua funcionando só neste navegador.
+      <p className="text-sm text-ink-mute mt-5 leading-relaxed text-center">
+        Para usar as ferramentas do Ratione é preciso ter uma conta. O período de beta é gratuito. Seus registros de Meu espaço ficam guardados no seu
+        perfil, em servidor no Brasil, e acompanham você em qualquer dispositivo.
       </p>
     </div>
   );
@@ -195,8 +200,12 @@ function Formulario() {
 
 export default function EntrarPage() {
   return (
-    <div>
-      <PageHeader eyebrow="Conta" title="Entrar no Ratione" description="Entre ou crie uma conta para guardar seus registros e levá-los a outros dispositivos." />
+    <div className="pt-4 sm:pt-10 pb-10">
+      <header className="text-center space-y-2 max-w-md mx-auto mb-8">
+        <p className="eyebrow leading-6">Conta</p>
+        <h1 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Entrar no Ratione</h1>
+        <p className="text-base text-ink-soft leading-relaxed">Entre ou crie sua conta para usar as ferramentas.</p>
+      </header>
       <Suspense fallback={null}>
         <Formulario />
       </Suspense>

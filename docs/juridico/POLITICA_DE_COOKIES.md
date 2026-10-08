@@ -14,7 +14,7 @@ Usamos **cookies** e o **armazenamento local do navegador** (`localStorage`) par
 | Sessão e autenticação | Essencial | Sessão / [X] dias | Execução de contrato | Não exigido |
 | Segurança (anti-fraude, proteção CSRF) | Essencial | Sessão | Legítimo interesse | Não exigido |
 | `ratione_tema` (tema claro/escuro) | Preferência | Até você limpar | Execução de contrato | Não exigido |
-| `ratione_historico_recente` (itens salvos neste navegador, na versão sem conta) | Funcional | Até você limpar | Execução de contrato | Não exigido |
+| `ratione_historico_recente` (itens salvos neste navegador antes da conta; é enviado à conta se o usuário aceitar e depois apagado) | Funcional | Até você limpar | Execução de contrato | Não exigido |
 | Medição de uso e desempenho (analytics) **[SE ADOTADO]** | Estatístico | [X] | Consentimento | **Exigido** |
 | Marketing/publicidade | — | — | — | **Não utilizamos** |
 
