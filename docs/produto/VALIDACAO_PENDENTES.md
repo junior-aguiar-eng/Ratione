@@ -1,36 +1,8 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 8. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **121** cenários · validados: **113** · pendentes: **8**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, nenhum no momento. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **121** cenários · validados: **121** · pendentes: **0**
 
-## Como responder
+**Não há cenário pendente: os 121 cenários foram validados pelo revisor jurídico.** O registro de cada validação (quem e quando) está em `cenarios.json` e em `REVISAO_CENARIOS.md`.
 
-Basta dizer, por número, o que está certo e o que está errado. Exemplos: *"1 a 20 certos"*; *"7 errado: o certo é 14/03, porque …"*. Eu registro as respostas no gabarito e corrijo o motor onde você discordar. **Dica:** responda por grupo; a mesma regra se repete dentro do grupo.
-
-Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art. 224); em dias úteis, sábados, domingos, feriados e dias sem expediente não contam (arts. 216 e 219). Pela intimação no Diário, a publicação é o primeiro dia útil depois da disponibilização, e a contagem começa no dia útil seguinte (art. 224, §§ 2º e 3º).
-
-## Resumo
-
-| Grupo | Números | Cenários |
-|---|---|---|
-| CLT | 1 a 3 | 3 |
-| Juizados Especiais | 4 a 8 | 5 |
-
-## CLT (1 a 3)
-
-| Nº | Caso | Dados | Sistema diz | Dias que não contaram |
-|---|---|---|---|---|
-| 1 | `clt-recesso-775a`<br>CLT: o recesso de 20/12 a 20/01 também suspende os prazos | publicação em 15/12/2025 (segunda-feira); 8 dias (CLT, dias úteis); TST; modo conservador | **26/01/2026 (segunda-feira)** | 12 sáb./dom.; suspensão 22/12 a 20/01/2026 |
-| 2 | `clt-ed-5d-feriado`<br>CLT: embargos de declaração em 5 dias úteis atravessando 7 de setembro | publicação em 03/09/2026 (quinta-feira); 5 dias (CLT, dias úteis); TST; modo conservador | **11/09/2026 (sexta-feira)** | 2 sáb./dom.; 07/09 Independência |
-| 3 | `clt-recesso-borda-20-jan`<br>CLT: publicação em 16/01/2026; 19 e 20/01 ainda são recesso e a contagem retoma em 21/01 | publicação em 16/01/2026 (sexta-feira); 3 dias (CLT, dias úteis); TST; modo conservador | **23/01/2026 (sexta-feira)** | 2 sáb./dom.; suspensão 19/01 a 20/01/2026 |
-
-## Juizados Especiais (4 a 8)
-
-| Nº | Caso | Dados | Sistema diz | Dias que não contaram |
-|---|---|---|---|---|
-| 4 | `jef-5d-embargos`<br>JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49) | publicação em 10/03/2026 (terça-feira); 5 dias (JEF, dias úteis); TJSP; modo conservador | **17/03/2026 (terça-feira)** | 2 sáb./dom. |
-| 5 | `jef-dobro-ignorado`<br>JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º) | publicação em 10/03/2026 (terça-feira); 10 dias (JEF, dias úteis); TJSP; modo conservador; em dobro | **24/03/2026 (terça-feira)** | 4 sáb./dom. |
-| 6 | `jef-recesso`<br>JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º) | publicação em 15/12/2025 (segunda-feira); 10 dias (JEF, dias úteis); TJSP; modo conservador | **28/01/2026 (quarta-feira)** | 12 sáb./dom.; suspensão 22/12 a 20/01/2026 |
-| 7 | `jef-recesso-desligado`<br>JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender) | publicação em 15/12/2025 (segunda-feira); 10 dias (JEF, dias úteis); TJSP; modo conservador; suspensão desligada | **30/12/2025 (terça-feira)** | 4 sáb./dom.; 25/12 Natal |
-| 8 | `jef-dje-sexta`<br>JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis | disponibilização no DJe em 13/03/2026 (sexta-feira); 10 dias (JEF, dias úteis); TJSP; modo conservador | **30/03/2026 (segunda-feira)** | 4 sáb./dom. |
-
+Quando uma regra ou um calendário mudar, o oráculo gera novos cenários e esta lista volta a aparecer, com os pendentes numerados.
