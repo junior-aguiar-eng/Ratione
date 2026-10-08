@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 22 |
-| Calendário verificado (STF, STJ, TRFs) | 33 |
+| Calendário verificado (tribunais com ato lido) | 33 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -994,7 +994,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-## Calendário verificado (STF, STJ, TRFs)
+## Calendário verificado (tribunais com ato lido)
 
 ### 78. `stj-semana-santa-2026`
 

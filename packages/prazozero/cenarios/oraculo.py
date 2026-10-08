@@ -625,13 +625,88 @@ ROTULO_TIPO = {"disponibilizacao_dje": "disponibilização no DJe", "publicacao"
 ROTULO_REGIME = {"cpc_dias_uteis": "CPC, dias úteis", "clt_dias_uteis": "CLT, dias úteis", "cpp_dias_corridos": "CPP, dias corridos", "jef_dias_uteis": "JEF, dias úteis"}
 ROTULO_CAT = {"basico": "Contagem básica", "dje": "Disponibilização no DJe", "feriado": "Feriados nacionais", "recesso": "Recesso e suspensão de prazos",
               "dobro": "Prazo em dobro", "bissexto": "Ano bissexto", "clt": "CLT", "cpp": "CPP (prazos criminais)", "jef": "Juizados Especiais",
-              "portal": "Intimação eletrônica", "tribunal": "Tribunais superiores", "verificado": "Calendário verificado (STF, STJ, TRFs)",
+              "portal": "Intimação eletrônica", "tribunal": "Tribunais superiores", "verificado": "Calendário verificado (tribunais com ato lido)",
               "pendente": "Dias ainda pendentes de conferência"}
 
 
 def br(iso):
     d = date.fromisoformat(iso)
     return f"{d.strftime('%d/%m/%Y')} ({DIAS_SEMANA[d.weekday()]})"
+
+
+NOTA_CAT = {
+    "verificado": "O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.",
+    "pendente": "Cada caso mostra a data com o dia ainda **não conferido** no ato do tribunal. Valide a contagem **supondo que o dia conta como sem expediente**; se ele é mesmo dia sem expediente naquele tribunal é o que falta conferir, não é dúvida de contagem. A coluna *Alternativa* mostra a outra data possível.",
+    "portal": "Intimação eletrônica (CPC, art. 231, V; Lei 11.419, art. 5º). O caso `portal-sabado` tem dúvida registrada em `VERIFICACAO_FONTES.md`, seção 7, item 1.",
+    "cpp": "Prazos criminais: dias corridos (CPP, art. 798) e suspensão de 20/12 a 20/01 (art. 798-A), salvo réu preso, Maria da Penha ou medida urgente.",
+    "recesso": "Suspensão de 20/12 a 20/01 (CPC, art. 220): nenhum dia conta, nem fim de semana.",
+}
+
+
+def gerar_pendentes(cenarios):
+    """Lista compacta, numerada de 1 a N, só dos cenários ainda não validados."""
+    pend = [c for c in cenarios if c["validacao"]["status"] != "validado"]
+    L = []
+    L.append("# RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO")
+    L.append("")
+    L.append("> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a " + str(len(pend)) + ". Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.")
+    L.append(f"> Total: **{len(cenarios)}** cenários · validados: **{len(cenarios) - len(pend)}** · pendentes: **{len(pend)}**")
+    L.append("")
+    L.append("## Como responder")
+    L.append("")
+    L.append("Basta dizer, por número, o que está certo e o que está errado. Exemplos: *\"1 a 20 certos\"*; *\"7 errado: o certo é 14/03, porque …\"*. "
+             "Eu registro as respostas no gabarito e corrijo o motor onde você discordar. **Dica:** responda por grupo; a mesma regra se repete dentro do grupo.")
+    L.append("")
+    L.append("Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art. 224); em dias úteis, sábados, domingos, feriados e dias sem expediente não contam (arts. 216 e 219). "
+             "Pela intimação no Diário, a publicação é o primeiro dia útil depois da disponibilização, e a contagem começa no dia útil seguinte (art. 224, §§ 2º e 3º).")
+    L.append("")
+    por_cat = {}
+    for c in pend:
+        por_cat.setdefault(c["categoria"], []).append(c)
+    L.append("## Resumo")
+    L.append("")
+    L.append("| Grupo | Números | Cenários |")
+    L.append("|---|---|---|")
+    n = 0
+    faixas = {}
+    for cat, itens in por_cat.items():
+        faixas[cat] = (n + 1, n + len(itens))
+        n += len(itens)
+        L.append(f"| {ROTULO_CAT.get(cat, cat)} | {faixas[cat][0]} a {faixas[cat][1]} | {len(itens)} |")
+    L.append("")
+    n = 0
+    for cat, itens in por_cat.items():
+        L.append(f"## {ROTULO_CAT.get(cat, cat)} ({faixas[cat][0]} a {faixas[cat][1]})")
+        L.append("")
+        if cat in NOTA_CAT:
+            L.append(f"*{NOTA_CAT[cat]}*")
+            L.append("")
+        L.append("| Nº | Caso | Dados | Sistema diz | Dias que não contaram |")
+        L.append("|---|---|---|---|---|")
+        for c in itens:
+            n += 1
+            e, x = c["entrada"], c["esperado"]
+            opcoes = []
+            if e.get("prazoEmDobro"): opcoes.append("em dobro")
+            if e.get("litisconsortesComAdvogadosDistintos"): opcoes.append("litisconsortes (só aviso)")
+            if e.get("excecaoSuspensaoCriminal"): opcoes.append("réu preso/exceção do art. 798-A")
+            if e.get("suspensaoRecesso") is not None: opcoes.append("suspensão " + ("ligada" if e["suspensaoRecesso"] else "desligada"))
+            modo = e.get("modo", "conservador")
+            dados = f"{ROTULO_TIPO[e['tipoEvento']]} em {br(e['dataEvento'])}; {e['diasPrazo']} dias ({ROTULO_REGIME[e.get('regime', 'cpc_dias_uteis')]}); {e.get('tribunalId', 'sem tribunal')}; modo {modo}" + ("; " + ", ".join(opcoes) if opcoes else "")
+            diz = f"**{br(x['dataVencimentoFinal'])}**" + (" (prorrogado)" if x["foiProrrogadoTermoFinal"] else "")
+            alt = c.get("alternativaEsperada")
+            if alt:
+                diz += f"<br>Alternativa: {br(alt)}"
+            r = x["rastro"]
+            partes = []
+            if r["fimsDeSemana"]: partes.append(f"{r['fimsDeSemana']} sáb./dom.")
+            if r["suspensaoDias"]: partes.append(f"suspensão {date.fromisoformat(r['suspensaoDe']).strftime('%d/%m')} a {date.fromisoformat(r['suspensaoAte']).strftime('%d/%m/%Y')}")
+            for d in r["diasNaoUteis"]:
+                partes.append(f"{date.fromisoformat(d['data']).strftime('%d/%m')} {d['motivo']}")
+            caso = f"`{c['id']}`<br>{c['descricao']}".replace("|", "/")
+            L.append(f"| {n} | {caso} | {dados} | {diz} | {'; '.join(partes).replace('|', '/') if partes else 'só o dia do começo'} |")
+        L.append("")
+    return "\n".join(L) + "\n"
 
 
 def gerar_revisao(cenarios):
@@ -755,4 +830,6 @@ if __name__ == "__main__":
     doc.write_text(gerar_revisao(cenarios), encoding="utf-8", newline="\n")
     aleatorios = Path(__file__).with_name("cenarios_aleatorios.json")
     aleatorios.write_text(json.dumps(gerar_aleatorios(), ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
+    pend = doc.with_name("VALIDACAO_PENDENTES.md")
+    pend.write_text(gerar_pendentes(cenarios), encoding="utf-8", newline="\n")
     print(f"{len(cenarios)} cenários gravados em {destino.name} e {doc.name}; {aleatorios.name} atualizado")
