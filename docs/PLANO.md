@@ -282,7 +282,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F0-03 | Alertas de dependências (Dependabot) | feito | 6 de 6 em 07/10/2026: `postcss` e `postcss-selector-parser` por override; `braces` saiu do lockfile com a F0-11 (o Tailwind 4 não usa `micromatch`, `fast-glob` nem `chokidar`) |
 | F0-04 | Manutenção do workflow | feito | Actions v7 (Node 24), runner `ubuntu-24.04`, Node 24 |
 | F0-05 | Núcleo comum: entidades, tribunais, procedência | parcial | Esquemas Zod e 22 tribunais existem; faltam procedência e adaptadores |
-| F0-06 | Banco, login e armazenamento (Supabase, São Paulo, RLS) | não iniciado | Login funciona; usuário A não lê dado do B (teste automatizado) |
+| F0-06 | Banco, login e armazenamento (Supabase, São Paulo, RLS) | em curso | **Esquema e RLS prontos e testados** (`supabase/migrations`, `packages/db`): `perfis` e `itens_salvos`, acesso só do dono, visitante sem acesso, perfil criado no cadastro, exclusão da conta apaga tudo (LGPD, art. 18); 12 testes com Postgres em memória (PGlite), que acusam a falha se uma regra for enfraquecida. **Falta:** criar o projeto na região de São Paulo e rodar a migração (`supabase/LEIA-ME.md`, passos do responsável), e o login na tela com o histórico migrado do navegador para a conta |
 | F0-07 | Design system com shadcn/ui | não iniciado | Hoje há tokens e componentes caseiros |
 | F0-08 | Deploy em staging e produção | não iniciado | Merge na `main` publica em staging |
 | F0-09 | Observabilidade (erros, logs, uptime) | não iniciado | Erro de produção chega ao painel |
@@ -303,7 +303,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
-| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 187 testes verdes; gabarito de oráculo independente |
+| F2-01 | Motor CPC, CLT e CPP com memória de cálculo | feito | 199 testes verdes; gabarito de oráculo independente |
 | F2-02 | Calendário verificado de STF e STJ | parcial | **Só 2026.** Falta 2027 quando as portarias saírem |
 | F2-03 | Calendário como dado (eventos com tribunal, período, efeito e fonte) | feito | `calendario/eventos.ts`: fontes, eventos e regras anuais separados do código; STF e STJ migrados sem mudar resultado e TJSP, TJMG e TJAL carregados por cima. O painel de curadoria (CRUD) fica para depois do banco (F0-06) |
 | F2-04 | Calendário de TRFs e TJs (portarias anuais) | parcial | **TJSP e TJMG (2026) com ato lido e selo**; **TJAL com selo 2026** ( 23/06 a 01/07 e 28/08 pendentes); **TJRJ carregado (sem selo)** pelo informativo oficial de 05/10/2026, atos não lidos; TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE e TJES não pesquisados. Ver `VERIFICACAO_FONTES.md` §11 |
