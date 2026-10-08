@@ -29,9 +29,8 @@ export default function MetodologiaPage() {
           <p>
             Os resultados são conferidos por um segundo programa, escrito à parte e sem código em comum, em cenários
             fixos e em centenas de entradas aleatórias. Essa conferência mostra que o programa faz o que as regras
-            dizem. A revisão jurídica é <strong className="text-ink">parcial</strong>: os casos mais importantes (contagem básica, feriado,
-            recesso, prazo em dobro, CLT, CPP, Juizados, férias do STJ, mandado de segurança e ação rescisória) foram validados por um
-            revisor jurídico em 07/10/2026; os demais cenários ainda aguardam validação.
+            dizem. Um revisor jurídico validou 108 dos 121 cenários e os dois prazos materiais (mandado de segurança e ação rescisória) em 07/10/2026.
+            Ainda aguardam validação os de <strong className="text-ink">CLT, intimação eletrônica e Juizados Especiais</strong>.
           </p>
         </section>
 
