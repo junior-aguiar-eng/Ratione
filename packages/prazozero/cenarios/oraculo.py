@@ -649,9 +649,14 @@ def gerar_pendentes(cenarios):
     L = []
     L.append("# RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO")
     L.append("")
-    L.append("> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a " + str(len(pend)) + ". Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.")
+    L.append("> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, " + ("numerados de 1 a " + str(len(pend)) if pend else "nenhum no momento") + ". Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.")
     L.append(f"> Total: **{len(cenarios)}** cenários · validados: **{len(cenarios) - len(pend)}** · pendentes: **{len(pend)}**")
     L.append("")
+    if not pend:
+        L.append("**Não há cenário pendente: os " + str(len(cenarios)) + " cenários foram validados pelo revisor jurídico.** O registro de cada validação (quem e quando) está em `cenarios.json` e em `REVISAO_CENARIOS.md`.")
+        L.append("")
+        L.append("Quando uma regra ou um calendário mudar, o oráculo gera novos cenários e esta lista volta a aparecer, com os pendentes numerados.")
+        return chr(10).join(L) + chr(10)
     L.append("## Como responder")
     L.append("")
     L.append("Basta dizer, por número, o que está certo e o que está errado. Exemplos: *\"1 a 20 certos\"*; *\"7 errado: o certo é 14/03, porque …\"*. "
