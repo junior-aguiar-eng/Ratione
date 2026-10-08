@@ -18,7 +18,8 @@ const BASE_SUPABASE = `
   grant usage on schema public to anon, authenticated, service_role;
   grant usage on schema auth to anon, authenticated, service_role;
   grant execute on function auth.uid() to anon, authenticated, service_role;
-  -- O Supabase concede tudo nas tabelas novas do schema public; a RLS e os revoke das migrações é que restringem.
+  -- Como no Supabase real, tabelas novas nascem com TODOS os privilégios para anon e authenticated (inclusive TRUNCATE);
+  -- as migrações é que precisam reduzir isso ao mínimo. A service_role ignora a RLS (bypassrls).
   alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
 `;
 
