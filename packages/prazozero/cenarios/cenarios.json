@@ -2606,9 +2606,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-07"
     },
     "alternativaEsperada": null
   },
@@ -2638,16 +2638,16 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-07"
     },
     "alternativaEsperada": null
   },
   {
     "id": "portal-sabado",
     "categoria": "portal",
-    "descricao": "Intimação eletrônica: consulta no sábado (leitura literal do art. 231, V; ver nota de revisão)",
+    "descricao": "Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)",
     "fundamento": "CPC, art. 231, V; Lei 11.419/2006, art. 5º, § 2º",
     "entrada": {
       "dataEvento": "2026-03-14",
@@ -2670,9 +2670,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-07"
     },
     "alternativaEsperada": null
   },
@@ -2702,9 +2702,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-07"
     },
     "alternativaEsperada": null
   },
@@ -3581,9 +3581,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-07"
     },
     "alternativaEsperada": null
   },

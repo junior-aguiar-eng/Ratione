@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **121** · validados: **108** · pendentes: **13**
+> Cenários: **121** · validados: **113** · pendentes: **8**
 
 ## Como revisar
 
@@ -1404,7 +1404,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ### 112. `portal-sexta`
 
@@ -1416,11 +1416,11 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ### 113. `portal-sabado`
 
-**Intimação eletrônica: consulta no sábado (leitura literal do art. 231, V; ver nota de revisão)**
+**Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
 - **Entrada:** consulta à intimação eletrônica em **14/03/2026 (sábado)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSP** · modo conservador
 - **Publicação / dia do começo:** 16/03/2026 (segunda-feira) · **início da contagem:** 17/03/2026 (terça-feira)
@@ -1428,7 +1428,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** CPC, art. 231, V; Lei 11.419/2006, art. 5º, § 2º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ### 114. `portal-feriado`
 
@@ -1440,7 +1440,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** CPC, art. 231, V; Lei 662/1949, art. 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ### 115. `portal-recesso`
 
@@ -1452,7 +1452,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** CPC, arts. 220 e 231, V; Lei 11.419/2006, art. 5º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ## Juizados Especiais
 

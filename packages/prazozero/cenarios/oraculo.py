@@ -469,7 +469,7 @@ add("portal-segunda", "portal", "Intimação eletrônica: consulta na segunda; d
     entrada("2026-03-09", "intimacao_portal", 5))
 add("portal-sexta", "portal", "Intimação eletrônica: consulta na sexta; dia do começo na segunda", "CPC, arts. 224, caput, e 231, V; Lei 11.419/2006, art. 5º",
     entrada("2026-03-13", "intimacao_portal", 5))
-add("portal-sabado", "portal", "Intimação eletrônica: consulta no sábado (leitura literal do art. 231, V; ver nota de revisão)", "CPC, art. 231, V; Lei 11.419/2006, art. 5º, § 2º",
+add("portal-sabado", "portal", "Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)", "CPC, art. 231, V; Lei 11.419/2006, art. 5º, § 2º",
     entrada("2026-03-14", "intimacao_portal", 5))
 add("portal-feriado", "portal", "Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte", "CPC, art. 231, V; Lei 662/1949, art. 1º",
     entrada("2026-04-20", "intimacao_portal", 5))
@@ -637,7 +637,7 @@ def br(iso):
 NOTA_CAT = {
     "verificado": "O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.",
     "pendente": "Cada caso mostra a data com o dia ainda **não conferido** no ato do tribunal. Valide a contagem **supondo que o dia conta como sem expediente**; se ele é mesmo dia sem expediente naquele tribunal é o que falta conferir, não é dúvida de contagem. A coluna *Alternativa* mostra a outra data possível.",
-    "portal": "Intimação eletrônica (CPC, art. 231, V; Lei 11.419, art. 5º). O caso `portal-sabado` tem dúvida registrada em `VERIFICACAO_FONTES.md`, seção 7, item 1.",
+    "portal": "Intimação eletrônica (CPC, art. 231, V; Lei 11.419, art. 5º). Consulta em dia não útil: a intimação se realiza no primeiro dia útil seguinte (Lei 11.419, art. 5º, § 2º), que é o dia do começo, e a contagem começa no dia seguinte (leitura A, validada pelo revisor em 07/10/2026).",
     "cpp": "Prazos criminais: dias corridos (CPP, art. 798) e suspensão de 20/12 a 20/01 (art. 798-A), salvo réu preso, Maria da Penha ou medida urgente.",
     "recesso": "Suspensão de 20/12 a 20/01 (CPC, art. 220): nenhum dia conta, nem fim de semana.",
 }

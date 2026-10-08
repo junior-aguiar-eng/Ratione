@@ -67,7 +67,7 @@ Pergunta para o revisor: o TST e o TSE aplicam o art. 62 por força da expressã
 
 ## 7. Dúvidas jurídicas para o revisor
 
-1. **Consulta em dia não útil (intimação eletrônica).** Leitura literal do CPC 231, V: dia do começo = dia útil seguinte à consulta, e a contagem começa no dia seguinte a esse. A Lei 11.419, art. 5º, § 2º, diz que a intimação se realiza no primeiro dia útil seguinte; somando o art. 231, V, alguns entendem que o dia do começo seria o útil depois disso (um dia a mais). O motor usa a leitura literal (data mais cedo). Cenário `portal-sabado`.
+1. ~~**Consulta em dia não útil (intimação eletrônica).**~~ **Resolvida em 07/10/2026 pelo revisor: vale a leitura A.** Consulta em dia não útil: a intimação se realiza no primeiro dia útil seguinte (Lei 11.419, art. 5º, § 2º), esse dia é o dia do começo (excluído, CPC art. 224) e a contagem começa no dia útil seguinte a ele. Exemplo: consulta no sábado 14/03/2026, 5 dias úteis, vence em 23/03/2026. É o que o motor já fazia. Cenário `portal-sabado` validado; o limite de 10 dias corridos da ciência tácita (art. 5º, § 3º) segue a mesma lógica.
 2. **Ponto facultativo no meio do prazo.** O STF informa que prazos "que se iniciarem ou se encerrarem" nesses dias são prorrogados; a Portaria do STJ os lista "para os fins dos arts. 219 e 224, § 1º". O motor trata esses dias como **sem expediente** (não computados, CPC art. 216). Confirmar se, no meio do prazo, o dia conta.
 3. **Prazo em dobro com prazo próprio** (CPC 180, § 2º; 183, § 2º; 186, § 4º): o campo "Prazo em dobro" da tela não distingue. Não há como o motor saber se a lei fixou prazo próprio.
 4. **TST e TSE** (seção 2).
