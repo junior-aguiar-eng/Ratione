@@ -23,6 +23,10 @@ Este diretório guarda o esquema do banco (`migrations/`). O projeto real: `rati
 
 A chave **publicável** e a URL são feitas para ficar no navegador; a segurança vem das regras de RLS testadas aqui. Mesmo assim, prefira não colá-las em conversas: basta eu saber que o `.env.local` está preenchido.
 
+## Estado atual (08/10/2026)
+
+Tudo acima já foi feito para o projeto `ratione`, inclusive o endereço de retorno `http://localhost:3000/auth/callback` na lista de redirecionamentos. Para publicar o site, será preciso acrescentar o endereço de produção em *Site URL* e *Redirect URLs*.
+
 ## Depois
 
 Avise quando terminar o passo 5. O próximo passo (login na tela, salvar cálculos na conta e migrar o histórico que hoje fica só no navegador) é código meu.
