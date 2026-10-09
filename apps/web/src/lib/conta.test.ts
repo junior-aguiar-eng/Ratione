@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { linhaParaRegistro, registroParaLinha } from './historico';
 import { traduzirErroAuth } from './erros-auth';
+import { caminhoInterno, destinoPadrao, tipoLinkValido } from './link-email';
 import { excluirConta, type DependenciasExclusao } from './excluir-conta';
 
 describe('Histórico na conta: conversão entre registro e linha do banco', () => {
@@ -97,5 +98,24 @@ describe('Exclusão da conta (LGPD)', () => {
     const { dep } = montar({ apagarUsuario: async () => false });
     const r = await excluirConta('segredo123', dep);
     assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('Nada foi apagado'));
+  });
+});
+
+describe('Link enviado por e-mail', () => {
+  it('só aceita os tipos de link conhecidos', () => {
+    for (const t of ['signup', 'recovery', 'email_change']) assert.ok(tipoLinkValido(t), t);
+    for (const t of [null, '', 'admin', 'RECOVERY', 'recovery;x']) assert.ok(!tipoLinkValido(t), String(t));
+  });
+
+  it('só segue para caminho interno', () => {
+    assert.strictEqual(caminhoInterno('/conta', '/x'), '/conta');
+    for (const p of [null, '', 'https://externo.com', '//externo.com', 'conta', '/\\externo.com']) {
+      assert.strictEqual(caminhoInterno(p, '/x'), '/x', String(p));
+    }
+  });
+
+  it('a recuperação de senha leva à conta; o cadastro, ao Meu espaço', () => {
+    assert.strictEqual(destinoPadrao('recovery'), '/conta');
+    assert.strictEqual(destinoPadrao('signup'), '/meu-espaco');
   });
 });

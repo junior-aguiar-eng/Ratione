@@ -23,6 +23,17 @@ Este diretório guarda o esquema do banco (`migrations/`). O projeto real: `rati
 
 A chave **publicável** e a URL são feitas para ficar no navegador; a segurança vem das regras de RLS testadas aqui. Mesmo assim, prefira não colá-las em conversas: basta eu saber que o `.env.local` está preenchido.
 
+## Modelos de e-mail (obrigatório para o login funcionar em qualquer navegador)
+
+Os links padrão do Supabase só funcionam no mesmo navegador em que o pedido foi feito, e o Outlook/Hotmail costuma gastá-los ao varrer o e-mail. O Ratione usa a página `/auth/confirm`, que só consome o link quando o usuário clica no botão. Para isso, troque os modelos em *Authentication → Email Templates*:
+
+- **Confirm signup**: troque o link do botão por
+  `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=signup`
+- **Reset Password**: troque por
+  `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery`
+
+Mantenha o resto do texto do modelo. Confira que *URL Configuration → Site URL* é o endereço onde o site está rodando (`http://localhost:3000` no teste local; o de produção depois). Links de e-mails enviados **antes** da troca continuam no formato antigo: peça um novo.
+
 ## Estado atual (08/10/2026)
 
 Tudo acima já foi feito para o projeto `ratione`, inclusive o endereço de retorno `http://localhost:3000/auth/callback` na lista de redirecionamentos. Para publicar o site, será preciso acrescentar o endereço de produção em *Site URL* e *Redirect URLs*.
