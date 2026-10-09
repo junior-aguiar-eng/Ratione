@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { linhaParaRegistro, registroParaLinha } from './historico';
 import { traduzirErroAuth } from './erros-auth';
+import { excluirConta, type DependenciasExclusao } from './excluir-conta';
 
 describe('Histórico na conta: conversão entre registro e linha do banco', () => {
   it('registro vira linha respeitando os limites do banco', () => {
@@ -42,5 +43,59 @@ describe('Mensagens de erro do login', () => {
     assert.match(traduzirErroAuth('email rate limit exceeded'), /Muitas tentativas/);
     assert.match(traduzirErroAuth('Password should be at least 6 characters'), /Senha fraca/);
     assert.match(traduzirErroAuth('algo inesperado'), /Tente novamente/);
+  });
+});
+
+describe('Exclusão da conta (LGPD)', () => {
+  const montar = (sobre: Partial<DependenciasExclusao> = {}) => {
+    const chamadas: string[] = [];
+    const dep: DependenciasExclusao = {
+      usuarioAtual: async () => ({ id: 'u1', email: 'a@b.com' }),
+      conferirSenha: async () => {
+        chamadas.push('senha');
+        return true;
+      },
+      apagarUsuario: async id => {
+        chamadas.push(`apagar:${id}`);
+        return true;
+      },
+      ...sobre
+    };
+    return { dep, chamadas };
+  };
+
+  it('com sessão e senha corretas, apaga o usuário da sessão', async () => {
+    const { dep, chamadas } = montar();
+    assert.deepStrictEqual(await excluirConta('segredo123', dep), { ok: true });
+    assert.deepStrictEqual(chamadas, ['senha', 'apagar:u1']);
+  });
+
+  it('sem senha, ou com senha de tipo errado, recusa sem tocar em nada', async () => {
+    for (const s of [undefined, null, '', 123, 'x'.repeat(201)]) {
+      const { dep, chamadas } = montar();
+      const r = await excluirConta(s, dep);
+      assert.ok(!r.ok && r.status === 400, String(s));
+      assert.deepStrictEqual(chamadas, []);
+    }
+  });
+
+  it('sem sessão: 401 e nada é apagado', async () => {
+    const { dep, chamadas } = montar({ usuarioAtual: async () => null });
+    const r = await excluirConta('segredo123', dep);
+    assert.ok(!r.ok && r.status === 401);
+    assert.deepStrictEqual(chamadas, []);
+  });
+
+  it('senha incorreta: 403 e nada é apagado', async () => {
+    const { dep, chamadas } = montar({ conferirSenha: async () => false });
+    const r = await excluirConta('errada', dep);
+    assert.ok(!r.ok && r.status === 403);
+    assert.deepStrictEqual(chamadas, []);
+  });
+
+  it('falha ao apagar: 500 e a mensagem diz que nada foi apagado', async () => {
+    const { dep } = montar({ apagarUsuario: async () => false });
+    const r = await excluirConta('segredo123', dep);
+    assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('Nada foi apagado'));
   });
 });

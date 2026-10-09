@@ -17,8 +17,8 @@ export default function PrivacidadePage() {
           você salvar em &ldquo;Meu espaço&rdquo; (título, descrição curta, módulo e data). Cada conta só acessa os próprios dados.
         </p>
         <p>
-          Você pode baixar seus dados e apagar seus registros salvos em &ldquo;Minha conta&rdquo; (LGPD, art. 18). A exclusão completa da conta pela
-          tela ainda não está disponível. Esta página é um rascunho e passará por revisão jurídica antes do lançamento.
+          Você pode baixar seus dados, apagar seus registros salvos e excluir a conta por completo em &ldquo;Minha conta&rdquo; (LGPD, art. 18),
+          informando a senha atual; a exclusão remove o cadastro, o perfil e os registros e não pode ser desfeita. Esta página é um rascunho e passará por revisão jurídica antes do lançamento.
         </p>
         <p>
           Antes de qualquer funcionalidade que envolva envio de documentos, esta página será atualizada com as regras

@@ -41,6 +41,7 @@ export default function ContaPage() {
   const [mensagem, setMensagem] = useState<{ tom: 'info' | 'danger'; texto: string } | null>(null);
   const [novaSenha, setNovaSenha] = useState('');
   const [ocupado, setOcupado] = useState(false);
+  const [senhaExclusao, setSenhaExclusao] = useState('');
 
   useEffect(() => {
     if (!carregando && !usuario) router.replace('/entrar');
@@ -132,6 +133,31 @@ export default function ContaPage() {
     const { error } = await sb.from('itens_salvos').delete().eq('usuario_id', usuario.id);
     if (error) aviso('danger', 'Não foi possível apagar os registros.');
     else aviso('info', 'Todos os registros salvos na conta foram apagados.');
+  };
+
+  const excluirConta = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!window.confirm('Excluir a conta e TODOS os dados associados a ela? Isso não pode ser desfeito.')) return;
+    setOcupado(true);
+    try {
+      const resp = await fetch('/api/conta/excluir', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ senha: senhaExclusao })
+      });
+      if (resp.ok) {
+        await obterSupabase()?.auth.signOut({ scope: 'local' }).catch(() => undefined);
+        router.replace('/');
+        return;
+      }
+      const corpo = (await resp.json().catch(() => null)) as { mensagem?: string } | null;
+      aviso('danger', corpo?.mensagem ?? 'Não foi possível excluir a conta. Tente de novo em instantes.');
+    } catch {
+      aviso('danger', 'Sem conexão com o servidor. Nada foi apagado.');
+    } finally {
+      setOcupado(false);
+      setSenhaExclusao('');
+    }
   };
 
   if (!carregando && !contaDisponivel) {
@@ -245,8 +271,8 @@ export default function ContaPage() {
             Seus dados (LGPD)
           </h2>
           <p className="text-sm text-ink-soft leading-relaxed">
-            Você pode baixar tudo o que o Ratione guarda sobre você ou apagar seus registros salvos. A exclusão completa da conta pela própria
-            tela ainda não está disponível; as regras de retenção e exclusão estão na{' '}
+            Você pode baixar tudo o que o Ratione guarda sobre você, apagar seus registros salvos ou excluir a conta por completo. As regras de
+            retenção e exclusão estão na{' '}
             <Link href="/privacidade" className="underline underline-offset-2">
               Política de privacidade
             </Link>
@@ -262,6 +288,31 @@ export default function ContaPage() {
             </button>
           </div>
         </section>
+
+        <form onSubmit={excluirConta} className="card p-6 space-y-5" aria-label="Excluir conta">
+          <h2 className="font-serif text-xl font-semibold text-ink">Excluir conta</h2>
+          <p className="text-sm text-ink-soft leading-relaxed">
+            Apaga a sua conta, o perfil e todos os registros salvos, sem possibilidade de recuperação. Baixe seus dados antes, se quiser guardá-los.
+            Para confirmar, informe a senha atual.
+          </p>
+          <div>
+            <label htmlFor="senha-exclusao" className="label">
+              Senha atual
+            </label>
+            <input
+              id="senha-exclusao"
+              type="password"
+              required
+              autoComplete="current-password"
+              value={senhaExclusao}
+              onChange={e => setSenhaExclusao(e.target.value)}
+              className="field"
+            />
+          </div>
+          <button type="submit" disabled={ocupado || senhaExclusao.length === 0} className="btn-secondary disabled:opacity-60">
+            Excluir minha conta
+          </button>
+        </form>
 
         <button type="button" onClick={sair} className="btn-secondary">
           <LogOut className="w-4 h-4" />
