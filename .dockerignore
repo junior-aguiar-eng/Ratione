@@ -1,0 +1,13 @@
+**/node_modules
+**/.next
+**/dist
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+.git
+.github
+docs
+supabase
+uploads
+temp
+scratch
