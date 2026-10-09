@@ -25,7 +25,11 @@ A chave **publicável** e a URL são feitas para ficar no navegador; a seguranç
 
 ## Modelos de e-mail (obrigatório para o login funcionar em qualquer navegador)
 
-Os links padrão do Supabase só funcionam no mesmo navegador em que o pedido foi feito, e o Outlook/Hotmail costuma gastá-los ao varrer o e-mail. O Ratione usa a página `/auth/confirm`, que só consome o link quando o usuário clica no botão. Para isso, troque os modelos em *Authentication → Email Templates*:
+Os links padrão do Supabase só funcionam no mesmo navegador em que o pedido foi feito, e o Outlook/Hotmail costuma gastá-los ao varrer o e-mail. O Ratione usa a página `/auth/confirm`, que só consome o link quando o usuário clica no botão.
+
+**Antes, o SMTP próprio.** Com o e-mail padrão do Supabase o painel não deixa editar os modelos ("Set up custom SMTP to edit templates"). Ative em *Authentication → Emails → SMTP Settings*. Com o Gmail: host `smtp.gmail.com`, porta `465`, usuário e remetente = o endereço do Gmail, e no campo de senha uma **senha de app** (myaccount.google.com/apppasswords, exige verificação em duas etapas). A senha normal é recusada: o pedido falha com `534 5.7.9 Application-specific password required`, visível em *Logs → Auth* (POST `/recover` com status 500), enquanto a tela só diz que enviou. O SMTP próprio também sobe o limite para 30 e-mails por hora (*Authentication → Rate Limits*).
+
+Depois troque os modelos em *Authentication → Emails → Templates*:
 
 - **Confirm signup**: troque o link do botão por
   `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=signup`
@@ -34,9 +38,9 @@ Os links padrão do Supabase só funcionam no mesmo navegador em que o pedido fo
 
 Mantenha o resto do texto do modelo. Confira que *URL Configuration → Site URL* é o endereço onde o site está rodando (`http://localhost:3000` no teste local; o de produção depois). Links de e-mails enviados **antes** da troca continuam no formato antigo: peça um novo.
 
-## Estado atual (08/10/2026)
+## Estado atual (09/10/2026)
 
-Tudo acima já foi feito para o projeto `ratione`, inclusive o endereço de retorno `http://localhost:3000/auth/callback` na lista de redirecionamentos. Para publicar o site, será preciso acrescentar o endereço de produção em *Site URL* e *Redirect URLs*.
+Tudo acima já foi feito para o projeto `ratione`, inclusive o endereço de retorno `http://localhost:3000/auth/callback` na lista de redirecionamentos. O SMTP é o Gmail do responsável (remetente "Ratione") e os dois modelos apontam para `/auth/confirm`; a recuperação de senha foi testada de ponta a ponta com Hotmail e outro navegador. Para publicar o site, será preciso acrescentar o endereço de produção em *Site URL* e *Redirect URLs* e trocar o Gmail por um provedor transacional (Resend, Brevo) com domínio próprio: o painel avisa que o Gmail é para e-mail pessoal e a entrega pode piorar.
 
 ## Depois
 
