@@ -50,6 +50,8 @@ export async function POST(request: Request) {
     },
     apagarUsuario: async id => {
       const { error } = await createClient(url, secreta, semSessao).auth.admin.deleteUser(id);
+      // Só no log do servidor: "Invalid API key" aqui indica SUPABASE_SERVICE_ROLE_KEY errada ou revogada
+      if (error) console.error('[excluir-conta] deleteUser falhou:', error.status, error.message);
       return !error;
     }
   });
