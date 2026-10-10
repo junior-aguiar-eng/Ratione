@@ -106,7 +106,7 @@ gcloud compute forwarding-rules create ratione-http --global --load-balancing-sc
 2. **Certificado**: o Google só o emite depois que o DNS aponta para o IP; acompanhar com `gcloud compute ssl-certificates describe ratione-cert --global --format="value(managed.status)"` até `ACTIVE` (15 a 60 minutos). O redirecionamento http→https do Google devolve `https://…:443/`; é o comportamento padrão e funciona.
 3. **Supabase**, *URL Configuration*: **Site URL** `https://ratione.nexojuris.ia.br` e acrescentar `https://ratione.nexojuris.ia.br/auth/callback` em *Redirect URLs* (manter as de `localhost`). Os modelos de e-mail usam `{{ .SiteURL }}`: depois da troca, os links dos e-mails levam ao site publicado, também nos testes locais.
 
-O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar pelo balanceador, restringir o ingresso do serviço (`--ingress=internal-and-cloud-load-balancing`, também no `deploy.yml`).
+O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar pelo balanceador, o serviço usa `--ingress internal-and-cloud-load-balancing` (no `deploy.yml`); depois disso o `*.run.app` deixa de responder.
 
 ## Depois
 
