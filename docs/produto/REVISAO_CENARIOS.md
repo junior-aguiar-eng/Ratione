@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **146** · validados: **121** · pendentes: **25**
+> Cenários: **152** · validados: **121** · pendentes: **31**
 
 ## Como revisar
 
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 26 |
-| Calendário verificado (tribunais com ato lido) | 54 |
+| Calendário verificado (tribunais com ato lido) | 60 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -1391,7 +1391,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **11/03/2026 (quarta-feira)**
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 06/03/2026 TJPE: Data Magna (Lei estadual PE 16.241/2017, art. 49)
 - **Fundamento:** Lei 9.093/1995, art. 1º, II; CPC, art. 216; Lei PE 16.241/2017, art. 49
-- **Calendário do tribunal verificado:** não
+- **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
 ### 111. `tjrs-20-setembro`
@@ -1670,7 +1670,80 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 134. `tjpr-19-dezembro-nao-feriado`
+### 134. `tjpe-2026-carnaval`
+
+**TJPE 2026: 16, 17 e 18/02 (Carnaval e Cinzas) não contam; vence 24/02**
+
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
+- **Vencimento esperado:** **24/02/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 17/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 18/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
+- **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 135. `tjpe-2026-corpus-christi-transferido`
+
+**TJPE 2026: Corpus Christi foi transferido para 22/06; 04/06 conta como dia útil**
+
+- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
+- **Vencimento esperado:** **05/06/2026 (sexta-feira)**
+- **Alternativa (se os dias pendentes forem confirmados):** 08/06/2026 (segunda-feira)
+- **Como foi contado (dias excluídos):** nenhum além do dia do começo
+- **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 136. `tjpe-2026-sao-joao`
+
+**TJPE 2026: 22 a 26/06 e 29 e 30/06 (Corpus Christi, São João e feriados forenses de junho) não contam**
+
+- **Entrada:** publicação em **19/06/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 19/06/2026 (sexta-feira) · **início da contagem:** 01/07/2026 (quarta-feira)
+- **Vencimento esperado:** **03/07/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 22/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 23/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 24/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 25/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 26/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 29/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 30/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
+- **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 137. `tjpe-2026-dez-de-agosto`
+
+**TJPE 2026: 10/08 (Dia dos Cursos Jurídicos, antecipado de 11/08) não conta; 11/08 conta**
+
+- **Entrada:** publicação em **07/08/2026 (sexta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 07/08/2026 (sexta-feira) · **início da contagem:** 11/08/2026 (terça-feira)
+- **Vencimento esperado:** **12/08/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
+- **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 138. `tjpe-2026-dia-servidor`
+
+**TJPE 2026: 30/10 (Dia do Servidor, transferido de 28/10) e Finados (02/11) não contam**
+
+- **Entrada:** publicação em **28/10/2026 (quarta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 28/10/2026 (quarta-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
+- **Vencimento esperado:** **03/11/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 02/11/2026 Finados
+- **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 139. `tjpe-2026-pje-maio`
+
+**TJPE: prazos suspensos de 11 a 15/05/2026 por instabilidade do PJe**
+
+- **Entrada:** publicação em **08/05/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
+- **Publicação / dia do começo:** 08/05/2026 (sexta-feira) · **início da contagem:** 18/05/2026 (segunda-feira)
+- **Vencimento esperado:** **20/05/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 11/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 12/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 13/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 14/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 15/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
+- **Fundamento:** Atos TJPE 966/2026 e 977/2026, art. 1º (lidos em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 140. `tjpr-19-dezembro-nao-feriado`
 
 **TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil**
 
@@ -1682,7 +1755,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 135. `tjdf-dia-evangelico-util`
+### 141. `tjdf-dia-evangelico-util`
 
 **TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal**
 
@@ -1696,7 +1769,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Intimação eletrônica
 
-### 136. `portal-segunda`
+### 142. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -1708,7 +1781,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 137. `portal-sexta`
+### 143. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -1720,7 +1793,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 138. `portal-sabado`
+### 144. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -1732,7 +1805,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 139. `portal-feriado`
+### 145. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -1744,7 +1817,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 140. `portal-recesso`
+### 146. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -1758,7 +1831,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 141. `jef-5d-embargos`
+### 147. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -1770,7 +1843,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 142. `jef-10d-recurso`
+### 148. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -1782,7 +1855,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 143. `jef-dobro-ignorado`
+### 149. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -1794,7 +1867,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 144. `jef-recesso`
+### 150. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -1806,7 +1879,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 145. `jef-recesso-desligado`
+### 151. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -1818,7 +1891,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 146. `jef-dje-sexta`
+### 152. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 
