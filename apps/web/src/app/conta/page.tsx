@@ -42,6 +42,8 @@ export default function ContaPage() {
   const [novaSenha, setNovaSenha] = useState('');
   const [ocupado, setOcupado] = useState(false);
   const [senhaExclusao, setSenhaExclusao] = useState('');
+  // Confirmação na própria página: `window.confirm` é bloqueado em navegadores embutidos e devolve "cancelar" sem mostrar nada
+  const [confirmando, setConfirmando] = useState<'itens' | 'conta' | null>(null);
 
   useEffect(() => {
     if (!carregando && !usuario) router.replace('/entrar');
@@ -129,7 +131,7 @@ export default function ContaPage() {
   const apagarItens = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    if (!window.confirm('Apagar TODOS os registros salvos na sua conta? Isso não pode ser desfeito.')) return;
+    setConfirmando(null);
     const { error } = await sb.from('itens_salvos').delete().eq('usuario_id', usuario.id);
     if (error) aviso('danger', 'Não foi possível apagar os registros.');
     else aviso('info', 'Todos os registros salvos na conta foram apagados.');
@@ -137,7 +139,8 @@ export default function ContaPage() {
 
   const excluirConta = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!window.confirm('Excluir a conta e TODOS os dados associados a ela? Isso não pode ser desfeito.')) return;
+    if (confirmando !== 'conta') return setConfirmando('conta');
+    setConfirmando(null);
     setOcupado(true);
     try {
       const resp = await fetch('/api/conta/excluir', {
@@ -283,10 +286,23 @@ export default function ContaPage() {
               <Download className="w-4 h-4" />
               Baixar meus dados
             </button>
-            <button type="button" onClick={apagarItens} className="btn-secondary">
+            <button type="button" onClick={() => setConfirmando('itens')} className="btn-secondary">
               Apagar meus registros salvos
             </button>
           </div>
+          {confirmando === 'itens' && (
+            <Notice tom="danger" titulo="Apagar todos os registros salvos na conta?">
+              <p>Isso não pode ser desfeito.</p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <button type="button" onClick={apagarItens} className="btn-primary">
+                  Sim, apagar os registros
+                </button>
+                <button type="button" onClick={() => setConfirmando(null)} className="btn-secondary">
+                  Cancelar
+                </button>
+              </div>
+            </Notice>
+          )}
         </section>
 
         <form onSubmit={excluirConta} className="card p-6 space-y-5" aria-label="Excluir conta">
@@ -309,9 +325,23 @@ export default function ContaPage() {
               className="field"
             />
           </div>
-          <button type="submit" disabled={ocupado || senhaExclusao.length === 0} className="btn-secondary disabled:opacity-60">
-            Excluir minha conta
-          </button>
+          {confirmando === 'conta' ? (
+            <Notice tom="danger" titulo="Excluir a conta e todos os dados associados a ela?">
+              <p>Isso não pode ser desfeito.</p>
+              <div className="flex flex-wrap gap-2 mt-3">
+                <button type="submit" disabled={ocupado} className="btn-primary disabled:opacity-60">
+                  Sim, excluir definitivamente
+                </button>
+                <button type="button" onClick={() => setConfirmando(null)} className="btn-secondary">
+                  Cancelar
+                </button>
+              </div>
+            </Notice>
+          ) : (
+            <button type="submit" disabled={ocupado || senhaExclusao.length === 0} className="btn-secondary disabled:opacity-60">
+              Excluir minha conta
+            </button>
+          )}
         </form>
 
         <button type="button" onClick={sair} className="btn-secondary">
