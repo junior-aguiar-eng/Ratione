@@ -4054,8 +4054,8 @@
   },
   {
     "id": "tjrj-carnaval-2026",
-    "categoria": "verificado",
-    "descricao": "TJRJ 2026: ponto facultativo de 13/02 e Carnaval (16 a 18/02) não contam",
+    "categoria": "pendente",
+    "descricao": "TJRJ 2026: 13/02 é ponto facultativo (alerta: o modo conservador conta o dia, o completo não); Carnaval (16 a 18/02) não conta",
     "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
     "entrada": {
       "dataEvento": "2026-02-12",
@@ -4099,8 +4099,8 @@
   },
   {
     "id": "tjrj-sao-jorge-2026",
-    "categoria": "verificado",
-    "descricao": "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo) não contam",
+    "categoria": "pendente",
+    "descricao": "TJRJ 2026: 23/04 (São Jorge, feriado estadual) não conta; 24/04 é ponto facultativo (alerta)",
     "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026",
     "entrada": {
       "dataEvento": "2026-04-22",

@@ -666,9 +666,9 @@ add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 
 
 # ---- TJRJ 2026 (F2-04): informativo oficial, sem selo ----
 INFRJ = "TJRJ, informativo de suspensão de prazos 2026 (cita o ato)"
-add("tjrj-carnaval-2026", "verificado", "TJRJ 2026: ponto facultativo de 13/02 e Carnaval (16 a 18/02) não contam", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+add("tjrj-carnaval-2026", "pendente", "TJRJ 2026: 13/02 é ponto facultativo (alerta: o modo conservador conta o dia, o completo não); Carnaval (16 a 18/02) não conta", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
     entrada("2026-02-12", "publicacao", 3, "TJRJ"))
-add("tjrj-sao-jorge-2026", "verificado", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo) não contam", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
+add("tjrj-sao-jorge-2026", "pendente", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) não conta; 24/04 é ponto facultativo (alerta)", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
     entrada("2026-04-22", "publicacao", 3, "TJRJ"))
 add("tjrj-copa-2026", "verificado", "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam", INFRJ + "; Atos Executivos 96 e 103/2026",
     entrada("2026-06-23", "publicacao", 3, "TJRJ"))
