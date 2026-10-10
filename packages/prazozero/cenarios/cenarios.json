@@ -5604,6 +5604,354 @@
     "alternativaEsperada": null
   },
   {
+    "id": "tjce-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 16 e 17/02 (Carnaval, ponto facultativo) não contam; Cinzas conta no meio do prazo",
+    "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-cinzas-vencimento",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: prazo que termina na Quarta-feira de Cinzas (ponto facultativo até as 14h) é protraído para o dia seguinte",
+    "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJCE: expediente reduzido (Cinzas, Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-sao-jose-data-magna",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 19/03 (São José, ponto facultativo) e 25/03 (Data Magna do Ceará) não contam",
+    "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 6,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-17",
+      "dataTermoInicial": "2026-03-18",
+      "dataVencimentoFinal": "2026-03-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-19",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-03-25",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 04/06 (Corpus Christi) e 05/06 (Portaria 1169/2026, ponto facultativo) não contam",
+    "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Portaria TJCE 1169/2026, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-copa-24-junho",
+    "categoria": "verificado",
+    "descricao": "TJCE: prazo que termina em 24/06/2026 (expediente único das 8h às 15h) é prorrogado para o primeiro dia útil",
+    "fundamento": "Portaria TJCE 1401/2026, art. 1º (lida em 10/10/2026); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-25",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJCE: expediente reduzido (Cinzas, Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-copa-29-junho",
+    "categoria": "verificado",
+    "descricao": "TJCE: o começo do prazo em 29/06/2026 (expediente único das 8h às 12h) é postergado",
+    "fundamento": "Portaria TJCE 1440/2026, art. 1º (lida em 10/10/2026); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "TJCE: expediente reduzido (Cinzas, Portarias 1401 e 1440/2026): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 28/10 (Dia do Servidor Público Estadual, sem transferência) não conta",
+    "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-26",
+      "dataTermoInicial": "2026-10-27",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjce-2026-fortaleza-13-abril-conservador",
+    "categoria": "pendente",
+    "descricao": "TJCE: 13/04/2026 (ponto facultativo só na Comarca de Fortaleza) ignorado no modo conservador",
+    "fundamento": "Portaria TJCE 727/2026, art. 1º; depende da comarca; CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJCE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-09",
+      "dataTermoInicial": "2026-04-10",
+      "dataVencimentoFinal": "2026-04-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-15"
+  },
+  {
+    "id": "tjce-2026-fortaleza-13-abril-completo",
+    "categoria": "pendente",
+    "descricao": "TJCE: 13/04/2026 considerado no modo completo",
+    "fundamento": "Portaria TJCE 727/2026, art. 1º; depende da comarca; CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJCE",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-09",
+      "dataTermoInicial": "2026-04-10",
+      "dataVencimentoFinal": "2026-04-15",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-13",
+            "motivo": "TJCE: ponto facultativo só na Comarca de Fortaleza (Portaria 727/2026)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
     "id": "tjpr-19-dezembro-nao-feriado",
     "categoria": "verificado",
     "descricao": "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil",
