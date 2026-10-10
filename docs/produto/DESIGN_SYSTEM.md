@@ -50,4 +50,4 @@ Comparação automática do estilo computado (cor, fundo, borda, raio, fonte, es
 - **Argumenta:** as abas viraram `Tabs` do Radix (setas do teclado entre abas, painel associado à aba); o visual é o mesmo.
 - **Checkbox:** passou do nativo para o do design system, com a cor da marca nos dois temas.
 
-**Não coberto pela comparação:** `/conta` com login e `/auth/confirm` (exigem sessão ou link de e-mail; usam os mesmos `Button`, `Input`, `Label` e `Card`, e o build e os tipos passam). Conferir à mão na primeira publicação.
+**Não coberto pela comparação:** `/conta` com login e `/auth/confirm` (exigem sessão ou link de e-mail; usam os mesmos `Button`, `Input`, `Label` e `Card`, e o build e os tipos passam). Conferidas à mão em produção em 10/10/2026, sem ajuste de visual.
