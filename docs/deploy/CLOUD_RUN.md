@@ -82,13 +82,33 @@ Em *Settings → Secrets and variables → Actions → Variables* (são **variá
 
 Depois, *Actions → Publicar (Cloud Run) → Run workflow* faz a primeira publicação.
 
-## Domínio
+## Domínio (balanceador de carga)
 
-1. Mapear `ratione.nexojuris.ia.br` para o serviço `ratione-web` (Cloud Run → *Domain mappings*, ou Firebase Hosting na frente se a região não oferecer o mapeamento). O Google indica o registro DNS a criar.
-2. No Registro.br, em *Editar zona* de `nexojuris.ia.br`: criar o registro indicado (CNAME `ratione` → `ghs.googlehosted.com.` no mapeamento direto). O certificado HTTPS sai sozinho em alguns minutos a algumas horas.
-3. No Supabase, *URL Configuration*: **Site URL** `https://ratione.nexojuris.ia.br` e acrescentar `https://ratione.nexojuris.ia.br/auth/callback` em *Redirect URLs* (manter as de `localhost` para o desenvolvimento).
+O mapeamento direto de domínio do Cloud Run **não existe em `southamerica-east1`** (a API responde "Creating domain mappings is not allowed in southamerica-east1"). O Firebase Hosting na frente também não serve: ele só repassa ao Cloud Run o cookie `__session`, e o login do Supabase depende dos cookies `sb-…-auth-token` (o `proxy.ts`, a exclusão de conta e o retorno dos e-mails leem a sessão no servidor). Por isso o domínio passa por um **balanceador de carga HTTPS global** (cerca de US$ 18/mês, fixo), com o site ainda em São Paulo.
+
+```bash
+gcloud services enable compute.googleapis.com
+gcloud compute addresses create ratione-ip --global --ip-version=IPV4
+gcloud compute network-endpoint-groups create ratione-neg --region=$REGIAO --network-endpoint-type=serverless --cloud-run-service=ratione-web
+gcloud compute backend-services create ratione-backend --global --load-balancing-scheme=EXTERNAL_MANAGED
+gcloud compute backend-services add-backend ratione-backend --global --network-endpoint-group=ratione-neg --network-endpoint-group-region=$REGIAO
+gcloud compute url-maps create ratione-urlmap --default-service=ratione-backend --global
+gcloud compute ssl-certificates create ratione-cert --domains=ratione.nexojuris.ia.br --global
+gcloud compute target-https-proxies create ratione-https-proxy --url-map=ratione-urlmap --ssl-certificates=ratione-cert --global
+gcloud compute forwarding-rules create ratione-https --global --load-balancing-scheme=EXTERNAL_MANAGED --address=ratione-ip --target-https-proxy=ratione-https-proxy --ports=443
+# http -> https: url-map só com redirecionamento (importado de um YAML com defaultUrlRedirect.httpsRedirect: true)
+gcloud compute url-maps import ratione-http-redirect --source=redir.yaml --global
+gcloud compute target-http-proxies create ratione-http-proxy --url-map=ratione-http-redirect --global
+gcloud compute forwarding-rules create ratione-http --global --load-balancing-scheme=EXTERNAL_MANAGED --address=ratione-ip --target-http-proxy=ratione-http-proxy --ports=80
+```
+
+1. **DNS no Registro.br** (*Configurar zona DNS* de `nexojuris.ia.br`, modo avançado): registro **A** `ratione` → `34.120.34.54` (o IP `ratione-ip`). Os demais registros da zona (site principal, `hml`, Resend) não mudam. O Registro.br leva alguns minutos para publicar.
+2. **Certificado**: o Google só o emite depois que o DNS aponta para o IP; acompanhar com `gcloud compute ssl-certificates describe ratione-cert --global --format="value(managed.status)"` até `ACTIVE` (15 a 60 minutos). O redirecionamento http→https do Google devolve `https://…:443/`; é o comportamento padrão e funciona.
+3. **Supabase**, *URL Configuration*: **Site URL** `https://ratione.nexojuris.ia.br` e acrescentar `https://ratione.nexojuris.ia.br/auth/callback` em *Redirect URLs* (manter as de `localhost`). Os modelos de e-mail usam `{{ .SiteURL }}`: depois da troca, os links dos e-mails levam ao site publicado, também nos testes locais.
+
+O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar pelo balanceador, restringir o ingresso do serviço (`--ingress=internal-and-cloud-load-balancing`, também no `deploy.yml`).
 
 ## Depois
 
-- E-mail com domínio próprio (Resend ou Brevo) em `ratione.nexojuris.ia.br`, substituindo o SMTP do Gmail (`supabase/LEIA-ME.md`).
+- E-mail com domínio próprio, substituindo o SMTP do Gmail (`supabase/LEIA-ME.md`). O domínio `nexojuris.ia.br` já tem o Resend configurado no DNS (`resend._domainkey`, `send`, `rsend`).
 - Trocar a chave de serviço: `printf '%s' "$NOVA" | gcloud secrets versions add supabase-service-role-key --data-file=-` e publicar de novo.
