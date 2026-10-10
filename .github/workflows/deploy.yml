@@ -1,0 +1,71 @@
+name: Publicar (Cloud Run)
+
+# Publica o site depois que o CI passa na `main`. Sem chave do Google no GitHub: o login usa
+# Workload Identity Federation (token do GitHub trocado por credencial temporária).
+# Configuração única no Google Cloud e variáveis do repositório: docs/deploy/CLOUD_RUN.md.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-producao
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  REGIAO: southamerica-east1
+  SERVICO: ratione-web
+  REPOSITORIO: ratione
+
+jobs:
+  publicar:
+    name: Imagem e Cloud Run
+    # Só com CI verde, e só depois de configurado o projeto no Google (variável GCP_PROJECT_ID)
+    if: >-
+      vars.GCP_PROJECT_ID != '' &&
+      (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v3
+
+      - name: Imagem
+        id: imagem
+        run: |
+          IMAGEM="$REGIAO-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/$REPOSITORIO/web:${{ github.event.workflow_run.head_sha || github.sha }}"
+          gcloud auth configure-docker "$REGIAO-docker.pkg.dev" --quiet
+          docker build -t "$IMAGEM" \
+            --build-arg NEXT_PUBLIC_SUPABASE_URL="${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" \
+            --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}" \
+            .
+          docker push "$IMAGEM"
+          echo "nome=$IMAGEM" >> "$GITHUB_OUTPUT"
+
+      # A chave de serviço do Supabase vem do Secret Manager, nunca do repositório nem da imagem
+      - name: Cloud Run
+        run: |
+          gcloud run deploy "$SERVICO" \
+            --project "${{ vars.GCP_PROJECT_ID }}" \
+            --region "$REGIAO" \
+            --image "${{ steps.imagem.outputs.nome }}" \
+            --service-account "${{ vars.GCP_RUNTIME_SA }}" \
+            --set-secrets SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest \
+            --allow-unauthenticated \
+            --port 8080 --memory 512Mi --cpu 1 \
+            --min-instances 0 --max-instances 3 \
+            --quiet
