@@ -1014,7 +1014,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJRS** · modo completo
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
 - **Vencimento esperado:** **10/06/2026 (quarta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRS: Corpus Christi (feriado municipal de Porto Alegre; depende da comarca)
 - **Fundamento:** Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224 (asterisco: feriado municipal)
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
@@ -1812,7 +1812,6 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPE** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
 - **Vencimento esperado:** **05/06/2026 (sexta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 08/06/2026 (segunda-feira)
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim

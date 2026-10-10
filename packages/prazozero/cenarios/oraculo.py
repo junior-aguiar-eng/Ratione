@@ -130,9 +130,11 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 def calendario(ano: int, trib: str, uf: str, completo: bool):
     """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
     nao_util, parcial, nomes = set(), set(), {}
+    # Calendário do ano lido por inteiro: o ato é a lista completa e a tabela provisória de dias pendentes não vale (espelha feriados.ts)
+    coberto = ano in ANOS_VERIFICADOS.get(trib, set())
 
     def nu(d, verificado, nome):
-        if verificado or completo:
+        if verificado or (completo and not coberto):
             nao_util.add(d)
             nomes[d] = nome
 
@@ -148,7 +150,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     nu(p - timedelta(48), aplica, "Carnaval (segunda)")
     nu(p - timedelta(47), aplica, "Carnaval (terça)")
     nu(p + timedelta(60), False, "Corpus Christi")
-    if completo:
+    if completo and not coberto:
         parcial.add(p - timedelta(46))
         nomes[p - timedelta(46)] = "Quarta-feira de Cinzas (expediente parcial)"
     if aplica or trib in SUPERIORES_SEM_ATO:
@@ -282,7 +284,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
         for d in intervalo(date(ano, 12, 20), date(ano, 12, 31)):
             ev(d, True, "TJAL: feriados forenses de dezembro (Lei 6.564/2005, art. 37)")
-    if completo and uf in FERIADOS_ESTADUAIS_PENDENTES:
+    if completo and not coberto and uf in FERIADOS_ESTADUAIS_PENDENTES:
         m, dd, nome = FERIADOS_ESTADUAIS_PENDENTES[uf]
         d = date(ano, m, dd)
         if d not in nao_util and d not in parcial:

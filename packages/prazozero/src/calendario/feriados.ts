@@ -194,6 +194,14 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
     }
   }
 
+  // Tribunal com o calendário do ano lido por inteiro (COBERTURA_CALENDARIO): o ato é a lista completa. A tabela provisória de dias
+  // pendentes (Carnaval, Cinzas, Paixão, Corpus Christi) e os feriados estaduais provisórios deixam de valer para esse ano; sem isso, um
+  // ato que transfere o feriado (TJPE: Corpus Christi em 22/06) ainda alertaria "04/06 pendente". Os alertas dos próprios atos continuam.
+  const calendarioLidoPorInteiro = !!trib && !!COBERTURA_CALENDARIO[trib]?.anos.includes(ano);
+  if (calendarioLidoPorInteiro) {
+    for (const [dataIso, f] of mapa) if (f.verificacao === 'pendente') mapa.delete(dataIso);
+  }
+
   // 4. Calendário como dado (eventos.ts): eventos do ano e regras anuais do tribunal.
   //    Um dia pendente nunca apaga um dia já conferido.
   if (trib) {
@@ -236,7 +244,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
   }
 
   // 5. Feriados estaduais (pendentes de conferência). Não valem para a Justiça Federal, que segue a Lei 5.010, art. 62.
-  if (uf && !aplica5010 && FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
+  if (uf && !aplica5010 && !calendarioLidoPorInteiro && FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
     for (const fe of FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
       const dataIso = `${ano}-${String(fe.mes).padStart(2, '0')}-${String(fe.dia).padStart(2, '0')}`;
       if (!mapa.has(dataIso)) {

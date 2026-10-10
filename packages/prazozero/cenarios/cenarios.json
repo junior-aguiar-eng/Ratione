@@ -4614,7 +4614,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-06-04",
-            "motivo": "Corpus Christi"
+            "motivo": "TJRS: Corpus Christi (feriado municipal de Porto Alegre; depende da comarca)"
           }
         ]
       }
@@ -5291,7 +5291,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-06-08"
+    "alternativaEsperada": null
   },
   {
     "id": "tjpe-2026-sao-joao",
