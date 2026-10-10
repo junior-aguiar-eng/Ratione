@@ -4212,7 +4212,7 @@
       "dataTermoInicial": "2026-03-09",
       "dataVencimentoFinal": "2026-03-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -5333,6 +5333,275 @@
       "por": null,
       "em": null
     }
+  },
+  {
+    "id": "tjpe-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJPE 2026: 16, 17 e 18/02 (Carnaval e Cinzas) não contam; vence 24/02",
+    "fundamento": "Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpe-2026-corpus-christi-transferido",
+    "categoria": "verificado",
+    "descricao": "TJPE 2026: Corpus Christi foi transferido para 22/06; 04/06 conta como dia útil",
+    "fundamento": "Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-08"
+  },
+  {
+    "id": "tjpe-2026-sao-joao",
+    "categoria": "verificado",
+    "descricao": "TJPE 2026: 22 a 26/06 e 29 e 30/06 (Corpus Christi, São João e feriados forenses de junho) não contam",
+    "fundamento": "Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-19",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-07-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-22",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-24",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-25",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-26",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-06-30",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpe-2026-dez-de-agosto",
+    "categoria": "verificado",
+    "descricao": "TJPE 2026: 10/08 (Dia dos Cursos Jurídicos, antecipado de 11/08) não conta; 11/08 conta",
+    "fundamento": "Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-11",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpe-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJPE 2026: 30/10 (Dia do Servidor, transferido de 28/10) e Finados (02/11) não contam",
+    "fundamento": "Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-28",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-28",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpe-2026-pje-maio",
+    "categoria": "verificado",
+    "descricao": "TJPE: prazos suspensos de 11 a 15/05/2026 por instabilidade do PJe",
+    "fundamento": "Atos TJPE 966/2026 e 977/2026, art. 1º (lidos em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-05-08",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-05-08",
+      "dataTermoInicial": "2026-05-18",
+      "dataVencimentoFinal": "2026-05-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-11",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-05-12",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-05-13",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-05-14",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          },
+          {
+            "data": "2026-05-15",
+            "motivo": "TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjpr-19-dezembro-nao-feriado",

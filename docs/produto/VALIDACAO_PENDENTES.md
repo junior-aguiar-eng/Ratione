@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 25. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **146** cenários · validados: **121** · pendentes: **25**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 31. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **152** cenários · validados: **121** · pendentes: **31**
 
 ## Como responder
 
@@ -13,10 +13,10 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 21 | 21 |
-| Dias ainda pendentes de conferência | 22 a 25 | 4 |
+| Calendário verificado (tribunais com ato lido) | 1 a 27 | 27 |
+| Dias ainda pendentes de conferência | 28 a 31 | 4 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 21)
+## Calendário verificado (tribunais com ato lido) (1 a 27)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -43,15 +43,21 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 19 | `tjsc-2026-copa-24-junho`<br>TJSC: prazo que termina em 24/06/2026 (jogo às 19h, expediente das 10h às 17h) é postergado para o primeiro dia útil | publicação em 17/06/2026 (quarta-feira); 5 dias (CPC, dias úteis); TJSC; modo conservador | **25/06/2026 (quinta-feira)** (prorrogado) | 2 sáb./dom.; 24/06 TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026): protrai o vencimento (CPC, art. 224, § 1º) |
 | 20 | `tjsc-2026-dia-funcionario-publico`<br>TJSC 2026: 28/10 (Dia do Funcionário Público, sem transferência para 30/10) não conta | publicação em 26/10/2026 (segunda-feira); 3 dias (CPC, dias úteis); TJSC; modo conservador | **30/10/2026 (sexta-feira)** | 28/10 TJSC: Resolução GP 1/2026 |
 | 21 | `tjsc-2026-dia-da-justica`<br>TJSC 2026: 08/12 (Dia da Justiça, efeitos forenses) não conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJSC; modo conservador | **10/12/2026 (quinta-feira)** | 2 sáb./dom.; 08/12 TJSC: Resolução GP 1/2026 |
+| 22 | `tjpe-2026-carnaval`<br>TJPE 2026: 16, 17 e 18/02 (Carnaval e Cinzas) não contam; vence 24/02 | publicação em 12/02/2026 (quinta-feira); 5 dias (CPC, dias úteis); TJPE; modo conservador | **24/02/2026 (terça-feira)** | 4 sáb./dom.; 16/02 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 17/02 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 18/02 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026 |
+| 23 | `tjpe-2026-corpus-christi-transferido`<br>TJPE 2026: Corpus Christi foi transferido para 22/06; 04/06 conta como dia útil | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJPE; modo conservador | **05/06/2026 (sexta-feira)**<br>Alternativa: 08/06/2026 (segunda-feira) | só o dia do começo |
+| 24 | `tjpe-2026-sao-joao`<br>TJPE 2026: 22 a 26/06 e 29 e 30/06 (Corpus Christi, São João e feriados forenses de junho) não contam | publicação em 19/06/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJPE; modo conservador | **03/07/2026 (sexta-feira)** | 4 sáb./dom.; 22/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 23/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 24/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 25/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 26/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 29/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 30/06 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026 |
+| 25 | `tjpe-2026-dez-de-agosto`<br>TJPE 2026: 10/08 (Dia dos Cursos Jurídicos, antecipado de 11/08) não conta; 11/08 conta | publicação em 07/08/2026 (sexta-feira); 2 dias (CPC, dias úteis); TJPE; modo conservador | **12/08/2026 (quarta-feira)** | 2 sáb./dom.; 10/08 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026 |
+| 26 | `tjpe-2026-dia-servidor`<br>TJPE 2026: 30/10 (Dia do Servidor, transferido de 28/10) e Finados (02/11) não contam | publicação em 28/10/2026 (quarta-feira); 2 dias (CPC, dias úteis); TJPE; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 02/11 Finados |
+| 27 | `tjpe-2026-pje-maio`<br>TJPE: prazos suspensos de 11 a 15/05/2026 por instabilidade do PJe | publicação em 08/05/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJPE; modo conservador | **20/05/2026 (quarta-feira)** | 4 sáb./dom.; 11/05 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 12/05 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 13/05 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 14/05 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 15/05 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026 |
 
-## Dias ainda pendentes de conferência (22 a 25)
+## Dias ainda pendentes de conferência (28 a 31)
 
 *Cada caso mostra a data com o dia ainda **não conferido** no ato do tribunal. Valide a contagem **supondo que o dia conta como sem expediente**; se ele é mesmo dia sem expediente naquele tribunal é o que falta conferir, não é dúvida de contagem. A coluna *Alternativa* mostra a outra data possível.*
 
 | Nº | Caso | Dados | Sistema diz | Dias que não contaram |
 |---|---|---|---|---|
-| 22 | `tjrs-2026-corpus-christi-conservador`<br>TJRS: Corpus Christi (04/06/2026) é feriado municipal de Porto Alegre; ignorado no modo conservador | publicação em 02/06/2026 (terça-feira); 5 dias (CPC, dias úteis); TJRS; modo conservador | **09/06/2026 (terça-feira)**<br>Alternativa: 10/06/2026 (quarta-feira) | 2 sáb./dom. |
-| 23 | `tjrs-2026-corpus-christi-completo`<br>TJRS: Corpus Christi (04/06/2026) considerado no modo completo | publicação em 02/06/2026 (terça-feira); 5 dias (CPC, dias úteis); TJRS; modo completo | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi |
-| 24 | `tjsc-2026-copa-29-junho-conservador`<br>TJSC: 29/06/2026 (jogo às 14h, sem aviso do tribunal) ignorado no modo conservador | publicação em 26/06/2026 (sexta-feira); 2 dias (CPC, dias úteis); TJSC; modo conservador | **30/06/2026 (terça-feira)**<br>Alternativa: 01/07/2026 (quarta-feira) | 2 sáb./dom. |
-| 25 | `tjsc-2026-copa-29-junho-completo`<br>TJSC: 29/06/2026 considerado no modo completo (começo do prazo postergado) | publicação em 26/06/2026 (sexta-feira); 2 dias (CPC, dias úteis); TJSC; modo completo | **01/07/2026 (quarta-feira)** | 2 sáb./dom.; 29/06 TJSC: jogo da Seleção às 14h (Res. GP 31/2026; pendente: sem aviso do tribunal): protrai o dia do começo |
+| 28 | `tjrs-2026-corpus-christi-conservador`<br>TJRS: Corpus Christi (04/06/2026) é feriado municipal de Porto Alegre; ignorado no modo conservador | publicação em 02/06/2026 (terça-feira); 5 dias (CPC, dias úteis); TJRS; modo conservador | **09/06/2026 (terça-feira)**<br>Alternativa: 10/06/2026 (quarta-feira) | 2 sáb./dom. |
+| 29 | `tjrs-2026-corpus-christi-completo`<br>TJRS: Corpus Christi (04/06/2026) considerado no modo completo | publicação em 02/06/2026 (terça-feira); 5 dias (CPC, dias úteis); TJRS; modo completo | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi |
+| 30 | `tjsc-2026-copa-29-junho-conservador`<br>TJSC: 29/06/2026 (jogo às 14h, sem aviso do tribunal) ignorado no modo conservador | publicação em 26/06/2026 (sexta-feira); 2 dias (CPC, dias úteis); TJSC; modo conservador | **30/06/2026 (terça-feira)**<br>Alternativa: 01/07/2026 (quarta-feira) | 2 sáb./dom. |
+| 31 | `tjsc-2026-copa-29-junho-completo`<br>TJSC: 29/06/2026 considerado no modo completo (começo do prazo postergado) | publicação em 26/06/2026 (sexta-feira); 2 dias (CPC, dias úteis); TJSC; modo completo | **01/07/2026 (quarta-feira)** | 2 sáb./dom.; 29/06 TJSC: jogo da Seleção às 14h (Res. GP 31/2026; pendente: sem aviso do tribunal): protrai o dia do começo |
 

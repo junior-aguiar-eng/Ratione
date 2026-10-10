@@ -193,6 +193,24 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjsc.jus.br/web/imprensa/-/justica-de-sc-atuara-em-regime-de-plantao-no-carnaval-expediente-volta-ao-normal-na-quarta-feira',
     lido: 'só a notícia oficial (as Resoluções GP 1/1985, 74/2023 e 13/2022 e a Resolução TJ 7/2006 não foram lidas): 16 e 17/02 sem expediente; em 18/02 o expediente começa às 12h',
     lidoEm: LIDO_10_10
+  },
+  'tjpe-ato-conjunto-43-2025': {
+    ato: 'Ato Conjunto nº 43/2025 do TJPE (13/10/2025; DJe nº 304/2025, 14/10/2025, pp. 3 e 4): calendário dos feriados forenses de 2026',
+    url: 'https://portal.tjpe.jus.br/documents/d/portal/feriados-2026-pdf',
+    lido: 'inteiro teor (2 páginas do DJe). Art. 1º: 21 feriados, mais, no parágrafo único, 02 a 06/01, 23 e 25 a 30/06 e 20 a 31/12 (COJE, art. 94, e Res. TJPE 520/2024). Corpus Christi foi transferido de 04/06 para 22/06; o Dia dos Cursos Jurídicos, antecipado de 11/08 para 10/08. O art. 2º (16/07, só na Comarca do Recife) e o art. 4º (feriados municipais do interior) são municipais e não entram: CPC, art. 1.003, § 6º',
+    lidoEm: LIDO_10_10
+  },
+  'tjpe-ato-966-2026': {
+    ato: 'Ato nº 966/2026 da Presidência do TJPE (12/05/2026): suspende os prazos processuais em 11, 12 e 13/05/2026 (instabilidade do PJe)',
+    url: 'https://portal.tjpe.jus.br/documents/d/portal/ato_n-966-2026-pdf',
+    lido: 'inteiro teor (PDF de 2 páginas, SEI 00018092-59.2026.8.17.8017); arts. 1º (1º e 2º graus)',
+    lidoEm: LIDO_10_10
+  },
+  'tjpe-ato-977-2026': {
+    ato: 'Ato nº 977/2026 da Presidência do TJPE (14/05/2026; DJe nº 109/2026, 15/05/2026, p. 31): suspende os prazos processuais em 14 e 15/05/2026 (instabilidade do PJe)',
+    url: 'https://portal.tjpe.jus.br/documents/d/portal/ato_n-977-2026-pdf',
+    lido: 'inteiro teor na página do DJe (art. 1º: 1º e 2º graus)',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -457,6 +475,31 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJSC'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h): expediente das 10h às 17h; começo e vencimento dos prazos postergados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º', fonte: 'tjsc-res-gp-31-2026' },
   { tribunais: ['TJSC'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h, segundo avisos de outros tribunais): expediente das 8h às 12h pela Res. GP 31/2026; o TJSC não publicou aviso para este dia que eu tenha encontrado', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo extraído de avisos do TJDFT e do TJBA', fonte: 'tjsc-res-gp-31-2026' },
 
+  // ---------- TJPE, 2026: Ato Conjunto 43/2025 (art. 1º e parágrafo único) e Atos 966 e 977/2026 (PJe) ----------
+  // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 06/03 (já é regra anual conferida por lei estadual),
+  // 02 a 06/01 e 20 a 31/12 (já no recesso do CPC, art. 220) e 16/07 (feriado municipal do Recife). Corpus Christi é 22/06; 04/06 é dia normal.
+  ...[
+    ['2026-02-16', '2026-02-16', 'Carnaval (segunda-feira)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, II'],
+    ['2026-02-17', '2026-02-17', 'Carnaval (terça-feira)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, III'],
+    ['2026-02-18', '2026-02-18', 'Quarta-feira de Cinzas (sem expediente por inteiro)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, IV'],
+    ['2026-04-02', '2026-04-03', 'Semana Santa (Quinta-feira e Sexta-feira Santa)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, VI e VII'],
+    ['2026-05-11', '2026-05-15', 'Prazos suspensos por instabilidade do PJe (11 a 13/05: Ato 966; 14 e 15/05: Ato 977)', 'tjpe-ato-966-2026', 'Atos TJPE 966/2026 e 977/2026, art. 1º'],
+    ['2026-06-22', '2026-06-22', 'Corpus Christi (transferido de 04/06)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XI'],
+    ['2026-06-23', '2026-06-30', 'São João e feriados forenses de junho (23, 24 e 25 a 30)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XII, e parágrafo único (COJE, art. 94)'],
+    ['2026-08-10', '2026-08-10', 'Dia dos Cursos Jurídicos (antecipado de 11/08)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XIII (COJE, art. 94)'],
+    ['2026-10-30', '2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XVI'],
+    ['2026-12-08', '2026-12-08', 'Nossa Senhora da Conceição e Dia da Justiça', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XX']
+  ].map(([inicio, fim, nome, fonte, fundamento]) => ({
+    tribunais: ['TJPE'],
+    inicio,
+    fim,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: fonte as keyof typeof FONTES_CALENDARIO
+  })),
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -514,5 +557,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] },
   TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] },
   TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] },
-  TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] }
+  TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] },
+  TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] }
 };
