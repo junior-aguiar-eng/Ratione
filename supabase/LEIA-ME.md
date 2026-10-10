@@ -38,9 +38,11 @@ Depois troque os modelos em *Authentication → Emails → Templates*:
 
 Mantenha o resto do texto do modelo. Confira que *URL Configuration → Site URL* é o endereço onde o site está rodando (`http://localhost:3000` no teste local; o de produção depois). Links de e-mails enviados **antes** da troca continuam no formato antigo: peça um novo.
 
-## Estado atual (09/10/2026)
+## Estado atual (10/10/2026)
 
-Tudo acima já foi feito para o projeto `ratione`, inclusive o endereço de retorno `http://localhost:3000/auth/callback` na lista de redirecionamentos. O SMTP é o Gmail do responsável (remetente "Ratione") e os dois modelos apontam para `/auth/confirm`; a recuperação de senha foi testada de ponta a ponta com Hotmail e outro navegador. Para publicar o site, será preciso acrescentar o endereço de produção em *Site URL* e *Redirect URLs* e trocar o Gmail por um provedor transacional (Resend, Brevo) com domínio próprio: o painel avisa que o Gmail é para e-mail pessoal e a entrega pode piorar.
+Tudo acima foi feito para o projeto `ratione`. O site publicado é `https://ratione.nexojuris.ia.br`: *Site URL* aponta para ele e a lista de redirecionamentos tem `https://ratione.nexojuris.ia.br/auth/callback` e `http://localhost:3000/auth/callback` (desenvolvimento). Os dois modelos apontam para `/auth/confirm` e usam `{{ .SiteURL }}`, então os links dos e-mails levam ao site publicado, também nos testes locais.
+
+**SMTP: Resend, com domínio próprio.** Host `smtp.resend.com`, porta `465`, usuário `resend`, senha = chave de API do Resend (permissão só de envio, restrita ao domínio `nexojuris.ia.br`), remetente `nao-responda@nexojuris.ia.br` ("Ratione"). Substituiu o Gmail, que o painel desaconselha para produção e limita a 30 e-mails por hora. A chave fica só no painel do Supabase; para trocá-la, crie outra no Resend, cole no campo de senha do SMTP e apague a antiga. Testado em 10/10/2026: cadastro com confirmação e recuperação de senha, com os links abrindo no domínio publicado.
 
 ## Depois
 

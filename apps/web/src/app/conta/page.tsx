@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Download, LogOut } from 'lucide-react';
@@ -39,6 +39,7 @@ export default function ContaPage() {
   const { usuario, carregando, contaDisponivel } = useSessao();
   const [perfil, setPerfil] = useState<Perfil>(VAZIO);
   const [mensagem, setMensagem] = useState<{ tom: 'info' | 'danger'; texto: string } | null>(null);
+  const avisoRef = useRef<HTMLDivElement>(null);
   const [novaSenha, setNovaSenha] = useState('');
   const [ocupado, setOcupado] = useState(false);
   const [senhaExclusao, setSenhaExclusao] = useState('');
@@ -69,7 +70,11 @@ export default function ContaPage() {
       });
   }, [usuario]);
 
-  const aviso = (tom: 'info' | 'danger', texto: string) => setMensagem({ tom, texto });
+  // O aviso fica no topo da página: sem rolar até ele, quem age num formulário mais abaixo não vê o resultado
+  const aviso = (tom: 'info' | 'danger', texto: string) => {
+    setMensagem({ tom, texto });
+    requestAnimationFrame(() => avisoRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+  };
 
   const salvarPerfil = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,7 +185,7 @@ export default function ContaPage() {
       <PageHeader eyebrow="Conta" title="Minha conta" description={usuario.email ?? undefined} />
 
       <div className="max-w-xl space-y-12">
-        <div aria-live="polite">
+        <div ref={avisoRef} aria-live="polite">
           {mensagem && (
             <Notice tom={mensagem.tom === 'danger' ? 'danger' : 'info'} titulo={mensagem.tom === 'danger' ? 'Atenção' : undefined}>
               {mensagem.texto}
