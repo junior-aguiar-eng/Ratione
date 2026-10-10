@@ -119,11 +119,16 @@ export default function ContaPage() {
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }] = await Promise.all([
+    const [{ data: perfilBd }, { data: itens }, { data: avisos }] = await Promise.all([
       sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
-      sb.from('itens_salvos').select('*').order('criado_em', { ascending: false })
+      sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
+      sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true })
     ]);
-    const conteudo = JSON.stringify({ exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens }, null, 2);
+    const conteudo = JSON.stringify(
+      { exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens, avisosPorEmail: avisos },
+      null,
+      2
+    );
     const blob = new Blob([conteudo], { type: 'application/json;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -137,9 +142,12 @@ export default function ContaPage() {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
     setConfirmando(null);
-    const { error } = await sb.from('itens_salvos').delete().eq('usuario_id', usuario.id);
-    if (error) aviso('danger', 'Não foi possível apagar os registros.');
-    else aviso('info', 'Todos os registros salvos na conta foram apagados.');
+    const [itens, avisos] = await Promise.all([
+      sb.from('itens_salvos').delete().eq('usuario_id', usuario.id),
+      sb.from('lembretes_prazo').delete().eq('usuario_id', usuario.id)
+    ]);
+    if (itens.error || avisos.error) aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
+    else aviso('info', 'Todos os registros salvos e os avisos por e-mail da conta foram apagados.');
   };
 
   const excluirConta = async (e: React.FormEvent) => {
@@ -292,11 +300,11 @@ export default function ContaPage() {
               Baixar meus dados
             </button>
             <button type="button" onClick={() => setConfirmando('itens')} className="btn-secondary">
-              Apagar meus registros salvos
+              Apagar meus registros e avisos
             </button>
           </div>
           {confirmando === 'itens' && (
-            <Notice tom="danger" titulo="Apagar todos os registros salvos na conta?">
+            <Notice tom="danger" titulo="Apagar todos os registros salvos e os avisos por e-mail da conta?">
               <p>Isso não pode ser desfeito.</p>
               <div className="flex flex-wrap gap-2 mt-3">
                 <button type="button" onClick={apagarItens} className="btn-primary">

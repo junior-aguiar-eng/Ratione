@@ -22,6 +22,7 @@ import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
+import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import ResultadoMaterial from './ResultadoMaterial';
@@ -510,6 +511,8 @@ export default function PrazoZeroPage() {
                   </button>
                 </div>
               </section>
+
+              <AvisoPorEmail tituloPadrao={`${nomeAto} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataVencimentoFinal} />
 
               <section className="border-t border-line pt-7 space-y-5">
                 <div className="flex items-end justify-between gap-4">

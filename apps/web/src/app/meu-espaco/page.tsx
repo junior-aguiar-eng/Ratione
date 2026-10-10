@@ -17,6 +17,7 @@ import {
   TipoHistorico
 } from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
+import AvisosAtivos from './AvisosAtivos';
 
 const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
   { id: 'todos', rotulo: 'Todos' },
@@ -105,6 +106,8 @@ export default function MeuEspacoPage() {
           <Notice tom="info">{resultadoImportacao}</Notice>
         </div>
       )}
+
+      <AvisosAtivos />
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div className="flex flex-wrap gap-1" role="group" aria-label="Filtrar por tipo">
