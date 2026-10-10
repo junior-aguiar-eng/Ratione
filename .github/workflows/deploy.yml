@@ -66,6 +66,7 @@ jobs:
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
             --set-secrets SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest \
             --allow-unauthenticated \
+            --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \
             --min-instances 0 --max-instances 3 \
             --quiet
