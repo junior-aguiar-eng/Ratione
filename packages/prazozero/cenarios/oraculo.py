@@ -130,9 +130,11 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 def calendario(ano: int, trib: str, uf: str, completo: bool):
     """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
     nao_util, parcial, nomes = set(), set(), {}
+    # Calendário do ano lido por inteiro: o ato é a lista completa e a tabela provisória de dias pendentes não vale (espelha feriados.ts)
+    coberto = ano in ANOS_VERIFICADOS.get(trib, set())
 
     def nu(d, verificado, nome):
-        if verificado or completo:
+        if verificado or (completo and not coberto):
             nao_util.add(d)
             nomes[d] = nome
 
@@ -148,7 +150,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     nu(p - timedelta(48), aplica, "Carnaval (segunda)")
     nu(p - timedelta(47), aplica, "Carnaval (terça)")
     nu(p + timedelta(60), False, "Corpus Christi")
-    if completo:
+    if completo and not coberto:
         parcial.add(p - timedelta(46))
         nomes[p - timedelta(46)] = "Quarta-feira de Cinzas (expediente parcial)"
     if aplica or trib in SUPERIORES_SEM_ATO:
@@ -282,7 +284,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
         for d in intervalo(date(ano, 12, 20), date(ano, 12, 31)):
             ev(d, True, "TJAL: feriados forenses de dezembro (Lei 6.564/2005, art. 37)")
-    if completo and uf in FERIADOS_ESTADUAIS_PENDENTES:
+    if completo and not coberto and uf in FERIADOS_ESTADUAIS_PENDENTES:
         m, dd, nome = FERIADOS_ESTADUAIS_PENDENTES[uf]
         d = date(ano, m, dd)
         if d not in nao_util and d not in parcial:
@@ -664,9 +666,9 @@ add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 
 
 # ---- TJRJ 2026 (F2-04): informativo oficial, sem selo ----
 INFRJ = "TJRJ, informativo de suspensão de prazos 2026 (cita o ato)"
-add("tjrj-carnaval-2026", "verificado", "TJRJ 2026: ponto facultativo de 13/02 e Carnaval (16 a 18/02) não contam", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+add("tjrj-carnaval-2026", "pendente", "TJRJ 2026: 13/02 é ponto facultativo (alerta: o modo conservador conta o dia, o completo não); Carnaval (16 a 18/02) não conta", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
     entrada("2026-02-12", "publicacao", 3, "TJRJ"))
-add("tjrj-sao-jorge-2026", "verificado", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo) não contam", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
+add("tjrj-sao-jorge-2026", "pendente", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) não conta; 24/04 é ponto facultativo (alerta)", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
     entrada("2026-04-22", "publicacao", 3, "TJRJ"))
 add("tjrj-copa-2026", "verificado", "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam", INFRJ + "; Atos Executivos 96 e 103/2026",
     entrada("2026-06-23", "publicacao", 3, "TJRJ"))
