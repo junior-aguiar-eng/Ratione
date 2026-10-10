@@ -110,5 +110,5 @@ O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar p
 
 ## Depois
 
-- E-mail com domínio próprio, substituindo o SMTP do Gmail (`supabase/LEIA-ME.md`). O domínio `nexojuris.ia.br` já tem o Resend configurado no DNS (`resend._domainkey`, `send`, `rsend`).
+- E-mail: já sai pelo Resend (`nao-responda@nexojuris.ia.br`); ver `supabase/LEIA-ME.md`.
 - Trocar a chave de serviço: `printf '%s' "$NOVA" | gcloud secrets versions add supabase-service-role-key --data-file=-` e publicar de novo.
