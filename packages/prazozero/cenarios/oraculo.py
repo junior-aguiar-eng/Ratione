@@ -24,7 +24,7 @@ UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR"
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}}
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -33,6 +33,10 @@ ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}
 TJSP_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "07-09", "07-10", "10-30", "12-07", "12-08"]
 TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #  TJPR: Decreto Judiciário 621/2025, arts. 1º a 3º (art. 4º, feriados municipais, não entra: CPC, art. 1.003, § 6º); recesso coincide com o CPC, art. 220
+#  TJRS: Ato 05/2025 OE (2026) e Ato 06/2026 OE (2027); Ato Conjunto 004/2026 (02/07/2026, falta de energia). Asterisco = feriado municipal de Porto Alegre:
+#        02/02 não entra e Corpus Christi (04/06/2026 e 27/05/2027) fica pendente. Revolução Farroupilha (20/09) é regra anual já conferida.
+TJRS_NU = {2026: ["02-16", "02-17", "04-03", "07-02", "12-08"], 2027: ["02-08", "02-09", "03-26", "12-08"]}
+TJRS_CORPUS_PENDENTE = {2026: "06-04", 2027: "05-27"}
 TJPR_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "10-30", "12-18", "12-24", "12-31"]
 TJMG_2026_NU = [("02-16", "02-18"), ("04-01", "04-03"), ("04-20", "04-20"), ("10-30", "10-30"), ("12-07", "12-07")]
 TJMG_2026_PENDENTE = ["06-04", "06-05"]
@@ -174,6 +178,10 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if trib == "TJPE":
         ev(date(ano, 3, 6), True, "TJPE: Data Magna (Lei estadual PE 16.241/2017, art. 49)")
     if trib == "TJRS":
+        for s in TJRS_NU.get(ano, []):
+            ev(dia(s), True, "TJRS: ato do Órgão Especial / Ato Conjunto 004/2026")
+        if ano in TJRS_CORPUS_PENDENTE:
+            ev(dia(TJRS_CORPUS_PENDENTE[ano]), False, "TJRS: Corpus Christi (feriado municipal de Porto Alegre; depende da comarca)")
         ev(date(ano, 9, 20), True, "TJRS: data magna (Constituição estadual, art. 6º; Decreto 36.180/1995)")
     if trib == "TJGO":
         ev(date(ano, 10, 24), True, "TJGO: pedra fundamental de Goiânia (Lei estadual GO 19.850/2017)")
@@ -591,6 +599,18 @@ add("tjpr-2026-corpus-christi", "verificado", "TJPR 2026: 04/06 (Corpus Christi)
     entrada("2026-06-02", "publicacao", 5, "TJPR"))
 add("tjpr-2026-dia-servidor", "verificado", "TJPR 2026: 30/10 (Dia do Funcionário Público, transferido de 28/10) e Finados (02/11) não contam", TJPR + ", art. 1º",
     entrada("2026-10-28", "publicacao", 2, "TJPR"))
+# TJRS 2026: Ato 05/2025 OE e Ato Conjunto 004/2026 (lidos em 10/10/2026). Nascem pendentes de validação do revisor.
+TJRS = "Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224"
+add("tjrs-2026-carnaval", "verificado", "TJRS 2026: 16/02 e 17/02 (Carnaval) não contam; vence 23/02", TJRS,
+    entrada("2026-02-12", "publicacao", 5, "TJRS"))
+add("tjrs-2026-dia-da-justica", "verificado", "TJRS 2026: 08/12 (Dia da Justiça) não conta", TJRS,
+    entrada("2026-12-04", "publicacao", 3, "TJRS"))
+add("tjrs-2026-ato-conjunto-energia", "verificado", "TJRS: 02/07/2026 teve os prazos suspensos (falta de energia); não conta", "Ato Conjunto 004/2026 (P e CGJ), art. 1º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    entrada("2026-07-01", "publicacao", 2, "TJRS"))
+add("tjrs-2026-corpus-christi-conservador", "pendente", "TJRS: Corpus Christi (04/06/2026) é feriado municipal de Porto Alegre; ignorado no modo conservador", TJRS + " (asterisco: feriado municipal)",
+    entrada("2026-06-02", "publicacao", 5, "TJRS"))
+add("tjrs-2026-corpus-christi-completo", "pendente", "TJRS: Corpus Christi (04/06/2026) considerado no modo completo", TJRS + " (asterisco: feriado municipal)",
+    entrada("2026-06-02", "publicacao", 5, "TJRS", modo="completo"))
 add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil", "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
     entrada("2025-12-18", "publicacao", 1, "TJPR"))
 add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",

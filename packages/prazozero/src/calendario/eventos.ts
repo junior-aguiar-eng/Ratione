@@ -133,6 +133,24 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjpr.jus.br/destaques/-/asset_publisher/1lKI/content/id/111426821',
     lido: 'só o comunicado oficial do TJPR de 17/12/2025; a resolução em si não foi lida. O efeito sobre prazos coincide com o CPC, art. 220 (20/12 a 20/01), que o motor já aplica',
     lidoEm: LIDO_10_10
+  },
+  'tjrs-ato-05-2025': {
+    ato: 'Ato nº 05/2025 do Órgão Especial do TJRS (assinado em 21/10/2025): feriados e dias sem expediente em 2026',
+    url: 'https://www.tjrs.jus.br/static/2025/10/Ato_05_2025_OE-Feriados-2026.pdf',
+    lido: 'inteiro teor (PDF de 2 páginas, SEI 8.2024.2199/000072-7)',
+    lidoEm: LIDO_10_10
+  },
+  'tjrs-ato-06-2026': {
+    ato: 'Ato nº 06/2026 do Órgão Especial do TJRS (DJE 02/10/2026): feriados e dias sem expediente em 2027',
+    url: 'https://www.tjrs.jus.br/static/2026/10/SEI_10087781_Ato_06_2026___ORGAO_ESPECIAL.pdf',
+    lido: 'inteiro teor (PDF de 2 páginas, SEI 8.2024.2199/000072-7)',
+    lidoEm: LIDO_10_10
+  },
+  'tjrs-ato-conjunto-004-2026': {
+    ato: 'Ato Conjunto nº 004/2026 (P e CGJ) do TJRS (DJE 02/07/2026): suspensão dos prazos por falta de energia e indisponibilidade dos sistemas',
+    url: 'https://www.tjrs.jus.br/static/2026/07/SEI_9676356_Ato_Conjunto_004_2026___P_E_CGJ-2.pdf',
+    lido: 'inteiro teor (PDF de 2 páginas, SEI 8.2026.0139/000472-0)',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -276,6 +294,33 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     fonte: 'tjpr-dj-621-2025' as const
   })),
 
+  // ---------- TJRS: Ato 05/2025 OE (2026) e Ato 06/2026 OE (2027) ----------
+  // Os feriados nacionais dos atos já estão em lei federal; entram os que dependem do ato (Carnaval, Sexta-Feira Santa, 8/12).
+  // Os atos marcam com asterisco 02/02 (Navegantes) e Corpus Christi: feriados municipais de Porto Alegre. 02/02 não entra;
+  // Corpus Christi fica pendente (depende da comarca). A Revolução Farroupilha (20/09) já é regra anual conferida.
+  ...[
+    ['2026-02-16', 'Carnaval (segunda-feira)', 'tjrs-ato-05-2025', 'Ato 05/2025 OE'],
+    ['2026-02-17', 'Carnaval (terça-feira)', 'tjrs-ato-05-2025', 'Ato 05/2025 OE'],
+    ['2026-04-03', 'Sexta-Feira Santa', 'tjrs-ato-05-2025', 'Ato 05/2025 OE'],
+    ['2026-12-08', 'Dia da Justiça', 'tjrs-ato-05-2025', 'Ato 05/2025 OE'],
+    ['2026-07-02', 'Suspensão dos prazos por falta de energia e indisponibilidade dos sistemas', 'tjrs-ato-conjunto-004-2026', 'Ato Conjunto 004/2026 (P e CGJ), art. 1º'],
+    ['2027-02-08', 'Carnaval (segunda-feira)', 'tjrs-ato-06-2026', 'Ato 06/2026 OE'],
+    ['2027-02-09', 'Carnaval (terça-feira)', 'tjrs-ato-06-2026', 'Ato 06/2026 OE'],
+    ['2027-03-26', 'Sexta-Feira Santa', 'tjrs-ato-06-2026', 'Ato 06/2026 OE'],
+    ['2027-12-08', 'Dia da Justiça', 'tjrs-ato-06-2026', 'Ato 06/2026 OE']
+  ].map(([data, nome, fonte, fundamento]) => ({
+    tribunais: ['TJRS'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: fonte as keyof typeof FONTES_CALENDARIO
+  })),
+  { tribunais: ['TJRS'], inicio: '2026-06-04', fim: '2026-06-04', nome: 'Corpus Christi: feriado municipal em Porto Alegre e nas comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato 05/2025 OE (marcado com asterisco: feriado municipal de Porto Alegre)', fonte: 'tjrs-ato-05-2025' },
+  { tribunais: ['TJRS'], inicio: '2027-05-27', fim: '2027-05-27', nome: 'Corpus Christi: feriado municipal em Porto Alegre e nas comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato 06/2026 OE (marcado com asterisco: feriado municipal de Porto Alegre)', fonte: 'tjrs-ato-06-2026' },
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -329,5 +374,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJSP: { anos: [2026], fontes: ['tjsp-csm-2813'] },
   TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] },
   TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] },
-  TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] }
+  TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] },
+  TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] }
 };
