@@ -41,6 +41,7 @@ export interface RegraAnual {
 }
 
 const LIDO = '2026-10-07';
+const LIDO_10_10 = '2026-10-10';
 
 export const FONTES_CALENDARIO = {
   'stj-gdg-1010': {
@@ -120,6 +121,18 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjal.jus.br/organizacao/Lei.n.6.564.de.05.01.05.COoDIGO.DE.ORG.JUDICIaRIA.pdf',
     lido: 'texto consolidado no site do TJAL, com o cabeçalho "alterada até a Lei nº 8.850/2021"; arts. 35 a 38 sem marca de alteração; alterações posteriores a 2021 não verificadas',
     lidoEm: LIDO
+  },
+  'tjpr-dj-621-2025': {
+    ato: 'Decreto Judiciário nº 621/2025 do TJPR (Presidência): calendário de feriados e suspensão de expediente em 2026',
+    url: 'https://www.tjpr.jus.br/documents/d/comunicacao/sei_12428873_decreto',
+    lido: 'inteiro teor (PDF de 7 páginas, SEI 0064955-90.2025.8.16.6000); arts. 1º a 3º. O art. 4º (feriados locais dos municípios-sede) não entra: feriado municipal nunca conta (CPC, art. 1.003, § 6º)',
+    lidoEm: LIDO_10_10
+  },
+  'tjpr-recesso-2025-2026': {
+    ato: 'Resolução TJPR nº 515/2025: recesso de 20/12/2025 a 06/01/2026 e suspensão de prazos de 07/01 a 20/01/2026',
+    url: 'https://www.tjpr.jus.br/destaques/-/asset_publisher/1lKI/content/id/111426821',
+    lido: 'só o comunicado oficial do TJPR de 17/12/2025; a resolução em si não foi lida. O efeito sobre prazos coincide com o CPC, art. 220 (20/12 a 20/01), que o motor já aplica',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -236,6 +249,33 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     fonte: 'tjrj-informativo-2026' as const
   })),
 
+  // ---------- TJPR, 2026: Decreto Judiciário 621/2025, arts. 1º a 3º ----------
+  // Os feriados do art. 1º que a lei federal já traz (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12) não se repetem aqui;
+  // entram os que dependem do ato: Carnaval, Paixão de Cristo e Corpus Christi, além do que é próprio do tribunal.
+  // Fora: 08/09 (padroeira de Curitiba, feriado municipal) e 08/12 (o Dia da Justiça foi transferido para 18/12).
+  ...[
+    ['2026-02-16', 'Véspera de Carnaval (suspensão do expediente, com compensação de 1 hora por dia)', 'art. 2º'],
+    ['2026-02-17', 'Carnaval', 'art. 1º'],
+    ['2026-04-02', 'Quinta-feira Santa (suspensão do expediente, com compensação de 1 hora por dia)', 'art. 2º'],
+    ['2026-04-03', 'Paixão de Cristo', 'art. 1º'],
+    ['2026-04-20', 'Suspensão do expediente, com compensação de 1 hora por dia (emenda de Tiradentes)', 'art. 2º'],
+    ['2026-06-04', 'Corpus Christi', 'art. 1º'],
+    ['2026-06-05', 'Suspensão do expediente, com compensação de 1 hora por dia (emenda de Corpus Christi)', 'art. 2º'],
+    ['2026-10-30', 'Dia do Funcionário Público (transferido de 28/10)', 'art. 1º'],
+    ['2026-12-18', 'Dia da Justiça (transferido de 08/12)', 'art. 1º'],
+    ['2026-12-24', 'Véspera de Natal (suspensão do expediente)', 'art. 3º'],
+    ['2026-12-31', 'Véspera de Ano Novo (suspensão do expediente)', 'art. 3º']
+  ].map(([data, nome, art]) => ({
+    tribunais: ['TJPR'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: `Decreto Judiciário TJPR 621/2025, ${art}`,
+    fonte: 'tjpr-dj-621-2025' as const
+  })),
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -288,5 +328,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   STF: { anos: [2026], fontes: ['stf-cal-2026'] },
   TJSP: { anos: [2026], fontes: ['tjsp-csm-2813'] },
   TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] },
-  TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] }
+  TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] },
+  TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] }
 };
