@@ -838,7 +838,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "prazoEmDobro": true
     },
     "esperado": {
@@ -1218,7 +1218,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR"
+      "tribunalId": "TJBA"
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
@@ -1250,7 +1250,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "modo": "completo"
     },
     "esperado": {
@@ -1295,7 +1295,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR"
+      "tribunalId": "TJBA"
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
@@ -1327,7 +1327,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "modo": "completo"
     },
     "esperado": {
@@ -1368,7 +1368,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJPR"
+      "tribunalId": "TJBA"
     },
     "esperado": {
       "dataPublicacao": "2026-02-10",
@@ -1400,7 +1400,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "modo": "completo"
     },
     "esperado": {
@@ -1490,7 +1490,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR"
+      "tribunalId": "TJBA"
     },
     "esperado": {
       "dataPublicacao": "2026-06-02",
@@ -1522,7 +1522,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "modo": "completo"
     },
     "esperado": {
@@ -1559,7 +1559,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJPR"
+      "tribunalId": "TJBA"
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
@@ -1591,7 +1591,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "modo": "completo"
     },
     "esperado": {
@@ -1766,7 +1766,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "prazoEmDobro": true,
       "modo": "completo"
     },
@@ -1804,7 +1804,7 @@
       "dataEvento": "2026-03-30",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJPR",
+      "tribunalId": "TJBA",
       "regime": "cpp_dias_corridos",
       "modo": "completo"
     },
@@ -4338,6 +4338,129 @@
       "em": "2026-10-07"
     },
     "alternativaEsperada": "2027-04-08"
+  },
+  {
+    "id": "tjpr-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJPR 2026: 16/02 (suspensão) e 17/02 (Carnaval) não contam; vence 23/02",
+    "fundamento": "Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, arts. 1º e 2º",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJPR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJPR: Decreto Judiciário 621/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJPR: Decreto Judiciário 621/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpr-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJPR 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam",
+    "fundamento": "Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, arts. 1º e 2º",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJPR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJPR: Decreto Judiciário 621/2025"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJPR: Decreto Judiciário 621/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpr-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJPR 2026: 30/10 (Dia do Funcionário Público, transferido de 28/10) e Finados (02/11) não contam",
+    "fundamento": "Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, art. 1º",
+    "entrada": {
+      "dataEvento": "2026-10-28",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-28",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJPR: Decreto Judiciário 621/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjpr-19-dezembro-nao-feriado",
