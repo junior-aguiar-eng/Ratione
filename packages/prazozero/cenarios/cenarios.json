@@ -838,7 +838,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "prazoEmDobro": true
     },
     "esperado": {
@@ -1218,7 +1218,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA"
+      "tribunalId": "TJSC"
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
@@ -1250,7 +1250,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "modo": "completo"
     },
     "esperado": {
@@ -1295,7 +1295,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA"
+      "tribunalId": "TJSC"
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
@@ -1327,7 +1327,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "modo": "completo"
     },
     "esperado": {
@@ -1368,7 +1368,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJBA"
+      "tribunalId": "TJSC"
     },
     "esperado": {
       "dataPublicacao": "2026-02-10",
@@ -1400,7 +1400,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "modo": "completo"
     },
     "esperado": {
@@ -1490,7 +1490,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA"
+      "tribunalId": "TJSC"
     },
     "esperado": {
       "dataPublicacao": "2026-06-02",
@@ -1522,7 +1522,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "modo": "completo"
     },
     "esperado": {
@@ -1559,7 +1559,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJBA"
+      "tribunalId": "TJSC"
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
@@ -1591,7 +1591,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "modo": "completo"
     },
     "esperado": {
@@ -1766,7 +1766,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "prazoEmDobro": true,
       "modo": "completo"
     },
@@ -1804,7 +1804,7 @@
       "dataEvento": "2026-03-30",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJBA",
+      "tribunalId": "TJSC",
       "regime": "cpp_dias_corridos",
       "modo": "completo"
     },
@@ -4645,6 +4645,186 @@
       "por": null,
       "em": null
     }
+  },
+  {
+    "id": "tjba-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 12, 13, 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02",
+    "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJBA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-10",
+      "dataTermoInicial": "2026-02-11",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-12",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-02-13",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-02-16",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjba-2026-sao-joao",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 22, 23 e 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam; vence 30/06",
+    "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJBA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-19",
+      "dataTermoInicial": "2026-06-25",
+      "dataVencimentoFinal": "2026-06-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-22",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-06-24",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjba-2026-independencia-da-bahia",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 02 e 03/07 (Independência da Bahia) não contam",
+    "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJBA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-01",
+      "dataTermoInicial": "2026-07-06",
+      "dataVencimentoFinal": "2026-07-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-02",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-07-03",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjba-2026-copa-29-junho",
+    "categoria": "verificado",
+    "descricao": "TJBA: 29/06/2026 teve os prazos suspensos (jogo da Seleção na Copa); não conta",
+    "fundamento": "Decreto Judiciário TJBA 944/2026, art. 3º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJBA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjpr-19-dezembro-nao-feriado",

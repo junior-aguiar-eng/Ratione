@@ -24,7 +24,11 @@ UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR"
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}}
+# Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
+# (hoje: TJSC, TJDF, TJGO, TJPE, TJCE, TJES) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
+TRIBUNAL_SEM_ATO = "TJSC"
+
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -35,6 +39,10 @@ TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #  TJPR: Decreto Judiciário 621/2025, arts. 1º a 3º (art. 4º, feriados municipais, não entra: CPC, art. 1.003, § 6º); recesso coincide com o CPC, art. 220
 #  TJRS: Ato 05/2025 OE (2026) e Ato 06/2026 OE (2027); Ato Conjunto 004/2026 (02/07/2026, falta de energia). Asterisco = feriado municipal de Porto Alegre:
 #        02/02 não entra e Corpus Christi (04/06/2026 e 27/05/2027) fica pendente. Revolução Farroupilha (20/09) é regra anual já conferida.
+#  TJBA: Decreto Judiciário 1050/2025, art. 5º (feriados e pontos facultativos, todos sem expediente; art. 8º prorroga os prazos) e Decreto Judiciário 944/2026
+#        (29/06/2026, jogo da Seleção: prazos suspensos). Só entram os dias que não são feriado federal; 02/01 já está no recesso (CPC, art. 220).
+TJBA_2026_NU = ["02-12", "02-13", "02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "06-29", "07-02", "07-03",
+                "08-10", "08-11", "10-30", "12-07", "12-08"]
 TJRS_NU = {2026: ["02-16", "02-17", "04-03", "07-02", "12-08"], 2027: ["02-08", "02-09", "03-26", "12-08"]}
 TJRS_CORPUS_PENDENTE = {2026: "06-04", 2027: "05-27"}
 TJPR_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "10-30", "12-18", "12-24", "12-31"]
@@ -157,6 +165,9 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJPR":
         for s in TJPR_2026_NU:
             ev(dia(s), True, "TJPR: Decreto Judiciário 621/2025")
+    if ano == 2026 and trib == "TJBA":
+        for s in TJBA_2026_NU:
+            ev(dia(s), True, "TJBA: Decreto Judiciário 1050/2025 e 944/2026")
     if ano == 2026 and trib == "TJMG":
         for de, ate in TJMG_2026_NU:
             for d in intervalo(dia(de), dia(ate)):
@@ -377,7 +388,7 @@ add("recesso-desligado", "recesso", "Recesso desligado explicitamente (suspensao
 add("recesso-pre-dezembro", "recesso", "15 dias úteis a partir de 01/12/2025: o 15º dia cai após o recesso", "CPC, art. 220",
     entrada("2025-12-01", "publicacao", 15))
 add("dobro-30d", "dobro", "Fazenda Pública: 15 dias em dobro (30 úteis)", "CPC, arts. 183 e 219",
-    entrada("2026-03-02", "publicacao", 15, "TJBA", prazoEmDobro=True))
+    entrada("2026-03-02", "publicacao", 15, TRIBUNAL_SEM_ATO, prazoEmDobro=True))
 add("dobro-recesso", "dobro", "Prazo em dobro atravessando o recesso", "CPC, arts. 183 e 220",
     entrada("2025-12-10", "publicacao", 10, prazoEmDobro=True))
 add("bissexto-2024", "bissexto", "Fevereiro de 2024 (bissexto): 29/02 é dia útil", CPC,
@@ -402,27 +413,27 @@ add("stf-sem-uf", "tribunal", "STF (sem UF): calendário 2026 verificado", "Cale
 # Cenários que dependem de dias ainda pendentes de conferência: conservador mostra a data mais cedo.
 PEND = "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar"
 add("carnaval-2026-conservador", "pendente", "Carnaval 2026 ignorado no modo conservador (data mais cedo)", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-13", "publicacao", 5, "TJBA"))
+    entrada("2026-02-13", "publicacao", 5, TRIBUNAL_SEM_ATO))
 add("carnaval-2026-completo", "pendente", "Carnaval 2026 considerado; Quarta de Cinzas protrai o dia do começo", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-13", "publicacao", 5, "TJBA", modo="completo"))
+    entrada("2026-02-13", "publicacao", 5, TRIBUNAL_SEM_ATO, modo="completo"))
 add("cinzas-meio-conservador", "pendente", "Quarta de Cinzas no meio do prazo (conservador)", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-12", "publicacao", 5, "TJBA"))
+    entrada("2026-02-12", "publicacao", 5, TRIBUNAL_SEM_ATO))
 add("cinzas-meio-completo", "pendente", "Quarta de Cinzas no meio do prazo conta normalmente", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-12", "publicacao", 5, "TJBA", modo="completo"))
+    entrada("2026-02-12", "publicacao", 5, TRIBUNAL_SEM_ATO, modo="completo"))
 add("cinzas-vencimento-conservador", "pendente", "Prazo de 4 dias; sem Carnaval vence na segunda 16/02", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-10", "publicacao", 4, "TJBA"))
+    entrada("2026-02-10", "publicacao", 4, TRIBUNAL_SEM_ATO))
 add("cinzas-vencimento-completo", "pendente", "Prazo de 4 dias; vencimento cairia na Quarta de Cinzas e é protraído", PEND + "; CPC, art. 224, § 1º",
-    entrada("2026-02-10", "publicacao", 4, "TJBA", modo="completo"))
+    entrada("2026-02-10", "publicacao", 4, TRIBUNAL_SEM_ATO, modo="completo"))
 add("carnaval-2028-completo", "pendente", "Carnaval 2028 em 28 e 29/02 (bissexto), Cinzas em 01/03", PEND + "; CPC, art. 224, § 1º",
     entrada("2028-02-25", "publicacao", 5, modo="completo"))
 add("corpus-christi-conservador", "pendente", "Corpus Christi 2026 (04/06) ignorado no modo conservador", PEND,
-    entrada("2026-06-02", "publicacao", 5, "TJBA"))
+    entrada("2026-06-02", "publicacao", 5, TRIBUNAL_SEM_ATO))
 add("corpus-christi-completo", "pendente", "Corpus Christi 2026 considerado", PEND,
-    entrada("2026-06-02", "publicacao", 5, "TJBA", modo="completo"))
+    entrada("2026-06-02", "publicacao", 5, TRIBUNAL_SEM_ATO, modo="completo"))
 add("sexta-santa-conservador", "pendente", "Sexta-feira Santa 2026 (03/04) ignorada no modo conservador", PEND + "; Lei 9.093/1995, art. 2º",
-    entrada("2026-04-01", "publicacao", 3, "TJBA"))
+    entrada("2026-04-01", "publicacao", 3, TRIBUNAL_SEM_ATO))
 add("sexta-santa-completo", "pendente", "Sexta-feira Santa 2026 considerada (TJSP)", PEND + "; Lei 9.093/1995, art. 2º",
-    entrada("2026-04-01", "publicacao", 3, "TJBA", modo="completo"))
+    entrada("2026-04-01", "publicacao", 3, TRIBUNAL_SEM_ATO, modo="completo"))
 add("onze-agosto-tjsp-completo", "pendente", "11 de agosto não é feriado forense no TJSP", PEND,
     entrada("2026-08-07", "publicacao", 3, "TJSP", modo="completo"))
 add("sp-9-julho-conservador", "pendente", "TJSP 2027 (sem provimento publicado): 9 de julho ignorado no modo conservador", PEND + "; lei estadual a conferir",
@@ -432,9 +443,9 @@ add("sp-9-julho-completo", "pendente", "TJSP 2027 (sem provimento publicado): 9 
 add("consciencia-negra-2023-completo", "pendente", "20/11/2023 considerado (lei local, pendente)", PEND,
     entrada("2023-11-17", "publicacao", 2, modo="completo"))
 add("dobro-sexta-santa-completo", "pendente", "Prazo em dobro com Sexta-feira Santa considerada", PEND,
-    entrada("2026-03-02", "publicacao", 15, "TJBA", prazoEmDobro=True, modo="completo"))
+    entrada("2026-03-02", "publicacao", 15, TRIBUNAL_SEM_ATO, prazoEmDobro=True, modo="completo"))
 add("cpp-sexta-santa-completo", "pendente", "CPP: vencimento na Sexta-feira Santa (completo) é prorrogado", PEND + "; CPP, art. 798, § 3º",
-    entrada("2026-03-30", "publicacao", 4, "TJBA", regime="cpp_dias_corridos", modo="completo"))
+    entrada("2026-03-30", "publicacao", 4, TRIBUNAL_SEM_ATO, regime="cpp_dias_corridos", modo="completo"))
 
 # ---- Calendário verificado (fontes primárias lidas em 07/10/2026) ----
 P1010 = "Portaria STJ/GDG 1.010/2025"
@@ -611,6 +622,16 @@ add("tjrs-2026-corpus-christi-conservador", "pendente", "TJRS: Corpus Christi (0
     entrada("2026-06-02", "publicacao", 5, "TJRS"))
 add("tjrs-2026-corpus-christi-completo", "pendente", "TJRS: Corpus Christi (04/06/2026) considerado no modo completo", TJRS + " (asterisco: feriado municipal)",
     entrada("2026-06-02", "publicacao", 5, "TJRS", modo="completo"))
+# TJBA 2026: Decreto Judiciário 1050/2025 (lido por inteiro) e 944/2026. Nascem pendentes de validação do revisor.
+TJBA = "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224"
+add("tjba-2026-carnaval", "verificado", "TJBA 2026: 12, 13, 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02", TJBA,
+    entrada("2026-02-10", "publicacao", 5, "TJBA"))
+add("tjba-2026-sao-joao", "verificado", "TJBA 2026: 22, 23 e 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam; vence 30/06", TJBA,
+    entrada("2026-06-19", "publicacao", 3, "TJBA"))
+add("tjba-2026-independencia-da-bahia", "verificado", "TJBA 2026: 02 e 03/07 (Independência da Bahia) não contam", TJBA,
+    entrada("2026-07-01", "publicacao", 3, "TJBA"))
+add("tjba-2026-copa-29-junho", "verificado", "TJBA: 29/06/2026 teve os prazos suspensos (jogo da Seleção na Copa); não conta", "Decreto Judiciário TJBA 944/2026, art. 3º (lido em 10/10/2026); CPC, arts. 219 e 224",
+    entrada("2026-06-26", "publicacao", 2, "TJBA"))
 add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil", "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
     entrada("2025-12-18", "publicacao", 1, "TJPR"))
 add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",

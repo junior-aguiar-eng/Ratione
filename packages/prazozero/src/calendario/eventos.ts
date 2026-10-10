@@ -151,6 +151,18 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjrs.jus.br/static/2026/07/SEI_9676356_Ato_Conjunto_004_2026___P_E_CGJ-2.pdf',
     lido: 'inteiro teor (PDF de 2 páginas, SEI 8.2026.0139/000472-0)',
     lidoEm: LIDO_10_10
+  },
+  'tjba-dj-1050-2025': {
+    ato: 'Decreto Judiciário nº 1050/2025 do TJBA (DJE nº 3.944, 05/12/2025, pp. 6 a 8): recesso 2025/2026, expediente forense e feriados e pontos facultativos de 2026',
+    url: 'https://www.tjba.jus.br/portal/wp-content/uploads/2025/12/Decreto-1050-25_-expediente-forense-2026.pdf',
+    lido: 'inteiro teor (3 páginas do DJE). Art. 5º: feriados e pontos facultativos, todos sem expediente forense; art. 8º: prazos que vencem nesses dias são prorrogados. O recesso (arts. 2º e 4º) coincide com o CPC, art. 220. Os feriados municipais por comarca (Decreto Judiciário 09/2026 e alterações) não entram: CPC, art. 1.003, § 6º',
+    lidoEm: LIDO_10_10
+  },
+  'tjba-dj-944-2026': {
+    ato: 'Decreto Judiciário nº 944/2026 do TJBA (25/06/2026; DJE 26/06/2026): expediente e prazos em 29/06/2026 (jogo da Seleção na Copa do Mundo)',
+    url: 'https://www7.tjba.jus.br/secao/lerPublicacao.wsp?tmp.mostrarDiv=sim&tmp.id=42896&tmp.secao=9',
+    lido: 'texto no site do TJBA (o próprio texto ressalva que não substitui o do DJE de 26/06/2026); art. 3º suspende os prazos em 29/06/2026',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -321,6 +333,41 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJRS'], inicio: '2026-06-04', fim: '2026-06-04', nome: 'Corpus Christi: feriado municipal em Porto Alegre e nas comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato 05/2025 OE (marcado com asterisco: feriado municipal de Porto Alegre)', fonte: 'tjrs-ato-05-2025' },
   { tribunais: ['TJRS'], inicio: '2027-05-27', fim: '2027-05-27', nome: 'Corpus Christi: feriado municipal em Porto Alegre e nas comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato 06/2026 OE (marcado com asterisco: feriado municipal de Porto Alegre)', fonte: 'tjrs-ato-06-2026' },
 
+  // ---------- TJBA, 2026: Decreto Judiciário 1050/2025, art. 5º (todos "sem expediente forense", art. 8º prorroga os prazos) ----------
+  // Fora: os feriados federais do art. 5º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11) e 02/01 (já no recesso do CPC, art. 220).
+  ...[
+    ['2026-02-12', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
+    ['2026-02-13', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
+    ['2026-02-16', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
+    ['2026-02-17', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (sem expediente por inteiro)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
+    ['2026-04-02', 'Endoenças (Quinta-feira Santa)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, III'],
+    ['2026-04-03', 'Sexta-feira Santa', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, III'],
+    ['2026-04-20', 'Emenda de Tiradentes', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, IV'],
+    ['2026-06-04', 'Corpus Christi', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VI'],
+    ['2026-06-05', 'Emenda de Corpus Christi', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VI'],
+    ['2026-06-22', 'São João', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VII'],
+    ['2026-06-23', 'São João', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VII'],
+    ['2026-06-24', 'São João', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VII'],
+    ['2026-06-29', 'Suspensão dos prazos: jogo da Seleção na Copa do Mundo (expediente das 8h às 11h)', 'tjba-dj-944-2026', 'Decreto Judiciário TJBA 944/2026, art. 3º'],
+    ['2026-07-02', 'Independência da Bahia', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VIII'],
+    ['2026-07-03', 'Emenda da Independência da Bahia', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, VIII'],
+    ['2026-08-10', 'Criação dos Cursos Jurídicos, Dia do Magistrado e do Advogado', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, IX'],
+    ['2026-08-11', 'Criação dos Cursos Jurídicos, Dia do Magistrado e do Advogado', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, IX'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, XII'],
+    ['2026-12-07', 'Dia da Justiça (véspera)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, XV'],
+    ['2026-12-08', 'Dia da Justiça', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, XV']
+  ].map(([data, nome, fonte, fundamento]) => ({
+    tribunais: ['TJBA'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: fonte as keyof typeof FONTES_CALENDARIO
+  })),
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -375,5 +422,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] },
   TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] },
   TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] },
-  TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] }
+  TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] },
+  TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] }
 };
