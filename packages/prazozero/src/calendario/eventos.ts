@@ -241,6 +241,30 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjce.jus.br/atos_normativos/portaria-no-727-2026/',
     lido: 'inteiro teor (art. 1º). Vale só para a Comarca de Fortaleza: depende da comarca, por isso fica pendente',
     lidoEm: LIDO_10_10
+  },
+  'tjes-an-176-2026': {
+    ato: 'Ato Normativo nº 176/2026 da Presidência do TJES (29/09/2026; disponibilizado em 30/09/2026): republica a relação de feriados de 2026 (revoga o Ato 319/2025)',
+    url: 'https://www.tjes.jus.br/ato-normativo-no-176-2026-disp-30-09-2026/',
+    lido: 'inteiro teor (versão vigente); o texto do Ato 319/2025, que aparece tachado na página, não foi usado. Anexo Único: feriados e pontos facultativos de 2026 (Dia do Servidor transferido de 28 para 30/10 por decisão no SEI 7011080-32.2026.8.08.0000). Art. 1º: o expediente das unidades administrativas é suspenso em 24 e 31/12 (só administrativas, não entram). Art. 3º: 08/09 só em Vitória (municipal, não entra). Art. 4º: os pontos facultativos são compensados com uma hora a mais. As Leis Complementares 234/2002 e 46/1994 e a Lei estadual 11.010/2019 citadas não foram lidas',
+    lidoEm: LIDO_10_10
+  },
+  'tjes-an-103-113-2026': {
+    ato: 'Atos Normativos nº 103/2026 (24/06/2026, expediente das 11h às 17h) e nº 113/2026 (29/06/2026, expediente das 7h às 12h) do TJES: jogos da Seleção na Copa do Mundo',
+    url: 'https://www.tjes.jus.br/ato-normativo-no-103-2026-disp-12-06-2026/',
+    lido: 'inteiro teor dos dois atos (o 113 em https://www.tjes.jus.br/ato-normativo-no-113-2026-disp-26-06-2026/). Os atos não tratam de prazos e a notícia oficial de 15/06/2026 diz que "não haverá suspensão dos prazos processuais"; o efeito do horário reduzido sobre o começo e o vencimento (CPC, art. 224, § 1º) não está confirmado pelo tribunal',
+    lidoEm: LIDO_10_10
+  },
+  'tjes-an-124-2026': {
+    ato: 'Ato Normativo nº 124/2026 do TJES (15/07/2026): prorroga para o primeiro dia útil os prazos que venceram em 08/07/2026 (indisponibilidade do PJe)',
+    url: 'https://www.tjes.jus.br/ato-normativo-no-124-2026-disp-16-07-2026/',
+    lido: 'inteiro teor (art. 1º; CNJ, Res. 185/2014, art. 11)',
+    lidoEm: LIDO_10_10
+  },
+  'tjes-an-130-2026': {
+    ato: 'Ato Normativo nº 130/2026 do TJES (31/07/2026): prorroga para o primeiro dia útil os prazos que venceram em 31/07/2026 (falhas no PJe)',
+    url: 'https://www.tjes.jus.br/ato-normativo-no-130-2026-disp-03-08-2026/',
+    lido: 'inteiro teor (art. 1º; CNJ, Res. 185/2014, art. 11)',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -558,6 +582,39 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJCE'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h): expediente único das 8h às 12h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 1440/2026, art. 1º e considerandos; CPC, art. 224, § 1º', fonte: 'tjce-portaria-1440-2026' },
   { tribunais: ['TJCE'], inicio: '2026-04-13', fim: '2026-04-13', nome: 'Aniversário de Fortaleza: ponto facultativo só nos órgãos da Comarca de Fortaleza (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria TJCE 727/2026, art. 1º (Lei municipal 7.335/1994)', fonte: 'tjce-portaria-727-2026' },
 
+  // ---------- TJES, 2026: Ato Normativo 176/2026 (Anexo Único) e Atos 103, 113, 124 e 130/2026 ----------
+  // Fora: os feriados federais do anexo (21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11), o recesso (01 a 06/01 e 20 a 31/12, CPC, art. 220),
+  // 24 e 31/12 (só unidades administrativas), 08/09 (Vitória) e os atos de comarcas e unidades específicas (por exemplo, 043, 112 e 177/2026).
+  ...[
+    ['2026-02-16', 'Carnaval (segunda-feira)', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, b)'],
+    ['2026-02-17', 'Carnaval (terça-feira)', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, b)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (listada como feriado)', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, b)'],
+    ['2026-04-02', 'Quinta-feira da Semana Santa', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, a)'],
+    ['2026-04-03', 'Sexta-feira da Semana Santa', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, a)'],
+    ['2026-04-13', 'Nossa Senhora da Penha', 'Ato Normativo TJES 176/2026, Anexo Único (Lei estadual 11.010/2019, art. 1º)'],
+    ['2026-04-20', 'Ponto facultativo', 'Ato Normativo TJES 176/2026, Anexo Único'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo onde não houver lei municipal)', 'Ato Normativo TJES 176/2026, art. 2º e Anexo Único'],
+    ['2026-06-05', 'Ponto facultativo', 'Ato Normativo TJES 176/2026, Anexo Único'],
+    ['2026-08-10', 'Ponto facultativo', 'Ato Normativo TJES 176/2026, Anexo Único'],
+    ['2026-08-11', 'Dia do Advogado', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, d)'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Ato Normativo TJES 176/2026, considerandos e Anexo Único'],
+    ['2026-12-07', 'Ponto facultativo', 'Ato Normativo TJES 176/2026, Anexo Único'],
+    ['2026-12-08', 'Dia da Justiça', 'Ato Normativo TJES 176/2026, Anexo Único (LC estadual 234/2002, art. 141, d)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJES'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjes-an-176-2026' as const
+  })),
+  { tribunais: ['TJES'], inicio: '2026-07-08', fim: '2026-07-08', nome: 'Indisponibilidade do PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 124/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-124-2026' },
+  { tribunais: ['TJES'], inicio: '2026-07-31', fim: '2026-07-31', nome: 'Falhas no PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 130/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-130-2026' },
+  { tribunais: ['TJES'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 11h às 17h (o tribunal diz que não há suspensão de prazos)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Ato Normativo TJES 103/2026, art. 2º; CPC, art. 224, § 1º (efeito sobre prazos não confirmado)', fonte: 'tjes-an-103-113-2026' },
+  { tribunais: ['TJES'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 7h às 12h (efeito sobre prazos não confirmado)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Ato Normativo TJES 113/2026, art. 2º; CPC, art. 224, § 1º (efeito sobre prazos não confirmado)', fonte: 'tjes-an-103-113-2026' },
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -617,5 +674,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] },
   TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] },
   TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] },
-  TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] }
+  TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] },
+  TJES: { anos: [2026], fontes: ['tjes-an-176-2026', 'tjes-an-103-113-2026', 'tjes-an-124-2026', 'tjes-an-130-2026'] }
 };
