@@ -7,6 +7,10 @@ import Notice from '../../components/Notice';
 import { useSessao } from '../../lib/useSessao';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { criarLembrete, opcoesDeAviso } from '../../lib/lembretes-cliente';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label, Legend } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 
 /**
  * "Avisar por e-mail" (F2-10): 3 dias e 1 dia antes do vencimento, para quem tem conta. O e-mail leva só o título
@@ -69,34 +73,34 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
       ) : (
         <div className="space-y-4 max-w-xl">
           <div>
-            <label htmlFor="titulo-aviso" className="label">
+            <Label htmlFor="titulo-aviso">
               Nome do aviso
-            </label>
-            <input id="titulo-aviso" type="text" maxLength={200} value={titulo} onChange={e => setTitulo(e.target.value)} className="field" />
+            </Label>
+            <Input id="titulo-aviso" type="text" maxLength={200} value={titulo} onChange={e => setTitulo(e.target.value)} />
             <p className="text-xs text-ink-soft mt-1.5">
               Este nome vai no e-mail, enviado por um serviço de terceiros. Não escreva nome de partes nem número de processo.
             </p>
           </div>
           <fieldset className="space-y-2">
-            <legend className="label mb-1">Quando avisar</legend>
+            <Legend className="mb-1">Quando avisar</Legend>
             <label className="flex items-center gap-2 text-sm text-ink">
-              <input type="checkbox" checked={tres && opcoes.tres} disabled={!opcoes.tres} onChange={e => setTres(e.target.checked)} />3 dias antes
+              <Checkbox checked={tres && opcoes.tres} disabled={!opcoes.tres} onCheckedChange={v => setTres(v === true)} />3 dias antes
               {!opcoes.tres && <span className="text-ink-soft"> (faltam menos de 3 dias)</span>}
             </label>
             <label className="flex items-center gap-2 text-sm text-ink">
-              <input type="checkbox" checked={um && opcoes.um} disabled={!opcoes.um} onChange={e => setUm(e.target.checked)} />1 dia antes
+              <Checkbox checked={um && opcoes.um} disabled={!opcoes.um} onCheckedChange={v => setUm(v === true)} />1 dia antes
             </label>
           </fieldset>
           {erro && <Notice tom="danger">{erro}</Notice>}
-          <button
+          <Button
+            variant="secondary"
             type="button"
             onClick={ativar}
             disabled={estado === 'salvando' || !titulo.trim() || !((tres && opcoes.tres) || (um && opcoes.um))}
-            className="btn-secondary disabled:opacity-60"
           >
             {estado === 'salvando' ? <Check className="w-4 h-4" /> : <BellRing className="w-4 h-4" />}
             {estado === 'salvando' ? 'Ativando…' : 'Ativar aviso por e-mail'}
-          </button>
+          </Button>
         </div>
       )}
     </section>

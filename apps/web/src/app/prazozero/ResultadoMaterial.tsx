@@ -9,6 +9,7 @@ import { salvarRegistro } from '../../lib/historico';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
+import { Button } from '@/components/ui/button';
 
 export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string }) {
   const [copiado, setCopiado] = useState(false);
@@ -119,22 +120,22 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
       </div>
 
       <div className="flex flex-wrap gap-2 no-print">
-        <button type="button" onClick={exportar} className="btn-secondary">
+        <Button variant="secondary" type="button" onClick={exportar}>
           <FileDown className="w-4 h-4" />
           Exportar PDF
-        </button>
-        <button type="button" onClick={copiar} className="btn-secondary">
+        </Button>
+        <Button variant="secondary" type="button" onClick={copiar}>
           {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
           {copiado ? 'Copiado' : 'Copiar memória de cálculo'}
-        </button>
-        <button type="button" onClick={adicionarAoCalendario} className="btn-secondary">
+        </Button>
+        <Button variant="secondary" type="button" onClick={adicionarAoCalendario}>
           <CalendarPlus className="w-4 h-4" />
           Adicionar ao calendário
-        </button>
-        <button type="button" onClick={salvar} className="btn-secondary">
+        </Button>
+        <Button variant="secondary" type="button" onClick={salvar}>
           {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
           {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
-        </button>
+        </Button>
       </div>
 
       <AvisoPorEmail tituloPadrao={`${titulo} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataLimite} />

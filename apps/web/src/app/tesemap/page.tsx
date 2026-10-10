@@ -9,6 +9,12 @@ import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo, TipoNoGrafo } from '@ratione/t
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { salvarRegistro } from '../../lib/historico';
+import { Button } from '@/components/ui/button';
+import { NativeSelect } from '@/components/ui/native-select';
+import { Label } from '@/components/ui/label';
+import { cardClasses } from '@/components/ui/card';
+import { Badge, BadgeTom } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 const TEMAS = [
   { id: 'tema-1076-stj', rotulo: 'Tema 1.076/STJ · Honorários e equidade' },
@@ -31,13 +37,13 @@ const POSICOES: Record<string, { x: number; y: number }> = {
   'tema-fraude-bancaria': { x: 330, y: 410 }
 };
 
-const ESTILO_TIPO: Record<TipoNoGrafo, { rotulo: string; cor: string; tag: string; ponto: string }> = {
-  tema_central: { rotulo: 'Tema', cor: 'rgb(var(--brand))', tag: 'tag-brand', ponto: 'bg-brand' },
-  tese_vinculante: { rotulo: 'Precedente vinculante', cor: 'rgb(var(--warn))', tag: 'tag-warn', ponto: 'bg-warn' },
-  dispositivo_legal: { rotulo: 'Dispositivo legal', cor: 'rgb(var(--info))', tag: 'tag-info', ponto: 'bg-info' },
-  distinguishing: { rotulo: 'Distinguishing', cor: 'rgb(var(--rel))', tag: 'tag-rel', ponto: 'bg-rel' },
-  inovacao_legislativa: { rotulo: 'Alteração legislativa', cor: 'rgb(var(--ok))', tag: 'tag-ok', ponto: 'bg-ok' },
-  acordao_paradigma: { rotulo: 'Acórdão paradigma', cor: 'rgb(var(--warn))', tag: 'tag-warn', ponto: 'bg-warn' }
+const ESTILO_TIPO: Record<TipoNoGrafo, { rotulo: string; cor: string; tom: BadgeTom; ponto: string }> = {
+  tema_central: { rotulo: 'Tema', cor: 'rgb(var(--brand))', tom: 'brand', ponto: 'bg-brand' },
+  tese_vinculante: { rotulo: 'Precedente vinculante', cor: 'rgb(var(--warn))', tom: 'warn', ponto: 'bg-warn' },
+  dispositivo_legal: { rotulo: 'Dispositivo legal', cor: 'rgb(var(--info))', tom: 'info', ponto: 'bg-info' },
+  distinguishing: { rotulo: 'Distinguishing', cor: 'rgb(var(--rel))', tom: 'rel', ponto: 'bg-rel' },
+  inovacao_legislativa: { rotulo: 'Alteração legislativa', cor: 'rgb(var(--ok))', tom: 'ok', ponto: 'bg-ok' },
+  acordao_paradigma: { rotulo: 'Acórdão paradigma', cor: 'rgb(var(--warn))', tom: 'warn', ponto: 'bg-warn' }
 };
 
 export default function TeseMapPage() {
@@ -135,16 +141,16 @@ export default function TeseMapPage() {
         description="Veja como um precedente se relaciona com os dispositivos que interpreta, as alterações legislativas e as distinções possíveis."
         actions={
           <div className="w-full sm:w-80">
-            <label htmlFor="tema" className="label">
+            <Label htmlFor="tema">
               Tema
-            </label>
-            <select id="tema" value={temaId} onChange={e => setTemaId(e.target.value)} className="field">
+            </Label>
+            <NativeSelect id="tema" value={temaId} onChange={e => setTemaId(e.target.value)}>
               {TEMAS.map(t => (
                 <option key={t.id} value={t.id}>
                   {t.rotulo}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
         }
       />
@@ -181,11 +187,11 @@ export default function TeseMapPage() {
           </ul>
         </div>
 
-        <aside className="lg:col-span-4 lg:sticky lg:top-24 card p-6 space-y-6" aria-label="Detalhe do item selecionado">
+        <aside className={cn(cardClasses, 'lg:col-span-4 lg:sticky lg:top-24 p-6 space-y-6')} aria-label="Detalhe do item selecionado">
           {noSelecionado && (
             <>
               <div className="space-y-3">
-                <span className={ESTILO_TIPO[noSelecionado.tipo].tag}>{ESTILO_TIPO[noSelecionado.tipo].rotulo}</span>
+                <Badge variant={ESTILO_TIPO[noSelecionado.tipo].tom}>{ESTILO_TIPO[noSelecionado.tipo].rotulo}</Badge>
                 <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{noSelecionado.label}</h2>
                 {noSelecionado.tribunal && (
                   <p className="text-sm text-ink-mute">
@@ -241,10 +247,10 @@ export default function TeseMapPage() {
                     Consultar no site do STJ
                   </a>
                 )}
-                <button type="button" onClick={salvar} className="btn-secondary w-full first:mt-2">
+                <Button variant="secondary" type="button" onClick={salvar} className="w-full first:mt-2">
                   {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
                   {salvo ? 'Salvo em Meu espaço' : 'Salvar tema em Meu espaço'}
-                </button>
+                </Button>
               </div>
             </>
           )}

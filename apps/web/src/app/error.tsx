@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Notice from '../components/Notice';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 /** Erro numa página: o servidor já registrou o detalhe; aqui só orientamos quem usa. */
 export default function Erro({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
@@ -18,10 +19,10 @@ export default function Erro({ error, reset }: { error: Error & { digest?: strin
         )}
       </Notice>
       <div className="flex gap-3">
-        <button type="button" onClick={reset} className="btn-primary">
+        <Button type="button" onClick={reset}>
           Tentar de novo
-        </button>
-        <a href="/" className="btn-secondary">
+        </Button>
+        <a href="/" className={buttonVariants({ variant: 'secondary' })}>
           Página inicial
         </a>
       </div>

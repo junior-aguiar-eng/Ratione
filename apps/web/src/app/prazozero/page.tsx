@@ -27,6 +27,14 @@ import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import ResultadoMaterial from './ResultadoMaterial';
 import RelatorioAlteracoes from './RelatorioAlteracoes';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
+import { Label, Legend } from '@/components/ui/label';
+import { Card, cardClasses } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
+import { cn } from '@/lib/utils';
 
 const CATALOGO = CATALOGO_PRAZOS;
 const GRUPOS = Array.from(new Set(CATALOGO.map(p => p.grupo)));
@@ -205,18 +213,17 @@ export default function PrazoZeroPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start print:block">
         {/* Fluxo guiado */}
         <form
-          className="lg:col-span-5 lg:sticky lg:top-24 card p-6 space-y-7 print:hidden"
+          className={cn(cardClasses, 'lg:col-span-5 lg:sticky lg:top-24 p-6 space-y-7 print:hidden')}
           onSubmit={e => e.preventDefault()}
           aria-label="Dados do cálculo"
         >
           <fieldset className="space-y-3">
-            <legend className="label mb-3">1. Qual prazo deseja calcular?</legend>
-            <select
+            <Legend className="mb-3">1. Qual prazo deseja calcular?</Legend>
+            <NativeSelect
               id="ato"
               aria-label="Prazo a calcular"
               value={atoId}
               onChange={e => escolherAto(e.target.value)}
-              className="field"
             >
               {GRUPOS.map(g => (
                 <optgroup key={g} label={g}>
@@ -228,7 +235,7 @@ export default function PrazoZeroPage() {
                 </optgroup>
               ))}
               <option value="outro">Outro prazo (personalizado)</option>
-            </select>
+            </NativeSelect>
             {prazo && (
               <p className="text-sm text-ink-mute leading-snug">
                 Base legal: {prazo.baseLegal}.{prazo.observacao ? ` ${prazo.observacao}` : ''}
@@ -238,30 +245,28 @@ export default function PrazoZeroPage() {
             {atoId === 'outro' && (
               <div className="grid grid-cols-3 gap-3 pt-1">
                 <div>
-                  <label htmlFor="dias" className="label">
+                  <Label htmlFor="dias">
                     Dias
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     id="dias"
                     type="number"
                     min={1}
                     max={365}
                     value={diasOutro}
                     onChange={e => setDiasOutro(parseInt(e.target.value, 10) || 1)}
-                    className="field"
                   />
                 </div>
                 <div className="col-span-2">
-                  <label htmlFor="nome-ato" className="label">
+                  <Label htmlFor="nome-ato">
                     Nome do ato
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     id="nome-ato"
                     type="text"
                     value={nomeOutro}
                     onChange={e => setNomeOutro(e.target.value)}
                     placeholder="Ex.: Agravo interno"
-                    className="field"
                   />
                 </div>
               </div>
@@ -270,47 +275,45 @@ export default function PrazoZeroPage() {
 
           {!material && (
           <div>
-            <label htmlFor="tipo-evento" className="label">
+            <Label htmlFor="tipo-evento">
               2. Como ocorreu a intimação?
-            </label>
-            <select
+            </Label>
+            <NativeSelect
               id="tipo-evento"
               value={tipoEvento}
               onChange={e => setTipoEvento(e.target.value as TipoEventoOrigem)}
-              className="field"
             >
               <option value="disponibilizacao_dje">Disponibilização no Diário de Justiça eletrônico</option>
               <option value="publicacao">Publicação já considerada no Diário</option>
               <option value="intimacao_portal">Intimação eletrônica no portal do tribunal</option>
               <option value="carga_ou_audiencia">Ciência pessoal, em audiência ou por mandado</option>
-            </select>
+            </NativeSelect>
           </div>
           )}
 
           <div>
-            <label htmlFor="data-evento" className="label">
+            <Label htmlFor="data-evento">
               {material ? '2. ' + material.pergunta : '3. Quando ocorreu?'}
-            </label>
-            <input
+            </Label>
+            <Input
               id="data-evento"
               type="date"
               value={dataEvento}
               onChange={e => setDataEvento(e.target.value)}
-              className="field"
             />
           </div>
 
           <div>
-            <label htmlFor="tribunal" className="label">
+            <Label htmlFor="tribunal">
               {material ? '3. Em qual tribunal será proposta a ação?' : '4. Em qual tribunal?'}
-            </label>
-            <select id="tribunal" value={tribunalId} onChange={e => setTribunalId(e.target.value)} className="field">
+            </Label>
+            <NativeSelect id="tribunal" value={tribunalId} onChange={e => setTribunalId(e.target.value)}>
               {Object.values(TRIBUNAIS_BRASIL).map(t => (
                 <option key={t.id} value={t.id}>
                   {t.sigla} · {t.nome}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
 
           {!material && (
@@ -321,28 +324,22 @@ export default function PrazoZeroPage() {
             </summary>
             <div className="space-y-5 pt-4">
               <div>
-                <label htmlFor="regime" className="label">
+                <Label htmlFor="regime">
                   Regime de contagem
-                </label>
-                <select
+                </Label>
+                <NativeSelect
                   id="regime"
                   value={regime}
                   onChange={e => setRegime(e.target.value as RegimeContagem)}
-                  className="field"
                 >
                   <option value="cpc_dias_uteis">CPC · dias úteis, com recesso forense</option>
                   <option value="clt_dias_uteis">CLT · dias úteis</option>
                   <option value="jef_dias_uteis">JEF · dias úteis (Lei 9.099, art. 12-A)</option>
                   <option value="cpp_dias_corridos">CPP · dias corridos</option>
-                </select>
+                </NativeSelect>
               </div>
               <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={prazoEmDobro}
-                  onChange={e => setPrazoEmDobro(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
-                />
+                <Checkbox checked={prazoEmDobro} onCheckedChange={v => setPrazoEmDobro(v === true)} className="mt-1" />
                 <span>
                   <span className="block text-sm font-medium text-ink">Prazo em dobro</span>
                   <span className="block text-sm text-ink-mute">Fazenda Pública, Ministério Público ou Defensoria</span>
@@ -350,12 +347,7 @@ export default function PrazoZeroPage() {
               </label>
               {regime === 'cpp_dias_corridos' && (
                 <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={excecaoCriminal}
-                    onChange={e => setExcecaoCriminal(e.target.checked)}
-                    className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
-                  />
+                  <Checkbox checked={excecaoCriminal} onCheckedChange={v => setExcecaoCriminal(v === true)} className="mt-1" />
                   <span>
                     <span className="block text-sm font-medium text-ink">Réu preso, Maria da Penha ou medida urgente</span>
                     <span className="block text-sm text-ink-mute">Nesses casos o prazo não se suspende de 20/12 a 20/01 (CPP, art. 798-A)</span>
@@ -363,12 +355,7 @@ export default function PrazoZeroPage() {
                 </label>
               )}
               <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={litisconsortes}
-                  onChange={e => setLitisconsortes(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
-                />
+                <Checkbox checked={litisconsortes} onCheckedChange={v => setLitisconsortes(v === true)} className="mt-1" />
                 <span>
                   <span className="block text-sm font-medium text-ink">Litisconsortes com advogados distintos</span>
                   <span className="block text-sm text-ink-mute">Só gera um aviso: o dobro do art. 229 não vale em autos eletrônicos</span>
@@ -385,18 +372,18 @@ export default function PrazoZeroPage() {
             resultadoMaterial ? (
               <ResultadoMaterial resultado={resultadoMaterial} titulo={nomeAto} tribunalId={tribunalId} />
             ) : (
-              <div className="card">
+              <Card>
                 <EmptyState titulo="Informe a data para calcular">
                   {material.pergunta} O resultado aparece aqui.
                 </EmptyState>
-              </div>
+              </Card>
             )
           ) : !resultado || !resumo ? (
-            <div className="card">
+            <Card>
               <EmptyState titulo="Informe a data para calcular">
                 Escolha o prazo, a forma de intimação e a data do evento. O resultado aparece aqui.
               </EmptyState>
-            </div>
+            </Card>
           ) : (
             <>
               <div className="hidden print:block border-b border-line pb-3 text-sm text-ink-soft">
@@ -493,22 +480,22 @@ export default function PrazoZeroPage() {
                 {relatorio && <RelatorioAlteracoes relatorio={relatorio} />}
 
                 <div className="flex flex-wrap gap-2 no-print">
-                  <button type="button" onClick={exportar} className="btn-secondary">
+                  <Button variant="secondary" type="button" onClick={exportar}>
                     <FileDown className="w-4 h-4" />
                     Exportar PDF
-                  </button>
-                  <button type="button" onClick={copiarCertidao} className="btn-secondary">
+                  </Button>
+                  <Button variant="secondary" type="button" onClick={copiarCertidao}>
                     {copiado ? <Check className="w-4 h-4 text-ok-text" /> : <Copy className="w-4 h-4" />}
                     {copiado ? 'Copiado' : 'Copiar memória de cálculo'}
-                  </button>
-                  <button type="button" onClick={adicionarAoCalendario} className="btn-secondary">
+                  </Button>
+                  <Button variant="secondary" type="button" onClick={adicionarAoCalendario}>
                     <CalendarPlus className="w-4 h-4" />
                     Adicionar ao calendário
-                  </button>
-                  <button type="button" onClick={salvar} className="btn-secondary">
+                  </Button>
+                  <Button variant="secondary" type="button" onClick={salvar}>
                     {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
                     {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
-                  </button>
+                  </Button>
                 </div>
               </section>
 
@@ -580,7 +567,7 @@ export default function PrazoZeroPage() {
                               <td className="px-4 py-2.5 num whitespace-nowrap font-medium">{dataCurta(item.data)}</td>
                               <td className="px-4 py-2.5 whitespace-nowrap">{item.diaSemana}</td>
                               <td className="px-4 py-2.5 whitespace-nowrap">
-                                {contado ? <span className="tag-brand">{item.diaContadoNumero}º dia</span> : 'Não'}
+                                {contado ? <Badge variant="brand">{item.diaContadoNumero}º dia</Badge> : 'Não'}
                               </td>
                               <td className="px-4 py-2.5">
                                 <span className={final ? 'font-semibold text-ink' : ''}>

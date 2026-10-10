@@ -39,84 +39,45 @@
   --color-rel-text: rgb(var(--rel-text));
   --color-rel-tint: rgb(var(--rel-tint));
 
+  /* Nomes semânticos do shadcn/ui apontando para os tokens do Ratione: `shadcn add` funciona sem mexer nas cores */
+  --color-background: rgb(var(--canvas));
+  --color-foreground: rgb(var(--ink));
+  --color-card: rgb(var(--surface));
+  --color-card-foreground: rgb(var(--ink));
+  --color-popover: rgb(var(--surface));
+  --color-popover-foreground: rgb(var(--ink));
+  --color-primary: rgb(var(--brand));
+  --color-primary-foreground: #ffffff;
+  --color-secondary: rgb(var(--surface-2));
+  --color-secondary-foreground: rgb(var(--ink));
+  --color-muted: rgb(var(--surface-2));
+  --color-muted-foreground: rgb(var(--ink-soft));
+  --color-accent: rgb(var(--surface-2));
+  --color-accent-foreground: rgb(var(--ink));
+  --color-destructive: rgb(var(--danger-text));
+  --color-border: rgb(var(--line));
+  --color-input: rgb(var(--line-strong));
+  --color-ring: rgb(var(--brand));
+
   --font-sans:
     var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+/* Borda padrão = linha do tema (no Tailwind 4 o padrão passou a ser currentcolor; o shadcn usa `border` sem cor). */
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: rgb(var(--line));
   }
-}
-
-@utility card {
-  @apply bg-surface border border-line rounded-lg;
 }
 
 @utility eyebrow {
   @apply text-xs font-semibold uppercase tracking-[0.12em] text-brand-text;
-}
-
-@utility label {
-  @apply block text-sm font-medium text-ink mb-1.5;
-}
-
-@utility field {
-  @apply w-full bg-surface border border-line-strong rounded-md px-3 py-2.5 text-sm text-ink placeholder:text-ink-mute focus:outline-hidden focus:border-brand focus:ring-2 focus:ring-brand/20;
-}
-
-@utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors bg-brand text-white hover:bg-brand-strong;
-}
-
-@utility btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors bg-surface text-ink border border-line-strong hover:bg-surface-2;
-}
-
-@utility tag {
-  @apply inline-flex items-center gap-1.5 rounded-sm px-2 py-0.5 text-xs font-medium;
-}
-
-@utility tag-neutral {
-  @apply tag bg-surface-2 text-ink-soft;
-}
-
-@utility tag-brand {
-  @apply tag bg-brand-tint text-brand-text;
-}
-
-@utility tag-info {
-  @apply tag bg-info-tint text-info-text;
-}
-
-@utility tag-ok {
-  @apply tag bg-ok-tint text-ok-text;
-}
-
-@utility tag-warn {
-  @apply tag bg-warn-tint text-warn-text;
-}
-
-@utility tag-danger {
-  @apply tag bg-danger-tint text-danger-text;
-}
-
-@utility tag-rel {
-  @apply tag bg-rel-tint text-rel-text;
 }
 
 @utility num {

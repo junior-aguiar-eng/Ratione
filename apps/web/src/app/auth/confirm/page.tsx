@@ -7,6 +7,7 @@ import PageHeader from '../../../components/PageHeader';
 import Notice from '../../../components/Notice';
 import { obterSupabase } from '../../../lib/supabase/client';
 import { caminhoInterno, destinoPadrao, tipoLinkValido } from '../../../lib/link-email';
+import { Button } from '@/components/ui/button';
 
 function Confirmar() {
   const router = useRouter();
@@ -49,9 +50,9 @@ function Confirmar() {
           : 'Para ativar a sua conta, confirme abaixo.'}
       </p>
       {erro && <Notice tom="danger">{erro}</Notice>}
-      <button type="button" onClick={confirmar} disabled={ocupado} className="btn-primary disabled:opacity-60">
+      <Button type="button" onClick={confirmar} disabled={ocupado}>
         {recuperacao ? 'Continuar para criar nova senha' : 'Confirmar e entrar'}
-      </button>
+      </Button>
     </div>
   );
 }

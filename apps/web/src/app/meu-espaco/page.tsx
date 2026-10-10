@@ -18,6 +18,8 @@ import {
 } from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
 import AvisosAtivos from './AvisosAtivos';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
   { id: 'todos', rotulo: 'Todos' },
@@ -94,9 +96,9 @@ export default function MeuEspacoPage() {
             Deseja enviá-los para a sua conta? Eles passam a acompanhar você em outros dispositivos e são removidos deste navegador. Se preferir, deixe
             como está.
             <div className="mt-3">
-              <button type="button" onClick={importar} disabled={importando} className="btn-secondary disabled:opacity-60">
+              <Button variant="secondary" type="button" onClick={importar} disabled={importando}>
                 {importando ? 'Enviando…' : 'Enviar para a minha conta'}
-              </button>
+              </Button>
             </div>
           </Notice>
         </div>
@@ -128,13 +130,13 @@ export default function MeuEspacoPage() {
 
         <div className="relative w-full sm:w-72">
           <Search className="w-4 h-4 text-ink-mute absolute left-3 top-1/2 -translate-y-1/2" aria-hidden />
-          <input
+          <Input
             type="search"
             value={busca}
             onChange={e => setBusca(e.target.value)}
             placeholder="Pesquisar nos registros"
             aria-label="Pesquisar nos registros"
-            className="field pl-9!"
+            className="pl-9"
           />
         </div>
       </div>
@@ -143,7 +145,7 @@ export default function MeuEspacoPage() {
         <EmptyState
           titulo="Você ainda não salvou nada"
           acao={
-            <Link href="/prazozero" className="btn-primary">
+            <Link href="/prazozero" className={buttonVariants()}>
               Calcular um prazo
             </Link>
           }

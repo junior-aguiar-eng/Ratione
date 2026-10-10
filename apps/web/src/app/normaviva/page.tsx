@@ -8,6 +8,9 @@ import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 
 const FONTE_CPC = 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm';
 
@@ -112,13 +115,13 @@ export default function NormaVivaPage() {
       <section aria-label="Pesquisar dispositivo" className="space-y-4">
         <div className="relative max-w-2xl">
           <Search className="w-5 h-5 text-ink-mute absolute left-3.5 top-1/2 -translate-y-1/2" aria-hidden />
-          <input
+          <Input
             type="search"
             value={busca}
             onChange={e => setBusca(e.target.value)}
             placeholder="Pesquisar lei, artigo ou assunto. Ex.: art. 489 CPC"
             aria-label="Pesquisar lei, artigo ou assunto"
-            className="field pl-11! py-3! text-base"
+            className="pl-11 py-3 text-base"
           />
         </div>
 
@@ -163,9 +166,9 @@ export default function NormaVivaPage() {
               </div>
               {dataConsulta &&
                 (versao ? (
-                  <span className="tag-ok">{usandoHoje ? 'Vigente' : `Redação em ${dataCurta(dataConsulta)}`}</span>
+                  <Badge variant="ok">{usandoHoje ? 'Vigente' : `Redação em ${dataCurta(dataConsulta)}`}</Badge>
                 ) : (
-                  <span className="tag-warn">Sem redação nesta data</span>
+                  <Badge variant="warn">Sem redação nesta data</Badge>
                 ))}
             </div>
 
@@ -181,12 +184,12 @@ export default function NormaVivaPage() {
               >
                 Hoje
               </button>
-              <input
+              <Input
                 type="date"
                 aria-label="Escolher data"
                 value={dataConsulta}
                 onChange={e => e.target.value && setDataConsulta(e.target.value)}
-                className="field w-auto!"
+                className="w-auto"
               />
             </div>
           </header>
@@ -219,11 +222,11 @@ export default function NormaVivaPage() {
           )}
 
           <div className="flex flex-wrap gap-2 no-print">
-            <button type="button" onClick={salvar} disabled={!versao} className="btn-secondary disabled:opacity-50">
+            <Button variant="secondary" type="button" onClick={salvar} disabled={!versao}>
               {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
               {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
-            </button>
-            <a href={FONTE_CPC} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            </Button>
+            <a href={FONTE_CPC} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
               Fonte oficial (Planalto)
               <ExternalLink className="w-4 h-4" />
             </a>

@@ -11,6 +11,12 @@ import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
+import { Label } from '@/components/ui/label';
+import { cardClasses } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 const PROFISSOES = [
   ['', 'Prefiro não informar'],
@@ -201,85 +207,84 @@ export default function ContaPage() {
           )}
         </div>
 
-        <form onSubmit={salvarPerfil} className="card p-6 space-y-5" aria-label="Perfil">
+        <form onSubmit={salvarPerfil} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Perfil">
           <h2 className="font-serif text-xl font-semibold text-ink">Perfil</h2>
           <div>
-            <label htmlFor="nome" className="label">
+            <Label htmlFor="nome">
               Nome
-            </label>
-            <input id="nome" maxLength={200} value={perfil.nome} onChange={e => setPerfil({ ...perfil, nome: e.target.value })} className="field" />
+            </Label>
+            <Input id="nome" maxLength={200} value={perfil.nome} onChange={e => setPerfil({ ...perfil, nome: e.target.value })} />
           </div>
           <div>
-            <label htmlFor="profissao" className="label">
+            <Label htmlFor="profissao">
               Atuação
-            </label>
-            <select id="profissao" value={perfil.profissao} onChange={e => setPerfil({ ...perfil, profissao: e.target.value })} className="field">
+            </Label>
+            <NativeSelect id="profissao" value={perfil.profissao} onChange={e => setPerfil({ ...perfil, profissao: e.target.value })}>
               {PROFISSOES.map(([v, r]) => (
                 <option key={v} value={v}>
                   {r}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
           <div>
-            <label htmlFor="oab" className="label">
+            <Label htmlFor="oab">
               OAB (declaratória)
-            </label>
-            <input id="oab" maxLength={30} value={perfil.oab} onChange={e => setPerfil({ ...perfil, oab: e.target.value })} className="field" />
+            </Label>
+            <Input id="oab" maxLength={30} value={perfil.oab} onChange={e => setPerfil({ ...perfil, oab: e.target.value })} />
             <p className="text-sm text-ink-mute mt-1.5">Informação declarada por você; o Ratione não a verifica.</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="tribunal" className="label">
+              <Label htmlFor="tribunal">
                 Tribunal padrão
-              </label>
-              <select id="tribunal" value={perfil.tribunal_padrao} onChange={e => setPerfil({ ...perfil, tribunal_padrao: e.target.value })} className="field">
+              </Label>
+              <NativeSelect id="tribunal" value={perfil.tribunal_padrao} onChange={e => setPerfil({ ...perfil, tribunal_padrao: e.target.value })}>
                 <option value="">Nenhum</option>
                 {tribunais.map(t => (
                   <option key={t.id} value={t.id}>
                     {t.sigla}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
             <div>
-              <label htmlFor="uf" className="label">
+              <Label htmlFor="uf">
                 UF
-              </label>
-              <select id="uf" value={perfil.uf_padrao} onChange={e => setPerfil({ ...perfil, uf_padrao: e.target.value })} className="field">
+              </Label>
+              <NativeSelect id="uf" value={perfil.uf_padrao} onChange={e => setPerfil({ ...perfil, uf_padrao: e.target.value })}>
                 <option value="">Nenhuma</option>
                 {UFS.map(u => (
                   <option key={u} value={u}>
                     {u}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
           </div>
-          <button type="submit" disabled={ocupado} className="btn-primary disabled:opacity-60">
+          <Button type="submit" disabled={ocupado}>
             Salvar perfil
-          </button>
+          </Button>
         </form>
 
-        <form onSubmit={trocarSenha} className="card p-6 space-y-5" aria-label="Alterar senha">
+        <form onSubmit={trocarSenha} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Alterar senha">
           <h2 className="font-serif text-xl font-semibold text-ink">Alterar senha</h2>
           <div>
-            <label htmlFor="nova-senha" className="label">
+            <Label htmlFor="nova-senha">
               Nova senha
-            </label>
-            <input
+            </Label>
+            <Input
               id="nova-senha"
               type="password"
               minLength={8}
               autoComplete="new-password"
               value={novaSenha}
               onChange={e => setNovaSenha(e.target.value)}
-              className="field"
             />
           </div>
-          <button type="submit" disabled={ocupado} className="btn-secondary disabled:opacity-60">
+          <Button variant="secondary" type="submit" disabled={ocupado}>
             Alterar senha
-          </button>
+          </Button>
         </form>
 
         <section className="space-y-4" aria-labelledby="dados">
@@ -295,72 +300,71 @@ export default function ContaPage() {
             .
           </p>
           <div className="flex flex-wrap gap-2">
-            <button type="button" onClick={exportar} className="btn-secondary">
+            <Button variant="secondary" type="button" onClick={exportar}>
               <Download className="w-4 h-4" />
               Baixar meus dados
-            </button>
-            <button type="button" onClick={() => setConfirmando('itens')} className="btn-secondary">
+            </Button>
+            <Button variant="secondary" type="button" onClick={() => setConfirmando('itens')}>
               Apagar meus registros e avisos
-            </button>
+            </Button>
           </div>
           {confirmando === 'itens' && (
             <Notice tom="danger" titulo="Apagar todos os registros salvos e os avisos por e-mail da conta?">
               <p>Isso não pode ser desfeito.</p>
               <div className="flex flex-wrap gap-2 mt-3">
-                <button type="button" onClick={apagarItens} className="btn-primary">
+                <Button type="button" onClick={apagarItens}>
                   Sim, apagar os registros
-                </button>
-                <button type="button" onClick={() => setConfirmando(null)} className="btn-secondary">
+                </Button>
+                <Button variant="secondary" type="button" onClick={() => setConfirmando(null)}>
                   Cancelar
-                </button>
+                </Button>
               </div>
             </Notice>
           )}
         </section>
 
-        <form onSubmit={excluirConta} className="card p-6 space-y-5" aria-label="Excluir conta">
+        <form onSubmit={excluirConta} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Excluir conta">
           <h2 className="font-serif text-xl font-semibold text-ink">Excluir conta</h2>
           <p className="text-sm text-ink-soft leading-relaxed">
             Apaga a sua conta, o perfil e todos os registros salvos, sem possibilidade de recuperação. Baixe seus dados antes, se quiser guardá-los.
             Para confirmar, informe a senha atual.
           </p>
           <div>
-            <label htmlFor="senha-exclusao" className="label">
+            <Label htmlFor="senha-exclusao">
               Senha atual
-            </label>
-            <input
+            </Label>
+            <Input
               id="senha-exclusao"
               type="password"
               required
               autoComplete="current-password"
               value={senhaExclusao}
               onChange={e => setSenhaExclusao(e.target.value)}
-              className="field"
             />
           </div>
           {confirmando === 'conta' ? (
             <Notice tom="danger" titulo="Excluir a conta e todos os dados associados a ela?">
               <p>Isso não pode ser desfeito.</p>
               <div className="flex flex-wrap gap-2 mt-3">
-                <button type="submit" disabled={ocupado} className="btn-primary disabled:opacity-60">
+                <Button type="submit" disabled={ocupado}>
                   Sim, excluir definitivamente
-                </button>
-                <button type="button" onClick={() => setConfirmando(null)} className="btn-secondary">
+                </Button>
+                <Button variant="secondary" type="button" onClick={() => setConfirmando(null)}>
                   Cancelar
-                </button>
+                </Button>
               </div>
             </Notice>
           ) : (
-            <button type="submit" disabled={ocupado || senhaExclusao.length === 0} className="btn-secondary disabled:opacity-60">
+            <Button variant="secondary" type="submit" disabled={ocupado || senhaExclusao.length === 0}>
               Excluir minha conta
-            </button>
+            </Button>
           )}
         </form>
 
-        <button type="button" onClick={sair} className="btn-secondary">
+        <Button variant="secondary" type="button" onClick={sair}>
           <LogOut className="w-4 h-4" />
           Sair
-        </button>
+        </Button>
       </div>
     </div>
   );
