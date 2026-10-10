@@ -28,7 +28,7 @@ PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, 
 # (hoje: TJSC, TJDF, TJGO, TJPE, TJCE, TJES) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
 TRIBUNAL_SEM_ATO = "TJSC"
 
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}}
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -41,6 +41,11 @@ TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #        02/02 não entra e Corpus Christi (04/06/2026 e 27/05/2027) fica pendente. Revolução Farroupilha (20/09) é regra anual já conferida.
 #  TJBA: Decreto Judiciário 1050/2025, art. 5º (feriados e pontos facultativos, todos sem expediente; art. 8º prorroga os prazos) e Decreto Judiciário 944/2026
 #        (29/06/2026, jogo da Seleção: prazos suspensos). Só entram os dias que não são feriado federal; 02/01 já está no recesso (CPC, art. 220).
+#  TJDF (TJDFT): Portaria Conjunta 105/2025, art. 2º (feriados e pontos facultativos; art. 4º suspende o expediente; art. 5º prorroga os prazos).
+#        Copa: Portaria Conjunta 48/2026 (alterada pela 53/2026): 29/06 ponto facultativo; 24/06 expediente das 9h às 16h (prazos que começam ou terminam no dia são prorrogados).
+#        Fora: feriados federais da lista e 30/11 (só ofícios extrajudiciais, art. 3º).
+TJDF_2026_NU = ["02-16", "02-17", "02-18", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "06-29", "08-10", "08-11", "10-30", "12-07", "12-08", "12-24", "12-31"]
+TJDF_2026_PARCIAL = ["06-24"]
 TJBA_2026_NU = ["02-12", "02-13", "02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "06-29", "07-02", "07-03",
                 "08-10", "08-11", "10-30", "12-07", "12-08"]
 TJRS_NU = {2026: ["02-16", "02-17", "04-03", "07-02", "12-08"], 2027: ["02-08", "02-09", "03-26", "12-08"]}
@@ -165,6 +170,12 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJPR":
         for s in TJPR_2026_NU:
             ev(dia(s), True, "TJPR: Decreto Judiciário 621/2025")
+    if ano == 2026 and trib == "TJDF":
+        for s in TJDF_2026_NU:
+            ev(dia(s), True, "TJDFT: Portaria Conjunta 105/2025 e 48/2026")
+        for s in TJDF_2026_PARCIAL:
+            parcial.add(dia(s))
+            nomes[dia(s)] = "TJDFT: jogo da Seleção, expediente das 9h às 16h (Portaria Conjunta 48/2026)"
     if ano == 2026 and trib == "TJBA":
         for s in TJBA_2026_NU:
             ev(dia(s), True, "TJBA: Decreto Judiciário 1050/2025 e 944/2026")
@@ -632,6 +643,18 @@ add("tjba-2026-independencia-da-bahia", "verificado", "TJBA 2026: 02 e 03/07 (In
     entrada("2026-07-01", "publicacao", 3, "TJBA"))
 add("tjba-2026-copa-29-junho", "verificado", "TJBA: 29/06/2026 teve os prazos suspensos (jogo da Seleção na Copa); não conta", "Decreto Judiciário TJBA 944/2026, art. 3º (lido em 10/10/2026); CPC, arts. 219 e 224",
     entrada("2026-06-26", "publicacao", 2, "TJBA"))
+# TJDF (TJDFT) 2026: Portarias Conjuntas 105/2025 e 48/2026 (lidas em 10/10/2026). Nascem pendentes de validação do revisor.
+TJDFT = "Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224"
+add("tjdf-2026-carnaval", "verificado", "TJDFT 2026: 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02", TJDFT,
+    entrada("2026-02-12", "publicacao", 5, "TJDF"))
+add("tjdf-2026-semana-santa", "verificado", "TJDFT 2026: 01 a 03/04 (Semana Santa) não contam", TJDFT,
+    entrada("2026-03-31", "publicacao", 2, "TJDF"))
+add("tjdf-2026-ponto-facultativo-20-abril", "verificado", "TJDFT 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam", TJDFT,
+    entrada("2026-04-16", "publicacao", 3, "TJDF"))
+add("tjdf-2026-copa-24-junho", "verificado", "TJDFT: prazo que termina em 24/06/2026 (jogo da Seleção, expediente das 9h às 16h) é prorrogado para o primeiro dia útil", "Portaria Conjunta TJDFT 48/2026, arts. 1º, IV, e 2º (lida em 10/10/2026); CPC, arts. 219 e 224",
+    entrada("2026-06-17", "publicacao", 5, "TJDF"))
+add("tjdf-2026-copa-29-junho", "verificado", "TJDFT: 29/06/2026 (ponto facultativo no jogo das 14h) não conta", "Portaria Conjunta TJDFT 48/2026, art. 1º, I (redação da Portaria Conjunta 53/2026); CPC, arts. 219 e 224",
+    entrada("2026-06-26", "publicacao", 2, "TJDF"))
 add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil", "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
     entrada("2025-12-18", "publicacao", 1, "TJPR"))
 add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",

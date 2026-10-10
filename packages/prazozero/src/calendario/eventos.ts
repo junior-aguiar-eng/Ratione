@@ -163,6 +163,18 @@ export const FONTES_CALENDARIO = {
     url: 'https://www7.tjba.jus.br/secao/lerPublicacao.wsp?tmp.mostrarDiv=sim&tmp.id=42896&tmp.secao=9',
     lido: 'texto no site do TJBA (o próprio texto ressalva que não substitui o do DJE de 26/06/2026); art. 3º suspende os prazos em 29/06/2026',
     lidoEm: LIDO_10_10
+  },
+  'tjdft-pc-105-2025': {
+    ato: 'Portaria Conjunta nº 105/2025 do TJDFT (17/12/2025; Diário Administrativo 26/12/2025): calendário de feriados de 2026',
+    url: 'https://www.tjdft.jus.br/institucional/imprensa/noticias/imagens-e-arquivos-2025/sei_4868188_portaria_conjunta_105-1.pdf',
+    lido: 'inteiro teor (PDF de 4 páginas, SEI 0047698/2025). Art. 2º lista feriados e pontos facultativos; art. 4º suspende o expediente nos feriados; art. 5º prorroga os prazos. O art. 3º (30/11 e outros) vale só para os ofícios extrajudiciais e não entra. Conferida com a página "Feriados e expedientes suspensos" do TJDFT',
+    lidoEm: LIDO_10_10
+  },
+  'tjdft-pc-48-2026': {
+    ato: 'Portaria Conjunta nº 48/2026 do TJDFT (10/06/2026; Diário Administrativo 12/06/2026), alterada pela Portaria Conjunta 53/2026: expediente nos dias de jogo da Seleção na Copa do Mundo',
+    url: 'https://www.tjdft.jus.br/institucional/imprensa/noticias/imagens-e-arquivos-2026/portaria-conjunta-48-de-2026.pdf',
+    lido: 'inteiro teor da 48/2026 (PDF de 3 páginas, SEI 0019969/2026); a 53/2026 só pelas notícias oficiais do TJDFT (jogo às 14h = ponto facultativo). Art. 2º: prazos que começam ou terminam nos dias de expediente diferenciado são prorrogados para o primeiro dia útil',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -368,6 +380,40 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     fonte: fonte as keyof typeof FONTES_CALENDARIO
   })),
 
+  // ---------- TJDFT, 2026: Portaria Conjunta 105/2025, art. 2º (feriados e pontos facultativos; art. 4º suspende o expediente) ----------
+  // Fora: os feriados federais da lista (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12) e 30/11, que só vale para os ofícios extrajudiciais (art. 3º).
+  ...[
+    ['2026-02-16', 'Segunda-feira de Carnaval', 'Portaria Conjunta TJDFT 105/2025, art. 2º, II (Lei 11.697/2008, art. 60)'],
+    ['2026-02-17', 'Terça-feira de Carnaval', 'Portaria Conjunta TJDFT 105/2025, art. 2º, II (Lei 11.697/2008, art. 60)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado forense por inteiro)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, II (Lei 11.697/2008, art. 60)'],
+    ['2026-04-01', 'Semana Santa (quarta-feira)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, III (Lei 11.697/2008, art. 60)'],
+    ['2026-04-02', 'Semana Santa (quinta-feira)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, III (Lei 11.697/2008, art. 60)'],
+    ['2026-04-03', 'Sexta-feira Santa', 'Portaria Conjunta TJDFT 105/2025, art. 2º, III (Lei 11.697/2008, art. 60)'],
+    ['2026-04-20', 'Ponto facultativo', 'Portaria Conjunta TJDFT 105/2025, art. 2º, IV'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, VII'],
+    ['2026-06-05', 'Ponto facultativo', 'Portaria Conjunta TJDFT 105/2025, art. 2º, VIII'],
+    ['2026-08-10', 'Ponto facultativo', 'Portaria Conjunta TJDFT 105/2025, art. 2º, IX'],
+    ['2026-08-11', 'Feriado forense (Dia do Advogado)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, X (Lei 11.697/2008, art. 60)'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, XIII'],
+    ['2026-12-07', 'Ponto facultativo', 'Portaria Conjunta TJDFT 105/2025, art. 2º, XVII'],
+    ['2026-12-08', 'Feriado forense (Dia da Justiça)', 'Portaria Conjunta TJDFT 105/2025, art. 2º, XVIII (Lei 11.697/2008, art. 60)'],
+    ['2026-12-24', 'Véspera de Natal', 'Portaria Conjunta TJDFT 105/2025, art. 2º, XIX'],
+    ['2026-12-31', 'Véspera de Ano-Novo', 'Portaria Conjunta TJDFT 105/2025, art. 2º, XXI']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJDF'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjdft-pc-105-2025' as const
+  })),
+  // Copa do Mundo 2026 (Portaria Conjunta 48/2026, alterada pela 53/2026): 29/06, jogo às 14h, ponto facultativo; 24/06, jogo às 19h/20h,
+  // expediente das 9h às 16h, e os prazos que começam ou terminam nesse dia são prorrogados (art. 2º). 19/06 teve expediente normal (jogo após as 20h).
+  { tribunais: ['TJDF'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h): ponto facultativo', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJDFT 48/2026, art. 1º, I (redação da Portaria Conjunta 53/2026), e art. 2º', fonte: 'tjdft-pc-48-2026' },
+  { tribunais: ['TJDF'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h/20h): expediente das 9h às 16h; prazos que começam ou terminam no dia são prorrogados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJDFT 48/2026, art. 1º, IV, e art. 2º', fonte: 'tjdft-pc-48-2026' },
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -423,5 +469,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] },
   TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] },
   TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] },
-  TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] }
+  TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] },
+  TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] }
 };
