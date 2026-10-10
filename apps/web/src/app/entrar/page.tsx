@@ -7,6 +7,12 @@ import Notice from '../../components/Notice';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cardClasses } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { cn } from '@/lib/utils';
 
 type Modo = 'entrar' | 'cadastrar' | 'recuperar';
 
@@ -104,20 +110,20 @@ function Formulario() {
         ))}
       </div>
 
-      <form onSubmit={enviar} className="card p-6 space-y-5" aria-label={titulos[modo]}>
+      <form onSubmit={enviar} className={cn(cardClasses, 'p-6 space-y-5')} aria-label={titulos[modo]}>
         <div>
-          <label htmlFor="email" className="label">
+          <Label htmlFor="email">
             E-mail
-          </label>
-          <input id="email" type="email" required autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} className="field" />
+          </Label>
+          <Input id="email" type="email" required autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} />
         </div>
 
         {modo !== 'recuperar' && (
           <div>
-            <label htmlFor="senha" className="label">
+            <Label htmlFor="senha">
               Senha
-            </label>
-            <input
+            </Label>
+            <Input
               id="senha"
               type="password"
               required
@@ -125,7 +131,6 @@ function Formulario() {
               autoComplete={modo === 'entrar' ? 'current-password' : 'new-password'}
               value={senha}
               onChange={e => setSenha(e.target.value)}
-              className="field"
             />
             {modo === 'cadastrar' && <p className="text-sm text-ink-mute mt-1.5">Mínimo de 8 caracteres.</p>}
           </div>
@@ -133,12 +138,7 @@ function Formulario() {
 
         {modo === 'cadastrar' && (
           <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={aceite}
-              onChange={e => setAceite(e.target.checked)}
-              className="mt-1 w-4 h-4 accent-[rgb(var(--brand))]"
-            />
+            <Checkbox checked={aceite} onCheckedChange={v => setAceite(v === true)} className="mt-1" />
             <span className="text-sm text-ink-soft leading-snug">
               Li e aceito os{' '}
               <Link href="/termos" className="underline underline-offset-2" target="_blank">
@@ -166,9 +166,9 @@ function Formulario() {
           )}
         </div>
 
-        <button type="submit" disabled={enviando} className="btn-primary w-full justify-center disabled:opacity-60">
+        <Button type="submit" disabled={enviando} className="w-full">
           {enviando ? 'Aguarde…' : titulos[modo]}
-        </button>
+        </Button>
 
         {modo === 'entrar' && (
           <button

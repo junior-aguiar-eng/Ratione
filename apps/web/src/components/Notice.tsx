@@ -1,13 +1,8 @@
 import React from 'react';
 import { Info, AlertTriangle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 type Tom = 'info' | 'warn' | 'danger';
-
-const ESTILOS: Record<Tom, string> = {
-  info: 'bg-info-tint text-info-text border-info/30',
-  warn: 'bg-warn-tint text-warn-text border-warn/40',
-  danger: 'bg-danger-tint text-danger-text border-danger/40'
-};
 
 export default function Notice({
   tom = 'info',
@@ -20,12 +15,12 @@ export default function Notice({
 }) {
   const Icone = tom === 'info' ? Info : AlertTriangle;
   return (
-    <div role="note" className={`flex gap-3 rounded-lg border p-4 text-sm leading-relaxed ${ESTILOS[tom]}`}>
+    <Alert role="note" variant={tom}>
       <Icone className="w-[18px] h-[18px] shrink-0 mt-0.5" aria-hidden />
       <div className="space-y-1">
-        {titulo && <p className="font-semibold">{titulo}</p>}
-        <div>{children}</div>
+        {titulo && <AlertTitle>{titulo}</AlertTitle>}
+        <AlertDescription>{children}</AlertDescription>
       </div>
-    </div>
+    </Alert>
   );
 }

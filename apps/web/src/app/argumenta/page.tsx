@@ -7,6 +7,10 @@ import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { DECISAO_DEMO, TRECHOS_DEMO, TRECHO_POR_ITEM } from '../../lib/decisaoDemo';
 import { salvarRegistro } from '../../lib/historico';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge, BadgeTom } from '@/components/ui/badge';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 type Aba = 'geral' | 'teses' | 'estrutura' | 'fragilidades' | 'estrategia';
 
@@ -18,12 +22,12 @@ const ABAS: { id: Aba; rotulo: string }[] = [
   { id: 'estrategia', rotulo: 'Estratégia' }
 ];
 
-const TIPO_PREMISSA: Record<string, { rotulo: string; tag: string }> = {
-  fato_provado: { rotulo: 'Fato', tag: 'tag-ok' },
-  fato_controverso: { rotulo: 'Fato controverso', tag: 'tag-warn' },
-  norma_positivada: { rotulo: 'Norma', tag: 'tag-info' },
-  precedente_judicial: { rotulo: 'Precedente', tag: 'tag-rel' },
-  presuncao_legal: { rotulo: 'Presunção', tag: 'tag-neutral' }
+const TIPO_PREMISSA: Record<string, { rotulo: string; tom: BadgeTom }> = {
+  fato_provado: { rotulo: 'Fato', tom: 'ok' },
+  fato_controverso: { rotulo: 'Fato controverso', tom: 'warn' },
+  norma_positivada: { rotulo: 'Norma', tom: 'info' },
+  precedente_judicial: { rotulo: 'Precedente', tom: 'rel' },
+  presuncao_legal: { rotulo: 'Presunção', tom: 'neutral' }
 };
 
 const INCISO_ROTULO: Record<string, string> = {
@@ -94,11 +98,11 @@ export default function ArgumentaPage() {
         description="Veja como a decisão foi construída: teses, premissas, conclusões e pontos de atenção da fundamentação, com o trecho original ao lado."
         actions={
           <>
-            <button type="button" onClick={salvar} className="btn-secondary">
+            <Button variant="secondary" type="button" onClick={salvar}>
               {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
               {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
-            </button>
-            <Link href="/prazozero" className="btn-primary">
+            </Button>
+            <Link href="/prazozero" className={buttonVariants()}>
               Calcular prazo recursal
             </Link>
           </>
@@ -115,7 +119,7 @@ export default function ArgumentaPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Documento */}
         <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-5" aria-label="Documento analisado">
-          <div className="card p-5 space-y-4">
+          <Card className="p-5 space-y-4">
             <div className="flex items-start gap-3">
               <FileText className="w-5 h-5 text-brand-text mt-0.5 shrink-0" aria-hidden />
               <div>
@@ -146,9 +150,9 @@ export default function ArgumentaPage() {
                 ))}
               </ul>
             </nav>
-          </div>
+          </Card>
 
-          <div className="card overflow-hidden">
+          <Card className="overflow-hidden">
             <h2 className="px-5 py-3 text-sm font-semibold text-ink border-b border-line bg-surface-2">
               Trechos da decisão
             </h2>
@@ -180,40 +184,23 @@ export default function ArgumentaPage() {
                 );
               })}
             </ul>
-          </div>
+          </Card>
         </aside>
 
         {/* Análise */}
-        <div className="lg:col-span-8 space-y-8">
-          <div role="tablist" aria-label="Seções da análise" className="flex gap-1 border-b border-line overflow-x-auto">
-            {ABAS.map(a => {
-              const ativa = aba === a.id;
-              return (
-                <button
-                  key={a.id}
-                  role="tab"
-                  type="button"
-                  id={`aba-${a.id}`}
-                  aria-selected={ativa}
-                  aria-controls="painel-analise"
-                  onClick={() => setAba(a.id)}
-                  className={`relative whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors flex items-center gap-2 ${
-                    ativa ? 'text-ink' : 'text-ink-soft hover:text-ink'
-                  }`}
-                >
-                  {a.rotulo}
-                  {a.id === 'fragilidades' && vulnerabilidades.length > 0 && (
-                    <span className="tag-danger px-1.5!">{vulnerabilidades.length}</span>
-                  )}
-                  {ativa && <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-brand" />}
-                </button>
-              );
-            })}
-          </div>
+        <Tabs value={aba} onValueChange={v => setAba(v as Aba)} className="lg:col-span-8 gap-8">
+          <TabsList aria-label="Seções da análise">
+            {ABAS.map(a => (
+              <TabsTrigger key={a.id} value={a.id}>
+                {a.rotulo}
+                {a.id === 'fragilidades' && vulnerabilidades.length > 0 && (
+                  <Badge variant="danger" className="px-1.5">{vulnerabilidades.length}</Badge>
+                )}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-          <div id="painel-analise" role="tabpanel" aria-labelledby={`aba-${aba}`} className="space-y-10">
-            {aba === 'geral' && (
-              <>
+            <TabsContent value="geral" className="space-y-10">
                 <section className="space-y-3">
                   <h2 className="font-serif text-2xl font-semibold text-ink">Resumo do caso</h2>
                   <p className="text-base text-ink-soft leading-relaxed">{decisao.relatorio.resumoFatico}</p>
@@ -240,7 +227,7 @@ export default function ArgumentaPage() {
                 <section className="border-t border-line pt-8 space-y-4">
                   <div className="flex items-center gap-3">
                     <h2 className="font-serif text-2xl font-semibold text-ink">Dispositivo</h2>
-                    <span className="tag-ok">Procedente</span>
+                    <Badge variant="ok">Procedente</Badge>
                   </div>
                   <blockquote className="font-serif text-lg leading-[1.7] text-ink border-l-2 border-brand pl-5">
                     {decisao.dispositivo.conteudoDispositivo}
@@ -273,19 +260,20 @@ export default function ArgumentaPage() {
                     ))}
                   </ul>
                 </section>
-              </>
-            )}
+            </TabsContent>
 
-            {aba === 'teses' &&
-              decisao.fundamentacao.tesesIdentificadas.map((tese, i) => (
+            <TabsContent value="teses" className="space-y-10">
+              {decisao.fundamentacao.tesesIdentificadas.map((tese, i) => (
                 <section key={tese.id} className={`space-y-5 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
                       <span className="eyebrow">Tese {i + 1}</span>
                       {tese.vulnerabilidades.length > 0 && (
-                        <button type="button" onClick={() => setAba('fragilidades')} className="tag-danger hover:underline">
-                          {tese.vulnerabilidades.length} ponto de atenção
-                        </button>
+                        <Badge asChild variant="danger">
+                          <button type="button" onClick={() => setAba('fragilidades')} className="hover:underline">
+                            {tese.vulnerabilidades.length} ponto de atenção
+                          </button>
+                        </Badge>
                       )}
                     </div>
                     <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{tese.titulo}</h2>
@@ -297,7 +285,7 @@ export default function ArgumentaPage() {
                       return (
                         <li key={p.id} className="flex gap-4">
                           <div className="flex flex-col items-center">
-                            <span className={`${tipo.tag} w-28 justify-center`}>{tipo.rotulo}</span>
+                            <Badge variant={tipo.tom} className="w-28 justify-center">{tipo.rotulo}</Badge>
                             <span className="w-px flex-1 bg-line-strong my-1" />
                           </div>
                           <div className="pb-5 pt-0.5">
@@ -314,14 +302,15 @@ export default function ArgumentaPage() {
                       );
                     })}
                     <li className="flex gap-4">
-                      <span className="tag-brand w-28 justify-center self-start">Conclusão</span>
+                      <Badge variant="brand" className="w-28 justify-center self-start">Conclusão</Badge>
                       <p className="text-base font-medium text-ink leading-snug pt-0.5">{tese.conclusao}</p>
                     </li>
                   </ol>
                 </section>
               ))}
+            </TabsContent>
 
-            {aba === 'estrutura' && (
+            <TabsContent value="estrutura" className="space-y-10">
               <ol className="space-y-8">
                 {[
                   {
@@ -368,10 +357,9 @@ export default function ArgumentaPage() {
                   </li>
                 ))}
               </ol>
-            )}
+            </TabsContent>
 
-            {aba === 'fragilidades' && (
-              <>
+            <TabsContent value="fragilidades" className="space-y-10">
                 <p className="text-base text-ink-soft leading-relaxed">
                   Pontos em que a fundamentação pode não atender ao dever de análise completa dos argumentos (CPC, art.
                   489, § 1º).
@@ -379,7 +367,7 @@ export default function ArgumentaPage() {
                 {vulnerabilidades.map(v => (
                   <section key={v.id} className="rounded-lg border border-danger/40 bg-danger-tint/50 p-6 space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="tag-danger">{INCISO_ROTULO[v.tipoInciso]}</span>
+                      <Badge variant="danger">{INCISO_ROTULO[v.tipoInciso]}</Badge>
                       <span className="text-sm text-ink-mute">
                         p. {v.pagina}, § {v.paragrafo}
                       </span>
@@ -407,10 +395,9 @@ export default function ArgumentaPage() {
                     </div>
                   </section>
                 ))}
-              </>
-            )}
+            </TabsContent>
 
-            {aba === 'estrategia' && (
+            <TabsContent value="estrategia" className="space-y-10">
               <ul className="divide-y divide-line border-y border-line">
                 <li className="py-6">
                   <h2 className="font-serif text-xl font-semibold text-ink">Opor embargos de declaração</h2>
@@ -431,9 +418,8 @@ export default function ArgumentaPage() {
                   </Link>
                 </li>
               </ul>
-            )}
-          </div>
-        </div>
+            </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

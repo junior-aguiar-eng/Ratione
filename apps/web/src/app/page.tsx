@@ -8,6 +8,8 @@ import RecentesHome from '../components/RecentesHome';
 import { MODULOS } from '../lib/modulos';
 import { DECISAO_DEMO } from '../lib/decisaoDemo';
 import { dataCurta, dataLonga, diaDaSemana } from '../lib/datas';
+import { buttonVariants } from '@/components/ui/button';
+import { Badge, BadgeTom } from '@/components/ui/badge';
 
 function Secao({
   id,
@@ -36,11 +38,11 @@ function Secao({
       <div className={`lg:col-span-5 space-y-5 ${invertido ? 'lg:order-2' : ''}`}>
         <div className="flex items-center gap-3">
           <span className="eyebrow">{nome}</span>
-          {status && status !== 'Disponível' && <span className="tag-neutral">{status}</span>}
+          {status && status !== 'Disponível' && <Badge>{status}</Badge>}
         </div>
         <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-[1.15] sm:leading-10">{titulo}</h2>
         <p className="text-base text-ink-soft leading-relaxed max-w-md">{descricao}</p>
-        <Link href={href} className="btn-primary">
+        <Link href={href} className={buttonVariants()}>
           <span>{cta}</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
@@ -56,11 +58,11 @@ function Secao({
 
 function VisualArgumenta() {
   const tese = DECISAO_DEMO.fundamentacao.tesesIdentificadas[0];
-  const etapas = [
-    { rotulo: 'Decisão', texto: 'Sentença cível · Fraude bancária e transações via PIX', tom: 'bg-surface-2 text-ink-soft' },
-    { rotulo: 'Tese', texto: tese.titulo, tom: 'bg-brand-tint text-brand-text' },
-    { rotulo: 'Fundamento', texto: 'CDC, art. 14 · Súmula 479/STJ', tom: 'bg-info-tint text-info-text' },
-    { rotulo: 'Conclusão', texto: 'Pedidos julgados procedentes', tom: 'bg-ok-tint text-ok-text' }
+  const etapas: { rotulo: string; texto: string; tom: BadgeTom }[] = [
+    { rotulo: 'Decisão', texto: 'Sentença cível · Fraude bancária e transações via PIX', tom: 'neutral' },
+    { rotulo: 'Tese', texto: tese.titulo, tom: 'brand' },
+    { rotulo: 'Fundamento', texto: 'CDC, art. 14 · Súmula 479/STJ', tom: 'info' },
+    { rotulo: 'Conclusão', texto: 'Pedidos julgados procedentes', tom: 'ok' }
   ];
 
   return (
@@ -69,7 +71,7 @@ function VisualArgumenta() {
         {etapas.map((e, i) => (
           <li key={e.rotulo} className="flex gap-4">
             <div className="flex flex-col items-center">
-              <span className={`tag ${e.tom} w-24 justify-center`}>{e.rotulo}</span>
+              <Badge variant={e.tom} className="w-24 justify-center">{e.rotulo}</Badge>
               {i < etapas.length - 1 && <span className="w-px flex-1 bg-line-strong my-1" />}
             </div>
             <p className="text-base text-ink pb-5 pt-0.5 leading-snug">{e.texto}</p>
@@ -111,7 +113,7 @@ function VisualNormaViva() {
           <p className="text-sm text-ink-mute">{versao.normaNome}</p>
           <h3 className="font-serif text-2xl font-semibold text-ink mt-0.5">{versao.dispositivoRotulo}</h3>
         </div>
-        <span className="tag-ok">Vigente</span>
+        <Badge variant="ok">Vigente</Badge>
       </div>
 
       <ol className="grid grid-cols-3 gap-4 relative">
@@ -293,11 +295,11 @@ export default function HomePage() {
           prazos.
         </p>
         <div className="flex flex-wrap gap-3 pt-2">
-          <Link href="/prazozero" className="btn-primary">
+          <Link href="/prazozero" className={buttonVariants()}>
             <span>Calcular prazo</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <Link href="#ferramentas" className="btn-secondary">
+          <Link href="#ferramentas" className={buttonVariants({ variant: 'secondary' })}>
             Ver as ferramentas
           </Link>
         </div>

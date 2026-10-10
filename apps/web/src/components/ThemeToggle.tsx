@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function ThemeToggle() {
   const [escuro, setEscuro] = useState(false);
@@ -22,13 +23,14 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
+    <Button
+      variant="ghost"
+      size="icon"
       type="button"
       onClick={alternar}
       aria-label={escuro ? 'Usar tema claro' : 'Usar tema escuro'}
-      className="p-2 rounded-md text-ink-soft hover:text-ink hover:bg-surface-2 transition-colors"
     >
       {escuro ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
-    </button>
+    </Button>
   );
 }
