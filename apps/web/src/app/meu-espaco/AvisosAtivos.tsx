@@ -38,7 +38,7 @@ export default function AvisosAtivos() {
       <ul className="divide-y divide-line border-y border-line mt-3">
         {avisos.map(a => (
           <li key={a.id} className="flex items-start justify-between gap-4 py-4">
-            <div className="min-w-0 space-y-0.5">
+            <div className="min-w-0 flex flex-col gap-0.5">
               <p className="text-base font-medium text-ink">{a.titulo}</p>
               <p className="text-sm text-ink-soft">
                 Vence em {diaDaSemana(a.vencimento)}, {dataCurta(a.vencimento)}

@@ -198,7 +198,7 @@ export default function ContaPage() {
     <div>
       <PageHeader eyebrow="Conta" title="Minha conta" description={usuario.email ?? undefined} />
 
-      <div className="max-w-xl space-y-12">
+      <div className="max-w-xl flex flex-col gap-12">
         <div ref={avisoRef} aria-live="polite">
           {mensagem && (
             <Notice tom={mensagem.tom === 'danger' ? 'danger' : 'info'} titulo={mensagem.tom === 'danger' ? 'Atenção' : undefined}>
@@ -207,7 +207,7 @@ export default function ContaPage() {
           )}
         </div>
 
-        <form onSubmit={salvarPerfil} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Perfil">
+        <form onSubmit={salvarPerfil} className={cn(cardClasses, 'p-6 flex flex-col gap-5')} aria-label="Perfil">
           <h2 className="font-serif text-xl font-semibold text-ink">Perfil</h2>
           <div>
             <Label htmlFor="nome">
@@ -262,12 +262,12 @@ export default function ContaPage() {
               </NativeSelect>
             </div>
           </div>
-          <Button type="submit" disabled={ocupado}>
+          <Button type="submit" disabled={ocupado} className="self-start">
             Salvar perfil
           </Button>
         </form>
 
-        <form onSubmit={trocarSenha} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Alterar senha">
+        <form onSubmit={trocarSenha} className={cn(cardClasses, 'p-6 flex flex-col gap-5')} aria-label="Alterar senha">
           <h2 className="font-serif text-xl font-semibold text-ink">Alterar senha</h2>
           <div>
             <Label htmlFor="nova-senha">
@@ -282,12 +282,12 @@ export default function ContaPage() {
               onChange={e => setNovaSenha(e.target.value)}
             />
           </div>
-          <Button variant="secondary" type="submit" disabled={ocupado}>
+          <Button variant="secondary" type="submit" disabled={ocupado} className="self-start">
             Alterar senha
           </Button>
         </form>
 
-        <section className="space-y-4" aria-labelledby="dados">
+        <section className="flex flex-col gap-4" aria-labelledby="dados">
           <h2 id="dados" className="font-serif text-xl font-semibold text-ink">
             Seus dados (LGPD)
           </h2>
@@ -323,7 +323,7 @@ export default function ContaPage() {
           )}
         </section>
 
-        <form onSubmit={excluirConta} className={cn(cardClasses, 'p-6 space-y-5')} aria-label="Excluir conta">
+        <form onSubmit={excluirConta} className={cn(cardClasses, 'p-6 flex flex-col gap-5')} aria-label="Excluir conta">
           <h2 className="font-serif text-xl font-semibold text-ink">Excluir conta</h2>
           <p className="text-sm text-ink-soft leading-relaxed">
             Apaga a sua conta, o perfil e todos os registros salvos, sem possibilidade de recuperação. Baixe seus dados antes, se quiser guardá-los.
@@ -355,13 +355,13 @@ export default function ContaPage() {
               </div>
             </Notice>
           ) : (
-            <Button variant="secondary" type="submit" disabled={ocupado || senhaExclusao.length === 0}>
+            <Button variant="secondary" type="submit" disabled={ocupado || senhaExclusao.length === 0} className="self-start">
               Excluir minha conta
             </Button>
           )}
         </form>
 
-        <Button variant="secondary" type="button" onClick={sair}>
+        <Button variant="secondary" type="button" onClick={sair} className="self-start">
           <LogOut className="w-4 h-4" />
           Sair
         </Button>

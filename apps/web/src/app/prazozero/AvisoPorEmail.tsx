@@ -50,7 +50,7 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
   };
 
   return (
-    <section className="border-t border-line pt-7 space-y-4 no-print" aria-labelledby="aviso-email">
+    <section className="border-t border-line pt-7 flex flex-col gap-4 no-print" aria-labelledby="aviso-email">
       <div>
         <h2 id="aviso-email" className="font-serif text-2xl font-semibold text-ink">
           Avisar por e-mail
@@ -71,7 +71,7 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
           .
         </Notice>
       ) : (
-        <div className="space-y-4 max-w-xl">
+        <div className="flex flex-col gap-4 max-w-xl">
           <div>
             <Label htmlFor="titulo-aviso">
               Nome do aviso
@@ -81,7 +81,7 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
               Este nome vai no e-mail, enviado por um serviço de terceiros. Não escreva nome de partes nem número de processo.
             </p>
           </div>
-          <fieldset className="space-y-2">
+          <fieldset className="flex flex-col gap-2">
             <Legend className="mb-1">Quando avisar</Legend>
             <label className="flex items-center gap-2 text-sm text-ink">
               <Checkbox checked={tres && opcoes.tres} disabled={!opcoes.tres} onCheckedChange={v => setTres(v === true)} />3 dias antes
@@ -95,6 +95,7 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
           <Button
             variant="secondary"
             type="button"
+            className="self-start"
             onClick={ativar}
             disabled={estado === 'salvando' || !titulo.trim() || !((tres && opcoes.tres) || (um && opcoes.um))}
           >

@@ -43,14 +43,14 @@ function Confirmar() {
   };
 
   return (
-    <div className="max-w-md space-y-5">
+    <div className="max-w-md flex flex-col gap-5">
       <p className="text-ink-soft leading-relaxed">
         {recuperacao
           ? 'Para criar uma nova senha, confirme abaixo. Em seguida você vai definir a senha nova.'
           : 'Para ativar a sua conta, confirme abaixo.'}
       </p>
       {erro && <Notice tom="danger">{erro}</Notice>}
-      <Button type="button" onClick={confirmar} disabled={ocupado}>
+      <Button type="button" onClick={confirmar} disabled={ocupado} className="self-start">
         {recuperacao ? 'Continuar para criar nova senha' : 'Confirmar e entrar'}
       </Button>
     </div>

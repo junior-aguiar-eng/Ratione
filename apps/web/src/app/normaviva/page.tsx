@@ -112,7 +112,7 @@ export default function NormaVivaPage() {
       />
 
       {/* Pesquisa */}
-      <section aria-label="Pesquisar dispositivo" className="space-y-4">
+      <section aria-label="Pesquisar dispositivo" className="flex flex-col gap-4">
         <div className="relative max-w-2xl">
           <Search className="w-5 h-5 text-ink-mute absolute left-3.5 top-1/2 -translate-y-1/2" aria-hidden />
           <Input
@@ -157,8 +157,8 @@ export default function NormaVivaPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mt-12 items-start">
         {/* Texto normativo */}
-        <article className="lg:col-span-8 space-y-7">
-          <header className="space-y-4">
+        <article className="lg:col-span-8 flex flex-col gap-7">
+          <header className="flex flex-col gap-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <p className="text-sm text-ink-mute">Código de Processo Civil (Lei nº 13.105/2015)</p>
@@ -234,10 +234,10 @@ export default function NormaVivaPage() {
         </article>
 
         {/* Histórico */}
-        <aside className="lg:col-span-4 space-y-9" aria-label="Histórico do dispositivo">
+        <aside className="lg:col-span-4 flex flex-col gap-9" aria-label="Histórico do dispositivo">
           <section>
             <h3 className="font-serif text-xl font-semibold text-ink mb-5">Linha do tempo</h3>
-            <ol className="relative border-l border-line-strong ml-1.5 space-y-6">
+            <ol className="relative border-l border-line-strong ml-1.5 flex flex-col gap-6">
               {linhaDoTempo.map(v => {
                 const ativa = versao?.id === v.id;
                 return (

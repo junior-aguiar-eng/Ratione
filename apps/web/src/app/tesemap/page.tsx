@@ -158,7 +158,7 @@ export default function TeseMapPage() {
       <p className="text-lg font-serif text-ink mb-6 max-w-3xl">{grafo?.temaPrincipal}</p>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-8 space-y-4">
+        <div className="lg:col-span-8 flex flex-col gap-4">
           <div className="h-[600px] rounded-lg border border-line overflow-hidden bg-canvas">
             <ReactFlow
               key={temaId}
@@ -187,10 +187,10 @@ export default function TeseMapPage() {
           </ul>
         </div>
 
-        <aside className={cn(cardClasses, 'lg:col-span-4 lg:sticky lg:top-24 p-6 space-y-6')} aria-label="Detalhe do item selecionado">
+        <aside className={cn(cardClasses, 'lg:col-span-4 lg:sticky lg:top-24 p-6 flex flex-col gap-6')} aria-label="Detalhe do item selecionado">
           {noSelecionado && (
             <>
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 <Badge variant={ESTILO_TIPO[noSelecionado.tipo].tom}>{ESTILO_TIPO[noSelecionado.tipo].rotulo}</Badge>
                 <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{noSelecionado.label}</h2>
                 {noSelecionado.tribunal && (
@@ -205,7 +205,7 @@ export default function TeseMapPage() {
               {relacoes.length > 0 && (
                 <div className="border-t border-line pt-5">
                   <h3 className="text-sm font-semibold text-ink mb-3">Relações</h3>
-                  <ul className="space-y-2.5">
+                  <ul className="flex flex-col gap-2.5">
                     {relacoes.map(r => (
                       <li key={r.id} className="text-sm leading-snug">
                         <span className="text-ink-mute">{r.saida ? r.rotulo : `${r.rotulo} (recebida)`}</span>
@@ -223,7 +223,7 @@ export default function TeseMapPage() {
                 </div>
               )}
 
-              <div className="border-t border-line pt-5 space-y-2 text-sm">
+              <div className="border-t border-line pt-5 flex flex-col gap-2 text-sm">
                 {noSelecionado.id.startsWith('cpc-art85') && (
                   <Link href="/normaviva" className="flex items-center gap-2.5 py-1.5 text-ink hover:text-brand-text">
                     <BookOpen className="w-4 h-4 text-info-text" />

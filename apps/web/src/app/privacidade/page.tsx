@@ -6,7 +6,7 @@ export default function PrivacidadePage() {
   return (
     <div className="max-w-3xl">
       <PageHeader eyebrow="Transparência" title="Privacidade" description="O que acontece com as informações que você usa no Ratione." />
-      <div className="space-y-5 text-base text-ink-soft leading-relaxed">
+      <div className="flex flex-col gap-5 text-base text-ink-soft leading-relaxed">
         <p>
           O uso das ferramentas do Ratione exige uma conta (e-mail e senha). Os cálculos são feitos no seu navegador; os dados que você digita nas
           ferramentas não são enviados ao servidor, a menos que você escolha salvá-los.

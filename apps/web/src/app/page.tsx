@@ -9,6 +9,7 @@ import { MODULOS } from '../lib/modulos';
 import { DECISAO_DEMO } from '../lib/decisaoDemo';
 import { dataCurta, dataLonga, diaDaSemana } from '../lib/datas';
 import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { Badge, BadgeTom } from '@/components/ui/badge';
 
 function Secao({
@@ -35,14 +36,14 @@ function Secao({
   const status = MODULOS.find(m => m.href === href)?.status;
   return (
     <section id={id} className="py-14 border-t border-line grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-      <div className={`lg:col-span-5 space-y-5 ${invertido ? 'lg:order-2' : ''}`}>
+      <div className={`lg:col-span-5 flex flex-col gap-5 ${invertido ? 'lg:order-2' : ''}`}>
         <div className="flex items-center gap-3">
           <span className="eyebrow">{nome}</span>
           {status && status !== 'Disponível' && <Badge>{status}</Badge>}
         </div>
         <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink leading-[1.15] sm:leading-10">{titulo}</h2>
         <p className="text-base text-ink-soft leading-relaxed max-w-md">{descricao}</p>
-        <Link href={href} className={buttonVariants()}>
+        <Link href={href} className={cn(buttonVariants(), 'self-start')}>
           <span>{cta}</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
@@ -66,8 +67,8 @@ function VisualArgumenta() {
   ];
 
   return (
-    <div className="space-y-6">
-      <ol className="space-y-0">
+    <div className="flex flex-col gap-6">
+      <ol className="">
         {etapas.map((e, i) => (
           <li key={e.rotulo} className="flex gap-4">
             <div className="flex flex-col items-center">
@@ -107,7 +108,7 @@ function VisualNormaViva() {
   ];
 
   return (
-    <div className="space-y-7">
+    <div className="flex flex-col gap-7">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm text-ink-mute">{versao.normaNome}</p>
@@ -215,7 +216,7 @@ function VisualTeseMap() {
         ))}
       </svg>
 
-      <ul className="sm:hidden space-y-3">
+      <ul className="sm:hidden flex flex-col gap-3">
         {textoRelacoes.map(r => (
           <li key={r.id} className="text-sm leading-snug text-ink-soft">
             <span className="font-medium text-ink">{r.de}</span> <span className="text-brand-text">{r.rel.toLowerCase()}</span>{' '}
@@ -256,7 +257,7 @@ function VisualPrazoZero() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <div>
         <p className="text-sm text-ink-mute">Prazo final</p>
         <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink mt-1 leading-tight sm:leading-none">{dataLonga(r.dataVencimentoFinal)}</p>
@@ -286,7 +287,7 @@ function VisualPrazoZero() {
 export default function HomePage() {
   return (
     <div>
-      <section className="pt-10 sm:pt-16 pb-16 max-w-3xl space-y-6">
+      <section className="pt-10 sm:pt-16 pb-16 max-w-3xl flex flex-col gap-6">
         <h1 className="font-serif text-5xl sm:text-6xl font-semibold tracking-tight text-ink leading-[1.05] sm:leading-none">
           Direito, estruturado.
         </h1>

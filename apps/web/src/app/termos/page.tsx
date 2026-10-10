@@ -6,7 +6,7 @@ export default function TermosPage() {
   return (
     <div className="max-w-3xl">
       <PageHeader eyebrow="Transparência" title="Termos de uso" description="Condições gerais de uso das ferramentas." />
-      <div className="space-y-5 text-base text-ink-soft leading-relaxed">
+      <div className="flex flex-col gap-5 text-base text-ink-soft leading-relaxed">
         <p>
           O Ratione é um instrumento de apoio ao trabalho jurídico. Os resultados não constituem aconselhamento
           jurídico e não substituem a análise do profissional responsável.

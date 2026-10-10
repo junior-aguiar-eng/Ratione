@@ -58,7 +58,7 @@ export default function NovaSenhaPage() {
     <div>
       <PageHeader eyebrow="Conta" title="Criar nova senha" description={usuario.email ?? undefined} />
 
-      <form onSubmit={salvar} className={cn(cardClasses, 'p-6 space-y-5 max-w-md')} aria-label="Criar nova senha">
+      <form onSubmit={salvar} className={cn(cardClasses, 'p-6 flex flex-col gap-5 max-w-md')} aria-label="Criar nova senha">
         {erro && (
           <div aria-live="polite">
             <Notice tom="danger">{erro}</Notice>

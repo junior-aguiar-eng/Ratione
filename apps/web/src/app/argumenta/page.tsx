@@ -118,8 +118,8 @@ export default function ArgumentaPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Documento */}
-        <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-5" aria-label="Documento analisado">
-          <Card className="p-5 space-y-4">
+        <aside className="lg:col-span-4 lg:sticky lg:top-24 flex flex-col gap-5" aria-label="Documento analisado">
+          <Card className="p-5 flex flex-col gap-4">
             <div className="flex items-start gap-3">
               <FileText className="w-5 h-5 text-brand-text mt-0.5 shrink-0" aria-hidden />
               <div>
@@ -132,7 +132,7 @@ export default function ArgumentaPage() {
             </div>
 
             <nav aria-label="Seções da decisão" className="border-t border-line pt-3">
-              <ul className="space-y-0.5">
+              <ul className="flex flex-col gap-0.5">
                 {SECOES.map(s => (
                   <li key={s.rotulo}>
                     <button
@@ -200,8 +200,8 @@ export default function ArgumentaPage() {
             ))}
           </TabsList>
 
-            <TabsContent value="geral" className="space-y-10">
-                <section className="space-y-3">
+            <TabsContent value="geral" className="flex flex-col gap-10">
+                <section className="flex flex-col gap-3">
                   <h2 className="font-serif text-2xl font-semibold text-ink">Resumo do caso</h2>
                   <p className="text-base text-ink-soft leading-relaxed">{decisao.relatorio.resumoFatico}</p>
                   <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-3 text-sm">
@@ -216,7 +216,7 @@ export default function ArgumentaPage() {
                   </dl>
                   <div className="pt-2">
                     <h3 className="text-sm font-semibold text-ink mb-2">Pedidos</h3>
-                    <ul className="list-disc pl-5 space-y-1 text-base text-ink-soft">
+                    <ul className="list-disc pl-5 flex flex-col gap-1 text-base text-ink-soft">
                       {decisao.relatorio.pedidosPrincipais.map(p => (
                         <li key={p}>{p}</li>
                       ))}
@@ -224,7 +224,7 @@ export default function ArgumentaPage() {
                   </div>
                 </section>
 
-                <section className="border-t border-line pt-8 space-y-4">
+                <section className="border-t border-line pt-8 flex flex-col gap-4">
                   <div className="flex items-center gap-3">
                     <h2 className="font-serif text-2xl font-semibold text-ink">Dispositivo</h2>
                     <Badge variant="ok">Procedente</Badge>
@@ -235,7 +235,7 @@ export default function ArgumentaPage() {
                   <p className="text-sm text-ink-soft">{decisao.dispositivo.honorarios}</p>
                 </section>
 
-                <section className="border-t border-line pt-8 space-y-3">
+                <section className="border-t border-line pt-8 flex flex-col gap-3">
                   <h2 className="font-serif text-2xl font-semibold text-ink">Fontes citadas</h2>
                   <ul className="divide-y divide-line border-y border-line">
                     {FONTES.map(f => (
@@ -262,10 +262,10 @@ export default function ArgumentaPage() {
                 </section>
             </TabsContent>
 
-            <TabsContent value="teses" className="space-y-10">
+            <TabsContent value="teses" className="flex flex-col gap-10">
               {decisao.fundamentacao.tesesIdentificadas.map((tese, i) => (
-                <section key={tese.id} className={`space-y-5 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
-                  <div className="space-y-2">
+                <section key={tese.id} className={`flex flex-col gap-5 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
+                  <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-3">
                       <span className="eyebrow">Tese {i + 1}</span>
                       {tese.vulnerabilidades.length > 0 && (
@@ -279,7 +279,7 @@ export default function ArgumentaPage() {
                     <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{tese.titulo}</h2>
                   </div>
 
-                  <ol className="space-y-0">
+                  <ol className="">
                     {tese.premissas.map(p => {
                       const tipo = TIPO_PREMISSA[p.tipo];
                       return (
@@ -310,8 +310,8 @@ export default function ArgumentaPage() {
               ))}
             </TabsContent>
 
-            <TabsContent value="estrutura" className="space-y-10">
-              <ol className="space-y-8">
+            <TabsContent value="estrutura" className="flex flex-col gap-10">
+              <ol className="flex flex-col gap-8">
                 {[
                   {
                     rotulo: 'Relatório',
@@ -349,7 +349,7 @@ export default function ArgumentaPage() {
                         {s.paginas}
                       </button>
                     </div>
-                    <ul className="space-y-2 text-base text-ink-soft leading-relaxed">
+                    <ul className="flex flex-col gap-2 text-base text-ink-soft leading-relaxed">
                       {s.itens.map(i => (
                         <li key={i}>{i}</li>
                       ))}
@@ -359,13 +359,13 @@ export default function ArgumentaPage() {
               </ol>
             </TabsContent>
 
-            <TabsContent value="fragilidades" className="space-y-10">
+            <TabsContent value="fragilidades" className="flex flex-col gap-10">
                 <p className="text-base text-ink-soft leading-relaxed">
                   Pontos em que a fundamentação pode não atender ao dever de análise completa dos argumentos (CPC, art.
                   489, § 1º).
                 </p>
                 {vulnerabilidades.map(v => (
-                  <section key={v.id} className="rounded-lg border border-danger/40 bg-danger-tint/50 p-6 space-y-4">
+                  <section key={v.id} className="rounded-lg border border-danger/40 bg-danger-tint/50 p-6 flex flex-col gap-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <Badge variant="danger">{INCISO_ROTULO[v.tipoInciso]}</Badge>
                       <span className="text-sm text-ink-mute">
@@ -397,7 +397,7 @@ export default function ArgumentaPage() {
                 ))}
             </TabsContent>
 
-            <TabsContent value="estrategia" className="space-y-10">
+            <TabsContent value="estrategia" className="flex flex-col gap-10">
               <ul className="divide-y divide-line border-y border-line">
                 <li className="py-6">
                   <h2 className="font-serif text-xl font-semibold text-ink">Opor embargos de declaração</h2>
