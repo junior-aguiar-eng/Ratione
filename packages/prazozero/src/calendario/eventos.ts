@@ -670,13 +670,12 @@ const EVENTOS_BASE: EventoCalendario[] = [
 /**
  * Pontos facultativos (decisão do revisor jurídico em 10/10/2026): o ponto facultativo é facultativo ao tribunal e não há como prever se será
  * concedido. Nunca conta como dia sem expediente: vira alerta (dia pendente), que o modo conservador ignora e o modo completo mostra.
- * Exceção: o dia que o próprio ato trata como feriado ou suspensão decretada (por exemplo, jogos da Copa com prazos expressamente prorrogados).
- * TJBA: os dias do art. 6º do Decreto 1050/2025 (os que exigem compensação de horas); os demais da lista são feriados.
+ * Exceção (esclarecida pelo revisor em 10/10/2026): quando o calendário ou o ato PREVÊ EXPRESSAMENTE que não haverá expediente no ponto facultativo,
+ * o dia conta como sem expediente. É o caso de TJBA (art. 5º do Decreto 1050/2025, com prorrogação no art. 8º), TJCE (art. 1º da Portaria 2924/2025)
+ * e TJDFT (arts. 4º e 5º da Portaria Conjunta 105/2025): esses ficam fora desta lista. Ficam como alerta TJES (só manda compensar as horas), TJGO
+ * (decretos não lidos) e TJRJ (atos não lidos). Também conta o dia que o ato trata como feriado ou suspensão decretada (Copa com prazos prorrogados).
  */
 const PONTOS_FACULTATIVOS: Record<string, string[]> = {
-  TJBA: ['2026-02-12', '2026-02-13', '2026-04-02', '2026-04-20', '2026-06-05', '2026-06-22', '2026-06-23', '2026-07-03', '2026-08-10', '2026-12-07'],
-  TJDF: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
-  TJCE: ['2026-02-16', '2026-02-17', '2026-02-18', '2026-03-19', '2026-04-02', '2026-04-03', '2026-06-04', '2026-06-05'],
   TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TJGO: ['2026-04-20', '2026-06-05'],
   TJRJ: ['2026-02-13', '2026-04-24', '2026-06-05']
