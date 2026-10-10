@@ -26,7 +26,7 @@ FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
 # Pontos facultativos (decisão do revisor jurídico em 10/10/2026): viram alerta (dia pendente), salvo quando o ato prevê expressamente que não haverá expediente
 # (TJBA, TJCE e TJDFT: contam como dia sem expediente). Espelha PONTOS_FACULTATIVOS de eventos.ts.
-PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"]}     | {("TJGO", d) for d in ["04-20", "06-05"]}     | {("TJRJ", d) for d in ["02-13", "04-24", "06-05"]}
+PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"]}
 
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
@@ -56,9 +56,10 @@ TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #        Portarias 1401 e 1440/2026 (Copa: 24/06 das 8h às 15h; 29/06 das 8h às 12h). Cinzas: normal só a partir das 14h. 13/04 (Portaria 727/2026) vale só na Comarca de Fortaleza: pendente.
 #  TJES: Ato Normativo 176/2026 (Anexo Único; feriados e pontos facultativos; Dia do Servidor em 30/10; Nossa Senhora da Penha em 13/04 conferida em 2026), Atos 124 e 130/2026
 #        (prazos que venceram em 08/07 e 31/07 prorrogados, PJe) (os Atos 103 e 113/2026, da Copa, não confirmam efeito sobre prazos: ficam de fora).
-#  TJGO: calendário oficial de 2026 (PDF de 13/01/2026; Carnaval 16 e 17/02 e Cinzas até as 12h; Semana Santa 01 a 03/04; 20/04 e 05/06 pontos facultativos; Corpus Christi 04/06;
+#  TJGO: calendário oficial de 2026 (PDF de 08/06/2026; Carnaval 16 e 17/02 e Cinzas até as 12h; Semana Santa 01 a 03/04; pontos facultativos 20/03 (MotoGP, Decreto 1130/2026), 20/04 (Decreto 1738/2026) e 05/06,
+#        que contam como dia sem expediente pelo art. 91, II, da Lei estadual 21.268/2022; Corpus Christi 04/06;
 #        28/10; 08/12), Decreto Judiciário 3079/2026 (29/06, 7h às 12h, prazos prorrogados) (o Decreto 2876/2026, de 19 e 24/06, não consta de ato lido: fica de fora).
-TJGO_2026_NU = ["02-16", "02-17", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "10-28", "12-08"]
+TJGO_2026_NU = ["02-16", "02-17", "03-20", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "10-28", "12-08"]
 TJGO_2026_PARCIAL = ["02-18", "06-29"]
 TJES_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-13", "04-20", "06-04", "06-05", "08-10", "08-11", "10-30", "12-07", "12-08"]
 TJES_2026_PARCIAL = ["07-08", "07-31"]
@@ -251,6 +252,10 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         for off in (-48, -47, -46, -4, -3, -2):
             ev(p + timedelta(off), True, "TJMG: Carnaval/Semana Santa (Res. 458/2004)")
         ev(date(ano, 12, 8), True, "TJMG: Dia da Justiça (Res. 458/2004)")
+    if trib == "TJRJ":  # Lei estadual 10.633/2024, art. 83, I, III e IV: permanente (Carnaval de segunda a quarta, Semana Santa só quinta e sexta)
+        for off in (-48, -47, -46, -3, -2):
+            ev(p + timedelta(off), True, "TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83)")
+        ev(date(ano, 12, 8), True, "TJRJ: Dia da Justiça (Lei 10.633/2024, art. 83, I)")
     if ano == 2026 and trib == "TJRJ":
         for s in TJRJ_2026_NU:
             ev(dia(s), ("TJRJ", s) not in PF, "TJRJ: " + s)
@@ -662,10 +667,16 @@ add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 
 
 # ---- TJRJ 2026 (F2-04): informativo oficial, sem selo ----
 INFRJ = "TJRJ, informativo de suspensão de prazos 2026 (cita o ato)"
-add("tjrj-carnaval-2026", "pendente", "TJRJ 2026: 13/02 é ponto facultativo (alerta: o modo conservador conta o dia, o completo não); Carnaval (16 a 18/02) não conta", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+add("tjrj-carnaval-2026", "verificado", "TJRJ 2026: 13/02 (ponto facultativo, expediente e prazos suspensos) e o Carnaval (16 a 18/02) não contam", INFRJ + "; Ato Executivo 20/2026; Lei 10.633/2024, art. 83, II e III",
     entrada("2026-02-12", "publicacao", 3, "TJRJ"))
-add("tjrj-sao-jorge-2026", "pendente", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) não conta; 24/04 é ponto facultativo (alerta)", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026",
+add("tjrj-sao-jorge-2026", "verificado", "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo, expediente e prazos suspensos) não contam", INFRJ + "; Lei estadual 5.198/2008; Ato Executivo 79/2026; Lei 10.633/2024, art. 83, II",
     entrada("2026-04-22", "publicacao", 3, "TJRJ"))
+add("tjrj-ponto-facultativo-5-junho-2026", "verificado", "TJRJ 2026: 04/06 (Corpus Christi, Lei estadual 11.002/2025) e 05/06 (ponto facultativo, expediente e prazos suspensos) não contam", INFRJ + "; Ato Executivo 91/2026; Lei 10.633/2024, art. 83, II",
+    entrada("2026-06-02", "publicacao", 3, "TJRJ"))
+add("tjrj-permanente-2028", "verificado", "TJRJ 2028 (sem informativo do ano): Carnaval de segunda a quarta (28/02 a 01/03) pela lei permanente; sem selo", "Lei estadual RJ 10.633/2024, art. 83, III",
+    entrada("2028-02-25", "publicacao", 3, "TJRJ"))
+add("tjrj-dia-da-justica-2027", "verificado", "TJRJ 2027 (sem informativo do ano): 8 de dezembro (Dia da Justiça) não conta; sem selo", "Lei estadual RJ 10.633/2024, art. 83, I",
+    entrada("2027-12-03", "publicacao", 3, "TJRJ"))
 add("tjrj-copa-2026", "verificado", "TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam", INFRJ + "; Atos Executivos 96 e 103/2026",
     entrada("2026-06-23", "publicacao", 3, "TJRJ"))
 
@@ -791,10 +802,12 @@ add("tjgo-2026-cinzas-vencimento", "verificado", "TJGO 2026: prazo que termina n
     entrada("2026-02-12", "publicacao", 2, "TJGO"))
 add("tjgo-2026-semana-santa", "verificado", "TJGO 2026: 01 a 03/04 (Semana Santa, de quarta a sexta-feira) não contam", TJGO,
     entrada("2026-03-31", "publicacao", 2, "TJGO"))
-add("tjgo-2026-ponto-facultativo-20-abril", "pendente", "TJGO 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta", TJGO,
+add("tjgo-2026-ponto-facultativo-20-abril", "verificado", "TJGO 2026: 20/04 é ponto facultativo e 21/04 (Tiradentes) é feriado: nenhum dos dois conta", TJGO + "; Decreto Judiciário 1738/2026; Lei estadual GO 21.268/2022, art. 91, II",
     entrada("2026-04-16", "publicacao", 3, "TJGO"))
-add("tjgo-2026-corpus-christi", "pendente", "TJGO 2026: 04/06 (Corpus Christi) não conta; 05/06 é ponto facultativo (alerta)", TJGO,
+add("tjgo-2026-corpus-christi", "verificado", "TJGO 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam", TJGO + "; Lei estadual GO 21.268/2022, art. 91, II",
     entrada("2026-06-02", "publicacao", 3, "TJGO"))
+add("tjgo-2026-ponto-facultativo-20-marco", "verificado", "TJGO 2026: 20/03 (ponto facultativo, MotoGP em Goiânia) não conta", TJGO + "; Decreto Judiciário 1130/2026 (notícia oficial); Lei estadual GO 21.268/2022, art. 91, II",
+    entrada("2026-03-18", "publicacao", 3, "TJGO"))
 add("tjgo-2026-copa-29-junho", "verificado", "TJGO: o começo do prazo em 29/06/2026 (expediente das 7h às 12h) é postergado", "Decreto Judiciário TJGO 3079/2026, arts. 1º e 2º (lido em 10/10/2026); CPC, art. 224, § 1º",
     entrada("2026-06-26", "publicacao", 2, "TJGO"))
 add("tjgo-2026-dia-servidor", "verificado", "TJGO 2026: 28/10 (Dia do Servidor Público, feriado estadual, sem transferência) não conta", TJGO,

@@ -4054,9 +4054,9 @@
   },
   {
     "id": "tjrj-carnaval-2026",
-    "categoria": "pendente",
-    "descricao": "TJRJ 2026: 13/02 é ponto facultativo (alerta: o modo conservador conta o dia, o completo não); Carnaval (16 a 18/02) não conta",
-    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: 13/02 (ponto facultativo, expediente e prazos suspensos) e o Carnaval (16 a 18/02) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, II e III",
     "entrada": {
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
@@ -4065,16 +4065,20 @@
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
-      "dataTermoInicial": "2026-02-13",
-      "dataVencimentoFinal": "2026-02-20",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": false,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-02-13",
+            "motivo": "TJRJ: 02-13"
+          },
           {
             "data": "2026-02-16",
             "motivo": "TJRJ: 02-16"
@@ -4091,17 +4095,17 @@
       }
     },
     "validacao": {
-      "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-10"
+      "status": "pendente",
+      "por": null,
+      "em": null
     },
-    "alternativaEsperada": "2026-02-23"
+    "alternativaEsperada": null
   },
   {
     "id": "tjrj-sao-jorge-2026",
-    "categoria": "pendente",
-    "descricao": "TJRJ 2026: 23/04 (São Jorge, feriado estadual) não conta; 24/04 é ponto facultativo (alerta)",
-    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: 23/04 (São Jorge, feriado estadual) e 24/04 (ponto facultativo, expediente e prazos suspensos) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026; Lei 10.633/2024, art. 83, II",
     "entrada": {
       "dataEvento": "2026-04-22",
       "tipoEvento": "publicacao",
@@ -4110,8 +4114,8 @@
     },
     "esperado": {
       "dataPublicacao": "2026-04-22",
-      "dataTermoInicial": "2026-04-24",
-      "dataVencimentoFinal": "2026-04-28",
+      "dataTermoInicial": "2026-04-27",
+      "dataVencimentoFinal": "2026-04-29",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": false,
       "rastro": {
@@ -4123,16 +4127,143 @@
           {
             "data": "2026-04-23",
             "motivo": "TJRJ: 04-23"
+          },
+          {
+            "data": "2026-04-24",
+            "motivo": "TJRJ: 04-24"
           }
         ]
       }
     },
     "validacao": {
-      "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-10"
+      "status": "pendente",
+      "por": null,
+      "em": null
     },
-    "alternativaEsperada": "2026-04-29"
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrj-ponto-facultativo-5-junho-2026",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2026: 04/06 (Corpus Christi, Lei estadual 11.002/2025) e 05/06 (ponto facultativo, expediente e prazos suspensos) não contam",
+    "fundamento": "TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 91/2026; Lei 10.633/2024, art. 83, II",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJRJ: 06-04"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJRJ: 06-05"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrj-permanente-2028",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2028 (sem informativo do ano): Carnaval de segunda a quarta (28/02 a 01/03) pela lei permanente; sem selo",
+    "fundamento": "Lei estadual RJ 10.633/2024, art. 83, III",
+    "entrada": {
+      "dataEvento": "2028-02-25",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2028-02-25",
+      "dataTermoInicial": "2028-03-02",
+      "dataVencimentoFinal": "2028-03-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2028-02-28",
+            "motivo": "TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83)"
+          },
+          {
+            "data": "2028-02-29",
+            "motivo": "TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83)"
+          },
+          {
+            "data": "2028-03-01",
+            "motivo": "TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrj-dia-da-justica-2027",
+    "categoria": "verificado",
+    "descricao": "TJRJ 2027 (sem informativo do ano): 8 de dezembro (Dia da Justiça) não conta; sem selo",
+    "fundamento": "Lei estadual RJ 10.633/2024, art. 83, I",
+    "entrada": {
+      "dataEvento": "2027-12-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRJ"
+    },
+    "esperado": {
+      "dataPublicacao": "2027-12-03",
+      "dataTermoInicial": "2027-12-06",
+      "dataVencimentoFinal": "2027-12-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2027-12-08",
+            "motivo": "TJRJ: Dia da Justiça (Lei 10.633/2024, art. 83, I)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjrj-copa-2026",
@@ -6219,9 +6350,9 @@
   },
   {
     "id": "tjgo-2026-ponto-facultativo-20-abril",
-    "categoria": "pendente",
-    "descricao": "TJGO 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta",
-    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 20/04 é ponto facultativo e 21/04 (Tiradentes) é feriado: nenhum dos dois conta",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Decreto Judiciário 1738/2026; Lei estadual GO 21.268/2022, art. 91, II",
     "entrada": {
       "dataEvento": "2026-04-16",
       "tipoEvento": "publicacao",
@@ -6231,7 +6362,7 @@
     "esperado": {
       "dataPublicacao": "2026-04-16",
       "dataTermoInicial": "2026-04-17",
-      "dataVencimentoFinal": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-23",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -6241,6 +6372,10 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-04-20",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
           }
@@ -6248,17 +6383,17 @@
       }
     },
     "validacao": {
-      "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-10"
+      "status": "pendente",
+      "por": null,
+      "em": null
     },
-    "alternativaEsperada": "2026-04-23"
+    "alternativaEsperada": null
   },
   {
     "id": "tjgo-2026-corpus-christi",
-    "categoria": "pendente",
-    "descricao": "TJGO 2026: 04/06 (Corpus Christi) não conta; 05/06 é ponto facultativo (alerta)",
-    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Lei estadual GO 21.268/2022, art. 91, II",
     "entrada": {
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
@@ -6268,7 +6403,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -6280,16 +6415,57 @@
           {
             "data": "2026-06-04",
             "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJGO: calendário oficial de 2026"
           }
         ]
       }
     },
     "validacao": {
-      "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-10"
+      "status": "pendente",
+      "por": null,
+      "em": null
     },
-    "alternativaEsperada": "2026-06-09"
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-ponto-facultativo-20-marco",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 20/03 (ponto facultativo, MotoGP em Goiânia) não conta",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Decreto Judiciário 1130/2026 (notícia oficial); Lei estadual GO 21.268/2022, art. 91, II",
+    "entrada": {
+      "dataEvento": "2026-03-18",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-18",
+      "dataTermoInicial": "2026-03-19",
+      "dataVencimentoFinal": "2026-03-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-20",
+            "motivo": "TJGO: calendário oficial de 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjgo-2026-copa-29-junho",

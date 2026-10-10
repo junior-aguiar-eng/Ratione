@@ -83,8 +83,14 @@ export const FONTES_CALENDARIO = {
   'tjrj-informativo-2026': {
     ato: 'TJRJ, Informativo de suspensão de prazos e de expediente forense, calendário de feriados 2026 (atualizado em 05/10/2026), que cita cada ato (Lei estadual 10.633/2024, art. 83; Atos Executivos TJ 20, 60, 79, 91, 96, 103, 114, 116, 129, 159 e 162/2026)',
     url: 'https://www.tjrj.jus.br/documents/d/portal-conhecimento/suspensao-prazos-1a-e-2a-instancia_2026_seesc',
-    lido: 'informativo oficial do tribunal (PDF, lido no navegador porque o servidor envia cadeia de certificados incompleta); diz ser meramente informativo e não substituir a publicação oficial; os atos em si não foram lidos; só ocorrências de todo o Estado, as de comarca não entram',
+    lido: 'informativo oficial do tribunal (PDF, baixado com a verificação de certificado ligada pelo repositório do Windows; o pacote certifi do script não fecha a cadeia do servidor); diz ser meramente informativo e não substituir a publicação oficial; transcreve a ementa de cada ato, mas os atos em si não foram lidos; só ocorrências de todo o Estado, as de comarca não entram',
     lidoEm: LIDO
+  },
+  'tjrj-lei-10633': {
+    ato: 'Lei estadual RJ nº 10.633/2024 (organização e divisão judiciárias), art. 83: não há expediente aos sábados, domingos e em 8 de dezembro (Dia da Justiça); nos dias declarados ponto facultativo nas repartições públicas estaduais; de segunda a quarta-feira da semana do Carnaval; na quinta e na sexta-feira da Semana Santa; nos feriados nacionais, estaduais e municipais da sede da comarca. § 1º: prazos suspensos de 20/12 a 20/01',
+    url: 'https://www.tjrj.jus.br/documents/d/portal-conhecimento/lei_de_organizaca_e_divisao_judiciarias_do_estado_do_rio_de_janeiro_lodj_lei_n_10_633_2024',
+    lido: 'texto compilado publicado no portal do TJRJ (PDF): art. 83 lido por inteiro; alterações posteriores da lei não verificadas',
+    lidoEm: LIDO_10_10
   },
   'pe-lei-16241': {
     ato: 'Lei estadual de Pernambuco nº 16.241/2017, art. 49: 6 de março, Data Magna e feriado civil (consolida a Lei 16.059/2017, revogada)',
@@ -261,9 +267,27 @@ export const FONTES_CALENDARIO = {
     lidoEm: LIDO_10_10
   },
   'tjgo-feriados-2026': {
-    ato: 'Calendário oficial "Feriados 2026" do TJGO (PDF de 13/01/2026), com base no art. 123 do Regimento Interno (Res. 170/2021) e no art. 91 do COJEG (Lei 21.268/2022); inclui os pontos facultativos do Decreto Judiciário 1.738/2026 (20/04)',
-    url: 'https://docs.tjgo.jus.br/institucional/feriados/DOC_feriados_2026_13012026.pdf',
-    lido: 'inteiro teor do PDF oficial (2 páginas): é o calendário publicado pelo tribunal, não o decreto; os Decretos Judiciários que o fundamentam (como o 1.738/2026) não foram lidos porque as páginas de notícia do TJGO respondem 403 ao meu acesso. O próprio PDF diz que as datas podem mudar e que podem ser decretados pontos facultativos ao longo do ano',
+    ato: 'Calendário oficial "Feriados 2026" do TJGO (versão de 08/06/2026), com base no art. 123 do Regimento Interno (Res. 170/2021) e no art. 91 do COJEG (Lei 21.268/2022); inclui os pontos facultativos de 20/03 (MotoGP), 20/04 e 05/06',
+    url: 'https://docs.tjgo.jus.br/institucional/feriados/DOC_feriados_2026_08062026.pdf',
+    lido: 'inteiro teor do PDF oficial (2 páginas, versão de 08/06/2026; a de 13/01/2026 não trazia o 20/03): é o calendário publicado pelo tribunal. O próprio PDF diz que as datas podem mudar e que podem ser decretados pontos facultativos ao longo do ano',
+    lidoEm: LIDO_10_10
+  },
+  'tjgo-dj-1738-2026': {
+    ato: 'Decreto Judiciário nº 1738/2026 do TJGO (16/04/2026): "o ponto será facultativo para o Poder Judiciário do Estado de Goiás" em 20/04/2026; o art. 2º preserva os plantões para questões urgentes',
+    url: 'https://www.tjgo.jus.br/files/2026/04%20-%20Abril/Decreto%20judiciario%201738_2026.pdf',
+    lido: 'inteiro teor (PDF de 3 páginas, PROAD 202604000735974). O texto decretado não diz que não há expediente nem trata de prazos; o efeito sobre o expediente vem do art. 91, II, da Lei estadual 21.268/2022 (fonte tjgo-lei-21268-art-91). A notícia do TJGO sobre o decreto diz que o expediente é retomado em 22/04',
+    lidoEm: LIDO_10_10
+  },
+  'tjgo-dj-1130-2026': {
+    ato: 'Decreto Judiciário nº 1130/2026 do TJGO (09/03/2026): ponto facultativo em 20/03/2026 (MotoGP em Goiânia), sem alterar os plantões',
+    url: 'https://www.tjgo.jus.br/index.php/agencia-de-noticias/noticias-ccs/240-carrossel-tj/35612-tjgo-decreta-ponto-facultativo-no-dia-20-de-marco-em-razao-do-motogp-em-goiania',
+    lido: 'só a notícia oficial do TJGO (10/03/2026), aberta pelo navegador do app; o PDF do decreto não foi localizado. A data também consta do calendário oficial (fonte tjgo-feriados-2026)',
+    lidoEm: LIDO_10_10
+  },
+  'tjgo-lei-21268-art-91': {
+    ato: 'Lei estadual GO 21.268/2022 (COJEG), art. 91, II: "Não haverá expediente nos órgãos do Poder Judiciário: … nos dias declarados como ponto facultativo pelo Chefe do Poder Judiciário"',
+    url: 'https://docs.tjgo.jus.br/institucional/departamentos/recursos_humanos/docs/EXPEDIENTE_FORENSE.pdf',
+    lido: 'o artigo como transcrito no documento "Expediente forense" do próprio TJGO (atualizado em 28/5/2025), que cita também o art. 123 do Regimento Interno (Res. 170/2021) com o mesmo teor; a lei e o Regimento em si não foram lidos',
     lidoEm: LIDO_10_10
   },
   'tjgo-dj-3079-2026': {
@@ -357,7 +381,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   // ---------- TJRJ, 2026: informativo oficial (ocorrências de todo o Estado até 12/10/2026) ----------
   ...[
     ['2026-02-05', 'Prorrogação dos prazos de processos eletrônicos (indisponibilidade do sistema), Ato Executivo 24/2026'],
-    ['2026-02-13', 'Ponto facultativo antes do Carnaval, Ato Executivo 20/2026'],
+    ['2026-02-13', 'Ponto facultativo antes do Carnaval: expediente e prazos suspensos, Ato Executivo 20/2026 (Lei 10.633/2024, art. 83, II)'],
     ['2026-02-16', 'Carnaval (Lei 10.633/2024, art. 83, III)'],
     ['2026-02-17', 'Carnaval (Lei 10.633/2024, art. 83, III)'],
     ['2026-02-18', 'Quarta-feira de Cinzas (Lei 10.633/2024, art. 83, III)'],
@@ -366,9 +390,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-04-02', 'Semana Santa (Lei 10.633/2024, art. 83, IV)'],
     ['2026-04-03', 'Sexta-feira da Paixão (Lei 10.633/2024, art. 83, IV)'],
     ['2026-04-23', 'Dia de São Jorge (Lei estadual 5.198/2008)'],
-    ['2026-04-24', 'Ponto facultativo, Ato Executivo 79/2026'],
+    ['2026-04-24', 'Ponto facultativo: expediente e prazos suspensos, Ato Executivo 79/2026 (Lei 10.633/2024, art. 83, II)'],
     ['2026-06-04', 'Corpus Christi (Lei estadual 11.002/2025)'],
-    ['2026-06-05', 'Ponto facultativo, Ato Executivo 91/2026'],
+    ['2026-06-05', 'Ponto facultativo: expediente e prazos suspensos, Ato Executivo 91/2026 (Lei 10.633/2024, art. 83, II)'],
     ['2026-06-24', 'Jogo da Seleção na Copa: prazos suspensos, expediente das 11h às 15h, Ato Executivo 96/2026'],
     ['2026-06-29', 'Jogo da Seleção na Copa: expediente e prazos suspensos, Ato Executivo 103/2026'],
     ['2026-07-29', 'Suspensão de prazos, Ato Executivo 116/2026'],
@@ -618,7 +642,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   { tribunais: ['TJES'], inicio: '2026-07-08', fim: '2026-07-08', nome: 'Indisponibilidade do PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 124/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-124-2026' },
   { tribunais: ['TJES'], inicio: '2026-07-31', fim: '2026-07-31', nome: 'Falhas no PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 130/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-130-2026' },
 
-  // ---------- TJGO, 2026: calendário oficial (PDF de 13/01/2026) e Decreto Judiciário 3079/2026 (Copa) ----------
+  // ---------- TJGO, 2026: calendário oficial (PDF de 08/06/2026), Decretos Judiciários 1130, 1738 e 3079/2026 e Lei 21.268/2022, art. 91 ----------
   // Fora: os feriados federais do calendário (21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), o recesso (20/12 a 06/01, CPC, art. 220), 24/05 (domingo e
   // municipal), 26/07 e 24/10 (domingo e sábado; 24/10 já é regra anual por lei estadual) e todos os feriados municipais das comarcas.
   ...[
@@ -627,9 +651,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-04-01', 'Semana Santa (quarta-feira)', 'Calendário oficial TJGO 2026 (Regimento Interno, art. 123)'],
     ['2026-04-02', 'Semana Santa (quinta-feira)', 'Calendário oficial TJGO 2026 (Regimento Interno, art. 123)'],
     ['2026-04-03', 'Sexta-feira Santa', 'Calendário oficial TJGO 2026 (Regimento Interno, art. 123)'],
-    ['2026-04-20', 'Ponto facultativo em todo o Poder Judiciário estadual (Decreto Judiciário 1.738/2026)', 'Calendário oficial TJGO 2026; Decreto Judiciário TJGO 1.738/2026 (não lido)'],
     ['2026-06-04', 'Corpus Christi', 'Calendário oficial TJGO 2026'],
-    ['2026-06-05', 'Ponto facultativo em todo o Poder Judiciário estadual', 'Calendário oficial TJGO 2026'],
     ['2026-10-28', 'Dia do Servidor Público (feriado estadual, Lei estadual 20.756/2020)', 'Calendário oficial TJGO 2026'],
     ['2026-12-08', 'Dia da Justiça', 'Calendário oficial TJGO 2026 (Regimento Interno, art. 123)']
   ].map(([data, nome, fundamento]) => ({
@@ -642,6 +664,11 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fundamento,
     fonte: 'tjgo-feriados-2026' as const
   })),
+  // Pontos facultativos: contam como dia sem expediente porque a lei estadual diz que não há expediente nos dias declarados ponto facultativo pelo Chefe do
+  // Poder Judiciário (exceção do revisor jurídico: o ato prevê expressamente a ausência de expediente). Os plantões para questões urgentes continuam.
+  { tribunais: ['TJGO'], inicio: '2026-03-20', fim: '2026-03-20', nome: 'Ponto facultativo em todo o Poder Judiciário estadual (MotoGP em Goiânia): sem expediente', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Decreto Judiciário TJGO 1.130/2026 (só a notícia oficial foi lida); Lei estadual GO 21.268/2022, art. 91, II (não haverá expediente nos dias declarados ponto facultativo pelo Chefe do Poder Judiciário)', fonte: 'tjgo-dj-1130-2026' },
+  { tribunais: ['TJGO'], inicio: '2026-04-20', fim: '2026-04-20', nome: 'Ponto facultativo em todo o Poder Judiciário estadual (véspera de Tiradentes): sem expediente', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Decreto Judiciário TJGO 1.738/2026, art. 1º; Lei estadual GO 21.268/2022, art. 91, II (não haverá expediente nos dias declarados ponto facultativo pelo Chefe do Poder Judiciário)', fonte: 'tjgo-dj-1738-2026' },
+  { tribunais: ['TJGO'], inicio: '2026-06-05', fim: '2026-06-05', nome: 'Ponto facultativo em todo o Poder Judiciário estadual (após Corpus Christi): sem expediente', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário oficial TJGO 2026; Lei estadual GO 21.268/2022, art. 91, II (não haverá expediente nos dias declarados ponto facultativo pelo Chefe do Poder Judiciário)', fonte: 'tjgo-feriados-2026' },
   { tribunais: ['TJGO'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: feriado até as 12h (o expediente começa ao meio-dia)', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário oficial TJGO 2026 ("18 de fevereiro, até 12h"); CPC, art. 224, § 1º', fonte: 'tjgo-feriados-2026' },
   { tribunais: ['TJGO'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 7h às 12h; prazos de termo inicial ou final prorrogados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Decreto Judiciário TJGO 3079/2026, arts. 1º e 2º', fonte: 'tjgo-dj-3079-2026' },
 
@@ -672,13 +699,12 @@ const EVENTOS_BASE: EventoCalendario[] = [
  * concedido. Nunca conta como dia sem expediente: vira alerta (dia pendente), que o modo conservador ignora e o modo completo mostra.
  * Exceção (esclarecida pelo revisor em 10/10/2026): quando o calendário ou o ato PREVÊ EXPRESSAMENTE que não haverá expediente no ponto facultativo,
  * o dia conta como sem expediente. É o caso de TJBA (art. 5º do Decreto 1050/2025, com prorrogação no art. 8º), TJCE (art. 1º da Portaria 2924/2025)
- * e TJDFT (arts. 4º e 5º da Portaria Conjunta 105/2025): esses ficam fora desta lista. Ficam como alerta TJES (só manda compensar as horas), TJGO
- * (decretos não lidos) e TJRJ (atos não lidos). Também conta o dia que o ato trata como feriado ou suspensão decretada (Copa com prazos prorrogados).
+ * e TJDFT (arts. 4º e 5º da Portaria Conjunta 105/2025) e TJGO (art. 91, II, da Lei estadual 21.268/2022: não há expediente nos dias declarados
+ * ponto facultativo pelo Chefe do Poder Judiciário): esses ficam fora desta lista. Fica como alerta só o TJES (o ato só manda compensar as horas). TJRJ também conta (art. 83, II,
+ * da Lei estadual 10.633/2024: não há expediente nos dias declarados ponto facultativo nas repartições estaduais; Atos Executivos 20, 79 e 91/2026). Também conta o dia que o ato trata como feriado ou suspensão decretada (Copa com prazos prorrogados).
  */
 const PONTOS_FACULTATIVOS: Record<string, string[]> = {
-  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
-  TJGO: ['2026-04-20', '2026-06-05'],
-  TJRJ: ['2026-02-13', '2026-04-24', '2026-06-05']
+  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -706,6 +732,10 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
   // Feriados civis por lei estadual (Lei 9.093/1995, art. 1º, II: data magna do Estado fixada em lei estadual); CPC, art. 216: feriados declarados em lei
   { tribunais: ['TJPE'], nome: 'Data Magna de Pernambuco (6 de março)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual PE 16.241/2017, art. 49', fonte: 'pe-lei-16241', quando: { tipo: 'intervalo', de: [3, 6], ate: [3, 6] } },
   { tribunais: ['TJRS'], nome: 'Data magna do Rio Grande do Sul (20 de setembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Constituição do Estado do RS, art. 6º, parágrafo único; Decreto estadual 36.180/1995', fonte: 'rs-decreto-36180', quando: { tipo: 'intervalo', de: [9, 20], ate: [9, 20] } },
+  // Lei estadual RJ 10.633/2024, art. 83 (permanente): Carnaval de segunda a quarta-feira, Semana Santa só quinta e sexta-feira e Dia da Justiça
+  { tribunais: ['TJRJ'], nome: 'Carnaval (segunda a quarta-feira)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, III', fonte: 'tjrj-lei-10633', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
+  { tribunais: ['TJRJ'], nome: 'Semana Santa (quinta e sexta-feira)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, IV', fonte: 'tjrj-lei-10633', quando: { tipo: 'pascoa', deslocamentos: [-3, -2] } },
+  { tribunais: ['TJRJ'], nome: 'Dia da Justiça (8 de dezembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, I', fonte: 'tjrj-lei-10633', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
   { tribunais: ['TJGO'], nome: 'Pedra fundamental de Goiânia (24 de outubro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual GO 19.850/2017, art. 1º (feriado estadual)', fonte: 'go-lei-19850', quando: { tipo: 'intervalo', de: [10, 24], ate: [10, 24] } },
 
   { tribunais: ['TJES'], nome: 'Nossa Senhora da Penha (segunda-feira após a oitava da Páscoa)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual ES 11.010/2019 (texto não lido)', fonte: 'tjes-aviso-penha-2023', quando: { tipo: 'pascoa', deslocamentos: [8] } },
@@ -736,5 +766,5 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] },
   TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] },
   TJES: { anos: [2026], fontes: ['tjes-an-176-2026', 'tjes-an-124-2026', 'tjes-an-130-2026'] },
-  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-3079-2026'] }
+  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-1130-2026', 'tjgo-dj-1738-2026', 'tjgo-lei-21268-art-91', 'tjgo-dj-3079-2026'] }
 };
