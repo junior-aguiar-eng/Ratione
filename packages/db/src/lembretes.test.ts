@@ -79,6 +79,20 @@ describe('RLS dos lembretes de prazo por e-mail (F2-10)', () => {
     assert.strictEqual(visto.rows[0].enviado, true);
   });
 
+  it('a chave de serviço só lê e só atualiza as marcas de envio: não altera título nem data, não cria, não apaga', async () => {
+    const tenta = (sql: string, params: unknown[] = []) =>
+      db.transaction(async tx => {
+        await tx.exec('set local role service_role');
+        return tx.query(sql, params);
+      });
+    assert.ok((await tenta('select id from public.lembretes_prazo')).rows.length >= 1);
+    await tenta('update public.lembretes_prazo set enviado_1_dia_em = now() where id = $1', [lembreteDaAna]);
+    await assert.rejects(tenta("update public.lembretes_prazo set titulo = 'x' where id = $1", [lembreteDaAna]), /permission denied/);
+    await assert.rejects(tenta("update public.lembretes_prazo set vencimento = '2030-01-01' where id = $1", [lembreteDaAna]), /permission denied/);
+    await assert.rejects(tenta(INSERIR, [ana, 'x']), /permission denied/);
+    await assert.rejects(tenta('delete from public.lembretes_prazo where id = $1', [lembreteDaAna]), /permission denied/);
+  });
+
   it('há um teto de 200 lembretes ativos por conta', async () => {
     const carlos = await criarUsuario(db, 'carlos@exemplo.com');
     await db.query(

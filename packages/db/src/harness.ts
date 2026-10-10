@@ -19,8 +19,10 @@ const BASE_SUPABASE = `
   grant usage on schema auth to anon, authenticated, service_role;
   grant execute on function auth.uid() to anon, authenticated, service_role;
   -- Como no Supabase real, tabelas novas nascem com TODOS os privilégios para anon e authenticated (inclusive TRUNCATE);
-  -- as migrações é que precisam reduzir isso ao mínimo. A service_role ignora a RLS (bypassrls).
-  alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+  -- as migrações é que precisam reduzir isso ao mínimo. A service_role ignora a RLS (bypassrls), mas em produção (conferido em
+  -- 11/10/2026) ela nasce SÓ com REFERENCES, TRIGGER e TRUNCATE: sem SELECT nem UPDATE. Quem a usa precisa de GRANT explícito na migração.
+  alter default privileges in schema public grant all on tables to anon, authenticated;
+  alter default privileges in schema public grant references, trigger, truncate on tables to service_role;
 `;
 
 export const PASTA_MIGRACOES = join(__dirname, '../../../supabase/migrations');

@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     simulacao: !chaveEmail,
     listarProximos: async (de, ate) => {
       const { data, error } = await sb.from('lembretes_prazo').select('*').gte('vencimento', de).lte('vencimento', ate);
-      if (error) throw new Error('falha ao listar lembretes');
+      if (error) throw new Error(`falha ao listar lembretes (${error.code ?? 'sem código'}: ${error.message})`);
       return (data ?? []) as Lembrete[];
     },
     emailDe: async usuarioId => {
