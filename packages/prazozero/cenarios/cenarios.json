@@ -838,7 +838,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "prazoEmDobro": true
     },
     "esperado": {
@@ -1218,7 +1218,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC"
+      "tribunalId": "TJGO"
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
@@ -1250,7 +1250,7 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1295,7 +1295,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC"
+      "tribunalId": "TJGO"
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
@@ -1327,7 +1327,7 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1368,7 +1368,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSC"
+      "tribunalId": "TJGO"
     },
     "esperado": {
       "dataPublicacao": "2026-02-10",
@@ -1400,7 +1400,7 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1490,7 +1490,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC"
+      "tribunalId": "TJGO"
     },
     "esperado": {
       "dataPublicacao": "2026-06-02",
@@ -1522,7 +1522,7 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1559,7 +1559,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJSC"
+      "tribunalId": "TJGO"
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
@@ -1591,7 +1591,7 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1766,7 +1766,7 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "prazoEmDobro": true,
       "modo": "completo"
     },
@@ -1804,7 +1804,7 @@
       "dataEvento": "2026-03-30",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJSC",
+      "tribunalId": "TJGO",
       "regime": "cpp_dias_corridos",
       "modo": "completo"
     },
@@ -5030,6 +5030,309 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJSC 2026: 16 e 17/02 (Carnaval) não contam; a Quarta-feira de Cinzas conta no meio do prazo",
+    "fundamento": "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-cinzas-vencimento",
+    "categoria": "verificado",
+    "descricao": "TJSC 2026: prazo que termina na Quarta-feira de Cinzas (expediente a partir das 12h) é protraído para o dia seguinte",
+    "fundamento": "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Resolução GP 13/2022 (citada na notícia oficial de 13/02/2026)",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJSC 2026: 04/06 (Corpus Christi) não conta; 05/06 conta (não há emenda)",
+    "fundamento": "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-copa-24-junho",
+    "categoria": "verificado",
+    "descricao": "TJSC: prazo que termina em 24/06/2026 (jogo às 19h, expediente das 10h às 17h) é postergado para o primeiro dia útil",
+    "fundamento": "Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º (lida em 10/10/2026); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-25",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-dia-funcionario-publico",
+    "categoria": "verificado",
+    "descricao": "TJSC 2026: 28/10 (Dia do Funcionário Público, sem transferência para 30/10) não conta",
+    "fundamento": "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-26",
+      "dataTermoInicial": "2026-10-27",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJSC 2026: 08/12 (Dia da Justiça, efeitos forenses) não conta",
+    "fundamento": "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJSC: Resolução GP 1/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjsc-2026-copa-29-junho-conservador",
+    "categoria": "pendente",
+    "descricao": "TJSC: 29/06/2026 (jogo às 14h, sem aviso do tribunal) ignorado no modo conservador",
+    "fundamento": "Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo de avisos do TJDFT e do TJBA; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-29",
+      "dataVencimentoFinal": "2026-06-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-07-01"
+  },
+  {
+    "id": "tjsc-2026-copa-29-junho-completo",
+    "categoria": "pendente",
+    "descricao": "TJSC: 29/06/2026 considerado no modo completo (começo do prazo postergado)",
+    "fundamento": "Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo de avisos do TJDFT e do TJBA; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSC",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "TJSC: jogo da Seleção às 14h (Res. GP 31/2026; pendente: sem aviso do tribunal): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
   },
   {
     "id": "tjpr-19-dezembro-nao-feriado",
