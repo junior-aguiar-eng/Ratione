@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { excluirConta } from '../../../../lib/excluir-conta';
+import { registrar } from '../../../../lib/log';
 
 /**
  * Excluir a própria conta. Exige a chave secreta do Supabase (`SUPABASE_SERVICE_ROLE_KEY`), que existe
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
     apagarUsuario: async id => {
       const { error } = await createClient(url, secreta, semSessao).auth.admin.deleteUser(id);
       // Só no log do servidor: "Invalid API key" aqui indica SUPABASE_SERVICE_ROLE_KEY errada ou revogada
-      if (error) console.error('[excluir-conta] deleteUser falhou:', error.status, error.message);
+      if (error) registrar('ERROR', 'Exclusão de conta: deleteUser falhou', { status: error.status, erro_mensagem: error.message });
       return !error;
     }
   });
