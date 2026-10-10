@@ -108,6 +108,22 @@ gcloud compute forwarding-rules create ratione-http --global --load-balancing-sc
 
 O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar pelo balanceador, o serviço usa `--ingress internal-and-cloud-load-balancing` (no `deploy.yml`); depois disso o `*.run.app` deixa de responder.
 
+## Monitoramento
+
+Projeto `ratione-nexojuris`. O servidor escreve logs em JSON (`apps/web/src/lib/log.ts`); todo erro não tratado vira `severity=ERROR` (`apps/web/src/instrumentation.ts`).
+
+```bash
+gcloud services enable monitoring.googleapis.com
+gcloud beta monitoring channels create --display-name="Ratione - responsavel" --type=email --channel-labels=email_address=ENDERECO
+gcloud monitoring uptime create ratione-saude --resource-type=uptime-url --resource-labels=host=ratione.nexojuris.ia.br,project_id=ratione-nexojuris --protocol=https --path=/api/saude --period=5 --timeout=10 --regions=usa-virginia,europe,south-america
+gcloud alpha monitoring policies create --policy-from-file=ARQUIVO.json   # um para o uptime, outro para o log ERROR
+```
+
+- **Uptime:** `GET /api/saude` a cada 5 minutos; o alerta dispara se falhar em mais de uma região.
+- **Erro no servidor:** alerta por log com o filtro `resource.type="cloud_run_revision" AND resource.labels.service_name="ratione-web" AND severity>=ERROR`, no máximo um e-mail por hora.
+- Para investigar: *Logging → Logs Explorer* com o mesmo filtro. O campo `digest` é o código que a tela de erro mostra ao usuário.
+- Mudar o destinatário: *Monitoring → Alerting → Edit notification channels*.
+
 ## Depois
 
 - E-mail: já sai pelo Resend (`nao-responda@nexojuris.ia.br`); ver `supabase/LEIA-ME.md`.
