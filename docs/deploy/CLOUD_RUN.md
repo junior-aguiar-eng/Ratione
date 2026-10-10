@@ -149,7 +149,8 @@ gcloud alpha monitoring policies create --policy-from-file=ARQUIVO.json   # um p
 
 - **Uptime:** `GET /api/saude` a cada 5 minutos; o alerta dispara se falhar em mais de uma região.
   - **Armadilha no Git Bash (Windows):** ele converte `--path=/api/saude` em `/C:/Program Files/Git/api/saude`. O uptime check passa a testar um caminho inexistente e o alerta "fora do ar" dispara com o site no ar (aconteceu em 10/10/2026). Rode esse comando no PowerShell, ou confira depois com `gcloud monitoring uptime list-configs --format="value(httpCheck.path)"`.
-- **Erro no servidor:** alerta por log com o filtro `resource.type="cloud_run_revision" AND resource.labels.service_name="ratione-web" AND severity>=ERROR`, no máximo um e-mail por hora.
+- **Erro no servidor:** alerta por log com o filtro `resource.type="cloud_run_revision" AND resource.labels.service_name="ratione-web" AND severity>=ERROR`, mais uma exclusão das requisições feitas pelo IP direto do balanceador (`NOT httpRequest.requestUrl=~"^https://34[.]120[.]34[.]54"`, ruído de varredura), no máximo um e-mail por hora. Com um incidente já aberto, um novo `ERROR` gera outro e-mail só depois dessa hora e o e-mail mostra o início do incidente antigo.
+  - **Testar o alerta** (sem provocar erro no site): `gcloud logging write ratione-teste-alerta '{"message":"TESTE do alerta: pode ignorar"}' --payload-type=json --severity=ERROR --monitored-resource-type=cloud_run_revision --monitored-resource-labels=service_name=ratione-web,revision_name=REVISAO,location=southamerica-east1,configuration_name=ratione-web` (REVISAO: `gcloud run services describe ratione-web --region=southamerica-east1 --format="value(status.latestReadyRevisionName)"`). O e-mail chega em poucos minutos.
 - Para investigar: *Logging → Logs Explorer* com o mesmo filtro. O campo `digest` é o código que a tela de erro mostra ao usuário.
 - Mudar o destinatário: *Monitoring → Alerting → Edit notification channels*.
 
