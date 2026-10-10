@@ -64,7 +64,7 @@ jobs:
             --region "$REGIAO" \
             --image "${{ steps.imagem.outputs.nome }}" \
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
-            --set-secrets SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest \
+            --set-secrets SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest \
             --allow-unauthenticated \
             --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \
