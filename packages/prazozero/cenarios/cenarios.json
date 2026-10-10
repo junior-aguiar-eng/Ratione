@@ -5952,6 +5952,317 @@
     }
   },
   {
+    "id": "tjes-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJES 2026: 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02",
+    "fundamento": "Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-nossa-senhora-da-penha",
+    "categoria": "verificado",
+    "descricao": "TJES 2026: 13/04 (Nossa Senhora da Penha, Lei estadual 11.010/2019) não conta",
+    "fundamento": "Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-09",
+      "dataTermoInicial": "2026-04-10",
+      "dataVencimentoFinal": "2026-04-15",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-13",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJES 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJES 2026: o Dia do Servidor foi transferido para 30/10; 28/10 conta, 30/10 e Finados (02/11) não",
+    "fundamento": "Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224; considerandos do Ato 176/2026",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJES 2026: 07/12 (ponto facultativo) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJES: Ato Normativo 176/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-pje-8-julho",
+    "categoria": "verificado",
+    "descricao": "TJES: prazo que vence em 08/07/2026 (indisponibilidade do PJe) é prorrogado para o primeiro dia útil",
+    "fundamento": "Ato Normativo TJES 124/2026, art. 1º (lido em 10/10/2026); CNJ, Res. 185/2014, art. 11",
+    "entrada": {
+      "dataEvento": "2026-07-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-01",
+      "dataTermoInicial": "2026-07-02",
+      "dataVencimentoFinal": "2026-07-09",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-08",
+            "motivo": "TJES: prazos prorrogados por falha do PJe (Atos 124 e 130/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjes-2026-copa-24-junho-conservador",
+    "categoria": "pendente",
+    "descricao": "TJES: 24/06/2026 (horário reduzido no jogo; o tribunal diz que não suspende prazos) ignorado no modo conservador",
+    "fundamento": "Ato Normativo TJES 103/2026, art. 2º; efeito sobre prazos não confirmado; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJES"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-25"
+  },
+  {
+    "id": "tjes-2026-copa-24-junho-completo",
+    "categoria": "pendente",
+    "descricao": "TJES: 24/06/2026 considerado no modo completo (vencimento postergado)",
+    "fundamento": "Ato Normativo TJES 103/2026, art. 2º; efeito sobre prazos não confirmado; CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJES",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-25",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJES: horário reduzido no jogo da Seleção (Atos 103 e 113/2026; pendente: o tribunal diz que não suspende prazos): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
     "id": "tjpr-19-dezembro-nao-feriado",
     "categoria": "verificado",
     "descricao": "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil",
