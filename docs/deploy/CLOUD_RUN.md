@@ -120,6 +120,7 @@ gcloud alpha monitoring policies create --policy-from-file=ARQUIVO.json   # um p
 ```
 
 - **Uptime:** `GET /api/saude` a cada 5 minutos; o alerta dispara se falhar em mais de uma região.
+  - **Armadilha no Git Bash (Windows):** ele converte `--path=/api/saude` em `/C:/Program Files/Git/api/saude`. O uptime check passa a testar um caminho inexistente e o alerta "fora do ar" dispara com o site no ar (aconteceu em 10/10/2026). Rode esse comando no PowerShell, ou confira depois com `gcloud monitoring uptime list-configs --format="value(httpCheck.path)"`.
 - **Erro no servidor:** alerta por log com o filtro `resource.type="cloud_run_revision" AND resource.labels.service_name="ratione-web" AND severity>=ERROR`, no máximo um e-mail por hora.
 - Para investigar: *Logging → Logs Explorer* com o mesmo filtro. O campo `digest` é o código que a tela de erro mostra ao usuário.
 - Mudar o destinatário: *Monitoring → Alerting → Edit notification channels*.
