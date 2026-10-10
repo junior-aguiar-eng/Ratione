@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **172** · validados: **164** · pendentes: **8**
+> Cenários: **172** · validados: **172** · pendentes: **0**
 
 ## Como revisar
 
@@ -1567,7 +1567,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 12/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 13/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 16/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 17/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 18/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
 - **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 125. `tjba-2026-sao-joao`
 
@@ -1579,7 +1579,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 22/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 23/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 24/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 29/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
 - **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 126. `tjba-2026-independencia-da-bahia`
 
@@ -1591,7 +1591,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 03/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
 - **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 127. `tjba-2026-copa-29-junho`
 
@@ -1639,7 +1639,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 131. `tjdf-2026-copa-24-junho`
 
@@ -1819,7 +1819,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 17/02/2026 TJCE: Portaria 2924/2025 e 1169/2026
 - **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 146. `tjce-2026-cinzas-vencimento`
 
@@ -1831,7 +1831,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 17/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 18/02/2026 TJCE: expediente reduzido (Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 147. `tjce-2026-sao-jose-data-magna`
 
@@ -1843,7 +1843,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/03/2026 TJCE: Portaria 2924/2025 e 1169/2026; 25/03/2026 TJCE: Portaria 2924/2025 e 1169/2026
 - **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 148. `tjce-2026-corpus-christi`
 
@@ -1855,7 +1855,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJCE: Portaria 2924/2025 e 1169/2026; 05/06/2026 TJCE: Portaria 2924/2025 e 1169/2026
 - **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Portaria TJCE 1169/2026, art. 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 149. `tjce-2026-copa-24-junho`
 
