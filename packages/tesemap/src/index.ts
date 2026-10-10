@@ -137,3 +137,5 @@ export const GRAFOS_PRECEDENTES_CATALOGADOS: Record<string, GrafoTopologicoTeses
     ]
   }
 };
+
+export * from './nucleo';

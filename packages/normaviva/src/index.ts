@@ -127,3 +127,5 @@ export class MotorNormaViva {
       .sort((a, b) => a.dataInicioVigencia.localeCompare(b.dataInicioVigencia));
   }
 }
+
+export * from './nucleo';

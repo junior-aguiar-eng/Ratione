@@ -1,4 +1,7 @@
 import { z } from 'zod';
+import { ProcedenciaSchema } from './procedencia';
+
+export * from './procedencia';
 
 /**
  * Esferas e instâncias do Poder Judiciário Brasileiro
@@ -88,7 +91,8 @@ export const DispositivoLegalSchema = z.object({
   texto: z.string(),
   vigenteEm: z.string(), // ISO Date
   revogado: z.boolean().default(false),
-  alteradoPor: z.string().optional()
+  alteradoPor: z.string().optional(),
+  procedencia: ProcedenciaSchema
 });
 export type DispositivoLegal = z.infer<typeof DispositivoLegalSchema>;
 
@@ -115,6 +119,7 @@ export const PrecedenteSchema = z.object({
   enunciadoTese: z.string(),
   dispositivosRelacionados: z.array(z.string()).default([]),
   dataPublicacaoAcordao: z.string().optional(),
-  linkOficial: z.string().optional()
+  linkOficial: z.string().optional(),
+  procedencia: ProcedenciaSchema
 });
 export type Precedente = z.infer<typeof PrecedenteSchema>;
