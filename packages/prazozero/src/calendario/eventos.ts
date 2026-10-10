@@ -248,12 +248,6 @@ export const FONTES_CALENDARIO = {
     lido: 'inteiro teor (versão vigente); o texto do Ato 319/2025, que aparece tachado na página, não foi usado. Anexo Único: feriados e pontos facultativos de 2026 (Dia do Servidor transferido de 28 para 30/10 por decisão no SEI 7011080-32.2026.8.08.0000). Art. 1º: o expediente das unidades administrativas é suspenso em 24 e 31/12 (só administrativas, não entram). Art. 3º: 08/09 só em Vitória (municipal, não entra). Art. 4º: os pontos facultativos são compensados com uma hora a mais. As Leis Complementares 234/2002 e 46/1994 e a Lei estadual 11.010/2019 citadas não foram lidas',
     lidoEm: LIDO_10_10
   },
-  'tjes-an-103-113-2026': {
-    ato: 'Atos Normativos nº 103/2026 (24/06/2026, expediente das 11h às 17h) e nº 113/2026 (29/06/2026, expediente das 7h às 12h) do TJES: jogos da Seleção na Copa do Mundo',
-    url: 'https://www.tjes.jus.br/ato-normativo-no-103-2026-disp-12-06-2026/',
-    lido: 'inteiro teor dos dois atos (o 113 em https://www.tjes.jus.br/ato-normativo-no-113-2026-disp-26-06-2026/). Os atos não tratam de prazos e a notícia oficial de 15/06/2026 diz que "não haverá suspensão dos prazos processuais"; o efeito do horário reduzido sobre o começo e o vencimento (CPC, art. 224, § 1º) não está confirmado pelo tribunal',
-    lidoEm: LIDO_10_10
-  },
   'tjes-an-124-2026': {
     ato: 'Ato Normativo nº 124/2026 do TJES (15/07/2026): prorroga para o primeiro dia útil os prazos que venceram em 08/07/2026 (indisponibilidade do PJe)',
     url: 'https://www.tjes.jus.br/ato-normativo-no-124-2026-disp-16-07-2026/',
@@ -277,12 +271,6 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjgo.jus.br/files/2026/06%20-%20Junho/Decreto%20Judiciario_29%20de%20junho.pdf',
     lido: 'inteiro teor (PDF de 2 páginas, PROAD 202606000757428). Art. 2º: os prazos de termo inicial ou final em 29/06 são prorrogados para o primeiro dia útil (CPC, art. 224, § 1º)',
     lidoEm: LIDO_10_10
-  },
-  'tjgo-dj-2876-2026': {
-    ato: 'Decreto Judiciário nº 2876/2026 do TJGO: expediente das 8h às 15h em 19 e 24/06/2026 (jogos da Seleção na Copa do Mundo)',
-    url: 'https://www.tjgo.jus.br/index.php/agencia-de-noticias/noticias-ccs/17-tribunal/36566-expediente-no-poder-judiciario-estadual-sera-das-8-horas-as-15-horas-nos-19-e-24-de-junho-devido-aos-jogos-do-brasil',
-    lido: 'NÃO lido: o decreto não apareceu como arquivo e a notícia do TJGO que o cita responde 403 ao meu acesso; o resumo da busca diz que os prazos de início ou fim nesses dias são prorrogados (CPC, art. 224, § 1º). Por isso os dois dias ficam pendentes',
-    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -297,7 +285,7 @@ const PF_2026: Array<{ data: string; nome: string; parcial?: boolean }> = [
   { data: '2026-12-07', nome: 'Ponto facultativo' }
 ];
 
-export const EVENTOS_CALENDARIO: EventoCalendario[] = [
+const EVENTOS_BASE: EventoCalendario[] = [
   // ---------- STF e STJ, 2026 ----------
   ...PF_2026.map(pf => ({
     tribunais: ['STJ'],
@@ -545,7 +533,6 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   })),
   { tribunais: ['TJSC'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente começa às 12h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 13/2022 e Resolução TJ 7/2006, art. 1º (citadas na notícia oficial de 13/02/2026)', fonte: 'tjsc-noticia-carnaval-2026' },
   { tribunais: ['TJSC'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h): expediente das 10h às 17h; começo e vencimento dos prazos postergados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º', fonte: 'tjsc-res-gp-31-2026' },
-  { tribunais: ['TJSC'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h, segundo avisos de outros tribunais): expediente das 8h às 12h pela Res. GP 31/2026; o TJSC não publicou aviso para este dia que eu tenha encontrado', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo extraído de avisos do TJDFT e do TJBA', fonte: 'tjsc-res-gp-31-2026' },
 
   // ---------- TJPE, 2026: Ato Conjunto 43/2025 (art. 1º e parágrafo único) e Atos 966 e 977/2026 (PJe) ----------
   // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 06/03 (já é regra anual conferida por lei estadual),
@@ -600,7 +587,7 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJCE'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h): expediente único das 8h às 12h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 1440/2026, art. 1º e considerandos; CPC, art. 224, § 1º', fonte: 'tjce-portaria-1440-2026' },
   { tribunais: ['TJCE'], inicio: '2026-04-13', fim: '2026-04-13', nome: 'Aniversário de Fortaleza: ponto facultativo só nos órgãos da Comarca de Fortaleza (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria TJCE 727/2026, art. 1º (Lei municipal 7.335/1994)', fonte: 'tjce-portaria-727-2026' },
 
-  // ---------- TJES, 2026: Ato Normativo 176/2026 (Anexo Único) e Atos 103, 113, 124 e 130/2026 ----------
+  // ---------- TJES, 2026: Ato Normativo 176/2026 (Anexo Único) e Atos 124 e 130/2026 ----------
   // Fora: os feriados federais do anexo (21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11), o recesso (01 a 06/01 e 20 a 31/12, CPC, art. 220),
   // 24 e 31/12 (só unidades administrativas), 08/09 (Vitória) e os atos de comarcas e unidades específicas (por exemplo, 043, 112 e 177/2026).
   ...[
@@ -630,10 +617,8 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   })),
   { tribunais: ['TJES'], inicio: '2026-07-08', fim: '2026-07-08', nome: 'Indisponibilidade do PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 124/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-124-2026' },
   { tribunais: ['TJES'], inicio: '2026-07-31', fim: '2026-07-31', nome: 'Falhas no PJe: prazos que venceram no dia prorrogados para o primeiro dia útil', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Ato Normativo TJES 130/2026, art. 1º (CNJ, Res. 185/2014, art. 11)', fonte: 'tjes-an-130-2026' },
-  { tribunais: ['TJES'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 11h às 17h (o tribunal diz que não há suspensão de prazos)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Ato Normativo TJES 103/2026, art. 2º; CPC, art. 224, § 1º (efeito sobre prazos não confirmado)', fonte: 'tjes-an-103-113-2026' },
-  { tribunais: ['TJES'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 7h às 12h (efeito sobre prazos não confirmado)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Ato Normativo TJES 113/2026, art. 2º; CPC, art. 224, § 1º (efeito sobre prazos não confirmado)', fonte: 'tjes-an-103-113-2026' },
 
-  // ---------- TJGO, 2026: calendário oficial (PDF de 13/01/2026), Decreto Judiciário 3079/2026 (Copa) e, pendente, Decreto 2876/2026 ----------
+  // ---------- TJGO, 2026: calendário oficial (PDF de 13/01/2026) e Decreto Judiciário 3079/2026 (Copa) ----------
   // Fora: os feriados federais do calendário (21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), o recesso (20/12 a 06/01, CPC, art. 220), 24/05 (domingo e
   // municipal), 26/07 e 24/10 (domingo e sábado; 24/10 já é regra anual por lei estadual) e todos os feriados municipais das comarcas.
   ...[
@@ -659,8 +644,6 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   })),
   { tribunais: ['TJGO'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: feriado até as 12h (o expediente começa ao meio-dia)', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário oficial TJGO 2026 ("18 de fevereiro, até 12h"); CPC, art. 224, § 1º', fonte: 'tjgo-feriados-2026' },
   { tribunais: ['TJGO'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 7h às 12h; prazos de termo inicial ou final prorrogados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Decreto Judiciário TJGO 3079/2026, arts. 1º e 2º', fonte: 'tjgo-dj-3079-2026' },
-  { tribunais: ['TJGO'], inicio: '2026-06-19', fim: '2026-06-19', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 8h às 15h (Decreto 2876/2026, não lido)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Decreto Judiciário TJGO 2876/2026 (citado em notícia do tribunal; texto não lido); CPC, art. 224, § 1º', fonte: 'tjgo-dj-2876-2026' },
-  { tribunais: ['TJGO'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo: expediente das 8h às 15h (Decreto 2876/2026, não lido)', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Decreto Judiciário TJGO 2876/2026 (citado em notícia do tribunal; texto não lido); CPC, art. 224, § 1º', fonte: 'tjgo-dj-2876-2026' },
 
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
@@ -683,6 +666,37 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   })),
   { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' }
 ];
+
+/**
+ * Pontos facultativos (decisão do revisor jurídico em 10/10/2026): o ponto facultativo é facultativo ao tribunal e não há como prever se será
+ * concedido. Nunca conta como dia sem expediente: vira alerta (dia pendente), que o modo conservador ignora e o modo completo mostra.
+ * Exceção: o dia que o próprio ato trata como feriado ou suspensão decretada (por exemplo, jogos da Copa com prazos expressamente prorrogados).
+ * TJBA: os dias do art. 6º do Decreto 1050/2025 (os que exigem compensação de horas); os demais da lista são feriados.
+ */
+const PONTOS_FACULTATIVOS: Record<string, string[]> = {
+  TJBA: ['2026-02-12', '2026-02-13', '2026-04-02', '2026-04-20', '2026-06-05', '2026-06-22', '2026-06-23', '2026-07-03', '2026-08-10', '2026-12-07'],
+  TJDF: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
+  TJCE: ['2026-02-16', '2026-02-17', '2026-02-18', '2026-03-19', '2026-04-02', '2026-04-03', '2026-06-04', '2026-06-05'],
+  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
+  TJGO: ['2026-04-20', '2026-06-05'],
+  TJRJ: ['2026-02-13', '2026-04-24', '2026-06-05']
+};
+
+function comoAlerta(e: EventoCalendario): EventoCalendario {
+  const tribunal = e.tribunais.length === 1 ? e.tribunais[0] : '';
+  if (e.verificacao === 'ato_do_tribunal' && e.inicio === e.fim && PONTOS_FACULTATIVOS[tribunal]?.includes(e.inicio)) {
+    return {
+      ...e,
+      verificacao: 'pendente',
+      nome: `Ponto facultativo (alerta): ${e.nome}`,
+      fundamento: `${e.fundamento}; ponto facultativo: o tribunal pode conceder ou não, por isso só alerta`
+    };
+  }
+  return e;
+}
+
+export const EVENTOS_CALENDARIO: EventoCalendario[] = EVENTOS_BASE.map(comoAlerta);
+
 
 /** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente e as do TJAL da Lei estadual 6.564/2005 (consolidada); só o recesso de 23/06 a 01/07 do TJAL fica pendente. */
 export const REGRAS_ANUAIS: RegraAnual[] = [
@@ -722,6 +736,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] },
   TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] },
   TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] },
-  TJES: { anos: [2026], fontes: ['tjes-an-176-2026', 'tjes-an-103-113-2026', 'tjes-an-124-2026', 'tjes-an-130-2026'] },
-  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-3079-2026', 'tjgo-dj-2876-2026'] }
+  TJES: { anos: [2026], fontes: ['tjes-an-176-2026', 'tjes-an-124-2026', 'tjes-an-130-2026'] },
+  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-3079-2026'] }
 };
