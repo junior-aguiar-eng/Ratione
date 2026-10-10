@@ -42,6 +42,21 @@ describe('Relatório "o que pode alterar este prazo" (F2-12)', () => {
     assert.ok(i.dataSeAplicar! > res.dataVencimentoFinal);
   });
 
+  it('STJ: o ponto facultativo é contado como dia sem expediente, com alerta ao usuário', () => {
+    // 20/04/2026 é ponto facultativo nos atos de STF e STJ: o cálculo o pula e o relatório avisa
+    const p: ParametrosCalculoPrazo = { dataEvento: '2026-04-16', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'STJ' };
+    const res = motor.calcularPrazo(p);
+    assert.ok(res.memoriaCalculo.some(i => i.data === '2026-04-20' && !i.diaUtil), '20/04 não deve contar');
+    const i = item(relatorioAlteracoes(p, res), 'ponto-facultativo')!;
+    assert.ok(i, 'deve haver o alerta de ponto facultativo');
+    assert.match(i.descricao, /20\/04/);
+    assert.strictEqual(i.dataSeAplicar, undefined);
+  });
+
+  it('sem ponto facultativo no caminho do prazo, não há alerta de ponto facultativo', () => {
+    assert.strictEqual(item(rel(base), 'ponto-facultativo'), undefined);
+  });
+
   it('sem dia pendente, não há item de dias pendentes', () => {
     assert.strictEqual(item(rel(base), 'dias-pendentes'), undefined);
   });

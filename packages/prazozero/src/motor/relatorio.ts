@@ -9,6 +9,7 @@ import { MotorPrazoZero, ParametrosCalculoPrazo, ResultadoCalculoPrazo } from '.
  */
 export type CategoriaAlteracao =
   | 'dia_pendente'
+  | 'ponto_facultativo'
   | 'calendario_nao_conferido'
   | 'parte'
   | 'excecao_criminal'
@@ -58,6 +59,23 @@ export function relatorioAlteracoes(p: ParametrosCalculoPrazo, r: ResultadoCalcu
         '. Se o tribunal confirmar algum deles como dia sem expediente, o vencimento se move.',
       fundamentoLegal: 'CPC, art. 219 e art. 224, § 1º; ato do tribunal',
       dataSeAplicar: r.alternativa.dataVencimentoFinal
+    });
+  }
+
+  // 1b. Ponto facultativo contado como dia sem expediente (STF e STJ: os atos alteram os prazos nesses dias).
+  // Decisão do revisor (10/10/2026): considerar, mas avisar. Nos demais tribunais o ponto facultativo é dia pendente (item 1).
+  const pontosFacultativos = r.memoriaCalculo.filter(
+    i => !i.diaUtil || i.descricao.includes('expediente parcial'))
+    .filter(i => i.verificacao !== 'pendente' && /facultativ/i.test(i.descricao));
+  if (pontosFacultativos.length > 0) {
+    itens.push({
+      id: 'ponto-facultativo',
+      categoria: 'ponto_facultativo',
+      titulo: 'Ponto facultativo contado como dia sem expediente',
+      descricao:
+        pontosFacultativos.map(i => `${i.data.split('-').reverse().join('/')} (${i.descricao.replace(/ \(não computado\)$/, '')})`).join('; ') +
+        '. O ato do tribunal altera os prazos nesses dias, e o cálculo os considera. Ponto facultativo é facultativo ao tribunal: confirme no ato que ele foi mantido e que o prazo foi mesmo alterado.',
+      fundamentoLegal: 'Ato do tribunal; CPC, art. 219 e art. 224, § 1º'
     });
   }
 
