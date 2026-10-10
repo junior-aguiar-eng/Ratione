@@ -4,3 +4,4 @@ export * from './catalogo/prazos';
 export * from './motor/materiais';
 export * from './motor/relatorio';
 export * from './datas/civil';
+export * from './calendario/nucleo';
