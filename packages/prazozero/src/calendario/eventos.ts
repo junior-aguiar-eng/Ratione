@@ -175,6 +175,24 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjdft.jus.br/institucional/imprensa/noticias/imagens-e-arquivos-2026/portaria-conjunta-48-de-2026.pdf',
     lido: 'inteiro teor da 48/2026 (PDF de 3 páginas, SEI 0019969/2026); a 53/2026 só pelas notícias oficiais do TJDFT (jogo às 14h = ponto facultativo). Art. 2º: prazos que começam ou terminam nos dias de expediente diferenciado são prorrogados para o primeiro dia útil',
     lidoEm: LIDO_10_10
+  },
+  'tjsc-res-gp-1-2026': {
+    ato: 'Resolução GP nº 1/2026 do TJSC (16/01/2026; DJE nº 4.649, 19/01/2026): calendário de feriados para efeitos forenses em 2026',
+    url: 'https://busca.tjsc.jus.br/buscatextual/integra.html#/integra/1/doc/188428/sistema/1',
+    lido: 'texto COMPILADO (com as alterações das Resoluções GP 10, 12 e 45/2026) pela API do sistema de busca do TJSC; só entram as linhas do Anexo Único que valem para "Tribunal de Justiça, Turmas Recursais e todas as comarcas do Estado" (16 dias). As demais 195 linhas (feriados municipais) não entram: CPC, art. 1.003, § 6º. O art. 1º, parágrafo único, remete o recesso a "resolução própria", não localizada',
+    lidoEm: LIDO_10_10
+  },
+  'tjsc-res-gp-31-2026': {
+    ato: 'Resolução GP nº 31/2026 do TJSC (27/05/2026; DJE nº 4.735, 28/05/2026): horário excepcional nos dias de jogo da Seleção na Copa do Mundo de 2026',
+    url: 'https://busca.tjsc.jus.br/buscatextual/integra.html#/integra/1/doc/189133/sistema/1',
+    lido: 'inteiro teor pela API do sistema de busca do TJSC. Art. 2º: o dia do começo e o do vencimento dos prazos são postergados nos dias úteis de jogo entre 14h e 19h (CPC, art. 224, § 1º). A notícia oficial de 09/06/2026 confirma o expediente das 10h às 17h em 24/06 (jogo às 19h) e que 13/06 (sábado) e 19/06 (21h30) ficam fora da regra',
+    lidoEm: LIDO_10_10
+  },
+  'tjsc-noticia-carnaval-2026': {
+    ato: 'Notícia oficial do TJSC de 13/02/2026 sobre o Carnaval: Resolução GP 1/1985 (art. 1º, redação da GP 74/2023) e Resolução GP 13/2022 (Quarta-feira de Cinzas)',
+    url: 'https://www.tjsc.jus.br/web/imprensa/-/justica-de-sc-atuara-em-regime-de-plantao-no-carnaval-expediente-volta-ao-normal-na-quarta-feira',
+    lido: 'só a notícia oficial (as Resoluções GP 1/1985, 74/2023 e 13/2022 e a Resolução TJ 7/2006 não foram lidas): 16 e 17/02 sem expediente; em 18/02 o expediente começa às 12h',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -414,6 +432,31 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
   { tribunais: ['TJDF'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h): ponto facultativo', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJDFT 48/2026, art. 1º, I (redação da Portaria Conjunta 53/2026), e art. 2º', fonte: 'tjdft-pc-48-2026' },
   { tribunais: ['TJDF'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h/20h): expediente das 9h às 16h; prazos que começam ou terminam no dia são prorrogados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJDFT 48/2026, art. 1º, IV, e art. 2º', fonte: 'tjdft-pc-48-2026' },
 
+  // ---------- TJSC, 2026: Resolução GP 1/2026 (compilada), Anexo Único, só as linhas de todo o Estado; Resolução GP 31/2026 (Copa) ----------
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12) e todos os municipais.
+  // Em SC o Dia do Funcionário Público fica em 28/10 (não é transferido para 30/10) e o 11/08 não é feriado forense.
+  ...[
+    ['2026-02-16', 'Segunda-feira de Carnaval', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-02-17', 'Terça-feira de Carnaval', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-04-02', 'Quinta-feira da Semana Santa', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-04-03', 'Sexta-feira Santa', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-06-04', 'Corpus Christi', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-10-28', 'Dia do Funcionário Público', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único (Res. GP 1/1985)'],
+    ['2026-12-08', 'Dia da Justiça (efeitos forenses)', 'tjsc-res-gp-1-2026', 'Resolução GP TJSC 1/2026, Anexo Único']
+  ].map(([data, nome, fonte, fundamento]) => ({
+    tribunais: ['TJSC'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: fonte as keyof typeof FONTES_CALENDARIO
+  })),
+  { tribunais: ['TJSC'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente começa às 12h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 13/2022 e Resolução TJ 7/2006, art. 1º (citadas na notícia oficial de 13/02/2026)', fonte: 'tjsc-noticia-carnaval-2026' },
+  { tribunais: ['TJSC'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h): expediente das 10h às 17h; começo e vencimento dos prazos postergados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º', fonte: 'tjsc-res-gp-31-2026' },
+  { tribunais: ['TJSC'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h, segundo avisos de outros tribunais): expediente das 8h às 12h pela Res. GP 31/2026; o TJSC não publicou aviso para este dia que eu tenha encontrado', efeito: 'expediente_parcial', verificacao: 'pendente', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo extraído de avisos do TJDFT e do TJBA', fonte: 'tjsc-res-gp-31-2026' },
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -470,5 +513,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJPR: { anos: [2026], fontes: ['tjpr-dj-621-2025', 'tjpr-recesso-2025-2026'] },
   TJRS: { anos: [2026, 2027], fontes: ['tjrs-ato-05-2025', 'tjrs-ato-06-2026', 'tjrs-ato-conjunto-004-2026'] },
   TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] },
-  TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] }
+  TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] },
+  TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] }
 };

@@ -25,10 +25,10 @@ FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
-# (hoje: TJSC, TJDF, TJGO, TJPE, TJCE, TJES) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
-TRIBUNAL_SEM_ATO = "TJSC"
+# (hoje: TJGO, TJPE, TJCE, TJES) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
+TRIBUNAL_SEM_ATO = "TJGO"
 
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}}
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -44,6 +44,11 @@ TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #  TJDF (TJDFT): Portaria Conjunta 105/2025, art. 2º (feriados e pontos facultativos; art. 4º suspende o expediente; art. 5º prorroga os prazos).
 #        Copa: Portaria Conjunta 48/2026 (alterada pela 53/2026): 29/06 ponto facultativo; 24/06 expediente das 9h às 16h (prazos que começam ou terminam no dia são prorrogados).
 #        Fora: feriados federais da lista e 30/11 (só ofícios extrajudiciais, art. 3º).
+#  TJSC: Resolução GP 1/2026 compilada (Anexo Único, só as linhas de todo o Estado; Dia do Funcionário Público em 28/10; 11/08 não é feriado) e
+#        Resolução GP 31/2026 (Copa: 24/06 jogo às 19h, expediente das 10h às 17h, começo e vencimento postergados; 29/06 pendente). Cinzas: expediente começa às 12h.
+TJSC_2026_NU = ["02-16", "02-17", "04-02", "04-03", "06-04", "10-28", "12-08"]
+TJSC_2026_PARCIAL = ["02-18", "06-24"]
+TJSC_2026_PARCIAL_PENDENTE = ["06-29"]
 TJDF_2026_NU = ["02-16", "02-17", "02-18", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "06-29", "08-10", "08-11", "10-30", "12-07", "12-08", "12-24", "12-31"]
 TJDF_2026_PARCIAL = ["06-24"]
 TJBA_2026_NU = ["02-12", "02-13", "02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "06-29", "07-02", "07-03",
@@ -170,6 +175,16 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJPR":
         for s in TJPR_2026_NU:
             ev(dia(s), True, "TJPR: Decreto Judiciário 621/2025")
+    if ano == 2026 and trib == "TJSC":
+        for s in TJSC_2026_NU:
+            ev(dia(s), True, "TJSC: Resolução GP 1/2026")
+        for s in TJSC_2026_PARCIAL:
+            parcial.add(dia(s))
+            nomes[dia(s)] = "TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026)"
+        for s in TJSC_2026_PARCIAL_PENDENTE:
+            if completo and dia(s) not in nao_util:
+                parcial.add(dia(s))
+                nomes[dia(s)] = "TJSC: jogo da Seleção às 14h (Res. GP 31/2026; pendente: sem aviso do tribunal)"
     if ano == 2026 and trib == "TJDF":
         for s in TJDF_2026_NU:
             ev(dia(s), True, "TJDFT: Portaria Conjunta 105/2025 e 48/2026")
@@ -655,6 +670,24 @@ add("tjdf-2026-copa-24-junho", "verificado", "TJDFT: prazo que termina em 24/06/
     entrada("2026-06-17", "publicacao", 5, "TJDF"))
 add("tjdf-2026-copa-29-junho", "verificado", "TJDFT: 29/06/2026 (ponto facultativo no jogo das 14h) não conta", "Portaria Conjunta TJDFT 48/2026, art. 1º, I (redação da Portaria Conjunta 53/2026); CPC, arts. 219 e 224",
     entrada("2026-06-26", "publicacao", 2, "TJDF"))
+# TJSC 2026: Resolução GP 1/2026 (compilada) e Resolução GP 31/2026 (lidas em 10/10/2026). Nascem pendentes de validação do revisor.
+TJSC = "Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224"
+add("tjsc-2026-carnaval", "verificado", "TJSC 2026: 16 e 17/02 (Carnaval) não contam; a Quarta-feira de Cinzas conta no meio do prazo", TJSC,
+    entrada("2026-02-12", "publicacao", 5, "TJSC"))
+add("tjsc-2026-cinzas-vencimento", "verificado", "TJSC 2026: prazo que termina na Quarta-feira de Cinzas (expediente a partir das 12h) é protraído para o dia seguinte", TJSC + "; Resolução GP 13/2022 (citada na notícia oficial de 13/02/2026)",
+    entrada("2026-02-12", "publicacao", 2, "TJSC"))
+add("tjsc-2026-corpus-christi", "verificado", "TJSC 2026: 04/06 (Corpus Christi) não conta; 05/06 conta (não há emenda)", TJSC,
+    entrada("2026-06-02", "publicacao", 5, "TJSC"))
+add("tjsc-2026-copa-24-junho", "verificado", "TJSC: prazo que termina em 24/06/2026 (jogo às 19h, expediente das 10h às 17h) é postergado para o primeiro dia útil", "Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º (lida em 10/10/2026); CPC, art. 224, § 1º",
+    entrada("2026-06-17", "publicacao", 5, "TJSC"))
+add("tjsc-2026-dia-funcionario-publico", "verificado", "TJSC 2026: 28/10 (Dia do Funcionário Público, sem transferência para 30/10) não conta", TJSC,
+    entrada("2026-10-26", "publicacao", 3, "TJSC"))
+add("tjsc-2026-dia-da-justica", "verificado", "TJSC 2026: 08/12 (Dia da Justiça, efeitos forenses) não conta", TJSC,
+    entrada("2026-12-04", "publicacao", 3, "TJSC"))
+add("tjsc-2026-copa-29-junho-conservador", "pendente", "TJSC: 29/06/2026 (jogo às 14h, sem aviso do tribunal) ignorado no modo conservador", "Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo de avisos do TJDFT e do TJBA; CPC, art. 224, § 1º",
+    entrada("2026-06-26", "publicacao", 2, "TJSC"))
+add("tjsc-2026-copa-29-junho-completo", "pendente", "TJSC: 29/06/2026 considerado no modo completo (começo do prazo postergado)", "Resolução GP TJSC 31/2026, arts. 1º, I, e 2º; horário do jogo de avisos do TJDFT e do TJBA; CPC, art. 224, § 1º",
+    entrada("2026-06-26", "publicacao", 2, "TJSC", modo="completo"))
 add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil", "Lei PR 18.384/2014, art. 1º; Decreto Judiciário TJPR 759/2018",
     entrada("2025-12-18", "publicacao", 1, "TJPR"))
 add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",
