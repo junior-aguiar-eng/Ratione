@@ -29,7 +29,7 @@
 4. **Mudou regra ou calendário? Rodou a suíte inteira.** O CI faz isso a cada push.
 5. **Este arquivo é atualizado no mesmo commit** que muda o estado de um item. Estados: **feito**, **em curso**, **parcial**, **não iniciado**.
 6. **Cada módulo funciona sozinho.** Um módulo usa o núcleo comum, mas não precisa de outro para funcionar.
-7. **Ponto facultativo é alerta, não dia sem expediente; jogo da Copa só entra se constar de ato ou calendário lido** (decisão do revisor jurídico, 10/10/2026). Não há como prever se o ponto facultativo será concedido: ele vira dia pendente (o modo conservador conta o dia e o completo mostra a data alternativa). Expediente reduzido de jogo da Copa só entra quando o calendário ou um ato lido o traz com efeito sobre prazos; o que não consta é desconsiderado. O calendário de 2027 só é carregado no fim do ano, quando houver todos os calendários.
+7. **Ponto facultativo é alerta, não dia sem expediente; jogo da Copa só entra se constar de ato ou calendário lido** (decisão do revisor jurídico, 10/10/2026). Não há como prever se o ponto facultativo será concedido: ele vira dia pendente (o modo conservador conta o dia e o completo mostra a data alternativa). Expediente reduzido de jogo da Copa só entra quando o calendário ou um ato lido o traz com efeito sobre prazos; o que não consta é desconsiderado. **Exceção (STF e STJ):** cujos atos alteram os prazos nos pontos facultativos, eles continuam contados como dia sem expediente, com **alerta ao usuário** (item `ponto-facultativo` do relatório). O calendário de 2027 só é carregado no fim do ano, quando houver todos os calendários.
 
 ---
 
