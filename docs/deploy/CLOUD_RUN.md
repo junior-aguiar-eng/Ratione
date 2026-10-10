@@ -114,7 +114,7 @@ O código já está no repositório e **fica inerte** até os passos abaixo: sem
 
 1. **Banco (feito em 11/10/2026):** `supabase/migrations/20261011000001_lembretes_prazo.sql` aplicada no projeto `ratione` pelo SQL Editor e conferida (RLS ligada; `authenticated` só com SELECT, INSERT e DELETE; políticas `lembretes_leitura`, `lembretes_insercao` e `lembretes_exclusao`; gatilho `lembretes_prazo_limite`). Para repetir em outro ambiente: SQL Editor ou `supabase db push`, e conferir a RLS.
 2. **Chave do Resend para os lembretes:** em *Resend → API Keys*, criar uma chave **só de envio**, restrita ao domínio `nexojuris.ia.br`, com o nome `ratione-lembretes` (separada da chave do SMTP do Supabase, para poder revogar uma sem afetar a outra). Não colar a chave em chat nem em arquivo do repositório.
-3. **Segredos no Google Cloud** (projeto `ratione-nexojuris`):
+3. **Segredos no Google Cloud** (projeto `ratione-nexojuris`; **feito em 11/10/2026**: `resend-api-key-lembretes` criado pelo responsável e `lembretes-segredo` gerado aleatoriamente, ambos legíveis pela conta `ratione-web@…`):
 ```bash
 printf '%s' "$CHAVE_RESEND" | gcloud secrets create resend-api-key-lembretes --data-file=-
 openssl rand -hex 32 | tr -d '
@@ -122,7 +122,7 @@ openssl rand -hex 32 | tr -d '
 gcloud secrets add-iam-policy-binding resend-api-key-lembretes --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
 gcloud secrets add-iam-policy-binding lembretes-segredo --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
 ```
-4. **`deploy.yml`:** acrescentar ao `--set-secrets` do passo "Cloud Run" `RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest`. Só depois de os segredos existirem: referenciar um segredo que não existe faz a publicação falhar.
+4. **`deploy.yml` (feito em 11/10/2026):** o `--set-secrets` do passo "Cloud Run" passou a incluir `RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest`. Entra em vigor na primeira publicação depois do merge. Não atualizar o serviço à mão com `--update-secrets`: o `--set-secrets` do deploy substitui a lista inteira.
 5. **Agendador** (uma vez por dia, de manhã, horário de Brasília):
 ```bash
 gcloud services enable cloudscheduler.googleapis.com
