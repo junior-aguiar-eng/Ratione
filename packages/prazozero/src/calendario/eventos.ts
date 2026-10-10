@@ -211,6 +211,36 @@ export const FONTES_CALENDARIO = {
     url: 'https://portal.tjpe.jus.br/documents/d/portal/ato_n-977-2026-pdf',
     lido: 'inteiro teor na página do DJe (art. 1º: 1º e 2º graus)',
     lidoEm: LIDO_10_10
+  },
+  'tjce-portaria-2924-2025': {
+    ato: 'Portaria nº 2924/2025 da Presidência do TJCE (17/12/2025; DJEA nº 3.690): feriados e pontos facultativos de janeiro de 2026 a janeiro de 2027',
+    url: 'https://portal.tjce.jus.br/uploads/2026/04/PORT-FERIADOS-E-PONTO-FACULTATIVO-2026-1776690769.pdf',
+    lido: 'inteiro teor (PDF de 3 páginas). Art. 1º e considerandos: as datas do Anexo Único, feriados e pontos facultativos, são dias em que não haverá expediente forense e que impactam a contagem dos prazos (CPC, arts. 219 e 224). Art. 2º: feriados e pontos facultativos municipais seguem a lei de cada município (não entram: CPC, art. 1.003, § 6º). O recesso (20/12/2026 a 06/01/2027) é ponto facultativo, com o efeito do CPC, art. 220',
+    lidoEm: LIDO_10_10
+  },
+  'tjce-portaria-1169-2026': {
+    ato: 'Portaria nº 1169/2026 do TJCE (28/05/2026): ponto facultativo em 05/06/2026, dia seguinte a Corpus Christi',
+    url: 'https://www.tjce.jus.br/atos_normativos/portaria-no-1169-2026/',
+    lido: 'inteiro teor (art. 1º)',
+    lidoEm: LIDO_10_10
+  },
+  'tjce-portaria-1401-2026': {
+    ato: 'Portaria nº 1401/2026 do TJCE (23/06/2026): expediente único das 8h às 15h em 24/06/2026, jogo da Seleção na Copa do Mundo',
+    url: 'https://www.tjce.jus.br/atos_normativos/portaria-no-1401-2026/',
+    lido: 'inteiro teor (art. 1º); o efeito sobre os prazos vem do CPC, art. 224, § 1º (expediente encerrado antes da hora normal)',
+    lidoEm: LIDO_10_10
+  },
+  'tjce-portaria-1440-2026': {
+    ato: 'Portaria nº 1440/2026 do TJCE (25/06/2026; disponibilizada em 26/06/2026): expediente único das 8h às 12h em 29/06/2026, jogo da Seleção na Copa do Mundo',
+    url: 'https://www.tjce.jus.br/atos_normativos/portaria-no-1440-2026/',
+    lido: 'inteiro teor (art. 1º); os considerandos citam o CPC, art. 224, § 1º, para a prorrogação dos prazos',
+    lidoEm: LIDO_10_10
+  },
+  'tjce-portaria-727-2026': {
+    ato: 'Portaria nº 727/2026 do TJCE (06/04/2026): ponto facultativo em 13/04/2026 nos órgãos da Comarca de Fortaleza (aniversário da cidade, Lei municipal 7.335/1994)',
+    url: 'https://www.tjce.jus.br/atos_normativos/portaria-no-727-2026/',
+    lido: 'inteiro teor (art. 1º). Vale só para a Comarca de Fortaleza: depende da comarca, por isso fica pendente',
+    lidoEm: LIDO_10_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -500,6 +530,34 @@ export const EVENTOS_CALENDARIO: EventoCalendario[] = [
     fonte: fonte as keyof typeof FONTES_CALENDARIO
   })),
 
+  // ---------- TJCE, 2026: Portaria 2924/2025 (Anexo Único) e Portarias 1169, 1401, 1440 e 727/2026 ----------
+  // Fora: os feriados federais do anexo (21/4, 1/5, 7/9, 12/10, 2/11, 20/11) e o recesso (20/12 a 06/01, já no CPC, art. 220).
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (fevereiro)'],
+    ['2026-02-17', 'Carnaval (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (fevereiro)'],
+    ['2026-03-19', 'Dia de São José (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (março)'],
+    ['2026-03-25', 'Data Magna do Ceará (feriado estadual, EC estadual 73/2011)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (março)'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (abril)'],
+    ['2026-04-03', 'Sexta-feira Santa (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (abril)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (junho)'],
+    ['2026-06-05', 'Ponto facultativo no dia seguinte a Corpus Christi', 'tjce-portaria-1169-2026', 'Portaria TJCE 1169/2026, art. 1º'],
+    ['2026-10-28', 'Dia do Servidor Público Estadual', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (outubro)'],
+    ['2026-12-08', 'Dia da Justiça (feriado, Lei estadual 12.342/1994)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (dezembro)']
+  ].map(([data, nome, fonte, fundamento]) => ({
+    tribunais: ['TJCE'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: fonte as keyof typeof FONTES_CALENDARIO
+  })),
+  { tribunais: ['TJCE'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: ponto facultativo até as 14h; expediente normal a partir das 14h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 2924/2025, Anexo Único (fevereiro); CPC, art. 224, § 1º', fonte: 'tjce-portaria-2924-2025' },
+  { tribunais: ['TJCE'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h): expediente único das 8h às 15h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 1401/2026, art. 1º; CPC, art. 224, § 1º', fonte: 'tjce-portaria-1401-2026' },
+  { tribunais: ['TJCE'], inicio: '2026-06-29', fim: '2026-06-29', nome: 'Jogo da Seleção na Copa do Mundo (14h): expediente único das 8h às 12h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 1440/2026, art. 1º e considerandos; CPC, art. 224, § 1º', fonte: 'tjce-portaria-1440-2026' },
+  { tribunais: ['TJCE'], inicio: '2026-04-13', fim: '2026-04-13', nome: 'Aniversário de Fortaleza: ponto facultativo só nos órgãos da Comarca de Fortaleza (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Portaria TJCE 727/2026, art. 1º (Lei municipal 7.335/1994)', fonte: 'tjce-portaria-727-2026' },
+
   // ---------- TJAL, 2026: Ato Normativo 03/2026 (texto lido no DJE de 28/01/2026) ----------
   ...[
     ['2026-04-20', 'Tiradentes (suspensão de atividades, atos e prazos)'],
@@ -558,5 +616,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJBA: { anos: [2026], fontes: ['tjba-dj-1050-2025', 'tjba-dj-944-2026'] },
   TJDF: { anos: [2026], fontes: ['tjdft-pc-105-2025', 'tjdft-pc-48-2026'] },
   TJSC: { anos: [2026], fontes: ['tjsc-res-gp-1-2026', 'tjsc-res-gp-31-2026', 'tjsc-noticia-carnaval-2026'] },
-  TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] }
+  TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] },
+  TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] }
 };
