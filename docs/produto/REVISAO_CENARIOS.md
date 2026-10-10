@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **172** · validados: **119** · pendentes: **53**
+> Cenários: **172** · validados: **164** · pendentes: **8**
 
 ## Como revisar
 
@@ -31,8 +31,8 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CLT | 4 |
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
-| Dias ainda pendentes de conferência | 41 |
-| Calendário verificado (tribunais com ato lido) | 65 |
+| Dias ainda pendentes de conferência | 33 |
+| Calendário verificado (tribunais com ato lido) | 73 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -992,7 +992,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJRJ: 02-16; 17/02/2026 TJRJ: 02-17; 18/02/2026 TJRJ: 02-18
 - **Fundamento:** TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, III
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 78. `tjrj-sao-jorge-2026`
 
@@ -1005,7 +1005,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/04/2026 TJRJ: 04-23
 - **Fundamento:** TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 79. `tjes-penha-pendente`
 
@@ -1031,7 +1031,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224 (asterisco: feriado municipal)
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 81. `tjrs-2026-corpus-christi-completo`
 
@@ -1043,113 +1043,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRS: Corpus Christi (feriado municipal de Porto Alegre; depende da comarca)
 - **Fundamento:** Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224 (asterisco: feriado municipal)
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 82. `tjba-2026-carnaval`
-
-**TJBA 2026: 12 e 13/02 são pontos facultativos (alerta: o modo conservador conta os dias, o completo não); 16, 17 e 18/02 (Carnaval e Cinzas) não contam**
-
-- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
-- **Publicação / dia do começo:** 10/02/2026 (terça-feira) · **início da contagem:** 11/02/2026 (quarta-feira)
-- **Vencimento esperado:** **20/02/2026 (sexta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 24/02/2026 (terça-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 17/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 18/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
-- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 83. `tjba-2026-sao-joao`
-
-**TJBA 2026: 22 e 23/06 são pontos facultativos (alerta); 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam**
-
-- **Entrada:** publicação em **19/06/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
-- **Publicação / dia do começo:** 19/06/2026 (sexta-feira) · **início da contagem:** 22/06/2026 (segunda-feira)
-- **Vencimento esperado:** **25/06/2026 (quinta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 30/06/2026 (terça-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 24/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
-- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 84. `tjba-2026-independencia-da-bahia`
-
-**TJBA 2026: 02/07 (Independência da Bahia) não conta; 03/07 é ponto facultativo (alerta)**
-
-- **Entrada:** publicação em **01/07/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
-- **Publicação / dia do começo:** 01/07/2026 (quarta-feira) · **início da contagem:** 03/07/2026 (sexta-feira)
-- **Vencimento esperado:** **07/07/2026 (terça-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 08/07/2026 (quarta-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
-- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 85. `tjdf-2026-ponto-facultativo-20-abril`
-
-**TJDFT 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta**
-
-- **Entrada:** publicação em **16/04/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJDF** · modo conservador
-- **Publicação / dia do começo:** 16/04/2026 (quinta-feira) · **início da contagem:** 17/04/2026 (sexta-feira)
-- **Vencimento esperado:** **22/04/2026 (quarta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 23/04/2026 (quinta-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
-- **Fundamento:** Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 86. `tjce-2026-carnaval`
-
-**TJCE 2026: 16 e 17/02 (Carnaval, ponto facultativo) e a Quarta-feira de Cinzas (ponto facultativo até as 14h) são alertas**
-
-- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
-- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
-- **Vencimento esperado:** **19/02/2026 (quinta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 23/02/2026 (segunda-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos
-- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 87. `tjce-2026-cinzas-vencimento`
-
-**TJCE 2026: prazo que termina na Quarta-feira de Cinzas (ponto facultativo até as 14h): alerta de prorrogação**
-
-- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
-- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
-- **Vencimento esperado:** **16/02/2026 (segunda-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 19/02/2026 (quinta-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos
-- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 88. `tjce-2026-sao-jose-data-magna`
-
-**TJCE 2026: 19/03 (São José) é ponto facultativo (alerta); 25/03 (Data Magna do Ceará) não conta**
-
-- **Entrada:** publicação em **17/03/2026 (terça-feira)** · prazo de **6 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
-- **Publicação / dia do começo:** 17/03/2026 (terça-feira) · **início da contagem:** 18/03/2026 (quarta-feira)
-- **Vencimento esperado:** **26/03/2026 (quinta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 27/03/2026 (sexta-feira)
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 25/03/2026 TJCE: Portaria 2924/2025 e 1169/2026
-- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 89. `tjce-2026-corpus-christi`
-
-**TJCE 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alertas)**
-
-- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
-- **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
-- **Vencimento esperado:** **05/06/2026 (sexta-feira)**
-- **Alternativa (se os dias pendentes forem confirmados):** 09/06/2026 (terça-feira)
-- **Como foi contado (dias excluídos):** nenhum além do dia do começo
-- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Portaria TJCE 1169/2026, art. 1º
-- **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
-
-### 90. `tjce-2026-fortaleza-13-abril-conservador`
+### 82. `tjce-2026-fortaleza-13-abril-conservador`
 
 **TJCE: 13/04/2026 (ponto facultativo só na Comarca de Fortaleza) ignorado no modo conservador**
 
@@ -1160,9 +1056,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Portaria TJCE 727/2026, art. 1º; depende da comarca; CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 91. `tjce-2026-fortaleza-13-abril-completo`
+### 83. `tjce-2026-fortaleza-13-abril-completo`
 
 **TJCE: 13/04/2026 considerado no modo completo**
 
@@ -1172,9 +1068,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 13/04/2026 TJCE: ponto facultativo só na Comarca de Fortaleza (Portaria 727/2026)
 - **Fundamento:** Portaria TJCE 727/2026, art. 1º; depende da comarca; CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 92. `tjes-2026-ponto-facultativo-20-abril`
+### 84. `tjes-2026-ponto-facultativo-20-abril`
 
 **TJES 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta**
 
@@ -1185,9 +1081,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 93. `tjes-2026-dia-servidor`
+### 85. `tjes-2026-dia-servidor`
 
 **TJES 2026: o Dia do Servidor foi transferido para 30/10 como ponto facultativo (alerta); 28/10 conta; Finados (02/11) não conta**
 
@@ -1198,9 +1094,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224; considerandos do Ato 176/2026
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 94. `tjes-2026-dia-da-justica`
+### 86. `tjes-2026-dia-da-justica`
 
 **TJES 2026: 07/12 é ponto facultativo (alerta); 08/12 (Dia da Justiça) não conta**
 
@@ -1211,9 +1107,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJES: Ato Normativo 176/2026
 - **Fundamento:** Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 95. `tjgo-2026-ponto-facultativo-20-abril`
+### 87. `tjgo-2026-ponto-facultativo-20-abril`
 
 **TJGO 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta**
 
@@ -1224,9 +1120,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 96. `tjgo-2026-corpus-christi`
+### 88. `tjgo-2026-corpus-christi`
 
 **TJGO 2026: 04/06 (Corpus Christi) não conta; 05/06 é ponto facultativo (alerta)**
 
@@ -1237,11 +1133,11 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ## Calendário verificado (tribunais com ato lido)
 
-### 97. `stj-semana-santa-2026`
+### 89. `stj-semana-santa-2026`
 
 **STJ: Quarta, Quinta e Sexta Santas de 2026 não contam**
 
@@ -1253,7 +1149,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 98. `trf3-semana-santa-2026`
+### 90. `trf3-semana-santa-2026`
 
 **TRF3: Semana Santa é feriado forense pela Lei 5.010 (Justiça Federal)**
 
@@ -1265,7 +1161,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 99. `stj-onze-agosto-2026`
+### 91. `stj-onze-agosto-2026`
 
 **STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam**
 
@@ -1277,7 +1173,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 100. `stj-corpus-christi-2026`
+### 92. `stj-corpus-christi-2026`
 
 **STJ: Corpus Christi e 05/06 sem expediente em 2026**
 
@@ -1289,7 +1185,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 101. `stf-corpus-christi-2026`
+### 93. `stf-corpus-christi-2026`
 
 **STF: Corpus Christi e 05/06 sem expediente em 2026**
 
@@ -1301,7 +1197,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 102. `stj-cinzas-comeco-2026`
+### 94. `stj-cinzas-comeco-2026`
 
 **STJ: Carnaval e Quarta de Cinzas (até 14h) protraem o dia do começo**
 
@@ -1313,7 +1209,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 103. `stf-ponto-facultativo-30-out`
+### 95. `stf-ponto-facultativo-30-out`
 
 **STF: 30/10/2026 (transferência do Dia do Servidor) e Finados não contam**
 
@@ -1325,7 +1221,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 104. `stj-ferias-julho-5d`
+### 96. `stj-ferias-julho-5d`
 
 **STJ: prazos suspensos de 2 a 31 de julho; retoma em 03/08**
 
@@ -1337,7 +1233,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 105. `stj-ferias-julho-8d`
+### 97. `stj-ferias-julho-8d`
 
 **STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam**
 
@@ -1349,7 +1245,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 106. `stf-ferias-julho-5d`
+### 98. `stf-ferias-julho-5d`
 
 **STF: prazos não correm nas férias de julho**
 
@@ -1361,7 +1257,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 107. `tjsp-sem-ferias-julho`
+### 99. `tjsp-sem-ferias-julho`
 
 **TJSP não tem férias coletivas em julho (contraste com STJ/STF)**
 
@@ -1373,7 +1269,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 108. `stj-recesso-ate-31-jan`
+### 100. `stj-recesso-ate-31-jan`
 
 **STJ: prazos suspensos de 20/12 a 31/01 (não a 20/01) e Cinzas protrai o vencimento**
 
@@ -1385,7 +1281,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 109. `stf-recesso-ate-31-jan`
+### 101. `stf-recesso-ate-31-jan`
 
 **STF: prazos não correm de 20/12 a 31/01**
 
@@ -1397,7 +1293,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 110. `stf-dje-ferias-janeiro`
+### 102. `stf-dje-ferias-janeiro`
 
 **STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02**
 
@@ -1409,7 +1305,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 111. `stj-dje-semana-santa`
+### 103. `stj-dje-semana-santa`
 
 **STJ: disponibilização em 31/03/2026; 1 a 3/04 são feriados, publicação na segunda 06/04**
 
@@ -1421,7 +1317,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 112. `trf3-finados`
+### 104. `trf3-finados`
 
 **TRF3: 2 de novembro (segunda) não conta**
 
@@ -1433,7 +1329,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 113. `stj-7-e-8-dezembro`
+### 105. `stj-7-e-8-dezembro`
 
 **STJ: 7/12 (ponto facultativo) e 8/12 (Dia da Justiça) não contam**
 
@@ -1445,7 +1341,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 114. `tjsp-cinzas-2026`
+### 106. `tjsp-cinzas-2026`
 
 **TJSP 2026: Carnaval (16 e 17/02) e Quarta de Cinzas com expediente parcial protraem o dia do começo**
 
@@ -1457,7 +1353,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 115. `tjsp-9-julho-2026`
+### 107. `tjsp-9-julho-2026`
 
 **TJSP 2026: 9 de julho (Data Magna, Lei Estadual 9.497/1997) e 10/07 (suspensão) não contam**
 
@@ -1469,7 +1365,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 116. `tjsp-semana-santa-2026`
+### 108. `tjsp-semana-santa-2026`
 
 **TJSP 2026: Endoenças (02/04) e Sexta-feira da Paixão (03/04) não contam**
 
@@ -1481,7 +1377,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 117. `tjsp-dje-recesso-2026`
+### 109. `tjsp-dje-recesso-2026`
 
 **TJSP: disponibilização em 18/12/2026; recesso até 20/01/2027; 2027 ainda sem provimento (sem selo)**
 
@@ -1493,7 +1389,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 118. `tjmg-carnaval-2026`
+### 110. `tjmg-carnaval-2026`
 
 **TJMG 2026: segunda, terça e quarta-feira de cinzas (16 a 18/02) suspensas por inteiro**
 
@@ -1505,7 +1401,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 119. `tjmg-semana-santa-2026`
+### 111. `tjmg-semana-santa-2026`
 
 **TJMG 2026: quarta a sexta-feira da Semana Santa (01 a 03/04) suspensas**
 
@@ -1517,7 +1413,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 120. `tjmg-permanente-2028`
+### 112. `tjmg-permanente-2028`
 
 **TJMG 2028 (sem portaria anual): Carnaval de segunda a quarta (28/02 a 01/03) pela resolução permanente; sem selo**
 
@@ -1529,7 +1425,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 121. `tjal-atos-2026`
+### 113. `tjal-atos-2026`
 
 **TJAL 2026: 20/04 (Tiradentes, suspensão) e 21/04 não contam**
 
@@ -1541,7 +1437,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 122. `tjrj-copa-2026`
+### 114. `tjrj-copa-2026`
 
 **TJRJ 2026: jogos da Copa em 24/06 (prazos suspensos) e 29/06 (expediente e prazos) não contam**
 
@@ -1553,7 +1449,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 123. `tjpe-data-magna`
+### 115. `tjpe-data-magna`
 
 **TJPE: 6 de março (Data Magna, Lei estadual PE 16.241/2017, art. 49) não conta em nenhum ano**
 
@@ -1565,7 +1461,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 124. `tjrs-20-setembro`
+### 116. `tjrs-20-setembro`
 
 **TJRS: 20 de setembro (data magna, Constituição estadual, art. 6º; Decreto 36.180/1995) não conta**
 
@@ -1577,7 +1473,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 125. `tjgo-24-outubro`
+### 117. `tjgo-24-outubro`
 
 **TJGO: 24 de outubro (pedra fundamental de Goiânia, feriado estadual) não conta**
 
@@ -1589,7 +1485,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 126. `tjpr-2026-carnaval`
+### 118. `tjpr-2026-carnaval`
 
 **TJPR 2026: 16/02 (suspensão) e 17/02 (Carnaval) não contam; vence 23/02**
 
@@ -1599,9 +1495,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJPR: Decreto Judiciário 621/2025; 17/02/2026 TJPR: Decreto Judiciário 621/2025
 - **Fundamento:** Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, arts. 1º e 2º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 127. `tjpr-2026-corpus-christi`
+### 119. `tjpr-2026-corpus-christi`
 
 **TJPR 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam**
 
@@ -1611,9 +1507,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJPR: Decreto Judiciário 621/2025; 05/06/2026 TJPR: Decreto Judiciário 621/2025
 - **Fundamento:** Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, arts. 1º e 2º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 128. `tjpr-2026-dia-servidor`
+### 120. `tjpr-2026-dia-servidor`
 
 **TJPR 2026: 30/10 (Dia do Funcionário Público, transferido de 28/10) e Finados (02/11) não contam**
 
@@ -1623,9 +1519,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJPR: Decreto Judiciário 621/2025; 02/11/2026 Finados
 - **Fundamento:** Decreto Judiciário TJPR 621/2025 (lido em 10/10/2026); CPC, arts. 219 e 224, art. 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 129. `tjrs-2026-carnaval`
+### 121. `tjrs-2026-carnaval`
 
 **TJRS 2026: 16/02 e 17/02 (Carnaval) não contam; vence 23/02**
 
@@ -1635,9 +1531,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJRS: ato do Órgão Especial / Ato Conjunto 004/2026; 17/02/2026 TJRS: ato do Órgão Especial / Ato Conjunto 004/2026
 - **Fundamento:** Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 130. `tjrs-2026-dia-da-justica`
+### 122. `tjrs-2026-dia-da-justica`
 
 **TJRS 2026: 08/12 (Dia da Justiça) não conta**
 
@@ -1647,9 +1543,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJRS: ato do Órgão Especial / Ato Conjunto 004/2026
 - **Fundamento:** Ato 05/2025 do Órgão Especial do TJRS (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 131. `tjrs-2026-ato-conjunto-energia`
+### 123. `tjrs-2026-ato-conjunto-energia`
 
 **TJRS: 02/07/2026 teve os prazos suspensos (falta de energia); não conta**
 
@@ -1659,9 +1555,45 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 TJRS: ato do Órgão Especial / Ato Conjunto 004/2026
 - **Fundamento:** Ato Conjunto 004/2026 (P e CGJ), art. 1º (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
+
+### 124. `tjba-2026-carnaval`
+
+**TJBA 2026: 12, 13, 16, 17 e 18/02 (pontos facultativos e Carnaval, todos sem expediente pelo art. 5º do Decreto 1050/2025) não contam**
+
+- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 10/02/2026 (terça-feira) · **início da contagem:** 11/02/2026 (quarta-feira)
+- **Vencimento esperado:** **24/02/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 12/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 13/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 16/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 17/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 18/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 132. `tjba-2026-copa-29-junho`
+### 125. `tjba-2026-sao-joao`
+
+**TJBA 2026: 22, 23 e 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam**
+
+- **Entrada:** publicação em **19/06/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 19/06/2026 (sexta-feira) · **início da contagem:** 25/06/2026 (quinta-feira)
+- **Vencimento esperado:** **30/06/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 22/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 23/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 24/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 29/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 126. `tjba-2026-independencia-da-bahia`
+
+**TJBA 2026: 02 e 03/07 (Independência da Bahia) não contam**
+
+- **Entrada:** publicação em **01/07/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 01/07/2026 (quarta-feira) · **início da contagem:** 06/07/2026 (segunda-feira)
+- **Vencimento esperado:** **08/07/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 03/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 127. `tjba-2026-copa-29-junho`
 
 **TJBA: 29/06/2026 teve os prazos suspensos (jogo da Seleção na Copa); não conta**
 
@@ -1671,9 +1603,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
 - **Fundamento:** Decreto Judiciário TJBA 944/2026, art. 3º (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 133. `tjdf-2026-carnaval`
+### 128. `tjdf-2026-carnaval`
 
 **TJDFT 2026: 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02**
 
@@ -1683,9 +1615,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 17/02/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 18/02/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026
 - **Fundamento:** Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 134. `tjdf-2026-semana-santa`
+### 129. `tjdf-2026-semana-santa`
 
 **TJDFT 2026: 01 a 03/04 (Semana Santa) não contam**
 
@@ -1695,9 +1627,21 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 02/04/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 03/04/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026
 - **Fundamento:** Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
+
+### 130. `tjdf-2026-ponto-facultativo-20-abril`
+
+**TJDFT 2026: 20/04 (ponto facultativo, expediente suspenso pelos arts. 4º e 5º da Portaria 105/2025) e 21/04 (Tiradentes) não contam**
+
+- **Entrada:** publicação em **16/04/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJDF** · modo conservador
+- **Publicação / dia do começo:** 16/04/2026 (quinta-feira) · **início da contagem:** 17/04/2026 (sexta-feira)
+- **Vencimento esperado:** **23/04/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026; 21/04/2026 Tiradentes
+- **Fundamento:** Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 135. `tjdf-2026-copa-24-junho`
+### 131. `tjdf-2026-copa-24-junho`
 
 **TJDFT: prazo que termina em 24/06/2026 (jogo da Seleção, expediente das 9h às 16h) é prorrogado para o primeiro dia útil**
 
@@ -1707,9 +1651,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 24/06/2026 TJDFT: jogo da Seleção, expediente das 9h às 16h (Portaria Conjunta 48/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Portaria Conjunta TJDFT 48/2026, arts. 1º, IV, e 2º (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 136. `tjdf-2026-copa-29-junho`
+### 132. `tjdf-2026-copa-29-junho`
 
 **TJDFT: 29/06/2026 (ponto facultativo no jogo das 14h) não conta**
 
@@ -1719,9 +1663,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TJDFT: Portaria Conjunta 105/2025 e 48/2026
 - **Fundamento:** Portaria Conjunta TJDFT 48/2026, art. 1º, I (redação da Portaria Conjunta 53/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 137. `tjsc-2026-carnaval`
+### 133. `tjsc-2026-carnaval`
 
 **TJSC 2026: 16 e 17/02 (Carnaval) não contam; a Quarta-feira de Cinzas conta no meio do prazo**
 
@@ -1731,9 +1675,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJSC: Resolução GP 1/2026; 17/02/2026 TJSC: Resolução GP 1/2026
 - **Fundamento:** Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 138. `tjsc-2026-cinzas-vencimento`
+### 134. `tjsc-2026-cinzas-vencimento`
 
 **TJSC 2026: prazo que termina na Quarta-feira de Cinzas (expediente a partir das 12h) é protraído para o dia seguinte**
 
@@ -1743,9 +1687,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJSC: Resolução GP 1/2026; 17/02/2026 TJSC: Resolução GP 1/2026; 18/02/2026 TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Resolução GP 13/2022 (citada na notícia oficial de 13/02/2026)
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 139. `tjsc-2026-corpus-christi`
+### 135. `tjsc-2026-corpus-christi`
 
 **TJSC 2026: 04/06 (Corpus Christi) não conta; 05/06 conta (não há emenda)**
 
@@ -1755,9 +1699,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJSC: Resolução GP 1/2026
 - **Fundamento:** Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 140. `tjsc-2026-copa-24-junho`
+### 136. `tjsc-2026-copa-24-junho`
 
 **TJSC: prazo que termina em 24/06/2026 (jogo às 19h, expediente das 10h às 17h) é postergado para o primeiro dia útil**
 
@@ -1767,9 +1711,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 24/06/2026 TJSC: expediente parcial (Cinzas às 12h; jogo da Seleção, Res. GP 31/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º (lida em 10/10/2026); CPC, art. 224, § 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 141. `tjsc-2026-dia-funcionario-publico`
+### 137. `tjsc-2026-dia-funcionario-publico`
 
 **TJSC 2026: 28/10 (Dia do Funcionário Público, sem transferência para 30/10) não conta**
 
@@ -1779,9 +1723,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 28/10/2026 TJSC: Resolução GP 1/2026
 - **Fundamento:** Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 142. `tjsc-2026-dia-da-justica`
+### 138. `tjsc-2026-dia-da-justica`
 
 **TJSC 2026: 08/12 (Dia da Justiça, efeitos forenses) não conta**
 
@@ -1791,9 +1735,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJSC: Resolução GP 1/2026
 - **Fundamento:** Resolução GP TJSC 1/2026, Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 143. `tjpe-2026-carnaval`
+### 139. `tjpe-2026-carnaval`
 
 **TJPE 2026: 16, 17 e 18/02 (Carnaval e Cinzas) não contam; vence 24/02**
 
@@ -1803,9 +1747,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 17/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 18/02/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 144. `tjpe-2026-corpus-christi-transferido`
+### 140. `tjpe-2026-corpus-christi-transferido`
 
 **TJPE 2026: Corpus Christi foi transferido para 22/06; 04/06 conta como dia útil**
 
@@ -1815,9 +1759,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 145. `tjpe-2026-sao-joao`
+### 141. `tjpe-2026-sao-joao`
 
 **TJPE 2026: 22 a 26/06 e 29 e 30/06 (Corpus Christi, São João e feriados forenses de junho) não contam**
 
@@ -1827,9 +1771,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 22/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 23/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 24/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 25/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 26/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 29/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 30/06/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 146. `tjpe-2026-dez-de-agosto`
+### 142. `tjpe-2026-dez-de-agosto`
 
 **TJPE 2026: 10/08 (Dia dos Cursos Jurídicos, antecipado de 11/08) não conta; 11/08 conta**
 
@@ -1839,9 +1783,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 147. `tjpe-2026-dia-servidor`
+### 143. `tjpe-2026-dia-servidor`
 
 **TJPE 2026: 30/10 (Dia do Servidor, transferido de 28/10) e Finados (02/11) não contam**
 
@@ -1851,9 +1795,9 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 02/11/2026 Finados
 - **Fundamento:** Ato Conjunto TJPE 43/2025, art. 1º e parágrafo único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
-### 148. `tjpe-2026-pje-maio`
+### 144. `tjpe-2026-pje-maio`
 
 **TJPE: prazos suspensos de 11 a 15/05/2026 por instabilidade do PJe**
 
@@ -1862,6 +1806,54 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **20/05/2026 (quarta-feira)**
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 11/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 12/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 13/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 14/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026; 15/05/2026 TJPE: Ato Conjunto 43/2025 e Atos 966 e 977/2026
 - **Fundamento:** Atos TJPE 966/2026 e 977/2026, art. 1º (lidos em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
+
+### 145. `tjce-2026-carnaval`
+
+**TJCE 2026: 16 e 17/02 (Carnaval, ponto facultativo sem expediente forense) não contam; a Quarta-feira de Cinzas (expediente normal só a partir das 14h) conta no meio do prazo**
+
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
+- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
+- **Vencimento esperado:** **23/02/2026 (segunda-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 17/02/2026 TJCE: Portaria 2924/2025 e 1169/2026
+- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 146. `tjce-2026-cinzas-vencimento`
+
+**TJCE 2026: prazo que termina na Quarta-feira de Cinzas (expediente normal só a partir das 14h) é protraído para o dia seguinte**
+
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
+- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
+- **Vencimento esperado:** **19/02/2026 (quinta-feira)** · prorrogado
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 17/02/2026 TJCE: Portaria 2924/2025 e 1169/2026; 18/02/2026 TJCE: expediente reduzido (Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)
+- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 147. `tjce-2026-sao-jose-data-magna`
+
+**TJCE 2026: 19/03 (São José, ponto facultativo sem expediente forense) e 25/03 (Data Magna do Ceará) não contam**
+
+- **Entrada:** publicação em **17/03/2026 (terça-feira)** · prazo de **6 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
+- **Publicação / dia do começo:** 17/03/2026 (terça-feira) · **início da contagem:** 18/03/2026 (quarta-feira)
+- **Vencimento esperado:** **27/03/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/03/2026 TJCE: Portaria 2924/2025 e 1169/2026; 25/03/2026 TJCE: Portaria 2924/2025 e 1169/2026
+- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 148. `tjce-2026-corpus-christi`
+
+**TJCE 2026: 04/06 (Corpus Christi) e 05/06 (Portaria 1169/2026) são dias sem expediente forense e não contam**
+
+- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJCE** · modo conservador
+- **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
+- **Vencimento esperado:** **09/06/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJCE: Portaria 2924/2025 e 1169/2026; 05/06/2026 TJCE: Portaria 2924/2025 e 1169/2026
+- **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Portaria TJCE 1169/2026, art. 1º
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
@@ -1875,7 +1867,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 24/06/2026 TJCE: expediente reduzido (Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Portaria TJCE 1401/2026, art. 1º (lida em 10/10/2026); CPC, art. 224, § 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 150. `tjce-2026-copa-29-junho`
 
@@ -1887,7 +1879,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TJCE: expediente reduzido (Portarias 1401 e 1440/2026): protrai o dia do começo
 - **Fundamento:** Portaria TJCE 1440/2026, art. 1º (lida em 10/10/2026); CPC, art. 224, § 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 151. `tjce-2026-dia-servidor`
 
@@ -1899,7 +1891,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 28/10/2026 TJCE: Portaria 2924/2025 e 1169/2026
 - **Fundamento:** Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 152. `tjes-2026-carnaval`
 
@@ -1911,7 +1903,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJES: Ato Normativo 176/2026; 17/02/2026 TJES: Ato Normativo 176/2026; 18/02/2026 TJES: Ato Normativo 176/2026
 - **Fundamento:** Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 153. `tjes-2026-nossa-senhora-da-penha`
 
@@ -1923,7 +1915,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 13/04/2026 TJES: Ato Normativo 176/2026
 - **Fundamento:** Ato Normativo TJES 176/2026, Anexo Único (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 154. `tjes-2026-pje-8-julho`
 
@@ -1935,7 +1927,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/07/2026 TJES: prazos prorrogados por falha do PJe (Atos 124 e 130/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Ato Normativo TJES 124/2026, art. 1º (lido em 10/10/2026); CNJ, Res. 185/2014, art. 11
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 155. `tjgo-2026-carnaval`
 
@@ -1947,7 +1939,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJGO: calendário oficial de 2026; 17/02/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 156. `tjgo-2026-cinzas-vencimento`
 
@@ -1959,7 +1951,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJGO: calendário oficial de 2026; 17/02/2026 TJGO: calendário oficial de 2026; 18/02/2026 TJGO: expediente parcial (Cinzas até as 12h; jogo da Seleção, Decreto 3079/2026): protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 157. `tjgo-2026-semana-santa`
 
@@ -1971,7 +1963,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJGO: calendário oficial de 2026; 02/04/2026 TJGO: calendário oficial de 2026; 03/04/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 158. `tjgo-2026-copa-29-junho`
 
@@ -1983,7 +1975,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TJGO: expediente parcial (Cinzas até as 12h; jogo da Seleção, Decreto 3079/2026): protrai o dia do começo
 - **Fundamento:** Decreto Judiciário TJGO 3079/2026, arts. 1º e 2º (lido em 10/10/2026); CPC, art. 224, § 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 159. `tjgo-2026-dia-servidor`
 
@@ -1995,7 +1987,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 28/10/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 160. `tjpr-19-dezembro-nao-feriado`
 
