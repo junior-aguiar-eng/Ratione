@@ -17,7 +17,7 @@ export function caminhoInterno(pedido: string | null, padrao: string): string {
   return pedido;
 }
 
-/** Para onde ir depois de confirmar: a recuperação de senha leva à troca de senha. */
+/** Para onde ir depois de confirmar: a recuperação de senha leva à tela de criar a senha nova. */
 export function destinoPadrao(tipo: TipoLink): string {
-  return tipo === 'recovery' ? '/conta' : '/meu-espaco';
+  return tipo === 'recovery' ? '/conta/nova-senha' : '/meu-espaco';
 }
