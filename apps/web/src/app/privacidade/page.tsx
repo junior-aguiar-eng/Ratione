@@ -17,8 +17,13 @@ export default function PrivacidadePage() {
           você salvar em &ldquo;Meu espaço&rdquo; (título, descrição curta, módulo e data). Cada conta só acessa os próprios dados.
         </p>
         <p>
-          Você pode baixar seus dados, apagar seus registros salvos e excluir a conta por completo em &ldquo;Minha conta&rdquo; (LGPD, art. 18),
-          informando a senha atual; a exclusão remove o cadastro, o perfil e os registros e não pode ser desfeita. Esta página é um rascunho e passará por revisão jurídica antes do lançamento.
+          Se você ativar o aviso por e-mail de um prazo, guardamos o nome que você deu ao aviso, o tribunal, a data do vencimento e quando o e-mail foi
+          enviado. O e-mail é enviado por um prestador de serviço de e-mail (Resend), que recebe o seu endereço, o nome do aviso e a data; por isso, não escreva nome de partes nem número de processo no nome do aviso.
+          Você cancela o aviso em &ldquo;Meu espaço&rdquo; a qualquer momento. Os e-mails de confirmação de conta e de nova senha saem pelo mesmo prestador.
+        </p>
+        <p>
+          Você pode baixar seus dados, apagar seus registros salvos e avisos e excluir a conta por completo em &ldquo;Minha conta&rdquo; (LGPD, art. 18),
+          informando a senha atual; a exclusão remove o cadastro, o perfil, os registros e os avisos e não pode ser desfeita. Esta página é um rascunho e passará por revisão jurídica antes do lançamento.
         </p>
         <p>
           Antes de qualquer funcionalidade que envolva envio de documentos, esta página será atualizada com as regras

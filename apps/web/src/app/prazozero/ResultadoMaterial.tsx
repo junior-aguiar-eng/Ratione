@@ -6,6 +6,7 @@ import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
+import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 
@@ -135,6 +136,8 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
           {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
         </button>
       </div>
+
+      <AvisoPorEmail tituloPadrao={`${titulo} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataLimite} />
     </section>
   );
 }

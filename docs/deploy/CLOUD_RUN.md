@@ -108,6 +108,30 @@ gcloud compute forwarding-rules create ratione-http --global --load-balancing-sc
 
 O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar pelo balanceador, o serviço usa `--ingress internal-and-cloud-load-balancing` (no `deploy.yml`); depois disso o `*.run.app` deixa de responder.
 
+## Lembretes por e-mail (F2-10)
+
+O código já está no repositório e **fica inerte** até os passos abaixo: sem `LEMBRETES_SEGREDO` a rota `POST /api/lembretes/enviar` responde 503, e sem `RESEND_API_KEY` ela só simula (conta o que enviaria e não envia nem marca nada). Nada disso exige alterar o site já publicado.
+
+1. **Banco:** aplicar `supabase/migrations/20261011000001_lembretes_prazo.sql` no projeto `ratione` (SQL Editor do Supabase ou `supabase db push`). Conferir depois que a tabela tem RLS ligada.
+2. **Chave do Resend para os lembretes:** em *Resend → API Keys*, criar uma chave **só de envio**, restrita ao domínio `nexojuris.ia.br`, com o nome `ratione-lembretes` (separada da chave do SMTP do Supabase, para poder revogar uma sem afetar a outra). Não colar a chave em chat nem em arquivo do repositório.
+3. **Segredos no Google Cloud** (projeto `ratione-nexojuris`):
+```bash
+printf '%s' "$CHAVE_RESEND" | gcloud secrets create resend-api-key-lembretes --data-file=-
+openssl rand -hex 32 | tr -d '
+' | gcloud secrets create lembretes-segredo --data-file=-
+gcloud secrets add-iam-policy-binding resend-api-key-lembretes --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+gcloud secrets add-iam-policy-binding lembretes-segredo --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+```
+4. **`deploy.yml`:** acrescentar ao `--set-secrets` do passo "Cloud Run" `RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest`. Só depois de os segredos existirem: referenciar um segredo que não existe faz a publicação falhar.
+5. **Agendador** (uma vez por dia, de manhã, horário de Brasília):
+```bash
+gcloud services enable cloudscheduler.googleapis.com
+gcloud scheduler jobs create http ratione-lembretes --location=southamerica-east1 --schedule="0 8 * * *" --time-zone="America/Sao_Paulo"   --uri="https://ratione.nexojuris.ia.br/api/lembretes/enviar" --http-method=POST   --headers="Authorization=Bearer $(gcloud secrets versions access latest --secret=lembretes-segredo)"
+```
+6. **Teste:** criar um aviso para um prazo que vença em 3 dias, rodar o job (`gcloud scheduler jobs run ratione-lembretes --location=southamerica-east1`) e conferir o e-mail. A resposta da rota traz só contagens (`analisados`, `enviados`, `semEmail`, `falhas`); o log traz o mesmo, sem endereços.
+
+No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve caminhos que começam com `/`.
+
 ## Monitoramento
 
 Projeto `ratione-nexojuris`. O servidor escreve logs em JSON (`apps/web/src/lib/log.ts`); todo erro não tratado vira `severity=ERROR` (`apps/web/src/instrumentation.ts`).
