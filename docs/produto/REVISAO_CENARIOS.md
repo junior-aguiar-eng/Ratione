@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **176** · validados: **168** · pendentes: **8**
+> Cenários: **176** · validados: **176** · pendentes: **0**
 
 ## Como revisar
 
@@ -1395,7 +1395,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 13/02/2026 TJRJ: 02-13; 16/02/2026 TJRJ: 02-16; 17/02/2026 TJRJ: 02-17; 18/02/2026 TJRJ: 02-18
 - **Fundamento:** TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 20/2026; Lei 10.633/2024, art. 83, II e III
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 111. `tjrj-sao-jorge-2026`
 
@@ -1407,7 +1407,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/04/2026 TJRJ: 04-23; 24/04/2026 TJRJ: 04-24
 - **Fundamento:** TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Lei estadual 5.198/2008; Ato Executivo 79/2026; Lei 10.633/2024, art. 83, II
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 112. `tjrj-ponto-facultativo-5-junho-2026`
 
@@ -1419,7 +1419,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRJ: 06-04; 05/06/2026 TJRJ: 06-05
 - **Fundamento:** TJRJ, informativo de suspensão de prazos 2026 (cita o ato); Ato Executivo 91/2026; Lei 10.633/2024, art. 83, II
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 113. `tjrj-permanente-2028`
 
@@ -1431,7 +1431,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 28/02/2028 TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83); 29/02/2028 TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83); 01/03/2028 TJRJ: Carnaval/Semana Santa (Lei 10.633/2024, art. 83)
 - **Fundamento:** Lei estadual RJ 10.633/2024, art. 83, III
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 114. `tjrj-dia-da-justica-2027`
 
@@ -1443,7 +1443,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2027 TJRJ: Dia da Justiça (Lei 10.633/2024, art. 83, I)
 - **Fundamento:** Lei estadual RJ 10.633/2024, art. 83, I
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 115. `tjrj-copa-2026`
 
@@ -1983,7 +1983,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJGO: calendário oficial de 2026; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Decreto Judiciário 1738/2026; Lei estadual GO 21.268/2022, art. 91, II
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 160. `tjgo-2026-corpus-christi`
 
@@ -1995,7 +1995,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJGO: calendário oficial de 2026; 05/06/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Lei estadual GO 21.268/2022, art. 91, II
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 161. `tjgo-2026-ponto-facultativo-20-marco`
 
@@ -2007,7 +2007,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/03/2026 TJGO: calendário oficial de 2026
 - **Fundamento:** Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224; Decreto Judiciário 1130/2026 (notícia oficial); Lei estadual GO 21.268/2022, art. 91, II
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-10
 
 ### 162. `tjgo-2026-copa-29-junho`
 
