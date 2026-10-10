@@ -46,7 +46,7 @@ function Confirmar() {
     <div className="max-w-md space-y-5">
       <p className="text-ink-soft leading-relaxed">
         {recuperacao
-          ? 'Para criar uma nova senha, confirme abaixo. Em seguida você poderá definir a senha na tela da conta.'
+          ? 'Para criar uma nova senha, confirme abaixo. Em seguida você vai definir a senha nova.'
           : 'Para ativar a sua conta, confirme abaixo.'}
       </p>
       {erro && <Notice tom="danger">{erro}</Notice>}

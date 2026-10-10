@@ -114,8 +114,8 @@ describe('Link enviado por e-mail', () => {
     }
   });
 
-  it('a recuperação de senha leva à conta; o cadastro, ao Meu espaço', () => {
-    assert.strictEqual(destinoPadrao('recovery'), '/conta');
+  it('a recuperação de senha leva à tela de nova senha; o cadastro, ao Meu espaço', () => {
+    assert.strictEqual(destinoPadrao('recovery'), '/conta/nova-senha');
     assert.strictEqual(destinoPadrao('signup'), '/meu-espaco');
   });
 });
