@@ -132,6 +132,8 @@ gcloud scheduler jobs create http ratione-lembretes --location=southamerica-east
 
 No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve caminhos que começam com `/`.
 
+**Quebra de linha no segredo:** no PowerShell, enviar um valor por pipe (`$valor | gcloud secrets create ... --data-file=-`) acrescenta uma quebra de linha ao segredo. A rota apara espaços e quebras dos dois segredos (`limparSegredo`), então isso não quebra mais o envio; mesmo assim, prefira `[System.IO.File]::WriteAllText` ou `printf '%s'` para gravar o valor exato. Foi o que fez o primeiro disparo do job responder 401 em 11/10/2026.
+
 ## Monitoramento
 
 Projeto `ratione-nexojuris`. O servidor escreve logs em JSON (`apps/web/src/lib/log.ts`); todo erro não tratado vira `severity=ERROR` (`apps/web/src/instrumentation.ts`).
