@@ -70,6 +70,14 @@ describe('Lembretes de prazo: o e-mail', () => {
     assert.match(e.texto, /\/meu-espaco/);
   });
 
+  it('não repete o tribunal quando o nome do aviso já o traz; acrescenta quando não traz', () => {
+    const com = montarEmail(lembrete({ titulo: 'Embargos de declaração · TJSP', tribunal: 'TJSP' }), '2026-11-07');
+    assert.ok(!com.texto.includes('(TJSP)'));
+    assert.ok(!com.html.includes('(TJSP)'));
+    const sem = montarEmail(lembrete({ titulo: 'Contestação do cliente X', tribunal: 'TJSP' }), '2026-11-07');
+    assert.match(sem.texto, /\(TJSP\)/);
+  });
+
   it('o texto muda com a proximidade: amanhã e hoje', () => {
     assert.match(montarEmail(lembrete(), '2026-11-09').assunto, /vence amanhã/);
     assert.match(montarEmail(lembrete(), '2026-11-10').assunto, /vence hoje/);

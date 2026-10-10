@@ -64,7 +64,8 @@ export function montarEmail(l: Lembrete, hoje: string, enderecoSite = 'https://r
   const dias = diferencaDiasIso(hoje, l.vencimento);
   const quando = dias <= 0 ? 'vence hoje' : dias === 1 ? 'vence amanhã' : `vence em ${dias} dias`;
   const data = `${diaDaSemana(l.vencimento)}, ${dataCurta(l.vencimento)}`;
-  const tribunal = l.tribunal ? ` (${l.tribunal})` : '';
+  // O nome padrão do aviso já traz o tribunal ("Embargos de declaração · TJSP"): não repete
+  const tribunal = l.tribunal && !l.titulo.toUpperCase().includes(l.tribunal.toUpperCase()) ? ` (${l.tribunal})` : '';
   const assunto = `Ratione: seu prazo ${quando} (${dataCurta(l.vencimento)})`;
   const link = `${enderecoSite}/meu-espaco`;
   const linhas = [
