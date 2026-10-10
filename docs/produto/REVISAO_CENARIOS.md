@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **129** · validados: **121** · pendentes: **8**
+> Cenários: **133** · validados: **121** · pendentes: **12**
 
 ## Como revisar
 
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 24 |
-| Calendário verificado (tribunais com ato lido) | 39 |
+| Calendário verificado (tribunais com ato lido) | 43 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -363,7 +363,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Fazenda Pública: 15 dias em dobro (30 úteis)**
 
-- **Entrada:** publicação em **02/03/2026 (segunda-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador · prazo em dobro
+- **Entrada:** publicação em **02/03/2026 (segunda-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador · prazo em dobro
 - **Publicação / dia do começo:** 02/03/2026 (segunda-feira) · **início da contagem:** 03/03/2026 (terça-feira)
 - **Vencimento esperado:** **13/04/2026 (segunda-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 14/04/2026 (terça-feira)
@@ -723,7 +723,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Carnaval 2026 ignorado no modo conservador (data mais cedo)**
 
-- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador
 - **Publicação / dia do começo:** 13/02/2026 (sexta-feira) · **início da contagem:** 16/02/2026 (segunda-feira)
 - **Vencimento esperado:** **20/02/2026 (sexta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 25/02/2026 (quarta-feira)
@@ -736,7 +736,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Carnaval 2026 considerado; Quarta de Cinzas protrai o dia do começo**
 
-- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 13/02/2026 (sexta-feira) · **início da contagem:** 19/02/2026 (quinta-feira)
 - **Vencimento esperado:** **25/02/2026 (quarta-feira)**
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 Quarta-feira de Cinzas (expediente parcial): protrai o dia do começo
@@ -748,7 +748,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Quarta de Cinzas no meio do prazo (conservador)**
 
-- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador
 - **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
 - **Vencimento esperado:** **19/02/2026 (quinta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 23/02/2026 (segunda-feira)
@@ -761,7 +761,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Quarta de Cinzas no meio do prazo conta normalmente**
 
-- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
 - **Vencimento esperado:** **23/02/2026 (segunda-feira)**
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça)
@@ -773,7 +773,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Prazo de 4 dias; sem Carnaval vence na segunda 16/02**
 
-- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **4 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **4 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador
 - **Publicação / dia do começo:** 10/02/2026 (terça-feira) · **início da contagem:** 11/02/2026 (quarta-feira)
 - **Vencimento esperado:** **16/02/2026 (segunda-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 19/02/2026 (quinta-feira)
@@ -786,7 +786,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Prazo de 4 dias; vencimento cairia na Quarta de Cinzas e é protraído**
 
-- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **4 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **4 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 10/02/2026 (terça-feira) · **início da contagem:** 11/02/2026 (quarta-feira)
 - **Vencimento esperado:** **19/02/2026 (quinta-feira)** · prorrogado
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 Quarta-feira de Cinzas (expediente parcial): protrai o vencimento (CPC, art. 224, § 1º)
@@ -810,7 +810,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Corpus Christi 2026 (04/06) ignorado no modo conservador**
 
-- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
 - **Vencimento esperado:** **09/06/2026 (terça-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 10/06/2026 (quarta-feira)
@@ -823,7 +823,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Corpus Christi 2026 considerado**
 
-- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
 - **Vencimento esperado:** **10/06/2026 (quarta-feira)**
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi
@@ -835,7 +835,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Sexta-feira Santa 2026 (03/04) ignorada no modo conservador**
 
-- **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJSC** · modo conservador
 - **Publicação / dia do começo:** 01/04/2026 (quarta-feira) · **início da contagem:** 02/04/2026 (quinta-feira)
 - **Vencimento esperado:** **06/04/2026 (segunda-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 07/04/2026 (terça-feira)
@@ -848,7 +848,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Sexta-feira Santa 2026 considerada (TJSP)**
 
-- **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 01/04/2026 (quarta-feira) · **início da contagem:** 02/04/2026 (quinta-feira)
 - **Vencimento esperado:** **07/04/2026 (terça-feira)**
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 03/04/2026 Sexta-feira Santa
@@ -909,7 +909,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **Prazo em dobro com Sexta-feira Santa considerada**
 
-- **Entrada:** publicação em **02/03/2026 (segunda-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **TJBA** · modo completo · prazo em dobro
+- **Entrada:** publicação em **02/03/2026 (segunda-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **TJSC** · modo completo · prazo em dobro
 - **Publicação / dia do começo:** 02/03/2026 (segunda-feira) · **início da contagem:** 03/03/2026 (terça-feira)
 - **Vencimento esperado:** **14/04/2026 (terça-feira)**
 - **Como foi contado (dias excluídos):** 12 sábados/domingos; 03/04/2026 Sexta-feira Santa
@@ -921,7 +921,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 **CPP: vencimento na Sexta-feira Santa (completo) é prorrogado**
 
-- **Entrada:** publicação em **30/03/2026 (segunda-feira)** · prazo de **4 dias** (CPP, dias corridos) · tribunal **TJBA** · modo completo
+- **Entrada:** publicação em **30/03/2026 (segunda-feira)** · prazo de **4 dias** (CPP, dias corridos) · tribunal **TJSC** · modo completo
 - **Publicação / dia do começo:** 30/03/2026 (segunda-feira) · **início da contagem:** 31/03/2026 (terça-feira)
 - **Vencimento esperado:** **06/04/2026 (segunda-feira)** · prorrogado
 - **Como foi contado (dias excluídos):** 03/04/2026 vencimento em dia não útil (Sexta-feira Santa), prorrogado (CPP, art. 798, § 3º)
@@ -1465,7 +1465,55 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
-### 117. `tjpr-19-dezembro-nao-feriado`
+### 117. `tjba-2026-carnaval`
+
+**TJBA 2026: 12, 13, 16, 17 e 18/02 (Carnaval e Quarta-feira de Cinzas) não contam; vence 24/02**
+
+- **Entrada:** publicação em **10/02/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 10/02/2026 (terça-feira) · **início da contagem:** 11/02/2026 (quarta-feira)
+- **Vencimento esperado:** **24/02/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 12/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 13/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 16/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 17/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 18/02/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 118. `tjba-2026-sao-joao`
+
+**TJBA 2026: 22, 23 e 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam; vence 30/06**
+
+- **Entrada:** publicação em **19/06/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 19/06/2026 (sexta-feira) · **início da contagem:** 25/06/2026 (quinta-feira)
+- **Vencimento esperado:** **30/06/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 22/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 23/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 24/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 29/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 119. `tjba-2026-independencia-da-bahia`
+
+**TJBA 2026: 02 e 03/07 (Independência da Bahia) não contam**
+
+- **Entrada:** publicação em **01/07/2026 (quarta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 01/07/2026 (quarta-feira) · **início da contagem:** 06/07/2026 (segunda-feira)
+- **Vencimento esperado:** **08/07/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026; 03/07/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 120. `tjba-2026-copa-29-junho`
+
+**TJBA: 29/06/2026 teve os prazos suspensos (jogo da Seleção na Copa); não conta**
+
+- **Entrada:** publicação em **26/06/2026 (sexta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJBA** · modo conservador
+- **Publicação / dia do começo:** 26/06/2026 (sexta-feira) · **início da contagem:** 30/06/2026 (terça-feira)
+- **Vencimento esperado:** **01/07/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TJBA: Decreto Judiciário 1050/2025 e 944/2026
+- **Fundamento:** Decreto Judiciário TJBA 944/2026, art. 3º (lido em 10/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 121. `tjpr-19-dezembro-nao-feriado`
 
 **TJPR: 19 de dezembro não é feriado civil (Lei estadual PR 18.384/2014, art. 1º); sem decreto lido, conta como dia útil**
 
@@ -1477,7 +1525,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 118. `tjdf-dia-evangelico-util`
+### 122. `tjdf-dia-evangelico-util`
 
 **TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal**
 
@@ -1491,7 +1539,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Intimação eletrônica
 
-### 119. `portal-segunda`
+### 123. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -1503,7 +1551,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 120. `portal-sexta`
+### 124. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -1515,7 +1563,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 121. `portal-sabado`
+### 125. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -1527,7 +1575,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 122. `portal-feriado`
+### 126. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -1539,7 +1587,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 123. `portal-recesso`
+### 127. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -1553,7 +1601,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 124. `jef-5d-embargos`
+### 128. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -1565,7 +1613,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 125. `jef-10d-recurso`
+### 129. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -1577,7 +1625,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 126. `jef-dobro-ignorado`
+### 130. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -1589,7 +1637,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 127. `jef-recesso`
+### 131. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -1601,7 +1649,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 128. `jef-recesso-desligado`
+### 132. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -1613,7 +1661,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 129. `jef-dje-sexta`
+### 133. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 
