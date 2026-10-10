@@ -24,6 +24,16 @@ export interface Lembrete {
 
 export type Momento = 'tres_dias' | 'um_dia';
 
+/**
+ * Valor de segredo vindo do ambiente, sem espaços nem quebras de linha nas pontas. Segredos guardados pelo terminal costumam levar uma
+ * quebra de linha no fim (o PowerShell acrescenta uma ao enviar por pipe); sem isto, o segredo da rota nunca confere e a chave do
+ * provedor de e-mail vira um cabeçalho inválido. Vazio vira `undefined`.
+ */
+export function limparSegredo(valor: string | null | undefined): string | undefined {
+  const limpo = valor?.trim();
+  return limpo ? limpo : undefined;
+}
+
 /** Data civil de hoje em Brasília (o servidor roda em UTC; perto da meia-noite a data local é outra). */
 export function hojeNoBrasil(agora: Date = new Date()): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(agora);

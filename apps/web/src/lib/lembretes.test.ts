@@ -5,6 +5,7 @@ import {
   avisoDevido,
   executarEnvio,
   hojeNoBrasil,
+  limparSegredo,
   montarEmail,
   type DependenciasEnvio,
   type Email,
@@ -177,3 +178,17 @@ describe('Lembretes de prazo: o que o formulário oferece', () => {
   });
 });
 
+describe('Lembretes de prazo: segredos vindos do ambiente', () => {
+  it('apara espaços e quebras de linha das pontas (o PowerShell acrescenta uma ao enviar o segredo por pipe)', () => {
+    assert.strictEqual(limparSegredo('abc123\r\n'), 'abc123');
+    assert.strictEqual(limparSegredo('  abc123\n'), 'abc123');
+    assert.strictEqual(limparSegredo('abc123'), 'abc123');
+  });
+
+  it('vazio, só espaços ou ausente vira undefined (a rota trata como não configurado)', () => {
+    assert.strictEqual(limparSegredo(''), undefined);
+    assert.strictEqual(limparSegredo(' \r\n'), undefined);
+    assert.strictEqual(limparSegredo(undefined), undefined);
+    assert.strictEqual(limparSegredo(null), undefined);
+  });
+});

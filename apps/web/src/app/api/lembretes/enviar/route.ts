@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { timingSafeEqual } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
-import { executarEnvio, hojeNoBrasil, type DependenciasEnvio, type Lembrete, type Momento } from '../../../../lib/lembretes';
+import { executarEnvio, hojeNoBrasil, limparSegredo, type DependenciasEnvio, type Lembrete, type Momento } from '../../../../lib/lembretes';
 import { registrar } from '../../../../lib/log';
 
 /**
@@ -24,20 +24,20 @@ function segredoConfere(recebido: string | null, esperado: string): boolean {
 }
 
 export async function POST(request: Request) {
-  const segredo = process.env.LEMBRETES_SEGREDO;
+  const segredo = limparSegredo(process.env.LEMBRETES_SEGREDO);
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const secreta = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!segredo || segredo.length < 32 || !url || !secreta) {
     return NextResponse.json({ mensagem: 'O envio de lembretes ainda não está habilitado nesta instalação.' }, { status: 503 });
   }
   const cabecalho = request.headers.get('authorization') ?? '';
-  if (!segredoConfere(cabecalho.startsWith('Bearer ') ? cabecalho.slice(7) : null, segredo)) {
+  if (!segredoConfere(cabecalho.startsWith('Bearer ') ? limparSegredo(cabecalho.slice(7)) ?? null : null, segredo)) {
     return NextResponse.json({ mensagem: 'Não autorizado.' }, { status: 401 });
   }
 
   const sb = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-  const chaveEmail = process.env.RESEND_API_KEY;
-  const remetente = process.env.LEMBRETES_REMETENTE || REMETENTE_PADRAO;
+  const chaveEmail = limparSegredo(process.env.RESEND_API_KEY);
+  const remetente = limparSegredo(process.env.LEMBRETES_REMETENTE) || REMETENTE_PADRAO;
   const coluna = (m: Momento) => (m === 'tres_dias' ? 'enviado_3_dias_em' : 'enviado_1_dia_em');
 
   const dep: DependenciasEnvio = {
