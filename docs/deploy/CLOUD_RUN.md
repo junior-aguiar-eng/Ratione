@@ -112,7 +112,7 @@ O endereço `*.run.app` continua respondendo. Para obrigar o tráfego a passar p
 
 O código já está no repositório e **fica inerte** até os passos abaixo: sem `LEMBRETES_SEGREDO` a rota `POST /api/lembretes/enviar` responde 503, e sem `RESEND_API_KEY` ela só simula (conta o que enviaria e não envia nem marca nada). Nada disso exige alterar o site já publicado.
 
-1. **Banco:** aplicar `supabase/migrations/20261011000001_lembretes_prazo.sql` no projeto `ratione` (SQL Editor do Supabase ou `supabase db push`). Conferir depois que a tabela tem RLS ligada.
+1. **Banco (feito em 11/10/2026):** `supabase/migrations/20261011000001_lembretes_prazo.sql` aplicada no projeto `ratione` pelo SQL Editor e conferida (RLS ligada; `authenticated` só com SELECT, INSERT e DELETE; políticas `lembretes_leitura`, `lembretes_insercao` e `lembretes_exclusao`; gatilho `lembretes_prazo_limite`). Para repetir em outro ambiente: SQL Editor ou `supabase db push`, e conferir a RLS.
 2. **Chave do Resend para os lembretes:** em *Resend → API Keys*, criar uma chave **só de envio**, restrita ao domínio `nexojuris.ia.br`, com o nome `ratione-lembretes` (separada da chave do SMTP do Supabase, para poder revogar uma sem afetar a outra). Não colar a chave em chat nem em arquivo do repositório.
 3. **Segredos no Google Cloud** (projeto `ratione-nexojuris`):
 ```bash
