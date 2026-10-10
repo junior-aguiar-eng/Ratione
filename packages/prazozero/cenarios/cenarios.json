@@ -4091,9 +4091,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-02-23"
   },
@@ -4128,9 +4128,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-04-29"
   },
@@ -4353,9 +4353,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4394,9 +4394,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4435,9 +4435,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4476,9 +4476,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4513,9 +4513,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4550,9 +4550,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4582,9 +4582,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-06-10"
   },
@@ -4620,15 +4620,15 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     }
   },
   {
     "id": "tjba-2026-carnaval",
-    "categoria": "pendente",
-    "descricao": "TJBA 2026: 12 e 13/02 são pontos facultativos (alerta: o modo conservador conta os dias, o completo não); 16, 17 e 18/02 (Carnaval e Cinzas) não contam",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 12, 13, 16, 17 e 18/02 (pontos facultativos e Carnaval, todos sem expediente pelo art. 5º do Decreto 1050/2025) não contam",
     "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-10",
@@ -4639,15 +4639,23 @@
     "esperado": {
       "dataPublicacao": "2026-02-10",
       "dataTermoInicial": "2026-02-11",
-      "dataVencimentoFinal": "2026-02-20",
+      "dataVencimentoFinal": "2026-02-24",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-02-12",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-02-13",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
           {
             "data": "2026-02-16",
             "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
@@ -4668,12 +4676,12 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-02-24"
+    "alternativaEsperada": null
   },
   {
     "id": "tjba-2026-sao-joao",
-    "categoria": "pendente",
-    "descricao": "TJBA 2026: 22 e 23/06 são pontos facultativos (alerta); 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 22, 23 e 24/06 (São João) e 29/06 (Copa, Decreto 944/2026) não contam",
     "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-06-19",
@@ -4683,18 +4691,30 @@
     },
     "esperado": {
       "dataPublicacao": "2026-06-19",
-      "dataTermoInicial": "2026-06-22",
-      "dataVencimentoFinal": "2026-06-25",
+      "dataTermoInicial": "2026-06-25",
+      "dataVencimentoFinal": "2026-06-30",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-06-22",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
             "data": "2026-06-24",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-06-29",
             "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
           }
         ]
@@ -4705,12 +4725,12 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-06-30"
+    "alternativaEsperada": null
   },
   {
     "id": "tjba-2026-independencia-da-bahia",
-    "categoria": "pendente",
-    "descricao": "TJBA 2026: 02/07 (Independência da Bahia) não conta; 03/07 é ponto facultativo (alerta)",
+    "categoria": "verificado",
+    "descricao": "TJBA 2026: 02 e 03/07 (Independência da Bahia) não contam",
     "fundamento": "Decreto Judiciário TJBA 1050/2025, arts. 5º e 8º (lido em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-07-01",
@@ -4720,8 +4740,8 @@
     },
     "esperado": {
       "dataPublicacao": "2026-07-01",
-      "dataTermoInicial": "2026-07-03",
-      "dataVencimentoFinal": "2026-07-07",
+      "dataTermoInicial": "2026-07-06",
+      "dataVencimentoFinal": "2026-07-08",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -4733,6 +4753,10 @@
           {
             "data": "2026-07-02",
             "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
+          },
+          {
+            "data": "2026-07-03",
+            "motivo": "TJBA: Decreto Judiciário 1050/2025 e 944/2026"
           }
         ]
       }
@@ -4742,7 +4766,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-07-08"
+    "alternativaEsperada": null
   },
   {
     "id": "tjba-2026-copa-29-junho",
@@ -4775,9 +4799,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4820,9 +4844,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4865,16 +4889,16 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
   {
     "id": "tjdf-2026-ponto-facultativo-20-abril",
-    "categoria": "pendente",
-    "descricao": "TJDFT 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta",
+    "categoria": "verificado",
+    "descricao": "TJDFT 2026: 20/04 (ponto facultativo, expediente suspenso pelos arts. 4º e 5º da Portaria 105/2025) e 21/04 (Tiradentes) não contam",
     "fundamento": "Portaria Conjunta TJDFT 105/2025, arts. 2º, 4º e 5º (lida em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-04-16",
@@ -4885,7 +4909,7 @@
     "esperado": {
       "dataPublicacao": "2026-04-16",
       "dataTermoInicial": "2026-04-17",
-      "dataVencimentoFinal": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-23",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -4894,6 +4918,10 @@
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJDFT: Portaria Conjunta 105/2025 e 48/2026"
+          },
           {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
@@ -4906,7 +4934,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-04-23"
+    "alternativaEsperada": null
   },
   {
     "id": "tjdf-2026-copa-24-junho",
@@ -4939,9 +4967,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -4976,9 +5004,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5017,9 +5045,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5062,9 +5090,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5099,9 +5127,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5136,9 +5164,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5173,9 +5201,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5210,9 +5238,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5255,9 +5283,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5287,9 +5315,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5348,9 +5376,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5385,9 +5413,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5426,9 +5454,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5479,16 +5507,16 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
   {
     "id": "tjce-2026-carnaval",
-    "categoria": "pendente",
-    "descricao": "TJCE 2026: 16 e 17/02 (Carnaval, ponto facultativo) e a Quarta-feira de Cinzas (ponto facultativo até as 14h) são alertas",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 16 e 17/02 (Carnaval, ponto facultativo sem expediente forense) não contam; a Quarta-feira de Cinzas (expediente normal só a partir das 14h) conta no meio do prazo",
     "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-12",
@@ -5499,15 +5527,24 @@
     "esperado": {
       "dataPublicacao": "2026-02-12",
       "dataTermoInicial": "2026-02-13",
-      "dataVencimentoFinal": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
       }
     },
     "validacao": {
@@ -5515,12 +5552,12 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-02-23"
+    "alternativaEsperada": null
   },
   {
     "id": "tjce-2026-cinzas-vencimento",
-    "categoria": "pendente",
-    "descricao": "TJCE 2026: prazo que termina na Quarta-feira de Cinzas (ponto facultativo até as 14h): alerta de prorrogação",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: prazo que termina na Quarta-feira de Cinzas (expediente normal só a partir das 14h) é protraído para o dia seguinte",
     "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-12",
@@ -5531,15 +5568,28 @@
     "esperado": {
       "dataPublicacao": "2026-02-12",
       "dataTermoInicial": "2026-02-13",
-      "dataVencimentoFinal": "2026-02-16",
-      "foiProrrogadoTermoFinal": false,
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
       "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJCE: expediente reduzido (Portarias 1401 e 1440/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
       }
     },
     "validacao": {
@@ -5547,12 +5597,12 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-02-19"
+    "alternativaEsperada": null
   },
   {
     "id": "tjce-2026-sao-jose-data-magna",
-    "categoria": "pendente",
-    "descricao": "TJCE 2026: 19/03 (São José) é ponto facultativo (alerta); 25/03 (Data Magna do Ceará) não conta",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 19/03 (São José, ponto facultativo sem expediente forense) e 25/03 (Data Magna do Ceará) não contam",
     "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-03-17",
@@ -5563,7 +5613,7 @@
     "esperado": {
       "dataPublicacao": "2026-03-17",
       "dataTermoInicial": "2026-03-18",
-      "dataVencimentoFinal": "2026-03-26",
+      "dataVencimentoFinal": "2026-03-27",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -5572,6 +5622,10 @@
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-03-19",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
           {
             "data": "2026-03-25",
             "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
@@ -5584,12 +5638,12 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-03-27"
+    "alternativaEsperada": null
   },
   {
     "id": "tjce-2026-corpus-christi",
-    "categoria": "pendente",
-    "descricao": "TJCE 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alertas)",
+    "categoria": "verificado",
+    "descricao": "TJCE 2026: 04/06 (Corpus Christi) e 05/06 (Portaria 1169/2026) são dias sem expediente forense e não contam",
     "fundamento": "Portaria TJCE 2924/2025, art. 1º e Anexo Único (lida em 10/10/2026); CPC, arts. 219 e 224; Portaria TJCE 1169/2026, art. 1º",
     "entrada": {
       "dataEvento": "2026-06-02",
@@ -5600,15 +5654,24 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-05",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 0,
+        "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJCE: Portaria 2924/2025 e 1169/2026"
+          }
+        ]
       }
     },
     "validacao": {
@@ -5616,7 +5679,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-06-09"
+    "alternativaEsperada": null
   },
   {
     "id": "tjce-2026-copa-24-junho",
@@ -5649,9 +5712,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5686,9 +5749,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5723,9 +5786,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5755,9 +5818,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-04-15"
   },
@@ -5793,9 +5856,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     }
   },
   {
@@ -5837,9 +5900,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5874,9 +5937,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -5911,9 +5974,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-04-23"
   },
@@ -5943,9 +6006,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-11-03"
   },
@@ -5980,9 +6043,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-12-11"
   },
@@ -6017,9 +6080,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -6058,9 +6121,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -6103,9 +6166,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -6148,9 +6211,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -6185,9 +6248,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-04-23"
   },
@@ -6222,9 +6285,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": "2026-06-09"
   },
@@ -6259,9 +6322,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
@@ -6296,9 +6359,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-10"
     },
     "alternativaEsperada": null
   },
