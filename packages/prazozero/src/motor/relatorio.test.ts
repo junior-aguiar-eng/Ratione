@@ -33,8 +33,8 @@ describe('Relatório "o que pode alterar este prazo" (F2-12)', () => {
     assert.strictEqual(item(rel({ ...base, regime: 'cpp_dias_corridos', diasPrazo: 5 }), 'prazo-em-dobro'), undefined);
   });
 
-  it('dia pendente: aparece com a mesma data alternativa do cálculo (Carnaval no TJGO, sem ato)', () => {
-    const p: ParametrosCalculoPrazo = { dataEvento: '2026-02-12', tipoEvento: 'disponibilizacao_dje', diasPrazo: 5, tribunalId: 'TJGO' };
+  it('dia pendente: aparece com a mesma data alternativa do cálculo (Carnaval sem tribunal informado, sem ato)', () => {
+    const p: ParametrosCalculoPrazo = { dataEvento: '2026-02-12', tipoEvento: 'disponibilizacao_dje', diasPrazo: 5 };
     const res = motor.calcularPrazo(p);
     assert.ok(res.alternativa);
     const i = item(relatorioAlteracoes(p, res), 'dias-pendentes')!;
@@ -48,7 +48,7 @@ describe('Relatório "o que pode alterar este prazo" (F2-12)', () => {
 
   it('calendário conferido (TJSP 2026) não gera o item de calendário não conferido; outro tribunal gera', () => {
     assert.strictEqual(item(rel(base), 'calendario-nao-conferido'), undefined);
-    assert.ok(item(rel({ ...base, tribunalId: 'TJGO' }), 'calendario-nao-conferido'));
+    assert.ok(item(rel({ ...base, tribunalId: 'TJRJ' }), 'calendario-nao-conferido'));
     assert.ok(item(rel({ ...base, dataEvento: '2027-03-10' }), 'calendario-nao-conferido'));
   });
 

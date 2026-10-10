@@ -838,7 +838,6 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJGO",
       "prazoEmDobro": true
     },
     "esperado": {
@@ -1217,8 +1216,7 @@
     "entrada": {
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
-      "diasPrazo": 5,
-      "tribunalId": "TJGO"
+      "diasPrazo": 5
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
@@ -1250,7 +1248,6 @@
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1294,8 +1291,7 @@
     "entrada": {
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
-      "diasPrazo": 5,
-      "tribunalId": "TJGO"
+      "diasPrazo": 5
     },
     "esperado": {
       "dataPublicacao": "2026-02-12",
@@ -1327,7 +1323,6 @@
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1367,8 +1362,7 @@
     "entrada": {
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
-      "diasPrazo": 4,
-      "tribunalId": "TJGO"
+      "diasPrazo": 4
     },
     "esperado": {
       "dataPublicacao": "2026-02-10",
@@ -1400,7 +1394,6 @@
       "dataEvento": "2026-02-10",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1489,8 +1482,7 @@
     "entrada": {
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
-      "diasPrazo": 5,
-      "tribunalId": "TJGO"
+      "diasPrazo": 5
     },
     "esperado": {
       "dataPublicacao": "2026-06-02",
@@ -1522,7 +1514,6 @@
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 5,
-      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1558,8 +1549,7 @@
     "entrada": {
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
-      "diasPrazo": 3,
-      "tribunalId": "TJGO"
+      "diasPrazo": 3
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
@@ -1591,7 +1581,6 @@
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
       "diasPrazo": 3,
-      "tribunalId": "TJGO",
       "modo": "completo"
     },
     "esperado": {
@@ -1766,7 +1755,6 @@
       "dataEvento": "2026-03-02",
       "tipoEvento": "publicacao",
       "diasPrazo": 15,
-      "tribunalId": "TJGO",
       "prazoEmDobro": true,
       "modo": "completo"
     },
@@ -1804,7 +1792,6 @@
       "dataEvento": "2026-03-30",
       "tipoEvento": "publicacao",
       "diasPrazo": 4,
-      "tribunalId": "TJGO",
       "regime": "cpp_dias_corridos",
       "modo": "completo"
     },
@@ -6252,6 +6239,362 @@
           {
             "data": "2026-06-24",
             "motivo": "TJES: horário reduzido no jogo da Seleção (Atos 103 e 113/2026; pendente: o tribunal diz que não suspende prazos): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "tjgo-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 16 e 17/02 (Carnaval) não contam; a Quarta-feira de Cinzas (feriado até as 12h) conta no meio do prazo",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJGO: calendário oficial de 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-cinzas-vencimento",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: prazo que termina na Quarta-feira de Cinzas (feriado até as 12h) é protraído para o dia seguinte",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJGO: expediente parcial (Cinzas até as 12h; jogo da Seleção, Decreto 3079/2026): protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 01 a 03/04 (Semana Santa, de quarta a sexta-feira) não contam",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJGO: calendário oficial de 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJGO: calendário oficial de 2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJGO: calendário oficial de 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-copa-29-junho",
+    "categoria": "verificado",
+    "descricao": "TJGO: o começo do prazo em 29/06/2026 (expediente das 7h às 12h) é postergado",
+    "fundamento": "Decreto Judiciário TJGO 3079/2026, arts. 1º e 2º (lido em 10/10/2026); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "TJGO: expediente parcial (Cinzas até as 12h; jogo da Seleção, Decreto 3079/2026): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJGO 2026: 28/10 (Dia do Servidor Público, feriado estadual, sem transferência) não conta",
+    "fundamento": "Calendário oficial TJGO 2026, Regimento Interno art. 123 (lido em 10/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-26",
+      "dataTermoInicial": "2026-10-27",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJGO: calendário oficial de 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjgo-2026-copa-24-junho-conservador",
+    "categoria": "pendente",
+    "descricao": "TJGO: 24/06/2026 (jogo; Decreto 2876/2026 não lido) ignorado no modo conservador",
+    "fundamento": "Decreto Judiciário TJGO 2876/2026 (texto não lido); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJGO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-25"
+  },
+  {
+    "id": "tjgo-2026-copa-24-junho-completo",
+    "categoria": "pendente",
+    "descricao": "TJGO: 24/06/2026 considerado no modo completo (vencimento postergado)",
+    "fundamento": "Decreto Judiciário TJGO 2876/2026 (texto não lido); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJGO",
+      "modo": "completo"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-06-25",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJGO: jogo da Seleção, expediente das 8h às 15h (Decreto 2876/2026; pendente: texto não lido): protrai o vencimento (CPC, art. 224, § 1º)"
           }
         ]
       }
