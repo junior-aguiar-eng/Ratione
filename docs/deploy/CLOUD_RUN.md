@@ -132,6 +132,8 @@ gcloud scheduler jobs create http ratione-lembretes --location=southamerica-east
 
 No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve caminhos que começam com `/`.
 
+**Permissão do `service_role` (aplicada em produção em 11/10/2026):** nas tabelas novas do Supabase o `service_role` nasce só com REFERENCES, TRIGGER e TRUNCATE, sem SELECT nem UPDATE, e a RLS ignorada por ele não substitui o privilégio de tabela. Por isso existe a migração `20261011000002_lembretes_prazo_service_role.sql` (SELECT e UPDATE só nas duas colunas de marca de envio). Sem ela o envio diário respondia 500 "falha ao listar lembretes". Toda tabela nova que a rota de servidor ler ou gravar precisa de GRANT explícito para o `service_role`.
+
 **Quebra de linha no segredo:** no PowerShell, enviar um valor por pipe (`$valor | gcloud secrets create ... --data-file=-`) acrescenta uma quebra de linha ao segredo. A rota apara espaços e quebras dos dois segredos (`limparSegredo`), então isso não quebra mais o envio; mesmo assim, prefira `[System.IO.File]::WriteAllText` ou `printf '%s'` para gravar o valor exato. Foi o que fez o primeiro disparo do job responder 401 em 11/10/2026.
 
 ## Monitoramento
