@@ -17,7 +17,7 @@ export default function Notice({
   return (
     <Alert role="note" variant={tom}>
       <Icone className="w-[18px] h-[18px] shrink-0 mt-0.5" aria-hidden />
-      <div className="space-y-1">
+      <div className="flex flex-col gap-1">
         {titulo && <AlertTitle>{titulo}</AlertTitle>}
         <AlertDescription>{children}</AlertDescription>
       </div>

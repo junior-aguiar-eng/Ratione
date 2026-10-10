@@ -7,7 +7,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 /** Erro numa página: o servidor já registrou o detalhe; aqui só orientamos quem usa. */
 export default function Erro({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
-    <div className="max-w-xl space-y-6">
+    <div className="max-w-xl flex flex-col gap-6">
       <h1 className="font-serif text-3xl font-semibold text-ink">Algo deu errado</h1>
       <Notice tom="danger" titulo="Não foi possível concluir esta ação.">
         O erro foi registrado. Tente de novo; se persistir, volte à página inicial.

@@ -213,11 +213,11 @@ export default function PrazoZeroPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start print:block">
         {/* Fluxo guiado */}
         <form
-          className={cn(cardClasses, 'lg:col-span-5 lg:sticky lg:top-24 p-6 space-y-7 print:hidden')}
+          className={cn(cardClasses, 'lg:col-span-5 lg:sticky lg:top-24 p-6 flex flex-col gap-7 print:hidden')}
           onSubmit={e => e.preventDefault()}
           aria-label="Dados do cálculo"
         >
-          <fieldset className="space-y-3">
+          <fieldset className="flex flex-col gap-3">
             <Legend className="mb-3">1. Qual prazo deseja calcular?</Legend>
             <NativeSelect
               id="ato"
@@ -322,7 +322,7 @@ export default function PrazoZeroPage() {
               <span>Opções avançadas</span>
               <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
             </summary>
-            <div className="space-y-5 pt-4">
+            <div className="flex flex-col gap-5 pt-4">
               <div>
                 <Label htmlFor="regime">
                   Regime de contagem
@@ -367,7 +367,7 @@ export default function PrazoZeroPage() {
         </form>
 
         {/* Resultado */}
-        <div className="lg:col-span-7 space-y-9 print:space-y-6" aria-live="polite">
+        <div className="lg:col-span-7 flex flex-col gap-9 print:gap-6" aria-live="polite">
           {material ? (
             resultadoMaterial ? (
               <ResultadoMaterial resultado={resultadoMaterial} titulo={nomeAto} tribunalId={tribunalId} />
@@ -393,7 +393,7 @@ export default function PrazoZeroPage() {
                   alterar o prazo.
                 </p>
               </div>
-              <section className="space-y-5">
+              <section className="flex flex-col gap-5">
                 <div>
                   <p className="text-sm font-medium text-ink-mute">Prazo final</p>
                   <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight sm:leading-none mt-1">
@@ -452,7 +452,7 @@ export default function PrazoZeroPage() {
 
                 {resultado.calendarioVerificado && resultado.fontesCalendario ? (
                   <Notice tom="info" titulo={`Calendário do ${tribunalId} conferido contra o ato oficial`}>
-                    <ul className="space-y-1">
+                    <ul className="flex flex-col gap-1">
                       {resultado.fontesCalendario.map(f => (
                         <li key={f.url}>
                           <a href={f.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
@@ -501,7 +501,7 @@ export default function PrazoZeroPage() {
 
               <AvisoPorEmail tituloPadrao={`${nomeAto} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataVencimentoFinal} />
 
-              <section className="border-t border-line pt-7 space-y-5">
+              <section className="border-t border-line pt-7 flex flex-col gap-5">
                 <div className="flex items-end justify-between gap-4">
                   <div>
                     <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>
@@ -524,7 +524,7 @@ export default function PrazoZeroPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
                   <div>
                     <h3 className="font-semibold text-ink mb-2">Eventos considerados</h3>
-                    <ul className="space-y-1.5 text-ink-soft leading-snug">
+                    <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
                       <li>Fins de semana: {resumo.fins || 'nenhum'}</li>
                       <li>
                         Recesso e férias (suspensão de prazos):{' '}
@@ -539,7 +539,7 @@ export default function PrazoZeroPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-ink mb-2">Base utilizada</h3>
-                    <ul className="space-y-1.5 text-ink-soft leading-snug">
+                    <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
                       {resumo.base.map(b => (
                         <li key={b}>{b}</li>
                       ))}

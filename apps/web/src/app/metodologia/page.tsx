@@ -12,8 +12,8 @@ export default function MetodologiaPage() {
         description="Como os resultados são produzidos, de onde vêm as informações e o que ainda não está coberto."
       />
 
-      <div className="space-y-12 text-base text-ink-soft leading-relaxed">
-        <section className="space-y-3">
+      <div className="flex flex-col gap-12 text-base text-ink-soft leading-relaxed">
+        <section className="flex flex-col gap-3">
           <h2 className="font-serif text-2xl font-semibold text-ink">Cálculo verificável</h2>
           <p>
             O prazo final é calculado por regras fixas, aplicadas dia a dia: a mesma entrada produz sempre o mesmo
@@ -34,10 +34,10 @@ export default function MetodologiaPage() {
           </p>
         </section>
 
-        <section className="space-y-3" id="fontes">
+        <section className="flex flex-col gap-3" id="fontes">
           <h2 className="font-serif text-2xl font-semibold text-ink">Fontes jurídicas</h2>
           <p>Cada regra é lida na versão compilada da lei, no Planalto, e registrada com a data da leitura.</p>
-          <ul className="list-disc pl-5 space-y-2">
+          <ul className="list-disc pl-5 flex flex-col gap-2">
             <li>
               <strong className="text-ink">Prazos processuais:</strong> CPC, arts. 219, 220, 224 e 231; CLT, arts. 775 e
               775-A; CPP, arts. 798 e 798-A; Lei 9.099/1995, art. 12-A; Resolução CNJ 244/2016 (suspensão em todos os
@@ -71,12 +71,12 @@ export default function MetodologiaPage() {
           </ul>
         </section>
 
-        <section className="space-y-4">
+        <section className="flex flex-col gap-4">
           <h2 className="font-serif text-2xl font-semibold text-ink">O que ainda não está coberto</h2>
           <Notice tom="warn" titulo="Confira sempre o calendário do tribunal">
             O resultado é um instrumento de apoio e não dispensa a conferência dos atos do tribunal.
           </Notice>
-          <ul className="list-disc pl-5 space-y-2">
+          <ul className="list-disc pl-5 flex flex-col gap-2">
             <li>
               <strong className="text-ink">Calendário conferido hoje:</strong> STF, STJ, TJSP, TJMG e TJAL, só para 2026.
               O TJRJ está carregado até outubro de 2026, sem selo. Nos demais tribunais entram os feriados nacionais, a Lei 5.010
@@ -110,9 +110,9 @@ export default function MetodologiaPage() {
           </ul>
         </section>
 
-        <section className="space-y-3">
+        <section className="flex flex-col gap-3">
           <h2 className="font-serif text-2xl font-semibold text-ink">Estado de cada ferramenta</h2>
-          <ul className="space-y-2">
+          <ul className="flex flex-col gap-2">
             <li>
               <strong className="text-ink">PrazoZero:</strong> disponível, com as limitações acima.
             </li>

@@ -158,8 +158,8 @@ export default function MeuEspacoPage() {
         <ul className="divide-y divide-line border-y border-line mt-4">
           {visiveis.map(r => (
             <li key={r.id} className="flex items-start justify-between gap-4 py-5">
-              <div className="min-w-0 space-y-1">
-                <Link href={r.url} className="text-lg font-medium text-ink hover:text-brand-text">
+              <div className="min-w-0 flex flex-col gap-1">
+                <Link href={r.url} className="self-start text-lg font-medium text-ink hover:text-brand-text">
                   {r.titulo}
                 </Link>
                 <p className="text-sm text-ink-mute">

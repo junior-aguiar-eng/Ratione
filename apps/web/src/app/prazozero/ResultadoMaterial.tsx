@@ -57,7 +57,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
   };
 
   return (
-    <section className="space-y-5">
+    <section className="flex flex-col gap-5">
       <div className="hidden print:block border-b border-line pb-3 text-sm text-ink-soft">
         <p className="font-semibold text-ink">Ratione · PrazoZero: memória de cálculo</p>
         <p>Gerado em {new Date().toLocaleString('pt-BR')}. Instrumento de apoio: confira o calendário do tribunal.</p>
@@ -100,7 +100,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
       )}
 
       <Notice tom="info" titulo="O que este cálculo não decide">
-        <ul className="space-y-1.5">
+        <ul className="flex flex-col gap-1.5">
           {resultado.avisos.map(a => (
             <li key={a}>{a}</li>
           ))}
@@ -109,7 +109,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
 
       <div>
         <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>
-        <ol className="mt-3 space-y-2 text-sm text-ink-soft leading-snug">
+        <ol className="mt-3 flex flex-col gap-2 text-sm text-ink-soft leading-snug">
           {resultado.memoriaCalculo.map((i, k) => (
             <li key={k}>
               <span className="num font-medium text-ink">{dataCurta(i.data)}</span> · {i.descricao}

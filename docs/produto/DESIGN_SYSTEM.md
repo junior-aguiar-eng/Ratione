@@ -8,7 +8,8 @@ Base: **shadcn/ui** (estilo `new-york`) sobre **Radix** (`radix-ui`) e **Tailwin
 2. **Variação por `cva`.** Aparência diferente é uma `variant`/`size` do componente, não uma classe nova no CSS global. Os utilitários caseiros `btn-primary`, `btn-secondary`, `field`, `label`, `card` e `tag-*` foram removidos; restam só `eyebrow` e `num` (tipografia).
 3. **Tela não repete classe de componente.** Botão é `Button`, campo é `Input`/`NativeSelect`, rótulo é `Label`/`Legend`, etiqueta é `Badge`, aviso é `Notice` (sobre `Alert`). `className` na tela serve para layout (`w-full`, `self-start`), não para refazer o visual.
 4. **Foco:** o anel é o `:focus-visible` global (`globals.css`); campos de texto acrescentam borda e anel da marca ao focar.
-5. **Nativo quando basta.** Lista suspensa é `<select>` nativo (`NativeSelect`: teclado, leitor de tela e seletor do celular de graça) e “Opções avançadas” é `<details>`. Não usar o `Select` do Radix, que troca o `<select>` por um menu próprio.
+5. **Espaço entre irmãos é `flex flex-col gap-N`, nunca `space-y-N`.** No Tailwind 4 o `space-y` é margem: não vale em filho inline, não funciona com `<legend>` e soma com o `mt-*` do filho. Cuidado: num pai `flex-col` o filho inline (`Button`, link, `<button>` de texto) **estica na largura**; dê `self-start` (ou `w-full` de propósito). Um elemento vazio de região `aria-live` também ganha gap, ao contrário da margem que colapsava; compense com `-mt-*` enquanto estiver vazio (ver o aviso do `/entrar`).
+6. **Nativo quando basta.** Lista suspensa é `<select>` nativo (`NativeSelect`: teclado, leitor de tela e seletor do celular de graça) e “Opções avançadas” é `<details>`. Não usar o `Select` do Radix, que troca o `<select>` por um menu próprio.
 
 ## Componentes
 

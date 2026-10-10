@@ -110,7 +110,7 @@ function Formulario() {
         ))}
       </div>
 
-      <form onSubmit={enviar} className={cn(cardClasses, 'p-6 space-y-5')} aria-label={titulos[modo]}>
+      <form onSubmit={enviar} className={cn(cardClasses, 'p-6 flex flex-col gap-5')} aria-label={titulos[modo]}>
         <div>
           <Label htmlFor="email">
             E-mail
@@ -153,7 +153,7 @@ function Formulario() {
           </label>
         )}
 
-        <div aria-live="polite" className="space-y-3">
+        <div aria-live="polite" className={cn('flex flex-col gap-3', !erro && !aviso && '-mt-5')}>
           {erro && (
             <Notice tom="danger" titulo="Não foi possível continuar">
               {erro}
@@ -178,13 +178,13 @@ function Formulario() {
               setErro(null);
               setAviso(null);
             }}
-            className="text-sm text-brand-text underline underline-offset-2"
+            className="self-start text-sm text-brand-text underline underline-offset-2"
           >
             Esqueci a senha
           </button>
         )}
         {modo === 'recuperar' && (
-          <button type="button" onClick={() => setModo('entrar')} className="text-sm text-brand-text underline underline-offset-2">
+          <button type="button" onClick={() => setModo('entrar')} className="self-start text-sm text-brand-text underline underline-offset-2">
             Voltar para entrar
           </button>
         )}
@@ -201,7 +201,7 @@ function Formulario() {
 export default function EntrarPage() {
   return (
     <div className="pt-4 sm:pt-10 pb-10">
-      <header className="text-center space-y-2 max-w-md mx-auto mb-8">
+      <header className="text-center flex flex-col gap-2 max-w-md mx-auto mb-8">
         <p className="eyebrow leading-6">Conta</p>
         <h1 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Entrar no Ratione</h1>
         <p className="text-base text-ink-soft leading-relaxed">Entre ou crie sua conta para usar as ferramentas.</p>

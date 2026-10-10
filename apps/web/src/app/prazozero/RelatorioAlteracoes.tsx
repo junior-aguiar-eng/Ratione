@@ -21,7 +21,7 @@ export default function RelatorioAlteracoes({ relatorio }: { relatorio: Relatori
         <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
       </summary>
 
-      <div className="px-4 pb-5 pt-1 space-y-6 text-sm">
+      <div className="px-4 pb-5 pt-1 flex flex-col gap-6 text-sm">
         <p className="text-ink-soft">
           Nada abaixo muda o prazo final mostrado ({dataCurta(relatorio.dataVencimentoFinal)}). São situações que o cálculo não conhece ou ainda não
           confirmou. Confira cada uma antes de contar com uma data diferente.
@@ -30,9 +30,9 @@ export default function RelatorioAlteracoes({ relatorio }: { relatorio: Relatori
         {comData.length > 0 && (
           <section>
             <h3 className="font-semibold text-ink mb-2">Mudam a data</h3>
-            <ul className="space-y-4">
+            <ul className="flex flex-col gap-4">
               {comData.map(i => (
-                <li key={i.id} className="space-y-1">
+                <li key={i.id} className="flex flex-col gap-1">
                   <p className="font-medium text-ink">
                     {i.titulo}: <span className="num">{dataCurta(i.dataSeAplicar!)}</span>{' '}
                     <span className="font-normal text-ink-mute">({diaDaSemana(i.dataSeAplicar!)})</span>
@@ -48,9 +48,9 @@ export default function RelatorioAlteracoes({ relatorio }: { relatorio: Relatori
         {semData.length > 0 && (
           <section>
             <h3 className="font-semibold text-ink mb-2">Dependem de fatos do caso</h3>
-            <ul className="space-y-4">
+            <ul className="flex flex-col gap-4">
               {semData.map(i => (
-                <li key={i.id} className="space-y-1">
+                <li key={i.id} className="flex flex-col gap-1">
                   <p className="font-medium text-ink">{i.titulo}</p>
                   <p className="text-ink-soft leading-snug">{i.descricao}</p>
                   <p className="text-xs text-ink-mute">{i.fundamentoLegal}</p>
