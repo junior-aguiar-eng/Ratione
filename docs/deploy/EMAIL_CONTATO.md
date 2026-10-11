@@ -4,6 +4,8 @@ As páginas de Termos e Privacidade apontam `contato@nexojuris.ia.br` como canal
 
 Desenho escolhido: **receber** com encaminhamento gratuito (ImprovMX) para o Gmail e **responder como `contato@`** pelo Gmail usando o Resend, que já está verificado para o domínio. Custo zero. Não exige mexer em nada que já funciona (login, confirmação de conta, avisos de prazo).
 
+> **Estado (11/10/2026): pronto e testado nos dois sentidos.** Recebimento: DNS no Registro.br, ImprovMX ativo, mensagem do Hotmail chegou ao Gmail. Envio: mensagem do Gmail como `Ratione <contato@nexojuris.ia.br>` chegou ao Hotmail e o Resend a registrou como entregue; cabeçalhos no Outlook: `spf=pass` (rsend.nexojuris.ia.br), `dkim=pass` (header.d=nexojuris.ia.br), `dmarc=pass` e `compauth=pass`. Região de envio do Resend conferida: São Paulo (`sa-east-1`); chaves existentes: `ratione-lembretes`, `ratione-supabase-smtp` e `Supabase Integration` (o nome `gmail-contato` está livre).
+>
 > Quem faz: você. Criar conta no ImprovMX e editar o DNS no Registro.br são ações suas. Os valores abaixo são os que o ImprovMX documenta; **confira no painel dele**, que mostra os registros atuais.
 
 ## 1. ImprovMX (receber)
@@ -37,6 +39,12 @@ Registros na raiz do domínio `nexojuris.ia.br` (a raiz hoje **não tem** MX nem
 4. Em *Ao responder uma mensagem*, deixe "Responder do mesmo endereço para o qual a mensagem foi enviada".
 
 A chave fica guardada nas configurações do Gmail. Se o Gmail for comprometido, revogue `gmail-contato` no Resend.
+
+## Se o Gmail não enviar como contato@ (aprendido em 11/10/2026)
+
+- **Responder** uma mensagem recebida por encaminhamento pode sair do Gmail pessoal, mesmo com "Responda pelo mesmo endereço em que a mensagem foi recebida" marcado. Ao responder a um titular, confira o remetente; se o seletor "De" não aparecer, abra uma **mensagem nova** (aí ele aparece) e escolha `Ratione <contato@...>`.
+- A configuração do Gmail **não testa a senha ao salvar**. Se a chave estiver errada, o Gmail não mostra erro: a mensagem simplesmente não sai. Sinal de que o login nunca aconteceu: a chave `gmail-contato` aparece como **"No activity"** em https://resend.com/api-keys. Refazer em *editar informações* digitando a chave de novo (sem espaços) resolve; trocar para a porta `587` com TLS também funciona.
+- Diagnóstico pelo Resend (https://resend.com/emails): toda mensagem enviada como `contato@` aparece ali com o status. Se não aparece, ela não saiu do Gmail.
 
 ## 4. Teste (feche o item)
 
