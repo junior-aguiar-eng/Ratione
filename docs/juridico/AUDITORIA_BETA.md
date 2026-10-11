@@ -18,17 +18,19 @@ Texto em vigor no site: `/termos`, `/privacidade` (inclui cookies) e `/metodolog
 | Registros técnicos do Google Cloud ficam 30 dias, em localização global | `gcloud logging buckets list`: `_Default`, local `global`, retenção 30 dias (conferido em 11/10/2026) |
 | Os registros de acesso trazem IP, navegador, data e hora | Entradas `run.googleapis.com/requests` têm `remoteIp`, `userAgent` e `requestUrl` |
 | Hospedagem em São Paulo; banco em São Paulo | `docs/deploy/CLOUD_RUN.md` (`southamerica-east1`) e `supabase/LEIA-ME.md` (`sa-east-1`) |
+| ImprovMX recebe e repassa as mensagens ao canal do titular | Decisão de 11/10/2026; só é verdade depois de seguir `docs/deploy/EMAIL_CONTATO.md` |
 | Resend recebe endereço, assunto e texto | `api/lembretes/enviar/route.ts` (POST a `api.resend.com/emails`) e SMTP do Supabase Auth (`supabase/LEIA-ME.md`) |
 | Sem estatística de uso, publicidade ou rastreadores de terceiros | Nenhum SDK de analytics no `package.json`; fontes via `next/font` (servidas pelo próprio site) |
 | Cookies e armazenamento local | Sessão do Supabase (`sb-…`); `localStorage`: `ratione_tema` e `ratione_historico_recente` (`ThemeToggle.tsx`, `lib/historico.ts`) |
 | Nenhuma ferramenta usa IA | Argumenta é demonstração com decisão fixa (`lib/decisaoDemo.ts`); não há chamada a modelo no código |
-| Guardamos a versão dos Termos aceita | `entrar/page.tsx` envia `dadosDeAceite()` em `signUp(... options.data)` (`user_metadata.termos_versao`) |
+| Guardamos a versão dos Termos aceita e quando | `entrar/page.tsx` envia só a versão em `signUp(... options.data)`; o gatilho `registrar_aceite` grava a linha em `aceites_termos` com o horário do banco (`20261011000003_aceites_termos.sql`, 8 testes em `packages/db/src/aceites.test.ts`); o usuário só lê o próprio registro e o recebe na exportação de dados |
 | Cenários validados e calendário conferido (Metodologia) | Lidos do código: `CENARIOS_VALIDADOS` (teste compara com `cenarios.json`) e `CALENDARIO_VERIFICADO` |
 
 ## 2. O que depende de você (responsável) antes de publicar
 
 **Obrigatório**
-1. **Criar e monitorar a caixa `contato@nexojuris.ia.br`.** Ela é o canal do titular de dados (LGPD, art. 9º) e o contato dos Termos. O remetente atual (`nao-responda@`) só envia, não recebe. Sem a caixa, publicar as páginas é prometer um canal que não existe.
+0. **Aplicar a migração `20261011000003_aceites_termos.sql` no Supabase** (SQL Editor → colar → Run, como nas anteriores). Enquanto não for aplicada, o cadastro funciona, mas nada é gravado em `aceites_termos`; e o "Baixar meus dados" sai com `aceitesDosTermos` vazio (a tabela ainda não existe).
+1. **Pôr no ar o `contato@nexojuris.ia.br`.** Ele é o canal do titular de dados (LGPD, art. 9º) e o contato dos Termos. O remetente atual (`nao-responda@`) só envia, e o domínio não tem MX. Caminho escolhido: encaminhar para o Gmail (ImprovMX) e responder como `contato@` pelo Resend; registros DNS e passos em [`../deploy/EMAIL_CONTATO.md`](../deploy/EMAIL_CONTATO.md). Sem isso, publicar as páginas é prometer um canal que não existe.
 2. **Confirmar o nome do responsável** (as páginas usam José Bonifácio de Aguiar Santos Júnior, pessoa física, sem CPF nem endereço) e se isso basta para o beta. A LGPD (art. 9º, I e II) exige identidade e contato do controlador; CPF e endereço só se tornam necessários com cobrança.
 
 **Decisões jurídicas que escrevi como proposta e você deve aprovar ou trocar**
@@ -42,7 +44,7 @@ Texto em vigor no site: `/termos`, `/privacidade` (inclui cookies) e `/metodolog
 **Lacunas que as páginas não resolvem (e dizem só o que é verdade hoje)**
 9. **Transferência internacional (LGPD, art. 33).** Resend pode processar fora do Brasil, e o bucket de logs do Google Cloud é `global`. A página diz "com as garantias contratuais oferecidas por esses prestadores": confirme o aceite do DPA/cláusulas-padrão de cada um (item "DPA" do §8 do plano) e, no Resend, a região do domínio `nexojuris.ia.br`.
 10. **Backups do Supabase:** a página diz que podem manter os dados "por um período limitado". Se você souber o prazo do plano contratado, informe o número.
-11. **Prova do aceite.** Gravamos `termos_versao` em `user_metadata` (valor enviado pelo navegador) e o `created_at` do cadastro é do servidor. Serve para saber qual texto estava em vigor, mas é prova fraca. Para prova forte seria preciso uma tabela própria preenchida no servidor.
+11. **Prova do aceite (resolvido no código, com dois limites).** O aceite agora é uma linha em `aceites_termos`, criada por gatilho no banco com o horário do servidor; o navegador não escreve nela nem a altera, e um horário enviado no cadastro é ignorado. Limites: (a) a **versão** continua sendo a que o navegador declarou no cadastro (o banco só aceita o formato `1.0`); cadastro sem versão fica com `versao` nula, o que também é registro; (b) a linha **some junto com a conta** (`ON DELETE CASCADE`), coerente com a promessa de apagar tudo, mas você perde a prova justamente quando um ex-usuário contesta. Se preferir guardá-la após a exclusão (defesa em processo, LGPD art. 7º, VI e art. 16, I), é decisão a registrar na Política de privacidade e implica mudar o `CASCADE`. As contas criadas antes ganharam o registro `anterior_ao_registro` (data do cadastro, sem versão), porque a tela já exigia marcar o aceite.
 12. **Marco Civil, art. 15:** a guarda de registros de acesso por 6 meses vale para provedor **pessoa jurídica**. Como pessoa física, os 30 dias do Google Cloud não conflitam; ao abrir CNPJ, reavaliar.
 
 ## 3. Fora do que as páginas dizem

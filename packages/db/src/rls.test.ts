@@ -120,6 +120,7 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
     assert.deepStrictEqual(
       q.rows.map(x => `${x.grantee} ${x.tabela}: ${x.privilegios}`),
       [
+        'authenticated aceites_termos: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',
         'authenticated lembretes_prazo: DELETE,INSERT,SELECT',
         'authenticated perfis: SELECT,UPDATE'

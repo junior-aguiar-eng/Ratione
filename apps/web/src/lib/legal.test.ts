@@ -3,9 +3,12 @@ import assert from 'node:assert';
 import { RESPONSAVEL, VERSAO_TEXTOS, VIGENCIA_TEXTOS, dadosDeAceite } from './legal';
 
 describe('Textos jurídicos: dados do responsável e registro do aceite', () => {
-  it('o cadastro registra a versão dos termos aceita e o horário', () => {
-    const d = dadosDeAceite(new Date('2026-10-10T12:00:00Z'));
-    assert.deepStrictEqual(d, { termos_versao: VERSAO_TEXTOS, termos_aceitos_em: '2026-10-10T12:00:00.000Z' });
+  it('o cadastro envia só a versão dos termos aceita: o horário é do servidor, não do navegador', () => {
+    assert.deepStrictEqual(dadosDeAceite(), { termos_versao: VERSAO_TEXTOS });
+  });
+
+  it('a versão enviada tem o formato que o banco aceita', () => {
+    assert.match(VERSAO_TEXTOS, /^[0-9]+(\.[0-9]+){0,2}$/);
   });
 
   it('responsável e canal do titular estão preenchidos e o e-mail tem formato válido', () => {

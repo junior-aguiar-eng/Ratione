@@ -21,7 +21,7 @@ export default function TermosPage() {
           </p>
           <p>
             Ao criar a conta, você declara que leu estes Termos e a <Link href="/privacidade" className={link}>Política de privacidade</Link> e
-            concorda com eles. Guardamos a versão dos Termos que você aceitou. Se não concordar, não crie a conta. O uso é destinado a maiores de
+            concorda com eles. Guardamos a versão dos Termos que você aceitou e o momento do aceite. Se não concordar, não crie a conta. O uso é destinado a maiores de
             18 anos com capacidade civil.
           </p>
         </Secao>

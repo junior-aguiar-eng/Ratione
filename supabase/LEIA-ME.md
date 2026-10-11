@@ -44,6 +44,10 @@ Tudo acima foi feito para o projeto `ratione`. O site publicado é `https://rati
 
 **SMTP: Resend, com domínio próprio.** Host `smtp.resend.com`, porta `465`, usuário `resend`, senha = chave de API do Resend (permissão só de envio, restrita ao domínio `nexojuris.ia.br`), remetente `nao-responda@nexojuris.ia.br` ("Ratione"). Substituiu o Gmail, que o painel desaconselha para produção e limita a 30 e-mails por hora. A chave fica só no painel do Supabase; para trocá-la, crie outra no Resend, cole no campo de senha do SMTP e apague a antiga. Testado em 10/10/2026: cadastro com confirmação e recuperação de senha, com os links abrindo no domínio publicado.
 
+## Migrações posteriores
+
+Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O último é `20261011000003_aceites_termos.sql` (aceite dos Termos gravado pelo servidor, F1-02); depois de rodar, conferir em *Table Editor* que existe `aceites_termos` e que cada conta já criada tem uma linha.
+
 ## Depois
 
 Avise quando terminar o passo 5. O próximo passo (login na tela, salvar cálculos na conta e migrar o histórico que hoje fica só no navegador) é código meu.
