@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cardClasses } from '@/components/ui/card';
+import { dadosDeAceite } from '../../lib/legal';
 import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +59,7 @@ function Formulario() {
         } else if (!aceite) {
           setErro('Para criar a conta, aceite os Termos de uso e a Política de privacidade.');
         } else {
-          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retorno } });
+          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retorno, data: dadosDeAceite() } });
           if (error) setErro(traduzirErroAuth(error.message));
           else
             setAviso(

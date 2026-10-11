@@ -300,7 +300,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | ID | Item | Estado | Pronto quando |
 |---|---|---|---|
 | F1-01 | Rotas e homes definitivas de cada ferramenta e do Meu espaço | feito | Telas existem e compilam; **dados de NormaViva, TeseMap e Argumenta são digitados à mão** |
-| F1-02 | Páginas de metodologia, termos e privacidade | parcial | Rascunhos; dependem da revisão jurídica (§8) |
+| F1-02 | Páginas de metodologia, termos e privacidade | feito (com ressalva) | **Feito (11/10/2026):** `/termos` e `/privacidade` (com cookies) reescritas para o beta como ele é hoje (gratuito, com conta, sem IA, sem upload, com avisos por e-mail), com responsável identificado, canal do titular, prestadores (Supabase, Google Cloud, Resend), retenção, direitos e como exercê-los; `/metodologia` deixa de ter número fixo: o total de cenários validados (176) e os tribunais com calendário conferido vêm do código, e um teste falha se o número divergir de `cenarios.json`. O cadastro grava a versão dos Termos aceita (`user_metadata`). Cada afirmação tem a comprovação no sistema em [`juridico/AUDITORIA_BETA.md`](juridico/AUDITORIA_BETA.md). **Ressalva:** a caixa `contato@nexojuris.ia.br` precisa existir antes de publicar, e o responsável precisa aprovar os pontos jurídicos listados na auditoria (foro, cláusula de responsabilidade, prazo de 15 dias, sem banner de cookies, transferência internacional, backups). As minutas de [`juridico/`](juridico/) seguem como versão-alvo para cobrança e IA |
 
 ### F2 — PrazoZero em produção (~6 a 8 semanas)
 

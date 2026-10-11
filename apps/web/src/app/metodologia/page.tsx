@@ -1,7 +1,19 @@
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
+import { CALENDARIO_VERIFICADO, CENARIOS_VALIDADOS, CENARIOS_VALIDADOS_EM } from '@ratione/prazozero';
+import { dataCurta } from '../../lib/datas';
 
 export const metadata = { title: 'Metodologia | Ratione' };
+
+/** "TJRS (2026 e 2027)": agrupa os tribunais pelos anos cobertos, a partir do que o código realmente carrega. */
+function resumoCalendarioConferido(): string {
+  const porAnos = new Map<string, string[]>();
+  for (const [tribunal, c] of Object.entries(CALENDARIO_VERIFICADO).sort(([a], [b]) => a.localeCompare(b, 'pt-BR'))) {
+    const anos = [...c.anos].sort().join(' e ');
+    porAnos.set(anos, [...(porAnos.get(anos) ?? []), tribunal]);
+  }
+  return [...porAnos.entries()].map(([anos, lista]) => `${lista.join(', ')} (${anos})`).join('; ');
+}
 
 export default function MetodologiaPage() {
   return (
@@ -29,7 +41,7 @@ export default function MetodologiaPage() {
           <p>
             Os resultados são conferidos por um segundo programa, escrito à parte e sem código em comum, em cenários
             fixos e em centenas de entradas aleatórias. Essa conferência mostra que o programa faz o que as regras
-            dizem. Um revisor jurídico validou os 121 cenários e os dois prazos materiais (mandado de segurança e ação rescisória) em 07/10/2026.
+            dizem. Um revisor jurídico validou os {CENARIOS_VALIDADOS} cenários (o último em {dataCurta(CENARIOS_VALIDADOS_EM)}) e os dois prazos materiais (mandado de segurança e ação rescisória).
             A validação cobre a <strong className="text-ink">regra de contagem</strong>; o calendário de cada tribunal segue o que está descrito abaixo.
           </p>
         </section>
@@ -78,14 +90,14 @@ export default function MetodologiaPage() {
           </Notice>
           <ul className="list-disc pl-5 flex flex-col gap-2">
             <li>
-              <strong className="text-ink">Calendário conferido hoje:</strong> STF, STJ, TJSP, TJMG e TJAL, só para 2026.
+              <strong className="text-ink">Calendário conferido contra o ato do tribunal:</strong> {resumoCalendarioConferido()}.
               O TJRJ está carregado até outubro de 2026, sem selo. Nos demais tribunais entram os feriados nacionais, a Lei 5.010
-              na Justiça Federal e o feriado estadual fixado em lei em PE, RS e GO; o resto fica como dia pendente e aparece só como
+              na Justiça Federal e os feriados estaduais já conferidos por lei; o resto fica como dia pendente e aparece só como
               data alternativa.
             </li>
             <li>
               <strong className="text-ink">Anos futuros:</strong> os tribunais divulgam o calendário do ano seguinte perto
-              do fim do ano. Fora de 2026, o resultado não recebe o selo.
+              do fim do ano. Fora dos anos listados acima, o resultado não recebe o selo.
             </li>
             <li>
               <strong className="text-ink">Feriados municipais</strong> não são considerados. Feriado local deve ser

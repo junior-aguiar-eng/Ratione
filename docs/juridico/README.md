@@ -1,7 +1,7 @@
 # RATIONE — MINUTAS JURÍDICAS (rascunho para revisão do advogado responsável)
 
 > **Status:** minutas para **revisão e adaptação** pelo advogado responsável. Não publicar sem revisão.
-> **Versão-alvo:** documentos descrevem o produto **com conta, cobrança e IA** (o estado de produção). O protótipo atual armazena dados apenas no navegador.
+> **Versão-alvo:** estas minutas descrevem o produto **com conta, cobrança e IA** (fase futura) e **não estão publicadas**. O que está no ar hoje é o texto do **beta gratuito** (`/termos`, `/privacidade`, `/metodologia`), conferido contra o sistema em [`AUDITORIA_BETA.md`](AUDITORIA_BETA.md), que também lista o que depende do responsável.
 
 ## Conteúdo
 | Arquivo | Finalidade |
