@@ -125,13 +125,14 @@ export default function ContaPage() {
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }, { data: avisos }] = await Promise.all([
+    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }] = await Promise.all([
       sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
       sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
-      sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true })
+      sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
+      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true })
     ]);
     const conteudo = JSON.stringify(
-      { exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens, avisosPorEmail: avisos },
+      { exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens, avisosPorEmail: avisos, aceitesDosTermos: aceites },
       null,
       2
     );

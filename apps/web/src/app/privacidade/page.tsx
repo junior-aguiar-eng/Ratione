@@ -30,7 +30,7 @@ export default function PrivacidadePage() {
           <Lista>
             <li>
               <Destaque>Conta:</Destaque> e-mail e senha. A senha é guardada de forma criptografada (hash) e nós não a vemos. Para criar e manter
-              a conta e permitir o acesso (execução de contrato, LGPD, art. 7º, V). Também guardamos a versão dos Termos que você aceitou.
+              a conta e permitir o acesso (execução de contrato, LGPD, art. 7º, V). Também guardamos a versão dos Termos que você aceitou e quando (prova do aceite; legítimo interesse e exercício regular de direitos, art. 7º, IX e VI).
             </li>
             <li>
               <Destaque>Perfil (opcional):</Destaque> nome, atuação, número da OAB (declaratório, não verificado), tribunal e UF padrão. Para
@@ -71,6 +71,10 @@ export default function PrivacidadePage() {
               <Destaque>Resend</Destaque> (envio de e-mail): recebe o seu endereço, o assunto e o texto da mensagem para entregar os e-mails de
               confirmação de conta, de nova senha e dos avisos de prazo (o texto do aviso traz o nome que você deu a ele). Pode processar dados
               fora do Brasil.
+            </li>
+            <li>
+              <Destaque>ImprovMX</Destaque> (encaminhamento de e-mail do endereço de contato): recebe e repassa as mensagens que você enviar ao
+              canal do titular, com o seu endereço e o que escrever. Pode processar dados fora do Brasil.
             </li>
             <li>Autoridades, quando a lei exigir.</li>
           </Lista>

@@ -14,9 +14,10 @@ export const VERSAO_TEXTOS = '1.0';
 export const VIGENCIA_TEXTOS = '2026-10-10';
 
 /**
- * Metadados gravados no cadastro (`user_metadata`): qual versão dos termos a pessoa aceitou.
- * O horário confiável do cadastro é o `created_at` do Supabase; este campo só diz qual texto estava em vigor.
+ * Enviado no cadastro (`signUp`, `options.data`): qual versão dos Termos a pessoa aceitou ao marcar a caixa.
+ * Quem grava o aceite é o banco (gatilho `registrar_aceite`, tabela `aceites_termos`), com o horário do servidor:
+ * por isso não se envia horário daqui. Ver `supabase/migrations/20261011000003_aceites_termos.sql`.
  */
-export function dadosDeAceite(agora: Date = new Date()): { termos_versao: string; termos_aceitos_em: string } {
-  return { termos_versao: VERSAO_TEXTOS, termos_aceitos_em: agora.toISOString() };
+export function dadosDeAceite(): { termos_versao: string } {
+  return { termos_versao: VERSAO_TEXTOS };
 }

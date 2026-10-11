@@ -12,7 +12,7 @@ const BASE_SUPABASE = `
   create role authenticated nologin;
   create role service_role nologin bypassrls;
   create schema auth;
-  create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, criado_em timestamptz default now());
+  create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, raw_user_meta_data jsonb not null default '{}', created_at timestamptz not null default now());
   create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
   grant usage on schema public to anon, authenticated, service_role;
@@ -27,18 +27,24 @@ const BASE_SUPABASE = `
 
 export const PASTA_MIGRACOES = join(__dirname, '../../../supabase/migrations');
 
-export async function criarBanco(): Promise<PGlite> {
+/** `ate`: aplica só as migrações cujo nome é menor ou igual a ele (para testar uma migração sobre dados que já existiam). */
+export async function criarBanco(ate?: string): Promise<PGlite> {
   const db = new PGlite();
   await db.exec(BASE_SUPABASE);
   const arquivos = readdirSync(PASTA_MIGRACOES)
-    .filter(f => f.endsWith('.sql'))
+    .filter(f => f.endsWith('.sql') && (!ate || f.replace('.sql', '') <= ate))
     .sort();
   for (const f of arquivos) await db.exec(readFileSync(join(PASTA_MIGRACOES, f), 'utf-8'));
   return db;
 }
 
-export async function criarUsuario(db: PGlite, email: string): Promise<string> {
-  const r = await db.query<{ id: string }>('insert into auth.users (email) values ($1) returning id', [email]);
+export async function aplicarMigracao(db: PGlite, nome: string): Promise<void> {
+  await db.exec(readFileSync(join(PASTA_MIGRACOES, `${nome}.sql`), 'utf-8'));
+}
+
+/** `metadados` imita o `options.data` do `signUp` (vai para `raw_user_meta_data`). */
+export async function criarUsuario(db: PGlite, email: string, metadados: Record<string, unknown> = {}): Promise<string> {
+  const r = await db.query<{ id: string }>('insert into auth.users (email, raw_user_meta_data) values ($1, $2) returning id', [email, JSON.stringify(metadados)]);
   return r.rows[0].id;
 }
 
