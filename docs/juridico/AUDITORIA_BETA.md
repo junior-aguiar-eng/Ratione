@@ -18,7 +18,7 @@ Texto em vigor no site: `/termos`, `/privacidade` (inclui cookies) e `/metodolog
 | Registros técnicos do Google Cloud ficam 30 dias, em localização global | `gcloud logging buckets list`: `_Default`, local `global`, retenção 30 dias (conferido em 11/10/2026) |
 | Os registros de acesso trazem IP, navegador, data e hora | Entradas `run.googleapis.com/requests` têm `remoteIp`, `userAgent` e `requestUrl` |
 | Hospedagem em São Paulo; banco em São Paulo | `docs/deploy/CLOUD_RUN.md` (`southamerica-east1`) e `supabase/LEIA-ME.md` (`sa-east-1`) |
-| ImprovMX recebe e repassa as mensagens ao canal do titular | Domínio ativo no ImprovMX; MX, SPF e DMARC no Registro.br; teste de recebimento aprovado em 11/10/2026 (`docs/deploy/EMAIL_CONTATO.md`) |
+| ImprovMX recebe e repassa as mensagens ao canal do titular | Domínio ativo no ImprovMX; MX, SPF e DMARC no Registro.br; recebimento e envio como `contato@` (pelo Resend) testados em 11/10/2026 (`docs/deploy/EMAIL_CONTATO.md`) |
 | Resend recebe endereço, assunto e texto | `api/lembretes/enviar/route.ts` (POST a `api.resend.com/emails`) e SMTP do Supabase Auth (`supabase/LEIA-ME.md`) |
 | Sem estatística de uso, publicidade ou rastreadores de terceiros | Nenhum SDK de analytics no `package.json`; fontes via `next/font` (servidas pelo próprio site) |
 | Cookies e armazenamento local | Sessão do Supabase (`sb-…`); `localStorage`: `ratione_tema` e `ratione_historico_recente` (`ThemeToggle.tsx`, `lib/historico.ts`) |
