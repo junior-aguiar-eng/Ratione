@@ -4,7 +4,7 @@ As páginas de Termos e Privacidade apontam `contato@nexojuris.ia.br` como canal
 
 Desenho escolhido: **receber** com encaminhamento gratuito (ImprovMX) para o Gmail e **responder como `contato@`** pelo Gmail usando o Resend, que já está verificado para o domínio. Custo zero. Não exige mexer em nada que já funciona (login, confirmação de conta, avisos de prazo).
 
-> **Estado (11/10/2026): pronto e testado nos dois sentidos.** Recebimento: DNS no Registro.br, ImprovMX ativo, mensagem do Hotmail chegou ao Gmail. Envio: mensagem do Gmail como `Ratione <contato@nexojuris.ia.br>` chegou ao Hotmail e o Resend a registrou como entregue. Região de envio do Resend conferida: São Paulo (`sa-east-1`); chaves existentes: `ratione-lembretes`, `ratione-supabase-smtp` e `Supabase Integration` (o nome `gmail-contato` está livre).
+> **Estado (11/10/2026): pronto e testado nos dois sentidos.** Recebimento: DNS no Registro.br, ImprovMX ativo, mensagem do Hotmail chegou ao Gmail. Envio: mensagem do Gmail como `Ratione <contato@nexojuris.ia.br>` chegou ao Hotmail e o Resend a registrou como entregue; cabeçalhos no Outlook: `spf=pass` (rsend.nexojuris.ia.br), `dkim=pass` (header.d=nexojuris.ia.br), `dmarc=pass` e `compauth=pass`. Região de envio do Resend conferida: São Paulo (`sa-east-1`); chaves existentes: `ratione-lembretes`, `ratione-supabase-smtp` e `Supabase Integration` (o nome `gmail-contato` está livre).
 >
 > Quem faz: você. Criar conta no ImprovMX e editar o DNS no Registro.br são ações suas. Os valores abaixo são os que o ImprovMX documenta; **confira no painel dele**, que mostra os registros atuais.
 
