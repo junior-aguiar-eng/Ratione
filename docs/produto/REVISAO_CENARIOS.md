@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **196** · validados: **195** · pendentes: **1**
+> Cenários: **196** · validados: **196** · pendentes: **0**
 
 ## Como revisar
 
@@ -2239,7 +2239,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TRF4: Dia do Servidor (Portaria 233/2026); 02/11/2026 Finados
 - **Fundamento:** Calendário de Feriados 2026 do TRF4 e Portaria TRF4 233/2026 (lidos em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 181. `trf4-2026-ponto-facultativo-sem-ato`
 

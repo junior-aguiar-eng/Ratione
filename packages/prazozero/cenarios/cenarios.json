@@ -7074,9 +7074,9 @@
       }
     },
     "validacao": {
-      "status": "pendente",
-      "por": null,
-      "em": null
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
     },
     "alternativaEsperada": null
   },
