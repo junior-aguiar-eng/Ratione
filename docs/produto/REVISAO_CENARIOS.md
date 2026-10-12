@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **196** · validados: **175** · pendentes: **21**
+> Cenários: **196** · validados: **196** · pendentes: **0**
 
 ## Como revisar
 
@@ -1081,7 +1081,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 85. `trf1-2026-corpus-christi`
 
@@ -1094,7 +1094,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 86. `trf4-2026-dia-servidor`
 
@@ -1107,7 +1107,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 87. `trf5-2026-sao-joao`
 
@@ -1120,7 +1120,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 23/06/2026 TRF5: Ato 219/2026
 - **Fundamento:** Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224; CPC, art. 1.003, § 6º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 88. `trf5-2026-dia-servidor`
 
@@ -1133,7 +1133,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 89. `trf6-2026-corpus-christi`
 
@@ -1146,7 +1146,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TRF6: ponto facultativo / feriado do ato
 - **Fundamento:** Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ## Calendário verificado (tribunais com ato lido)
 
@@ -1340,7 +1340,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 TRF3: Quarta-feira de Cinzas (expediente a partir das 14h): protrai o dia do começo
 - **Fundamento:** Lei 5.010/1966, art. 62, III; Portaria CATRF3R 48/2025, art. 3º (lida em 12/10/2026); CPC, art. 224, § 1º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 106. `trf3-finados`
 
@@ -2144,7 +2144,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 TRF1: Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo
 - **Fundamento:** Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 173. `trf2-2026-ponto-facultativo-20-abril`
 
@@ -2156,7 +2156,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026; 21/04/2026 Tiradentes; 23/04/2026 TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026
 - **Fundamento:** Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 174. `trf2-2026-sao-jorge`
 
@@ -2168,7 +2168,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/04/2026 TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026
 - **Fundamento:** Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 175. `trf2-2026-copa-29-junho`
 
@@ -2180,7 +2180,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026
 - **Fundamento:** Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 176. `trf2-2026-dia-servidor`
 
@@ -2192,7 +2192,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026; 02/11/2026 Finados
 - **Fundamento:** Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 177. `trf3-2026-corpus-christi-ponto-facultativo`
 
@@ -2204,7 +2204,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026; 05/06/2026 TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026
 - **Fundamento:** Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 178. `trf3-2026-revolucao-constitucionalista`
 
@@ -2216,7 +2216,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 09/07/2026 TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026
 - **Fundamento:** Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 179. `trf3-2026-posse-2-marco`
 
@@ -2228,7 +2228,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/03/2026 TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026
 - **Fundamento:** Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 180. `trf3-2026-dia-servidor`
 
@@ -2240,7 +2240,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026; 02/11/2026 Finados
 - **Fundamento:** Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 181. `trf4-2026-ponto-facultativo-sem-ato`
 
@@ -2252,7 +2252,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 182. `trf5-2026-carnaval-cinzas`
 
@@ -2264,7 +2264,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 TRF5: Ato 219/2026
 - **Fundamento:** Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224; art. 5º, § 3º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 183. `trf5-2026-data-magna-pernambuco`
 
@@ -2276,7 +2276,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 06/03/2026 TRF5: Ato 219/2026
 - **Fundamento:** Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 184. `trf6-2026-cinzas`
 
@@ -2288,7 +2288,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda); 17/02/2026 Carnaval (terça); 18/02/2026 TRF6: Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo
 - **Fundamento:** Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ### 185. `trf6-2026-dois-de-novembro`
 
@@ -2300,7 +2300,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/11/2026 Finados
 - **Fundamento:** Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224; Lei 5.010/1966, art. 62, IV
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-12
 
 ## Intimação eletrônica
 
