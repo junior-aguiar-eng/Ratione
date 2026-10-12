@@ -332,6 +332,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://portal.trf6.jus.br/wp-content/uploads/2026/01/SEI_1571312_Portaria_Presi_1.pdf',
     lido: 'inteiro teor (PDF de 5 páginas). Os feriados municipais do art. 2º (cidades-sede de subseção) ficam de fora',
     lidoEm: LIDO_12_10
+  },
+  'tjpa-gp-4765-2025': {
+    ato: 'Portaria nº 4765/2025-GP do TJPA (20/10/2025; DJE nº 8186, 21/10/2025): dias sem expediente em 2026 (art. 1º e Anexo; art. 2º transfere o Dia do Servidor de 28 para 30/10)',
+    url: 'https://www.tjpa.jus.br/CMSPortal/VisualizarArquivo?idArquivo=2234620',
+    lido: 'inteiro teor (PDF digitalizado de 2 páginas, lido como imagem). O art. 1º diz que não haverá expediente nos feriados e pontos facultativos do Anexo; o art. 3º manda aplicar o CPC, art. 224, § 1º. Ficam de fora os atos locais de Belém, Ananindeua e Marituba (por exemplo, a Portaria 4.263/2026-GP, Círio, 09/10/2026) e o recesso de fim de ano, que vem de ato próprio e do CPC, art. 220',
+    lidoEm: LIDO_12_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -833,6 +839,32 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento: 'Portaria Presi 1/2026 do TRF6, art. 1º',
     fonte: 'trf6-presi-1-2026' as const
+  })),
+
+  // ---------- TJPA, 2026: Portaria 4765/2025-GP, Anexo (art. 1º: "não haverá expediente" nos feriados e pontos facultativos) ----------
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11), que já vêm da lei federal.
+  ...[
+    ['2026-02-16', 'Segunda-feira de Carnaval (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-02-17', 'Carnaval (suspensão nacional do expediente forense)', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 1.408/1951)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-04-03', 'Sexta-feira Santa', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 1.408/1951)'],
+    ['2026-04-20', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-06-04', 'Corpus Christi', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 9.093/1995 e Lei municipal 6.306/1967)'],
+    ['2026-06-05', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-10-26', 'Recírio (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Portaria TJPA 4765/2025-GP, art. 2º e Anexo'],
+    ['2026-12-07', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJPA 4765/2025-GP, Anexo (Decreto-lei 8.292/1945 e Lei 1.408/1951)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJPA'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjpa-gp-4765-2025' as const
   }))
 ];
 
@@ -917,5 +949,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF3: { anos: [2026], fontes: ['trf3-catrf3r-48-2025'] },
   TRF4: { anos: [2026], fontes: ['trf4-calendario-2026'] },
   TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
-  TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] }
+  TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] },
+  TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] }
 };
