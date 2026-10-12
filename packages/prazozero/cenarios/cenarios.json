@@ -1877,7 +1877,7 @@
       "dataTermoInicial": "2026-04-06",
       "dataVencimentoFinal": "2026-04-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -3275,9 +3275,9 @@
   },
   {
     "id": "trf3-carnaval-conservador",
-    "categoria": "pendente",
-    "descricao": "TRF3: Carnaval é feriado (Lei 5.010); Quarta de Cinzas ainda sem ato do TRF3 (conservador)",
-    "fundamento": "Lei 5.010/1966, art. 62, III; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar (Cinzas)",
+    "categoria": "verificado",
+    "descricao": "TRF3: Carnaval é feriado (Lei 5.010) e na Quarta de Cinzas o expediente começa às 14h: o começo do prazo passa para 19/02",
+    "fundamento": "Lei 5.010/1966, art. 62, III; Portaria CATRF3R 48/2025, art. 3º (lida em 12/10/2026); CPC, art. 224, § 1º",
     "entrada": {
       "dataEvento": "2026-02-13",
       "tipoEvento": "publicacao",
@@ -3286,12 +3286,12 @@
     },
     "esperado": {
       "dataPublicacao": "2026-02-13",
-      "dataTermoInicial": "2026-02-18",
-      "dataVencimentoFinal": "2026-02-20",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 4,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
@@ -3303,6 +3303,10 @@
           {
             "data": "2026-02-17",
             "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TRF3: Quarta-feira de Cinzas (expediente a partir das 14h): protrai o dia do começo"
           }
         ]
       }
@@ -3310,9 +3314,9 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "em": "2026-10-12"
     },
-    "alternativaEsperada": "2026-02-23"
+    "alternativaEsperada": null
   },
   {
     "id": "trf3-finados",
@@ -3330,7 +3334,7 @@
       "dataTermoInicial": "2026-11-03",
       "dataVencimentoFinal": "2026-11-05",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -6602,6 +6606,775 @@
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
       "em": "2026-10-07"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf1-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TRF1 2026: 20/04 é ponto facultativo (alerta, o ato só o divulga); 21/04 (Tiradentes) não conta",
+    "fundamento": "Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF1"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "trf1-2026-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRF1 2026: Carnaval não conta e a Quarta-feira de Cinzas (ponto facultativo até as 14h) protrai o começo do prazo",
+    "fundamento": "Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF1"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TRF1: Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf1-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TRF1 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alerta)",
+    "fundamento": "Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF1"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "trf2-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TRF2 2026: 20/04 é ponto facultativo sem expediente (art. 1º) e 21/04 (Tiradentes) é feriado: nenhum conta",
+    "fundamento": "Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF2"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          },
+          {
+            "data": "2026-04-23",
+            "motivo": "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf2-2026-sao-jorge",
+    "categoria": "verificado",
+    "descricao": "TRF2 2026: 23/04 (Dia de São Jorge, Lei estadual RJ 5.198/2008) não conta",
+    "fundamento": "Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-22",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRF2"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-22",
+      "dataTermoInicial": "2026-04-24",
+      "dataVencimentoFinal": "2026-04-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-23",
+            "motivo": "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf2-2026-copa-29-junho",
+    "categoria": "verificado",
+    "descricao": "TRF2 2026: 29/06 (jogo da Seleção, Portaria 338/2026) não conta",
+    "fundamento": "Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRF2"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf2-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TRF2 2026: o Dia do Servidor foi transferido para 30/10 (Portaria 30/2026) e não conta",
+    "fundamento": "Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF2"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-2026-corpus-christi-ponto-facultativo",
+    "categoria": "verificado",
+    "descricao": "TRF3 2026: 04/06 (Corpus Christi) e 05/06 (sem expediente, art. 2º) não contam",
+    "fundamento": "Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-2026-revolucao-constitucionalista",
+    "categoria": "verificado",
+    "descricao": "TRF3 2026: 09/07 (Revolução Constitucionalista, só na sede em São Paulo) não conta",
+    "fundamento": "Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-07",
+      "dataTermoInicial": "2026-07-08",
+      "dataVencimentoFinal": "2026-07-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-09",
+            "motivo": "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-2026-posse-2-marco",
+    "categoria": "verificado",
+    "descricao": "TRF3 2026: 02/03 (posse dos dirigentes: prazos suspensos no Tribunal, Portaria 53/2026) não conta",
+    "fundamento": "Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-27",
+      "dataTermoInicial": "2026-03-03",
+      "dataVencimentoFinal": "2026-03-04",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-02",
+            "motivo": "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf3-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TRF3 2026: o Dia do Servidor é 30/10 (originalmente 28/10) e não conta",
+    "fundamento": "Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF3"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf4-2026-dia-servidor",
+    "categoria": "pendente",
+    "descricao": "TRF4 2026: 30/10 (Dia do Servidor, Portaria 233/2026 não lida) só alerta",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF4"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-11-03"
+  },
+  {
+    "id": "trf4-2026-ponto-facultativo-sem-ato",
+    "categoria": "verificado",
+    "descricao": "TRF4 2026: 20/04 e 05/06 não são pontos facultativos do TRF4 (não constam do calendário): contam como dias úteis",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF4"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf5-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRF5 2026: Carnaval e Quarta-feira de Cinzas (ponto facultativo sem expediente) não contam",
+    "fundamento": "Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224; art. 5º, § 3º",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF5"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TRF5: Ato 219/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf5-2026-data-magna-pernambuco",
+    "categoria": "verificado",
+    "descricao": "TRF5 2026: 06/03 (Data Magna de Pernambuco) não conta",
+    "fundamento": "Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-05",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRF5"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-05",
+      "dataTermoInicial": "2026-03-09",
+      "dataVencimentoFinal": "2026-03-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-06",
+            "motivo": "TRF5: Ato 219/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf5-2026-sao-joao",
+    "categoria": "pendente",
+    "descricao": "TRF5 2026: 23/06 (ponto facultativo sem expediente) não conta; 24/06 (São João, feriado municipal do Recife) só alerta",
+    "fundamento": "Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224; CPC, art. 1.003, § 6º",
+    "entrada": {
+      "dataEvento": "2026-06-22",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF5"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-22",
+      "dataTermoInicial": "2026-06-24",
+      "dataVencimentoFinal": "2026-06-26",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-23",
+            "motivo": "TRF5: Ato 219/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-06-29"
+  },
+  {
+    "id": "trf5-2026-dia-servidor",
+    "categoria": "pendente",
+    "descricao": "TRF5 2026: Dia do Servidor (28/10, transferido para 30/10 pelo Ato 498/2026, não lido) só alerta",
+    "fundamento": "Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF5"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-26",
+      "dataTermoInicial": "2026-10-27",
+      "dataVencimentoFinal": "2026-10-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-11-03"
+  },
+  {
+    "id": "trf6-2026-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRF6 2026: Carnaval não conta e a Quarta-feira de Cinzas (ponto facultativo até as 14h) protrai o começo do prazo",
+    "fundamento": "Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF6"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TRF6: Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trf6-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TRF6 2026: 04/06 (Corpus Christi, listado como feriado) não conta e 05/06 é ponto facultativo (alerta)",
+    "fundamento": "Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF6"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-05",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TRF6: ponto facultativo / feriado do ato"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
+    },
+    "alternativaEsperada": "2026-06-10"
+  },
+  {
+    "id": "trf6-2026-dois-de-novembro",
+    "categoria": "verificado",
+    "descricao": "TRF6 2026: 02/11 (Finados, feriado forense, art. 62, IV, da Lei 5.010) não conta",
+    "fundamento": "Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224; Lei 5.010/1966, art. 62, IV",
+    "entrada": {
+      "dataEvento": "2026-10-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRF6"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-30",
+      "dataTermoInicial": "2026-11-03",
+      "dataVencimentoFinal": "2026-11-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-12"
     },
     "alternativaEsperada": null
   }
