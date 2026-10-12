@@ -7041,9 +7041,9 @@
   },
   {
     "id": "trf4-2026-dia-servidor",
-    "categoria": "pendente",
-    "descricao": "TRF4 2026: 30/10 (Dia do Servidor, Portaria 233/2026 não lida) só alerta",
-    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TRF4 2026: o feriado do Dia do Servidor foi adiado para 30/10 (Portaria 233/2026) e não conta; 28/10 tem expediente normal",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 e Portaria TRF4 233/2026 (lidos em 12/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-27",
       "tipoEvento": "publicacao",
@@ -7053,29 +7053,38 @@
     "esperado": {
       "dataPublicacao": "2026-10-27",
       "dataTermoInicial": "2026-10-28",
-      "dataVencimentoFinal": "2026-10-30",
+      "dataVencimentoFinal": "2026-11-03",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 0,
+        "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TRF4: Dia do Servidor (Portaria 233/2026)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
       }
     },
     "validacao": {
-      "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-12"
+      "status": "pendente",
+      "por": null,
+      "em": null
     },
-    "alternativaEsperada": "2026-11-03"
+    "alternativaEsperada": null
   },
   {
     "id": "trf4-2026-ponto-facultativo-sem-ato",
     "categoria": "verificado",
     "descricao": "TRF4 2026: 20/04 e 05/06 não são pontos facultativos do TRF4 (não constam do calendário): contam como dias úteis",
-    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 e Portaria TRF4 233/2026 (lidos em 12/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-04-16",
       "tipoEvento": "publicacao",
@@ -7087,7 +7096,7 @@
       "dataTermoInicial": "2026-04-17",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,

@@ -316,9 +316,9 @@ export const FONTES_CALENDARIO = {
     lidoEm: LIDO_12_10
   },
   'trf4-calendario-2026': {
-    ato: 'Calendário de Feriados 2026 do TRF4 (portal da Justiça Federal da 4ª Região; Dia do Servidor com base na Portaria TRF4 nº 233/2026)',
-    url: 'https://www.trf4.jus.br/trf4/controlador.php?acao=calendario_feriados_listar&selOrgao=2',
-    lido: 'página oficial do calendário (linhas "Todas", atualizada em 30/03/2026 e 21/05/2026); a Portaria 233/2026 em si não foi lida. Feriados municipais e de subseção ficam de fora',
+    ato: 'Calendário de Feriados 2026 do TRF4 (portal da Justiça Federal da 4ª Região) e Portaria TRF4 nº 233/2026 (20/03/2026): adia para 30/10/2026 o feriado do Dia do Servidor',
+    url: 'https://intra2.trf4.jus.br/wp-content/uploads/2026/03/SEI_8319106_Portaria_233.pdf',
+    lido: 'inteiro teor da Portaria 233/2026 e página oficial do calendário (linhas "Todas", atualizada em 30/03 e 21/05/2026; https://www.trf4.jus.br/trf4/controlador.php?acao=calendario_feriados_listar&selOrgao=2). Não se achou ato da Presidência com o calendário inteiro. Feriados municipais e de subseção ficam de fora',
     lidoEm: LIDO_12_10
   },
   'trf5-ato-219-2026': {
@@ -786,8 +786,8 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
   { tribunais: ['TRF3'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas (expediente a partir das 14h)', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria CATRF3R 48/2025, art. 3º', fonte: 'trf3-catrf3r-48-2025' },
 
-  // ---------- TRF4, 2026: calendário oficial (só as linhas "Todas"; a Portaria 233/2026 do Dia do Servidor não foi lida, por isso só alerta) ----------
-  { tribunais: ['TRF4'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (alerta: listado no calendário do tribunal; Portaria 233/2026 não lida)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Calendário de Feriados 2026 do TRF4 (Lei 8.112/1990, art. 236, e Portaria TRF4 233/2026)', fonte: 'trf4-calendario-2026' },
+  // ---------- TRF4, 2026: calendário oficial (linhas "Todas") e Portaria 233/2026 (adia o feriado do Dia do Servidor para 30/10; art. 1º, parágrafo único: expediente normal em 28/10) ----------
+  { tribunais: ['TRF4'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (feriado adiado de 28/10)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TRF4 233/2026, art. 1º (Lei 8.112/1990, art. 236)', fonte: 'trf4-calendario-2026' },
 
   // ---------- TRF5, 2026: Ato 219/2026 (retificado pelo Ato 230/2026), arts. 1º a 5º ----------
   // Feriados municipais do Recife (24/06 e 16/07, Lei municipal 9.777/1967) só alertam. O Dia do Servidor (28/10) teria sido transferido para 30/10 pelo Ato 498/2026, não lido: os dois dias alertam.
@@ -915,6 +915,7 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF1: { anos: [2026], fontes: ['trf1-presi-5-2026'] },
   TRF2: { anos: [2026], fontes: ['trf2-pres-843-2026'] },
   TRF3: { anos: [2026], fontes: ['trf3-catrf3r-48-2025'] },
+  TRF4: { anos: [2026], fontes: ['trf4-calendario-2026'] },
   TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
   TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] }
 };
