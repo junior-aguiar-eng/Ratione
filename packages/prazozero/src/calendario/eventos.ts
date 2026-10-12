@@ -42,6 +42,7 @@ export interface RegraAnual {
 
 const LIDO = '2026-10-07';
 const LIDO_10_10 = '2026-10-10';
+const LIDO_12_10 = '2026-10-12';
 
 export const FONTES_CALENDARIO = {
   'stj-gdg-1010': {
@@ -295,6 +296,42 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjgo.jus.br/files/2026/06%20-%20Junho/Decreto%20Judiciario_29%20de%20junho.pdf',
     lido: 'inteiro teor (PDF de 2 páginas, PROAD 202606000757428). Art. 2º: os prazos de termo inicial ou final em 29/06 são prorrogados para o primeiro dia útil (CPC, art. 224, § 1º)',
     lidoEm: LIDO_10_10
+  },
+  'trf1-presi-5-2026': {
+    ato: 'Portaria Presi 5/2026 do TRF1 (12/01/2026): feriados nacionais e pontos facultativos da Justiça Federal da 1ª Região em 2026',
+    url: 'https://www.trf1.jus.br/trf1/avisos/divulgados-os-feriados-nacionais-e-os-pontos-facultativos-no-ambito-da-1-regiao-em-2026',
+    lido: 'texto integral publicado no portal do tribunal (aviso). Feriados estaduais e municipais ficam com o Provimento Geral da Corregedoria Regional e as portarias de cada seção (art. 2º): não entram',
+    lidoEm: LIDO_12_10
+  },
+  'trf2-pres-843-2026': {
+    ato: 'Portaria PRES/TRF2 nº 843/2025 (DJE 05/12/2025), alterada pelas Portarias PRES/TRF2 nº 30/2026 (DJE 05/02/2026) e nº 338/2026 (24/06/2026): dias sem expediente no Tribunal em 2026',
+    url: 'https://www.trf2.jus.br/jfrj/atendimento/calendario-de-prazos-suspensos-feriados',
+    lido: 'inteiro teor das Portarias 843, 30 e 338 (PDFs do tribunal) e página oficial de prazos suspensos e feriados. O art. 1º diz "não haverá expediente" também nos pontos facultativos. Ficam de fora as suspensões que valem só para INSS, AGU ou DPU e os atos de seções e subseções',
+    lidoEm: LIDO_12_10
+  },
+  'trf3-catrf3r-48-2025': {
+    ato: 'Portaria CATRF3R nº 48/2025 (29/08/2025), alterada pela nº 58/2026 (07/07/2026), e Portaria CATRF3R nº 53/2026 (20/02/2026): dias sem expediente no Tribunal em 2026',
+    url: 'https://www.trf3.jus.br/seju/calendario-dos-feriados',
+    lido: 'inteiro teor das Portarias 48, 53, 56, 57 e 58 (PDFs do tribunal). Arts. 1º e 2º da nº 48 dizem "não haverá expediente", inclusive em 20/04 e 05/06. As nº 56 e 57 (jogos da Copa, 24 e 29/06) só autorizam trabalho não presencial e não suspendem prazos',
+    lidoEm: LIDO_12_10
+  },
+  'trf4-calendario-2026': {
+    ato: 'Calendário de Feriados 2026 do TRF4 (portal da Justiça Federal da 4ª Região; Dia do Servidor com base na Portaria TRF4 nº 233/2026)',
+    url: 'https://www.trf4.jus.br/trf4/controlador.php?acao=calendario_feriados_listar&selOrgao=2',
+    lido: 'página oficial do calendário (linhas "Todas", atualizada em 30/03/2026 e 21/05/2026); a Portaria 233/2026 em si não foi lida. Feriados municipais e de subseção ficam de fora',
+    lidoEm: LIDO_12_10
+  },
+  'trf5-ato-219-2026': {
+    ato: 'Ato nº 219/2026 da Presidência do TRF5 (reedita o Ato 626/2025; retificado pelo Ato 230/2026; Diário Eletrônico Administrativo nº 94, 25/05/2026): feriados e pontos facultativos de 2026',
+    url: 'https://www4.trf5.jus.br/comunicacao-social/anexo/114877',
+    lido: 'inteiro teor (arts. 1º a 5º). O art. 3º diz que nos feriados e pontos facultativos não há expediente. O Ato 498/2026 (28/08/2026), que transfere o Dia do Servidor de 28 para 30/10, só foi visto pela citação em portaria do MPF e não foi lido',
+    lidoEm: LIDO_12_10
+  },
+  'trf6-presi-1-2026': {
+    ato: 'Portaria Presi 1/2026 do TRF6 (06/01/2026): feriados e pontos facultativos da Justiça Federal da 6ª Região em 2026',
+    url: 'https://portal.trf6.jus.br/wp-content/uploads/2026/01/SEI_1571312_Portaria_Presi_1.pdf',
+    lido: 'inteiro teor (PDF de 5 páginas). Os feriados municipais do art. 2º (cidades-sede de subseção) ficam de fora',
+    lidoEm: LIDO_12_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -691,7 +728,112 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fundamento: 'Ato Normativo TJAL 03/2026, arts. 1º, 2º, 3º e 5º',
     fonte: 'tjal-an-03-2026' as const
   })),
-  { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' }
+  { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' },
+
+  // ---------- TRF1, 2026: Portaria Presi 5/2026 (pontos facultativos viram alerta, ver PONTOS_FACULTATIVOS) ----------
+  ...PF_2026.map(pf => ({
+    tribunais: ['TRF1'],
+    inicio: pf.data,
+    fim: pf.data,
+    nome: pf.nome,
+    efeito: (pf.parcial ? 'expediente_parcial' : 'nao_util') as EfeitoEvento,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: 'Portaria Presi 5/2026 do TRF1, art. 1º',
+    fonte: 'trf1-presi-5-2026' as const
+  })),
+
+  // ---------- TRF2, 2026: Portaria PRES 843/2025 com as alterações das Portarias 30 e 338/2026 (art. 1º: "não haverá expediente") ----------
+  // O dia 20/01 (São Sebastião, lei municipal do Rio) fica de fora: é feriado municipal e já cai no período suspenso pelo CPC, art. 220.
+  ...[
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Portaria PRES/TRF2 843/2025, art. 1º, IV'],
+    ['2026-04-20', 'Ponto facultativo (sem expediente)', 'Portaria PRES/TRF2 30/2026, art. 1º, VI'],
+    ['2026-04-23', 'Dia de São Jorge', 'Portaria PRES/TRF2 843/2025, art. 1º (Lei estadual RJ 5.198/2008)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo, sem expediente)', 'Portaria PRES/TRF2 30/2026, art. 1º, X'],
+    ['2026-06-05', 'Ponto facultativo (sem expediente)', 'Portaria PRES/TRF2 30/2026, art. 1º, XI'],
+    ['2026-06-29', 'Ponto facultativo (jogo da Seleção na Copa, sem expediente)', 'Portaria PRES/TRF2 338/2026'],
+    ['2026-08-10', 'Ponto facultativo (sem expediente)', 'Portaria PRES/TRF2 30/2026, art. 1º, XII'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Portaria PRES/TRF2 30/2026, art. 1º, XVI'],
+    ['2026-12-07', 'Ponto facultativo (sem expediente)', 'Portaria PRES/TRF2 30/2026, art. 1º, XIX']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TRF2'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'trf2-pres-843-2026' as const
+  })),
+
+  // ---------- TRF3, 2026: Portaria CATRF3R 48/2025 (arts. 1º a 3º), alterada pela nº 58/2026, e nº 53/2026 ----------
+  // Fora: 26/08 (aniversário de Campo Grande, só para a Turma Regional de MS) e os jogos da Copa de 24 e 29/06 (trabalho não presencial, sem suspensão de prazos).
+  ...[
+    ['2026-03-02', 'Posse dos novos dirigentes: expediente presencial e prazos suspensos no Tribunal, prazos prorrogados para o dia útil seguinte', 'Portaria CATRF3R 53/2026, arts. 1º e 2º'],
+    ['2026-04-20', 'Sem expediente (horas compensadas)', 'Portaria CATRF3R 48/2025, art. 2º'],
+    ['2026-06-04', 'Corpus Christi', 'Portaria CATRF3R 48/2025, art. 1º'],
+    ['2026-06-05', 'Sem expediente (horas compensadas)', 'Portaria CATRF3R 48/2025, art. 2º'],
+    ['2026-07-09', 'Revolução Constitucionalista (só na sede, em São Paulo)', 'Portaria CATRF3R 48/2025, art. 1º, com a redação da Portaria CATRF3R 58/2026 (Lei estadual SP 9.497/1997)'],
+    ['2026-10-30', 'Dia do Servidor Público (originalmente 28/10)', 'Portaria CATRF3R 48/2025, art. 1º']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TRF3'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'trf3-catrf3r-48-2025' as const
+  })),
+  { tribunais: ['TRF3'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas (expediente a partir das 14h)', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria CATRF3R 48/2025, art. 3º', fonte: 'trf3-catrf3r-48-2025' },
+
+  // ---------- TRF4, 2026: calendário oficial (só as linhas "Todas"; a Portaria 233/2026 do Dia do Servidor não foi lida, por isso só alerta) ----------
+  { tribunais: ['TRF4'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (alerta: listado no calendário do tribunal; Portaria 233/2026 não lida)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Calendário de Feriados 2026 do TRF4 (Lei 8.112/1990, art. 236, e Portaria TRF4 233/2026)', fonte: 'trf4-calendario-2026' },
+
+  // ---------- TRF5, 2026: Ato 219/2026 (retificado pelo Ato 230/2026), arts. 1º a 5º ----------
+  // Feriados municipais do Recife (24/06 e 16/07, Lei municipal 9.777/1967) só alertam. O Dia do Servidor (28/10) teria sido transferido para 30/10 pelo Ato 498/2026, não lido: os dois dias alertam.
+  ...[
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Ato 219/2026 do TRF5, art. 2º e art. 5º, § 3º'],
+    ['2026-03-06', 'Data Magna do Estado de Pernambuco', 'Ato 219/2026 do TRF5, art. 1º (Lei estadual PE 13.835/2009, como citada no ato)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo, sem expediente)', 'Ato 219/2026 do TRF5, art. 2º'],
+    ['2026-06-23', 'Véspera de São João (ponto facultativo, sem expediente)', 'Ato 219/2026 do TRF5, art. 2º']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TRF5'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'trf5-ato-219-2026' as const
+  })),
+  ...[
+    ['2026-06-24', 'São João (feriado municipal do Recife: alerta)', 'Ato 219/2026 do TRF5, art. 1º (Lei municipal 9.777/1967); feriado municipal não conta (CPC, art. 1.003, § 6º)'],
+    ['2026-07-16', 'Nossa Senhora do Carmo (feriado municipal do Recife: alerta)', 'Ato 219/2026 do TRF5, art. 1º (Lei municipal 9.777/1967); feriado municipal não conta (CPC, art. 1.003, § 6º)'],
+    ['2026-10-28', 'Dia do Servidor Público (alerta: o Ato 498/2026 o teria transferido para 30/10)', 'Ato 219/2026 do TRF5, art. 2º (Lei 8.112/1990, art. 236)'],
+    ['2026-10-30', 'Dia do Servidor Público transferido (alerta: Ato 498/2026 não lido)', 'Ato 498/2026 do TRF5, citado em portaria do MPF e não lido']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TRF5'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'pendente' as const,
+    fundamento,
+    fonte: 'trf5-ato-219-2026' as const
+  })),
+
+  // ---------- TRF6, 2026: Portaria Presi 1/2026, art. 1º (pontos facultativos viram alerta, ver PONTOS_FACULTATIVOS) ----------
+  // Corpus Christi (04/06) vem listado como feriado, não como ponto facultativo (Lei municipal de Belo Horizonte 11.397/2022).
+  ...PF_2026.map(pf => ({
+    tribunais: ['TRF6'],
+    inicio: pf.data,
+    fim: pf.data,
+    nome: pf.data === '2026-06-04' ? 'Corpus Christi (feriado religioso, Lei municipal de Belo Horizonte 11.397/2022)' : pf.nome,
+    efeito: (pf.parcial ? 'expediente_parcial' : 'nao_util') as EfeitoEvento,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: 'Portaria Presi 1/2026 do TRF6, art. 1º',
+    fonte: 'trf6-presi-1-2026' as const
+  }))
 ];
 
 /**
@@ -704,6 +846,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
  * da Lei estadual 10.633/2024: não há expediente nos dias declarados ponto facultativo nas repartições estaduais; Atos Executivos 20, 79 e 91/2026). Também conta o dia que o ato trata como feriado ou suspensão decretada (Copa com prazos prorrogados).
  */
 const PONTOS_FACULTATIVOS: Record<string, string[]> = {
+  // TRF1 e TRF6: os atos só "divulgam" o ponto facultativo e não dizem que não haverá expediente (diferente de TRF2, TRF3 e TRF5, cujos atos dizem)
+  TRF1: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
+  TRF6: ['2026-04-20', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07']
 };
 
@@ -766,5 +911,10 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJPE: { anos: [2026], fontes: ['tjpe-ato-conjunto-43-2025', 'tjpe-ato-966-2026', 'tjpe-ato-977-2026'] },
   TJCE: { anos: [2026], fontes: ['tjce-portaria-2924-2025', 'tjce-portaria-1169-2026', 'tjce-portaria-1401-2026', 'tjce-portaria-1440-2026', 'tjce-portaria-727-2026'] },
   TJES: { anos: [2026], fontes: ['tjes-an-176-2026', 'tjes-an-124-2026', 'tjes-an-130-2026'] },
-  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-1130-2026', 'tjgo-dj-1738-2026', 'tjgo-lei-21268-art-91', 'tjgo-dj-3079-2026'] }
+  TJGO: { anos: [2026], fontes: ['tjgo-feriados-2026', 'tjgo-dj-1130-2026', 'tjgo-dj-1738-2026', 'tjgo-lei-21268-art-91', 'tjgo-dj-3079-2026'] },
+  TRF1: { anos: [2026], fontes: ['trf1-presi-5-2026'] },
+  TRF2: { anos: [2026], fontes: ['trf2-pres-843-2026'] },
+  TRF3: { anos: [2026], fontes: ['trf3-catrf3r-48-2025'] },
+  TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
+  TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] }
 };

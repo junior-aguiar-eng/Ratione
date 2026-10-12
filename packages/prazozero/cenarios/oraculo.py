@@ -26,13 +26,16 @@ FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
 # Pontos facultativos (decisão do revisor jurídico em 10/10/2026): viram alerta (dia pendente), salvo quando o ato prevê expressamente que não haverá expediente
 # (TJBA, TJCE e TJDFT: contam como dia sem expediente). Espelha PONTOS_FACULTATIVOS de eventos.ts.
-PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"]}
+PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"]} | {
+    ("TRF1", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"]} | {
+    ("TRF6", d) for d in ["04-20", "06-05", "08-10", "10-30", "12-07"]}
 
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
 TRIBUNAL_SEM_ATO = None
 
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}, "TJPE": {2026}, "TJCE": {2026}, "TJES": {2026}, "TJGO": {2026}}
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}, "TJPE": {2026}, "TJCE": {2026}, "TJES": {2026}, "TJGO": {2026},
+                    "TRF1": {2026}, "TRF2": {2026}, "TRF3": {2026}, "TRF5": {2026}, "TRF6": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -83,6 +86,16 @@ TJMG_2026_PENDENTE = ["06-04", "06-05"]
 TJRJ_2026_NU = ["02-05", "02-13", "02-16", "02-17", "02-18", "02-27", "03-27", "04-02", "04-03", "04-23", "04-24",
                 "06-04", "06-05", "06-24", "06-29", "07-29", "08-07", "08-11", "09-04", "09-11"]
 TJAL_2026_NU = ["04-20", "06-04", "06-05", "08-10", "08-11", "12-07", "12-08"]
+#  TRF1: Portaria Presi 5/2026 (aviso do portal do tribunal): pontos facultativos 18/02 (até 14h), 20/04, 04/06, 05/06, 10/08, 30/10 e 07/12 (só "divulgados": alerta).
+#  TRF2: Portaria PRES/TRF2 843/2025 com as Portarias 30/2026 e 338/2026 (art. 1º: "não haverá expediente", inclusive nos pontos facultativos); 20/01 (lei municipal do Rio) fica fora.
+#  TRF3: Portaria CATRF3R 48/2025 (arts. 1º a 3º) com a nº 58/2026 e a nº 53/2026 (02/03, posse dos dirigentes); jogos da Copa (nº 56 e 57) não suspendem prazos.
+#  TRF4: calendário oficial (linhas "Todas"); só o Dia do Servidor em 30/10 (Portaria 233/2026 não lida) alerta.
+#  TRF5: Ato 219/2026 (retificado pelo 230/2026): art. 3º, sem expediente em feriados e pontos facultativos; São João e Carmo (Recife, municipais) e o Dia do Servidor (Ato 498/2026 não lido) alertam.
+#  TRF6: Portaria Presi 1/2026: 04/06 vem como feriado; os demais pontos facultativos são alerta; Cinzas até as 14h.
+TRF2_2026_NU = ["02-18", "04-20", "04-23", "06-04", "06-05", "06-29", "08-10", "10-30", "12-07"]
+TRF3_2026_NU = ["03-02", "04-20", "06-04", "06-05", "07-09", "10-30"]
+TRF5_2026_NU = ["02-18", "03-06", "06-04", "06-23"]
+TRF5_2026_PENDENTE = ["06-24", "07-16", "10-28", "10-30"]
 
 
 def pascoa(ano: int) -> date:
@@ -263,6 +276,29 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         for s in TJAL_2026_NU:
             ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
         ev(date(2026, 8, 28), False, "TJAL: 28/08 só nos municípios que preveem o feriado")
+    if ano == 2026 and trib in ("TRF1", "TRF6"):
+        for mes, dd, eh_parcial in PF_2026:
+            sd = f"{mes:02d}-{dd:02d}"
+            if eh_parcial:
+                parcial.add(dia(sd))
+                nomes[dia(sd)] = trib + ": Quarta-feira de Cinzas (ponto facultativo até as 14h)"
+            else:
+                ev(dia(sd), (trib, sd) not in PF, trib + ": ponto facultativo / feriado do ato")
+    if ano == 2026 and trib == "TRF2":
+        for sd in TRF2_2026_NU:
+            ev(dia(sd), True, "TRF2: Portaria PRES/TRF2 843/2025, 30/2026 e 338/2026")
+    if ano == 2026 and trib == "TRF3":
+        for sd in TRF3_2026_NU:
+            ev(dia(sd), True, "TRF3: Portaria CATRF3R 48/2025, 53/2026 e 58/2026")
+        parcial.add(dia("02-18"))
+        nomes[dia("02-18")] = "TRF3: Quarta-feira de Cinzas (expediente a partir das 14h)"
+    if ano == 2026 and trib == "TRF4":
+        ev(dia("10-30"), False, "TRF4: Dia do Servidor (alerta; Portaria 233/2026 não lida)")
+    if ano == 2026 and trib == "TRF5":
+        for sd in TRF5_2026_NU:
+            ev(dia(sd), True, "TRF5: Ato 219/2026")
+        for sd in TRF5_2026_PENDENTE:
+            ev(dia(sd), False, "TRF5: alerta (feriado municipal do Recife ou Dia do Servidor, Ato 498/2026 não lido)")
     # Feriados civis por lei estadual lidos (Lei 9.093/1995, art. 1º, II): valem em todo ano
     if trib == "TJPE":
         ev(date(ano, 3, 6), True, "TJPE: Data Magna (Lei estadual PE 16.241/2017, art. 49)")
@@ -618,7 +654,7 @@ add("stf-dje-ferias-janeiro", "verificado", "STF: disponibilização em 30/01/20
     entrada("2026-01-30", "disponibilizacao_dje", 5, "STF"))
 add("stj-dje-semana-santa", "verificado", "STJ: disponibilização em 31/03/2026; 1 a 3/04 são feriados, publicação na segunda 06/04", "CPC, art. 224, § 2º; " + P1010 + ", art. 1º, IV",
     entrada("2026-03-31", "disponibilizacao_dje", 3, "STJ"))
-add("trf3-carnaval-conservador", "pendente", "TRF3: Carnaval é feriado (Lei 5.010); Quarta de Cinzas ainda sem ato do TRF3 (conservador)", "Lei 5.010/1966, art. 62, III; " + PEND + " (Cinzas)",
+add("trf3-carnaval-conservador", "verificado", "TRF3: Carnaval é feriado (Lei 5.010) e na Quarta de Cinzas o expediente começa às 14h: o começo do prazo passa para 19/02", "Lei 5.010/1966, art. 62, III; Portaria CATRF3R 48/2025, art. 3º (lida em 12/10/2026); CPC, art. 224, § 1º",
     entrada("2026-02-13", "publicacao", 3, "TRF3"))
 add("trf3-finados", "verificado", "TRF3: 2 de novembro (segunda) não conta", "Lei 662/1949, art. 1º",
     entrada("2026-10-30", "publicacao", 3, "TRF3"))
@@ -816,6 +852,53 @@ add("tjpr-19-dezembro-nao-feriado", "verificado", "TJPR: 19 de dezembro não é 
     entrada("2025-12-18", "publicacao", 1, "TJPR"))
 add("tjdf-dia-evangelico-util", "verificado", "TJDF: 30 de novembro (Dia do Evangélico, lei distrital) conta como dia útil: o TJDFT é órgão federal", "Lei 9.093/1995, art. 1º; aviso do TJDFT de 26/11/2020",
     entrada("2026-11-27", "publicacao", 2, "TJDF"))
+# TRFs 2026: Portarias dos tribunais (TRF1, TRF2, TRF3, TRF5, TRF6) e calendário do TRF4 (lidos em 12/10/2026). Nascem pendentes de validação do revisor.
+TRF1 = "Portaria Presi 5/2026 do TRF1 (lida em 12/10/2026); CPC, arts. 219 e 224"
+add("trf1-2026-ponto-facultativo-20-abril", "pendente", "TRF1 2026: 20/04 é ponto facultativo (alerta, o ato só o divulga); 21/04 (Tiradentes) não conta", TRF1,
+    entrada("2026-04-16", "publicacao", 3, "TRF1"))
+add("trf1-2026-cinzas", "verificado", "TRF1 2026: Carnaval não conta e a Quarta-feira de Cinzas (ponto facultativo até as 14h) protrai o começo do prazo", TRF1,
+    entrada("2026-02-13", "publicacao", 3, "TRF1"))
+add("trf1-2026-corpus-christi", "pendente", "TRF1 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alerta)", TRF1,
+    entrada("2026-06-02", "publicacao", 3, "TRF1"))
+TRF2 = "Portaria PRES/TRF2 843/2025, alterada pelas nº 30/2026 e nº 338/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224"
+add("trf2-2026-ponto-facultativo-20-abril", "verificado", "TRF2 2026: 20/04 é ponto facultativo sem expediente (art. 1º) e 21/04 (Tiradentes) é feriado: nenhum conta", TRF2,
+    entrada("2026-04-16", "publicacao", 3, "TRF2"))
+add("trf2-2026-sao-jorge", "verificado", "TRF2 2026: 23/04 (Dia de São Jorge, Lei estadual RJ 5.198/2008) não conta", TRF2,
+    entrada("2026-04-22", "publicacao", 2, "TRF2"))
+add("trf2-2026-copa-29-junho", "verificado", "TRF2 2026: 29/06 (jogo da Seleção, Portaria 338/2026) não conta", TRF2,
+    entrada("2026-06-26", "publicacao", 2, "TRF2"))
+add("trf2-2026-dia-servidor", "verificado", "TRF2 2026: o Dia do Servidor foi transferido para 30/10 (Portaria 30/2026) e não conta", TRF2,
+    entrada("2026-10-27", "publicacao", 3, "TRF2"))
+TRF3 = "Portaria CATRF3R 48/2025, alterada pela nº 58/2026, e nº 53/2026 (lidas em 12/10/2026); CPC, arts. 219 e 224"
+add("trf3-2026-corpus-christi-ponto-facultativo", "verificado", "TRF3 2026: 04/06 (Corpus Christi) e 05/06 (sem expediente, art. 2º) não contam", TRF3,
+    entrada("2026-06-02", "publicacao", 3, "TRF3"))
+add("trf3-2026-revolucao-constitucionalista", "verificado", "TRF3 2026: 09/07 (Revolução Constitucionalista, só na sede em São Paulo) não conta", TRF3,
+    entrada("2026-07-07", "publicacao", 3, "TRF3"))
+add("trf3-2026-posse-2-marco", "verificado", "TRF3 2026: 02/03 (posse dos dirigentes: prazos suspensos no Tribunal, Portaria 53/2026) não conta", TRF3,
+    entrada("2026-02-27", "publicacao", 2, "TRF3"))
+add("trf3-2026-dia-servidor", "verificado", "TRF3 2026: o Dia do Servidor é 30/10 (originalmente 28/10) e não conta", TRF3,
+    entrada("2026-10-27", "publicacao", 3, "TRF3"))
+TRF4 = "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224"
+add("trf4-2026-dia-servidor", "pendente", "TRF4 2026: 30/10 (Dia do Servidor, Portaria 233/2026 não lida) só alerta", TRF4,
+    entrada("2026-10-27", "publicacao", 3, "TRF4"))
+add("trf4-2026-ponto-facultativo-sem-ato", "verificado", "TRF4 2026: 20/04 e 05/06 não são pontos facultativos do TRF4 (não constam do calendário): contam como dias úteis", TRF4,
+    entrada("2026-04-16", "publicacao", 3, "TRF4"))
+TRF5 = "Ato 219/2026 da Presidência do TRF5 (lido em 12/10/2026); CPC, arts. 219 e 224"
+add("trf5-2026-carnaval-cinzas", "verificado", "TRF5 2026: Carnaval e Quarta-feira de Cinzas (ponto facultativo sem expediente) não contam", TRF5 + "; art. 5º, § 3º",
+    entrada("2026-02-12", "publicacao", 3, "TRF5"))
+add("trf5-2026-data-magna-pernambuco", "verificado", "TRF5 2026: 06/03 (Data Magna de Pernambuco) não conta", TRF5,
+    entrada("2026-03-05", "publicacao", 2, "TRF5"))
+add("trf5-2026-sao-joao", "pendente", "TRF5 2026: 23/06 (ponto facultativo sem expediente) não conta; 24/06 (São João, feriado municipal do Recife) só alerta", TRF5 + "; CPC, art. 1.003, § 6º",
+    entrada("2026-06-22", "publicacao", 3, "TRF5"))
+add("trf5-2026-dia-servidor", "pendente", "TRF5 2026: Dia do Servidor (28/10, transferido para 30/10 pelo Ato 498/2026, não lido) só alerta", TRF5,
+    entrada("2026-10-26", "publicacao", 3, "TRF5"))
+TRF6 = "Portaria Presi 1/2026 do TRF6 (lida em 12/10/2026); CPC, arts. 219 e 224"
+add("trf6-2026-cinzas", "verificado", "TRF6 2026: Carnaval não conta e a Quarta-feira de Cinzas (ponto facultativo até as 14h) protrai o começo do prazo", TRF6,
+    entrada("2026-02-13", "publicacao", 3, "TRF6"))
+add("trf6-2026-corpus-christi", "pendente", "TRF6 2026: 04/06 (Corpus Christi, listado como feriado) não conta e 05/06 é ponto facultativo (alerta)", TRF6,
+    entrada("2026-06-03", "publicacao", 3, "TRF6"))
+add("trf6-2026-dois-de-novembro", "verificado", "TRF6 2026: 02/11 (Finados, feriado forense, art. 62, IV, da Lei 5.010) não conta", TRF6 + "; Lei 5.010/1966, art. 62, IV",
+    entrada("2026-10-30", "publicacao", 3, "TRF6"))
 
 def validacoes_existentes(destino):
     """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
@@ -974,7 +1057,7 @@ def gerar_revisao(cenarios):
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
     L.append("- **Feriados estaduais e municipais**: TJSP, TJMG e TJRJ (2026) têm ato lido e PE, RS e GO têm feriado estadual lido em lei; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
-    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES e TRFs** além da Lei 5.010 e dos feriados nacionais; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
+    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES, TRF1, TRF2, TRF3, TRF5 e TRF6** (2026 lido) além da Lei 5.010 e dos feriados nacionais; **TRF4** só pelo calendário do portal, sem selo; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")
@@ -1029,7 +1112,7 @@ def gerar_aleatorios(n=600, semente=20261007):
     """Entradas pseudoaleatórias (semente fixa) com o resultado do oráculo: o teste compara motor e oráculo em todas."""
     import random
     r = random.Random(semente)
-    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF3", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", None]
+    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", None]
     regimes = ["cpc_dias_uteis", "clt_dias_uteis", "jef_dias_uteis", "cpp_dias_corridos"]
     tipos = ["disponibilizacao_dje", "publicacao", "intimacao_portal", "carga_ou_audiencia"]
     saida = []
