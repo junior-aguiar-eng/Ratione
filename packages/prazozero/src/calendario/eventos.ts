@@ -373,7 +373,7 @@ export const FONTES_CALENDARIO = {
   'tjpb-calendario-2026': {
     ato: 'Calendário 2026 do Tribunal de Justiça da Paraíba (documento ilustrado do tribunal, 17 páginas, com legenda mensal)',
     url: 'https://www.tjpb.jus.br/',
-    lido: 'PDF "Calendario_2026.pdf" entregue pelo responsável em 14/10/2026; as 12 páginas dos meses foram vistas em imagem (dias em vermelho sem expediente, em azul expediente alterado). Não é o ato normativo: nenhuma portaria do tribunal foi lida. Os dias que o próprio calendário chama de "Ponto Facultativo" (inclusive Carnaval, Semana Santa, Corpus Christi, São João e os "compensados") e os dias vermelhos sem rótulo que são facultativos por natureza (Cinzas e Dia do Servidor) só alertam, porque o calendário não diz que não haverá expediente e os compensa com horas em outros dias. Contam o feriado de 03/04, 05/08 (feriado estadual, Data Magna), 11/08 (Fundação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Expediente das 7h às 13h em 11/02 e 01/04. As páginas de feriados municipais das comarcas (15 e 16) não foram conferidas: municipais ficam fora (CPC, art. 1.003, § 6º). Recesso de 20/12 a 06/01 já está no recesso do CPC',
+    lido: 'PDF "Calendario_2026.pdf" entregue pelo responsável em 14/10/2026; as 12 páginas dos meses foram vistas em imagem (dias em vermelho sem expediente, em azul expediente alterado). Não é o ato normativo: nenhuma portaria do tribunal foi lida. Os dias que o próprio calendário chama de "Ponto Facultativo" (inclusive Carnaval, Semana Santa, Corpus Christi, São João e os "compensados") só alertam, porque o calendário não diz que não haverá expediente e os compensa com horas em outros dias. Contam, por decisão do responsável em 14/10/2026, os dias em vermelho sem rótulo de ponto facultativo: 18/02 (Cinzas) e 28/10 (Dia do Servidor), além do feriado de 03/04, 05/08 (feriado estadual, Data Magna), 11/08 (Fundação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Expediente das 7h às 13h em 11/02 e 01/04. As páginas de feriados municipais das comarcas (15 e 16) não foram conferidas: municipais ficam fora (CPC, art. 1.003, § 6º). Recesso de 20/12 a 06/01 já está no recesso do CPC',
     lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
@@ -1090,8 +1090,8 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   TJMA: ['2026-02-18', '2026-04-01', '2026-06-05'],
   // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
   TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07'],
-  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas e Dia do Servidor vêm sem rótulo
-  TJPB: ['2026-02-16', '2026-02-17', '2026-02-18', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-10-28', '2026-12-07']
+  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
+  TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {

@@ -9195,7 +9195,7 @@
   {
     "id": "tjpb-2026-carnaval",
     "categoria": "pendente",
-    "descricao": "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) e 18/02 (Cinzas) só alertam",
+    "descricao": "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) só alertam e 18/02 (Cinzas, sem rótulo de ponto facultativo) não conta",
     "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-12",
@@ -9442,8 +9442,8 @@
   },
   {
     "id": "tjpb-2026-dia-servidor",
-    "categoria": "pendente",
-    "descricao": "TJPB 2026: 28/10 (Dia do Servidor, sem rótulo de feriado) só alerta",
+    "categoria": "verificado",
+    "descricao": "TJPB 2026: 28/10 (Dia do Servidor, em vermelho sem rótulo de ponto facultativo) não conta",
     "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-27",
@@ -9453,16 +9453,25 @@
     },
     "esperado": {
       "dataPublicacao": "2026-10-27",
-      "dataTermoInicial": "2026-10-28",
-      "dataVencimentoFinal": "2026-10-30",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 0,
+        "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
       }
     },
     "validacao": {
@@ -9470,7 +9479,7 @@
       "por": null,
       "em": null
     },
-    "alternativaEsperada": "2026-11-03"
+    "alternativaEsperada": null
   },
   {
     "id": "tjpb-2026-dia-da-justica",

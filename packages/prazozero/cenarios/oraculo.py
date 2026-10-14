@@ -31,7 +31,7 @@ PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"
     ("TRF6", d) for d in ["04-20", "06-05", "08-10", "10-30", "12-07"]} | {
     ("TJMA", d) for d in ["02-18", "04-01", "06-05"]} | {
     ("TJMS", d) for d in ["02-18", "04-20", "06-05", "08-10", "12-07"]} | {
-    ("TJPB", d) for d in ["02-16", "02-17", "02-18", "04-02", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-10", "10-28", "12-07"]}
+    ("TJPB", d) for d in ["02-16", "02-17", "04-02", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-10", "12-07"]}
 
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
@@ -97,7 +97,7 @@ TJAL_2026_NU = ["04-20", "06-04", "06-05", "08-10", "08-11", "12-07", "12-08"]
 #  TRF6: Portaria Presi 1/2026: 04/06 vem como feriado; os demais pontos facultativos são alerta; Cinzas até as 14h.
 #  TJPA: Portaria 4765/2025-GP (art. 1º e Anexo: "não haverá expediente" nos feriados e pontos facultativos; art. 2º: Dia do Servidor em 30/10). Fora: feriados federais do anexo.
 #  TJMA: Resolução-GP 131/2025, art. 1º (feriados, inclusive 28/07 e 28/10) e art. 3º (pontos facultativos 18/02, 01/04 e 05/06: só alertam). Fora: feriados federais e municipais (São Luís e interior).
-#  TJPB: calendário 2026 do tribunal (sem ato lido): contam 03/04, 05/08, 11/08 e 08/12; pontos facultativos, compensados, Cinzas e Dia do Servidor só alertam; 11/02 e 01/04 com expediente até 13h.
+#  TJPB: calendário 2026 do tribunal (sem ato lido): contam 03/04, 05/08, 11/08 e 08/12; pontos facultativos e compensados só alertam; Cinzas e Dia do Servidor (vermelhos sem rótulo) contam por decisão do responsável; 11/02 e 01/04 com expediente até 13h.
 TJPB_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-05", "08-10", "08-11", "10-28", "12-07", "12-08"]
 TJPB_2026_PARCIAL = ["02-11", "04-01"]
 #  TJRO: Ato 2579/2025 compilado, arts. 1º e 5º (sem expediente e prazos prorrogados nos feriados e pontos facultativos); Dia do Advogado em 10/08, Dia do Servidor em 30/10 e Dia da Justiça em 07/12; fora: federais, municipais, 02/01 e 24 e 31/12 (recesso).
@@ -1047,7 +1047,7 @@ add("tjro-2026-dia-da-justica-transferido", "verificado", "TJRO 2026: o Dia da J
 TJPB = "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224"
 add("tjpb-2026-carnaval-meio-expediente", "verificado", "TJPB 2026: 11/02 tem expediente só das 7h às 13h (festejos de Carnaval) e protrai o vencimento", TJPB,
     entrada("2026-02-09", "publicacao", 2, "TJPB"))
-add("tjpb-2026-carnaval", "pendente", "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) e 18/02 (Cinzas) só alertam", TJPB,
+add("tjpb-2026-carnaval", "pendente", "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) só alertam e 18/02 (Cinzas, sem rótulo de ponto facultativo) não conta", TJPB,
     entrada("2026-02-12", "publicacao", 3, "TJPB"))
 add("tjpb-2026-semana-santa", "pendente", "TJPB 2026: 01/04 (expediente até 13h) protrai, 02/04 (ponto facultativo) só alerta e 03/04 não conta", TJPB,
     entrada("2026-03-31", "publicacao", 3, "TJPB"))
@@ -1061,7 +1061,7 @@ add("tjpb-2026-data-magna", "verificado", "TJPB 2026: 05/08 (Data Magna da Para�
     entrada("2026-08-04", "publicacao", 2, "TJPB"))
 add("tjpb-2026-dia-do-advogado", "pendente", "TJPB 2026: 10/08 (ponto facultativo compensado) só alerta e 11/08 (Cursos Jurídicos) não conta", TJPB,
     entrada("2026-08-07", "publicacao", 3, "TJPB"))
-add("tjpb-2026-dia-servidor", "pendente", "TJPB 2026: 28/10 (Dia do Servidor, sem rótulo de feriado) só alerta", TJPB,
+add("tjpb-2026-dia-servidor", "verificado", "TJPB 2026: 28/10 (Dia do Servidor, em vermelho sem rótulo de ponto facultativo) não conta", TJPB,
     entrada("2026-10-27", "publicacao", 3, "TJPB"))
 add("tjpb-2026-dia-da-justica", "pendente", "TJPB 2026: 07/12 (ponto facultativo compensado) só alerta e 08/12 (Dia da Justiça) não conta", TJPB,
     entrada("2026-12-04", "publicacao", 3, "TJPB"))
