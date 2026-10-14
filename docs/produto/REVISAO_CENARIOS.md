@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **313** · validados: **196** · pendentes: **117**
+> Cenários: **313** · validados: **313** · pendentes: **0**
 
 ## Como revisar
 
@@ -1146,7 +1146,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJMA: Resolução-GP 131/2025; 17/02/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 90. `tjma-2026-semana-santa`
 
@@ -1159,7 +1159,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJMA: Resolução-GP 131/2025; 03/04/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 91. `tjma-2026-corpus-christi`
 
@@ -1172,7 +1172,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 92. `tjms-2026-carnaval`
 
@@ -1185,7 +1185,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJMS: página de feriados forenses 2026; 17/02/2026 TJMS: página de feriados forenses 2026
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 93. `tjms-2026-ponto-facultativo-20-abril`
 
@@ -1198,7 +1198,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 94. `tjms-2026-corpus-christi`
 
@@ -1211,7 +1211,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJMS: página de feriados forenses 2026
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 95. `tjms-2026-dia-do-advogado`
 
@@ -1224,7 +1224,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJMS: página de feriados forenses 2026
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 96. `tjms-2026-dia-da-justica`
 
@@ -1237,7 +1237,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJMS: página de feriados forenses 2026
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 97. `tjpb-2026-carnaval`
 
@@ -1250,7 +1250,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 98. `tjpb-2026-semana-santa`
 
@@ -1263,7 +1263,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJPB: expediente das 7h às 13h: protrai o dia do começo; 03/04/2026 TJPB: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 99. `tjpb-2026-ponto-facultativo-20-abril`
 
@@ -1276,7 +1276,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 100. `tjpb-2026-corpus-christi`
 
@@ -1289,7 +1289,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 101. `tjpb-2026-sao-joao`
 
@@ -1302,7 +1302,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 102. `tjpb-2026-dia-do-advogado`
 
@@ -1315,7 +1315,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJPB: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 103. `tjpb-2026-dia-da-justica`
 
@@ -1328,7 +1328,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJPB: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 104. `tjrn-2026-ponto-facultativo-20-abril`
 
@@ -1341,7 +1341,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 105. `tjrn-2026-corpus-christi`
 
@@ -1354,7 +1354,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 106. `tjrn-2026-sao-pedro`
 
@@ -1367,7 +1367,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 107. `tjac-2026-corpus-christi`
 
@@ -1380,7 +1380,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 108. `tjac-2026-revolucao-acreana`
 
@@ -1393,7 +1393,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 109. `tjap-2026-corpus-christi`
 
@@ -1406,7 +1406,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 05/06/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 110. `tjap-2026-dia-servidor`
 
@@ -1419,7 +1419,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 111. `tjap-2026-dia-do-evangelico`
 
@@ -1432,7 +1432,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 112. `tjto-2026-ponto-facultativo-20-abril`
 
@@ -1445,7 +1445,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 113. `tjto-2026-corpus-christi`
 
@@ -1458,7 +1458,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 114. `tjto-2026-dia-do-advogado`
 
@@ -1471,7 +1471,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 115. `tjse-2026-carnaval`
 
@@ -1484,7 +1484,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 17/02/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 116. `tjse-2026-semana-santa`
 
@@ -1497,7 +1497,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 03/04/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 117. `tjse-2026-ponto-facultativo-20-abril`
 
@@ -1510,7 +1510,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 118. `tjse-2026-corpus-christi`
 
@@ -1523,7 +1523,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 119. `tjse-2026-festejos-juninos`
 
@@ -1536,7 +1536,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 24/06/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 120. `tjse-2026-dia-do-magistrado`
 
@@ -1549,7 +1549,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 121. `tjse-2026-dia-da-justica`
 
@@ -1562,7 +1562,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 122. `tjse-2026-dia-do-ministerio-publico`
 
@@ -1575,7 +1575,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ## Calendário verificado (tribunais com ato lido)
 
@@ -2753,7 +2753,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJPA: Portaria 4765/2025-GP; 17/02/2026 TJPA: Portaria 4765/2025-GP; 18/02/2026 TJPA: Portaria 4765/2025-GP
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 221. `tjpa-2026-semana-santa`
 
@@ -2765,7 +2765,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJPA: Portaria 4765/2025-GP; 03/04/2026 TJPA: Portaria 4765/2025-GP
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 222. `tjpa-2026-ponto-facultativo-20-abril`
 
@@ -2777,7 +2777,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJPA: Portaria 4765/2025-GP; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 223. `tjpa-2026-corpus-christi`
 
@@ -2789,7 +2789,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJPA: Portaria 4765/2025-GP; 05/06/2026 TJPA: Portaria 4765/2025-GP
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 224. `tjpa-2026-recirio`
 
@@ -2801,7 +2801,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 26/10/2026 TJPA: Portaria 4765/2025-GP
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 225. `tjpa-2026-dia-servidor`
 
@@ -2813,7 +2813,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJPA: Portaria 4765/2025-GP; 02/11/2026 Finados
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224; art. 2º
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 226. `tjpa-2026-dia-da-justica`
 
@@ -2825,7 +2825,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJPA: Portaria 4765/2025-GP; 08/12/2026 TJPA: Portaria 4765/2025-GP
 - **Fundamento:** Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 227. `tjma-2026-adesao-do-maranhao`
 
@@ -2837,7 +2837,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 28/07/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 228. `tjma-2026-dia-do-advogado`
 
@@ -2849,7 +2849,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 229. `tjma-2026-dia-servidor`
 
@@ -2861,7 +2861,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJMA: Resolução-GP 131/2025; 02/11/2026 Finados
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 230. `tjma-2026-dia-da-justica`
 
@@ -2873,7 +2873,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 08/12/2026 TJMA: Resolução-GP 131/2025
 - **Fundamento:** Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 231. `tjmt-2026-carnaval-cinzas`
 
@@ -2885,7 +2885,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 TJMT: Portaria 1915/2025-PRES; 17/02/2026 TJMT: Portaria 1915/2025-PRES; 18/02/2026 TJMT: Cinzas, expediente a partir das 13h: protrai o dia do começo
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 232. `tjmt-2026-semana-santa`
 
@@ -2897,7 +2897,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJMT: Portaria 1915/2025-PRES; 03/04/2026 TJMT: Portaria 1915/2025-PRES
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 233. `tjmt-2026-ponto-facultativo-20-abril`
 
@@ -2909,7 +2909,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJMT: Portaria 1915/2025-PRES; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 234. `tjmt-2026-corpus-christi`
 
@@ -2921,7 +2921,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJMT: Portaria 1915/2025-PRES; 05/06/2026 TJMT: Portaria 1915/2025-PRES
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 235. `tjmt-2026-dia-do-advogado`
 
@@ -2933,7 +2933,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJMT: Portaria 1915/2025-PRES; 11/08/2026 TJMT: Portaria 1915/2025-PRES
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 236. `tjmt-2026-dia-servidor`
 
@@ -2945,7 +2945,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJMT: Portaria 1915/2025-PRES; 02/11/2026 Finados
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 237. `tjmt-2026-dia-da-justica`
 
@@ -2957,7 +2957,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJMT: Portaria 1915/2025-PRES; 08/12/2026 TJMT: Portaria 1915/2025-PRES
 - **Fundamento:** Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 238. `tjam-2026-carnaval-cinzas`
 
@@ -2969,7 +2969,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJAM: Portaria 4704/2025; 17/02/2026 TJAM: Portaria 4704/2025; 18/02/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 239. `tjam-2026-semana-santa`
 
@@ -2981,7 +2981,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJAM: Portaria 4704/2025; 03/04/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 240. `tjam-2026-ponto-facultativo-20-abril`
 
@@ -2993,7 +2993,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJAM: Portaria 4704/2025; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 241. `tjam-2026-dia-do-defensor`
 
@@ -3005,7 +3005,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/05/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 242. `tjam-2026-corpus-christi`
 
@@ -3017,7 +3017,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJAM: Portaria 4704/2025; 05/06/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 243. `tjam-2026-dia-do-advogado`
 
@@ -3029,7 +3029,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 244. `tjam-2026-dia-servidor`
 
@@ -3041,7 +3041,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJAM: Portaria 4704/2025; 02/11/2026 Finados
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 245. `tjam-2026-dezembro`
 
@@ -3053,7 +3053,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 07/12/2026 TJAM: Portaria 4704/2025; 08/12/2026 TJAM: Portaria 4704/2025; 14/12/2026 TJAM: Portaria 4704/2025
 - **Fundamento:** Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 246. `tjms-2026-semana-santa`
 
@@ -3065,7 +3065,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJMS: página de feriados forenses 2026; 03/04/2026 TJMS: página de feriados forenses 2026
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 247. `tjms-2026-dia-servidor`
 
@@ -3077,7 +3077,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJMS: página de feriados forenses 2026; 02/11/2026 Finados
 - **Fundamento:** Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 248. `tjro-2026-carnaval-cinzas`
 
@@ -3089,7 +3089,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJRO: Ato 2579/2025 compilado; 17/02/2026 TJRO: Ato 2579/2025 compilado; 18/02/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 249. `tjro-2026-semana-santa`
 
@@ -3101,7 +3101,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJRO: Ato 2579/2025 compilado; 03/04/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 250. `tjro-2026-ponto-facultativo-20-abril`
 
@@ -3113,7 +3113,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJRO: Ato 2579/2025 compilado; 21/04/2026 Tiradentes
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 251. `tjro-2026-corpus-christi`
 
@@ -3125,7 +3125,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRO: Ato 2579/2025 compilado; 05/06/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 252. `tjro-2026-dia-trabalhador-da-justica`
 
@@ -3137,7 +3137,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/07/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 253. `tjro-2026-dia-do-advogado-transferido`
 
@@ -3149,7 +3149,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 254. `tjro-2026-dia-servidor-transferido`
 
@@ -3161,7 +3161,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJRO: Ato 2579/2025 compilado; 02/11/2026 Finados
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 255. `tjro-2026-dia-da-justica-transferido`
 
@@ -3173,7 +3173,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJRO: Ato 2579/2025 compilado
 - **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 256. `tjpb-2026-carnaval-meio-expediente`
 
@@ -3185,7 +3185,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 11/02/2026 TJPB: expediente das 7h às 13h: protrai o vencimento (CPC, art. 224, § 1º)
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 257. `tjpb-2026-data-magna`
 
@@ -3197,7 +3197,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 05/08/2026 TJPB: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 258. `tjpb-2026-dia-servidor`
 
@@ -3209,7 +3209,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJPB: calendário 2026 do tribunal; 02/11/2026 Finados
 - **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 259. `tjrn-2026-carnaval-cinzas`
 
@@ -3221,7 +3221,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJRN: Portaria Conjunta 02/2026; 17/02/2026 TJRN: Portaria Conjunta 02/2026; 18/02/2026 TJRN: Portaria Conjunta 02/2026
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 260. `tjrn-2026-semana-santa`
 
@@ -3233,7 +3233,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJRN: Portaria Conjunta 02/2026; 02/04/2026 TJRN: Portaria Conjunta 02/2026; 03/04/2026 TJRN: Portaria Conjunta 02/2026
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 261. `tjrn-2026-dia-do-advogado-antecipado`
 
@@ -3245,7 +3245,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJRN: Portaria Conjunta 02/2026
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 262. `tjrn-2026-dia-servidor`
 
@@ -3257,7 +3257,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJRN: Portaria Conjunta 02/2026; 02/11/2026 Finados
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 263. `tjrn-2026-dia-da-justica-antecipado`
 
@@ -3269,7 +3269,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJRN: Portaria Conjunta 02/2026
 - **Fundamento:** Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 264. `tjac-2026-dia-do-catolico-evangelico`
 
@@ -3281,7 +3281,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 22/01/2026 TJAC: Portaria PRESI 6569/2025; 23/01/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 265. `tjac-2026-carnaval-cinzas`
 
@@ -3293,7 +3293,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJAC: Portaria PRESI 6569/2025; 17/02/2026 TJAC: Portaria PRESI 6569/2025; 18/02/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 266. `tjac-2026-semana-santa`
 
@@ -3305,7 +3305,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJAC: Portaria PRESI 6569/2025; 03/04/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 267. `tjac-2026-aniversario-do-estado`
 
@@ -3317,7 +3317,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 15/06/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 268. `tjac-2026-dia-do-advogado`
 
@@ -3329,7 +3329,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 269. `tjac-2026-dia-servidor-adiado`
 
@@ -3341,7 +3341,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJAC: Portaria PRESI 6569/2025; 02/11/2026 Finados
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 270. `tjac-2026-tratado-de-petropolis`
 
@@ -3353,7 +3353,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/11/2026 TJAC: Portaria PRESI 6569/2025; 20/11/2026 Consciência Negra
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 271. `tjac-2026-dia-da-justica`
 
@@ -3365,7 +3365,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 08/12/2026 TJAC: Portaria PRESI 6569/2025
 - **Fundamento:** Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 272. `tjrr-2026-carnaval-cinzas`
 
@@ -3377,7 +3377,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJRR: Portaria 1558/2025; 17/02/2026 TJRR: Portaria 1558/2025; 18/02/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 273. `tjrr-2026-semana-santa`
 
@@ -3389,7 +3389,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJRR: Portaria 1558/2025; 02/04/2026 TJRR: Portaria 1558/2025; 03/04/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 274. `tjrr-2026-ponto-facultativo-20-abril`
 
@@ -3401,7 +3401,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJRR: Portaria 1558/2025; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 275. `tjrr-2026-corpus-christi`
 
@@ -3413,7 +3413,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRR: Portaria 1558/2025; 05/06/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 276. `tjrr-2026-dia-dos-magistrados`
 
@@ -3425,7 +3425,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJRR: Portaria 1558/2025; 11/08/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 277. `tjrr-2026-aniversario-do-estado`
 
@@ -3437,7 +3437,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 05/10/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 278. `tjrr-2026-dia-servidor`
 
@@ -3449,7 +3449,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJRR: Portaria 1558/2025; 02/11/2026 Finados
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 279. `tjrr-2026-dia-da-justica`
 
@@ -3461,7 +3461,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJRR: Portaria 1558/2025; 08/12/2026 TJRR: Portaria 1558/2025
 - **Fundamento:** Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 280. `tjap-2026-carnaval-cinzas`
 
@@ -3473,7 +3473,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJAP: calendário 2026 do tribunal; 17/02/2026 TJAP: calendário 2026 do tribunal; 18/02/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 281. `tjap-2026-padroeiro-e-expediente-suspenso`
 
@@ -3485,7 +3485,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/03/2026 TJAP: calendário 2026 do tribunal; 20/03/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 282. `tjap-2026-semana-santa`
 
@@ -3497,7 +3497,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJAP: calendário 2026 do tribunal; 02/04/2026 TJAP: calendário 2026 do tribunal; 03/04/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 283. `tjap-2026-expediente-suspenso-20-abril`
 
@@ -3509,7 +3509,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJAP: calendário 2026 do tribunal; 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 284. `tjap-2026-dia-de-cabralzinho`
 
@@ -3521,7 +3521,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 15/05/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 285. `tjap-2026-dia-do-advogado`
 
@@ -3533,7 +3533,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJAP: calendário 2026 do tribunal; 11/08/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 286. `tjap-2026-dezembro`
 
@@ -3545,7 +3545,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJAP: calendário 2026 do tribunal; 08/12/2026 TJAP: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 287. `tjto-2026-carnaval`
 
@@ -3557,7 +3557,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJTO: Portaria 3741/2025 (notícia oficial); 17/02/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 288. `tjto-2026-semana-santa`
 
@@ -3569,7 +3569,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJTO: Portaria 3741/2025 (notícia oficial); 02/04/2026 TJTO: Portaria 3741/2025 (notícia oficial); 03/04/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 289. `tjto-2026-nossa-senhora-da-natividade`
 
@@ -3581,7 +3581,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/09/2026 Independência; 08/09/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 290. `tjto-2026-criacao-do-estado`
 
@@ -3593,7 +3593,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 05/10/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 291. `tjto-2026-dia-servidor-transferido`
 
@@ -3605,7 +3605,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJTO: Portaria 3741/2025 (notícia oficial); 02/11/2026 Finados
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 292. `tjto-2026-dia-da-justica-transferido`
 
@@ -3617,7 +3617,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 293. `tjto-2026-dia-da-justica-18-dezembro`
 
@@ -3629,7 +3629,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 10 sábados/domingos; suspensão de 23 dias (21/12/2026 a 20/01/2027); 18/12/2026 TJTO: Portaria 3741/2025 (notícia oficial)
 - **Fundamento:** Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 294. `tjpi-2026-carnaval-cinzas`
 
@@ -3641,7 +3641,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJPI: Provimento 59/2025; 17/02/2026 TJPI: Provimento 59/2025; 18/02/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 295. `tjpi-2026-semana-santa`
 
@@ -3653,7 +3653,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJPI: Provimento 59/2025; 03/04/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 296. `tjpi-2026-corpus-christi`
 
@@ -3665,7 +3665,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 297. `tjpi-2026-dia-do-advogado`
 
@@ -3677,7 +3677,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 298. `tjpi-2026-dia-do-piaui`
 
@@ -3689,7 +3689,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/10/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 299. `tjpi-2026-dia-servidor`
 
@@ -3701,7 +3701,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJPI: Provimento 59/2025; 02/11/2026 Finados
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 300. `tjpi-2026-dia-da-justica`
 
@@ -3713,7 +3713,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJPI: Provimento 59/2025
 - **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 301. `tjse-2026-emancipacao-de-sergipe`
 
@@ -3725,7 +3725,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 08/07/2026 TJSE: calendário 2026 do tribunal
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 302. `tjse-2026-dia-do-funcionario-publico`
 
@@ -3737,7 +3737,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJSE: calendário 2026 do tribunal; 02/11/2026 Finados
 - **Fundamento:** Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ## Intimação eletrônica
 
