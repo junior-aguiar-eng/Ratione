@@ -7673,5 +7673,276 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-carnaval",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, ponto facultativo) só alerta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-24"
+  },
+  {
+    "id": "tjma-2026-semana-santa",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 01/04 (ponto facultativo) só alerta; 02/04 e 03/04 não contam",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-01",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-08"
+  },
+  {
+    "id": "tjma-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjma-2026-adesao-do-maranhao",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 28/07 (Adesão do Maranhão à Independência) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-27",
+      "dataTermoInicial": "2026-07-29",
+      "dataVencimentoFinal": "2026-07-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-28",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 11/08 (Dia do Advogado, feriado forense) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 28/10 (Dia do Servidor, sem transferência para 30/10 no ato) não conta; 30/10 conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-07",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

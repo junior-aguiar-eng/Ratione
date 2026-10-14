@@ -43,6 +43,7 @@ export interface RegraAnual {
 const LIDO = '2026-10-07';
 const LIDO_10_10 = '2026-10-10';
 const LIDO_12_10 = '2026-10-12';
+const LIDO_14_10 = '2026-10-14';
 
 export const FONTES_CALENDARIO = {
   'stj-gdg-1010': {
@@ -338,6 +339,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjpa.jus.br/CMSPortal/VisualizarArquivo?idArquivo=2234620',
     lido: 'inteiro teor (PDF digitalizado de 2 páginas, lido como imagem). O art. 1º diz que não haverá expediente nos feriados e pontos facultativos do Anexo; o art. 3º manda aplicar o CPC, art. 224, § 1º. Ficam de fora os atos locais de Belém, Ananindeua e Marituba (por exemplo, a Portaria 4.263/2026-GP, Círio, 09/10/2026) e o recesso de fim de ano, que vem de ato próprio e do CPC, art. 220',
     lidoEm: LIDO_12_10
+  },
+  'tjma-res-gp-131-2025': {
+    ato: 'Resolução-GP nº 131/2025 do TJMA (04/11/2025; DJE de 06/11/2025): dias sem expediente no Judiciário do Maranhão em 2026 (arts. 1º e 3º)',
+    url: 'https://novogerenciador.tjma.jus.br/storage/arquivos/resolucoes_2025/resolucao_gp_n_131_de_4_de_novembro_de_2025_05_11_2025_17_12_45.pdf',
+    lido: 'inteiro teor (PDF de 2 páginas). O art. 1º lista os dias em que não haverá expediente; o art. 3º lista três pontos facultativos (18/02, 01/04 e 05/06) sem dizer que não haverá expediente, por isso só alertam; o art. 4º diz que os pontos facultativos do Poder Executivo não vinculam o Judiciário. Ficam de fora os feriados municipais (29/06 e 08/09 em São Luís, art. 1º, parágrafo único, e os das comarcas do interior, art. 2º). Atos posteriores não foram lidos: a página de suspensões de expediente do tribunal respondeu 403',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -865,6 +872,32 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjpa-gp-4765-2025' as const
+  })),
+
+  // ---------- TJMA, 2026: Resolução-GP 131/2025, arts. 1º e 3º (pontos facultativos do art. 3º viram alerta, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11, 25/12) e os municipais (art. 1º, parágrafo único, e art. 2º).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, II (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-02-17', 'Carnaval (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, III (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo)', 'Resolução-GP TJMA 131/2025, art. 3º, I'],
+    ['2026-04-01', 'Quarta-feira da Semana Santa (ponto facultativo)', 'Resolução-GP TJMA 131/2025, art. 3º, II'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, IV (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-04-03', 'Sexta-feira da Paixão (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, V (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-06-04', 'Corpus Christi', 'Resolução-GP TJMA 131/2025, art. 1º, VIII'],
+    ['2026-06-05', 'Ponto facultativo', 'Resolução-GP TJMA 131/2025, art. 3º, III'],
+    ['2026-07-28', 'Adesão do Maranhão à Independência do Brasil', 'Resolução-GP TJMA 131/2025, art. 1º, IX'],
+    ['2026-08-11', 'Dia do Advogado (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, X (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-10-28', 'Dia do Servidor Público', 'Resolução-GP TJMA 131/2025, art. 1º, XIII'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, XVI (LC estadual 14/1991, art. 5º-A, § 1º)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMA'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjma-res-gp-131-2025' as const
   }))
 ];
 
@@ -881,7 +914,9 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   // TRF1 e TRF6: os atos só "divulgam" o ponto facultativo e não dizem que não haverá expediente (diferente de TRF2, TRF3 e TRF5, cujos atos dizem)
   TRF1: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TRF6: ['2026-04-20', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
-  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07']
+  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
+  // TJMA: o art. 3º da Resolução-GP 131/2025 só "considera" esses dias pontos facultativos e não diz que não haverá expediente
+  TJMA: ['2026-02-18', '2026-04-01', '2026-06-05']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -950,5 +985,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF4: { anos: [2026], fontes: ['trf4-calendario-2026'] },
   TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
   TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] },
-  TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] }
+  TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] },
+  TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] }
 };
