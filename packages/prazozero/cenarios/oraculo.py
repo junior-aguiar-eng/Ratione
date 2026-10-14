@@ -20,7 +20,7 @@ LEI_5010 = {"STF", "STJ", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6"}
 SUPERIORES_SEM_ATO = {"TST", "TSE"}  # citados no art. 62, sem ato próprio conferido: pendente
 # Só tribunais estaduais: a Justiça Federal segue a Lei 5.010, art. 62, e não a tabela estadual.
 UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR": "PR", "TJSC": "SC", "TJBA": "BA", "TJDF": "DF",
-                  "TJGO": "GO", "TJPE": "PE", "TJCE": "CE", "TJAL": "AL", "TJES": "ES", "TJPA": "PA", "TJMA": "MA", "TJMT": "MT", "TJAM": "AM", "TJMS": "MS", "TJRO": "RO", "TJPB": "PB", "TJRN": "RN", "TJAC": "AC", "TJRR": "RR"}
+                  "TJGO": "GO", "TJPE": "PE", "TJCE": "CE", "TJAL": "AL", "TJES": "ES", "TJPA": "PA", "TJMA": "MA", "TJMT": "MT", "TJAM": "AM", "TJMS": "MS", "TJRO": "RO", "TJPB": "PB", "TJRN": "RN", "TJAC": "AC", "TJRR": "RR", "TJAP": "AP", "TJTO": "TO"}
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
@@ -33,14 +33,16 @@ PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"
     ("TJMS", d) for d in ["02-18", "04-20", "06-05", "08-10", "12-07"]} | {
     ("TJPB", d) for d in ["02-16", "02-17", "04-02", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-10", "12-07"]} | {
     ("TJRN", d) for d in ["04-20", "06-04", "06-05", "06-29"]} | {
-    ("TJAC", d) for d in ["06-04", "08-06"]}
+    ("TJAC", d) for d in ["06-04", "08-06"]} | {
+    ("TJAP", d) for d in ["06-04", "10-30", "11-30"]} | {
+    ("TJTO", d) for d in ["04-20", "06-04", "06-05", "08-10"]}
 
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
 TRIBUNAL_SEM_ATO = None
 
 ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}, "TJPE": {2026}, "TJCE": {2026}, "TJES": {2026}, "TJGO": {2026},
-                    "TRF1": {2026}, "TRF2": {2026}, "TRF3": {2026}, "TRF4": {2026}, "TRF5": {2026}, "TRF6": {2026}, "TJPA": {2026}, "TJMA": {2026}, "TJMT": {2026}, "TJAM": {2026}, "TJMS": {2026}, "TJRO": {2026}, "TJPB": {2026}, "TJRN": {2026}, "TJAC": {2026}, "TJRR": {2026}}
+                    "TRF1": {2026}, "TRF2": {2026}, "TRF3": {2026}, "TRF4": {2026}, "TRF5": {2026}, "TRF6": {2026}, "TJPA": {2026}, "TJMA": {2026}, "TJMT": {2026}, "TJAM": {2026}, "TJMS": {2026}, "TJRO": {2026}, "TJPB": {2026}, "TJRN": {2026}, "TJAC": {2026}, "TJRR": {2026}, "TJAP": {2026}, "TJTO": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
@@ -99,6 +101,10 @@ TJAL_2026_NU = ["04-20", "06-04", "06-05", "08-10", "08-11", "12-07", "12-08"]
 #  TRF6: Portaria Presi 1/2026: 04/06 vem como feriado; os demais pontos facultativos são alerta; Cinzas até as 14h.
 #  TJPA: Portaria 4765/2025-GP (art. 1º e Anexo: "não haverá expediente" nos feriados e pontos facultativos; art. 2º: Dia do Servidor em 30/10). Fora: feriados federais do anexo.
 #  TJMA: Resolução-GP 131/2025, art. 1º (feriados, inclusive 28/07 e 28/10) e art. 3º (pontos facultativos 18/02, 01/04 e 05/06: só alertam). Fora: feriados federais e municipais (São Luís e interior).
+#  TJAP: calendário do tribunal (sem portaria lida): contam feriados e "Expediente Suspenso" (20/03, 20/04, 05/06, 10/08, 07/12); alertam os "Ponto Facultativo" da legenda (04/06, 30/10, 30/11); fora: federais, municipais, recomendações de audiência (19/05, 14/12), fim de semana e 24 e 31/12.
+TJAP_2026_NU = ["02-16", "02-17", "02-18", "03-19", "03-20", "04-01", "04-02", "04-03", "04-20", "05-15", "06-04", "06-05", "08-10", "08-11", "10-30", "11-30", "12-07", "12-08"]
+#  TJTO: Portaria 3741/2025 pela notícia oficial (portaria não lida): contam Carnaval, Semana Santa, 11/08, 08/09, 05/10, 30/10 e 18/12; alertam os pontos facultativos 20/04, 04/06, 05/06 e 10/08; fora: federais, municipais e 15/08 (sábado).
+TJTO_2026_NU = ["02-16", "02-17", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "08-10", "08-11", "09-08", "10-05", "10-30", "12-18"]
 #  TJRR: Portaria 1558/2025, art. 3º e Anexo Único ("Todas as Comarcas"; suspensos o expediente e os prazos em feriados e pontos facultativos, que contam); fora: federais, linhas só de Boa Vista, municípios do interior e recesso.
 TJRR_2026_NU = ["02-16", "02-17", "02-18", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "08-10", "08-11", "10-05", "10-28", "12-07", "12-08"]
 #  TJAC: Portaria PRESI 6569/2025 (tabelas mensais): contam 22 e 23/01, 16 a 18/02, 02 e 03/04, 15/06, 11/08, 30/10 (28/10 adiado), 19/11 (17/11 adiado) e 08/12; alertam 04/06 e 06/08 (pontos facultativos estaduais); fora: federais, municipais, fim de semana e 24 e 31/12.
@@ -313,6 +319,12 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJPA":
         for sd in TJPA_2026_NU:
             ev(dia(sd), True, "TJPA: Portaria 4765/2025-GP")
+    if ano == 2026 and trib == "TJAP":
+        for sd in TJAP_2026_NU:
+            ev(dia(sd), ("TJAP", sd) not in PF, "TJAP: calendário 2026 do tribunal")
+    if ano == 2026 and trib == "TJTO":
+        for sd in TJTO_2026_NU:
+            ev(dia(sd), ("TJTO", sd) not in PF, "TJTO: Portaria 3741/2025 (notícia oficial)")
     if ano == 2026 and trib == "TJRR":
         for sd in TJRR_2026_NU:
             ev(dia(sd), True, "TJRR: Portaria 1558/2025")
@@ -1140,6 +1152,50 @@ add("tjrr-2026-dia-servidor", "verificado", "TJRR 2026: 28/10 (Dia do Servidor, 
     entrada("2026-10-27", "publicacao", 3, "TJRR"))
 add("tjrr-2026-dia-da-justica", "verificado", "TJRR 2026: 07/12 (ponto facultativo sem expediente) e 08/12 (Dia da Justiça) não contam", TJRR,
     entrada("2026-12-04", "publicacao", 3, "TJRR"))
+# TJAP 2026: calendário do tribunal (lido em 14/10/2026; nenhuma portaria lida). Nascem pendentes de validação do revisor.
+TJAP = "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224"
+add("tjap-2026-carnaval-cinzas", "verificado", "TJAP 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam", TJAP,
+    entrada("2026-02-12", "publicacao", 3, "TJAP"))
+add("tjap-2026-padroeiro-e-expediente-suspenso", "verificado", "TJAP 2026: 19/03 (Padroeiro do Estado) e 20/03 (expediente suspenso) não contam", TJAP,
+    entrada("2026-03-17", "publicacao", 3, "TJAP"))
+add("tjap-2026-semana-santa", "verificado", "TJAP 2026: 01, 02 e 03/04 (Semana Santa) não contam", TJAP,
+    entrada("2026-03-30", "publicacao", 3, "TJAP"))
+add("tjap-2026-expediente-suspenso-20-abril", "verificado", "TJAP 2026: 20/04 (expediente suspenso) e 21/04 (Tiradentes) não contam", TJAP,
+    entrada("2026-04-16", "publicacao", 3, "TJAP"))
+add("tjap-2026-dia-de-cabralzinho", "verificado", "TJAP 2026: 15/05 (Dia de Cabralzinho, feriado estadual) não conta", TJAP,
+    entrada("2026-05-13", "publicacao", 2, "TJAP"))
+add("tjap-2026-corpus-christi", "pendente", "TJAP 2026: 04/06 (Corpus Christi, ponto facultativo) só alerta e 05/06 (expediente suspenso) não conta", TJAP,
+    entrada("2026-06-02", "publicacao", 3, "TJAP"))
+add("tjap-2026-dia-do-advogado", "verificado", "TJAP 2026: 10/08 (expediente suspenso) e 11/08 (Dia do Advogado) não contam", TJAP,
+    entrada("2026-08-07", "publicacao", 3, "TJAP"))
+add("tjap-2026-dia-servidor", "pendente", "TJAP 2026: 30/10 (Dia do Servidor, ponto facultativo na legenda) só alerta; 28/10 conta", TJAP,
+    entrada("2026-10-27", "publicacao", 3, "TJAP"))
+add("tjap-2026-dia-do-evangelico", "pendente", "TJAP 2026: 30/11 (Dia do Evangélico, ponto facultativo) só alerta", TJAP,
+    entrada("2026-11-26", "publicacao", 3, "TJAP"))
+add("tjap-2026-dezembro", "verificado", "TJAP 2026: 07/12 (expediente suspenso) e 08/12 (Dia da Justiça) não contam", TJAP,
+    entrada("2026-12-04", "publicacao", 3, "TJAP"))
+# TJTO 2026: Portaria 3741/2025 pela notícia oficial (lida em 14/10/2026; a portaria em si não foi lida). Nascem pendentes de validação do revisor.
+TJTO = "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224"
+add("tjto-2026-carnaval", "verificado", "TJTO 2026: 16 e 17/02 (Carnaval) não contam; 18/02 (Cinzas) não consta e conta", TJTO,
+    entrada("2026-02-12", "publicacao", 3, "TJTO"))
+add("tjto-2026-semana-santa", "verificado", "TJTO 2026: 01, 02 e 03/04 (Semana Santa) não contam", TJTO,
+    entrada("2026-03-30", "publicacao", 3, "TJTO"))
+add("tjto-2026-ponto-facultativo-20-abril", "pendente", "TJTO 2026: 20/04 (ponto facultativo) só alerta; 21/04 (Tiradentes) não conta", TJTO,
+    entrada("2026-04-16", "publicacao", 3, "TJTO"))
+add("tjto-2026-corpus-christi", "pendente", "TJTO 2026: 04/06 (Corpus Christi, ponto facultativo) e 05/06 só alertam", TJTO,
+    entrada("2026-06-02", "publicacao", 3, "TJTO"))
+add("tjto-2026-dia-do-advogado", "pendente", "TJTO 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Cursos Jurídicos) não conta", TJTO,
+    entrada("2026-08-07", "publicacao", 3, "TJTO"))
+add("tjto-2026-nossa-senhora-da-natividade", "verificado", "TJTO 2026: 07/09 (Independência) e 08/09 (Padroeira do Tocantins) não contam", TJTO,
+    entrada("2026-09-04", "publicacao", 2, "TJTO"))
+add("tjto-2026-criacao-do-estado", "verificado", "TJTO 2026: 05/10 (Criação do Estado do Tocantins) não conta", TJTO,
+    entrada("2026-10-02", "publicacao", 2, "TJTO"))
+add("tjto-2026-dia-servidor-transferido", "verificado", "TJTO 2026: o Dia do Servidor foi transferido para 30/10: 28/10 conta e 30/10 não", TJTO,
+    entrada("2026-10-27", "publicacao", 3, "TJTO"))
+add("tjto-2026-dia-da-justica-transferido", "verificado", "TJTO 2026: o Dia da Justiça foi transferido para 18/12: 08/12 conta e 18/12 não", TJTO,
+    entrada("2026-12-04", "publicacao", 3, "TJTO"))
+add("tjto-2026-dia-da-justica-18-dezembro", "verificado", "TJTO 2026: 18/12 (Dia da Justiça transferido) não conta", TJTO,
+    entrada("2026-12-15", "publicacao", 3, "TJTO"))
 
 def validacoes_existentes(destino):
     """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
@@ -1298,7 +1354,7 @@ def gerar_revisao(cenarios):
     L.append("")
     L.append("- **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.")
     L.append("- **Feriados estaduais e municipais**: TJSP, TJMG e TJRJ (2026) têm ato lido e PE, RS e GO têm feriado estadual lido em lei; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).")
-    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES, TJPA, TJMA, TJMT, TJAM, TJMS, TJRO, TJPB, TJRN, TJAC, TJRR, TRF1, TRF2, TRF3, TRF5 e TRF6** (2026 lido) além da Lei 5.010 e dos feriados nacionais; **TRF4** pelo calendário do portal e pela Portaria 233/2026; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
+    L.append("- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES, TJPA, TJMA, TJMT, TJAM, TJMS, TJRO, TJPB, TJRN, TJAC, TJRR, TJAP, TJTO, TRF1, TRF2, TRF3, TRF5 e TRF6** (2026 lido) além da Lei 5.010 e dos feriados nacionais; **TRF4** pelo calendário do portal e pela Portaria 233/2026; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.")
     L.append("- **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.")
     L.append("")
     L.append("## Resumo")
@@ -1353,7 +1409,7 @@ def gerar_aleatorios(n=600, semente=20261007):
     """Entradas pseudoaleatórias (semente fixa) com o resultado do oráculo: o teste compara motor e oráculo em todas."""
     import random
     r = random.Random(semente)
-    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", "TJPA", "TJMA", "TJMT", "TJAM", "TJMS", "TJRO", "TJPB", "TJRN", "TJAC", "TJRR", None]
+    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", "TJPA", "TJMA", "TJMT", "TJAM", "TJMS", "TJRO", "TJPB", "TJRN", "TJAC", "TJRR", "TJAP", "TJTO", None]
     regimes = ["cpc_dias_uteis", "clt_dias_uteis", "jef_dias_uteis", "cpp_dias_corridos"]
     tipos = ["disponibilizacao_dje", "publicacao", "intimacao_portal", "carga_ou_audiencia"]
     saida = []
