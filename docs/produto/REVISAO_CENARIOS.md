@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **232** · validados: **196** · pendentes: **36**
+> Cenários: **240** · validados: **196** · pendentes: **44**
 
 ## Como revisar
 
@@ -15,7 +15,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Indisponibilidade do sistema** (CPC, art. 224, § 1º, parte final): o motor não modela; é preciso o ato do tribunal.
 - **Feriados estaduais e municipais**: TJSP, TJMG e TJRJ (2026) têm ato lido e PE, RS e GO têm feriado estadual lido em lei; a tabela estadual dos demais segue pendente e feriado municipal nunca é calculado (CPC, art. 1.003, § 6º).
-- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES, TJPA, TJMA, TJMT, TJAM, TJMS, TRF1, TRF2, TRF3, TRF5 e TRF6** (2026 lido) além da Lei 5.010 e dos feriados nacionais; **TRF4** pelo calendário do portal e pela Portaria 233/2026; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.
+- **Calendário fora de 2026** (os tribunais só divulgam o ano seguinte no fim do ano) e **TJRS, TJPR, TJSC, TJBA, TJDF, TJGO, TJPE, TJCE, TJES, TJPA, TJMA, TJMT, TJAM, TJMS, TJRO, TRF1, TRF2, TRF3, TRF5 e TRF6** (2026 lido) além da Lei 5.010 e dos feriados nacionais; **TRF4** pelo calendário do portal e pela Portaria 233/2026; **TJRJ** só até 12/10/2026 e sem selo (informativo oficial; os atos não foram lidos); **TJAL** com selo, mas o recesso de 23/06 a 01/07 (art. 37 da Lei 6.564/2005) e o 28/08 (só em alguns municípios) ficam pendentes.
 - **Prazos criminais nas férias de STF e STJ**: coberto apenas pelo que os comunicados oficiais dizem (seguem o CPP, art. 798); a Portaria GDG 218/2024 do STF não foi lida, só o comunicado.
 
 ## Resumo
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 41 |
-| Calendário verificado (tribunais com ato lido) | 125 |
+| Calendário verificado (tribunais com ato lido) | 133 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -2741,9 +2741,105 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
+### 222. `tjro-2026-carnaval-cinzas`
+
+**TJRO 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas), pontos facultativos sem expediente, não contam**
+
+- **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
+- **Vencimento esperado:** **20/02/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJRO: Ato 2579/2025 compilado; 17/02/2026 TJRO: Ato 2579/2025 compilado; 18/02/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 223. `tjro-2026-semana-santa`
+
+**TJRO 2026: 02/04 (Quinta-feira Santa, ponto facultativo) e 03/04 (Sexta-feira Santa) não contam**
+
+- **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 01/04/2026 (quarta-feira) · **início da contagem:** 06/04/2026 (segunda-feira)
+- **Vencimento esperado:** **07/04/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJRO: Ato 2579/2025 compilado; 03/04/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 224. `tjro-2026-ponto-facultativo-20-abril`
+
+**TJRO 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam**
+
+- **Entrada:** publicação em **16/04/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 16/04/2026 (quinta-feira) · **início da contagem:** 17/04/2026 (sexta-feira)
+- **Vencimento esperado:** **23/04/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJRO: Ato 2579/2025 compilado; 21/04/2026 Tiradentes
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 225. `tjro-2026-corpus-christi`
+
+**TJRO 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam**
+
+- **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
+- **Vencimento esperado:** **09/06/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJRO: Ato 2579/2025 compilado; 05/06/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 226. `tjro-2026-dia-trabalhador-da-justica`
+
+**TJRO 2026: 20/07 (Dia do Trabalhador da Justiça Estadual, ponto facultativo) não conta**
+
+- **Entrada:** publicação em **16/07/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 16/07/2026 (quinta-feira) · **início da contagem:** 17/07/2026 (sexta-feira)
+- **Vencimento esperado:** **22/07/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/07/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 227. `tjro-2026-dia-do-advogado-transferido`
+
+**TJRO 2026: o Dia do Advogado foi transferido para 10/08: 10/08 não conta e 11/08 conta**
+
+- **Entrada:** publicação em **06/08/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 06/08/2026 (quinta-feira) · **início da contagem:** 07/08/2026 (sexta-feira)
+- **Vencimento esperado:** **12/08/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 228. `tjro-2026-dia-servidor-transferido`
+
+**TJRO 2026: o Dia do Servidor foi transferido para 30/10: 28/10 conta e 30/10 não**
+
+- **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 28/10/2026 (quarta-feira)
+- **Vencimento esperado:** **03/11/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJRO: Ato 2579/2025 compilado; 02/11/2026 Finados
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 229. `tjro-2026-dia-da-justica-transferido`
+
+**TJRO 2026: o Dia da Justiça foi transferido para 07/12: 07/12 não conta e 08/12 conta (municipal só em duas comarcas)**
+
+- **Entrada:** publicação em **04/12/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJRO** · modo conservador
+- **Publicação / dia do começo:** 04/12/2026 (sexta-feira) · **início da contagem:** 08/12/2026 (terça-feira)
+- **Vencimento esperado:** **10/12/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJRO: Ato 2579/2025 compilado
+- **Fundamento:** Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
 ## Intimação eletrônica
 
-### 222. `portal-segunda`
+### 230. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -2755,7 +2851,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 223. `portal-sexta`
+### 231. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -2767,7 +2863,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 224. `portal-sabado`
+### 232. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -2779,7 +2875,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 225. `portal-feriado`
+### 233. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -2791,7 +2887,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 226. `portal-recesso`
+### 234. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -2805,7 +2901,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 227. `jef-5d-embargos`
+### 235. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -2817,7 +2913,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 228. `jef-10d-recurso`
+### 236. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -2829,7 +2925,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 229. `jef-dobro-ignorado`
+### 237. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -2841,7 +2937,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 230. `jef-recesso`
+### 238. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -2853,7 +2949,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 231. `jef-recesso-desligado`
+### 239. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -2865,7 +2961,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 232. `jef-dje-sexta`
+### 240. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 

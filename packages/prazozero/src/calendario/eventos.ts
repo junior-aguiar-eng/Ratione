@@ -363,6 +363,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjms.jus.br/institucional/feriados',
     lido: 'página inteira lida em 14/10/2026 pelo script de acesso; a Portaria 983/2025 em si não foi lida. A página diz "não há expediente" em 02 e 03/04 (art. 164, § 2º, do CODJ) e lista como feriado 16 e 17/02, 04/06, 11/08, 30/10 (Dia do Servidor) e 08/12. 18/02 (Cinzas) vem sem efeito dito e 20/04, 05/06, 10/08 e 07/12 vêm só como ponto facultativo, sem dizer que não há expediente: alertam. Ficam de fora os feriados municipais (só na comarca; CPC, art. 1.003, § 6º). 20 a 31/12 é feriado forense (art. 268 do CODJ) e já está no recesso',
     lidoEm: LIDO_14_10
+  },
+  'tjro-ato-2579-2025': {
+    ato: 'Ato nº 2579/2025 da Presidência do TJRO (25/11/2025; DJE nº 218, p. 18-20), na versão compilada com os Atos 2942/2025, 657, 782, 1255, 1720 e 2168/2026: feriados e pontos facultativos de 2026',
+    url: 'https://atos.tjro.jus.br/detalhar/6114',
+    lido: 'inteiro teor, texto compilado da página de atos do tribunal (arts. 1º a 6º e Anexo Único), lido em 14/10/2026 pelo script de acesso e conferido com a página de feriados de 2026 do tribunal (https://www.tjro.jus.br/feriados-locais/feriados-2026); os PDFs original e compilado não foram abertos. O art. 1º diz que não haverá expediente forense e administrativo nos feriados e pontos facultativos do anexo e o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias, por isso os pontos facultativos contam. O Dia da Justiça foi transferido de 08/12 para 07/12 (art. 3º-C, Ato 2168/2026), o Dia do Advogado de 11/08 para 10/08 e o Dia do Servidor de 28/10 para 30/10 (art. 3º, Ato 657/2026). Ficam de fora os feriados municipais (só na comarca ou no Fórum Digital, art. 1º, § 2º; CPC, art. 1.003, § 6º), 24 e 31/12 (recesso de 20/12 a 06/01) e 02/01. O art. 4º permite novos pontos facultativos durante o ano; atos posteriores ao 2168/2026 não foram lidos. Horário de funcionamento do público (7h às 14h) pela página do tribunal',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -998,6 +1004,32 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjms-feriados-2026' as const
+  })),
+
+  // ---------- TJRO, 2026: Ato 2579/2025 compilado (art. 1º: sem expediente nos feriados e pontos facultativos do anexo; art. 5º: prazos prorrogados) ----------
+  // Fora: feriados federais, municipais (comarca ou Fórum Digital), 02/01 e 24 e 31/12 (recesso) e o 08/12 (transferido para 07/12; fica só o municipal de Guajará-Mirim e Candeias do Jamari).
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-02-17', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, I'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-04-20', 'Dia anterior a Tiradentes (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, VI (Ato 657/2026)'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-06-05', 'Dia seguinte a Corpus Christi (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, II'],
+    ['2026-07-20', 'Dia do Trabalhador da Justiça Estadual (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, VII (Ato 782/2026)'],
+    ['2026-08-10', 'Dia do Magistrado, do Advogado e dos Cursos Jurídicos, transferido de 11/08 (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º, I (Ato 657/2026)'],
+    ['2026-10-30', 'Dia do Servidor Público, transferido de 28/10 (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º, II (Ato 657/2026)'],
+    ['2026-12-07', 'Dia da Justiça, transferido de 08/12 (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º-C (Ato 2168/2026)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRO'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjro-ato-2579-2025' as const
   }))
 ];
 
@@ -1091,5 +1123,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] },
   TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] },
   TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
-  TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] }
+  TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
+  TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] }
 };
