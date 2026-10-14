@@ -387,6 +387,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://webdev.tjac.jus.br/wp-content/uploads/2025/12/Portaria_PRESI_TJAC_6569_2025.pdf',
     lido: 'inteiro teor (PDF de 7 páginas, lido em 14/10/2026 pelo script de acesso; as tabelas mensais foram conferidas em imagem). O art. 1º institui o calendário com base no Decreto estadual 11.809/2025 (calendário do Executivo, não lido) e o art. 3º trata da convocação de servidores nos dias "declarados como facultativos" com compensação de horas; o ato não diz que não haverá expediente nos pontos facultativos, por isso 04/06 (Corpus Christi) e 06/08 (Início da Revolução Acreana), pontos facultativos estaduais, só alertam. Contam os feriados estaduais, forenses e regimentais da tabela: 22/01 (Dia do Católico, comemoração do dia 20 adiada para o dia 22) e 23/01 (Dia do Evangélico), 16, 17 e 18/02, 02 e 03/04, 15/06 (Aniversário do Estado), 11/08 (Dia do Advogado), 30/10 (Dia do Servidor, comemoração do dia 28 adiada para o dia 30), 19/11 (Tratado de Petrópolis, comemoração do dia 17 adiada para o dia 19) e 08/12 (Dia da Justiça). Ficam de fora os feriados e pontos facultativos municipais (art. 2º: só na comarca), 24 e 31/12 e os dias que caem em sábado ou domingo. Atos posteriores não foram lidos',
     lidoEm: LIDO_14_10
+  },
+  'tjrr-pr-1558-2025': {
+    ato: 'Portaria TJRR/PR nº 1558/2025 (19/12/2025; DJe nº 8006, de 22/12/2025, p. 3-5): feriados e pontos facultativos de 2026 nas comarcas de Roraima (Anexo Único)',
+    url: 'https://diario.tjrr.jus.br/dpj/dpj-20251222.pdf',
+    lido: 'inteiro teor (portaria e Anexo Único no DJe de 22/12/2025, lidos em 14/10/2026 pelo script de acesso; a tabela foi conferida em imagem). O art. 3º suspende o expediente e os prazos processuais nos feriados e nos pontos facultativos do anexo, por isso os pontos facultativos contam. Valem as linhas de "Todas as Comarcas": 16 a 18/02 (Carnaval e Cinzas), 01 a 03/04 (Semana Santa), 20/04, 04 e 05/06, 10 e 11/08 (Dia dos Magistrados), 05/10 (Aniversário do Estado), 28/10 (Dia do Servidor), 07 e 08/12. Ficam de fora as linhas da Comarca de Boa Vista (19 e 20/01, 29/06, 09 e 10/07) e os feriados dos municípios do interior (parte b do anexo): feriado municipal não conta (CPC, art. 1.003, § 6º). 01 a 06/01 e 20 a 31/12 são recesso forense e já estão no recesso. O art. 2º manda comunicar feriados e pontos facultativos decretados depois, que não constam do anexo; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -1136,6 +1142,35 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjac-presi-6569-2025' as const
+  })),
+
+  // ---------- TJRR, 2026: Portaria 1558/2025, Anexo Único, "Todas as Comarcas" (art. 3º: suspensos o expediente e os prazos nos feriados e pontos facultativos) ----------
+  // Fora: feriados federais, as linhas só da Comarca de Boa Vista, os feriados municipais do interior e o recesso (01 a 06/01 e 20 a 31/12).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-01', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-02', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-03', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-20', 'Ponto facultativo referente ao feriado de 21/04, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-06-05', 'Ponto facultativo referente ao feriado de 04/06, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-08-10', 'Ponto facultativo referente ao Dia dos Magistrados, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-08-11', 'Dia dos Magistrados (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-10-05', 'Aniversário do Estado de Roraima (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-10-28', 'Dia do Servidor Público (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-12-07', 'Ponto facultativo referente ao feriado de 08/12, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-12-08', 'Dia da Justiça e Nossa Senhora da Conceição (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRR'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjrr-pr-1558-2025' as const
   }))
 ];
 
@@ -1239,5 +1274,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
   TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] },
   TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] },
-  TJAC: { anos: [2026], fontes: ['tjac-presi-6569-2025'] }
+  TJAC: { anos: [2026], fontes: ['tjac-presi-6569-2025'] },
+  TJRR: { anos: [2026], fontes: ['tjrr-pr-1558-2025'] }
 };

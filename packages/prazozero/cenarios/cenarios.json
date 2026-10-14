@@ -10207,5 +10207,337 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 01, 02 e 03/04 (Semana Santa) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 20/04 (ponto facultativo sem expediente) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo sem expediente) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-dos-magistrados",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 10/08 (ponto facultativo sem expediente) e 11/08 (Dia dos Magistrados) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-aniversario-do-estado",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 05/10 (Aniversário do Estado de Roraima) não conta",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-02",
+      "dataTermoInicial": "2026-10-06",
+      "dataVencimentoFinal": "2026-10-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-05",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 28/10 (Dia do Servidor, feriado) não conta",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 07/12 (ponto facultativo sem expediente) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]
