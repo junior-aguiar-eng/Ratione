@@ -345,6 +345,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://novogerenciador.tjma.jus.br/storage/arquivos/resolucoes_2025/resolucao_gp_n_131_de_4_de_novembro_de_2025_05_11_2025_17_12_45.pdf',
     lido: 'inteiro teor (PDF de 2 páginas). O art. 1º lista os dias em que não haverá expediente; o art. 3º lista três pontos facultativos (18/02, 01/04 e 05/06) sem dizer que não haverá expediente, por isso só alertam; o art. 4º diz que os pontos facultativos do Poder Executivo não vinculam o Judiciário. Ficam de fora os feriados municipais (29/06 e 08/09 em São Luís, art. 1º, parágrafo único, e os das comarcas do interior, art. 2º). Atos posteriores não foram lidos: a página de suspensões de expediente do tribunal respondeu 403',
     lidoEm: LIDO_14_10
+  },
+  'tjmt-pres-1915-2025': {
+    ato: 'Portaria TJMT/PRES nº 1915/2025 (05/12/2025; DJe de 09/12/2025): calendário forense oficial do Judiciário de Mato Grosso para 2026 (Anexos I e II)',
+    url: 'https://wiki.tjmt.jus.br/images/a/a5/Portaria_1915-2025-PRES_.pdf',
+    lido: 'inteiro teor (PDF de 8 páginas, cópia da wiki do tribunal entregue pelo responsável em 14/10/2026, porque o endereço respondia 503; o próprio texto avisa que não substitui o DJe de 09/12/2025). O art. 2º suspende o expediente e os prazos nos feriados e nos pontos facultativos, por isso os pontos facultativos do Anexo I contam; Cinzas tem expediente só a partir das 13h (Portaria 338/2023-PRES, não lida). Ficam de fora os feriados municipais do Anexo II (só na comarca, art. 2º, § 1º; CPC, art. 1.003, § 6º) e 24 e 31/12, que já estão no recesso. O art. 2º, § 2º, avisa que as datas podem mudar durante o ano; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -898,7 +904,34 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjma-res-gp-131-2025' as const
-  }))
+  })),
+
+  // ---------- TJMT, 2026: Portaria 1915/2025-PRES, Anexo I (art. 2º: suspensos o expediente e os prazos nos feriados e nos pontos facultativos) ----------
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 24 e 31/12 (recesso) e os feriados municipais do Anexo II.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-02-17', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-04-02', 'Paixão de Cristo (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-04-03', 'Paixão de Cristo (feriado nacional)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Lei 1.408/1951)'],
+    ['2026-04-20', 'Ponto facultativo (sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-06-05', 'Corpus Christi (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-08-10', 'Dia do Advogado (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (Lei 5.010/1966, art. 62, IV)'],
+    ['2026-08-11', 'Dia do Advogado (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (Lei 5.010/1966, art. 62, IV)'],
+    ['2026-10-28', 'Dia do Servidor Público (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-12-07', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMT'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjmt-pres-1915-2025' as const
+  })),
+  { tribunais: ['TJMT'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente a partir das 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJMT/PRES 1915/2025, Anexo I (Portaria 338/2023-PRES, não lida); CPC, art. 224, § 1º', fonte: 'tjmt-pres-1915-2025' }
 ];
 
 /**
@@ -986,5 +1019,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
   TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] },
   TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] },
-  TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] }
+  TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] },
+  TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] }
 };

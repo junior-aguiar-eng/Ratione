@@ -65,6 +65,7 @@ export const TRIBUNAIS_BRASIL: Record<string, Tribunal> = {
   TJAL: { id: 'TJAL', nome: 'Tribunal de Justiça do Estado de Alagoas', sigla: 'TJAL', esfera: 'estadual', uf: 'AL', sede: 'Maceió/AL', fusoHorario: 'America/Maceio', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
   TJES: { id: 'TJES', nome: 'Tribunal de Justiça do Estado do Espírito Santo', sigla: 'TJES', esfera: 'estadual', uf: 'ES', sede: 'Vitória/ES', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
   TJPA: { id: 'TJPA', nome: 'Tribunal de Justiça do Estado do Pará', sigla: 'TJPA', esfera: 'estadual', uf: 'PA', sede: 'Belém/PA', fusoHorario: 'America/Belem', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
+  TJMT: { id: 'TJMT', nome: 'Tribunal de Justiça do Estado de Mato Grosso', sigla: 'TJMT', esfera: 'estadual', uf: 'MT', sede: 'Cuiabá/MT', fusoHorario: 'America/Cuiaba', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
   TJMA: { id: 'TJMA', nome: 'Tribunal de Justiça do Estado do Maranhão', sigla: 'TJMA', esfera: 'estadual', uf: 'MA', sede: 'São Luís/MA', fusoHorario: 'America/Fortaleza', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
 };
 
