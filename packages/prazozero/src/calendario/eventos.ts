@@ -369,6 +369,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://atos.tjro.jus.br/detalhar/6114',
     lido: 'inteiro teor, texto compilado da página de atos do tribunal (arts. 1º a 6º e Anexo Único), lido em 14/10/2026 pelo script de acesso e conferido com a página de feriados de 2026 do tribunal (https://www.tjro.jus.br/feriados-locais/feriados-2026); os PDFs original e compilado não foram abertos. O art. 1º diz que não haverá expediente forense e administrativo nos feriados e pontos facultativos do anexo e o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias, por isso os pontos facultativos contam. O Dia da Justiça foi transferido de 08/12 para 07/12 (art. 3º-C, Ato 2168/2026), o Dia do Advogado de 11/08 para 10/08 e o Dia do Servidor de 28/10 para 30/10 (art. 3º, Ato 657/2026). Ficam de fora os feriados municipais (só na comarca ou no Fórum Digital, art. 1º, § 2º; CPC, art. 1.003, § 6º), 24 e 31/12 (recesso de 20/12 a 06/01) e 02/01. O art. 4º permite novos pontos facultativos durante o ano; atos posteriores ao 2168/2026 não foram lidos. Horário de funcionamento do público (7h às 14h) pela página do tribunal',
     lidoEm: LIDO_14_10
+  },
+  'tjpb-calendario-2026': {
+    ato: 'Calendário 2026 do Tribunal de Justiça da Paraíba (documento ilustrado do tribunal, 17 páginas, com legenda mensal)',
+    url: 'https://www.tjpb.jus.br/',
+    lido: 'PDF "Calendario_2026.pdf" entregue pelo responsável em 14/10/2026; as 12 páginas dos meses foram vistas em imagem (dias em vermelho sem expediente, em azul expediente alterado). Não é o ato normativo: nenhuma portaria do tribunal foi lida. Os dias que o próprio calendário chama de "Ponto Facultativo" (inclusive Carnaval, Semana Santa, Corpus Christi, São João e os "compensados") e os dias vermelhos sem rótulo que são facultativos por natureza (Cinzas e Dia do Servidor) só alertam, porque o calendário não diz que não haverá expediente e os compensa com horas em outros dias. Contam o feriado de 03/04, 05/08 (feriado estadual, Data Magna), 11/08 (Fundação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Expediente das 7h às 13h em 11/02 e 01/04. As páginas de feriados municipais das comarcas (15 e 16) não foram conferidas: municipais ficam fora (CPC, art. 1.003, § 6º). Recesso de 20/12 a 06/01 já está no recesso do CPC',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -1030,7 +1036,40 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjro-ato-2579-2025' as const
-  }))
+  })),
+
+  // ---------- TJPB, 2026: calendário do tribunal (pontos facultativos e dias compensados só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-02-17', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-02-18', 'Quarta-feira de Cinzas', 'Calendário 2026 do TJPB'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo, Semana Santa)', 'Calendário 2026 do TJPB'],
+    ['2026-04-03', 'Sexta-feira Santa (Paixão de Cristo, feriado)', 'Calendário 2026 do TJPB'],
+    ['2026-04-20', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-06-05', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-22', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-23', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-24', 'São João (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-08-05', 'Data Magna da Paraíba (feriado estadual)', 'Calendário 2026 do TJPB'],
+    ['2026-08-10', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-08-11', 'Fundação dos Cursos Jurídicos', 'Calendário 2026 do TJPB'],
+    ['2026-10-28', 'Dia do Servidor Público', 'Calendário 2026 do TJPB'],
+    ['2026-12-07', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-12-08', 'Dia da Justiça', 'Calendário 2026 do TJPB']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJPB'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjpb-calendario-2026' as const
+  })),
+  { tribunais: ['TJPB'], inicio: '2026-02-11', fim: '2026-02-11', nome: 'Festejos de Carnaval: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
+  { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' }
 ];
 
 /**
@@ -1050,7 +1089,9 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   // TJMA: o art. 3º da Resolução-GP 131/2025 só "considera" esses dias pontos facultativos e não diz que não haverá expediente
   TJMA: ['2026-02-18', '2026-04-01', '2026-06-05'],
   // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
-  TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07']
+  TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07'],
+  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas e Dia do Servidor vêm sem rótulo
+  TJPB: ['2026-02-16', '2026-02-17', '2026-02-18', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-10-28', '2026-12-07']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -1124,5 +1165,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] },
   TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
   TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
-  TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] }
+  TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
+  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] }
 };

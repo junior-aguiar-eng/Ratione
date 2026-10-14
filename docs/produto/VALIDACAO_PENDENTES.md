@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 44. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **240** cenários · validados: **196** · pendentes: **44**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 54. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **250** cenários · validados: **196** · pendentes: **54**
 
 ## Como responder
 
@@ -13,10 +13,10 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 36 | 36 |
-| Dias ainda pendentes de conferência | 37 a 44 | 8 |
+| Calendário verificado (tribunais com ato lido) | 1 a 38 | 38 |
+| Dias ainda pendentes de conferência | 39 a 54 | 16 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 36)
+## Calendário verificado (tribunais com ato lido) (1 a 38)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -58,19 +58,29 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 34 | `tjro-2026-dia-do-advogado-transferido`<br>TJRO 2026: o Dia do Advogado foi transferido para 10/08: 10/08 não conta e 11/08 conta | publicação em 06/08/2026 (quinta-feira); 3 dias (CPC, dias úteis); TJRO; modo conservador | **12/08/2026 (quarta-feira)** | 2 sáb./dom.; 10/08 TJRO: Ato 2579/2025 compilado |
 | 35 | `tjro-2026-dia-servidor-transferido`<br>TJRO 2026: o Dia do Servidor foi transferido para 30/10: 28/10 conta e 30/10 não | publicação em 27/10/2026 (terça-feira); 3 dias (CPC, dias úteis); TJRO; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 TJRO: Ato 2579/2025 compilado; 02/11 Finados |
 | 36 | `tjro-2026-dia-da-justica-transferido`<br>TJRO 2026: o Dia da Justiça foi transferido para 07/12: 07/12 não conta e 08/12 conta (municipal só em duas comarcas) | publicação em 04/12/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJRO; modo conservador | **10/12/2026 (quinta-feira)** | 2 sáb./dom.; 07/12 TJRO: Ato 2579/2025 compilado |
+| 37 | `tjpb-2026-carnaval-meio-expediente`<br>TJPB 2026: 11/02 tem expediente só das 7h às 13h (festejos de Carnaval) e protrai o vencimento | publicação em 09/02/2026 (segunda-feira); 2 dias (CPC, dias úteis); TJPB; modo conservador | **12/02/2026 (quinta-feira)** (prorrogado) | 11/02 TJPB: expediente das 7h às 13h: protrai o vencimento (CPC, art. 224, § 1º) |
+| 38 | `tjpb-2026-data-magna`<br>TJPB 2026: 05/08 (Data Magna da Paraíba, feriado estadual) não conta | publicação em 04/08/2026 (terça-feira); 2 dias (CPC, dias úteis); TJPB; modo conservador | **07/08/2026 (sexta-feira)** | 05/08 TJPB: calendário 2026 do tribunal |
 
-## Dias ainda pendentes de conferência (37 a 44)
+## Dias ainda pendentes de conferência (39 a 54)
 
 *Cada caso mostra a data com o dia ainda **não conferido** no ato do tribunal. Valide a contagem **supondo que o dia conta como sem expediente**; se ele é mesmo dia sem expediente naquele tribunal é o que falta conferir, não é dúvida de contagem. A coluna *Alternativa* mostra a outra data possível.*
 
 | Nº | Caso | Dados | Sistema diz | Dias que não contaram |
 |---|---|---|---|---|
-| 37 | `tjma-2026-carnaval`<br>TJMA 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, ponto facultativo) só alerta | publicação em 12/02/2026 (quinta-feira); 5 dias (CPC, dias úteis); TJMA; modo conservador | **23/02/2026 (segunda-feira)**<br>Alternativa: 24/02/2026 (terça-feira) | 4 sáb./dom.; 16/02 TJMA: Resolução-GP 131/2025; 17/02 TJMA: Resolução-GP 131/2025 |
-| 38 | `tjma-2026-semana-santa`<br>TJMA 2026: 01/04 (ponto facultativo) só alerta; 02/04 e 03/04 não contam | publicação em 31/03/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMA; modo conservador | **07/04/2026 (terça-feira)**<br>Alternativa: 08/04/2026 (quarta-feira) | 2 sáb./dom.; 02/04 TJMA: Resolução-GP 131/2025; 03/04 TJMA: Resolução-GP 131/2025 |
-| 39 | `tjma-2026-corpus-christi`<br>TJMA 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMA; modo conservador | **08/06/2026 (segunda-feira)**<br>Alternativa: 09/06/2026 (terça-feira) | 2 sáb./dom.; 04/06 TJMA: Resolução-GP 131/2025 |
-| 40 | `tjms-2026-carnaval`<br>TJMS 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, sem efeito dito) só alerta | publicação em 12/02/2026 (quinta-feira); 4 dias (CPC, dias úteis); TJMS; modo conservador | **20/02/2026 (sexta-feira)**<br>Alternativa: 23/02/2026 (segunda-feira) | 2 sáb./dom.; 16/02 TJMS: página de feriados forenses 2026; 17/02 TJMS: página de feriados forenses 2026 |
-| 41 | `tjms-2026-ponto-facultativo-20-abril`<br>TJMS 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta | publicação em 16/04/2026 (quinta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **22/04/2026 (quarta-feira)**<br>Alternativa: 23/04/2026 (quinta-feira) | 2 sáb./dom.; 21/04 Tiradentes |
-| 42 | `tjms-2026-corpus-christi`<br>TJMS 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **08/06/2026 (segunda-feira)**<br>Alternativa: 09/06/2026 (terça-feira) | 2 sáb./dom.; 04/06 TJMS: página de feriados forenses 2026 |
-| 43 | `tjms-2026-dia-do-advogado`<br>TJMS 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Cursos Jurídicos) não conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **13/08/2026 (quinta-feira)**<br>Alternativa: 14/08/2026 (sexta-feira) | 2 sáb./dom.; 11/08 TJMS: página de feriados forenses 2026 |
-| 44 | `tjms-2026-dia-da-justica`<br>TJMS 2026: 07/12 (ponto facultativo) só alerta e 08/12 (Dia da Justiça) não conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **10/12/2026 (quinta-feira)**<br>Alternativa: 11/12/2026 (sexta-feira) | 2 sáb./dom.; 08/12 TJMS: página de feriados forenses 2026 |
+| 39 | `tjma-2026-carnaval`<br>TJMA 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, ponto facultativo) só alerta | publicação em 12/02/2026 (quinta-feira); 5 dias (CPC, dias úteis); TJMA; modo conservador | **23/02/2026 (segunda-feira)**<br>Alternativa: 24/02/2026 (terça-feira) | 4 sáb./dom.; 16/02 TJMA: Resolução-GP 131/2025; 17/02 TJMA: Resolução-GP 131/2025 |
+| 40 | `tjma-2026-semana-santa`<br>TJMA 2026: 01/04 (ponto facultativo) só alerta; 02/04 e 03/04 não contam | publicação em 31/03/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMA; modo conservador | **07/04/2026 (terça-feira)**<br>Alternativa: 08/04/2026 (quarta-feira) | 2 sáb./dom.; 02/04 TJMA: Resolução-GP 131/2025; 03/04 TJMA: Resolução-GP 131/2025 |
+| 41 | `tjma-2026-corpus-christi`<br>TJMA 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMA; modo conservador | **08/06/2026 (segunda-feira)**<br>Alternativa: 09/06/2026 (terça-feira) | 2 sáb./dom.; 04/06 TJMA: Resolução-GP 131/2025 |
+| 42 | `tjms-2026-carnaval`<br>TJMS 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, sem efeito dito) só alerta | publicação em 12/02/2026 (quinta-feira); 4 dias (CPC, dias úteis); TJMS; modo conservador | **20/02/2026 (sexta-feira)**<br>Alternativa: 23/02/2026 (segunda-feira) | 2 sáb./dom.; 16/02 TJMS: página de feriados forenses 2026; 17/02 TJMS: página de feriados forenses 2026 |
+| 43 | `tjms-2026-ponto-facultativo-20-abril`<br>TJMS 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta | publicação em 16/04/2026 (quinta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **22/04/2026 (quarta-feira)**<br>Alternativa: 23/04/2026 (quinta-feira) | 2 sáb./dom.; 21/04 Tiradentes |
+| 44 | `tjms-2026-corpus-christi`<br>TJMS 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **08/06/2026 (segunda-feira)**<br>Alternativa: 09/06/2026 (terça-feira) | 2 sáb./dom.; 04/06 TJMS: página de feriados forenses 2026 |
+| 45 | `tjms-2026-dia-do-advogado`<br>TJMS 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Cursos Jurídicos) não conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **13/08/2026 (quinta-feira)**<br>Alternativa: 14/08/2026 (sexta-feira) | 2 sáb./dom.; 11/08 TJMS: página de feriados forenses 2026 |
+| 46 | `tjms-2026-dia-da-justica`<br>TJMS 2026: 07/12 (ponto facultativo) só alerta e 08/12 (Dia da Justiça) não conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJMS; modo conservador | **10/12/2026 (quinta-feira)**<br>Alternativa: 11/12/2026 (sexta-feira) | 2 sáb./dom.; 08/12 TJMS: página de feriados forenses 2026 |
+| 47 | `tjpb-2026-carnaval`<br>TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) e 18/02 (Cinzas) só alertam | publicação em 12/02/2026 (quinta-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **17/02/2026 (terça-feira)**<br>Alternativa: 20/02/2026 (sexta-feira) | 2 sáb./dom. |
+| 48 | `tjpb-2026-semana-santa`<br>TJPB 2026: 01/04 (expediente até 13h) protrai, 02/04 (ponto facultativo) só alerta e 03/04 não conta | publicação em 31/03/2026 (terça-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **07/04/2026 (terça-feira)**<br>Alternativa: 08/04/2026 (quarta-feira) | 2 sáb./dom.; 01/04 TJPB: expediente das 7h às 13h: protrai o dia do começo; 03/04 TJPB: calendário 2026 do tribunal |
+| 49 | `tjpb-2026-ponto-facultativo-20-abril`<br>TJPB 2026: 20/04 é ponto facultativo compensado (alerta); 21/04 (Tiradentes) não conta | publicação em 16/04/2026 (quinta-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **22/04/2026 (quarta-feira)**<br>Alternativa: 23/04/2026 (quinta-feira) | 2 sáb./dom.; 21/04 Tiradentes |
+| 50 | `tjpb-2026-corpus-christi`<br>TJPB 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alerta) | publicação em 02/06/2026 (terça-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **05/06/2026 (sexta-feira)**<br>Alternativa: 09/06/2026 (terça-feira) | só o dia do começo |
+| 51 | `tjpb-2026-sao-joao`<br>TJPB 2026: 22, 23 e 24/06 (São João) são pontos facultativos (alerta) | publicação em 19/06/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **24/06/2026 (quarta-feira)**<br>Alternativa: 29/06/2026 (segunda-feira) | 2 sáb./dom. |
+| 52 | `tjpb-2026-dia-do-advogado`<br>TJPB 2026: 10/08 (ponto facultativo compensado) só alerta e 11/08 (Cursos Jurídicos) não conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **13/08/2026 (quinta-feira)**<br>Alternativa: 14/08/2026 (sexta-feira) | 2 sáb./dom.; 11/08 TJPB: calendário 2026 do tribunal |
+| 53 | `tjpb-2026-dia-servidor`<br>TJPB 2026: 28/10 (Dia do Servidor, sem rótulo de feriado) só alerta | publicação em 27/10/2026 (terça-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **30/10/2026 (sexta-feira)**<br>Alternativa: 03/11/2026 (terça-feira) | só o dia do começo |
+| 54 | `tjpb-2026-dia-da-justica`<br>TJPB 2026: 07/12 (ponto facultativo compensado) só alerta e 08/12 (Dia da Justiça) não conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CPC, dias úteis); TJPB; modo conservador | **10/12/2026 (quinta-feira)**<br>Alternativa: 11/12/2026 (sexta-feira) | 2 sáb./dom.; 08/12 TJPB: calendário 2026 do tribunal |
 
