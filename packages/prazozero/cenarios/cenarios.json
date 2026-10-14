@@ -9823,5 +9823,389 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-do-catolico-evangelico",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 22/01 (Dia do Católico, adiado do dia 20) e 23/01 (Dia do Evangélico) não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-01-21",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-21",
+      "dataTermoInicial": "2026-01-26",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-01-22",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-01-23",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas), feriados forenses, não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 02/04 (Quinta-feira Santa) e 03/04 (Sexta-feira da Paixão) não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-aniversario-do-estado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 15/06 (Aniversário do Estado do Acre) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-12",
+      "dataTermoInicial": "2026-06-16",
+      "dataVencimentoFinal": "2026-06-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-15",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJAC 2026: 04/06 (Corpus Christi, ponto facultativo estadual) só alerta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-08"
+  },
+  {
+    "id": "tjac-2026-revolucao-acreana",
+    "categoria": "pendente",
+    "descricao": "TJAC 2026: 06/08 (Início da Revolução Acreana, ponto facultativo estadual) só alerta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-04",
+      "dataTermoInicial": "2026-08-05",
+      "dataVencimentoFinal": "2026-08-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-10"
+  },
+  {
+    "id": "tjac-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 11/08 (Dia do Advogado, feriado regimental) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-servidor-adiado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: o Dia do Servidor foi adiado para 30/10: 28/10 conta e 30/10 não",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-tratado-de-petropolis",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: o Tratado de Petrópolis foi adiado para 19/11: 17/11 conta e 19/11 não",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-11-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-11-16",
+      "dataTermoInicial": "2026-11-17",
+      "dataVencimentoFinal": "2026-11-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-19",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-11-20",
+            "motivo": "Consciência Negra"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 08/12 (Dia da Justiça, feriado regimental) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-07",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

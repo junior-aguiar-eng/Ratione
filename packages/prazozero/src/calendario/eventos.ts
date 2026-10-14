@@ -381,6 +381,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjrn.jus.br/',
     lido: 'inteiro teor (edição do DJe nº 763 em PDF de 2 páginas, entregue pelo responsável em 14/10/2026). O art. 1º divulga os feriados e estabelece os pontos facultativos, mas não diz que não haverá expediente nos pontos facultativos. Contam os dias que o ato funda na Lei Complementar estadual 643/2018, art. 97, § 3º (Carnaval, Cinzas, Semana Santa de 01 a 03/04, e as antecipações do Dia do Advogado em 10/08 e do Dia da Justiça em 07/12) e o Dia do Servidor em 30/10 (LC estadual 122/1994, art. 230; decisão do responsável em 14/10/2026, a mesma do TJPB). Alertam 04/06 (o ato diz "ponto facultativo"), 20/04 e 05/06 (só citam o Decreto estadual 35.209/2025, não lido, que trata de pontos facultativos do Executivo) e 29/06 (São Pedro, sem fundamento citado). O § 2º trata os feriados municipais (só na comarca; fora, CPC, art. 1.003, § 6º). 24 e 31/12 e o feriado forense de 20/12 a 06/01 já estão no recesso. Atos posteriores não foram lidos',
     lidoEm: LIDO_14_10
+  },
+  'tjac-presi-6569-2025': {
+    ato: 'Portaria PRESI nº 6569/2025 do TJAC (Presidência; assinada em 30/01/2026; DJe nº 7.950, de 03/02/2026, p. 18-19): calendário de feriados, pontos facultativos e suspensão de expediente de 2026',
+    url: 'https://webdev.tjac.jus.br/wp-content/uploads/2025/12/Portaria_PRESI_TJAC_6569_2025.pdf',
+    lido: 'inteiro teor (PDF de 7 páginas, lido em 14/10/2026 pelo script de acesso; as tabelas mensais foram conferidas em imagem). O art. 1º institui o calendário com base no Decreto estadual 11.809/2025 (calendário do Executivo, não lido) e o art. 3º trata da convocação de servidores nos dias "declarados como facultativos" com compensação de horas; o ato não diz que não haverá expediente nos pontos facultativos, por isso 04/06 (Corpus Christi) e 06/08 (Início da Revolução Acreana), pontos facultativos estaduais, só alertam. Contam os feriados estaduais, forenses e regimentais da tabela: 22/01 (Dia do Católico, comemoração do dia 20 adiada para o dia 22) e 23/01 (Dia do Evangélico), 16, 17 e 18/02, 02 e 03/04, 15/06 (Aniversário do Estado), 11/08 (Dia do Advogado), 30/10 (Dia do Servidor, comemoração do dia 28 adiada para o dia 30), 19/11 (Tratado de Petrópolis, comemoração do dia 17 adiada para o dia 19) e 08/12 (Dia da Justiça). Ficam de fora os feriados e pontos facultativos municipais (art. 2º: só na comarca), 24 e 31/12 e os dias que caem em sábado ou domingo. Atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -1102,6 +1108,34 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento,
     fonte: 'tjrn-pc-02-2026' as const
+  })),
+
+  // ---------- TJAC, 2026: Portaria PRESI 6569/2025 (alertam 04/06 e 06/08, pontos facultativos estaduais, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais, 24 e 31/12 (recesso) e os dias em fim de semana.
+  ...[
+    ['2026-01-22', 'Dia do Católico (comemoração do dia 20 adiada para o dia 22; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 3.137/2016)'],
+    ['2026-01-23', 'Dia do Evangélico (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 1.538/2004)'],
+    ['2026-02-16', 'Carnaval (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-02-17', 'Carnaval (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, III)'],
+    ['2026-04-03', 'Sexta-feira da Paixão (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, III)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Decreto estadual 11.610/2024)'],
+    ['2026-06-15', 'Aniversário do Estado do Acre (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 14/1964)'],
+    ['2026-08-06', 'Início da Revolução Acreana (ponto facultativo estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Decreto estadual 11.610/2024)'],
+    ['2026-08-11', 'Dia do Advogado (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)'],
+    ['2026-10-30', 'Dia do Servidor Público (comemoração do dia 28 adiada para o dia 30; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; LC 39/1993)'],
+    ['2026-11-19', 'Tratado de Petrópolis (comemoração do dia 17 adiada para o dia 19; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 57/1965)'],
+    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJAC'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjac-presi-6569-2025' as const
   }))
 ];
 
@@ -1126,7 +1160,9 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
   TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07'],
   // TJRN: a Portaria Conjunta 02/2026 chama 04/06 de ponto facultativo; 20/04 e 05/06 só citam o Decreto estadual 35.209/2025 (não lido) e 29/06 não cita fundamento; o ato não diz que não há expediente
-  TJRN: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-06-29']
+  TJRN: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-06-29'],
+  // TJAC: 04/06 e 06/08 são pontos facultativos estaduais (Decreto 11.610/2024) e a Portaria 6569/2025 só trata da compensação de horas, sem dizer que não há expediente
+  TJAC: ['2026-06-04', '2026-08-06']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -1202,5 +1238,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
   TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
   TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] },
-  TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] }
+  TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] },
+  TJAC: { anos: [2026], fontes: ['tjac-presi-6569-2025'] }
 };
