@@ -351,6 +351,18 @@ export const FONTES_CALENDARIO = {
     url: 'https://wiki.tjmt.jus.br/images/a/a5/Portaria_1915-2025-PRES_.pdf',
     lido: 'inteiro teor (PDF de 8 páginas, cópia da wiki do tribunal entregue pelo responsável em 14/10/2026, porque o endereço respondia 503; o próprio texto avisa que não substitui o DJe de 09/12/2025). O art. 2º suspende o expediente e os prazos nos feriados e nos pontos facultativos, por isso os pontos facultativos do Anexo I contam; Cinzas tem expediente só a partir das 13h (Portaria 338/2023-PRES, não lida). Ficam de fora os feriados municipais do Anexo II (só na comarca, art. 2º, § 1º; CPC, art. 1.003, § 6º) e 24 e 31/12, que já estão no recesso. O art. 2º, § 2º, avisa que as datas podem mudar durante o ano; atos posteriores não foram lidos',
     lidoEm: LIDO_14_10
+  },
+  'tjam-portaria-4704-2025': {
+    ato: 'Portaria nº 4704/2025 da Presidência do TJAM (11/11/2025; DJe, Caderno Extra, edição 4151): Calendário Judicial de 2026 (itens I a VI e anexo)',
+    url: 'https://www.tjam.jus.br/index.php/menu/sala-de-imprensa/15737-tjam-aprova-calendario-judicial-para-2026',
+    lido: 'inteiro teor (página do DJe em PDF entregue pelo responsável em 14/10/2026; a notícia do tribunal só serviu para achar o endereço). O item III prorroga os prazos que começam ou terminam em ponto facultativo ou feriado para o primeiro dia útil seguinte, por isso os pontos facultativos contam como dia sem expediente. Ficam de fora os feriados municipais (item IV: só na comarca; 24/10, Manaus, cai num sábado) e os dias que caem em sábado (04/07 e 05/09). O item V avisa que as datas podem mudar durante o ano e o VI que outras suspensões dependem de ato do Presidente; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjms-feriados-2026': {
+    ato: 'Página oficial "Feriados Forenses 2026" do TJMS, que cita a Portaria nº 983/2025 (DJ nº 5775, de 12/12/2025) e as leis municipais',
+    url: 'https://www.tjms.jus.br/institucional/feriados',
+    lido: 'página inteira lida em 14/10/2026 pelo script de acesso; a Portaria 983/2025 em si não foi lida. A página diz "não há expediente" em 02 e 03/04 (art. 164, § 2º, do CODJ) e lista como feriado 16 e 17/02, 04/06, 11/08, 30/10 (Dia do Servidor) e 08/12. 18/02 (Cinzas) vem sem efeito dito e 20/04, 05/06, 10/08 e 07/12 vêm só como ponto facultativo, sem dizer que não há expediente: alertam. Ficam de fora os feriados municipais (só na comarca; CPC, art. 1.003, § 6º). 20 a 31/12 é feriado forense (art. 268 do CODJ) e já está no recesso',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -931,7 +943,62 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fundamento,
     fonte: 'tjmt-pres-1915-2025' as const
   })),
-  { tribunais: ['TJMT'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente a partir das 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJMT/PRES 1915/2025, Anexo I (Portaria 338/2023-PRES, não lida); CPC, art. 224, § 1º', fonte: 'tjmt-pres-1915-2025' }
+  { tribunais: ['TJMT'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente a partir das 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJMT/PRES 1915/2025, Anexo I (Portaria 338/2023-PRES, não lida); CPC, art. 224, § 1º', fonte: 'tjmt-pres-1915-2025' },
+
+  // ---------- TJAM, 2026: Portaria 4704/2025 (item II: pontos facultativos; item III: prazos prorrogados para o primeiro dia útil, então contam) ----------
+  // Fora: feriados federais, sábados (04/07 e 05/09), 24/10 (municipal de Manaus, sábado) e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado, art. 267, I, da LC estadual 17/1997)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado nacional)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-04-20', 'Ponto facultativo (véspera de Tiradentes)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-05-19', 'Dia do Defensor Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-06-05', 'Ponto facultativo (dia seguinte a Corpus Christi)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-08-11', 'Dia do Advogado (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-10-28', 'Dia do Servidor Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-12-07', 'Ponto facultativo (véspera de Nossa Senhora da Conceição e do Dia da Justiça)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-12-08', 'Nossa Senhora da Conceição e Dia da Justiça (feriado, art. 267, II, da LC estadual 17/1997)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-12-14', 'Dia Nacional do Ministério Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJAM'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjam-portaria-4704-2025' as const
+  })),
+
+  // ---------- TJMS, 2026: página oficial de feriados forenses (pontos facultativos e Cinzas só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais e 20 a 31/12 (recesso).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-02', 'Quinta-feira Santa (não há expediente, art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-03', 'Sexta-feira Santa (não há expediente, art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-20', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-06-05', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-08-10', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-08-11', 'Instituição dos Cursos Jurídicos (art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-10-30', 'Dia do Servidor Público (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-12-07', 'Ponto facultativo em todas as comarcas', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-12-08', 'Dia da Justiça (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMS'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjms-feriados-2026' as const
+  }))
 ];
 
 /**
@@ -949,7 +1016,9 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   TRF6: ['2026-04-20', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   // TJMA: o art. 3º da Resolução-GP 131/2025 só "considera" esses dias pontos facultativos e não diz que não haverá expediente
-  TJMA: ['2026-02-18', '2026-04-01', '2026-06-05']
+  TJMA: ['2026-02-18', '2026-04-01', '2026-06-05'],
+  // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
+  TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -1020,5 +1089,7 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] },
   TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] },
   TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] },
-  TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] }
+  TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] },
+  TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
+  TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] }
 };
