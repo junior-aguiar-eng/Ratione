@@ -43,6 +43,7 @@ export interface RegraAnual {
 const LIDO = '2026-10-07';
 const LIDO_10_10 = '2026-10-10';
 const LIDO_12_10 = '2026-10-12';
+const LIDO_14_10 = '2026-10-14';
 
 export const FONTES_CALENDARIO = {
   'stj-gdg-1010': {
@@ -316,9 +317,9 @@ export const FONTES_CALENDARIO = {
     lidoEm: LIDO_12_10
   },
   'trf4-calendario-2026': {
-    ato: 'Calendário de Feriados 2026 do TRF4 (portal da Justiça Federal da 4ª Região; Dia do Servidor com base na Portaria TRF4 nº 233/2026)',
-    url: 'https://www.trf4.jus.br/trf4/controlador.php?acao=calendario_feriados_listar&selOrgao=2',
-    lido: 'página oficial do calendário (linhas "Todas", atualizada em 30/03/2026 e 21/05/2026); a Portaria 233/2026 em si não foi lida. Feriados municipais e de subseção ficam de fora',
+    ato: 'Calendário de Feriados 2026 do TRF4 (portal da Justiça Federal da 4ª Região) e Portaria TRF4 nº 233/2026 (20/03/2026): adia para 30/10/2026 o feriado do Dia do Servidor',
+    url: 'https://intra2.trf4.jus.br/wp-content/uploads/2026/03/SEI_8319106_Portaria_233.pdf',
+    lido: 'inteiro teor da Portaria 233/2026 e página oficial do calendário (linhas "Todas", atualizada em 30/03 e 21/05/2026; https://www.trf4.jus.br/trf4/controlador.php?acao=calendario_feriados_listar&selOrgao=2). Não se achou ato da Presidência com o calendário inteiro. Feriados municipais e de subseção ficam de fora',
     lidoEm: LIDO_12_10
   },
   'trf5-ato-219-2026': {
@@ -332,6 +333,90 @@ export const FONTES_CALENDARIO = {
     url: 'https://portal.trf6.jus.br/wp-content/uploads/2026/01/SEI_1571312_Portaria_Presi_1.pdf',
     lido: 'inteiro teor (PDF de 5 páginas). Os feriados municipais do art. 2º (cidades-sede de subseção) ficam de fora',
     lidoEm: LIDO_12_10
+  },
+  'tjpa-gp-4765-2025': {
+    ato: 'Portaria nº 4765/2025-GP do TJPA (20/10/2025; DJE nº 8186, 21/10/2025): dias sem expediente em 2026 (art. 1º e Anexo; art. 2º transfere o Dia do Servidor de 28 para 30/10)',
+    url: 'https://www.tjpa.jus.br/CMSPortal/VisualizarArquivo?idArquivo=2234620',
+    lido: 'inteiro teor (PDF digitalizado de 2 páginas, lido como imagem). O art. 1º diz que não haverá expediente nos feriados e pontos facultativos do Anexo; o art. 3º manda aplicar o CPC, art. 224, § 1º. Ficam de fora os atos locais de Belém, Ananindeua e Marituba (por exemplo, a Portaria 4.263/2026-GP, Círio, 09/10/2026) e o recesso de fim de ano, que vem de ato próprio e do CPC, art. 220',
+    lidoEm: LIDO_12_10
+  },
+  'tjma-res-gp-131-2025': {
+    ato: 'Resolução-GP nº 131/2025 do TJMA (04/11/2025; DJE de 06/11/2025): dias sem expediente no Judiciário do Maranhão em 2026 (arts. 1º e 3º)',
+    url: 'https://novogerenciador.tjma.jus.br/storage/arquivos/resolucoes_2025/resolucao_gp_n_131_de_4_de_novembro_de_2025_05_11_2025_17_12_45.pdf',
+    lido: 'inteiro teor (PDF de 2 páginas). O art. 1º lista os dias em que não haverá expediente; o art. 3º lista três pontos facultativos (18/02, 01/04 e 05/06) sem dizer que não haverá expediente, por isso só alertam; o art. 4º diz que os pontos facultativos do Poder Executivo não vinculam o Judiciário. Ficam de fora os feriados municipais (29/06 e 08/09 em São Luís, art. 1º, parágrafo único, e os das comarcas do interior, art. 2º). Atos posteriores não foram lidos: a página de suspensões de expediente do tribunal respondeu 403',
+    lidoEm: LIDO_14_10
+  },
+  'tjmt-pres-1915-2025': {
+    ato: 'Portaria TJMT/PRES nº 1915/2025 (05/12/2025; DJe de 09/12/2025): calendário forense oficial do Judiciário de Mato Grosso para 2026 (Anexos I e II)',
+    url: 'https://wiki.tjmt.jus.br/images/a/a5/Portaria_1915-2025-PRES_.pdf',
+    lido: 'inteiro teor (PDF de 8 páginas, cópia da wiki do tribunal entregue pelo responsável em 14/10/2026, porque o endereço respondia 503; o próprio texto avisa que não substitui o DJe de 09/12/2025). O art. 2º suspende o expediente e os prazos nos feriados e nos pontos facultativos, por isso os pontos facultativos do Anexo I contam; Cinzas tem expediente só a partir das 13h (Portaria 338/2023-PRES, não lida). Ficam de fora os feriados municipais do Anexo II (só na comarca, art. 2º, § 1º; CPC, art. 1.003, § 6º) e 24 e 31/12, que já estão no recesso. O art. 2º, § 2º, avisa que as datas podem mudar durante o ano; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjam-portaria-4704-2025': {
+    ato: 'Portaria nº 4704/2025 da Presidência do TJAM (11/11/2025; DJe, Caderno Extra, edição 4151): Calendário Judicial de 2026 (itens I a VI e anexo)',
+    url: 'https://www.tjam.jus.br/index.php/menu/sala-de-imprensa/15737-tjam-aprova-calendario-judicial-para-2026',
+    lido: 'inteiro teor (página do DJe em PDF entregue pelo responsável em 14/10/2026; a notícia do tribunal só serviu para achar o endereço). O item III prorroga os prazos que começam ou terminam em ponto facultativo ou feriado para o primeiro dia útil seguinte, por isso os pontos facultativos contam como dia sem expediente. Ficam de fora os feriados municipais (item IV: só na comarca; 24/10, Manaus, cai num sábado) e os dias que caem em sábado (04/07 e 05/09). O item V avisa que as datas podem mudar durante o ano e o VI que outras suspensões dependem de ato do Presidente; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjms-feriados-2026': {
+    ato: 'Página oficial "Feriados Forenses 2026" do TJMS, que cita a Portaria nº 983/2025 (DJ nº 5775, de 12/12/2025) e as leis municipais',
+    url: 'https://www.tjms.jus.br/institucional/feriados',
+    lido: 'página inteira lida em 14/10/2026 pelo script de acesso; a Portaria 983/2025 em si não foi lida. A página diz "não há expediente" em 02 e 03/04 (art. 164, § 2º, do CODJ) e lista como feriado 16 e 17/02, 04/06, 11/08, 30/10 (Dia do Servidor) e 08/12. 18/02 (Cinzas) vem sem efeito dito e 20/04, 05/06, 10/08 e 07/12 vêm só como ponto facultativo, sem dizer que não há expediente: alertam. Ficam de fora os feriados municipais (só na comarca; CPC, art. 1.003, § 6º). 20 a 31/12 é feriado forense (art. 268 do CODJ) e já está no recesso',
+    lidoEm: LIDO_14_10
+  },
+  'tjro-ato-2579-2025': {
+    ato: 'Ato nº 2579/2025 da Presidência do TJRO (25/11/2025; DJE nº 218, p. 18-20), na versão compilada com os Atos 2942/2025, 657, 782, 1255, 1720 e 2168/2026: feriados e pontos facultativos de 2026',
+    url: 'https://atos.tjro.jus.br/detalhar/6114',
+    lido: 'inteiro teor, texto compilado da página de atos do tribunal (arts. 1º a 6º e Anexo Único), lido em 14/10/2026 pelo script de acesso e conferido com a página de feriados de 2026 do tribunal (https://www.tjro.jus.br/feriados-locais/feriados-2026); os PDFs original e compilado não foram abertos. O art. 1º diz que não haverá expediente forense e administrativo nos feriados e pontos facultativos do anexo e o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias, por isso os pontos facultativos contam. O Dia da Justiça foi transferido de 08/12 para 07/12 (art. 3º-C, Ato 2168/2026), o Dia do Advogado de 11/08 para 10/08 e o Dia do Servidor de 28/10 para 30/10 (art. 3º, Ato 657/2026). Ficam de fora os feriados municipais (só na comarca ou no Fórum Digital, art. 1º, § 2º; CPC, art. 1.003, § 6º), 24 e 31/12 (recesso de 20/12 a 06/01) e 02/01. O art. 4º permite novos pontos facultativos durante o ano; atos posteriores ao 2168/2026 não foram lidos. Horário de funcionamento do público (7h às 14h) pela página do tribunal',
+    lidoEm: LIDO_14_10
+  },
+  'tjpb-calendario-2026': {
+    ato: 'Calendário 2026 do Tribunal de Justiça da Paraíba (documento ilustrado do tribunal, 17 páginas, com legenda mensal)',
+    url: 'https://www.tjpb.jus.br/',
+    lido: 'PDF "Calendario_2026.pdf" entregue pelo responsável em 14/10/2026; as 12 páginas dos meses foram vistas em imagem (dias em vermelho sem expediente, em azul expediente alterado). Não é o ato normativo: nenhuma portaria do tribunal foi lida. Os dias que o próprio calendário chama de "Ponto Facultativo" (inclusive Carnaval, Semana Santa, Corpus Christi, São João e os "compensados") só alertam, porque o calendário não diz que não haverá expediente e os compensa com horas em outros dias. Contam, por decisão do responsável em 14/10/2026, os dias em vermelho sem rótulo de ponto facultativo: 18/02 (Cinzas) e 28/10 (Dia do Servidor), além do feriado de 03/04, 05/08 (feriado estadual, Data Magna), 11/08 (Fundação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Expediente das 7h às 13h em 11/02 e 01/04. As páginas de feriados municipais das comarcas (15 e 16) não foram conferidas: municipais ficam fora (CPC, art. 1.003, § 6º). Recesso de 20/12 a 06/01 já está no recesso do CPC',
+    lidoEm: LIDO_14_10
+  },
+  'tjrn-pc-02-2026': {
+    ato: 'Portaria Conjunta nº 02/2026 da Presidência e da Corregedoria-Geral do TJRN (15/01/2026; republicada no DJe nº 763, de 16/01/2026, por incorreção no original): feriados e pontos facultativos de 2026',
+    url: 'https://www.tjrn.jus.br/',
+    lido: 'inteiro teor (edição do DJe nº 763 em PDF de 2 páginas, entregue pelo responsável em 14/10/2026). O art. 1º divulga os feriados e estabelece os pontos facultativos, mas não diz que não haverá expediente nos pontos facultativos. Contam os dias que o ato funda na Lei Complementar estadual 643/2018, art. 97, § 3º (Carnaval, Cinzas, Semana Santa de 01 a 03/04, e as antecipações do Dia do Advogado em 10/08 e do Dia da Justiça em 07/12) e o Dia do Servidor em 30/10 (LC estadual 122/1994, art. 230; decisão do responsável em 14/10/2026, a mesma do TJPB). Alertam 04/06 (o ato diz "ponto facultativo"), 20/04 e 05/06 (só citam o Decreto estadual 35.209/2025, não lido, que trata de pontos facultativos do Executivo) e 29/06 (São Pedro, sem fundamento citado). O § 2º trata os feriados municipais (só na comarca; fora, CPC, art. 1.003, § 6º). 24 e 31/12 e o feriado forense de 20/12 a 06/01 já estão no recesso. Atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjac-presi-6569-2025': {
+    ato: 'Portaria PRESI nº 6569/2025 do TJAC (Presidência; assinada em 30/01/2026; DJe nº 7.950, de 03/02/2026, p. 18-19): calendário de feriados, pontos facultativos e suspensão de expediente de 2026',
+    url: 'https://webdev.tjac.jus.br/wp-content/uploads/2025/12/Portaria_PRESI_TJAC_6569_2025.pdf',
+    lido: 'inteiro teor (PDF de 7 páginas, lido em 14/10/2026 pelo script de acesso; as tabelas mensais foram conferidas em imagem). O art. 1º institui o calendário com base no Decreto estadual 11.809/2025 (calendário do Executivo, não lido) e o art. 3º trata da convocação de servidores nos dias "declarados como facultativos" com compensação de horas; o ato não diz que não haverá expediente nos pontos facultativos, por isso 04/06 (Corpus Christi) e 06/08 (Início da Revolução Acreana), pontos facultativos estaduais, só alertam. Contam os feriados estaduais, forenses e regimentais da tabela: 22/01 (Dia do Católico, comemoração do dia 20 adiada para o dia 22) e 23/01 (Dia do Evangélico), 16, 17 e 18/02, 02 e 03/04, 15/06 (Aniversário do Estado), 11/08 (Dia do Advogado), 30/10 (Dia do Servidor, comemoração do dia 28 adiada para o dia 30), 19/11 (Tratado de Petrópolis, comemoração do dia 17 adiada para o dia 19) e 08/12 (Dia da Justiça). Ficam de fora os feriados e pontos facultativos municipais (art. 2º: só na comarca), 24 e 31/12 e os dias que caem em sábado ou domingo. Atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjrr-pr-1558-2025': {
+    ato: 'Portaria TJRR/PR nº 1558/2025 (19/12/2025; DJe nº 8006, de 22/12/2025, p. 3-5): feriados e pontos facultativos de 2026 nas comarcas de Roraima (Anexo Único)',
+    url: 'https://diario.tjrr.jus.br/dpj/dpj-20251222.pdf',
+    lido: 'inteiro teor (portaria e Anexo Único no DJe de 22/12/2025, lidos em 14/10/2026 pelo script de acesso; a tabela foi conferida em imagem). O art. 3º suspende o expediente e os prazos processuais nos feriados e nos pontos facultativos do anexo, por isso os pontos facultativos contam. Valem as linhas de "Todas as Comarcas": 16 a 18/02 (Carnaval e Cinzas), 01 a 03/04 (Semana Santa), 20/04, 04 e 05/06, 10 e 11/08 (Dia dos Magistrados), 05/10 (Aniversário do Estado), 28/10 (Dia do Servidor), 07 e 08/12. Ficam de fora as linhas da Comarca de Boa Vista (19 e 20/01, 29/06, 09 e 10/07) e os feriados dos municípios do interior (parte b do anexo): feriado municipal não conta (CPC, art. 1.003, § 6º). 01 a 06/01 e 20 a 31/12 são recesso forense e já estão no recesso. O art. 2º manda comunicar feriados e pontos facultativos decretados depois, que não constam do anexo; atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjap-calendario-2026': {
+    ato: 'Calendário 2026 do TJAP na página de consultas do tribunal (com dias de "Expediente Suspenso - Portaria 77918/2026-GP")',
+    url: 'https://old.tjap.jus.br/app/open/consultas/?task=cal',
+    lido: 'página inteira lida em 14/10/2026 pelo script de acesso e a classificação de cada dia (feriado nacional, estadual, regimental, expediente suspenso, ponto facultativo) conferida no HTML. Nenhuma portaria foi lida, nem a Portaria 77918/2026-GP. Contam os dias de feriado nacional, estadual e regimental e de "Expediente Suspenso" (20/03, 20/04, 05/06, 10/08 e 07/12); alertam os que a legenda chama de "Ponto Facultativo" (04/06 Corpus Christi, 30/10 Dia do Servidor, "alteração" pela Portaria 77918/26, e 30/11 Dia do Evangélico). Ficam de fora os feriados municipais, os dias em que a legenda só recomenda não marcar audiência (19/05, Defensoria, e 14/12, Ministério Público), os dias em fim de semana (01/11 e 13/09) e 24 e 31/12 (recesso)',
+    lidoEm: LIDO_14_10
+  },
+  'tjto-portaria-3741-2025': {
+    ato: 'Portaria nº 3741/2025 do TJTO: calendário de feriados e pontos facultativos de 2026 (publicada no Diário da Justiça; calendário na notícia oficial de 10/11/2025)',
+    url: 'https://www.tjto.jus.br/comunicacao/noticias/tjto-publica-calendario-de-feriados-e-pontos-facultativos-para-2026',
+    lido: 'notícia oficial do tribunal com o calendário completo, lida em 14/10/2026 pelo script de acesso; a Portaria 3741/2025 em si não foi lida (o diário em wwa.tjto.jus.br falha no handshake TLS por chave DH fraca, e o PDF do calendário na página de feriados devolve a mesma notícia). A notícia não diz que não há expediente nos pontos facultativos: 20/04, 04/06, 05/06 e 10/08 alertam. Contam o Carnaval (16 e 17/02), a Semana Santa (01 a 03/04; LC estadual 10/1996, art. 110), 11/08, 08/09 (Padroeira do Tocantins), 05/10 (Criação do Estado), o Dia do Servidor transferido para 30/10 e o Dia da Justiça transferido para 18/12. Quarta-feira de Cinzas não consta. Ficam de fora os feriados municipais (19/03 e 20/05 em Palmas e os do interior; CPC, art. 1.003, § 6º) e 15/08 (sábado)',
+    lidoEm: LIDO_14_10
+  },
+  'tjpi-provimento-59-2025': {
+    ato: 'Provimento nº 59/2025 - PJPI/TJPI/SECPRE (Presidência; assinado em 14/11/2025): recesso forense, feriados e pontos facultativos de 2026 e suspensão de prazos nos dias sem expediente',
+    url: 'https://www.tjpi.jus.br/',
+    lido: 'inteiro teor (cópia do texto no Portal da Transparência do TJPI, em PDF entregue pelo responsável em 14/10/2026; o próprio texto avisa que não substitui o publicado no Diário Oficial da Justiça). O art. 1º diz que não haverá expediente forense em 16, 17 e 18/02 (Carnaval e Cinzas), na Semana Santa (Quinta-feira Santa a Domingo de Páscoa: 02 e 03/04 em dia útil), 04/06 (Corpus Christi), 11/08, 19/10 (Dia do Piauí, Lei estadual 176/1937), 28/10 (Dia do Servidor, LC estadual 13/1994, art. 201) e 08/12, além dos feriados nacionais; o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias. O parágrafo único do art. 1º e o art. 7º deixam os pontos facultativos a cargo da Presidência: nenhum consta do provimento, e a Portaria 169/2026 (4 pontos facultativos, só vista em nota do sindicato dos servidores) não foi lida; por isso 20/04, 05/06, 10/08 e 07/12 não entram. Fora: feriados municipais (art. 1º, X, e art. 4º; CPC, art. 1.003, § 6º) e 14/12 (art. 3º: só atos que dependem do Ministério Público). O art. 2º suspende os prazos de 07 a 20/01/2026, já coberto pelo recesso do CPC (art. 220). Atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
+  },
+  'tjse-calendario-2026': {
+    ato: 'Calendário 2026 das Comarcas de Aracaju e do interior do Estado e respectivos distritos, do TJSE (documento do tribunal, PDF "Calendário 2026 - Desa. Iolanda", com feriados e "previsão de pontos facultativos" por mês)',
+    url: 'https://www.tjse.jus.br/',
+    lido: 'PDF inteiro entregue pelo responsável em 14/10/2026. Não é o ato normativo: nenhuma portaria foi lida. Contam os dias da coluna de feriados que não indicam município: 17/02 (Carnaval), 03/04 (Paixão de Cristo), 04/06 (Corpus Christi), 24/06 (festejos juninos, São João), 08/07 (Emancipação Política de Sergipe), 11/08 (Dia do Magistrado), 30/10 (Dia do Funcionário Público) e 08/12 (Dia da Justiça). Alertam os da coluna "previsão de pontos facultativos": 16/02 (Carnaval), 18/02 (Cinzas), 02/04, 20/04, 05/06, 29/06 (festejos juninos, São Pedro), 10/08 e 07/12; e 14/12 (Dia do Ministério Público), que vem como feriado sem município mas é data própria do Ministério Público. Fora: os feriados com município (Comarcas e distritos), 16/03 (ponto facultativo só na Comarca de Aracaju e no Tribunal) e o recesso de 20/12 a 06/01',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -786,8 +871,8 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
   { tribunais: ['TRF3'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas (expediente a partir das 14h)', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria CATRF3R 48/2025, art. 3º', fonte: 'trf3-catrf3r-48-2025' },
 
-  // ---------- TRF4, 2026: calendário oficial (só as linhas "Todas"; a Portaria 233/2026 do Dia do Servidor não foi lida, por isso só alerta) ----------
-  { tribunais: ['TRF4'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (alerta: listado no calendário do tribunal; Portaria 233/2026 não lida)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Calendário de Feriados 2026 do TRF4 (Lei 8.112/1990, art. 236, e Portaria TRF4 233/2026)', fonte: 'trf4-calendario-2026' },
+  // ---------- TRF4, 2026: calendário oficial (linhas "Todas") e Portaria 233/2026 (adia o feriado do Dia do Servidor para 30/10; art. 1º, parágrafo único: expediente normal em 28/10) ----------
+  { tribunais: ['TRF4'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (feriado adiado de 28/10)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TRF4 233/2026, art. 1º (Lei 8.112/1990, art. 236)', fonte: 'trf4-calendario-2026' },
 
   // ---------- TRF5, 2026: Ato 219/2026 (retificado pelo Ato 230/2026), arts. 1º a 5º ----------
   // Feriados municipais do Recife (24/06 e 16/07, Lei municipal 9.777/1967) só alertam. O Dia do Servidor (28/10) teria sido transferido para 30/10 pelo Ato 498/2026, não lido: os dois dias alertam.
@@ -833,6 +918,398 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento: 'Portaria Presi 1/2026 do TRF6, art. 1º',
     fonte: 'trf6-presi-1-2026' as const
+  })),
+
+  // ---------- TJPA, 2026: Portaria 4765/2025-GP, Anexo (art. 1º: "não haverá expediente" nos feriados e pontos facultativos) ----------
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11), que já vêm da lei federal.
+  ...[
+    ['2026-02-16', 'Segunda-feira de Carnaval (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-02-17', 'Carnaval (suspensão nacional do expediente forense)', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 1.408/1951)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-04-03', 'Sexta-feira Santa', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 1.408/1951)'],
+    ['2026-04-20', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-06-04', 'Corpus Christi', 'Portaria TJPA 4765/2025-GP, Anexo (Lei 9.093/1995 e Lei municipal 6.306/1967)'],
+    ['2026-06-05', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-10-26', 'Recírio (ponto facultativo, sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Portaria TJPA 4765/2025-GP, art. 2º e Anexo'],
+    ['2026-12-07', 'Ponto facultativo (sem expediente)', 'Portaria TJPA 4765/2025-GP, Anexo'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJPA 4765/2025-GP, Anexo (Decreto-lei 8.292/1945 e Lei 1.408/1951)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJPA'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjpa-gp-4765-2025' as const
+  })),
+
+  // ---------- TJMA, 2026: Resolução-GP 131/2025, arts. 1º e 3º (pontos facultativos do art. 3º viram alerta, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11, 25/12) e os municipais (art. 1º, parágrafo único, e art. 2º).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, II (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-02-17', 'Carnaval (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, III (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo)', 'Resolução-GP TJMA 131/2025, art. 3º, I'],
+    ['2026-04-01', 'Quarta-feira da Semana Santa (ponto facultativo)', 'Resolução-GP TJMA 131/2025, art. 3º, II'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, IV (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-04-03', 'Sexta-feira da Paixão (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, V (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-06-04', 'Corpus Christi', 'Resolução-GP TJMA 131/2025, art. 1º, VIII'],
+    ['2026-06-05', 'Ponto facultativo', 'Resolução-GP TJMA 131/2025, art. 3º, III'],
+    ['2026-07-28', 'Adesão do Maranhão à Independência do Brasil', 'Resolução-GP TJMA 131/2025, art. 1º, IX'],
+    ['2026-08-11', 'Dia do Advogado (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, X (LC estadual 14/1991, art. 5º-A, § 1º)'],
+    ['2026-10-28', 'Dia do Servidor Público', 'Resolução-GP TJMA 131/2025, art. 1º, XIII'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Resolução-GP TJMA 131/2025, art. 1º, XVI (LC estadual 14/1991, art. 5º-A, § 1º)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMA'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjma-res-gp-131-2025' as const
+  })),
+
+  // ---------- TJMT, 2026: Portaria 1915/2025-PRES, Anexo I (art. 2º: suspensos o expediente e os prazos nos feriados e nos pontos facultativos) ----------
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 24 e 31/12 (recesso) e os feriados municipais do Anexo II.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-02-17', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-04-02', 'Paixão de Cristo (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-04-03', 'Paixão de Cristo (feriado nacional)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Lei 1.408/1951)'],
+    ['2026-04-20', 'Ponto facultativo (sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-06-05', 'Corpus Christi (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-08-10', 'Dia do Advogado (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (Lei 5.010/1966, art. 62, IV)'],
+    ['2026-08-11', 'Dia do Advogado (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (Lei 5.010/1966, art. 62, IV)'],
+    ['2026-10-28', 'Dia do Servidor Público (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-12-07', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)'],
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMT'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjmt-pres-1915-2025' as const
+  })),
+  { tribunais: ['TJMT'], inicio: '2026-02-18', fim: '2026-02-18', nome: 'Quarta-feira de Cinzas: expediente a partir das 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJMT/PRES 1915/2025, Anexo I (Portaria 338/2023-PRES, não lida); CPC, art. 224, § 1º', fonte: 'tjmt-pres-1915-2025' },
+
+  // ---------- TJAM, 2026: Portaria 4704/2025 (item II: pontos facultativos; item III: prazos prorrogados para o primeiro dia útil, então contam) ----------
+  // Fora: feriados federais, sábados (04/07 e 05/09), 24/10 (municipal de Manaus, sábado) e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado, art. 267, I, da LC estadual 17/1997)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado nacional)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-04-20', 'Ponto facultativo (véspera de Tiradentes)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-05-19', 'Dia do Defensor Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-06-05', 'Ponto facultativo (dia seguinte a Corpus Christi)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-08-11', 'Dia do Advogado (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-10-28', 'Dia do Servidor Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-12-07', 'Ponto facultativo (véspera de Nossa Senhora da Conceição e do Dia da Justiça)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III'],
+    ['2026-12-08', 'Nossa Senhora da Conceição e Dia da Justiça (feriado, art. 267, II, da LC estadual 17/1997)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026'],
+    ['2026-12-14', 'Dia Nacional do Ministério Público (ponto facultativo)', 'Portaria TJAM 4704/2025, item II e Calendário Judicial 2026, item II e III']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJAM'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjam-portaria-4704-2025' as const
+  })),
+
+  // ---------- TJMS, 2026: página oficial de feriados forenses (pontos facultativos e Cinzas só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais e 20 a 31/12 (recesso).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-02', 'Quinta-feira Santa (não há expediente, art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-03', 'Sexta-feira Santa (não há expediente, art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-04-20', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-06-05', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-08-10', 'Ponto facultativo', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-08-11', 'Instituição dos Cursos Jurídicos (art. 164, § 2º, do CODJ)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-10-30', 'Dia do Servidor Público (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-12-07', 'Ponto facultativo em todas as comarcas', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
+    ['2026-12-08', 'Dia da Justiça (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJMS'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjms-feriados-2026' as const
+  })),
+
+  // ---------- TJRO, 2026: Ato 2579/2025 compilado (art. 1º: sem expediente nos feriados e pontos facultativos do anexo; art. 5º: prazos prorrogados) ----------
+  // Fora: feriados federais, municipais (comarca ou Fórum Digital), 02/01 e 24 e 31/12 (recesso) e o 08/12 (transferido para 07/12; fica só o municipal de Guajará-Mirim e Candeias do Jamari).
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-02-17', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, I'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-04-20', 'Dia anterior a Tiradentes (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, VI (Ato 657/2026)'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
+    ['2026-06-05', 'Dia seguinte a Corpus Christi (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, II'],
+    ['2026-07-20', 'Dia do Trabalhador da Justiça Estadual (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 2º, VII (Ato 782/2026)'],
+    ['2026-08-10', 'Dia do Magistrado, do Advogado e dos Cursos Jurídicos, transferido de 11/08 (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º, I (Ato 657/2026)'],
+    ['2026-10-30', 'Dia do Servidor Público, transferido de 28/10 (ponto facultativo, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º, II (Ato 657/2026)'],
+    ['2026-12-07', 'Dia da Justiça, transferido de 08/12 (feriado)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único, art. 3º-C (Ato 2168/2026)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRO'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjro-ato-2579-2025' as const
+  })),
+
+  // ---------- TJPB, 2026: calendário do tribunal (pontos facultativos e dias compensados só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-02-17', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-02-18', 'Quarta-feira de Cinzas', 'Calendário 2026 do TJPB'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo, Semana Santa)', 'Calendário 2026 do TJPB'],
+    ['2026-04-03', 'Sexta-feira Santa (Paixão de Cristo, feriado)', 'Calendário 2026 do TJPB'],
+    ['2026-04-20', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-06-05', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-22', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-23', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-06-24', 'São João (ponto facultativo)', 'Calendário 2026 do TJPB'],
+    ['2026-08-05', 'Data Magna da Paraíba (feriado estadual)', 'Calendário 2026 do TJPB'],
+    ['2026-08-10', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-08-11', 'Fundação dos Cursos Jurídicos', 'Calendário 2026 do TJPB'],
+    ['2026-10-28', 'Dia do Servidor Público', 'Calendário 2026 do TJPB'],
+    ['2026-12-07', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
+    ['2026-12-08', 'Dia da Justiça', 'Calendário 2026 do TJPB']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJPB'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjpb-calendario-2026' as const
+  })),
+  { tribunais: ['TJPB'], inicio: '2026-02-11', fim: '2026-02-11', nome: 'Festejos de Carnaval: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
+  { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
+
+  // ---------- TJRN, 2026: Portaria Conjunta 02/2026 (alertam 04/06, 20/04, 05/06 e 29/06, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais, 24 e 31/12 e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, I (LC estadual 643/2018, art. 97, § 3º, II)'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, II (LC estadual 643/2018, art. 97, § 3º, II; Lei 1.408/1951, art. 5º)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, III (LC estadual 643/2018, art. 97, § 3º, II)'],
+    ['2026-04-01', 'Semana Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, IV (LC estadual 643/2018, art. 97, § 3º, I)'],
+    ['2026-04-02', 'Semana Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, V (LC estadual 643/2018, art. 97, § 3º, I)'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, VI (LC estadual 643/2018, art. 97, § 3º, I; Lei 1.408/1951, art. 5º)'],
+    ['2026-04-20', 'Ponto facultativo (Decreto estadual 35.209/2025, não lido)', 'Portaria Conjunta TJRN 02/2026, art. 1º, VII'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Portaria Conjunta TJRN 02/2026, art. 1º, X'],
+    ['2026-06-05', 'Ponto facultativo (Decreto estadual 35.209/2025, não lido)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XI'],
+    ['2026-06-29', 'Dia de São Pedro (sem fundamento citado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XII'],
+    ['2026-08-10', 'Antecipação do Dia do Advogado, do Magistrado e dos Cursos Jurídicos (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XIII (LC estadual 643/2018, art. 97, § 3º, III)'],
+    ['2026-10-30', 'Dia do Servidor Público', 'Portaria Conjunta TJRN 02/2026, art. 1º, XV (LC estadual 122/1994, art. 230)'],
+    ['2026-12-07', 'Antecipação do Dia da Justiça (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XIX (LC estadual 643/2018, art. 97, § 3º, III)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRN'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjrn-pc-02-2026' as const
+  })),
+
+  // ---------- TJAC, 2026: Portaria PRESI 6569/2025 (alertam 04/06 e 06/08, pontos facultativos estaduais, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais, 24 e 31/12 (recesso) e os dias em fim de semana.
+  ...[
+    ['2026-01-22', 'Dia do Católico (comemoração do dia 20 adiada para o dia 22; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 3.137/2016)'],
+    ['2026-01-23', 'Dia do Evangélico (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 1.538/2004)'],
+    ['2026-02-16', 'Carnaval (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-02-17', 'Carnaval (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado forense)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, II)'],
+    ['2026-04-02', 'Quinta-feira Santa (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, III)'],
+    ['2026-04-03', 'Sexta-feira da Paixão (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, III)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Decreto estadual 11.610/2024)'],
+    ['2026-06-15', 'Aniversário do Estado do Acre (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 14/1964)'],
+    ['2026-08-06', 'Início da Revolução Acreana (ponto facultativo estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Decreto estadual 11.610/2024)'],
+    ['2026-08-11', 'Dia do Advogado (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)'],
+    ['2026-10-30', 'Dia do Servidor Público (comemoração do dia 28 adiada para o dia 30; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; LC 39/1993)'],
+    ['2026-11-19', 'Tratado de Petrópolis (comemoração do dia 17 adiada para o dia 19; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 57/1965)'],
+    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJAC'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjac-presi-6569-2025' as const
+  })),
+
+  // ---------- TJRR, 2026: Portaria 1558/2025, Anexo Único, "Todas as Comarcas" (art. 3º: suspensos o expediente e os prazos nos feriados e pontos facultativos) ----------
+  // Fora: feriados federais, as linhas só da Comarca de Boa Vista, os feriados municipais do interior e o recesso (01 a 06/01 e 20 a 31/12).
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-01', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-02', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-03', 'Semana Santa (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-04-20', 'Ponto facultativo referente ao feriado de 21/04, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-06-05', 'Ponto facultativo referente ao feriado de 04/06, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-08-10', 'Ponto facultativo referente ao Dia dos Magistrados, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-08-11', 'Dia dos Magistrados (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-10-05', 'Aniversário do Estado de Roraima (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-10-28', 'Dia do Servidor Público (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-12-07', 'Ponto facultativo referente ao feriado de 08/12, sem expediente', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
+    ['2026-12-08', 'Dia da Justiça e Nossa Senhora da Conceição (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRR'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjrr-pr-1558-2025' as const
+  })),
+
+  // ---------- TJAP, 2026: calendário do tribunal (pontos facultativos da legenda só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais, dias só de recomendação de audiência (19/05 e 14/12), fim de semana e 24 e 31/12.
+  ...[
+    ['2026-02-16', 'Carnaval (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-02-17', 'Carnaval', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-03-19', 'Padroeiro do Estado do Amapá (feriado estadual)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-03-20', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-04-01', 'Semana Santa (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-04-02', 'Semana Santa (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-04-03', 'Paixão de Cristo', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-04-20', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-05-15', 'Dia de Cabralzinho (feriado estadual)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-06-05', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-08-10', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-08-11', 'Dia do Advogado (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-10-30', 'Dia do Servidor Público (ponto facultativo, alteração pela Portaria 77918/26)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-11-30', 'Dia do Evangélico (ponto facultativo)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-12-07', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJAP'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjap-calendario-2026' as const
+  })),
+
+  // ---------- TJTO, 2026: Portaria 3741/2025 pela notícia oficial (20/04, 04/06, 05/06 e 10/08 só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais (Palmas e interior) e 15/08 (sábado).
+  ...[
+    ['2026-02-16', 'Carnaval (LC estadual 10/1996, art. 110, parágrafo único)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-02-17', 'Carnaval (LC estadual 10/1996, art. 110, parágrafo único)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-04-01', 'Semana Santa (LC estadual 10/1996, art. 110)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-04-02', 'Semana Santa (LC estadual 10/1996, art. 110)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-04-03', 'Semana Santa (LC estadual 10/1996, art. 110)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-04-20', 'Ponto facultativo', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-06-05', 'Ponto facultativo', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-08-10', 'Ponto facultativo', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-08-11', 'Instituição dos Cursos Jurídicos no Brasil', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-09-08', 'Nossa Senhora da Natividade, Padroeira do Tocantins', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-10-05', 'Criação do Estado do Tocantins', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025'],
+    ['2026-12-18', 'Dia da Justiça (transferido de 08/12)', 'Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJTO'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjto-portaria-3741-2025' as const
+  })),
+
+  // ---------- TJPI, 2026: Provimento 59/2025, art. 1º (sem expediente; art. 5º: prazos prorrogados) ----------
+  // Fora: feriados federais, municipais, 14/12 (só atos do Ministério Público), recesso e pontos facultativos da Presidência (nenhum no provimento).
+  ...[
+    ['2026-02-16', 'Carnaval (segunda-feira)', 'Provimento TJPI 59/2025, art. 1º, III'],
+    ['2026-02-17', 'Carnaval (terça-feira)', 'Provimento TJPI 59/2025, art. 1º, III'],
+    ['2026-02-18', 'Quarta-feira de Cinzas', 'Provimento TJPI 59/2025, art. 1º, III'],
+    ['2026-04-02', 'Quinta-feira Santa (Semana Santa)', 'Provimento TJPI 59/2025, art. 1º, IV'],
+    ['2026-04-03', 'Sexta-feira Santa (Semana Santa)', 'Provimento TJPI 59/2025, art. 1º, IV'],
+    ['2026-06-04', 'Corpus Christi', 'Provimento TJPI 59/2025, art. 1º, V'],
+    ['2026-08-11', 'Criação dos Cursos Jurídicos, Dia do Advogado e Dia do Magistrado', 'Provimento TJPI 59/2025, art. 1º, VI'],
+    ['2026-10-19', 'Dia do Piauí (feriado estadual, Lei estadual 176/1937)', 'Provimento TJPI 59/2025, art. 1º, VII'],
+    ['2026-10-28', 'Dia do Servidor Público Estadual (LC estadual 13/1994, art. 201)', 'Provimento TJPI 59/2025, art. 1º, VIII'],
+    ['2026-12-08', 'Dia da Justiça (Decreto-lei 8.292/1945)', 'Provimento TJPI 59/2025, art. 1º, IX']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJPI'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjpi-provimento-59-2025' as const
+  })),
+
+  // ---------- TJSE, 2026: calendário do tribunal (pontos facultativos e 14/12 só alertam, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados com município, 16/03 (só Aracaju e Tribunal) e o recesso.
+  ...[
+    ['2026-02-16', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (ponto facultativo)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-04-02', 'Quinta-feira Santa (ponto facultativo)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-04-03', 'Paixão de Cristo (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-04-20', 'Ponto facultativo', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-06-04', 'Corpus Christi (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-06-05', 'Ponto facultativo', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-06-24', 'Festejos juninos, São João (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-06-29', 'Festejos juninos, São Pedro (ponto facultativo)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-07-08', 'Emancipação Política de Sergipe (feriado estadual)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-08-10', 'Ponto facultativo', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-08-11', 'Dia do Magistrado (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-10-30', 'Dia do Funcionário Público (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-12-07', 'Ponto facultativo', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-12-08', 'Dia da Justiça (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
+    ['2026-12-14', 'Dia do Ministério Público', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJSE'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjse-calendario-2026' as const
   }))
 ];
 
@@ -849,7 +1326,23 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   // TRF1 e TRF6: os atos só "divulgam" o ponto facultativo e não dizem que não haverá expediente (diferente de TRF2, TRF3 e TRF5, cujos atos dizem)
   TRF1: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TRF6: ['2026-04-20', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
-  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07']
+  TJES: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
+  // TJMA: o art. 3º da Resolução-GP 131/2025 só "considera" esses dias pontos facultativos e não diz que não haverá expediente
+  TJMA: ['2026-02-18', '2026-04-01', '2026-06-05'],
+  // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
+  TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07'],
+  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
+  TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07'],
+  // TJRN: a Portaria Conjunta 02/2026 chama 04/06 de ponto facultativo; 20/04 e 05/06 só citam o Decreto estadual 35.209/2025 (não lido) e 29/06 não cita fundamento; o ato não diz que não há expediente
+  TJRN: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-06-29'],
+  // TJAC: 04/06 e 06/08 são pontos facultativos estaduais (Decreto 11.610/2024) e a Portaria 6569/2025 só trata da compensação de horas, sem dizer que não há expediente
+  TJAC: ['2026-06-04', '2026-08-06'],
+  // TJAP: a legenda do calendário do tribunal chama esses dias de "Ponto Facultativo" (os de "Expediente Suspenso" contam)
+  TJAP: ['2026-06-04', '2026-10-30', '2026-11-30'],
+  // TJTO: a notícia oficial sobre a Portaria 3741/2025 chama esses dias de ponto facultativo e não diz que não há expediente
+  TJTO: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10'],
+  // TJSE: o calendário do tribunal lista estes dias em "previsão de pontos facultativos" (e 14/12 como data própria do Ministério Público)
+  TJSE: ['2026-02-16', '2026-02-18', '2026-04-02', '2026-04-20', '2026-06-05', '2026-06-29', '2026-08-10', '2026-12-07', '2026-12-14']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -915,6 +1408,21 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TRF1: { anos: [2026], fontes: ['trf1-presi-5-2026'] },
   TRF2: { anos: [2026], fontes: ['trf2-pres-843-2026'] },
   TRF3: { anos: [2026], fontes: ['trf3-catrf3r-48-2025'] },
+  TRF4: { anos: [2026], fontes: ['trf4-calendario-2026'] },
   TRF5: { anos: [2026], fontes: ['trf5-ato-219-2026'] },
-  TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] }
+  TRF6: { anos: [2026], fontes: ['trf6-presi-1-2026'] },
+  TJPA: { anos: [2026], fontes: ['tjpa-gp-4765-2025'] },
+  TJMA: { anos: [2026], fontes: ['tjma-res-gp-131-2025'] },
+  TJMT: { anos: [2026], fontes: ['tjmt-pres-1915-2025'] },
+  TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
+  TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
+  TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
+  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] },
+  TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] },
+  TJAC: { anos: [2026], fontes: ['tjac-presi-6569-2025'] },
+  TJRR: { anos: [2026], fontes: ['tjrr-pr-1558-2025'] },
+  TJAP: { anos: [2026], fontes: ['tjap-calendario-2026'] },
+  TJTO: { anos: [2026], fontes: ['tjto-portaria-3741-2025'] },
+  TJPI: { anos: [2026], fontes: ['tjpi-provimento-59-2025'] },
+  TJSE: { anos: [2026], fontes: ['tjse-calendario-2026'] }
 };

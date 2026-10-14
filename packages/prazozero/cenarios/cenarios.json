@@ -7041,9 +7041,9 @@
   },
   {
     "id": "trf4-2026-dia-servidor",
-    "categoria": "pendente",
-    "descricao": "TRF4 2026: 30/10 (Dia do Servidor, Portaria 233/2026 não lida) só alerta",
-    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TRF4 2026: o feriado do Dia do Servidor foi adiado para 30/10 (Portaria 233/2026) e não conta; 28/10 tem expediente normal",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 e Portaria TRF4 233/2026 (lidos em 12/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-27",
       "tipoEvento": "publicacao",
@@ -7053,15 +7053,24 @@
     "esperado": {
       "dataPublicacao": "2026-10-27",
       "dataTermoInicial": "2026-10-28",
-      "dataVencimentoFinal": "2026-10-30",
+      "dataVencimentoFinal": "2026-11-03",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 0,
+        "fimsDeSemana": 2,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TRF4: Dia do Servidor (Portaria 233/2026)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
       }
     },
     "validacao": {
@@ -7069,13 +7078,13 @@
       "por": "Junior Aguiar (revisor jurídico)",
       "em": "2026-10-12"
     },
-    "alternativaEsperada": "2026-11-03"
+    "alternativaEsperada": null
   },
   {
     "id": "trf4-2026-ponto-facultativo-sem-ato",
     "categoria": "verificado",
     "descricao": "TRF4 2026: 20/04 e 05/06 não são pontos facultativos do TRF4 (não constam do calendário): contam como dias úteis",
-    "fundamento": "Calendário de Feriados 2026 do TRF4 (lido em 12/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário de Feriados 2026 do TRF4 e Portaria TRF4 233/2026 (lidos em 12/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-04-16",
       "tipoEvento": "publicacao",
@@ -7087,7 +7096,7 @@
       "dataTermoInicial": "2026-04-17",
       "dataVencimentoFinal": "2026-04-22",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -7377,5 +7386,4574 @@
       "em": "2026-10-12"
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 16/02 (ponto facultativo), 17/02 (Carnaval) e 18/02 (Cinzas, ponto facultativo) não contam",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 02/04 (Quinta-feira Santa, ponto facultativo) e 03/04 (Sexta-feira Santa) não contam",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 20/04 é ponto facultativo sem expediente e 21/04 (Tiradentes) é feriado: nenhum conta",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-recirio",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 26/10 (Recírio, ponto facultativo) não conta",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-22",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-22",
+      "dataTermoInicial": "2026-10-23",
+      "dataVencimentoFinal": "2026-10-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-26",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: o Dia do Servidor foi transferido para 30/10 (art. 2º): 28/10 conta e 30/10 não",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224; art. 2º",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpa-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJPA 2026: 07/12 (ponto facultativo) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Portaria TJPA 4765/2025-GP, art. 1º e Anexo (lida em 12/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJPA: Portaria 4765/2025-GP"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-carnaval",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, ponto facultativo) só alerta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-24"
+  },
+  {
+    "id": "tjma-2026-semana-santa",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 01/04 (ponto facultativo) só alerta; 02/04 e 03/04 não contam",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-01",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-08"
+  },
+  {
+    "id": "tjma-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJMA 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjma-2026-adesao-do-maranhao",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 28/07 (Adesão do Maranhão à Independência) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-27",
+      "dataTermoInicial": "2026-07-29",
+      "dataVencimentoFinal": "2026-07-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-28",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 11/08 (Dia do Advogado, feriado forense) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 28/10 (Dia do Servidor, sem transferência para 30/10 no ato) não conta; 30/10 conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjma-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJMA 2026: 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Resolução-GP TJMA 131/2025, arts. 1º e 3º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMA"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-07",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJMA: Resolução-GP 131/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 16 e 17/02 (Carnaval, pontos facultativos sem expediente) não contam e a Quarta-feira de Cinzas (expediente a partir das 13h) protrai o começo do prazo",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJMT: Cinzas, expediente a partir das 13h: protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 02/04 (ponto facultativo sem expediente) e 03/04 (feriado) não contam",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 20/04 (ponto facultativo sem expediente) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 04/06 e 05/06 (Corpus Christi, pontos facultativos sem expediente) não contam",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 10/08 e 11/08 (Dia do Advogado, pontos facultativos sem expediente) não contam",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 28/10 (Dia do Servidor, ponto facultativo sem expediente) não conta",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjmt-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJMT 2026: 07/12 e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMT"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJMT: Portaria 1915/2025-PRES"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 16/02 (ponto facultativo), 17/02 (Carnaval) e 18/02 (Cinzas, ponto facultativo) não contam",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 02/04 (Quinta-feira Santa) e 03/04 (Sexta-feira Santa) não contam",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-dia-do-defensor",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 19/05 (Dia do Defensor Público, ponto facultativo) não conta",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-05-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-05-15",
+      "dataTermoInicial": "2026-05-18",
+      "dataVencimentoFinal": "2026-05-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-19",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 11/08 (Dia do Advogado, ponto facultativo) não conta",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 28/10 (Dia do Servidor, ponto facultativo) não conta",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjam-2026-dezembro",
+    "categoria": "verificado",
+    "descricao": "TJAM 2026: 07/12 (ponto facultativo), 08/12 (feriado) e 14/12 (ponto facultativo) não contam",
+    "fundamento": "Portaria TJAM 4704/2025, itens II e III (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TJAM"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJAM: Portaria 4704/2025"
+          },
+          {
+            "data": "2026-12-14",
+            "motivo": "TJAM: Portaria 4704/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjms-2026-carnaval",
+    "categoria": "pendente",
+    "descricao": "TJMS 2026: 16 e 17/02 (Carnaval) não contam e 18/02 (Cinzas, sem efeito dito) só alerta",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 4,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-23"
+  },
+  {
+    "id": "tjms-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJMS 2026: 02/04 e 03/04 (não há expediente, art. 164, § 2º, do CODJ) não contam",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjms-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TJMS 2026: 20/04 é ponto facultativo (alerta); 21/04 (Tiradentes) não conta",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "tjms-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJMS 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjms-2026-dia-do-advogado",
+    "categoria": "pendente",
+    "descricao": "TJMS 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Cursos Jurídicos) não conta",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-14"
+  },
+  {
+    "id": "tjms-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJMS 2026: o Dia do Servidor é 30/10 (feriado): 28/10 conta e 30/10 não",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjms-2026-dia-da-justica",
+    "categoria": "pendente",
+    "descricao": "TJMS 2026: 07/12 (ponto facultativo) só alerta e 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJMS"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJMS: página de feriados forenses 2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-12-11"
+  },
+  {
+    "id": "tjro-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas), pontos facultativos sem expediente, não contam",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: 02/04 (Quinta-feira Santa, ponto facultativo) e 03/04 (Sexta-feira Santa) não contam",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: 20/04 (ponto facultativo) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo) não contam",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-dia-trabalhador-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: 20/07 (Dia do Trabalhador da Justiça Estadual, ponto facultativo) não conta",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-16",
+      "dataTermoInicial": "2026-07-17",
+      "dataVencimentoFinal": "2026-07-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-20",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-dia-do-advogado-transferido",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: o Dia do Advogado foi transferido para 10/08: 10/08 não conta e 11/08 conta",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-06",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-06",
+      "dataTermoInicial": "2026-08-07",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-dia-servidor-transferido",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: o Dia do Servidor foi transferido para 30/10: 28/10 conta e 30/10 não",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjro-2026-dia-da-justica-transferido",
+    "categoria": "verificado",
+    "descricao": "TJRO 2026: o Dia da Justiça foi transferido para 07/12: 07/12 não conta e 08/12 conta (municipal só em duas comarcas)",
+    "fundamento": "Ato TJRO 2579/2025 compilado, arts. 1º, 3º, 3º-C e 5º e Anexo Único (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-08",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJRO: Ato 2579/2025 compilado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpb-2026-carnaval-meio-expediente",
+    "categoria": "verificado",
+    "descricao": "TJPB 2026: 11/02 tem expediente só das 7h às 13h (festejos de Carnaval) e protrai o vencimento",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-09",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-09",
+      "dataTermoInicial": "2026-02-10",
+      "dataVencimentoFinal": "2026-02-12",
+      "foiProrrogadoTermoFinal": true,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-11",
+            "motivo": "TJPB: expediente das 7h às 13h: protrai o vencimento (CPC, art. 224, § 1º)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpb-2026-carnaval",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) só alertam e 18/02 (Cinzas, sem rótulo de ponto facultativo) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-20"
+  },
+  {
+    "id": "tjpb-2026-semana-santa",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 01/04 (expediente até 13h) protrai, 02/04 (ponto facultativo) só alerta e 03/04 não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-02",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJPB: expediente das 7h às 13h: protrai o dia do começo"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-08"
+  },
+  {
+    "id": "tjpb-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 20/04 é ponto facultativo compensado (alerta); 21/04 (Tiradentes) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "tjpb-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 04/06 (Corpus Christi) e 05/06 são pontos facultativos (alerta)",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjpb-2026-sao-joao",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 22, 23 e 24/06 (São João) são pontos facultativos (alerta)",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-19",
+      "dataTermoInicial": "2026-06-22",
+      "dataVencimentoFinal": "2026-06-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-29"
+  },
+  {
+    "id": "tjpb-2026-data-magna",
+    "categoria": "verificado",
+    "descricao": "TJPB 2026: 05/08 (Data Magna da Paraíba, feriado estadual) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-04",
+      "dataTermoInicial": "2026-08-06",
+      "dataVencimentoFinal": "2026-08-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-05",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpb-2026-dia-do-advogado",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 10/08 (ponto facultativo compensado) só alerta e 11/08 (Cursos Jurídicos) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-14"
+  },
+  {
+    "id": "tjpb-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJPB 2026: 28/10 (Dia do Servidor, em vermelho sem rótulo de ponto facultativo) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpb-2026-dia-da-justica",
+    "categoria": "pendente",
+    "descricao": "TJPB 2026: 07/12 (ponto facultativo compensado) só alerta e 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPB"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJPB: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-12-11"
+  },
+  {
+    "id": "tjrn-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJRN 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas), feriados pela LC estadual 643/2018, não contam",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrn-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJRN 2026: 01, 02 e 03/04 (Semana Santa, feriados pela LC estadual 643/2018) não contam",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrn-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TJRN 2026: 20/04 (só cita o Decreto estadual 35.209/2025) é alerta; 21/04 (Tiradentes) não conta",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "tjrn-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJRN 2026: 04/06 (Corpus Christi, ponto facultativo) e 05/06 só alertam",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjrn-2026-sao-pedro",
+    "categoria": "pendente",
+    "descricao": "TJRN 2026: 29/06 (Dia de São Pedro, sem fundamento citado) só alerta",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-25",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-25",
+      "dataTermoInicial": "2026-06-26",
+      "dataVencimentoFinal": "2026-06-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-07-01"
+  },
+  {
+    "id": "tjrn-2026-dia-do-advogado-antecipado",
+    "categoria": "verificado",
+    "descricao": "TJRN 2026: o Dia do Advogado foi antecipado para 10/08 (LC estadual 643/2018): 10/08 não conta e 11/08 conta",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-11",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrn-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJRN 2026: o Dia do Servidor é 30/10 (LC estadual 122/1994, art. 230): 28/10 conta e 30/10 não",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrn-2026-dia-da-justica-antecipado",
+    "categoria": "verificado",
+    "descricao": "TJRN 2026: o Dia da Justiça foi antecipado para 07/12 (LC estadual 643/2018): 07/12 não conta e 08/12 conta",
+    "fundamento": "Portaria Conjunta TJRN 02/2026, art. 1º (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRN"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-08",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJRN: Portaria Conjunta 02/2026"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-do-catolico-evangelico",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 22/01 (Dia do Católico, adiado do dia 20) e 23/01 (Dia do Evangélico) não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-01-21",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-01-21",
+      "dataTermoInicial": "2026-01-26",
+      "dataVencimentoFinal": "2026-01-28",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-01-22",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-01-23",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas), feriados forenses, não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 02/04 (Quinta-feira Santa) e 03/04 (Sexta-feira da Paixão) não contam",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-aniversario-do-estado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 15/06 (Aniversário do Estado do Acre) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-12",
+      "dataTermoInicial": "2026-06-16",
+      "dataVencimentoFinal": "2026-06-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-15",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJAC 2026: 04/06 (Corpus Christi, ponto facultativo estadual) só alerta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-08"
+  },
+  {
+    "id": "tjac-2026-revolucao-acreana",
+    "categoria": "pendente",
+    "descricao": "TJAC 2026: 06/08 (Início da Revolução Acreana, ponto facultativo estadual) só alerta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-04",
+      "dataTermoInicial": "2026-08-05",
+      "dataVencimentoFinal": "2026-08-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-10"
+  },
+  {
+    "id": "tjac-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 11/08 (Dia do Advogado, feriado regimental) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-servidor-adiado",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: o Dia do Servidor foi adiado para 30/10: 28/10 conta e 30/10 não",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-tratado-de-petropolis",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: o Tratado de Petrópolis foi adiado para 19/11: 17/11 conta e 19/11 não",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-11-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-11-16",
+      "dataTermoInicial": "2026-11-17",
+      "dataVencimentoFinal": "2026-11-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-11-19",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          },
+          {
+            "data": "2026-11-20",
+            "motivo": "Consciência Negra"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjac-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJAC 2026: 08/12 (Dia da Justiça, feriado regimental) não conta",
+    "fundamento": "Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAC"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-07",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJAC: Portaria PRESI 6569/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 01, 02 e 03/04 (Semana Santa) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 20/04 (ponto facultativo sem expediente) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo sem expediente) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-dos-magistrados",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 10/08 (ponto facultativo sem expediente) e 11/08 (Dia dos Magistrados) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-aniversario-do-estado",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 05/10 (Aniversário do Estado de Roraima) não conta",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-02",
+      "dataTermoInicial": "2026-10-06",
+      "dataVencimentoFinal": "2026-10-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-05",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 28/10 (Dia do Servidor, feriado) não conta",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjrr-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJRR 2026: 07/12 (ponto facultativo sem expediente) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJRR"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJRR: Portaria 1558/2025"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJRR: Portaria 1558/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-padroeiro-e-expediente-suspenso",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 19/03 (Padroeiro do Estado) e 20/03 (expediente suspenso) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-17",
+      "dataTermoInicial": "2026-03-18",
+      "dataVencimentoFinal": "2026-03-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-19",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-03-20",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 01, 02 e 03/04 (Semana Santa) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-expediente-suspenso-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 20/04 (expediente suspenso) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-dia-de-cabralzinho",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 15/05 (Dia de Cabralzinho, feriado estadual) não conta",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-05-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-05-13",
+      "dataTermoInicial": "2026-05-14",
+      "dataVencimentoFinal": "2026-05-18",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-15",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJAP 2026: 04/06 (Corpus Christi, ponto facultativo) só alerta e 05/06 (expediente suspenso) não conta",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-05",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjap-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 10/08 (expediente suspenso) e 11/08 (Dia do Advogado) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjap-2026-dia-servidor",
+    "categoria": "pendente",
+    "descricao": "TJAP 2026: 30/10 (Dia do Servidor, ponto facultativo na legenda) só alerta; 28/10 conta",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-11-03"
+  },
+  {
+    "id": "tjap-2026-dia-do-evangelico",
+    "categoria": "pendente",
+    "descricao": "TJAP 2026: 30/11 (Dia do Evangélico, ponto facultativo) só alerta",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-11-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-11-26",
+      "dataTermoInicial": "2026-11-27",
+      "dataVencimentoFinal": "2026-12-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-12-02"
+  },
+  {
+    "id": "tjap-2026-dezembro",
+    "categoria": "verificado",
+    "descricao": "TJAP 2026: 07/12 (expediente suspenso) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Calendário 2026 do TJAP, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAP"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-07",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-12-08",
+            "motivo": "TJAP: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-carnaval",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: 16 e 17/02 (Carnaval) não contam; 18/02 (Cinzas) não consta e conta",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-19",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: 01, 02 e 03/04 (Semana Santa) não contam",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-30",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-30",
+      "dataTermoInicial": "2026-03-31",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TJTO 2026: 20/04 (ponto facultativo) só alerta; 21/04 (Tiradentes) não conta",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "tjto-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJTO 2026: 04/06 (Corpus Christi, ponto facultativo) e 05/06 só alertam",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-05",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjto-2026-dia-do-advogado",
+    "categoria": "pendente",
+    "descricao": "TJTO 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Cursos Jurídicos) não conta",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-14"
+  },
+  {
+    "id": "tjto-2026-nossa-senhora-da-natividade",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: 07/09 (Independência) e 08/09 (Padroeira do Tocantins) não contam",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-09-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-09-04",
+      "dataTermoInicial": "2026-09-09",
+      "dataVencimentoFinal": "2026-09-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-09-07",
+            "motivo": "Independência"
+          },
+          {
+            "data": "2026-09-08",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-criacao-do-estado",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: 05/10 (Criação do Estado do Tocantins) não conta",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-02",
+      "dataTermoInicial": "2026-10-06",
+      "dataVencimentoFinal": "2026-10-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-05",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-dia-servidor-transferido",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: o Dia do Servidor foi transferido para 30/10: 28/10 conta e 30/10 não",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-dia-da-justica-transferido",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: o Dia da Justiça foi transferido para 18/12: 08/12 conta e 18/12 não",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjto-2026-dia-da-justica-18-dezembro",
+    "categoria": "verificado",
+    "descricao": "TJTO 2026: 18/12 (Dia da Justiça transferido) não conta",
+    "fundamento": "Portaria TJTO 3741/2025, pela notícia oficial de 10/11/2025 (portaria não lida; lida em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJTO"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-15",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2027-01-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 10,
+        "suspensaoDias": 23,
+        "suspensaoDe": "2026-12-21",
+        "suspensaoAte": "2027-01-20",
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-18",
+            "motivo": "TJTO: Portaria 3741/2025 (notícia oficial)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "TJPI: Provimento 59/2025"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "TJPI: Provimento 59/2025"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 02/04 (Quinta-feira Santa) e 03/04 (Sexta-feira Santa) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-01",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-01",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJPI: Provimento 59/2025"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 04/06 (Corpus Christi) não conta",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-dia-do-advogado",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 11/08 (Cursos Jurídicos, Dia do Advogado e do Magistrado) não conta",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-12",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-dia-do-piaui",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 19/10 (Dia do Piauí, feriado estadual) não conta",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-16",
+      "dataTermoInicial": "2026-10-20",
+      "dataVencimentoFinal": "2026-10-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-19",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-dia-servidor",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 28/10 (Dia do Servidor Público Estadual) não conta",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "TJPI: Provimento 59/2025"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 08/12 (Dia da Justiça) não conta; 07/12 (ponto facultativo não previsto no provimento) conta",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJPI: Provimento 59/2025"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjse-2026-carnaval",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 16/02 (ponto facultativo) e 18/02 (Cinzas, ponto facultativo) só alertam; 17/02 (Carnaval, feriado) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-02-12",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-12",
+      "dataTermoInicial": "2026-02-13",
+      "dataVencimentoFinal": "2026-02-18",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-17",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-20"
+  },
+  {
+    "id": "tjse-2026-semana-santa",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 02/04 (Quinta-feira Santa, ponto facultativo) só alerta; 03/04 (Paixão de Cristo) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-01",
+      "dataVencimentoFinal": "2026-04-06",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-03",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-07"
+  },
+  {
+    "id": "tjse-2026-ponto-facultativo-20-abril",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 20/04 (ponto facultativo) só alerta; 21/04 (Tiradentes) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-22",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-23"
+  },
+  {
+    "id": "tjse-2026-corpus-christi",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-09"
+  },
+  {
+    "id": "tjse-2026-festejos-juninos",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 24/06 (São João, feriado) não conta e 29/06 (São Pedro, ponto facultativo) só alerta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-06-23",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-23",
+      "dataTermoInicial": "2026-06-25",
+      "dataVencimentoFinal": "2026-06-29",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-24",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-30"
+  },
+  {
+    "id": "tjse-2026-emancipacao-de-sergipe",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 08/07 (Emancipação Política de Sergipe) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-07-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-07",
+      "dataTermoInicial": "2026-07-09",
+      "dataVencimentoFinal": "2026-07-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-08",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjse-2026-dia-do-magistrado",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Dia do Magistrado) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-10",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-08-14"
+  },
+  {
+    "id": "tjse-2026-dia-do-funcionario-publico",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 28/10 conta e 30/10 (Dia do Funcionário Público, feriado) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjse-2026-dia-da-justica",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 07/12 (ponto facultativo) só alerta e 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-12-11"
+  },
+  {
+    "id": "tjse-2026-dia-do-ministerio-publico",
+    "categoria": "pendente",
+    "descricao": "TJSE 2026: 14/12 (Dia do Ministério Público) só alerta",
+    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-12-11",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJSE"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-11",
+      "dataTermoInicial": "2026-12-14",
+      "dataVencimentoFinal": "2026-12-16",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-12-17"
   }
 ]
