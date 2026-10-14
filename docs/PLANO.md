@@ -391,7 +391,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 ### Próximos passos, em ordem
 
 1. **F2-18 e F2-05**: a F2-04 está fechada (27 TJs e 6 TRFs, 313 de 313 cenários validados). Falta fechar os selos pelos atos que não foram lidos (F2-18) e os feriados estaduais ainda sem ato (F2-05; pesquisa de fontes, não depende do responsável). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
-2. **F0-06 em diante** (banco, login, deploy, alerta por e-mail do F2-10), conforme as decisões do responsável (§12): exige criar a conta no Supabase.
+2. **F2-11**: as 6 dúvidas jurídicas abertas em `VERIFICACAO_FONTES.md` §7, aguardando o revisor. **F2-02**: calendário de STF e STJ de 2027, quando as portarias saírem. (F0-06 a F0-14 e o alerta por e-mail do F2-10 já estão feitos.)
 3. **Beta fechado** do PrazoZero (critério da fase F2): 10 usuários, sem erro de cálculo reportado.
 
 ---
