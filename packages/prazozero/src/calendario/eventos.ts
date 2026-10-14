@@ -375,6 +375,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://www.tjpb.jus.br/',
     lido: 'PDF "Calendario_2026.pdf" entregue pelo responsável em 14/10/2026; as 12 páginas dos meses foram vistas em imagem (dias em vermelho sem expediente, em azul expediente alterado). Não é o ato normativo: nenhuma portaria do tribunal foi lida. Os dias que o próprio calendário chama de "Ponto Facultativo" (inclusive Carnaval, Semana Santa, Corpus Christi, São João e os "compensados") só alertam, porque o calendário não diz que não haverá expediente e os compensa com horas em outros dias. Contam, por decisão do responsável em 14/10/2026, os dias em vermelho sem rótulo de ponto facultativo: 18/02 (Cinzas) e 28/10 (Dia do Servidor), além do feriado de 03/04, 05/08 (feriado estadual, Data Magna), 11/08 (Fundação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Expediente das 7h às 13h em 11/02 e 01/04. As páginas de feriados municipais das comarcas (15 e 16) não foram conferidas: municipais ficam fora (CPC, art. 1.003, § 6º). Recesso de 20/12 a 06/01 já está no recesso do CPC',
     lidoEm: LIDO_14_10
+  },
+  'tjrn-pc-02-2026': {
+    ato: 'Portaria Conjunta nº 02/2026 da Presidência e da Corregedoria-Geral do TJRN (15/01/2026; republicada no DJe nº 763, de 16/01/2026, por incorreção no original): feriados e pontos facultativos de 2026',
+    url: 'https://www.tjrn.jus.br/',
+    lido: 'inteiro teor (edição do DJe nº 763 em PDF de 2 páginas, entregue pelo responsável em 14/10/2026). O art. 1º divulga os feriados e estabelece os pontos facultativos, mas não diz que não haverá expediente nos pontos facultativos. Contam os dias que o ato funda na Lei Complementar estadual 643/2018, art. 97, § 3º (Carnaval, Cinzas, Semana Santa de 01 a 03/04, e as antecipações do Dia do Advogado em 10/08 e do Dia da Justiça em 07/12) e o Dia do Servidor em 30/10 (LC estadual 122/1994, art. 230; decisão do responsável em 14/10/2026, a mesma do TJPB). Alertam 04/06 (o ato diz "ponto facultativo"), 20/04 e 05/06 (só citam o Decreto estadual 35.209/2025, não lido, que trata de pontos facultativos do Executivo) e 29/06 (São Pedro, sem fundamento citado). O § 2º trata os feriados municipais (só na comarca; fora, CPC, art. 1.003, § 6º). 24 e 31/12 e o feriado forense de 20/12 a 06/01 já estão no recesso. Atos posteriores não foram lidos',
+    lidoEm: LIDO_14_10
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -1069,7 +1075,34 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fonte: 'tjpb-calendario-2026' as const
   })),
   { tribunais: ['TJPB'], inicio: '2026-02-11', fim: '2026-02-11', nome: 'Festejos de Carnaval: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
-  { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' }
+  { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
+
+  // ---------- TJRN, 2026: Portaria Conjunta 02/2026 (alertam 04/06, 20/04, 05/06 e 29/06, ver PONTOS_FACULTATIVOS) ----------
+  // Fora: feriados federais, municipais, 24 e 31/12 e o recesso de 20/12 a 06/01.
+  ...[
+    ['2026-02-16', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, I (LC estadual 643/2018, art. 97, § 3º, II)'],
+    ['2026-02-17', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, II (LC estadual 643/2018, art. 97, § 3º, II; Lei 1.408/1951, art. 5º)'],
+    ['2026-02-18', 'Quarta-feira de Cinzas (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, III (LC estadual 643/2018, art. 97, § 3º, II)'],
+    ['2026-04-01', 'Semana Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, IV (LC estadual 643/2018, art. 97, § 3º, I)'],
+    ['2026-04-02', 'Semana Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, V (LC estadual 643/2018, art. 97, § 3º, I)'],
+    ['2026-04-03', 'Sexta-feira Santa (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, VI (LC estadual 643/2018, art. 97, § 3º, I; Lei 1.408/1951, art. 5º)'],
+    ['2026-04-20', 'Ponto facultativo (Decreto estadual 35.209/2025, não lido)', 'Portaria Conjunta TJRN 02/2026, art. 1º, VII'],
+    ['2026-06-04', 'Corpus Christi (ponto facultativo)', 'Portaria Conjunta TJRN 02/2026, art. 1º, X'],
+    ['2026-06-05', 'Ponto facultativo (Decreto estadual 35.209/2025, não lido)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XI'],
+    ['2026-06-29', 'Dia de São Pedro (sem fundamento citado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XII'],
+    ['2026-08-10', 'Antecipação do Dia do Advogado, do Magistrado e dos Cursos Jurídicos (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XIII (LC estadual 643/2018, art. 97, § 3º, III)'],
+    ['2026-10-30', 'Dia do Servidor Público', 'Portaria Conjunta TJRN 02/2026, art. 1º, XV (LC estadual 122/1994, art. 230)'],
+    ['2026-12-07', 'Antecipação do Dia da Justiça (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, XIX (LC estadual 643/2018, art. 97, § 3º, III)']
+  ].map(([data, nome, fundamento]) => ({
+    tribunais: ['TJRN'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento,
+    fonte: 'tjrn-pc-02-2026' as const
+  }))
 ];
 
 /**
@@ -1091,7 +1124,9 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
   TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07'],
   // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
-  TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07']
+  TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07'],
+  // TJRN: a Portaria Conjunta 02/2026 chama 04/06 de ponto facultativo; 20/04 e 05/06 só citam o Decreto estadual 35.209/2025 (não lido) e 29/06 não cita fundamento; o ato não diz que não há expediente
+  TJRN: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-06-29']
 };
 
 function comoAlerta(e: EventoCalendario): EventoCalendario {
@@ -1166,5 +1201,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
   TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
   TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
-  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] }
+  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] },
+  TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] }
 };
