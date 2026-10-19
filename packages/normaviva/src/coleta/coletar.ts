@@ -74,7 +74,8 @@ async function baixar(url: string): Promise<{ bytes: Buffer; contentType: string
   throw new Error(`${url}: ${ultimo} (2 tentativas)`);
 }
 
-export async function coletarNorma(n: NormaPlanalto): Promise<EntradaManifesto> {
+/** Baixa e valida a norma sem gravar nada: a atualização diária compara antes de decidir se grava. */
+export async function baixarNorma(n: NormaPlanalto): Promise<{ entrada: EntradaManifesto; bytes: Buffer }> {
   const url = BASE_PLANALTO + n.caminho;
   const { bytes, contentType, urlFinal } = await baixar(url);
   if (!new URL(urlFinal).hostname.endsWith('planalto.gov.br')) throw new Error(`${n.id}: redirecionou para fora do Planalto (${urlFinal})`);
@@ -82,19 +83,27 @@ export async function coletarNorma(n: NormaPlanalto): Promise<EntradaManifesto> 
   const titulo = (texto.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? '').replace(/\s+/g, ' ').trim();
   if (bytes.length < 5_000 || !/art\.?\s*1/i.test(texto)) throw new Error(`${n.id}: resposta não parece o texto de uma lei (${bytes.length} bytes)`);
   const arquivo = `${n.id}.html.gz`;
-  writeFileSync(join(PASTA, arquivo), gzipSync(bytes, { level: 9 }));
   return {
-    id: n.id,
-    nome: n.nome,
-    url: urlFinal,
-    tipoPagina: tipoDaPagina(n.caminho),
-    titulo,
-    charset,
-    bytes: bytes.length,
-    sha256: createHash('sha256').update(bytes).digest('hex'),
-    lidoEm: new Date().toISOString().slice(0, 10),
-    arquivo
+    bytes,
+    entrada: {
+      id: n.id,
+      nome: n.nome,
+      url: urlFinal,
+      tipoPagina: tipoDaPagina(n.caminho),
+      titulo,
+      charset,
+      bytes: bytes.length,
+      sha256: createHash('sha256').update(bytes).digest('hex'),
+      lidoEm: new Date().toISOString().slice(0, 10),
+      arquivo
+    }
   };
+}
+
+export async function coletarNorma(n: NormaPlanalto): Promise<EntradaManifesto> {
+  const { entrada, bytes } = await baixarNorma(n);
+  writeFileSync(join(PASTA, entrada.arquivo), gzipSync(bytes, { level: 9 }));
+  return entrada;
 }
 
 async function main() {

@@ -1,0 +1,86 @@
+name: Atualizar normas (NormaViva)
+
+# F3-06: todo dia relê as 28 normas do corpus no Planalto e compara o TEXTO DE LEI com o que está no repositório.
+# Se algum texto mudou, abre (ou atualiza) uma issue de alerta com o resumo. NÃO altera o corpus, NÃO faz commit e NÃO aprova
+# nada: a aprovação é do revisor, no computador dele (`pnpm atualizar aprovar ID`), porque a fila do runner não é guardada.
+# Não usa segredo nenhum: lê páginas públicas do Planalto e escreve só issues, com o token do próprio repositório.
+on:
+  schedule:
+    - cron: '0 9 * * *' # 09:00 UTC = 06:00 em Brasília; o alerta sai em menos de 24 h da mudança
+  workflow_dispatch:
+
+concurrency:
+  group: atualizar-normas
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  atualizar:
+    name: Reler o Planalto e comparar
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Instalar pnpm
+        run: npm install -g pnpm@11.19.0
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      # Código de saída do comando: 0 sem mudança de texto, 2 com mudança na fila, 1 erro de execução
+      - name: Reler as normas e comparar com o corpus
+        id: atualizar
+        working-directory: packages/normaviva
+        run: |
+          set +e
+          pnpm atualizar 2>&1 | tee "$RUNNER_TEMP/relatorio.txt"
+          codigo=${PIPESTATUS[0]}
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Alertar por issue (mudança de texto de lei)
+        if: steps.atualizar.outputs.codigo == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXECUCAO: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        working-directory: packages/normaviva
+        run: |
+          hoje=$(date -u +%F)
+          {
+            echo "O Planalto mudou o **texto de lei** de ao menos uma norma do corpus do NormaViva (leitura de $hoje). Nada foi alterado no repositório."
+            echo
+            echo "| Norma | Novos | Removidos | Texto alterado | Anotação alterada | Revogados |"
+            echo "|---|---|---|---|---|---|"
+            jq -r '.[] | select(.status == "pendente") | "| \(.normaId) | \(.resumo.novos) | \(.resumo.removidos) | \(.resumo.textoAlterado) | \(.resumo.anotacaoAlterada) | \(.resumo.revogados) |"' corpus/fila-revisao.json
+            echo
+            echo "**O que fazer (revisor):** no computador, a partir de \`packages/normaviva\`, rode \`pnpm atualizar\` (refaz a leitura e a fila), confira o diff e então \`pnpm atualizar aprovar ID\` ou \`pnpm atualizar rejeitar ID\`; depois \`pnpm conferir && pnpm parsear && pnpm versoes && pnpm relacoes\` e abra o PR do corpus. Execução: $EXECUCAO"
+            echo
+            echo "<details><summary>Amostra das mudanças (até 40 por norma)</summary>"
+            echo
+            echo '```json'
+            jq -c '.[] | select(.status == "pendente") | {normaId, amostra: .resumo.amostra}' corpus/fila-revisao.json | head -c 50000
+            echo
+            echo '```'
+            echo "</details>"
+          } > "$RUNNER_TEMP/alerta.md"
+          gh label create normaviva-atualizacao --color BFD4F2 --description "Mudança de texto de lei detectada no Planalto" --force
+          existente=$(gh issue list --label normaviva-atualizacao --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existente" ]; then
+            gh issue comment "$existente" --body-file "$RUNNER_TEMP/alerta.md"
+          else
+            gh issue create --title "NormaViva: o Planalto mudou o texto de lei ($hoje)" --label normaviva-atualizacao --body-file "$RUNNER_TEMP/alerta.md"
+          fi
+
+      - name: Falhar se a execução deu erro
+        if: steps.atualizar.outputs.codigo != '0' && steps.atualizar.outputs.codigo != '2'
+        run: |
+          echo "pnpm atualizar terminou com código ${{ steps.atualizar.outputs.codigo }}"
+          exit 1

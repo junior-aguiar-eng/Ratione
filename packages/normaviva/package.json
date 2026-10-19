@@ -20,7 +20,8 @@
     "conferir": "tsx src/coleta/conferir.ts",
     "parsear": "tsx src/parser/verificar.ts",
     "versoes": "tsx src/versoes/verificar.ts",
-    "relacoes": "tsx src/busca/verificar.ts"
+    "relacoes": "tsx src/busca/verificar.ts",
+    "atualizar": "tsx src/atualizacao/atualizar.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
