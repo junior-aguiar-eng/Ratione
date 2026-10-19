@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **314** · validados: **310** · pendentes: **4**
+> Cenários: **314** · validados: **314** · pendentes: **0**
 
 ## Como revisar
 
@@ -431,7 +431,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 22 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV); 07/09/2026 Independência
 - **Fundamento:** CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 33. `dobro-embargos-feriado`
 
@@ -1627,7 +1627,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Portaria STJ/GDG 1.010/2025, art. 1º, VIII e IX
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 127. `stf-corpus-christi-2026`
 
@@ -1640,7 +1640,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 128. `stj-cinzas-comeco-2026`
 
@@ -1689,7 +1689,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 12 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV)
 - **Fundamento:** LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 132. `stf-ferias-julho-5d`
 
