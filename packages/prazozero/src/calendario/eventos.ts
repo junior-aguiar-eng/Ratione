@@ -371,6 +371,12 @@ export const FONTES_CALENDARIO = {
     lido: 'inteiro teor, texto compilado da página de atos do tribunal (arts. 1º a 6º e Anexo Único), lido em 14/10/2026 pelo script de acesso e conferido com a página de feriados de 2026 do tribunal (https://www.tjro.jus.br/feriados-locais/feriados-2026); os PDFs original e compilado não foram abertos. O art. 1º diz que não haverá expediente forense e administrativo nos feriados e pontos facultativos do anexo e o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias, por isso os pontos facultativos contam. O Dia da Justiça foi transferido de 08/12 para 07/12 (art. 3º-C, Ato 2168/2026), o Dia do Advogado de 11/08 para 10/08 e o Dia do Servidor de 28/10 para 30/10 (art. 3º, Ato 657/2026). Ficam de fora os feriados municipais (só na comarca ou no Fórum Digital, art. 1º, § 2º; CPC, art. 1.003, § 6º), 24 e 31/12 (recesso de 20/12 a 06/01) e 02/01. O art. 4º permite novos pontos facultativos durante o ano; atos posteriores ao 2168/2026 não foram lidos. Horário de funcionamento do público (7h às 14h) pela página do tribunal',
     lidoEm: LIDO_14_10
   },
+  'tjpb-ato-conjunto-9-2026': {
+    ato: 'Ato Conjunto TJPB/MPPB/DPE nº 9/2026 (DJe de 16/10/2026): transfere o feriado do Dia do Servidor Público de 28 para 30/10/2026 e altera o Anexo Único do Ato Conjunto nº 04/2025',
+    url: 'https://www.tjpb.jus.br/w/ato-conjunto-transfere-o-feriado-do-dia-do-servidor-p%C3%BAblico-de-28-para-o-dia-30-de-outubro',
+    lido: 'NÃO lido por inteiro: o texto do ato e a notícia do tribunal não abriram (o site responde 403 e a página de treinamento do tribunal ainda mostra 28/10). A transferência vem de resumo de busca da notícia oficial e da decisão do revisor em 19/10/2026; 30/10 conta como dia sem expediente e 28/10 volta a ser dia útil. Confirmar o texto do ato quando houver cópia',
+    lidoEm: LIDO_19_10
+  },
   'tjpb-calendario-2026': {
     ato: 'Calendário 2026 do Tribunal de Justiça da Paraíba (documento ilustrado do tribunal, 17 páginas, com legenda mensal)',
     url: 'https://www.tjpb.jus.br/',
@@ -1104,7 +1110,6 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-08-05', 'Data Magna da Paraíba (feriado estadual)', 'Calendário 2026 do TJPB'],
     ['2026-08-10', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
     ['2026-08-11', 'Fundação dos Cursos Jurídicos', 'Calendário 2026 do TJPB'],
-    ['2026-10-28', 'Dia do Servidor Público', 'Calendário 2026 do TJPB'],
     ['2026-12-07', 'Ponto facultativo (compensado)', 'Calendário 2026 do TJPB'],
     ['2026-12-08', 'Dia da Justiça', 'Calendário 2026 do TJPB']
   ].map(([data, nome, fundamento]) => ({
@@ -1117,6 +1122,8 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fundamento,
     fonte: 'tjpb-calendario-2026' as const
   })),
+  // Dia do Servidor transferido de 28 para 30/10 pelo Ato Conjunto TJPB/MPPB/DPE nº 9/2026 (DJe de 16/10/2026): ato NÃO lido por inteiro (decisão do revisor em 19/10/2026)
+  { tribunais: ['TJPB'], inicio: '2026-10-30', fim: '2026-10-30', nome: 'Dia do Servidor Público (transferido de 28/10)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Ato Conjunto TJPB/MPPB/DPE 9/2026 (transfere o feriado; texto não lido)', fonte: 'tjpb-ato-conjunto-9-2026' },
   { tribunais: ['TJPB'], inicio: '2026-02-11', fim: '2026-02-11', nome: 'Festejos de Carnaval: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
   { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
 
@@ -1355,7 +1362,7 @@ const PONTOS_FACULTATIVOS: Record<string, string[]> = {
   TJMA: ['2026-02-18', '2026-04-01', '2026-06-05'],
   // TJMS: a página do tribunal só diz "ponto facultativo" (e Cinzas sem efeito dito) e não diz que não há expediente; o ato (Portaria 983/2025) não foi lido
   TJMS: ['2026-02-18', '2026-04-20', '2026-06-05', '2026-08-10', '2026-12-07'],
-  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
+  // TJPB: o calendário do tribunal chama esses dias de ponto facultativo (ou compensado) e não diz que não há expediente; Cinzas (18/02) e Dia do Servidor (28/10, depois transferido para 30/10 pelo Ato Conjunto 9/2026) vêm em vermelho sem esse rótulo e contam (decisão do responsável em 14/10/2026)
   TJPB: ['2026-02-16', '2026-02-17', '2026-04-02', '2026-04-20', '2026-06-04', '2026-06-05', '2026-06-22', '2026-06-23', '2026-06-24', '2026-08-10', '2026-12-07'],
   // TJRN: a Portaria Conjunta 02/2026 chama 04/06 de ponto facultativo; 20/04 e 05/06 só citam o Decreto estadual 35.209/2025 (não lido) e 29/06 não cita fundamento; o ato não diz que não há expediente
   TJRN: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-06-29'],
@@ -1441,7 +1448,7 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJAM: { anos: [2026], fontes: ['tjam-portaria-4704-2025'] },
   TJMS: { anos: [2026], fontes: ['tjms-feriados-2026'] },
   TJRO: { anos: [2026], fontes: ['tjro-ato-2579-2025'] },
-  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026'] },
+  TJPB: { anos: [2026], fontes: ['tjpb-calendario-2026', 'tjpb-ato-conjunto-9-2026'] },
   TJRN: { anos: [2026], fontes: ['tjrn-pc-02-2026'] },
   TJAC: { anos: [2026], fontes: ['tjac-presi-6569-2025'] },
   TJRR: { anos: [2026], fontes: ['tjrr-pr-1558-2025'] },

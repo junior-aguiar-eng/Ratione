@@ -1248,7 +1248,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **17/02/2026 (terça-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 20/02/2026 (sexta-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1261,7 +1261,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **07/04/2026 (terça-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 08/04/2026 (quarta-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 TJPB: expediente das 7h às 13h: protrai o dia do começo; 03/04/2026 TJPB: calendário 2026 do tribunal
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1274,7 +1274,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **22/04/2026 (quarta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 23/04/2026 (quinta-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1287,7 +1287,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **05/06/2026 (sexta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 09/06/2026 (terça-feira)
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1300,7 +1300,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **24/06/2026 (quarta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 29/06/2026 (segunda-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1313,7 +1313,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **13/08/2026 (quinta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 14/08/2026 (sexta-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJPB: calendário 2026 do tribunal
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -1326,7 +1326,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Vencimento esperado:** **10/12/2026 (quinta-feira)**
 - **Alternativa (se os dias pendentes forem confirmados):** 11/12/2026 (sexta-feira)
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJPB: calendário 2026 do tribunal
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -3183,7 +3183,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Publicação / dia do começo:** 09/02/2026 (segunda-feira) · **início da contagem:** 10/02/2026 (terça-feira)
 - **Vencimento esperado:** **12/02/2026 (quinta-feira)** · prorrogado
 - **Como foi contado (dias excluídos):** 11/02/2026 TJPB: expediente das 7h às 13h: protrai o vencimento (CPC, art. 224, § 1º)
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -3195,21 +3195,21 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Publicação / dia do começo:** 04/08/2026 (terça-feira) · **início da contagem:** 06/08/2026 (quinta-feira)
 - **Vencimento esperado:** **07/08/2026 (sexta-feira)**
 - **Como foi contado (dias excluídos):** 05/08/2026 TJPB: calendário 2026 do tribunal
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 258. `tjpb-2026-dia-servidor`
 
-**TJPB 2026: 28/10 (Dia do Servidor, em vermelho sem rótulo de ponto facultativo) não conta**
+**TJPB 2026: 28/10 conta e 30/10 (Dia do Servidor transferido pelo Ato Conjunto 9/2026, texto não lido) não conta**
 
 - **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPB** · modo conservador
-- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
+- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 28/10/2026 (quarta-feira)
 - **Vencimento esperado:** **03/11/2026 (terça-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJPB: calendário 2026 do tribunal; 02/11/2026 Finados
-- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 TJPB: calendário 2026 do tribunal; 02/11/2026 Finados
+- **Fundamento:** Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 259. `tjrn-2026-carnaval-cinzas`
 
