@@ -72,7 +72,7 @@ function mandadoSeguranca(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   ];
   const avisos = [
     'Decadência: não se suspende nem se interrompe, inclusive no recesso de 20/12 a 20/01 (Código Civil, art. 207). Conta dias corridos, não dias úteis.',
-    'A página do Planalto marca o art. 23 com "Vide ADIN 4296": o efeito dessa ação sobre o prazo não foi verificado e fica para o revisor jurídico.',
+    'A página do Planalto marca o art. 23 com "Vide ADIN 4296". Segundo fontes secundárias, o STF julgou constitucional o prazo de 120 dias nessa ação (Súmula 632); o acórdão não foi lido.',
     'A data é contada da ciência do ato impugnado; confirme qual foi o ato e quando o impetrante dele teve ciência.',
     AVISO_CALENDARIO
   ];
