@@ -11316,7 +11316,7 @@
     "id": "tjpi-2026-carnaval-cinzas",
     "categoria": "verificado",
     "descricao": "TJPI 2026: 16 e 17/02 (Carnaval) e 18/02 (Cinzas) não contam",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
@@ -11337,15 +11337,15 @@
         "diasNaoUteis": [
           {
             "data": "2026-02-16",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           },
           {
             "data": "2026-02-17",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           },
           {
             "data": "2026-02-18",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11361,7 +11361,7 @@
     "id": "tjpi-2026-semana-santa",
     "categoria": "verificado",
     "descricao": "TJPI 2026: 02/04 (Quinta-feira Santa) e 03/04 (Sexta-feira Santa) não contam",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
@@ -11382,11 +11382,11 @@
         "diasNaoUteis": [
           {
             "data": "2026-04-02",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           },
           {
             "data": "2026-04-03",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11401,8 +11401,8 @@
   {
     "id": "tjpi-2026-corpus-christi",
     "categoria": "verificado",
-    "descricao": "TJPI 2026: 04/06 (Corpus Christi) não conta",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "descricao": "TJPI 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria 169/2026) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
@@ -11412,7 +11412,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11423,7 +11423,11 @@
         "diasNaoUteis": [
           {
             "data": "2026-06-04",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11431,15 +11435,15 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "em": "2026-10-19"
     },
     "alternativaEsperada": null
   },
   {
     "id": "tjpi-2026-dia-do-advogado",
     "categoria": "verificado",
-    "descricao": "TJPI 2026: 11/08 (Cursos Jurídicos, Dia do Advogado e do Magistrado) não conta",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "descricao": "TJPI 2026: 10/08 (ponto facultativo, Portaria 169/2026) e 11/08 (Cursos Jurídicos, Dia do Advogado e do Magistrado) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-08-07",
       "tipoEvento": "publicacao",
@@ -11448,8 +11452,8 @@
     },
     "esperado": {
       "dataPublicacao": "2026-08-07",
-      "dataTermoInicial": "2026-08-10",
-      "dataVencimentoFinal": "2026-08-12",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-13",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11459,8 +11463,12 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-08-10",
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
+          },
+          {
             "data": "2026-08-11",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11468,7 +11476,7 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "em": "2026-10-19"
     },
     "alternativaEsperada": null
   },
@@ -11476,7 +11484,7 @@
     "id": "tjpi-2026-dia-do-piaui",
     "categoria": "verificado",
     "descricao": "TJPI 2026: 19/10 (Dia do Piauí, feriado estadual) não conta",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-16",
       "tipoEvento": "publicacao",
@@ -11497,7 +11505,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-10-19",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11513,7 +11521,7 @@
     "id": "tjpi-2026-dia-servidor",
     "categoria": "verificado",
     "descricao": "TJPI 2026: 28/10 (Dia do Servidor Público Estadual) não conta",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-27",
       "tipoEvento": "publicacao",
@@ -11534,7 +11542,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-10-28",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           },
           {
             "data": "2026-11-02",
@@ -11553,8 +11561,8 @@
   {
     "id": "tjpi-2026-dia-da-justica",
     "categoria": "verificado",
-    "descricao": "TJPI 2026: 08/12 (Dia da Justiça) não conta; 07/12 (ponto facultativo não previsto no provimento) conta",
-    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "descricao": "TJPI 2026: 07/12 (ponto facultativo, Portaria 169/2026) e 08/12 (Dia da Justiça) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-12-04",
       "tipoEvento": "publicacao",
@@ -11563,8 +11571,8 @@
     },
     "esperado": {
       "dataPublicacao": "2026-12-04",
-      "dataTermoInicial": "2026-12-07",
-      "dataVencimentoFinal": "2026-12-10",
+      "dataTermoInicial": "2026-12-09",
+      "dataVencimentoFinal": "2026-12-11",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11574,8 +11582,12 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-12-07",
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
+          },
+          {
             "data": "2026-12-08",
-            "motivo": "TJPI: Provimento 59/2025"
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
           }
         ]
       }
@@ -11583,7 +11595,48 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "em": "2026-10-19"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjpi-2026-ponto-facultativo-20-abril",
+    "categoria": "verificado",
+    "descricao": "TJPI 2026: 20/04 (ponto facultativo, Portaria 169/2026) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224",
+    "entrada": {
+      "dataEvento": "2026-04-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJPI"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-16",
+      "dataTermoInicial": "2026-04-17",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "TJPI: Provimento 59/2025 e Portaria 169/2026"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "Junior Aguiar (revisor jurídico)",
+      "em": "2026-10-19"
     },
     "alternativaEsperada": null
   },
