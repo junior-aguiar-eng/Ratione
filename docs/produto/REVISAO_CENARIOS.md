@@ -422,7 +422,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ### 32. `stj-dobro-ferias-julho`
 
-**STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08**
+**STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho; 10/08 (ponto facultativo no meio do prazo) conta no conservador e 11/08 não conta**
 
 - **Entrada:** publicação em **26/06/2026 (sexta-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador · prazo em dobro
 - **Publicação / dia do começo:** 26/06/2026 (sexta-feira) · **início da contagem:** 29/06/2026 (segunda-feira)
@@ -1618,7 +1618,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ### 126. `stj-corpus-christi-2026`
 
-**STJ: Corpus Christi e 05/06 sem expediente em 2026**
+**STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta**
 
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
@@ -1631,7 +1631,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ### 127. `stf-corpus-christi-2026`
 
-**STF: Corpus Christi e 05/06 sem expediente em 2026**
+**STF: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta**
 
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **STF** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
@@ -1680,7 +1680,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ### 131. `stj-ferias-julho-8d`
 
-**STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam**
+**STJ: após as férias de julho, 10/08 (ponto facultativo no meio do prazo) conta no modo conservador e 11/08 não conta; a alternativa não conta o 10/08**
 
 - **Entrada:** publicação em **30/06/2026 (terça-feira)** · prazo de **8 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 30/06/2026 (terça-feira) · **início da contagem:** 01/07/2026 (quarta-feira)

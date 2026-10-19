@@ -1978,7 +1978,7 @@
   {
     "id": "stj-corpus-christi-2026",
     "categoria": "verificado",
-    "descricao": "STJ: Corpus Christi e 05/06 sem expediente em 2026",
+    "descricao": "STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta",
     "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, VIII e IX",
     "entrada": {
       "dataEvento": "2026-06-02",
@@ -2010,7 +2010,7 @@
   {
     "id": "stf-corpus-christi-2026",
     "categoria": "verificado",
-    "descricao": "STF: Corpus Christi e 05/06 sem expediente em 2026",
+    "descricao": "STF: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta",
     "fundamento": "Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)",
     "entrada": {
       "dataEvento": "2026-06-02",
@@ -2160,7 +2160,7 @@
   {
     "id": "stj-ferias-julho-8d",
     "categoria": "verificado",
-    "descricao": "STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam",
+    "descricao": "STJ: após as férias de julho, 10/08 (ponto facultativo no meio do prazo) conta no modo conservador e 11/08 não conta; a alternativa não conta o 10/08",
     "fundamento": "LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
     "entrada": {
       "dataEvento": "2026-06-30",
@@ -3144,7 +3144,7 @@
   {
     "id": "stj-dobro-ferias-julho",
     "categoria": "dobro",
-    "descricao": "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08",
+    "descricao": "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho; 10/08 (ponto facultativo no meio do prazo) conta no conservador e 11/08 não conta",
     "fundamento": "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
     "entrada": {
       "dataEvento": "2026-06-26",

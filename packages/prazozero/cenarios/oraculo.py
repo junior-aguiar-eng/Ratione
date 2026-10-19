@@ -667,9 +667,9 @@ add("tst-semana-santa-conservador", "pendente", "TST: art. 62 cita 'Tribunais Su
     entrada("2026-04-01", "publicacao", 3, "TST"))
 add("stj-onze-agosto-2026", "verificado", "STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam", P1010 + ", art. 1º, X e XI",
     entrada("2026-08-07", "publicacao", 3, "STJ"))
-add("stj-corpus-christi-2026", "verificado", "STJ: Corpus Christi e 05/06 sem expediente em 2026", P1010 + ", art. 1º, VIII e IX",
+add("stj-corpus-christi-2026", "verificado", "STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", P1010 + ", art. 1º, VIII e IX",
     entrada("2026-06-02", "publicacao", 5, "STJ"))
-add("stf-corpus-christi-2026", "verificado", "STF: Corpus Christi e 05/06 sem expediente em 2026", CAL_STF,
+add("stf-corpus-christi-2026", "verificado", "STF: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", CAL_STF,
     entrada("2026-06-02", "publicacao", 5, "STF"))
 add("stj-cinzas-comeco-2026", "verificado", "STJ: Carnaval e Quarta de Cinzas (até 14h) protraem o dia do começo", P1010 + ", art. 1º, II e III; CPC, art. 224, § 1º",
     entrada("2026-02-13", "publicacao", 5, "STJ"))
@@ -677,7 +677,7 @@ add("stf-ponto-facultativo-30-out", "verificado", "STF: 30/10/2026 (transferênc
     entrada("2026-10-28", "publicacao", 2, "STF"))
 add("stj-ferias-julho-5d", "verificado", "STJ: prazos suspensos de 2 a 31 de julho; retoma em 03/08", "LC 35/1979, art. 66, § 1º; RISTJ, arts. 81 e 106; Portaria STJ/GP 455/2026",
     entrada("2026-06-30", "publicacao", 5, "STJ"))
-add("stj-ferias-julho-8d", "verificado", "STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam", "LC 35/1979, art. 66, § 1º; " + P1010,
+add("stj-ferias-julho-8d", "verificado", "STJ: após as férias de julho, 10/08 (ponto facultativo no meio do prazo) conta no modo conservador e 11/08 não conta; a alternativa não conta o 10/08", "LC 35/1979, art. 66, § 1º; " + P1010,
     entrada("2026-06-30", "publicacao", 8, "STJ"))
 add("stf-ferias-julho-5d", "verificado", "STF: prazos não correm nas férias de julho", "LC 35/1979, art. 66, § 1º; RISTF, arts. 78 e 105",
     entrada("2026-06-30", "publicacao", 5, "STF"))
@@ -740,7 +740,7 @@ add("clt-ed-5d-feriado", "clt", "CLT: embargos de declaração em 5 dias úteis 
     entrada("2026-09-03", "publicacao", 5, "TST", regime="clt_dias_uteis"))
 add("clt-recesso-borda-20-jan", "clt", "CLT: publicação em 16/01/2026; 19 e 20/01 ainda são recesso e a contagem retoma em 21/01", "CLT, art. 775-A",
     entrada("2026-01-16", "publicacao", 3, "TST", regime="clt_dias_uteis"))
-add("stj-dobro-ferias-julho", "dobro", "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08", "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; " + P1010,
+add("stj-dobro-ferias-julho", "dobro", "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho; 10/08 (ponto facultativo no meio do prazo) conta no conservador e 11/08 não conta", "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; " + P1010,
     entrada("2026-06-26", "publicacao", 15, "STJ", prazoEmDobro=True))
 add("stf-dje-ferias-janeiro", "verificado", "STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02", "RISTF, arts. 78 e 105; CPC, art. 224, § 2º; " + CAL_STF,
     entrada("2026-01-30", "disponibilizacao_dje", 5, "STF"))
