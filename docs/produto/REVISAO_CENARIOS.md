@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **313** · validados: **313** · pendentes: **0**
+> Cenários: **314** · validados: **314** · pendentes: **0**
 
 ## Como revisar
 
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 67 |
-| Calendário verificado (tribunais com ato lido) | 180 |
+| Calendário verificado (tribunais com ato lido) | 181 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -3638,8 +3638,8 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **12/02/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
 - **Publicação / dia do começo:** 12/02/2026 (quinta-feira) · **início da contagem:** 13/02/2026 (sexta-feira)
 - **Vencimento esperado:** **20/02/2026 (sexta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJPI: Provimento 59/2025; 17/02/2026 TJPI: Provimento 59/2025; 18/02/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 16/02/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 17/02/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 18/02/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -3650,34 +3650,34 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **01/04/2026 (quarta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
 - **Publicação / dia do começo:** 01/04/2026 (quarta-feira) · **início da contagem:** 06/04/2026 (segunda-feira)
 - **Vencimento esperado:** **07/04/2026 (terça-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJPI: Provimento 59/2025; 03/04/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/04/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 03/04/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 296. `tjpi-2026-corpus-christi`
 
-**TJPI 2026: 04/06 (Corpus Christi) não conta**
+**TJPI 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria 169/2026) não contam**
 
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
-- **Vencimento esperado:** **08/06/2026 (segunda-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Vencimento esperado:** **09/06/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 05/06/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 297. `tjpi-2026-dia-do-advogado`
 
-**TJPI 2026: 11/08 (Cursos Jurídicos, Dia do Advogado e do Magistrado) não conta**
+**TJPI 2026: 10/08 (ponto facultativo, Portaria 169/2026) e 11/08 (Cursos Jurídicos, Dia do Advogado e do Magistrado) não contam**
 
 - **Entrada:** publicação em **07/08/2026 (sexta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
-- **Publicação / dia do começo:** 07/08/2026 (sexta-feira) · **início da contagem:** 10/08/2026 (segunda-feira)
-- **Vencimento esperado:** **12/08/2026 (quarta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Publicação / dia do começo:** 07/08/2026 (sexta-feira) · **início da contagem:** 12/08/2026 (quarta-feira)
+- **Vencimento esperado:** **13/08/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 11/08/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
 ### 298. `tjpi-2026-dia-do-piaui`
 
@@ -3686,8 +3686,8 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **16/10/2026 (sexta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
 - **Publicação / dia do começo:** 16/10/2026 (sexta-feira) · **início da contagem:** 20/10/2026 (terça-feira)
 - **Vencimento esperado:** **21/10/2026 (quarta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/10/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/10/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
@@ -3698,24 +3698,36 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
 - **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
 - **Vencimento esperado:** **03/11/2026 (terça-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJPI: Provimento 59/2025; 02/11/2026 Finados
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 02/11/2026 Finados
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
 ### 300. `tjpi-2026-dia-da-justica`
 
-**TJPI 2026: 08/12 (Dia da Justiça) não conta; 07/12 (ponto facultativo não previsto no provimento) conta**
+**TJPI 2026: 07/12 (ponto facultativo, Portaria 169/2026) e 08/12 (Dia da Justiça) não contam**
 
 - **Entrada:** publicação em **04/12/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
-- **Publicação / dia do começo:** 04/12/2026 (sexta-feira) · **início da contagem:** 07/12/2026 (segunda-feira)
-- **Vencimento esperado:** **10/12/2026 (quinta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 TJPI: Provimento 59/2025
-- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026); CPC, arts. 219 e 224
+- **Publicação / dia do começo:** 04/12/2026 (sexta-feira) · **início da contagem:** 09/12/2026 (quarta-feira)
+- **Vencimento esperado:** **11/12/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 08/12/2026 TJPI: Provimento 59/2025 e Portaria 169/2026
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
 
-### 301. `tjse-2026-emancipacao-de-sergipe`
+### 301. `tjpi-2026-ponto-facultativo-20-abril`
+
+**TJPI 2026: 20/04 (ponto facultativo, Portaria 169/2026) e 21/04 (Tiradentes) não contam**
+
+- **Entrada:** publicação em **16/04/2026 (quinta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **TJPI** · modo conservador
+- **Publicação / dia do começo:** 16/04/2026 (quinta-feira) · **início da contagem:** 17/04/2026 (sexta-feira)
+- **Vencimento esperado:** **23/04/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 TJPI: Provimento 59/2025 e Portaria 169/2026; 21/04/2026 Tiradentes
+- **Fundamento:** Provimento TJPI 59/2025, arts. 1º e 5º (lido em 14/10/2026), e Portaria TJPI 169/2026, arts. 1º, 2º e 7º (lida em 19/10/2026); CPC, arts. 219 e 224
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-19
+
+### 302. `tjse-2026-emancipacao-de-sergipe`
 
 **TJSE 2026: 08/07 (Emancipação Política de Sergipe) não conta**
 
@@ -3727,7 +3739,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-14
 
-### 302. `tjse-2026-dia-do-funcionario-publico`
+### 303. `tjse-2026-dia-do-funcionario-publico`
 
 **TJSE 2026: 28/10 conta e 30/10 (Dia do Funcionário Público, feriado) não conta**
 
@@ -3741,7 +3753,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Intimação eletrônica
 
-### 303. `portal-segunda`
+### 304. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -3753,7 +3765,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 304. `portal-sexta`
+### 305. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -3765,7 +3777,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 305. `portal-sabado`
+### 306. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -3777,7 +3789,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 306. `portal-feriado`
+### 307. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -3789,7 +3801,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 307. `portal-recesso`
+### 308. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -3803,7 +3815,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 308. `jef-5d-embargos`
+### 309. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -3815,7 +3827,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 309. `jef-10d-recurso`
+### 310. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -3827,7 +3839,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 310. `jef-dobro-ignorado`
+### 311. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -3839,7 +3851,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 311. `jef-recesso`
+### 312. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -3851,7 +3863,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 312. `jef-recesso-desligado`
+### 313. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -3863,7 +3875,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 313. `jef-dje-sexta`
+### 314. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 

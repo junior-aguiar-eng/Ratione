@@ -44,6 +44,7 @@ const LIDO = '2026-10-07';
 const LIDO_10_10 = '2026-10-10';
 const LIDO_12_10 = '2026-10-12';
 const LIDO_14_10 = '2026-10-14';
+const LIDO_19_10 = '2026-10-19';
 
 export const FONTES_CALENDARIO = {
   'stj-gdg-1010': {
@@ -409,8 +410,14 @@ export const FONTES_CALENDARIO = {
   'tjpi-provimento-59-2025': {
     ato: 'Provimento nº 59/2025 - PJPI/TJPI/SECPRE (Presidência; assinado em 14/11/2025): recesso forense, feriados e pontos facultativos de 2026 e suspensão de prazos nos dias sem expediente',
     url: 'https://www.tjpi.jus.br/',
-    lido: 'inteiro teor (cópia do texto no Portal da Transparência do TJPI, em PDF entregue pelo responsável em 14/10/2026; o próprio texto avisa que não substitui o publicado no Diário Oficial da Justiça). O art. 1º diz que não haverá expediente forense em 16, 17 e 18/02 (Carnaval e Cinzas), na Semana Santa (Quinta-feira Santa a Domingo de Páscoa: 02 e 03/04 em dia útil), 04/06 (Corpus Christi), 11/08, 19/10 (Dia do Piauí, Lei estadual 176/1937), 28/10 (Dia do Servidor, LC estadual 13/1994, art. 201) e 08/12, além dos feriados nacionais; o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias. O parágrafo único do art. 1º e o art. 7º deixam os pontos facultativos a cargo da Presidência: nenhum consta do provimento, e a Portaria 169/2026 (4 pontos facultativos, só vista em nota do sindicato dos servidores) não foi lida; por isso 20/04, 05/06, 10/08 e 07/12 não entram. Fora: feriados municipais (art. 1º, X, e art. 4º; CPC, art. 1.003, § 6º) e 14/12 (art. 3º: só atos que dependem do Ministério Público). O art. 2º suspende os prazos de 07 a 20/01/2026, já coberto pelo recesso do CPC (art. 220). Atos posteriores não foram lidos',
+    lido: 'inteiro teor (cópia do texto no Portal da Transparência do TJPI, em PDF entregue pelo responsável em 14/10/2026; o próprio texto avisa que não substitui o publicado no Diário Oficial da Justiça). O art. 1º diz que não haverá expediente forense em 16, 17 e 18/02 (Carnaval e Cinzas), na Semana Santa (Quinta-feira Santa a Domingo de Páscoa: 02 e 03/04 em dia útil), 04/06 (Corpus Christi), 11/08, 19/10 (Dia do Piauí, Lei estadual 176/1937), 28/10 (Dia do Servidor, LC estadual 13/1994, art. 201) e 08/12, além dos feriados nacionais; o art. 5º prorroga para o primeiro dia útil os prazos que começam ou vencem nesses dias. O parágrafo único do art. 1º e o art. 7º deixam os pontos facultativos a cargo da Presidência: nenhum consta do provimento, e os 4 pontos facultativos de 2026 (20/04, 05/06, 10/08 e 07/12) vieram depois, na Portaria 169/2026, lida em 19/10/2026 (fonte própria). Fora: feriados municipais (art. 1º, X, e art. 4º; CPC, art. 1.003, § 6º) e 14/12 (art. 3º: só atos que dependem do Ministério Público). O art. 2º suspende os prazos de 07 a 20/01/2026, já coberto pelo recesso do CPC (art. 220). Atos posteriores não foram lidos',
     lidoEm: LIDO_14_10
+  },
+  'tjpi-portaria-169-2026': {
+    ato: 'Portaria (Presidência e Corregedoria-Geral) nº 169/2026 - PJPI/TJPI/SECPRE (assinada em 22 e 26/01/2026): pontos facultativos de 2026',
+    url: 'https://www.tjpi.jus.br/',
+    lido: 'inteiro teor (Diário da Justiça do Estado do Piauí nº 10216, disponibilizado em 26/01/2026 e publicado em 27/01/2026, item 1.14, PDF entregue pelo responsável em 19/10/2026). O art. 1º estabelece pontos facultativos em 20/04 (por causa de Tiradentes), 05/06 (Corpus Christi), 10/08 (Cursos Jurídicos) e 07/12 (Dia da Justiça); o art. 2º diz que não haverá expediente nesses dias e o art. 7º suspende os prazos que comecem ou terminem neles, com retorno no primeiro dia útil seguinte. Por isso os quatro dias contam como dia sem expediente',
+    lidoEm: LIDO_19_10
   },
   'tjse-calendario-2026': {
     ato: 'Calendário 2026 das Comarcas de Aracaju e do interior do Estado e respectivos distritos, do TJSE (documento do tribunal, PDF "Calendário 2026 - Desa. Iolanda", com feriados e "previsão de pontos facultativos" por mês)',
@@ -1281,6 +1288,23 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fonte: 'tjpi-provimento-59-2025' as const
   })),
 
+  // ---------- TJPI, 2026: Portaria 169/2026, arts. 1º, 2º e 7º (pontos facultativos sem expediente; prazos suspensos) ----------
+  ...[
+    ['2026-04-20', 'Ponto facultativo (Tiradentes em 21/04)'],
+    ['2026-06-05', 'Ponto facultativo (Corpus Christi em 04/06)'],
+    ['2026-08-10', 'Ponto facultativo (Cursos Jurídicos em 11/08)'],
+    ['2026-12-07', 'Ponto facultativo (Dia da Justiça em 08/12)']
+  ].map(([data, nome]) => ({
+    tribunais: ['TJPI'],
+    inicio: data,
+    fim: data,
+    nome,
+    efeito: 'nao_util' as const,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: 'Portaria TJPI 169/2026, arts. 1º, 2º e 7º',
+    fonte: 'tjpi-portaria-169-2026' as const
+  })),
+
   // ---------- TJSE, 2026: calendário do tribunal (pontos facultativos e 14/12 só alertam, ver PONTOS_FACULTATIVOS) ----------
   // Fora: feriados com município, 16/03 (só Aracaju e Tribunal) e o recesso.
   ...[
@@ -1423,6 +1447,6 @@ export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Arra
   TJRR: { anos: [2026], fontes: ['tjrr-pr-1558-2025'] },
   TJAP: { anos: [2026], fontes: ['tjap-calendario-2026'] },
   TJTO: { anos: [2026], fontes: ['tjto-portaria-3741-2025'] },
-  TJPI: { anos: [2026], fontes: ['tjpi-provimento-59-2025'] },
+  TJPI: { anos: [2026], fontes: ['tjpi-provimento-59-2025', 'tjpi-portaria-169-2026'] },
   TJSE: { anos: [2026], fontes: ['tjse-calendario-2026'] }
 };
