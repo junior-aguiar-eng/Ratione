@@ -16,7 +16,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test src/**/*.test.ts",
-    "coletar": "tsx src/coleta/coletar.ts"
+    "coletar": "tsx src/coleta/coletar.ts",
+    "conferir": "tsx src/coleta/conferir.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",

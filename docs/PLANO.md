@@ -331,7 +331,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado |
 |---|---|---|
-| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | parcial | **Planalto feito (19/10/2026):** 28 normas coletadas pelo coletor de `packages/normaviva/src/coleta/` (HTML original em gzip + manifesto com URL, charset e SHA-256), 19 em versão compilada e 9 só na página anotada (vale o não tachado); a Lei 11.340 vem em UTF-16 com BOM e o coletor trata. Registro em `VERIFICACAO_FONTES.md` §16. **Falta:** Legalize-BR (decidir: conferência cruzada ou importação do acervo) |
+| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | parcial | **Planalto feito (19/10/2026):** 28 normas coletadas pelo coletor de `packages/normaviva/src/coleta/` (HTML original em gzip + manifesto com URL, charset e SHA-256), 19 em versão compilada e 9 só na página anotada (vale o não tachado); a Lei 11.340 vem em UTF-16 com BOM e o coletor trata. Registro em `VERIFICACAO_FONTES.md` §16. **Legalize-BR dispensado (19/10/2026):** só metadados e ementa, sem o texto (arquivos de 0,5 a 6 KB). **Conferência cruzada feita com a API do Senado** (`pnpm conferir`): dos 876 atos alteradores que o Planalto anota, 796 coincidem com os 1.032 do Senado; 80 só no Planalto e 236 só no Senado, listados em `corpus/conferencia-senado.json` para a F3-03. Nada corrigido no corpus |
 | F3-02 | Parser LC 95/98 (artigo, parágrafo, inciso, alínea) | não iniciado |
 | F3-03 | Versões a partir das anotações "Redação dada/Incluído/Revogado" (modelo bitemporal) | não iniciado |
 | F3-04 | Consulta temporal, diff visual e linha do tempo | não iniciado |
