@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/**/*.test.ts"
+    "test": "tsx --test src/**/*.test.ts",
+    "coletar": "tsx src/coleta/coletar.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",

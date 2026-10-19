@@ -220,6 +220,16 @@ Marco legal lido no Planalto: Lei 9.093/1995, art. 1º, II ("a data magna do Est
 
 Efeito prático: nos tribunais de PE, RS e GO esses dias passam a contar como sem expediente em todo ano, também no modo conservador; nos demais, só no modo completo (data alternativa). Nenhum ganhou selo de calendário: o selo continua exigindo o ato anual do tribunal.
 
+## 16. Corpus do NormaViva: coleta do Planalto (F3-01), lido em 19/10/2026
+
+Coletor em `packages/normaviva/src/coleta/` (`pnpm coletar` a partir de `packages/normaviva`): User-Agent de navegador, 30 s de timeout, 2 tentativas, 1 s entre pedidos. Grava o HTML **original** (bytes intactos, gzip) em `packages/normaviva/corpus/planalto/<id>.html.gz` e, em `manifesto.json`, a URL, o tipo de página, o título, o charset, o tamanho, o **SHA-256 dos bytes originais** e a data de leitura. Não interpreta o texto (parser e versões são F3-02 e F3-03). Resposta que não parece lei, redirecionamento para fora do Planalto ou falha de rede é recusada, não gravada.
+
+**28 normas:** CF/1988, CC, CPC, CP, CPP, CLT, CDC, LINDB, CTN, ECA, Lei 8.112, 8.213, 8.245, 8.429, 9.099, 9.307, 9.503, 6.830, 7.210, 7.347, 11.101, 11.340, 11.343, 11.419, 12.016, 12.965, 13.709 e 14.133. **19 em versão compilada ou consolidada** (a única que vale; a CF usa a página `constituicao.htm`) e **9 só na página anotada** (Leis 6.830, 9.099, 9.307, 11.340, 11.343, 11.419, 12.016, 12.965 e 14.133), onde o texto vigente é o que **não** está tachado (`<s>/<strike>`); o Planalto não publica compilada para elas no endereço padrão (sonda de 7 sufixos em 19/10/2026).
+
+Achados: (1) **a Lei 11.340/2006 é servida em UTF-16 com BOM**, sem charset útil; o `fetch_oficial.py` a devolve ilegível, então o coletor detecta o BOM antes do charset; (2) `l7347orig.htm` é o texto original da Lei 7.347, a compilada é `l7347compilada.htm`; (3) o `iso-8859-1` declarado é lido como windows-1252.
+
+**Fica para depois:** a importação do Legalize-BR (decisão em aberto: usar só como conferência cruzada destas 28 normas ou importar o acervo todo) e a rotina diária que compara o SHA-256 e gera alerta de mudança (F3-06).
+
 ## 15. Como repetir esta verificação
 
 ```bash

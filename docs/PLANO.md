@@ -331,7 +331,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 
 | ID | Item | Estado |
 |---|---|---|
-| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | não iniciado |
+| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | parcial | **Planalto feito (19/10/2026):** 28 normas coletadas pelo coletor de `packages/normaviva/src/coleta/` (HTML original em gzip + manifesto com URL, charset e SHA-256), 19 em versão compilada e 9 só na página anotada (vale o não tachado); a Lei 11.340 vem em UTF-16 com BOM e o coletor trata. Registro em `VERIFICACAO_FONTES.md` §16. **Falta:** Legalize-BR (decidir: conferência cruzada ou importação do acervo) |
 | F3-02 | Parser LC 95/98 (artigo, parágrafo, inciso, alínea) | não iniciado |
 | F3-03 | Versões a partir das anotações "Redação dada/Incluído/Revogado" (modelo bitemporal) | não iniciado |
 | F3-04 | Consulta temporal, diff visual e linha do tempo | não iniciado |
