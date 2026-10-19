@@ -258,6 +258,18 @@ Código em `packages/normaviva/src/versoes/` (`pnpm versoes`, a partir de `packa
 
 **Variações de citação do Planalto tratadas:** ano de dois dígitos ("10.12.97", corte em 30 para 20xx), "Lcp" por Lei Complementar, "Ato Complementar", "Leinº", "Lei nº 13. 281" (espaço no número), medida provisória reeditada ("2.225-45"), "Emenda Constituição Constitucional", dia ordinal ("1º.7.2003") e data sem "de" ("Decreto-lei nº 4.000, 19.12.1941").
 
+## 19. Relações normativas e busca textual (F3-05), 19/10/2026
+
+Migração `supabase/migrations/20261019000001_normaviva.sql` (**ainda não aplicada no Supabase real**: aplicar pelo SQL Editor, como as anteriores) e código em `packages/normaviva/src/busca/`. Testada no PGlite (Postgres real) com o corpus inteiro carregado: `pnpm test` em `packages/normaviva` (a carga das 28 normas leva cerca de 1 minuto).
+
+**Tabelas:** `normas` (URL, tipo de página, SHA-256 e data de leitura), `dispositivos` (hierarquia por `pai_id`, texto, continuação, anotações, `busca` tsvector gerada em português com índice GIN), `versoes_dispositivo` (vigência provisória, `texto_anterior_disponivel`, hash e `conhecido_em`: tempo do direito e tempo do sistema) e `relacoes`. Leitura pública (anon e logado); só a chave de serviço escreve. A função `buscar_dispositivos(consulta, norma, limite)` usa `websearch_to_tsquery('portuguese')`, ranqueia por relevância, destaca o trecho, ignora revogados e limita a 100 resultados. Sem `unaccent` nem `pg_trgm` (indisponíveis no PGlite): a busca em português já reduz ao radical e ignora acento nas formas comuns, mas **não faz correspondência aproximada** (erro de digitação).
+
+**Barra de pesquisa** (`interpretarConsulta`): `art. 489 CPC`, `art. 85, § 2º do Código de Processo Civil`, `Lei 14.133`, `Lei nº 8.078/1990`, `CPC` e `Código Penal` viram citação, norma ou dispositivo; frase com assunto vai para o texto livre (FTS). 18 normas têm sigla e nome registrados em `apelidos.ts`.
+
+**Relações extraídas por regra (sem IA e sem inferência):** 10.157 de alteração (`alterado_por`, `incluido_por`, `revogado_por`, vindas das anotações do Planalto) e 3.214 remissões expressas a artigos (`remete`). O `escopo` diz a certeza sobre a norma de destino: **958 `mesma`** ("deste Código", "desta Lei"), **1.798 `presumido`** (artigo sem norma, que na redação legislativa é a própria norma), **195 `explicito`** (nome ou sigla de outra norma do corpus) e **263 `externo`** (outra norma, em geral fora do corpus). 2.850 (89%) encontram o artigo de destino no corpus; as outras 364 apontam para norma ou artigo que não está nas 28. **Limites:** o destino é o artigo, não o parágrafo ou inciso (o detalhe fica em `destino_texto`); a remissão presumida pode estar errada em texto que altera outra norma; "arts. X a Y" (faixa) cita só os extremos que aparecem como número. Relação `curado` exige `validado_por` (restrição do banco); relação por IA só entra com validação humana, e nenhuma foi criada.
+
+**Fica para depois:** aplicar a migração e carregar o corpus no Supabase real (a carga exige a chave de serviço e um executor SQL de produção; o código aceita qualquer `ExecutorSql`), relações de tipo `regulamenta`/`excepciona`, e a interface.
+
 ## 15. Como repetir esta verificação
 
 ```bash
