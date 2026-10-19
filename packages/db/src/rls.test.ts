@@ -113,17 +113,26 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
     assert.strictEqual((await db.query('select 1 from public.itens_salvos where usuario_id = $1', [carla])).rows.length, 0);
   });
 
-  it('privilégios mínimos: authenticated só tem o necessário e anon não tem nenhum', async () => {
+  it('privilégios mínimos: authenticated só tem o necessário; anon só lê o texto público das leis (NormaViva)', async () => {
     const q = await db.query<{ grantee: string; tabela: string; privilegios: string }>(
       "select grantee, table_name as tabela, string_agg(privilege_type, ',' order by privilege_type) as privilegios from information_schema.role_table_grants where table_schema = 'public' and grantee in ('anon', 'authenticated') group by grantee, table_name order by 1, 2"
     );
     assert.deepStrictEqual(
       q.rows.map(x => `${x.grantee} ${x.tabela}: ${x.privilegios}`),
       [
+        // Texto das leis (F3-05): conteúdo público, só leitura; quem escreve é a carga, com a chave de serviço
+        'anon dispositivos: SELECT',
+        'anon normas: SELECT',
+        'anon relacoes: SELECT',
+        'anon versoes_dispositivo: SELECT',
         'authenticated aceites_termos: SELECT',
+        'authenticated dispositivos: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',
         'authenticated lembretes_prazo: DELETE,INSERT,SELECT',
-        'authenticated perfis: SELECT,UPDATE'
+        'authenticated normas: SELECT',
+        'authenticated perfis: SELECT,UPDATE',
+        'authenticated relacoes: SELECT',
+        'authenticated versoes_dispositivo: SELECT'
       ]
     );
   });

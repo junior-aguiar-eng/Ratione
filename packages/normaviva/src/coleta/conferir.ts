@@ -16,24 +16,28 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 const PASTA = join(__dirname, '..', '..', 'corpus');
 const API = 'https://legis.senado.leg.br/dadosabertos/legislacao/';
 
-export type TipoAto = 'lei' | 'lei-complementar' | 'decreto-lei' | 'decreto' | 'medida-provisoria' | 'emenda-constitucional';
+export type TipoAto = 'lei' | 'lei-complementar' | 'decreto-lei' | 'decreto' | 'medida-provisoria' | 'emenda-constitucional' | 'ato-complementar';
 
 const ROTULOS: Array<[RegExp, TipoAto]> = [
-  [/^lei complementar/i, 'lei-complementar'],
+  [/^(lei complementar|lcp)/i, 'lei-complementar'],
+  [/^ato complementar/i, 'ato-complementar'],
   [/^lei/i, 'lei'],
   [/^decreto[- ]lei/i, 'decreto-lei'],
   [/^decreto/i, 'decreto'],
   [/^medida provis[óo]ria/i, 'medida-provisoria'],
-  [/^emenda constitucional/i, 'emenda-constitucional']
+  [/^emenda\s+(?:constitui[çc][ãa]o\s+)?constitucional/i, 'emenda-constitucional']
 ];
 
 /** Chave canônica de um ato: `lei:13256:2016`. */
 export function chaveDoAto(tipo: TipoAto, numero: string, ano: string): string {
-  return `${tipo}:${numero.replace(/\./g, '')}:${ano}`;
+  // Medida provisória reeditada ("2.225-45") vale pelo número-base; ano de dois dígitos ("10.12.97") vira 19xx/20xx (corte em 30)
+  const base = numero.replace(/-\d+$/, '').replace(/[\s.]/g, '');
+  const completo = ano.length === 2 ? (Number(ano) <= 30 ? `20${ano}` : `19${ano}`) : ano;
+  return `${tipo}:${base}:${completo}`;
 }
 
 const FONTE_PADRAO_ATO =
-  /(Lei Complementar|Lei|Decreto-Lei|Decreto|Medida Provis[óo]ria|Emenda Constitucional(?: de Revis[ãa]o)?)\s+n[ºo°.]*\s*([\d.]+)(?:\/(\d{4})|\s*,?\s+de\s+(?:\d{1,2}[./]\d{1,2}[./])?(\d{4})|\s+de\s+\d{1,2}\s+de\s+\w+\s+de\s+(\d{4}))/i;
+  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)|\s+de\s+\d{1,2}\s+de\s+\w+\s+de\s+(\d{4}))/i;
 
 /** Expressão nova a cada uso: uma regex global compartilhada carrega `lastIndex` entre chamadas e pula achados. */
 const padraoAto = () => new RegExp(FONTE_PADRAO_ATO.source, 'gi');
@@ -68,6 +72,21 @@ export function atosAlteradoresDoPlanalto(texto: string): Set<string> {
   return achados;
 }
 
+/** Todos os atos citados num trecho, na ordem, com a data completa quando o Planalto a traz ("de 11.7.1984"). */
+export function atosDoTexto(texto: string): Array<{ chave: string; dataIso: string | null }> {
+  const saida: Array<{ chave: string; dataIso: string | null }> = [];
+  for (const m of texto.matchAll(padraoAto())) {
+    const tipo = ROTULOS.find(([re]) => re.test(m[1]))?.[1];
+    if (!tipo) continue;
+    const completa = m[0].match(/(\d{1,2})[ºo°]?[./](\d{1,2})[./](\d{4})/);
+    saida.push({
+      chave: chaveDoAto(tipo, m[2], m[3] ?? m[4] ?? m[5]),
+      dataIso: completa ? `${completa[3]}-${completa[2].padStart(2, '0')}-${completa[1].padStart(2, '0')}` : null
+    });
+  }
+  return saida;
+}
+
 /** "Lei nº 13.256 de 04/02/2016" → chave do ato. */
 export function chaveDoNomeSenado(nome: string): string | undefined {
   const m = padraoAto().exec(nome);
@@ -87,6 +106,20 @@ export function ehAlteracao(comentario: string): boolean {
 interface VideSenado {
   nomeNormaPosterior: string;
   comentario: string;
+  datAssinatura?: string;
+  datapub?: string;
+}
+
+/** "04/02/2016" → "2016-02-04". */
+export function dataIsoDoSenado(br: string | undefined): string | null {
+  const m = br?.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
+}
+
+export interface AtoSenado {
+  nome: string;
+  assinatura: string | null;
+  publicacao: string | null;
 }
 
 function urlSenado(id: string): string {
@@ -99,7 +132,7 @@ function urlSenado(id: string): string {
   return `${API}${tipo}/${m[2]}/${m[3]}`;
 }
 
-async function buscarSenado(id: string): Promise<{ url: string; normaNome: string; vides: VideSenado[] }> {
+async function buscarSenado(id: string): Promise<{ url: string; normaNome: string; vides: VideSenado[]; assinatura: string | null; publicacao: string | null }> {
   const url = urlSenado(id);
   let r: Response | undefined;
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
@@ -111,7 +144,15 @@ async function buscarSenado(id: string): Promise<{ url: string; normaNome: strin
   const doc = (await r!.json()).DetalheDocumento.documentos.documento;
   const d = Array.isArray(doc) ? doc[0] : doc;
   const vides: VideSenado[] = d.vides?.vide ? (Array.isArray(d.vides.vide) ? d.vides.vide : [d.vides.vide]) : [];
-  return { url, normaNome: d.identificacao.normaNome, vides };
+  const pubs = d.publicacoes?.publicacao ? (Array.isArray(d.publicacoes.publicacao) ? d.publicacoes.publicacao : [d.publicacoes.publicacao]) : [];
+  const original = pubs.find((p: { dispositivo?: string }) => /Publica[çc][ãa]o Original/i.test(p.dispositivo ?? '')) ?? pubs[0];
+  return {
+    url,
+    normaNome: d.identificacao.normaNome,
+    vides,
+    assinatura: dataIsoDoSenado(d.identificacao.dataassinatura),
+    publicacao: dataIsoDoSenado(original?.data)
+  };
 }
 
 /** O ato aparece em qualquer lugar do texto do Planalto (mesmo fora de anotação de alteração)? */
@@ -140,15 +181,24 @@ export interface ResultadoConferencia {
 async function main() {
   const manifesto: EntradaManifesto[] = JSON.parse(readFileSync(join(PASTA, 'planalto', 'manifesto.json'), 'utf-8'));
   const saida: ResultadoConferencia[] = [];
+  const datasPorNorma: Record<string, { norma: { nome: string; assinatura: string | null; publicacao: string | null }; atos: Record<string, AtoSenado> }> = {};
   for (const m of manifesto) {
     const texto = detectarCharset(gunzipSync(readFileSync(join(PASTA, 'planalto', m.arquivo))), null).texto;
     const planalto = atosAlteradoresDoPlanalto(texto);
-    const { url, normaNome, vides } = await buscarSenado(m.id);
+    const { url, normaNome, vides, assinatura, publicacao } = await buscarSenado(m.id);
     const senado = new Set<string>();
+    const atos: Record<string, AtoSenado> = {};
     for (const v of vides) {
       const chave = chaveDoNomeSenado(v.nomeNormaPosterior);
-      if (chave && ehAlteracao(v.comentario)) senado.add(chave);
+      if (chave && ehAlteracao(v.comentario)) {
+        senado.add(chave);
+        // um ato pode aparecer em várias linhas de `vides`; vale a primeira publicação (a mais antiga)
+        const novo: AtoSenado = { nome: v.nomeNormaPosterior, assinatura: dataIsoDoSenado(v.datAssinatura), publicacao: dataIsoDoSenado(v.datapub) };
+        const antigo = atos[chave];
+        if (!antigo || (novo.publicacao && (!antigo.publicacao || novo.publicacao < antigo.publicacao))) atos[chave] = novo;
+      }
     }
+    datasPorNorma[m.id] = { norma: { nome: normaNome, assinatura, publicacao }, atos };
     const soPlanalto = [...planalto].filter(c => !senado.has(c)).sort();
     const soSenado = [...senado].filter(c => !planalto.has(c)).sort();
     const plano = textoSemHtml(texto);
@@ -157,6 +207,8 @@ async function main() {
     console.log(`${m.id.padEnd(15)} planalto ${String(planalto.size).padStart(3)}  senado ${String(senado.size).padStart(3)}  em ambos ${String(planalto.size - soPlanalto.length).padStart(3)}  só planalto ${String(soPlanalto.length).padStart(3)}  só senado ${String(soSenado.length).padStart(3)}  (ausentes do texto: ${soSenado.length - citados.length})`);
     await new Promise(r => setTimeout(r, 500));
   }
+  // Datas de assinatura e de publicação de cada norma e de cada ato alterador (a F3-03 usa para o início provisório de vigência)
+  writeFileSync(join(PASTA, 'atos-senado.json'), JSON.stringify({ geradoEm: new Date().toISOString().slice(0, 10), normas: datasPorNorma }, null, 2) + '\n', 'utf-8');
   writeFileSync(join(PASTA, 'conferencia-senado.json'), JSON.stringify({ geradoEm: new Date().toISOString().slice(0, 10), normas: saida }, null, 2) + '\n', 'utf-8');
 }
 

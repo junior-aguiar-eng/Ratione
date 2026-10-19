@@ -12,5 +12,8 @@
     "@types/node": "^24.0.0",
     "tsx": "^4.19.3",
     "typescript": "^7.0.2"
+  },
+  "exports": {
+    "./harness": "./src/harness.ts"
   }
 }
