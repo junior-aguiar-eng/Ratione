@@ -18,7 +18,8 @@
     "test": "tsx --test src/**/*.test.ts",
     "coletar": "tsx src/coleta/coletar.ts",
     "conferir": "tsx src/coleta/conferir.ts",
-    "parsear": "tsx src/parser/verificar.ts"
+    "parsear": "tsx src/parser/verificar.ts",
+    "versoes": "tsx src/versoes/verificar.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
