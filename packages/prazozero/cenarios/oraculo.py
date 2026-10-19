@@ -176,7 +176,7 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 
 def calendario(ano: int, trib: str, uf: str, completo: bool):
     """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
-    nao_util, parcial, nomes = set(), set(), {}
+    nao_util, parcial, nomes, facultativo = set(), set(), {}, set()
     # Calendário do ano lido por inteiro: o ato é a lista completa e a tabela provisória de dias pendentes não vale (espelha feriados.ts)
     coberto = ano in ANOS_VERIFICADOS.get(trib, set())
 
@@ -217,7 +217,12 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
                 parcial.add(d)
                 nomes[d] = "Quarta-feira de Cinzas (ponto facultativo até as 14h)"
             else:
-                nao_util.add(d)
+                # Ponto facultativo do STF/STJ (decisão do revisor, 19/10/2026): prorroga o início e o fim; no meio do prazo o modo
+                # conservador o conta como dia útil e o completo (a alternativa) não o conta.
+                if completo:
+                    nao_util.add(d)
+                else:
+                    facultativo.add(d)
                 nomes[d] = "Ponto facultativo (ato do tribunal)"
     def ev(d, verificado, nome):
         """Evento de tribunal: o pendente só entra no modo completo e nunca apaga um dia já conferido."""
@@ -411,7 +416,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         if d not in nao_util and d not in parcial:
             nao_util.add(d)
             nomes[d] = nome + " (estadual, pendente)"
-    return nao_util, parcial, nomes
+    return nao_util, parcial, nomes, facultativo
 
 
 class Ctx:
@@ -439,8 +444,8 @@ class Ctx:
             return False
         if self.recesso and self.em_suspensao(d):
             return False
-        nu, pa, _ = self.cal(d.year)
-        return d not in nu and d not in pa
+        nu, pa, _, fac = self.cal(d.year)
+        return d not in nu and d not in pa and d not in fac
 
     def proximo_util(self, d):
         d += timedelta(1)
@@ -484,7 +489,7 @@ def calcular(e: dict, completo: bool) -> dict:
             contados += 1
         if not ctx.util(fim):
             prorrogado = True
-            _, _, nomes_fim = ctx.cal(fim.year)
+            _, _, nomes_fim, _ = ctx.cal(fim.year)
             rastro["diasNaoUteis"].append({"data": fim.isoformat(), "motivo": "vencimento em dia não útil (" + ("fim de semana" if ctx.fim_de_semana(fim) else nomes_fim.get(fim, "sem expediente")) + "), prorrogado (CPP, art. 798, § 3º)"})
             fim = ctx.proximo_util(fim)
     else:
@@ -497,7 +502,10 @@ def calcular(e: dict, completo: bool) -> dict:
             if recesso and ctx.em_suspensao(d):
                 marca_suspensao(d)
                 continue
-            nu, pa, nomes_ano = ctx.cal(d.year)
+            nu, pa, nomes_ano, fac = ctx.cal(d.year)
+            if d in fac and (contados == 0 or contados + 1 == efetivo):
+                rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "ponto facultativo") + ": prorroga o início ou o fim do prazo"})
+                continue
             if d in nu:
                 rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "sem expediente")})
                 continue
@@ -659,9 +667,9 @@ add("tst-semana-santa-conservador", "pendente", "TST: art. 62 cita 'Tribunais Su
     entrada("2026-04-01", "publicacao", 3, "TST"))
 add("stj-onze-agosto-2026", "verificado", "STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam", P1010 + ", art. 1º, X e XI",
     entrada("2026-08-07", "publicacao", 3, "STJ"))
-add("stj-corpus-christi-2026", "verificado", "STJ: Corpus Christi e 05/06 sem expediente em 2026", P1010 + ", art. 1º, VIII e IX",
+add("stj-corpus-christi-2026", "verificado", "STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", P1010 + ", art. 1º, VIII e IX",
     entrada("2026-06-02", "publicacao", 5, "STJ"))
-add("stf-corpus-christi-2026", "verificado", "STF: Corpus Christi e 05/06 sem expediente em 2026", CAL_STF,
+add("stf-corpus-christi-2026", "verificado", "STF: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", CAL_STF,
     entrada("2026-06-02", "publicacao", 5, "STF"))
 add("stj-cinzas-comeco-2026", "verificado", "STJ: Carnaval e Quarta de Cinzas (até 14h) protraem o dia do começo", P1010 + ", art. 1º, II e III; CPC, art. 224, § 1º",
     entrada("2026-02-13", "publicacao", 5, "STJ"))
@@ -669,7 +677,7 @@ add("stf-ponto-facultativo-30-out", "verificado", "STF: 30/10/2026 (transferênc
     entrada("2026-10-28", "publicacao", 2, "STF"))
 add("stj-ferias-julho-5d", "verificado", "STJ: prazos suspensos de 2 a 31 de julho; retoma em 03/08", "LC 35/1979, art. 66, § 1º; RISTJ, arts. 81 e 106; Portaria STJ/GP 455/2026",
     entrada("2026-06-30", "publicacao", 5, "STJ"))
-add("stj-ferias-julho-8d", "verificado", "STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam", "LC 35/1979, art. 66, § 1º; " + P1010,
+add("stj-ferias-julho-8d", "verificado", "STJ: após as férias de julho, 10/08 (ponto facultativo no meio do prazo) conta no modo conservador e 11/08 não conta; a alternativa não conta o 10/08", "LC 35/1979, art. 66, § 1º; " + P1010,
     entrada("2026-06-30", "publicacao", 8, "STJ"))
 add("stf-ferias-julho-5d", "verificado", "STF: prazos não correm nas férias de julho", "LC 35/1979, art. 66, § 1º; RISTF, arts. 78 e 105",
     entrada("2026-06-30", "publicacao", 5, "STF"))
@@ -732,7 +740,7 @@ add("clt-ed-5d-feriado", "clt", "CLT: embargos de declaração em 5 dias úteis 
     entrada("2026-09-03", "publicacao", 5, "TST", regime="clt_dias_uteis"))
 add("clt-recesso-borda-20-jan", "clt", "CLT: publicação em 16/01/2026; 19 e 20/01 ainda são recesso e a contagem retoma em 21/01", "CLT, art. 775-A",
     entrada("2026-01-16", "publicacao", 3, "TST", regime="clt_dias_uteis"))
-add("stj-dobro-ferias-julho", "dobro", "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08", "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; " + P1010,
+add("stj-dobro-ferias-julho", "dobro", "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho; 10/08 (ponto facultativo no meio do prazo) conta no conservador e 11/08 não conta", "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; " + P1010,
     entrada("2026-06-26", "publicacao", 15, "STJ", prazoEmDobro=True))
 add("stf-dje-ferias-janeiro", "verificado", "STF: disponibilização em 30/01/2026 (férias); publicação só em 02/02 e contagem a partir de 03/02", "RISTF, arts. 78 e 105; CPC, art. 224, § 2º; " + CAL_STF,
     entrada("2026-01-30", "disponibilizacao_dje", 5, "STF"))

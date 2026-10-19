@@ -9,7 +9,8 @@ export interface FeriadoLegal {
   tribunalId?: string;
   fundamentoLegal: string;
   /** `nao_util`: o dia não conta. `expediente_parcial`: só protrai o dia do começo ou do vencimento (CPC, art. 224, § 1º). */
-  efeito: 'nao_util' | 'expediente_parcial';
+  /** `ponto_facultativo`: STF e STJ (decisão do revisor, 19/10/2026): prorroga o início e o fim do prazo; no meio, o modo conservador conta o dia e mostra a data alternativa sem contá-lo. */
+  efeito: 'nao_util' | 'expediente_parcial' | 'ponto_facultativo';
   /**
    * `lei_federal`: texto de lei federal conferido no Planalto; entra em qualquer cálculo.
    * `ato_do_tribunal`: ato do próprio tribunal lido na fonte oficial (ver `fonte`); vale para o ano do ato.

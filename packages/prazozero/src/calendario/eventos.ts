@@ -4,7 +4,7 @@
  * Para incluir um tribunal ou ano: ler o ato, registrar a fonte aqui, listar os eventos e,
  * se o ano estiver completo, declarar a cobertura (o resultado passa a exibir o selo de calendário conferido).
  */
-export type EfeitoEvento = 'nao_util' | 'expediente_parcial';
+export type EfeitoEvento = 'nao_util' | 'expediente_parcial' | 'ponto_facultativo';
 export type VerificacaoEvento = 'ato_do_tribunal' | 'lei_estadual' | 'pendente';
 
 export interface FonteCalendario {
@@ -451,7 +451,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
     inicio: pf.data,
     fim: pf.data,
     nome: pf.nome,
-    efeito: (pf.parcial ? 'expediente_parcial' : 'nao_util') as EfeitoEvento,
+    efeito: (pf.parcial ? 'expediente_parcial' : 'ponto_facultativo') as EfeitoEvento,
     verificacao: 'ato_do_tribunal' as const,
     fundamento: 'Portaria STJ/GDG 1.010/2025, art. 1º',
     fonte: 'stj-gdg-1010' as const
@@ -461,7 +461,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
     inicio: pf.data,
     fim: pf.data,
     nome: pf.nome,
-    efeito: (pf.parcial ? 'expediente_parcial' : 'nao_util') as EfeitoEvento,
+    efeito: (pf.parcial ? 'expediente_parcial' : 'ponto_facultativo') as EfeitoEvento,
     verificacao: 'ato_do_tribunal' as const,
     fundamento: 'Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)',
     fonte: 'stf-cal-2026' as const

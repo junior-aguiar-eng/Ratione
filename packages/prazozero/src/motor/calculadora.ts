@@ -59,13 +59,15 @@ export interface ItemMemoriaCalculo {
   diaContadoNumero: number | null; // 1, 2, ..., N
   /** Presente nos dias de feriado/expediente parcial: se o dia tem base verificada ou ainda está pendente. */
   verificacao?: FeriadoLegal['verificacao'];
+  /** `true` quando um ponto facultativo (STF e STJ) foi contado como dia útil no meio do prazo (modo conservador). */
+  pontoFacultativoContado?: boolean;
 }
 
 export interface AlternativaPrazo {
   dataVencimentoFinal: string;
   descricao: string;
   /** Dias pendentes de conferência que, se confirmados, produzem a data alternativa. */
-  eventosPendentes: Array<{ data: string; nome: string; fundamentoLegal: string }>;
+  eventosPendentes: Array<{ data: string; nome: string; fundamentoLegal: string; pontoFacultativo?: boolean }>;
 }
 
 export interface ResultadoCalculoPrazo {
@@ -139,7 +141,7 @@ export class MotorPrazoZero {
    */
   public verificarDiaUtil(dataIso: string, params: ContextoDia): {
     diaUtil: boolean;
-    motivoNaoUtil?: 'fim_de_semana' | 'feriado' | 'recesso_forense' | 'expediente_parcial';
+    motivoNaoUtil?: 'fim_de_semana' | 'feriado' | 'recesso_forense' | 'expediente_parcial' | 'ponto_facultativo';
     detalheFeriado?: FeriadoLegal;
     fundamentoLegal?: string;
     descricao: string;
@@ -174,7 +176,7 @@ export class MotorPrazoZero {
     if (f && (params.incluirPendentes || f.verificacao !== 'pendente')) {
       return {
         diaUtil: false,
-        motivoNaoUtil: f.efeito === 'expediente_parcial' ? 'expediente_parcial' : 'feriado',
+        motivoNaoUtil: f.efeito === 'expediente_parcial' ? 'expediente_parcial' : f.efeito === 'ponto_facultativo' ? 'ponto_facultativo' : 'feriado',
         detalheFeriado: f,
         descricao: `${f.nome} (${f.fundamentoLegal})`
       };
@@ -264,7 +266,15 @@ export class MotorPrazoZero {
       const completo = this.executar(p, true);
       if (completo.dataVencimentoFinal !== principal.dataVencimentoFinal) {
         let recessoJaListado = false;
-        const eventosPendentes = completo.memoriaCalculo
+        const pontosFacultativos = principal.memoriaCalculo
+          .filter(i => i.pontoFacultativoContado)
+          .map(i => ({
+            data: i.data,
+            nome: i.descricao.replace(/ — ponto facultativo contado no meio do prazo: /, ' ').replace(` (${i.fundamentoLegal})`, ''),
+            fundamentoLegal: i.fundamentoLegal,
+            pontoFacultativo: true as const
+          }));
+        const pendentes = completo.memoriaCalculo
           .filter(i => {
             if (i.verificacao !== 'pendente') return false;
             if (i.status === 'recesso_forense') {
@@ -279,9 +289,13 @@ export class MotorPrazoZero {
             nome: i.descricao.replace(/ \(não computado\)$/, '').replace(` (${i.fundamentoLegal})`, ''),
             fundamentoLegal: i.fundamentoLegal
           }));
+        const eventosPendentes = [...pendentes, ...pontosFacultativos].sort((a, b) => a.data.localeCompare(b.data));
+        const soPontoFacultativo = pendentes.length === 0;
         alternativa = {
           dataVencimentoFinal: completo.dataVencimentoFinal,
-          descricao: `Se os dias pendentes de conferência forem confirmados para este tribunal, o vencimento passa para ${completo.dataVencimentoFinal}.`,
+          descricao: soPontoFacultativo
+            ? `Ponto facultativo no meio do prazo foi contado como dia útil. Se o tribunal o tratar como dia sem expediente, o vencimento passa para ${completo.dataVencimentoFinal}.`
+            : `Se os dias pendentes de conferência (e os pontos facultativos contados no meio do prazo) forem tratados como dia sem expediente neste tribunal, o vencimento passa para ${completo.dataVencimentoFinal}.`,
           eventosPendentes
         };
         avisos.push(
@@ -411,7 +425,9 @@ export class MotorPrazoZero {
         const ehDiaDoComeco = diasContados === 0;
         const ehDiaDoVencimento = diasContados + 1 === diasPrazoEfetivo;
         const parcialProtraido = parcial && (ehDiaDoComeco || ehDiaDoVencimento);
-        const contaComoUtil = analise.diaUtil || (parcial && !parcialProtraido);
+        // Ponto facultativo (STF e STJ): prorroga o início e o fim; no meio, o modo conservador conta o dia (data mais cedo) e a alternativa não conta
+        const pontoFacultativoMeio = analise.motivoNaoUtil === 'ponto_facultativo' && !incluirPendentes && !ehDiaDoComeco && !ehDiaDoVencimento;
+        const contaComoUtil = analise.diaUtil || (parcial && !parcialProtraido) || pontoFacultativoMeio;
 
         if (contaComoUtil) {
           diasContados++;
@@ -424,12 +440,14 @@ export class MotorPrazoZero {
             descricao: (ehUltimo
               ? `Termo Ad Quem alcançado (${diasContados}º dia útil)`
               : `${diasContados}º dia útil computado no prazo`) +
-              (parcial ? ` — expediente parcial: ${analise.detalheFeriado!.nome}` : ''),
-            fundamentoLegal: parcial
+              (parcial ? ` — expediente parcial: ${analise.detalheFeriado!.nome}` : '') +
+              (pontoFacultativoMeio ? ` — ponto facultativo contado no meio do prazo: ${analise.detalheFeriado!.nome}` : ''),
+            fundamentoLegal: parcial || pontoFacultativoMeio
               ? analise.detalheFeriado!.fundamentoLegal
               : regime === 'cpc_dias_uteis' ? 'CPC, art. 219' : regime === 'clt_dias_uteis' ? 'CLT, art. 775' : 'Lei 9.099/1995, art. 12-A',
             diaContadoNumero: diasContados,
-            ...(parcial ? { verificacao } : {})
+            ...(parcial || pontoFacultativoMeio ? { verificacao } : {}),
+            ...(pontoFacultativoMeio ? { pontoFacultativoContado: true } : {})
           });
           if (ehUltimo) {
             dataFinalVencimento = dataIso;

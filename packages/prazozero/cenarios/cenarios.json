@@ -1959,7 +1959,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-08-10",
-            "motivo": "Ponto facultativo (ato do tribunal)"
+            "motivo": "Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo"
           },
           {
             "data": "2026-08-11",
@@ -1978,7 +1978,7 @@
   {
     "id": "stj-corpus-christi-2026",
     "categoria": "verificado",
-    "descricao": "STJ: Corpus Christi e 05/06 sem expediente em 2026",
+    "descricao": "STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta",
     "fundamento": "Portaria STJ/GDG 1.010/2025, art. 1º, VIII e IX",
     "entrada": {
       "dataEvento": "2026-06-02",
@@ -1989,7 +1989,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-11",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -1997,29 +1997,20 @@
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": [
-          {
-            "data": "2026-06-04",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          },
-          {
-            "data": "2026-06-05",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          }
-        ]
+        "diasNaoUteis": []
       }
     },
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "em": "2026-10-19"
     },
-    "alternativaEsperada": null
+    "alternativaEsperada": "2026-06-11"
   },
   {
     "id": "stf-corpus-christi-2026",
     "categoria": "verificado",
-    "descricao": "STF: Corpus Christi e 05/06 sem expediente em 2026",
+    "descricao": "STF: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta",
     "fundamento": "Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)",
     "entrada": {
       "dataEvento": "2026-06-02",
@@ -2030,7 +2021,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-11",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -2038,24 +2029,15 @@
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": [
-          {
-            "data": "2026-06-04",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          },
-          {
-            "data": "2026-06-05",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          }
-        ]
+        "diasNaoUteis": []
       }
     },
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "em": "2026-10-19"
     },
-    "alternativaEsperada": null
+    "alternativaEsperada": "2026-06-11"
   },
   {
     "id": "stj-cinzas-comeco-2026",
@@ -2127,7 +2109,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-10-30",
-            "motivo": "Ponto facultativo (ato do tribunal)"
+            "motivo": "Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo"
           },
           {
             "data": "2026-11-02",
@@ -2178,7 +2160,7 @@
   {
     "id": "stj-ferias-julho-8d",
     "categoria": "verificado",
-    "descricao": "STJ: após as férias de julho, 10/08 (PF) e 11/08 não contam",
+    "descricao": "STJ: após as férias de julho, 10/08 (ponto facultativo no meio do prazo) conta no modo conservador e 11/08 não conta; a alternativa não conta o 10/08",
     "fundamento": "LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
     "entrada": {
       "dataEvento": "2026-06-30",
@@ -2189,7 +2171,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-30",
       "dataTermoInicial": "2026-07-01",
-      "dataVencimentoFinal": "2026-08-13",
+      "dataVencimentoFinal": "2026-08-12",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -2198,10 +2180,6 @@
         "suspensaoDe": "2026-07-02",
         "suspensaoAte": "2026-07-31",
         "diasNaoUteis": [
-          {
-            "data": "2026-08-10",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          },
           {
             "data": "2026-08-11",
             "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
@@ -2212,9 +2190,9 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "em": "2026-10-19"
     },
-    "alternativaEsperada": null
+    "alternativaEsperada": "2026-08-13"
   },
   {
     "id": "stf-ferias-julho-5d",
@@ -3166,7 +3144,7 @@
   {
     "id": "stj-dobro-ferias-julho",
     "categoria": "dobro",
-    "descricao": "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho e por 10 e 11/08",
+    "descricao": "STJ: prazo em dobro (30 úteis) interrompido pelas férias de julho; 10/08 (ponto facultativo no meio do prazo) conta no conservador e 11/08 não conta",
     "fundamento": "CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025",
     "entrada": {
       "dataEvento": "2026-06-26",
@@ -3178,7 +3156,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-26",
       "dataTermoInicial": "2026-06-29",
-      "dataVencimentoFinal": "2026-09-11",
+      "dataVencimentoFinal": "2026-09-10",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -3187,10 +3165,6 @@
         "suspensaoDe": "2026-07-02",
         "suspensaoAte": "2026-07-31",
         "diasNaoUteis": [
-          {
-            "data": "2026-08-10",
-            "motivo": "Ponto facultativo (ato do tribunal)"
-          },
           {
             "data": "2026-08-11",
             "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
@@ -3205,9 +3179,9 @@
     "validacao": {
       "status": "validado",
       "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "em": "2026-10-19"
     },
-    "alternativaEsperada": null
+    "alternativaEsperada": "2026-09-11"
   },
   {
     "id": "stf-dje-ferias-janeiro",
@@ -3421,7 +3395,7 @@
         "diasNaoUteis": [
           {
             "data": "2026-12-07",
-            "motivo": "Ponto facultativo (ato do tribunal)"
+            "motivo": "Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo"
           },
           {
             "data": "2026-12-08",
