@@ -50,13 +50,18 @@ export function relatorioAlteracoes(p: ParametrosCalculoPrazo, r: ResultadoCalcu
 
   // 1. Dias do calendário ainda não conferidos (os mesmos da data alternativa)
   if (r.alternativa) {
+    const soPontoFacultativo = r.alternativa.eventosPendentes.every(e => e.pontoFacultativo);
     itens.push({
       id: 'dias-pendentes',
       categoria: 'dia_pendente',
-      titulo: 'Dias sem expediente ainda não conferidos no ato do tribunal',
+      titulo: soPontoFacultativo
+        ? 'Ponto facultativo contado como dia útil no meio do prazo'
+        : 'Dias sem expediente ainda não conferidos no ato do tribunal',
       descricao:
         r.alternativa.eventosPendentes.map(e => `${e.data.split('-').reverse().join('/')} (${e.nome})`).join('; ') +
-        '. Se o tribunal confirmar algum deles como dia sem expediente, o vencimento se move.',
+        (soPontoFacultativo
+          ? '. O ato prorroga os prazos que começam ou terminam nesse dia, mas no meio do prazo o cálculo o conta (data mais cedo). Se o tribunal o tratar como dia sem expediente, o vencimento se move.'
+          : '. Se o tribunal confirmar algum deles como dia sem expediente (ou tratar o ponto facultativo como tal), o vencimento se move.'),
       fundamentoLegal: 'CPC, art. 219 e art. 224, § 1º; ato do tribunal',
       dataSeAplicar: r.alternativa.dataVencimentoFinal
     });

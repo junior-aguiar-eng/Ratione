@@ -176,7 +176,7 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 
 def calendario(ano: int, trib: str, uf: str, completo: bool):
     """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
-    nao_util, parcial, nomes = set(), set(), {}
+    nao_util, parcial, nomes, facultativo = set(), set(), {}, set()
     # Calendário do ano lido por inteiro: o ato é a lista completa e a tabela provisória de dias pendentes não vale (espelha feriados.ts)
     coberto = ano in ANOS_VERIFICADOS.get(trib, set())
 
@@ -217,7 +217,12 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
                 parcial.add(d)
                 nomes[d] = "Quarta-feira de Cinzas (ponto facultativo até as 14h)"
             else:
-                nao_util.add(d)
+                # Ponto facultativo do STF/STJ (decisão do revisor, 19/10/2026): prorroga o início e o fim; no meio do prazo o modo
+                # conservador o conta como dia útil e o completo (a alternativa) não o conta.
+                if completo:
+                    nao_util.add(d)
+                else:
+                    facultativo.add(d)
                 nomes[d] = "Ponto facultativo (ato do tribunal)"
     def ev(d, verificado, nome):
         """Evento de tribunal: o pendente só entra no modo completo e nunca apaga um dia já conferido."""
@@ -411,7 +416,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
         if d not in nao_util and d not in parcial:
             nao_util.add(d)
             nomes[d] = nome + " (estadual, pendente)"
-    return nao_util, parcial, nomes
+    return nao_util, parcial, nomes, facultativo
 
 
 class Ctx:
@@ -439,8 +444,8 @@ class Ctx:
             return False
         if self.recesso and self.em_suspensao(d):
             return False
-        nu, pa, _ = self.cal(d.year)
-        return d not in nu and d not in pa
+        nu, pa, _, fac = self.cal(d.year)
+        return d not in nu and d not in pa and d not in fac
 
     def proximo_util(self, d):
         d += timedelta(1)
@@ -484,7 +489,7 @@ def calcular(e: dict, completo: bool) -> dict:
             contados += 1
         if not ctx.util(fim):
             prorrogado = True
-            _, _, nomes_fim = ctx.cal(fim.year)
+            _, _, nomes_fim, _ = ctx.cal(fim.year)
             rastro["diasNaoUteis"].append({"data": fim.isoformat(), "motivo": "vencimento em dia não útil (" + ("fim de semana" if ctx.fim_de_semana(fim) else nomes_fim.get(fim, "sem expediente")) + "), prorrogado (CPP, art. 798, § 3º)"})
             fim = ctx.proximo_util(fim)
     else:
@@ -497,7 +502,10 @@ def calcular(e: dict, completo: bool) -> dict:
             if recesso and ctx.em_suspensao(d):
                 marca_suspensao(d)
                 continue
-            nu, pa, nomes_ano = ctx.cal(d.year)
+            nu, pa, nomes_ano, fac = ctx.cal(d.year)
+            if d in fac and (contados == 0 or contados + 1 == efetivo):
+                rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "ponto facultativo") + ": prorroga o início ou o fim do prazo"})
+                continue
             if d in nu:
                 rastro["diasNaoUteis"].append({"data": d.isoformat(), "motivo": nomes_ano.get(d, "sem expediente")})
                 continue

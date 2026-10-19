@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **314** · validados: **314** · pendentes: **0**
+> Cenários: **314** · validados: **310** · pendentes: **4**
 
 ## Como revisar
 
@@ -426,11 +426,12 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Entrada:** publicação em **26/06/2026 (sexta-feira)** · prazo de **15 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador · prazo em dobro
 - **Publicação / dia do começo:** 26/06/2026 (sexta-feira) · **início da contagem:** 29/06/2026 (segunda-feira)
-- **Vencimento esperado:** **11/09/2026 (sexta-feira)**
-- **Como foi contado (dias excluídos):** 22 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 10/08/2026 Ponto facultativo (ato do tribunal); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV); 07/09/2026 Independência
+- **Vencimento esperado:** **10/09/2026 (quinta-feira)**
+- **Alternativa (se os dias pendentes forem confirmados):** 11/09/2026 (sexta-feira)
+- **Como foi contado (dias excluídos):** 22 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV); 07/09/2026 Independência
 - **Fundamento:** CPC, arts. 183 e 219; LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ### 33. `dobro-embargos-feriado`
 
@@ -1610,7 +1611,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **07/08/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 07/08/2026 (sexta-feira) · **início da contagem:** 12/08/2026 (quarta-feira)
 - **Vencimento esperado:** **14/08/2026 (sexta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Ponto facultativo (ato do tribunal); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV)
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo; 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV)
 - **Fundamento:** Portaria STJ/GDG 1.010/2025, art. 1º, X e XI
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
@@ -1621,11 +1622,12 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
-- **Vencimento esperado:** **11/06/2026 (quinta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Ponto facultativo (ato do tribunal); 05/06/2026 Ponto facultativo (ato do tribunal)
+- **Vencimento esperado:** **09/06/2026 (terça-feira)**
+- **Alternativa (se os dias pendentes forem confirmados):** 11/06/2026 (quinta-feira)
+- **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Portaria STJ/GDG 1.010/2025, art. 1º, VIII e IX
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ### 127. `stf-corpus-christi-2026`
 
@@ -1633,11 +1635,12 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Entrada:** publicação em **02/06/2026 (terça-feira)** · prazo de **5 dias** (CPC, dias úteis) · tribunal **STF** · modo conservador
 - **Publicação / dia do começo:** 02/06/2026 (terça-feira) · **início da contagem:** 03/06/2026 (quarta-feira)
-- **Vencimento esperado:** **11/06/2026 (quinta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Ponto facultativo (ato do tribunal); 05/06/2026 Ponto facultativo (ato do tribunal)
+- **Vencimento esperado:** **09/06/2026 (terça-feira)**
+- **Alternativa (se os dias pendentes forem confirmados):** 11/06/2026 (quinta-feira)
+- **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ### 128. `stj-cinzas-comeco-2026`
 
@@ -1658,7 +1661,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **28/10/2026 (quarta-feira)** · prazo de **2 dias** (CPC, dias úteis) · tribunal **STF** · modo conservador
 - **Publicação / dia do começo:** 28/10/2026 (quarta-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
 - **Vencimento esperado:** **03/11/2026 (terça-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Ponto facultativo (ato do tribunal); 02/11/2026 Finados
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo; 02/11/2026 Finados
 - **Fundamento:** Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
@@ -1681,11 +1684,12 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 - **Entrada:** publicação em **30/06/2026 (terça-feira)** · prazo de **8 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 30/06/2026 (terça-feira) · **início da contagem:** 01/07/2026 (quarta-feira)
-- **Vencimento esperado:** **13/08/2026 (quinta-feira)**
-- **Como foi contado (dias excluídos):** 12 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 10/08/2026 Ponto facultativo (ato do tribunal); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV)
+- **Vencimento esperado:** **12/08/2026 (quarta-feira)**
+- **Alternativa (se os dias pendentes forem confirmados):** 13/08/2026 (quinta-feira)
+- **Como foi contado (dias excluídos):** 12 sábados/domingos; suspensão de 22 dias (02/07/2026 a 31/07/2026); 11/08/2026 11 de agosto (Lei 5.010, art. 62, IV)
 - **Fundamento:** LC 35/1979, art. 66, § 1º; Portaria STJ/GDG 1.010/2025
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
 ### 132. `stf-ferias-julho-5d`
 
@@ -1790,7 +1794,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Entrada:** publicação em **04/12/2026 (sexta-feira)** · prazo de **3 dias** (CPC, dias úteis) · tribunal **STJ** · modo conservador
 - **Publicação / dia do começo:** 04/12/2026 (sexta-feira) · **início da contagem:** 09/12/2026 (quarta-feira)
 - **Vencimento esperado:** **11/12/2026 (sexta-feira)**
-- **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 Ponto facultativo (ato do tribunal); 08/12/2026 Dia da Justiça (Lei 5.010, art. 62, IV)
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo; 08/12/2026 Dia da Justiça (Lei 5.010, art. 62, IV)
 - **Fundamento:** Portaria STJ/GDG 1.010/2025, art. 1º, XVII e XVIII
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07

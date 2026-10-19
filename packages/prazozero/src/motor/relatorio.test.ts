@@ -42,15 +42,28 @@ describe('Relatório "o que pode alterar este prazo" (F2-12)', () => {
     assert.ok(i.dataSeAplicar! > res.dataVencimentoFinal);
   });
 
-  it('STJ: o ponto facultativo é contado como dia sem expediente, com alerta ao usuário', () => {
-    // 20/04/2026 é ponto facultativo nos atos de STF e STJ: o cálculo o pula e o relatório avisa
-    const p: ParametrosCalculoPrazo = { dataEvento: '2026-04-16', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'STJ' };
+  it('STJ: ponto facultativo no INÍCIO do prazo é pulado (prorroga), com alerta ao usuário', () => {
+    // 20/04/2026 é ponto facultativo nos atos de STF e STJ; publicação na sexta 17/04: o primeiro dia de contagem seria o ponto facultativo
+    const p: ParametrosCalculoPrazo = { dataEvento: '2026-04-17', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'STJ' };
     const res = motor.calcularPrazo(p);
     assert.ok(res.memoriaCalculo.some(i => i.data === '2026-04-20' && !i.diaUtil), '20/04 não deve contar');
     const i = item(relatorioAlteracoes(p, res), 'ponto-facultativo')!;
     assert.ok(i, 'deve haver o alerta de ponto facultativo');
     assert.match(i.descricao, /20\/04/);
     assert.strictEqual(i.dataSeAplicar, undefined);
+  });
+
+  it('STJ: ponto facultativo no MEIO do prazo é contado (data mais cedo) e a alternativa não o conta (decisão de 19/10/2026)', () => {
+    const p: ParametrosCalculoPrazo = { dataEvento: '2026-04-16', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'STJ' };
+    const res = motor.calcularPrazo(p);
+    assert.ok(res.memoriaCalculo.some(i => i.data === '2026-04-20' && i.diaUtil && i.pontoFacultativoContado), '20/04 conta no meio do prazo');
+    assert.strictEqual(res.dataVencimentoFinal, '2026-04-22');
+    assert.strictEqual(res.alternativa?.dataVencimentoFinal, '2026-04-23');
+    const i = item(relatorioAlteracoes(p, res), 'dias-pendentes')!;
+    assert.ok(i, 'deve haver o item da data alternativa');
+    assert.match(i.titulo, /Ponto facultativo/);
+    assert.match(i.descricao, /20\/04/);
+    assert.strictEqual(i.dataSeAplicar, '2026-04-23');
   });
 
   it('sem ponto facultativo no caminho do prazo, não há alerta de ponto facultativo', () => {
