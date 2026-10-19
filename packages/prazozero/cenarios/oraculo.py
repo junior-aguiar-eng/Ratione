@@ -117,7 +117,7 @@ TJAC_2026_NU = ["01-22", "01-23", "02-16", "02-17", "02-18", "04-02", "04-03", "
 #  TJRN: Portaria Conjunta 02/2026, art. 1º: contam 16 a 18/02, 01 a 03/04 (LC estadual 643/2018, art. 97, § 3º), 10/08, 30/10 e 07/12; alertam 04/06 (ponto facultativo), 20/04 e 05/06 (Decreto estadual não lido) e 29/06 (sem fundamento); fora: federais, municipais, 24 e 31/12 e recesso.
 TJRN_2026_NU = ["02-16", "02-17", "02-18", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "06-29", "08-10", "10-30", "12-07"]
 #  TJPB: calendário 2026 do tribunal (sem ato lido): contam 03/04, 05/08, 11/08 e 08/12; pontos facultativos e compensados só alertam; Cinzas e Dia do Servidor (vermelhos sem rótulo) contam por decisão do responsável; 11/02 e 01/04 com expediente até 13h.
-TJPB_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-05", "08-10", "08-11", "10-28", "12-07", "12-08"]
+TJPB_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-22", "06-23", "06-24", "08-05", "08-10", "08-11", "10-30", "12-07", "12-08"]
 TJPB_2026_PARCIAL = ["02-11", "04-01"]
 #  TJRO: Ato 2579/2025 compilado, arts. 1º e 5º (sem expediente e prazos prorrogados nos feriados e pontos facultativos); Dia do Advogado em 10/08, Dia do Servidor em 30/10 e Dia da Justiça em 07/12; fora: federais, municipais, 02/01 e 24 e 31/12 (recesso).
 TJRO_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "07-20", "08-10", "10-30", "12-07"]
@@ -1084,7 +1084,7 @@ add("tjro-2026-dia-servidor-transferido", "verificado", "TJRO 2026: o Dia do Ser
 add("tjro-2026-dia-da-justica-transferido", "verificado", "TJRO 2026: o Dia da Justiça foi transferido para 07/12: 07/12 não conta e 08/12 conta (municipal só em duas comarcas)", TJRO,
     entrada("2026-12-04", "publicacao", 3, "TJRO"))
 # TJPB 2026: calendário do tribunal (lido em 14/10/2026; nenhuma portaria lida). Nascem pendentes de validação do revisor.
-TJPB = "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026); CPC, arts. 219 e 224"
+TJPB = "Calendário 2026 do TJPB, sem ato normativo lido (lido em 14/10/2026), e Ato Conjunto 9/2026 (transferência do Dia do Servidor para 30/10; texto não lido, decisão do revisor em 19/10/2026); CPC, arts. 219 e 224"
 add("tjpb-2026-carnaval-meio-expediente", "verificado", "TJPB 2026: 11/02 tem expediente só das 7h às 13h (festejos de Carnaval) e protrai o vencimento", TJPB,
     entrada("2026-02-09", "publicacao", 2, "TJPB"))
 add("tjpb-2026-carnaval", "pendente", "TJPB 2026: 16 e 17/02 (Carnaval, ponto facultativo) só alertam e 18/02 (Cinzas, sem rótulo de ponto facultativo) não conta", TJPB,
@@ -1101,7 +1101,7 @@ add("tjpb-2026-data-magna", "verificado", "TJPB 2026: 05/08 (Data Magna da Para�
     entrada("2026-08-04", "publicacao", 2, "TJPB"))
 add("tjpb-2026-dia-do-advogado", "pendente", "TJPB 2026: 10/08 (ponto facultativo compensado) só alerta e 11/08 (Cursos Jurídicos) não conta", TJPB,
     entrada("2026-08-07", "publicacao", 3, "TJPB"))
-add("tjpb-2026-dia-servidor", "verificado", "TJPB 2026: 28/10 (Dia do Servidor, em vermelho sem rótulo de ponto facultativo) não conta", TJPB,
+add("tjpb-2026-dia-servidor", "verificado", "TJPB 2026: 28/10 conta e 30/10 (Dia do Servidor transferido pelo Ato Conjunto 9/2026, texto não lido) não conta", TJPB,
     entrada("2026-10-27", "publicacao", 3, "TJPB"))
 add("tjpb-2026-dia-da-justica", "pendente", "TJPB 2026: 07/12 (ponto facultativo compensado) só alerta e 08/12 (Dia da Justiça) não conta", TJPB,
     entrada("2026-12-04", "publicacao", 3, "TJPB"))
