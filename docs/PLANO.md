@@ -325,7 +325,7 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-12 | Relatório "o que pode alterar este prazo" | feito | `motor/relatorio.ts` e seção recolhível na tela. Mostra, com a data que resultaria: dias ainda não conferidos, prazo em dobro (CPC 180, 183, 186; CLT: DL 779/1969), exceção criminal (CPP 798-A) e indisponibilidade do sistema no último dia (Lei 11.419, art. 10); e, sem data, calendário não conferido, consulta do portal (Lei 11.419, art. 5º), suspensão do prazo (CPC 221 e 313), justa causa (223), prorrogação pelo juiz (222) e feriado local (1.003, § 6º). Textos lidos no compilado em 07/10/2026; 11 testes |
 | F2-17 | Auditoria do que foi feito (07/10/2026) | feito | Achados e correções na seção "Auditoria" de `produto/VERIFICACAO_FONTES.md` (§ 13). Segue aberta a validação jurídica (F2-09) |
 
-**Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada; beta fechado com 10 usuários sem erro de cálculo reportado.
+**Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada. **O beta fechado (10 usuários, sem erro de cálculo reportado) deixou de ser critério desta fase:** por decisão do responsável (19/10/2026), a revisão geral do site e o recrutamento acontecem uma vez, com o produto concluído, não a cada etapa.
 
 ### F3 — NormaViva (~8 a 10 semanas)
 
@@ -390,8 +390,9 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **Beta fechado** do PrazoZero (critério da fase F2): 10 usuários, sem erro de cálculo reportado.
-2. **Revisão de fim de 2026**, quando os calendários de 2027 saírem: F2-02 (STF e STJ), F2-05 (feriados estaduais restantes) e F2-18 (selos que dependem de atos não lidos, com os atos posteriores). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
+1. **F3 (NormaViva)**: a F2 está fechada no que depende de nós; o que resta (F2-02, F2-05, F2-18) espera os atos de 2027.
+2. **Revisão geral do site e beta fechado** (10 usuários, sem erro de cálculo reportado): uma só vez, com o produto concluído (decisão de 19/10/2026).
+3. **Revisão de fim de 2026**, quando os calendários de 2027 saírem: F2-02 (STF e STJ), F2-05 (feriados estaduais restantes) e F2-18 (selos que dependem de atos não lidos, com os atos posteriores). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
 
 ---
 
@@ -405,7 +406,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 | Mudança de layout do Planalto | Média / Médio | Parser com testes, alerta de diff, fila de revisão |
 | Vazamento de documentos (Argumenta) | Baixa / Muito alto | Criptografia, RLS, retenção curta, RIPD; só depois das fases anteriores |
 | Custo de IA fora de controle | Média / Médio | Limites por plano, cache, medição por análise |
-| Escopo excessivo para uma pessoa | Alta / Alto | Beta só com PrazoZero; módulos entram por fase; regra 1 do §1 |
+| Escopo excessivo para uma pessoa | Alta / Alto | Beta único no fim, com o produto concluído (antes: só com PrazoZero); módulos entram por fase; regra 1 do §1 |
 | Concorrentes estabelecidos | Média / Médio | Diferencial: memória de cálculo auditável e módulos conectados; validar com entrevistas |
 
 ---
