@@ -234,6 +234,18 @@ Achados: (1) **a Lei 11.340/2006 é servida em UTF-16 com BOM**, sem charset út
 
 **Fica para depois:** a rotina diária que compara o SHA-256 e gera alerta de mudança (F3-06).
 
+## 17. Parser LC 95/98 sobre o corpus do Planalto (F3-02), 19/10/2026
+
+Código em `packages/normaviva/src/parser/` (`html.ts`: HTML → parágrafos; `dispositivos.ts`: parágrafos → árvore de artigo, parágrafo, inciso, alínea e item; `verificar.ts`: métricas). `pnpm parsear` (a partir de `packages/normaviva`) roda nas 28 normas e grava `corpus/parser-resumo.json`; a saída completa de dispositivos **não é versionada**, sai do corpus por este código, de forma determinística.
+
+**Regras:** só entra texto não tachado (o tachado é redação sem vigência); as anotações entre parênteses ("Redação dada…", "Incluído…", "Revogado…", "Vide…", "Vigência…") saem do texto e ficam em `anotacoes`, na ordem, para a F3-03; dispositivo revogado com o texto todo tachado mantém o rótulo (senão o artigo some); faixas ("Arts. 52 a 58 (Revogados…)") e artigos revogados colados no mesmo parágrafo viram um dispositivo revogado por artigo; texto entre aspas “…” é a redação que a lei dá a **outra** norma e fica na continuação do artigo que a traz; o ADCT e os anexos têm escopo próprio; linha sem rótulo é preservada em `continuacao` ou `preambulo` e rótulo repetido ou numeração reiniciada vai para as anomalias. Nada é adivinhado.
+
+**Resultado nas 28 normas:** 29.447 dispositivos (8.824 artigos, 9.631 parágrafos, 9.072 incisos, 1.895 alíneas, 25 itens), 725 revogados e 10.704 com alguma anotação.
+
+**Conferência de sequência dos artigos** (as âncoras `<a name>` do Planalto não servem: variam entre as leis e as do CC são numeradas errado): **CPC 1.072, CC 2.046, CP 361, CLT 922, CDC 119, Lei 14.133 194 e CF 250** artigos, sem lacuna; as demais leis também fecham o último número (Leis 8.069, 9.503, 7.210, 11.101, 11.343, entre outras). **Resíduos conhecidos, não resolvidos:** CPP (artigos 194, 557, 558, 559 e 611 não aparecem no HTML compilado como "Art. N"); Lei 8.112 (o HTML repete, depois do art. 253, um bloco que recomeça no art. 192; faltam os artigos 23, 26 e 232 na primeira passagem); CLT (uma quebra de sequência 2→1). **145 anomalias** no total, listadas por norma em `parser-resumo.json` (rótulo repetido e "linha parecida com dispositivo, mas fora da LC 95", concentradas nas Leis 8.112, 8.213, 11.419 e 12.965); servem de fila de revisão para a F3-03.
+
+**Achados do HTML:** o Planalto escreve `º` como `<sup>o</sup>` ("§ 2 o"), parte o número do artigo em dois `<span>` ("Art. 5" + "7." na LGPD), tem erro de digitação ("Art. . 154" na CLT) e cola vários artigos revogados num só parágrafo (CP).
+
 ## 15. Como repetir esta verificação
 
 ```bash
