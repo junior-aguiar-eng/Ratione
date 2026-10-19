@@ -21,7 +21,8 @@
     "parsear": "tsx src/parser/verificar.ts",
     "versoes": "tsx src/versoes/verificar.ts",
     "relacoes": "tsx src/busca/verificar.ts",
-    "atualizar": "tsx src/atualizacao/atualizar.ts"
+    "atualizar": "tsx src/atualizacao/atualizar.ts",
+    "carregar": "tsx src/busca/carregar-supabase.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
@@ -32,6 +33,7 @@
     "tsx": "^4.19.3",
     "typescript": "^7.0.2",
     "@electric-sql/pglite": "^0.5.8",
-    "@ratione/db": "workspace:*"
+    "@ratione/db": "workspace:*",
+    "@supabase/supabase-js": "^2.117.3"
   }
 }
