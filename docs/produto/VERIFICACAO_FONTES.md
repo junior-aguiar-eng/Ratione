@@ -270,6 +270,14 @@ Migração `supabase/migrations/20261019000001_normaviva.sql` (**ainda não apli
 
 **Fica para depois:** aplicar a migração e carregar o corpus no Supabase real (a carga exige a chave de serviço e um executor SQL de produção; o código aceita qualquer `ExecutorSql`), relações de tipo `regulamenta`/`excepciona`, e a interface.
 
+## 20. Atualização do corpus e fila de revisão (F3-06), 19/10/2026
+
+Código em `packages/normaviva/src/atualizacao/` (`pnpm atualizar`, a partir de `packages/normaviva`). Relê as 28 normas no Planalto, compara com o corpus e põe em `corpus/fila-revisao.json` a mudança de **texto de lei**; a nova leitura espera em `corpus/pendentes/`. `pnpm atualizar aprovar ID` aceita (substitui o HTML do corpus e o manifesto; depois rodar `pnpm conferir && pnpm parsear && pnpm versoes && pnpm relacoes`) e `pnpm atualizar rejeitar ID` descarta. **Nada muda no corpus sem aprovação.** Código de saída 2 quando entra item novo na fila (para o agendador alertar), 1 em erro de execução; falha de rede numa norma aparece como `erro` e não derruba as outras.
+
+**Achado que mudou o desenho:** o SHA-256 dos bytes **não serve sozinho** para detectar mudança. Na primeira execução real, **27 das 28 páginas já diferiam em bytes poucas horas depois da coleta, com o texto idêntico** (parte volátil da página do Planalto). Por isso a decisão é pelo diff dos dispositivos (`comparar.ts`: dispositivo novo, removido, com texto, continuação ou anotação alterados, ou que passou a revogado); mudança só de página vira `so_pagina` no relatório e o corpus não é tocado. O SHA-256 continua no manifesto como registro de integridade da leitura. **Limite:** mudança fora dos dispositivos (preâmbulo, cabeçalhos de livro e capítulo) não é detectada.
+
+**Alerta em menos de 24 horas** (critério da fase F3): o código está pronto, mas **falta o agendador diário** e o canal do alerta (e-mail ou issue). Não foi criado: é configuração permanente que depende de decisão do responsável. A fila fica no repositório (`fila-revisao.json`), não no banco; mudar para tabela é trivial se o agendador rodar fora do repositório. Feeds da Câmara, do Senado e do LexML (previstos no PLANO) não entram nesta versão.
+
 ## 15. Como repetir esta verificação
 
 ```bash
