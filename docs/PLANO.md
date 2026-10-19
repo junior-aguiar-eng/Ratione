@@ -325,14 +325,14 @@ Prazos são hipóteses para **uma pessoa com assistência de IA** e devem ser re
 | F2-12 | Relatório "o que pode alterar este prazo" | feito | `motor/relatorio.ts` e seção recolhível na tela. Mostra, com a data que resultaria: dias ainda não conferidos, prazo em dobro (CPC 180, 183, 186; CLT: DL 779/1969), exceção criminal (CPP 798-A) e indisponibilidade do sistema no último dia (Lei 11.419, art. 10); e, sem data, calendário não conferido, consulta do portal (Lei 11.419, art. 5º), suspensão do prazo (CPC 221 e 313), justa causa (223), prorrogação pelo juiz (222) e feriado local (1.003, § 6º). Textos lidos no compilado em 07/10/2026; 11 testes |
 | F2-17 | Auditoria do que foi feito (07/10/2026) | feito | Achados e correções na seção "Auditoria" de `produto/VERIFICACAO_FONTES.md` (§ 13). Segue aberta a validação jurídica (F2-09) |
 
-**Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada; beta fechado com 10 usuários sem erro de cálculo reportado.
+**Pronto quando (fase):** 100 cenários verdes e validados; cada data de calendário com fonte e data de verificação; revisão jurídica registrada. **O beta fechado (10 usuários, sem erro de cálculo reportado) deixou de ser critério desta fase:** por decisão do responsável (19/10/2026), a revisão geral do site e o recrutamento acontecem uma vez, com o produto concluído, não a cada etapa.
 
 ### F3 — NormaViva (~8 a 10 semanas)
 
 | ID | Item | Estado |
 |---|---|---|
-| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | não iniciado |
-| F3-02 | Parser LC 95/98 (artigo, parágrafo, inciso, alínea) | não iniciado |
+| F3-01 | Coleta do Planalto (CF, CC, CPC, CP, CPP, CLT, CDC + ~20 leis de maior uso) e importação do Legalize-BR | parcial | **Planalto feito (19/10/2026):** 28 normas coletadas pelo coletor de `packages/normaviva/src/coleta/` (HTML original em gzip + manifesto com URL, charset e SHA-256), 19 em versão compilada e 9 só na página anotada (vale o não tachado); a Lei 11.340 vem em UTF-16 com BOM e o coletor trata. Registro em `VERIFICACAO_FONTES.md` §16. **Legalize-BR dispensado (19/10/2026):** só metadados e ementa, sem o texto (arquivos de 0,5 a 6 KB). **Conferência cruzada feita com a API do Senado** (`pnpm conferir`): dos 876 atos alteradores que o Planalto anota, 796 coincidem com os 1.032 do Senado; 80 só no Planalto e 236 só no Senado, listados em `corpus/conferencia-senado.json` para a F3-03. Nada corrigido no corpus |
+| F3-02 | Parser LC 95/98 (artigo, parágrafo, inciso, alínea) | feito (com resíduos) | **Feito (19/10/2026):** `packages/normaviva/src/parser/`, `pnpm parsear`. 29.447 dispositivos nas 28 normas, com anotações de alteração separadas do texto e rótulo preservado em revogados; CPC, CC, CP, CLT, CDC, Lei 14.133 e CF sem lacuna de artigo. **Resíduos:** CPP (5 artigos ausentes do HTML), Lei 8.112 (bloco repetido após o art. 253) e 145 anomalias listadas em `corpus/parser-resumo.json` para a F3-03. Registro em `VERIFICACAO_FONTES.md` §17 |
 | F3-03 | Versões a partir das anotações "Redação dada/Incluído/Revogado" (modelo bitemporal) | não iniciado |
 | F3-04 | Consulta temporal, diff visual e linha do tempo | não iniciado |
 | F3-05 | Relações normativas e busca textual (Postgres FTS) | não iniciado |
@@ -390,8 +390,9 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### Próximos passos, em ordem
 
-1. **Beta fechado** do PrazoZero (critério da fase F2): 10 usuários, sem erro de cálculo reportado.
-2. **Revisão de fim de 2026**, quando os calendários de 2027 saírem: F2-02 (STF e STJ), F2-05 (feriados estaduais restantes) e F2-18 (selos que dependem de atos não lidos, com os atos posteriores). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
+1. **F3 (NormaViva)**: a F2 está fechada no que depende de nós; o que resta (F2-02, F2-05, F2-18) espera os atos de 2027.
+2. **Revisão geral do site e beta fechado** (10 usuários, sem erro de cálculo reportado): uma só vez, com o produto concluído (decisão de 19/10/2026).
+3. **Revisão de fim de 2026**, quando os calendários de 2027 saírem: F2-02 (STF e STJ), F2-05 (feriados estaduais restantes) e F2-18 (selos que dependem de atos não lidos, com os atos posteriores). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
 
 ---
 
@@ -405,7 +406,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 | Mudança de layout do Planalto | Média / Médio | Parser com testes, alerta de diff, fila de revisão |
 | Vazamento de documentos (Argumenta) | Baixa / Muito alto | Criptografia, RLS, retenção curta, RIPD; só depois das fases anteriores |
 | Custo de IA fora de controle | Média / Médio | Limites por plano, cache, medição por análise |
-| Escopo excessivo para uma pessoa | Alta / Alto | Beta só com PrazoZero; módulos entram por fase; regra 1 do §1 |
+| Escopo excessivo para uma pessoa | Alta / Alto | Beta único no fim, com o produto concluído (antes: só com PrazoZero); módulos entram por fase; regra 1 do §1 |
 | Concorrentes estabelecidos | Média / Médio | Diferencial: memória de cálculo auditável e módulos conectados; validar com entrevistas |
 
 ---

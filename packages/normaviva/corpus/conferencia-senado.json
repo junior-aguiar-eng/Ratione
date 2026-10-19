@@ -1,0 +1,963 @@
+{
+  "geradoEm": "2026-10-19",
+  "normas": [
+    {
+      "id": "CF-1988",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/urn?urn=urn:lex:br:federal:constituicao:1988-10-05;1988",
+      "senadoNorma": "Constituição da República Federativa do Brasil",
+      "atosNoPlanalto": 135,
+      "atosNoSenado": 126,
+      "emAmbos": 114,
+      "soNoPlanalto": [
+        "emenda-constitucional:10:1996",
+        "emenda-constitucional:110:2021",
+        "emenda-constitucional:129:2023",
+        "emenda-constitucional:12:1996",
+        "emenda-constitucional:1:1994",
+        "emenda-constitucional:21:1999",
+        "emenda-constitucional:27:2000",
+        "emenda-constitucional:31:2000",
+        "emenda-constitucional:38:2002",
+        "emenda-constitucional:43:2004",
+        "emenda-constitucional:56:2007",
+        "emenda-constitucional:57:2008",
+        "emenda-constitucional:60:2009",
+        "emenda-constitucional:68:2011",
+        "emenda-constitucional:73:2013",
+        "emenda-constitucional:78:2014",
+        "emenda-constitucional:83:2014",
+        "emenda-constitucional:89:2015",
+        "emenda-constitucional:93:2016",
+        "emenda-constitucional:95:2016",
+        "emenda-constitucional:99:2017"
+      ],
+      "soNoSenado": [
+        "emenda-constitucional:106:2020",
+        "emenda-constitucional:107:2020",
+        "emenda-constitucional:58:2009",
+        "emenda-constitucional:5:1994",
+        "emenda-constitucional:8:1995",
+        "lei-complementar:108:2001",
+        "lei-complementar:109:2001",
+        "lei-complementar:192:2022",
+        "lei-complementar:200:2023",
+        "lei-complementar:214:2025",
+        "lei:9610:1998",
+        "lei:9611:1998"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "emenda-constitucional:106:2020",
+        "emenda-constitucional:107:2020",
+        "emenda-constitucional:58:2009",
+        "emenda-constitucional:5:1994"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "emenda-constitucional:8:1995",
+        "lei-complementar:108:2001",
+        "lei-complementar:109:2001",
+        "lei-complementar:192:2022",
+        "lei-complementar:200:2023",
+        "lei-complementar:214:2025",
+        "lei:9610:1998",
+        "lei:9611:1998"
+      ]
+    },
+    {
+      "id": "DL-2848-1940",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/urn?urn=urn:lex:br:federal:decreto.lei:1940-12-07;2848",
+      "senadoNorma": "Decreto-Lei nº 2.848 de 07/12/1940",
+      "atosNoPlanalto": 92,
+      "atosNoSenado": 115,
+      "emAmbos": 91,
+      "soNoPlanalto": [
+        "lei:9677:1998"
+      ],
+      "soNoSenado": [
+        "decreto-lei:385:1968",
+        "lei:10695:2003",
+        "lei:12650:2012",
+        "lei:13142:2015",
+        "lei:13228:2015",
+        "lei:13330:2016",
+        "lei:13445:2017",
+        "lei:13715:2018",
+        "lei:13771:2018",
+        "lei:1431:1951",
+        "lei:15229:2025",
+        "lei:2505:1955",
+        "lei:4451:1964",
+        "lei:5467:1968",
+        "lei:6016:1973",
+        "lei:6368:1976",
+        "lei:6515:1977",
+        "lei:6895:1980",
+        "lei:7716:1989",
+        "lei:8635:1993",
+        "lei:9268:1996",
+        "lei:9281:1996",
+        "lei:9318:1996",
+        "lei:9459:1997"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:13445:2017",
+        "lei:6515:1977"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto-lei:385:1968",
+        "lei:10695:2003",
+        "lei:12650:2012",
+        "lei:13142:2015",
+        "lei:13228:2015",
+        "lei:13330:2016",
+        "lei:13715:2018",
+        "lei:13771:2018",
+        "lei:1431:1951",
+        "lei:15229:2025",
+        "lei:2505:1955",
+        "lei:4451:1964",
+        "lei:5467:1968",
+        "lei:6016:1973",
+        "lei:6368:1976",
+        "lei:6895:1980",
+        "lei:7716:1989",
+        "lei:8635:1993",
+        "lei:9268:1996",
+        "lei:9281:1996",
+        "lei:9318:1996",
+        "lei:9459:1997"
+      ]
+    },
+    {
+      "id": "DL-3689-1941",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/urn?urn=urn:lex:br:federal:decreto.lei:1941-10-03;3689",
+      "senadoNorma": "Decreto-Lei nº 3.689 de 03/10/1941",
+      "atosNoPlanalto": 48,
+      "atosNoSenado": 66,
+      "emAmbos": 46,
+      "soNoPlanalto": [
+        "lei:11101:2005",
+        "lei:5126:1966"
+      ],
+      "soNoSenado": [
+        "decreto-lei:4769:1942",
+        "decreto-lei:552:1969",
+        "lei:10695:2003",
+        "lei:10792:2003",
+        "lei:11340:2006",
+        "lei:11449:2007",
+        "lei:13285:2016",
+        "lei:1431:1951",
+        "lei:15272:2025",
+        "lei:1720:1952",
+        "lei:1907:1953",
+        "lei:4336:1964",
+        "lei:5349:1967",
+        "lei:5970:1973",
+        "lei:6900:1981",
+        "lei:799:1949",
+        "lei:8701:1993",
+        "lei:8884:1994",
+        "lei:9033:1995",
+        "lei:9113:1995"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:15272:2025",
+        "lei:5970:1973"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto-lei:4769:1942",
+        "decreto-lei:552:1969",
+        "lei:10695:2003",
+        "lei:10792:2003",
+        "lei:11340:2006",
+        "lei:11449:2007",
+        "lei:13285:2016",
+        "lei:1431:1951",
+        "lei:1720:1952",
+        "lei:1907:1953",
+        "lei:4336:1964",
+        "lei:5349:1967",
+        "lei:6900:1981",
+        "lei:799:1949",
+        "lei:8701:1993",
+        "lei:8884:1994",
+        "lei:9033:1995",
+        "lei:9113:1995"
+      ]
+    },
+    {
+      "id": "DL-4657-1942",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/urn?urn=urn:lex:br:federal:decreto.lei:1942-09-04;4657",
+      "senadoNorma": "Decreto-Lei nº 4.657 de 04/09/1942",
+      "atosNoPlanalto": 7,
+      "atosNoSenado": 8,
+      "emAmbos": 7,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "decreto-lei:333:1967"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "decreto-lei:333:1967"
+      ],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "DL-5452-1943",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/urn?urn=urn:lex:br:federal:decreto.lei:1943-05-01;5452",
+      "senadoNorma": "Decreto-Lei nº 5.452 de 01/05/1943",
+      "atosNoPlanalto": 162,
+      "atosNoSenado": 236,
+      "emAmbos": 156,
+      "soNoPlanalto": [
+        "decreto-lei:9398:1946",
+        "lei:13154:2015",
+        "lei:8737:1946",
+        "lei:9528:1998",
+        "lei:9842:1999",
+        "medida-provisoria:2226:2001"
+      ],
+      "soNoSenado": [
+        "decreto-lei:1031:1969",
+        "decreto-lei:5:1966",
+        "decreto-lei:72:1966",
+        "decreto-lei:744:1969",
+        "decreto-lei:75:1966",
+        "decreto-lei:766:1969",
+        "decreto-lei:8079:1945",
+        "decreto-lei:8080:1945",
+        "decreto-lei:8305:1945",
+        "decreto-lei:8740:1946",
+        "decreto-lei:915:1969",
+        "decreto-lei:9168:1946",
+        "decreto-lei:9576:1946",
+        "decreto-lei:9675:1946",
+        "decreto-lei:9852:1946",
+        "decreto:10060:2019",
+        "decreto:10854:2021",
+        "decreto:64125:1969",
+        "lei-complementar:123:2006",
+        "lei-complementar:182:2021",
+        "lei-complementar:75:1993",
+        "lei:13287:2016",
+        "lei:13301:2016",
+        "lei:13985:2020",
+        "lei:13999:2020",
+        "lei:14020:2020",
+        "lei:14042:2020",
+        "lei:14043:2020",
+        "lei:14179:2021",
+        "lei:14348:2022",
+        "lei:14437:2022",
+        "lei:14597:2023",
+        "lei:14755:2023",
+        "lei:14967:2024",
+        "lei:15143:2025",
+        "lei:15371:2026",
+        "lei:1540:1952",
+        "lei:1667:1952",
+        "lei:1723:1952",
+        "lei:2196:1954",
+        "lei:2757:1956",
+        "lei:2800:1956",
+        "lei:2872:1956",
+        "lei:2959:1956",
+        "lei:3022:1956",
+        "lei:3165:1957",
+        "lei:3519:1958",
+        "lei:3807:1960",
+        "lei:3857:1960",
+        "lei:3970:1961",
+        "lei:4072:1962",
+        "lei:4140:1962",
+        "lei:4654:1965",
+        "lei:4668:1965",
+        "lei:5274:1967",
+        "lei:5381:1968",
+        "lei:5431:1968",
+        "lei:5673:1971",
+        "lei:5686:1971",
+        "lei:5801:1972",
+        "lei:5911:1973",
+        "lei:6086:1974",
+        "lei:6128:1974",
+        "lei:6211:1975",
+        "lei:6598:1978",
+        "lei:6986:1982",
+        "lei:7047:1982",
+        "lei:7121:1983",
+        "lei:7189:1984",
+        "lei:7305:1985",
+        "lei:7313:1985",
+        "lei:7351:1985",
+        "lei:7520:1986",
+        "lei:7701:1988",
+        "lei:816:1949",
+        "lei:8260:1991",
+        "lei:8861:1994",
+        "lei:8923:1994",
+        "lei:8949:1994",
+        "lei:9601:1998"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "decreto-lei:72:1966",
+        "lei:13985:2020",
+        "lei:13999:2020",
+        "lei:14179:2021",
+        "lei:15371:2026",
+        "lei:2800:1956",
+        "lei:2959:1956",
+        "lei:3807:1960",
+        "lei:5686:1971",
+        "lei:7520:1986",
+        "lei:7701:1988",
+        "lei:9601:1998"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto-lei:1031:1969",
+        "decreto-lei:5:1966",
+        "decreto-lei:744:1969",
+        "decreto-lei:75:1966",
+        "decreto-lei:766:1969",
+        "decreto-lei:8079:1945",
+        "decreto-lei:8080:1945",
+        "decreto-lei:8305:1945",
+        "decreto-lei:8740:1946",
+        "decreto-lei:915:1969",
+        "decreto-lei:9168:1946",
+        "decreto-lei:9576:1946",
+        "decreto-lei:9675:1946",
+        "decreto-lei:9852:1946",
+        "decreto:10060:2019",
+        "decreto:10854:2021",
+        "decreto:64125:1969",
+        "lei-complementar:123:2006",
+        "lei-complementar:182:2021",
+        "lei-complementar:75:1993",
+        "lei:13287:2016",
+        "lei:13301:2016",
+        "lei:14020:2020",
+        "lei:14042:2020",
+        "lei:14043:2020",
+        "lei:14348:2022",
+        "lei:14437:2022",
+        "lei:14597:2023",
+        "lei:14755:2023",
+        "lei:14967:2024",
+        "lei:15143:2025",
+        "lei:1540:1952",
+        "lei:1667:1952",
+        "lei:1723:1952",
+        "lei:2196:1954",
+        "lei:2757:1956",
+        "lei:2872:1956",
+        "lei:3022:1956",
+        "lei:3165:1957",
+        "lei:3519:1958",
+        "lei:3857:1960",
+        "lei:3970:1961",
+        "lei:4072:1962",
+        "lei:4140:1962",
+        "lei:4654:1965",
+        "lei:4668:1965",
+        "lei:5274:1967",
+        "lei:5381:1968",
+        "lei:5431:1968",
+        "lei:5673:1971",
+        "lei:5801:1972",
+        "lei:5911:1973",
+        "lei:6086:1974",
+        "lei:6128:1974",
+        "lei:6211:1975",
+        "lei:6598:1978",
+        "lei:6986:1982",
+        "lei:7047:1982",
+        "lei:7121:1983",
+        "lei:7189:1984",
+        "lei:7305:1985",
+        "lei:7313:1985",
+        "lei:7351:1985",
+        "lei:816:1949",
+        "lei:8260:1991",
+        "lei:8861:1994",
+        "lei:8923:1994",
+        "lei:8949:1994"
+      ]
+    },
+    {
+      "id": "LEI-10406-2002",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/10406/2002",
+      "senadoNorma": "Lei nº 10.406 de 10/01/2002",
+      "atosNoPlanalto": 52,
+      "atosNoSenado": 60,
+      "emAmbos": 52,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei-complementar:182:2021",
+        "lei-complementar:214:2025",
+        "lei:10838:2004",
+        "lei:12375:2010",
+        "lei:13425:2017",
+        "lei:13476:2017",
+        "lei:14118:2021",
+        "lei:15224:2025"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei-complementar:182:2021",
+        "lei-complementar:214:2025",
+        "lei:10838:2004",
+        "lei:12375:2010",
+        "lei:13425:2017",
+        "lei:13476:2017",
+        "lei:14118:2021",
+        "lei:15224:2025"
+      ]
+    },
+    {
+      "id": "LEI-11101-2005",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/11101/2005",
+      "senadoNorma": "Lei nº 11.101 de 09/02/2005",
+      "atosNoPlanalto": 4,
+      "atosNoSenado": 5,
+      "emAmbos": 4,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:12873:2013"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:12873:2013"
+      ],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-11340-2006",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/11340/2006",
+      "senadoNorma": "Lei nº 11.340 de 07/08/2006",
+      "atosNoPlanalto": 25,
+      "atosNoSenado": 26,
+      "emAmbos": 25,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:13871:2019"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:13871:2019"
+      ],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-11343-2006",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/11343/2006",
+      "senadoNorma": "Lei nº 11.343 de 23/08/2006",
+      "atosNoPlanalto": 10,
+      "atosNoSenado": 9,
+      "emAmbos": 8,
+      "soNoPlanalto": [
+        "lei:15581:2025",
+        "medida-provisoria:885:2019"
+      ],
+      "soNoSenado": [
+        "lei:15281:2025"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:15281:2025"
+      ]
+    },
+    {
+      "id": "LEI-11419-2006",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/11419/2006",
+      "senadoNorma": "Lei nº 11.419 de 19/12/2006",
+      "atosNoPlanalto": 2,
+      "atosNoSenado": 2,
+      "emAmbos": 2,
+      "soNoPlanalto": [],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-12016-2009",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/12016/2009",
+      "senadoNorma": "Lei nº 12.016 de 07/08/2009",
+      "atosNoPlanalto": 1,
+      "atosNoSenado": 1,
+      "emAmbos": 1,
+      "soNoPlanalto": [],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-12965-2014",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/12965/2014",
+      "senadoNorma": "Lei nº 12.965 de 23/04/2014",
+      "atosNoPlanalto": 2,
+      "atosNoSenado": 1,
+      "emAmbos": 1,
+      "soNoPlanalto": [
+        "medida-provisoria:1068:2021"
+      ],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-13105-2015",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/13105/2015",
+      "senadoNorma": "Lei nº 13.105 de 16/03/2015",
+      "atosNoPlanalto": 17,
+      "atosNoSenado": 19,
+      "emAmbos": 16,
+      "soNoPlanalto": [
+        "lei:15484:2026"
+      ],
+      "soNoSenado": [
+        "lei:14010:2020",
+        "lei:14879:2024",
+        "lei:15252:2025"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:14010:2020",
+        "lei:14879:2024",
+        "lei:15252:2025"
+      ]
+    },
+    {
+      "id": "LEI-13709-2018",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/13709/2018",
+      "senadoNorma": "Lei nº 13.709 de 14/08/2018",
+      "atosNoPlanalto": 4,
+      "atosNoSenado": 6,
+      "emAmbos": 4,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:14058:2020",
+        "lei:15134:2025"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:14058:2020",
+        "lei:15134:2025"
+      ]
+    },
+    {
+      "id": "LEI-14133-2021",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/14133/2021",
+      "senadoNorma": "Lei nº 14.133 de 01/04/2021",
+      "atosNoPlanalto": 8,
+      "atosNoSenado": 12,
+      "emAmbos": 6,
+      "soNoPlanalto": [
+        "medida-provisoria:1166:2023",
+        "medida-provisoria:1167:2023"
+      ],
+      "soNoSenado": [
+        "decreto:10947:2022",
+        "lei-complementar:195:2022",
+        "lei:14620:2023",
+        "lei:14835:2024",
+        "lei:14903:2024",
+        "lei:14981:2024"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto:10947:2022",
+        "lei-complementar:195:2022",
+        "lei:14620:2023",
+        "lei:14835:2024",
+        "lei:14903:2024",
+        "lei:14981:2024"
+      ]
+    },
+    {
+      "id": "LEI-5172-1966",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/5172/1966",
+      "senadoNorma": "Lei nº 5.172 de 25/10/1966",
+      "atosNoPlanalto": 15,
+      "atosNoSenado": 23,
+      "emAmbos": 13,
+      "soNoPlanalto": [
+        "lei:1881:1981",
+        "lei:28:1966"
+      ],
+      "soNoSenado": [
+        "decreto-lei:1881:1981",
+        "decreto-lei:2470:1988",
+        "decreto-lei:2472:1988",
+        "decreto-lei:28:1966",
+        "decreto-lei:406:1968",
+        "decreto:69680:1971",
+        "decreto:70235:1972",
+        "decreto:86309:1981",
+        "lei-complementar:118:2005",
+        "lei-complementar:182:2021"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "decreto-lei:1881:1981",
+        "decreto-lei:28:1966",
+        "decreto-lei:406:1968",
+        "lei-complementar:118:2005"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto-lei:2470:1988",
+        "decreto-lei:2472:1988",
+        "decreto:69680:1971",
+        "decreto:70235:1972",
+        "decreto:86309:1981",
+        "lei-complementar:182:2021"
+      ]
+    },
+    {
+      "id": "LEI-6830-1980",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/6830/1980",
+      "senadoNorma": "Lei nº 6.830 de 22/09/1980",
+      "atosNoPlanalto": 4,
+      "atosNoSenado": 4,
+      "emAmbos": 4,
+      "soNoPlanalto": [],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-7210-1984",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/7210/1984",
+      "senadoNorma": "Lei nº 7.210 de 11/07/1984",
+      "atosNoPlanalto": 27,
+      "atosNoSenado": 29,
+      "emAmbos": 27,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:11340:2006",
+        "lei:9046:1995"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:9046:1995"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:11340:2006"
+      ]
+    },
+    {
+      "id": "LEI-7347-1985",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/7347/1985",
+      "senadoNorma": "Lei nº 7.347 de 24/07/1985",
+      "atosNoPlanalto": 7,
+      "atosNoSenado": 10,
+      "emAmbos": 7,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:10257:2001",
+        "lei:8158:1991",
+        "lei:8884:1994"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:10257:2001",
+        "lei:8158:1991",
+        "lei:8884:1994"
+      ]
+    },
+    {
+      "id": "LEI-8069-1990",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8069/1990",
+      "senadoNorma": "Lei nº 8.069 de 13/07/1990",
+      "atosNoPlanalto": 52,
+      "atosNoSenado": 53,
+      "emAmbos": 51,
+      "soNoPlanalto": [
+        "lei:9532:1997"
+      ],
+      "soNoSenado": [
+        "lei:11185:2005",
+        "lei:9455:1997"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:9455:1997"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:11185:2005"
+      ]
+    },
+    {
+      "id": "LEI-8078-1990",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8078/1990",
+      "senadoNorma": "Lei nº 8.078 de 11/09/1990",
+      "atosNoPlanalto": 13,
+      "atosNoSenado": 20,
+      "emAmbos": 12,
+      "soNoPlanalto": [
+        "medida-provisoria:1393:2026"
+      ],
+      "soNoSenado": [
+        "lei:11785:2008",
+        "lei:14010:2020",
+        "lei:14046:2020",
+        "lei:14368:2022",
+        "lei:14917:2024",
+        "lei:15224:2025",
+        "lei:8703:1993",
+        "lei:9298:1996"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:11785:2008"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:14010:2020",
+        "lei:14046:2020",
+        "lei:14368:2022",
+        "lei:14917:2024",
+        "lei:15224:2025",
+        "lei:8703:1993",
+        "lei:9298:1996"
+      ]
+    },
+    {
+      "id": "LEI-8112-1990",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8112/1990",
+      "senadoNorma": "Lei nº 8.112 de 11/12/1990",
+      "atosNoPlanalto": 37,
+      "atosNoSenado": 41,
+      "emAmbos": 23,
+      "soNoPlanalto": [
+        "medida-provisoria:1132:2022",
+        "medida-provisoria:431:2008",
+        "medida-provisoria:441:2008",
+        "medida-provisoria:479:2009",
+        "medida-provisoria:568:2012",
+        "medida-provisoria:632:2013",
+        "medida-provisoria:664:2014",
+        "medida-provisoria:681:2015",
+        "medida-provisoria:689:2015",
+        "medida-provisoria:765:2016",
+        "medida-provisoria:792:2017",
+        "medida-provisoria:805:2017",
+        "medida-provisoria:871:2019",
+        "medida-provisoria:873:2019"
+      ],
+      "soNoSenado": [
+        "decreto:2030:1996",
+        "decreto:3114:1999",
+        "lei-complementar:150:2015",
+        "lei:12764:2012",
+        "lei:13464:2017",
+        "lei:14131:2021",
+        "lei:14431:2022",
+        "lei:14982:2024",
+        "lei:8162:1991",
+        "lei:8270:1991",
+        "lei:8647:1993",
+        "lei:8745:1993",
+        "lei:9515:1997",
+        "lei:9525:1997",
+        "lei:9527:1997",
+        "lei:9624:1998",
+        "lei:9782:1999",
+        "lei:9783:1999"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:14131:2021",
+        "lei:9525:1997"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto:2030:1996",
+        "decreto:3114:1999",
+        "lei-complementar:150:2015",
+        "lei:12764:2012",
+        "lei:13464:2017",
+        "lei:14431:2022",
+        "lei:14982:2024",
+        "lei:8162:1991",
+        "lei:8270:1991",
+        "lei:8647:1993",
+        "lei:8745:1993",
+        "lei:9515:1997",
+        "lei:9527:1997",
+        "lei:9624:1998",
+        "lei:9782:1999",
+        "lei:9783:1999"
+      ]
+    },
+    {
+      "id": "LEI-8213-1991",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8213/1991",
+      "senadoNorma": "Lei nº 8.213 de 24/07/1991",
+      "atosNoPlanalto": 82,
+      "atosNoSenado": 76,
+      "emAmbos": 62,
+      "soNoPlanalto": [
+        "lei:10877:2004",
+        "lei:13063:2014",
+        "lei:9528:1997",
+        "medida-provisoria:1002:1995",
+        "medida-provisoria:1113:2022",
+        "medida-provisoria:1303:2025",
+        "medida-provisoria:1355:2026",
+        "medida-provisoria:316:2006",
+        "medida-provisoria:413:2008",
+        "medida-provisoria:449:2008",
+        "medida-provisoria:619:2013",
+        "medida-provisoria:664:2014",
+        "medida-provisoria:676:2015",
+        "medida-provisoria:681:2015",
+        "medida-provisoria:739:2016",
+        "medida-provisoria:767:2017",
+        "medida-provisoria:780:2017",
+        "medida-provisoria:871:2019",
+        "medida-provisoria:905:2019",
+        "medida-provisoria:955:2020"
+      ],
+      "soNoSenado": [
+        "decreto:3266:1999",
+        "decreto:7264:2010",
+        "lei:11368:2006",
+        "lei:12254:2010",
+        "lei:13064:2014",
+        "lei:13301:2016",
+        "lei:13464:2017",
+        "lei:13985:2020",
+        "lei:15358:2026",
+        "lei:15371:2026",
+        "lei:8222:1991",
+        "lei:9639:1998",
+        "lei:9711:1998",
+        "lei:9732:1998"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:11368:2006",
+        "lei:12254:2010",
+        "lei:13985:2020",
+        "lei:15371:2026",
+        "lei:8222:1991"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "decreto:3266:1999",
+        "decreto:7264:2010",
+        "lei:13064:2014",
+        "lei:13301:2016",
+        "lei:13464:2017",
+        "lei:15358:2026",
+        "lei:9639:1998",
+        "lei:9711:1998",
+        "lei:9732:1998"
+      ]
+    },
+    {
+      "id": "LEI-8245-1991",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8245/1991",
+      "senadoNorma": "Lei nº 8.245 de 18/10/1991",
+      "atosNoPlanalto": 5,
+      "atosNoSenado": 8,
+      "emAmbos": 5,
+      "soNoPlanalto": [],
+      "soNoSenado": [
+        "lei:14010:2020",
+        "lei:14216:2021",
+        "lei:9267:1996"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:14010:2020",
+        "lei:14216:2021",
+        "lei:9267:1996"
+      ]
+    },
+    {
+      "id": "LEI-8429-1992",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8429/1992",
+      "senadoNorma": "Lei nº 8.429 de 02/06/1992",
+      "atosNoPlanalto": 5,
+      "atosNoSenado": 10,
+      "emAmbos": 4,
+      "soNoPlanalto": [
+        "lei:13204:2015"
+      ],
+      "soNoSenado": [
+        "lei-complementar:157:2016",
+        "lei:12120:2009",
+        "lei:13146:2015",
+        "lei:13650:2018",
+        "lei:15269:2025",
+        "lei:9366:1996"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei-complementar:157:2016",
+        "lei:12120:2009",
+        "lei:13146:2015",
+        "lei:13650:2018",
+        "lei:15269:2025",
+        "lei:9366:1996"
+      ]
+    },
+    {
+      "id": "LEI-9099-1995",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/9099/1995",
+      "senadoNorma": "Lei nº 9.099 de 26/09/1995",
+      "atosNoPlanalto": 12,
+      "atosNoSenado": 12,
+      "emAmbos": 12,
+      "soNoPlanalto": [],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-9307-1996",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/9307/1996",
+      "senadoNorma": "Lei nº 9.307 de 23/09/1996",
+      "atosNoPlanalto": 2,
+      "atosNoSenado": 2,
+      "emAmbos": 2,
+      "soNoPlanalto": [],
+      "soNoSenado": [],
+      "soNoSenadoCitadoSemAnotacao": [],
+      "soNoSenadoAusenteDoPlanalto": []
+    },
+    {
+      "id": "LEI-9503-1997",
+      "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/9503/1997",
+      "senadoNorma": "Lei nº 9.503 de 23/09/1997",
+      "atosNoPlanalto": 46,
+      "atosNoSenado": 52,
+      "emAmbos": 41,
+      "soNoPlanalto": [
+        "lei:12760:2012",
+        "lei:13154:2015",
+        "lei:9792:1999",
+        "medida-provisoria:1327:2025",
+        "medida-provisoria:1360:2026"
+      ],
+      "soNoSenado": [
+        "lei:10233:2001",
+        "lei:10830:2003",
+        "lei:11275:2006",
+        "lei:12217:2010",
+        "lei:12547:2011",
+        "lei:12865:2013",
+        "lei:13290:2016",
+        "lei:13495:2017",
+        "lei:13724:2018",
+        "lei:13886:2019",
+        "lei:15485:2026"
+      ],
+      "soNoSenadoCitadoSemAnotacao": [
+        "lei:12217:2010"
+      ],
+      "soNoSenadoAusenteDoPlanalto": [
+        "lei:10233:2001",
+        "lei:10830:2003",
+        "lei:11275:2006",
+        "lei:12547:2011",
+        "lei:12865:2013",
+        "lei:13290:2016",
+        "lei:13495:2017",
+        "lei:13724:2018",
+        "lei:13886:2019",
+        "lei:15485:2026"
+      ]
+    }
+  ]
+}

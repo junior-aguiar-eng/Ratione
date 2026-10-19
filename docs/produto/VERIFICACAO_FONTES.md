@@ -220,6 +220,32 @@ Marco legal lido no Planalto: Lei 9.093/1995, art. 1º, II ("a data magna do Est
 
 Efeito prático: nos tribunais de PE, RS e GO esses dias passam a contar como sem expediente em todo ano, também no modo conservador; nos demais, só no modo completo (data alternativa). Nenhum ganhou selo de calendário: o selo continua exigindo o ato anual do tribunal.
 
+## 16. Corpus do NormaViva: coleta do Planalto (F3-01), lido em 19/10/2026
+
+Coletor em `packages/normaviva/src/coleta/` (`pnpm coletar` a partir de `packages/normaviva`): User-Agent de navegador, 30 s de timeout, 2 tentativas, 1 s entre pedidos. Grava o HTML **original** (bytes intactos, gzip) em `packages/normaviva/corpus/planalto/<id>.html.gz` e, em `manifesto.json`, a URL, o tipo de página, o título, o charset, o tamanho, o **SHA-256 dos bytes originais** e a data de leitura. Não interpreta o texto (parser e versões são F3-02 e F3-03). Resposta que não parece lei, redirecionamento para fora do Planalto ou falha de rede é recusada, não gravada.
+
+**28 normas:** CF/1988, CC, CPC, CP, CPP, CLT, CDC, LINDB, CTN, ECA, Lei 8.112, 8.213, 8.245, 8.429, 9.099, 9.307, 9.503, 6.830, 7.210, 7.347, 11.101, 11.340, 11.343, 11.419, 12.016, 12.965, 13.709 e 14.133. **19 em versão compilada ou consolidada** (a única que vale; a CF usa a página `constituicao.htm`) e **9 só na página anotada** (Leis 6.830, 9.099, 9.307, 11.340, 11.343, 11.419, 12.016, 12.965 e 14.133), onde o texto vigente é o que **não** está tachado (`<s>/<strike>`); o Planalto não publica compilada para elas no endereço padrão (sonda de 7 sufixos em 19/10/2026).
+
+Achados: (1) **a Lei 11.340/2006 é servida em UTF-16 com BOM**, sem charset útil; o `fetch_oficial.py` a devolve ilegível, então o coletor detecta o BOM antes do charset; (2) `l7347orig.htm` é o texto original da Lei 7.347, a compilada é `l7347compilada.htm`; (3) o `iso-8859-1` declarado é lido como windows-1252.
+
+**Legalize-BR (`danalec/legalize-br`) não serve para conferir o texto.** Em 19/10/2026: o repositório tem 8,4 GB, nomeia os arquivos pelo identificador do LexML (não pelo número da lei), cobre só 1988 a 2026 (fora CP, CPP, CLT, LINDB e CTN) e, nos 100 mil arquivos que a API lista (a listagem é truncada), **todos têm entre 513 B e 6 KB** (mediana de 761 B): só metadados e ementa, sem o texto da lei. Não foi importado.
+
+**Conferência cruzada feita com a API de Dados Abertos do Senado** (`legis.senado.leg.br/dadosabertos/legislacao/...`, fonte oficial 1 da lista do projeto), por `pnpm conferir` (`src/coleta/conferir.ts`; resultado em `corpus/conferencia-senado.json`). Compara os atos que o Planalto anota como alteradores ("Redação dada…", "Incluído…", "Revogado…") com os atos que o Senado registra em `vides` como **alteração permanente** (alteração provisória, regulamentação, legislação correlata e ressalva ficam de fora). Resultado nas 28 normas: o Planalto cita **876** atos alteradores e o Senado registra **1.032**; **796 coincidem** (91% dos do Planalto), **80 só no Planalto** e **236 só no Senado**. As maiores diferenças estão nas Leis 8.112 (14 só no Planalto, 18 só no Senado), 8.213 (20 e 14), na CLT (6 e 80), na CF (21 e 12), no CC (0 e 8) e no CP (1 e 24); só as Leis 6.830, 9.099, 9.307, 11.419 e 12.016 batem exatamente. **Divergência não é erro por si:** o Senado também registra atos que o Planalto trata como "Vide" ou cita só no corpo, e o Planalto anota medidas provisórias que o Senado classifica como provisórias. O arquivo lista, por norma, os atos de cada lado e quais dos "só no Senado" nem aparecem no texto do Planalto (possível lacuna de consolidação); a F3-03 usa essa lista para olhar com cuidado onde há divergência. **Nada foi corrigido no corpus**: o texto vigente continua sendo o do Planalto.
+
+**Fica para depois:** a rotina diária que compara o SHA-256 e gera alerta de mudança (F3-06).
+
+## 17. Parser LC 95/98 sobre o corpus do Planalto (F3-02), 19/10/2026
+
+Código em `packages/normaviva/src/parser/` (`html.ts`: HTML → parágrafos; `dispositivos.ts`: parágrafos → árvore de artigo, parágrafo, inciso, alínea e item; `verificar.ts`: métricas). `pnpm parsear` (a partir de `packages/normaviva`) roda nas 28 normas e grava `corpus/parser-resumo.json`; a saída completa de dispositivos **não é versionada**, sai do corpus por este código, de forma determinística.
+
+**Regras:** só entra texto não tachado (o tachado é redação sem vigência); as anotações entre parênteses ("Redação dada…", "Incluído…", "Revogado…", "Vide…", "Vigência…") saem do texto e ficam em `anotacoes`, na ordem, para a F3-03; dispositivo revogado com o texto todo tachado mantém o rótulo (senão o artigo some); faixas ("Arts. 52 a 58 (Revogados…)") e artigos revogados colados no mesmo parágrafo viram um dispositivo revogado por artigo; texto entre aspas “…” é a redação que a lei dá a **outra** norma e fica na continuação do artigo que a traz; o ADCT e os anexos têm escopo próprio; linha sem rótulo é preservada em `continuacao` ou `preambulo` e rótulo repetido ou numeração reiniciada vai para as anomalias. Nada é adivinhado.
+
+**Resultado nas 28 normas:** 29.447 dispositivos (8.824 artigos, 9.631 parágrafos, 9.072 incisos, 1.895 alíneas, 25 itens), 725 revogados e 10.704 com alguma anotação.
+
+**Conferência de sequência dos artigos** (as âncoras `<a name>` do Planalto não servem: variam entre as leis e as do CC são numeradas errado): **CPC 1.072, CC 2.046, CP 361, CLT 922, CDC 119, Lei 14.133 194 e CF 250** artigos, sem lacuna; as demais leis também fecham o último número (Leis 8.069, 9.503, 7.210, 11.101, 11.343, entre outras). **Resíduos conhecidos, não resolvidos:** CPP (artigos 194, 557, 558, 559 e 611 não aparecem no HTML compilado como "Art. N"); Lei 8.112 (o HTML repete, depois do art. 253, um bloco que recomeça no art. 192; faltam os artigos 23, 26 e 232 na primeira passagem); CLT (uma quebra de sequência 2→1). **145 anomalias** no total, listadas por norma em `parser-resumo.json` (rótulo repetido e "linha parecida com dispositivo, mas fora da LC 95", concentradas nas Leis 8.112, 8.213, 11.419 e 12.965); servem de fila de revisão para a F3-03.
+
+**Achados do HTML:** o Planalto escreve `º` como `<sup>o</sup>` ("§ 2 o"), parte o número do artigo em dois `<span>` ("Art. 5" + "7." na LGPD), tem erro de digitação ("Art. . 154" na CLT) e cola vários artigos revogados num só parágrafo (CP).
+
 ## 15. Como repetir esta verificação
 
 ```bash
