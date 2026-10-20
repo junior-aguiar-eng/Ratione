@@ -1,70 +1,39 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Bookmark, Check, ExternalLink, Search } from 'lucide-react';
-import { MotorNormaViva } from '@ratione/normaviva';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
+import { obterSupabase } from '../../lib/supabase/client';
+import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
+import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, hashCurto, segmentosDoTrecho, situacaoNaData } from '../../lib/normavivaApresentacao';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
-const FONTE_CPC = 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm';
-
-interface ItemCatalogo {
-  id: string;
-  rotulo: string;
-  norma: string;
-  assunto: string;
-  jurisprudencia?: string;
-}
-
-const CATALOGO: ItemCatalogo[] = [
-  {
-    id: 'CPC-ART-85-P2',
-    rotulo: 'Art. 85, § 2º',
-    norma: 'CPC/15',
-    assunto: 'Honorários advocatícios: fixação em percentual',
-    jurisprudencia: 'Tema 1.076/STJ'
-  },
-  {
-    id: 'CPC-ART-85-P6A',
-    rotulo: 'Art. 85, § 6º-A',
-    norma: 'CPC/15',
-    assunto: 'Honorários e vedação de equidade (Lei 14.365/2022)',
-    jurisprudencia: 'Tema 1.076/STJ'
-  },
-  { id: 'CPC-ART-489-P1', rotulo: 'Art. 489, § 1º', norma: 'CPC/15', assunto: 'Fundamentação da decisão judicial' },
-  { id: 'CPC-ART-219', rotulo: 'Art. 219', norma: 'CPC/15', assunto: 'Contagem de prazos em dias úteis' }
-];
-
-const normalizar = (t: string) =>
-  t
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-
-const ROTULO_ALTERACAO: Record<string, string> = {
-  redacao_original: 'Redação original',
-  alterado: 'Alteração',
-  acrescentado: 'Dispositivo acrescentado',
-  revogado_expressamente: 'Revogação',
-  declarado_inconstitucional: 'Declaração de inconstitucionalidade'
+/** "art. 85, § 2º, I" → profundidade 2 (artigo = 0); usada só para recuar o texto. */
+const profundidade = (rotulo: string) => rotulo.split(', ').length - 1;
+const ultimoPasso = (rotulo: string) => {
+  const p = rotulo.split(', ').pop() ?? rotulo;
+  return p.startsWith('art. ') ? `Art. ${p.slice(5)}` : p;
 };
 
 export default function NormaVivaPage() {
-  const motor = useMemo(() => new MotorNormaViva(), []);
-
+  const db = useMemo(() => obterSupabase(), []);
+  const [normas, setNormas] = useState<Norma[]>([]);
   const [busca, setBusca] = useState('');
-  const [itemId, setItemId] = useState(CATALOGO[0].id);
+  const [resultado, setResultado] = useState<ResultadoDaBusca>({ tipo: 'vazio' });
+  const [buscando, setBuscando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+  const [itemId, setItemId] = useState<string | null>(null);
+  const [detalhe, setDetalhe] = useState<Detalhe | null>(null);
+  const [abrindo, setAbrindo] = useState(false);
   const [hoje, setHoje] = useState('');
   const [dataConsulta, setDataConsulta] = useState('');
   const [salvo, setSalvo] = useState(false);
+  const sequencia = useRef(0);
 
   useEffect(() => {
     const h = hojeIso();
@@ -72,43 +41,79 @@ export default function NormaVivaPage() {
     setDataConsulta(h);
   }, []);
 
-  const resultados = useMemo(() => {
-    const termos = normalizar(busca).split(' ').filter(Boolean);
-    if (termos.length === 0) return CATALOGO;
-    return CATALOGO.filter(i => {
-      const palheiro = normalizar(`${i.rotulo} ${i.norma} ${i.assunto} ${i.id}`);
-      return termos.every(t => palheiro.includes(t));
-    });
-  }, [busca]);
+  useEffect(() => {
+    if (!db) return;
+    listarNormas(db).then(setNormas).catch(e => setErro(String(e.message ?? e)));
+  }, [db]);
 
-  const item = CATALOGO.find(i => i.id === itemId)!;
-  const linhaDoTempo = useMemo(() => motor.obterLinhaDoTempo(itemId), [motor, itemId]);
-  const versao = useMemo(
-    () => (dataConsulta ? motor.consultarDispositivoNaData(itemId, dataConsulta) : null),
-    [motor, itemId, dataConsulta]
-  );
+  // Pesquisa com pequena espera depois da última tecla; só vale a resposta da pesquisa mais recente
+  useEffect(() => {
+    if (!db || normas.length === 0) return;
+    const minha = ++sequencia.current;
+    const t = setTimeout(async () => {
+      setBuscando(true);
+      try {
+        const r = await pesquisar(db, busca, normas);
+        if (minha === sequencia.current) {
+          setResultado(r);
+          setErro(null);
+        }
+      } catch (e) {
+        if (minha === sequencia.current) setErro((e as Error).message);
+      } finally {
+        if (minha === sequencia.current) setBuscando(false);
+      }
+    }, 350);
+    return () => clearTimeout(t);
+  }, [db, busca, normas]);
+
+  useEffect(() => {
+    if (!db || !itemId || normas.length === 0) return;
+    let vivo = true;
+    setAbrindo(true);
+    carregarDetalhe(db, itemId, normas)
+      .then(d => vivo && (setDetalhe(d), setErro(null)))
+      .catch(e => vivo && setErro((e as Error).message))
+      .finally(() => vivo && setAbrindo(false));
+    return () => {
+      vivo = false;
+    };
+  }, [db, itemId, normas]);
+
+  const nomeDaNorma = (id: string) => normas.find(n => n.id === id)?.nome ?? id;
+  const situacao = detalhe?.versao && dataConsulta ? situacaoNaData(detalhe.versao, dataConsulta, dataCurta) : null;
   const usandoHoje = dataConsulta !== '' && dataConsulta === hoje;
-  const primeiraVigencia = linhaDoTempo[0]?.dataInicioVigencia;
 
   const salvar = () => {
-    if (!versao) return;
+    if (!detalhe) return;
     salvarRegistro({
       modulo: 'NormaViva',
       tipo: 'norma',
-      titulo: `${item.rotulo} · ${item.norma}`,
-      detalhe: `${item.assunto}. Redação em ${dataCurta(dataConsulta)}`,
+      titulo: `${detalhe.dispositivo.rotulo} · ${detalhe.norma.nome}`,
+      detalhe: `Texto lido do Planalto em ${dataCurta(detalhe.norma.lido_em)}`,
       url: '/normaviva'
     });
     setSalvo(true);
     setTimeout(() => setSalvo(false), 2000);
   };
 
+  if (!db) {
+    return (
+      <div>
+        <PageHeader eyebrow="NormaViva" title="Histórico da norma" description="Pesquise leis, artigos e assuntos." />
+        <Notice tom="warn" titulo="Base indisponível">
+          O NormaViva lê a base de leis do Supabase, e esta cópia do site está sem a configuração dele.
+        </Notice>
+      </div>
+    );
+  }
+
   return (
     <div>
       <PageHeader
         eyebrow="NormaViva"
         title="Histórico da norma"
-        description="Consulte a redação de um dispositivo em qualquer data e acompanhe como ele mudou ao longo do tempo."
+        description="Pesquise um artigo, uma lei ou um assunto e veja o texto vigente, o que o alterou e a fonte oficial."
       />
 
       {/* Pesquisa */}
@@ -125,172 +130,259 @@ export default function NormaVivaPage() {
           />
         </div>
 
-        {resultados.length === 0 ? (
-          <p className="text-sm text-ink-soft">
-            Nenhum dispositivo encontrado. A prévia reúne {CATALOGO.length} dispositivos do CPC/15.
+        {erro && (
+          <Notice tom="warn" titulo="Não consegui ler a base">
+            {erro}
+          </Notice>
+        )}
+
+        {resultado.tipo === 'vazio' && !erro && (
+          <p className="text-sm text-ink-soft max-w-2xl">
+            A base reúne {normas.length || 28} normas federais (Constituição, códigos e leis de maior uso), lidas do Planalto. Exemplos: <em>art. 489 CPC</em>, <em>Lei 14.133</em>,{' '}
+            <em>desconsideração da personalidade jurídica</em>.
           </p>
-        ) : (
-          <ul className="flex flex-wrap gap-2">
-            {resultados.map(r => {
-              const ativo = r.id === itemId;
-              return (
-                <li key={r.id}>
-                  <button
-                    type="button"
-                    aria-pressed={ativo}
-                    onClick={() => setItemId(r.id)}
-                    className={`text-left rounded-md border px-4 py-2.5 transition-colors ${
-                      ativo ? 'border-brand bg-brand-tint' : 'border-line-strong bg-surface hover:bg-surface-2'
-                    }`}
-                  >
-                    <span className="block text-sm font-semibold text-ink">
-                      {r.rotulo} <span className="font-normal text-ink-mute">· {r.norma}</span>
-                    </span>
-                    <span className="block text-sm text-ink-soft">{r.assunto}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        )}
+
+        {resultado.tipo === 'resultados' && (
+          <div className="flex flex-col gap-3" aria-live="polite">
+            {resultado.aviso && <p className="text-sm text-ink-soft">{resultado.aviso}</p>}
+            {resultado.itens.length === 0 ? (
+              <p className="text-sm text-ink-soft">{buscando ? 'Pesquisando…' : 'Nenhum dispositivo encontrado.'}</p>
+            ) : (
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {resultado.itens.map(r => {
+                  const ativo = r.id === itemId;
+                  return (
+                    <li key={r.id}>
+                      <button
+                        type="button"
+                        aria-pressed={ativo}
+                        onClick={() => setItemId(r.id)}
+                        className={`w-full text-left rounded-md border px-4 py-2.5 transition-colors ${
+                          ativo ? 'border-brand bg-brand-tint' : 'border-line-strong bg-surface hover:bg-surface-2'
+                        }`}
+                      >
+                        <span className="block text-sm font-semibold text-ink">
+                          {ultimoPasso(r.rotulo).startsWith('Art.') ? r.rotulo.replace(/^art\./, 'Art.') : r.rotulo}{' '}
+                          <span className="font-normal text-ink-mute">· {nomeDaNorma(r.norma_id)}</span>
+                        </span>
+                        <span className="block text-sm text-ink-soft">
+                          {segmentosDoTrecho(r.trecho).map((s, i) =>
+                            s.destaque ? (
+                              <mark key={i} className="bg-brand-tint text-ink rounded-sm px-0.5">
+                                {s.texto}
+                              </mark>
+                            ) : (
+                              <span key={i}>{s.texto}</span>
+                            )
+                          )}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
         )}
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mt-12 items-start">
-        {/* Texto normativo */}
-        <article className="lg:col-span-8 flex flex-col gap-7">
-          <header className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-sm text-ink-mute">Código de Processo Civil (Lei nº 13.105/2015)</p>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink mt-1">{item.rotulo}</h2>
-              </div>
-              {dataConsulta &&
-                (versao ? (
-                  <Badge variant="ok">{usandoHoje ? 'Vigente' : `Redação em ${dataCurta(dataConsulta)}`}</Badge>
-                ) : (
-                  <Badge variant="warn">Sem redação nesta data</Badge>
-                ))}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <span className="text-sm font-medium text-ink">Ver redação em:</span>
-              <button
-                type="button"
-                aria-pressed={usandoHoje}
-                onClick={() => setDataConsulta(hoje)}
-                className={`px-3.5 py-2 rounded-md text-sm font-medium border transition-colors ${
-                  usandoHoje ? 'border-brand bg-brand-tint text-brand-text' : 'border-line-strong bg-surface text-ink-soft hover:bg-surface-2'
-                }`}
-              >
-                Hoje
-              </button>
-              <Input
-                type="date"
-                aria-label="Escolher data"
-                value={dataConsulta}
-                onChange={e => e.target.value && setDataConsulta(e.target.value)}
-                className="w-auto"
-              />
-            </div>
-          </header>
-
-          {!dataConsulta ? (
-            <div className="h-48 rounded-lg bg-surface-2 animate-pulse" aria-hidden />
-          ) : versao ? (
-            <>
-              <blockquote className="font-serif text-lg sm:text-xl leading-[1.75] sm:leading-7 text-ink border-l-2 border-brand pl-6">
-                {versao.texto}
-              </blockquote>
-
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-line pt-6 text-sm">
-                <div>
-                  <dt className="text-ink-mute">Ato modificador</dt>
-                  <dd className="text-base font-medium text-ink mt-0.5">{versao.atoModificador.rotulo}</dd>
-                </div>
-                <div>
-                  <dt className="text-ink-mute">Início da vigência</dt>
-                  <dd className="text-base font-medium text-ink num mt-0.5">{dataCurta(versao.dataInicioVigencia)}</dd>
-                </div>
-              </dl>
-            </>
+      {itemId && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mt-12 items-start">
+          {abrindo && !detalhe ? (
+            <div className="lg:col-span-12 h-48 rounded-lg bg-surface-2 animate-pulse" aria-hidden />
           ) : (
-            <Notice tom="warn" titulo={`O ${item.rotulo} não tinha redação em ${dataCurta(dataConsulta)}`}>
-              {primeiraVigencia
-                ? `A base registra este dispositivo a partir de ${dataCurta(primeiraVigencia)}.`
-                : 'Não há versão registrada para este dispositivo.'}
-            </Notice>
+            detalhe && (
+              <>
+                {/* Texto normativo */}
+                <article className="lg:col-span-8 flex flex-col gap-7">
+                  <header className="flex flex-col gap-4">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm text-ink-mute">{detalhe.norma.nome}</p>
+                        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink mt-1">{detalhe.dispositivo.rotulo.replace(/^art\./, 'Art.')}</h2>
+                        {detalhe.dispositivo.estrutura.length > 0 && <p className="text-sm text-ink-mute mt-1">{detalhe.dispositivo.estrutura.join(' · ')}</p>}
+                      </div>
+                      {situacao &&
+                        (detalhe.dispositivo.revogado || detalhe.versao?.origem === 'revogado' ? (
+                          <Badge variant="warn">Revogado</Badge>
+                        ) : situacao.tipo === 'redacao_atual' ? (
+                          <Badge variant="ok">Vigente</Badge>
+                        ) : (
+                          <Badge variant="warn">Sem texto nesta data</Badge>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3 pt-1">
+                      <span className="text-sm font-medium text-ink">Ver redação em:</span>
+                      <button
+                        type="button"
+                        aria-pressed={usandoHoje}
+                        onClick={() => setDataConsulta(hoje)}
+                        className={`px-3.5 py-2 rounded-md text-sm font-medium border transition-colors ${
+                          usandoHoje ? 'border-brand bg-brand-tint text-brand-text' : 'border-line-strong bg-surface text-ink-soft hover:bg-surface-2'
+                        }`}
+                      >
+                        Hoje
+                      </button>
+                      <Input
+                        type="date"
+                        aria-label="Escolher data"
+                        value={dataConsulta}
+                        onChange={e => e.target.value && setDataConsulta(e.target.value)}
+                        className="w-auto"
+                      />
+                    </div>
+                  </header>
+
+                  {situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
+                    <Notice tom="warn" titulo={`A base não tem o texto de ${dataCurta(dataConsulta)}`}>
+                      {situacao.aviso}
+                    </Notice>
+                  ) : (
+                    <>
+                      <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6 flex flex-col gap-3" data-testid="texto-do-dispositivo">
+                        {detalhe.texto.map(t => (
+                          <p key={t.id} style={{ marginLeft: `${Math.min(profundidade(t.rotulo), 4) * 1.25}rem` }} className={t.revogado ? 'text-ink-mute' : ''}>
+                            <span className="font-semibold">{ultimoPasso(t.rotulo)}</span>{' '}
+                            {t.revogado && t.texto === '' ? '(Revogado)' : t.texto}
+                            {t.continuacao && <span className="block text-base text-ink-soft mt-1">{t.continuacao}</span>}
+                          </p>
+                        ))}
+                      </div>
+                      {situacao && (
+                        <Notice tom={situacao.tipo === 'redacao_atual' && !situacao.provisoria ? 'info' : 'warn'} titulo="Vigência">
+                          {situacao.aviso}
+                        </Notice>
+                      )}
+                    </>
+                  )}
+
+                  <div className="flex flex-wrap gap-2 no-print">
+                    <Button variant="secondary" type="button" onClick={salvar}>
+                      {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
+                      {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
+                    </Button>
+                    <a href={detalhe.norma.fonte_url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
+                      Fonte oficial (Planalto)
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                </article>
+
+                {/* Histórico e relações */}
+                <aside className="lg:col-span-4 flex flex-col gap-9" aria-label="Histórico e relações do dispositivo">
+                  <section>
+                    <h3 className="font-serif text-xl font-semibold text-ink mb-3">O que mudou</h3>
+                    {detalhe.versao ? (
+                      <dl className="text-sm flex flex-col gap-3">
+                        <div>
+                          <dt className="text-ink-mute">Redação atual</dt>
+                          <dd className="text-base font-medium text-ink mt-0.5">{ROTULO_ORIGEM[detalhe.versao.origem]}</dd>
+                        </div>
+                        {detalhe.versao.ato_rotulo && (
+                          <div>
+                            <dt className="text-ink-mute">Ato</dt>
+                            <dd className="text-ink mt-0.5">{detalhe.versao.ato_rotulo}</dd>
+                          </div>
+                        )}
+                        {detalhe.versao.vigente_de && (
+                          <div>
+                            <dt className="text-ink-mute">{detalhe.versao.vigencia_confirmada ? 'Em vigor desde' : 'Vigência (provisória)'}</dt>
+                            <dd className="text-ink num mt-0.5">{dataCurta(detalhe.versao.vigente_de)}</dd>
+                          </div>
+                        )}
+                        <div>
+                          <dt className="text-ink-mute">Texto anterior</dt>
+                          <dd className="text-ink-soft mt-0.5">{detalhe.versao.texto_anterior_disponivel ? 'Disponível' : 'Não está na base atual'}</dd>
+                        </div>
+                      </dl>
+                    ) : (
+                      <p className="text-sm text-ink-soft">Sem versão registrada.</p>
+                    )}
+                    {detalhe.relacoes.filter(r => r.tipo !== 'remete' && r.origem_id !== detalhe.dispositivo.id).length > 0 && (
+                      <ul className="mt-4 text-sm text-ink-soft flex flex-col gap-1.5">
+                        {detalhe.relacoes
+                          .filter(r => r.tipo !== 'remete' && r.origem_id !== detalhe.dispositivo.id)
+                          .map(r => (
+                            <li key={r.id}>
+                              <span className="text-ink">{detalhe.texto.find(t => t.id === r.origem_id)?.rotulo.split(', ').slice(1).join(', ') || ''}</span>{' '}
+                              {ROTULO_RELACAO[r.tipo].toLowerCase()} {r.destino_texto ?? r.destino_ato}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </section>
+
+                  {detalhe.relacoes.some(r => r.tipo === 'remete') && (
+                    <section className="border-t border-line pt-6">
+                      <h3 className="font-serif text-xl font-semibold text-ink mb-3">Remissões neste texto</h3>
+                      <ul className="flex flex-col gap-2 text-sm">
+                        {detalhe.relacoes
+                          .filter(r => r.tipo === 'remete')
+                          .map(r => (
+                            <li key={r.id} title={r.escopo ? ROTULO_ESCOPO[r.escopo] : undefined}>
+                              {r.destino_id ? (
+                                <button type="button" onClick={() => setItemId(r.destino_id)} className="text-brand-text hover:underline underline-offset-2 text-left">
+                                  {detalhe.rotulosDestino[r.destino_id]?.rotulo.replace(/^art\./, 'Art.') ?? r.destino_texto}
+                                  {r.destino_norma_id && r.destino_norma_id !== detalhe.dispositivo.norma_id ? ` · ${nomeDaNorma(r.destino_norma_id)}` : ''}
+                                </button>
+                              ) : (
+                                <span className="text-ink-soft">{r.destino_texto}</span>
+                              )}
+                              {r.escopo === 'presumido' && <span className="text-ink-mute"> (norma presumida)</span>}
+                            </li>
+                          ))}
+                      </ul>
+                    </section>
+                  )}
+
+                  {detalhe.citadoPor.length > 0 && (
+                    <section className="border-t border-line pt-6">
+                      <h3 className="font-serif text-xl font-semibold text-ink mb-3">Citado por</h3>
+                      <ul className="flex flex-col gap-2 text-sm">
+                        {detalhe.citadoPor.map(c => (
+                          <li key={c.origem_id}>
+                            <button type="button" onClick={() => setItemId(c.origem_id)} className="text-brand-text hover:underline underline-offset-2 text-left">
+                              {c.rotulo.replace(/^art\./, 'Art.')}
+                              {c.norma_id && c.norma_id !== detalhe.dispositivo.norma_id ? ` · ${nomeDaNorma(c.norma_id)}` : ''}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+
+                  <section className="border-t border-line pt-6">
+                    <h3 className="font-serif text-xl font-semibold text-ink mb-3">Fonte</h3>
+                    <dl className="text-sm flex flex-col gap-2">
+                      <div>
+                        <dt className="text-ink-mute">Página lida</dt>
+                        <dd className="text-ink-soft mt-0.5">{detalhe.norma.fonte_tipo_pagina === 'compilada' ? 'Texto compilado do Planalto' : 'Página anotada do Planalto (vale o texto não tachado)'}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-ink-mute">Lida em</dt>
+                        <dd className="text-ink num mt-0.5">{dataCurta(detalhe.norma.lido_em)}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-ink-mute">Impressão digital (SHA-256)</dt>
+                        <dd className="text-ink-soft num mt-0.5" title={detalhe.norma.fonte_sha256}>
+                          {hashCurto(detalhe.norma.fonte_sha256)}
+                        </dd>
+                      </div>
+                    </dl>
+                  </section>
+                </aside>
+              </>
+            )
           )}
-
-          <div className="flex flex-wrap gap-2 no-print">
-            <Button variant="secondary" type="button" onClick={salvar} disabled={!versao}>
-              {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-              {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
-            </Button>
-            <a href={FONTE_CPC} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
-              Fonte oficial (Planalto)
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-        </article>
-
-        {/* Histórico */}
-        <aside className="lg:col-span-4 flex flex-col gap-9" aria-label="Histórico do dispositivo">
-          <section>
-            <h3 className="font-serif text-xl font-semibold text-ink mb-5">Linha do tempo</h3>
-            <ol className="relative border-l border-line-strong ml-1.5 flex flex-col gap-6">
-              {linhaDoTempo.map(v => {
-                const ativa = versao?.id === v.id;
-                return (
-                  <li key={v.id} className="pl-6 relative">
-                    <span
-                      className={`absolute left-[-7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas ${
-                        ativa ? 'bg-brand' : 'bg-ink-mute'
-                      }`}
-                    />
-                    <p className="text-sm font-semibold text-ink num">{dataCurta(v.dataInicioVigencia)}</p>
-                    <p className="text-sm text-ink mt-0.5">{v.atoModificador.rotulo}</p>
-                    <p className="text-sm text-ink-mute">{ROTULO_ALTERACAO[v.tipoAlteracao]}</p>
-                  </li>
-                );
-              })}
-              <li className="pl-6 relative">
-                <span className="absolute left-[-7px] top-1 w-3.5 h-3.5 rounded-full ring-4 ring-canvas bg-ok" />
-                <p className="text-sm font-semibold text-ink">Hoje</p>
-                <p className="text-sm text-ink-mute">
-                  {linhaDoTempo.at(-1)?.dataFimVigencia === null ? 'Vigente' : 'Sem vigência'}
-                </p>
-              </li>
-            </ol>
-          </section>
-
-          <section className="border-t border-line pt-6">
-            <h3 className="font-serif text-xl font-semibold text-ink mb-2">O que mudou</h3>
-            <p className="text-sm text-ink-soft leading-relaxed">
-              {linhaDoTempo.length > 1
-                ? `${linhaDoTempo.length} redações registradas. Use a data para comparar.`
-                : 'Nenhuma alteração posterior registrada na base atual.'}
-            </p>
-          </section>
-
-          {item.jurisprudencia && (
-            <section className="border-t border-line pt-6">
-              <h3 className="font-serif text-xl font-semibold text-ink mb-2">Jurisprudência</h3>
-              <p className="text-sm text-ink-soft mb-3">{item.jurisprudencia}</p>
-              <Link
-                href="/tesemap"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2"
-              >
-                Explorar no TeseMap
-                <ExternalLink className="w-3.5 h-3.5" />
-              </Link>
-            </section>
-          )}
-        </aside>
-      </div>
+        </div>
+      )}
 
       <div className="mt-14 max-w-3xl">
-        <Notice tom="info" titulo="Prévia">
-          A base reúne {CATALOGO.length} dispositivos do CPC/15. Confira o texto na fonte oficial antes de citá-lo.
+        <Notice tom="info" titulo="Como ler esta base">
+          O texto foi extraído automaticamente do Planalto e pode ter falhas de formatação: confira na fonte oficial antes de citá-lo. A base guarda só a redação vigente de cada
+          dispositivo; o início de vigência mostrado é a data de publicação do ato, usada como data provisória.
         </Notice>
       </div>
     </div>

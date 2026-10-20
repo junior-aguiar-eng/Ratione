@@ -5,7 +5,7 @@
 import { NORMAS_CONHECIDAS, normaPorNomeNoInicio, normaPorSigla } from './apelidos';
 
 const NOMES_EXATOS = new Set(NORMAS_CONHECIDAS.flatMap(n => n.nomes));
-import { numeroComoNoParser } from './referencias';
+import { numeroComoNoParser } from './numero';
 
 export type ConsultaInterpretada =
   | { tipo: 'dispositivo'; normaId: string | null; artigo: string; detalhe: string | null }

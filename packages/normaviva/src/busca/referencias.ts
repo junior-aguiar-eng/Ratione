@@ -10,6 +10,7 @@
  */
 import { atosDoTexto } from '../coleta/conferir';
 import { idDeNormaPelaChave, normaPorNomeNoInicio, normaPorSigla } from './apelidos';
+import { numeroComoNoParser } from './numero';
 
 export type EscopoRemissao = 'mesma' | 'explicito' | 'presumido' | 'externo';
 
@@ -33,12 +34,7 @@ const RE_DETALHE = /^\s*,?\s*((?:[Cc]aput|[Pp]ar[áa]grafo [úu]nico|§§?\s*\d+
 const RE_MESMA = /^[\s,;]*(?:d(?:este|esta|o presente|a presente)\s+(?:artigo|Código|Lei|Constituição|Decreto-Lei|Estatuto|Consolidação|Capítulo|Seção|Título|Livro|Parte)|d(?:este|esse)\s+\w+)/i;
 const RE_OUTRA = /^[\s,;]*(?:d[aoe]s?|na|no|nos|nas|à|ao)\s+/i;
 
-/** Número do artigo como o parser escreve ("5º" até 9; sem ordinal a partir de 10). */
-export function numeroComoNoParser(digitos: string, ordinal: boolean, letra: string | undefined): string {
-  const n = Number(digitos.replace(/\./g, ''));
-  const base = ordinal && n <= 9 ? `${digitos}º` : digitos;
-  return letra ? `${base}-${letra}` : base;
-}
+export { numeroComoNoParser } from './numero';
 
 const RE_LISTA = new RegExp(String.raw`^\s*(?:,|e|ou)\s+(?:o\s+)?(?:[Aa]rts?\.?\s*)?${NUMERO}`);
 
