@@ -64,7 +64,7 @@ const RE_INCISO_ANOTADO = /^([IVXLCDM]+)(?:\s*-\s*([A-Z]{1,2}))?\s+(\((?:Revogad
 const RE_ALINEA = /^([a-z])\)\s*(.*)$/;
 const RE_ITEM = /^(\d{1,2})\.\s+(.*)$/;
 const RE_CABECALHO = /^(PARTE|LIVRO|T[ÍI]TULO|CAP[ÍI]TULO|SE[ÇC][ÃA]O|SUBSE[ÇC][ÃA]O)\b/i;
-const RE_ANOTACAO = /^\((?:Reda[çc][ãa]o dada|Inclu[ií]d|Revogad|Vide|Vig[êe]ncia|Regulament|Renumerad|Suprimid|Acrescid|Vetad|Promulga[çc][ãa]o|Declarad|Express[ãa]o|Texto)/i;
+const RE_ANOTACAO = /^\((?:Reda[çc][ãa]o dada|Inclu[ií]d|Revogad|Vide|Vig[êe]ncia|Produ[çc][ãa]o de efeito|Regulament|Renumerad|Suprimid|Acrescid|Vetad|Promulga[çc][ãa]o|Declarad|Express[ãa]o|Texto)/i;
 
 const ORDEM_CABECALHO = ['PARTE', 'LIVRO', 'TITULO', 'CAPITULO', 'SECAO', 'SUBSECAO'];
 const NIVEL: Record<TipoDispositivo, number> = { artigo: 1, paragrafo: 2, paragrafo_unico: 2, inciso: 3, alinea: 4, item: 5 };
@@ -75,11 +75,18 @@ function tipoDaAnotacao(t: string): TipoAnotacao {
   if (/^(Revogad|Suprimid)/i.test(t)) return 'revogado';
   if (/^Vide/i.test(t)) return 'vide';
   if (/^Vig[êe]ncia/i.test(t)) return 'vigencia';
+  if (/^Produ[çc][ãa]o de efeito/i.test(t)) return 'vigencia';
   if (/^Regulament/i.test(t)) return 'regulamento';
   if (/^Renumerad/i.test(t)) return 'renumerado';
   if (/^Vetad/i.test(t)) return 'vetado';
   return 'outra';
 }
+
+/**
+ * "Produção de efeitos" sem parênteses: o Planalto a escreve como texto de link logo depois de outra anotação ("(Incluído pela Emenda…) Produção de efeitos").
+ * Só vale no fim do texto e junto de outra anotação, para nunca cortar texto de lei.
+ */
+const RE_PRODUCAO_SOLTA = /(?:^|\s)(Produ[çc][ãa]o de efeitos?)\s*$/;
 
 /** Separa o texto das anotações entre parênteses (com um nível de parênteses interno, como "(Vide ADIN 4.296)"). */
 export function separarAnotacoes(linha: string): { texto: string; anotacoes: Anotacao[] } {
@@ -92,7 +99,10 @@ export function separarAnotacoes(linha: string): { texto: string; anotacoes: Ano
     })
     .replace(/\s+/g, ' ')
     .trim();
-  return { texto: texto.replace(/^[-–—:.\s]+/, '').trim(), anotacoes };
+  const solta = anotacoes.length > 0 ? texto.match(RE_PRODUCAO_SOLTA) : null;
+  if (solta) anotacoes.push({ tipo: 'vigencia', texto: solta[1] });
+  const sem = solta ? texto.slice(0, solta.index).trim() : texto;
+  return { texto: sem.replace(/^[-–—:.\s]+/, '').trim(), anotacoes };
 }
 
 /** "5" + "º" → "5º" (só até 9, como na LC 95); "1.045" fica "1.045"; sufixo "-A" mantido. */

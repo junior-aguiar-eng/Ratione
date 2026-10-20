@@ -32,7 +32,7 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 
 - **Ato que deu a redação B:** Emenda Constitucional nº 100 de 26/06/2019 · publicado em **27/06/2019** (provisório)
 - **Redação A** (até 26/06/2019): Quando a transferência obrigatória da União, para a execução da programação prevista no §11 deste artigo, for destinada a Estados, ao Distrito Federal e a Municípios, independerá da adimplência do ente federativo destinatário e não integrará a base de cálculo da receita corrente líquida para fins de aplicação dos limites de despesa de pessoal de que trata o caput do art. 169. *(anotação do Planalto: Incluído pela Emenda Constitucional nº 86, de 2015)*
-- **Redação B** (a partir de 27/06/2019): As programações orçamentárias previstas nos §§ 11 e 12 deste artigo não serão de execução obrigatória nos casos dos impedimentos de ordem técnica. (Produção de efeito)
+- **Redação B** (a partir de 27/06/2019): As programações orçamentárias previstas nos §§ 11 e 12 deste artigo não serão de execução obrigatória nos casos dos impedimentos de ordem técnica.
 - **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
 - **Fonte:** [texto compilado do Planalto](https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm), lido em 19/10/2026
 - **Validação:** pendente
