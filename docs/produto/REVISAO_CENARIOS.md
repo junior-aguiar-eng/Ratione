@@ -685,7 +685,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 **CPP: 8 dias corridos vencem no sábado 14/03 e vão para a segunda 16/03**
 
 - **Entrada:** publicação em **06/03/2026 (sexta-feira)** · prazo de **8 dias** (CPP, dias corridos) · tribunal **TJSP** · modo conservador
-- **Publicação / dia do começo:** 06/03/2026 (sexta-feira) · **início da contagem:** 09/03/2026 (segunda-feira)
+- **Publicação / dia do começo:** 06/03/2026 (sexta-feira) · **início da contagem:** 07/03/2026 (sábado)
 - **Vencimento esperado:** **16/03/2026 (segunda-feira)** · prorrogado
 - **Como foi contado (dias excluídos):** 14/03/2026 vencimento em dia não útil (fim de semana), prorrogado (CPP, art. 798, § 3º)
 - **Fundamento:** CPP, art. 798, caput e § 3º
@@ -697,7 +697,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 **CPP: 3 dias corridos vencem em 12/10 (segunda, feriado) e vão para 13/10**
 
 - **Entrada:** publicação em **09/10/2026 (sexta-feira)** · prazo de **3 dias** (CPP, dias corridos) · tribunal **TJSP** · modo conservador
-- **Publicação / dia do começo:** 09/10/2026 (sexta-feira) · **início da contagem:** 13/10/2026 (terça-feira)
+- **Publicação / dia do começo:** 09/10/2026 (sexta-feira) · **início da contagem:** 10/10/2026 (sábado)
 - **Vencimento esperado:** **13/10/2026 (terça-feira)** · prorrogado
 - **Como foi contado (dias excluídos):** 12/10/2026 vencimento em dia não útil (Nossa Senhora Aparecida), prorrogado (CPP, art. 798, § 3º)
 - **Fundamento:** CPP, art. 798, § 3º; Lei 6.802/1980, art. 1º

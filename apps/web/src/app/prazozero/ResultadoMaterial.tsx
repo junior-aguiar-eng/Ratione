@@ -5,15 +5,16 @@ import { Bookmark, CalendarPlus, Check, Copy, FileDown } from 'lucide-react';
 import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
-import { salvarRegistro } from '../../lib/historico';
+import { useSalvar } from '../../lib/useSalvar';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import { Button } from '@/components/ui/button';
 
-export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string }) {
+export default function ResultadoMaterial({ resultado, titulo, tribunalId, urlSalvo }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string; urlSalvo: string }) {
   const [copiado, setCopiado] = useState(false);
-  const [salvo, setSalvo] = useState(false);
+  const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
+  const salvo = estadoSalvo === 'salvo';
   const rotuloInicio = resultado.tipo === 'mandado_seguranca' ? 'Ciência do ato' : 'Trânsito em julgado';
 
   const memoriaTexto = [
@@ -45,15 +46,13 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
   const exportar = () => exportarPdf(`prazozero-${nomeArquivoSeguro(titulo)}-${resultado.dataLimite}`);
 
   const salvar = () => {
-    salvarRegistro({
+    salvarNaConta({
       modulo: 'PrazoZero',
       tipo: 'prazo',
       titulo,
       detalhe: `${tribunalId} · último dia em ${dataCurta(resultado.dataLimite)}`,
-      url: '/prazozero'
+      url: urlSalvo
     });
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
   };
 
   return (
@@ -134,7 +133,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId }: { r
         </Button>
         <Button variant="secondary" type="button" onClick={salvar}>
           {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-          {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
+          {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
         </Button>
       </div>
 

@@ -8,7 +8,7 @@ import { BookOpen, Bookmark, Check, ExternalLink, Scale } from 'lucide-react';
 import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo, TipoNoGrafo } from '@ratione/tesemap';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
-import { salvarRegistro } from '../../lib/historico';
+import { useSalvar } from '../../lib/useSalvar';
 import { Button } from '@/components/ui/button';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Label } from '@/components/ui/label';
@@ -49,7 +49,8 @@ const ESTILO_TIPO: Record<TipoNoGrafo, { rotulo: string; cor: string; tom: Badge
 export default function TeseMapPage() {
   const [temaId, setTemaId] = useState(TEMAS[0].id);
   const [noSelecionado, setNoSelecionado] = useState<NoGrafo | null>(null);
-  const [salvo, setSalvo] = useState(false);
+  const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
+  const salvo = estadoSalvo === 'salvo';
 
   const grafo = GRAFOS_PRECEDENTES_CATALOGADOS[temaId];
 
@@ -122,15 +123,13 @@ export default function TeseMapPage() {
   const salvar = () => {
     if (!grafo) return;
     const tema = TEMAS.find(t => t.id === temaId)!;
-    salvarRegistro({
+    salvarNaConta({
       modulo: 'TeseMap',
       tipo: 'tese',
       titulo: tema.rotulo.split(' · ')[0],
       detalhe: grafo.temaPrincipal,
       url: '/tesemap'
     });
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
   };
 
   return (
@@ -249,7 +248,7 @@ export default function TeseMapPage() {
                 )}
                 <Button variant="secondary" type="button" onClick={salvar} className="w-full first:mt-2">
                   {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                  {salvo ? 'Salvo em Meu espaço' : 'Salvar tema em Meu espaço'}
+                  {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar tema em Meu espaço'}
                 </Button>
               </div>
             </>

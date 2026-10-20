@@ -403,7 +403,8 @@ export class MotorPrazoZero {
 
     // Etapa 2: Determinação do Termo Inicial da Contagem (CPC, art. 224, § 3º)
     // "excluindo o dia do começo e incluindo o do vencimento"
-    const dataTermoInicial = this.obterProximoDiaUtil(dataPublicacao, contextConfig);
+    // No CPP a contagem é em dias corridos e começa no dia seguinte (art. 798, § 1º): o termo inicial sai da própria contagem, mais abaixo
+    let dataTermoInicial = this.obterProximoDiaUtil(dataPublicacao, contextConfig);
 
     // Etapa 3: Iteração determinística dia a dia
     let cursor = somarDiasIso(dataPublicacao, 1);
@@ -533,6 +534,7 @@ export class MotorPrazoZero {
       cursor = somarDiasIso(cursor, 1);
     }
 
+    if (regime === 'cpp_dias_corridos') dataTermoInicial = memoria.find(i => i.diaContadoNumero === 1)?.data ?? dataTermoInicial;
     const diasCorridosTotais = diferencaDiasIso(p.dataEvento, dataFinalVencimento);
 
     // Certidão Textual Auditável Formatada
@@ -544,7 +546,7 @@ export class MotorPrazoZero {
       `Ato Processual: ${p.nomeAto || 'Prazo em dias'} (${diasPrazoEfetivo} dias ${regime === 'cpp_dias_corridos' ? 'corridos' : 'úteis'}${multiplicador > 1 ? ' - Prazo em Dobro' : ''})`,
       dataDisponibilizacao ? `• Disponibilização (DJe): ${dataDisponibilizacao} (CPC, art. 224, § 2º)` : '',
       `• Publicação Oficial: ${dataPublicacao}`,
-      `• Termo Inicial da Contagem: ${dataTermoInicial} (CPC, art. 224, § 3º)`,
+      `• Termo Inicial da Contagem: ${dataTermoInicial} (${regime === 'cpp_dias_corridos' ? 'CPP, art. 798, § 1º' : 'CPC, art. 224, § 3º'})`,
       `• TERMO AD QUEM (VENCIMENTO FINAL): ${dataFinalVencimento}`,
       `• Total de dias corridos transcorridos: ${diasCorridosTotais} dias`,
       foiProrrogadoTermoFinal ? `• Observação de Prorrogação: ${motivoProrrogacao}` : '',

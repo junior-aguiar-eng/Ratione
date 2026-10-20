@@ -68,7 +68,7 @@ function Formulario() {
             );
         }
       } else {
-        const { error } = await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${retorno}?proximo=/conta` });
+        const { error } = await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${retorno}?proximo=/conta/nova-senha` });
         if (error) setErro(traduzirErroAuth(error.message));
         else setAviso('Se houver uma conta com esse e-mail, enviamos o link para criar uma nova senha.');
       }

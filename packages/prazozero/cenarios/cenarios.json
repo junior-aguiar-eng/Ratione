@@ -3425,7 +3425,7 @@
     },
     "esperado": {
       "dataPublicacao": "2026-03-06",
-      "dataTermoInicial": "2026-03-09",
+      "dataTermoInicial": "2026-03-07",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": true,
       "calendarioVerificado": true,
@@ -3463,7 +3463,7 @@
     },
     "esperado": {
       "dataPublicacao": "2026-10-09",
-      "dataTermoInicial": "2026-10-13",
+      "dataTermoInicial": "2026-10-10",
       "dataVencimentoFinal": "2026-10-13",
       "foiProrrogadoTermoFinal": true,
       "calendarioVerificado": true,

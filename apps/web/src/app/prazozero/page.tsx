@@ -21,7 +21,8 @@ import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
-import { salvarRegistro } from '../../lib/historico';
+import { useSalvar } from '../../lib/useSalvar';
+import { lerPrazoZero, urlDoPrazoZero } from '../../lib/parametrosSalvos';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
@@ -60,10 +61,26 @@ export default function PrazoZeroPage() {
 
   const [memoriaAberta, setMemoriaAberta] = useState(false);
   const [copiado, setCopiado] = useState(false);
-  const [salvo, setSalvo] = useState(false);
+  const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
+  const salvo = estadoSalvo === 'salvo';
 
+  // Abrir um item de "Meu espaço" traz os parâmetros do cálculo na URL; sem eles, vale a data de hoje
   useEffect(() => {
-    setDataEvento(hojeIso());
+    const salvo = lerPrazoZero(window.location.search);
+    setDataEvento(salvo.data ?? hojeIso());
+    if (salvo.atoId) {
+      setAtoId(salvo.atoId);
+      const catalogado = buscarPrazo(salvo.atoId);
+      if (catalogado?.regime) setRegime(catalogado.regime);
+    }
+    if (salvo.dias) setDiasOutro(salvo.dias);
+    if (salvo.nome) setNomeOutro(salvo.nome);
+    if (salvo.tipoEvento) setTipoEvento(salvo.tipoEvento);
+    if (salvo.tribunalId) setTribunalId(salvo.tribunalId);
+    if (salvo.regime) setRegime(salvo.regime);
+    if (salvo.dobro) setPrazoEmDobro(true);
+    if (salvo.litisconsortes) setLitisconsortes(true);
+    if (salvo.excecaoCriminal) setExcecaoCriminal(true);
   }, []);
 
   const prazo = atoId === 'outro' ? undefined : buscarPrazo(atoId);
@@ -191,15 +208,23 @@ export default function PrazoZeroPage() {
 
   const salvar = () => {
     if (!resultado) return;
-    salvarRegistro({
+    salvarNaConta({
       modulo: 'PrazoZero',
       tipo: 'prazo',
       titulo: `${nomeAto} · ${resultado.diasTotaisComputados} dias ${tipoDias}`,
       detalhe: `${tribunalId} · prazo final em ${dataCurta(resultado.dataVencimentoFinal)}`,
-      url: '/prazozero'
+      url: urlDoPrazoZero({
+        atoId,
+        ...(atoId === 'outro' ? { dias, nome: nomeOutro.trim() } : {}),
+        tipoEvento,
+        data: dataEvento,
+        tribunalId,
+        regime,
+        dobro: prazoEmDobro,
+        litisconsortes,
+        excecaoCriminal: regime === 'cpp_dias_corridos' && excecaoCriminal
+      })
     });
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
   };
 
   return (
@@ -370,7 +395,12 @@ export default function PrazoZeroPage() {
         <div className="lg:col-span-7 flex flex-col gap-9 print:gap-6" aria-live="polite">
           {material ? (
             resultadoMaterial ? (
-              <ResultadoMaterial resultado={resultadoMaterial} titulo={nomeAto} tribunalId={tribunalId} />
+              <ResultadoMaterial
+                resultado={resultadoMaterial}
+                titulo={nomeAto}
+                tribunalId={tribunalId}
+                urlSalvo={urlDoPrazoZero({ atoId, data: dataEvento, tribunalId })}
+              />
             ) : (
               <Card>
                 <EmptyState titulo="Informe a data para calcular">
@@ -494,7 +524,7 @@ export default function PrazoZeroPage() {
                   </Button>
                   <Button variant="secondary" type="button" onClick={salvar}>
                     {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                    {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
+                    {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
                   </Button>
                 </div>
               </section>
