@@ -7,6 +7,7 @@ import Notice from '../../components/Notice';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
+import { caminhoInterno } from '../../lib/link-email';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -34,8 +35,8 @@ function Formulario() {
   }, [params]);
 
   // Depois de entrar, volta para onde o usuário queria ir (só caminhos internos)
-  const pedido = params.get('proximo') ?? '';
-  const proximo = pedido.startsWith('/') && !pedido.startsWith('//') && !pedido.startsWith('/entrar') ? pedido : '/prazozero';
+  const pedido = caminhoInterno(params.get('proximo'), '/prazozero');
+  const proximo = pedido.startsWith('/entrar') ? '/prazozero' : pedido;
 
   useEffect(() => {
     if (usuario) router.replace(proximo);

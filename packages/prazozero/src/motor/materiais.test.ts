@@ -70,3 +70,12 @@ describe('Prazos materiais (F2-14)', () => {
     assert.throws(() => calcularPrazoMaterial({ tipo: 'mandado_seguranca', dataInicio: '2026-02-30' }), /dataInicio inválida/);
   });
 });
+
+describe('Prazos materiais: UF do tribunal', () => {
+  it('rescisória que vence em feriado estadual ainda não conferido mostra a alternativa, como o prazo processual', () => {
+    // 16/09/2027 (quinta-feira): Emancipação Política de Alagoas, pendente de conferência
+    const r = calcularPrazoMaterial({ tipo: 'acao_rescisoria', dataInicio: '2025-09-16', tribunalId: 'TJAL' });
+    assert.strictEqual(r.dataLimite, '2027-09-16');
+    assert.strictEqual(r.dataAlternativa, '2027-09-17');
+  });
+});
