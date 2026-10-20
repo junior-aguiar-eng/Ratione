@@ -10,6 +10,11 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./consulta": {
+      "types": "./src/busca/consulta.ts",
+      "import": "./src/busca/consulta.ts",
+      "default": "./src/busca/consulta.ts"
     }
   },
   "scripts": {
