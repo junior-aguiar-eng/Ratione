@@ -1,7 +1,7 @@
 /**
  * Dados do NormaViva (F3-05, interface): leitura das tabelas públicas `normas`, `dispositivos`, `versoes_dispositivo` e `relacoes`
  * com a chave publicável do Supabase. A leitura é pública por RLS; nada aqui escreve.
- * O texto vem do Planalto e vale só como apoio: cada tela mostra a fonte, a data de leitura e o hash do que foi lido.
+ * O texto vem do Planalto e vale só como apoio: cada tela mostra a fonte e a data de leitura (o hash fica no banco, sem aparecer ao usuário).
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { interpretarConsulta } from '@ratione/normaviva/consulta';

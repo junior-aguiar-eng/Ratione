@@ -85,6 +85,3 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
       : `Redação atual, que a base data de ${dataCurta(versao.vigente_de)}: é a data de publicação do ato, usada como início provisório. A vigência pode ter começado em outro dia (vacatio legis); a cláusula de vigência do ato não foi lida.`
   };
 }
-
-/** "9f86d081884c…" para o hash exibido na fonte. */
-export const hashCurto = (hash: string) => `${hash.slice(0, 12)}…`;
