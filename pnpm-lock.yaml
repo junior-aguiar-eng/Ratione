@@ -146,6 +146,9 @@ importers:
       '@ratione/db':
         specifier: workspace:*
         version: link:../db
+      '@supabase/supabase-js':
+        specifier: ^2.117.3
+        version: 2.117.3
       '@types/node':
         specifier: ^24.0.0
         version: 24.19.1

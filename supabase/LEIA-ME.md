@@ -15,6 +15,25 @@ Este diretório guarda o esquema do banco (`migrations/`). O projeto real: `rati
    - a chave **publicável** (`sb_publishable_...`, em *API Keys*). A chave *secret* nunca vai para o `.env.local`.
 5. **Colocar no seu computador, não no GitHub.** Copie `apps/web/.env.example` para `apps/web/.env.local` e preencha as duas linhas. O `.env.local` já é ignorado pelo Git.
 
+## NormaViva: aplicar a migração e carregar o corpus das leis (F3-05)
+
+O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públicas de leitura: `normas`, `dispositivos`, `versoes_dispositivo` e `relacoes`. Ninguém além da chave de serviço escreve nelas.
+
+1. **Aplicar as duas migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261019000001_normaviva.sql` → *Run* ("Success"). Depois a mesma coisa com `supabase/migrations/20261019000002_resolver_destinos.sql`. Em *Table Editor* confira as 4 tabelas com o cadeado de RLS ligado.
+2. **Conferir a carga sem tocar no banco.** No terminal, em `packages/normaviva`: `pnpm carregar --simular`. Deve mostrar 28 normas, 29.447 dispositivos, 29.447 versões e 13.371 relações.
+3. **Carregar.** No mesmo terminal, **só nele**, defina as duas variáveis e rode (PowerShell):
+
+   ```powershell
+   $env:SUPABASE_URL = "https://<ref>.supabase.co"          # Project Settings → API → Project URL
+   $env:SUPABASE_SERVICE_ROLE_KEY = "<chave secret/service_role>"   # Project Settings → API Keys
+   pnpm carregar
+   ```
+
+   Ao final o script confere a contagem do banco contra o corpus e avisa se algo não bate. Pode repetir quando quiser: a recarga apaga as 4 tabelas e insere tudo de novo. Feche o terminal depois (a chave some da memória do terminal).
+4. **Testar a busca.** No SQL Editor: `select * from buscar_dispositivos('honorários advocatícios', 'LEI-13105-2015', 5);` deve devolver artigos do art. 85 do CPC.
+
+A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
+
 ## O que NÃO compartilhar
 
 - A chave **secret** / **`service_role`** (dá acesso total e ignora a RLS).

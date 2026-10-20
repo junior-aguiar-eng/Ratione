@@ -120,6 +120,12 @@ describe('Banco do NormaViva com o corpus do Planalto (F3-05)', () => {
     assert.ok(Number(por.mesma.n) >= 1 && Number(por.explicito.n) >= 1 && Number(por.externo.n) >= 1, 'as quatro classes de escopo aparecem');
   });
 
+  it('resolver_destinos_relacoes: só a chave de serviço executa, e rodar de novo não liga nada a mais', async () => {
+    await assert.rejects(como(db, null, tx => tx.query('select resolver_destinos_relacoes()')), /permission denied/);
+    const r = await db.query<{ n: number }>('select resolver_destinos_relacoes() as n');
+    assert.strictEqual(r.rows[0].n, 0, 'a carga já resolveu tudo o que dava para resolver');
+  });
+
   it('visitante lê, mas não escreve (RLS e privilégios)', async () => {
     const lido = await como(db, null, tx => tx.query('select count(*)::int as n from normas'));
     assert.strictEqual((lido.rows[0] as { n: number }).n, 28);
