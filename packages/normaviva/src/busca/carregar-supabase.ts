@@ -8,7 +8,8 @@
  *   SUPABASE_URL                  https://<ref>.supabase.co
  *   SUPABASE_SERVICE_ROLE_KEY     chave secreta (service_role); só este script a usa
  *
- * Antes: aplicar no SQL Editor as migrações 20261019000001_normaviva.sql e 20261019000002_resolver_destinos.sql.
+ * Antes: aplicar no SQL Editor as migrações de `supabase/migrations` (a 20261021000001_versoes_anteriores.sql acrescenta colunas que a carga usa).
+ * A carga inclui as redações anteriores dos casos do F3-07 (`historico-conhecido.json`) como segunda versão do dispositivo.
  * A recarga é completa e idempotente: `delete` em `normas` leva junto, em cascata, dispositivos, versões e relações.
  */
 import { join } from 'node:path';
@@ -73,7 +74,7 @@ export async function carregar(cliente: ClienteCarga, linhas: LinhasDaNorma[], l
 
 async function main() {
   const simular = process.argv.includes('--simular');
-  const linhas = linhasDoCorpus(PASTA);
+  const linhas = linhasDoCorpus(PASTA, undefined, { comHistorico: true });
   const esperado = contar(linhas);
   console.log('Corpus montado:', esperado);
   if (simular) {

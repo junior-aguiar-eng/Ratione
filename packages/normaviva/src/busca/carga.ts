@@ -10,6 +10,8 @@ import { detectarCharset, type EntradaManifesto } from '../coleta/coletar';
 import { paragrafosDoHtml, parsearDispositivos, type DispositivoParseado } from '../parser';
 import { versoesDaNorma, type DatasDaNorma, type VersaoNormativa } from '../versoes';
 import { extrairRemissoes } from './referencias';
+import { acrescentarVersoesAnteriores } from '../historico/anteriores';
+import type { CasoHistorico } from '../historico/historico';
 
 export interface LinhaNorma {
   id: string;
@@ -49,10 +51,17 @@ export interface LinhaVersao {
   ano_do_ato: number | null;
   fonte_da_data: string | null;
   vigente_de: string | null;
+  /** Fim da redação (a véspera da publicação do ato seguinte); nulo na redação vigente. */
+  vigente_ate: string | null;
   vigencia_confirmada: boolean;
   texto_anterior_disponivel: boolean;
   conhecido_em: string;
   hash: string;
+  /** `compilado`: texto vigente da página compilada; `tachado_planalto`: redação anterior lida do texto tachado da página anotada. */
+  fonte_do_texto: 'compilado' | 'tachado_planalto';
+  /** Quem conferiu a redação anterior no Diário Oficial (revisor jurídico) e quando; nulos enquanto não conferida. */
+  conferida_por: string | null;
+  conferida_em: string | null;
 }
 
 export interface LinhaRelacao {
@@ -134,10 +143,14 @@ export function montarLinhas(m: EntradaManifesto, html: string, datas: DatasDaNo
     ano_do_ato: v.anoDoAto,
     fonte_da_data: v.ato?.fonteDaData ?? (v.origem === 'redacao_original' && v.vigenteDe ? 'norma' : null),
     vigente_de: v.vigenteDe,
+    vigente_ate: null,
     vigencia_confirmada: false,
     texto_anterior_disponivel: false,
     conhecido_em: lidoEm,
-    hash: sha(v.texto)
+    hash: sha(v.texto),
+    fonte_do_texto: 'compilado' as const,
+    conferida_por: null,
+    conferida_em: null
   }));
 
   const relacoes: LinhaRelacao[] = [];
@@ -193,15 +206,21 @@ export function montarLinhas(m: EntradaManifesto, html: string, datas: DatasDaNo
   };
 }
 
-/** Lê o corpus gravado em `corpus/` e monta as linhas das normas pedidas (todas, se nenhuma for indicada). */
-export function linhasDoCorpus(pasta: string, ids?: string[]): LinhasDaNorma[] {
+/**
+ * Lê o corpus gravado em `corpus/` e monta as linhas das normas pedidas (todas, se nenhuma for indicada).
+ * Com `comHistorico`, acrescenta as redações anteriores dos casos do F3-07 (`historico-conhecido.json`) como segunda versão do dispositivo.
+ * Sem ele (o padrão), é só o corpus lido do Planalto: a geração dos próprios casos parte daí.
+ */
+export function linhasDoCorpus(pasta: string, ids?: string[], opcoes: { comHistorico?: boolean } = {}): LinhasDaNorma[] {
   const manifesto: EntradaManifesto[] = JSON.parse(readFileSync(join(pasta, 'planalto', 'manifesto.json'), 'utf-8'));
   const datas: { normas: Record<string, DatasDaNorma> } = JSON.parse(readFileSync(join(pasta, 'atos-senado.json'), 'utf-8'));
+  const casos: CasoHistorico[] = opcoes.comHistorico ? JSON.parse(readFileSync(join(pasta, 'historico-conhecido.json'), 'utf-8')) : [];
   return manifesto
     .filter(m => !ids || ids.includes(m.id))
     .map(m => {
       const html = detectarCharset(gunzipSync(readFileSync(join(pasta, 'planalto', m.arquivo))), null).texto;
-      return montarLinhas(m, html, datas.normas[m.id], m.lidoEm);
+      const linhas = montarLinhas(m, html, datas.normas[m.id], m.lidoEm);
+      return opcoes.comHistorico ? acrescentarVersoesAnteriores(linhas, casos, datas.normas[m.id]) : linhas;
     });
 }
 
@@ -215,7 +234,7 @@ const COLUNAS = {
   dispositivos:
     'id text, norma_id text, escopo text, rotulo text, tipo text, numero text, pai_id text, ordem integer, texto text, continuacao text, revogado boolean, anotacoes jsonb, estrutura text[]',
   versoes_dispositivo:
-    'dispositivo_id text, texto text, origem text, ato_chave text, ato_rotulo text, ato_assinatura date, ato_publicacao date, ano_do_ato integer, fonte_da_data text, vigente_de date, vigencia_confirmada boolean, texto_anterior_disponivel boolean, conhecido_em date, hash text',
+    'dispositivo_id text, texto text, origem text, ato_chave text, ato_rotulo text, ato_assinatura date, ato_publicacao date, ano_do_ato integer, fonte_da_data text, vigente_de date, vigente_ate date, vigencia_confirmada boolean, texto_anterior_disponivel boolean, conhecido_em date, hash text, fonte_do_texto text, conferida_por text, conferida_em date',
   relacoes: 'origem_id text, tipo text, destino_id text, destino_norma_id text, destino_rotulo text, destino_ato text, destino_texto text, trecho text, escopo text, origem_dado text'
 } as const;
 
