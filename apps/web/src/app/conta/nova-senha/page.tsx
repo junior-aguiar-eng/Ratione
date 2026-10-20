@@ -8,6 +8,7 @@ import Notice from '../../../components/Notice';
 import EmptyState from '../../../components/EmptyState';
 import { obterSupabase } from '../../../lib/supabase/client';
 import { useSessao } from '../../../lib/useSessao';
+import { irParaPagina } from '../../../lib/navegacao';
 import { traduzirErroAuth } from '../../../lib/erros-auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -41,7 +42,7 @@ export default function NovaSenhaPage() {
       setOcupado(false);
       return setErro(traduzirErroAuth(error.message));
     }
-    router.replace('/meu-espaco');
+    irParaPagina('/meu-espaco');
   };
 
   if (!carregando && !contaDisponivel) {
