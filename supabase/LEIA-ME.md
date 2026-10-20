@@ -19,7 +19,7 @@ Este diretório guarda o esquema do banco (`migrations/`). O projeto real: `rati
 
 O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públicas de leitura: `normas`, `dispositivos`, `versoes_dispositivo` e `relacoes`. Ninguém além da chave de serviço escreve nelas.
 
-1. **Aplicar as duas migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261019000001_normaviva.sql` → *Run* ("Success"). Depois a mesma coisa com `supabase/migrations/20261019000002_resolver_destinos.sql`. Em *Table Editor* confira as 4 tabelas com o cadeado de RLS ligado.
+1. **Aplicar as duas migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261019000001_normaviva.sql` → *Run* ("Success"). Depois a mesma coisa com `supabase/migrations/20261019000002_resolver_destinos.sql` e com `supabase/migrations/20261020000001_busca_por_proximidade.sql` (esta troca a função de busca por assunto por uma versão com proximidade; o projeto `ratione` já a tem aplicada desde 20/10/2026). Em *Table Editor* confira as 4 tabelas com o cadeado de RLS ligado.
 2. **Conferir a carga sem tocar no banco.** No terminal, em `packages/normaviva`: `pnpm carregar --simular`. Deve mostrar 28 normas, 29.447 dispositivos, 29.447 versões e 13.371 relações.
 3. **Carregar.** No mesmo terminal, **só nele**, defina as duas variáveis e rode (PowerShell):
 
