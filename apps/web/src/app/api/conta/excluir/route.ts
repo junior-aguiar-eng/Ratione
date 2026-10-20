@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { excluirConta } from '../../../../lib/excluir-conta';
+import { origemPublica } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
 /**
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
 
   // Só aceita pedido feito a partir do próprio site (defesa contra requisição forjada de outra origem)
   const origem = request.headers.get('origin');
-  if (origem && origem !== new URL(request.url).origin) {
+  if (origem && origem !== origemPublica(request)) {
     return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
   }
 
