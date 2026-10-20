@@ -115,13 +115,13 @@ function rotuloDe(caminho: PassoCaminho[]): string {
     .join(', ');
 }
 
-interface Marca {
+export interface Marca {
   tipo: TipoDispositivo;
   numero: string;
   resto: string;
 }
 
-function marcaDaLinha(linha: string, temArtigo: boolean): Marca | undefined {
+export function marcaDaLinha(linha: string, temArtigo: boolean): Marca | undefined {
   let m = linha.match(RE_ARTIGO);
   if (m) return { tipo: 'artigo', numero: numeroOrdinal(m[1], m[2], m[3]), resto: m[4] };
   if (!temArtigo) return undefined;

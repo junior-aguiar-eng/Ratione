@@ -1,0 +1,1172 @@
+[
+  {
+    "id": "CF-1988|corpo|art. 103-B, § 4º, III",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 103-B, § 4º, III",
+    "rotulo": "art. 103-B, § 4º, III",
+    "antes": {
+      "texto": "receber e conhecer das reclamações contra membros ou órgãos do Poder Judiciário, inclusive contra seus serviços auxiliares, serventias e órgãos prestadores de serviços notariais e de registro que atuem por delegação do poder público ou oficializados, sem prejuízo da competência disciplinar e correicional dos tribunais, podendo avocar processos disciplinares em curso e determinar a remoção, a disponibilidade ou a aposentadoria com subsídios ou proventos proporcionais ao tempo de serviço e aplicar outras sanções administrativas, assegurada ampla defesa;",
+      "anotacao": "Incluído pela Emenda Constitucional nº 45, de 2004"
+    },
+    "depois": {
+      "texto": "receber e conhecer das reclamações contra membros ou órgãos do Poder Judiciário, inclusive contra seus serviços auxiliares, serventias e órgãos prestadores de serviços notariais e de registro que atuem por delegação do poder público ou oficializados, sem prejuízo da competência disciplinar e correicional dos tribunais, podendo avocar processos disciplinares em curso, determinar a remoção ou a disponibilidade e aplicar outras sanções administrativas, assegurada ampla defesa;",
+      "atoRotulo": "Emenda Constitucional nº 103 de 12/11/2019",
+      "atoChave": "emenda-constitucional:103:2019",
+      "vigenteDe": "2019-11-13",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2019-11-12",
+        "esperado": "antes"
+      },
+      {
+        "em": "2019-11-13",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "CF-1988|corpo|art. 166, § 13",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 166, § 13",
+    "rotulo": "art. 166, § 13",
+    "antes": {
+      "texto": "Quando a transferência obrigatória da União, para a execução da programação prevista no §11 deste artigo, for destinada a Estados, ao Distrito Federal e a Municípios, independerá da adimplência do ente federativo destinatário e não integrará a base de cálculo da receita corrente líquida para fins de aplicação dos limites de despesa de pessoal de que trata o caput do art. 169.",
+      "anotacao": "Incluído pela Emenda Constitucional nº 86, de 2015"
+    },
+    "depois": {
+      "texto": "As programações orçamentárias previstas nos §§ 11 e 12 deste artigo não serão de execução obrigatória nos casos dos impedimentos de ordem técnica. (Produção de efeito)",
+      "atoRotulo": "Emenda Constitucional nº 100 de 26/06/2019",
+      "atoChave": "emenda-constitucional:100:2019",
+      "vigenteDe": "2019-06-27",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2019-06-26",
+        "esperado": "antes"
+      },
+      {
+        "em": "2019-06-27",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "CF-1988|corpo|art. 243",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 243",
+    "rotulo": "art. 243",
+    "antes": {
+      "texto": "As glebas de qualquer região do País onde forem localizadas culturas ilegais de plantas psicotrópicas serão imediatamente expropriadas e especificamente destinadas ao assentamento de colonos, para o cultivo de produtos alimentícios e medicamentosos, sem qualquer indenização ao proprietário e sem prejuízo de outras sanções previstas em lei.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "As propriedades rurais e urbanas de qualquer região do País onde forem localizadas culturas ilegais de plantas psicotrópicas ou a exploração de trabalho escravo na forma da lei serão expropriadas e destinadas à reforma agrária e a programas de habitação popular, sem qualquer indenização ao proprietário e sem prejuízo de outras sanções previstas em lei, observado, no que couber, o disposto no art. 5º.",
+      "atoRotulo": "Emenda Constitucional nº 81 de 05/06/2014",
+      "atoChave": "emenda-constitucional:81:2014",
+      "vigenteDe": "2014-06-06",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2014-06-05",
+        "esperado": "antes"
+      },
+      {
+        "em": "2014-06-06",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "CF-1988|corpo|art. 29-A, IV",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 29-A, IV",
+    "rotulo": "art. 29-A, IV",
+    "antes": {
+      "texto": "cinco por cento para Municípios com população acima de quinhentos mil habitantes.",
+      "anotacao": "Incluído pela Emenda Constitucional nº 25, de 2000"
+    },
+    "depois": {
+      "texto": "4,5% (quatro inteiros e cinco décimos por cento) para Municípios com população entre 500.001 (quinhentos mil e um) e 3.000.000 (três milhões) de habitantes;",
+      "atoRotulo": "Emenda Constitucional nº 58 de 23/09/2009",
+      "atoChave": "emenda-constitucional:58:2009",
+      "vigenteDe": "2009-09-24",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2009-09-23",
+        "esperado": "antes"
+      },
+      {
+        "em": "2009-09-24",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "CF-1988|corpo|art. 73, § 1º, I",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 73, § 1º, I",
+    "rotulo": "art. 73, § 1º, I",
+    "antes": {
+      "texto": "mais de trinta e cinco e menos de sessenta e cinco anos de idade;",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "mais de trinta e cinco e menos de setenta anos de idade;",
+      "atoRotulo": "Emenda Constitucional nº 122 de 17/05/2022",
+      "atoChave": "emenda-constitucional:122:2022",
+      "vigenteDe": "2022-05-18",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2022-05-17",
+        "esperado": "antes"
+      },
+      {
+        "em": "2022-05-18",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "CF-1988|corpo|art. 7º, XII",
+    "normaId": "CF-1988",
+    "normaNome": "Constituição da República Federativa do Brasil de 1988",
+    "dispositivoId": "CF-1988|corpo|art. 7º, XII",
+    "rotulo": "art. 7º, XII",
+    "antes": {
+      "texto": "salário-família para os seus dependentes;",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "salário-família pago em razão do dependente do trabalhador de baixa renda nos termos da lei;",
+      "atoRotulo": "Emenda Constitucional nº 20 de 15/12/1998",
+      "atoChave": "emenda-constitucional:20:1998",
+      "vigenteDe": "1998-12-16",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1998-12-15",
+        "esperado": "antes"
+      },
+      {
+        "em": "1998-12-16",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "DL-5452-1943|corpo|art. 73, § 4º",
+    "normaId": "DL-5452-1943",
+    "normaNome": "Decreto-Lei nº 5.452/1943 (Consolidação das Leis do Trabalho)",
+    "dispositivoId": "DL-5452-1943|corpo|art. 73, § 4º",
+    "rotulo": "art. 73, § 4º",
+    "antes": {
+      "texto": "As prorrogações do trabalho noturno aplica-se o disposto neste capítulo.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Nos horários mistos, assim entendidos os que abrangem períodos diurnos e noturnos, aplica-se às horas de trabalho noturno o disposto neste artigo e seus parágrafos.",
+      "atoRotulo": "Decreto-Lei nº 9.666 de 28/08/1946",
+      "atoChave": "decreto-lei:9666:1946",
+      "vigenteDe": "1946-08-30",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1946-08-29",
+        "esperado": "antes"
+      },
+      {
+        "em": "1946-08-30",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11340-2006|corpo|art. 18, II",
+    "normaId": "LEI-11340-2006",
+    "normaNome": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "dispositivoId": "LEI-11340-2006|corpo|art. 18, II",
+    "rotulo": "art. 18, II",
+    "antes": {
+      "texto": "determinar o encaminhamento da ofendida ao órgão de assistência judiciária, quando for o caso;",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "determinar o encaminhamento da ofendida ao órgão de assistência judiciária, quando for o caso, inclusive para o ajuizamento da ação de separação judicial, de divórcio, de anulação de casamento ou de dissolução de união estável perante o juízo competente;",
+      "atoRotulo": "Lei nº 13.894 de 29/10/2019",
+      "atoChave": "lei:13894:2019",
+      "vigenteDe": "2019-10-30",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2019-10-29",
+        "esperado": "antes"
+      },
+      {
+        "em": "2019-10-30",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11340-2006|corpo|art. 22, § 4º",
+    "normaId": "LEI-11340-2006",
+    "normaNome": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "dispositivoId": "LEI-11340-2006|corpo|art. 22, § 4º",
+    "rotulo": "art. 22, § 4º",
+    "antes": {
+      "texto": "Aplica-se às hipóteses previstas neste artigo, no que couber, o disposto no caput e nos §§ 5º e 6º do art. 461 da Lei no 5.869, de 11 de janeiro de 1973 (Código de Processo Civil).",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Na aplicação das medidas protetivas de urgência, o juiz concederá a tutela específica ou determinará providências que assegurem a obtenção de tutela pelo resultado prático equivalente.",
+      "atoRotulo": "Lei nº 15.412 de 20/05/2026",
+      "atoChave": "lei:15412:2026",
+      "vigenteDe": "2026-05-21",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2026-05-20",
+        "esperado": "antes"
+      },
+      {
+        "em": "2026-05-21",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11340-2006|corpo|art. 38-A, parágrafo único",
+    "normaId": "LEI-11340-2006",
+    "normaNome": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "dispositivoId": "LEI-11340-2006|corpo|art. 38-A, parágrafo único",
+    "rotulo": "art. 38-A, parágrafo único",
+    "antes": {
+      "texto": "As medidas protetivas de urgência serão registradas em banco de dados mantido e regulamentado pelo Conselho Nacional de Justiça, garantido o acesso do Ministério Público, da Defensoria Pública e dos órgãos de segurança pública e de assistência social, com vistas à fiscalização e à efetividade das medidas protetivas.",
+      "anotacao": "Incluído pela Lei nº 13.827, de 2019"
+    },
+    "depois": {
+      "texto": "As medidas protetivas de urgência serão, após sua concessão, imediatamente registradas em banco de dados mantido e regulamentado pelo Conselho Nacional de Justiça, garantido o acesso instantâneo do Ministério Público, da Defensoria Pública e dos órgãos de segurança pública e de assistência social, com vistas à fiscalização e à efetividade das medidas protetivas. Vigência",
+      "atoRotulo": "Lei nº 14.310 de 08/03/2022",
+      "atoChave": "lei:14310:2022",
+      "vigenteDe": "2022-03-09",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2022-03-08",
+        "esperado": "antes"
+      },
+      {
+        "em": "2022-03-09",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11340-2006|corpo|art. 7º, II",
+    "normaId": "LEI-11340-2006",
+    "normaNome": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "dispositivoId": "LEI-11340-2006|corpo|art. 7º, II",
+    "rotulo": "art. 7º, II",
+    "antes": {
+      "texto": "a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da auto-estima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "a violência psicológica, entendida como qualquer conduta que lhe cause dano emocional e diminuição da autoestima ou que lhe prejudique e perturbe o pleno desenvolvimento ou que vise degradar ou controlar suas ações, comportamentos, crenças e decisões, mediante ameaça, constrangimento, humilhação, manipulação, isolamento, vigilância constante, perseguição contumaz, insulto, chantagem, violação de sua intimidade, ridicularização, exploração e limitação do direito de ir e vir ou qualquer outro meio que lhe cause prejuízo à saúde psicológica e à autodeterminação;",
+      "atoRotulo": "Lei nº 13.772 de 19/12/2018",
+      "atoChave": "lei:13772:2018",
+      "vigenteDe": "2018-12-20",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2018-12-19",
+        "esperado": "antes"
+      },
+      {
+        "em": "2018-12-20",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11340-2006|corpo|art. 9º",
+    "normaId": "LEI-11340-2006",
+    "normaNome": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "dispositivoId": "LEI-11340-2006|corpo|art. 9º",
+    "rotulo": "art. 9º",
+    "antes": {
+      "texto": "A assistência à mulher em situação de violência doméstica e familiar será prestada de forma articulada e conforme os princípios e as diretrizes previstos na Lei Orgânica da Assistência Social, no Sistema Único de Saúde, no Sistema Único de Segurança Pública, entre outras normas e políticas públicas de proteção, e emergencialmente quando for o caso.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "A assistência à mulher em situação de violência doméstica e familiar será prestada em caráter prioritário no Sistema Único de Saúde (SUS) e no Sistema Único de Segurança Pública (Susp), de forma articulada e conforme os princípios e as diretrizes previstos na Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social), e em outras normas e políticas públicas de proteção, e emergencialmente, quando for o caso.",
+      "atoRotulo": "Lei nº 14.887 de 12/06/2024",
+      "atoChave": "lei:14887:2024",
+      "vigenteDe": "2024-06-13",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2024-06-12",
+        "esperado": "antes"
+      },
+      {
+        "em": "2024-06-13",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11343-2006|corpo|art. 32",
+    "normaId": "LEI-11343-2006",
+    "normaNome": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "dispositivoId": "LEI-11343-2006|corpo|art. 32",
+    "rotulo": "art. 32",
+    "antes": {
+      "texto": "As plantações ilícitas serão imediatamente destruídas pelas autoridades de polícia judiciária, que recolherão quantidade suficiente para exame pericial, de tudo lavrando auto de levantamento das condições encontradas, com a delimitação do local, asseguradas as medidas necessárias para a preservação da prova.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "As plantações ilícitas serão imediatamente destruídas pelo delegado de polícia na forma do art. 50-A, que recolherá quantidade suficiente para exame pericial, de tudo lavrando auto de levantamento das condições encontradas, com a delimitação do local, asseguradas as medidas necessárias para a preservação da prova.",
+      "atoRotulo": "Lei nº 12.961 de 04/04/2014",
+      "atoChave": "lei:12961:2014",
+      "vigenteDe": "2014-04-07",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2014-04-06",
+        "esperado": "antes"
+      },
+      {
+        "em": "2014-04-07",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11343-2006|corpo|art. 62, § 4º",
+    "normaId": "LEI-11343-2006",
+    "normaNome": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "dispositivoId": "LEI-11343-2006|corpo|art. 62, § 4º",
+    "rotulo": "art. 62, § 4º",
+    "antes": {
+      "texto": "Após a instauração da competente ação penal, o Ministério Público, mediante petição autônoma, requererá ao juízo competente que, em caráter cautelar, proceda à alienação dos bens apreendidos, excetuados aqueles que a União, por intermédio da Senad, indicar para serem colocados sob uso e custódia da autoridade de polícia judiciária, de órgãos de inteligência ou militares, envolvidos nas ações de prevenção ao uso indevido de drogas e operações de repressão à produção não autorizada e ao tráfico ilícito de drogas, exclusivamente no interesse dessas atividades.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Quando a autorização judicial recair sobre veículos, embarcações ou aeronaves, o juiz ordenará à autoridade ou ao órgão de registro e controle a expedição de certificado provisório de registro e licenciamento em favor do órgão ao qual tenha deferido o uso ou custódia, ficando este livre do pagamento de multas, encargos e tributos anteriores à decisão de utilização do bem até o trânsito em julgado da decisão que decretar o seu perdimento em favor da União.",
+      "atoRotulo": "Lei nº 13.840 de 05/06/2019",
+      "atoChave": "lei:13840:2019",
+      "vigenteDe": "2019-06-06",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2019-06-05",
+        "esperado": "antes"
+      },
+      {
+        "em": "2019-06-06",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-11343-2006|corpo|art. 73",
+    "normaId": "LEI-11343-2006",
+    "normaNome": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "dispositivoId": "LEI-11343-2006|corpo|art. 73",
+    "rotulo": "art. 73",
+    "antes": {
+      "texto": "A União poderá celebrar convênios com os Estados visando à prevenção e repressão do tráfico ilícito e do uso indevido de drogas.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "A União poderá estabelecer convênios com os Estados e o com o Distrito Federal, visando à prevenção e repressão do tráfico ilícito e do uso indevido de drogas, e com os Municípios, com o objetivo de prevenir o uso indevido delas e de possibilitar a atenção e reinserção social de usuários e dependentes de drogas.",
+      "atoRotulo": "Lei nº 12.219 de 31/03/2010",
+      "atoChave": "lei:12219:2010",
+      "vigenteDe": "2010-04-01",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2010-03-31",
+        "esperado": "antes"
+      },
+      {
+        "em": "2010-04-01",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-14133-2021|corpo|art. 86, § 3º",
+    "normaId": "LEI-14133-2021",
+    "normaNome": "Lei nº 14.133/2021 (Licitações e Contratos Administrativos)",
+    "dispositivoId": "LEI-14133-2021|corpo|art. 86, § 3º",
+    "rotulo": "art. 86, § 3º",
+    "antes": {
+      "texto": "A faculdade conferida pelo § 2º deste artigo estará limitada a órgãos e entidades da Administração Pública federal, estadual, distrital e municipal que, na condição de não participantes, desejarem aderir à ata de registro de preços de órgão ou entidade gerenciadora federal, estadual ou distrital.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "A faculdade de aderir à ata de registro de preços na condição de não participante poderá ser exercida:",
+      "atoRotulo": "Lei nº 14.770 de 22/12/2023",
+      "atoChave": "lei:14770:2023",
+      "vigenteDe": "2023-12-22",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2023-12-21",
+        "esperado": "antes"
+      },
+      {
+        "em": "2023-12-22",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-6830-1980|corpo|art. 7º-O, II",
+    "normaId": "LEI-6830-1980",
+    "normaNome": "Lei nº 6.830/1980 (Execução Fiscal)",
+    "dispositivoId": "LEI-6830-1980|corpo|art. 7º-O, II",
+    "rotulo": "art. 7º-O, II",
+    "antes": {
+      "texto": "penhora, se não for paga a dívida, nem garantida a execução, por meio de depósito ou fiança;",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "penhora, se não for paga a dívida, nem garantida a execução, por meio de depósito, fiança ou seguro garantia;",
+      "atoRotulo": "Lei nº 13.043 de 13/11/2014",
+      "atoChave": "lei:13043:2014",
+      "vigenteDe": "2014-11-14",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2014-11-13",
+        "esperado": "antes"
+      },
+      {
+        "em": "2014-11-14",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l6830.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8112-1990|corpo|art. 247",
+    "normaId": "LEI-8112-1990",
+    "normaNome": "Lei nº 8.112/1990 (Regime Jurídico dos Servidores Públicos Civis da União)",
+    "dispositivoId": "LEI-8112-1990|corpo|art. 247",
+    "rotulo": "art. 247",
+    "antes": {
+      "texto": "Para efeito do disposto no § 2° do art. 231, haverá ajuste de contas com a Previdência Social, correspondente ao período de contribuição por parte dos servidores celetistas abrangidos pelo art. 243.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Para efeito do disposto no Título VI desta Lei, haverá ajuste de contas com a Previdência Social, correspondente ao período de contribuição por parte dos servidores celetistas abrangidos pelo art. 243.",
+      "atoRotulo": "Lei nº 8.162 de 08/01/1991",
+      "atoChave": "lei:8162:1991",
+      "vigenteDe": "1991-01-09",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1991-01-08",
+        "esperado": "antes"
+      },
+      {
+        "em": "1991-01-09",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8112-1990|corpo|art. 9º, II",
+    "normaId": "LEI-8112-1990",
+    "normaNome": "Lei nº 8.112/1990 (Regime Jurídico dos Servidores Públicos Civis da União)",
+    "dispositivoId": "LEI-8112-1990|corpo|art. 9º, II",
+    "rotulo": "art. 9º, II",
+    "antes": {
+      "texto": "em comissão, para cargos de confiança, de livre exoneração.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "em comissão, inclusive na condição de interino, para cargos de confiança vagos.",
+      "atoRotulo": "Lei nº 9.527 de 10/12/1997",
+      "atoChave": "lei:9527:1997",
+      "vigenteDe": "1997-12-11",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1997-12-10",
+        "esperado": "antes"
+      },
+      {
+        "em": "1997-12-11",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8213-1991|corpo|art. 151",
+    "normaId": "LEI-8213-1991",
+    "normaNome": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "dispositivoId": "LEI-8213-1991|corpo|art. 151",
+    "rotulo": "art. 151",
+    "antes": {
+      "texto": "Até que seja elaborada a lista de doenças mencionadas no inciso II do art. 26, independe de carência a concessão de auxílio-doença e aposentadoria por invalidez ao segurado que, após filiar-se ao Regime Geral de Previdência Social, for acometido das seguintes doenças: tuberculose ativa; hanseníase; alienação mental; neoplasia maligna; cegueira; paralisia irreversível e incapacitante; cardiopatia grave; doença de Parkinson; espondiloartrose anquilosante; nefropatia grave; estado avançado da doença de Paget (osteíte deformante); síndrome da deficiência imunológica adquirida-Aids; e contaminação por radiação, com base em conclusão da medicina especializada.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Até que seja elaborada a lista de doenças mencionada no inciso II do art. 26, independe de carência a concessão de auxílio-doença e de aposentadoria por invalidez ao segurado que, após filiar-se ao RGPS, for acometido das seguintes doenças: tuberculose ativa, hanseníase, alienação mental, esclerose múltipla, hepatopatia grave, neoplasia maligna, cegueira, paralisia irreversível e incapacitante, cardiopatia grave, doença de Parkinson, espondiloartrose anquilosante, nefropatia grave, estado avançado da doença de Paget (osteíte deformante), síndrome da deficiência imunológica adquirida (aids) ou contaminação por radiação, com base em conclusão da medicina especializada.",
+      "atoRotulo": "Lei nº 13.135 de 17/06/2015",
+      "atoChave": "lei:13135:2015",
+      "vigenteDe": "2015-06-18",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2015-06-17",
+        "esperado": "antes"
+      },
+      {
+        "em": "2015-06-18",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8213-1991|corpo|art. 29, § 3º",
+    "normaId": "LEI-8213-1991",
+    "normaNome": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "dispositivoId": "LEI-8213-1991|corpo|art. 29, § 3º",
+    "rotulo": "art. 29, § 3º",
+    "antes": {
+      "texto": "Serão considerados para o cálculo do salário-de-benefício os ganhos habituais do segurado empregado, a qualquer título, sob forma de moeda corrente ou de utilidades, sobre os quais tenha incidido contribuição previdenciária.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Serão considerados para cálculo do salário-de-benefício os ganhos habituais do segurado empregado, a qualquer título, sob forma de moeda corrente ou de utilidades, sobre os quais tenha incidido contribuições previdenciárias, exceto o décimo-terceiro salário (gratificação natalina).",
+      "atoRotulo": "Lei nº 8.870 de 15/04/1994",
+      "atoChave": "lei:8870:1994",
+      "vigenteDe": "1994-04-16",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1994-04-15",
+        "esperado": "antes"
+      },
+      {
+        "em": "1994-04-16",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8213-1991|corpo|art. 44",
+    "normaId": "LEI-8213-1991",
+    "normaNome": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "dispositivoId": "LEI-8213-1991|corpo|art. 44",
+    "rotulo": "art. 44",
+    "antes": {
+      "texto": "A aposentadoria por invalidez, observado o disposto na Seção III deste capítulo, especialmente no art. 33, consistirá numa renda mensal correspondente a:",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "A aposentadoria por invalidez, inclusive a decorrente de acidente do trabalho, consistirá numa renda mensal correspondente a 100% (cem por cento) do salário-de-benefício, observado o disposto na Seção III, especialmente no art. 33 desta Lei.",
+      "atoRotulo": "Lei nº 9.032 de 28/04/1995",
+      "atoChave": "lei:9032:1995",
+      "vigenteDe": "1995-04-29",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1995-04-28",
+        "esperado": "antes"
+      },
+      {
+        "em": "1995-04-29",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8213-1991|corpo|art. 6º",
+    "normaId": "LEI-8213-1991",
+    "normaNome": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "dispositivoId": "LEI-8213-1991|corpo|art. 6º",
+    "rotulo": "art. 6º",
+    "antes": {
+      "texto": "O Conselho Nacional de Previdência Social (CNPS) deverá indicar cidadão de notório conhecimento na área para exercer a função de Ouvidor Geral da Previdência Social, que terá mandato de 2 (dois) anos, sendo vedada a sua recondução.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Haverá, no âmbito da Previdência Social, uma Ouvidoria-Geral, cujas atribuições serão definidas em regulamento.",
+      "atoRotulo": "Lei nº 9.711 de 20/11/1998",
+      "atoChave": "lei:9711:1998",
+      "vigenteDe": "1998-11-21",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1998-11-20",
+        "esperado": "antes"
+      },
+      {
+        "em": "1998-11-21",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-8213-1991|corpo|art. 72",
+    "normaId": "LEI-8213-1991",
+    "normaNome": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "dispositivoId": "LEI-8213-1991|corpo|art. 72",
+    "rotulo": "art. 72",
+    "antes": {
+      "texto": "O salário-maternidade para a segurada empregada ou trabalhadora avulsa consistirá numa renda mensal igual à sua remuneração integral e será pago pela empresa, efetivando-se a compensação quando do recolhimento das contribuições, sobre a folha de salários.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "O salário-maternidade para a segurada empregada ou trabalhadora avulsa consistirá numa renda mensal igual a sua remuneração integral.",
+      "atoRotulo": "Lei nº 9.876 de 26/11/1999",
+      "atoChave": "lei:9876:1999",
+      "vigenteDe": "1999-11-29",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "1999-11-28",
+        "esperado": "antes"
+      },
+      {
+        "em": "1999-11-29",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+      "tipoPagina": "compilada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9099-1995|corpo|art. 23",
+    "normaId": "LEI-9099-1995",
+    "normaNome": "Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais)",
+    "dispositivoId": "LEI-9099-1995|corpo|art. 23",
+    "rotulo": "art. 23",
+    "antes": {
+      "texto": "Não comparecendo o demandado, o Juiz togado proferirá sentença.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Se o demandado não comparecer ou recusar-se a participar da tentativa de conciliação não presencial, o Juiz togado proferirá sentença.",
+      "atoRotulo": "Lei nº 13.994 de 24/04/2020",
+      "atoChave": "lei:13994:2020",
+      "vigenteDe": "2020-04-27",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2020-04-26",
+        "esperado": "antes"
+      },
+      {
+        "em": "2020-04-27",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9099-1995|corpo|art. 60",
+    "normaId": "LEI-9099-1995",
+    "normaNome": "Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais)",
+    "dispositivoId": "LEI-9099-1995|corpo|art. 60",
+    "rotulo": "art. 60",
+    "antes": {
+      "texto": "O Juizado Especial Criminal, provido por Juízes togados ou togados e leigos, tem competência para a conciliação, o julgamento e a execução das infrações penais de menor potencial ofensivo.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "O Juizado Especial Criminal, provido por juízes togados ou togados e leigos, tem competência para a conciliação, o julgamento e a execução das infrações penais de menor potencial ofensivo, respeitadas as regras de conexão e continência.",
+      "atoRotulo": "Lei nº 11.313 de 28/06/2006",
+      "atoChave": "lei:11313:2006",
+      "vigenteDe": "2006-06-29",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2006-06-28",
+        "esperado": "antes"
+      },
+      {
+        "em": "2006-06-29",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9099-1995|corpo|art. 69, parágrafo único",
+    "normaId": "LEI-9099-1995",
+    "normaNome": "Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais)",
+    "dispositivoId": "LEI-9099-1995|corpo|art. 69, parágrafo único",
+    "rotulo": "art. 69, parágrafo único",
+    "antes": {
+      "texto": "Ao autor do fato que, após a lavratura do termo, for imediatamente encaminhado ao Juizado ou assumir o compromisso de a ele comparecer, não se imporá prisão em flagrante, nem se exigirá fiança.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Ao autor do fato que, após a lavratura do termo, for imediatamente encaminhado ao juizado ou assumir o compromisso de a ele comparecer, não se imporá prisão em flagrante, nem se exigirá fiança. Em caso de violência doméstica, o juiz poderá determinar, como medida de cautela, seu afastamento do lar, domicílio ou local de convivência com a vítima. )",
+      "atoRotulo": "Lei nº 10.455 de 13/05/2002",
+      "atoChave": "lei:10455:2002",
+      "vigenteDe": "2002-05-14",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2002-05-13",
+        "esperado": "antes"
+      },
+      {
+        "em": "2002-05-14",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9099-1995|corpo|art. 83, § 2º",
+    "normaId": "LEI-9099-1995",
+    "normaNome": "Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais)",
+    "dispositivoId": "LEI-9099-1995|corpo|art. 83, § 2º",
+    "rotulo": "art. 83, § 2º",
+    "antes": {
+      "texto": "Quando opostos contra sentença, os embargos de declaração suspenderão o prazo para o recurso.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Os embargos de declaração interrompem o prazo para a interposição de recurso.",
+      "atoRotulo": "Lei nº 13.105 de 16/03/2015",
+      "atoChave": "lei:13105:2015",
+      "vigenteDe": "2015-03-17",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2015-03-16",
+        "esperado": "antes"
+      },
+      {
+        "em": "2015-03-17",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9099-1995|corpo|art. 8º, § 1º",
+    "normaId": "LEI-9099-1995",
+    "normaNome": "Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais)",
+    "dispositivoId": "LEI-9099-1995|corpo|art. 8º, § 1º",
+    "rotulo": "art. 8º, § 1º",
+    "antes": {
+      "texto": "Somente as pessoas físicas capazes serão admitidas a propor ação perante o Juizado Especial, excluídos os cessionários de direito de pessoas jurídicas.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "Somente serão admitidas a propor ação perante o Juizado Especial:",
+      "atoRotulo": "Lei nº 12.126 de 16/12/2009",
+      "atoChave": "lei:12126:2009",
+      "vigenteDe": "2009-12-17",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2009-12-16",
+        "esperado": "antes"
+      },
+      {
+        "em": "2009-12-17",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  },
+  {
+    "id": "LEI-9307-1996|corpo|art. 13, § 4º",
+    "normaId": "LEI-9307-1996",
+    "normaNome": "Lei nº 9.307/1996 (Arbitragem)",
+    "dispositivoId": "LEI-9307-1996|corpo|art. 13, § 4º",
+    "rotulo": "art. 13, § 4º",
+    "antes": {
+      "texto": "Sendo nomeados vários árbitros, estes, por maioria, elegerão o presidente do tribunal arbitral. Não havendo consenso, será designado presidente o mais idoso.",
+      "anotacao": null
+    },
+    "depois": {
+      "texto": "As partes, de comum acordo, poderão afastar a aplicação de dispositivo do regulamento do órgão arbitral institucional ou entidade especializada que limite a escolha do árbitro único, coárbitro ou presidente do tribunal à respectiva lista de árbitros, autorizado o controle da escolha pelos órgãos competentes da instituição, sendo que, nos casos de impasse e arbitragem multiparte, deverá ser observado o que dispuser o regulamento aplicável.",
+      "atoRotulo": "Lei nº 13.129 de 26/05/2015",
+      "atoChave": "lei:13129:2015",
+      "vigenteDe": "2015-05-27",
+      "fonteDaData": "publicacao_senado"
+    },
+    "vigenciaConfirmada": false,
+    "consultas": [
+      {
+        "em": "2015-05-26",
+        "esperado": "antes"
+      },
+      {
+        "em": "2015-05-27",
+        "esperado": "depois"
+      }
+    ],
+    "fonte": {
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9307.htm",
+      "tipoPagina": "anotada",
+      "lidoEm": "2026-10-19"
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    }
+  }
+]

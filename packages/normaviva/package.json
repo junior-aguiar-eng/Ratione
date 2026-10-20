@@ -26,6 +26,7 @@
     "parsear": "tsx src/parser/verificar.ts",
     "versoes": "tsx src/versoes/verificar.ts",
     "relacoes": "tsx src/busca/verificar.ts",
+    "historico": "tsx src/historico/gerar.ts",
     "atualizar": "tsx src/atualizacao/atualizar.ts",
     "carregar": "tsx src/busca/carregar-supabase.ts"
   },

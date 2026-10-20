@@ -27,8 +27,22 @@ const IGNORADOS = new Set(['script', 'style', 'head']);
 /** Parágrafos de texto, na ordem do documento, sem o conteúdo tachado e com espaços normalizados. */
 const RE_ROTULO_TACHADO = /^(Arts?\.?\s*\d[\d.]*\s*[ºo°]?(?:\s*-\s*[A-Z]{1,2})?\s*\.?|§\s*\d[\d.]*\s*[ºo°]?(?:\s*-\s*[A-Z]{1,2})?\s*\.?|Par[áa]grafo [úu]nico\s*\.?|[IVXLCDM]+(?:\s*-\s*[A-Z]{1,2})?\s+[-–—]|[a-z]\))/;
 
+export interface ParagrafoComTachado {
+  /** Texto vigente do parágrafo (sem o tachado), como o parser o recebe. */
+  texto: string;
+  /** Trechos tachados que fecharam neste parágrafo: a redação que perdeu a vigência (só serve de evidência histórica, nunca de texto vigente). */
+  tachados: string[];
+}
+
+/** Parágrafos de texto sem o tachado (a entrada do parser). */
 export function paragrafosDoHtml(html: string): string[] {
-  const saida: string[] = [];
+  return paragrafosComTachado(html).map(p => p.texto);
+}
+
+/** Os mesmos parágrafos, com o texto tachado de cada um guardado à parte (F3-07: redação anterior de um dispositivo). */
+export function paragrafosComTachado(html: string): ParagrafoComTachado[] {
+  const saida: ParagrafoComTachado[] = [];
+  let tachadosAtual: string[] = [];
   let atual = '';
   let tachado = 0;
   let tachadoTexto = '';
@@ -39,7 +53,11 @@ export function paragrafosDoHtml(html: string): string[] {
     if (rotuloResgatado && !/\(\s*(Revogad|Vetad|Suprimid)/i.test(atual.slice(rotuloResgatado.length))) atual = atual.slice(rotuloResgatado.length);
     rotuloResgatado = '';
     const t = atual.replace(/[\s ]+/g, ' ').trim();
-    if (t) saida.push(t);
+    // Parágrafo inteiro tachado (a redação antiga) vem logo antes do parágrafo com a redação nova: o tachado espera o próximo com texto
+    if (t) {
+      saida.push({ texto: t, tachados: tachadosAtual });
+      tachadosAtual = [];
+    }
     atual = '';
   };
   const sem = html.replace(/<!--[\s\S]*?-->/g, '');
@@ -59,7 +77,9 @@ export function paragrafosDoHtml(html: string): string[] {
       if (tachado === 0) {
         // Dispositivo revogado com o texto inteiro tachado: o texto sai, mas o rótulo fica para a "(Revogado…)" que vem depois,
         // senão o artigo some do corpus.
-        const rotulo = tachadoTexto.replace(/\s+/g, ' ').trim().match(RE_ROTULO_TACHADO)?.[1];
+        const grupo = tachadoTexto.replace(/\s+/g, ' ').trim();
+        if (grupo) tachadosAtual.push(grupo);
+        const rotulo = grupo.match(RE_ROTULO_TACHADO)?.[1];
         if (rotulo && atual.replace(/\s+/g, '') === '') {
           atual = rotulo + ' ';
           rotuloResgatado = atual;
