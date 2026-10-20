@@ -38,6 +38,12 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 `supabase/migrations/20261020000002_limite_itens_salvos.sql` limita a 1.000 os itens salvos por conta (gatilho `limitar_itens_salvos`, mesmo padrão do teto de lembretes). **Aplique no projeto real:** *SQL Editor → New query*, cole o conteúdo do arquivo → *Run*. Enquanto não for aplicada, o site funciona, só sem o teto; o botão "Salvar em Meu espaço" passa a mostrar "Limite de itens atingido" quando a conta estiver cheia.
 
+## Correções de dados do NormaViva (`supabase/correcoes/`)
+
+Arquivos SQL que corrigem o texto já carregado sem recarregar o corpus inteiro. Cada um é gerado do corpus, idempotente e termina com uma consulta de conferência. Aplicar no *SQL Editor*, depois do merge do código que muda o parser. Aplicadas: `20261020_producao_de_efeito.sql` em 20/10/2026 (conferido no banco: 0 dispositivos com a anotação no texto, 12 revogados corrigidos, 737 revogados no total, hash das versões confere).
+
+- `20261020_producao_de_efeito.sql`: tira "Produção de efeito(s)" do texto de 81 dispositivos (CF, CLT, Código Civil, Lei 11.101, CTN, ECA, Lei 8.213 e CTB) e marca como revogados 12 que apareciam como vigentes. Funciona por regras sobre os dados do banco (não carrega texto de lei no script), ensaiado contra uma recarga com o parser novo. Conferência esperada no fim: `0` e `12`.
+
 ## O que NÃO compartilhar
 
 - A chave **secret** / **`service_role`** (dá acesso total e ignora a RLS).
