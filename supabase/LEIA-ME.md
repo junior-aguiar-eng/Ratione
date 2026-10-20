@@ -34,6 +34,10 @@ O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públ
 
 A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
 
+## Teto de itens salvos (20/10/2026)
+
+`supabase/migrations/20261020000002_limite_itens_salvos.sql` limita a 1.000 os itens salvos por conta (gatilho `limitar_itens_salvos`, mesmo padrão do teto de lembretes). **Aplique no projeto real:** *SQL Editor → New query*, cole o conteúdo do arquivo → *Run*. Enquanto não for aplicada, o site funciona, só sem o teto; o botão "Salvar em Meu espaço" passa a mostrar "Limite de itens atingido" quando a conta estiver cheia.
+
 ## O que NÃO compartilhar
 
 - A chave **secret** / **`service_role`** (dá acesso total e ignora a RLS).

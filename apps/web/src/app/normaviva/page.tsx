@@ -5,7 +5,8 @@ import { Bookmark, Check, ExternalLink, Search } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { dataCurta, hojeIso } from '../../lib/datas';
-import { salvarRegistro } from '../../lib/historico';
+import { useSalvar } from '../../lib/useSalvar';
+import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
 import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoNaData } from '../../lib/normavivaApresentacao';
@@ -32,13 +33,16 @@ export default function NormaVivaPage() {
   const [abrindo, setAbrindo] = useState(false);
   const [hoje, setHoje] = useState('');
   const [dataConsulta, setDataConsulta] = useState('');
-  const [salvo, setSalvo] = useState(false);
+  const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
+  const salvo = estadoSalvo === 'salvo';
   const sequencia = useRef(0);
 
   useEffect(() => {
     const h = hojeIso();
+    const salvo = lerNormaViva(window.location.search);
     setHoje(h);
-    setDataConsulta(h);
+    setDataConsulta(salvo.em ?? h);
+    if (salvo.dispositivoId) setItemId(salvo.dispositivoId);
   }, []);
 
   useEffect(() => {
@@ -86,15 +90,13 @@ export default function NormaVivaPage() {
 
   const salvar = () => {
     if (!detalhe) return;
-    salvarRegistro({
+    salvarNaConta({
       modulo: 'NormaViva',
       tipo: 'norma',
       titulo: `${detalhe.dispositivo.rotulo} · ${detalhe.norma.nome}`,
       detalhe: `Texto lido do Planalto em ${dataCurta(detalhe.norma.lido_em)}`,
-      url: '/normaviva'
+      url: urlDoNormaViva({ dispositivoId: detalhe.dispositivo.id, em: usandoHoje ? undefined : dataConsulta })
     });
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
   };
 
   if (!db) {
@@ -261,7 +263,7 @@ export default function NormaVivaPage() {
                   <div className="flex flex-wrap gap-2 no-print">
                     <Button variant="secondary" type="button" onClick={salvar}>
                       {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                      {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
+                      {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
                     </Button>
                     <a href={detalhe.norma.fonte_url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
                       Fonte oficial (Planalto)

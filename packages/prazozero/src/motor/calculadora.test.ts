@@ -236,3 +236,16 @@ describe('MotorPrazoZero - Testes Processuais Reais (Sem Mocks)', () => {
     assert.strictEqual(resultado.dataVencimentoFinal, '2026-03-16');
   });
 });
+
+describe('Prazo criminal: termo inicial', () => {
+  it('é o primeiro dia contado (dia corrido seguinte), com o CPP como fundamento', () => {
+    const r = new MotorPrazoZero().calcularPrazo({ dataEvento: '2026-03-13', tipoEvento: 'carga_ou_audiencia', diasPrazo: 5, regime: 'cpp_dias_corridos', tribunalId: 'TJSP' });
+    assert.strictEqual(r.dataTermoInicial, '2026-03-14');
+    assert.strictEqual(r.memoriaCalculo.find(i => i.diaContadoNumero === 1)?.data, r.dataTermoInicial);
+    assert.match(r.certidaoAuditavel, /Termo Inicial da Contagem: 2026-03-14 \(CPP, art\. 798, § 1º\)/);
+  });
+  it('no recesso do art. 798-A o primeiro dia contado é depois da suspensão', () => {
+    const r = new MotorPrazoZero().calcularPrazo({ dataEvento: '2026-12-18', tipoEvento: 'carga_ou_audiencia', diasPrazo: 5, regime: 'cpp_dias_corridos', tribunalId: 'TJSP' });
+    assert.strictEqual(r.dataTermoInicial, '2026-12-19');
+  });
+});

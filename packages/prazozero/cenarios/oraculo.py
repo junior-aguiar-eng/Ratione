@@ -487,6 +487,9 @@ def calcular(e: dict, completo: bool) -> dict:
                 marca_suspensao(fim)
                 continue
             contados += 1
+            if contados == 1:
+                # No CPP a contagem é em dias corridos e o termo inicial é o primeiro dia contado (CPP, art. 798, § 1º), não o próximo dia útil
+                termo_inicial = fim
         if not ctx.util(fim):
             prorrogado = True
             _, _, nomes_fim, _ = ctx.cal(fim.year)

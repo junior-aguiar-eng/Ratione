@@ -55,9 +55,13 @@ export default function MeuEspacoPage() {
 
   const importar = async () => {
     setImportando(true);
-    const n = await importarNavegadorParaConta();
+    const { enviados, mantidos } = await importarNavegadorParaConta();
     setImportando(false);
-    setResultadoImportacao(n > 0 ? `${n} ${n === 1 ? 'registro enviado' : 'registros enviados'} para a sua conta e removidos deste navegador.` : 'Não foi possível enviar agora. Seus registros continuam neste navegador.');
+    const enviou = `${enviados} ${enviados === 1 ? 'registro enviado' : 'registros enviados'} para a sua conta e removidos deste navegador.`;
+    const ficou = `${mantidos} ${mantidos === 1 ? 'registro continua' : 'registros continuam'} neste navegador (a conta atingiu o limite de itens salvos ou o registro está danificado).`;
+    setResultadoImportacao(
+      enviados === 0 ? 'Não foi possível enviar agora. Seus registros continuam neste navegador.' : mantidos > 0 ? `${enviou} ${ficou}` : enviou
+    );
     await recarregar();
   };
 

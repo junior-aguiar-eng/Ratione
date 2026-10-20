@@ -39,9 +39,35 @@ export function linhaParaRegistro(l: LinhaItemSalvo): RegistroHistorico {
   };
 }
 
+const MODULOS: readonly string[] = ['Argumenta', 'NormaViva', 'TeseMap', 'PrazoZero'];
+const TIPOS: readonly string[] = ['decisao', 'norma', 'tese', 'prazo'];
+
+/** Registro lido do navegador com a forma que o banco aceita (o armazenamento local pode ter dado antigo ou editado à mão). */
+export function registroValido(r: unknown): r is RegistroHistorico {
+  if (typeof r !== 'object' || r === null) return false;
+  const x = r as Record<string, unknown>;
+  return (
+    typeof x.id === 'string' &&
+    typeof x.titulo === 'string' &&
+    typeof x.url === 'string' &&
+    typeof x.modulo === 'string' &&
+    MODULOS.includes(x.modulo) &&
+    typeof x.tipo === 'string' &&
+    TIPOS.includes(x.tipo) &&
+    typeof x.criadoEm === 'string' &&
+    !Number.isNaN(Date.parse(x.criadoEm))
+  );
+}
+
+/** O banco aceita URL interna de até 500 caracteres. Acima disso, vale só o caminho, sem os parâmetros (cortar a query daria um link quebrado). */
+function urlParaBanco(url: string): string {
+  if (!url.startsWith('/') || url.startsWith('//')) return '/';
+  return url.length <= 500 ? url : url.split('?')[0].slice(0, 500);
+}
+
 /** Respeita os limites do banco: título até 300, detalhe até 1000, URL interna (começa com "/"). */
 export function registroParaLinha(r: NovoRegistro, usuarioId: string, criadoEm?: string) {
-  const url = r.url.startsWith('/') && !r.url.startsWith('//') ? r.url.slice(0, 500) : '/';
+  const url = urlParaBanco(r.url);
   return {
     usuario_id: usuarioId,
     modulo: r.modulo,
@@ -106,22 +132,28 @@ export function limparNavegador(): void {
  * Salva o registro. Com login, vai para a conta (Supabase, região de São Paulo); sem login, ou se a conta falhar,
  * fica neste navegador. O chamador não precisa esperar.
  */
-export function salvarRegistro(r: NovoRegistro): void {
-  void (async () => {
-    const sb = obterSupabase();
-    if (sb) {
-      try {
-        const { data } = await sb.auth.getSession();
-        if (data.session) {
-          const { error } = await sb.from('itens_salvos').insert(registroParaLinha(r, data.session.user.id));
-          if (!error) return;
-        }
-      } catch {
-        // cai para o navegador
+export type DestinoSalvo = 'conta' | 'navegador' | 'limite';
+
+/** Mensagem do gatilho do banco (supabase/migrations/…_limite_itens_salvos.sql). */
+export const ehErroDeLimite = (mensagem: string | undefined) => /limite de \d+ itens salvos/.test(mensagem ?? '');
+
+export async function salvarRegistro(r: NovoRegistro): Promise<DestinoSalvo> {
+  const sb = obterSupabase();
+  if (sb) {
+    try {
+      const { data } = await sb.auth.getSession();
+      if (data.session) {
+        const { error } = await sb.from('itens_salvos').insert(registroParaLinha(r, data.session.user.id));
+        if (!error) return 'conta';
+        // Conta cheia: guardar no navegador esconderia o problema (o item não apareceria em outros dispositivos)
+        if (ehErroDeLimite(error.message)) return 'limite';
       }
+    } catch {
+      // cai para o navegador
     }
-    salvarNoNavegador(r);
-  })();
+  }
+  salvarNoNavegador(r);
+  return 'navegador';
 }
 
 export interface HistoricoCarregado {
@@ -157,17 +189,44 @@ export async function removerDaConta(id: string): Promise<boolean> {
   return !error;
 }
 
-/** Envia para a conta os itens salvos só neste navegador (a pedido do usuário). Devolve quantos foram enviados. */
-export async function importarNavegadorParaConta(): Promise<number> {
+export interface ResultadoImportacao {
+  enviados: number;
+  /** Registros que continuam neste navegador (inválidos, ou a conta atingiu o limite). */
+  mantidos: number;
+}
+
+/**
+ * Envia para a conta os itens salvos só neste navegador (a pedido do usuário). Em lote; se o lote falhar, tenta um por um, de modo que
+ * um registro ruim (ou o limite da conta) não impeça os demais. Só sai do navegador o que foi enviado.
+ */
+export async function importarNavegadorParaConta(): Promise<ResultadoImportacao> {
   const sb = obterSupabase();
-  if (!sb) return 0;
+  if (!sb) return { enviados: 0, mantidos: lerHistorico().length };
   const { data: sessao } = await sb.auth.getSession();
-  if (!sessao.session) return 0;
+  const usuarioId = sessao.session?.user.id;
   const locais = lerHistorico();
-  if (locais.length === 0) return 0;
-  const linhas = locais.map(l => registroParaLinha(l, sessao.session!.user.id, l.criadoEm));
+  if (!usuarioId || locais.length === 0) return { enviados: 0, mantidos: locais.length };
+
+  const validos = locais.filter(registroValido);
+  const linhas = validos.map(l => registroParaLinha(l, usuarioId, l.criadoEm));
+  const enviadosIds = new Set<string>();
+
   const { error } = await sb.from('itens_salvos').insert(linhas);
-  if (error) return 0;
-  limparNavegador();
-  return linhas.length;
+  if (!error) validos.forEach(v => enviadosIds.add(v.id));
+  else {
+    for (let i = 0; i < linhas.length; i++) {
+      const { error: erroLinha } = await sb.from('itens_salvos').insert(linhas[i]);
+      if (!erroLinha) enviadosIds.add(validos[i].id);
+      else if (ehErroDeLimite(erroLinha.message)) break;
+    }
+  }
+
+  const restantes = locais.filter(l => !enviadosIds.has((l as RegistroHistorico).id));
+  try {
+    if (restantes.length === 0) localStorage.removeItem(CHAVE);
+    else localStorage.setItem(CHAVE, JSON.stringify(restantes));
+  } catch {
+    // armazenamento indisponível: ignorar
+  }
+  return { enviados: enviadosIds.size, mantidos: restantes.length };
 }

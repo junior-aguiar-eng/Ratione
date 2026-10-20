@@ -144,3 +144,16 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
     assert.deepStrictEqual(r.rows.map(x => x.tabela), []);
   });
 });
+
+describe('Teto de itens salvos por conta', () => {
+  it('a conta aceita até 1.000 itens e recusa o seguinte, sem afetar outra conta', async () => {
+    const db = await criarBanco();
+    const carlos = await criarUsuario(db, 'carlos@exemplo.com');
+    const dora = await criarUsuario(db, 'dora@exemplo.com');
+    await db.query("insert into public.itens_salvos (usuario_id, modulo, tipo, titulo) select $1, 'PrazoZero', 'prazo', 'i' || g from generate_series(1, 1000) g", [carlos]);
+    await assert.rejects(como(db, carlos, tx => tx.query(INSERIR_ITEM, [carlos, 'a mais'])), /limite de 1000 itens/);
+    await como(db, dora, tx => tx.query(INSERIR_ITEM, [dora, 'da Dora']));
+    await como(db, carlos, tx => tx.query('delete from public.itens_salvos where titulo = $1', ['i1']));
+    await como(db, carlos, tx => tx.query(INSERIR_ITEM, [carlos, 'cabe de novo']));
+  });
+});

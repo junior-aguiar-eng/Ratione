@@ -6,7 +6,7 @@ import { ArrowRight, Bookmark, Check, ExternalLink, FileText } from 'lucide-reac
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { DECISAO_DEMO, TRECHOS_DEMO, TRECHO_POR_ITEM } from '../../lib/decisaoDemo';
-import { salvarRegistro } from '../../lib/historico';
+import { useSalvar } from '../../lib/useSalvar';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge, BadgeTom } from '@/components/ui/badge';
@@ -57,7 +57,8 @@ export default function ArgumentaPage() {
   const decisao = DECISAO_DEMO;
   const [aba, setAba] = useState<Aba>('geral');
   const [trechoAtivo, setTrechoAtivo] = useState<string>('t-relatorio');
-  const [salvo, setSalvo] = useState(false);
+  const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
+  const salvo = estadoSalvo === 'salvo';
   const refs = useRef<Record<string, HTMLButtonElement | null>>({});
   const listaRef = useRef<HTMLUListElement | null>(null);
   const primeiraRenderizacao = useRef(true);
@@ -79,15 +80,13 @@ export default function ArgumentaPage() {
   const verNoDocumento = (id: string) => setTrechoAtivo(TRECHO_POR_ITEM[id] ?? id);
 
   const salvar = () => {
-    salvarRegistro({
+    salvarNaConta({
       modulo: 'Argumenta',
       tipo: 'decisao',
       titulo: 'Sentença cível · fraude bancária e PIX (exemplo)',
       detalhe: `${vulnerabilidades.length} ponto de atenção na fundamentação (CPC, art. 489, § 1º)`,
       url: '/argumenta'
     });
-    setSalvo(true);
-    setTimeout(() => setSalvo(false), 2000);
   };
 
   return (
@@ -100,7 +99,7 @@ export default function ArgumentaPage() {
           <>
             <Button variant="secondary" type="button" onClick={salvar}>
               {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-              {salvo ? 'Salvo em Meu espaço' : 'Salvar em Meu espaço'}
+              {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
             </Button>
             <Link href="/prazozero" className={buttonVariants()}>
               Calcular prazo recursal
