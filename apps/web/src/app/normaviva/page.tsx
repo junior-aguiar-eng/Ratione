@@ -8,7 +8,7 @@ import { dataCurta, hojeIso } from '../../lib/datas';
 import { salvarRegistro } from '../../lib/historico';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
-import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, hashCurto, segmentosDoTrecho, situacaoNaData } from '../../lib/normavivaApresentacao';
+import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoNaData } from '../../lib/normavivaApresentacao';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -363,12 +363,6 @@ export default function NormaVivaPage() {
                       <div>
                         <dt className="text-ink-mute">Lida em</dt>
                         <dd className="text-ink num mt-0.5">{dataCurta(detalhe.norma.lido_em)}</dd>
-                      </div>
-                      <div>
-                        <dt className="text-ink-mute">Impressão digital (SHA-256)</dt>
-                        <dd className="text-ink-soft num mt-0.5" title={detalhe.norma.fonte_sha256}>
-                          {hashCurto(detalhe.norma.fonte_sha256)}
-                        </dd>
                       </div>
                     </dl>
                   </section>
