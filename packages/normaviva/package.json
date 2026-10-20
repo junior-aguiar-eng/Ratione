@@ -23,6 +23,7 @@
     "test": "tsx --test src/**/*.test.ts",
     "coletar": "tsx src/coleta/coletar.ts",
     "conferir": "tsx src/coleta/conferir.ts",
+    "coletar:anotadas": "tsx src/coleta/coletar-anotadas.ts",
     "parsear": "tsx src/parser/verificar.ts",
     "versoes": "tsx src/versoes/verificar.ts",
     "relacoes": "tsx src/busca/verificar.ts",
