@@ -1,7 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
+import { detectarCharset, type EntradaManifesto } from '../coleta/coletar';
 import { paragrafosComTachado, paragrafosDoHtml } from '../parser';
 import { linhasDoCorpus } from '../busca/carga';
 import { gerarHistorico, type CasoHistorico } from './historico';
@@ -41,10 +44,43 @@ describe('Leitor de HTML: texto tachado à parte (F3-07)', () => {
 describe('Normas de teste com histórico conhecido (F3-07)', () => {
   const corpus = new Map(linhasDoCorpus(PASTA).map(l => [l.norma.id, l]));
 
-  it('são 30 casos, de pelo menos 10 normas, com id único', () => {
-    assert.equal(casos.length, 30);
-    assert.ok(new Set(casos.map(c => c.normaId)).size >= 10);
+  it('são 57 casos em 25 normas, com id único; as normas de página compilada entram pela página anotada complementar', () => {
+    assert.equal(casos.length, 57);
+    assert.equal(new Set(casos.map(c => c.normaId)).size, 25);
     assert.equal(new Set(casos.map(c => c.id)).size, casos.length);
+    for (const id of ['DL-2848-1940', 'DL-3689-1941', 'LEI-10406-2002', 'LEI-13105-2015', 'LEI-8078-1990', 'LEI-13709-2018']) {
+      const c = casos.find(x => x.normaId === id);
+      assert.ok(c, `${id} sem caso`);
+      assert.equal(c.fonte.tipoPagina, 'anotada', id);
+    }
+  });
+
+  it('a redação A aparece de fato tachada na página de origem de cada caso (evidência, não só cópia)', () => {
+    const manifestos = [
+      ...(JSON.parse(readFileSync(join(PASTA, 'planalto', 'manifesto.json'), 'utf-8')) as EntradaManifesto[]).map(m => ({ ...m, caminho: join(PASTA, 'planalto', m.arquivo) })),
+      ...(JSON.parse(readFileSync(join(PASTA, 'planalto', 'anotadas', 'manifesto.json'), 'utf-8')) as EntradaManifesto[]).map(m => ({ ...m, caminho: join(PASTA, 'planalto', 'anotadas', m.arquivo) }))
+    ];
+    const tachadosPorUrl = new Map<string, string[]>();
+    for (const c of casos) {
+      const m = manifestos.find(x => x.url === c.fonte.url);
+      assert.ok(m, `${c.id}: página de origem fora dos manifestos (${c.fonte.url})`);
+      if (!tachadosPorUrl.has(m.url)) {
+        const html = detectarCharset(gunzipSync(readFileSync(m.caminho)), null).texto;
+        tachadosPorUrl.set(m.url, paragrafosComTachado(html).flatMap(p => p.tachados));
+      }
+      assert.ok(tachadosPorUrl.get(m.url)!.some(t => t.includes(c.antes.texto)), `${c.id}: a redação A não está tachada na página de origem`);
+    }
+  });
+
+  it('as páginas anotadas complementares estão íntegras: o SHA-256 do manifesto é o dos bytes lidos', () => {
+    const manifesto = JSON.parse(readFileSync(join(PASTA, 'planalto', 'anotadas', 'manifesto.json'), 'utf-8')) as EntradaManifesto[];
+    assert.equal(manifesto.length, 15);
+    for (const m of manifesto) {
+      assert.equal(m.tipoPagina, 'anotada', m.id);
+      const bytes = gunzipSync(readFileSync(join(PASTA, 'planalto', 'anotadas', m.arquivo)));
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), m.sha256, m.id);
+      assert.equal(bytes.length, m.bytes, m.id);
+    }
   });
 
   it('a redação B de cada caso é exatamente o texto do dispositivo no corpus, com o ato e a data que o corpus registra', () => {
@@ -100,7 +136,7 @@ describe('Normas de teste com histórico conhecido (F3-07)', () => {
   it('o documento de revisão traz os totais e cada caso', () => {
     const doc = documentoDeRevisao(casos, ['LEI-X-2000']);
     const pend = casos.filter(c => c.validacao.status !== 'validado').length;
-    assert.match(doc, new RegExp(`\\*\\*30 casos em \\d+ normas\\*\\*`));
+    assert.match(doc, new RegExp(`\\*\\*${casos.length} casos em ${new Set(casos.map(c => c.normaId)).size} normas\\*\\*`));
     assert.match(doc, new RegExp(`pendentes: \\*\\*${pend}\\*\\*`));
     for (const c of casos) assert.ok(doc.includes(`### ${c.rotulo}`), c.id);
     assert.ok(doc.includes('LEI-X-2000'));

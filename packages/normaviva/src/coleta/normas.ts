@@ -45,3 +45,26 @@ export const NORMAS_PLANALTO: NormaPlanalto[] = [
   { id: 'LEI-13709-2018', nome: 'Lei nº 13.709/2018 (Lei Geral de Proteção de Dados)', caminho: '_ato2015-2018/2018/lei/l13709compilado.htm' },
   { id: 'LEI-14133-2021', nome: 'Lei nº 14.133/2021 (Licitações e Contratos Administrativos)', caminho: '_ato2019-2022/2021/lei/l14133.htm' }
 ];
+
+/**
+ * Páginas ANOTADAS (texto original com o tachado das redações antigas) das normas cujo corpus vem da versão compilada, que não traz o tachado.
+ * Servem só de evidência histórica para as normas de teste do F3-07 (`historico/`); o texto vigente continua vindo do corpus principal.
+ * Caminho depois de `https://www.planalto.gov.br/ccivil_03/`.
+ */
+export const PAGINAS_ANOTADAS: NormaPlanalto[] = [
+  { id: 'DL-2848-1940', nome: 'Decreto-Lei nº 2.848/1940 (Código Penal), página anotada', caminho: 'decreto-lei/del2848.htm' },
+  { id: 'DL-3689-1941', nome: 'Decreto-Lei nº 3.689/1941 (Código de Processo Penal), página anotada', caminho: 'decreto-lei/del3689.htm' },
+  { id: 'DL-4657-1942', nome: 'Decreto-Lei nº 4.657/1942 (LINDB), página anotada', caminho: 'decreto-lei/del4657.htm' },
+  { id: 'LEI-10406-2002', nome: 'Lei nº 10.406/2002 (Código Civil), página anotada', caminho: 'leis/2002/l10406.htm' },
+  { id: 'LEI-11101-2005', nome: 'Lei nº 11.101/2005 (Recuperação e Falência), página anotada', caminho: '_ato2004-2006/2005/lei/l11101.htm' },
+  { id: 'LEI-13105-2015', nome: 'Lei nº 13.105/2015 (Código de Processo Civil), página anotada', caminho: '_ato2015-2018/2015/lei/l13105.htm' },
+  { id: 'LEI-13709-2018', nome: 'Lei nº 13.709/2018 (LGPD), página anotada', caminho: '_ato2015-2018/2018/lei/l13709.htm' },
+  { id: 'LEI-5172-1966', nome: 'Lei nº 5.172/1966 (Código Tributário Nacional), página anotada', caminho: 'leis/l5172.htm' },
+  { id: 'LEI-7210-1984', nome: 'Lei nº 7.210/1984 (Lei de Execução Penal), página anotada', caminho: 'leis/l7210.htm' },
+  { id: 'LEI-7347-1985', nome: 'Lei nº 7.347/1985 (Ação Civil Pública), página anotada', caminho: 'leis/l7347orig.htm' },
+  { id: 'LEI-8069-1990', nome: 'Lei nº 8.069/1990 (ECA), página anotada', caminho: 'leis/l8069.htm' },
+  { id: 'LEI-8078-1990', nome: 'Lei nº 8.078/1990 (CDC), página anotada', caminho: 'leis/l8078.htm' },
+  { id: 'LEI-8245-1991', nome: 'Lei nº 8.245/1991 (Locações), página anotada', caminho: 'leis/l8245.htm' },
+  { id: 'LEI-8429-1992', nome: 'Lei nº 8.429/1992 (Improbidade), página anotada', caminho: 'leis/l8429.htm' },
+  { id: 'LEI-9503-1997', nome: 'Lei nº 9.503/1997 (CTB), página anotada', caminho: 'leis/l9503.htm' }
+];

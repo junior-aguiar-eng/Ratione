@@ -38,10 +38,10 @@ export function documentoDeRevisao(casos: CasoHistorico[], normasSemCaso: string
   L.push('## De onde vem cada coisa');
   L.push('');
   L.push('- **Redação B:** o corpus, lido do Planalto (só a redação vigente).');
-  L.push('- **Redação A:** o texto **tachado** da própria página do Planalto, só quando o trecho tachado é o dispositivo inteiro (mesmo tipo e número). Tachado de palavras soltas não reconstrói o texto e fica de fora. O tachado vale aqui só como evidência histórica, nunca como texto vigente.');
+  L.push('- **Redação A:** o texto **tachado** da página do Planalto, só quando o trecho tachado é o dispositivo inteiro (mesmo tipo e número). Tachado de palavras soltas não reconstrói o texto e fica de fora. O tachado vale aqui só como evidência histórica, nunca como texto vigente. A página é a do próprio corpus; nas normas cujo corpus vem da versão compilada (que não traz o tachado), é a **página anotada** da mesma norma, coletada à parte em `corpus/planalto/anotadas/` (`pnpm coletar:anotadas`). A linha **Fonte** de cada caso diz qual foi.');
   L.push('- **Data:** a da publicação do ato que deu a redação B (API do Senado). **É provisória** (`vigenciaConfirmada: false`): a vigência pode ter começado em outro dia (*vacatio legis*, cláusula própria).');
   L.push('- **O caso vale pelo rótulo.** Se a lei renumerou dispositivos, A é o texto que ocupava aquele rótulo na época; os casos em que A e B quase não se parecem trazem um aviso.');
-  L.push('- **Limite:** só as normas cujas páginas do Planalto trazem texto tachado têm casos. Sem casos, por não haver tachado: ' + normasSemCaso.join(', ') + '.');
+  L.push('- **Limite:** só as normas cujas páginas do Planalto trazem texto tachado de redações antigas têm casos. Sem casos: ' + normasSemCaso.join(', ') + '. A Lei 12.965 só tem tachado de medida provisória rejeitada ("Rejeitada"), que não é alteração de lei; as Leis 11.419 e 12.016 não têm tachado nenhum.');
   L.push('');
   L.push('## Como validar');
   L.push('');

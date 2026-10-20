@@ -2,17 +2,17 @@
 
 > **Gerado por `pnpm historico` (em `packages/normaviva`). Não edite à mão:** a validação fica em `packages/normaviva/corpus/historico-conhecido.json` (campo `validacao`) e este documento é regenerado.
 
-**30 casos em 10 normas** · validados: **0** · pendentes: **30**
+**57 casos em 25 normas** · validados: **0** · pendentes: **57**
 
 Cada caso diz: até a véspera da publicação do ato, o dispositivo tinha a redação **A**; a partir dela, a redação **B** (a vigente hoje). Servem de gabarito para a consulta temporal do NormaViva (F3-04).
 
 ## De onde vem cada coisa
 
 - **Redação B:** o corpus, lido do Planalto (só a redação vigente).
-- **Redação A:** o texto **tachado** da própria página do Planalto, só quando o trecho tachado é o dispositivo inteiro (mesmo tipo e número). Tachado de palavras soltas não reconstrói o texto e fica de fora. O tachado vale aqui só como evidência histórica, nunca como texto vigente.
+- **Redação A:** o texto **tachado** da página do Planalto, só quando o trecho tachado é o dispositivo inteiro (mesmo tipo e número). Tachado de palavras soltas não reconstrói o texto e fica de fora. O tachado vale aqui só como evidência histórica, nunca como texto vigente. A página é a do próprio corpus; nas normas cujo corpus vem da versão compilada (que não traz o tachado), é a **página anotada** da mesma norma, coletada à parte em `corpus/planalto/anotadas/` (`pnpm coletar:anotadas`). A linha **Fonte** de cada caso diz qual foi.
 - **Data:** a da publicação do ato que deu a redação B (API do Senado). **É provisória** (`vigenciaConfirmada: false`): a vigência pode ter começado em outro dia (*vacatio legis*, cláusula própria).
 - **O caso vale pelo rótulo.** Se a lei renumerou dispositivos, A é o texto que ocupava aquele rótulo na época; os casos em que A e B quase não se parecem trazem um aviso.
-- **Limite:** só as normas cujas páginas do Planalto trazem texto tachado têm casos. Sem casos, por não haver tachado: DL-2848-1940, DL-3689-1941, DL-4657-1942, LEI-10406-2002, LEI-11101-2005, LEI-11419-2006, LEI-12016-2009, LEI-12965-2014, LEI-13105-2015, LEI-13709-2018, LEI-5172-1966, LEI-7210-1984, LEI-7347-1985, LEI-8069-1990, LEI-8078-1990, LEI-8245-1991, LEI-8429-1992, LEI-9503-1997.
+- **Limite:** só as normas cujas páginas do Planalto trazem texto tachado de redações antigas têm casos. Sem casos: LEI-11419-2006, LEI-12016-2009, LEI-12965-2014. A Lei 12.965 só tem tachado de medida provisória rejeitada ("Rejeitada"), que não é alteração de lei; as Leis 11.419 e 12.016 não têm tachado nenhum.
 
 ## Como validar
 
@@ -70,6 +70,60 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Fonte:** [texto compilado do Planalto](https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm), lido em 19/10/2026
 - **Validação:** pendente
 
+## Decreto-Lei nº 2.848/1940 (Código Penal) (DL-2848-1940)
+
+### art. 155, § 8º
+
+- **Ato que deu a redação B:** Lei nº 15.397 de 30/04/2026 · publicado em **04/05/2026** (provisório)
+- **Redação A** (até 03/05/2026): A pena é de reclusão de 2 (dois) a 8 (oito) anos e multa, se a subtração for de fios, cabos ou equipamentos utilizados para fornecimento ou transmissão de energia elétrica ou de telefonia ou para transferência de dados, bem como equipamentos ou materiais ferroviários ou metroviários, aplicável, em qualquer caso, o disposto no § 2º deste artigo. *(anotação do Planalto: Incluído pela Lei nº 15.181, de 2025)*
+- **Redação B** (a partir de 04/05/2026): A pena é de reclusão, de 2 (dois) a 8 (oito) anos, e multa, se a subtração for de fios, cabos ou equipamentos utilizados para fornecimento ou transmissão de energia elétrica ou de telefonia ou para transferência de dados, bem como equipamentos ou materiais ferroviários ou metroviários, aplicável, em qualquer caso, o disposto no § 2º deste artigo.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 51
+
+- **Ato que deu a redação B:** Lei nº 13.964 de 24/12/2019 · publicado em **24/12/2019** (provisório)
+- **Redação A** (até 23/12/2019): Transitada em julgado a sentença condenatória, a multa será considerada dívida de valor, aplicando-se-lhes as normas da legislação relativa à dívida ativa da Fazenda Pública, inclusive no que concerne às causas interruptivas e suspensivas da prescrição. *(anotação do Planalto: Redação dada pela Lei nº 9.268, de 1º.4.1996)*
+- **Redação B** (a partir de 24/12/2019): Transitada em julgado a sentença condenatória, a multa será executada perante o juiz da execução penal e será considerada dívida de valor, aplicáveis as normas relativas à dívida ativa da Fazenda Pública, inclusive no que concerne às causas interruptivas e suspensivas da prescrição.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Decreto-Lei nº 3.689/1941 (Código de Processo Penal) (DL-3689-1941)
+
+### art. 341
+
+- **Ato que deu a redação B:** Lei nº 12.403 de 04/05/2011 · publicado em **05/05/2011** (provisório)
+- **Redação A** (até 04/05/2011): Julgar-se-á quebrada a fiança quando o réu, legalmente intimado para ato do processo, deixar de comparecer, sem provar, incontinenti, motivo justo, ou quando, na vigência da fiança, praticar outra infração penal.
+- **Redação B** (a partir de 05/05/2011): Julgar-se-á quebrada a fiança quando o acusado: .
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 3º-B, § 1º
+
+- **Ato que deu a redação B:** Lei nº 15.358 de 24/03/2026 · publicado em **25/03/2026** (provisório)
+- **Redação A** (até 24/03/2026): O preso em flagrante ou por força de mandado de prisão provisória será encaminhado à presença do juiz de garantias no prazo de 24 (vinte e quatro) horas, momento em que se realizará audiência com a presença do Ministério Público e da Defensoria Pública ou de advogado constituído, vedado o emprego de videoconferência. *(anotação do Planalto: Incluído pela Lei nº 13.964, de 2019)*
+- **Redação B** (a partir de 25/03/2026): O preso em flagrante ou por força de mandado de prisão provisória será encaminhado à presença do juiz competente para celebração da audiência de custódia no prazo de 24 (vinte e quatro) horas, momento em que se realizará, por videoconferência, audiência com a presença do Ministério Público e da Defensoria Pública ou de advogado constituído, na forma estabelecida no art. 310 deste Código.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Decreto-Lei nº 4.657/1942 (Lei de Introdução às Normas do Direito Brasileiro) (DL-4657-1942)
+
+### art. 10, § 1º
+
+- **Ato que deu a redação B:** Lei nº 9.047 de 18/05/1995 · publicado em **19/05/1995** (provisório)
+- **Redação A** (até 18/05/1995): A vocação para suceder em bens de estrangeiro situados no Brasil. será regulada pela lei brasileira em benefício do cônjuge brasileiro e dos filhos do casal, sempre que não lhes seja mais favorável a lei do domicílio.
+- **Redação B** (a partir de 19/05/1995): A sucessão de bens de estrangeiros, situados no País, será regulada pela lei brasileira em benefício do cônjuge ou dos filhos brasileiros, ou de quem os represente, sempre que não lhes seja mais favorável a lei pessoal do de cujus.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del4657.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 6º
+
+- **Ato que deu a redação B:** Lei nº 3.238 de 01/08/1957 · publicado em **03/08/1957** (provisório)
+- **Redação A** (até 02/08/1957): A lei em vigor terá efeito imediato e geral. Não atingirá, entretanto, salvo disposição expressa em contrário, as situações jurídicas definitivamente constituídas e a execução do ato jurídico perfeito.
+- **Redação B** (a partir de 03/08/1957): A Lei em vigor terá efeito imediato e geral, respeitados o ato jurídico perfeito, o direito adquirido e a coisa julgada.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del4657.htm), lido em 20/10/2026
+- **Validação:** pendente
+
 ## Decreto-Lei nº 5.452/1943 (Consolidação das Leis do Trabalho) (DL-5452-1943)
 
 ### art. 73, § 4º
@@ -79,6 +133,42 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Redação B** (a partir de 30/08/1946): Nos horários mistos, assim entendidos os que abrangem períodos diurnos e noturnos, aplica-se às horas de trabalho noturno o disposto neste artigo e seus parágrafos.
 - **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
 - **Fonte:** [texto compilado do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm), lido em 19/10/2026
+- **Validação:** pendente
+
+## Lei nº 10.406/2002 (Código Civil) (LEI-10406-2002)
+
+### art. 1.076, II
+
+- **Ato que deu a redação B:** Lei nº 14.451 de 21/09/2022 · publicado em **22/09/2022** (provisório)
+- **Redação A** (até 21/09/2022): pelos votos correspondentes a mais de metade do capital social, nos casos previstos nos incisos II, III, IV e VIII do art. 1.071;
+- **Redação B** (a partir de 22/09/2022): pelos votos correspondentes a mais da metade do capital social, nos casos previstos nos incisos II, III, IV, V, VI e VIII do caput do art. 1.071 deste Código; Vigência
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/2002/l10406.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 3º
+
+- **Ato que deu a redação B:** Lei nº 13.146 de 06/07/2015 · publicado em **07/07/2015** (provisório)
+- **Redação A** (até 06/07/2015): São absolutamente incapazes de exercer pessoalmente os atos da vida civil:
+- **Redação B** (a partir de 07/07/2015): São absolutamente incapazes de exercer pessoalmente os atos da vida civil os menores de 16 (dezesseis) anos.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/2002/l10406.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 11.101/2005 (Recuperação Judicial, Extrajudicial e Falência) (LEI-11101-2005)
+
+### art. 6º
+
+- **Ato que deu a redação B:** Lei nº 14.112 de 24/12/2020 · publicado em **24/12/2020** (provisório)
+- **Redação A** (até 23/12/2020): A decretação da falência ou o deferimento do processamento da recuperação judicial suspende o curso da prescrição e de todas as ações e execuções em face do devedor, inclusive aquelas dos credores particulares do sócio solidário.
+- **Redação B** (a partir de 24/12/2020): A decretação da falência ou o deferimento do processamento da recuperação judicial implica:
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11101.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 72, parágrafo único
+
+- **Ato que deu a redação B:** Lei Complementar nº 147 de 07/08/2014 · publicado em **08/08/2014** (provisório)
+- **Redação A** (até 07/08/2014): O juiz também julgará improcedente o pedido de recuperação judicial e decretará a falência do devedor se houver objeções, nos termos do art. 55 desta Lei, de credores titulares de mais da metade dos créditos descritos no inciso I do caput do art. 71 desta Lei.
+- **Redação B** (a partir de 08/08/2014): O juiz também julgará improcedente o pedido de recuperação judicial e decretará a falência do devedor se houver objeções, nos termos do art. 55, de credores titulares de mais da metade de qualquer uma das classes de créditos previstos no art. 83, computados na forma do art. 45, todos desta Lei.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11101.htm), lido em 20/10/2026
 - **Validação:** pendente
 
 ## Lei nº 11.340/2006 (Lei Maria da Penha) (LEI-11340-2006)
@@ -151,6 +241,34 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm), lido em 19/10/2026
 - **Validação:** pendente
 
+## Lei nº 13.105/2015 (Código de Processo Civil) (LEI-13105-2015)
+
+### art. 1.063
+
+- **Ato que deu a redação B:** Lei nº 14.976 de 18/09/2024 · publicado em **19/09/2024** (provisório)
+- **Redação A** (até 18/09/2024): Até a edição de lei específica, os juizados especiais cíveis previstos na Lei nº 9.099, de 26 de setembro de 1995 , continuam competentes para o processamento e julgamento das causas previstas no art. 275, inciso II, da Lei nº 5.869, de 11 de janeiro de 1973
+- **Redação B** (a partir de 19/09/2024): Os juizados especiais cíveis previstos na Lei nº 9.099, de 26 de setembro de 1995, continuam competentes para o processamento e o julgamento das causas previstas no inciso II do art. 275 da Lei nº 5.869, de 11 de janeiro de 1973.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 12
+
+- **Ato que deu a redação B:** Lei nº 13.256 de 04/02/2016 · publicado em **05/02/2016** (provisório)
+- **Redação A** (até 04/02/2016): Os juízes e os tribunais deverão obedecer à ordem cronológica de conclusão para proferir sentença ou acórdão.
+- **Redação B** (a partir de 05/02/2016): Os juízes e os tribunais atenderão, preferencialmente, à ordem cronológica de conclusão para proferir sentença ou acórdão.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 13.709/2018 (Lei Geral de Proteção de Dados) (LEI-13709-2018)
+
+### art. 18, V
+
+- **Ato que deu a redação B:** Lei nº 13.853 de 08/07/2019 · publicado em **09/07/2019** (provisório)
+- **Redação A** (até 08/07/2019): portabilidade dos dados a outro fornecedor de serviço ou produto, mediante requisição expressa e observados os segredos comercial e industrial, de acordo com a regulamentação do órgão controlador;
+- **Redação B** (a partir de 09/07/2019): portabilidade dos dados a outro fornecedor de serviço ou produto, mediante requisição expressa, de acordo com a regulamentação da autoridade nacional, observados os segredos comercial e industrial; Vigência
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm), lido em 20/10/2026
+- **Validação:** pendente
+
 ## Lei nº 14.133/2021 (Licitações e Contratos Administrativos) (LEI-14133-2021)
 
 ### art. 86, § 3º
@@ -161,6 +279,24 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm), lido em 19/10/2026
 - **Validação:** pendente
 
+## Lei nº 5.172/1966 (Código Tributário Nacional) (LEI-5172-1966)
+
+### art. 151, III
+
+- **Ato que deu a redação B:** Lei Complementar nº 236 de 04/09/2026 · publicado em **04/09/2026** (provisório)
+- **Redação A** (até 03/09/2026): as reclamações e os recursos, nos têrmos das leis reguladoras do processo tributário administrativo;
+- **Redação B** (a partir de 04/09/2026): as impugnações, os recursos e a manifestação de inconformidade, nos termos das leis reguladoras do processo tributário administrativo;
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l5172.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 9º, IV, b)
+
+- **Ato que deu a redação B:** Lei Complementar nº 214 de 16/01/2025 · publicado em **16/01/2025** (provisório)
+- **Redação A** (até 15/01/2025): templos de qualquer culto;
+- **Redação B** (a partir de 16/01/2025): entidades religiosas e templos de qualquer culto, inclusive suas organizações assistenciais e beneficentes;
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l5172.htm), lido em 20/10/2026
+- **Validação:** pendente
+
 ## Lei nº 6.830/1980 (Execução Fiscal) (LEI-6830-1980)
 
 ### art. 7º-O, II
@@ -169,6 +305,79 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Redação A** (até 13/11/2014): penhora, se não for paga a dívida, nem garantida a execução, por meio de depósito ou fiança;
 - **Redação B** (a partir de 14/11/2014): penhora, se não for paga a dívida, nem garantida a execução, por meio de depósito, fiança ou seguro garantia;
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l6830.htm), lido em 19/10/2026
+- **Validação:** pendente
+
+## Lei nº 7.210/1984 (Lei de Execução Penal) (LEI-7210-1984)
+
+### art. 112, I
+
+- **Ato que deu a redação B:** Lei nº 15.402 de 08/05/2026 · publicado em **08/05/2026** (provisório)
+- **Redação A** (até 07/05/2026): 16% (dezesseis por cento) da pena, se o apenado for primário e o crime tiver sido cometido sem violência à pessoa ou grave ameaça; *(anotação do Planalto: Incluído pela Lei nº 13.964, de 2019)*
+- **Redação B** (a partir de 08/05/2026): se o apenado for primário e for condenado pela prática de crime mediante o exercício de violência ou grave ameaça, salvo em relação aos crimes previstos no Título XII da Parte Especial do Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal), deverão ser cumpridos ao menos 25% (vinte e cinco por cento) da pena;
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l7210.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 9º-A, § 5º
+
+- **Ato que deu a redação B:** Lei nº 15.295 de 19/12/2025 · publicado em **22/12/2025** (provisório)
+- **Redação A** (até 21/12/2025): A amostra biológica coletada só poderá ser utilizada para o único e exclusivo fim de permitir a identificação pelo perfil genético, não estando autorizadas as práticas de fenotipagem genética ou de busca familiar. *(anotação do Planalto: Incluído pela Lei nº 13.964, de 2019)*
+- **Redação B** (a partir de 22/12/2025): A amostra biológica coletada só poderá ser utilizada para o único e exclusivo fim de permitir a identificação pelo perfil genético, não estando autorizadas as práticas de fenotipagem genética. Vigência
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l7210.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 7.347/1985 (Ação Civil Pública) (LEI-7347-1985)
+
+### art. 15
+
+- **Ato que deu a redação B:** Lei nº 8.078 de 11/09/1990 · publicado em **12/09/1990** (provisório)
+- **Redação A** (até 11/09/1990): Decorridos 60 (sessenta) dias do trânsito em julgado da sentença condenatória, sem que a associação autora lhe promova a execução, deverá fazê-lo o Ministério Público.
+- **Redação B** (a partir de 12/09/1990): Decorridos sessenta dias do trânsito em julgado da sentença condenatória, sem que a associação autora lhe promova a execução, deverá fazê-lo o Ministério Público, facultada igual iniciativa aos demais legitimados.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l7347orig.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 1º, V
+
+- **Ato que deu a redação B:** Lei nº 12.529 de 30/11/2011 · publicado em **01/12/2011** (provisório)
+- **Redação A** (até 30/11/2011): por infração da ordem econômica e da economia popular; *(anotação do Planalto: Redação dada pela Medida provisória nº 2.180-35, de 2001)*
+- **Redação B** (a partir de 01/12/2011): por infração da ordem econômica; .
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l7347orig.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 8.069/1990 (Estatuto da Criança e do Adolescente) (LEI-8069-1990)
+
+### art. 4º
+
+- **Ato que deu a redação B:** Lei nº 15.512 de 22/09/2026 · publicado em **23/09/2026** (provisório)
+- **Redação A** (até 22/09/2026): É dever da família, da comunidade, da sociedade em geral e do poder público assegurar, com absoluta prioridade, a efetivação dos direitos referentes à vida, à saúde, à alimentação, à educação, ao esporte, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito, à liberdade e à convivência familiar e comunitária.
+- **Redação B** (a partir de 23/09/2026): É dever da família, da comunidade, da sociedade em geral e do poder público assegurar, com absoluta prioridade, a efetivação dos direitos referentes à vida, à saúde, à alimentação, à educação, ao esporte, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito, à liberdade, à natureza e à convivência familiar e comunitária.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8069.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 87, II
+
+- **Ato que deu a redação B:** Lei nº 13.257 de 08/03/2016 · publicado em **09/03/2016** (provisório)
+- **Redação A** (até 08/03/2016): políticas e programas de assistência social, em caráter supletivo, para aqueles que deles necessitem
+- **Redação B** (a partir de 09/03/2016): serviços, programas, projetos e benefícios de assistência social de garantia de proteção social e de prevenção e redução de violações de direitos, seus agravamentos ou reincidências;
+- **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8069.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 8.078/1990 (Código de Defesa do Consumidor) (LEI-8078-1990)
+
+### art. 4º
+
+- **Ato que deu a redação B:** Lei nº 9.008 de 21/03/1995 · publicado em **22/03/1995** (provisório)
+- **Redação A** (até 21/03/1995): A Política Nacional de Relações de Consumo tem por objetivo o atendimento das necessidades dos consumidores, o respeito a sua dignidade, saúde e segurança, a proteção de seus interesses econômicos, a melhoria da sua qualidade de vida, bem como a transferência e harmonia das relações de consumo, atendidos os seguintes princípios:
+- **Redação B** (a partir de 22/03/1995): A Política Nacional das Relações de Consumo tem por objetivo o atendimento das necessidades dos consumidores, o respeito à sua dignidade, saúde e segurança, a proteção de seus interesses econômicos, a melhoria da sua qualidade de vida, bem como a transparência e harmonia das relações de consumo, atendidos os seguintes princípios:
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8078.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 57
+
+- **Ato que deu a redação B:** Lei nº 8.656 de 21/05/1993 · publicado em **22/05/1993** (provisório)
+- **Redação A** (até 21/05/1993): A pena de multa, graduada de acordo com a gravidade da infração, a vantagem auferida e a condição econômica do fornecedor será aplicada mediante procedimento administrativo nos termos da lei, revertendo para o fundo de que trata a Lei n° 7.347, de 24 de julho de 1985, sendo a infração ou dano de âmbito nacional, ou para os fundos estaduais de proteção ao consumidor nos demais casos.
+- **Redação B** (a partir de 22/05/1993): A pena de multa, graduada de acordo com a gravidade da infração, a vantagem auferida e a condição econômica do fornecedor, será aplicada mediante procedimento administrativo, revertendo para o Fundo de que trata a Lei nº 7.347, de 24 de julho de 1985, os valores cabíveis à União, ou para os Fundos estaduais ou municipais de proteção ao consumidor nos demais casos.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8078.htm), lido em 20/10/2026
 - **Validação:** pendente
 
 ## Lei nº 8.112/1990 (Regime Jurídico dos Servidores Públicos Civis da União) (LEI-8112-1990)
@@ -232,6 +441,27 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Fonte:** [texto compilado do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm), lido em 19/10/2026
 - **Validação:** pendente
 
+## Lei nº 8.245/1991 (Locações de imóveis urbanos) (LEI-8245-1991)
+
+### art. 12
+
+- **Ato que deu a redação B:** Lei nº 12.112 de 09/12/2009 · publicado em **10/12/2009** (provisório)
+- **Redação A** (até 09/12/2009): Em casos de separação de fato, separação judicial, divórcio ou dissolução da sociedade concubinária, a locação prosseguirá automaticamente com o cônjuge ou companheiro que permanecer no imóvel.
+- **Redação B** (a partir de 10/12/2009): Em casos de separação de fato, separação judicial, divórcio ou dissolução da união estável, a locação residencial prosseguirá automaticamente com o cônjuge ou companheiro que permanecer no imóvel.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8245.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+## Lei nº 8.429/1992 (Improbidade Administrativa) (LEI-8429-1992)
+
+### art. 1º
+
+- **Ato que deu a redação B:** Lei nº 14.230 de 25/10/2021 · publicado em **26/10/2021** (provisório)
+- **Redação A** (até 25/10/2021): Os atos de improbidade praticados por qualquer agente público, servidor ou não, contra a administração direta, indireta ou fundacional de qualquer dos Poderes da União, dos Estados, do Distrito Federal, dos Municípios, de Território, de empresa incorporada ao patrimônio público ou de entidade para cuja criação ou custeio o erário haja concorrido ou concorra com mais de cinqüenta por cento do patrimônio ou da receita anual, serão punidos na forma desta lei.
+- **Redação B** (a partir de 26/10/2021): O sistema de responsabilização por atos de improbidade administrativa tutelará a probidade na organização do Estado e no exercício de suas funções, como forma de assegurar a integridade do patrimônio público e social, nos termos desta Lei.
+- **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l8429.htm), lido em 20/10/2026
+- **Validação:** pendente
+
 ## Lei nº 9.099/1995 (Juizados Especiais Cíveis e Criminais) (LEI-9099-1995)
 
 ### art. 23
@@ -283,5 +513,23 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Redação B** (a partir de 27/05/2015): As partes, de comum acordo, poderão afastar a aplicação de dispositivo do regulamento do órgão arbitral institucional ou entidade especializada que limite a escolha do árbitro único, coárbitro ou presidente do tribunal à respectiva lista de árbitros, autorizado o controle da escolha pelos órgãos competentes da instituição, sendo que, nos casos de impasse e arbitragem multiparte, deverá ser observado o que dispuser o regulamento aplicável.
 - **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l9307.htm), lido em 19/10/2026
+- **Validação:** pendente
+
+## Lei nº 9.503/1997 (Código de Trânsito Brasileiro) (LEI-9503-1997)
+
+### art. 174
+
+- **Ato que deu a redação B:** Lei nº 12.971 de 09/05/2014 · publicado em **12/05/2014** (provisório)
+- **Redação A** (até 11/05/2014): Promover, na via, competição esportiva, eventos organizados, exibição e demonstração de perícia em manobra de veículo, ou deles participar, como condutor, sem permissão da autoridade de trânsito com circunscrição sobre a via:
+- **Redação B** (a partir de 12/05/2014): Promover, na via, competição, eventos organizados, exibição e demonstração de perícia em manobra de veículo, ou deles participar, como condutor, sem permissão da autoridade de trânsito com circunscrição sobre a via:
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l9503.htm), lido em 20/10/2026
+- **Validação:** pendente
+
+### art. 2º, parágrafo único
+
+- **Ato que deu a redação B:** Lei nº 13.146 de 06/07/2015 · publicado em **07/07/2015** (provisório)
+- **Redação A** (até 06/07/2015): Para os efeitos deste Código, são consideradas vias terrestres as praias abertas à circulação pública e as vias internas pertencentes aos condomínios constituídos por unidades autônomas.
+- **Redação B** (a partir de 07/07/2015): Para os efeitos deste Código, são consideradas vias terrestres as praias abertas à circulação pública, as vias internas pertencentes aos condomínios constituídos por unidades autônomas e as vias e áreas de estacionamento de estabelecimentos privados de uso coletivo.
+- **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/leis/l9503.htm), lido em 20/10/2026
 - **Validação:** pendente
 

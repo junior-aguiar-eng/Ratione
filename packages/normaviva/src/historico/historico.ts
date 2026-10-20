@@ -10,7 +10,7 @@
  * - data do ato que deu a redação B: a da publicação do ato (API do Senado), PROVISÓRIA (vigência não confirmada).
  * Todo caso nasce `pendente`: só vira `validado` quando o responsável conferir no Diário Oficial.
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { detectarCharset, type EntradaManifesto } from '../coleta/coletar';
@@ -47,10 +47,20 @@ export interface CasoHistorico {
 const TEXTO_MINIMO = 25;
 const POR_NORMA = 6;
 const ALVO = 30;
+/** Normas lidas pela página anotada complementar: 1 a 2 casos cada, sem teto global (decisão do responsável, 20/10/2026). */
+const POR_NORMA_COMPLEMENTAR = 2;
 const CHAVE_ATO = /^(Reda[çc][ãa]o dada|Inclu[ií]d|Acrescid)/i;
 
-function candidatosDaNorma(l: LinhasDaNorma, m: EntradaManifesto, pasta: string): CasoHistorico[] {
-  const html = detectarCharset(gunzipSync(readFileSync(join(pasta, 'planalto', m.arquivo))), null).texto;
+/** A página do Planalto de onde a redação A (o tachado) é lida. */
+interface PaginaDeOrigem {
+  caminho: string;
+  url: string;
+  tipoPagina: string;
+  lidoEm: string;
+}
+
+function candidatosDaNorma(l: LinhasDaNorma, pagina: PaginaDeOrigem): CasoHistorico[] {
+  const html = detectarCharset(gunzipSync(readFileSync(pagina.caminho)), null).texto;
   const versaoPorDispositivo = new Map(l.versoes.map(v => [v.dispositivo_id, v]));
   const porChave = new Map<string, typeof l.dispositivos>();
   for (const d of l.dispositivos) {
@@ -99,7 +109,7 @@ function candidatosDaNorma(l: LinhasDaNorma, m: EntradaManifesto, pasta: string)
         { em: somarDiasIso(v.vigente_de, -1), esperado: 'antes' },
         { em: v.vigente_de, esperado: 'depois' }
       ],
-      fonte: { url: l.norma.fonte_url, tipoPagina: l.norma.fonte_tipo_pagina, lidoEm: l.norma.lido_em },
+      fonte: { url: pagina.url, tipoPagina: pagina.tipoPagina, lidoEm: pagina.lidoEm },
       validacao: { status: 'pendente', por: null, em: null }
     });
   }
@@ -107,10 +117,10 @@ function candidatosDaNorma(l: LinhasDaNorma, m: EntradaManifesto, pasta: string)
 }
 
 /** Até `POR_NORMA` casos de uma norma, de atos diferentes, espalhados pelo texto (do começo ao fim). */
-function escolher(casos: CasoHistorico[]): CasoHistorico[] {
+function escolher(casos: CasoHistorico[], limite = POR_NORMA): CasoHistorico[] {
   const escolhidos: CasoHistorico[] = [];
-  const passos = Math.min(casos.length, POR_NORMA * 2);
-  for (let k = 0; k < passos && escolhidos.length < POR_NORMA; k++) {
+  const passos = Math.min(casos.length, limite * 2);
+  for (let k = 0; k < passos && escolhidos.length < limite; k++) {
     // 0, meio, fim, depois os pontos intermediários: uma ordem que cobre o texto todo cedo
     const fracao = [0, 0.5, 1, 0.25, 0.75, 0.125, 0.375, 0.625][k] ?? 0;
     const c = casos[Math.min(casos.length - 1, Math.floor(fracao * casos.length))];
@@ -140,16 +150,28 @@ export interface ResultadoHistorico {
 
 export function gerarHistorico(pasta: string, validacoesAnteriores: Record<string, CasoHistorico['validacao']> = {}): ResultadoHistorico {
   const manifesto: EntradaManifesto[] = JSON.parse(readFileSync(join(pasta, 'planalto', 'manifesto.json'), 'utf-8'));
+  const arquivoComplementar = join(pasta, 'planalto', 'anotadas', 'manifesto.json');
+  const complementares: EntradaManifesto[] = existsSync(arquivoComplementar) ? JSON.parse(readFileSync(arquivoComplementar, 'utf-8')) : [];
   const linhas = linhasDoCorpus(pasta);
   const porNorma: CasoHistorico[][] = [];
+  const doComplemento: CasoHistorico[] = [];
   const candidatos: Record<string, number> = {};
   for (const l of linhas) {
     const m = manifesto.find(x => x.id === l.norma.id)!;
-    const todos = candidatosDaNorma(l, m, pasta);
+    // 1º a página do próprio corpus; só se ela não tiver tachado aproveitável, a página anotada complementar
+    let todos = candidatosDaNorma(l, { caminho: join(pasta, 'planalto', m.arquivo), url: l.norma.fonte_url, tipoPagina: l.norma.fonte_tipo_pagina, lidoEm: l.norma.lido_em });
+    let complemento = false;
+    const c = todos.length === 0 ? complementares.find(x => x.id === l.norma.id) : undefined;
+    if (c) {
+      todos = candidatosDaNorma(l, { caminho: join(pasta, 'planalto', 'anotadas', c.arquivo), url: c.url, tipoPagina: c.tipoPagina, lidoEm: c.lidoEm });
+      complemento = true;
+    }
     candidatos[l.norma.id] = todos.length;
-    if (todos.length > 0) porNorma.push(escolher(todos));
+    if (todos.length === 0) continue;
+    if (complemento) doComplemento.push(...escolher(todos, POR_NORMA_COMPLEMENTAR));
+    else porNorma.push(escolher(todos));
   }
-  const casos = equilibrar(porNorma);
+  const casos = [...equilibrar(porNorma), ...doComplemento].sort((x, y) => x.normaId.localeCompare(y.normaId) || x.id.localeCompare(y.id));
   for (const c of casos) if (validacoesAnteriores[c.id]) c.validacao = validacoesAnteriores[c.id];
   return { casos, candidatos };
 }
