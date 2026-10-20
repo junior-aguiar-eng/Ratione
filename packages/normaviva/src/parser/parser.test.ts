@@ -121,3 +121,37 @@ describe('Parser no corpus real do Planalto (F3-02)', () => {
     assert.ok(r.dispositivos.find(d => d.escopo === 'corpo' && d.rotulo === 'art. 117')?.revogado);
   });
 });
+
+describe('Anotação "(Produção de efeito)" (20/10/2026)', () => {
+  it('sai do texto e fica em `anotacoes` como vigência', () => {
+    const r = separarAnotacoes('dispor sobre critérios de execução equitativa. (Redação dada pela Emenda Constitucional nº 102, de 2019) (Produção de efeito)');
+    assert.strictEqual(r.texto, 'dispor sobre critérios de execução equitativa.');
+    assert.deepStrictEqual(r.anotacoes.map(a => a.tipo), ['redacao_dada', 'vigencia']);
+  });
+
+  it('dispositivo revogado que traz só "(Produção de efeito)" fica revogado, com texto vazio (antes aparecia como vigente)', () => {
+    const r = parsearDispositivos(['Art. 1º Texto qualquer do primeiro artigo.', 'Art. 86. (Revogado pela Lei Complementar nº 104, de 2001) (Produção de efeito)']);
+    const art86 = r.dispositivos.find(d => d.rotulo === 'art. 86')!;
+    assert.strictEqual(art86.texto, '');
+    assert.strictEqual(art86.revogado, true);
+  });
+
+  it('"Produção de efeitos" sem parênteses (texto de link) sai do fim do texto, só junto de outra anotação', () => {
+    const r = separarAnotacoes('Excetuam-se da desvinculação de que trata o caput: (Incluído pela Emenda Constitucional nº 112, de 2021) Produção de efeitos');
+    assert.strictEqual(r.texto, 'Excetuam-se da desvinculação de que trata o caput:');
+    assert.deepStrictEqual(r.anotacoes.map(a => a.tipo), ['incluido', 'vigencia']);
+    // texto de lei que termina assim, sem outra anotação, não é cortado
+    assert.strictEqual(separarAnotacoes('A lei regula a Produção de efeitos').texto, 'A lei regula a Produção de efeitos');
+  });
+
+  it('nenhum dispositivo do corpus guarda a anotação colada ao texto, e os artigos revogados saem como revogados', () => {
+    const ids = ['CF-1988', 'DL-5452-1943', 'LEI-10406-2002', 'LEI-11101-2005', 'LEI-5172-1966', 'LEI-8069-1990', 'LEI-8213-1991', 'LEI-9503-1997'];
+    const colados = ids.flatMap(id => corpus(id).dispositivos.filter(d => /Produ[çc][ãa]o de efeitos?/.test(d.texto)).map(d => `${id} ${d.rotulo}`));
+    assert.deepStrictEqual(colados, []);
+    const ctn = corpus('LEI-5172-1966').dispositivos;
+    for (const n of ['86', '87', '88', '89', '93', '94']) assert.ok(ctn.find(d => d.rotulo === `art. ${n}`)?.revogado, `CTN art. ${n}`);
+    assert.ok(corpus('LEI-8069-1990').dispositivos.find(d => d.rotulo === 'art. 260, § 1º')?.revogado);
+    const cf = corpus('CF-1988').dispositivos;
+    assert.ok(cf.find(d => d.escopo === 'ADCT' && d.rotulo === 'art. 76, § 1º')?.revogado);
+  });
+});
