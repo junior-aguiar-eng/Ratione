@@ -6,6 +6,7 @@ import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
+import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
@@ -133,7 +134,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId, urlSa
         </Button>
         <Button variant="secondary" type="button" onClick={salvar}>
           {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-          {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
+          {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
         </Button>
       </div>
 

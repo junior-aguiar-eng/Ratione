@@ -7,6 +7,7 @@ import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { DECISAO_DEMO, TRECHOS_DEMO, TRECHO_POR_ITEM } from '../../lib/decisaoDemo';
 import { useSalvar } from '../../lib/useSalvar';
+import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge, BadgeTom } from '@/components/ui/badge';
@@ -99,7 +100,7 @@ export default function ArgumentaPage() {
           <>
             <Button variant="secondary" type="button" onClick={salvar}>
               {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-              {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
+              {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
             </Button>
             <Link href="/prazozero" className={buttonVariants()}>
               Calcular prazo recursal

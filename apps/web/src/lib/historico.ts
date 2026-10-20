@@ -128,17 +128,26 @@ export function limparNavegador(): void {
 
 // ---------- Na conta (com login) ----------
 
-/**
- * Salva o registro. Com login, vai para a conta (Supabase, região de São Paulo); sem login, ou se a conta falhar,
- * fica neste navegador. O chamador não precisa esperar.
- */
 export type DestinoSalvo = 'conta' | 'navegador' | 'limite';
 
 /** Mensagem do gatilho do banco (supabase/migrations/…_limite_itens_salvos.sql). */
 export const ehErroDeLimite = (mensagem: string | undefined) => /limite de \d+ itens salvos/.test(mensagem ?? '');
 
-export async function salvarRegistro(r: NovoRegistro): Promise<DestinoSalvo> {
-  const sb = obterSupabase();
+/** O que salvar e importar usam do cliente do Supabase (separado para testar sem rede). */
+export interface ClienteItens {
+  auth: { getSession(): Promise<{ data: { session: { user: { id: string } } | null } }> };
+  from(tabela: 'itens_salvos'): { insert(linhas: object | object[]): PromiseLike<{ error: { message: string } | null }> };
+}
+
+/**
+ * Salva o registro. Com login, vai para a conta (Supabase, região de São Paulo); sem login, ou se a conta falhar,
+ * fica neste navegador. Conta cheia (teto de itens) não cai para o navegador: devolve 'limite'.
+ */
+export function salvarRegistro(r: NovoRegistro): Promise<DestinoSalvo> {
+  return salvarRegistroCom(obterSupabase() as ClienteItens | null, r, salvarNoNavegador);
+}
+
+export async function salvarRegistroCom(sb: ClienteItens | null, r: NovoRegistro, guardarNoNavegador: (r: NovoRegistro) => void): Promise<DestinoSalvo> {
   if (sb) {
     try {
       const { data } = await sb.auth.getSession();
@@ -152,7 +161,7 @@ export async function salvarRegistro(r: NovoRegistro): Promise<DestinoSalvo> {
       // cai para o navegador
     }
   }
-  salvarNoNavegador(r);
+  guardarNoNavegador(r);
   return 'navegador';
 }
 
@@ -199,12 +208,25 @@ export interface ResultadoImportacao {
  * Envia para a conta os itens salvos só neste navegador (a pedido do usuário). Em lote; se o lote falhar, tenta um por um, de modo que
  * um registro ruim (ou o limite da conta) não impeça os demais. Só sai do navegador o que foi enviado.
  */
-export async function importarNavegadorParaConta(): Promise<ResultadoImportacao> {
-  const sb = obterSupabase();
-  if (!sb) return { enviados: 0, mantidos: lerHistorico().length };
+export function importarNavegadorParaConta(): Promise<ResultadoImportacao> {
+  return importarComCliente(obterSupabase() as ClienteItens | null, lerHistorico(), restantes => {
+    try {
+      if (restantes.length === 0) localStorage.removeItem(CHAVE);
+      else localStorage.setItem(CHAVE, JSON.stringify(restantes));
+    } catch {
+      // armazenamento indisponível: ignorar
+    }
+  });
+}
+
+export async function importarComCliente(
+  sb: ClienteItens | null,
+  locais: RegistroHistorico[],
+  gravarRestantes: (restantes: RegistroHistorico[]) => void
+): Promise<ResultadoImportacao> {
+  if (!sb) return { enviados: 0, mantidos: locais.length };
   const { data: sessao } = await sb.auth.getSession();
   const usuarioId = sessao.session?.user.id;
-  const locais = lerHistorico();
   if (!usuarioId || locais.length === 0) return { enviados: 0, mantidos: locais.length };
 
   const validos = locais.filter(registroValido);
@@ -221,12 +243,7 @@ export async function importarNavegadorParaConta(): Promise<ResultadoImportacao>
     }
   }
 
-  const restantes = locais.filter(l => !enviadosIds.has((l as RegistroHistorico).id));
-  try {
-    if (restantes.length === 0) localStorage.removeItem(CHAVE);
-    else localStorage.setItem(CHAVE, JSON.stringify(restantes));
-  } catch {
-    // armazenamento indisponível: ignorar
-  }
+  const restantes = locais.filter(l => !enviadosIds.has(l.id));
+  gravarRestantes(restantes);
   return { enviados: enviadosIds.size, mantidos: restantes.length };
 }

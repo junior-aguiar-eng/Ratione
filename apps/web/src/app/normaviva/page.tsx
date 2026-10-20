@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
+import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
@@ -263,7 +264,7 @@ export default function NormaVivaPage() {
                   <div className="flex flex-wrap gap-2 no-print">
                     <Button variant="secondary" type="button" onClick={salvar}>
                       {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                      {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
+                      {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
                     </Button>
                     <a href={detalhe.norma.fonte_url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
                       Fonte oficial (Planalto)

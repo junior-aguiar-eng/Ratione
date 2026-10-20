@@ -22,6 +22,7 @@ import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
+import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerPrazoZero, urlDoPrazoZero } from '../../lib/parametrosSalvos';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
@@ -524,7 +525,7 @@ export default function PrazoZeroPage() {
                   </Button>
                   <Button variant="secondary" type="button" onClick={salvar}>
                     {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                    {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar em Meu espaço'}
+                    {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
                   </Button>
                 </div>
               </section>
