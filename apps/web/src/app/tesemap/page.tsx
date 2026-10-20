@@ -9,6 +9,7 @@ import { GRAFOS_PRECEDENTES_CATALOGADOS, NoGrafo, TipoNoGrafo } from '@ratione/t
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import { useSalvar } from '../../lib/useSalvar';
+import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { Button } from '@/components/ui/button';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Label } from '@/components/ui/label';
@@ -248,7 +249,7 @@ export default function TeseMapPage() {
                 )}
                 <Button variant="secondary" type="button" onClick={salvar} className="w-full first:mt-2">
                   {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                  {salvo ? 'Salvo em Meu espaço' : estadoSalvo === 'limite' ? 'Limite de itens atingido' : 'Salvar tema em Meu espaço'}
+                  {rotuloSalvar(estadoSalvo, 'Salvar tema em Meu espaço')}
                 </Button>
               </div>
             </>
