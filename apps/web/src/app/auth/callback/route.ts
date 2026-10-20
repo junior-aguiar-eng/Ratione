@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
+import { origemPublica } from '../../../lib/origem';
 import { caminhoInterno } from '../../../lib/link-email';
 
 /**
@@ -8,7 +9,8 @@ import { caminhoInterno } from '../../../lib/link-email';
  * Troca o código de uso único por uma sessão e a grava nos cookies.
  */
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
+  const origin = origemPublica(request);
   const codigo = searchParams.get('code');
   const proximo = caminhoInterno(searchParams.get('proximo'), '/meu-espaco');
 

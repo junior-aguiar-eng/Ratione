@@ -14,6 +14,7 @@ import { registrar } from '../../../../lib/log';
  */
 export const dynamic = 'force-dynamic';
 
+const PAGINA = 1000;
 const REMETENTE_PADRAO = 'Ratione <nao-responda@nexojuris.ia.br>';
 
 function segredoConfere(recebido: string | null, esperado: string): boolean {
@@ -44,9 +45,14 @@ export async function POST(request: Request) {
     hoje: () => hojeNoBrasil(),
     simulacao: !chaveEmail,
     listarProximos: async (de, ate) => {
-      const { data, error } = await sb.from('lembretes_prazo').select('*').gte('vencimento', de).lte('vencimento', ate);
-      if (error) throw new Error(`falha ao listar lembretes (${error.code ?? 'sem código'}: ${error.message})`);
-      return (data ?? []) as Lembrete[];
+      // O PostgREST devolve no máximo 1.000 linhas por pedido: lê em páginas, em ordem estável
+      const todos: Lembrete[] = [];
+      for (let inicio = 0; ; inicio += PAGINA) {
+        const { data, error } = await sb.from('lembretes_prazo').select('*').gte('vencimento', de).lte('vencimento', ate).order('id').range(inicio, inicio + PAGINA - 1);
+        if (error) throw new Error(`falha ao listar lembretes (${error.code ?? 'sem código'}: ${error.message})`);
+        todos.push(...((data ?? []) as Lembrete[]));
+        if ((data?.length ?? 0) < PAGINA) return todos;
+      }
     },
     emailDe: async usuarioId => {
       const { data, error } = await sb.auth.admin.getUserById(usuarioId);
