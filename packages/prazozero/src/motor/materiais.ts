@@ -1,3 +1,4 @@
+import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import { MotorPrazoZero } from './calculadora';
 import { civil, deDias, ehDataIsoValida, formatarCivil, paraDias, somarDiasIso } from '../datas/civil';
 
@@ -55,6 +56,9 @@ function validar(iso: string): void {
 
 const motor = new MotorPrazoZero();
 
+/** UF informada ou a do tribunal (como no motor processual), para os feriados estaduais entrarem no calendário. */
+const ufDe = (p: ParametrosPrazoMaterial) => p.uf ?? (p.tribunalId ? TRIBUNAIS_BRASIL[p.tribunalId]?.uf : undefined);
+
 export function calcularPrazoMaterial(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   validar(p.dataInicio);
   return p.tipo === 'mandado_seguranca' ? mandadoSeguranca(p) : acaoRescisoria(p);
@@ -64,7 +68,7 @@ function mandadoSeguranca(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   const BASE = 'Lei 12.016/2009, art. 23; Código Civil, arts. 132 e 207';
   const limite = somarDiasIso(p.dataInicio, 120);
   // Sem suspensão: o recesso não suspende a decadência (CC, art. 207). Só dias sem expediente conferidos.
-  const ctx = { uf: p.uf, tribunalId: p.tribunalId, regime: 'cpc_dias_uteis' as const, suspensaoRecesso: false };
+  const ctx = { uf: ufDe(p), tribunalId: p.tribunalId, regime: 'cpc_dias_uteis' as const, suspensaoRecesso: false };
   const util = motor.verificarDiaUtil(limite, ctx);
   const memoria: ItemMemoriaMaterial[] = [
     { data: p.dataInicio, descricao: 'Ciência do ato impugnado (dia do começo, excluído da contagem)', fundamentoLegal: 'Lei 12.016/2009, art. 23; CC, art. 132' },
@@ -111,7 +115,7 @@ function maisDoisAnos(iso: string): { data: string; semCorrespondencia: boolean;
 function acaoRescisoria(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   const BASE = 'CPC, art. 975; Código Civil, art. 132';
   const { data: bruto, semCorrespondencia, imediato } = maisDoisAnos(p.dataInicio);
-  const ctx = { uf: p.uf, tribunalId: p.tribunalId, regime: 'cpc_dias_uteis' as const, suspensaoRecesso: true };
+  const ctx = { uf: ufDe(p), tribunalId: p.tribunalId, regime: 'cpc_dias_uteis' as const, suspensaoRecesso: true };
   const memoria: ItemMemoriaMaterial[] = [
     { data: p.dataInicio, descricao: 'Trânsito em julgado da última decisão (dia do começo, excluído da contagem)', fundamentoLegal: 'CPC, art. 975, caput; CC, art. 132' },
     { data: bruto, descricao: 'Mesmo dia e mês, 2 anos depois: vencimento antes da prorrogação', fundamentoLegal: 'CC, art. 132, § 3º' }

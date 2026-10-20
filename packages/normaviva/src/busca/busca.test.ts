@@ -152,3 +152,37 @@ describe('Banco do NormaViva com o corpus do Planalto (F3-05)', () => {
     await assert.rejects(como(db, null, tx => tx.query("update dispositivos set texto = 'x' where true")), /permission denied/);
   });
 });
+
+describe('Barra de pesquisa: citações digitadas de modo informal', () => {
+  const normas = ['LEI-14133-2021', 'LEI-8078-1990', 'DL-2848-1940'];
+  const dispositivo = (q: string) => {
+    const r = interpretarConsulta(q, normas);
+    assert.equal(r.tipo, 'dispositivo', q);
+    return r.tipo === 'dispositivo' ? r : undefined;
+  };
+
+  it('artigo de 1 a 9 sem o ordinal vira "5º", como a base guarda', () => {
+    assert.deepStrictEqual(dispositivo('art 5 CF'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '5º', detalhe: null });
+    assert.equal(dispositivo('art. 10 CC')?.artigo, '10');
+  });
+
+  it('inciso sem parágrafo: "art. 5º, LV, CF" e "art. 1.015, I, CPC"', () => {
+    assert.deepStrictEqual(dispositivo('art. 5º, LV, CF'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '5º', detalhe: 'LV' });
+    assert.deepStrictEqual(dispositivo('art. 1.015, I, CPC'), { tipo: 'dispositivo', normaId: 'LEI-13105-2015', artigo: '1.015', detalhe: 'I' });
+  });
+
+  it('sigla que também é número romano (CC, CDC) continua sendo a norma', () => {
+    assert.deepStrictEqual(dispositivo('art. 50 CC'), { tipo: 'dispositivo', normaId: 'LEI-10406-2002', artigo: '50', detalhe: null });
+    assert.equal(dispositivo('art. 6, CDC')?.normaId, 'LEI-8078-1990');
+  });
+
+  it('norma citada por número de lei e "artigo" por extenso', () => {
+    assert.equal(dispositivo('art. 6 Lei 8.078')?.normaId, 'LEI-8078-1990');
+    assert.equal(dispositivo('art. 5º da Lei nº 8.078/1990')?.normaId, 'LEI-8078-1990');
+    assert.equal(dispositivo('artigo 489 do CPC')?.normaId, 'LEI-13105-2015');
+  });
+
+  it('lei com ano de dois dígitos', () => {
+    assert.deepStrictEqual(interpretarConsulta('lei 8.078/90', normas), { tipo: 'norma', normaId: 'LEI-8078-1990' });
+  });
+});
