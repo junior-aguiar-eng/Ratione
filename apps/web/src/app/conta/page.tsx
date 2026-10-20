@@ -9,6 +9,7 @@ import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
+import { irParaPagina } from '../../lib/navegacao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import { Button } from '@/components/ui/button';
@@ -119,7 +120,7 @@ export default function ContaPage() {
 
   const sair = async () => {
     await obterSupabase()?.auth.signOut();
-    router.replace('/');
+    irParaPagina('/');
   };
 
   const exportar = async () => {
@@ -170,7 +171,7 @@ export default function ContaPage() {
       });
       if (resp.ok) {
         await obterSupabase()?.auth.signOut({ scope: 'local' }).catch(() => undefined);
-        router.replace('/');
+        irParaPagina('/');
         return;
       }
       const corpo = (await resp.json().catch(() => null)) as { mensagem?: string } | null;

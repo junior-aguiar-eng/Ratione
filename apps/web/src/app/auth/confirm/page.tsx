@@ -2,15 +2,15 @@
 
 import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import PageHeader from '../../../components/PageHeader';
 import Notice from '../../../components/Notice';
 import { obterSupabase } from '../../../lib/supabase/client';
+import { irParaPagina } from '../../../lib/navegacao';
 import { caminhoInterno, destinoPadrao, tipoLinkValido } from '../../../lib/link-email';
 import { Button } from '@/components/ui/button';
 
 function Confirmar() {
-  const router = useRouter();
   const params = useSearchParams();
   const [ocupado, setOcupado] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -39,7 +39,7 @@ function Confirmar() {
       setErro('O link é inválido ou já foi usado. Peça um novo na tela de entrada.');
       return;
     }
-    router.replace(caminhoInterno(params.get('proximo'), destinoPadrao(tipo)));
+    irParaPagina(caminhoInterno(params.get('proximo'), destinoPadrao(tipo)));
   };
 
   return (

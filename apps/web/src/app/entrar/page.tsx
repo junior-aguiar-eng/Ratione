@@ -2,10 +2,11 @@
 
 import React, { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Notice from '../../components/Notice';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
+import { irParaPagina } from '../../lib/navegacao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
 import { caminhoInterno } from '../../lib/link-email';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,6 @@ import { cn } from '@/lib/utils';
 type Modo = 'entrar' | 'cadastrar' | 'recuperar';
 
 function Formulario() {
-  const router = useRouter();
   const params = useSearchParams();
   const { usuario, carregando, contaDisponivel } = useSessao();
   const [modo, setModo] = useState<Modo>('entrar');
@@ -39,8 +39,8 @@ function Formulario() {
   const proximo = pedido.startsWith('/entrar') ? '/prazozero' : pedido;
 
   useEffect(() => {
-    if (usuario) router.replace(proximo);
-  }, [usuario, router, proximo]);
+    if (usuario) irParaPagina(proximo);
+  }, [usuario, proximo]);
 
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
