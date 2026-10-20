@@ -87,6 +87,25 @@ describe('Banco do NormaViva com o corpus do Planalto (F3-05)', () => {
     assert.strictEqual(Number(rev.rows[0].n), 0);
   });
 
+  it('busca por proximidade: "desconsideração da personalidade jurídica" acha o art. 50 do CC e o incidente do CPC', async () => {
+    const r = await db.query<{ norma_id: string; rotulo: string }>("select norma_id, rotulo from buscar_dispositivos('desconsideração da personalidade jurídica', null, 30)");
+    const i = r.rows.findIndex(x => x.norma_id === 'LEI-10406-2002' && x.rotulo === 'art. 50');
+    assert.ok(i >= 0 && i < 15, `art. 50 do CC entre os 15 primeiros (posição ${i + 1})`);
+    assert.ok(r.rows.slice(0, 8).some(x => x.norma_id === 'LEI-13105-2015' && /^art\. 13[3-7]/.test(x.rotulo)), 'o incidente de desconsideração do CPC (arts. 133 a 137) está no topo');
+  });
+
+  it('busca: quem tem todas as palavras vem antes de quem tem só parte delas; consulta sem palavra útil volta vazia', async () => {
+    const r = await db.query<{ relevancia: number }>("select relevancia from buscar_dispositivos('prisão preventiva requisitos', null, 30)");
+    assert.ok(r.rows.length > 3);
+    const rels = r.rows.map(x => Math.floor(x.relevancia));
+    assert.deepStrictEqual(rels, [...rels].sort((a, b) => b - a), 'ordenado por quantidade de palavras achadas');
+    assert.strictEqual(rels[0], 3, 'o primeiro tem as 3 palavras');
+    const vazia = await db.query("select * from buscar_dispositivos('a', null, 10)");
+    assert.strictEqual(vazia.rows.length, 0);
+    const realce = await db.query<{ trecho: string }>("select trecho from buscar_dispositivos('legítima defesa', 'DL-2848-1940', 1)");
+    assert.match(realce.rows[0].trecho, /<b>/);
+  });
+
   it('citação de artigo localiza o dispositivo e seus filhos pela hierarquia', async () => {
     const q = interpretarConsulta('art. 85, § 2º do CPC');
     assert.strictEqual(q.tipo, 'dispositivo');
