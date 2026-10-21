@@ -55,14 +55,14 @@ export interface DatasDaNorma {
 
 const ORIGEM_DA_ANOTACAO: Partial<Record<Anotacao['tipo'], OrigemVersao>> = { redacao_dada: 'redacao_dada', incluido: 'incluido', revogado: 'revogado' };
 
-interface Candidato {
+export interface Candidato {
   origem: OrigemVersao;
   ato: AtoDaVersao;
   vigenteDe: string | null;
   anoDoAto: number | null;
 }
 
-function candidatoDaAnotacao(a: Anotacao, datas: DatasDaNorma): Candidato | undefined {
+export function candidatoDaAnotacao(a: Anotacao, datas: DatasDaNorma): Candidato | undefined {
   const origem = ORIGEM_DA_ANOTACAO[a.tipo];
   if (!origem) return undefined;
   const atos = atosDoTexto(a.texto);

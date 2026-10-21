@@ -42,6 +42,13 @@ export interface Versao {
   vigencia_confirmada: boolean;
   texto_anterior_disponivel: boolean;
   hash: string;
+  /** Fim da redação (véspera da publicação do ato seguinte); nulo na redação vigente. Ausente antes da migração das redações anteriores. */
+  vigente_ate?: string | null;
+  /** `compilado`: texto vigente da página compilada; `tachado_planalto`: redação anterior lida do tachado da página anotada. */
+  fonte_do_texto?: 'compilado' | 'tachado_planalto';
+  /** Quem conferiu a redação anterior no Diário Oficial e quando; nulos enquanto não conferida. */
+  conferida_por?: string | null;
+  conferida_em?: string | null;
 }
 
 export interface Relacao {
@@ -131,13 +138,41 @@ export interface Detalhe {
   /** O próprio dispositivo e tudo o que está abaixo dele (parágrafos, incisos, alíneas), na ordem do texto. */
   texto: Dispositivo[];
   norma: Norma;
+  /** A redação vigente (a que não tem fim). */
   versao: Versao | null;
+  /** Todas as redações conhecidas do dispositivo, da mais recente para a mais antiga (a vigente primeiro). */
+  versoes: Versao[];
   /** Alterações e remissões que partem deste dispositivo e dos que estão abaixo dele. */
   relacoes: Relacao[];
   /** Dispositivos que citam este artigo. */
   citadoPor: Array<{ origem_id: string; rotulo: string; norma_id: string }>;
   /** Rótulos dos destinos já resolvidos (para mostrar "art. 311" em vez do id). */
   rotulosDestino: Record<string, { rotulo: string; norma_id: string }>;
+}
+
+const COLUNAS_VERSAO_BASE =
+  'texto, origem, ato_chave, ato_rotulo, ato_publicacao, ano_do_ato, fonte_da_data, vigente_de, vigencia_confirmada, texto_anterior_disponivel, hash';
+const COLUNAS_VERSAO = `${COLUNAS_VERSAO_BASE}, vigente_ate, fonte_do_texto, conferida_por, conferida_em`;
+
+/** A vigente (sem fim) primeiro; as anteriores da mais recente para a mais antiga. */
+export function ordenarVersoes(versoes: Versao[]): Versao[] {
+  return [...versoes].sort((a, b) => {
+    if (!a.vigente_ate !== !b.vigente_ate) return a.vigente_ate ? 1 : -1;
+    return (b.vigente_ate ?? '').localeCompare(a.vigente_ate ?? '');
+  });
+}
+
+/**
+ * Todas as redações do dispositivo. Se o banco ainda não tem as colunas das redações anteriores (migração 20261021000001 por aplicar), a leitura cai para
+ * a consulta antiga, que traz só a vigente: a página nunca fica fora do ar por causa da ordem entre migração e publicação.
+ */
+export async function lerVersoes(db: SupabaseClient, id: string): Promise<Versao[]> {
+  const nova = await db.from('versoes_dispositivo').select(COLUNAS_VERSAO).eq('dispositivo_id', id);
+  if (!nova.error) return ordenarVersoes((nova.data ?? []) as unknown as Versao[]);
+  if (nova.error.code !== '42703') falhou(nova.error, 'ler a versão');
+  const antiga = await db.from('versoes_dispositivo').select(COLUNAS_VERSAO_BASE).eq('dispositivo_id', id).limit(1);
+  if (antiga.error) falhou(antiga.error, 'ler a versão');
+  return ordenarVersoes((antiga.data ?? []) as unknown as Versao[]);
 }
 
 export async function carregarDetalhe(db: SupabaseClient, id: string, normas: Norma[]): Promise<Detalhe> {
@@ -158,12 +193,11 @@ export async function carregarDetalhe(db: SupabaseClient, id: string, normas: No
   if (!norma) throw new Error(`norma ${dispositivo.norma_id} não encontrada`);
 
   const ids = texto.map(t => t.id);
-  const [v, rel, citado] = await Promise.all([
-    db.from('versoes_dispositivo').select('texto, origem, ato_chave, ato_rotulo, ato_publicacao, ano_do_ato, fonte_da_data, vigente_de, vigencia_confirmada, texto_anterior_disponivel, hash').eq('dispositivo_id', id).limit(1),
+  const [versoes, rel, citado] = await Promise.all([
+    lerVersoes(db, id),
     db.from('relacoes').select('id, origem_id, tipo, destino_id, destino_norma_id, destino_rotulo, destino_ato, destino_texto, trecho, escopo').in('origem_id', ids).order('id').limit(300),
     db.from('relacoes').select('origem_id').eq('tipo', 'remete').eq('destino_id', id).limit(40)
   ]);
-  if (v.error) falhou(v.error, 'ler a versão');
   if (rel.error) falhou(rel.error, 'ler as relações');
   if (citado.error) falhou(citado.error, 'ler quem cita');
 
@@ -181,7 +215,8 @@ export async function carregarDetalhe(db: SupabaseClient, id: string, normas: No
     dispositivo,
     texto,
     norma,
-    versao: (v.data?.[0] as Versao | undefined) ?? null,
+    versao: versoes.find(x => !x.vigente_ate) ?? versoes[0] ?? null,
+    versoes,
     relacoes: (rel.data ?? []) as Relacao[],
     citadoPor: origensCitantes.map(o => ({ origem_id: o, rotulo: rotulos[o]?.rotulo ?? o, norma_id: rotulos[o]?.norma_id ?? '' })),
     rotulosDestino: rotulos

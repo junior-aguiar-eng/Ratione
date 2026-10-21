@@ -85,3 +85,62 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
       : `Redação atual, que a base data de ${dataCurta(versao.vigente_de)}: é a data de publicação do ato, usada como início provisório. A vigência pode ter começado em outro dia (vacatio legis); a cláusula de vigência do ato não foi lida.`
   };
 }
+
+// ---------- Várias redações do mesmo dispositivo (F3-04) ----------
+
+export type SituacaoEm =
+  | SituacaoNaData
+  /** A data cai numa redação anterior que a base conhece: mostra o texto da época, com os avisos de fonte e de vigência provisória. */
+  | { tipo: 'texto_da_epoca'; versao: Versao; conferida: boolean; avisos: string[] };
+
+/** Começo conhecido de uma redação: a data, ou o 1º de janeiro do ano do ato quando só o ano se sabe; `null` se nada se sabe. */
+function inicioConhecido(v: Versao): string | null {
+  return v.vigente_de ?? (v.ano_do_ato ? `${v.ano_do_ato}-01-01` : null);
+}
+
+function avisosDaAnterior(v: Versao, atual: Versao, dataCurta: (iso: string) => string): string[] {
+  const avisos: string[] = [];
+  avisos.push(`Redação que vigorou até ${dataCurta(v.vigente_ate!)}, véspera da publicação de ${atual.ato_rotulo ?? 'ato posterior'}, que deu a redação atual.`);
+  if (v.vigente_de) {
+    avisos.push(`Início: ${dataCurta(v.vigente_de)}${v.origem === 'redacao_original' ? ' (publicação da norma)' : ` (publicação de ${v.ato_rotulo ?? 'ato anterior'})`}.`);
+  } else {
+    avisos.push('O início desta redação não é conhecido pela base.');
+  }
+  avisos.push('As datas são as de publicação dos atos, usadas como provisórias: a vigência pode ter começado ou acabado em outro dia (vacatio legis), e a cláusula de vigência não foi lida.');
+  avisos.push(
+    v.conferida_em
+      ? `Texto lido do trecho tachado da página anotada do Planalto e conferido por ${v.conferida_por} em ${dataCurta(v.conferida_em)}.`
+      : 'Texto lido do trecho tachado da página anotada do Planalto; ainda não foi conferido no Diário Oficial. Confira antes de citá-lo.'
+  );
+  return avisos;
+}
+
+/**
+ * O que a base pode afirmar sobre o dispositivo em `dataConsulta`, considerando todas as redações conhecidas.
+ * A regra é a de sempre: nunca mostrar uma redação como se fosse a de outra época. Antes da redação atual, só há texto se uma redação
+ * anterior cobre a data; fora delas, a base diz que não tem.
+ */
+export function situacaoEm(versoes: Versao[], dataConsulta: string, dataCurta: (iso: string) => string): SituacaoEm | null {
+  const atual = versoes.find(v => !v.vigente_ate) ?? versoes[0];
+  if (!atual) return null;
+  const base = situacaoNaData(atual, dataConsulta, dataCurta);
+  if (base.tipo !== 'texto_da_epoca_indisponivel') return base;
+
+  const anteriores = versoes.filter(v => v.vigente_ate);
+  if (anteriores.length === 0) return base;
+  const dentro = anteriores.find(v => dataConsulta <= v.vigente_ate! && dataConsulta >= (inicioConhecido(v) ?? '0000-01-01'));
+  if (dentro) return { tipo: 'texto_da_epoca', versao: dentro, conferida: !!dentro.conferida_em, avisos: avisosDaAnterior(dentro, atual, dataCurta) };
+
+  const maisAntiga = anteriores[anteriores.length - 1];
+  const inicio = inicioConhecido(maisAntiga);
+  if (inicio && dataConsulta < inicio) {
+    return {
+      tipo: 'texto_da_epoca_indisponivel',
+      aviso:
+        maisAntiga.origem === 'redacao_original'
+          ? `A norma foi publicada em ${dataCurta(inicio)}; não havia texto antes disso.`
+          : `A base conhece a redação deste dispositivo a partir de ${dataCurta(inicio)}. Antes disso o texto era outro e não está na base: confira no Planalto ou no DOU da época.`
+    };
+  }
+  return base;
+}

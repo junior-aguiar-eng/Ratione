@@ -10,7 +10,9 @@ import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
-import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoNaData } from '../../lib/normavivaApresentacao';
+import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoEm } from '../../lib/normavivaApresentacao';
+import { linhaDoTempo } from '../../lib/linhaDoTempo';
+import { DiffTexto, LinhaDoTempo } from './Historico';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -86,7 +88,9 @@ export default function NormaVivaPage() {
   }, [db, itemId, normas]);
 
   const nomeDaNorma = (id: string) => normas.find(n => n.id === id)?.nome ?? id;
-  const situacao = detalhe?.versao && dataConsulta ? situacaoNaData(detalhe.versao, dataConsulta, dataCurta) : null;
+  const situacao = detalhe && dataConsulta ? situacaoEm(detalhe.versoes, dataConsulta, dataCurta) : null;
+  // A redação anterior mais recente e a atual: o que o dispositivo mudou na última alteração que a base conhece
+  const anterior = detalhe?.versoes.find(v => v.vigente_ate) ?? null;
   const usandoHoje = dataConsulta !== '' && dataConsulta === hoje;
 
   const salvar = () => {
@@ -207,7 +211,9 @@ export default function NormaVivaPage() {
                         {detalhe.dispositivo.estrutura.length > 0 && <p className="text-sm text-ink-mute mt-1">{detalhe.dispositivo.estrutura.join(' · ')}</p>}
                       </div>
                       {situacao &&
-                        (detalhe.dispositivo.revogado || detalhe.versao?.origem === 'revogado' ? (
+                        (situacao.tipo === 'texto_da_epoca' ? (
+                          <Badge variant="brand">Redação da época</Badge>
+                        ) : detalhe.dispositivo.revogado || detalhe.versao?.origem === 'revogado' ? (
                           <Badge variant="warn">Revogado</Badge>
                         ) : situacao.tipo === 'redacao_atual' ? (
                           <Badge variant="ok">Vigente</Badge>
@@ -238,7 +244,27 @@ export default function NormaVivaPage() {
                     </div>
                   </header>
 
-                  {situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
+                  {situacao?.tipo === 'texto_da_epoca' ? (
+                    <>
+                      <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6" data-testid="texto-da-epoca">
+                        <p>
+                          <span className="font-semibold">{ultimoPasso(detalhe.dispositivo.rotulo)}</span> {situacao.versao.texto}
+                        </p>
+                      </div>
+                      {detalhe.texto.length > 1 && (
+                        <Notice tom="info">
+                          Nesta data, os parágrafos, incisos e alíneas deste dispositivo podem ter sido outros. A base só tem o texto atual deles, e por isso não os mostra aqui.
+                        </Notice>
+                      )}
+                      <Notice tom="warn" titulo="Redação da época">
+                        <span className="flex flex-col gap-1">
+                          {situacao.avisos.map(a => (
+                            <span key={a}>{a}</span>
+                          ))}
+                        </span>
+                      </Notice>
+                    </>
+                  ) : situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
                     <Notice tom="warn" titulo={`A base não tem o texto de ${dataCurta(dataConsulta)}`}>
                       {situacao.aviso}
                     </Notice>
@@ -259,6 +285,19 @@ export default function NormaVivaPage() {
                         </Notice>
                       )}
                     </>
+                  )}
+
+                  {anterior && detalhe.versao && (
+                    <section aria-labelledby="o-que-mudou" className="flex flex-col gap-3">
+                      <h3 id="o-que-mudou" className="font-serif text-xl font-semibold text-ink">
+                        O que mudou
+                      </h3>
+                      <p className="text-sm text-ink-soft">
+                        Da redação anterior para a atual{detalhe.versao.ato_rotulo ? ` (${detalhe.versao.ato_rotulo})` : ''}. O que saiu aparece riscado; o que entrou, destacado.
+                        {anterior.conferida_em ? '' : ' A redação anterior ainda não foi conferida no Diário Oficial.'}
+                      </p>
+                      <DiffTexto antes={anterior.texto} depois={detalhe.versao.texto} />
+                    </section>
                   )}
 
                   <div className="flex flex-wrap gap-2 no-print">
@@ -302,6 +341,12 @@ export default function NormaVivaPage() {
                       </dl>
                     ) : (
                       <p className="text-sm text-ink-soft">Sem versão registrada.</p>
+                    )}
+                    {detalhe.versoes.length > 1 && (
+                      <div className="mt-5">
+                        <h4 className="text-sm font-medium text-ink mb-2">Linha do tempo</h4>
+                        <LinhaDoTempo etapas={linhaDoTempo(detalhe.versoes, dataCurta)} />
+                      </div>
                     )}
                     {detalhe.relacoes.filter(r => r.tipo !== 'remete' && r.origem_id !== detalhe.dispositivo.id).length > 0 && (
                       <ul className="mt-4 text-sm text-ink-soft flex flex-col gap-1.5">
