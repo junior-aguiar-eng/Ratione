@@ -12,9 +12,9 @@ import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { detectarCharset, type EntradaManifesto } from './coletar';
 
-const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+export const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 const PASTA = join(__dirname, '..', '..', 'corpus');
-const API = 'https://legis.senado.leg.br/dadosabertos/legislacao/';
+export const API = 'https://legis.senado.leg.br/dadosabertos/legislacao/';
 
 export type TipoAto = 'lei' | 'lei-complementar' | 'decreto-lei' | 'decreto' | 'medida-provisoria' | 'emenda-constitucional' | 'ato-complementar';
 
@@ -37,7 +37,7 @@ export function chaveDoAto(tipo: TipoAto, numero: string, ano: string): string {
 }
 
 const FONTE_PADRAO_ATO =
-  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)|\s+de\s+\d{1,2}\s+de\s+\w+\s+de\s+(\d{4}))/i;
+  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)(?!\s+de\s+[a-zçãéêíóú]+\s+de\s+\d{4})|\s*,?\s+de\s+\d{1,2}[ºo°]?\s+de\s+[a-zçãéêíóú]+\s+de\s+(\d{4}))/i;
 
 /** Expressão nova a cada uso: uma regex global compartilhada carrega `lastIndex` entre chamadas e pula achados. */
 const padraoAto = () => new RegExp(FONTE_PADRAO_ATO.source, 'gi');
@@ -103,7 +103,7 @@ export function ehAlteracao(comentario: string): boolean {
   return /permanente/i.test(comentario) && /altera[çc][ãa]o|revoga[çc][ãa]o|reda[çc][ãa]o|supress[ãa]o|acr[ée]scimo|inclus[ãa]o/i.test(comentario) && !/regulament|correlata|ressalva|constitucion/i.test(comentario);
 }
 
-interface VideSenado {
+export interface VideSenado {
   nomeNormaPosterior: string;
   comentario: string;
   datAssinatura?: string;
@@ -122,7 +122,7 @@ export interface AtoSenado {
   publicacao: string | null;
 }
 
-function urlSenado(id: string): string {
+export function urlSenado(id: string): string {
   if (id === 'CF-1988') return `${API}urn?urn=urn:lex:br:federal:constituicao:1988-10-05;1988`;
   // Decretos-leis só respondem pela URN, que leva a data de assinatura (Planalto, cabeçalho de cada decreto-lei)
   const DATA_DL: Record<string, string> = { 'DL-2848-1940': '1940-12-07', 'DL-3689-1941': '1941-10-03', 'DL-4657-1942': '1942-09-04', 'DL-5452-1943': '1943-05-01' };
@@ -132,7 +132,7 @@ function urlSenado(id: string): string {
   return `${API}${tipo}/${m[2]}/${m[3]}`;
 }
 
-async function buscarSenado(id: string): Promise<{ url: string; normaNome: string; vides: VideSenado[]; assinatura: string | null; publicacao: string | null }> {
+export async function buscarSenado(id: string): Promise<{ url: string; normaNome: string; vides: VideSenado[]; assinatura: string | null; publicacao: string | null }> {
   const url = urlSenado(id);
   let r: Response | undefined;
   for (let tentativa = 1; tentativa <= 3; tentativa++) {
@@ -153,6 +153,19 @@ async function buscarSenado(id: string): Promise<{ url: string; normaNome: strin
     assinatura: dataIsoDoSenado(d.identificacao.dataassinatura),
     publicacao: dataIsoDoSenado(original?.data)
   };
+}
+
+/** Atos que alteraram a norma segundo o Senado (`vides` com alteração permanente), com as datas; um ato em várias linhas vale pela publicação mais antiga. */
+export function atosAlteradoresDoSenado(vides: VideSenado[]): Record<string, AtoSenado> {
+  const atos: Record<string, AtoSenado> = {};
+  for (const v of vides) {
+    const chave = chaveDoNomeSenado(v.nomeNormaPosterior);
+    if (!chave || !ehAlteracao(v.comentario)) continue;
+    const novo: AtoSenado = { nome: v.nomeNormaPosterior, assinatura: dataIsoDoSenado(v.datAssinatura), publicacao: dataIsoDoSenado(v.datapub) };
+    const antigo = atos[chave];
+    if (!antigo || (novo.publicacao && (!antigo.publicacao || novo.publicacao < antigo.publicacao))) atos[chave] = novo;
+  }
+  return atos;
 }
 
 /** O ato aparece em qualquer lugar do texto do Planalto (mesmo fora de anotação de alteração)? */
@@ -186,18 +199,8 @@ async function main() {
     const texto = detectarCharset(gunzipSync(readFileSync(join(PASTA, 'planalto', m.arquivo))), null).texto;
     const planalto = atosAlteradoresDoPlanalto(texto);
     const { url, normaNome, vides, assinatura, publicacao } = await buscarSenado(m.id);
-    const senado = new Set<string>();
-    const atos: Record<string, AtoSenado> = {};
-    for (const v of vides) {
-      const chave = chaveDoNomeSenado(v.nomeNormaPosterior);
-      if (chave && ehAlteracao(v.comentario)) {
-        senado.add(chave);
-        // um ato pode aparecer em várias linhas de `vides`; vale a primeira publicação (a mais antiga)
-        const novo: AtoSenado = { nome: v.nomeNormaPosterior, assinatura: dataIsoDoSenado(v.datAssinatura), publicacao: dataIsoDoSenado(v.datapub) };
-        const antigo = atos[chave];
-        if (!antigo || (novo.publicacao && (!antigo.publicacao || novo.publicacao < antigo.publicacao))) atos[chave] = novo;
-      }
-    }
+    const atos = atosAlteradoresDoSenado(vides);
+    const senado = new Set(Object.keys(atos));
     datasPorNorma[m.id] = { norma: { nome: normaNome, assinatura, publicacao }, atos };
     const soPlanalto = [...planalto].filter(c => !senado.has(c)).sort();
     const soSenado = [...senado].filter(c => !planalto.has(c)).sort();

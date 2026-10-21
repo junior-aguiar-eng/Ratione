@@ -6,8 +6,8 @@
     "presumido": 1798,
     "explicito": 195,
     "externo": 263,
-    "comDestinoNoCorpus": 2851,
-    "semDestinoNoCorpus": 363
+    "comDestinoNoCorpus": 2967,
+    "semDestinoNoCorpus": 247
   },
   "normas": [
     {
@@ -19,8 +19,8 @@
       "presumido": 442,
       "explicito": 92,
       "externo": 17,
-      "comDestinoNoCorpus": 633,
-      "semDestinoNoCorpus": 21
+      "comDestinoNoCorpus": 634,
+      "semDestinoNoCorpus": 20
     },
     {
       "id": "DL-2848-1940",
@@ -31,8 +31,8 @@
       "presumido": 48,
       "explicito": 8,
       "externo": 3,
-      "comDestinoNoCorpus": 89,
-      "semDestinoNoCorpus": 20
+      "comDestinoNoCorpus": 91,
+      "semDestinoNoCorpus": 18
     },
     {
       "id": "DL-3689-1941",
@@ -43,8 +43,8 @@
       "presumido": 178,
       "explicito": 33,
       "externo": 14,
-      "comDestinoNoCorpus": 267,
-      "semDestinoNoCorpus": 20
+      "comDestinoNoCorpus": 278,
+      "semDestinoNoCorpus": 9
     },
     {
       "id": "DL-4657-1942",
@@ -67,8 +67,8 @@
       "presumido": 150,
       "explicito": 3,
       "externo": 13,
-      "comDestinoNoCorpus": 176,
-      "semDestinoNoCorpus": 50
+      "comDestinoNoCorpus": 180,
+      "semDestinoNoCorpus": 46
     },
     {
       "id": "LEI-10406-2002",
@@ -79,8 +79,8 @@
       "presumido": 194,
       "explicito": 1,
       "externo": 6,
-      "comDestinoNoCorpus": 207,
-      "semDestinoNoCorpus": 7
+      "comDestinoNoCorpus": 208,
+      "semDestinoNoCorpus": 6
     },
     {
       "id": "LEI-11101-2005",
@@ -91,8 +91,8 @@
       "presumido": 36,
       "explicito": 3,
       "externo": 28,
-      "comDestinoNoCorpus": 265,
-      "semDestinoNoCorpus": 35
+      "comDestinoNoCorpus": 281,
+      "semDestinoNoCorpus": 19
     },
     {
       "id": "LEI-11340-2006",
@@ -103,8 +103,8 @@
       "presumido": 3,
       "explicito": 2,
       "externo": 6,
-      "comDestinoNoCorpus": 6,
-      "semDestinoNoCorpus": 6
+      "comDestinoNoCorpus": 10,
+      "semDestinoNoCorpus": 2
     },
     {
       "id": "LEI-11343-2006",
@@ -115,8 +115,8 @@
       "presumido": 23,
       "explicito": 4,
       "externo": 5,
-      "comDestinoNoCorpus": 44,
-      "semDestinoNoCorpus": 8
+      "comDestinoNoCorpus": 47,
+      "semDestinoNoCorpus": 5
     },
     {
       "id": "LEI-11419-2006",
@@ -139,8 +139,8 @@
       "presumido": 1,
       "explicito": 0,
       "externo": 8,
-      "comDestinoNoCorpus": 4,
-      "semDestinoNoCorpus": 9
+      "comDestinoNoCorpus": 5,
+      "semDestinoNoCorpus": 8
     },
     {
       "id": "LEI-12965-2014",
@@ -151,8 +151,8 @@
       "presumido": 15,
       "explicito": 2,
       "externo": 1,
-      "comDestinoNoCorpus": 14,
-      "semDestinoNoCorpus": 4
+      "comDestinoNoCorpus": 15,
+      "semDestinoNoCorpus": 3
     },
     {
       "id": "LEI-13105-2015",
@@ -163,8 +163,8 @@
       "presumido": 258,
       "explicito": 6,
       "externo": 33,
-      "comDestinoNoCorpus": 262,
-      "semDestinoNoCorpus": 38
+      "comDestinoNoCorpus": 276,
+      "semDestinoNoCorpus": 24
     },
     {
       "id": "LEI-13709-2018",
@@ -175,8 +175,8 @@
       "presumido": 17,
       "explicito": 3,
       "externo": 5,
-      "comDestinoNoCorpus": 52,
-      "semDestinoNoCorpus": 5
+      "comDestinoNoCorpus": 53,
+      "semDestinoNoCorpus": 4
     },
     {
       "id": "LEI-14133-2021",
@@ -187,8 +187,8 @@
       "presumido": 10,
       "explicito": 2,
       "externo": 17,
-      "comDestinoNoCorpus": 84,
-      "semDestinoNoCorpus": 17
+      "comDestinoNoCorpus": 85,
+      "semDestinoNoCorpus": 16
     },
     {
       "id": "LEI-5172-1966",
@@ -199,8 +199,8 @@
       "presumido": 55,
       "explicito": 6,
       "externo": 12,
-      "comDestinoNoCorpus": 68,
-      "semDestinoNoCorpus": 13
+      "comDestinoNoCorpus": 69,
+      "semDestinoNoCorpus": 12
     },
     {
       "id": "LEI-6830-1980",
@@ -223,8 +223,8 @@
       "presumido": 3,
       "explicito": 0,
       "externo": 4,
-      "comDestinoNoCorpus": 11,
-      "semDestinoNoCorpus": 4
+      "comDestinoNoCorpus": 15,
+      "semDestinoNoCorpus": 0
     },
     {
       "id": "LEI-7347-1985",
@@ -247,8 +247,8 @@
       "presumido": 55,
       "explicito": 1,
       "externo": 23,
-      "comDestinoNoCorpus": 123,
-      "semDestinoNoCorpus": 23
+      "comDestinoNoCorpus": 141,
+      "semDestinoNoCorpus": 5
     },
     {
       "id": "LEI-8078-1990",
@@ -259,8 +259,8 @@
       "presumido": 21,
       "explicito": 6,
       "externo": 7,
-      "comDestinoNoCorpus": 43,
-      "semDestinoNoCorpus": 7
+      "comDestinoNoCorpus": 50,
+      "semDestinoNoCorpus": 0
     },
     {
       "id": "LEI-8112-1990",
@@ -271,8 +271,8 @@
       "presumido": 78,
       "explicito": 2,
       "externo": 7,
-      "comDestinoNoCorpus": 88,
-      "semDestinoNoCorpus": 7
+      "comDestinoNoCorpus": 89,
+      "semDestinoNoCorpus": 6
     },
     {
       "id": "LEI-8213-1991",
@@ -283,8 +283,8 @@
       "presumido": 45,
       "explicito": 6,
       "externo": 24,
-      "comDestinoNoCorpus": 107,
-      "semDestinoNoCorpus": 25
+      "comDestinoNoCorpus": 110,
+      "semDestinoNoCorpus": 22
     },
     {
       "id": "LEI-8245-1991",
@@ -307,8 +307,8 @@
       "presumido": 2,
       "explicito": 1,
       "externo": 13,
-      "comDestinoNoCorpus": 41,
-      "semDestinoNoCorpus": 14
+      "comDestinoNoCorpus": 53,
+      "semDestinoNoCorpus": 2
     },
     {
       "id": "LEI-9099-1995",
@@ -343,8 +343,8 @@
       "presumido": 104,
       "explicito": 3,
       "externo": 12,
-      "comDestinoNoCorpus": 160,
-      "semDestinoNoCorpus": 13
+      "comDestinoNoCorpus": 170,
+      "semDestinoNoCorpus": 3
     }
   ]
 }

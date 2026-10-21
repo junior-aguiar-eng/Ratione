@@ -1,6 +1,7 @@
 name: Atualizar normas (NormaViva)
 
-# F3-06: todo dia relê as 28 normas do corpus no Planalto e compara o TEXTO DE LEI com o que está no repositório.
+# F3-06: todo dia relê as 28 normas do corpus no Planalto e compara o TEXTO DE LEI com o que está no repositório, e confere os feeds do Senado
+# (ato novo que altera ou cita uma das normas), que avisam antes de a página do Planalto mudar.
 # Se algum texto mudou, abre (ou atualiza) uma issue de alerta com o resumo. NÃO altera o corpus, NÃO faz commit e NÃO aprova
 # nada: a aprovação é do revisor, no computador dele (`pnpm atualizar aprovar ID`), porque a fila do runner não é guardada.
 # Não usa segredo nenhum: lê páginas públicas do Planalto e escreve só issues, com o token do próprio repositório.
@@ -78,6 +79,49 @@ jobs:
           else
             gh issue create --title "NormaViva: o Planalto mudou o texto de lei ($hoje)" --label normaviva-atualizacao --body-file "$RUNNER_TEMP/alerta.md"
           fi
+
+      # Feeds do Senado (F3-06): ato novo que o Senado já registra como alteração de uma das 28 normas, ou ato recente cuja ementa a cita.
+      # Avisa antes de o Planalto atualizar a página. Código de saída: 0 sem alerta, 2 com alerta, 1 em erro de execução.
+      - name: Conferir os feeds do Senado
+        id: feeds
+        working-directory: packages/normaviva
+        run: |
+          set +e
+          pnpm feeds 2>&1 | tee "$RUNNER_TEMP/feeds.txt"
+          codigo=${PIPESTATUS[0]}
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Alertar por issue (ato novo que altera ou cita norma do corpus)
+        if: steps.feeds.outputs.codigo == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXECUCAO: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        working-directory: packages/normaviva
+        run: |
+          hoje=$(date -u +%F)
+          {
+            echo "Os feeds do Senado apontam ato novo que **altera ou cita** norma do corpus do NormaViva (leitura de $hoje). Nada foi alterado no repositório."
+            echo
+            echo "| Data | Norma | Ato | Origem | Motivo |"
+            echo "|---|---|---|---|---|"
+            jq -r '.alertas[] | "| \(.data // "?") | \(.normaId) | \(.ato) | \(if .fonte == "ato_recente" then "ato recente" else "alteração registrada no Senado" end) | \(.motivo | gsub("[|]"; "/")) |"' corpus/feeds-alertas.json
+            echo
+            echo "**O que fazer (revisor):** conferir se o Planalto já consolidou o ato (a página da norma e \`pnpm atualizar\`); se sim, \`pnpm conferir\` atualiza a lista de atos conhecidos e o alerta some. Execução: $EXECUCAO"
+          } > "$RUNNER_TEMP/alerta-feed.md"
+          gh label create normaviva-feed --color C5DEF5 --description "Ato novo do Senado que altera ou cita norma do corpus" --force
+          existente=$(gh issue list --label normaviva-feed --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existente" ]; then
+            gh issue comment "$existente" --body-file "$RUNNER_TEMP/alerta-feed.md"
+          else
+            gh issue create --title "NormaViva: o Senado registra ato novo que altera ou cita norma do corpus ($hoje)" --label normaviva-feed --body-file "$RUNNER_TEMP/alerta-feed.md"
+          fi
+
+      - name: Falhar se os feeds deram erro
+        if: steps.feeds.outputs.codigo != '0' && steps.feeds.outputs.codigo != '2'
+        run: |
+          echo "pnpm feeds terminou com código ${{ steps.feeds.outputs.codigo }}"
+          exit 1
 
       - name: Falhar se a execução deu erro
         if: steps.atualizar.outputs.codigo != '0' && steps.atualizar.outputs.codigo != '2'

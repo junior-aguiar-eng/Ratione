@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { atoCitadoNoTexto, atosAlteradoresDoPlanalto, chaveDoNomeSenado, ehAlteracao, textoSemHtml } from './conferir';
+import { atoCitadoNoTexto, atosAlteradoresDoPlanalto, atosDoTexto, chaveDoNomeSenado, ehAlteracao, textoSemHtml } from './conferir';
 
 describe('Conferência do Planalto com o Senado (F3-01)', () => {
   it('textoSemHtml tira tags, decodifica entidades e junta espaços', () => {
@@ -38,5 +38,29 @@ describe('Conferência do Planalto com o Senado (F3-01)', () => {
   it('atoCitadoNoTexto acha o ato fora de anotação', () => {
     assert.ok(atoCitadoNoTexto('lei:8884:1994', 'conforme a Lei nº 8.884, de 11.6.1994, que'));
     assert.ok(!atoCitadoNoTexto('lei:8885:1994', 'conforme a Lei nº 8.884, de 11.6.1994, que'));
+  });
+});
+
+describe('Reconhecimento de atos com a data por extenso (21/10/2026)', () => {
+  const chaves = (t: string) => atosDoTexto(t).map(a => a.chave);
+
+  it('"de 26 de setembro de 1995" é o ano de 1995, não "2026" (o dia não é o ano)', () => {
+    assert.deepStrictEqual(chaves('Altera a Lei nº 9.099, de 26 de setembro de 1995, para dispor.'), ['lei:9099:1995']);
+    assert.deepStrictEqual(chaves('Lei nº 13.105, de 16 de março de 2015'), ['lei:13105:2015']);
+    assert.deepStrictEqual(chaves('art. 1.275 da Lei nº 10.406, de 10 de janeiro de 2002 (Código Civil)'), ['lei:10406:2002']);
+    assert.deepStrictEqual(chaves('Lei Complementar nº 41, de 22 de dezembro de 1981'), ['lei-complementar:41:1981']);
+  });
+
+  it('dia com ordinal, mês com acento e a forma sem vírgula continuam certos', () => {
+    assert.deepStrictEqual(chaves('Lei nº 5.172, de 1º de outubro de 1966'), ['lei:5172:1966']);
+    assert.deepStrictEqual(chaves('Lei nº 1.060, de 5 de fevereiro de 1950'), ['lei:1060:1950']);
+    assert.deepStrictEqual(chaves('Lei nº 4.737 de 15 de julho de 1965'), ['lei:4737:1965']);
+  });
+
+  it('as outras formas de data não mudaram: só o ano, data numérica e ponto como separador', () => {
+    assert.deepStrictEqual(chaves('Lei nº 9.099, de 1995'), ['lei:9099:1995']);
+    assert.deepStrictEqual(chaves('Lei nº 13.256 de 04/02/2016'), ['lei:13256:2016']);
+    assert.deepStrictEqual(chaves('Lei nº 8.078, de 11.9.1990'), ['lei:8078:1990']);
+    assert.deepStrictEqual(chaves('Medida Provisória nº 2.225-45, de 4.9.2001'), ['medida-provisoria:2225:2001']);
   });
 });

@@ -27,6 +27,11 @@ describe('Remissões expressas (F3-05)', () => {
     assert.deepStrictEqual(r.map(x => x.artigo), ['1.015', '22-A']);
   });
 
+  it('norma citada com a data por extenso ("de 26 de setembro de 1995") é a de 1995, e liga ao corpus', () => {
+    const r = extrairRemissoes('Nos termos do art. 7º da Lei nº 9.099, de 26 de setembro de 1995, e do art. 1.275 da Lei nº 10.406, de 10 de janeiro de 2002 (Código Civil).');
+    assert.deepStrictEqual(r.map(x => [x.artigo, x.normaDestinoId]), [['7º', 'LEI-9099-1995'], ['1.275', 'LEI-10406-2002']]);
+  });
+
   it('lista no plural: "arts. 485 e 932" e "arts. 5º, 7º e 9º deste Código"', () => {
     assert.deepStrictEqual(extrairRemissoes('com base nos arts. 485 e 932;').map(x => x.artigo), ['485', '932']);
     const r = extrairRemissoes('Aplicam-se os arts. 5º, 7º e 9º deste Código.');
