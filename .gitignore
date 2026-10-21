@@ -47,3 +47,6 @@ scratch/
 # Gerados pelo Next (variam entre dev e build)
 apps/web/next-env.d.ts
 apps/web/AGENTS.md
+
+# Saída de `pnpm feeds` (alertas do dia; o agendador a lê e a descarta)
+packages/normaviva/corpus/feeds-alertas.json

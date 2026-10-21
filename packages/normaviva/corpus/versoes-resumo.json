@@ -188,11 +188,11 @@
       "incluido": 62,
       "revogado": 6,
       "vetado": 5,
-      "dataPublicacaoSenado": 95,
+      "dataPublicacaoSenado": 97,
       "dataAssinaturaSenado": 0,
       "dataDaAnotacao": 0,
-      "soAno": 27,
-      "semDataDeVigencia": 32,
+      "soAno": 25,
+      "semDataDeVigencia": 30,
       "anotadosSemAto": 2
     },
     {
@@ -467,7 +467,6 @@
       "medida-provisoria:1068:2021"
     ],
     "LEI-13105-2015": [
-      "lei:148:1979",
       "lei:15484:2026"
     ],
     "LEI-13709-2018": [],

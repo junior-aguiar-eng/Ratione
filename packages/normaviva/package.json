@@ -30,6 +30,7 @@
     "historico": "tsx src/historico/gerar.ts",
     "historico:sql": "tsx src/historico/gerar-sql.ts",
     "atualizar": "tsx src/atualizacao/atualizar.ts",
+    "feeds": "tsx src/atualizacao/feeds.ts",
     "carregar": "tsx src/busca/carregar-supabase.ts"
   },
   "dependencies": {

@@ -288,6 +288,21 @@ A página `/normaviva` (`apps/web/src/app/normaviva/page.tsx`) deixou de usar os
 
 **Busca melhorada em 20/10/2026** (migração `20261020000001_busca_por_proximidade.sql`, aplicada no Supabase real pelo SQL Editor e testada no PGlite): o dispositivo entra com pelo menos 60% das palavras da consulta (com 1 ou 2 palavras ainda vale o E lógico); as palavras longas (8+ letras) casam pelo começo, e a ordem é (1) quantas palavras da consulta ele tem, (2) proximidade entre elas (`ts_rank_cd`), (3) ordem do texto. Antes, "desconsideração da personalidade jurídica" **não achava o art. 50 do CC** (o texto diz "desconsiderá-la", outro radical) e trazia primeiro a Lei 8.429; agora o art. 50 do CC é o 9º resultado, atrás dos artigos do CPC sobre o incidente de desconsideração (arts. 133 a 137, 790, 792, 932, 1.015, 1.062), que citam as três expressões. Consultas de 28 a 41 ms no corpus todo. A sintaxe de aspas e de exclusão do `websearch_to_tsquery` deixou de valer. **Limites conhecidos:** (1) a busca continua lexical: ela não conhece sinônimos nem o sentido ("direito de arrependimento compra internet" devolve 1 resultado, porque o CDC art. 49 não usa "compra" nem "internet"); busca semântica seria outro projeto; (2) a linha do tempo de redações da tela antiga foi retirada, porque a base só tem a redação vigente (F3-04 depende do texto antigo); (3) **a tela não foi vista no navegador**: a rota exige login e eu não entro com a senha do responsável; o build, a checagem de tipos e os testes passam, e a camada de dados foi exercitada contra o banco real. Conferir a aparência é passo do responsável.
 
+## 22. Feeds de atualização (F3-06), 21/10/2026
+
+Fontes testadas do ambiente de desenvolvimento, com User-Agent de navegador e timeout de 25 a 45 s:
+
+| Fonte | Resultado | Uso |
+|---|---|---|
+| Senado, `legislacao/lista?ano=AAAA&v=3` | HTTP 200, JSON, ~1.300 atos do ano (leis, decretos, medidas provisórias, acórdãos de ADI, ADC e ADPF) com tipo, nome, ementa e data de assinatura | **Usada** (atos recentes cuja ementa cita uma norma do corpus) |
+| Senado, detalhe de cada norma (`vides`) | HTTP 200, JSON; já usado pela conferência cruzada (`pnpm conferir`) | **Usada** (alterações que o corpus ainda não conhece) |
+| Câmara, `dadosabertos.camara.leg.br/api/v2/proposicoes` | HTTP 200, JSON, mas só **proposições** (projetos em tramitação) | **Não usada**: não traz as normas já publicadas, que chegam pelo Senado |
+| LexML, `www.lexml.gov.br/busca/SRU` | HTTP 200, mas com uma página HTML de **"Verificação de segurança"** em vez dos dados | **Não usada**: bloqueia consulta por script |
+
+O alerta compara o ato com o texto do corpus (`atoCitadoNoTexto`): se o Planalto já o cita, o texto está consolidado e não há alerta. Primeira execução real: 0 alertas (as EC 139, 140 e 141 já constam do corpus da CF).
+
+**Achado na mesma etapa:** o reconhecedor de atos (`atosDoTexto`) lia "de 26 de setembro de 1995" como o ano 2026 e não aceitava vírgula antes da data por extenso. Corrigido; ver F3-05 no PLANO.
+
 ## 15. Como repetir esta verificação
 
 ```bash
