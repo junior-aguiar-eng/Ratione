@@ -423,8 +423,9 @@ export default function NormaVivaPage() {
 
       <div className="mt-14 max-w-3xl">
         <Notice tom="info" titulo="Como ler esta base">
-          O texto foi extraído automaticamente do Planalto e pode ter falhas de formatação: confira na fonte oficial antes de citá-lo. A base guarda só a redação vigente de cada
-          dispositivo; o início de vigência mostrado é a data de publicação do ato, usada como data provisória.
+          O texto foi extraído automaticamente do Planalto e pode ter falhas de formatação: confira na fonte oficial antes de citá-lo. Na maioria dos dispositivos a base guarda só a
+          redação vigente; em alguns há também a redação anterior (veja a linha do tempo), ainda sem conferência no Diário Oficial. As datas de vigência mostradas são as de publicação
+          do ato, usadas como datas provisórias.
         </Notice>
       </div>
     </div>
