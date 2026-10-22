@@ -24,18 +24,19 @@
 | `esquemaSaida`, `saida`, `conferirSaida` | Formato fechado da resposta, validação no servidor e conferência opcional contra o contexto |
 | `limitesPorUsuario` | Cota por dia e por mês nesta tarefa |
 | `versao` | Muda quando instruções, mensagem ou esquema mudam (invalida o cache) |
+| `guardaResultado` | Se a resposta vai para o cache compartilhado. **Falso quando a entrada é material do usuário** (decisão colada no Argumenta): aí nem o texto nem a resposta ficam no banco, só o registro de uso com o hash |
 
 ## 3. O executor único (`apps/web/src/lib/ia/executar.ts`)
 
 Toda tarefa passa pela mesma sequência, que nenhuma tarefa altera:
 
-1. IA ligada nesta instalação → 2. tarefa existe no catálogo → 3. usuário logado → 4. entrada válida → 5. contexto montado das fontes → 6. tamanho dentro do limite → 7. **cache** (se já existe, devolve sem custo e fora da cota) → 8. **reserva** atômica no banco (cota da tarefa, uma chamada de cada vez por usuário, orçamento do mês) → 9. **uma** chamada ao modelo, sem ferramentas → 10. validação da saída (formato e conferência) → 11. registro do custo real → 12. gravação no cache.
+1. IA ligada nesta instalação → 2. tarefa existe no catálogo → 3. usuário logado → 4. entrada válida → 5. contexto montado das fontes → 6. tamanho dentro do limite → 7. **cache** (se já existe, devolve sem custo e fora da cota; pulado quando `guardaResultado` é falso) → 8. **reserva** atômica no banco (cota da tarefa, uma chamada de cada vez por usuário, orçamento do mês) → 9. **uma** chamada ao modelo, sem ferramentas → 10. validação da saída (formato e conferência) → 11. registro do custo real → 12. gravação no cache (também pulada quando `guardaResultado` é falso).
 
 Falha, recusa e saída fora do formato são registradas e **contam na cota** (insistir não contorna o limite); nada disso é mostrado nem guardado.
 
 ## 4. Tarefas de várias etapas
 
-Quando um recurso precisa de mais de um passo (ex.: conferir as citações de um texto), **quem encadeia é o código**. Cada passo de IA é uma tarefa do catálogo, pequena e conferível; os passos de verificação são código determinístico sobre as bases do Ratione. Exemplo planejado (ainda não implementado):
+Quando um recurso precisa de mais de um passo (ex.: conferir as citações de um texto), **quem encadeia é o código**. O Argumenta já funciona assim: a tela chama `argumenta-estrutura`, `argumenta-questoes` e `argumenta-fundamentos` em sequência, e a última recebe as questões da anterior ([`ARGUMENTA.md`](ARGUMENTA.md)). Cada passo de IA é uma tarefa do catálogo, pequena e conferível; os passos de verificação são código determinístico sobre as bases do Ratione. Exemplo planejado (ainda não implementado):
 
 1. tarefa `extrair-citacoes`: o modelo só lista as citações do texto, em formato fechado;
 2. código: confere cada citação no NormaViva (existe, revogada, alterada desde quando);
@@ -70,6 +71,9 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | Tarefa | O que faz | Gatilho | Limite | Especificação |
 |---|---|---|---|---|
 | `explicar-dispositivo` | Explica o dispositivo aberto no NormaViva, só a partir do texto oficial | Botão "Explicar com IA" (logado) | 5/dia, 60/mês | [`EXPLICACAO_IA.md`](EXPLICACAO_IA.md) |
+| `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 
 ## 9. Ligar e desligar
 

@@ -35,6 +35,11 @@ export interface TarefaIA<Entrada, Contexto, Saida> {
   maxCaracteresMensagem: number;
   /** Muda sempre que as instruções, a mensagem ou o esquema mudam (invalida o cache). */
   versao: string;
+  /**
+   * Guarda a resposta no cache compartilhado (`ia_respostas`) para reaproveitar. Falso quando a entrada é material do usuário
+   * (ex.: decisão colada no Argumenta): aí nem o texto nem a resposta ficam no banco, só o registro de uso com o hash.
+   */
+  guardaResultado: boolean;
   /** Instruções do sistema: fixas, sem data nem dado variável. */
   instrucoes: string;
   /** Tarefas fechadas não chamam ferramentas. Etapas com consulta são código, fora do modelo. */

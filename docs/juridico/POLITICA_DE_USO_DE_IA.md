@@ -20,7 +20,7 @@
 | NormaViva: consulta, linha do tempo, diff | **Não** | Dados oficiais com fonte |
 | NormaViva: "Explicar dispositivo" | Opcional | Explicação **identificada** como gerada por IA |
 | TeseMap: precedentes e relações | **Não** (exibição) | Relações **validadas por pessoa**; sugestões de IA ficam internas até validação |
-| Argumenta: análise de decisões | **Sim** | Teses, premissas e pontos de atenção **sugeridos**, com **trechos de origem** |
+| Argumenta: análise de decisões | **Sim** | Estrutura, questões, conclusões e fundamentos **sugeridos**, com o **parágrafo de origem**; teses, premissas e pontos de atenção depois |
 
 ## 3. Provedores
 Podemos usar modelos de **Anthropic (Claude), Google (Gemini) e OpenAI (ChatGPT/GPT)**, selecionados por tarefa e por qualidade/custo/disponibilidade, com **alternância automática** em caso de falha. O **modelo e a versão** usados em cada resultado são **registrados e exibidos**.
@@ -35,7 +35,7 @@ Podemos usar modelos de **Anthropic (Claude), Google (Gemini) e OpenAI (ChatGPT/
 
 ## 5. Limites e riscos
 - A IA **pode errar, omitir ou inventar** informações (inclusive citações). Todo resultado traz o selo **"Gerado com IA. Confira nas fontes"**.
-- Sempre que possível, o resultado traz **trechos do documento e fontes** para conferência. **Citações de normas e precedentes são verificadas** contra as bases do NormaViva e do TeseMap; o que **não for encontrado** é sinalizado como **"não verificado"**.
+- Sempre que possível, o resultado traz **trechos do documento e fontes** para conferência. **Citações de normas e precedentes são verificadas** contra as bases do NormaViva e do TeseMap; o que **não for encontrado** é sinalizado como **"não verificado"**. No Argumenta, essa verificação ainda não está disponível: as citações aparecem como estão no texto.
 - Resultados **não constituem parecer ou aconselhamento jurídico**.
 
 ## 6. Uso responsável pelo usuário

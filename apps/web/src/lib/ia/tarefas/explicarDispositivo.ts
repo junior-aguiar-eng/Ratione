@@ -56,6 +56,7 @@ export const explicarDispositivo: TarefaIA<{ dispositivoId: string }, Dispositiv
   maxTokensSaida: 2_000,
   maxCaracteresMensagem: 20_000,
   versao: 'v1-2026-10-22',
+  guardaResultado: true,
   instrucoes: INSTRUCOES,
   ferramentas: [],
   limitesPorUsuario: { porDia: 5, porMes: 60 },

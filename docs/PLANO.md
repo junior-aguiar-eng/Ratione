@@ -264,7 +264,7 @@ Sem transformar desenvolvimento em homologação interminável: validação auto
 |---|---|---|
 | PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 121 gerados, **0 validados por jurista** |
 | NormaViva | ~30 normas com histórico conhecido (`data A → redação A`, `data B → redação B`) | parcial: 57 casos em 25 normas, pendentes de validação (F3-07) |
-| Argumenta | ~30 decisões públicas com dispositivo, questão, tese principal e fundamentos; avalia-se a **extração estrutural**, não a concordância perfeita da IA | não iniciado |
+| Argumenta | ~30 decisões públicas com dispositivo, questão, tese principal e fundamentos; avalia-se a **extração estrutural**, não a concordância perfeita da IA | formato definido; decisões a reunir. Testes automáticos da segmentação, da pseudonimização e das tarefas feitos |
 | TeseMap | Grafo pequeno e conhecido (`A cita B`, `B interpreta C`, `D distingue B`), sem depender de terceiros | feito: grafo mínimo do Tema 1.076/STJ (F4-05), com trecho literal conferido e teste no esquema real |
 | Transversal | CI a cada push; E2E dos fluxos críticos; regressão visual nas telas-chave; teste de RLS | CI feito |
 
@@ -361,13 +361,13 @@ Em produção: 7.734 nós (STJ e STF) e as 5 relações validadas do grafo míni
 |---|---|---|
 | F5-01 | Upload seguro (PDF, DOCX, texto), armazenamento privado criptografado, exclusão pelo usuário | não iniciado |
 | F5-02 | Worker Docling, parágrafos com âncoras (página e §) | não iniciado |
-| F5-03 | Pipeline de 9 etapas com saída estruturada | não iniciado |
+| F5-03 | Pipeline de 9 etapas com saída estruturada | parcial: etapas 1 a 4 sobre texto colado, pseudonimizado no navegador e sem guardar nada (tarefas `argumenta-estrutura`, `argumenta-questoes`, `argumenta-fundamentos`; [`produto/ARGUMENTA.md`](produto/ARGUMENTA.md)) |
 | F5-04 | Verificação de citações contra NormaViva e TeseMap | não iniciado |
-| F5-05 | Corpus de 30 decisões públicas e métricas de revisão | não iniciado |
+| F5-05 | Corpus de 30 decisões públicas e métricas de revisão | formato e métricas definidos ([`produto/ARGUMENTA.md`](produto/ARGUMENTA.md) §6); decisões a reunir |
 | F5-06 | Controle de custo por análise e limite por plano | não iniciado |
 | F5-07 | Relatório de impacto (RIPD) | não iniciado |
 
-Hoje há uma tela estática com 1 decisão fictícia. **Pronto quando (fase):** logs sem texto integral; retenção configurável; usuário exclui e confirma a remoção.
+Decisões de 22/10/2026: começar pelo texto colado (upload e armazenamento só depois do RIPD), pseudonimização sempre ligada, Claude Haiku 5.5 até o corpus mostrar outra necessidade. A tela analisa a decisão colada (estrutura, questões, conclusões e fundamentos, com o parágrafo de origem) e mantém abaixo a análise de exemplo. **Pronto quando (fase):** logs sem texto integral; retenção configurável; usuário exclui e confirma a remoção.
 
 ### F6 — Motores avançados e integrações
 
@@ -391,7 +391,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 ### Próximos passos, em ordem
 
 0. **Auditoria de 22/10/2026** (feita): Next.js 16.4.0 com falhas críticas trocado pela 16.4.2 e cabeçalhos de segurança HTTP (PR #114); página inicial com o grafo validado, código legado e duplicado removido e checagem de código morto no `tsc` (PR #115); documentação e branches (este bloco). Pendências que restaram (22/10/2026): nenhuma de validação. Os 57 casos do F3-07 foram validados; a issue #102 foi resolvida com a correção do `pnpm vigencia` (vetos não contam como alteração; aviso complexo que sai por consolidação vai para conferência); os cenários do F2-11 já estavam validados (314 de 314) e a pendência listada aqui antes estava errada.
-1. **F5 (Argumenta)**: a F2 está fechada no que depende de nós (F2-02, F2-05 e F2-18 esperam os atos de 2027); a F3 e a F4 estão em produção (a F4 com verificação semanal das fontes; F4-06 descartado).
+1. **F5 (Argumenta)**, iniciada em 22/10/2026 com as etapas 1 a 4 sobre texto colado. Próximo: ligar e testar com decisões reais, reunir o corpus (F5-05) e medir o Haiku; depois verificação de citações (F5-04) e RIPD (F5-07) antes do upload (F5-01). A F2 está fechada no que depende de nós (F2-02, F2-05 e F2-18 esperam os atos de 2027); a F3 e a F4 estão em produção (a F4 com verificação semanal das fontes; F4-06 descartado).
 2. **Revisão geral do site e beta fechado** (10 usuários, sem erro de cálculo reportado): uma só vez, com o produto concluído (decisão de 19/10/2026).
 3. **Revisão de fim de 2026**, quando os calendários de 2027 saírem: F2-02 (STF e STJ), F2-05 (feriados estaduais restantes) e F2-18 (selos que dependem de atos não lidos, com os atos posteriores). O TJAL segue com 23/06 a 01/07 e 28/08 pendentes (F2-16).
 

@@ -136,8 +136,10 @@ export default function MetodologiaPage() {
               <strong className="text-ink">TeseMap:</strong> prévia, com dois temas catalogados.
             </li>
             <li>
-              <strong className="text-ink">Argumenta:</strong> demonstração com uma decisão ilustrativa. O envio de
-              documentos ainda não está disponível.
+              <strong className="text-ink">Argumenta:</strong> prévia. Analisa uma decisão colada como texto (estrutura,
+              questões, conclusões e fundamentos, com o parágrafo de origem), com IA e com os dados pessoais trocados por
+              marcadores antes do envio; nada fica guardado. As citações não são verificadas e o envio de arquivos ainda não
+              está disponível. Uma análise ilustrativa mostra o restante do módulo.
             </li>
           </ul>
         </section>

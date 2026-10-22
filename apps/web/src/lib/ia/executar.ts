@@ -7,6 +7,7 @@ import { custoMaximoUsd, custoUsd, limitesDaTarefa } from './politica';
  * Executor único das tarefas de IA. A ordem é sempre a mesma e nenhuma tarefa a muda:
  * ligada → tarefa do catálogo → login → entrada válida → contexto das fontes → tamanho → cache → reserva (cota e orçamento) →
  * modelo → validação da saída → registro do custo → cache. O modelo recebe só o que o contrato da tarefa monta.
+ * Tarefa com `guardaResultado: false` pula as duas etapas de cache: nada do material do usuário fica guardado.
  */
 
 export type MotivoNegado = 'limite_dia' | 'limite_mes' | 'orcamento' | 'em_andamento';
@@ -79,7 +80,7 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
   const referencia = t.referencia(contexto);
   const chave = chaveDoCache(t, mensagem);
 
-  const guardada = await dep.lerCache({ tarefa: t.id, chave });
+  const guardada = t.guardaResultado ? await dep.lerCache({ tarefa: t.id, chave }) : null;
   const valida = guardada !== null ? t.saida.safeParse(guardada) : null;
   if (valida?.success) {
     await dep.registrarCache({ tarefa: t.id, usuarioId: usuario.id, referencia, chave });
@@ -127,6 +128,6 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
   }
 
   await dep.finalizar(reserva.id, 'gerada', r.uso, custo);
-  await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data });
+  if (t.guardaResultado) await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data });
   return { status: 200, corpo: { resposta: saida.data, doCache: false, modelo: t.modelo, restantesHoje: reserva.restantesHoje } };
 }

@@ -53,6 +53,8 @@ describe('Catálogo de tarefas de IA: contrato de cada tarefa', () => {
       assert.ok(t.limitesPorUsuario.porDia >= 1 && t.limitesPorUsuario.porDia <= TETOS.porDia);
       assert.ok(t.limitesPorUsuario.porMes >= t.limitesPorUsuario.porDia && t.limitesPorUsuario.porMes <= TETOS.porMes);
       assert.match(t.versao, /^v\d+-\d{4}-\d{2}-\d{2}$/, 'versão com data');
+      assert.equal(typeof t.guardaResultado, 'boolean', 'decide se a resposta vai para o cache');
+      if (t.id.startsWith('argumenta-')) assert.equal(t.guardaResultado, false, 'material do usuário nunca vai para o cache');
       assert.deepEqual(t.ferramentas, [], 'tarefa fechada não chama ferramentas');
       assert.doesNotMatch(t.instrucoes, /\d{4}-\d{2}-\d{2}/, 'instruções fixas, sem data');
       assert.deepEqual(esquemaFechado(t.esquemaSaida, 'saida'), []);

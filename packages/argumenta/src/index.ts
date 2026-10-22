@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+export * from './segmentar';
+export * from './pseudonimizar';
+export * from './decisao';
+
 /**
  * Tipologia rigorosa de nulidades de fundamentação conforme Art. 489, § 1º do Código de Processo Civil
  */
