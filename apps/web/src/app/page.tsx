@@ -234,10 +234,10 @@ export default function HomePage() {
           id="tesemap"
           nome="TeseMap"
           titulo="Explore como uma tese se conecta à jurisprudência."
-          descricao="Precedentes vinculantes, dispositivos legais e distinções reunidos em um mapa navegável."
+          descricao="Precedentes qualificados do STJ e do STF, súmulas e controle concentrado, cada um com a fonte oficial, e as relações que uma pessoa validou."
           cta="Explorar tese"
           href="/tesemap"
-          legenda="Exemplo com dados do módulo: Tema 1.076/STJ."
+          legenda="Relações validadas do Tema 1.076/STJ, as mesmas do módulo."
         >
           <GrafoMinimoVitrine />
         </Secao>
