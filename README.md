@@ -18,8 +18,8 @@ O Ratione rejeita o modelo de "assistente genérico de chat" e entrega quatro fe
 |---|---|---|---|
 | **[PrazoZero](apps/web/src/app/prazozero)** | Cálculo de prazos com memória auditável | **100% Determinístico** (Sem IA) | CPC (arts. 219, 220, 224, 231, 975), CLT, CPP, Lei 9.099/95, Res. CNJ 244/2016 e 455/2022, feriados nacionais e calendário de cada tribunal lido no ato oficial |
 | **[Argumenta](apps/web/src/app/argumenta)** | Destrinchar sentenças e testar teses | **Estrutural & Cognitivo** | Art. 489, § 1º do CPC (Incisos I a VI: omissões, saltos e distinções), Docling Layout |
-| **[NormaViva](apps/web/src/app/normaviva)** | O estado da norma no tempo (*Point-in-Time*) | **Bitemporal Determinístico** | LC 95/1998, Corpus LexML / Legalize-BR, Diff legislativo |
-| **[TeseMap](apps/web/src/app/tesemap)** | Grafo topológico de precedentes | **Grafo Direcionado** | Art. 927 do CPC, STF Repercussão Geral, STJ Repetitivos, React Flow (`xyflow`) |
+| **[NormaViva](apps/web/src/app/normaviva)** | O estado da norma no tempo (*Point-in-Time*) | **Bitemporal Determinístico** | LC 95/1998; texto da versão compilada do Planalto e atos e datas da API de Dados Abertos do Senado; diff legislativo |
+| **[TeseMap](apps/web/src/app/tesemap)** | Grafo topológico de precedentes | **Grafo Direcionado** | Art. 927 do CPC; precedentes qualificados dos Dados Abertos do STJ, súmulas do STJ e do STF, repercussão geral e controle concentrado da Transparência do STF; React Flow (`xyflow`) |
 
 ---
 
@@ -76,4 +76,4 @@ pnpm dev
 - **Prazos:** conferidos por um oráculo independente (Python, sem código em comum com o motor) em 121 cenários fixos e 600 entradas aleatórias, mais testes de propriedades. **Os 121 cenários foram validados por revisão jurídica** em 07/10/2026 (mais 2 prazos materiais) (ver `docs/produto/REVISAO_CENARIOS.md`).
 - **Calendário:** cada dia não útil aponta o ato de onde foi lido (ato, URL e data). Só STF, STJ, TJSP, TJMG e TJAL (2026) têm o calendário conferido; o resto fica `pendente` e aparece só como data alternativa. Registro em `docs/produto/VERIFICACAO_FONTES.md`.
 - **Auditoria:** o usuário recebe a memória de cálculo dia a dia, com o fundamento de cada dia excluído (art. 1.003, § 6º do CPC, para feriado local).
-- **Dados de exemplo:** NormaViva, TeseMap e Argumenta usam um conjunto pequeno de dados digitados à mão e conferidos, rotulados como prévia ou demonstração na tela.
+- **Dados reais com fonte:** NormaViva (28 normas, do Planalto) e TeseMap (precedentes, súmulas e controle concentrado do STJ e do STF) leem o banco; cada registro guarda a fonte oficial e a data de leitura, e toda relação do grafo exige validação humana. Só o Argumenta segue com uma decisão de exemplo, rotulada como demonstração, até a F5.
