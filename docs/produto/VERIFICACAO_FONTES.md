@@ -379,7 +379,7 @@ Primeiras relações do grafo (`packages/tesemap/corpus/grafo-minimo.json`): o T
 | Art. 85, § 6º-A **confirma** Tema 1.076/STJ | texto do § 6º-A (incluído pela Lei nº 14.365/2022) | CPC, versão compilada do Planalto (corpus do NormaViva, lido em 19/10/2026) |
 | Tema 1.255/STF **relaciona** Tema 1.076/STJ | descrição do Tema 1.255 (mérito pendente) | Transparência do STF, temas de repercussão geral (F4-02) |
 
-**Situação:** as 5 relações foram sugeridas pela IA (`sugerido_ia`) e estão **pendentes** de validação; não aparecem no site até o responsável registrar a validação no arquivo (`pnpm grafo-minimo` gera a folha de revisão, `corpus/grafo-minimo.md`). O trecho é conferido pelo programa; o que a validação confere é a leitura (tipo e rótulo da relação).
+**Situação:** as 5 relações foram sugeridas pela IA (`sugerido_ia`) e **validadas em 22/10/2026** pelo analista validador jurídico, José Bonifácio de Aguiar Santos Júnior, como estão. Relação nova ou alterada nasce pendente e só aparece no site depois de validada no arquivo (`pnpm grafo-minimo` gera a folha de revisão, `corpus/grafo-minimo.md`). O trecho é conferido pelo programa; o que a validação confere é a leitura (tipo e rótulo da relação).
 
 ## 15. Como repetir esta verificação
 

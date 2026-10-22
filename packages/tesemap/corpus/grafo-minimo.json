@@ -16,7 +16,7 @@
       "rotulo": "Equidade só quando o proveito econômico for inestimável ou irrisório ou o valor da causa for muito baixo",
       "trechoDe": "STJ-TEMA-1076",
       "trecho": "Apenas se admite arbitramento de honorários por equidade quando, havendo ou não condenação: (a) o proveito econômico obtido pelo vencedor for inestimável ou irrisório; ou (b) o valor da causa for muito baixo.",
-      "validacao": { "status": "pendente", "por": null, "em": null }
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
     },
     {
       "id": "tema1076-interpreta-85-2",
@@ -26,7 +26,7 @@
       "rotulo": "Valores elevados: os percentuais do § 2º são obrigatórios",
       "trechoDe": "STJ-TEMA-1076",
       "trecho": "É obrigatória nesses casos a observância dos percentuais previstos nos §§ 2º ou 3º do artigo 85 do CPC - a depender da presença da Fazenda Pública na lide -",
-      "validacao": { "status": "pendente", "por": null, "em": null }
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
     },
     {
       "id": "tema1076-interpreta-85-3",
@@ -36,7 +36,7 @@
       "rotulo": "Valores elevados com a Fazenda Pública na lide: os percentuais do § 3º são obrigatórios",
       "trechoDe": "STJ-TEMA-1076",
       "trecho": "É obrigatória nesses casos a observância dos percentuais previstos nos §§ 2º ou 3º do artigo 85 do CPC - a depender da presença da Fazenda Pública na lide -",
-      "validacao": { "status": "pendente", "por": null, "em": null }
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
     },
     {
       "id": "85-6a-confirma-tema1076",
@@ -46,7 +46,7 @@
       "rotulo": "A Lei nº 14.365/2022 proíbe a equidade quando o valor for líquido ou liquidável, salvo nas hipóteses do § 8º",
       "trechoDe": "NV|LEI-13105-2015|corpo|art. 85, § 6º-A",
       "trecho": "é proibida a apreciação equitativa, salvo nas hipóteses expressamente previstas no § 8º deste artigo.",
-      "validacao": { "status": "pendente", "por": null, "em": null }
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
     },
     {
       "id": "rg1255-relaciona-tema1076",
@@ -56,7 +56,7 @@
       "rotulo": "O STF examina em repercussão geral a interpretação do Tema 1.076 (mérito pendente)",
       "trechoDe": "STF-RG-1255",
       "trecho": "a interpretação conferida pelo Superior Tribunal de Justiça ao art. 85, §§ 2º, 3º e 8º, do Código de Processo Civil, em julgamento de recurso especial repetitivo",
-      "validacao": { "status": "pendente", "por": null, "em": null }
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
     }
   ],
   "esperado": {

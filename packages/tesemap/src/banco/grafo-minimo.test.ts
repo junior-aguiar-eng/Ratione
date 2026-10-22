@@ -48,9 +48,12 @@ function clienteDoBanco(db: PGlite): ClienteCarga {
 }
 
 const validarTudo = (g: GrafoMinimo): GrafoMinimo => ({ ...g, arestas: g.arestas.map(a => ({ ...a, validacao: { status: 'validado', por: 'Revisor', em: '2026-10-22' } })) });
+// Os testes partem das relações pendentes, qualquer que seja a validação registrada no arquivo
+const tudoPendente = (g: GrafoMinimo): GrafoMinimo => ({ ...g, arestas: g.arestas.map(a => ({ ...a, validacao: { status: 'pendente', por: null, em: null } })) });
 
 describe('Grafo mínimo conhecido (F4-05)', () => {
-  const grafo = carregarGrafoMinimo();
+  const arquivo = carregarGrafoMinimo();
+  const grafo = tudoPendente(arquivo);
   const corpus = linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus'), ['LEI-13105-2015']);
   const stj = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), () => []);
   const stf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), () => [], temasStfCitadosPeloStj(stj), carregarAplicacaoStf());
@@ -88,6 +91,12 @@ describe('Grafo mínimo conhecido (F4-05)', () => {
     assert.throws(() => arestasDoGrafoMinimo(com({ trechoDe: 'STF-RG-1255' }), nos), /uma das pontas/);
     // Espaços a mais não contam como diferença
     assert.equal(arestasDoGrafoMinimo(com({ trecho: a.trecho.replace(/ /g, '  ') }), nos).length, 1);
+  });
+
+  it('o arquivo monta sem erro com a validação que estiver registrada nele', () => {
+    const arestas = arestasDoGrafoMinimo(arquivo, nos);
+    assert.equal(arestas.length, arquivo.arestas.length);
+    arquivo.arestas.forEach((a, i) => assert.equal(arestas[i].validado_por, a.validacao.status === 'validado' ? a.validacao.por : null));
   });
 
   it('validação: validado leva nome e data; pendente, nenhum dos dois', () => {
