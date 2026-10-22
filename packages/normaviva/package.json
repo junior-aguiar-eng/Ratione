@@ -11,6 +11,11 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./vigencia-futura": {
+      "types": "./src/vigenciafutura/avisos.ts",
+      "import": "./src/vigenciafutura/avisos.ts",
+      "default": "./src/vigenciafutura/avisos.ts"
+    },
     "./consulta": {
       "types": "./src/busca/consulta.ts",
       "import": "./src/busca/consulta.ts",
@@ -31,6 +36,7 @@
     "historico:sql": "tsx src/historico/gerar-sql.ts",
     "atualizar": "tsx src/atualizacao/atualizar.ts",
     "feeds": "tsx src/atualizacao/feeds.ts",
+    "vigencia": "tsx src/vigenciafutura/atualizar.ts",
     "carregar": "tsx src/busca/carregar-supabase.ts"
   },
   "dependencies": {

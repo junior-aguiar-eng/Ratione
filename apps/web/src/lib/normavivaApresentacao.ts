@@ -5,6 +5,7 @@
  * à última alteração, a tela NÃO mostra texto algum: mostrar a redação atual como se fosse a da época seria dado jurídico errado.
  */
 import type { Versao } from './normaviva';
+import { chaveDoArtigo, type AvisoVigenciaFutura } from '@ratione/normaviva/vigencia-futura';
 
 export interface Segmento {
   texto: string;
@@ -143,4 +144,32 @@ export function situacaoEm(versoes: Versao[], dataConsulta: string, dataCurta: (
     };
   }
   return base;
+}
+
+export interface TextoDoAvisoFuturo {
+  titulo: string;
+  /** Uma frase por linha. */
+  linhas: string[];
+  /** Dispositivos do artigo mostrado que a lei altera, como o Senado os registra. */
+  dispositivos: string[];
+  fonteUrl: string;
+}
+
+/**
+ * Aviso de lei já publicada que altera este artigo e ainda não vale (F3-06). O texto da tela continua sendo o vigente hoje; o aviso diz que ele muda,
+ * quando, e deixa claro o que não se sabe (vigência escalonada ou condicionada: ler a cláusula no ato).
+ */
+export function textoDoAvisoFuturo(aviso: AvisoVigenciaFutura, normaId: string, rotulo: string, dataCurta: (iso: string) => string): TextoDoAvisoFuturo {
+  const artigo = chaveDoArtigo(rotulo);
+  const dispositivos = aviso.alteracoes
+    .filter(a => a.normaId === normaId)
+    .flatMap(a => a.dispositivos)
+    .filter(d => chaveDoArtigo(d.dispositivo) === artigo)
+    .map(d => `${d.dispositivo} (${d.acao.toLowerCase()})`);
+  const linhas =
+    aviso.vigenteEm !== null
+      ? [`O texto acima é o que vale hoje. A ${aviso.ato} altera este artigo e passa a valer em ${dataCurta(aviso.vigenteEm)}; o Planalto só consolida a nova redação nessa data.`]
+      : [`O texto acima é o que vale hoje. A ${aviso.ato} altera este artigo, mas a vigência dela é escalonada ou condicionada: leia a cláusula no ato antes de aplicar a nova redação.`];
+  linhas.push(`Cláusula de vigência: ${aviso.clausula}.`);
+  return { titulo: 'Alteração já publicada, ainda não em vigor', linhas, dispositivos, fonteUrl: aviso.fonte.url };
 }

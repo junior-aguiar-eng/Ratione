@@ -333,8 +333,22 @@ Amostra dos ausentes, lida no texto dos próprios atos (Planalto, 22/10/2026):
 - **Alteração já substituída:** Lei 15.229/2025 deu redação ao art. 171, § 5º, III, do CP; o § 5º foi depois revogado pela Lei 15.397/2026, e o Planalto deixou de anotá-la.
 - **Dispositivo vetado:** Lei 15.134/2025 (LGPD) e Lei 15.485/2026 (CTB): os artigos que alterariam essas normas foram vetados; o Senado registra pela ementa.
 - **Norma autônoma, sem mudar o texto:** Lei 15.358/2026 veda o auxílio-reclusão (art. 80 da Lei 8.213) em certos crimes, sem alterar a redação do art. 80.
-- **Vigência futura:** Lei 15.371/2026 (licença-paternidade) altera a CLT e a Lei 8.213 (arts. 28, 71-B, 72 e outros), mas **entra em vigor em 1º/01/2027** (art. 14); o Planalto ainda não consolidou. O corpus está certo para hoje, mas **nada avisa o usuário** de que esses artigos mudam em 2027 (pendência registrada na F3-06).
+- **Vigência futura:** Lei 15.371/2026 (licença-paternidade) altera a CLT e a Lei 8.213 (arts. 28, 71-B, 72 e outros), mas **entra em vigor em 1º/01/2027** (art. 14); o Planalto ainda não consolidou. O corpus está certo para hoje, mas **nada avisa o usuário** de que esses artigos mudam em 2027 (tratada em §24).
 - **Ementa ampla sem alteração:** leis de marco regulatório (cultura, setor elétrico, alimentos) que o Senado associa a CC, CDC, LIA e Lei 14.133 sem dispositivo que as altere no Planalto.
+
+## 24. Leis publicadas com vigência futura (F3-06), 22/10/2026
+
+Fontes lidas: detalhe do ato na API do Senado (`legislacao/lei/<n>/<ano>`, `legislacao/lcp/<n>/<ano>`: campo `edivs`, que lista por norma alterada os dispositivos e a ação) e texto do ato no Planalto (`_ato2023-2026/<ano>/lei/L<n>.htm`; lei complementar em `leis/lcp/Lcp<n>.htm`), ambos lidos em 22/10/2026.
+
+| Ato | Cláusula lida | Vigência |
+|---|---|---|
+| Lei 15.371/2026 (licença-paternidade) | art. 14: "Esta Lei entra em vigor no dia 1º de janeiro de 2027" | 01/01/2027. O art. 11 escalona a duração (10 dias em 2027, 15 em 2028, 20 em 2029, esta condicionada à meta fiscal); o aviso informa a entrada em vigor, não o escalonamento |
+| Lei Complementar 227/2026 | art. 182: vigor na publicação, "produzindo efeitos" a partir de 01/01/2027 em diante, por dispositivo | `complexa`: ler o ato |
+| Lei 15.269/2025 | art. 24: vigor na publicação e efeitos por dispositivo (a partir de 01/01/2026 e outros) | `complexa`: ler o ato |
+
+Regras da leitura: prazo contado da publicação segue a LC 95/98, art. 8º, § 2º (inclui o dia da publicação e o último do prazo; vale no dia seguinte à consumação); em dias é a publicação mais N dias, em meses e anos é o mesmo dia do mês de destino. Vigência que a leitura não entende vira `complexa` e o aviso manda ler o ato, em vez de dar uma data. O Senado registra a Lei 15.371 como alteração permanente da CLT e da Lei 8.213 e o texto do corpus a cita só em nota "Vide"; por isso o aviso só sai quando o texto anota a alteração ("Redação dada pela…"), não quando apenas cita o ato.
+
+**Achado na mesma etapa:** `urlSenado` (`coleta/conferir.ts`) usa `lei-complementar` para lei complementar, caminho que o Senado responde com um corpo sem o documento; o caminho que funciona é `lcp`. Não afeta o corpus atual (nenhuma lei complementar entre as 28 normas), por isso não foi alterado aqui.
 
 ## 15. Como repetir esta verificação
 

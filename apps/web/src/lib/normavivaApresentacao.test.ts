@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { situacaoNaData, segmentosDoTrecho } from './normavivaApresentacao';
+import { situacaoNaData, segmentosDoTrecho, textoDoAvisoFuturo } from './normavivaApresentacao';
+import { avisosDoArtigo, type AvisoVigenciaFutura } from '@ratione/normaviva/vigencia-futura';
 import type { Versao } from './normaviva';
 
 const dc = (iso: string) => iso.split('-').reverse().join('/');
@@ -58,5 +59,49 @@ describe('Apresentação do NormaViva', () => {
     const s = situacaoNaData(versao({ vigente_de: null, ano_do_ato: 1999 }), '2026-10-19', dc);
     assert.strictEqual(s.tipo, 'sem_data');
     assert.match(s.aviso, /1999/);
+  });
+});
+
+describe('Aviso de vigência futura na tela', () => {
+  const aviso: AvisoVigenciaFutura = {
+    ato: 'Lei nº 15.371 de 31/03/2026',
+    chave: 'lei:15371:2026',
+    publicacao: '2026-04-01',
+    vigencia: { tipo: 'data', em: '2027-01-01' },
+    vigenteEm: '2027-01-01',
+    clausula: 'Art. 14. Esta Lei entra em vigor no dia 1º de janeiro de 2027',
+    ementa: '',
+    fonte: { url: 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15371.htm', lidoEm: '2026-10-22' },
+    alteracoes: [
+      {
+        normaId: 'DL-5452-1943',
+        artigos: ['392', '392-a'],
+        dispositivos: [
+          { dispositivo: 'Art. 392, caput', acao: 'Alteração' },
+          { dispositivo: 'Art. 392, § 8', acao: 'Acréscimo' },
+          { dispositivo: 'Art. 392-A, caput', acao: 'Alteração' }
+        ]
+      }
+    ]
+  };
+
+  it('diz que o texto é o de hoje, quando a nova redação vale e quais dispositivos do artigo mudam (só os do artigo mostrado)', () => {
+    const t = textoDoAvisoFuturo(aviso, 'DL-5452-1943', 'art. 392', dc);
+    assert.match(t.linhas[0], /O texto acima é o que vale hoje/);
+    assert.match(t.linhas[0], /passa a valer em 01\/01\/2027/);
+    assert.deepStrictEqual(t.dispositivos, ['Art. 392, caput (alteração)', 'Art. 392, § 8 (acréscimo)']);
+    assert.match(t.linhas[1], /entra em vigor no dia 1º de janeiro de 2027/);
+  });
+
+  it('vigência sem data: não inventa data e manda ler o ato', () => {
+    const t = textoDoAvisoFuturo({ ...aviso, vigenteEm: null, vigencia: { tipo: 'complexa' } }, 'DL-5452-1943', 'art. 392', dc);
+    assert.match(t.linhas[0], /escalonada ou condicionada/);
+    assert.doesNotMatch(t.linhas[0], /passa a valer em/);
+  });
+
+  it('só aparece no artigo certo e some quando a data chega', () => {
+    assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 392, § 8º', '2026-10-22', [aviso]).length, 1);
+    assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 393', '2026-10-22', [aviso]).length, 0);
+    assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 392', '2027-01-01', [aviso]).length, 0);
   });
 });
