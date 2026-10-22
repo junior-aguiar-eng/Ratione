@@ -1,0 +1,71 @@
+{
+  "descricao": "F4-05: grafo mínimo conhecido do TeseMap (Tema 1.076/STJ, honorários por apreciação equitativa). Cada aresta cita um trecho literal do texto oficial guardado no repositório; o teste confere o trecho. As arestas nascem sugeridas pela IA e pendentes: só aparecem no site depois da validação do responsável. Para validar, troque em cada aresta \"validacao\": {\"status\": \"pendente\", \"por\": null, \"em\": null} por {\"status\": \"validado\", \"por\": \"<nome>\", \"em\": \"AAAA-MM-DD\"} e rode pnpm grafo-minimo.",
+  "atualizadoEm": "2026-10-22",
+  "dispositivos": [
+    { "id": "LEI-13105-2015|corpo|art. 85, § 2º", "rotulo": "Art. 85, § 2º, do CPC" },
+    { "id": "LEI-13105-2015|corpo|art. 85, § 3º", "rotulo": "Art. 85, § 3º, do CPC" },
+    { "id": "LEI-13105-2015|corpo|art. 85, § 6º-A", "rotulo": "Art. 85, § 6º-A, do CPC" },
+    { "id": "LEI-13105-2015|corpo|art. 85, § 8º", "rotulo": "Art. 85, § 8º, do CPC" }
+  ],
+  "arestas": [
+    {
+      "id": "tema1076-restringe-85-8",
+      "origem": "STJ-TEMA-1076",
+      "destino": "NV|LEI-13105-2015|corpo|art. 85, § 8º",
+      "tipo": "restringe",
+      "rotulo": "Equidade só quando o proveito econômico for inestimável ou irrisório ou o valor da causa for muito baixo",
+      "trechoDe": "STJ-TEMA-1076",
+      "trecho": "Apenas se admite arbitramento de honorários por equidade quando, havendo ou não condenação: (a) o proveito econômico obtido pelo vencedor for inestimável ou irrisório; ou (b) o valor da causa for muito baixo.",
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
+    },
+    {
+      "id": "tema1076-interpreta-85-2",
+      "origem": "STJ-TEMA-1076",
+      "destino": "NV|LEI-13105-2015|corpo|art. 85, § 2º",
+      "tipo": "interpreta",
+      "rotulo": "Valores elevados: os percentuais do § 2º são obrigatórios",
+      "trechoDe": "STJ-TEMA-1076",
+      "trecho": "É obrigatória nesses casos a observância dos percentuais previstos nos §§ 2º ou 3º do artigo 85 do CPC - a depender da presença da Fazenda Pública na lide -",
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
+    },
+    {
+      "id": "tema1076-interpreta-85-3",
+      "origem": "STJ-TEMA-1076",
+      "destino": "NV|LEI-13105-2015|corpo|art. 85, § 3º",
+      "tipo": "interpreta",
+      "rotulo": "Valores elevados com a Fazenda Pública na lide: os percentuais do § 3º são obrigatórios",
+      "trechoDe": "STJ-TEMA-1076",
+      "trecho": "É obrigatória nesses casos a observância dos percentuais previstos nos §§ 2º ou 3º do artigo 85 do CPC - a depender da presença da Fazenda Pública na lide -",
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
+    },
+    {
+      "id": "85-6a-confirma-tema1076",
+      "origem": "NV|LEI-13105-2015|corpo|art. 85, § 6º-A",
+      "destino": "STJ-TEMA-1076",
+      "tipo": "confirma",
+      "rotulo": "A Lei nº 14.365/2022 proíbe a equidade quando o valor for líquido ou liquidável, salvo nas hipóteses do § 8º",
+      "trechoDe": "NV|LEI-13105-2015|corpo|art. 85, § 6º-A",
+      "trecho": "é proibida a apreciação equitativa, salvo nas hipóteses expressamente previstas no § 8º deste artigo.",
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
+    },
+    {
+      "id": "rg1255-relaciona-tema1076",
+      "origem": "STF-RG-1255",
+      "destino": "STJ-TEMA-1076",
+      "tipo": "relaciona",
+      "rotulo": "O STF examina em repercussão geral a interpretação do Tema 1.076 (mérito pendente)",
+      "trechoDe": "STF-RG-1255",
+      "trecho": "a interpretação conferida pelo Superior Tribunal de Justiça ao art. 85, §§ 2º, 3º e 8º, do Código de Processo Civil, em julgamento de recurso especial repetitivo",
+      "validacao": { "status": "validado", "por": "José Bonifácio de Aguiar Santos Júnior", "em": "2026-10-22" }
+    }
+  ],
+  "esperado": {
+    "vizinhosDoTema1076": [
+      "NV|LEI-13105-2015|corpo|art. 85, § 2º",
+      "NV|LEI-13105-2015|corpo|art. 85, § 3º",
+      "NV|LEI-13105-2015|corpo|art. 85, § 6º-A",
+      "NV|LEI-13105-2015|corpo|art. 85, § 8º",
+      "STF-RG-1255"
+    ]
+  }
+}

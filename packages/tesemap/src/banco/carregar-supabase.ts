@@ -3,6 +3,7 @@
  *
  *   pnpm carregar:tesemap --simular   # monta os nós e mostra as contagens; não precisa de chave nem toca no banco
  *   pnpm carregar:tesemap             # grava (upsert) os nós dos precedentes do STJ e dos temas de repercussão geral do STF
+ *                                     # e o grafo mínimo (F4-05): nós de dispositivo e arestas, que só aparecem depois de validadas
  *
  * Variáveis de ambiente (no terminal, NUNCA em arquivo versionado nem em conversa): SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY.
  * Antes: aplicar no SQL Editor `supabase/migrations/20261022000003_tesemap.sql`.
@@ -18,7 +19,8 @@ import { carregarAplicacaoStf, carregarSumulasStf, carregarTemasRgStf, manifesto
 import { nosDosPrecedentesStj, temasStfCitadosPeloStj } from './nos-stj';
 import { nosDasSumulasStf, nosDosTemasStf } from './nos-stf';
 import { citacoesNoTexto } from './citacoes';
-import type { NoBanco } from './esquemas';
+import { arestasDoGrafoMinimo, carregarGrafoMinimo, nosDosDispositivos } from './grafo-minimo';
+import type { ArestaBanco, NoBanco } from './esquemas';
 
 const LOTE = 200;
 
@@ -41,9 +43,20 @@ export async function carregarNos(cliente: ClienteCarga, nos: NoBanco[], log: (m
   return { enviados: nos.length, noBanco: c.count ?? 0 };
 }
 
+/** Arestas por (origem, destino, tipo): recarregar atualiza rótulo, fonte e validação; aresta curada fora do arquivo fica como está. */
+export async function carregarArestas(cliente: ClienteCarga, arestas: ArestaBanco[], log: (m: string) => void = () => {}): Promise<{ enviadas: number; noBanco: number }> {
+  const r = await cliente.from('tesemap_arestas').upsert(arestas, { onConflict: 'origem_id,destino_id,tipo' });
+  if (r.error) throw new Error(`gravar tesemap_arestas: ${r.error.message}`);
+  log(`  tesemap_arestas: ${arestas.length} arestas enviadas (${arestas.filter(a => a.validado_por !== null).length} validadas)`);
+  const c = await cliente.from('tesemap_arestas').select('*', { count: 'exact', head: true });
+  if (c.error) throw new Error(`contar tesemap_arestas: ${c.error.message}`);
+  return { enviadas: arestas.length, noBanco: c.count ?? 0 };
+}
+
 async function main() {
   // Atalhos para o NormaViva: só o dispositivo que existe no corpus de leis
-  const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus')).flatMap(l => l.dispositivos.map(d => d.id)));
+  const corpus = linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus'));
+  const ids = new Set(corpus.flatMap(l => l.dispositivos.map(d => d.id)));
   const citar = (t: string) => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id));
   const nosStj = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), citar);
   const nosStf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), citar, temasStfCitadosPeloStj(nosStj), carregarAplicacaoStf());
@@ -51,11 +64,15 @@ async function main() {
   // As ligações das súmulas só valem para nó que existe no grafo: os do STJ, os temas do STF e as próprias súmulas
   const existentes = new Set([...nosStj, ...nosStf].map(n => n.id).concat(sumulas.map(x => x.id)));
   const nosSumulas = nosDasSumulasStf(sumulas, manifestoStf(), existentes, citar);
-  const nos = [...nosStj, ...nosStf, ...nosSumulas];
+  const grafo = carregarGrafoMinimo();
+  const nosDispositivos = nosDosDispositivos(grafo, corpus);
+  const nos = [...nosStj, ...nosStf, ...nosSumulas, ...nosDispositivos];
+  const arestas = arestasDoGrafoMinimo(grafo, nos);
   const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
   console.log(
-    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes); ${comCitacao} citam dispositivo do NormaViva`
+    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes) + ${nosDispositivos.length} dispositivos do grafo mínimo; ${comCitacao} citam dispositivo do NormaViva`
   );
+  console.log(`Arestas do grafo mínimo: ${arestas.length} (${arestas.filter(a => a.validado_por !== null).length} validadas; as pendentes não aparecem no site)`);
   if (process.argv.includes('--simular')) {
     console.log('Simulação: nada foi enviado ao banco.');
     return;
@@ -70,6 +87,9 @@ async function main() {
   const r = await carregarNos(cliente, nos, console.log);
   console.log(`Nós no banco: ${r.noBanco} (inclui os curados à mão, se houver).`);
   if (r.noBanco < nos.length) throw new Error('O banco tem menos nós do que os enviados: investigue antes de usar.');
+  const ra = await carregarArestas(cliente, arestas, console.log);
+  console.log(`Arestas no banco: ${ra.noBanco}.`);
+  if (ra.noBanco < arestas.length) throw new Error('O banco tem menos arestas do que as enviadas: investigue antes de usar.');
   console.log('Carga conferida.');
 }
 
