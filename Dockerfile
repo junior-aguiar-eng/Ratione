@@ -20,6 +20,8 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+# "sim" mostra o botão da explicação por IA; o servidor também precisa estar ligado (docs/produto/EXPLICACAO_IA.md)
+ARG NEXT_PUBLIC_IA_EXPLICACAO
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter web build
 

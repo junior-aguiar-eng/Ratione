@@ -52,19 +52,29 @@ jobs:
           docker build -t "$IMAGEM" \
             --build-arg NEXT_PUBLIC_SUPABASE_URL="${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" \
             --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}" \
+            --build-arg NEXT_PUBLIC_IA_EXPLICACAO="${{ vars.IA_EXPLICACAO }}" \
             .
           docker push "$IMAGEM"
           echo "nome=$IMAGEM" >> "$GITHUB_OUTPUT"
 
       # A chave de serviço do Supabase vem do Secret Manager, nunca do repositório nem da imagem
+      # Explicação por IA (F3-08): só com a variável IA_EXPLICACAO = sim o servidor recebe a chave da Anthropic (segredo anthropic-api-key)
+      # e a rota liga; com qualquer outro valor o segredo nem é referenciado e a rota responde 503 (docs/produto/EXPLICACAO_IA.md).
       - name: Cloud Run
         run: |
+          SEGREDOS="SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest"
+          IA="IA_EXPLICACAO_LIGADA=nao"
+          if [ "${{ vars.IA_EXPLICACAO }}" = "sim" ]; then
+            SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
+            IA="IA_EXPLICACAO_LIGADA=sim"
+          fi
           gcloud run deploy "$SERVICO" \
             --project "${{ vars.GCP_PROJECT_ID }}" \
             --region "$REGIAO" \
             --image "${{ steps.imagem.outputs.nome }}" \
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
-            --set-secrets SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest \
+            --set-secrets "$SEGREDOS" \
+            --update-env-vars "$IA" \
             --allow-unauthenticated \
             --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \

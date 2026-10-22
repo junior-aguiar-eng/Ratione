@@ -9,6 +9,7 @@
     "test": "tsx --test src/**/*.test.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
     "@ratione/argumenta": "workspace:*",
     "@ratione/core": "workspace:*",
     "@ratione/normaviva": "workspace:*",

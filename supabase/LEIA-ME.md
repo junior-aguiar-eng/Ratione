@@ -38,6 +38,10 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 `supabase/migrations/20261020000002_limite_itens_salvos.sql` limita a 1.000 os itens salvos por conta (gatilho `limitar_itens_salvos`, mesmo padrão do teto de lembretes). **Aplique no projeto real:** *SQL Editor → New query*, cole o conteúdo do arquivo → *Run*. Enquanto não for aplicada, o site funciona, só sem o teto; o botão "Salvar em Meu espaço" passa a mostrar "Limite de itens atingido" quando a conta estiver cheia.
 
+## Explicação por IA (F3-08, 22/10/2026)
+
+`supabase/migrations/20261022000001_explicacao_ia.sql` cria o cache das explicações (`ia_explicacoes`), o registro de uso com o custo (`ia_uso`) e as funções que conferem cota e orçamento de forma atômica (`ia_reservar`, `ia_finalizar`, `ia_registrar_cache`), executáveis só pela chave de serviço. **Aplique no projeto real** pelo *SQL Editor* antes de ligar a funcionalidade; enquanto ela estiver desligada, a migração não muda nada no site. Como ligar e desligar: `docs/produto/EXPLICACAO_IA.md`, §5.
+
 ## Correções de dados do NormaViva (`supabase/correcoes/`)
 
 Arquivos SQL que corrigem o texto já carregado sem recarregar o corpus inteiro. Cada um é gerado do corpus, idempotente e termina com uma consulta de conferência. Aplicar no *SQL Editor*, depois do merge do código que muda o parser. Aplicadas: `20261020_producao_de_efeito.sql` em 20/10/2026 (conferido no banco: 0 dispositivos com a anotação no texto, 12 revogados corrigidos, 737 revogados no total, hash das versões confere).
