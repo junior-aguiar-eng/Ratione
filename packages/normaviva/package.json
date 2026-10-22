@@ -16,6 +16,11 @@
       "import": "./src/vigenciafutura/avisos.ts",
       "default": "./src/vigenciafutura/avisos.ts"
     },
+    "./sinonimos": {
+      "types": "./src/busca/sinonimos.ts",
+      "import": "./src/busca/sinonimos.ts",
+      "default": "./src/busca/sinonimos.ts"
+    },
     "./consulta": {
       "types": "./src/busca/consulta.ts",
       "import": "./src/busca/consulta.ts",
