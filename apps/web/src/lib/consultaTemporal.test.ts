@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { lerVersoes, ordenarVersoes, type Versao } from './normaviva';
+import { lerVersoes, ordenarVersoes, versoesPublicaveis, type Versao } from './normaviva';
 import { situacaoEm } from './normavivaApresentacao';
 import { diffPalavras } from './diffTexto';
 import { linhaDoTempo } from './linhaDoTempo';
@@ -200,11 +200,19 @@ describe('Leitura das redações no banco', () => {
     return { db, consultas };
   }
 
-  it('com as colunas novas, traz a vigente e a anterior, a vigente primeiro', async () => {
+  it('com as colunas novas, a anterior ainda não conferida no Diário Oficial não aparece, e a vigente deixa de anunciá-la (decisão de 22/10/2026)', async () => {
     const { db, consultas } = falso({ semColunasNovas: false });
     const v = await lerVersoes(db, 'x');
-    assert.deepEqual(v.map(x => x.vigente_ate ?? null), [null, '1957-08-02']);
+    assert.deepEqual(v.map(x => x.vigente_ate ?? null), [null]);
+    assert.equal(v[0].texto_anterior_disponivel, false);
     assert.deepEqual(consultas, ['nova']);
+  });
+
+  it('a anterior conferida aparece, depois da vigente; a do texto compilado não depende de conferência', () => {
+    const conferida = { ...original, conferida_por: 'Revisor', conferida_em: '2026-10-22' };
+    assert.deepEqual(ordenarVersoes(versoesPublicaveis([conferida, atual])).map(x => x.vigente_ate ?? null), [null, '1957-08-02']);
+    assert.equal(versoesPublicaveis([conferida, atual]).find(x => !x.vigente_ate)?.texto_anterior_disponivel, true);
+    assert.equal(versoesPublicaveis([{ ...original, fonte_do_texto: 'compilado' }, atual]).length, 2);
   });
 
   it('banco sem as colunas novas (migração por aplicar): cai para a consulta antiga e a página segue no ar', async () => {
