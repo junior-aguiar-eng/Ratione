@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { clausulaDeVigencia, lerVigencia, vigenteEm } from './vigencia';
 import { avisosDoArtigo, chaveDoArtigo, type AvisoVigenciaFutura } from './avisos';
-import { executarVigencia, numeroEAno, urlPlanaltoDoAto, type DependenciasVigencia, type DetalheDoAto } from './atualizar';
+import { alteracoesDoAto, executarVigencia, numeroEAno, urlPlanaltoDoAto, type DependenciasVigencia, type DetalheDoAto } from './atualizar';
 import type { DocumentoDaLista } from '../atualizacao/feeds';
 
 const ler = (frase: string, publicacao = '2026-04-01') => {
@@ -148,5 +148,36 @@ describe('Execução', () => {
   it('ato que não altera norma monitorada segundo o Senado é examinado e esquecido', async () => {
     const r = await executarVigencia(base({ detalheDoAto: async () => ({ ...detalheClt, altera: [{ nomeNorma: 'Lei nº 1.234 de 01/01/1960', itens: [] }] }) }));
     assert.equal(r.arquivo.examinados['lei:15371:2026'], 'nao_altera_o_corpus');
+  });
+
+  it('item vetado não é alteração: o ato só com vetos na norma é esquecido (Lei 15.269/2025 e o art. 11, XIII, da LIA)', async () => {
+    const vetado: DetalheDoAto = { ...detalheClt, altera: [{ nomeNorma: 'Decreto-Lei nº 5.452 de 01/05/1943', itens: [{ dispositivo: 'Art. 11, caput, Inciso 13', acao: 'Acréscimo Vetado' }] }] };
+    const r = await executarVigencia(base({ detalheDoAto: async () => vetado }));
+    assert.equal(r.arquivo.avisos.length, 0);
+    assert.equal(r.arquivo.examinados['lei:15371:2026'], 'nao_altera_o_corpus');
+    assert.equal(alteracoesDoAto({ ...detalheClt, altera: [{ ...detalheClt.altera[0], itens: [...detalheClt.altera[0].itens, { dispositivo: 'Art. 500', acao: 'Alteração Vetada' }] }] }, new Map([['decreto-lei:5452:1943', 'DL-5452-1943']]))[0].artigos.length, 2);
+  });
+
+  it('aviso que já estava no arquivo e só tinha vetos sai; o que tinha vetos e alterações perde só os vetos', async () => {
+    const primeiro = await executarVigencia(base());
+    const so = primeiro.arquivo.avisos[0];
+    const soVetos = { ...so, alteracoes: [{ ...so.alteracoes[0], dispositivos: [{ dispositivo: 'Art. 11, caput, Inciso 13', acao: 'Acréscimo Vetado' }] }] };
+    const r = await executarVigencia(base({ arquivo: () => ({ ...primeiro.arquivo, avisos: [soVetos] }) }));
+    assert.deepEqual(r.removidos, ['Lei nº 15.371 de 31/03/2026']);
+    assert.equal(r.arquivo.examinados['lei:15371:2026'], 'nao_altera_o_corpus');
+    const misto = { ...so, alteracoes: [{ ...so.alteracoes[0], dispositivos: [...so.alteracoes[0].dispositivos, { dispositivo: 'Art. 600', acao: 'Acréscimo Vetado' }] }] };
+    const r2 = await executarVigencia(base({ arquivo: () => ({ ...primeiro.arquivo, avisos: [misto] }) }));
+    assert.deepEqual(r2.arquivo.avisos[0].alteracoes[0].dispositivos.map(d => d.acao), ['Alteração', 'Acréscimo']);
+  });
+
+  it('aviso de vigência complexa que sai por consolidação vai para a lista de conferência (LC 227/2026)', async () => {
+    const primeiro = await executarVigencia(base());
+    const complexo = { ...primeiro.arquivo.avisos[0], vigencia: { tipo: 'complexa' as const }, vigenteEm: null };
+    const r = await executarVigencia(base({ arquivo: () => ({ ...primeiro.arquivo, avisos: [complexo] }), textoDaNorma: () => '(Redação dada pela Lei nº 15.371, de 31.3.2026)' }));
+    assert.deepEqual(r.removidos, ['Lei nº 15.371 de 31/03/2026']);
+    assert.deepEqual(r.complexosConsolidados, ['Lei nº 15.371 de 31/03/2026']);
+    assert.equal(r.arquivo.examinados['lei:15371:2026'], 'consolidado_vigencia_complexa');
+    const comData = await executarVigencia(base({ arquivo: () => primeiro.arquivo, textoDaNorma: () => '(Redação dada pela Lei nº 15.371, de 31.3.2026)' }));
+    assert.deepEqual(comData.complexosConsolidados, [], 'vigência com data não precisa de conferência');
   });
 });
