@@ -80,11 +80,12 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848.htm), lido em 20/10/2026
 - **Validação:** pendente
 
-### art. 51
+### art. 46
 
-- **Ato que deu a redação B:** Lei nº 13.964 de 24/12/2019 · publicado em **24/12/2019** (provisório)
-- **Redação A** (até 23/12/2019): Transitada em julgado a sentença condenatória, a multa será considerada dívida de valor, aplicando-se-lhes as normas da legislação relativa à dívida ativa da Fazenda Pública, inclusive no que concerne às causas interruptivas e suspensivas da prescrição. *(anotação do Planalto: Redação dada pela Lei nº 9.268, de 1º.4.1996)*
-- **Redação B** (a partir de 24/12/2019): Transitada em julgado a sentença condenatória, a multa será executada perante o juiz da execução penal e será considerada dívida de valor, aplicáveis as normas relativas à dívida ativa da Fazenda Pública, inclusive no que concerne às causas interruptivas e suspensivas da prescrição.
+- **Ato que deu a redação B:** Lei nº 9.714 de 25/11/1998 · publicado em **26/11/1998** (provisório)
+- **Redação A** (até 25/11/1998): A prestação de serviços a comunidade consiste na atribuição ao condenado de tarefas gratuitas junto a entidades assistências, hospitais, escolas, orfanatos e outros estabelecimentos congêneres, em programas comunitários ou estatais. *(anotação do Planalto: Redação dada pela Lei nº 7.209, de 1984)*
+- **Redação B** (a partir de 26/11/1998): A prestação de serviços à comunidade ou a entidades públicas é aplicável às condenações superiores a seis meses de privação da liberdade.
+- **Atenção:** A e B são muito diferentes. Pode ter havido renumeração: nesse caso A é o texto que ocupava este rótulo, não a versão anterior do mesmo dispositivo. Confira no ato antes de validar.
 - **Fonte:** [página anotada do Planalto](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848.htm), lido em 20/10/2026
 - **Validação:** pendente
 
@@ -299,7 +300,7 @@ Confira, no Diário Oficial ou no texto original do ato, se A era mesmo a redaç
 
 ## Lei nº 6.830/1980 (Execução Fiscal) (LEI-6830-1980)
 
-### art. 7º-O, II
+### art. 7º, II
 
 - **Ato que deu a redação B:** Lei nº 13.043 de 13/11/2014 · publicado em **14/11/2014** (provisório)
 - **Redação A** (até 13/11/2014): penhora, se não for paga a dívida, nem garantida a execução, por meio de depósito ou fiança;
