@@ -1,6 +1,8 @@
 # Explicação de dispositivo por IA (F3-08)
 
 > **Decisão do responsável (22/10/2026):** a explicação é feita com o **Claude Haiku 5.5** (API da Anthropic), **só sob demanda**, com **controle rígido de uso**, numa implementação própria e separada do resto do NormaViva. Qualquer mudança nas regras abaixo (modelo, limites, o que o modelo recebe, ferramentas) precisa de nova decisão do responsável.
+>
+> É a tarefa `explicar-dispositivo` do **catálogo de tarefas de IA** ([`IA_TAREFAS.md`](IA_TAREFAS.md)): segue o contrato, o executor único e as travas descritos lá.
 
 ## 1. O que é
 
@@ -10,19 +12,19 @@ Na tela de um dispositivo do NormaViva, a pessoa logada pode clicar em **"Explic
 
 | Regra | Como é garantida |
 |---|---|
-| Só sob demanda: nenhuma chamada automática (ao abrir a página, ao pesquisar, em lote, em segundo plano) | O único caminho é o clique no botão, que faz um `POST` para `/api/normaviva/explicar`; o componente volta ao estado inicial a cada dispositivo (`key`) |
+| Só sob demanda: nenhuma chamada automática (ao abrir a página, ao pesquisar, em lote, em segundo plano) | O único caminho é o clique no botão, que faz um `POST` para `/api/ia/explicar-dispositivo`; o componente volta ao estado inicial a cada dispositivo (`key`) |
 | Só quem tem conta e está logado | A rota confere a sessão no servidor (`auth.getUser`); sem sessão, 401 e nada é chamado |
-| O usuário não escreve pergunta nem texto: o pedido leva só o id do dispositivo | `idValido` aceita só o formato `NORMA|escopo|rótulo`; qualquer outra coisa é 400 |
+| O usuário não escreve pergunta nem texto: o pedido leva só o id do dispositivo | `idDeDispositivoValido` aceita só o formato `NORMA|escopo|rótulo`; qualquer outra coisa é 400 |
 | O modelo vê só o texto oficial, lido do banco no servidor | `lerDispositivoParaExplicar` (mesmo texto da tela); o texto vai entre `<dispositivo>` e `</dispositivo>`, tratado como dado |
-| **Sem ferramentas e sem busca na web** | A chamada não declara `tools`; é uma única mensagem (`lib/ia/cliente.ts`) |
-| Não cita jurisprudência, súmulas, doutrina nem outras leis além das citadas no próprio texto; não aconselha caso concreto | Instruções do prompt do sistema (`lib/ia/prompt.ts`), fixo e versionado (`VERSAO_PROMPT`) |
+| **Sem ferramentas e sem busca na web** | O contrato declara `ferramentas: []` e o único cliente da API (`lib/ia/cliente.ts`) não envia `tools`; é uma única mensagem |
+| Não cita jurisprudência, súmulas, doutrina nem outras leis além das citadas no próprio texto; não aconselha caso concreto | Instruções fixas da tarefa (`lib/ia/tarefas/explicarDispositivo.ts`), versionadas (`versao`) |
 | Resposta em formato fixo | Saída estruturada (`output_config.format`, esquema JSON) e nova validação no servidor (`zod`); fora do formato, nada é mostrado nem guardado |
 | Texto longo não é cortado em silêncio | Acima de 20.000 caracteres, a rota recusa (413) e pede um parágrafo ou inciso |
-| A mesma explicação é reaproveitada | Cache por modelo, versão do prompt, dispositivo e hash do texto (`ia_explicacoes`); servir do cache não conta na cota nem custa; texto alterado pela lei gera explicação nova |
+| A mesma explicação é reaproveitada | Cache por tarefa, versão, modelo e mensagem montada (`ia_respostas`); servir do cache não conta na cota nem custa; texto alterado pela lei gera explicação nova |
 | Toda chamada é reservada antes e registrada depois, com o custo | `ia_reservar` (atômica, uma de cada vez) e `ia_finalizar` (`ia_uso`) |
 | A chave da API fica só no servidor | `ANTHROPIC_API_KEY` vem do Secret Manager no Cloud Run; nunca no repositório, na imagem ou no navegador |
 
-## 3. Limites (padrão, em `lib/ia/politica.ts`)
+## 3. Limites (no contrato da tarefa e em `lib/ia/politica.ts`)
 
 | Limite | Padrão | Ajuste |
 |---|---|---|
@@ -30,7 +32,7 @@ Na tela de um dispositivo do NormaViva, a pessoa logada pode clicar em **"Explic
 | Explicações novas por usuário por mês | 60 | `IA_LIMITE_MES` |
 | Gasto de todos os usuários somados no mês | US$ 5,00 | `IA_ORCAMENTO_MES_USD` |
 | Uma explicação de cada vez por usuário | (fixo) | chamada "reservada" há menos de 2 minutos barra a próxima |
-| Teto da resposta | 2.000 tokens | `MAX_TOKENS` (código) |
+| Teto da resposta | 2.000 tokens | `maxTokensSaida` (contrato) |
 | Tempo da chamada | 30 s, 1 nova tentativa só em falha transitória | código |
 
 O ambiente só pode **apertar** os limites ou, no máximo, dobrá-los; valor inválido cai no padrão. Falha, recusa e resposta fora do formato **contam na cota** (para que insistir não contorne o limite), mas só pelo custo real cobrado. O orçamento soma o custo real das chamadas feitas e o custo máximo das que estão em curso: nunca passa do teto.
@@ -45,7 +47,7 @@ O ambiente só pode **apertar** os limites ou, no máximo, dobrá-los; valor inv
 
 Nada é chamado enquanto os três passos abaixo não forem feitos; até lá, o botão nem aparece.
 
-1. **Banco:** aplicar `supabase/migrations/20261022000001_explicacao_ia.sql` no SQL Editor do projeto `ratione`.
+1. **Banco:** aplicar, nesta ordem, `supabase/migrations/20261022000001_explicacao_ia.sql` e `20261022000002_ia_tarefas.sql` no SQL Editor do projeto `ratione`.
 2. **Chave:** criar uma chave na Console da Anthropic (de preferência num workspace só do Ratione, com limite de gasto mensal configurado lá também) e guardá-la no Secret Manager do Google Cloud com o nome `anthropic-api-key`, dando à conta de serviço do Cloud Run (`GCP_RUNTIME_SA`) o papel "Secret Manager Secret Accessor" nesse segredo. A chave não passa pelo repositório nem por esta conversa.
 3. **Interruptor:** criar a variável de repositório `IA_EXPLICACAO` = `sim` (GitHub → Settings → Variables) e rodar o deploy. O build passa a mostrar o botão e o servidor recebe a chave e `IA_EXPLICACAO_LIGADA=sim`.
 
@@ -56,10 +58,10 @@ Nada é chamado enquanto os três passos abaixo não forem feitos; até lá, o b
 No SQL Editor:
 
 ```sql
--- Gasto e uso do mês, por resultado
-select situacao, count(*), sum(custo_usd) from public.ia_uso
+-- Gasto e uso do mês, por tarefa e resultado
+select tarefa, situacao, count(*), sum(custo_usd) from public.ia_uso
 where criado_em >= date_trunc('month', now() at time zone 'America/Sao_Paulo') at time zone 'America/Sao_Paulo'
-group by situacao;
+group by tarefa, situacao;
 ```
 
 Falhas e recusas também aparecem no log do Cloud Run ("Explicação por IA: …").
@@ -68,13 +70,11 @@ Falhas e recusas também aparecem no log do Cloud Run ("Explicação por IA: …
 
 | Arquivo | Papel |
 |---|---|
-| `apps/web/src/lib/ia/politica.ts` | Modelo, limites, preço, cálculo de custo, interruptor |
-| `apps/web/src/lib/ia/prompt.ts` | Prompt do sistema, mensagem com o texto delimitado, esquema da resposta |
-| `apps/web/src/lib/ia/explicar.ts` | Ordem das verificações (puro, testado sem rede) |
-| `apps/web/src/lib/ia/cliente.ts` | A única chamada à API da Anthropic |
-| `apps/web/src/lib/ia/dispositivoDoBanco.ts` | Texto do dispositivo lido do banco |
-| `apps/web/src/app/api/normaviva/explicar/route.ts` | Rota do servidor |
+| `apps/web/src/lib/ia/tarefas/explicarDispositivo.ts` | O contrato da tarefa: entrada, instruções, mensagem, esquema da resposta, limites |
+| `apps/web/src/lib/ia/fontes/dispositivoDoBanco.ts` | Texto do dispositivo lido do banco |
+| `apps/web/src/lib/ia/catalogo.ts`, `executar.ts`, `cliente.ts`, `politica.ts` | Catálogo, executor único, a única chamada à API, política global (ver `IA_TAREFAS.md`) |
+| `apps/web/src/app/api/ia/[tarefa]/route.ts` | Rota única dos recursos de IA |
 | `apps/web/src/app/normaviva/ExplicacaoIA.tsx` | Botão e exibição |
-| `supabase/migrations/20261022000001_explicacao_ia.sql` | Cache, registro de uso, reserva atômica |
+| `supabase/migrations/20261022000001_explicacao_ia.sql`, `20261022000002_ia_tarefas.sql` | Cache, registro de uso, reserva atômica por tarefa |
 
-Testes: `apps/web/src/lib/ia/explicar.test.ts` (ordem das verificações, cache, falhas, custo, política, prompt) e `packages/db/src/ia.test.ts` (acesso, cota, chamada em andamento, orçamento, leitura só do próprio uso).
+Testes: `apps/web/src/lib/ia/executar.test.ts` (ordem das verificações, cache, falhas, custo, política, mensagem), `catalogo.test.ts` (contrato e travas) e `packages/db/src/ia.test.ts` (acesso, cota por tarefa, chamada em andamento, orçamento, migração sobre dados existentes).

@@ -1,22 +1,22 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { ESFORCO, MAX_TOKENS, MODELO, TEMPO_MAXIMO_MS, TENTATIVAS_EXTRAS, type Uso } from './politica';
-import { ESQUEMA_RESPOSTA, PROMPT_DO_SISTEMA, mensagemDoUsuario, type DispositivoParaExplicar } from './prompt';
-import type { ResultadoModelo } from './explicar';
+import type { PedidoModelo, ResultadoModelo, Uso } from './contrato';
+import { TEMPO_MAXIMO_MS, TENTATIVAS_EXTRAS } from './politica';
 
 /**
- * A única chamada à API da Anthropic no Ratione. Sem `tools` (nenhuma busca na web, nenhum acesso a outra fonte), uma mensagem,
- * esforço baixo e resposta no esquema fixo. A chave (`ANTHROPIC_API_KEY`) existe só no servidor de produção, nunca no navegador.
+ * A única chamada à API da Anthropic no Ratione (o teste `catalogo.test.ts` falha se outro arquivo importar o SDK).
+ * Recebe só o pedido que o executor monta a partir do contrato da tarefa: sem `tools` (nenhuma busca na web, nenhum acesso a outra fonte),
+ * uma única mensagem, resposta no esquema fixo. A chave (`ANTHROPIC_API_KEY`) existe só no servidor de produção, nunca no navegador.
  */
-export function criarChamadaAoModelo(apiKey: string): (d: DispositivoParaExplicar) => Promise<ResultadoModelo> {
+export function criarChamadaAoModelo(apiKey: string): (p: PedidoModelo) => Promise<ResultadoModelo> {
   const cliente = new Anthropic({ apiKey, timeout: TEMPO_MAXIMO_MS, maxRetries: TENTATIVAS_EXTRAS });
-  return async d => {
+  return async p => {
     try {
       const r = await cliente.messages.create({
-        model: MODELO,
-        max_tokens: MAX_TOKENS,
-        system: PROMPT_DO_SISTEMA,
-        output_config: { effort: ESFORCO, format: { type: 'json_schema', schema: ESQUEMA_RESPOSTA as unknown as Record<string, unknown> } },
-        messages: [{ role: 'user', content: mensagemDoUsuario(d) }]
+        model: p.modelo,
+        max_tokens: p.maxTokens,
+        system: p.instrucoes,
+        output_config: { effort: p.esforco, format: { type: 'json_schema', schema: p.esquema as unknown as Record<string, unknown> } },
+        messages: [{ role: 'user', content: p.mensagem }]
       });
       const uso: Uso = {
         input_tokens: r.usage.input_tokens,
