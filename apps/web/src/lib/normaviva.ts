@@ -185,6 +185,18 @@ export async function lerVersoes(db: SupabaseClient, id: string): Promise<Versao
   return ordenarVersoes((antiga.data ?? []) as unknown as Versao[]);
 }
 
+/** Ids por consulta: `.in()` vai na URL, e os ~700 ids do maior artigo (Lei 14.133, art. 6º) passavam de 6,9 KB, perto do limite de 8 KB de alguns servidores. */
+export const IDS_POR_CONSULTA = 80;
+
+/** Roda a consulta em lotes de ids, em paralelo, e junta as linhas na ordem dos lotes. Lista vazia não consulta nada. */
+export async function emLotes<T>(ids: string[], consulta: (lote: string[]) => PromiseLike<{ data: T[] | null; error: { message: string; code?: string } | null }>, tamanho = IDS_POR_CONSULTA): Promise<{ data: T[]; error: { message: string; code?: string } | null }> {
+  const lotes: string[][] = [];
+  for (let i = 0; i < ids.length; i += tamanho) lotes.push(ids.slice(i, i + tamanho));
+  const respostas = await Promise.all(lotes.map(l => consulta(l)));
+  const erro = respostas.find(r => r.error)?.error ?? null;
+  return { data: respostas.flatMap(r => r.data ?? []), error: erro };
+}
+
 export async function carregarDetalhe(db: SupabaseClient, id: string, normas: Norma[]): Promise<Detalhe> {
   const base = await db.from('dispositivos').select(COLUNAS_DISPOSITIVO).eq('id', id).single();
   if (base.error) falhou(base.error, 'abrir dispositivo');
@@ -203,12 +215,14 @@ export async function carregarDetalhe(db: SupabaseClient, id: string, normas: No
   if (!norma) throw new Error(`norma ${dispositivo.norma_id} não encontrada`);
 
   const ids = texto.map(t => t.id);
-  const [versoes, rel, citado] = await Promise.all([
+  const [versoes, relLotes, citado] = await Promise.all([
     lerVersoes(db, id),
-    db.from('relacoes').select('id, origem_id, tipo, destino_id, destino_norma_id, destino_rotulo, destino_ato, destino_texto, trecho, escopo').in('origem_id', ids).order('id').limit(300),
+    emLotes<Relacao>(ids, lote => db.from('relacoes').select('id, origem_id, tipo, destino_id, destino_norma_id, destino_rotulo, destino_ato, destino_texto, trecho, escopo').in('origem_id', lote).order('id').limit(300)),
     db.from('relacoes').select('origem_id').eq('tipo', 'remete').eq('destino_id', id).limit(40)
   ]);
-  if (rel.error) falhou(rel.error, 'ler as relações');
+  if (relLotes.error) falhou(relLotes.error, 'ler as relações');
+  // Cada lote vem ordenado por id; juntos, reordenam e mantêm o teto de 300 da consulta única
+  const rel = { data: relLotes.data.sort((a, b) => a.id - b.id).slice(0, 300) };
   if (citado.error) falhou(citado.error, 'ler quem cita');
 
   const origensCitantes = [...new Set((citado.data ?? []).map(c => c.origem_id as string))];
@@ -216,7 +230,7 @@ export async function carregarDetalhe(db: SupabaseClient, id: string, normas: No
   const buscar = [...new Set([...origensCitantes, ...destinosIds])];
   const rotulos: Record<string, { rotulo: string; norma_id: string }> = {};
   if (buscar.length > 0) {
-    const r = await db.from('dispositivos').select('id, rotulo, norma_id').in('id', buscar);
+    const r = await emLotes<{ id: string; rotulo: string; norma_id: string }>(buscar, lote => db.from('dispositivos').select('id, rotulo, norma_id').in('id', lote));
     if (r.error) falhou(r.error, 'ler rótulos');
     for (const d of r.data ?? []) rotulos[d.id as string] = { rotulo: d.rotulo as string, norma_id: d.norma_id as string };
   }
