@@ -163,12 +163,22 @@ export function ordenarVersoes(versoes: Versao[]): Versao[] {
 }
 
 /**
- * Todas as redações do dispositivo. Se o banco ainda não tem as colunas das redações anteriores (migração 20261021000001 por aplicar), a leitura cai para
+ * Decisão do responsável (22/10/2026): a redação anterior tirada do tachado do Planalto só aparece depois de conferida no Diário Oficial
+ * (`conferida_em`). Sem nenhuma anterior publicável, a vigente deixa de dizer que o texto anterior está disponível.
+ */
+export function versoesPublicaveis(versoes: Versao[]): Versao[] {
+  const publicaveis = versoes.filter(v => !v.vigente_ate || v.fonte_do_texto !== 'tachado_planalto' || !!v.conferida_em);
+  const temAnterior = publicaveis.some(v => v.vigente_ate);
+  return publicaveis.map(v => (!v.vigente_ate && v.texto_anterior_disponivel && !temAnterior ? { ...v, texto_anterior_disponivel: false } : v));
+}
+
+/**
+ * Todas as redações publicáveis do dispositivo. Se o banco ainda não tem as colunas das redações anteriores (migração 20261021000001 por aplicar), a leitura cai para
  * a consulta antiga, que traz só a vigente: a página nunca fica fora do ar por causa da ordem entre migração e publicação.
  */
 export async function lerVersoes(db: SupabaseClient, id: string): Promise<Versao[]> {
   const nova = await db.from('versoes_dispositivo').select(COLUNAS_VERSAO).eq('dispositivo_id', id);
-  if (!nova.error) return ordenarVersoes((nova.data ?? []) as unknown as Versao[]);
+  if (!nova.error) return ordenarVersoes(versoesPublicaveis((nova.data ?? []) as unknown as Versao[]));
   if (nova.error.code !== '42703') falhou(nova.error, 'ler a versão');
   const antiga = await db.from('versoes_dispositivo').select(COLUNAS_VERSAO_BASE).eq('dispositivo_id', id).limit(1);
   if (antiga.error) falhou(antiga.error, 'ler a versão');
