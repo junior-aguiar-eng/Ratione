@@ -1,0 +1,26 @@
+{
+  "conjunto": "precedentes-qualificados",
+  "titulo": "Precedentes qualificados",
+  "paginaUrl": "https://dadosabertos.web.stj.jus.br/dataset/precedentes-qualificados",
+  "licenca": "Creative Commons Atribuição",
+  "conjuntoModificadoEm": "2026-10-20",
+  "lidoEm": "2026-10-22",
+  "arquivos": [
+    {
+      "nome": "Temas.csv",
+      "url": "https://dadosabertos.web.stj.jus.br/dataset/4238da2f-c07b-4c1a-b345-4402accacdcf/resource/df29da13-7d6b-41ba-ad96-cd1a5bbd191c/download/temas.csv",
+      "modificadoEm": "2026-10-09",
+      "bytes": 2588746,
+      "sha256": "98f1506ec8f02c4e849e968c9550268a947e32e2e7a10f188385add5cf31fd16",
+      "arquivo": "temas.csv.gz"
+    },
+    {
+      "nome": "Processos.csv",
+      "url": "https://dadosabertos.web.stj.jus.br/dataset/4238da2f-c07b-4c1a-b345-4402accacdcf/resource/7ed21202-0049-4fcb-aa7c-48d810d3c499/download/processos.csv",
+      "modificadoEm": "2026-10-20",
+      "bytes": 1139077,
+      "sha256": "6f7a4f6b2716d9dc5207852a49f2cc7604bb2e427a51de1e68ae7b146d3f8585",
+      "arquivo": "processos.csv.gz"
+    }
+  ]
+}

@@ -350,6 +350,23 @@ Regras da leitura: prazo contado da publicação segue a LC 95/98, art. 8º, § 
 
 **Achado na mesma etapa:** `urlSenado` (`coleta/conferir.ts`) usa `lei-complementar` para lei complementar, caminho que o Senado responde com um corpo sem o documento; o caminho que funciona é `lcp`. Não afeta o corpus atual (nenhuma lei complementar entre as 28 normas), por isso não foi alterado aqui.
 
+## 25. Precedentes qualificados do STJ (F4-01), lido em 22/10/2026
+
+**Fonte:** Portal de Dados Abertos do STJ (`dadosabertos.web.stj.jus.br`, CKAN). Conjunto "Precedentes qualificados" (`/dataset/precedentes-qualificados`, grupo "Gestão de Precedentes"), licença **Creative Commons Atribuição** (exige citar o STJ como fonte). Catálogo: `/api/3/action/package_show?id=precedentes-qualificados`. Dois arquivos que se ligam por `sequencialPrecedente`: `Temas.csv` (modificado pelo STJ em 09/10/2026) e `Processos.csv` (20/10/2026); dicionários de dados em CSV no mesmo conjunto. Resposta do portal sem autenticação, com `User-Agent` de navegador.
+
+**Resultado do teste T2 do plano:** os espelhos de acórdãos (ementa) existem como 10 conjuntos por órgão julgador, em ZIP/JSON, com defasagem; ficam para a ligação por número de processo (F5-04), não para o TeseMap v1. Não há conjunto de **súmulas** do STJ no portal.
+
+| Conferência | Resultado |
+|---|---|
+| Delimitador | **Vírgula**; o dicionário de dados mostra `;` |
+| `tipoPrecedente` | `Tema` (1.505 linhas), `Controvérsia` (837), `PUIL` (27), `IAC` (23), `SIRDR` (11); o dicionário fala em "Tema Repetitivo" |
+| Linhas repetidas | 2.403 linhas para 2.364 precedentes: 39 repetições, que só diferem no Tema de Repercussão Geral do STF (`numeroRepercussaoGeralSTF`, `descricaoRepercussaoGeral`); o leitor soma esses temas |
+| Tema 1076 | Presente: julgado em 16/03/2022 pela Corte Especial, situação "Acórdão Publicado - RE Pendente", ligado ao Tema 1255 de RG do STF; a tese firmada coincide com a do grafo curado (honorários por equidade) |
+| `Processos.csv` | 5.561 linhas; `tipoPrecedente` vazio em 7; 10 sem precedente correspondente em `Temas.csv` |
+| Situação | Valor livre do STJ ("Trânsito em Julgado", "Afetado", "Cancelada" e "Cancelado" etc.); **não é normalizada** no leitor, só o marcador `cancelado`, para não inventar efeito jurídico |
+
+**Limites:** o dado é o que o STJ publica e fica defasado em relação ao Sistema de Gestão de Precedentes (há campos "recuperados via sistema Athos" nas anotações); onde exibido, mostrar a data de leitura e a atribuição. A procedência no núcleo é `curado` por convenção do projeto, mas a importação é mecânica do arquivo oficial, e o campo `lido` do `Precedente` diz isso.
+
 ## 15. Como repetir esta verificação
 
 ```bash
