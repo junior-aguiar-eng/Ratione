@@ -37,7 +37,7 @@ export function chaveDoAto(tipo: TipoAto, numero: string, ano: string): string {
 }
 
 const FONTE_PADRAO_ATO =
-  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)(?!\s+de\s+[a-zçãéêíóú]+\s+de\s+\d{4})|\s*,?\s+de\s+\d{1,2}[ºo°]?\s+de\s+[a-zçãéêíóú]+\s+de\s+(\d{4}))/i;
+  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)(?!\s+(?:de\s+)?(?:janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+\d{4})|\s*,?\s+de\s+\d{1,2}[ºo°]?\s+(?:de\s+)?(?:janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+(\d{4}))/i;
 
 /** Expressão nova a cada uso: uma regex global compartilhada carrega `lastIndex` entre chamadas e pula achados. */
 const padraoAto = () => new RegExp(FONTE_PADRAO_ATO.source, 'gi');

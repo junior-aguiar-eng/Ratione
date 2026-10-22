@@ -51,6 +51,11 @@ describe('Reconhecimento de atos com a data por extenso (21/10/2026)', () => {
     assert.deepStrictEqual(chaves('Lei Complementar nº 41, de 22 de dezembro de 1981'), ['lei-complementar:41:1981']);
   });
 
+  it('sem o "de" antes do mês, como o Planalto às vezes escreve ("de 24 julho de 1991")', () => {
+    assert.deepStrictEqual(chaves('art. 12 da Lei no 8.212, de 24 julho de 1991;'), ['lei:8212:1991']);
+    assert.deepStrictEqual(chaves('Lei nº 8.212, de 1991, e a Lei nº 9.876, de 26 de novembro de 1999'), ['lei:8212:1991', 'lei:9876:1999']);
+  });
+
   it('dia com ordinal, mês com acento e a forma sem vírgula continuam certos', () => {
     assert.deepStrictEqual(chaves('Lei nº 5.172, de 1º de outubro de 1966'), ['lei:5172:1966']);
     assert.deepStrictEqual(chaves('Lei nº 1.060, de 5 de fevereiro de 1950'), ['lei:1060:1950']);
