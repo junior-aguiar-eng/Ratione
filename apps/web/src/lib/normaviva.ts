@@ -5,6 +5,7 @@
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { interpretarConsulta } from '@ratione/normaviva/consulta';
+import { variantesDaConsulta } from '@ratione/normaviva/sinonimos';
 
 export interface Norma {
   id: string;
@@ -70,6 +71,8 @@ export interface Resultado {
   rotulo: string;
   /** Trecho com os termos achados entre `<b>` e `</b>` (só estas tags; ver `segmentosDoTrecho`). */
   trecho: string;
+  /** Presente quando o dispositivo só apareceu por uma expressão equivalente à pesquisada ("locação" para "aluguel"). */
+  via_sinonimo?: string;
 }
 
 export type ResultadoDaBusca =
@@ -128,9 +131,44 @@ export async function pesquisar(db: SupabaseClient, consulta: string, normas: No
     };
   }
 
-  const r = await db.rpc('buscar_dispositivos', { consulta: q, norma: null, limite: 30 });
+  const variantes = variantesDaConsulta(q);
+  const [r, ...alternativas] = await Promise.all([
+    db.rpc('buscar_dispositivos', { consulta: q, norma: null, limite: LIMITE_DA_BUSCA }),
+    ...variantes.map(v => db.rpc('buscar_dispositivos', { consulta: v.consulta, norma: null, limite: LIMITE_DA_BUSCA }))
+  ]);
   if (r.error) falhou(r.error, 'buscar por assunto');
-  return { tipo: 'resultados', origem: 'assunto', itens: (r.data ?? []) as Resultado[] };
+  // Uma alternativa que falha não derruba a pesquisa original: o resultado só fica sem o complemento
+  const doSinonimo = alternativas.map((a, i) => ({ termo: variantes[i].termo, itens: a.error ? [] : ((a.data ?? []) as Resultado[]) }));
+  const itens = mesclarComSinonimos((r.data ?? []) as Resultado[], doSinonimo);
+  const usados = [...new Set(itens.map(i => i.via_sinonimo).filter((x): x is string => !!x))];
+  return {
+    tipo: 'resultados',
+    origem: 'assunto',
+    itens,
+    aviso: usados.length > 0 ? `Incluí também resultados para ${usados.map(u => `“${u}”`).join(', ')}, expressões equivalentes nas leis. Eles aparecem marcados.` : undefined
+  };
+}
+
+const LIMITE_DA_BUSCA = 30;
+
+/**
+ * A pesquisa original vem inteira e na sua ordem; o que veio só de expressão equivalente entra depois, marcado e sem repetir dispositivo,
+ * alternando entre as alternativas para que uma não ocupe todo o espaço. O total não passa do limite da busca.
+ */
+export function mesclarComSinonimos(principal: Resultado[], alternativas: Array<{ termo: string; itens: Resultado[] }>, limite = LIMITE_DA_BUSCA): Resultado[] {
+  const saida = principal.slice(0, limite);
+  const vistos = new Set(saida.map(r => r.id));
+  const filas = alternativas.map(a => a.itens.filter(r => !vistos.has(r.id)).map(r => ({ ...r, via_sinonimo: a.termo })));
+  for (let i = 0; saida.length < limite && filas.some(f => i < f.length); i++) {
+    for (const f of filas) {
+      const r = f[i];
+      if (r && saida.length < limite && !vistos.has(r.id)) {
+        vistos.add(r.id);
+        saida.push(r);
+      }
+    }
+  }
+  return saida;
 }
 
 export interface Detalhe {

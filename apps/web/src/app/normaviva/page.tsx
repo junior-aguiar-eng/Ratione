@@ -174,6 +174,11 @@ export default function NormaVivaPage() {
                         <span className="block text-sm font-semibold text-ink">
                           {ultimoPasso(r.rotulo).startsWith('Art.') ? r.rotulo.replace(/^art\./, 'Art.') : r.rotulo}{' '}
                           <span className="font-normal text-ink-mute">· {nomeDaNorma(r.norma_id)}</span>
+                          {r.via_sinonimo && (
+                            <Badge variant="info" className="ml-2 align-middle" data-testid="via-sinonimo">
+                              por “{r.via_sinonimo}”
+                            </Badge>
+                          )}
                         </span>
                         <span className="block text-sm text-ink-soft">
                           {segmentosDoTrecho(r.trecho).map((s, i) =>
