@@ -2,7 +2,7 @@
  * Carga do grafo do TeseMap no Supabase real (F4-03). A partir de `packages/tesemap`, NO SEU COMPUTADOR:
  *
  *   pnpm carregar:tesemap --simular   # monta os nós e mostra as contagens; não precisa de chave nem toca no banco
- *   pnpm carregar:tesemap             # grava (upsert) os nós dos precedentes do STJ
+ *   pnpm carregar:tesemap             # grava (upsert) os nós dos precedentes do STJ e dos temas de repercussão geral do STF
  *
  * Variáveis de ambiente (no terminal, NUNCA em arquivo versionado nem em conversa): SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY.
  * Antes: aplicar no SQL Editor `supabase/migrations/20261022000003_tesemap.sql`.
@@ -14,7 +14,9 @@ import { carregarPrecedentesStj, manifestoStj } from '../stj';
 import { join } from 'node:path';
 import { extrairRemissoes } from '@ratione/normaviva/referencias';
 import { linhasDoCorpus } from '@ratione/normaviva/corpus';
-import { nosDosPrecedentesStj } from './nos-stj';
+import { carregarTemasRgStf, manifestoStf } from '../stf';
+import { nosDosPrecedentesStj, temasStfCitadosPeloStj } from './nos-stj';
+import { nosDosTemasStf } from './nos-stf';
 import { citacoesNoTexto } from './citacoes';
 import type { NoBanco } from './esquemas';
 
@@ -42,9 +44,12 @@ export async function carregarNos(cliente: ClienteCarga, nos: NoBanco[], log: (m
 async function main() {
   // Atalhos para o NormaViva: só o dispositivo que existe no corpus de leis
   const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus')).flatMap(l => l.dispositivos.map(d => d.id)));
-  const nos = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), t => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id)));
+  const citar = (t: string) => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id));
+  const nosStj = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), citar);
+  const nosStf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), citar, temasStfCitadosPeloStj(nosStj));
+  const nos = [...nosStj, ...nosStf];
   const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
-  console.log(`Nós montados: ${nos.length} (precedentes do STJ com tese firmada, não cancelados); ${comCitacao} citam dispositivo do NormaViva`);
+  console.log(`Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} do STF (repercussão geral reconhecida: ${nosStf.filter(n => n.tipo === 'precedente').length} com tese, ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita); ${comCitacao} citam dispositivo do NormaViva`);
   if (process.argv.includes('--simular')) {
     console.log('Simulação: nada foi enviado ao banco.');
     return;

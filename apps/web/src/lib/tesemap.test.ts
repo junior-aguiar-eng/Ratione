@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { citacoesDoNo, coberturaPorExtenso, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, type NoTese } from './tesemap';
+import { citacoesDoNo, coberturaPorExtenso, numerosDeRepercussaoGeral, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, type NoTese } from './tesemap';
 
 const dc = (iso: string) => iso.split('-').reverse().join('/');
 const no = (detalhes: Record<string, unknown>): NoTese => ({
@@ -55,5 +55,14 @@ describe('Cobertura e desenho do grafo (F4-04)', () => {
     assert.deepEqual(p, [{ x: 0, y: -300 }, { x: 300, y: 0 }, { x: 0, y: 300 }, { x: -300, y: 0 }]);
     assert.deepEqual(posicoesRadiais(0), []);
     assert.ok(posicoesRadiais(12).every(q => Math.hypot(q.x, q.y) > 290));
+  });
+});
+
+describe('Ligação STJ e STF pela repercussão geral (F4-02)', () => {
+  it('lê os números de tema do STF que o STJ liga, sem repetir e sem aceitar o que não é número', () => {
+    const n = (rg: unknown): NoTese => ({ id: 'STJ-TEMA-1076', tipo: 'precedente', rotulo: 'x', tribunal: 'STJ', numero_referencia: null, descricao: '', dispositivo_id: null, detalhes: { repercussaoGeral: rg }, origem_dado: 'curado', fontes: [], validado_por: null, validado_em: null, atualizado_em: '2026-10-22' });
+    assert.deepEqual(numerosDeRepercussaoGeral(n([{ numero: '1255' }, { numero: '1255' }, { numero: '12x' }, { numero: 3 }, null, 'x'])), ['1255']);
+    assert.deepEqual(numerosDeRepercussaoGeral(n('x')), []);
+    assert.deepEqual(numerosDeRepercussaoGeral(n(undefined)), []);
   });
 });

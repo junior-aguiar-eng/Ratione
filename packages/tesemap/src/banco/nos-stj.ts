@@ -54,3 +54,14 @@ export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoS
       })
     );
 }
+
+/** Números de tema de repercussão geral do STF que os nós do STJ ligam (`detalhes.repercussaoGeral`), para o STF trazer a outra ponta. */
+export function temasStfCitadosPeloStj(nos: NoBanco[]): Set<number> {
+  const numeros = new Set<number>();
+  for (const n of nos) {
+    const rg = n.detalhes.repercussaoGeral;
+    if (!Array.isArray(rg)) continue;
+    for (const r of rg as Array<{ numero?: string }>) if (r.numero && /^\d+$/.test(r.numero)) numeros.add(Number(r.numero));
+  }
+  return numeros;
+}

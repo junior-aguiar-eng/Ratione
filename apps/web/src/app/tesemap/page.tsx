@@ -11,7 +11,7 @@ import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
-import { abrirNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, resumoDoNo, type Cobertura, type NoTese, type Vizinhanca } from '../../lib/tesemap';
+import { abrirNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, ligadosPelaRepercussaoGeral, resumoDoNo, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import PreviaCatalogada from './PreviaCatalogada';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -40,6 +40,7 @@ export default function TeseMapPage() {
   const [noId, setNoId] = useState<string | null>(null);
   const [aberto, setAberto] = useState<Vizinhanca | null>(null);
   const [abrindo, setAbrindo] = useState(false);
+  const [ligados, setLigados] = useState<NoLigado[]>([]);
   const [erro, setErro] = useState<string | null>(null);
   const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
   const salvo = estadoSalvo === 'salvo';
@@ -91,6 +92,19 @@ export default function TeseMapPage() {
     };
   }, [db, noId, semDados]);
 
+  // Ligação declarada pelo STJ com o tema de repercussão geral do STF (e a volta): só o que existe no grafo
+  useEffect(() => {
+    setLigados([]);
+    if (!db || !aberto) return;
+    let vivo = true;
+    ligadosPelaRepercussaoGeral(db, aberto.no)
+      .then(l => vivo && setLigados(l))
+      .catch(() => vivo && setLigados([]));
+    return () => {
+      vivo = false;
+    };
+  }, [db, aberto]);
+
   // Sem Supabase, sem tabelas (migração por aplicar) ou sem nenhum dado: a prévia catalogada
   if (semDados) return <PreviaCatalogada />;
   if (db && !cobertura) return <p className="text-sm text-ink-soft py-10">{erro ?? 'Carregando o TeseMap…'}</p>;
@@ -116,7 +130,7 @@ export default function TeseMapPage() {
       />
 
       <p className="text-sm text-ink-soft mb-6 max-w-3xl" data-testid="cobertura">
-        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fonte: STJ, Dados Abertos (licença CC BY). Não é toda a jurisprudência: é o conjunto declarado acima.
+        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fontes: STJ, Dados Abertos (licença CC BY), e Portal da Transparência do STF. Não é toda a jurisprudência: é o conjunto declarado acima.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 mb-6">
@@ -203,12 +217,20 @@ export default function TeseMapPage() {
                 </div>
               )}
 
-              <div className="flex flex-col gap-1">
-                <h3 className="text-sm font-semibold text-ink">Tese firmada</h3>
-                <p className="font-serif text-lg text-ink leading-[1.7] border-l-2 border-brand pl-5 whitespace-pre-line" data-testid="tese-firmada">
-                  {no.descricao}
-                </p>
-              </div>
+              {no.detalhes.teseFirmada === false ? (
+                <Notice tom="info" titulo="Sem tese firmada no arquivo do tribunal">
+                  O arquivo do STF não traz tese para este tema: o mérito está pendente, a repercussão geral foi negada ou a tese não foi informada. A questão acima é a que o tribunal registra. Consulte o processo no portal do STF.
+                </Notice>
+              ) : (
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-sm font-semibold text-ink">Tese firmada</h3>
+                  <p className="font-serif text-lg text-ink leading-[1.7] border-l-2 border-brand pl-5 whitespace-pre-line" data-testid="tese-firmada">
+                    {no.descricao}
+                  </p>
+                </div>
+              )}
+
+              <LigacoesEntreTribunais ligados={ligados} onAbrir={setNoId} />
 
               <DadosComplementares no={no} />
 
@@ -254,6 +276,25 @@ export default function TeseMapPage() {
   );
 }
 
+function LigacoesEntreTribunais({ ligados, onAbrir }: { ligados: NoLigado[]; onAbrir: (id: string) => void }) {
+  if (ligados.length === 0) return null;
+  return (
+    <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="ligacoes-tribunais">
+      <h3 className="text-sm font-semibold text-ink">Tema correlato em outro tribunal</h3>
+      <ul className="flex flex-wrap gap-2">
+        {ligados.map(l => (
+          <li key={l.id}>
+            <button type="button" onClick={() => onAbrir(l.id)} className="inline-flex items-center rounded-md border border-line-strong bg-surface px-3 py-1.5 text-ink hover:bg-surface-2">
+              {l.rotulo}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p className="text-xs text-ink-mute">Ligação que o próprio STJ registra no arquivo oficial de precedentes qualificados; não é relação validada do mapa.</p>
+    </div>
+  );
+}
+
 function DadosComplementares({ no }: { no: NoTese }) {
   const rg = Array.isArray(no.detalhes.repercussaoGeral) ? (no.detalhes.repercussaoGeral as Array<{ numero: string; descricao: string | null }>) : [];
   const linhas: Array<[string, React.ReactNode]> = [];
@@ -262,10 +303,15 @@ function DadosComplementares({ no }: { no: NoTese }) {
     if (t) linhas.push([rotulo, t]);
   };
   add('Órgão julgador', no.detalhes.orgaoJulgador);
+  add('Processo paradigma', no.detalhes.processoParadigma);
+  add('Relator', no.detalhes.relator);
+  add('Ramos do direito', no.detalhes.ramosDoDireito);
+  if (no.tribunal === 'STF') add('Suspensão nacional', no.detalhes.suspensaoNacional);
   if (texto(no.detalhes.dataPublicacaoAcordao)) linhas.push(['Acórdão publicado em', dataCurta(no.detalhes.dataPublicacaoAcordao as string)]);
   add('Referência legislativa', no.detalhes.referenciaLegislativa);
   add('Súmula originada', no.detalhes.sumulaOriginada);
   add('Assuntos', no.detalhes.assuntos);
+  if (no.tribunal === 'STF' && texto(no.detalhes.dataJulgamento)) linhas.push(['Julgado em', dataCurta(no.detalhes.dataJulgamento as string)]);
   if (Array.isArray(no.detalhes.processosLeadingCase) && no.detalhes.processosLeadingCase.length > 0) linhas.push(['Processos paradigma', (no.detalhes.processosLeadingCase as string[]).join('; ')]);
   if (rg.length > 0) linhas.push(['Repercussão geral no STF', rg.map(r => `Tema ${r.numero}${r.descricao ? `: ${r.descricao}` : ''}`).join(' | ')]);
   if (linhas.length === 0) return null;
@@ -306,7 +352,7 @@ function Atalhos({ no }: { no: NoTese }) {
       {link && (
         <a href={link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 py-1.5 text-ink hover:text-brand-text">
           <ExternalLink className="w-4 h-4 text-ink-mute" />
-          Consultar no site do STJ
+          {texto(no.detalhes.linkOficial)?.includes('stf.jus.br') ? 'Consultar no portal do STF' : 'Consultar no site do STJ'}
         </a>
       )}
     </div>
