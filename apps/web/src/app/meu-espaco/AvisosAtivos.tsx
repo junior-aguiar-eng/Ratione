@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BellRing, Trash2 } from 'lucide-react';
 import { useSessao } from '../../lib/useSessao';
 import { dataCurta, diaDaSemana, hojeIso } from '../../lib/datas';

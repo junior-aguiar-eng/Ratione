@@ -1,5 +1,5 @@
 import { COBERTURA_CALENDARIO, EVENTOS_CALENDARIO, FONTES_CALENDARIO, REGRAS_ANUAIS } from './eventos';
-import { anoDe, diferencaDiasIso, formatarCivil, pascoaIso, somarDiasIso } from '../datas/civil';
+import { anoDe, formatarCivil, pascoaIso, somarDiasIso } from '../datas/civil';
 
 export interface FeriadoLegal {
   data: string; // ISO "YYYY-MM-DD"

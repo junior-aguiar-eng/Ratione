@@ -13,8 +13,9 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { BASE_PLANALTO, NORMAS_PLANALTO, type NormaPlanalto } from './normas';
+import { USER_AGENT_NAVEGADOR } from '@ratione/core';
 
-const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+const USER_AGENT = USER_AGENT_NAVEGADOR;
 const PASTA = join(__dirname, '..', '..', 'corpus', 'planalto');
 const MANIFESTO = join(PASTA, 'manifesto.json');
 

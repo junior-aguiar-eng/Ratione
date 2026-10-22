@@ -8,6 +8,7 @@
  * "Plenário") à monocrática e, entre as colegiadas, a mais recente; no mesmo dia, a de texto mais longo. Assim a homologação monocrática de 2025 na
  * ADPF 347 não toma o lugar do mérito julgado pelo Plenário em 2023, e o pedido de amicus curiae rotulado "Procedente" não vira mérito.
  */
+import { juntarEspacos as espacos } from '@ratione/core';
 import { lerCsv } from '../stj/csv';
 import { dataBr } from './repercussao';
 
@@ -28,7 +29,6 @@ export interface DecisaoControle {
 }
 
 const COLUNAS = ['Processo', 'Data', 'Descrição', 'Andamento agrupado', 'Subgrupo', 'Observação'];
-const espacos = (s: string) => s.replace(/\s+/g, ' ').trim();
 const PREENCHIMENTO = /^(?:\*NI\*|Sem Descri[çc][ãa]o|Decis[ãa]o:?|-)?$/i;
 
 export function lerDecisoesControle(csv: string): DecisaoControle[] {

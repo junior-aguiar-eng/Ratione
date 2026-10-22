@@ -25,7 +25,8 @@
       "types": "./src/stf/index.ts",
       "import": "./src/stf/index.ts",
       "default": "./src/stf/index.ts"
-    }
+    },
+    "./grafo-minimo.json": "./corpus/grafo-minimo.json"
   },
   "scripts": {
     "build": "tsc",
