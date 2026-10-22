@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { RelatorioAlteracoes as Relatorio } from '@ratione/prazozero';
 import { dataCurta, diaDaSemana } from '../../lib/datas';

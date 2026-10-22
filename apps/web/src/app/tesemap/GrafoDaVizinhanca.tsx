@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ReactFlow, Background, Controls, MarkerType, type Edge, type Node } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { posicoesRadiais, type NoTese, type Vizinhanca } from '../../lib/tesemap';

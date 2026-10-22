@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { decisaoColegiada, decisaoDeMerito, lerDecisoesControle, processosComMerito, type DecisaoControle } from './controle';
+import { decisaoColegiada, decisaoDeMerito, lerDecisoesControle, type DecisaoControle } from './controle';
 import { carregarControleStf, manifestoStf } from './corpus';
 import { nosDoControleConcentrado } from '../banco/nos-stf';
 

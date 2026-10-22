@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Notice from '../components/Notice';
 import { Button, buttonVariants } from '@/components/ui/button';
 

@@ -9,6 +9,7 @@
  * 01/08/2012)"). Depois do parêntese pode vir a nota do STJ ("SÚMULA CANCELADA: A Segunda Seção, na sessão de ..."). O rodapé de cada página
  * ("scon.stj.jus.br/SCON/sumstj/  12") é descartado.
  */
+import { dataBrParaIso as dataIso, juntarEspacos as espacos } from '@ratione/core';
 import { sumulasCitadasNoTexto } from '../stf/sumulas';
 
 export type SituacaoSumulaStj = 'aprovada' | 'alterada' | 'cancelada' | 'revogada';
@@ -34,7 +35,6 @@ export interface SumulaStj {
 
 export const idDaSumulaStj = (numero: number) => `STJ-SUMULA-${numero}`;
 
-const espacos = (s: string) => s.replace(/\s+/g, ' ').trim();
 
 /** "tema repetitivo 1194", "Tema Repetitivo n. 1.076": números, sem repetir. */
 export function temasRepetitivosNoTexto(texto: string): number[] {
@@ -43,12 +43,6 @@ export function temasRepetitivosNoTexto(texto: string): number[] {
   return [...n].sort((a, b) => a - b);
 }
 
-function dataIso(br: string): string {
-  const [d, m, a] = br.split('/').map(Number);
-  const dt = new Date(Date.UTC(a, m - 1, d));
-  if (dt.getUTCFullYear() !== a || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) throw new Error(`data inexistente: ${br}`);
-  return `${a}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-}
 
 const CABECALHO = /^\s*(?:q\s+)?S[ÚU]MULA (\d+)(?:\s*\(S[ÚU]MULA (CANCELADA|ALTERADA|REVOGADA)\))?\s*(?:VEJA MAIS)?\s*$/;
 const RODAPE = /^\s*scon\.stj\.jus\.br\/SCON\/sumstj\/\s+\d+\s*$/;

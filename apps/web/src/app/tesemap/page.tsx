@@ -12,7 +12,7 @@ import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
-import PreviaCatalogada from './PreviaCatalogada';
+import ReservaTeseMap from './ReservaTeseMap';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -105,8 +105,8 @@ export default function TeseMapPage() {
     };
   }, [db, aberto]);
 
-  // Sem Supabase, sem tabelas (migração por aplicar) ou sem nenhum dado: a prévia catalogada
-  if (semDados) return <PreviaCatalogada />;
+  // Sem Supabase, sem tabelas (migração por aplicar) ou sem nenhum dado: o grafo mínimo validado, que vem do repositório
+  if (semDados) return <ReservaTeseMap />;
   if (db && !cobertura) return <p className="text-sm text-ink-soft py-10">{erro ?? 'Carregando o TeseMap…'}</p>;
 
   const tribunais = [...new Set((cobertura?.itens ?? []).map(c => c.tribunal).filter(Boolean))].sort();

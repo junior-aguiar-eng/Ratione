@@ -5,6 +5,7 @@
  * "Critérios de Busca" com a consulta usada, que fica no manifesto como parte da procedência. A exportação traz só as súmulas aprovadas (as canceladas
  * não vêm; o número que falta na sequência é uma súmula que não está no arquivo).
  */
+import { juntarEspacos as limpo } from '@ratione/core';
 import { lerCsv } from '../stj/csv';
 import { dataBr } from './repercussao';
 
@@ -33,7 +34,6 @@ const COLUNAS = ['Título', 'Título URL', 'Enunciado', 'Órgão julgador', 'Dat
 
 export const idDaSumula = (numero: number, vinculante: boolean) => (vinculante ? `STF-SV-${numero}` : `STF-SUMULA-${numero}`);
 
-const limpo = (s: string) => s.replace(/\s+/g, ' ').trim();
 const textoOuNulo = (s: string) => (limpo(s) === '' || limpo(s) === '-' ? null : limpo(s));
 
 /** Súmulas e súmulas vinculantes que um texto cita ("Veja Súmula 419 e Súmula 645", "a Súmula Vinculante 51"), como ids, sem repetir. */

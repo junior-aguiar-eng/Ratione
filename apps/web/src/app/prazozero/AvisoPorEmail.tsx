@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { BellRing, Check } from 'lucide-react';
 import Notice from '../../components/Notice';
