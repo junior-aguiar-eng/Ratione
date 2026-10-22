@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-10-19",
+  "geradoEm": "2026-10-22",
   "normas": [
     {
       "id": "CF-1988",
@@ -66,7 +66,7 @@
       "atosNoSenado": 115,
       "emAmbos": 94,
       "soNoPlanalto": [
-        "lei:10224:2015",
+        "lei:10224:2001",
         "lei:9677:1998"
       ],
       "soNoSenado": [
@@ -127,7 +127,7 @@
       "emAmbos": 50,
       "soNoPlanalto": [
         "lei:11101:2005",
-        "lei:17:2020",
+        "lei:1720-B:1952",
         "lei:5126:1966"
       ],
       "soNoSenado": [
@@ -426,18 +426,13 @@
       "senadoNorma": "Lei nº 11.343 de 23/08/2006",
       "atosNoPlanalto": 10,
       "atosNoSenado": 9,
-      "emAmbos": 8,
+      "emAmbos": 9,
       "soNoPlanalto": [
-        "lei:15581:2025",
         "medida-provisoria:885:2019"
       ],
-      "soNoSenado": [
-        "lei:15281:2025"
-      ],
+      "soNoSenado": [],
       "soNoSenadoCitadoSemAnotacao": [],
-      "soNoSenadoAusenteDoPlanalto": [
-        "lei:15281:2025"
-      ]
+      "soNoSenadoAusenteDoPlanalto": []
     },
     {
       "id": "LEI-11419-2006",
@@ -483,20 +478,17 @@
       "senadoNorma": "Lei nº 13.105 de 16/03/2015",
       "atosNoPlanalto": 18,
       "atosNoSenado": 19,
-      "emAmbos": 16,
+      "emAmbos": 17,
       "soNoPlanalto": [
-        "lei:148:1979",
         "lei:15484:2026"
       ],
       "soNoSenado": [
         "lei:14010:2020",
-        "lei:14879:2024",
         "lei:15252:2025"
       ],
       "soNoSenadoCitadoSemAnotacao": [],
       "soNoSenadoAusenteDoPlanalto": [
         "lei:14010:2020",
-        "lei:14879:2024",
         "lei:15252:2025"
       ]
     },
@@ -693,9 +685,8 @@
       "senadoNorma": "Lei nº 8.112 de 11/12/1990",
       "atosNoPlanalto": 47,
       "atosNoSenado": 41,
-      "emAmbos": 31,
+      "emAmbos": 32,
       "soNoPlanalto": [
-        "lei:8647:2013",
         "medida-provisoria:1132:2022",
         "medida-provisoria:2225:2001",
         "medida-provisoria:431:2008",
@@ -721,7 +712,6 @@
         "lei:14131:2021",
         "lei:14431:2022",
         "lei:14982:2024",
-        "lei:8647:1993",
         "lei:9782:1999"
       ],
       "soNoSenadoCitadoSemAnotacao": [
@@ -735,7 +725,6 @@
         "lei:13464:2017",
         "lei:14431:2022",
         "lei:14982:2024",
-        "lei:8647:1993",
         "lei:9782:1999"
       ]
     },
@@ -743,11 +732,10 @@
       "id": "LEI-8213-1991",
       "senadoUrl": "https://legis.senado.leg.br/dadosabertos/legislacao/lei/8213/1991",
       "senadoNorma": "Lei nº 8.213 de 24/07/1991",
-      "atosNoPlanalto": 89,
+      "atosNoPlanalto": 88,
       "atosNoSenado": 76,
       "emAmbos": 65,
       "soNoPlanalto": [
-        "lei:107:2010",
         "lei:10877:2004",
         "lei:13063:2014",
         "lei:9528:1997",

@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-10-19",
+  "geradoEm": "2026-10-22",
   "normas": {
     "CF-1988": {
       "norma": {
@@ -23,6 +23,11 @@
           "assinatura": "1993-09-14",
           "publicacao": "1993-09-15"
         },
+        "emenda-constitucional:6:1994": {
+          "nome": "Emenda Constitucional de Revisão nº 6 de 07/06/1994",
+          "assinatura": "1994-06-07",
+          "publicacao": "1994-06-09"
+        },
         "emenda-constitucional:2:1994": {
           "nome": "Emenda Constitucional de Revisão nº 2 de 07/06/1994",
           "assinatura": "1994-06-07",
@@ -43,10 +48,10 @@
           "assinatura": "1994-06-07",
           "publicacao": "1994-06-09"
         },
-        "emenda-constitucional:6:1994": {
-          "nome": "Emenda Constitucional de Revisão nº 6 de 07/06/1994",
-          "assinatura": "1994-06-07",
-          "publicacao": "1994-06-09"
+        "emenda-constitucional:6:1995": {
+          "nome": "Emenda Constitucional nº 6 de 15/08/1995",
+          "assinatura": "1995-08-15",
+          "publicacao": "1995-08-16"
         },
         "emenda-constitucional:5:1995": {
           "nome": "Emenda Constitucional nº 5 de 15/08/1995",
@@ -55,11 +60,6 @@
         },
         "emenda-constitucional:8:1995": {
           "nome": "Emenda Constitucional nº 8 de 15/08/1995",
-          "assinatura": "1995-08-15",
-          "publicacao": "1995-08-16"
-        },
-        "emenda-constitucional:6:1995": {
-          "nome": "Emenda Constitucional nº 6 de 15/08/1995",
           "assinatura": "1995-08-15",
           "publicacao": "1995-08-16"
         },
@@ -83,13 +83,13 @@
           "assinatura": "1996-08-21",
           "publicacao": "1996-08-22"
         },
-        "emenda-constitucional:15:1996": {
-          "nome": "Emenda Constitucional nº 15 de 12/09/1996",
+        "emenda-constitucional:14:1996": {
+          "nome": "Emenda Constitucional nº 14 de 12/09/1996",
           "assinatura": "1996-09-12",
           "publicacao": "1996-09-13"
         },
-        "emenda-constitucional:14:1996": {
-          "nome": "Emenda Constitucional nº 14 de 12/09/1996",
+        "emenda-constitucional:15:1996": {
+          "nome": "Emenda Constitucional nº 15 de 12/09/1996",
           "assinatura": "1996-09-12",
           "publicacao": "1996-09-13"
         },
@@ -158,23 +158,23 @@
           "assinatura": "2000-05-25",
           "publicacao": "2000-05-26"
         },
-        "emenda-constitucional:30:2000": {
-          "nome": "Emenda Constitucional nº 30 de 13/09/2000",
-          "assinatura": "2000-09-13",
-          "publicacao": "2000-09-14"
-        },
         "emenda-constitucional:29:2000": {
           "nome": "Emenda Constitucional nº 29 de 13/09/2000",
           "assinatura": "2000-09-13",
           "publicacao": "2000-09-14"
         },
-        "lei-complementar:108:2001": {
-          "nome": "Lei Complementar nº 108 de 29/05/2001",
-          "assinatura": "2001-05-29",
-          "publicacao": "2001-05-30"
+        "emenda-constitucional:30:2000": {
+          "nome": "Emenda Constitucional nº 30 de 13/09/2000",
+          "assinatura": "2000-09-13",
+          "publicacao": "2000-09-14"
         },
         "lei-complementar:109:2001": {
           "nome": "Lei Complementar nº 109 de 29/05/2001",
+          "assinatura": "2001-05-29",
+          "publicacao": "2001-05-30"
+        },
+        "lei-complementar:108:2001": {
+          "nome": "Lei Complementar nº 108 de 29/05/2001",
           "assinatura": "2001-05-29",
           "publicacao": "2001-05-30"
         },
@@ -318,13 +318,13 @@
           "assinatura": "2010-02-04",
           "publicacao": "2010-02-05"
         },
-        "emenda-constitucional:65:2010": {
-          "nome": "Emenda Constitucional nº 65 de 13/07/2010",
+        "emenda-constitucional:66:2010": {
+          "nome": "Emenda Constitucional nº 66 de 13/07/2010",
           "assinatura": "2010-07-13",
           "publicacao": "2010-07-14"
         },
-        "emenda-constitucional:66:2010": {
-          "nome": "Emenda Constitucional nº 66 de 13/07/2010",
+        "emenda-constitucional:65:2010": {
+          "nome": "Emenda Constitucional nº 65 de 13/07/2010",
           "assinatura": "2010-07-13",
           "publicacao": "2010-07-14"
         },
@@ -543,13 +543,13 @@
           "assinatura": "2022-07-14",
           "publicacao": "2022-07-15"
         },
-        "emenda-constitucional:125:2022": {
-          "nome": "Emenda Constitucional nº 125 de 14/07/2022",
+        "emenda-constitucional:123:2022": {
+          "nome": "Emenda Constitucional nº 123 de 14/07/2022",
           "assinatura": "2022-07-14",
           "publicacao": "2022-07-15"
         },
-        "emenda-constitucional:123:2022": {
-          "nome": "Emenda Constitucional nº 123 de 14/07/2022",
+        "emenda-constitucional:125:2022": {
+          "nome": "Emenda Constitucional nº 125 de 14/07/2022",
           "assinatura": "2022-07-14",
           "publicacao": "2022-07-15"
         },
@@ -1639,13 +1639,13 @@
           "assinatura": "1945-02-14",
           "publicacao": "1945-02-16"
         },
-        "decreto-lei:8080:1945": {
-          "nome": "Decreto-Lei nº 8.080 de 11/10/1945",
+        "decreto-lei:8079:1945": {
+          "nome": "Decreto-Lei nº 8.079 de 11/10/1945",
           "assinatura": "1945-10-11",
           "publicacao": "1945-10-13"
         },
-        "decreto-lei:8079:1945": {
-          "nome": "Decreto-Lei nº 8.079 de 11/10/1945",
+        "decreto-lei:8080:1945": {
+          "nome": "Decreto-Lei nº 8.080 de 11/10/1945",
           "assinatura": "1945-10-11",
           "publicacao": "1945-10-13"
         },
@@ -1769,15 +1769,15 @@
           "assinatura": "1956-04-23",
           "publicacao": "1956-04-26"
         },
-        "lei:2802:1956": {
-          "nome": "Lei nº 2.802 de 18/06/1956",
-          "assinatura": "1956-06-18",
-          "publicacao": "1956-06-22"
-        },
         "lei:2800:1956": {
           "nome": "Lei nº 2.800 de 18/06/1956",
           "assinatura": "1956-06-18",
           "publicacao": "1956-06-25"
+        },
+        "lei:2802:1956": {
+          "nome": "Lei nº 2.802 de 18/06/1956",
+          "assinatura": "1956-06-18",
+          "publicacao": "1956-06-22"
         },
         "lei:2872:1956": {
           "nome": "Lei nº 2.872 de 18/09/1956",
@@ -1934,13 +1934,13 @@
           "assinatura": "1969-02-19",
           "publicacao": "1969-02-20"
         },
-        "decreto-lei:507:1969": {
-          "nome": "Decreto-Lei nº 507 de 18/03/1969",
+        "decreto-lei:506:1969": {
+          "nome": "Decreto-Lei nº 506 de 18/03/1969",
           "assinatura": "1969-03-18",
           "publicacao": "1969-03-19"
         },
-        "decreto-lei:506:1969": {
-          "nome": "Decreto-Lei nº 506 de 18/03/1969",
+        "decreto-lei:507:1969": {
+          "nome": "Decreto-Lei nº 507 de 18/03/1969",
           "assinatura": "1969-03-18",
           "publicacao": "1969-03-19"
         },
@@ -2049,13 +2049,13 @@
           "assinatura": "1974-07-15",
           "publicacao": "1974-07-16"
         },
-        "lei:6087:1974": {
-          "nome": "Lei nº 6.087 de 16/07/1974",
+        "lei:6090:1974": {
+          "nome": "Lei nº 6.090 de 16/07/1974",
           "assinatura": "1974-07-16",
           "publicacao": "1974-07-17"
         },
-        "lei:6090:1974": {
-          "nome": "Lei nº 6.090 de 16/07/1974",
+        "lei:6087:1974": {
+          "nome": "Lei nº 6.087 de 16/07/1974",
           "assinatura": "1974-07-16",
           "publicacao": "1974-07-17"
         },
@@ -2354,23 +2354,23 @@
           "assinatura": "1999-05-26",
           "publicacao": "1999-05-27"
         },
-        "lei:9853:1999": {
-          "nome": "Lei nº 9.853 de 27/10/1999",
-          "assinatura": "1999-10-27",
-          "publicacao": "1999-10-28"
-        },
         "lei:9851:1999": {
           "nome": "Lei nº 9.851 de 27/10/1999",
           "assinatura": "1999-10-27",
           "publicacao": "1999-10-28"
         },
-        "lei:9957:2000": {
-          "nome": "Lei nº 9.957 de 12/01/2000",
-          "assinatura": "2000-01-12",
-          "publicacao": "2000-01-13"
+        "lei:9853:1999": {
+          "nome": "Lei nº 9.853 de 27/10/1999",
+          "assinatura": "1999-10-27",
+          "publicacao": "1999-10-28"
         },
         "lei:9958:2000": {
           "nome": "Lei nº 9.958 de 12/01/2000",
+          "assinatura": "2000-01-12",
+          "publicacao": "2000-01-13"
+        },
+        "lei:9957:2000": {
+          "nome": "Lei nº 9.957 de 12/01/2000",
           "assinatura": "2000-01-12",
           "publicacao": "2000-01-13"
         },
@@ -2624,15 +2624,15 @@
           "assinatura": "2019-06-05",
           "publicacao": "2019-06-06"
         },
-        "lei:13876:2019": {
-          "nome": "Lei nº 13.876 de 20/09/2019",
-          "assinatura": "2019-09-20",
-          "publicacao": "2019-09-23"
-        },
         "lei:13874:2019": {
           "nome": "Lei nº 13.874 de 20/09/2019",
           "assinatura": "2019-09-20",
           "publicacao": "2019-09-20"
+        },
+        "lei:13876:2019": {
+          "nome": "Lei nº 13.876 de 20/09/2019",
+          "assinatura": "2019-09-20",
+          "publicacao": "2019-09-23"
         },
         "lei:13877:2019": {
           "nome": "Lei nº 13.877 de 27/09/2019",
@@ -2659,13 +2659,13 @@
           "assinatura": "2020-07-06",
           "publicacao": "2020-07-07"
         },
-        "lei:14042:2020": {
-          "nome": "Lei nº 14.042 de 19/08/2020",
+        "lei:14043:2020": {
+          "nome": "Lei nº 14.043 de 19/08/2020",
           "assinatura": "2020-08-19",
           "publicacao": "2020-08-20"
         },
-        "lei:14043:2020": {
-          "nome": "Lei nº 14.043 de 19/08/2020",
+        "lei:14042:2020": {
+          "nome": "Lei nº 14.042 de 19/08/2020",
           "assinatura": "2020-08-19",
           "publicacao": "2020-08-20"
         },
@@ -3181,13 +3181,13 @@
           "assinatura": "2019-09-17",
           "publicacao": "2019-09-18"
         },
-        "lei:13882:2019": {
-          "nome": "Lei nº 13.882 de 08/10/2019",
+        "lei:13880:2019": {
+          "nome": "Lei nº 13.880 de 08/10/2019",
           "assinatura": "2019-10-08",
           "publicacao": "2019-10-09"
         },
-        "lei:13880:2019": {
-          "nome": "Lei nº 13.880 de 08/10/2019",
+        "lei:13882:2019": {
+          "nome": "Lei nº 13.882 de 08/10/2019",
           "assinatura": "2019-10-08",
           "publicacao": "2019-10-09"
         },
@@ -3668,13 +3668,13 @@
           "assinatura": "1981-08-27",
           "publicacao": "1981-08-28"
         },
-        "decreto-lei:2472:1988": {
-          "nome": "Decreto-Lei nº 2.472 de 01/09/1988",
+        "decreto-lei:2470:1988": {
+          "nome": "Decreto-Lei nº 2.470 de 01/09/1988",
           "assinatura": "1988-09-01",
           "publicacao": "1988-09-02"
         },
-        "decreto-lei:2470:1988": {
-          "nome": "Decreto-Lei nº 2.470 de 01/09/1988",
+        "decreto-lei:2472:1988": {
+          "nome": "Decreto-Lei nº 2.472 de 01/09/1988",
           "assinatura": "1988-09-01",
           "publicacao": "1988-09-02"
         },

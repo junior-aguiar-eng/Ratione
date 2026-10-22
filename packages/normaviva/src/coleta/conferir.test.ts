@@ -51,6 +51,17 @@ describe('Reconhecimento de atos com a data por extenso (21/10/2026)', () => {
     assert.deepStrictEqual(chaves('Lei Complementar nº 41, de 22 de dezembro de 1981'), ['lei-complementar:41:1981']);
   });
 
+  it('anotações malformadas do Planalto: mês omitido, ponto antes do ano e número com letra (triagem F3-01, 22/10/2026)', () => {
+    assert.deepStrictEqual(chaves('Incluído pela Lei nº 10.224, de 15 de 2001'), ['lei:10224:2001']);
+    assert.deepStrictEqual(chaves('Redação dada pala Lei nº 10.710, de .2003'), ['lei:10710:2003']);
+    assert.deepStrictEqual(chaves('Redação dada pela Lei nº 1.720-B, de 3.11.1952'), ['lei:1720-B:1952']);
+    assert.deepStrictEqual(chaves('Lei nº 1.720-B de 03/11/1952'), ['lei:1720-B:1952']);
+  });
+
+  it('errata conferida: "Lei nº 15.581, de 2025" na Lei de Drogas é a Lei 15.281/2025', () => {
+    assert.deepStrictEqual(chaves('Incluído pela Lei nº 15.581, de 2025'), ['lei:15281:2025']);
+  });
+
   it('sem o "de" antes do mês, como o Planalto às vezes escreve ("de 24 julho de 1991")', () => {
     assert.deepStrictEqual(chaves('art. 12 da Lei no 8.212, de 24 julho de 1991;'), ['lei:8212:1991']);
     assert.deepStrictEqual(chaves('Lei nº 8.212, de 1991, e a Lei nº 9.876, de 26 de novembro de 1999'), ['lei:8212:1991', 'lei:9876:1999']);

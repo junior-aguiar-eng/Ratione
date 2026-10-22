@@ -303,6 +303,39 @@ O alerta compara o ato com o texto do corpus (`atoCitadoNoTexto`): se o Planalto
 
 **Achado na mesma etapa:** o reconhecedor de atos (`atosDoTexto`) lia "de 26 de setembro de 1995" como o ano 2026 e não aceitava vírgula antes da data por extenso. Corrigido; ver F3-05 no PLANO.
 
+## 23. Triagem das divergências Planalto × Senado (F3-01), 22/10/2026
+
+`pnpm conferir` refeito em 22/10/2026 com o reconhecedor de atos corrigido: 831 atos alteradores coincidem; **85 só no Planalto** e **206 só no Senado**. Nenhuma divergência mostrou o corpus desatualizado em relação ao Planalto: as páginas atuais (relidas em 22/10/2026) têm o mesmo texto. As categorias:
+
+**Só no Planalto (85)**
+
+| Categoria | Qtd. | O que é | Ação |
+|---|---|---|---|
+| Ato citado fora de anotação de alteração | 28 | Aparece no texto ("Vide", vigência, título), sem dispositivo alterado | Nenhuma |
+| Medida provisória | 21 | O Senado a registra como "Alteração Provisória" (a conferência só conta alteração permanente) | Nenhuma |
+| Emenda que só mexe no ADCT | 17 | O Senado não as lista na CF | Nenhuma |
+| Senado com outro comentário | 4 | "Regulamentação" ou "Legislação correlata" para o que o Planalto anota como alteração | Nenhuma |
+| Falta de registro no Senado | 15 | Ex.: Lei 11.101/2005 revoga o art. 503 do CPP; Lei 15.484/2026 inclui o art. 927, III-A, do CPC (recente) | Nenhuma (o Planalto é a fonte do texto) |
+
+**Erro de registro do Senado:** para a Lei 8.213 (art. 101, § 2º), o Senado lista a Lei 13.064/2014 (cargo da Polícia Civil do DF); a lei que alterou é a 13.063/2014, como anota o Planalto (L13063.htm lida em 22/10/2026).
+
+**Erros de leitura nossos, corrigidos** (`coleta/conferir.ts`, 5 testes): anotações malformadas do Planalto. "Lei nº 10.224, de 15 de 2001" (mês omitido) era lida como 2015; "Lei nº 10.710, de .2003" como "lei 107 de 2010"; "Lei nº 1.720-B, de 3.11.1952" como "lei 17 de 2020". **Errata do Planalto** (`ERRATAS_DO_PLANALTO`): a Lei 11.343, art. 23, parágrafo único, anota "Lei nº 15.581, de 2025"; a lei é a 15.281/2025 (L15281.htm, art. 1º).
+
+**Só no Senado (206)**
+
+| Categoria | Qtd. | Ação |
+|---|---|---|
+| Citado no texto do Planalto sem anotação de alteração | 34 | Nenhuma |
+| Decreto ou ato complementar (não altera lei) | 12 | Nenhuma |
+| Ausente do texto do Planalto | 160 | Amostra lida (abaixo); nenhuma pede correção do corpus |
+
+Amostra dos ausentes, lida no texto dos próprios atos (Planalto, 22/10/2026):
+- **Alteração já substituída:** Lei 15.229/2025 deu redação ao art. 171, § 5º, III, do CP; o § 5º foi depois revogado pela Lei 15.397/2026, e o Planalto deixou de anotá-la.
+- **Dispositivo vetado:** Lei 15.134/2025 (LGPD) e Lei 15.485/2026 (CTB): os artigos que alterariam essas normas foram vetados; o Senado registra pela ementa.
+- **Norma autônoma, sem mudar o texto:** Lei 15.358/2026 veda o auxílio-reclusão (art. 80 da Lei 8.213) em certos crimes, sem alterar a redação do art. 80.
+- **Vigência futura:** Lei 15.371/2026 (licença-paternidade) altera a CLT e a Lei 8.213 (arts. 28, 71-B, 72 e outros), mas **entra em vigor em 1º/01/2027** (art. 14); o Planalto ainda não consolidou. O corpus está certo para hoje, mas **nada avisa o usuário** de que esses artigos mudam em 2027 (pendência registrada na F3-06).
+- **Ementa ampla sem alteração:** leis de marco regulatório (cultura, setor elétrico, alimentos) que o Senado associa a CC, CDC, LIA e Lei 14.133 sem dispositivo que as altere no Planalto.
+
 ## 15. Como repetir esta verificação
 
 ```bash
