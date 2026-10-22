@@ -34,6 +34,17 @@ O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públ
 
 A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
 
+## TeseMap: aplicar a migração e carregar os precedentes do STJ (F4-03)
+
+O grafo do TeseMap fica em `tesemap_nos` e `tesemap_arestas` (leitura pública filtrada pela RLS: só nó curado ou validado por pessoa; aresta só validada).
+
+1. **Aplicar a migração.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261022000003_tesemap.sql` → *Run* ("Success"). Em *Table Editor* confira as 2 tabelas com o cadeado de RLS ligado.
+2. **Conferir sem tocar no banco.** Em `packages/tesemap`: `pnpm carregar:tesemap --simular` (deve mostrar 1.155 nós).
+3. **Carregar.** No mesmo terminal, **só nele**, defina `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (como na carga do NormaViva) e rode `pnpm carregar:tesemap`. A carga **não apaga nada**: atualiza por `id` os nós do STJ e deixa o que foi curado à mão.
+4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1155` e a data da leitura.
+
+A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
+
 ## Teto de itens salvos (20/10/2026)
 
 `supabase/migrations/20261020000002_limite_itens_salvos.sql` limita a 1.000 os itens salvos por conta (gatilho `limitar_itens_salvos`, mesmo padrão do teto de lembretes). **Aplique no projeto real:** *SQL Editor → New query*, cole o conteúdo do arquivo → *Run*. Enquanto não for aplicada, o site funciona, só sem o teto; o botão "Salvar em Meu espaço" passa a mostrar "Limite de itens atingido" quando a conta estiver cheia.

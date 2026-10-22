@@ -113,7 +113,7 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
     assert.strictEqual((await db.query('select 1 from public.itens_salvos where usuario_id = $1', [carla])).rows.length, 0);
   });
 
-  it('privilégios mínimos: authenticated só tem o necessário; anon só lê o texto público das leis (NormaViva)', async () => {
+  it('privilégios mínimos: authenticated só tem o necessário; anon só lê o conteúdo público (leis e grafo do TeseMap)', async () => {
     const q = await db.query<{ grantee: string; tabela: string; privilegios: string }>(
       "select grantee, table_name as tabela, string_agg(privilege_type, ',' order by privilege_type) as privilegios from information_schema.role_table_grants where table_schema = 'public' and grantee in ('anon', 'authenticated') group by grantee, table_name order by 1, 2"
     );
@@ -124,6 +124,9 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         'anon dispositivos: SELECT',
         'anon normas: SELECT',
         'anon relacoes: SELECT',
+        // Grafo do TeseMap (F4-03): leitura pública filtrada pela RLS (curado ou validado); quem escreve é a carga/curadoria, com a chave de serviço
+        'anon tesemap_arestas: SELECT',
+        'anon tesemap_nos: SELECT',
         'anon versoes_dispositivo: SELECT',
         'authenticated aceites_termos: SELECT',
         'authenticated dispositivos: SELECT',
@@ -133,6 +136,8 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         'authenticated normas: SELECT',
         'authenticated perfis: SELECT,UPDATE',
         'authenticated relacoes: SELECT',
+        'authenticated tesemap_arestas: SELECT',
+        'authenticated tesemap_nos: SELECT',
         'authenticated versoes_dispositivo: SELECT'
       ]
     );
