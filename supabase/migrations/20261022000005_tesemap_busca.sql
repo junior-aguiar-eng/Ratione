@@ -2,6 +2,13 @@
 -- de honorários por equidade) e não tirava acento. Aqui: todas as palavras da consulta têm de aparecer (em qualquer ordem), sem acento nem
 -- maiúscula, com o radical em português (configuração `portugues_sem_acento`, migração 20261022000004).
 
+-- Esta migração substitui a primeira versão da busca do TeseMap (arquivo `20261022000004_tesemap_busca.sql`, que usava `translate`): se aquela já foi
+-- aplicada no banco, os comandos abaixo a desfazem antes de criar a nova; num banco sem ela, não fazem nada.
+drop function if exists public.tesemap_buscar(text, text, text, integer);
+drop index if exists public.tesemap_nos_busca_idx;
+alter table public.tesemap_nos drop column if exists busca;
+drop function if exists public.tesemap_sem_acento(text);
+
 alter table public.tesemap_nos
   add column busca tsvector generated always as (
     to_tsvector(
