@@ -32,6 +32,7 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
     "coletar:stj": "tsx src/stj/coletar.ts",
+    "verificar:tesemap": "tsx src/atualizacao/verificar.ts",
     "carregar:tesemap": "tsx src/banco/carregar-supabase.ts",
     "importar:stf": "tsx src/stf/importar.ts",
     "agregar:stf": "tsx src/stf/agregar.ts",

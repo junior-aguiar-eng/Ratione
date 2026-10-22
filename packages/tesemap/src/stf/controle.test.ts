@@ -71,6 +71,7 @@ describe('Controle concentrado no corpus (Transparência do STF, 22/10/2026)', (
     assert.match(adpf54.descricao, /^Decisão: O Tribunal, por maioria/);
     assert.equal(adpf54.detalhes.orgaoJulgador, 'Plenário');
     assert.equal(adpf54.detalhes.dataJulgamento, '2012-04-12');
+    assert.equal(adpf54.detalhes.linkOficial, 'https://portal.stf.jus.br/processos/listarProcessos.asp?classe=ADPF&numeroProcesso=54');
     assert.equal(n.get('STF-ADI-4675')!.detalhes.orgaoJulgador, 'Decisão monocrática');
     assert.match(n.get('STF-ADI-7812')!.descricao, /não traz o texto/);
     assert.equal(n.get('STF-ADI-7812')!.detalhes.textoDaDecisaoDisponivel, false);
