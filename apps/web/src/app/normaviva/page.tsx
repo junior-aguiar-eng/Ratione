@@ -13,6 +13,7 @@ import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, typ
 import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoEm } from '../../lib/normavivaApresentacao';
 import { linhaDoTempo } from '../../lib/linhaDoTempo';
 import { DiffTexto, LinhaDoTempo } from './Historico';
+import ExplicacaoIA from './ExplicacaoIA';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -310,6 +311,8 @@ export default function NormaVivaPage() {
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
+
+                  <ExplicacaoIA key={detalhe.dispositivo.id} dispositivoId={detalhe.dispositivo.id} />
                 </article>
 
                 {/* Histórico e relações */}

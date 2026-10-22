@@ -127,6 +127,7 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         'anon versoes_dispositivo: SELECT',
         'authenticated aceites_termos: SELECT',
         'authenticated dispositivos: SELECT',
+        'authenticated ia_uso: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',
         'authenticated lembretes_prazo: DELETE,INSERT,SELECT',
         'authenticated normas: SELECT',
