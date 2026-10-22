@@ -10,12 +10,18 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./stj": {
+      "types": "./src/stj/index.ts",
+      "import": "./src/stj/index.ts",
+      "default": "./src/stj/index.ts"
     }
   },
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/**/*.test.ts"
+    "test": "tsx --test \"src/**/*.test.ts\"",
+    "coletar:stj": "tsx src/stj/coletar.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
