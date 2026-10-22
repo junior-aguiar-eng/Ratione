@@ -1,19 +1,19 @@
 {
   "total": {
-    "alteracoes": 10157,
-    "remissoes": 3214,
-    "mesma": 958,
-    "presumido": 1798,
+    "alteracoes": 10074,
+    "remissoes": 3182,
+    "mesma": 952,
+    "presumido": 1775,
     "explicito": 195,
-    "externo": 263,
-    "comDestinoNoCorpus": 3030,
-    "semDestinoNoCorpus": 184
+    "externo": 260,
+    "comDestinoNoCorpus": 3008,
+    "semDestinoNoCorpus": 174
   },
   "normas": [
     {
       "id": "CF-1988",
-      "dispositivos": 3343,
-      "alteracoes": 1634,
+      "dispositivos": 3334,
+      "alteracoes": 1628,
       "remissoes": 654,
       "mesma": 103,
       "presumido": 442,
@@ -108,8 +108,8 @@
     },
     {
       "id": "LEI-11343-2006",
-      "dispositivos": 395,
-      "alteracoes": 221,
+      "dispositivos": 394,
+      "alteracoes": 220,
       "remissoes": 52,
       "mesma": 20,
       "presumido": 23,
@@ -120,19 +120,19 @@
     },
     {
       "id": "LEI-11419-2006",
-      "dispositivos": 89,
+      "dispositivos": 67,
       "alteracoes": 3,
-      "remissoes": 6,
-      "mesma": 5,
+      "remissoes": 4,
+      "mesma": 3,
       "presumido": 1,
       "explicito": 0,
       "externo": 0,
       "comDestinoNoCorpus": 3,
-      "semDestinoNoCorpus": 3
+      "semDestinoNoCorpus": 1
     },
     {
       "id": "LEI-12016-2009",
-      "dispositivos": 76,
+      "dispositivos": 75,
       "alteracoes": 1,
       "remissoes": 13,
       "mesma": 4,
@@ -144,15 +144,15 @@
     },
     {
       "id": "LEI-12965-2014",
-      "dispositivos": 153,
-      "alteracoes": 10,
-      "remissoes": 18,
+      "dispositivos": 141,
+      "alteracoes": 2,
+      "remissoes": 13,
       "mesma": 0,
-      "presumido": 15,
+      "presumido": 10,
       "explicito": 2,
       "externo": 1,
-      "comDestinoNoCorpus": 15,
-      "semDestinoNoCorpus": 3
+      "comDestinoNoCorpus": 13,
+      "semDestinoNoCorpus": 0
     },
     {
       "id": "LEI-13105-2015",
@@ -180,14 +180,14 @@
     },
     {
       "id": "LEI-14133-2021",
-      "dispositivos": 1444,
-      "alteracoes": 57,
-      "remissoes": 101,
-      "mesma": 72,
-      "presumido": 10,
+      "dispositivos": 1435,
+      "alteracoes": 54,
+      "remissoes": 98,
+      "mesma": 71,
+      "presumido": 8,
       "explicito": 2,
       "externo": 17,
-      "comDestinoNoCorpus": 85,
+      "comDestinoNoCorpus": 82,
       "semDestinoNoCorpus": 16
     },
     {
@@ -252,7 +252,7 @@
     },
     {
       "id": "LEI-8078-1990",
-      "dispositivos": 474,
+      "dispositivos": 472,
       "alteracoes": 95,
       "remissoes": 50,
       "mesma": 16,
@@ -264,39 +264,39 @@
     },
     {
       "id": "LEI-8112-1990",
-      "dispositivos": 932,
-      "alteracoes": 374,
-      "remissoes": 95,
+      "dispositivos": 898,
+      "alteracoes": 360,
+      "remissoes": 89,
       "mesma": 8,
-      "presumido": 78,
+      "presumido": 72,
       "explicito": 2,
       "externo": 7,
-      "comDestinoNoCorpus": 89,
+      "comDestinoNoCorpus": 83,
       "semDestinoNoCorpus": 6
     },
     {
       "id": "LEI-8213-1991",
-      "dispositivos": 898,
-      "alteracoes": 629,
-      "remissoes": 132,
-      "mesma": 57,
-      "presumido": 45,
+      "dispositivos": 843,
+      "alteracoes": 580,
+      "remissoes": 118,
+      "mesma": 54,
+      "presumido": 37,
       "explicito": 6,
-      "externo": 24,
-      "comDestinoNoCorpus": 110,
-      "semDestinoNoCorpus": 22
+      "externo": 21,
+      "comDestinoNoCorpus": 99,
+      "semDestinoNoCorpus": 19
     },
     {
       "id": "LEI-8245-1991",
-      "dispositivos": 328,
+      "dispositivos": 325,
       "alteracoes": 44,
-      "remissoes": 55,
+      "remissoes": 53,
       "mesma": 1,
-      "presumido": 45,
+      "presumido": 43,
       "explicito": 5,
       "externo": 4,
       "comDestinoNoCorpus": 48,
-      "semDestinoNoCorpus": 7
+      "semDestinoNoCorpus": 5
     },
     {
       "id": "LEI-8429-1992",
@@ -324,7 +324,7 @@
     },
     {
       "id": "LEI-9307-1996",
-      "dispositivos": 152,
+      "dispositivos": 148,
       "alteracoes": 30,
       "remissoes": 26,
       "mesma": 13,
@@ -336,8 +336,8 @@
     },
     {
       "id": "LEI-9503-1997",
-      "dispositivos": 1632,
-      "alteracoes": 662,
+      "dispositivos": 1631,
+      "alteracoes": 660,
       "remissoes": 173,
       "mesma": 54,
       "presumido": 104,

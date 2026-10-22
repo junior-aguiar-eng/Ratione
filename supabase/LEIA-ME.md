@@ -47,16 +47,16 @@ Arquivos SQL que corrigem o texto já carregado sem recarregar o corpus inteiro.
 - `20261021_versoes_anteriores.sql` (F3-04, gerado por `pnpm historico:sql`): *(regenerado em 21/10/2026 com os casos atualizados pela correção do sufixo falso; a versão aplicada em produção está no histórico do git)* grava no banco as redações anteriores dos casos do F3-07 como segunda versão de cada dispositivo e marca a vigente com `texto_anterior_disponivel`. **Ordem obrigatória:** (1) publicar o código novo da página (ele lê com ou sem as colunas novas, então não quebra no meio do caminho; o código antigo, sim, mostraria a redação errada se as linhas entrassem antes); (2) aplicar a migração `supabase/migrations/20261021000001_versoes_anteriores.sql`; (3) aplicar este arquivo. Conferência no fim: `57` e `57`. **Aplicados em 21/10/2026** (migração e dados, depois do deploy; conferido no banco: 29.504 versões, uma vigente por dispositivo, nenhuma conferida). Quando o revisor validar casos (`pnpm historico`), rodar de novo `pnpm historico:sql` e aplicar: a conferência passa a constar da tela. O arquivo só insere onde ainda não há redação anterior; para atualizar a conferência de uma já inserida, use a recarga (`pnpm carregar`) ou um `update` em `conferida_por` e `conferida_em`.
 - `20261020_producao_de_efeito.sql`: tira "Produção de efeito(s)" do texto de 81 dispositivos (CF, CLT, Código Civil, Lei 11.101, CTN, ECA, Lei 8.213 e CTB) e marca como revogados 12 que apareciam como vigentes. Funciona por regras sobre os dados do banco (não carrega texto de lei no script), ensaiado contra uma recarga com o parser novo. Conferência esperada no fim: `0` e `12`.
 
-### Recarga depois da correção do sufixo falso (21/10/2026)
+### Recarga depois da correção do sufixo falso (21/10/2026) e dos resíduos do parser (22/10/2026)
 
 O parser lia "Art. 3º - A lei…" como art. 3º-A (CP, CLT, CTN, LEF, LEP, LINDB e parte da CF). Corrigido, 980 dispositivos mudam de id, e as relações e versões que apontam para eles mudam junto: por isso a correção em produção é a **recarga completa**, não um arquivo de `correcoes/`.
 
 1. Esperar o deploy do código com a correção (o site lê pelo id; a ordem evita que a página nova procure ids antigos ou o contrário por muito tempo).
-2. `pnpm carregar --simular` em `packages/normaviva`: 28 normas, 29.447 dispositivos, 29.504 versões e 13.371 relações.
+2. `pnpm carregar --simular` em `packages/normaviva`: 28 normas, 29.294 dispositivos, 29.351 versões e 13.256 relações (contagem depois dos resíduos do parser, 22/10/2026; antes eram 29.447, 29.504 e 13.371).
 3. `pnpm carregar` com as duas variáveis do passo 3 da seção do NormaViva acima. A recarga já inclui as redações anteriores do F3-04 (não é preciso aplicar `20261021_versoes_anteriores.sql` de novo) e repõe as correções de `correcoes/` (elas já estão no corpus).
-4. Conferir no *SQL Editor*: `select count(*) from relacoes where tipo = 'remete' and destino_id is not null;` deve dar cerca de `3030` (o corpus dá 3.030; antes da recarga a produção ficava uma abaixo do ensaio), e `select texto from dispositivos where id = 'DL-2848-1940|corpo|art. 3º';` deve começar com "A lei excepcional".
+4. Conferir no *SQL Editor*: `select count(*) from relacoes where tipo = 'remete' and destino_id is not null;` deve dar cerca de `3008` (o corpus dá 3.008), e `select texto from dispositivos where id = 'DL-2848-1940|corpo|art. 3º';` deve começar com "A lei excepcional".
 
-Itens salvos em Meu espaço que apontavam para um dos ids antigos (ex.: "art. 3º-A" do CP) deixam de abrir o dispositivo; o resto não muda.
+A mesma recarga leva os resíduos do parser corrigidos em 22/10/2026 (tachado por estilo, aspas retas, medida provisória rejeitada, incisos revogados com ";" e os artigos do decreto da CLT; ver F3-02 no PLANO). Itens salvos em Meu espaço que apontavam para um dos ids antigos (ex.: "art. 3º-A" do CP) deixam de abrir o dispositivo; o resto não muda.
 
 ## O que NÃO compartilhar
 

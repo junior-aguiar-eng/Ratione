@@ -3,7 +3,7 @@
  *
  * O Planalto serve HTML de FrontPage/Word: `<p>` sem fechamento, `<font>` aninhado, entidades, `º` escrito como
  * `<sup>o</sup>`. Leitor por tokens, sem dependência: abre parágrafo em `<p>`, `<div>`, `<table>`, `<tr>`, `<h1-6>`;
- * descarta `<script>`, `<style>` e tudo o que estiver tachado (`<strike>`, `<s>`, `<del>`), porque texto tachado é a
+ * descarta `<script>`, `<style>` e tudo o que estiver tachado (`<strike>`, `<s>`, `<del>` ou `<span style="text-decoration:line-through">`), porque texto tachado é a
  * redação que perdeu a vigência (regra 3 do PLANO, §1: vale o que não está tachado).
  */
 const ENTIDADES: Record<string, string> = {
@@ -44,11 +44,32 @@ export function paragrafosComTachado(html: string): ParagrafoComTachado[] {
   const saida: ParagrafoComTachado[] = [];
   let tachadosAtual: string[] = [];
   let atual = '';
-  let tachado = 0;
+  let tachadoTag = 0;
+  // `<span style="text-decoration:line-through">` (171 no corpus, quase todos nas Leis 8.213 e 8.112): pilha dos spans abertos no
+  // parágrafo, true para os tachados. O Planalto às vezes não fecha o span; o tachado por estilo acaba, no máximo, no fim do parágrafo.
+  let spans: boolean[] = [];
+  const tachado = () => tachadoTag + spans.filter(Boolean).length;
   let tachadoTexto = '';
   let rotuloResgatado = '';
   let ignorado = 0;
+  const fechaTachado = () => {
+    // Dispositivo revogado com o texto inteiro tachado: o texto sai, mas o rótulo fica para a "(Revogado…)" que vem depois,
+    // senão o artigo some do corpus.
+    const grupo = tachadoTexto.replace(/\s+/g, ' ').trim();
+    if (grupo) tachadosAtual.push(grupo);
+    const rotulo = grupo.match(RE_ROTULO_TACHADO)?.[1];
+    if (rotulo && atual.replace(/\s+/g, '') === '') {
+      atual = rotulo + ' ';
+      rotuloResgatado = atual;
+    }
+    tachadoTexto = '';
+  };
   const fecha = () => {
+    if (spans.some(Boolean)) {
+      spans = [];
+      if (tachado() === 0) fechaTachado();
+    }
+    spans = [];
     // O rótulo do texto tachado só fica se o parágrafo traz "(Revogado…)"; sem isso era redação antiga, trocada por outra logo abaixo
     if (rotuloResgatado && !/\(\s*(Revogad|Vetad|Suprimid)/i.test(atual.slice(rotuloResgatado.length))) atual = atual.slice(rotuloResgatado.length);
     rotuloResgatado = '';
@@ -61,11 +82,11 @@ export function paragrafosComTachado(html: string): ParagrafoComTachado[] {
     atual = '';
   };
   const sem = html.replace(/<!--[\s\S]*?-->/g, '');
-  for (const m of sem.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(\/?)>|([^<]+|<)/g)) {
-    if (m[4] !== undefined) {
+  for (const m of sem.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*?)(\/?)>|([^<]+|<)/g)) {
+    if (m[5] !== undefined) {
       if (!ignorado) {
-        if (tachado) tachadoTexto += decodificarEntidades(m[4]);
-        else atual += decodificarEntidades(m[4]);
+        if (tachado()) tachadoTexto += decodificarEntidades(m[5]);
+        else atual += decodificarEntidades(m[5]);
       }
       continue;
     }
@@ -73,22 +94,19 @@ export function paragrafosComTachado(html: string): ParagrafoComTachado[] {
     const tag = m[2].toLowerCase();
     if (IGNORADOS.has(tag)) ignorado += fechando ? -1 : 1;
     else if (TACHADO.has(tag)) {
-      tachado = Math.max(0, tachado + (fechando ? -1 : 1));
-      if (tachado === 0) {
-        // Dispositivo revogado com o texto inteiro tachado: o texto sai, mas o rótulo fica para a "(Revogado…)" que vem depois,
-        // senão o artigo some do corpus.
-        const grupo = tachadoTexto.replace(/\s+/g, ' ').trim();
-        if (grupo) tachadosAtual.push(grupo);
-        const rotulo = grupo.match(RE_ROTULO_TACHADO)?.[1];
-        if (rotulo && atual.replace(/\s+/g, '') === '') {
-          atual = rotulo + ' ';
-          rotuloResgatado = atual;
-        }
-        tachadoTexto = '';
+      const antes = tachado();
+      tachadoTag = Math.max(0, tachadoTag + (fechando ? -1 : 1));
+      if (antes > 0 && tachado() === 0) fechaTachado();
+    } else if (tag === 'span' && m[4] !== '/') {
+      if (!fechando) spans.push(/line-through/i.test(m[3]));
+      else if (spans.length > 0) {
+        const antes = tachado();
+        spans.pop();
+        if (antes > 0 && tachado() === 0) fechaTachado();
       }
     }
     else if (QUEBRAM_PARAGRAFO.has(tag)) fecha();
-    else if (tag === 'br' && !tachado && !ignorado) atual += ' ';
+    else if (tag === 'br' && !tachado() && !ignorado) atual += ' ';
     if (ignorado < 0) ignorado = 0;
   }
   fecha();

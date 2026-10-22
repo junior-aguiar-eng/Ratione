@@ -21,8 +21,8 @@ describe('Redações anteriores como segunda versão do dispositivo (F3-04)', ()
 
   it('sem o histórico (padrão) o corpus continua com uma versão por dispositivo; com ele, uma a mais por caso', () => {
     const n = (ls: typeof sem) => ls.reduce((s, l) => s + l.versoes.length, 0);
-    assert.equal(n(sem), 29447);
-    assert.equal(n(com), 29447 + casos.length);
+    assert.equal(n(sem), 29294);
+    assert.equal(n(com), 29294 + casos.length);
   });
 
   it('cada caso tem exatamente duas versões: a vigente (sem fim) e a anterior, que acaba na véspera da publicação do ato da vigente', () => {
@@ -126,7 +126,7 @@ describe('SQL que leva as redações anteriores ao banco já carregado (F3-04)',
     const alvo = (await (await carregar(true)).query(colunas)).rows;
     await antigo.exec(sql);
     const apos = (await antigo.query(colunas)).rows;
-    assert.equal(apos.length, 29447 + casos.length);
+    assert.equal(apos.length, 29294 + casos.length);
     assert.deepEqual(apos, alvo);
     await antigo.exec(sql);
     assert.deepEqual((await antigo.query(colunas)).rows, alvo);
