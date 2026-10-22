@@ -117,6 +117,49 @@ jobs:
             gh issue create --title "NormaViva: o Senado registra ato novo que altera ou cita norma do corpus ($hoje)" --label normaviva-feed --body-file "$RUNNER_TEMP/alerta-feed.md"
           fi
 
+      # Vigência futura (F3-06): lei já publicada que altera norma do corpus e só passa a valer depois (o Senado já a registra, então o feed não alerta).
+      # Código de saída: 0 sem mudança nos avisos, 2 com aviso novo ou removido, 1 em erro de execução. Não faz commit: o revisor roda `pnpm vigencia` e abre o PR.
+      - name: Conferir leis com vigência futura
+        id: vigencia
+        working-directory: packages/normaviva
+        run: |
+          set +e
+          pnpm vigencia 2>&1 | tee "$RUNNER_TEMP/vigencia.txt"
+          codigo=${PIPESTATUS[0]}
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Alertar por issue (lei com vigência futura nova ou vencida)
+        if: steps.vigencia.outputs.codigo == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXECUCAO: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        working-directory: packages/normaviva
+        run: |
+          hoje=$(date -u +%F)
+          {
+            echo "Mudou a lista de **leis já publicadas que ainda não valem** e alteram norma do corpus do NormaViva (leitura de $hoje). Nada foi alterado no repositório."
+            echo
+            echo '```'
+            grep -vE '^(\$|\[ELIFECYCLE\])' "$RUNNER_TEMP/vigencia.txt" 2>/dev/null || true
+            echo '```'
+            echo
+            echo "**O que fazer (revisor):** a partir de \`packages/normaviva\`, rode \`pnpm vigencia\`, leia a cláusula de vigência dos avisos novos (os \`complexa\` pedem leitura do ato) e abra o PR com \`src/vigenciafutura/vigencia-futura.json\`. Execução: $EXECUCAO"
+          } > "$RUNNER_TEMP/alerta-vigencia.md"
+          gh label create normaviva-vigencia --color FEF2C0 --description "Lei publicada com vigência futura que altera norma do corpus" --force
+          existente=$(gh issue list --label normaviva-vigencia --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existente" ]; then
+            gh issue comment "$existente" --body-file "$RUNNER_TEMP/alerta-vigencia.md"
+          else
+            gh issue create --title "NormaViva: lei com vigência futura altera norma do corpus ($hoje)" --label normaviva-vigencia --body-file "$RUNNER_TEMP/alerta-vigencia.md"
+          fi
+
+      - name: Falhar se a conferência de vigência deu erro
+        if: steps.vigencia.outputs.codigo != '0' && steps.vigencia.outputs.codigo != '2'
+        run: |
+          echo "pnpm vigencia terminou com código ${{ steps.vigencia.outputs.codigo }}"
+          exit 1
+
       - name: Falhar se os feeds deram erro
         if: steps.feeds.outputs.codigo != '0' && steps.feeds.outputs.codigo != '2'
         run: |

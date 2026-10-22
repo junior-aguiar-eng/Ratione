@@ -34,6 +34,8 @@ export interface DocumentoDaLista {
   ementa: string;
   /** DD/MM/AAAA */
   dataassinatura: string;
+  /** `LEI-15371-2026-03-31`: tipo, número, ano e data de assinatura. */
+  norma?: string;
 }
 
 export interface Alerta {

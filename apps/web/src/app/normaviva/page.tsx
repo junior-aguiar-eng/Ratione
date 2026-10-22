@@ -10,7 +10,8 @@ import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
-import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoEm } from '../../lib/normavivaApresentacao';
+import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoEm, textoDoAvisoFuturo } from '../../lib/normavivaApresentacao';
+import { avisosDoArtigo } from '@ratione/normaviva/vigencia-futura';
 import { linhaDoTempo } from '../../lib/linhaDoTempo';
 import { DiffTexto, LinhaDoTempo } from './Historico';
 import ExplicacaoIA from './ExplicacaoIA';
@@ -287,6 +288,23 @@ export default function NormaVivaPage() {
                       )}
                     </>
                   )}
+
+                  {avisosDoArtigo(detalhe.norma.id, detalhe.dispositivo.rotulo, hoje).map(aviso => {
+                    const t = textoDoAvisoFuturo(aviso, detalhe.norma.id, detalhe.dispositivo.rotulo, dataCurta);
+                    return (
+                      <Notice key={aviso.chave} tom="warn" titulo={t.titulo}>
+                        <span className="flex flex-col gap-1" data-testid="aviso-vigencia-futura">
+                          {t.linhas.map(l => (
+                            <span key={l}>{l}</span>
+                          ))}
+                          {t.dispositivos.length > 0 && <span>Dispositivos alterados neste artigo: {t.dispositivos.join('; ')}.</span>}
+                          <a href={t.fonteUrl} target="_blank" rel="noopener noreferrer" className="underline">
+                            Ver o ato no Planalto
+                          </a>
+                        </span>
+                      </Notice>
+                    );
+                  })}
 
                   {anterior && detalhe.versao && (
                     <section aria-labelledby="o-que-mudou" className="flex flex-col gap-3">
