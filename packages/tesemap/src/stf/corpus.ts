@@ -9,10 +9,11 @@ import { join } from 'node:path';
 import { lerTemasRg, type TemaRgStf } from './repercussao';
 import { lerSumulasStf, type SumulaStf } from './sumulas';
 import type { AplicacaoDosTemas } from './aplicacao';
+import { lerDecisoesControle, processosComMerito, type ProcessoControle } from './controle';
 
 export const PASTA_STF = join(__dirname, '..', '..', 'corpus', 'stf');
 
-export type NomeDoArquivoStf = 'repercussao-geral' | 'sumulas-vinculantes' | 'sumulas';
+export type NomeDoArquivoStf = 'repercussao-geral' | 'sumulas-vinculantes' | 'sumulas' | 'controle-concentrado';
 
 export interface ArquivoStf {
   nome: NomeDoArquivoStf;
@@ -63,6 +64,13 @@ export function carregarTemasRgStf(): TemaRgStf[] {
 export function carregarSumulasStf(): SumulaStf[] {
   const m = manifestoStf();
   return [...lerSumulasStf(textoDoArquivo(m, 'sumulas-vinculantes'), true).sumulas, ...lerSumulasStf(textoDoArquivo(m, 'sumulas'), false).sumulas];
+}
+
+/** Processos de controle concentrado com decisão de mérito (F4-02), ou lista vazia se o arquivo ainda não entrou. */
+export function carregarControleStf(): ProcessoControle[] {
+  const m = manifestoStf();
+  if (!m.arquivos.some(a => a.nome === 'controle-concentrado')) return [];
+  return processosComMerito(lerDecisoesControle(textoDoArquivo(m, 'controle-concentrado')));
 }
 
 /** Aplicação dos temas de repercussão geral (contagem agregada de `pnpm agregar:stf`), ou nulo se ainda não foi gerada. */

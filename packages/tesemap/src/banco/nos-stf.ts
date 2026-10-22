@@ -9,6 +9,7 @@ import { LIMIAR_DE_APLICACAO, classificarTemaRg, type TemaRgStf } from '../stf/r
 import { arquivoDoManifesto, type ManifestoStf } from '../stf/corpus';
 import type { SumulaStf } from '../stf/sumulas';
 import type { AplicacaoDosTemas } from '../stf/aplicacao';
+import type { ProcessoControle } from '../stf/controle';
 
 /** `citados`: números de tema que os precedentes do STJ ligam ao STF; `aplicacao`: contagem de devoluções. Os dois fazem o tema entrar mesmo com a repercussão negada (ver `classificarTemaRg`). */
 export function nosDosTemasStf(temas: TemaRgStf[], m: ManifestoStf, citacoes: (texto: string) => CitacaoNormativa[] = () => [], citados: ReadonlySet<number> = new Set(), aplicacao: AplicacaoDosTemas | null = null): NoBanco[] {
@@ -121,4 +122,50 @@ export function nosDasSumulasStf(sumulas: SumulaStf[], m: ManifestoStf, existent
         atualizado_em: arquivo.lidoEm
       });
     });
+}
+
+const ROTULO_DA_CLASSE: Record<string, string> = { ADI: 'ação direta de inconstitucionalidade', ADC: 'ação declaratória de constitucionalidade', ADO: 'ação direta de inconstitucionalidade por omissão', ADPF: 'arguição de descumprimento de preceito fundamental' };
+
+/**
+ * Nós dos processos de controle concentrado com decisão de mérito (F4-02). A descrição é o texto oficial da decisão de mérito escolhida por
+ * `decisaoDeMerito`; quando o arquivo do STF não traz o texto ("*NI*", "Sem Descrição"), a descrição diz só o resultado e avisa. O arquivo não traz o
+ * objeto da ação: o que se pesquisa é o que a decisão diz, e os atalhos para o NormaViva saem dos artigos que ela cita.
+ */
+export function nosDoControleConcentrado(processos: ProcessoControle[], m: ManifestoStf, citacoes: (texto: string) => CitacaoNormativa[] = () => []): NoBanco[] {
+  if (processos.length === 0) return [];
+  const arquivo = arquivoDoManifesto(m, 'controle-concentrado');
+  const fonte = {
+    id: 'stf-transparencia-controle-concentrado',
+    ato: 'Portal da Transparência do STF: decisões no controle concentrado (ADI, ADC, ADO e ADPF)',
+    url: m.paginaUrl,
+    lido: `${arquivo.descricao}; importação mecânica do arquivo oficial, ${m.obtidoPor}`,
+    lidoEm: arquivo.lidoEm
+  };
+  return processos.map(p =>
+    NoBancoSchema.parse({
+      id: p.id,
+      tipo: 'precedente',
+      rotulo: `${p.classe} ${p.numero} do STF`,
+      tribunal: 'STF',
+      numero_referencia: `${p.classe} ${p.numero}`,
+      descricao: p.merito.texto ?? `${p.merito.andamento} (o arquivo do STF não traz o texto desta decisão)`,
+      dispositivo_id: null,
+      detalhes: {
+        classe: p.classe,
+        classePorExtenso: ROTULO_DA_CLASSE[p.classe],
+        resultado: p.merito.andamento,
+        situacao: p.merito.andamento,
+        dataJulgamento: p.merito.data,
+        orgaoJulgador: p.colegiada ? 'Plenário' : 'Decisão monocrática',
+        textoDaDecisaoDisponivel: p.merito.texto !== null,
+        decisoesNoArquivo: p.totalDeDecisoes,
+        citacoes: citacoes(p.merito.texto ?? '')
+      },
+      origem_dado: 'curado',
+      fontes: [fonte],
+      validado_por: null,
+      validado_em: null,
+      atualizado_em: arquivo.lidoEm
+    })
+  );
 }

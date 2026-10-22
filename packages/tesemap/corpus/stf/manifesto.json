@@ -5,6 +5,15 @@
   "obtidoPor": "baixados pelo responsável e enviados ao repositório (o portal do STF bloqueia o acesso automático)",
   "arquivos": [
     {
+      "nome": "controle-concentrado",
+      "nomeOriginal": "58fb363c-1e6c-47e9-ad84-55c984e2c165.csv",
+      "descricao": "Decisões em ADI, ADC, ADO e ADPF, uma por linha: processo, data, descrição, andamento agrupado, subgrupo e texto da decisão",
+      "bytes": 9925571,
+      "sha256": "980d5e2b9d3577f7cfeb070dd427436db56836ef5bba73bb1364ec24d1893261",
+      "arquivo": "controle-concentrado.csv.gz",
+      "lidoEm": "2026-10-22"
+    },
+    {
       "nome": "repercussao-geral",
       "nomeOriginal": "855e1865-320c-4c3e-b0a1-98718b0b2983.csv",
       "descricao": "Um tema de repercussão geral por linha: título, tese, processo paradigma, situação, datas, ramos do direito",

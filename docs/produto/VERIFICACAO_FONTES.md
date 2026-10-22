@@ -392,6 +392,17 @@ Primeiras relações do grafo (`packages/tesemap/corpus/grafo-minimo.json`): o T
 | Descartado | O PDF público `https://www.stj.jus.br/docs_internet/VerbetesSTJ.pdf` (Last-Modified 22/11/2024, até a Súmula 673, sem as datas) e `VerbetesSTJ_asc.pdf` (2021): desatualizados. As Súmulas 674 e 675 (26/11/2024) e 676 (12/2024) conferem com as notícias oficiais do STJ |
 | Conferência | As Súmulas 545 e 630 aparecem com a redação revisada em 10/09/2025 (DJEN de 02/12/2025, Tema repetitivo 1194), e a anterior fica na nota; a Súmula 222 aparece cancelada em 13/11/2024 (DJe 29/11/2024) |
 
+## 28. Controle concentrado do STF (F4-02), lido em 22/10/2026
+
+| | |
+|---|---|
+| Fonte | Portal da Transparência do STF, painel de controle concentrado: decisões em ADI, ADC, ADO e ADPF (exportação CSV) |
+| Como foi obtida | Exportado pelo responsável e enviado ao repositório: o portal do STF responde 403 ao acesso automático (F4-02) |
+| Arquivo | `corpus/stf/controle-concentrado.csv.gz` (9,9 MB sem compressão; SHA-256 `980d5e2b9d3577f7cfeb070dd427436db56836ef5bba73bb1364ec24d1893261`), no manifesto do STF |
+| Conteúdo | 18.975 decisões de 8.353 processos (15.425 linhas de ADI, 3.068 de ADPF, 302 de ADC, 180 de ADO), de 1988 a 2026; colunas processo, data, descrição, andamento agrupado, subgrupo e observação (o texto da decisão). Não traz o objeto da ação nem a norma impugnada |
+| Recorte | Processos com decisão final de mérito (procedente, procedente em parte, improcedente): 4.008. Regra de escolha da decisão de mérito em `src/stf/controle.ts` |
+| Conferência | Casos conhecidos no arquivo, com a data certa: ADPF 54 (12/04/2012), ADC 43 e 44 (07/11/2019), ADI 4650 (17/09/2015), ADPF 347 (mérito de 04/10/2023, não a homologação de 17/10/2025) |
+
 ## 15. Como repetir esta verificação
 
 ```bash

@@ -3,7 +3,7 @@
  *
  *   pnpm carregar:tesemap --simular   # monta os nós e mostra as contagens; não precisa de chave nem toca no banco
  *   pnpm carregar:tesemap             # grava (upsert) os nós dos precedentes do STJ e dos temas de repercussão geral do STF
- *                                     # as súmulas do STJ (F4-01) e o grafo mínimo (F4-05): nós de dispositivo e arestas, que só aparecem depois de validadas
+ *                                     # o controle concentrado do STF (F4-02), as súmulas do STJ (F4-01) e o grafo mínimo (F4-05): nós de dispositivo e arestas, que só aparecem depois de validadas
  *
  * Variáveis de ambiente (no terminal, NUNCA em arquivo versionado nem em conversa): SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY.
  * Antes: aplicar no SQL Editor `supabase/migrations/20261022000003_tesemap.sql`.
@@ -15,9 +15,9 @@ import { carregarPrecedentesStj, carregarSumulasStj, manifestoStj, manifestoSumu
 import { join } from 'node:path';
 import { extrairRemissoes } from '@ratione/normaviva/referencias';
 import { linhasDoCorpus } from '@ratione/normaviva/corpus';
-import { carregarAplicacaoStf, carregarSumulasStf, carregarTemasRgStf, manifestoStf } from '../stf';
+import { carregarAplicacaoStf, carregarControleStf, carregarSumulasStf, carregarTemasRgStf, manifestoStf } from '../stf';
 import { nosDosPrecedentesStj, temasStfCitadosPeloStj } from './nos-stj';
-import { nosDasSumulasStf, nosDosTemasStf } from './nos-stf';
+import { nosDasSumulasStf, nosDoControleConcentrado, nosDosTemasStf } from './nos-stf';
 import { nosDasSumulasStj, temasQueLigamSumulas } from './nos-sumulas-stj';
 import { citacoesNoTexto } from './citacoes';
 import { arestasDoGrafoMinimo, carregarGrafoMinimo, nosDosDispositivos } from './grafo-minimo';
@@ -69,11 +69,12 @@ async function main() {
   const nosSumulasStj = nosDasSumulasStj(carregarSumulasStj(), manifestoSumulasStj(), temasQueLigamSumulas(precedentesStj), new Set(nosStj.map(n => n.id)), citar);
   const grafo = carregarGrafoMinimo();
   const nosDispositivos = nosDosDispositivos(grafo, corpus);
-  const nos = [...nosStj, ...nosStf, ...nosSumulas, ...nosSumulasStj, ...nosDispositivos];
+  const nosControle = nosDoControleConcentrado(carregarControleStf(), manifestoStf(), citar);
+  const nos = [...nosStj, ...nosStf, ...nosSumulas, ...nosControle, ...nosSumulasStj, ...nosDispositivos];
   const arestas = arestasDoGrafoMinimo(grafo, nos);
   const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
   console.log(
-    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes) + ${nosSumulasStj.length} súmulas do STJ em vigor (${nosSumulasStj.filter(n => (n.detalhes.temasStj as unknown[]).length > 0).length} ligadas a tema repetitivo) + ${nosDispositivos.length} dispositivos do grafo mínimo; ${comCitacao} citam dispositivo do NormaViva`
+    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes) + ${nosControle.length} processos de controle concentrado com mérito + ${nosSumulasStj.length} súmulas do STJ em vigor (${nosSumulasStj.filter(n => (n.detalhes.temasStj as unknown[]).length > 0).length} ligadas a tema repetitivo) + ${nosDispositivos.length} dispositivos do grafo mínimo; ${comCitacao} citam dispositivo do NormaViva`
   );
   console.log(`Arestas do grafo mínimo: ${arestas.length} (${arestas.filter(a => a.validado_por !== null).length} validadas; as pendentes não aparecem no site)`);
   if (process.argv.includes('--simular')) {

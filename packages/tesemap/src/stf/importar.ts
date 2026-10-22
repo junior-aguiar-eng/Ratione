@@ -3,6 +3,7 @@
  *
  *   pnpm importar:stf repercussao-geral <csv do portal da Transparência do STF>
  *   pnpm importar:stf sumulas <csv das súmulas vinculantes> <csv das súmulas não vinculantes>
+ *   pnpm importar:stf controle-concentrado <csv das decisões do controle concentrado, da Transparência do STF>
  *
  * O STF bloqueia o acesso automático (403), então os arquivos são baixados por uma pessoa: os temas de repercussão geral em
  * https://transparencia.stf.jus.br/extensions/dados_abertos/dados_abertos.html e as súmulas em https://jurisprudencia.stf.jus.br (exportar CSV, uma
@@ -16,6 +17,7 @@ import { basename, join } from 'node:path';
 import { PASTA_STF, type ArquivoStf, type ManifestoStf, type NomeDoArquivoStf } from './corpus';
 import { lerTemasRg } from './repercussao';
 import { lerSumulasStf } from './sumulas';
+import { lerDecisoesControle, processosComMerito } from './controle';
 
 const MANIFESTO = join(PASTA_STF, 'manifesto.json');
 
@@ -60,8 +62,13 @@ function main() {
     const a = guardar(manifesto, 'sumulas-vinculantes', arquivos[0], 'Súmulas vinculantes aprovadas: enunciado, órgão, data de aprovação, publicação, ramo do direito, observação', sv.consulta);
     const b = guardar(manifesto, 'sumulas', arquivos[1], 'Súmulas não vinculantes aprovadas: enunciado, órgão, data de aprovação, publicação, ramo do direito, observação', comuns.consulta);
     console.log(`ok   ${sv.sumulas.length} súmulas vinculantes (sha256 ${a}) e ${comuns.sumulas.length} não vinculantes (sha256 ${b})`);
+  } else if (tipo === 'controle-concentrado' && arquivos.length === 1) {
+    const decisoes = lerDecisoesControle(readFileSync(arquivos[0], 'utf-8'));
+    const processos = processosComMerito(decisoes);
+    const sha = guardar(manifesto, 'controle-concentrado', arquivos[0], 'Decisões em ADI, ADC, ADO e ADPF, uma por linha: processo, data, descrição, andamento agrupado, subgrupo e texto da decisão', null);
+    console.log(`ok   ${decisoes.length} decisões de ${new Set(decisoes.map(d => `${d.classe} ${d.numero}`)).size} processos; ${processos.length} com decisão de mérito (sha256 ${sha})`);
   } else {
-    throw new Error('Uso: pnpm importar:stf repercussao-geral <csv>  |  pnpm importar:stf sumulas <csv vinculantes> <csv não vinculantes>');
+    throw new Error('Uso: pnpm importar:stf repercussao-geral <csv>  |  pnpm importar:stf sumulas <csv vinculantes> <csv não vinculantes>  |  pnpm importar:stf controle-concentrado <csv>');
   }
   writeFileSync(MANIFESTO, JSON.stringify(manifesto, null, 2) + '\n', 'utf-8');
 }

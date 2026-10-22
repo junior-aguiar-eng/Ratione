@@ -51,7 +51,7 @@ describe('Corpus das súmulas do STF no repositório (F4-02)', () => {
     assert.deepEqual([9, 30].filter(n => sv.some(s => s.numero === n)), []);
     assert.equal(sv[sv.length - 1].numero, 63);
     assert.equal(comuns[comuns.length - 1].numero, 736);
-    assert.ok(m.arquivos.filter(a => a.nome !== 'repercussao-geral').every(a => /^https:\/\/jurisprudencia\.stf\.jus\.br\//.test(a.consulta ?? '')));
+    assert.ok(m.arquivos.filter(a => a.nome === 'sumulas' || a.nome === 'sumulas-vinculantes').every(a => /^https:\/\/jurisprudencia\.stf\.jus\.br\//.test(a.consulta ?? '')));
     assert.ok(sumulas.every(s => /^https:\/\/jurisprudencia\.stf\.jus\.br\/pages\/search\/seq-sumula\d+\/false$/.test(s.url) && s.enunciado.length > 10 && !/\s{2}/.test(s.enunciado)));
   });
 
