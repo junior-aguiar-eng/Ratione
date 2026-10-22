@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { detectarCharset } from '../coleta/coletar';
-import { paragrafosDoHtml } from './html';
+import { paragrafosComTachado, paragrafosDoHtml } from './html';
 import { parsearDispositivos, separarAnotacoes } from './dispositivos';
 import { conferirSequencia, numeroBase } from './verificar';
 
@@ -17,6 +17,17 @@ describe('HTML do Planalto → parágrafos (F3-02)', () => {
   it('descarta o texto tachado, junta o "º" escrito como <sup>o</sup> e decodifica entidades', () => {
     const ps = paragrafosDoHtml('<p><strike>§ 1º texto antigo</strike></p><p>Art. 8<sup>o</sup> Texto&nbsp;novo <b>vigente</b>.</p><script>x()</script>');
     assert.deepStrictEqual(ps, ['Art. 8o Texto novo vigente.']);
+  });
+
+  it('tachado por estilo (`<span style="text-decoration:line-through">`) também sai, mesmo sem o span fechado (22/10/2026)', () => {
+    const ps = paragrafosDoHtml(
+      '<p><span style="font-weight: normal; text-decoration:line-through">Art. 21-A. Texto antigo. (Incluído pela Lei nº 11.430, de 2006)</a></strike></font></p>' +
+        '<p><span style="color: black">Art. 21-A. Texto novo.</span> (Redação dada pela Lei Complementar nº 150, de 2015)</p>' +
+        '<p>§ 1º Vigente <span style="text-decoration: line-through">trecho antigo</span>e o resto.</p>'
+    );
+    assert.deepStrictEqual(ps, ['Art. 21-A. Texto novo. (Redação dada pela Lei Complementar nº 150, de 2015)', '§ 1º Vigente e o resto.']);
+    const comTachado = paragrafosComTachado('<p><span style="text-decoration:line-through">Art. 5º Antigo.</span></p><p>Art. 5º Novo.</p>');
+    assert.deepStrictEqual(comTachado, [{ texto: 'Art. 5º Novo.', tachados: ['Art. 5º Antigo.'] }]);
   });
 
   it('dispositivo revogado com o texto todo tachado mantém o rótulo para a anotação "(Revogado…)"', () => {
@@ -88,6 +99,63 @@ describe('Parser LC 95/98 (F3-02)', () => {
     ]);
     assert.deepStrictEqual(rotulos(r), ['art. 178', 'art. 179']);
     assert.ok(r.dispositivos[0].continuacao.some(l => l.includes('337-E')));
+  });
+
+  it('redação entre aspas retas dada a outra norma ("Art. 38. …" … "(NR)") também não vira dispositivo desta (Lei 11.419)', () => {
+    const r = parsearDispositivos([
+      'Art. 20. A Lei nº 5.869, de 11 de janeiro de 1973 - Código de Processo Civil, passa a vigorar com as seguintes alterações:',
+      '"Art. 38. .............',
+      'Parágrafo único. A procuração pode ser assinada digitalmente." (NR)',
+      '"Art. 169. .............',
+      '§ 1º É vedado usar abreviaturas.',
+      '§ 2º Quando se tratar de processo eletrônico." (NR)',
+      'Art. 21. Revogam-se as disposições em contrário.'
+    ]);
+    assert.deepStrictEqual(rotulos(r), ['art. 20', 'art. 21']);
+    assert.strictEqual(r.dispositivos[0].continuacao.length, 5);
+  });
+
+  it('linha de medida provisória rejeitada ou com vigência encerrada não vira dispositivo (Lei 12.965, art. 12)', () => {
+    const r = parsearDispositivos([
+      'Art. 12. (Revogado pela Medida Provisória nº 1.068, de 2021) (Rejeitada)',
+      'I - (Revogado pela Medida Provisória nº 1.068, de 2021) (Rejeitada)',
+      'Art. 12. Sem prejuízo das demais sanções, as infrações ficam sujeitas às seguintes sanções:',
+      'I - advertência;'
+    ]);
+    assert.deepStrictEqual(rotulos(r), ['art. 12', 'art. 12, I']);
+    assert.match(r.dispositivos[0].texto, /^Sem prejuízo/);
+    assert.deepStrictEqual(r.anomalias, []);
+  });
+
+  it('código aprovado por decreto: os artigos do decreto vão para o escopo "decreto" e o art. 1º do corpo é o do código (CLT)', () => {
+    const r = parsearDispositivos([
+      'Art. 1º Fica aprovada a Consolidação das Leis do Trabalho.',
+      'Art. 2º O presente decreto-lei entrará em vigor em 10 de novembro de 1943.',
+      'CONSOLIDAÇÃO DAS LEIS DO TRABALHO',
+      'Art. 1º - Esta Consolidação estatui as normas que regulam as relações de trabalho.',
+      'Art. 2º - Considera-se empregador a empresa.'
+    ]);
+    assert.deepStrictEqual(r.dispositivos.map(d => `${d.escopo}|${d.rotulo}`), ['decreto|art. 1º', 'decreto|art. 2º', 'corpo|art. 1º', 'corpo|art. 2º']);
+    assert.deepStrictEqual(r.anomalias, []);
+    const clt = corpus('DL-5452-1943');
+    assert.match(clt.dispositivos.find(d => d.escopo === 'corpo' && d.rotulo === 'art. 1º')?.texto ?? '', /^Esta Consolidação estatui/);
+  });
+
+  it('sobra de tachado ("c) ;") e artigo revogado e depois restabelecido: fica só a redação que vale, sem anomalia', () => {
+    const r = parsearDispositivos([
+      'Art. 12. São brasileiros:',
+      'I - natos:',
+      'c) ;',
+      'c) os nascidos no estrangeiro de pai brasileiro. (Redação dada pela Emenda Constitucional nº 54, de 2007)',
+      'Art. 31. (Revogado pela Lei nº 8.880, de 1994)',
+      'Art. 31. O valor mensal do auxílio-acidente integra o salário-de-contribuição. (Restabelecido com nova redação pela Lei nº 9.528, de 1997)',
+      'V - ; (Revogado pela Lei nº 1, de 2000)'
+    ]);
+    assert.deepStrictEqual(rotulos(r), ['art. 12', 'art. 12, I', 'art. 12, I, c)', 'art. 31', 'art. 31, V']);
+    assert.match(r.dispositivos[2].texto, /^os nascidos/);
+    assert.match(r.dispositivos[3].texto, /^O valor mensal/);
+    assert.ok(r.dispositivos[4].revogado, 'inciso com texto ";" e "(Revogado…)" é revogado');
+    assert.deepStrictEqual(r.anomalias, []);
   });
 
   it('separarAnotacoes tira "(Redação dada…)" e mantém parênteses que não são anotação', () => {

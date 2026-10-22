@@ -106,7 +106,9 @@ export function separarAnotacoes(linha: string): { texto: string; anotacoes: Ano
   const solta = anotacoes.length > 0 ? texto.match(RE_PRODUCAO_SOLTA) : null;
   if (solta) anotacoes.push({ tipo: 'vigencia', texto: solta[1] });
   const sem = solta ? texto.slice(0, solta.index).trim() : texto;
-  return { texto: sem.replace(/^[-–—:.\s]+/, '').trim(), anotacoes };
+  const limpo = sem.replace(/^[-–—:.\s]+/, '').trim();
+  // Só pontuação (";", ")") é sobra do texto tachado ao lado do rótulo: o dispositivo não tem texto
+  return { texto: /^[\s;:.,()\-–—]*$/.test(limpo) ? '' : limpo, anotacoes };
 }
 
 /** "5" + "º" → "5º" (só até 9, como na LC 95); "1.045" fica "1.045"; sufixo "-A" mantido. */
@@ -173,6 +175,26 @@ export function parsearDispositivos(paragrafosBrutos: string[]): ResultadoParser
   let tituloPendente: string | undefined;
   let profundidadeAspas = 0;
   const saldoDeAspas = (l: string) => (l.match(/“/g)?.length ?? 0) - (l.match(/”/g)?.length ?? 0);
+  // Aspas retas ("Art. 38. ……" até "…lei." (NR)), como na Lei 11.419: abre na linha que começa com aspas e fecha na que tem
+  // número ímpar delas ou o "(NR)". Sem par de aspas confiável, a citação nunca passa de LIMITE_ASPAS_RETAS linhas.
+  const LIMITE_ASPAS_RETAS = 40;
+  let linhasEmAspasRetas = 0;
+  const impar = (l: string) => (l.match(/"/g)?.length ?? 0) % 2 === 1;
+  /**
+   * Rótulo repetido no mesmo escopo: se a ocorrência anterior está vazia ou revogada (sobra de tachado como "c) ;", ou
+   * "Art. 31. (Revogado…)" seguido de "Art. 31. … (Restabelecido…)"), a nova a substitui; senão fica a repetição, como anomalia.
+   */
+  const registrar = (d: DispositivoParseado) => {
+    const chave = `${d.escopo}|${d.rotulo}`;
+    if (vistos.has(chave)) {
+      let i = dispositivos.length - 1;
+      while (i >= 0 && !(dispositivos[i].escopo === d.escopo && dispositivos[i].rotulo === d.rotulo)) i--;
+      if (i >= 0 && (dispositivos[i].revogado || dispositivos[i].texto === '')) dispositivos.splice(i, 1);
+      else anomalias.push(`rótulo repetido: ${d.escopo} ${d.rotulo}`);
+    }
+    vistos.add(chave);
+    dispositivos.push(d);
+  };
 
   for (const linha of paragrafos) {
     if (profundidadeAspas > 0 && atual) {
@@ -180,6 +202,25 @@ export function parsearDispositivos(paragrafosBrutos: string[]): ResultadoParser
       profundidadeAspas = Math.max(0, profundidadeAspas + saldoDeAspas(linha));
       continue;
     }
+    if (linhasEmAspasRetas > 0 && atual) {
+      atual.continuacao.push(linha);
+      linhasEmAspasRetas = impar(linha) || /\(NR\)/.test(linha) ? 0 : linhasEmAspasRetas + 1;
+      if (linhasEmAspasRetas > LIMITE_ASPAS_RETAS) {
+        anomalias.push(`aspas retas sem fechamento depois de: ${atual.rotulo}`);
+        linhasEmAspasRetas = 0;
+      }
+      continue;
+    }
+    if (atual && /^"/.test(linha) && impar(linha) && !/\(NR\)/.test(linha)) {
+      atual.continuacao.push(linha);
+      linhasEmAspasRetas = 1;
+      continue;
+    }
+    // Promulgação das partes vetadas, publicada depois da assinatura (Lei 8.112): o texto já está no corpo, com a anotação
+    // "(Promulgação partes vetadas)"; lido de novo, repetiria os artigos com a redação de 1991
+    if (dispositivos.length > 0 && /^Partes vetadas pelo Presidente da Rep[úu]blica e mantidas pelo Congresso/i.test(linha)) break;
+    // Redação de medida provisória rejeitada ou com a vigência encerrada não vale: a redação que vale vem em outra linha
+    if (/\((?:Rejeitada|Vig[êe]ncia encerrada)\)\s*$/i.test(linha) && marcaDaLinha(linha, temArtigo)) continue;
     if (dispositivos.length > 0 && /^ATO DAS DISPOSI[ÇC][ÕO]ES CONSTITUCIONAIS TRANSIT[ÓO]RIAS/i.test(linha)) {
       escopo = 'ADCT';
       caminho = [];
@@ -230,10 +271,7 @@ export function parsearDispositivos(paragrafosBrutos: string[]): ResultadoParser
           continuacao: [],
           estrutura: Object.values(estrutura)
         };
-        const chaveFaixa = `${escopo}|${d.rotulo}`;
-        if (vistos.has(chaveFaixa)) anomalias.push(`rótulo repetido: ${escopo} ${d.rotulo}`);
-        vistos.add(chaveFaixa);
-        dispositivos.push(d);
+        registrar(d);
         atual = d;
       }
       temArtigo = true;
@@ -246,7 +284,18 @@ export function parsearDispositivos(paragrafosBrutos: string[]): ResultadoParser
       tituloPendente = undefined;
       if (marca.tipo === 'artigo') {
         const n = Number(marca.numero.replace(/[º-].*$/, '').replace(/\./g, ''));
-        if (n === 1 && ultimoNumeroArtigo > 1 && escopo === 'corpo') anomalias.push(`numeração reiniciou em "${linha.slice(0, 60)}"`);
+        if (n === 1 && ultimoNumeroArtigo > 1 && escopo === 'corpo') {
+          // Código aprovado por decreto (CLT: "Art. 1º Fica aprovada a Consolidação…", "Art. 2º O presente decreto-lei entrará em vigor…"):
+          // os poucos artigos antes do recomeço são do decreto, não do código; vão para o escopo "decreto" e o código fica com o corpo
+          const doDecreto = dispositivos.filter(d => d.escopo === 'corpo');
+          if (doDecreto.filter(d => d.tipo === 'artigo').length <= 5) {
+            for (const d of doDecreto) {
+              vistos.delete(`corpo|${d.rotulo}`);
+              d.escopo = 'decreto';
+              vistos.add(`decreto|${d.rotulo}`);
+            }
+          } else anomalias.push(`numeração reiniciou em "${linha.slice(0, 60)}"`);
+        }
         ultimoNumeroArtigo = n;
         temArtigo = true;
         caminho = [{ tipo: 'artigo', numero: marca.numero }];
@@ -273,10 +322,7 @@ export function parsearDispositivos(paragrafosBrutos: string[]): ResultadoParser
         continuacao: [],
         ...(marca.tipo === 'artigo' ? { estrutura: Object.values(estrutura) } : {})
       };
-      const chave = `${escopo}|${d.rotulo}`;
-      if (vistos.has(chave)) anomalias.push(`rótulo repetido: ${escopo} ${d.rotulo}`);
-      vistos.add(chave);
-      dispositivos.push(d);
+      registrar(d);
       atual = d;
       continue;
     }
