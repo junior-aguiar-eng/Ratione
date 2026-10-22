@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Bookmark, Check, ExternalLink, FileText } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
+import AnaliseDecisao from './AnaliseDecisao';
 import { DECISAO_DEMO, TRECHOS_DEMO, TRECHO_POR_ITEM } from '../../lib/decisaoDemo';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
@@ -109,10 +110,16 @@ export default function ArgumentaPage() {
         }
       />
 
-      <div className="mb-8">
+      <div className="mb-14">
+        <AnaliseDecisao />
+      </div>
+
+      <div className="mb-8 flex flex-col gap-4">
+        <h2 className="font-serif text-2xl font-semibold text-ink border-t border-line pt-10">Exemplo de análise completa</h2>
         <Notice tom="info" titulo="Análise de exemplo">
-          Esta é uma decisão ilustrativa, criada para demonstrar o módulo. O envio de documentos ainda não está
-          disponível.
+          Esta é uma decisão ilustrativa, criada para mostrar aonde o módulo vai chegar: teses, premissas, pontos de atenção e estratégia. A
+          análise de uma decisão sua mostra, por enquanto, a estrutura, as questões, as conclusões e os fundamentos. O envio de arquivos (PDF,
+          DOCX) ainda não está disponível.
         </Notice>
       </div>
 

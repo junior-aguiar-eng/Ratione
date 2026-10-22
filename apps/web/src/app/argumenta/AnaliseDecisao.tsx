@@ -1,0 +1,465 @@
+'use client';
+
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
+import { Check, Loader2, Sparkles } from 'lucide-react';
+import { LIMITE_CARACTERES_DECISAO, MAX_PARAGRAFOS, prepararDecisao, restaurar, type DecisaoPreparada } from '@ratione/argumenta';
+import Notice from '../../components/Notice';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge, type BadgeTom } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
+import { campoClasses } from '@/components/ui/input';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useSessao } from '../../lib/useSessao';
+import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
+
+/**
+ * Análise de decisão colada (F5-03, etapas 1 a 4). O texto é segmentado e pseudonimizado aqui, no navegador; só os parágrafos com
+ * marcadores vão ao servidor, e a tabela de troca nunca sai desta tela. As três tarefas do catálogo de IA (`argumenta-estrutura`,
+ * `argumenta-questoes`, `argumenta-fundamentos`) rodam uma depois da outra, só quando a pessoa logada clica. Nada fica guardado.
+ */
+
+type Etapa = 'estrutura' | 'questoes' | 'fundamentos';
+interface Resultados {
+  estrutura?: SaidaEstrutura;
+  questoes?: SaidaQuestoes;
+  fundamentos?: SaidaFundamentos;
+}
+
+const ETAPAS: { id: Etapa; rotulo: string }[] = [
+  { id: 'estrutura', rotulo: 'Identificando a estrutura da decisão' },
+  { id: 'questoes', rotulo: 'Identificando as questões e as conclusões' },
+  { id: 'fundamentos', rotulo: 'Identificando os fundamentos de cada conclusão' }
+];
+
+const TIPO_DECISAO: Record<SaidaEstrutura['tipo'], string> = {
+  sentenca: 'Sentença',
+  acordao: 'Acórdão',
+  decisao_monocratica: 'Decisão monocrática',
+  decisao_interlocutoria: 'Decisão interlocutória',
+  outro: 'Decisão'
+};
+
+const SECAO: Record<SaidaEstrutura['secoes'][number]['tipo'], string> = {
+  cabecalho: 'Cabeçalho',
+  ementa: 'Ementa',
+  relatorio: 'Relatório',
+  preliminares: 'Preliminares',
+  fundamentacao: 'Fundamentação',
+  dispositivo: 'Dispositivo',
+  outro: 'Outro trecho'
+};
+
+type Questao = SaidaQuestoes['questoes'][number];
+
+const CATEGORIA: Record<Questao['categoria'], string> = {
+  preliminar: 'Preliminar',
+  prejudicial: 'Prejudicial',
+  merito: 'Mérito',
+  acessoria: 'Acessória'
+};
+
+const RESULTADO: Record<Questao['resultado'], { rotulo: string; tom: BadgeTom }> = {
+  acolhida: { rotulo: 'Acolhida', tom: 'ok' },
+  rejeitada: { rotulo: 'Rejeitada', tom: 'danger' },
+  parcialmente_acolhida: { rotulo: 'Parcialmente acolhida', tom: 'warn' },
+  nao_conhecida: { rotulo: 'Não conhecida', tom: 'neutral' },
+  prejudicada: { rotulo: 'Prejudicada', tom: 'neutral' }
+};
+
+const FUNDAMENTO: Record<SaidaFundamentos['fundamentos'][number]['tipo'], { rotulo: string; tom: BadgeTom }> = {
+  fato: { rotulo: 'Fato', tom: 'ok' },
+  prova: { rotulo: 'Prova', tom: 'ok' },
+  norma: { rotulo: 'Norma', tom: 'info' },
+  precedente: { rotulo: 'Precedente', tom: 'rel' },
+  doutrina: { rotulo: 'Doutrina', tom: 'neutral' },
+  argumento: { rotulo: 'Argumento', tom: 'brand' }
+};
+
+/** "§ 4", "§§ 4–6, 9": números em ordem, com intervalos juntos. */
+function rotuloParagrafos(numeros: readonly number[]): string {
+  const ns = [...new Set(numeros)].sort((a, b) => a - b);
+  const partes: string[] = [];
+  for (let i = 0; i < ns.length; i++) {
+    let j = i;
+    while (j + 1 < ns.length && ns[j + 1] === ns[j] + 1) j++;
+    partes.push(j > i ? `${ns[i]}–${ns[j]}` : `${ns[i]}`);
+    i = j;
+  }
+  return `${ns.length > 1 ? '§§' : '§'} ${partes.join(', ')}`;
+}
+
+async function pedir(etapa: Etapa, entrada: unknown): Promise<unknown> {
+  let r: Response;
+  try {
+    r = await fetch(`/api/ia/argumenta-${etapa}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entrada })
+    });
+  } catch {
+    throw new Error('Sem conexão. Tente de novo.');
+  }
+  const corpo = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(corpo.mensagem ?? 'A análise por IA falhou agora.');
+  return corpo.resposta;
+}
+
+export default function AnaliseDecisao() {
+  const { usuario, carregando, contaDisponivel } = useSessao();
+  const [texto, setTexto] = useState('');
+  const [extras, setExtras] = useState('');
+  const [enviada, setEnviada] = useState<DecisaoPreparada | null>(null);
+  const [resultados, setResultados] = useState<Resultados>({});
+  const [andamento, setAndamento] = useState<Etapa | null>(null);
+  const [erro, setErro] = useState<string | null>(null);
+  const [aba, setAba] = useState('geral');
+  const [ativo, setAtivo] = useState<number | null>(null);
+  const listaRef = useRef<HTMLOListElement | null>(null);
+
+  const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
+  const vazio = preparo.paragrafos.length === 0 || !texto.trim();
+  const longo = preparo.caracteres > LIMITE_CARACTERES_DECISAO || preparo.paragrafos.length > MAX_PARAGRAFOS;
+
+  // Rola só a lista de parágrafos (nunca a página), depois de um clique numa referência
+  useEffect(() => {
+    if (ativo === null || !listaRef.current) return;
+    const el = listaRef.current.querySelector<HTMLElement>(`[data-paragrafo="${ativo}"]`);
+    if (el) listaRef.current.scrollTo({ top: Math.max(el.offsetTop - 8, 0), behavior: 'smooth' });
+  }, [ativo]);
+
+  if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
+    return (
+      <Notice tom="info" titulo="Análise de decisões">
+        A análise de uma decisão sua ainda não está disponível nesta instalação. Abaixo, uma análise de exemplo.
+      </Notice>
+    );
+  }
+
+  const executar = async (decisao: DecisaoPreparada, atuais: Resultados) => {
+    setErro(null);
+    let feitos = { ...atuais };
+    try {
+      if (!feitos.estrutura) {
+        setAndamento('estrutura');
+        feitos = { ...feitos, estrutura: (await pedir('estrutura', { paragrafos: decisao.paragrafos })) as SaidaEstrutura };
+        setResultados(feitos);
+      }
+      if (!feitos.questoes) {
+        setAndamento('questoes');
+        feitos = { ...feitos, questoes: (await pedir('questoes', { paragrafos: decisao.paragrafos })) as SaidaQuestoes };
+        setResultados(feitos);
+      }
+      if (!feitos.fundamentos) {
+        setAndamento('fundamentos');
+        const questoes = feitos.questoes!.questoes.map(q => ({ id: q.id, enunciado: q.enunciado, conclusao: q.conclusao }));
+        feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { paragrafos: decisao.paragrafos, questoes })) as SaidaFundamentos };
+        setResultados(feitos);
+      }
+    } catch (e) {
+      setErro((e as Error).message);
+    } finally {
+      setAndamento(null);
+    }
+  };
+
+  const analisar = () => {
+    setEnviada(preparo);
+    setResultados({});
+    setAba('geral');
+    setAtivo(null);
+    void executar(preparo, {});
+  };
+
+  const novaAnalise = () => {
+    setEnviada(null);
+    setResultados({});
+    setErro(null);
+    setAtivo(null);
+  };
+
+  // Formulário
+  if (!enviada) {
+    const trocados = preparo.substituicoes.length;
+    return (
+      <Card className="p-6 flex flex-col gap-5">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-serif text-2xl font-semibold text-ink">Analisar uma decisão</h2>
+          <p className="text-base text-ink-soft">
+            Cole o texto de uma sentença, acórdão ou decisão. O Argumenta identifica a estrutura, as questões resolvidas, as conclusões e os
+            fundamentos de cada uma, com o parágrafo de origem.
+          </p>
+        </div>
+
+        <div>
+          <Label htmlFor="argumenta-texto">Texto da decisão</Label>
+          <textarea
+            id="argumenta-texto"
+            value={texto}
+            onChange={e => setTexto(e.target.value)}
+            rows={12}
+            placeholder="Cole aqui o texto da decisão (copiado do PDF ou do editor de texto)."
+            aria-describedby="argumenta-tamanho"
+            aria-invalid={longo || undefined}
+            className={`${campoClasses} font-serif text-[15px] leading-relaxed resize-y`}
+          />
+          <p id="argumenta-tamanho" className={`mt-1.5 text-sm ${longo ? 'text-danger-text' : 'text-ink-mute'}`}>
+            {vazio
+              ? `Até cerca de 6 páginas (${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres).`
+              : `${preparo.paragrafos.length} parágrafo(s) · ${preparo.caracteres.toLocaleString('pt-BR')} de ${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres${
+                  longo ? '. O texto passou do limite: analise uma parte menor (por exemplo, sem o relatório).' : ''
+                }`}
+          </p>
+        </div>
+
+        <details className="rounded-md border border-line px-4 py-3">
+          <summary className="cursor-pointer text-sm font-medium text-ink">
+            Dados pessoais: {trocados === 0 ? 'nenhum encontrado até agora' : `${trocados} trocado(s) por marcadores antes do envio`}
+          </summary>
+          <div className="flex flex-col gap-4 pt-3">
+            <p className="text-sm text-ink-soft">
+              Antes de sair do seu navegador, nomes das partes e dos advogados, CPF, CNPJ, RG, OAB, número do processo, endereço, CEP, telefone e
+              e-mail são trocados por marcadores como [PARTE_1]. Os dados reais voltam só nesta tela. A detecção usa padrões e rótulos (como
+              &ldquo;Autor:&rdquo;): confira abaixo e acrescente outros nomes, se faltar algum.
+            </p>
+            {trocados > 0 && (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm">
+                {preparo.substituicoes.map(s => (
+                  <li key={s.marcador} className="flex gap-2 min-w-0">
+                    <span className="font-mono text-ink-soft shrink-0">{s.marcador}</span>
+                    <span className="text-ink truncate">{s.original}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div>
+              <Label htmlFor="argumenta-extras">Outros nomes a ocultar (um por linha)</Label>
+              <textarea
+                id="argumenta-extras"
+                value={extras}
+                onChange={e => setExtras(e.target.value)}
+                rows={3}
+                className={`${campoClasses} resize-y`}
+              />
+            </div>
+            {!vazio && (
+              <details>
+                <summary className="cursor-pointer text-sm text-brand-text">Ver o texto exatamente como será enviado</summary>
+                <ol className="mt-2 max-h-72 overflow-y-auto flex flex-col gap-2 text-sm text-ink-soft">
+                  {preparo.paragrafos.map((p, i) => (
+                    <li key={i}>
+                      <span className="text-ink-mute">§{i + 1}.</span> {p}
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            )}
+          </div>
+        </details>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <Button type="button" onClick={analisar} disabled={!usuario || vazio || longo}>
+            <Sparkles className="w-4 h-4" />
+            Analisar decisão
+          </Button>
+          {!carregando && !usuario && (
+            <span className="text-sm text-ink-soft">
+              <Link href="/entrar" className="text-brand-text underline underline-offset-2">
+                Entre na sua conta
+              </Link>{' '}
+              para analisar uma decisão.
+            </span>
+          )}
+        </div>
+        <p className="text-sm text-ink-mute">
+          Nada do texto nem da análise fica guardado no Ratione: ao sair desta página, a análise se perde. Cada análise usa três pedidos de IA
+          do seu limite diário.
+        </p>
+      </Card>
+    );
+  }
+
+  // Análise
+  const r = (s: string) => restaurar(s, enviada.substituicoes);
+  const { estrutura, questoes, fundamentos } = resultados;
+  const ref = (numeros: readonly number[]) =>
+    numeros.length > 0 && (
+      <button
+        type="button"
+        onClick={() => setAtivo(Math.min(...numeros))}
+        className="text-sm text-brand-text hover:underline underline-offset-2"
+      >
+        {rotuloParagrafos(numeros)}
+      </button>
+    );
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="font-serif text-2xl font-semibold text-ink">Sua decisão</h2>
+        <Button variant="secondary" type="button" onClick={novaAnalise} disabled={andamento !== null}>
+          Nova análise
+        </Button>
+      </div>
+
+      {(andamento || erro) && (
+        <Card className="p-5 flex flex-col gap-3" aria-live="polite">
+          <ol className="flex flex-col gap-1.5 text-sm">
+            {ETAPAS.map(e => {
+              const pronta = !!resultados[e.id];
+              const atual = andamento === e.id;
+              return (
+                <li key={e.id} className={`flex items-center gap-2 ${pronta || atual ? 'text-ink' : 'text-ink-mute'}`}>
+                  {pronta ? (
+                    <Check className="w-4 h-4 text-ok-text" aria-hidden />
+                  ) : atual ? (
+                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden />
+                  ) : (
+                    <span className="w-4 h-4" aria-hidden />
+                  )}
+                  {e.rotulo}
+                  {atual && '…'}
+                </li>
+              );
+            })}
+          </ol>
+          {erro && (
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="text-sm text-danger-text">{erro}</p>
+              <Button variant="secondary" type="button" onClick={() => void executar(enviada, resultados)}>
+                Tentar de novo
+              </Button>
+            </div>
+          )}
+        </Card>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <Card className="lg:col-span-5 lg:sticky lg:top-24 overflow-hidden">
+          <h3 className="px-5 py-3 text-sm font-semibold text-ink border-b border-line bg-surface-2">Texto da decisão</h3>
+          <ol ref={listaRef} className="relative max-h-[560px] overflow-y-auto divide-y divide-line">
+            {enviada.paragrafos.map((p, i) => (
+              <li
+                key={i}
+                data-paragrafo={i + 1}
+                className={`px-5 py-3 border-l-[3px] ${ativo === i + 1 ? 'bg-brand-tint border-brand' : 'border-transparent'}`}
+              >
+                <span className="block text-xs text-ink-mute mb-1">§ {i + 1}</span>
+                <span className="block font-serif text-[15px] leading-relaxed text-ink">{r(p)}</span>
+              </li>
+            ))}
+          </ol>
+        </Card>
+
+        <div className="lg:col-span-7 flex flex-col gap-6">
+          {!estrutura ? (
+            <p className="text-base text-ink-soft">{erro ? 'A análise não foi concluída.' : 'Preparando a análise…'}</p>
+          ) : (
+            <Tabs value={aba} onValueChange={setAba} className="gap-8">
+              <TabsList aria-label="Seções da análise">
+                <TabsTrigger value="geral">Visão geral</TabsTrigger>
+                <TabsTrigger value="estrutura">Estrutura</TabsTrigger>
+                <TabsTrigger value="questoes" disabled={!questoes}>
+                  Questões e fundamentos
+                  {questoes && <Badge className="px-1.5">{questoes.questoes.length}</Badge>}
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="geral" className="flex flex-col gap-8">
+                <section className="flex flex-col gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Badge variant="brand">{TIPO_DECISAO[estrutura.tipo]}</Badge>
+                    <span className="text-base font-medium text-ink">{r(estrutura.resultado)}</span>
+                  </div>
+                  <p className="text-base text-ink-soft leading-relaxed">{r(estrutura.resumo)}</p>
+                </section>
+                {estrutura.pedidos.length > 0 && (
+                  <section className="border-t border-line pt-6 flex flex-col gap-3">
+                    <h3 className="text-sm font-semibold text-ink">Pedidos</h3>
+                    <ul className="flex flex-col gap-2">
+                      {estrutura.pedidos.map((p, i) => (
+                        <li key={i} className="flex flex-wrap items-baseline justify-between gap-x-4 text-base text-ink-soft">
+                          <span>{r(p.descricao)}</span>
+                          {ref(p.paragrafos)}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </TabsContent>
+
+              <TabsContent value="estrutura">
+                <ol className="divide-y divide-line border-y border-line">
+                  {[...estrutura.secoes]
+                    .sort((a, b) => a.inicio - b.inicio)
+                    .map((s, i) => (
+                      <li key={i} className="flex items-baseline justify-between gap-4 py-3">
+                        <span className="text-base font-medium text-ink">{SECAO[s.tipo]}</span>
+                        {ref(Array.from({ length: s.fim - s.inicio + 1 }, (_, k) => s.inicio + k))}
+                      </li>
+                    ))}
+                </ol>
+              </TabsContent>
+
+              <TabsContent value="questoes" className="flex flex-col gap-10">
+                {questoes?.questoes.map((q, i) => {
+                  const desta = fundamentos?.fundamentos.filter(f => f.questao === q.id) ?? [];
+                  return (
+                    <section key={q.id} className={`flex flex-col gap-4 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="eyebrow">
+                          Questão {i + 1} · {CATEGORIA[q.categoria]}
+                        </span>
+                        <Badge variant={RESULTADO[q.resultado].tom}>{RESULTADO[q.resultado].rotulo}</Badge>
+                        {ref(q.paragrafos)}
+                      </div>
+                      <h3 className="font-serif text-xl font-semibold text-ink leading-snug">{r(q.enunciado)}</h3>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-base text-ink">
+                          <span className="font-medium">Conclusão: </span>
+                          {r(q.conclusao)}
+                        </p>
+                        {ref(q.paragrafosConclusao)}
+                      </div>
+                      {fundamentos ? (
+                        desta.length > 0 ? (
+                          <ul className="flex flex-col gap-3">
+                            {desta.map((f, k) => (
+                              <li key={k} className="flex gap-3">
+                                <Badge variant={FUNDAMENTO[f.tipo].tom} className="w-24 justify-center self-start shrink-0">
+                                  {FUNDAMENTO[f.tipo].rotulo}
+                                </Badge>
+                                <div className="flex flex-col gap-0.5">
+                                  <p className="text-base text-ink leading-snug">{r(f.descricao)}</p>
+                                  <div className="flex flex-wrap items-baseline gap-x-3">
+                                    {f.citacao && <span className="text-sm text-ink-soft">{r(f.citacao)}</span>}
+                                    {ref(f.paragrafos)}
+                                  </div>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm text-ink-mute">Nenhum fundamento identificado para esta questão.</p>
+                        )
+                      ) : (
+                        andamento === 'fundamentos' && <p className="text-sm text-ink-mute">Identificando os fundamentos…</p>
+                      )}
+                    </section>
+                  );
+                })}
+              </TabsContent>
+            </Tabs>
+          )}
+
+          <Notice titulo="Análise gerada por IA (Claude Haiku 5.5)">
+            Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira cada ponto no parágrafo
+            indicado. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
+            página, a análise se perde.
+          </Notice>
+        </div>
+      </div>
+    </div>
+  );
+}

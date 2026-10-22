@@ -31,8 +31,9 @@ export default function TermosPage() {
             Um conjunto de ferramentas de apoio ao trabalho jurídico e ao estudo do Direito: <Destaque>PrazoZero</Destaque> (cálculo de prazos),{' '}
             <Destaque>NormaViva</Destaque> (consulta à redação de normas), <Destaque>TeseMap</Destaque> (mapa de precedentes) e{' '}
             <Destaque>Argumenta</Destaque> (análise de fundamentação). Cada ferramenta informa se está disponível, em prévia ou em demonstração; a
-            situação de cada uma está em <Link href="/metodologia" className={link}>Metodologia e limitações</Link>. Hoje nenhuma ferramenta usa
-            inteligência artificial.
+            situação de cada uma está em <Link href="/metodologia" className={link}>Metodologia e limitações</Link>. Os recursos de inteligência
+            artificial (explicação de dispositivo no NormaViva e análise de decisão no Argumenta), quando disponíveis, são identificados na tela
+            e só funcionam quando você pede.
           </p>
         </Secao>
 
