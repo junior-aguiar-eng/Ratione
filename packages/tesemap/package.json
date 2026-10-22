@@ -35,6 +35,7 @@
     "carregar:tesemap": "tsx src/banco/carregar-supabase.ts",
     "importar:stf": "tsx src/stf/importar.ts",
     "agregar:stf": "tsx src/stf/agregar.ts",
+    "importar:stj-sumulas": "tsx src/stj/importar-sumulas.ts",
     "grafo-minimo": "tsx src/banco/grafo-minimo-revisao.ts"
   },
   "dependencies": {

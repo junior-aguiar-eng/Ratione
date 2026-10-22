@@ -340,6 +340,7 @@ function DadosComplementares({ no }: { no: NoTese }) {
   if (no.tipo === 'sumula' && texto(no.detalhes.dataAprovacao)) linhas.push(['Aprovada em', dataCurta(no.detalhes.dataAprovacao as string)]);
   add('Publicação', no.detalhes.fontePublicacao);
   add('Observação do STF', no.detalhes.observacao);
+  add('Nota do STJ', no.detalhes.nota);
   if (Array.isArray(no.detalhes.processosLeadingCase) && no.detalhes.processosLeadingCase.length > 0) linhas.push(['Processos paradigma', (no.detalhes.processosLeadingCase as string[]).join('; ')]);
   if (rg.length > 0) linhas.push(['Repercussão geral no STF', rg.map(r => `Tema ${r.numero}${r.descricao ? `: ${r.descricao}` : ''}`).join(' | ')]);
   if (linhas.length === 0) return null;

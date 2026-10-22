@@ -188,19 +188,24 @@ export function numerosDeRepercussaoGeral(n: NoTese): string[] {
 
 /**
  * Ids dos nós que o próprio nó diz estarem ligados a ele: o tema de repercussão geral que o STJ registra (`repercussaoGeral`), o tema e as súmulas que
- * a observação de uma súmula do STF cita (`temasRg`, `sumulasCorrelatas`). Ignora o que não tiver o formato esperado.
+ * a observação de uma súmula do STF cita (`temasRg`, `sumulasCorrelatas`), a súmula do STJ que um tema repetitivo originou ou cita (`sumulaOriginada`,
+ * `referenciaSumular`, números) e o tema repetitivo ligado a uma súmula do STJ (`temasStj`). Ignora o que não tiver o formato esperado.
  */
 export function idsLigadosPeloProprioNo(n: NoTese): string[] {
   const temas = [...soNumeros(n.detalhes.repercussaoGeral), ...soNumeros(n.detalhes.temasRg)].map(x => `STF-RG-${x}`);
   const sumulas = Array.isArray(n.detalhes.sumulasCorrelatas)
     ? n.detalhes.sumulasCorrelatas.map(r => (r && typeof r === 'object' ? (r as { id?: unknown }).id : null)).filter((x): x is string => typeof x === 'string' && /^STF-(SV|SUMULA)-\d+$/.test(x))
     : [];
-  return [...new Set([...temas, ...sumulas])];
+  const sumulasStj = n.tribunal === 'STJ' && n.tipo === 'precedente'
+    ? [n.detalhes.sumulaOriginada, n.detalhes.referenciaSumular].flatMap(r => (typeof r === 'string' ? (r.match(/\d+/g) ?? []) : [])).map(x => `STJ-SUMULA-${Number(x)}`)
+    : [];
+  const temasStj = soNumeros(n.detalhes.temasStj).map(x => `STJ-TEMA-${x}`);
+  return [...new Set([...temas, ...sumulas, ...sumulasStj, ...temasStj])];
 }
 
 /**
- * Ligações que as próprias fontes registram: o STJ liga um precedente seu a um tema de repercussão geral do STF; a observação de uma súmula do STF cita
- * outra súmula ou um tema. Vale nos dois sentidos (quem é citado também mostra quem o cita). NÃO são relações validadas do mapa: a tela as mostra à
+ * Ligações que as próprias fontes registram: o STJ liga um precedente seu a um tema de repercussão geral do STF ou a uma súmula sua; a observação de uma
+ * súmula do STF cita outra súmula ou um tema. Vale nos dois sentidos (quem é citado também mostra quem o cita). NÃO são relações validadas do mapa: a tela as mostra à
  * parte, dizendo de onde vêm. Só aparecem os nós que existem no grafo.
  */
 export async function ligadosPelasFontes(db: SupabaseClient, n: NoTese): Promise<NoLigado[]> {

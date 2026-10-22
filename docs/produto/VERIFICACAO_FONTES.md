@@ -381,6 +381,17 @@ Primeiras relações do grafo (`packages/tesemap/corpus/grafo-minimo.json`): o T
 
 **Situação:** as 5 relações foram sugeridas pela IA (`sugerido_ia`) e **validadas em 22/10/2026** pelo analista validador jurídico, José Bonifácio de Aguiar Santos Júnior, como estão. Relação nova ou alterada nasce pendente e só aparece no site depois de validada no arquivo (`pnpm grafo-minimo` gera a folha de revisão, `corpus/grafo-minimo.md`). O trecho é conferido pelo programa; o que a validação confere é a leitura (tipo e rótulo da relação).
 
+## 27. Súmulas do STJ (F4-01), lidas em 22/10/2026
+
+| | |
+|---|---|
+| Fonte | STJ, pesquisa de súmulas do SCON, `https://scon.stj.jus.br/SCON/sumstj/` (todas as súmulas) |
+| Como foi obtida | Página impressa em PDF pelo responsável (Chrome, 22/10/2026, 93 páginas) e enviada ao repositório: o SCON responde **403** ao acesso automático (testado com `fetch_oficial.py`, duas tentativas, User-Agent de navegador) |
+| Arquivo | `corpus/stj/sumulas.pdf.gz` (PDF original, SHA-256 `79a0d9c9d0725ddbe4906bdfe0ee4f0b2b0c159fc228c15ce3d9d9c5aa6823f1`) e `corpus/stj/sumulas.txt.gz` (texto do `pdftotext 4.06 -layout`), com o manifesto `sumulas-manifesto.json` |
+| Conteúdo | 676 súmulas, de 1 a 676, sem lacuna: 641 aprovadas, 29 canceladas, 5 alteradas e 1 revogada; cada uma com órgão julgador, julgamento (salvo as Súmulas 152 e 217, que só registram a publicação), publicação e a nota de cancelamento ou alteração |
+| Descartado | O PDF público `https://www.stj.jus.br/docs_internet/VerbetesSTJ.pdf` (Last-Modified 22/11/2024, até a Súmula 673, sem as datas) e `VerbetesSTJ_asc.pdf` (2021): desatualizados. As Súmulas 674 e 675 (26/11/2024) e 676 (12/2024) conferem com as notícias oficiais do STJ |
+| Conferência | As Súmulas 545 e 630 aparecem com a redação revisada em 10/09/2025 (DJEN de 02/12/2025, Tema repetitivo 1194), e a anterior fica na nota; a Súmula 222 aparece cancelada em 13/11/2024 (DJe 29/11/2024) |
+
 ## 15. Como repetir esta verificação
 
 ```bash
