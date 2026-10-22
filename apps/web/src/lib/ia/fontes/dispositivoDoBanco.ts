@@ -1,6 +1,19 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Dispositivo } from '../normaviva';
-import type { DispositivoParaExplicar } from './prompt';
+import type { Dispositivo } from '../../normaviva';
+
+/** Um dispositivo do NormaViva como as tarefas o recebem: só o texto oficial e os metadados que a tela já mostra. */
+export interface DispositivoParaExplicar {
+  id: string;
+  normaNome: string;
+  rotulo: string;
+  /** Texto vigente do dispositivo e dos que estão abaixo dele, na ordem, com o rótulo de cada um. */
+  texto: string;
+  /** Ato que deu a redação atual e a data em que passou a valer, quando conhecidos. */
+  atoDaRedacao: string | null;
+  vigenteDe: string | null;
+  vigenciaConfirmada: boolean;
+  revogado: boolean;
+}
 
 type Linha = Pick<Dispositivo, 'id' | 'rotulo' | 'tipo' | 'ordem' | 'texto' | 'revogado'>;
 
@@ -14,7 +27,7 @@ export function textoDoDispositivo(base: Linha, abaixo: Linha[]): string {
   return linhas.join('\n');
 }
 
-/** Lê do banco (leitura pública do NormaViva) o que a explicação recebe. Nada vem do navegador além do id. */
+/** Fonte de leitura (pública) do NormaViva. Nada vem do navegador além do id. */
 export async function lerDispositivoParaExplicar(db: SupabaseClient, id: string): Promise<DispositivoParaExplicar | null> {
   const base = await db.from('dispositivos').select('id, norma_id, escopo, rotulo, tipo, ordem, texto, revogado').eq('id', id).maybeSingle();
   if (base.error) throw new Error(`ler dispositivo: ${base.error.message}`);

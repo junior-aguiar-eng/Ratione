@@ -42,6 +42,8 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 `supabase/migrations/20261022000001_explicacao_ia.sql` cria o cache das explicações (`ia_explicacoes`), o registro de uso com o custo (`ia_uso`) e as funções que conferem cota e orçamento de forma atômica (`ia_reservar`, `ia_finalizar`, `ia_registrar_cache`), executáveis só pela chave de serviço. **Aplique no projeto real** pelo *SQL Editor* antes de ligar a funcionalidade; enquanto ela estiver desligada, a migração não muda nada no site. Como ligar e desligar: `docs/produto/EXPLICACAO_IA.md`, §5.
 
+`supabase/migrations/20261022000002_ia_tarefas.sql` (mesmo dia) generaliza essas tabelas para o **catálogo de tarefas de IA** (`docs/produto/IA_TAREFAS.md`): o cache vira `ia_respostas`, o uso ganha a coluna `tarefa` e a cota passa a ser por tarefa, com o orçamento do mês e "uma chamada de cada vez" valendo para todas. Aplique **depois** da anterior (podem ir juntas, nesta ordem); preserva o que já houver nelas.
+
 ## Correções de dados do NormaViva (`supabase/correcoes/`)
 
 Arquivos SQL que corrigem o texto já carregado sem recarregar o corpus inteiro. Cada um é gerado do corpus, idempotente e termina com uma consulta de conferência. Aplicar no *SQL Editor*, depois do merge do código que muda o parser. Aplicadas: `20261020_producao_de_efeito.sql` em 20/10/2026 (conferido no banco: 0 dispositivos com a anotação no texto, 12 revogados corrigidos, 737 revogados no total, hash das versões confere).

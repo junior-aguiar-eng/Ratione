@@ -5,17 +5,17 @@ import { Sparkles } from 'lucide-react';
 import Notice from '../../components/Notice';
 import { Button } from '@/components/ui/button';
 import { useSessao } from '../../lib/useSessao';
-import type { RespostaExplicacao } from '../../lib/ia/prompt';
+import type { SaidaExplicacao } from '../../lib/ia/tarefas/explicarDispositivo';
 
 type Estado =
   | { tipo: 'ocioso' }
   | { tipo: 'carregando' }
-  | { tipo: 'pronto'; explicacao: RespostaExplicacao; doCache: boolean; restantesHoje: number | null }
+  | { tipo: 'pronto'; explicacao: SaidaExplicacao; doCache: boolean; restantesHoje: number | null }
   | { tipo: 'erro'; mensagem: string };
 
 /**
  * Explicação por IA (F3-08): só quando a pessoa logada clica. Nada é pedido ao abrir a página nem ao trocar de dispositivo
- * (o componente recebe `key` com o id e volta ao estado inicial). Regras em `lib/ia/politica.ts`.
+ * (o componente recebe `key` com o id e volta ao estado inicial). Tarefa "explicar-dispositivo" do catálogo de IA (`lib/ia/catalogo.ts`).
  */
 export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string }) {
   const { usuario, carregando, contaDisponivel } = useSessao();
@@ -27,9 +27,14 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
   const pedir = async () => {
     setEstado({ tipo: 'carregando' });
     try {
-      const r = await fetch('/api/normaviva/explicar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dispositivoId }) });
+      // Tarefa fechada do catálogo de IA (lib/ia/catalogo.ts): a entrada é só o id do dispositivo
+      const r = await fetch('/api/ia/explicar-dispositivo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entrada: { dispositivoId } })
+      });
       const corpo = await r.json().catch(() => ({}));
-      if (r.ok) setEstado({ tipo: 'pronto', explicacao: corpo.explicacao, doCache: !!corpo.doCache, restantesHoje: corpo.restantesHoje ?? null });
+      if (r.ok) setEstado({ tipo: 'pronto', explicacao: corpo.resposta, doCache: !!corpo.doCache, restantesHoje: corpo.restantesHoje ?? null });
       else setEstado({ tipo: 'erro', mensagem: corpo.mensagem ?? 'A explicação por IA falhou agora.' });
     } catch {
       setEstado({ tipo: 'erro', mensagem: 'Sem conexão. Tente de novo.' });
