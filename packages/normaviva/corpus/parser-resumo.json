@@ -9,7 +9,7 @@
       "incisos": 1460,
       "alineas": 365,
       "itens": 0,
-      "revogados": 74,
+      "revogados": 73,
       "comAnotacao": 1718,
       "continuacoes": 87,
       "preambulo": 15,
@@ -32,7 +32,7 @@
       "comAnotacao": 840,
       "continuacoes": 778,
       "preambulo": 15,
-      "anomalias": 2,
+      "anomalias": 0,
       "maiorArtigo": 361,
       "artigosUnicos": 361,
       "lacunas": [],
@@ -95,7 +95,7 @@
       "comAnotacao": 1936,
       "continuacoes": 87,
       "preambulo": 484,
-      "anomalias": 13,
+      "anomalias": 3,
       "maiorArtigo": 922,
       "artigosUnicos": 922,
       "lacunas": [],
@@ -344,7 +344,7 @@
       "comAnotacao": 237,
       "continuacoes": 9,
       "preambulo": 5,
-      "anomalias": 2,
+      "anomalias": 1,
       "maiorArtigo": 204,
       "artigosUnicos": 204,
       "lacunas": [],
@@ -563,26 +563,13 @@
       "rótulo repetido: ADCT art. 101, § 4º, III",
       "rótulo repetido: ADCT art. 101, § 4º, IV"
     ],
-    "DL-2848-1940": [
-      "rótulo repetido: corpo art. 359-M",
-      "rótulo repetido: corpo art. 359-M"
-    ],
+    "DL-2848-1940": [],
     "DL-3689-1941": [],
     "DL-4657-1942": [],
     "DL-5452-1943": [
       "numeração reiniciou em \"Art. 1º - Esta Consolidação estatui as normas que regulam as\"",
       "rótulo repetido: corpo art. 1º",
-      "rótulo repetido: corpo art. 2º",
-      "rótulo repetido: corpo art. 58-A",
-      "rótulo repetido: corpo art. 58-A, § 1º",
-      "rótulo repetido: corpo art. 58-A, § 2º",
-      "rótulo repetido: corpo art. 58-A, § 3º",
-      "rótulo repetido: corpo art. 373-A",
-      "rótulo repetido: corpo art. 401",
-      "rótulo repetido: corpo art. 401",
-      "rótulo repetido: corpo art. 448-A",
-      "rótulo repetido: corpo art. 627-A",
-      "rótulo repetido: corpo art. 642-A"
+      "rótulo repetido: corpo art. 2º"
     ],
     "LEI-10406-2002": [],
     "LEI-11101-2005": [],
@@ -638,7 +625,6 @@
     ],
     "LEI-6830-1980": [],
     "LEI-7210-1984": [
-      "rótulo repetido: corpo art. 9º-A",
       "linha parecida com dispositivo, mas fora da LC 95: \"III -jurídica;\""
     ],
     "LEI-7347-1985": [],

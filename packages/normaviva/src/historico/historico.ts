@@ -148,13 +148,36 @@ export interface ResultadoHistorico {
   candidatos: Record<string, number>;
 }
 
-export function gerarHistorico(pasta: string, validacoesAnteriores: Record<string, CasoHistorico['validacao']> = {}): ResultadoHistorico {
+/**
+ * O caso já escolhido antes reaparece entre os candidatos? Pelo id ou, se o parser mudou o rótulo, pelos textos A e B
+ * (iguais, ou o novo com a letra inicial que o parser perdia: "Art. 3º - A lei…" era lido como art. 3º-A, texto "lei…").
+ */
+function mesmoCaso(anterior: CasoHistorico, c: CasoHistorico): boolean {
+  if (anterior.normaId !== c.normaId) return false;
+  if (anterior.id === c.id) return true;
+  const igual = (velho: string, novo: string) => novo === velho || novo.replace(/^[AO] /, '') === velho;
+  return igual(anterior.antes.texto, c.antes.texto) && igual(anterior.depois.texto, c.depois.texto);
+}
+
+/** Seleção estável: cada caso já gravado fica (com a validação) enquanto existir no corpus; o que sumiu é trocado por um candidato novo da mesma norma. */
+function manterAnteriores(todos: CasoHistorico[], anteriores: CasoHistorico[]): CasoHistorico[] {
+  const mantidos: CasoHistorico[] = [];
+  for (const a of anteriores) {
+    const c = todos.find(x => mesmoCaso(a, x) && !mantidos.some(m => m.id === x.id));
+    if (c) mantidos.push({ ...c, validacao: a.validacao });
+  }
+  const livres = todos.filter(x => !mantidos.some(m => m.id === x.id || m.depois.atoRotulo === x.depois.atoRotulo));
+  return [...mantidos, ...escolher(livres, anteriores.length - mantidos.length)];
+}
+
+export function gerarHistorico(pasta: string, anteriores: CasoHistorico[] = []): ResultadoHistorico {
   const manifesto: EntradaManifesto[] = JSON.parse(readFileSync(join(pasta, 'planalto', 'manifesto.json'), 'utf-8'));
   const arquivoComplementar = join(pasta, 'planalto', 'anotadas', 'manifesto.json');
   const complementares: EntradaManifesto[] = existsSync(arquivoComplementar) ? JSON.parse(readFileSync(arquivoComplementar, 'utf-8')) : [];
   const linhas = linhasDoCorpus(pasta);
   const porNorma: CasoHistorico[][] = [];
   const doComplemento: CasoHistorico[] = [];
+  const estaveis: CasoHistorico[] = [];
   const candidatos: Record<string, number> = {};
   for (const l of linhas) {
     const m = manifesto.find(x => x.id === l.norma.id)!;
@@ -168,10 +191,10 @@ export function gerarHistorico(pasta: string, validacoesAnteriores: Record<strin
     }
     candidatos[l.norma.id] = todos.length;
     if (todos.length === 0) continue;
-    if (complemento) doComplemento.push(...escolher(todos, POR_NORMA_COMPLEMENTAR));
+    if (anteriores.length > 0) estaveis.push(...manterAnteriores(todos, anteriores.filter(a => a.normaId === l.norma.id)));
+    else if (complemento) doComplemento.push(...escolher(todos, POR_NORMA_COMPLEMENTAR));
     else porNorma.push(escolher(todos));
   }
-  const casos = [...equilibrar(porNorma), ...doComplemento].sort((x, y) => x.normaId.localeCompare(y.normaId) || x.id.localeCompare(y.id));
-  for (const c of casos) if (validacoesAnteriores[c.id]) c.validacao = validacoesAnteriores[c.id];
+  const casos = (anteriores.length > 0 ? estaveis : [...equilibrar(porNorma), ...doComplemento]).sort((x, y) => x.normaId.localeCompare(y.normaId) || x.id.localeCompare(y.id));
   return { casos, candidatos };
 }

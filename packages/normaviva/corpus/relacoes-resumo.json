@@ -6,8 +6,8 @@
     "presumido": 1798,
     "explicito": 195,
     "externo": 263,
-    "comDestinoNoCorpus": 2967,
-    "semDestinoNoCorpus": 247
+    "comDestinoNoCorpus": 3030,
+    "semDestinoNoCorpus": 184
   },
   "normas": [
     {
@@ -31,8 +31,8 @@
       "presumido": 48,
       "explicito": 8,
       "externo": 3,
-      "comDestinoNoCorpus": 91,
-      "semDestinoNoCorpus": 18
+      "comDestinoNoCorpus": 105,
+      "semDestinoNoCorpus": 4
     },
     {
       "id": "DL-3689-1941",
@@ -43,8 +43,8 @@
       "presumido": 178,
       "explicito": 33,
       "externo": 14,
-      "comDestinoNoCorpus": 278,
-      "semDestinoNoCorpus": 9
+      "comDestinoNoCorpus": 284,
+      "semDestinoNoCorpus": 3
     },
     {
       "id": "DL-4657-1942",
@@ -67,8 +67,8 @@
       "presumido": 150,
       "explicito": 3,
       "externo": 13,
-      "comDestinoNoCorpus": 180,
-      "semDestinoNoCorpus": 46
+      "comDestinoNoCorpus": 217,
+      "semDestinoNoCorpus": 9
     },
     {
       "id": "LEI-10406-2002",
@@ -91,8 +91,8 @@
       "presumido": 36,
       "explicito": 3,
       "externo": 28,
-      "comDestinoNoCorpus": 281,
-      "semDestinoNoCorpus": 19
+      "comDestinoNoCorpus": 282,
+      "semDestinoNoCorpus": 18
     },
     {
       "id": "LEI-11340-2006",
@@ -103,8 +103,8 @@
       "presumido": 3,
       "explicito": 2,
       "externo": 6,
-      "comDestinoNoCorpus": 10,
-      "semDestinoNoCorpus": 2
+      "comDestinoNoCorpus": 11,
+      "semDestinoNoCorpus": 1
     },
     {
       "id": "LEI-11343-2006",
@@ -115,8 +115,8 @@
       "presumido": 23,
       "explicito": 4,
       "externo": 5,
-      "comDestinoNoCorpus": 47,
-      "semDestinoNoCorpus": 5
+      "comDestinoNoCorpus": 48,
+      "semDestinoNoCorpus": 4
     },
     {
       "id": "LEI-11419-2006",
@@ -319,8 +319,8 @@
       "presumido": 5,
       "explicito": 2,
       "externo": 1,
-      "comDestinoNoCorpus": 33,
-      "semDestinoNoCorpus": 2
+      "comDestinoNoCorpus": 34,
+      "semDestinoNoCorpus": 1
     },
     {
       "id": "LEI-9307-1996",
@@ -343,8 +343,8 @@
       "presumido": 104,
       "explicito": 3,
       "externo": 12,
-      "comDestinoNoCorpus": 170,
-      "semDestinoNoCorpus": 3
+      "comDestinoNoCorpus": 172,
+      "semDestinoNoCorpus": 1
     }
   ]
 }
