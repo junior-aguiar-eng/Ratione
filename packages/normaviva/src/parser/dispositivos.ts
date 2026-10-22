@@ -53,7 +53,11 @@ export interface ResultadoParser {
 }
 
 const ORD = '(?:º|°|o(?=[\\s.\\-–—:]|$))';
-const SUFIXO = '(?:\\s*-\\s*([A-Z]{1,2})(?![a-zA-Zá-ú]))?';
+/**
+ * Sufixo de artigo ou parágrafo acrescido: "58-A", "§ 2 o -A.", "359-M-A" (duplo) e "401A." (colado, só antes de ponto).
+ * Nunca com espaço depois do hífen: em "Art. 3º - A lei…" e "§ 1º - O Presidente…" a letra é o artigo definido do texto.
+ */
+const SUFIXO = '(?:(?:\\s*-|(?=[A-Z]\\.))([A-Z]{1,2}(?:-[A-Z])?)(?![a-zA-Zá-ú]))?';
 const RE_ARTIGO = new RegExp(`^Art\\.?\\s*\\.?\\s*(\\d+(?:\\.\\d{3})*)\\s*(${ORD})?${SUFIXO}\\s*(?:[.\\-–—:]\\s*)?(.*)$`);
 /** "Arts. 187 a 196 (Revogados…)" e "Arts. 5º e 6º (…)": faixa ou par de artigos numa só linha. */
 const RE_ARTIGOS = new RegExp(String.raw`^Arts?\.?\s*(\d+(?:\.\d{3})*)\s*(?:${ORD})?\s*\.?\s*(a|ao|e|ou)\s*(\d+(?:\.\d{3})*)\s*(?:${ORD})?\s*(?:[.\-–—:]\s*)?(.*)$`);

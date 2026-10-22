@@ -70,8 +70,8 @@ export function documentoDeRevisao(casos: CasoHistorico[], normasSemCaso: string
 }
 
 function main() {
-  const anteriores: Record<string, CasoHistorico['validacao']> = {};
-  if (existsSync(ARQUIVO)) for (const c of JSON.parse(readFileSync(ARQUIVO, 'utf-8')) as CasoHistorico[]) anteriores[c.id] = c.validacao;
+  // Os casos já gravados (com a validação) são mantidos enquanto existirem no corpus
+  const anteriores: CasoHistorico[] = existsSync(ARQUIVO) ? JSON.parse(readFileSync(ARQUIVO, 'utf-8')) : [];
   const r = gerarHistorico(PASTA, anteriores);
   writeFileSync(ARQUIVO, JSON.stringify(r.casos, null, 2) + '\n', 'utf-8');
   const comCaso = new Set(r.casos.map(c => c.normaId));

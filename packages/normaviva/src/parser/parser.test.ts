@@ -53,6 +53,19 @@ describe('Parser LC 95/98 (F3-02)', () => {
     assert.ok(r.dispositivos[4].revogado);
   });
 
+  it('"Art. 3º - A lei…" e "§ 1º - O Presidente…": a letra depois do hífen com espaço é o artigo do texto, não sufixo (21/10/2026)', () => {
+    const r = parsearDispositivos(['Art. 3º - A lei excepcional ou temporária aplica-se ao fato.', '§ 1º - O Presidente poderá solicitar urgência.', 'Art. 10 - O dia do começo inclui-se no cômputo do prazo.']);
+    assert.deepStrictEqual(rotulos(r), ['art. 3º', 'art. 3º, § 1º', 'art. 10']);
+    assert.strictEqual(r.dispositivos[0].texto, 'A lei excepcional ou temporária aplica-se ao fato.');
+    assert.strictEqual(r.dispositivos[2].texto, 'O dia do começo inclui-se no cômputo do prazo.');
+  });
+
+  it('sufixos verdadeiros: "58-A", "§ 2 o -A.", "359-M-A." (duplo), "401A." (colado) e "897-A Caberão"', () => {
+    const r = parsearDispositivos(['Art. 58-A. Considera-se trabalho em regime de tempo parcial.', '§ 2 o -A. O prazo máximo.', 'Art. 359-M-A. Quando os delitos.', 'Art. 401A. (VETADO)', 'Art. 897-A Caberão embargos de declaração.']);
+    assert.deepStrictEqual(rotulos(r), ['art. 58-A', 'art. 58-A, § 2º-A', 'art. 359-M-A', 'art. 401-A', 'art. 897-A']);
+    assert.strictEqual(r.dispositivos[2].texto, 'Quando os delitos.');
+  });
+
   it('faixa de artigos revogados vira um dispositivo revogado por artigo', () => {
     const r = parsearDispositivos(['Art. 51. Texto.', 'Arts. 52 a 54 . (Revogados pelo Decreto-lei nº 406, de 1968)', 'Art. 1.620. a 1.622. (Revogados pela Lei nº 12.010, de 2009)']);
     assert.deepStrictEqual(rotulos(r), ['art. 51', 'art. 52', 'art. 53', 'art. 54', 'art. 1.620', 'art. 1.621', 'art. 1.622']);
@@ -110,6 +123,19 @@ describe('Parser no corpus real do Planalto (F3-02)', () => {
       const seq = conferirSequencia(corpus(id).dispositivos.filter(d => d.tipo === 'artigo' && d.escopo === 'corpo').map(a => numeroBase(a.numero)));
       assert.strictEqual(seq.maior, total, `${id}: maior artigo`);
       assert.deepStrictEqual(seq.lacunas, [], `${id}: lacunas`);
+    }
+  });
+
+  it('CP, CLT, CTN, LEF e LEP: "Art. 3º - A lei…" é o art. 3º, e nenhum dispositivo ganha sufixo falso "-A"/"-O"', () => {
+    const cp = corpus('DL-2848-1940');
+    assert.match(cp.dispositivos.find(d => d.rotulo === 'art. 3º')?.texto ?? '', /^A lei excepcional ou temporária/);
+    assert.match(cp.dispositivos.find(d => d.rotulo === 'art. 10')?.texto ?? '', /^O dia do começo/);
+    assert.ok(!cp.dispositivos.some(d => d.rotulo === 'art. 10-O'));
+    assert.ok(cp.dispositivos.some(d => d.rotulo === 'art. 337-O'), 'sufixo verdadeiro continua');
+    assert.match(corpus('DL-5452-1943').dispositivos.find(d => d.rotulo === 'art. 58')?.texto ?? '', /^A duração normal do trabalho/);
+    for (const id of ['DL-2848-1940', 'DL-5452-1943', 'LEI-5172-1966', 'LEI-6830-1980', 'LEI-7210-1984']) {
+      const r = corpus(id);
+      assert.deepStrictEqual(r.anomalias.filter(a => /rótulo repetido: corpo art\. \d+[º]?-[AO]\b/.test(a)), [], `${id}: repetição por sufixo falso`);
     }
   });
 

@@ -120,8 +120,14 @@ describe('Normas de teste com histórico conhecido (F3-07)', () => {
   });
 
   it('o arquivo versionado é o que o gerador produz do corpus (regenere com `pnpm historico` se o corpus mudou)', () => {
-    const validacoes = Object.fromEntries(casos.map(c => [c.id, c.validacao]));
-    assert.deepEqual(gerarHistorico(PASTA, validacoes).casos, casos);
+    assert.deepEqual(gerarHistorico(PASTA, casos).casos, casos);
+  });
+
+  it('a seleção é estável: regenerar a partir do arquivo mantém os mesmos casos, e um caso validado leva a validação junto', () => {
+    const comValidacao = casos.map((c, i) => (i === 0 ? { ...c, validacao: { status: 'validado' as const, por: 'Revisor', em: '2026-10-21' } } : c));
+    const r = gerarHistorico(PASTA, comValidacao).casos;
+    assert.deepEqual(r.map(c => c.id), casos.map(c => c.id));
+    assert.deepEqual(r.find(c => c.id === casos[0].id)?.validacao, { status: 'validado', por: 'Revisor', em: '2026-10-21' });
   });
 
   it('a validação é pendente ou tem quem e quando', () => {
