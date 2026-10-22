@@ -15,19 +15,28 @@
       "types": "./src/stj/index.ts",
       "import": "./src/stj/index.ts",
       "default": "./src/stj/index.ts"
+    },
+    "./banco": {
+      "types": "./src/banco/index.ts",
+      "import": "./src/banco/index.ts",
+      "default": "./src/banco/index.ts"
     }
   },
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
-    "coletar:stj": "tsx src/stj/coletar.ts"
+    "coletar:stj": "tsx src/stj/coletar.ts",
+    "carregar:tesemap": "tsx src/banco/carregar-supabase.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@ratione/db": "workspace:*",
+    "@supabase/supabase-js": "^2.117.3",
     "@types/node": "^24.0.0",
     "tsx": "^4.19.3",
     "typescript": "^7.0.2"
