@@ -49,6 +49,8 @@ export interface ResultadoVigencia {
   arquivo: ArquivoVigenciaFutura;
   novos: string[];
   removidos: string[];
+  /** Avisos de vigência complexa que saíram porque o Planalto consolidou o ato: confira se nenhum efeito ainda é futuro. */
+  complexosConsolidados: string[];
   erros: string[];
 }
 
@@ -71,18 +73,27 @@ export function urlPlanaltoDoAto(tipo: string, numero: string, ano: string): str
   return p ? `https://www.planalto.gov.br/ccivil_03/_ato${p[0]}-${p[1]}/${ano}/lei/L${numero}.htm` : null;
 }
 
-function alteracoesDoAto(detalhe: DetalheDoAto, chaves: Map<string, string>): AlteracaoNaNorma[] {
+/** Ação do Senado que não muda o texto: o dispositivo foi vetado ("Acréscimo Vetado", "Alteração Vetada", "Vetado"). */
+export const acaoVetada = (acao: string) => /vetad[oa]/i.test(acao);
+
+/**
+ * O que o ato muda em cada norma do corpus, segundo o Senado. Item vetado não conta: a Lei 15.269/2025 só "alterava" a Lei de Improbidade com o
+ * inciso XIII do art. 11, que foi vetado, e o aviso que isso gerava não tinha o que avisar.
+ */
+export function alteracoesDoAto(detalhe: DetalheDoAto, chaves: Map<string, string>): AlteracaoNaNorma[] {
   const saida: AlteracaoNaNorma[] = [];
   for (const a of detalhe.altera) {
     const chave = chaveDoNomeSenado(a.nomeNorma);
     const normaId = chave && chaves.get(chave);
     if (!normaId) continue;
+    const itens = a.itens.filter(i => !acaoVetada(i.acao));
+    if (itens.length === 0) continue;
     const artigos: string[] = [];
-    for (const it of a.itens) {
+    for (const it of itens) {
       const k = chaveDoArtigo(it.dispositivo);
       if (k && !artigos.includes(k)) artigos.push(k);
     }
-    saida.push({ normaId, artigos, dispositivos: a.itens.map(i => ({ dispositivo: i.dispositivo.trim(), acao: i.acao })) });
+    saida.push({ normaId, artigos, dispositivos: itens.map(i => ({ dispositivo: i.dispositivo.trim(), acao: i.acao })) });
   }
   return saida;
 }
@@ -102,12 +113,27 @@ export async function executarVigencia(dep: DependenciasVigencia): Promise<Resul
     return anotados.get(normaId)!.has(chave);
   };
 
-  // 1) Quem já é aviso sai quando a data chegou ou quando o texto do corpus já cita o ato (o Planalto consolidou)
+  // 1) Quem já é aviso: sai o que foi vetado (não muda o texto); sai o aviso quando a data chegou ou quando o texto do corpus já cita o ato (o
+  // Planalto consolidou). Aviso de vigência complexa que sai por consolidação fica registrado à parte (`consolidado_vigencia_complexa`) e vai para o
+  // relatório: parte dos efeitos pode ainda ser futura (a LC 227/2026 tinha efeitos em 2027, mas não nos artigos do CTN), e quem decide é o revisor.
+  const complexosConsolidados: string[] = [];
   for (const a of [...avisos.values()]) {
-    const consolidado = a.alteracoes.every(x => consolidadoEm(x.normaId, a.chave));
+    const alteracoes = a.alteracoes
+      .map(x => ({ ...x, dispositivos: x.dispositivos.filter(d => !acaoVetada(d.acao)) }))
+      .filter(x => x.dispositivos.length > 0)
+      .map(x => ({ ...x, artigos: [...new Set(x.dispositivos.map(d => chaveDoArtigo(d.dispositivo)).filter((k): k is string => !!k))] }));
+    if (alteracoes.length === 0) {
+      avisos.delete(a.chave);
+      examinados[a.chave] = 'nao_altera_o_corpus';
+      continue;
+    }
+    if (alteracoes.length !== a.alteracoes.length || alteracoes.some((x, i) => x.dispositivos.length !== a.alteracoes[i]?.dispositivos.length)) avisos.set(a.chave, { ...a, alteracoes });
+    const consolidado = alteracoes.every(x => consolidadoEm(x.normaId, a.chave));
     if ((a.vigenteEm !== null && a.vigenteEm <= hoje) || consolidado) {
       avisos.delete(a.chave);
-      examinados[a.chave] = 'em_vigor';
+      const complexo = consolidado && a.vigencia.tipo === 'complexa';
+      examinados[a.chave] = complexo ? 'consolidado_vigencia_complexa' : 'em_vigor';
+      if (complexo) complexosConsolidados.push(a.ato);
     }
   }
 
@@ -161,7 +187,7 @@ export async function executarVigencia(dep: DependenciasVigencia): Promise<Resul
   const lista = [...avisos.values()].sort((a, b) => (a.vigenteEm ?? '9999').localeCompare(b.vigenteEm ?? '9999') || a.chave.localeCompare(b.chave));
   const novos = lista.filter(a => !antes.avisos.some(b => b.chave === a.chave)).map(a => a.ato);
   const removidos = antes.avisos.filter(a => !avisos.has(a.chave)).map(a => a.ato);
-  return { arquivo: { geradoEm: hoje, avisos: lista, examinados }, novos, removidos, erros };
+  return { arquivo: { geradoEm: hoje, avisos: lista, examinados }, novos, removidos, complexosConsolidados, erros };
 }
 
 async function pedir(url: string, json: boolean): Promise<Response> {
@@ -216,6 +242,7 @@ async function main() {
   });
   writeFileSync(ARQUIVO, JSON.stringify(r.arquivo, null, 2) + '\n', 'utf-8');
   for (const a of r.arquivo.avisos) console.log(`${a.vigenteEm ?? 'a conferir'}  ${a.ato}  → ${a.alteracoes.map(x => `${x.normaId} (${x.artigos.length} art.)`).join(', ')}`);
+  for (const a of r.complexosConsolidados) console.log(`CONFERIR  ${a}: saiu porque o Planalto já anota a alteração, mas a vigência é complexa (algum efeito pode ser futuro); leia a cláusula`);
   for (const e of r.erros) console.log(`ERRO ${e}`);
   console.log(`${r.arquivo.avisos.length} aviso(s) (${r.novos.length} novo(s), ${r.removidos.length} removido(s)), ${r.erros.length} erro(s).`);
   if (r.erros.length > 0 && r.arquivo.avisos.length === 0 && Object.keys(r.arquivo.examinados).length === 0) process.exitCode = 1;

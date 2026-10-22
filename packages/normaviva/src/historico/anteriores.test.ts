@@ -65,7 +65,8 @@ describe('Redações anteriores como segunda versão do dispositivo (F3-04)', ()
   });
 
   it('a conferência do revisor vai junto; enquanto não houver, fica nula', () => {
-    const base = casos[0];
+    // Parte de uma cópia pendente: os casos reais foram validados em 22/10/2026
+    const base = { ...casos[0], validacao: { status: 'pendente' as const, por: null, em: null } };
     const dados = datasDoSenado.normas[base.normaId];
     assert.deepEqual([versaoAnterior(base, dados).conferida_por, versaoAnterior(base, dados).conferida_em], [null, null]);
     const conferido = versaoAnterior({ ...base, validacao: { status: 'validado', por: 'Revisor', em: '2026-11-01' } }, dados);
@@ -95,7 +96,7 @@ describe('Redações anteriores como segunda versão do dispositivo (F3-04)', ()
     });
 
     it('quem confere informa quem e quando, os dois juntos', async () => {
-      await assert.rejects(db.query("update public.versoes_dispositivo set conferida_por = 'Revisor' where dispositivo_id = 'DL-4657-1942|corpo|art. 6º' and vigente_ate is not null"), /versoes_dispositivo_conferida_junto/);
+      await assert.rejects(db.query("update public.versoes_dispositivo set conferida_por = 'Revisor', conferida_em = null where dispositivo_id = 'DL-4657-1942|corpo|art. 6º' and vigente_ate is not null"), /versoes_dispositivo_conferida_junto/);
     });
 
     it('o visitante (sem login) lê as redações anteriores, como o resto da base pública', async () => {

@@ -1,0 +1,70 @@
+-- F3-07: registra no banco a conferência das 57 redações anteriores validadas pelo revisor jurídico em 22/10/2026
+-- (corpus/historico-conhecido.json). As linhas já estão no banco desde a recarga de 22/10/2026, sem conferência; este arquivo só preenche
+-- conferida_por e conferida_em, casando dispositivo E hash do texto (redação que não for exatamente a validada não é marcada). Idempotente.
+-- Gerado a partir do corpus; conferência no fim: 57 conferidas e 0 redações anteriores sem conferência.
+update public.versoes_dispositivo v
+   set conferida_por = x.por, conferida_em = x.em
+  from (values
+  ('CF-1988|corpo|art. 103-B, § 4º, III', '534b4d406c280d5be82c63b0c1c14eb2dfe5abe01924b939eb5d5752d4c82efd', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('CF-1988|corpo|art. 166, § 13', '6824a25eab5dd9cca24f92327f1464f4fe42e95ec331baa829c5fdea52d6ea6d', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('CF-1988|corpo|art. 243', 'c21ddfb70afba514d0dbca3a676580e11c083d9a463a12a9e2f50c4747827bc8', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('CF-1988|corpo|art. 29-A, IV', 'd1755038098b6fbc1857af5a23e6034075264b7116b3e5dfcf96407c2b53b466', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('CF-1988|corpo|art. 73, § 1º, I', 'c9b6dad4f9587c0bde98f54f05f30ed4cac72716aee3089809133eebad622e1e', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('CF-1988|corpo|art. 7º, XII', '76f56e28136eb72a9b25ce887863843b4379defc65fcf99c958e4d30b8b92b53', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-2848-1940|corpo|art. 155, § 8º', '8381210bea718db24b22159d702d386b2ae1b35e6d49f58165044b98d7d884f8', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-2848-1940|corpo|art. 46', 'a5e262c897fff093609b869cf6b6a6ef850c3692280a114726dd2a81c3ad0020', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-3689-1941|corpo|art. 341', '74cb3d3da16e1d14f08df744100dd1c833fd341abebfb89af6599b750377a1db', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-3689-1941|corpo|art. 3º-B, § 1º', 'b92f8e0c7ff90b10a9ebaca7c672c36b78f74209c4f667e749ea96843dd64964', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-4657-1942|corpo|art. 10, § 1º', 'a01706a1895c04567a56307bc11abdbf2db64818cc7356d9a4d517f2baa9ec29', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-4657-1942|corpo|art. 6º', '27154e7c088a4eec1bdd2924623ca43a1a54f4adc6c3eb34df62416a4d120939', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('DL-5452-1943|corpo|art. 73, § 4º', '17f6c6b30b516f6d770375cede6a6dd6fac820f61a15cc5d2523554617607241', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-10406-2002|corpo|art. 1.076, II', '54a2de98a3be17c23a084611dda74ff3de373962d67b1bbb5d94413bd53cf509', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-10406-2002|corpo|art. 3º', '1534130aece365712aa84e5a6bfaa3f0a751cbfbfcdd99f6147190f07c9583cc', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11101-2005|corpo|art. 6º', '13384f371ecf8eb804c44902e104f328211a3a808c862db48c17222a4d273062', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11101-2005|corpo|art. 72, parágrafo único', '7b7e4371fe8da15b1ed35c0db8b8518163178b0ac6598237b71d0e034aeaef54', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11340-2006|corpo|art. 18, II', '7ed5ed8dbad74ecb50bb7c8a2efc33074a04938a1744ed692d268b65802efb99', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11340-2006|corpo|art. 22, § 4º', '098dc8ad43b76b2bde3a1dbde17db0a859b16ad0537e1d56ef81e303605df47a', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11340-2006|corpo|art. 38-A, parágrafo único', '8506d77b450292d7d45765a3d4e3ffe12a3492bf3c7337e95bea5c719586afdf', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11340-2006|corpo|art. 7º, II', 'f79409c14d30e0acd8e25d2fc3eb3cc838a958bee78529c7da20b12259cce513', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11340-2006|corpo|art. 9º', 'b2f08ebee94f7977dc110b0a8b43ba92c4340df64ea924f2095e73d7084da611', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11343-2006|corpo|art. 32', 'a176d05b03f9c1ddea69fb36b45ef9063c7f5efe8bbe3460c1710175a2d40edc', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11343-2006|corpo|art. 62, § 4º', '619c3395323fea44549446e3f751473490e3cb0483a212fe32531754a24c7911', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-11343-2006|corpo|art. 73', '55ecf56225cf7fe58edd5e742f7efe2d3ff824d5ea891792ad71a22ba552f9be', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-13105-2015|corpo|art. 1.063', '536a28e638ad4afa7f4b0474decd0860405c6b9b11f46d38e7595c4ee2d1eb77', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-13105-2015|corpo|art. 12', 'ae4ac7d64e0b307b5326f8323e2801ed52369224e0ed17e0d81afc873a0d141d', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-13709-2018|corpo|art. 18, V', 'a8fa44fca7248432846332dc5b3b583e6842ace424539e155b4851cf363c019b', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-14133-2021|corpo|art. 86, § 3º', 'b341bd8bf10cf484dce8d16f8762f709cedb137f385db7cc8c09f6fe9d58cd82', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-5172-1966|corpo|art. 151, III', '60028dcfa5203b9f428338c79ad992782b6eadf2cefdf7378904e822b92fbf3f', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-5172-1966|corpo|art. 9º, IV, b)', 'cc1aeb5d310905cb0183a3fed0179f7783173a2a18f12e21de224438e3c7bd18', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-6830-1980|corpo|art. 7º, II', 'abd817363b402da22035aad72023d2e1ca163b2e21e1edcc31395dd8cdafc88e', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-7210-1984|corpo|art. 112, I', '71f5615b138d9a1a8e4b9460a1e4fb965d04005f129fccaed81c63e6357bdcc1', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-7210-1984|corpo|art. 9º-A, § 5º', '6418583461dd3ae6bd38b8871e58af62d3d0f5493d64450cd965d0d0e7045a4d', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-7347-1985|corpo|art. 15', '17e8ac902e71b524ff6059574eae56f3eae0c6b44ae902aeda5bdcd7b141ea1b', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-7347-1985|corpo|art. 1º, V', 'bafae3e43c13b100b206a7095175641b682633e9b2cf9bd886ea36e4ceb66b7f', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8069-1990|corpo|art. 4º', '4f3e14455757ce7b948150a8c3a730b90a4d0b13bfe42abc351707f2136dd317', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8069-1990|corpo|art. 87, II', 'e680171d3b75a18033a9aed755e65546a70d1eeb94cbac9fde89e28f244ac964', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8078-1990|corpo|art. 4º', 'eb3365c565ea891f22da60358038961acddfa43ae555a08d0b629fdcb5fa82d9', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8078-1990|corpo|art. 57', '206c695143fe260632ad2156ff8f8aa19e006c14473066d23b6b2c3e156136c9', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8112-1990|corpo|art. 247', '646ab31efbb73c2f7ae89b89ad4d5acda68120b85bf9d82f00213f20739f09c9', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8112-1990|corpo|art. 9º, II', '1f674a10b2b3dc767548de9134c4caa2fb1e6d489aae08da238c9964f9a4853a', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8213-1991|corpo|art. 151', 'efb5b25412761739c05b085dd43930b3edf90cbbde8d9f2798be15e61f32d878', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8213-1991|corpo|art. 29, § 3º', 'e9b6cee48fafb9d9ff6b5725bd6584066141abb6d97f91ae7033cd6dfc454849', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8213-1991|corpo|art. 44', '32945dca080751130b51af11594470890f0aa2bbb4b8e2620dd8460a74618690', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8213-1991|corpo|art. 6º', '62fc0851115c9b78d70d9963da3a3c247db4f046f40e121f54d3bba89fda0ca6', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8213-1991|corpo|art. 72', '7114431d1bec6df42b72f0a2f8a30c0dfcd9f104dda0813b295fcd1c9349fdfe', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8245-1991|corpo|art. 12', '84658b09ab5049a25afaa13e1a9c8b6da49a5ba1d1760e7cc092a932af1407a3', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-8429-1992|corpo|art. 1º', 'b0c9f1ef81353395f79b86d6b86f0b5f60870abf537b47aa96ba72be6391c32e', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9099-1995|corpo|art. 23', 'fd98807c85743e952e0eb7019e487fb2c527a2d8182d650f1475cf43527881e2', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9099-1995|corpo|art. 60', '5e5c6a4b43c4f06d15fcc4074ec07ec3d1e4cad33ed89e96e2e1eea74a8064ca', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9099-1995|corpo|art. 69, parágrafo único', '99368d63f21a049eb1ec787d39b3b410d414d4cc23dcba3b9e0bf8aeb511022b', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9099-1995|corpo|art. 83, § 2º', '48e7621fe089ac7ef1dbea425c7d5bc1cc9860cc59cbabc86dc470df02ba5aa9', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9099-1995|corpo|art. 8º, § 1º', '73ee4e3c3b7a7e96a15f2f616db687674d8f70e9eea562c360893366b583d155', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9307-1996|corpo|art. 13, § 4º', 'cdb7bd935e86bcaca27ac512123e9927e0331aa10075bdca3ec3e83dbf02902c', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9503-1997|corpo|art. 174', '3ebe62a660b771af0461461cfb84bbcc8256cb2b704fa71bfe840f6a157fc876', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date),
+  ('LEI-9503-1997|corpo|art. 2º, parágrafo único', 'c68f8341f39e9fcacc8ce9457fc88ada9c745293d89fb326bf5420a893fe2920', 'José Bonifácio de Aguiar Santos Júnior', '2026-10-22'::date)
+  ) as x(dispositivo_id, hash, por, em)
+ where v.dispositivo_id = x.dispositivo_id and v.hash = x.hash and v.vigente_ate is not null;
+
+select count(*) filter (where conferida_por is not null) as conferidas,
+       count(*) filter (where conferida_por is null) as sem_conferencia
+  from public.versoes_dispositivo where vigente_ate is not null;
