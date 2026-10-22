@@ -3,7 +3,7 @@
  *
  *   pnpm carregar:tesemap --simular   # monta os nós e mostra as contagens; não precisa de chave nem toca no banco
  *   pnpm carregar:tesemap             # grava (upsert) os nós dos precedentes do STJ e dos temas de repercussão geral do STF
- *                                     # e o grafo mínimo (F4-05): nós de dispositivo e arestas, que só aparecem depois de validadas
+ *                                     # as súmulas do STJ (F4-01) e o grafo mínimo (F4-05): nós de dispositivo e arestas, que só aparecem depois de validadas
  *
  * Variáveis de ambiente (no terminal, NUNCA em arquivo versionado nem em conversa): SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY.
  * Antes: aplicar no SQL Editor `supabase/migrations/20261022000003_tesemap.sql`.
@@ -11,13 +11,14 @@
  * Diferente da carga do NormaViva, esta NÃO apaga nada: o texto da lei é regenerável do Planalto, mas as arestas do grafo são curadoria e
  * validação humana. O `upsert` por `id` atualiza só os nós da fonte oficial; nó ou aresta curados à mão ficam como estão.
  */
-import { carregarPrecedentesStj, manifestoStj } from '../stj';
+import { carregarPrecedentesStj, carregarSumulasStj, manifestoStj, manifestoSumulasStj } from '../stj';
 import { join } from 'node:path';
 import { extrairRemissoes } from '@ratione/normaviva/referencias';
 import { linhasDoCorpus } from '@ratione/normaviva/corpus';
 import { carregarAplicacaoStf, carregarSumulasStf, carregarTemasRgStf, manifestoStf } from '../stf';
 import { nosDosPrecedentesStj, temasStfCitadosPeloStj } from './nos-stj';
 import { nosDasSumulasStf, nosDosTemasStf } from './nos-stf';
+import { nosDasSumulasStj, temasQueLigamSumulas } from './nos-sumulas-stj';
 import { citacoesNoTexto } from './citacoes';
 import { arestasDoGrafoMinimo, carregarGrafoMinimo, nosDosDispositivos } from './grafo-minimo';
 import type { ArestaBanco, NoBanco } from './esquemas';
@@ -58,19 +59,21 @@ async function main() {
   const corpus = linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus'));
   const ids = new Set(corpus.flatMap(l => l.dispositivos.map(d => d.id)));
   const citar = (t: string) => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id));
-  const nosStj = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), citar);
+  const precedentesStj = carregarPrecedentesStj();
+  const nosStj = nosDosPrecedentesStj(precedentesStj, manifestoStj(), citar);
   const nosStf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), citar, temasStfCitadosPeloStj(nosStj), carregarAplicacaoStf());
   const sumulas = carregarSumulasStf();
   // As ligações das súmulas só valem para nó que existe no grafo: os do STJ, os temas do STF e as próprias súmulas
   const existentes = new Set([...nosStj, ...nosStf].map(n => n.id).concat(sumulas.map(x => x.id)));
   const nosSumulas = nosDasSumulasStf(sumulas, manifestoStf(), existentes, citar);
+  const nosSumulasStj = nosDasSumulasStj(carregarSumulasStj(), manifestoSumulasStj(), temasQueLigamSumulas(precedentesStj), new Set(nosStj.map(n => n.id)), citar);
   const grafo = carregarGrafoMinimo();
   const nosDispositivos = nosDosDispositivos(grafo, corpus);
-  const nos = [...nosStj, ...nosStf, ...nosSumulas, ...nosDispositivos];
+  const nos = [...nosStj, ...nosStf, ...nosSumulas, ...nosSumulasStj, ...nosDispositivos];
   const arestas = arestasDoGrafoMinimo(grafo, nos);
   const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
   console.log(
-    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes) + ${nosDispositivos.length} dispositivos do grafo mínimo; ${comCitacao} citam dispositivo do NormaViva`
+    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes) + ${nosSumulasStj.length} súmulas do STJ em vigor (${nosSumulasStj.filter(n => (n.detalhes.temasStj as unknown[]).length > 0).length} ligadas a tema repetitivo) + ${nosDispositivos.length} dispositivos do grafo mínimo; ${comCitacao} citam dispositivo do NormaViva`
   );
   console.log(`Arestas do grafo mínimo: ${arestas.length} (${arestas.filter(a => a.validado_por !== null).length} validadas; as pendentes não aparecem no site)`);
   if (process.argv.includes('--simular')) {

@@ -82,6 +82,14 @@ describe('Ligação STJ e STF pela repercussão geral (F4-02)', () => {
     assert.deepEqual(idsLigadosPeloProprioNo(n({})), []);
   });
 
+  it('ids que o próprio nó liga no STJ: súmula originada ou citada por um tema; tema ligado a uma súmula', () => {
+    assert.deepEqual(idsLigadosPeloProprioNo(no({ sumulaOriginada: '378', referenciaSumular: '444', repercussaoGeral: [] })), ['STJ-SUMULA-378', 'STJ-SUMULA-444']);
+    const sumula: NoTese = { ...no({ temasStj: [{ numero: '14' }, { numero: 'x' }] }), id: 'STJ-SUMULA-378', tipo: 'sumula' };
+    assert.deepEqual(idsLigadosPeloProprioNo(sumula), ['STJ-TEMA-14']);
+    // Número de súmula em nó que não é precedente do STJ não vira ligação
+    assert.deepEqual(idsLigadosPeloProprioNo({ ...no({ sumulaOriginada: '378' }), tribunal: 'STF' }), []);
+  });
+
   it('a lista diz "aprovada em" para súmula e "julgado em" para precedente', () => {
     const base = { id: 'x', rotulo: 'x', tribunal: 'STF', numero_referencia: null, descricao: '', dispositivo_id: null, detalhes: { dataJulgamento: '2015-06-18', orgaoJulgador: 'Tribunal Pleno' }, origem_dado: 'curado' as const, fontes: [], validado_por: null, validado_em: null, atualizado_em: '2026-10-22' };
     assert.equal(resumoDoNo({ ...base, tipo: 'sumula' }, dc), 'aprovada em 18/06/2015 · Tribunal Pleno');

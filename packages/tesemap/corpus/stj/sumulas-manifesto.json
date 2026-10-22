@@ -1,0 +1,28 @@
+{
+  "fonte": "STJ, pesquisa de súmulas (SCON): todos os enunciados, com órgão julgador, julgamento, publicação e notas de cancelamento ou alteração",
+  "paginaUrl": "https://scon.stj.jus.br/SCON/sumstj/",
+  "obtidoPor": "página impressa em PDF pelo responsável e enviada ao repositório (o SCON bloqueia o acesso automático)",
+  "lidoEm": "2026-10-22",
+  "pdf": {
+    "nomeOriginal": "VerbetesSTJ.pdf",
+    "bytes": 433431,
+    "sha256": "79a0d9c9d0725ddbe4906bdfe0ee4f0b2b0c159fc228c15ce3d9d9c5aa6823f1",
+    "arquivo": "sumulas.pdf.gz"
+  },
+  "texto": {
+    "arquivo": "sumulas.txt.gz",
+    "bytes": 217279,
+    "sha256": "ede5c79614b85ad0cb1aed407f28c4a360440eae2ac06c29f183a49572c6a141",
+    "extraidoCom": "pdftotext version 4.06 [www.xpdfreader.com], opções -layout -enc UTF-8"
+  },
+  "conferencia": {
+    "total": 676,
+    "maiorNumero": 676,
+    "porSituacao": {
+      "aprovada": 641,
+      "cancelada": 29,
+      "alterada": 5,
+      "revogada": 1
+    }
+  }
+}
