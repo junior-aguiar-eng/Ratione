@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 /** Erro no próprio layout: substitui a página inteira, então precisa trazer <html> e <body> e não depende do CSS do app. */
 export default function ErroGlobal({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {

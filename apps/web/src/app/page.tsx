@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { MotorPrazoZero } from '@ratione/prazozero';
 import { MotorNormaViva } from '@ratione/normaviva';
-import { GRAFOS_PRECEDENTES_CATALOGADOS } from '@ratione/tesemap';
 import RecentesHome from '../components/RecentesHome';
+import GrafoMinimoVitrine from '../components/GrafoMinimoVitrine';
 import { MODULOS } from '../lib/modulos';
 import { DECISAO_DEMO } from '../lib/decisaoDemo';
 import { dataCurta, dataLonga, diaDaSemana } from '../lib/datas';
@@ -137,110 +137,6 @@ function VisualNormaViva() {
   );
 }
 
-function VisualTeseMap() {
-  const grafo = GRAFOS_PRECEDENTES_CATALOGADOS['tema-1076-stj'];
-  const no = (id: string) => grafo.nos.find(n => n.id === id)!;
-
-  // Posições (viewBox 640x300). Colunas: legislação/tese/distinção à esquerda; dispositivos à direita.
-  const L = { x: 10, w: 250, h: 62 };
-  const R = { x: 380, w: 250, h: 62 };
-  const layout: Record<string, { x: number; y: number; w: number; tipo: 'info' | 'warn' | 'ok' | 'rel' }> = {
-    'lei-14365': { x: L.x, y: 8, w: L.w, tipo: 'ok' },
-    'tema-1076-stj': { x: L.x, y: 118, w: L.w, tipo: 'warn' },
-    'distinguishing-fazenda': { x: L.x, y: 228, w: L.w, tipo: 'rel' },
-    'cpc-art85-p2': { x: R.x, y: 8, w: R.w, tipo: 'info' },
-    'cpc-art85-p8': { x: R.x, y: 173, w: R.w, tipo: 'info' }
-  };
-  const cor: Record<string, string> = {
-    info: 'rgb(var(--info))',
-    warn: 'rgb(var(--warn))',
-    ok: 'rgb(var(--ok))',
-    rel: 'rgb(var(--rel))'
-  };
-  const arestas = grafo.arestas.filter(a => layout[a.source] && layout[a.target]);
-  const centro = (id: string, lado: 'dir' | 'esq') => {
-    const n = layout[id];
-    return { x: lado === 'dir' ? n.x + n.w : n.x, y: n.y + 31 };
-  };
-
-  const textoRelacoes = arestas.map(a => ({
-    id: a.id,
-    de: no(a.source).label,
-    rel: a.label,
-    para: no(a.target).label
-  }));
-
-  return (
-    <div>
-      <svg viewBox="0 0 640 300" className="w-full h-auto hidden sm:block" role="img" aria-label="Mapa do Tema 1.076/STJ">
-        <defs>
-          <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0L10 5L0 10z" fill="rgb(var(--ink-mute))" />
-          </marker>
-        </defs>
-        {arestas.map(a => {
-          const origem = layout[a.source];
-          const destino = layout[a.target];
-          const mesmaColuna = origem.x === destino.x;
-          const p1 = mesmaColuna
-            ? { x: origem.x + origem.w / 2, y: origem.y + (origem.y < destino.y ? 62 : 0) }
-            : centro(a.source, origem.x < destino.x ? 'dir' : 'esq');
-          const p2 = mesmaColuna
-            ? { x: destino.x + destino.w / 2, y: destino.y + (origem.y < destino.y ? 0 : 62) }
-            : centro(a.target, origem.x < destino.x ? 'esq' : 'dir');
-          return (
-            <line
-              key={a.id}
-              x1={p1.x}
-              y1={p1.y}
-              x2={p2.x}
-              y2={p2.y}
-              stroke="rgb(var(--ink-mute))"
-              strokeWidth="1.5"
-              markerEnd="url(#seta)"
-            />
-          );
-        })}
-        {Object.entries(layout).map(([id, p]) => (
-          <g key={id}>
-            <rect x={p.x} y={p.y} width={p.w} height={62} rx="8" fill="rgb(var(--surface))" stroke="rgb(var(--line-strong))" />
-            <rect x={p.x} y={p.y} width="5" height="62" rx="2.5" fill={cor[p.tipo]} />
-            <foreignObject x={p.x + 16} y={p.y} width={p.w - 24} height="62">
-              <div
-                style={{ height: 62, display: 'flex', alignItems: 'center', fontSize: 14, lineHeight: 1.3, fontWeight: 500, color: 'rgb(var(--ink))' }}
-              >
-                {no(id).label}
-              </div>
-            </foreignObject>
-          </g>
-        ))}
-      </svg>
-
-      <ul className="sm:hidden flex flex-col gap-3">
-        {textoRelacoes.map(r => (
-          <li key={r.id} className="text-sm leading-snug text-ink-soft">
-            <span className="font-medium text-ink">{r.de}</span> <span className="text-brand-text">{r.rel.toLowerCase()}</span>{' '}
-            <span className="font-medium text-ink">{r.para}</span>
-          </li>
-        ))}
-      </ul>
-
-      <ul className="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm text-ink-soft">
-        {[
-          ['bg-warn', 'Precedente vinculante'],
-          ['bg-info', 'Dispositivo legal'],
-          ['bg-ok', 'Alteração legislativa'],
-          ['bg-rel', 'Distinguishing']
-        ].map(([c, t]) => (
-          <li key={t} className="flex items-center gap-2">
-            <span className={`w-2.5 h-2.5 rounded-full ${c}`} /> {t}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 function VisualPrazoZero() {
   const r = new MotorPrazoZero().calcularPrazo({
     dataEvento: '2026-03-10',
@@ -338,12 +234,12 @@ export default function HomePage() {
           id="tesemap"
           nome="TeseMap"
           titulo="Explore como uma tese se conecta à jurisprudência."
-          descricao="Precedentes vinculantes, dispositivos legais e distinções reunidos em um mapa navegável."
+          descricao="Precedentes qualificados do STJ e do STF, súmulas e controle concentrado, cada um com a fonte oficial, e as relações que uma pessoa validou."
           cta="Explorar tese"
           href="/tesemap"
-          legenda="Exemplo com dados do módulo: Tema 1.076/STJ."
+          legenda="Relações validadas do Tema 1.076/STJ, as mesmas do módulo."
         >
-          <VisualTeseMap />
+          <GrafoMinimoVitrine />
         </Secao>
 
         <Secao

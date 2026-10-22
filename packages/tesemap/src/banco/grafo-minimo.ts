@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
-import { DataIsoSchema } from '@ratione/core';
+import { DataIsoSchema, juntarEspacos as espacos } from '@ratione/core';
 import { ArestaBancoSchema, NoBancoSchema, TIPOS_DE_ARESTA, type ArestaBanco, type NoBanco } from './esquemas';
 
 /** Prefixo dos nós do grafo que são dispositivos do NormaViva: `NV|` + id do dispositivo no corpus. */
@@ -51,8 +51,6 @@ export interface NormaDoCorpus {
   norma: { id: string; nome: string; fonte_url: string; fonte_tipo_pagina: string; fonte_sha256: string; lido_em: string };
   dispositivos: { id: string; texto: string; continuacao: string; anotacoes: unknown }[];
 }
-
-const espacos = (t: string) => t.replace(/\s+/g, ' ').trim();
 
 /** Nós dos dispositivos do grafo, com o texto oficial e a fonte do Planalto; recusa dispositivo que não exista no corpus. */
 export function nosDosDispositivos(grafo: GrafoMinimo, corpus: NormaDoCorpus[]): NoBanco[] {

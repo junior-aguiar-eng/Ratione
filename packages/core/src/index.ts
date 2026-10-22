@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ProcedenciaSchema } from './procedencia';
 
 export * from './procedencia';
+export * from './texto';
 
 /**
  * Esferas e instâncias do Poder Judiciário Brasileiro

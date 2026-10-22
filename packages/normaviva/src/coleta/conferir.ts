@@ -11,8 +11,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { detectarCharset, type EntradaManifesto } from './coletar';
+import { USER_AGENT_NAVEGADOR } from '@ratione/core';
 
-export const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+export const USER_AGENT = USER_AGENT_NAVEGADOR;
 const PASTA = join(__dirname, '..', '..', 'corpus');
 export const API = 'https://legis.senado.leg.br/dadosabertos/legislacao/';
 

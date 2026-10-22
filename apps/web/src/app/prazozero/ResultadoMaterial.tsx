@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Bookmark, CalendarPlus, Check, Copy, FileDown } from 'lucide-react';
 import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';

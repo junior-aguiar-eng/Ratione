@@ -12,12 +12,12 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { join } from 'node:path';
+import { USER_AGENT_NAVEGADOR as USER_AGENT } from '@ratione/core';
 import { lerPrecedentes } from './precedentes';
 
 const PORTAL = 'https://dadosabertos.web.stj.jus.br';
 const CONJUNTO = 'precedentes-qualificados';
 const PASTA = join(__dirname, '..', '..', 'corpus', 'stj');
-const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
 export interface ArquivoStj {
   nome: 'Temas.csv' | 'Processos.csv';

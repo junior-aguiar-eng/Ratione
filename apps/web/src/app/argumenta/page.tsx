@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Bookmark, Check, ExternalLink, FileText } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';

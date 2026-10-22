@@ -12,6 +12,7 @@
  * ou 1 (erro de execução). O workflow semanal transforma o código 2 numa issue; quem atualiza é o responsável (`pnpm coletar:stj` e a carga).
  */
 import { writeFileSync } from 'node:fs';
+import { juntarEspacos } from '@ratione/core';
 import { join } from 'node:path';
 import { baixarConjunto, type ManifestoStj } from '../stj/coletar';
 import { carregarPrecedentesStj, manifestoStj } from '../stj/corpus';
@@ -24,7 +25,6 @@ const AMOSTRA = 30;
 
 /** O que vira nó do grafo (mesmo critério de `nosDosPrecedentesStj`). */
 const noGrafo = (p: PrecedenteStj) => temTeseFirmada(p) && !p.cancelado && (p.tipo === 'Tema' || p.tipo === 'IAC');
-const espacos = (t: string | null) => (t ?? '').replace(/\s+/g, ' ').trim();
 
 export interface MudancasNosPrecedentes {
   /** Passou a ter nó no grafo: precedente novo com tese, ou tese firmada agora. */
@@ -47,7 +47,7 @@ export function compararPrecedentes(antes: PrecedenteStj[], depois: PrecedenteSt
     if (noGrafo(novo) && !estava) m.entram.push(id);
     else if (!noGrafo(novo) && estava) m.saem.push(id);
     else if (estava && velho) {
-      if (espacos(velho.tese) !== espacos(novo.tese)) m.teseAlterada.push(id);
+      if (juntarEspacos(velho.tese ?? '') !== juntarEspacos(novo.tese ?? '')) m.teseAlterada.push(id);
       else if (velho.situacao !== novo.situacao) m.situacaoAlterada.push(id);
     }
   }

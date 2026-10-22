@@ -1,4 +1,3 @@
-import React from 'react';
 import { Check, Clock } from 'lucide-react';
 import { diffPalavras } from '../../lib/diffTexto';
 import type { EtapaDaLinha } from '../../lib/linhaDoTempo';

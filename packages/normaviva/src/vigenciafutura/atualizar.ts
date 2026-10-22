@@ -18,7 +18,7 @@ import { join } from 'node:path';
 import { API, USER_AGENT, atosAlteradoresDoPlanalto, chaveDoNomeSenado, dataIsoDoSenado, ehAlteracao, textoSemHtml } from '../coleta/conferir';
 import { detectarCharset, type EntradaManifesto } from '../coleta/coletar';
 import { chavesDasNormas, normasCitadas, type DocumentoDaLista } from '../atualizacao/feeds';
-import { chaveDoArtigo, type AlteracaoNaNorma, type ArquivoVigenciaFutura, type AvisoVigenciaFutura } from './avisos';
+import { chaveDoArtigo, type AlteracaoNaNorma, type ArquivoVigenciaFutura } from './avisos';
 import { clausulaDeVigencia, lerVigencia, vigenteEm } from './vigencia';
 
 const PASTA = join(__dirname, '..', '..', 'corpus');
