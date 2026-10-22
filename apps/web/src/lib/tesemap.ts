@@ -167,7 +167,8 @@ const PLURAL: Record<string, [string, string]> = {
 /** "1.155 precedentes do STJ", "1 súmula do STF": a cobertura declarada em português. */
 export function coberturaPorExtenso(itens: Cobertura[]): string {
   return itens
-    .map(c => `${c.total.toLocaleString('pt-BR')} ${(PLURAL[c.tipo] ?? [c.tipo, c.tipo])[c.total === 1 ? 0 : 1]} ${c.tribunal ? `do ${c.tribunal}` : 'sem tribunal informado'}`)
+    // Dispositivo de lei (grafo mínimo, F4-05) não tem tribunal: diz de onde vem em vez de "sem tribunal informado"
+    .map(c => `${c.total.toLocaleString('pt-BR')} ${(PLURAL[c.tipo] ?? [c.tipo, c.tipo])[c.total === 1 ? 0 : 1]} ${c.tribunal ? `do ${c.tribunal}` : c.tipo === 'dispositivo' ? 'de lei' : 'sem tribunal informado'}`)
     .join(', ');
 }
 

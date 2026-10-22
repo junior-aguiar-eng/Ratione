@@ -34,7 +34,8 @@
     "coletar:stj": "tsx src/stj/coletar.ts",
     "carregar:tesemap": "tsx src/banco/carregar-supabase.ts",
     "importar:stf": "tsx src/stf/importar.ts",
-    "agregar:stf": "tsx src/stf/agregar.ts"
+    "agregar:stf": "tsx src/stf/agregar.ts",
+    "grafo-minimo": "tsx src/banco/grafo-minimo-revisao.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",

@@ -48,6 +48,13 @@ describe('Cobertura e desenho do grafo (F4-04)', () => {
       ]),
       '1.155 precedentes do STJ, 1 súmula do STF, 3 súmulas do STF'
     );
+    assert.equal(
+      coberturaPorExtenso([
+        { tribunal: '', tipo: 'dispositivo', total: 4, atualizado_em: '2026-10-19' },
+        { tribunal: '', tipo: 'conceito', total: 1, atualizado_em: '2026-10-19' }
+      ]),
+      '4 dispositivos de lei, 1 conceito sem tribunal informado'
+    );
   });
 
   it('vizinhos numa circunferência: o primeiro no alto, igualmente espaçados, nenhum sobre o centro', () => {

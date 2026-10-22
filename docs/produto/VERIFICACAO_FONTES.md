@@ -367,6 +367,20 @@ Regras da leitura: prazo contado da publicação segue a LC 95/98, art. 8º, § 
 
 **Limites:** o dado é o que o STJ publica e fica defasado em relação ao Sistema de Gestão de Precedentes (há campos "recuperados via sistema Athos" nas anotações); onde exibido, mostrar a data de leitura e a atribuição. A procedência no núcleo é `curado` por convenção do projeto, mas a importação é mecânica do arquivo oficial, e o campo `lido` do `Precedente` diz isso.
 
+## 26. Grafo mínimo do TeseMap (F4-05), 22/10/2026
+
+Primeiras relações do grafo (`packages/tesemap/corpus/grafo-minimo.json`): o Tema 1.076 do STJ (honorários por apreciação equitativa) ligado aos §§ 2º, 3º, 6º-A e 8º do art. 85 do CPC e ao Tema 1.255 do STF. Não houve leitura nova na internet: cada relação cita um trecho de texto oficial já guardado no repositório, e a montagem (`arestasDoGrafoMinimo`) recusa o trecho que não estiver, palavra por palavra, no texto do nó citado.
+
+| Relação | Trecho tirado de | Fonte |
+|---|---|---|
+| Tema 1.076/STJ **restringe** art. 85, § 8º | tese do Tema 1.076, item ii | Dados Abertos do STJ, "Precedentes qualificados" (`Temas.csv`, §25) |
+| Tema 1.076/STJ **interpreta** art. 85, § 2º | tese do Tema 1.076, item i | idem |
+| Tema 1.076/STJ **interpreta** art. 85, § 3º | tese do Tema 1.076, item i | idem |
+| Art. 85, § 6º-A **confirma** Tema 1.076/STJ | texto do § 6º-A (incluído pela Lei nº 14.365/2022) | CPC, versão compilada do Planalto (corpus do NormaViva, lido em 19/10/2026) |
+| Tema 1.255/STF **relaciona** Tema 1.076/STJ | descrição do Tema 1.255 (mérito pendente) | Transparência do STF, temas de repercussão geral (F4-02) |
+
+**Situação:** as 5 relações foram sugeridas pela IA (`sugerido_ia`) e estão **pendentes** de validação; não aparecem no site até o responsável registrar a validação no arquivo (`pnpm grafo-minimo` gera a folha de revisão, `corpus/grafo-minimo.md`). O trecho é conferido pelo programa; o que a validação confere é a leitura (tipo e rótulo da relação).
+
 ## 15. Como repetir esta verificação
 
 ```bash
