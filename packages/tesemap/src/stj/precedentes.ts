@@ -164,3 +164,11 @@ export function lerPrecedentes(temasCsv: string, processosCsv: string): Preceden
   }
   return [...porSeq.values()].sort((a, b) => a.tipo.localeCompare(b.tipo) || a.numero - b.numero);
 }
+
+/**
+ * A "tese" que o STJ publica nem sempre é uma tese: nos temas com mérito julgado e acórdão ainda não publicado o campo traz o aviso
+ * "*Aguardando a publicação do acórdão do julgamento de mérito." (5 casos em 22/10/2026). Tese firmada é a que tem texto e não é esse aviso.
+ */
+export function temTeseFirmada(p: Pick<PrecedenteStj, 'tese'>): boolean {
+  return !!p.tese && !/^\*?\s*aguardando\s+a\s+publica/i.test(p.tese);
+}

@@ -25,6 +25,16 @@
       "types": "./src/busca/consulta.ts",
       "import": "./src/busca/consulta.ts",
       "default": "./src/busca/consulta.ts"
+    },
+    "./referencias": {
+      "types": "./src/busca/referencias.ts",
+      "import": "./src/busca/referencias.ts",
+      "default": "./src/busca/referencias.ts"
+    },
+    "./corpus": {
+      "types": "./src/busca/carga.ts",
+      "import": "./src/busca/carga.ts",
+      "default": "./src/busca/carga.ts"
     }
   },
   "scripts": {

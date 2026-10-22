@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { lerCsv } from './csv';
-import { lerPrecedentes } from './precedentes';
+import { lerPrecedentes, temTeseFirmada } from './precedentes';
 import { carregarPrecedentesStj, manifestoStj, paraPrecedenteDoNucleo } from './corpus';
 
 const TEMAS_CAB =
@@ -62,6 +62,16 @@ describe('Precedentes qualificados do STJ (F4-01)', () => {
       ['STJ-TEMA-6', null],
       ['STJ-TEMA-1076', 'STJ-TEMA-1076']
     ]);
+  });
+
+  it('o aviso "*Aguardando a publicação do acórdão" do STJ não é tese: não vira precedente nem nó (5 casos em 22/10/2026)', () => {
+    const csv = `${TEMAS_CAB}\n${tema({ ...base, sequencialPrecedente: '9', numeroPrecedente: '50', situacao: 'Mérito Julgado', teseFirmada: '*Aguardando a publicação do acórdão do julgamento de mérito.' })}\n`;
+    const [p] = lerPrecedentes(csv, procs);
+    assert.equal(p.tese, '*Aguardando a publicação do acórdão do julgamento de mérito.', 'o dado cru fica como o STJ publicou');
+    assert.equal(temTeseFirmada(p), false);
+    assert.equal(paraPrecedenteDoNucleo(p, manifestoStj()), null);
+    assert.equal(temTeseFirmada({ tese: 'É legítima a cobrança.' }), true);
+    assert.equal(temTeseFirmada({ tese: null }), false);
   });
 });
 

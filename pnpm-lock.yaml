@@ -196,6 +196,9 @@ importers:
       '@ratione/db':
         specifier: workspace:*
         version: link:../db
+      '@ratione/normaviva':
+        specifier: workspace:*
+        version: link:../normaviva
       '@supabase/supabase-js':
         specifier: ^2.117.3
         version: 2.117.3(@opentelemetry/api@1.10.0)

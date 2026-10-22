@@ -85,3 +85,17 @@ export function lerNormaViva(busca: string): Partial<ParametrosNormaViva> {
   if (em && ehDataIsoValida(em)) r.em = em;
   return r;
 }
+
+export interface ParametrosTeseMap {
+  /** Id do nó do grafo (`STJ-TEMA-1076`). */
+  noId: string;
+}
+
+export function urlDoTeseMap(p: ParametrosTeseMap): string {
+  return `/tesemap?${new URLSearchParams({ n: p.noId }).toString()}`;
+}
+
+export function lerTeseMap(busca: string): Partial<ParametrosTeseMap> {
+  const n = new URLSearchParams(busca).get('n');
+  return n && /^[A-Za-z0-9._-]{1,80}$/.test(n) ? { noId: n } : {};
+}
