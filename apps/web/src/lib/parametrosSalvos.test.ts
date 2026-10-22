@@ -1,8 +1,15 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { lerNormaViva, lerPrazoZero, urlDoNormaViva, urlDoPrazoZero } from './parametrosSalvos';
+import { lerNormaViva, lerPrazoZero, lerTeseMap, urlDoNormaViva, urlDoPrazoZero, urlDoTeseMap } from './parametrosSalvos';
 
 describe('Parâmetros salvos na URL', () => {
+  it('TeseMap: o nó faz a viagem de ida e volta; id com caracteres estranhos é ignorado', () => {
+    assert.deepStrictEqual(lerTeseMap(urlDoTeseMap({ noId: 'STJ-TEMA-1076' }).split('?')[1]), { noId: 'STJ-TEMA-1076' });
+    assert.deepStrictEqual(lerTeseMap('n=a%20b'), {});
+    assert.deepStrictEqual(lerTeseMap('n=' + 'x'.repeat(100)), {});
+    assert.deepStrictEqual(lerTeseMap(''), {});
+  });
+
   it('PrazoZero: o que se salva é o que se lê', () => {
     const url = urlDoPrazoZero({ atoId: 'apelacao', tipoEvento: 'disponibilizacao_dje', data: '2026-11-03', tribunalId: 'TJSP', regime: 'cpc_dias_uteis', dobro: true });
     assert.ok(url.startsWith('/prazozero?'));

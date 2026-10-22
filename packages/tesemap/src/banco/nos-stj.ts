@@ -5,11 +5,13 @@
  * O nó é dado oficial importado (`curado`, sem validador); as arestas entre precedentes é que exigem validação humana.
  */
 import { NoBancoSchema, type NoBanco } from './esquemas';
+import type { CitacaoNormativa } from './citacoes';
 import { linkOficialDoTema } from '../stj/corpus';
 import type { ManifestoStj } from '../stj/coletar';
-import type { PrecedenteStj } from '../stj/precedentes';
+import { temTeseFirmada, type PrecedenteStj } from '../stj/precedentes';
 
-export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoStj): NoBanco[] {
+/** `citacoes` extrai, de um texto, os dispositivos do NormaViva que ele cita (ver `citacoes.ts`); sem ela, o nó sai sem atalhos. */
+export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoStj, citacoes: (texto: string) => CitacaoNormativa[] = () => []): NoBanco[] {
   const fonte = {
     id: 'stj-dados-abertos-precedentes-qualificados',
     ato: `Dados Abertos do STJ, conjunto "${m.titulo}" (${m.licenca})`,
@@ -18,7 +20,7 @@ export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoS
     lidoEm: m.lidoEm
   };
   return precedentes
-    .filter(p => p.tese && !p.cancelado && (p.tipo === 'Tema' || p.tipo === 'IAC'))
+    .filter(p => temTeseFirmada(p) && !p.cancelado && (p.tipo === 'Tema' || p.tipo === 'IAC'))
     .map(p =>
       NoBancoSchema.parse({
         id: p.id,
@@ -26,7 +28,7 @@ export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoS
         rotulo: p.tipo === 'Tema' ? `Tema ${p.numero} do STJ` : `IAC ${p.numero} do STJ`,
         tribunal: 'STJ',
         numero_referencia: p.tipo === 'Tema' ? `Tema ${p.numero}` : `IAC ${p.numero}`,
-        descricao: p.tese,
+        descricao: p.tese ?? '',
         dispositivo_id: null,
         detalhes: {
           tipoStj: p.tipo,
@@ -41,7 +43,8 @@ export function nosDosPrecedentesStj(precedentes: PrecedenteStj[], m: ManifestoS
           sumulaOriginada: p.sumulaOriginada,
           repercussaoGeral: p.repercussaoGeral,
           processosLeadingCase: p.processos.filter(x => x.leadingCase).map(x => x.processo),
-          linkOficial: p.tipo === 'Tema' ? linkOficialDoTema(p.numero) : null
+          linkOficial: p.tipo === 'Tema' ? linkOficialDoTema(p.numero) : null,
+          citacoes: citacoes(`${p.questao ?? ''} ${p.tese ?? ''}`)
         },
         origem_dado: 'curado',
         fontes: [fonte],

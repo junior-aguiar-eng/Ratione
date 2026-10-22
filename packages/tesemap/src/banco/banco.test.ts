@@ -26,7 +26,7 @@ const aresta = (origem: string, destino: string, sobre: Partial<ArestaBanco> = {
     validado_por: 'Revisor', validado_em: '2026-10-22', atualizado_em: '2026-10-22', ...sobre
   });
 
-const inserirNos = (tx: Tx, nos: NoBanco[]) => tx.query('insert into public.tesemap_nos select * from jsonb_populate_recordset(null::public.tesemap_nos, $1::jsonb)', [JSON.stringify(nos)]);
+const inserirNos = (tx: Tx, nos: NoBanco[]) => tx.query(`insert into public.tesemap_nos (id, tipo, rotulo, tribunal, numero_referencia, descricao, dispositivo_id, detalhes, origem_dado, fontes, validado_por, validado_em, atualizado_em) select id, tipo, rotulo, tribunal, numero_referencia, descricao, dispositivo_id, detalhes, origem_dado, fontes, validado_por, validado_em, atualizado_em from jsonb_populate_recordset(null::public.tesemap_nos, $1::jsonb)`, [JSON.stringify(nos)]);
 const inserirArestas = (tx: Tx, as: ArestaBanco[]) =>
   tx.query('insert into public.tesemap_arestas (origem_id, destino_id, tipo, rotulo, origem_dado, fontes, validado_por, validado_em, atualizado_em) select origem_id, destino_id, tipo, rotulo, origem_dado, fontes, validado_por, validado_em, atualizado_em from jsonb_populate_recordset(null::public.tesemap_arestas, $1::jsonb)', [JSON.stringify(as)]);
 
@@ -106,6 +106,29 @@ describe('Banco do TeseMap: regras e RLS (F4-03)', () => {
     assert.equal(linha('STF', 'sumula').atualizado_em, '2026-10-01');
   });
 
+  it('busca por assunto: todas as palavras, em qualquer ordem, sem acento nem maiúscula; filtros; respeita a RLS', async () => {
+    const outro = await criarBanco();
+    await comoServidor(outro, tx =>
+      inserirNos(tx, [
+        no('T1', { rotulo: 'Tema 1076 do STJ', numero_referencia: 'Tema 1076', descricao: 'A fixação dos honorários por apreciação equitativa não é permitida.', detalhes: { dataJulgamento: '2022-03-16', questao: 'Alcance do § 8º do art. 85 do CPC' } }),
+        no('T2', { rotulo: 'Tema 5 do STJ', numero_referencia: 'Tema 5', descricao: 'Juros de mora na condenação.', detalhes: { dataJulgamento: '2020-01-10' } }),
+        no('S1', { tribunal: 'STF', tipo: 'sumula', rotulo: 'Súmula 10', descricao: 'Honorários na execução fiscal.', detalhes: { dataJulgamento: '2024-05-05' } }),
+        no('IA', { origem_dado: 'sugerido_ia', rotulo: 'Tema 99 do STJ', descricao: 'Honorários sugeridos pela IA.' })
+      ])
+    );
+    const buscar = (consulta: string, tribunal: string | null = null, tipo: string | null = null) =>
+      como(outro, null, tx => tx.query<{ id: string }>('select id from public.tesemap_buscar($1, $2, $3, 40)', [consulta, tribunal, tipo])).then(r => r.rows.map(x => x.id));
+    assert.deepEqual(await buscar('honorarios apreciacao'), ['T1'], 'sem acento');
+    assert.deepEqual(await buscar('equitativa honorários'), ['T1'], 'fora de ordem');
+    assert.deepEqual(await buscar('Tema 1076'), ['T1']);
+    assert.deepEqual(await buscar('art. 85 cpc'), ['T1'], 'palavra que só está na questão');
+    assert.deepEqual(await buscar('honorários', 'STF'), ['S1'], 'filtro de tribunal');
+    assert.deepEqual(await buscar('honorários', null, 'sumula'), ['S1'], 'filtro de tipo');
+    assert.deepEqual(await buscar('honorários'), ['S1', 'T1'], 'empate de relevância: o julgado mais recentemente primeiro');
+    assert.deepEqual(await buscar(''), ['S1', 'T1', 'T2'], 'sem texto lista tudo, do mais recente ao mais antigo; a sugestão de IA pendente não aparece');
+    assert.deepEqual(await buscar('palavraquenaoexiste'), []);
+  });
+
   it('apagar um nó leva as arestas dele (cascata)', async () => {
     await comoServidor(db, tx => tx.query("delete from public.tesemap_nos where id = 'IA-VALIDADA'"));
     const r = await comoServidor(db, tx => tx.query<{ n: string }>("select count(*) as n from public.tesemap_arestas where destino_id = 'IA-VALIDADA'"));
@@ -121,6 +144,8 @@ describe('Carga dos precedentes do STJ no grafo (F4-03)', () => {
     assert.ok(nos.length > 1000);
     assert.equal(new Set(nos.map(n => n.id)).size, nos.length);
     assert.ok(nos.every(n => /^STJ-(TEMA|IAC)-\d+$/.test(n.id) && n.descricao.length > 0 && n.tribunal === 'STJ' && n.tipo === 'precedente'));
+    assert.ok(nos.every(n => !/aguardando a publica/i.test(n.descricao)), 'o aviso de acórdão não publicado não é tese');
+    assert.ok(!nos.some(n => n.id === 'STJ-TEMA-50'));
     assert.ok(nos.every(n => n.origem_dado === 'curado' && n.fontes[0].lidoEm === m.lidoEm && noVisivel(n)));
   });
 
@@ -132,6 +157,15 @@ describe('Carga dos precedentes do STJ no grafo (F4-03)', () => {
     assert.ok((n.detalhes as { repercussaoGeral: Array<{ numero: string }> }).repercussaoGeral.some(r => r.numero === '1255'));
   });
 
+  it('com os 1.155 nós reais, a busca sem acento acha o Tema 1076 e o IAC que cita a competência da Justiça Federal', async () => {
+    const db = await criarBanco();
+    await comoServidor(db, tx => inserirNos(tx, nos));
+    const ids = async (q: string) => (await como(db, null, tx => tx.query<{ id: string }>('select id from public.tesemap_buscar($1, null, null, 40)', [q]))).rows.map(r => r.id);
+    assert.ok((await ids('honorarios apreciacao equitativa')).includes('STJ-TEMA-1076'));
+    assert.ok((await ids('STJ-TEMA-1076 tema 1076')).includes('STJ-TEMA-1076') || (await ids('tema 1076')).includes('STJ-TEMA-1076'));
+    assert.equal((await ids('')).length, 40, 'sem texto, o teto da lista');
+  });
+
   it('os nós entram no banco real do esquema (PGlite) e o visitante os lê; recarregar não duplica nem apaga o que foi curado à mão', async () => {
     const db = await criarBanco();
     const base = nos.slice(0, 50);
@@ -140,7 +174,7 @@ describe('Carga dos precedentes do STJ no grafo (F4-03)', () => {
       from: () => ({
         upsert: async linhas => {
           try {
-            await comoServidor(db, tx => tx.query('insert into public.tesemap_nos select * from jsonb_populate_recordset(null::public.tesemap_nos, $1::jsonb) on conflict (id) do update set descricao = excluded.descricao, detalhes = excluded.detalhes, fontes = excluded.fontes, atualizado_em = excluded.atualizado_em', [JSON.stringify(linhas)]));
+            await comoServidor(db, tx => tx.query('insert into public.tesemap_nos (id, tipo, rotulo, tribunal, numero_referencia, descricao, dispositivo_id, detalhes, origem_dado, fontes, validado_por, validado_em, atualizado_em) select id, tipo, rotulo, tribunal, numero_referencia, descricao, dispositivo_id, detalhes, origem_dado, fontes, validado_por, validado_em, atualizado_em from jsonb_populate_recordset(null::public.tesemap_nos, $1::jsonb) on conflict (id) do update set descricao = excluded.descricao, detalhes = excluded.detalhes, fontes = excluded.fontes, atualizado_em = excluded.atualizado_em', [JSON.stringify(linhas)]));
             return { error: null };
           } catch (e) {
             return { error: { message: (e as Error).message } };

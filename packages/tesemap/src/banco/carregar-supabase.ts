@@ -11,7 +11,11 @@
  * validação humana. O `upsert` por `id` atualiza só os nós da fonte oficial; nó ou aresta curados à mão ficam como estão.
  */
 import { carregarPrecedentesStj, manifestoStj } from '../stj';
+import { join } from 'node:path';
+import { extrairRemissoes } from '@ratione/normaviva/referencias';
+import { linhasDoCorpus } from '@ratione/normaviva/corpus';
 import { nosDosPrecedentesStj } from './nos-stj';
+import { citacoesNoTexto } from './citacoes';
 import type { NoBanco } from './esquemas';
 
 const LOTE = 200;
@@ -36,8 +40,11 @@ export async function carregarNos(cliente: ClienteCarga, nos: NoBanco[], log: (m
 }
 
 async function main() {
-  const nos = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj());
-  console.log(`Nós montados: ${nos.length} (precedentes do STJ com tese firmada, não cancelados)`);
+  // Atalhos para o NormaViva: só o dispositivo que existe no corpus de leis
+  const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus')).flatMap(l => l.dispositivos.map(d => d.id)));
+  const nos = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), t => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id)));
+  const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
+  console.log(`Nós montados: ${nos.length} (precedentes do STJ com tese firmada, não cancelados); ${comCitacao} citam dispositivo do NormaViva`);
   if (process.argv.includes('--simular')) {
     console.log('Simulação: nada foi enviado ao banco.');
     return;

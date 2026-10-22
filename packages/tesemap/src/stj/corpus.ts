@@ -8,7 +8,7 @@ import { gunzipSync } from 'node:zlib';
 import { join } from 'node:path';
 import { PrecedenteSchema, type Precedente } from '@ratione/core';
 import type { ManifestoStj } from './coletar';
-import { lerPrecedentes, type PrecedenteStj } from './precedentes';
+import { lerPrecedentes, temTeseFirmada, type PrecedenteStj } from './precedentes';
 
 const PASTA = join(__dirname, '..', '..', 'corpus', 'stj');
 
@@ -40,14 +40,14 @@ export function linkOficialDoTema(numero: number): string {
  * tese ou cancelado) devolvem `null`: não são precedente qualificado formado, ou não têm tipo correspondente no núcleo.
  */
 export function paraPrecedenteDoNucleo(p: PrecedenteStj, m: ManifestoStj = manifestoStj()): Precedente | null {
-  if (!p.tese || p.cancelado || (p.tipo !== 'Tema' && p.tipo !== 'IAC')) return null;
+  if (!temTeseFirmada(p) || p.cancelado || (p.tipo !== 'Tema' && p.tipo !== 'IAC')) return null;
   const rotulo = p.tipo === 'Tema' ? `Tema ${p.numero}` : `IAC ${p.numero}`;
   return PrecedenteSchema.parse({
     id: p.id,
     tribunal: 'STJ',
     tipo: p.tipo === 'Tema' ? 'stj_repetitivo' : 'iac',
     numeroOuTema: rotulo,
-    enunciadoTese: p.tese,
+    enunciadoTese: p.tese ?? '',
     dispositivosRelacionados: [],
     dataPublicacaoAcordao: p.dataPublicacaoAcordao ?? undefined,
     linkOficial: p.tipo === 'Tema' ? linkOficialDoTema(p.numero) : undefined,
