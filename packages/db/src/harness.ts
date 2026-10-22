@@ -1,4 +1,5 @@
 import { PGlite } from '@electric-sql/pglite';
+import { unaccent } from '@electric-sql/pglite/contrib/unaccent';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -12,6 +13,8 @@ const BASE_SUPABASE = `
   create role authenticated nologin;
   create role service_role nologin bypassrls;
   create schema auth;
+  -- No Supabase, as extensões ficam no schema "extensions"; a "unaccent" vem embutida no PGlite (ver criarBanco)
+  create schema extensions;
   create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, raw_user_meta_data jsonb not null default '{}', created_at timestamptz not null default now());
   create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
@@ -29,7 +32,7 @@ export const PASTA_MIGRACOES = join(__dirname, '../../../supabase/migrations');
 
 /** `ate`: aplica só as migrações cujo nome é menor ou igual a ele (para testar uma migração sobre dados que já existiam). */
 export async function criarBanco(ate?: string): Promise<PGlite> {
-  const db = new PGlite();
+  const db = new PGlite({ extensions: { unaccent } });
   await db.exec(BASE_SUPABASE);
   const arquivos = readdirSync(PASTA_MIGRACOES)
     .filter(f => f.endsWith('.sql') && (!ate || f.replace('.sql', '') <= ate))

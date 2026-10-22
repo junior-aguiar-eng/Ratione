@@ -1,26 +1,19 @@
 -- F4-04: busca por assunto no TeseMap. O `ilike` do primeiro desenho exigia a frase inteira, na ordem ("honorários equidade" não achava a tese
--- de honorários por equidade) e não tirava acento ("honorarios" não achava "honorários"; o dicionário `portuguese` não faz isso).
--- Aqui: todas as palavras da consulta têm de aparecer (em qualquer ordem), sem acento nem maiúscula, com o radical em português.
--- Sem extensão: `translate` com a lista de letras acentuadas do português basta, é imutável e pode entrar numa coluna gerada.
+-- de honorários por equidade) e não tirava acento. Aqui: todas as palavras da consulta têm de aparecer (em qualquer ordem), sem acento nem
+-- maiúscula, com o radical em português (configuração `portugues_sem_acento`, migração 20261022000004).
 
-create function public.tesemap_sem_acento(texto text)
-returns text
-language sql
-immutable
-set search_path = ''
-as $$
-  select pg_catalog.translate(
-    pg_catalog.lower(texto),
-    'áàâãäéèêëíìîïóòôõöúùûüçñ',
-    'aaaaaeeeeiiiiooooouuuucn'
-  )
-$$;
+-- Esta migração substitui a primeira versão da busca do TeseMap (arquivo `20261022000004_tesemap_busca.sql`, que usava `translate`): se aquela já foi
+-- aplicada no banco, os comandos abaixo a desfazem antes de criar a nova; num banco sem ela, não fazem nada.
+drop function if exists public.tesemap_buscar(text, text, text, integer);
+drop index if exists public.tesemap_nos_busca_idx;
+alter table public.tesemap_nos drop column if exists busca;
+drop function if exists public.tesemap_sem_acento(text);
 
 alter table public.tesemap_nos
   add column busca tsvector generated always as (
     to_tsvector(
-      'portuguese'::regconfig,
-      public.tesemap_sem_acento(rotulo || ' ' || coalesce(numero_referencia, '') || ' ' || descricao || ' ' || coalesce(detalhes ->> 'questao', ''))
+      'public.portugues_sem_acento'::regconfig,
+      rotulo || ' ' || coalesce(numero_referencia, '') || ' ' || descricao || ' ' || coalesce(detalhes ->> 'questao', '')
     )
   ) stored;
 
@@ -39,7 +32,7 @@ set search_path = ''
 as $$
   with q as (
     select case when pg_catalog.btrim(coalesce(tesemap_buscar.consulta, '')) = '' then null
-                else pg_catalog.websearch_to_tsquery('portuguese'::regconfig, public.tesemap_sem_acento(tesemap_buscar.consulta)) end as consulta
+                else pg_catalog.websearch_to_tsquery('public.portugues_sem_acento'::regconfig, tesemap_buscar.consulta) end as consulta
   )
   select n.id, n.tipo, n.rotulo, n.tribunal, n.numero_referencia, n.descricao, n.dispositivo_id, n.detalhes,
          n.origem_dado, n.fontes, n.validado_por, n.validado_em, n.atualizado_em
@@ -53,7 +46,5 @@ as $$
   limit least(greatest(tesemap_buscar.limite, 1), 100)
 $$;
 
-revoke all on function public.tesemap_sem_acento(text) from public;
-grant execute on function public.tesemap_sem_acento(text) to anon, authenticated, service_role;
 revoke all on function public.tesemap_buscar(text, text, text, integer) from public;
 grant execute on function public.tesemap_buscar(text, text, text, integer) to anon, authenticated, service_role;
