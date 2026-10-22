@@ -40,9 +40,9 @@
       "vetado": 0,
       "dataPublicacaoSenado": 949,
       "dataAssinaturaSenado": 0,
-      "dataDaAnotacao": 1,
-      "soAno": 12,
-      "semDataDeVigencia": 12,
+      "dataDaAnotacao": 3,
+      "soAno": 10,
+      "semDataDeVigencia": 10,
       "anotadosSemAto": 1
     },
     {
@@ -128,11 +128,11 @@
       "incluido": 185,
       "revogado": 3,
       "vetado": 8,
-      "dataPublicacaoSenado": 220,
+      "dataPublicacaoSenado": 221,
       "dataAssinaturaSenado": 0,
       "dataDaAnotacao": 0,
-      "soAno": 1,
-      "semDataDeVigencia": 9,
+      "soAno": 0,
+      "semDataDeVigencia": 8,
       "anotadosSemAto": 0
     },
     {
@@ -338,11 +338,11 @@
       "incluido": 336,
       "revogado": 108,
       "vetado": 1,
-      "dataPublicacaoSenado": 536,
+      "dataPublicacaoSenado": 537,
       "dataAssinaturaSenado": 0,
       "dataDaAnotacao": 0,
-      "soAno": 93,
-      "semDataDeVigencia": 94,
+      "soAno": 92,
+      "semDataDeVigencia": 93,
       "anotadosSemAto": 5
     },
     {
@@ -442,11 +442,10 @@
       "emenda-constitucional:99:2017"
     ],
     "DL-2848-1940": [
-      "lei:10224:2015"
+      "lei:10224:2001"
     ],
     "DL-3689-1941": [
-      "lei:11101:2005",
-      "lei:17:2020"
+      "lei:11101:2005"
     ],
     "DL-4657-1942": [],
     "DL-5452-1943": [
@@ -458,9 +457,7 @@
     "LEI-10406-2002": [],
     "LEI-11101-2005": [],
     "LEI-11340-2006": [],
-    "LEI-11343-2006": [
-      "lei:15581:2025"
-    ],
+    "LEI-11343-2006": [],
     "LEI-11419-2006": [],
     "LEI-12016-2009": [],
     "LEI-12965-2014": [
@@ -492,7 +489,6 @@
       "medida-provisoria:805:2017"
     ],
     "LEI-8213-1991": [
-      "lei:107:2010",
       "lei:10877:2004",
       "lei:13063:2014",
       "lei:9528:1997",

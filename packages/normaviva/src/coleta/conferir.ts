@@ -36,8 +36,17 @@ export function chaveDoAto(tipo: TipoAto, numero: string, ano: string): string {
   return `${tipo}:${base}:${completo}`;
 }
 
-const FONTE_PADRAO_ATO =
-  /(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+)?)(?:\/(\d{4})|\s*,?\s*(?:de\s+)?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)(?!\s+(?:de\s+)?(?:janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+\d{4})|\s*,?\s+de\s+\d{1,2}[ºo°]?\s+(?:de\s+)?(?:janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+(\d{4}))/i;
+const MES = '(?:janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)';
+/**
+ * Tipo, número e ano do ato. Formas que o Planalto também usa: número com letra ("Lei nº 1.720-B"), ponto antes do ano ("de .2003"),
+ * mês omitido ("de 15 de 2001") ou sem o "de" ("de 24 julho de 1991"). O dia nunca é lido como ano.
+ */
+const FONTE_PADRAO_ATO = new RegExp(
+  String.raw`(Lei Complementar|Lcp|Ato Complementar|Lei|Decreto[- ]Lei|Decreto|Medida Provis[óo]ria|Emenda\s+(?:Constitui[çc][ãa]o\s+)?Constitucional(?: de Revis[ãa]o)?)\s*(?:n\s*[ºo°.]*)?\s*(\d[\d.]*(?:\s\d{3})?(?:-\d+|-[A-Z](?![a-zà-ú]))?)` +
+    String.raw`(?:\/(\d{4})|\s*,?\s*(?:de\s+)?\.?(?:\d{1,2}[ºo°]?[./]\d{1,2}[./])?(\d{4}|\d{2})(?!\d)(?!\s+(?:(?:de\s+)?${MES}\s+)?de\s+\d{4})` +
+    String.raw`|\s*,?\s+de\s+\d{1,2}[ºo°]?\s+(?:(?:de\s+)?${MES}\s+)?de\s+(\d{4}))`,
+  'i'
+);
 
 /** Expressão nova a cada uso: uma regex global compartilhada carrega `lastIndex` entre chamadas e pula achados. */
 const padraoAto = () => new RegExp(FONTE_PADRAO_ATO.source, 'gi');
@@ -64,23 +73,27 @@ export function atosAlteradoresDoPlanalto(texto: string): Set<string> {
   const semTags = textoSemHtml(texto);
   for (const trecho of semTags.matchAll(/\(([^()]{0,400})\)/g)) {
     if (!/Reda[çc][ãa]o dada|Inclu[ií]d[oa]|Revogad[oa]|Suprimid[oa]|Acrescid[oa]/i.test(trecho[1])) continue;
-    for (const m of trecho[1].matchAll(padraoAto())) {
-      const tipo = ROTULOS.find(([re]) => re.test(m[1]))?.[1];
-      if (tipo) achados.add(chaveDoAto(tipo, m[2], m[3] ?? m[4] ?? m[5]));
-    }
+    for (const { chave } of atosDoTexto(trecho[1])) achados.add(chave);
   }
   return achados;
 }
 
 /** Todos os atos citados num trecho, na ordem, com a data completa quando o Planalto a traz ("de 11.7.1984"). */
+/**
+ * Erros de digitação do Planalto na anotação, conferidos no texto do ato (só a chave muda; a anotação segue como publicada).
+ * - Lei 11.343/2006, art. 23, parágrafo único: "Incluído pela Lei nº 15.581, de 2025"; a lei é a 15.281/2025 (L15281.htm, art. 1º), lida em 22/10/2026.
+ */
+export const ERRATAS_DO_PLANALTO: Record<string, string> = { 'lei:15581:2025': 'lei:15281:2025' };
+
 export function atosDoTexto(texto: string): Array<{ chave: string; dataIso: string | null }> {
   const saida: Array<{ chave: string; dataIso: string | null }> = [];
   for (const m of texto.matchAll(padraoAto())) {
     const tipo = ROTULOS.find(([re]) => re.test(m[1]))?.[1];
     if (!tipo) continue;
     const completa = m[0].match(/(\d{1,2})[ºo°]?[./](\d{1,2})[./](\d{4})/);
+    const chave = chaveDoAto(tipo, m[2], m[3] ?? m[4] ?? m[5]);
     saida.push({
-      chave: chaveDoAto(tipo, m[2], m[3] ?? m[4] ?? m[5]),
+      chave: ERRATAS_DO_PLANALTO[chave] ?? chave,
       dataIso: completa ? `${completa[3]}-${completa[2].padStart(2, '0')}-${completa[1].padStart(2, '0')}` : null
     });
   }
