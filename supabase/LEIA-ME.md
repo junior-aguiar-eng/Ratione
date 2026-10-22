@@ -21,7 +21,7 @@ O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públ
 
 1. **Aplicar as duas migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261019000001_normaviva.sql` → *Run* ("Success"). Depois a mesma coisa com `supabase/migrations/20261019000002_resolver_destinos.sql` e com `supabase/migrations/20261020000001_busca_por_proximidade.sql` (esta troca a função de busca por assunto por uma versão com proximidade; o projeto `ratione` já a tem aplicada desde 20/10/2026). Em *Table Editor* confira as 4 tabelas com o cadeado de RLS ligado.
 2. **Conferir a carga sem tocar no banco.** No terminal, em `packages/normaviva`: `pnpm carregar --simular`. Deve mostrar 28 normas, 29.447 dispositivos, 29.447 versões e 13.371 relações.
-3. **Carregar.** No mesmo terminal, **só nele**, defina as duas variáveis e rode (PowerShell):
+3. **Carregar.** No mesmo terminal, **só nele**, defina as duas variáveis e rode (PowerShell). A chave é a **secreta** (`sb_secret_…`); com a publicável (`sb_publishable_…`) o banco responde "permission denied" e nada muda:
 
    ```powershell
    $env:SUPABASE_URL = "https://<ref>.supabase.co"          # Project Settings → API → Project URL
@@ -36,7 +36,7 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 ## NormaViva: busca sem acento (22/10/2026)
 
-A pesquisa por assunto passa a achar o que se digita sem acento ("honorarios advocaticios", "prisao preventiva"). Depois de aplicar a `20261022000004_busca_sem_acento.sql` (a mesma do passo do TeseMap abaixo: crie a extensão `unaccent` e a configuração de busca), aplique `supabase/migrations/20261022000006_normaviva_busca_sem_acento.sql` no *SQL Editor → New query* → *Run*. Ela recria uma coluna de busca nas 29 mil linhas de `dispositivos` (alguns segundos). Teste: `select count(*) from buscar_dispositivos('honorarios advocaticios', 'LEI-13105-2015', 100);` deve devolver 18 ou mais; com acento o resultado é o mesmo de antes.
+A pesquisa por assunto passa a achar o que se digita sem acento ("honorarios advocaticios", "prisao preventiva"). Depois de aplicar a `20261022000004_busca_sem_acento.sql` (a mesma do passo do TeseMap abaixo: crie a extensão `unaccent` e a configuração de busca), aplique `supabase/migrations/20261022000006_normaviva_busca_sem_acento.sql` no *SQL Editor → New query* → *Run*. Ela recria uma coluna de busca nas 29 mil linhas de `dispositivos` (alguns segundos). Teste: `select count(*) from buscar_dispositivos('honorarios advocaticios', 'LEI-13105-2015', 100);` deve devolver 18 ou mais; com acento o resultado é o mesmo de antes. **Aplicada em produção em 22/10/2026** (18 com e sem acento).
 
 ## TeseMap: aplicar a migração e carregar os precedentes do STJ (F4-03)
 
@@ -45,7 +45,9 @@ O grafo do TeseMap fica em `tesemap_nos` e `tesemap_arestas` (leitura pública f
 1. **Aplicar as migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261022000003_tesemap.sql` → *Run* ("Success"); depois o de `supabase/migrations/20261022000004_busca_sem_acento.sql` (extensão `unaccent` e configuração de busca sem acento) e o de `supabase/migrations/20261022000005_tesemap_busca.sql` (pesquisa por assunto da tela: todas as palavras, sem acento; se você já aplicou a primeira versão, `20261022000004_tesemap_busca.sql`, esta a substitui sem erro). Em *Table Editor* confira as 2 tabelas com o cadeado de RLS ligado.
 2. **Conferir sem tocar no banco.** Em `packages/tesemap`: `pnpm carregar:tesemap --simular` (deve mostrar 3.076 nós: 1.150 do STJ, 1.141 temas de repercussão geral do STF e 785 súmulas do STF, 399 deles com atalho para o NormaViva).
 3. **Carregar.** No mesmo terminal, **só nele**, defina `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (como na carga do NormaViva) e rode `pnpm carregar:tesemap`. A carga **não apaga nada**: atualiza por `id` os nós do STJ e do STF e deixa o que foi curado à mão.
-4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150`, `STF | precedente | 823`, `STF | tema | 318` e `STF | sumula | 785`, com a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 3;` deve trazer `STJ-TEMA-1076`.
+4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150`, `STF | precedente | 823`, `STF | tema | 318` e `STF | sumula | 785`, com a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 5;` deve trazer `STJ-TEMA-1076` (4º em 22/10/2026, atrás do Tema 1255 do STF, sobre o mesmo assunto).
+
+**Feito em produção em 22/10/2026:** migrações `20261022000003` a `...005` aplicadas e conferidas, 3.076 nós carregados e cobertura conferida (STJ 1.150; STF 823 precedentes, 318 temas e 785 súmulas).
 
 A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
 
@@ -57,7 +59,7 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 `supabase/migrations/20261022000001_explicacao_ia.sql` cria o cache das explicações (`ia_explicacoes`), o registro de uso com o custo (`ia_uso`) e as funções que conferem cota e orçamento de forma atômica (`ia_reservar`, `ia_finalizar`, `ia_registrar_cache`), executáveis só pela chave de serviço. **Aplique no projeto real** pelo *SQL Editor* antes de ligar a funcionalidade; enquanto ela estiver desligada, a migração não muda nada no site. Como ligar e desligar: `docs/produto/EXPLICACAO_IA.md`, §5.
 
-`supabase/migrations/20261022000002_ia_tarefas.sql` (mesmo dia) generaliza essas tabelas para o **catálogo de tarefas de IA** (`docs/produto/IA_TAREFAS.md`): o cache vira `ia_respostas`, o uso ganha a coluna `tarefa` e a cota passa a ser por tarefa, com o orçamento do mês e "uma chamada de cada vez" valendo para todas. Aplique **depois** da anterior (podem ir juntas, nesta ordem); preserva o que já houver nelas.
+`supabase/migrations/20261022000002_ia_tarefas.sql` (mesmo dia) generaliza essas tabelas para o **catálogo de tarefas de IA** (`docs/produto/IA_TAREFAS.md`): o cache vira `ia_respostas`, o uso ganha a coluna `tarefa` e a cota passa a ser por tarefa, com o orçamento do mês e "uma chamada de cada vez" valendo para todas. Aplique **depois** da anterior (podem ir juntas, nesta ordem); preserva o que já houver nelas. **Ambas aplicadas em produção em 22/10/2026.**
 
 ## Correções de dados do NormaViva (`supabase/correcoes/`)
 
@@ -77,7 +79,9 @@ O parser lia "Art. 3º - A lei…" como art. 3º-A (CP, CLT, CTN, LEF, LEP, LIND
 3. `pnpm carregar` com as duas variáveis do passo 3 da seção do NormaViva acima. A recarga já inclui as redações anteriores do F3-04 (não é preciso aplicar `20261021_versoes_anteriores.sql` de novo) e repõe as correções de `correcoes/` (elas já estão no corpus).
 4. Conferir no *SQL Editor*: `select count(*) from relacoes where tipo = 'remete' and destino_id is not null;` deve dar cerca de `3008` (o corpus dá 3.008), e `select texto from dispositivos where id = 'DL-2848-1940|corpo|art. 3º';` deve começar com "A lei excepcional".
 
-A mesma recarga leva os resíduos do parser corrigidos em 22/10/2026 (tachado por estilo, aspas retas, medida provisória rejeitada, incisos revogados com ";" e os artigos do decreto da CLT; ver F3-02 no PLANO). Itens salvos em Meu espaço que apontavam para um dos ids antigos (ex.: "art. 3º-A" do CP) deixam de abrir o dispositivo; o resto não muda.
+A mesma recarga leva os resíduos do parser corrigidos em 22/10/2026 (tachado por estilo, aspas retas, medida provisória rejeitada, incisos revogados com ";" e os artigos do decreto da CLT; ver F3-02 no PLANO). **Recarga feita em produção em 22/10/2026**, depois da migração `20261022000006`: o script conferiu 28 normas, 29.294 dispositivos, 29.351 versões e 13.256 relações; no banco, 3.008 remissões ligadas, 57 redações anteriores e o art. 3º do CP começando por "A lei excepcional" (sem o art. 3º-A falso).
+
+Itens salvos em Meu espaço que apontavam para um dos ids antigos (ex.: "art. 3º-A" do CP) deixam de abrir o dispositivo; o resto não muda.
 
 ## O que NÃO compartilhar
 
