@@ -170,3 +170,35 @@ export function coberturaPorExtenso(itens: Cobertura[]): string {
     .map(c => `${c.total.toLocaleString('pt-BR')} ${(PLURAL[c.tipo] ?? [c.tipo, c.tipo])[c.total === 1 ? 0 : 1]} ${c.tribunal ? `do ${c.tribunal}` : 'sem tribunal informado'}`)
     .join(', ');
 }
+
+export interface NoLigado {
+  id: string;
+  rotulo: string;
+  tribunal: string | null;
+}
+
+/** Números dos temas de repercussão geral do STF que um nó do STJ liga (`detalhes.repercussaoGeral`), ignorando o que não for número. */
+export function numerosDeRepercussaoGeral(n: NoTese): string[] {
+  const bruto = n.detalhes.repercussaoGeral;
+  if (!Array.isArray(bruto)) return [];
+  return [...new Set(bruto.map(r => (r && typeof r === 'object' ? (r as { numero?: unknown }).numero : null)).filter((x): x is string => typeof x === 'string' && /^\d+$/.test(x)))];
+}
+
+/**
+ * Ligações que o próprio STJ declara no arquivo oficial entre um precedente seu e um tema de repercussão geral do STF (e a volta). NÃO são relações
+ * validadas do mapa: a tela as mostra à parte, dizendo de onde vêm. Só aparecem os nós que existem no grafo.
+ */
+export async function ligadosPelaRepercussaoGeral(db: SupabaseClient, n: NoTese): Promise<NoLigado[]> {
+  if (n.tribunal === 'STJ') {
+    const ids = numerosDeRepercussaoGeral(n).map(x => `STF-RG-${x}`);
+    if (ids.length === 0) return [];
+    const r = await db.from('tesemap_nos').select('id, rotulo, tribunal').in('id', ids);
+    if (r.error) falhou(r.error, 'ler os temas do STF ligados');
+    return (r.data ?? []) as NoLigado[];
+  }
+  const m = n.id.match(/^STF-RG-(\d+)$/);
+  if (!m) return [];
+  const r = await db.from('tesemap_nos').select('id, rotulo, tribunal').contains('detalhes', { repercussaoGeral: [{ numero: m[1] }] }).limit(50);
+  if (r.error) falhou(r.error, 'ler os precedentes do STJ ligados');
+  return (r.data ?? []) as NoLigado[];
+}

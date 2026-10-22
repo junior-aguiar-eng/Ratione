@@ -1,0 +1,16 @@
+{
+  "fonte": "Portal da Transparência do STF, dados abertos: temas de repercussão geral",
+  "paginaUrl": "https://transparencia.stf.jus.br/extensions/dados_abertos/dados_abertos.html",
+  "lidoEm": "2026-10-22",
+  "obtidoPor": "baixado pelo responsável e enviado ao repositório (o portal do STF bloqueia o acesso automático)",
+  "arquivos": [
+    {
+      "nome": "repercussao-geral",
+      "nomeOriginal": "855e1865-320c-4c3e-b0a1-98718b0b2983.csv",
+      "descricao": "Um tema de repercussão geral por linha: título, tese, processo paradigma, situação, datas, ramos do direito",
+      "bytes": 14505939,
+      "sha256": "31678609a7ea70a78560f46b65b4acea8ee339ae02714ff0d73063e4fe43e147",
+      "arquivo": "repercussao-geral.csv.gz"
+    }
+  ]
+}

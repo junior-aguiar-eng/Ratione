@@ -20,6 +20,11 @@
       "types": "./src/banco/index.ts",
       "import": "./src/banco/index.ts",
       "default": "./src/banco/index.ts"
+    },
+    "./stf": {
+      "types": "./src/stf/index.ts",
+      "import": "./src/stf/index.ts",
+      "default": "./src/stf/index.ts"
     }
   },
   "scripts": {
@@ -27,7 +32,8 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
     "coletar:stj": "tsx src/stj/coletar.ts",
-    "carregar:tesemap": "tsx src/banco/carregar-supabase.ts"
+    "carregar:tesemap": "tsx src/banco/carregar-supabase.ts",
+    "importar:stf": "tsx src/stf/importar.ts"
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
