@@ -1,8 +1,8 @@
 {
-  "fonte": "Portal da Transparência do STF, dados abertos: temas de repercussão geral",
+  "fonte": "Portal do STF: dados abertos da Transparência (repercussão geral) e base de jurisprudência (súmulas)",
   "paginaUrl": "https://transparencia.stf.jus.br/extensions/dados_abertos/dados_abertos.html",
   "lidoEm": "2026-10-22",
-  "obtidoPor": "baixado pelo responsável e enviado ao repositório (o portal do STF bloqueia o acesso automático)",
+  "obtidoPor": "baixados pelo responsável e enviados ao repositório (o portal do STF bloqueia o acesso automático)",
   "arquivos": [
     {
       "nome": "repercussao-geral",
@@ -10,7 +10,28 @@
       "descricao": "Um tema de repercussão geral por linha: título, tese, processo paradigma, situação, datas, ramos do direito",
       "bytes": 14505939,
       "sha256": "31678609a7ea70a78560f46b65b4acea8ee339ae02714ff0d73063e4fe43e147",
-      "arquivo": "repercussao-geral.csv.gz"
+      "arquivo": "repercussao-geral.csv.gz",
+      "lidoEm": "2026-10-22"
+    },
+    {
+      "nome": "sumulas",
+      "nomeOriginal": "5382b8a0-export_sumulas_2026-10-22_13-58-34.csv",
+      "descricao": "Súmulas não vinculantes aprovadas: enunciado, órgão, data de aprovação, publicação, ramo do direito, observação",
+      "bytes": 288778,
+      "sha256": "0f9b47f0131f0ce8cd88871dfd1c747da837e2a48a11f3855296c0958e0b6144",
+      "arquivo": "sumulas.csv.gz",
+      "lidoEm": "2026-10-22",
+      "consulta": "https://jurisprudencia.stf.jus.br/pages/search?classeNumeroIncidente=n%C3%A3o%20vinculante&base=sumulas&pesquisa_inteiro_teor=false&sinonimo=true&plural=true&radicais=false&buscaExata=true&situacao_sumula=Aprovada&page=1&pageSize=250&sort=date&sortBy=desc&isAdvanced=true"
+    },
+    {
+      "nome": "sumulas-vinculantes",
+      "nomeOriginal": "ce8ab7e5-export_sumulas_2026-10-22_13-57-17.csv",
+      "descricao": "Súmulas vinculantes aprovadas: enunciado, órgão, data de aprovação, publicação, ramo do direito, observação",
+      "bytes": 33044,
+      "sha256": "c7527aea7a0a4f4c96d489bb42822e14de6dbf5f7f825bec49aa11423c3c0656",
+      "arquivo": "sumulas-vinculantes.csv.gz",
+      "lidoEm": "2026-10-22",
+      "consulta": "https://jurisprudencia.stf.jus.br/pages/search?classeNumeroIncidente=vinculante&base=sumulas&is_vinculante=true&pesquisa_inteiro_teor=false&sinonimo=true&plural=true&radicais=false&buscaExata=true&page=1&pageSize=250&sort=date&sortBy=desc&isAdvanced=true"
     }
   ]
 }

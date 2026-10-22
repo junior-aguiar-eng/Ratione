@@ -138,7 +138,7 @@ export async function abrirNo(db: SupabaseClient, id: string): Promise<Vizinhanc
 export function resumoDoNo(n: NoTese, dataCurta: (iso: string) => string): string {
   const julgado = typeof n.detalhes.dataJulgamento === 'string' ? n.detalhes.dataJulgamento : null;
   const orgao = typeof n.detalhes.orgaoJulgador === 'string' ? n.detalhes.orgaoJulgador : null;
-  return [julgado ? `julgado em ${dataCurta(julgado)}` : null, orgao].filter(Boolean).join(' · ');
+  return [julgado ? `${n.tipo === 'sumula' ? 'aprovada' : 'julgado'} em ${dataCurta(julgado)}` : null, orgao].filter(Boolean).join(' · ');
 }
 
 /** Lista as citações guardadas em `detalhes.citacoes`, ignorando o que não tiver o formato esperado. */
@@ -177,28 +177,73 @@ export interface NoLigado {
   tribunal: string | null;
 }
 
+const soNumeros = (bruto: unknown): string[] =>
+  Array.isArray(bruto) ? [...new Set(bruto.map(r => (r && typeof r === 'object' ? (r as { numero?: unknown }).numero : null)).filter((x): x is string => typeof x === 'string' && /^\d+$/.test(x)))] : [];
+
 /** Números dos temas de repercussão geral do STF que um nó do STJ liga (`detalhes.repercussaoGeral`), ignorando o que não for número. */
 export function numerosDeRepercussaoGeral(n: NoTese): string[] {
-  const bruto = n.detalhes.repercussaoGeral;
-  if (!Array.isArray(bruto)) return [];
-  return [...new Set(bruto.map(r => (r && typeof r === 'object' ? (r as { numero?: unknown }).numero : null)).filter((x): x is string => typeof x === 'string' && /^\d+$/.test(x)))];
+  return soNumeros(n.detalhes.repercussaoGeral);
 }
 
 /**
- * Ligações que o próprio STJ declara no arquivo oficial entre um precedente seu e um tema de repercussão geral do STF (e a volta). NÃO são relações
- * validadas do mapa: a tela as mostra à parte, dizendo de onde vêm. Só aparecem os nós que existem no grafo.
+ * Ids dos nós que o próprio nó diz estarem ligados a ele: o tema de repercussão geral que o STJ registra (`repercussaoGeral`), o tema e as súmulas que
+ * a observação de uma súmula do STF cita (`temasRg`, `sumulasCorrelatas`). Ignora o que não tiver o formato esperado.
  */
-export async function ligadosPelaRepercussaoGeral(db: SupabaseClient, n: NoTese): Promise<NoLigado[]> {
-  if (n.tribunal === 'STJ') {
-    const ids = numerosDeRepercussaoGeral(n).map(x => `STF-RG-${x}`);
-    if (ids.length === 0) return [];
-    const r = await db.from('tesemap_nos').select('id, rotulo, tribunal').in('id', ids);
-    if (r.error) falhou(r.error, 'ler os temas do STF ligados');
-    return (r.data ?? []) as NoLigado[];
+export function idsLigadosPeloProprioNo(n: NoTese): string[] {
+  const temas = [...soNumeros(n.detalhes.repercussaoGeral), ...soNumeros(n.detalhes.temasRg)].map(x => `STF-RG-${x}`);
+  const sumulas = Array.isArray(n.detalhes.sumulasCorrelatas)
+    ? n.detalhes.sumulasCorrelatas.map(r => (r && typeof r === 'object' ? (r as { id?: unknown }).id : null)).filter((x): x is string => typeof x === 'string' && /^STF-(SV|SUMULA)-\d+$/.test(x))
+    : [];
+  return [...new Set([...temas, ...sumulas])];
+}
+
+/**
+ * Ligações que as próprias fontes registram: o STJ liga um precedente seu a um tema de repercussão geral do STF; a observação de uma súmula do STF cita
+ * outra súmula ou um tema. Vale nos dois sentidos (quem é citado também mostra quem o cita). NÃO são relações validadas do mapa: a tela as mostra à
+ * parte, dizendo de onde vêm. Só aparecem os nós que existem no grafo.
+ */
+export async function ligadosPelasFontes(db: SupabaseClient, n: NoTese): Promise<NoLigado[]> {
+  const colunas = 'id, rotulo, tribunal';
+  const consultas: Array<PromiseLike<{ data: unknown; error: { message: string } | null }>> = [];
+  const ids = idsLigadosPeloProprioNo(n);
+  if (ids.length > 0) consultas.push(db.from('tesemap_nos').select(colunas).in('id', ids));
+  const tema = n.id.match(/^STF-RG-(\d+)$/);
+  if (tema) {
+    consultas.push(db.from('tesemap_nos').select(colunas).contains('detalhes', { repercussaoGeral: [{ numero: tema[1] }] }).limit(50));
+    consultas.push(db.from('tesemap_nos').select(colunas).contains('detalhes', { temasRg: [{ numero: tema[1] }] }).limit(50));
   }
-  const m = n.id.match(/^STF-RG-(\d+)$/);
-  if (!m) return [];
-  const r = await db.from('tesemap_nos').select('id, rotulo, tribunal').contains('detalhes', { repercussaoGeral: [{ numero: m[1] }] }).limit(50);
-  if (r.error) falhou(r.error, 'ler os precedentes do STJ ligados');
-  return (r.data ?? []) as NoLigado[];
+  if (n.tipo === 'sumula') consultas.push(db.from('tesemap_nos').select(colunas).contains('detalhes', { sumulasCorrelatas: [{ id: n.id }] }).limit(50));
+  const respostas = await Promise.all(consultas);
+  const erro = respostas.find(r => r.error)?.error;
+  if (erro) falhou(erro, 'ler as ligações registradas pelas fontes');
+  const porId = new Map<string, NoLigado>();
+  for (const r of respostas) for (const l of (r.data ?? []) as NoLigado[]) if (l.id !== n.id) porId.set(l.id, l);
+  return [...porId.values()].sort((a, b) => a.rotulo.localeCompare(b.rotulo, 'pt-BR', { numeric: true }));
+}
+
+export interface AplicacaoDoNo {
+  total: number;
+  /** [ano, decisões], do mais antigo ao mais recente. */
+  porAno: Array<[string, number]>;
+  de: string;
+  ate: string;
+  anosPossivelmenteIncompletos: string[];
+}
+
+/** Contagem de devoluções à origem que citam o tema (`detalhes.aplicacao`, de `pnpm agregar:stf`), ou nulo se o nó não a tem ou ela vier torta. */
+export function aplicacaoDoNo(n: NoTese): AplicacaoDoNo | null {
+  const a = n.detalhes.aplicacao as { total?: unknown; porAno?: unknown; de?: unknown; ate?: unknown; anosPossivelmenteIncompletos?: unknown } | undefined;
+  if (!a || typeof a.total !== 'number' || typeof a.de !== 'string' || typeof a.ate !== 'string' || !a.porAno || typeof a.porAno !== 'object') return null;
+  const porAno = Object.entries(a.porAno as Record<string, unknown>)
+    .filter((e): e is [string, number] => typeof e[1] === 'number')
+    .sort(([x], [y]) => x.localeCompare(y));
+  const incompletos = Array.isArray(a.anosPossivelmenteIncompletos) ? a.anosPossivelmenteIncompletos.filter((x): x is string => typeof x === 'string') : [];
+  return { total: a.total, porAno, de: a.de, ate: a.ate, anosPossivelmenteIncompletos: incompletos };
+}
+
+/** "8.890 decisões entre 2020 e 2026" / "nenhuma decisão registrada entre 2020 e 2026". */
+export function textoDoTotalDeAplicacao(a: AplicacaoDoNo): string {
+  const periodo = `entre ${a.de.slice(0, 4)} e ${a.ate.slice(0, 4)}`;
+  if (a.total === 0) return `nenhuma decisão registrada ${periodo}`;
+  return `${a.total.toLocaleString('pt-BR')} ${a.total === 1 ? 'decisão' : 'decisões'} ${periodo}`;
 }

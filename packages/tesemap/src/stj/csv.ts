@@ -1,10 +1,10 @@
 /**
- * Leitor de CSV (RFC 4180) para os arquivos dos Dados Abertos do STJ: campos entre aspas com vírgula, quebra de linha e aspas duplicadas,
+ * Leitor de CSV (RFC 4180) para os arquivos dos Dados Abertos do STJ e do STF (vírgula, ou ponto e vírgula nas exportações de súmulas do STF): campos entre aspas com vírgula, quebra de linha e aspas duplicadas,
  * BOM no começo e CRLF. Devolve cada linha como objeto pelo cabeçalho. Sem dependência: o formato é simples e o erro tem de ser nosso.
  */
-export function lerCsv(texto: string): Array<Record<string, string>> {
+/** Percorre as linhas do CSV uma a uma, sem guardá-las: para os arquivos grandes do STF (centenas de MB). Linhas vazias são puladas. */
+export function* linhasDoCsv(texto: string, separador = ','): Generator<string[]> {
   const t = texto.charCodeAt(0) === 0xfeff ? texto.slice(1) : texto;
-  const linhas: string[][] = [];
   let campo = '';
   let linha: string[] = [];
   let entreAspas = false;
@@ -18,22 +18,26 @@ export function lerCsv(texto: string): Array<Record<string, string>> {
         } else entreAspas = false;
       } else campo += c;
     } else if (c === '"' && campo === '') entreAspas = true;
-    else if (c === ',') {
+    else if (c === separador) {
       linha.push(campo);
       campo = '';
     } else if (c === '\n' || c === '\r') {
       if (c === '\r' && t[i + 1] === '\n') i++;
       linha.push(campo);
       campo = '';
-      if (linha.length > 1 || linha[0] !== '') linhas.push(linha);
+      if (linha.length > 1 || linha[0] !== '') yield linha;
       linha = [];
     } else campo += c;
   }
   if (entreAspas) throw new Error('CSV com aspas sem fechamento');
   if (campo !== '' || linha.length > 0) {
     linha.push(campo);
-    linhas.push(linha);
+    yield linha;
   }
+}
+
+export function lerCsv(texto: string, separador = ','): Array<Record<string, string>> {
+  const linhas = [...linhasDoCsv(texto, separador)];
   if (linhas.length === 0) return [];
   const cabecalho = linhas[0].map(h => h.trim());
   return linhas.slice(1).map((l, n) => {

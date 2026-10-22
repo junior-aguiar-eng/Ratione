@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { citacoesDoNo, coberturaPorExtenso, numerosDeRepercussaoGeral, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, type NoTese } from './tesemap';
+import { aplicacaoDoNo, citacoesDoNo, coberturaPorExtenso, idsLigadosPeloProprioNo, numerosDeRepercussaoGeral, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, textoDoTotalDeAplicacao, type NoTese } from './tesemap';
 
 const dc = (iso: string) => iso.split('-').reverse().join('/');
 const no = (detalhes: Record<string, unknown>): NoTese => ({
@@ -64,5 +64,40 @@ describe('Ligação STJ e STF pela repercussão geral (F4-02)', () => {
     assert.deepEqual(numerosDeRepercussaoGeral(n([{ numero: '1255' }, { numero: '1255' }, { numero: '12x' }, { numero: 3 }, null, 'x'])), ['1255']);
     assert.deepEqual(numerosDeRepercussaoGeral(n('x')), []);
     assert.deepEqual(numerosDeRepercussaoGeral(n(undefined)), []);
+  });
+
+  it('ids que o próprio nó liga: tema do STJ, tema e súmulas citados por uma súmula do STF; formato torto é ignorado', () => {
+    const n = (detalhes: Record<string, unknown>): NoTese => ({ id: 'STF-SV-55', tipo: 'sumula', rotulo: 'x', tribunal: 'STF', numero_referencia: null, descricao: '', dispositivo_id: null, detalhes, origem_dado: 'curado', fontes: [], validado_por: null, validado_em: null, atualizado_em: '2026-10-22' });
+    assert.deepEqual(
+      idsLigadosPeloProprioNo(n({ repercussaoGeral: [{ numero: '1255' }], temasRg: [{ numero: '6' }, { numero: '1255' }], sumulasCorrelatas: [{ id: 'STF-SUMULA-680' }, { id: 'STF-SV-9' }, { id: 'qualquer-coisa' }, { id: 5 }, null] })),
+      ['STF-RG-1255', 'STF-RG-6', 'STF-SUMULA-680', 'STF-SV-9']
+    );
+    assert.deepEqual(idsLigadosPeloProprioNo(n({})), []);
+  });
+
+  it('a lista diz "aprovada em" para súmula e "julgado em" para precedente', () => {
+    const base = { id: 'x', rotulo: 'x', tribunal: 'STF', numero_referencia: null, descricao: '', dispositivo_id: null, detalhes: { dataJulgamento: '2015-06-18', orgaoJulgador: 'Tribunal Pleno' }, origem_dado: 'curado' as const, fontes: [], validado_por: null, validado_em: null, atualizado_em: '2026-10-22' };
+    assert.equal(resumoDoNo({ ...base, tipo: 'sumula' }, dc), 'aprovada em 18/06/2015 · Tribunal Pleno');
+    assert.equal(resumoDoNo({ ...base, tipo: 'precedente' }, dc), 'julgado em 18/06/2015 · Tribunal Pleno');
+  });
+});
+
+describe('Aplicação do tema na tela (F4-02)', () => {
+  const n = (aplicacao: unknown): NoTese => ({ id: 'STF-RG-660', tipo: 'tema', rotulo: 'x', tribunal: 'STF', numero_referencia: null, descricao: '', dispositivo_id: null, detalhes: { aplicacao }, origem_dado: 'curado', fontes: [], validado_por: null, validado_em: null, atualizado_em: '2026-10-22' });
+
+  it('lê a contagem com os anos em ordem e os anos possivelmente incompletos; formato torto vira nulo', () => {
+    const a = aplicacaoDoNo(n({ total: 8890, porAno: { '2022': 5, '2020': 7, '2021': 'x' }, de: '2020-01-06', ate: '2026-10-21', anosPossivelmenteIncompletos: ['2024', 3] }))!;
+    assert.deepEqual(a.porAno, [['2020', 7], ['2022', 5]]);
+    assert.deepEqual(a.anosPossivelmenteIncompletos, ['2024']);
+    assert.equal(aplicacaoDoNo(n(undefined)), null);
+    assert.equal(aplicacaoDoNo(n({ total: '8890', porAno: {}, de: 'a', ate: 'b' })), null);
+    assert.equal(aplicacaoDoNo(n({ total: 1, de: '2020-01-01', ate: '2026-01-01' })), null);
+  });
+
+  it('o total em português: milhar, singular, zero e o período', () => {
+    const base = { porAno: [] as Array<[string, number]>, de: '2020-01-06', ate: '2026-10-21', anosPossivelmenteIncompletos: [] };
+    assert.equal(textoDoTotalDeAplicacao({ ...base, total: 8890 }), '8.890 decisões entre 2020 e 2026');
+    assert.equal(textoDoTotalDeAplicacao({ ...base, total: 1 }), '1 decisão entre 2020 e 2026');
+    assert.equal(textoDoTotalDeAplicacao({ ...base, total: 0 }), 'nenhuma decisão registrada entre 2020 e 2026');
   });
 });

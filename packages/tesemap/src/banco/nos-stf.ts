@@ -5,22 +5,25 @@
  */
 import { NoBancoSchema, type NoBanco } from './esquemas';
 import type { CitacaoNormativa } from './citacoes';
-import { classificarTemaRg, type TemaRgStf } from '../stf/repercussao';
-import type { ManifestoStf } from '../stf/corpus';
+import { LIMIAR_DE_APLICACAO, classificarTemaRg, type TemaRgStf } from '../stf/repercussao';
+import { arquivoDoManifesto, type ManifestoStf } from '../stf/corpus';
+import type { SumulaStf } from '../stf/sumulas';
+import type { AplicacaoDosTemas } from '../stf/aplicacao';
 
-/** `citados`: números de tema que os precedentes do STJ ligam ao STF; entram mesmo com a repercussão negada (ver `classificarTemaRg`). */
-export function nosDosTemasStf(temas: TemaRgStf[], m: ManifestoStf, citacoes: (texto: string) => CitacaoNormativa[] = () => [], citados: ReadonlySet<number> = new Set()): NoBanco[] {
-  const arquivo = m.arquivos.find(a => a.nome === 'repercussao-geral');
+/** `citados`: números de tema que os precedentes do STJ ligam ao STF; `aplicacao`: contagem de devoluções. Os dois fazem o tema entrar mesmo com a repercussão negada (ver `classificarTemaRg`). */
+export function nosDosTemasStf(temas: TemaRgStf[], m: ManifestoStf, citacoes: (texto: string) => CitacaoNormativa[] = () => [], citados: ReadonlySet<number> = new Set(), aplicacao: AplicacaoDosTemas | null = null): NoBanco[] {
+  const arquivo = arquivoDoManifesto(m, 'repercussao-geral');
   const fonte = {
     id: 'stf-transparencia-repercussao-geral',
-    ato: m.fonte,
+    ato: 'Portal da Transparência do STF, dados abertos: temas de repercussão geral',
     url: m.paginaUrl,
-    lido: `${arquivo?.descricao ?? 'Temas de repercussão geral'}; importação mecânica do arquivo oficial, ${m.obtidoPor}`,
-    lidoEm: m.lidoEm
+    lido: `${arquivo.descricao}; importação mecânica do arquivo oficial, ${m.obtidoPor}`,
+    lidoEm: arquivo.lidoEm
   };
   const nos: NoBanco[] = [];
   for (const t of temas) {
-    const tipo = classificarTemaRg(t, citados.has(t.numero));
+    const muitoAplicado = (aplicacao?.porTema[String(t.numero)]?.total ?? 0) >= LIMIAR_DE_APLICACAO;
+    const tipo = classificarTemaRg(t, citados.has(t.numero) || muitoAplicado);
     if (!tipo) continue;
     nos.push(
       NoBancoSchema.parse({
@@ -46,15 +49,76 @@ export function nosDosTemasStf(temas: TemaRgStf[], m: ManifestoStf, citacoes: (t
           suspensaoNacional: t.suspensaoNacional,
           linkOficial: t.linkProcesso,
           teseFirmada: !!t.tese,
-          citacoes: citacoes(`${t.titulo} ${t.tese ?? ''}`)
+          citacoes: citacoes(`${t.titulo} ${t.tese ?? ''}`),
+          // Devoluções à origem pelo regime da repercussão geral que citam este tema (regra e limites em `stf/aplicacao.ts`); ausente se a contagem não foi gerada
+          ...(aplicacao
+            ? {
+                aplicacao: {
+                  total: aplicacao.porTema[String(t.numero)]?.total ?? 0,
+                  porAno: aplicacao.porTema[String(t.numero)]?.porAno ?? {},
+                  de: aplicacao.periodo.de,
+                  ate: aplicacao.periodo.ate,
+                  anosPossivelmenteIncompletos: aplicacao.anosPossivelmenteIncompletos
+                }
+              }
+            : {})
         },
         origem_dado: 'curado',
         fontes: [fonte],
         validado_por: null,
         validado_em: null,
-        atualizado_em: m.lidoEm
+        atualizado_em: arquivo.lidoEm
       })
     );
   }
   return nos;
+}
+
+/**
+ * Nós das súmulas do STF (vinculantes e não vinculantes). O enunciado é o texto oficial; a fonte de cada nó é a página da própria súmula na base de
+ * jurisprudência do STF. As ligações vêm da observação que o STF escreve ("Veja Súmula 680", "Tema 6 da repercussão geral") e só valem quando o
+ * nó de destino existe no grafo (`existentes`): a tela as mostra como ligações registradas pelo STF, não como relações validadas do mapa.
+ */
+export function nosDasSumulasStf(sumulas: SumulaStf[], m: ManifestoStf, existentes: ReadonlySet<string>, citacoes: (texto: string) => CitacaoNormativa[] = () => []): NoBanco[] {
+  return sumulas
+    .filter(s => /^aprovada$/i.test(s.situacao))
+    .map(s => {
+      const arquivo = arquivoDoManifesto(m, s.vinculante ? 'sumulas-vinculantes' : 'sumulas');
+      return NoBancoSchema.parse({
+        id: s.id,
+        tipo: 'sumula',
+        rotulo: s.vinculante ? `Súmula Vinculante ${s.numero} do STF` : `Súmula ${s.numero} do STF`,
+        tribunal: 'STF',
+        numero_referencia: s.vinculante ? `SV ${s.numero}` : `Súmula ${s.numero}`,
+        descricao: s.enunciado,
+        dispositivo_id: null,
+        detalhes: {
+          vinculante: s.vinculante,
+          situacao: s.situacao,
+          orgaoJulgador: s.orgaoJulgador,
+          dataAprovacao: s.dataAprovacao,
+          dataJulgamento: s.dataAprovacao,
+          fontePublicacao: s.fontePublicacao,
+          ramoDoDireito: s.ramoDoDireito,
+          observacao: s.observacao,
+          linkOficial: s.url,
+          sumulasCorrelatas: s.sumulasCitadas.filter(id => existentes.has(id)).map(id => ({ id })),
+          temasRg: s.temasCitados.filter(n => existentes.has(`STF-RG-${n}`)).map(numero => ({ numero: String(numero) })),
+          citacoes: citacoes(s.enunciado)
+        },
+        origem_dado: 'curado',
+        fontes: [
+          {
+            id: `stf-jurisprudencia-${s.id.toLowerCase()}`,
+            ato: s.titulo,
+            url: s.url,
+            lido: `${arquivo.descricao}; importação mecânica da exportação oficial, ${m.obtidoPor}${arquivo.consulta ? `; consulta usada: ${arquivo.consulta}` : ''}`,
+            lidoEm: arquivo.lidoEm
+          }
+        ],
+        validado_por: null,
+        validado_em: null,
+        atualizado_em: arquivo.lidoEm
+      });
+    });
 }
