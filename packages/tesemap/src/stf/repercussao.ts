@@ -89,15 +89,19 @@ const cancelado = (t: TemaRgStf) => t.status.toLowerCase() === 'cancelado' || /c
  * Entram no grafo: tema com repercussão geral RECONHECIDA e não cancelado. Com tese firmada (mérito julgado ou reafirmação de jurisprudência) vira
  * `precedente`; com o mérito ainda pendente vira `tema` (a questão em julgamento, sem tese). Ficam de fora a repercussão negada (matéria
  * infraconstitucional ou sem relevância), os cancelados, os ainda em análise de repercussão e os julgados que o arquivo traz sem tese.
- * Exceção: o tema que um precedente do STJ cita (`citado`) entra como `tema`, mesmo com a repercussão negada, para a ligação não ficar sem ponta;
- * a tela mostra a situação ("RG negada - matéria infraconstitucional"). Cancelado e ainda em análise nunca entram.
+ * Exceção (`destaque`): o tema que um precedente do STJ cita, ou que as decisões do STF aplicam muitas vezes (ver `LIMIAR_DE_APLICACAO`), entra como
+ * `tema` mesmo com a repercussão negada ou sem tese no arquivo: sem isso o grafo deixaria de fora os temas que a prática mais encontra (o Tema 660, o mais
+ * aplicado, é de repercussão negada). A tela mostra a situação ("RG negada - matéria infraconstitucional"). Cancelado e ainda em análise nunca entram.
  */
-export function classificarTemaRg(t: TemaRgStf, citado = false): 'precedente' | 'tema' | null {
+/** Número de decisões de devolução que torna um tema "muito aplicado" o bastante para entrar no grafo mesmo sem tese ou com a repercussão negada. */
+export const LIMIAR_DE_APLICACAO = 50;
+
+export function classificarTemaRg(t: TemaRgStf, destaque = false): 'precedente' | 'tema' | null {
   if (cancelado(t)) return null;
   if (/^RG reconhecida/i.test(t.situacaoRg)) {
     if (/mérito pendente/i.test(t.situacaoRg)) return 'tema';
     if (t.tese) return 'precedente';
-    return citado ? 'tema' : null;
+    return destaque ? 'tema' : null;
   }
-  return citado && /^RG negada/i.test(t.situacaoRg) ? 'tema' : null;
+  return destaque && /^RG negada/i.test(t.situacaoRg) ? 'tema' : null;
 }

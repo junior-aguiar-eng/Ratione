@@ -43,9 +43,9 @@ A pesquisa por assunto passa a achar o que se digita sem acento ("honorarios adv
 O grafo do TeseMap fica em `tesemap_nos` e `tesemap_arestas` (leitura pública filtrada pela RLS: só nó curado ou validado por pessoa; aresta só validada).
 
 1. **Aplicar as migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261022000003_tesemap.sql` → *Run* ("Success"); depois o de `supabase/migrations/20261022000004_busca_sem_acento.sql` (extensão `unaccent` e configuração de busca sem acento) e o de `supabase/migrations/20261022000005_tesemap_busca.sql` (pesquisa por assunto da tela: todas as palavras, sem acento; se você já aplicou a primeira versão, `20261022000004_tesemap_busca.sql`, esta a substitui sem erro). Em *Table Editor* confira as 2 tabelas com o cadeado de RLS ligado.
-2. **Conferir sem tocar no banco.** Em `packages/tesemap`: `pnpm carregar:tesemap --simular` (deve mostrar 2.205 nós: 1.150 do STJ e 1.055 do STF, 371 deles com atalho para o NormaViva).
+2. **Conferir sem tocar no banco.** Em `packages/tesemap`: `pnpm carregar:tesemap --simular` (deve mostrar 3.076 nós: 1.150 do STJ, 1.141 temas de repercussão geral do STF e 785 súmulas do STF, 399 deles com atalho para o NormaViva).
 3. **Carregar.** No mesmo terminal, **só nele**, defina `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (como na carga do NormaViva) e rode `pnpm carregar:tesemap`. A carga **não apaga nada**: atualiza por `id` os nós do STJ e do STF e deixa o que foi curado à mão.
-4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150`, `STF | precedente | 823` e `STF | tema | 232`, com a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 3;` deve trazer `STJ-TEMA-1076`.
+4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150`, `STF | precedente | 823`, `STF | tema | 318` e `STF | sumula | 785`, com a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 3;` deve trazer `STJ-TEMA-1076`.
 
 A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
 

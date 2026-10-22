@@ -11,7 +11,7 @@ import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
-import { abrirNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, ligadosPelaRepercussaoGeral, resumoDoNo, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
+import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import PreviaCatalogada from './PreviaCatalogada';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -92,12 +92,12 @@ export default function TeseMapPage() {
     };
   }, [db, noId, semDados]);
 
-  // Ligação declarada pelo STJ com o tema de repercussão geral do STF (e a volta): só o que existe no grafo
+  // Ligações que as próprias fontes registram (STJ → tema do STF; súmula do STF → súmula ou tema), nos dois sentidos: só o que existe no grafo
   useEffect(() => {
     setLigados([]);
     if (!db || !aberto) return;
     let vivo = true;
-    ligadosPelaRepercussaoGeral(db, aberto.no)
+    ligadosPelasFontes(db, aberto.no)
       .then(l => vivo && setLigados(l))
       .catch(() => vivo && setLigados([]));
     return () => {
@@ -130,7 +130,7 @@ export default function TeseMapPage() {
       />
 
       <p className="text-sm text-ink-soft mb-6 max-w-3xl" data-testid="cobertura">
-        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fontes: STJ, Dados Abertos (licença CC BY), e Portal da Transparência do STF. Não é toda a jurisprudência: é o conjunto declarado acima.
+        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fontes: STJ, Dados Abertos (licença CC BY), e STF (Portal da Transparência e base de jurisprudência). Não é toda a jurisprudência: é o conjunto declarado acima.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 mb-6">
@@ -204,6 +204,7 @@ export default function TeseMapPage() {
               <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="warn">{ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
+                  {no.detalhes.vinculante === true && <Badge variant="brand">Vinculante</Badge>}
                   {texto(no.detalhes.situacao) && <Badge variant="neutral">{texto(no.detalhes.situacao)}</Badge>}
                 </div>
                 <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{no.rotulo}</h2>
@@ -223,7 +224,7 @@ export default function TeseMapPage() {
                 </Notice>
               ) : (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-sm font-semibold text-ink">Tese firmada</h3>
+                  <h3 className="text-sm font-semibold text-ink">{no.tipo === 'sumula' ? 'Enunciado' : 'Tese firmada'}</h3>
                   <p className="font-serif text-lg text-ink leading-[1.7] border-l-2 border-brand pl-5 whitespace-pre-line" data-testid="tese-firmada">
                     {no.descricao}
                   </p>
@@ -234,11 +235,13 @@ export default function TeseMapPage() {
 
               <DadosComplementares no={no} />
 
+              <AplicacaoDoTema no={no} />
+
               <Atalhos no={no} />
 
               <div className="border-t border-line pt-4 flex flex-col gap-3 text-sm text-ink-mute" data-testid="fonte">
                 {no.fontes.map(f => (
-                  <p key={f.id}>
+                  <p key={f.id} className="[overflow-wrap:anywhere]">
                     Fonte:{' '}
                     <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-brand-text underline underline-offset-2">
                       {f.ato}
@@ -276,11 +279,32 @@ export default function TeseMapPage() {
   );
 }
 
+function AplicacaoDoTema({ no }: { no: NoTese }) {
+  const a = aplicacaoDoNo(no);
+  if (!a) return null;
+  return (
+    <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="aplicacao-do-tema">
+      <h3 className="text-sm font-semibold text-ink">Aplicação pelo STF (devoluções à origem)</h3>
+      <p className="text-ink">{textoDoTotalDeAplicacao(a)}</p>
+      {a.total > 0 && (
+        <p className="text-ink-soft">
+          Por ano:{' '}
+          {a.porAno.map(([ano, n]) => `${ano}${a.anosPossivelmenteIncompletos.includes(ano) ? '*' : ''}: ${n.toLocaleString('pt-BR')}`).join(' · ')}
+        </p>
+      )}
+      <p className="text-xs text-ink-mute">
+        Conta as decisões do STF que devolveram processos ao tribunal de origem pelo regime da repercussão geral citando este tema. Não é o total de citações do tema na jurisprudência.
+        {a.anosPossivelmenteIncompletos.length > 0 && ` *O arquivo do STF parece incompleto em ${a.anosPossivelmenteIncompletos.join(', ')} (bem menos decisões que nos demais anos).`}
+      </p>
+    </div>
+  );
+}
+
 function LigacoesEntreTribunais({ ligados, onAbrir }: { ligados: NoLigado[]; onAbrir: (id: string) => void }) {
   if (ligados.length === 0) return null;
   return (
     <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="ligacoes-tribunais">
-      <h3 className="text-sm font-semibold text-ink">Tema correlato em outro tribunal</h3>
+      <h3 className="text-sm font-semibold text-ink">Ligações registradas pelas fontes</h3>
       <ul className="flex flex-wrap gap-2">
         {ligados.map(l => (
           <li key={l.id}>
@@ -290,7 +314,7 @@ function LigacoesEntreTribunais({ ligados, onAbrir }: { ligados: NoLigado[]; onA
           </li>
         ))}
       </ul>
-      <p className="text-xs text-ink-mute">Ligação que o próprio STJ registra no arquivo oficial de precedentes qualificados; não é relação validada do mapa.</p>
+      <p className="text-xs text-ink-mute">São as ligações que o próprio tribunal registra: o STJ, no arquivo de precedentes qualificados; o STF, na observação da súmula. Não são relações validadas do mapa.</p>
     </div>
   );
 }
@@ -306,12 +330,16 @@ function DadosComplementares({ no }: { no: NoTese }) {
   add('Processo paradigma', no.detalhes.processoParadigma);
   add('Relator', no.detalhes.relator);
   add('Ramos do direito', no.detalhes.ramosDoDireito);
+  add('Ramo do direito', no.detalhes.ramoDoDireito);
   if (no.tribunal === 'STF') add('Suspensão nacional', no.detalhes.suspensaoNacional);
   if (texto(no.detalhes.dataPublicacaoAcordao)) linhas.push(['Acórdão publicado em', dataCurta(no.detalhes.dataPublicacaoAcordao as string)]);
   add('Referência legislativa', no.detalhes.referenciaLegislativa);
   add('Súmula originada', no.detalhes.sumulaOriginada);
   add('Assuntos', no.detalhes.assuntos);
-  if (no.tribunal === 'STF' && texto(no.detalhes.dataJulgamento)) linhas.push(['Julgado em', dataCurta(no.detalhes.dataJulgamento as string)]);
+  if (no.tribunal === 'STF' && no.tipo !== 'sumula' && texto(no.detalhes.dataJulgamento)) linhas.push(['Julgado em', dataCurta(no.detalhes.dataJulgamento as string)]);
+  if (no.tipo === 'sumula' && texto(no.detalhes.dataAprovacao)) linhas.push(['Aprovada em', dataCurta(no.detalhes.dataAprovacao as string)]);
+  add('Publicação', no.detalhes.fontePublicacao);
+  add('Observação do STF', no.detalhes.observacao);
   if (Array.isArray(no.detalhes.processosLeadingCase) && no.detalhes.processosLeadingCase.length > 0) linhas.push(['Processos paradigma', (no.detalhes.processosLeadingCase as string[]).join('; ')]);
   if (rg.length > 0) linhas.push(['Repercussão geral no STF', rg.map(r => `Tema ${r.numero}${r.descricao ? `: ${r.descricao}` : ''}`).join(' | ')]);
   if (linhas.length === 0) return null;

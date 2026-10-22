@@ -14,9 +14,9 @@ import { carregarPrecedentesStj, manifestoStj } from '../stj';
 import { join } from 'node:path';
 import { extrairRemissoes } from '@ratione/normaviva/referencias';
 import { linhasDoCorpus } from '@ratione/normaviva/corpus';
-import { carregarTemasRgStf, manifestoStf } from '../stf';
+import { carregarAplicacaoStf, carregarSumulasStf, carregarTemasRgStf, manifestoStf } from '../stf';
 import { nosDosPrecedentesStj, temasStfCitadosPeloStj } from './nos-stj';
-import { nosDosTemasStf } from './nos-stf';
+import { nosDasSumulasStf, nosDosTemasStf } from './nos-stf';
 import { citacoesNoTexto } from './citacoes';
 import type { NoBanco } from './esquemas';
 
@@ -46,10 +46,16 @@ async function main() {
   const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus')).flatMap(l => l.dispositivos.map(d => d.id)));
   const citar = (t: string) => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id));
   const nosStj = nosDosPrecedentesStj(carregarPrecedentesStj(), manifestoStj(), citar);
-  const nosStf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), citar, temasStfCitadosPeloStj(nosStj));
-  const nos = [...nosStj, ...nosStf];
+  const nosStf = nosDosTemasStf(carregarTemasRgStf(), manifestoStf(), citar, temasStfCitadosPeloStj(nosStj), carregarAplicacaoStf());
+  const sumulas = carregarSumulasStf();
+  // As ligações das súmulas só valem para nó que existe no grafo: os do STJ, os temas do STF e as próprias súmulas
+  const existentes = new Set([...nosStj, ...nosStf].map(n => n.id).concat(sumulas.map(x => x.id)));
+  const nosSumulas = nosDasSumulasStf(sumulas, manifestoStf(), existentes, citar);
+  const nos = [...nosStj, ...nosStf, ...nosSumulas];
   const comCitacao = nos.filter(n => (n.detalhes.citacoes as unknown[]).length > 0).length;
-  console.log(`Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} do STF (repercussão geral reconhecida: ${nosStf.filter(n => n.tipo === 'precedente').length} com tese, ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita); ${comCitacao} citam dispositivo do NormaViva`);
+  console.log(
+    `Nós montados: ${nos.length} = ${nosStj.length} do STJ (tese firmada, não cancelados) + ${nosStf.length} temas de repercussão geral do STF (${nosStf.filter(n => n.tipo === 'precedente').length} com tese; ${nosStf.filter(n => n.tipo === 'tema').length} como tema sem tese, entre eles os que o STJ cita e os muito aplicados) + ${nosSumulas.length} súmulas do STF (${nosSumulas.filter(n => n.detalhes.vinculante).length} vinculantes); ${comCitacao} citam dispositivo do NormaViva`
+  );
   if (process.argv.includes('--simular')) {
     console.log('Simulação: nada foi enviado ao banco.');
     return;

@@ -1,2 +1,4 @@
 export * from './repercussao';
-export { carregarTemasRgStf, manifestoStf, type ManifestoStf, type ArquivoStf } from './corpus';
+export * from './sumulas';
+export * from './aplicacao';
+export { carregarTemasRgStf, carregarSumulasStf, carregarAplicacaoStf, manifestoStf, arquivoDoManifesto, type ManifestoStf, type ArquivoStf, type NomeDoArquivoStf } from './corpus';
