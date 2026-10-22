@@ -124,6 +124,12 @@ export function nosDasSumulasStf(sumulas: SumulaStf[], m: ManifestoStf, existent
     });
 }
 
+/**
+ * Página do processo no portal do STF por classe e número. O arquivo do controle concentrado não traz o número do incidente (`detalhe.asp?incidente=`);
+ * a consulta por classe e número redireciona para a página de detalhe (conferido em 22/10/2026 com a ADPF 54 e a ADI 4650).
+ */
+export const linkDoProcessoStf = (classe: string, numero: number) => `https://portal.stf.jus.br/processos/listarProcessos.asp?classe=${classe}&numeroProcesso=${numero}`;
+
 const ROTULO_DA_CLASSE: Record<string, string> = { ADI: 'ação direta de inconstitucionalidade', ADC: 'ação declaratória de constitucionalidade', ADO: 'ação direta de inconstitucionalidade por omissão', ADPF: 'arguição de descumprimento de preceito fundamental' };
 
 /**
@@ -159,6 +165,7 @@ export function nosDoControleConcentrado(processos: ProcessoControle[], m: Manif
         orgaoJulgador: p.colegiada ? 'Plenário' : 'Decisão monocrática',
         textoDaDecisaoDisponivel: p.merito.texto !== null,
         decisoesNoArquivo: p.totalDeDecisoes,
+        linkOficial: linkDoProcessoStf(p.classe, p.numero),
         citacoes: citacoes(p.merito.texto ?? '')
       },
       origem_dado: 'curado',

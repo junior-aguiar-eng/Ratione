@@ -47,6 +47,8 @@ O grafo do TeseMap fica em `tesemap_nos` e `tesemap_arestas` (leitura pública f
 3. **Carregar.** No mesmo terminal, **só nele**, defina `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (como na carga do NormaViva) e rode `pnpm carregar:tesemap`. A carga **não apaga nada**: atualiza por `id` os nós do STJ e do STF e deixa o que foi curado à mão.
 4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150`, `STF | precedente | 823`, `STF | tema | 318` e `STF | sumula | 785`, com a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 5;` deve trazer `STJ-TEMA-1076` (4º em 22/10/2026, atrás do Tema 1255 do STF, sobre o mesmo assunto).
 
+**Atualização semanal.** O workflow `Atualizar TeseMap` avisa por issue quando os Dados Abertos do STJ mudam ou quando um arquivo de entrada manual (STF, súmulas do STJ) passa de 90 dias. A carga continua manual: `pnpm coletar:stj` (ou o importador da fonte manual), PR e `pnpm carregar:tesemap`.
+
 **Grafo mínimo (F4-05).** A mesma carga grava os 4 nós de dispositivo do art. 85 do CPC e as 5 relações de `packages/tesemap/corpus/grafo-minimo.json`. As relações só aparecem no site depois de validadas: confira a folha `packages/tesemap/corpus/grafo-minimo.md` (gerada por `pnpm grafo-minimo`), registre a validação no JSON e rode `pnpm carregar:tesemap` de novo. Teste no SQL Editor: `select count(*) from tesemap_arestas;` dá o total gravado (com a chave de serviço ou no editor); a tela só mostra as validadas.
 
 **Feito em produção em 22/10/2026:** migrações `20261022000003` a `...005` aplicadas e conferidas, 3.076 nós carregados e cobertura conferida (STJ 1.150; STF 823 precedentes, 318 temas e 785 súmulas).

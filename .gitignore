@@ -50,3 +50,7 @@ apps/web/AGENTS.md
 
 # Saída de `pnpm feeds` (alertas do dia; o agendador a lê e a descarta)
 packages/normaviva/corpus/feeds-alertas.json
+
+# Relatório da verificação periódica do TeseMap (pnpm verificar:tesemap): efêmero, vira issue no workflow
+packages/tesemap/corpus/atualizacao-relatorio.json
+packages/tesemap/corpus/atualizacao-relatorio.md

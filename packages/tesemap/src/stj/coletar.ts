@@ -60,7 +60,14 @@ interface RecursoCkan {
   last_modified: string | null;
 }
 
-async function main() {
+export interface ConjuntoBaixado {
+  manifesto: ManifestoStj;
+  bytes: Record<ArquivoStj['nome'], Buffer>;
+  precedentes: ReturnType<typeof lerPrecedentes>;
+}
+
+/** Baixa o conjunto do portal e valida o layout e o conteúdo, sem gravar nada (a verificação periódica usa só isto; `pnpm coletar:stj` grava). */
+export async function baixarConjunto(): Promise<ConjuntoBaixado> {
   const meta = (await (await pedir(`${PORTAL}/api/3/action/package_show?id=${CONJUNTO}`)).json()) as {
     result: { title: string; license_title: string; metadata_modified: string; resources: RecursoCkan[] };
   };
@@ -83,10 +90,8 @@ async function main() {
       arquivo: `${nome.toLowerCase()}.gz`
     });
   }
-  // Valida o layout e o conteúdo antes de gravar qualquer coisa
+  // Valida o layout e o conteúdo antes de qualquer gravação
   const precedentes = lerPrecedentes(bytes['Temas.csv'].toString('utf-8'), bytes['Processos.csv'].toString('utf-8'));
-  mkdirSync(PASTA, { recursive: true });
-  for (const a of arquivos) writeFileSync(join(PASTA, a.arquivo), gzipSync(bytes[a.nome], { level: 9 }));
   const manifesto: ManifestoStj = {
     conjunto: CONJUNTO,
     titulo: meta.result.title,
@@ -96,6 +101,14 @@ async function main() {
     lidoEm: new Date().toISOString().slice(0, 10),
     arquivos
   };
+  return { manifesto, bytes: bytes as ConjuntoBaixado['bytes'], precedentes };
+}
+
+async function main() {
+  const { manifesto, bytes, precedentes } = await baixarConjunto();
+  const arquivos = manifesto.arquivos;
+  mkdirSync(PASTA, { recursive: true });
+  for (const a of arquivos) writeFileSync(join(PASTA, a.arquivo), gzipSync(bytes[a.nome], { level: 9 }));
   writeFileSync(join(PASTA, 'manifesto.json'), JSON.stringify(manifesto, null, 2) + '\n', 'utf-8');
   for (const a of arquivos) console.log(`ok   ${a.nome}  ${(a.bytes / 1024).toFixed(0)} KB  modificado em ${a.modificadoEm}  ${a.sha256.slice(0, 12)}`);
   console.log(`${precedentes.length} precedentes lidos (${manifesto.licenca}).`);

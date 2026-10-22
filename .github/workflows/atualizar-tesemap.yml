@@ -1,0 +1,72 @@
+name: Atualizar TeseMap
+
+# F4-01/F4-02: toda segunda-feira relê os Dados Abertos do STJ (precedentes qualificados) e compara com o corpus do repositório, e confere a idade
+# das fontes que só entram pelo responsável (arquivos do STF e súmulas do STJ, que bloqueiam acesso automático).
+# Se há o que fazer, abre (ou atualiza) uma issue com o resumo. NÃO altera o corpus, NÃO faz commit e NÃO grava no banco: quem atualiza é o
+# responsável, no computador dele (`pnpm coletar:stj` e `pnpm carregar:tesemap`), porque a carga exige a chave de serviço do Supabase.
+# Não usa segredo nenhum: lê o portal público do STJ e escreve só issues, com o token do próprio repositório.
+on:
+  schedule:
+    - cron: '30 9 * * 1' # segunda-feira, 09:30 UTC = 06:30 em Brasília
+  workflow_dispatch:
+
+concurrency:
+  group: atualizar-tesemap
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verificar:
+    name: Reler o STJ e conferir as fontes manuais
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Instalar pnpm
+        run: npm install -g pnpm@11.19.0
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      # Código de saída: 0 nada a fazer, 2 há o que fazer (relatório em corpus/atualizacao-relatorio.json e .md), 1 erro de execução
+      - name: Verificar
+        id: verificar
+        working-directory: packages/tesemap
+        run: |
+          set +e
+          pnpm verificar:tesemap 2>&1 | tee "$RUNNER_TEMP/relatorio.txt"
+          codigo=${PIPESTATUS[0]}
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Alertar por issue
+        if: steps.verificar.outputs.codigo == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXECUCAO: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        working-directory: packages/tesemap
+        run: |
+          hoje=$(date -u +%F)
+          # O texto vem pronto de `pnpm verificar:tesemap` (relatorioEmMarkdown, testado); aqui só acrescenta o link da execução
+          { cat corpus/atualizacao-relatorio.md; echo; echo "Execução: $EXECUCAO"; } > "$RUNNER_TEMP/alerta.md"
+          gh label create tesemap-atualizacao --color D4C5F9 --description "Fonte do TeseMap mudou ou precisa ser renovada" --force
+          existente=$(gh issue list --label tesemap-atualizacao --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existente" ]; then
+            gh issue comment "$existente" --body-file "$RUNNER_TEMP/alerta.md"
+          else
+            gh issue create --title "TeseMap: fonte mudou ou precisa ser renovada ($hoje)" --label tesemap-atualizacao --body-file "$RUNNER_TEMP/alerta.md"
+          fi
+
+      - name: Falhar se a verificação deu erro
+        if: steps.verificar.outputs.codigo != '0' && steps.verificar.outputs.codigo != '2'
+        run: |
+          echo "pnpm verificar:tesemap terminou com código ${{ steps.verificar.outputs.codigo }} (o portal do STJ pode estar fora do ar; veja o log)"
+          exit 1
