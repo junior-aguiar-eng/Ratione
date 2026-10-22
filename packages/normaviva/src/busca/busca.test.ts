@@ -85,6 +85,29 @@ describe('Banco do NormaViva com o corpus do Planalto (F3-05)', () => {
     assert.ok(r.rows.every(x => x.norma_id === 'LEI-13105-2015'));
   });
 
+  it('busca sem acento: "honorarios advocaticios" acha quase o mesmo que "honorários advocatícios"; o trecho continua acentuado e destacado', async () => {
+    const com = await db.query<{ id: string }>("select id from buscar_dispositivos('honorários advocatícios', 'LEI-13105-2015', 100)");
+    const sem = await db.query<{ id: string; rotulo: string; trecho: string }>("select id, rotulo, trecho from buscar_dispositivos('honorarios advocaticios', 'LEI-13105-2015', 100)");
+    assert.ok(com.rows.length > 10, 'com acento acha (eram 18)');
+    const comuns = sem.rows.filter(x => com.rows.some(c => c.id === x.id)).length;
+    assert.ok(comuns >= Math.ceil(com.rows.length * 0.9), `sem acento acha ao menos 90% do que acha com acento (${comuns} de ${com.rows.length})`);
+    assert.ok(sem.rows.some(x => x.rotulo.startsWith('art. 85')), 'o art. 85 do CPC está entre os resultados');
+    assert.match(sem.rows[0].trecho, /<b>honor[áa]rios<\/b>|<b>advocat[íi]cios<\/b>/i, 'o destaque cobre a palavra digitada sem acento');
+    assert.ok(sem.rows.some(x => /[áéíóúãõç]/i.test(x.trecho)), 'o trecho mostra o texto original, com acento');
+    const prisao = await db.query<{ norma_id: string }>("select norma_id from buscar_dispositivos('prisao preventiva requisitos', null, 30)");
+    assert.ok(prisao.rows.some(x => x.norma_id === 'DL-3689-1941'), 'prisao preventiva acha o CPP');
+    const caixa = await db.query<{ norma_id: string; rotulo: string }>("select norma_id, rotulo from buscar_dispositivos('DESCONSIDERACAO DA PERSONALIDADE JURIDICA', null, 30)");
+    assert.ok(caixa.rows.some(x => x.norma_id === 'LEI-10406-2002' && x.rotulo === 'art. 50'), 'maiúsculas sem acento: o art. 50 do CC está entre os resultados');
+  });
+
+  it('consulta com acento mantém o resultado de antes: usa a coluna e a configuração originais (a ordem do art. 50 do CC não muda)', async () => {
+    const r = await db.query<{ norma_id: string; rotulo: string }>("select norma_id, rotulo from buscar_dispositivos('desconsideração da personalidade jurídica', null, 30)");
+    const i = r.rows.findIndex(x => x.norma_id === 'LEI-10406-2002' && x.rotulo === 'art. 50');
+    assert.ok(i >= 0 && i < 15, `art. 50 do CC entre os 15 primeiros (posição ${i + 1})`);
+    const sem = await db.query<{ n: string }>("select count(*) as n from public.dispositivos where busca_sem_acento is null");
+    assert.strictEqual(Number(sem.rows[0].n), 0, 'a coluna sem acento está preenchida em todos os dispositivos');
+  });
+
   it('a busca ignora dispositivos revogados e respeita o limite', async () => {
     const r = await db.query<{ n: string }>("select count(*) as n from buscar_dispositivos('lei', null, 500)");
     assert.strictEqual(Number(r.rows[0].n), 100, 'teto de 100 resultados');

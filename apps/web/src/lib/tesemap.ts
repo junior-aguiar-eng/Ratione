@@ -98,7 +98,7 @@ export interface FiltroDeNos {
 }
 
 /**
- * Pesquisa no banco (`tesemap_buscar`, migração 20261022000004): todas as palavras, em qualquer ordem, sem acento nem maiúscula; sem texto,
+ * Pesquisa no banco (`tesemap_buscar`, migração 20261022000005): todas as palavras, em qualquer ordem, sem acento nem maiúscula; sem texto,
  * lista tudo. Os mais recentemente julgados primeiro quando a relevância empata.
  */
 export async function buscarNos(db: SupabaseClient, f: FiltroDeNos): Promise<NoTese[]> {

@@ -34,11 +34,15 @@ O texto das 28 normas (CF, códigos e leis de maior uso) fica em 4 tabelas públ
 
 A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem para esta conversa.
 
+## NormaViva: busca sem acento (22/10/2026)
+
+A pesquisa por assunto passa a achar o que se digita sem acento ("honorarios advocaticios", "prisao preventiva"). Depois de aplicar a `20261022000004_busca_sem_acento.sql` (a mesma do passo do TeseMap abaixo: crie a extensão `unaccent` e a configuração de busca), aplique `supabase/migrations/20261022000006_normaviva_busca_sem_acento.sql` no *SQL Editor → New query* → *Run*. Ela recria uma coluna de busca nas 29 mil linhas de `dispositivos` (alguns segundos). Teste: `select count(*) from buscar_dispositivos('honorarios advocaticios', 'LEI-13105-2015', 100);` deve devolver 18 ou mais; com acento o resultado é o mesmo de antes.
+
 ## TeseMap: aplicar a migração e carregar os precedentes do STJ (F4-03)
 
 O grafo do TeseMap fica em `tesemap_nos` e `tesemap_arestas` (leitura pública filtrada pela RLS: só nó curado ou validado por pessoa; aresta só validada).
 
-1. **Aplicar as migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261022000003_tesemap.sql` → *Run* ("Success"); depois o de `supabase/migrations/20261022000004_tesemap_busca.sql` (pesquisa por assunto da tela: todas as palavras, sem acento). Em *Table Editor* confira as 2 tabelas com o cadeado de RLS ligado.
+1. **Aplicar as migrações.** *SQL Editor → New query*: cole **todo** o conteúdo de `supabase/migrations/20261022000003_tesemap.sql` → *Run* ("Success"); depois o de `supabase/migrations/20261022000004_busca_sem_acento.sql` (extensão `unaccent` e configuração de busca sem acento) e o de `supabase/migrations/20261022000005_tesemap_busca.sql` (pesquisa por assunto da tela: todas as palavras, sem acento). Em *Table Editor* confira as 2 tabelas com o cadeado de RLS ligado.
 2. **Conferir sem tocar no banco.** Em `packages/tesemap`: `pnpm carregar:tesemap --simular` (deve mostrar 1.150 nós, 210 deles com atalho para o NormaViva).
 3. **Carregar.** No mesmo terminal, **só nele**, defina `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (como na carga do NormaViva) e rode `pnpm carregar:tesemap`. A carga **não apaga nada**: atualiza por `id` os nós do STJ e deixa o que foi curado à mão.
 4. **Testar.** No SQL Editor: `select * from tesemap_cobertura();` deve mostrar `STJ | precedente | 1150` e a data da leitura; `select id from tesemap_buscar('honorarios apreciacao equitativa') limit 3;` deve trazer `STJ-TEMA-1076`.
