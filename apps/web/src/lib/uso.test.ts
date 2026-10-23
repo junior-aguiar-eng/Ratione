@@ -12,6 +12,7 @@ import {
   inicioDoHistorico,
   nomeDoCsv,
   podeExportar,
+  precoEmReais,
   rotuloDaAnalise,
   type LinhaAnalise,
   type LinhaResumo
@@ -76,6 +77,14 @@ describe('Meu uso: o que mostrar de cada análise', () => {
       { ...base, tipo: 'rapida', quantidade: 3 }
     ];
     assert.deepEqual(cotasDoPlano(resumo).map(l => l.tipo), ['rapida', 'explicacao']);
+  });
+});
+
+describe('Meu uso: preço', () => {
+  it('centavos em reais, com espaço comum depois do R$', () => {
+    assert.equal(precoEmReais(2900), 'R$ 29,00');
+    assert.equal(precoEmReais(7990), 'R$ 79,90');
+    assert.equal(precoEmReais(123456), 'R$ 1.234,56');
   });
 });
 
