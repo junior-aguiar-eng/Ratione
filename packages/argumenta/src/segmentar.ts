@@ -44,6 +44,27 @@ function paragrafosDoBloco(linhas: string[]): string[] {
   return saida;
 }
 
+/** Rodapé que o PJe e outros sistemas repetem em cada página: assinatura, número do documento e "Pág. N". Não é conteúdo da decisão. */
+const RODAPE = /^(?:Assinado eletronicamente por:|N[úu]mero do documento:|P[áa]g\.?\s*\d+(?:\s*(?:\/|de)\s*\d+)?$)/i;
+
+/** Marcador de item sozinho na linha ("1.", "a)", "IV -"): pertence ao parágrafo que vem depois. */
+const SO_MARCADOR = /^(?:\d{1,3}\.|[a-z]\)|[IVX]{1,6}\s?[-–.])$/;
+
+/**
+ * PDFs com linhas separadas por linha em branco cortam a frase no meio: junta um parágrafo ao seguinte quando ele não termina em
+ * fim de frase e o próximo começa em minúscula, ou quando ele é só o marcador de um item.
+ */
+function juntarFrasesCortadas(paragrafos: string[]): string[] {
+  const saida: string[] = [];
+  for (const p of paragrafos) {
+    const anterior = saida[saida.length - 1];
+    if (anterior !== undefined && (SO_MARCADOR.test(anterior) || (!FIM_DE_FRASE.test(anterior) && /^\p{Ll}/u.test(p) && !titulo(anterior)))) {
+      saida[saida.length - 1] = `${anterior} ${p}`;
+    } else saida.push(p);
+  }
+  return saida;
+}
+
 /** Divide o texto em parágrafos: blocos separados por linha em branco e, dentro de cada bloco, a regra de `paragrafosDoBloco`. */
 export function segmentar(texto: string): string[] {
   const limpo = texto.replace(/\r\n?/g, '\n').replace(/[ \t]/g, ' ');
@@ -52,8 +73,8 @@ export function segmentar(texto: string): string[] {
     const linhas = bloco
       .split('\n')
       .map(l => l.replace(/ {2,}/g, ' ').trim())
-      .filter(Boolean);
+      .filter(l => l && !RODAPE.test(l));
     if (linhas.length) paragrafos.push(...paragrafosDoBloco(linhas));
   }
-  return paragrafos;
+  return juntarFrasesCortadas(paragrafos);
 }
