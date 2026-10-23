@@ -110,7 +110,11 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 
 ## 7. Cobrança com Mercado Pago
 
-Conta do Mercado Pago: **a conta que vai receber precisa estar de acordo com a forma jurídica escolhida** (T-01). Isso decide pessoa física ou CNPJ, a emissão de nota fiscal e os impostos, e **precede o lançamento**, não a implementação em modo de teste.
+**Decisão do responsável (23/10/2026):** hoje o responsável é **pessoa física, sem MEI**, em Maceió/AL, com faturamento esperado de até R$ 5 mil. A infraestrutura de cobrança será construída **pronta e desligada**: nada é publicado como comercial, e a cobrança só liga quando houver MEI (ou outra forma de empresa) e a conta do Mercado Pago correspondente. Até lá, o Ratione continua em **beta gratuito** e o Mercado Pago roda **só com credenciais e usuários de teste**, que não cobram de verdade.
+
+**Por que não cobrar como pessoa física nem por uma "ponte":** o plano de assinatura e a assinatura pertencem à conta do Mercado Pago que os criou. Cliente pagante criado numa conta de pessoa física **não migra** para a conta do MEI: teria de cancelar e assinar de novo. Por isso o primeiro cliente pagante só entra depois da conta definitiva.
+
+**Antes de abrir o MEI:** conferir no Portal do Empreendedor se a **atividade do Ratione cabe nas atividades permitidas ao MEI**. Eu não consegui confirmar isso, e é a principal incerteza: licenciar um sistema como serviço pode não caber. Se não couber, o caminho é ME ou SLU no Simples Nacional, com contador. O faturamento esperado (R$ 5 mil, entendido como por mês, ou R$ 60 mil por ano) fica abaixo do teto que eu conheço do MEI (R$ 81 mil por ano; **confirmar o valor atual**), mas qualquer crescimento perto do teto muda a conta.
 
 ### 7.1 Escolha técnica
 
@@ -156,7 +160,28 @@ Cliente (logado) clica em "Assinar Básico"
 - **Descer de plano:** vale no fim do ciclo pago.
 - **Trocar de cartão:** pelo Mercado Pago (a API permite trocar o cartão da assinatura), sem passar o cartão por aqui.
 
-### 7.4 Segurança e conformidade
+### 7.4 Prontidão: infraestrutura pronta, cobrança desligada
+
+Para que a ligação futura seja só troca de credencial e de chave, **sem mexer em código**:
+
+| Regra | Como |
+|---|---|
+| **Duas chaves de liga** | `COBRANCA_LIGADA` (servidor) e `NEXT_PUBLIC_COBRANCA` (build), ambas **`nao` por padrão**. Desligada: as telas de plano mostram "Em breve" ou ficam ocultas, a rota de assinar responde 503 e o webhook não processa nada |
+| **Só credenciais de teste enquanto for pessoa física** | O token de acesso e o segredo do webhook vêm do Secret Manager (`mercadopago-access-token`, `mercadopago-webhook-secret`). O código recusa iniciar a cobrança se o token for de produção e `COBRANCA_AMBIENTE` não for `producao` (e o inverso) |
+| **Nada da conta fixo no código** | Os identificadores dos planos do Mercado Pago ficam em tabela ou variável, não no código. Um comando idempotente (`pnpm mp:planos`) cria ou atualiza os planos **na conta cujas credenciais estiverem ativas** e grava os `preapproval_plan_id` |
+| **Troca de conta = trocar segredos e rodar o comando** | Ao abrir o MEI: nova conta no Mercado Pago, novas credenciais nos segredos, `pnpm mp:planos`, nova URL de webhook no painel, `COBRANCA_AMBIENTE=producao`, teste de ponta a ponta com valor baixo, e só então `COBRANCA_LIGADA=sim` |
+| **Identificação do fornecedor configurável** | Nome empresarial, CNPJ, endereço e e-mail de contato dos Termos, da Privacidade e do rodapé vêm de uma configuração única. Hoje com marcador explícito de "pendente"; o Decreto 7.962/2013 exige o dado real antes de vender |
+| **Sem cliente pagante real antes da conta definitiva** | Nenhuma assinatura de produção é criada na conta de pessoa física |
+
+**Checklist de ativação (quando houver MEI ou empresa):**
+1. CNPJ aberto com atividade compatível; alvará e inscrição municipal de Maceió, se exigidos; forma de emitir nota fiscal definida com o contador (o MEI pode ter dispensa de nota para venda a pessoa física, mas escritórios e empresas costumam exigi-la; **confirmar as regras de Maceió**).
+2. Conta do Mercado Pago do CNPJ aberta e verificada; credenciais e segredo do webhook no Secret Manager; deploy.
+3. `pnpm mp:planos` na conta nova; webhook cadastrado; teste de assinatura, cancelamento e reembolso com valor baixo.
+4. Termos, Privacidade e rodapé com os dados do fornecedor; revisão por advogado (T-03).
+5. Seguro de responsabilidade avaliado (PLANO §8).
+6. Ligar as duas chaves e anunciar.
+
+### 7.5 Segurança e conformidade
 
 - **Credenciais:** o token de acesso e o segredo do webhook ficam no Secret Manager do Google Cloud (`mercadopago-access-token`, `mercadopago-webhook-secret`), entregues ao Cloud Run pelo workflow de deploy como já se faz com a Anthropic. Nunca no repositório, na imagem ou no navegador.
 - **Dados guardados:** identificadores do Mercado Pago (assinatura, pagamento), valor, data, situação e forma de pagamento. **Não** guardamos número de cartão, validade nem CPF além do que a nota fiscal exigir.
@@ -168,7 +193,7 @@ Cliente (logado) clica em "Assinar Básico"
 
 | ID | Item | Depende de |
 |---|---|---|
-| F8-01 | **Decisões do responsável** (§9) e forma jurídica de recebimento (T-01) | — |
+| F8-01 | **Decisões do responsável** (§9). Forma de recebimento decidida (§7); resta cotas, preços e as demais | — |
 | F8-02 | Modelo de dados: planos, assinaturas, análises, cobranças, eventos do Mercado Pago, com RLS e testes de RLS | F8-01 |
 | F8-03 | Análise como unidade de cota: `analise_iniciar`, estorno de falha, `analise_id` nas chamadas, trava por chamada só como anti-abuso | F8-02 |
 | F8-04 | Tela "Meu uso" (resumo, histórico, falhas, aviso antes de enviar, exportação) e painel administrativo | F8-03 |
@@ -177,13 +202,13 @@ Cliente (logado) clica em "Assinar Básico"
 | F8-07 | Documentos legais atualizados e revisados (T-03); planilha de custo e preços (T-04) | F8-01, F8-04 |
 | F8-08 | Nível aprofundada: contrato por nível, preço do modelo em `politica.ts`, divisão de decisão longa, depois do corpus | F5-05, F5-04 |
 | F8-09 | Pagamento avulso por Pix ou boleto (Checkout Pro), se a análise de Pix recorrente indicar necessidade | F8-06 |
-| F8-10 | Lançamento da cobrança: credenciais de produção, teste real de ponta a ponta com pagamento de valor baixo, beta fechado | tudo |
+| F8-10 | Ativação da cobrança (checklist da §7.4), **depois de abrir o MEI ou a empresa**: credenciais de produção, teste de ponta a ponta com pagamento de valor baixo, beta fechado | tudo, T-01 |
 
 Ordem recomendada: F8-01 → F8-02 → F8-03 → F8-04 (a transparência e a cota por análise funcionam **sem cobrança**, já no gratuito e no beta) → F8-05 e F8-06 (cobrança em teste) → F8-07 → F8-10. O nível aprofundada (F8-08) acompanha o corpus e não bloqueia a cobrança: o Avançado pode sair antes dele, com mais análises básicas e as explicações, e ganhar a aprofundada quando ela existir (o cliente do Avançado precisa saber disso no momento da compra).
 
 ## 9. Decisões que dependem de você
 
-1. **Forma de recebimento** (pessoa física, MEI ou empresa) e como emitir nota fiscal: define se o Mercado Pago basta e quando a cobrança pode ser ligada.
+1. ~~**Forma de recebimento**~~ **Decidido em 23/10/2026:** infraestrutura pronta e desligada (§7 e §7.4); a cobrança liga quando houver MEI ou empresa. **Resta:** conferir se a atividade cabe no MEI, a emissão de nota em Maceió e abrir o MEI (checklist da §7.4).
 2. **Cotas e preços** de Básico e Avançado (§2.2 e §3), depois da medição de custo.
 3. O gratuito inclui **só** 1 uso por semana no total, ou também algumas explicações de dispositivo?
 4. **Fechar a página no meio** consome a análise? (§5)

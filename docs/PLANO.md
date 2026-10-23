@@ -379,13 +379,13 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 
 ### F8 — Planos, uso transparente e cobrança
 
-Proposta de 23/10/2026 em [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md): três planos (Gratuito com 1 uso de IA por semana, Básico e Avançado), dois níveis de análise por complexidade (básica com Haiku; aprofundada, com Sonnet, quando houver conteúdo e corpus que a justifiquem), a **análise como unidade de cota** (falha não consome), a tela "Meu uso" para o cliente e a cobrança recorrente pela API de assinaturas do **Mercado Pago**, com webhook validado. Substitui *Pro* e *Pro Estudo* e o Asaas. Itens F8-01 a F8-10 no documento. Estado: **proposta, aguardando as decisões da §9 do documento**.
+Proposta de 23/10/2026 em [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md): três planos (Gratuito com 1 uso de IA por semana, Básico e Avançado), dois níveis de análise por complexidade (básica com Haiku; aprofundada, com Sonnet, quando houver conteúdo e corpus que a justifiquem), a **análise como unidade de cota** (falha não consome), a tela "Meu uso" para o cliente e a cobrança recorrente pela API de assinaturas do **Mercado Pago**, com webhook validado. Substitui *Pro* e *Pro Estudo* e o Asaas. Itens F8-01 a F8-10 no documento. Estado: **proposta; forma de recebimento decidida (infraestrutura pronta e desligada até haver MEI)**; aguardam as demais decisões da §9 do documento.
 
 ### Trilhas transversais (não são código)
 
 | ID | Item | Estado |
 |---|---|---|
-| T-01 | CNPJ e forma de cobrança | não iniciado. Agora **precede o lançamento da cobrança** (F8): define em nome de quem o Mercado Pago recebe e como a nota fiscal sai |
+| T-01 | CNPJ e forma de cobrança | **decidido em 23/10/2026:** responsável é pessoa física, sem MEI, em Maceió/AL; a infraestrutura de cobrança (F8) fica pronta e **desligada**, e a cobrança só liga com MEI ou empresa. **Falta:** conferir se a atividade cabe no MEI, abrir o MEI, definir a nota fiscal em Maceió e abrir a conta do Mercado Pago do CNPJ (checklist em `produto/PLANOS_E_COBRANCA.md` §7.4) |
 | T-02 | Marca: busca por radical e fonética, classes, depósito | não iniciado |
 | T-03 | Revisão das minutas jurídicas por advogado | parcial (minutas escritas) |
 | T-04 | Preços dos planos Básico e Avançado; planilha de custo e teto de IA | não iniciado. Método na §3 de [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md): o custo vem da média de `ia_uso` por análise |
