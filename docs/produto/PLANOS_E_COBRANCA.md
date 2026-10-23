@@ -17,31 +17,35 @@
 
 ### 2.1 Dois níveis, definidos pela complexidade
 
-| | **Análise básica** | **Análise aprofundada** |
+| | **Análise rápida** | **Análise completa** |
 |---|---|---|
 | Para quê | Decisão curta e de uma tese: entender a estrutura, as questões, as conclusões e os fundamentos | Acórdão ou sentença longa, várias teses, preliminares, votos divergentes |
-| O que entrega | Hoje: etapas 1 a 4 do pipeline (estrutura, questões, conclusões, fundamentos), com o parágrafo de origem | Tudo da básica **mais** as etapas seguintes do PLANO §6.4: fragilidades da fundamentação (CPC, art. 489, § 1º), mapa de argumentos e verificação de citações contra NormaViva e TeseMap, **conforme forem ficando prontas** (F5-04) |
+| O que entrega | Hoje: etapas 1 a 4 do pipeline (estrutura, questões, conclusões, fundamentos), com o parágrafo de origem | Tudo da rápida **mais** as etapas seguintes do PLANO §6.4: fragilidades da fundamentação (CPC, art. 489, § 1º), mapa de argumentos e verificação de citações contra NormaViva e TeseMap, **conforme forem ficando prontas** (F5-04) |
 | Tamanho máximo | ~6 páginas (21.000 caracteres, como hoje) | ~15 páginas, o que exige dividir a decisão em partes (a mensagem de uma chamada hoje é limitada a 30.000 caracteres) |
 | Modelo | Claude Haiku 5.5 | Claude Sonnet 5.5 (a confirmar pelo corpus da F5-05, §6) |
 | Quando faz sentido | Primeira leitura, triagem, estudo | Peça que vai embasar recurso ou parecer |
 
-A aprofundada **não existe até haver conteúdo que a justifique**: hoje ela seria só a básica com outro modelo. Ela entra quando houver (a) a verificação de citações ou as fragilidades e (b) a medição do corpus mostrando ganho real do Sonnet em decisão longa.
+A completa **não existe até haver conteúdo que a justifique**: hoje ela seria só a rápida com outro modelo. Ela entra quando houver (a) a verificação de citações ou as fragilidades e (b) a medição do corpus mostrando ganho real do Sonnet em decisão longa.
 
-### 2.2 Planos (hipótese de cotas)
+### 2.2 Planos (cotas revistas em 23/10/2026 com o custo medido da §3)
 
-| | **Gratuito** | **Básico** | **Avançado** |
+| | **Gratuito** | **Essencial** | **Profissional** |
 |---|---|---|---|
-| Análise básica (Haiku) | **1 por semana** | 20 por mês | 60 por mês |
-| Análise aprofundada (Sonnet) | — | — | 10 por mês |
-| Explicar dispositivo (NormaViva) | dentro do 1 por semana | 60 por mês | 150 por mês |
-| Tamanho da decisão | até 6 páginas | até 6 páginas | até 6 páginas (básica) e 15 (aprofundada) |
+| Análise rápida (Haiku) | **3 por semana** | 40 por mês | 150 por mês |
+| Análise completa (Sonnet) | — | — | 25 por mês (entra quando a completa existir, §2.1) |
+| Explicar dispositivo (NormaViva) | 10 por semana | 200 por mês | 500 por mês |
+| Tamanho da decisão | até 6 páginas | até 6 páginas | até 6 páginas (rápida) e 15 (completa) |
 | Histórico de consumo | 30 dias | 12 meses | 12 meses |
 | Exportar histórico (CSV) | — | sim | sim |
 | Ferramentas sem IA (PrazoZero, NormaViva, TeseMap) | todas, uso razoável | todas | todas |
 | Preço | R$ 0 | R$ **[A DEFINIR]**/mês | R$ **[A DEFINIR]**/mês |
 
+Por que subiram em relação à primeira proposta (1 por semana, 20 e 60 por mês): o custo de uma análise rápida com o Haiku é da ordem de **US$ 0,004**, então o limite deixou de ser custo e passou a ser **abuso e valor percebido**. O gratuito precisa permitir **avaliar o produto de verdade** (três análises por semana dão para testar em decisões diferentes), e os planos pagos precisam parecer folgados para quem trabalha com processos todos os dias.
+
 Regras:
-- **Gratuito = 1 uso de IA por semana no total.** Escolhi contar a explicação de dispositivo dentro desse 1, para seguir o combinado literalmente. Decisão sua: se o gratuito deve ter também algumas explicações (que custam bem menos), a cota separada é fácil de acrescentar.
+- **Gratuito:** conta com e-mail confirmado (já exigido no cadastro). As explicações de dispositivo têm cota própria porque custam uma fração de centavo e são a porta de entrada.
+- **Piso e teto do gratuito:** o gasto de IA do gratuito sai de um **fundo separado** (§3.2). Se o fundo do mês acabar, **só o gratuito pausa** ("volta no próximo mês" ou "assine para continuar"); os pagantes nunca são afetados.
+- **Lançamento do Profissional sem a completa:** enquanto a análise completa não existir, o Profissional é vendido só com as rápidas e as explicações, **dito com todas as letras na página de compra**; a completa entra depois, sem custo extra.
 - **Semana:** de segunda a domingo, no horário de Brasília. **Mês** dos planos pagos: ciclo de cobrança (renova na data da cobrança). A data de renovação é sempre visível.
 - **Cota não acumula** de um período para outro.
 - Plano mensal sem fidelidade; anual com desconto fica para depois da primeira versão.
@@ -52,8 +56,8 @@ Regras:
 O custo de cada análise é medido, não presumido. A tabela `ia_uso` já guarda tokens e custo em dólares por chamada.
 
 ```text
-custo_IA_máximo_do_plano = cota_básica × custo_médio_básica
-                         + cota_aprofundada × custo_médio_aprofundada
+custo_IA_máximo_do_plano = cota_rápida × custo_médio_rápida
+                         + cota_completa × custo_médio_completa
                          + cota_explicação × custo_médio_explicação
 
 preço_mínimo = (custo_IA_máximo + custo_fixo_por_cliente
@@ -62,23 +66,44 @@ preço_mínimo = (custo_IA_máximo + custo_fixo_por_cliente
 
 | Item | Valor | Fonte |
 |---|---|---|
-| Custo médio da análise básica (3 chamadas) | **medir** (estimativa inicial: ~US$ 0,01) | média de `ia_uso` por análise, depois de algumas dezenas de análises reais |
-| Custo médio da análise aprofundada | **medir** (preço do Sonnet 5.5: conferir na página de preços da Anthropic e registrar em `politica.ts`) | idem, após a F5-05 |
+| Custo médio da análise rápida (3 chamadas) | **~US$ 0,004** (cálculo com os preços do Haiku 5.5 em `politica.ts` e ~12 mil tokens de entrada e ~4,5 mil de saída por análise). O Console da Anthropic mostrou **US$ 0,01** no mês depois de 4 análises e 2 explicações, arredondado em centavos e com atraso na página de uso: confere na ordem de grandeza. **Confirmar com a média de `ia_uso`** quando houver algumas dezenas de análises | cálculo em 23/10/2026 |
+| Custo médio da explicação de dispositivo (1 chamada) | **~US$ 0,0005** | idem |
+| Custo médio da análise completa | **medir** (preço do Sonnet 5.5: conferir na página de preços da Anthropic e registrar em `politica.ts`) | idem, após a F5-05 |
 | Taxa do Mercado Pago | **conferir na sua conta** (varia por meio de pagamento e prazo de recebimento) | painel do Mercado Pago |
 | Impostos e nota fiscal | **depende de como você vai faturar** (pessoa física, MEI ou empresa) | contador (T-01) |
 | Margem alvo | você define | — |
 
 Pelo desenho (cotas fixas por nível), o **pior caso de custo por cliente é conhecido de antemão**: é a cota inteira usada. Isso é o que permite um preço fixo sem créditos. Créditos com pesos só entram se, depois do beta, os clientes pedirem flexibilidade entre os níveis.
 
+### 3.1 Pior caso de custo de IA por cliente, por mês
+
+Com US$ 0,004 por análise rápida e US$ 0,0005 por explicação:
+
+| Plano | Rápidas | Explicações | Completas | **Custo máximo** |
+|---|---|---|---|---|
+| Gratuito (4,3 semanas) | 13 × 0,004 = US$ 0,05 | 43 × 0,0005 = US$ 0,02 | — | **~US$ 0,07** (cerca de R$ 0,40) |
+| Essencial | 40 × 0,004 = US$ 0,16 | 200 × 0,0005 = US$ 0,10 | — | **~US$ 0,26** |
+| Profissional | 150 × 0,004 = US$ 0,60 | 500 × 0,0005 = US$ 0,25 | 25 × (custo da completa) | **US$ 0,85 + 25 completas** |
+
+Para a completa, o custo do Sonnet ainda não está medido. **Só para dimensionar**, se ela custar de 15 a 40 vezes uma rápida (um multiplicador hipotético, não um preço), o Profissional custa no máximo de US$ 2,4 a US$ 4,9 por cliente por mês. Pelos preços que eu estimo para o plano, isso deixa uma margem folgada, mas só dá para afirmar com o preço real do Sonnet.
+
+### 3.2 Teto de gasto
+
+- **O teto atual de US$ 5 por mês para todas as tarefas somadas** (`ORCAMENTO_MENSAL_PADRAO_USD`) não escala: comporta só cerca de 1.250 análises rápidas por mês, e o ambiente só pode dobrá-lo. Precisa ser reescrito.
+- **Proposta:** dois fundos.
+  1. **Fundo do gratuito:** valor fixo mensal (sugestão inicial **US$ 15**, o que cobre ~200 contas gratuitas gastando o máximo ou muito mais contas com uso normal). Esgotado, só o gratuito pausa.
+  2. **Fundo dos pagantes:** uma **porcentagem da receita do mês** (sugestão **15%**), com piso fixo no beta. Alerta a 80% e pausa a 100%, como já prevê o `IA_E_PRECIFICACAO.md` §3.3.
+- O gasto real por cliente fica visível no painel administrativo (§4), para ajustar as porcentagens com dados.
+
 ## 4. Transparência para o cliente: "Meu uso"
 
 Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratione (não pela API da Anthropic, que mostra o gasto da organização, não o de cada cliente).
 
 1. **Resumo do plano:** plano atual, preço, próxima renovação e, por tipo, "usadas / total / restantes" no período, com a data em que renova.
-2. **Histórico por análise:** data e hora, tipo (básica, aprofundada, explicação), **resultado** (concluída, falhou, cancelada), se **consumiu** cota, o rótulo que o cliente deu e o tamanho (páginas, parágrafos). Sem o texto da decisão e sem a resposta.
+2. **Histórico por análise:** data e hora, tipo (rápida, completa, explicação), **resultado** (concluída, falhou, cancelada), se **consumiu** cota, o rótulo que o cliente deu e o tamanho (páginas, parágrafos). Sem o texto da decisão e sem a resposta.
 3. **Falhas visíveis e sem custo:** "Falhou, não consumiu".
-4. **Antes de enviar:** "Esta análise usa 1 das suas 20 análises básicas deste mês (restam 14)" e, se faltar saldo, o que fazer (esperar a renovação, mudar de plano).
-5. **Exportar** o histórico em CSV (Básico e Avançado), para quem reembolsa ou presta contas.
+4. **Antes de enviar:** "Esta análise usa 1 das suas 40 análises rápidas deste mês (restam 26)" e, se faltar saldo, o que fazer (esperar a renovação, mudar de plano).
+5. **Exportar** o histórico em CSV (Essencial e Profissional), para quem reembolsa ou presta contas.
 6. **Fatura e cobrança:** lista das cobranças (data, valor, forma, situação), link para cancelar e para o recibo do Mercado Pago.
 7. **Modelo e versão:** num recolhido "Detalhes da análise" (nome do modelo, versão das instruções, data). O rótulo em destaque é o **nível**. A Política de Uso de IA passa a dizer isso em vez de "exibidos" ao lado de cada resultado.
 
@@ -90,7 +115,7 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 |---|---|
 | Análise concluída (as 3 etapas, ou todas as do nível) | **Sim**, 1 análise do nível |
 | Erro do sistema, falha da API, recusa do modelo, saída descartada | **Não** (estorno automático da reserva) |
-| Cliente fecha a página no meio | **Sim**, se pelo menos a primeira etapa foi cobrada pelo provedor; a reserva fica registrada como "interrompida" (decisão a confirmar) |
+| Cliente fecha a página no meio | **Sim, se a primeira etapa já foi entregue** (**decidido em 23/10/2026**): a análise fica registrada como "interrompida" e consome a cota. Se fechar antes de a primeira etapa ser entregue, **não** consome. Falha de uma etapa seguinte que não se resolve com "tentar de novo" **estorna** |
 | "Tentar de novo" depois de falha parcial | **Não** gasta outra análise: continua a mesma |
 | Analisar de novo a mesma decisão | **Sim**, nova análise (não guardamos o texto, então não há como reaproveitar) |
 | Explicação de dispositivo já gerada para outro usuário (cache) | **Não** (como hoje) |
@@ -99,13 +124,13 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 - **Análise vira a unidade:** tabela `analises` (id, usuário, nível, rótulo, situação, criada em, concluída em, consumiu, páginas). As chamadas de `ia_uso` ganham `analise_id`. Hoje elas só se ligam pelo hash da decisão, o que se mistura se a mesma decisão for analisada duas vezes.
 - **A cota é conferida uma vez, no começo da análise**, por uma função `analise_iniciar` no banco (atômica, como `ia_reservar`). As três chamadas da análise carregam o `analise_id` e **não** contam de novo.
 - **As cotas por chamada** (hoje 5 por dia e 40 por mês por tarefa) deixam de ser regra de produto e ficam só como trava antiga contra abuso, em valor alto.
-- **Nível na entrada** das tarefas como valor de lista fechada (`basica` ou `aprofundada`), nunca texto livre; o contrato da tarefa passa a declarar um modelo por nível; a reserva de orçamento usa o custo máximo do nível.
+- **Nível na entrada** das tarefas como valor de lista fechada (`rapida` ou `completa`), nunca texto livre; o contrato da tarefa passa a declarar um modelo por nível; a reserva de orçamento usa o custo máximo do nível.
 
 ## 6. Modelos: quando entra o Sonnet
 
 1. Reunir as 30 decisões do corpus (F5-05), **incluindo acórdãos longos e complexos**, não só sentenças curtas.
 2. Rodar as mesmas decisões em Haiku e Sonnet e conferir contra o esperado validado por você (intervalo do dispositivo, questões, fundamentos, taxa de saídas descartadas).
-3. Se a diferença for pequena, o nível aprofundada usa o Haiku com as etapas extras. Se for grande nas decisões longas, usa o Sonnet.
+3. Se a diferença for pequena, o nível completa usa o Haiku com as etapas extras. Se for grande nas decisões longas, usa o Sonnet.
 4. Gemini e ChatGPT ficam fora da primeira versão: exigem um cliente novo, esquema de saída próprio, contrato e RIPD por provedor (transferência internacional, LGPD art. 33). Reabrir só se os números do corpus justificarem.
 
 ## 7. Cobrança com Mercado Pago
@@ -120,7 +145,7 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 
 | Peça | Uso | Observação |
 |---|---|---|
-| **Assinaturas** (API de planos `preapproval_plan` e assinaturas `preapproval`) | Cobrança mensal recorrente dos planos Básico e Avançado | A documentação do Mercado Pago descreve criar o plano (título, valor, frequência), criar a assinatura a partir dele e gerenciá-la (alterar valor, trocar cartão, pausar, cancelar, reativar, teste grátis). Cada plano tem um `preapproval_plan_id` |
+| **Assinaturas** (API de planos `preapproval_plan` e assinaturas `preapproval`) | Cobrança mensal recorrente dos planos Essencial e Profissional | A documentação do Mercado Pago descreve criar o plano (título, valor, frequência), criar a assinatura a partir dele e gerenciá-la (alterar valor, trocar cartão, pausar, cancelar, reativar, teste grátis). Cada plano tem um `preapproval_plan_id` |
 | **Página de pagamento do Mercado Pago** (a assinatura nasce na página do Mercado Pago, e o cliente volta ao Ratione) | Para o cliente informar o cartão | O cartão nunca passa pelo nosso servidor (escopo de segurança de dados de cartão reduzido) |
 | **Webhooks** | O Mercado Pago avisa mudanças de assinatura e de pagamento | Validação da assinatura do aviso com o cabeçalho `x-signature`, `x-request-id` e o `data.id` da consulta, com o segredo da aplicação (o SDK oficial `mercadopago` tem `WebhookSignatureValidator`) |
 | **Preferência de pagamento** (Checkout Pro) | **Fase posterior**: compra de 30 dias de acesso por Pix ou boleto, sem renovação automática, para quem não quer cartão | O campo `external_reference` liga o pagamento ao nosso pedido; `notification_url` recebe o aviso |
@@ -130,7 +155,7 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 ### 7.2 Fluxo
 
 ```text
-Cliente (logado) clica em "Assinar Básico"
+Cliente (logado) clica em "Assinar Essencial"
   → servidor cria a assinatura a partir do plano (preapproval_plan_id), com external_reference = id do cliente + id interno
   → redireciona para a página do Mercado Pago (cartão)
   → cliente volta ao Ratione (back_url) para uma tela "Estamos confirmando seu pagamento"
@@ -148,7 +173,7 @@ Cliente (logado) clica em "Assinar Básico"
 |---|---|---|
 | aguardando autorização | `pendente` | Gratuito, até confirmar |
 | autorizada | `ativa` | Plano pago |
-| cobrança falhou, assinatura ainda autorizada | `em_atraso` | Plano pago até o fim do ciclo pago + **carência a definir (ex.: 3 dias)** |
+| cobrança falhou, assinatura ainda autorizada | `em_atraso` | Plano pago até o fim do ciclo pago + **carência de 3 dias** (adotado como proposta; ajustar se discordar) |
 | pausada | `pausada` | Gratuito a partir do fim do ciclo pago |
 | cancelada | `cancelada` | Plano pago **até o fim do ciclo já pago**, depois Gratuito |
 
@@ -156,7 +181,7 @@ Cliente (logado) clica em "Assinar Básico"
 
 - **Cancelar:** botão em "Meu uso" que chama a API (status `cancelled`); o plano vale até o fim do ciclo pago. Sem fidelidade e sem retenção forçada.
 - **Arrependimento de 7 dias** (CDC, art. 49), na primeira compra: botão "Cancelar e pedir reembolso" que cancela a assinatura e pede o estorno do pagamento pela API do Mercado Pago. Texto no Termos de Uso e na tela.
-- **Subir de plano (Básico → Avançado):** vale na hora; cria-se a nova assinatura e cancela-se a antiga quando a nova ficar `ativa`. Valor proporcional: decisão sua (o Mercado Pago permite valor proporcional em uma cobrança).
+- **Subir de plano (Essencial → Profissional):** **na primeira versão vale na próxima renovação**, sem valor proporcional (adotado como proposta; ajustar se discordar). Mais simples e sem cobrança extra. O Mercado Pago permite cobrar valor proporcional, e isso pode entrar depois (com a troca imediata: cria-se a nova assinatura e cancela-se a antiga quando a nova ficar `ativa`).
 - **Descer de plano:** vale no fim do ciclo pago.
 - **Trocar de cartão:** pelo Mercado Pago (a API permite trocar o cartão da assinatura), sem passar o cartão por aqui.
 
@@ -193,7 +218,7 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 
 | ID | Item | Depende de |
 |---|---|---|
-| F8-01 | **Decisões do responsável** (§9). Forma de recebimento decidida (§7); resta cotas, preços e as demais | — |
+| F8-01 | **Decisões do responsável** (§9). **Quase fechado (23/10/2026):** forma de recebimento, cotas, nomes e regras de consumo decididos; faltam preço, teto de gasto e o custo da análise completa | — |
 | F8-02 | Modelo de dados: planos, assinaturas, análises, cobranças, eventos do Mercado Pago, com RLS e testes de RLS | F8-01 |
 | | **Feito em 23/10/2026 (parcial):** `planos`, `plano_cotas`, `assinaturas` e `analises`, com RLS e testes (`packages/db/src/planos.test.ts`). **Falta** `cobrancas` e os eventos do Mercado Pago, que entram com o F8-05, quando se souber o formato exato do que o Mercado Pago devolve. Migração `20261023000001` **ainda não aplicada em produção** | |
 | F8-03 | Análise como unidade de cota: `analise_iniciar`, estorno de falha, `analise_id` nas chamadas, trava por chamada só como anti-abuso | F8-02 |
@@ -202,18 +227,22 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 | F8-05 | Mercado Pago em **teste**: criar planos, assinatura pela página do Mercado Pago, volta, webhook validado e idempotente, estados | F8-02 |
 | F8-06 | Cancelamento, arrependimento com reembolso, subir e descer de plano, troca de cartão | F8-05 |
 | F8-07 | Documentos legais atualizados e revisados (T-03); planilha de custo e preços (T-04) | F8-01, F8-04 |
-| F8-08 | Nível aprofundada: contrato por nível, preço do modelo em `politica.ts`, divisão de decisão longa, depois do corpus | F5-05, F5-04 |
+| F8-08 | Nível completa: contrato por nível, preço do modelo em `politica.ts`, divisão de decisão longa, depois do corpus | F5-05, F5-04 |
 | F8-09 | Pagamento avulso por Pix ou boleto (Checkout Pro), se a análise de Pix recorrente indicar necessidade | F8-06 |
 | F8-10 | Ativação da cobrança (checklist da §7.4), **depois de abrir o MEI ou a empresa**: credenciais de produção, teste de ponta a ponta com pagamento de valor baixo, beta fechado | tudo, T-01 |
 
-Ordem recomendada: F8-01 → F8-02 → F8-03 → F8-04 (a transparência e a cota por análise funcionam **sem cobrança**, já no gratuito e no beta) → F8-05 e F8-06 (cobrança em teste) → F8-07 → F8-10. O nível aprofundada (F8-08) acompanha o corpus e não bloqueia a cobrança: o Avançado pode sair antes dele, com mais análises básicas e as explicações, e ganhar a aprofundada quando ela existir (o cliente do Avançado precisa saber disso no momento da compra).
+Ordem recomendada: F8-01 → F8-02 → F8-03 → F8-04 (a transparência e a cota por análise funcionam **sem cobrança**, já no gratuito e no beta) → F8-05 e F8-06 (cobrança em teste) → F8-07 → F8-10. O nível completa (F8-08) acompanha o corpus e não bloqueia a cobrança: o Profissional pode sair antes dele, com mais análises rápidas e as explicações, e ganhar a completa quando ela existir (o cliente do Profissional precisa saber disso no momento da compra).
 
-## 9. Decisões que dependem de você
+## 9. Decisões do responsável
 
-1. ~~**Forma de recebimento**~~ **Decidido em 23/10/2026:** infraestrutura pronta e desligada (§7 e §7.4); a cobrança liga quando houver MEI ou empresa. **Resta:** conferir se a atividade cabe no MEI, a emissão de nota em Maceió e abrir o MEI (checklist da §7.4).
-2. **Cotas e preços** de Básico e Avançado (§2.2 e §3), depois da medição de custo.
-3. O gratuito inclui **só** 1 uso por semana no total, ou também algumas explicações de dispositivo?
-4. **Fechar a página no meio** consome a análise? (§5)
-5. **Carência** de pagamento atrasado (§7.2) e **valor proporcional** ao subir de plano (§7.3).
-6. **Nome** dos níveis na tela ("Análise básica" e "Análise aprofundada") e dos planos ("Básico" e "Avançado" são nomes de trabalho; "Avançado" e "Aprofundada" podem confundir).
-7. Quando aposentar o `Pro` e o `Pro Estudo` do PLANO (Pro Estudo, para concurseiros, fica **fora** desta primeira versão; se quiser, volta como um quarto plano).
+Decididas em 23/10/2026, salvo onde indicado:
+
+1. **Forma de recebimento:** infraestrutura pronta e desligada (§7 e §7.4); a cobrança liga quando houver MEI ou empresa. **Resta:** conferir se a atividade cabe no MEI, a emissão de nota em Maceió e abrir o MEI (checklist da §7.4).
+2. **Cotas:** o responsável pediu mais folga no gratuito e nos pagos. Valores da §2.2 (Gratuito 3 rápidas e 10 explicações por semana; Essencial 40 rápidas e 200 explicações por mês; Profissional 150 rápidas, 25 completas e 500 explicações por mês), com o custo da §3.1. **Podem subir no beta**, não descer.
+3. **Gratuito:** análises e explicações com cota própria, como acima (em vez de "1 uso por semana no total").
+4. **Fechar a página no meio:** consome a cota se a primeira etapa já foi entregue; se uma etapa seguinte falhar sem solução, estorna (§5).
+5. **Carência de 3 dias** e **troca de plano na renovação, sem proporcional**: adotados como recomendação, **sem objeção ainda**; ajustar se discordar (§7.2 e §7.3).
+6. **Nomes:** planos **Gratuito, Essencial e Profissional**; análises **rápida** e **completa**.
+7. **Pro Estudo** fica fora da primeira versão (adotado como recomendação); volta como quarto plano se houver demanda dos concurseiros.
+
+**Ainda em aberto:** **preço** de Essencial e Profissional (depende de taxa do Mercado Pago, imposto e margem, §3), **teto de gasto** em dois fundos (§3.2: sugestão de US$ 15 para o gratuito e 15% da receita para os pagantes) e o custo real da **análise completa**.
