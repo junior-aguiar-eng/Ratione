@@ -9,10 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge, type BadgeTom } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
-import { campoClasses } from '@/components/ui/input';
+import { Input, campoClasses } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useSessao } from '../../lib/useSessao';
 import { obterSupabase } from '../../lib/supabase/client';
+import { dataCurta } from '../../lib/uso';
 import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
 
 /**
@@ -123,7 +124,6 @@ interface UsoRapida {
   renovaEm: string;
 }
 
-const dataCurta = (iso: string) => new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', timeZone: 'America/Sao_Paulo' });
 
 export default function AnaliseDecisao() {
   const { usuario, carregando, contaDisponivel } = useSessao();
@@ -137,6 +137,7 @@ export default function AnaliseDecisao() {
   const [ativo, setAtivo] = useState<number | null>(null);
   const [analiseId, setAnaliseId] = useState<string | null>(null);
   const [encerrada, setEncerrada] = useState(false);
+  const [rotulo, setRotulo] = useState('');
   const [uso, setUso] = useState<UsoRapida | null>(null);
   const listaRef = useRef<HTMLOListElement | null>(null);
 
@@ -188,7 +189,7 @@ export default function AnaliseDecisao() {
     try {
       if (!id) {
         setAndamento('estrutura');
-        const inicio = await enviar('/api/analises', { tipo: 'rapida' });
+        const inicio = await enviar('/api/analises', { tipo: 'rapida', rotulo: rotulo.trim() || undefined });
         id = inicio.analiseId as string;
         setAnaliseId(id);
         setUso(u => (u ? { ...u, restantes: inicio.restantes, renovaEm: inicio.renovaEm } : u));
@@ -272,6 +273,21 @@ export default function AnaliseDecisao() {
           </p>
         </div>
 
+        <div>
+          <Label htmlFor="argumenta-rotulo">Nome da análise (opcional)</Label>
+          <Input
+            id="argumenta-rotulo"
+            value={rotulo}
+            onChange={e => setRotulo(e.target.value)}
+            maxLength={80}
+            placeholder="Ex.: Cobrança de serviços, 1ª instância"
+            aria-describedby="argumenta-rotulo-ajuda"
+          />
+          <p id="argumenta-rotulo-ajuda" className="mt-1.5 text-sm text-ink-mute">
+            Aparece só no seu histórico de uso. Não coloque nomes das partes nem números de processo.
+          </p>
+        </div>
+
         <details className="rounded-md border border-line px-4 py-3">
           <summary className="cursor-pointer text-sm font-medium text-ink">
             Dados pessoais: {trocados === 0 ? 'nenhum encontrado até agora' : `${trocados} trocado(s) por marcadores antes do envio`}
@@ -335,7 +351,10 @@ export default function AnaliseDecisao() {
           <p className={`text-sm ${uso.restantes === 0 ? 'text-danger-text' : 'text-ink-soft'}`} aria-live="polite">
             {uso.restantes === 0
               ? `Você usou todas as ${uso.quantidade} análises rápidas do plano ${uso.plano} neste período. A cota renova em ${dataCurta(uso.renovaEm)}.`
-              : `Esta análise usa 1 das suas ${uso.restantes} análises rápidas restantes (de ${uso.quantidade}, plano ${uso.plano}), até ${dataCurta(uso.renovaEm)}. Se a análise falhar, a cota não é gasta.`}
+              : `Esta análise usa 1 das suas ${uso.restantes} análises rápidas restantes (de ${uso.quantidade}, plano ${uso.plano}), até ${dataCurta(uso.renovaEm)}. Se a análise falhar, a cota não é gasta.`}{' '}
+            <Link href="/meu-espaco/uso" className="text-brand-text underline underline-offset-2">
+              Ver meu uso
+            </Link>
           </p>
         )}
         <p className="text-sm text-ink-mute">Nada do texto nem da análise fica guardado no Ratione: ao sair desta página, a análise se perde.</p>

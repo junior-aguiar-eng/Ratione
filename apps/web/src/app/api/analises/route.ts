@@ -6,6 +6,7 @@ import { iniciarAnaliseNoBanco } from '../../../lib/ia/banco';
 import { mensagemDeCota } from '../../../lib/ia/executar';
 import { iaLigada } from '../../../lib/ia/politica';
 import { origemPublica } from '../../../lib/origem';
+import { rotuloDaAnalise } from '../../../lib/uso';
 import { registrar } from '../../../lib/log';
 
 /**
@@ -27,15 +28,19 @@ export async function POST(request: Request) {
   const origem = request.headers.get('origin');
   if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
-  let tipo: unknown;
+  let corpo: { tipo?: unknown; rotulo?: unknown } | null = null;
   try {
-    tipo = ((await request.json()) as { tipo?: unknown } | null)?.tipo;
+    corpo = (await request.json()) as { tipo?: unknown; rotulo?: unknown } | null;
   } catch {
-    tipo = undefined;
+    corpo = null;
   }
+  const tipo = corpo?.tipo;
   if (typeof tipo !== 'string' || !(TIPOS_DA_TELA as readonly string[]).includes(tipo)) {
     return NextResponse.json({ mensagem: 'Pedido inválido.' }, { status: 400 });
   }
+  // Nome opcional que o cliente dá à análise: texto livre, então sem dado pessoal e com tamanho limitado
+  const rotulo = rotuloDaAnalise(corpo?.rotulo);
+  if (!rotulo.ok) return NextResponse.json({ mensagem: rotulo.mensagem }, { status: 400 });
 
   const armazem = await cookies();
   const sessao = createServerClient(url, publicavel, {
@@ -46,7 +51,7 @@ export async function POST(request: Request) {
 
   try {
     const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-    const r = await iniciarAnaliseNoBanco(servidor, data.user.id, tipo);
+    const r = await iniciarAnaliseNoBanco(servidor, data.user.id, tipo, rotulo.rotulo);
     if (!r.ok) {
       return NextResponse.json({ mensagem: mensagemDeCota(r.motivo, r.renovaEm), motivo: r.motivo, renovaEm: r.renovaEm, plano: r.plano }, { status: 429 });
     }
