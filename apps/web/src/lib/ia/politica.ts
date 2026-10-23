@@ -17,22 +17,11 @@ export const TETOS = { maxTokensSaida: 4_000, maxCaracteresMensagem: 30_000 } as
 export const TEMPO_MAXIMO_MS = 30_000;
 export const TENTATIVAS_EXTRAS = 1;
 
-/** Teto de gasto de todas as tarefas e todos os usuários somados no mês, em US$. */
-export const ORCAMENTO_MENSAL_PADRAO_USD = 5;
+/** O teto de gasto do mês não fica aqui: são dois fundos (gratuito e pagantes) na tabela `ia_fundos` do banco, que o responsável ajusta com uma linha de SQL. */
 
 /** Liga a IA: sem `IA_EXPLICACAO_LIGADA=sim` e sem a chave da API, nenhuma tarefa chama o modelo. */
 export function iaLigada(env: Record<string, string | undefined>): boolean {
   return env.IA_EXPLICACAO_LIGADA === 'sim' && !!env.ANTHROPIC_API_KEY;
-}
-
-const lerNumero = (env: Record<string, string | undefined>, nome: string, padrao: number) => {
-  const v = Number(env[nome]);
-  return Number.isFinite(v) && v >= 0 && v <= padrao * 2 ? v : padrao;
-};
-
-/** Orçamento do mês: o ambiente pode apertar ou, no máximo, dobrar o padrão; valor inválido cai no padrão. */
-export function orcamentoDoAmbiente(env: Record<string, string | undefined>): number {
-  return lerNumero(env, 'IA_ORCAMENTO_MES_USD', ORCAMENTO_MENSAL_PADRAO_USD);
 }
 
 /** Custo de uma chamada em US$, pelo `usage` que a API devolve. */

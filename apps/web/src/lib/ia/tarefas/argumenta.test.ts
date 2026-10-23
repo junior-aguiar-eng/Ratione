@@ -26,7 +26,6 @@ function deps(json: string, sobre: Partial<DependenciasExecucao> = {}) {
   const analises: string[] = [];
   const dep: DependenciasExecucao = {
     ligada: true,
-    orcamentoMensalUsd: 5,
     fontes: { lerDispositivo: async () => null },
     usuarioAtual: async () => ({ id: 'u1' }),
     lerCache: async () => (registro.push('lerCache'), null),

@@ -14,8 +14,10 @@ import { custoMaximoUsd, custoUsd } from './politica';
  * Tarefa com `guardaResultado: false` pula as duas etapas de cache: nada do material do usuário fica guardado.
  */
 
-export type MotivoCota = 'limite_periodo' | 'sem_cota_no_plano';
-export type MotivoReserva = 'orcamento' | 'em_andamento' | 'analise_invalida';
+/** O fundo de gasto do mês acabou: `gratuito` (quem está no plano Gratuito) ou `pagantes` (quem tem plano pago). Cada fundo acaba sozinho. */
+export type MotivoFundo = 'orcamento_gratuito' | 'orcamento_pagantes';
+export type MotivoCota = 'limite_periodo' | 'sem_cota_no_plano' | MotivoFundo;
+export type MotivoReserva = MotivoFundo | 'em_andamento' | 'analise_invalida';
 export type MotivoNegado = MotivoCota | MotivoReserva;
 export type Reserva = { ok: true; id: number } | { ok: false; motivo: MotivoReserva };
 export type Situacao = 'gerada' | 'falhou' | 'recusada' | 'invalida';
@@ -26,7 +28,6 @@ export type InicioDeAnalise =
 
 export interface DependenciasExecucao {
   ligada: boolean;
-  orcamentoMensalUsd: number;
   fontes: Fontes;
   usuarioAtual: () => Promise<{ id: string } | null>;
   lerCache: (p: { tarefa: string; chave: string }) => Promise<unknown | null>;
@@ -47,7 +48,6 @@ export interface DependenciasExecucao {
     referencia: string;
     chave: string;
     analiseId: string;
-    orcamentoMensalUsd: number;
     custoMaximoUsd: number;
   }) => Promise<Reserva>;
   /** Uso servido do cache: registrado sem custo e sem contar na cota. */
@@ -71,13 +71,22 @@ export function dataDeRenovacao(iso: string): string {
 
 /** A mensagem que o cliente lê quando a cota do plano não deixa começar. */
 export function mensagemDeCota(motivo: MotivoCota, renovaEm: string): string {
-  return motivo === 'limite_periodo'
-    ? `Você usou toda a cota deste recurso no período do seu plano. Ela renova em ${dataDeRenovacao(renovaEm)}. O que já foi gerado continua disponível.`
-    : 'Este recurso não está incluído no seu plano.';
+  switch (motivo) {
+    case 'limite_periodo':
+      return `Você usou toda a cota deste recurso no período do seu plano. Ela renova em ${dataDeRenovacao(renovaEm)}. O que já foi gerado continua disponível.`;
+    case 'sem_cota_no_plano':
+      return 'Este recurso não está incluído no seu plano.';
+    case 'orcamento_gratuito':
+      return `O uso gratuito de IA deste mês chegou ao limite e volta em ${dataDeRenovacao(renovaEm)}. Sua cota da semana não foi gasta.`;
+    case 'orcamento_pagantes':
+      return `Os recursos de IA chegaram ao limite deste mês e voltam em ${dataDeRenovacao(renovaEm)}. Sua cota não foi gasta.`;
+  }
 }
 
-const MENSAGEM_NEGADO: Record<'orcamento' | 'em_andamento', string> = {
-  orcamento: 'Os recursos de IA atingiram o limite de uso deste mês e voltam no próximo. Sua cota não foi gasta.',
+/** Quando o fundo acaba no meio de uma análise já iniciada, a data de renovação não está à mão: vale "início do próximo mês". */
+const MENSAGEM_NEGADO: Record<MotivoFundo | 'em_andamento', string> = {
+  orcamento_gratuito: 'O uso gratuito de IA deste mês chegou ao limite e volta no início do próximo mês. Sua cota da semana não foi gasta.',
+  orcamento_pagantes: 'Os recursos de IA chegaram ao limite deste mês e voltam no início do próximo mês. Sua cota não foi gasta.',
   em_andamento: 'Já há um pedido seu de IA em andamento. Aguarde ele terminar.'
 };
 
@@ -139,7 +148,6 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
     referencia,
     chave,
     analiseId,
-    orcamentoMensalUsd: dep.orcamentoMensalUsd,
     custoMaximoUsd: custoMaximoUsd(t)
   });
   if (!reserva.ok) {

@@ -6,7 +6,7 @@ import { executarTarefa } from '../../../../lib/ia/executar';
 import { dependenciasDoBanco } from '../../../../lib/ia/banco';
 import { criarChamadaAoModelo } from '../../../../lib/ia/cliente';
 import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositivoDoBanco';
-import { iaLigada, orcamentoDoAmbiente } from '../../../../lib/ia/politica';
+import { iaLigada } from '../../../../lib/ia/politica';
 import { origemPublica } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
@@ -48,7 +48,6 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   try {
     const r = await executarTarefa(tarefa, corpo.entrada, {
       ligada: true,
-      orcamentoMensalUsd: orcamentoDoAmbiente(process.env),
       fontes: { lerDispositivo: id => lerDispositivoParaExplicar(publico, id) },
       usuarioAtual: async () => {
         const { data } = await sessao.auth.getUser();

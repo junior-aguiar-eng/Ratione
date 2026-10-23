@@ -89,11 +89,18 @@ Para a completa, o custo do Sonnet ainda não está medido. **Só para dimension
 
 ### 3.2 Teto de gasto
 
-- **O teto atual de US$ 5 por mês para todas as tarefas somadas** (`ORCAMENTO_MENSAL_PADRAO_USD`) não escala: comporta só cerca de 1.250 análises rápidas por mês, e o ambiente só pode dobrá-lo. Precisa ser reescrito.
-- **Proposta:** dois fundos.
-  1. **Fundo do gratuito:** valor fixo mensal (sugestão inicial **US$ 15**, o que cobre ~200 contas gratuitas gastando o máximo ou muito mais contas com uso normal). Esgotado, só o gratuito pausa.
-  2. **Fundo dos pagantes:** uma **porcentagem da receita do mês** (sugestão **15%**), com piso fixo no beta. Alerta a 80% e pausa a 100%, como já prevê o `IA_E_PRECIFICACAO.md` §3.3.
-- O gasto real por cliente fica visível no painel administrativo (§4), para ajustar as porcentagens com dados.
+**Feito em 23/10/2026** (migração `20261023000002_fundos_de_gasto.sql`). O teto único de US$ 5 por mês, que somava todos os usuários e não escalava, foi trocado por **dois fundos**, guardados na tabela `ia_fundos` do banco (mudam com uma linha de SQL, sem deploy):
+
+| Fundo | Paga o uso de | Teto mensal hoje | O que acontece quando acaba |
+|---|---|---|---|
+| `gratuito` | quem está no plano Gratuito | **US$ 15** (cobre ~200 contas gratuitas gastando a cota inteira; muito mais com uso normal) | **Só o gratuito pausa** até o dia 1º; os pagantes seguem. A cota da semana do cliente **não é gasta** |
+| `pagantes` | quem tem plano pago | **US$ 5** (o piso, igual ao teto único de antes: ainda não há receita nem pagantes) | Só os pagantes pausam; o gratuito segue |
+
+- **Quando decide:** o fundo é o do plano em vigor no momento da reserva (`ia_uso.fundo`). O mês é o de Brasília. Uma análise nova já é barrada ao iniciar, **sem reservar vaga**, com mensagem própria de cada fundo; uma análise em andamento é barrada na reserva se o custo máximo da chamada não couber no que sobra.
+- **Para conferir e ajustar** (SQL Editor): `select * from public.ia_fundos_situacao();` mostra teto, gasto, restante e % usado de cada fundo; `update public.ia_fundos set orcamento_mes_usd = 20 where fundo = 'gratuito';` muda o teto na hora.
+- **Exposição máxima de gasto hoje:** US$ 15 + US$ 5 = **US$ 20 por mês**, abaixo do limite mensal de US$ 50 configurado no Console da Anthropic.
+- **Fica para a cobrança (F8-05):** o fundo dos pagantes passa a ser o **maior entre o piso e 15% da receita do mês** (convertida em dólar), com alerta a 80% e pausa a 100%, como já prevê o `IA_E_PRECIFICACAO.md` §3.3. Hoje só existe o piso, porque ainda não há receita.
+- O gasto real por cliente aparece no painel do responsável (§4, ainda por fazer).
 
 ## 4. Transparência para o cliente: "Meu uso"
 
@@ -246,4 +253,6 @@ Decididas em 23/10/2026, salvo onde indicado:
 6. **Nomes:** planos **Gratuito, Essencial e Profissional**; análises **rápida** e **completa**.
 7. **Pro Estudo** fica fora da primeira versão (adotado como recomendação); volta como quarto plano se houver demanda dos concurseiros.
 
-**Ainda em aberto:** **preço** de Essencial e Profissional (depende de taxa do Mercado Pago, imposto e margem, §3), **teto de gasto** em dois fundos (§3.2: sugestão de US$ 15 para o gratuito e 15% da receita para os pagantes) e o custo real da **análise completa**.
+8. **Teto de gasto:** dois fundos, **gratuito US$ 15** e **pagantes US$ 5 (piso)** por mês, decididos em 23/10/2026 (§3.2); a porcentagem da receita dos pagantes entra com a cobrança.
+
+**Ainda em aberto:** **preço** de Essencial e Profissional (depende de taxa do Mercado Pago, imposto e margem, §3) e o custo real da **análise completa**.
