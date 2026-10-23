@@ -23,13 +23,18 @@ const REGRAS = `Regras:
 - Responda no formato pedido, sem texto fora dele.`;
 
 export interface DecisaoEnviada {
+  /** A análise que a tela iniciou em `POST /api/analises`: a cota do plano já foi conferida lá. */
+  analiseId: string;
   paragrafos: string[];
 }
 
-/** Decisão aceitável: parágrafos dentro dos limites e sem dado pessoal que a detecção ainda ache (o navegador já trocou tudo). */
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
+/** Decisão aceitável: análise iniciada, parágrafos dentro dos limites e sem dado pessoal que a detecção ainda ache (o navegador já trocou tudo). */
 function decisaoValida(bruta: unknown): DecisaoEnviada | null {
-  const paragrafos = (bruta as { paragrafos?: unknown } | null)?.paragrafos;
-  return paragrafosValidos(paragrafos) && !temDadoPessoal(paragrafos.join('\n\n')) ? { paragrafos } : null;
+  const { analiseId, paragrafos } = (bruta ?? {}) as { analiseId?: unknown; paragrafos?: unknown };
+  if (typeof analiseId !== 'string' || !UUID.test(analiseId)) return null;
+  return paragrafosValidos(paragrafos) && !temDadoPessoal(paragrafos.join('\n\n')) ? { analiseId, paragrafos } : null;
 }
 
 /** Só o hash do texto vai para o registro de uso: nada da decisão fica no banco. */
@@ -38,7 +43,7 @@ function referenciaDaDecisao(d: DecisaoEnviada): string {
 }
 
 const Paragrafos = z.array(z.number().int()).max(80);
-const LIMITES = { porDia: 5, porMes: 40 };
+const analiseDe = (d: { analiseId: string }) => d.analiseId;
 const VERSAO = 'v3-2026-10-23';
 const paragrafosJson = (descricao: string) => ({ type: 'array', items: { type: 'integer' }, description: descricao });
 
@@ -82,7 +87,8 @@ export const argumentaEstrutura: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaE
   guardaResultado: false,
   instrucoes: INSTRUCOES_ESTRUTURA,
   ferramentas: [],
-  limitesPorUsuario: LIMITES,
+  cota: { tipo: 'rapida', modo: 'por-analise', consome: true },
+  analiseDe,
   validarEntrada: decisaoValida,
   montarContexto: async d => d,
   referencia: referenciaDaDecisao,
@@ -182,7 +188,8 @@ export const argumentaQuestoes: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaQu
   guardaResultado: false,
   instrucoes: INSTRUCOES_QUESTOES,
   ferramentas: [],
-  limitesPorUsuario: LIMITES,
+  cota: { tipo: 'rapida', modo: 'por-analise' },
+  analiseDe,
   validarEntrada: decisaoValida,
   montarContexto: async d => d,
   referencia: referenciaDaDecisao,
@@ -276,7 +283,8 @@ export const argumentaFundamentos: TarefaIA<DecisaoComQuestoes, DecisaoComQuesto
   guardaResultado: false,
   instrucoes: INSTRUCOES_FUNDAMENTOS,
   ferramentas: [],
-  limitesPorUsuario: LIMITES,
+  cota: { tipo: 'rapida', modo: 'por-analise', conclui: true },
+  analiseDe,
   validarEntrada: bruta => {
     const decisao = decisaoValida(bruta);
     const questoes = (bruta as { questoes?: unknown } | null)?.questoes;
@@ -289,7 +297,7 @@ export const argumentaFundamentos: TarefaIA<DecisaoComQuestoes, DecisaoComQuesto
       }
       lidas.push({ id: q.id, enunciado: q.enunciado as string, conclusao: q.conclusao as string });
     }
-    return new Set(lidas.map(q => q.id)).size === lidas.length ? { paragrafos: decisao.paragrafos, questoes: lidas } : null;
+    return new Set(lidas.map(q => q.id)).size === lidas.length ? { analiseId: decisao.analiseId, paragrafos: decisao.paragrafos, questoes: lidas } : null;
   },
   montarContexto: async d => d,
   referencia: referenciaDaDecisao,

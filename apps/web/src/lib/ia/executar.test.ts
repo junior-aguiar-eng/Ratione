@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { chaveDoCache, executarTarefa, type DependenciasExecucao, type Situacao } from './executar';
+import { chaveDoCache, dataDeRenovacao, executarTarefa, mensagemDeCota, type DependenciasExecucao, type Situacao } from './executar';
 import type { PedidoModelo, ResultadoModelo } from './contrato';
 import { CATALOGO } from './catalogo';
-import { ORCAMENTO_MENSAL_PADRAO_USD, custoMaximoUsd, custoUsd, iaLigada, limitesDaTarefa, orcamentoDoAmbiente } from './politica';
+import { ORCAMENTO_MENSAL_PADRAO_USD, custoMaximoUsd, custoUsd, iaLigada, orcamentoDoAmbiente } from './politica';
 import { explicarDispositivo, idDeDispositivoValido, mensagemDoDispositivo } from './tarefas/explicarDispositivo';
 import type { DispositivoParaExplicar } from './fontes/dispositivoDoBanco';
 
@@ -21,6 +21,7 @@ const TAREFA = 'explicar-dispositivo';
 const ENTRADA = { dispositivoId: D.id };
 const OK = JSON.stringify({ resumo: 'Quem perde paga os honorários do advogado de quem ganha.', explicacao: ['…'], termos: [{ termo: 'vencido', significado: 'a parte que perdeu' }], atencao: [] });
 const USO = { input_tokens: 900, output_tokens: 300 };
+const RENOVA = '2026-10-26T03:00:00.000Z';
 
 function deps(sobre: Partial<DependenciasExecucao> = {}) {
   const registro: string[] = [];
@@ -29,12 +30,16 @@ function deps(sobre: Partial<DependenciasExecucao> = {}) {
   const reservas: Array<Record<string, unknown>> = [];
   const dep: DependenciasExecucao = {
     ligada: true,
-    env: {},
     orcamentoMensalUsd: 5,
     fontes: { lerDispositivo: async id => (id === D.id ? D : null) },
     usuarioAtual: async () => ({ id: 'u1' }),
     lerCache: async () => null,
-    reservar: async p => (registro.push('reservar'), reservas.push(p), { ok: true, id: 7, restantesHoje: 4 }),
+    iniciarAnalise: async () => (registro.push('iniciar'), { ok: true, analiseId: 'an-1', restantes: 4, renovaEm: RENOVA }),
+    consumirAnalise: async () => void registro.push('consumir'),
+    concluirAnalise: async () => void registro.push('concluir'),
+    falhaAnalise: async () => void registro.push('falha'),
+    cancelarAnalise: async () => void registro.push('cancelar'),
+    reservar: async p => (registro.push('reservar'), reservas.push(p), { ok: true, id: 7 }),
     registrarCache: async () => void registro.push('cache'),
     chamarModelo: async p => (registro.push('modelo'), pedidos.push(p), { tipo: 'ok', json: OK, uso: USO } as ResultadoModelo),
     finalizar: async (_id, situacao, _uso, custo) => void finalizados.push({ situacao, custo }),
@@ -44,8 +49,8 @@ function deps(sobre: Partial<DependenciasExecucao> = {}) {
   return { dep, registro, finalizados, pedidos, reservas };
 }
 
-describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer chamada', () => {
-  it('desligada, tarefa fora do catálogo, sem login, entrada livre, inexistente ou longo demais: nada é reservado nem chamado', async () => {
+describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer cota ou chamada', () => {
+  it('desligada, tarefa fora do catálogo, sem login, entrada livre, inexistente ou longo demais: nada é iniciado, reservado nem chamado', async () => {
     const casos: Array<[Partial<DependenciasExecucao>, unknown, unknown, number]> = [
       [{ ligada: false }, TAREFA, ENTRADA, 503],
       [{}, 'conversar', { pergunta: 'qual o prazo da apelação?' }, 404],
@@ -59,36 +64,51 @@ describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer cham
     for (const [sobre, tarefa, entrada, status] of casos) {
       const { dep, registro } = deps(sobre);
       assert.equal((await executarTarefa(tarefa, entrada, dep)).status, status, `${String(tarefa)} → ${status}`);
-      assert.deepEqual(registro, [], `status ${status}: nada reservado nem chamado`);
+      assert.deepEqual(registro, [], `status ${status}: nada iniciado, reservado nem chamado`);
     }
   });
 
-  it('cota ou orçamento esgotados: 429 com o motivo, sem chamar o modelo', async () => {
-    for (const motivo of ['limite_dia', 'limite_mes', 'orcamento', 'em_andamento'] as const) {
-      const { dep, registro } = deps({ reservar: async () => ({ ok: false, motivo }) });
+  it('cota do plano esgotada ou fora do plano: 429 com o motivo e a data de renovação, sem reservar nem chamar o modelo', async () => {
+    for (const motivo of ['limite_periodo', 'sem_cota_no_plano'] as const) {
+      const { dep, registro } = deps({ iniciarAnalise: async () => (registro.push('iniciar'), { ok: false, motivo, renovaEm: RENOVA }) });
       const r = await executarTarefa(TAREFA, ENTRADA, dep);
       assert.equal(r.status, 429);
-      assert.ok(r.status === 429 && r.corpo.motivo === motivo);
-      assert.ok(!registro.includes('modelo'));
+      assert.ok(r.status === 429 && r.corpo.motivo === motivo && r.corpo.renovaEm === RENOVA);
+      assert.ok(r.status === 429 && r.corpo.mensagem === mensagemDeCota(motivo, RENOVA));
+      assert.deepEqual(registro, ['iniciar']);
     }
+    assert.match(mensagemDeCota('limite_periodo', RENOVA), /renova em 26\/10/);
+    assert.equal(dataDeRenovacao('2026-10-26T02:59:00.000Z'), '25/10', 'a data é a de Brasília');
+  });
+
+  it('orçamento do mês ou chamada em curso: 429, a vaga da explicação é liberada e nada é chamado; análise inválida: 400', async () => {
+    for (const motivo of ['orcamento', 'em_andamento'] as const) {
+      const { dep, registro } = deps({ reservar: async () => (registro.push('reservar'), { ok: false, motivo }) });
+      const r = await executarTarefa(TAREFA, ENTRADA, dep);
+      assert.ok(r.status === 429 && r.corpo.motivo === motivo);
+      assert.deepEqual(registro, ['iniciar', 'reservar', 'cancelar']);
+    }
+    const invalida = deps({ reservar: async () => ({ ok: false, motivo: 'analise_invalida' }) });
+    const r = await executarTarefa(TAREFA, ENTRADA, invalida.dep);
+    assert.ok(r.status === 400 && r.corpo.motivo === 'analise_invalida');
   });
 });
 
 describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => {
-  it('resultado já gerado vem do cache: sem reserva, sem modelo, registrado fora da cota; cache inválido é ignorado', async () => {
+  it('resultado já gerado vem do cache: sem cota, sem reserva, sem modelo, registrado fora da cota; cache inválido é ignorado', async () => {
     const { dep, registro } = deps({ lerCache: async () => JSON.parse(OK) });
     const r = await executarTarefa(TAREFA, ENTRADA, dep);
-    assert.ok(r.status === 200 && r.corpo.doCache);
+    assert.ok(r.status === 200 && r.corpo.doCache && r.corpo.restantes === null);
     assert.deepEqual(registro, ['cache']);
     const outro = deps({ lerCache: async () => ({ lixo: true }) });
     assert.equal((await executarTarefa(TAREFA, ENTRADA, outro.dep)).status, 200);
-    assert.deepEqual(outro.registro, ['reservar', 'modelo', 'gravar']);
+    assert.deepEqual(outro.registro, ['iniciar', 'reservar', 'modelo', 'concluir', 'gravar']);
   });
 
   it('o modelo recebe só o que o contrato monta: modelo, esforço, teto, instruções fixas, mensagem com o texto oficial e o esquema', async () => {
     const { dep, pedidos, reservas, finalizados } = deps();
     const r = await executarTarefa(TAREFA, ENTRADA, dep);
-    assert.ok(r.status === 200 && !r.corpo.doCache && r.corpo.restantesHoje === 4);
+    assert.ok(r.status === 200 && !r.corpo.doCache && r.corpo.restantes === 4);
     assert.deepEqual(pedidos, [
       {
         modelo: 'claude-haiku-5-5',
@@ -101,11 +121,12 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
     ]);
     assert.equal(reservas[0].tarefa, TAREFA);
     assert.equal(reservas[0].referencia, D.id);
+    assert.equal(reservas[0].analiseId, 'an-1', 'a chamada é ligada à análise que a cota abriu');
     assert.equal(reservas[0].custoMaximoUsd, custoMaximoUsd(explicarDispositivo));
     assert.deepEqual(finalizados, [{ situacao: 'gerada', custo: custoUsd('claude-haiku-5-5', USO) }]);
   });
 
-  it('falha, recusa, resposta cortada ou fora do formato: a reserva é fechada (conta na cota) e nada vai para o cache', async () => {
+  it('falha, recusa, resposta cortada ou fora do formato: o custo real é registrado, a vaga é liberada (não consome) e nada vai para o cache', async () => {
     const custo = custoUsd('claude-haiku-5-5', USO);
     const casos: Array<[ResultadoModelo, Situacao, number]> = [
       [{ tipo: 'falha', mensagem: 'tempo esgotado' }, 'falhou', 0],
@@ -117,9 +138,11 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
     for (const [resultado, situacao, c] of casos) {
       const avisos: string[] = [];
       const { dep, registro, finalizados } = deps({ chamarModelo: async () => resultado, avisar: m => void avisos.push(m) });
-      assert.equal((await executarTarefa(TAREFA, ENTRADA, dep)).status, 502);
+      const r = await executarTarefa(TAREFA, ENTRADA, dep);
+      assert.equal(r.status, 502);
+      assert.ok(r.status === 502 && /cota não foi gasta/.test(r.corpo.mensagem), 'o cliente é avisado de que não gastou a cota');
       assert.deepEqual(finalizados, [{ situacao, custo: c }]);
-      assert.ok(!registro.includes('gravar'));
+      assert.deepEqual(registro, ['iniciar', 'reservar', 'cancelar'], 'a vaga volta; nada é concluído nem gravado');
       assert.equal(avisos.length, 1, 'fica registrado no log');
     }
   });
@@ -139,9 +162,7 @@ describe('Política global e tarefa "explicar-dispositivo"', () => {
     assert.equal(iaLigada({ IA_EXPLICACAO_LIGADA: 'true', ANTHROPIC_API_KEY: 'k' }), false);
   });
 
-  it('o ambiente só aperta os limites da tarefa; o orçamento pode, no máximo, dobrar', () => {
-    assert.deepEqual(limitesDaTarefa(explicarDispositivo, {}), { porDia: 5, porMes: 60 });
-    assert.deepEqual(limitesDaTarefa(explicarDispositivo, { IA_LIMITE_DIA: '2', IA_LIMITE_MES: '500' }), { porDia: 2, porMes: 60 });
+  it('o orçamento do ambiente pode, no máximo, dobrar o padrão', () => {
     assert.equal(orcamentoDoAmbiente({ IA_ORCAMENTO_MES_USD: '1.5' }), 1.5);
     assert.equal(orcamentoDoAmbiente({ IA_ORCAMENTO_MES_USD: '1000' }), ORCAMENTO_MENSAL_PADRAO_USD);
   });

@@ -123,18 +123,26 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         // Texto das leis (F3-05): conteúdo público, só leitura; quem escreve é a carga, com a chave de serviço
         'anon dispositivos: SELECT',
         'anon normas: SELECT',
+        // Catálogo de planos e cotas (F8-02): informação pública de preço e limite; só a migração muda
+        'anon plano_cotas: SELECT',
+        'anon planos: SELECT',
         'anon relacoes: SELECT',
         // Grafo do TeseMap (F4-03): leitura pública filtrada pela RLS (curado ou validado); quem escreve é a carga/curadoria, com a chave de serviço
         'anon tesemap_arestas: SELECT',
         'anon tesemap_nos: SELECT',
         'anon versoes_dispositivo: SELECT',
         'authenticated aceites_termos: SELECT',
+        // Cada cliente lê só as próprias análises e assinaturas (RLS); quem escreve é o servidor, pelas funções da migração
+        'authenticated analises: SELECT',
+        'authenticated assinaturas: SELECT',
         'authenticated dispositivos: SELECT',
         'authenticated ia_uso: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',
         'authenticated lembretes_prazo: DELETE,INSERT,SELECT',
         'authenticated normas: SELECT',
         'authenticated perfis: SELECT,UPDATE',
+        'authenticated plano_cotas: SELECT',
+        'authenticated planos: SELECT',
         'authenticated relacoes: SELECT',
         'authenticated tesemap_arestas: SELECT',
         'authenticated tesemap_nos: SELECT',

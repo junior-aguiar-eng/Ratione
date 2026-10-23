@@ -65,6 +65,12 @@ A chave **service_role** nunca vai para o Git, para o `.env.local` do site nem p
 
 `supabase/migrations/20261022000002_ia_tarefas.sql` (mesmo dia) generaliza essas tabelas para o **catálogo de tarefas de IA** (`docs/produto/IA_TAREFAS.md`): o cache vira `ia_respostas`, o uso ganha a coluna `tarefa` e a cota passa a ser por tarefa, com o orçamento do mês e "uma chamada de cada vez" valendo para todas. Aplique **depois** da anterior (podem ir juntas, nesta ordem); preserva o que já houver nelas. **Ambas aplicadas em produção em 22/10/2026.**
 
+## Planos e cota por análise (F8-02 e F8-03, 23/10/2026)
+
+`supabase/migrations/20261023000001_planos_e_analises.sql` cria `planos` e `plano_cotas` (Gratuito, Essencial, Profissional, com as cotas de `docs/produto/PLANOS_E_COBRANCA.md` §2.2), `assinaturas`, `analises` e as funções que conferem a cota por análise (`analise_iniciar`, `analise_consumir`, `analise_concluir`, `analise_falha`, `analise_cancelar`, `uso_resumo`, `plano_vigente`). Também **troca a função `ia_reservar`** (passa a exigir uma análise e perde as cotas por dia e por mês) e acrescenta `ia_uso.analise_id`. Não há cobrança: todo usuário está no plano Gratuito até existir uma assinatura, que só o servidor cria.
+
+**Ordem de implantação (importante):** aplique a migração no *SQL Editor* **antes** de publicar o código que a usa. O código novo chama funções que só existem depois dela, e a migração remove a assinatura antiga de `ia_reservar`, de que o código antigo depende. O intervalo entre aplicar a migração e publicar o código (uns 2 minutos) deixa o **Argumenta e o "Explicar com IA" fora do ar**; as demais ferramentas não são afetadas. Conferência depois de aplicar: `select id, periodo from public.planos order by ordem;` deve listar três planos, e `select count(*) from public.plano_cotas;` deve dar 9. Depois de publicar, `IA_LIMITE_DIA` e `IA_LIMITE_MES` deixam de ter efeito.
+
 ## Correções de dados do NormaViva (`supabase/correcoes/`)
 
 Arquivos SQL que corrigem o texto já carregado sem recarregar o corpus inteiro. Cada um é gerado do corpus, idempotente e termina com uma consulta de conferência. Aplicar no *SQL Editor*, depois do merge do código que muda o parser. Aplicadas: `20261020_producao_de_efeito.sql` em 20/10/2026 (conferido no banco: 0 dispositivos com a anotação no texto, 12 revogados corrigidos, 737 revogados no total, hash das versões confere).

@@ -59,7 +59,7 @@ export const explicarDispositivo: TarefaIA<{ dispositivoId: string }, Dispositiv
   guardaResultado: true,
   instrucoes: INSTRUCOES,
   ferramentas: [],
-  limitesPorUsuario: { porDia: 5, porMes: 60 },
+  cota: { tipo: 'explicacao', modo: 'por-chamada' },
   validarEntrada: bruta => {
     const id = (bruta as { dispositivoId?: unknown } | null)?.dispositivoId;
     return idDeDispositivoValido(id) ? { dispositivoId: id } : null;

@@ -21,6 +21,22 @@ export interface Fontes {
 /** JSON Schema da saída: objeto fechado (`additionalProperties: false`, todos os campos obrigatórios). */
 export type EsquemaSaida = { type: 'object'; properties: Record<string, unknown>; required: readonly string[]; additionalProperties: false };
 
+/** Tipos de cota dos planos (`plano_cotas` no banco): análise rápida, análise completa e explicação de dispositivo. */
+export type TipoCota = 'rapida' | 'completa' | 'explicacao';
+
+/**
+ * Como a tarefa conta na cota do plano (docs/produto/PLANOS_E_COBRANCA.md §5). A unidade é a análise, não a chamada.
+ * - `por-chamada`: cada execução é uma análise própria (ex.: explicar dispositivo): o executor a inicia, e consome e conclui no sucesso.
+ * - `por-analise`: a tela inicia a análise (`POST /api/analises`) e a entrada traz o `analiseId`; as etapas não contam de novo.
+ *   `consome` marca a etapa que passa a contar na cota (a 1ª entregue) e `conclui`, a última.
+ */
+export interface CotaDaTarefa {
+  tipo: TipoCota;
+  modo: 'por-chamada' | 'por-analise';
+  consome?: boolean;
+  conclui?: boolean;
+}
+
 export interface TarefaIA<Entrada, Contexto, Saida> {
   /** Identificador estável, igual à chave no catálogo e ao final da rota (`/api/ia/<id>`). */
   id: string;
@@ -44,7 +60,10 @@ export interface TarefaIA<Entrada, Contexto, Saida> {
   instrucoes: string;
   /** Tarefas fechadas não chamam ferramentas. Etapas com consulta são código, fora do modelo. */
   ferramentas: readonly [];
-  limitesPorUsuario: { porDia: number; porMes: number };
+  /** Como a tarefa conta na cota do plano do usuário (as quantidades ficam no banco, por plano). */
+  cota: CotaDaTarefa;
+  /** Só `por-analise`: o id da análise que a entrada traz. */
+  analiseDe?: (entrada: Entrada) => string;
   /** O que o usuário pode mandar; qualquer outra coisa é recusada (400). Nunca pergunta livre. */
   validarEntrada: (bruta: unknown) => Entrada | null;
   /** Busca nas fontes o que o modelo vai receber; `null` = não encontrado (404). */

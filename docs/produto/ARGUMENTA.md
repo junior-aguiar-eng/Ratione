@@ -54,11 +54,11 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 
 | Limite | Valor |
 |---|---|
-| Cota por tarefa | 5 por dia e 40 por mês por usuário (uma análise usa uma de cada tarefa) |
+| Cota | **do plano do usuário**, por análise rápida: Gratuito 3 por semana, Essencial 40 e Profissional 150 por mês ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md) §2.2). A cota é conferida uma vez, ao iniciar a análise (`POST /api/analises`); as três etapas carregam o mesmo `analiseId`. A análise passa a contar quando a **1ª etapa** é entregue; falha sem solução **estorna**. "Tentar de novo" continua a mesma análise |
 | Mensagem | 30.000 caracteres (a decisão até 21.000, mais até 10 questões na etapa de fundamentos) |
 | Resposta | 3.000 tokens (estrutura) e 4.000 (questões, fundamentos) |
 | Itens | até 15 pedidos, 15 partes, 10 questões e 30 fundamentos |
-| Custo estimado | cerca de US$ 0,01 por análise com o Haiku 5.5 (três chamadas de até ~10 mil tokens de entrada) |
+| Custo estimado | cerca de US$ 0,004 por análise com o Haiku 5.5 (três chamadas; conferido em 23/10/2026 com os preços de `politica.ts` e com o gasto do Console da Anthropic) |
 
 ## 5. Limitações conhecidas
 
@@ -73,4 +73,4 @@ O corpus de **30 decisões públicas** avalia a **extração estrutural**, não 
 
 ## 7. Ligar
 
-As tarefas usam a mesma chave da IA do resto do site (`IA_EXPLICACAO_LIGADA=sim` e `ANTHROPIC_API_KEY` no servidor; `NEXT_PUBLIC_IA_EXPLICACAO=sim` no build para mostrar o formulário). Não há migração nova: o registro de uso usa as tabelas de `20261022000002_ia_tarefas.sql`. Sem a IA ligada, a tela mostra só a análise de exemplo.
+As tarefas usam a mesma chave da IA do resto do site (`IA_EXPLICACAO_LIGADA=sim` e `ANTHROPIC_API_KEY` no servidor; `NEXT_PUBLIC_IA_EXPLICACAO=sim` no build para mostrar o formulário). Exige a migração `20261023000001_planos_e_analises.sql` (planos, análises e a cota por análise), **aplicada antes** de publicar este código (`supabase/LEIA-ME.md`). Sem a IA ligada, a tela mostra só a análise de exemplo.
