@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { DependenciasExecucao, InicioDeAnalise, MotivoReserva } from './executar';
+import type { DependenciasExecucao, InicioDeAnalise, MotivoCota, MotivoReserva } from './executar';
 import { registrar } from '../log';
 
 /**
@@ -15,7 +15,9 @@ export async function iniciarAnaliseNoBanco(servidor: SupabaseClient, usuarioId:
   if (error) throw new Error(`iniciar análise: ${error.message}`);
   const l = (data as LinhaInicio[])[0];
   if (l.ok && l.analise_id) return { ok: true, analiseId: l.analise_id, restantes: l.restantes ?? 0, renovaEm: l.renova_em, plano: l.plano };
-  return { ok: false, motivo: l.motivo === 'sem_cota_no_plano' ? 'sem_cota_no_plano' : 'limite_periodo', renovaEm: l.renova_em, plano: l.plano };
+  const motivos: MotivoCota[] = ['sem_cota_no_plano', 'limite_periodo', 'orcamento_gratuito', 'orcamento_pagantes'];
+  const motivo = motivos.find(m => m === l.motivo) ?? 'limite_periodo';
+  return { ok: false, motivo, renovaEm: l.renova_em, plano: l.plano };
 }
 
 async function chamar(servidor: SupabaseClient, funcao: string, analiseId: string, usuarioId: string): Promise<void> {
@@ -48,7 +50,6 @@ export function dependenciasDoBanco(
         p_referencia: p.referencia,
         p_chave: p.chave,
         p_analise: p.analiseId,
-        p_orcamento_mes_usd: p.orcamentoMensalUsd,
         p_custo_maximo_usd: p.custoMaximoUsd
       });
       if (error) throw new Error(`reservar: ${error.message}`);

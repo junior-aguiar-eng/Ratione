@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { chaveDoCache, dataDeRenovacao, executarTarefa, mensagemDeCota, type DependenciasExecucao, type Situacao } from './executar';
 import type { PedidoModelo, ResultadoModelo } from './contrato';
 import { CATALOGO } from './catalogo';
-import { ORCAMENTO_MENSAL_PADRAO_USD, custoMaximoUsd, custoUsd, iaLigada, orcamentoDoAmbiente } from './politica';
+import { custoMaximoUsd, custoUsd, iaLigada } from './politica';
 import { explicarDispositivo, idDeDispositivoValido, mensagemDoDispositivo } from './tarefas/explicarDispositivo';
 import type { DispositivoParaExplicar } from './fontes/dispositivoDoBanco';
 
@@ -30,7 +30,6 @@ function deps(sobre: Partial<DependenciasExecucao> = {}) {
   const reservas: Array<Record<string, unknown>> = [];
   const dep: DependenciasExecucao = {
     ligada: true,
-    orcamentoMensalUsd: 5,
     fontes: { lerDispositivo: async id => (id === D.id ? D : null) },
     usuarioAtual: async () => ({ id: 'u1' }),
     lerCache: async () => null,
@@ -69,7 +68,7 @@ describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer cota
   });
 
   it('cota do plano esgotada ou fora do plano: 429 com o motivo e a data de renovação, sem reservar nem chamar o modelo', async () => {
-    for (const motivo of ['limite_periodo', 'sem_cota_no_plano'] as const) {
+    for (const motivo of ['limite_periodo', 'sem_cota_no_plano', 'orcamento_gratuito', 'orcamento_pagantes'] as const) {
       const { dep, registro } = deps({ iniciarAnalise: async () => (registro.push('iniciar'), { ok: false, motivo, renovaEm: RENOVA }) });
       const r = await executarTarefa(TAREFA, ENTRADA, dep);
       assert.equal(r.status, 429);
@@ -82,7 +81,7 @@ describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer cota
   });
 
   it('orçamento do mês ou chamada em curso: 429, a vaga da explicação é liberada e nada é chamado; análise inválida: 400', async () => {
-    for (const motivo of ['orcamento', 'em_andamento'] as const) {
+    for (const motivo of ['orcamento_gratuito', 'orcamento_pagantes', 'em_andamento'] as const) {
       const { dep, registro } = deps({ reservar: async () => (registro.push('reservar'), { ok: false, motivo }) });
       const r = await executarTarefa(TAREFA, ENTRADA, dep);
       assert.ok(r.status === 429 && r.corpo.motivo === motivo);
@@ -162,9 +161,9 @@ describe('Política global e tarefa "explicar-dispositivo"', () => {
     assert.equal(iaLigada({ IA_EXPLICACAO_LIGADA: 'true', ANTHROPIC_API_KEY: 'k' }), false);
   });
 
-  it('o orçamento do ambiente pode, no máximo, dobrar o padrão', () => {
-    assert.equal(orcamentoDoAmbiente({ IA_ORCAMENTO_MES_USD: '1.5' }), 1.5);
-    assert.equal(orcamentoDoAmbiente({ IA_ORCAMENTO_MES_USD: '1000' }), ORCAMENTO_MENSAL_PADRAO_USD);
+  it('a mensagem de fundo esgotado diz a data de volta e que a cota do cliente não foi gasta; cada fundo tem a sua', () => {
+    assert.match(mensagemDeCota('orcamento_gratuito', '2026-11-01T03:00:00.000Z'), /uso gratuito de IA deste mês.*volta em 01\/11.*cota da semana não foi gasta/);
+    assert.match(mensagemDeCota('orcamento_pagantes', '2026-11-01T03:00:00.000Z'), /Os recursos de IA chegaram ao limite deste mês e voltam em 01\/11.*cota não foi gasta/);
   });
 
   it('custo pelo preço do Haiku 5.5 (US$ 0,10 e 0,50 por milhão) e reserva máxima de centavos de dólar', () => {

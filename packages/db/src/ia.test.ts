@@ -14,15 +14,14 @@ const CHAVE = 'a'.repeat(64);
 /** Inicia uma análise (a cota do período é conferida aqui) e devolve o id. */
 const iniciar = (tx: Tx, usuario: string, tipo = 'explicacao') =>
   tx.query<{ ok: boolean; analise_id: string | null }>('select * from public.analise_iniciar($1, $2)', [usuario, tipo]).then(r => r.rows[0].analise_id!);
-const reservar = (tx: Tx, usuario: string, analise: string, orcamento = 1, custoMax = 0.01, tarefa = 'explicar-dispositivo') =>
+const reservar = (tx: Tx, usuario: string, analise: string, custoMax = 0.01, tarefa = 'explicar-dispositivo') =>
   tx
-    .query<{ ok: boolean; motivo: string | null; reserva_id: string | null }>('select * from public.ia_reservar($1, $2, $3, $4, $5, $6, $7)', [
+    .query<{ ok: boolean; motivo: string | null; reserva_id: string | null }>('select * from public.ia_reservar($1, $2, $3, $4, $5, $6)', [
       tarefa,
       usuario,
       'LEI-13105-2015|corpo|art. 85',
       CHAVE,
       analise,
-      orcamento,
       custoMax
     ])
     .then(r => r.rows[0]);
@@ -88,18 +87,21 @@ describe('IA: chamadas dentro de uma análise, orçamento global e acesso (catá
     const gasto = await comoServidor(db, tx => tx.query<{ s: string }>('select coalesce(sum(custo_usd), 0)::text as s from public.ia_uso'));
     const jaGasto = Number(gasto.rows[0].s);
     assert.ok(jaGasto > 0);
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, jaGasto + 0.0005, 0.001))).motivo, 'orcamento');
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, 1, 0.001))).ok, true);
+    // O teto do fundo do Gratuito cabe no gasto de agora mais 0,0005, e a chamada de custo máximo 0,001 não cabe
+    await db.query('update public.ia_fundos set orcamento_mes_usd = $1 where fundo = $2', [jaGasto + 0.0005, 'gratuito']);
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, 0.001))).motivo, 'orcamento_gratuito');
+    await db.query("update public.ia_fundos set orcamento_mes_usd = 15 where fundo = 'gratuito'");
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, 0.001))).ok, true);
   });
 
   it('"uma de cada vez" vale para todas as tarefas do mesmo usuário', async () => {
     const dani = await criarUsuario(db, 'dani@exemplo.com');
     const id = await comoServidor(db, tx => iniciar(tx, dani, 'rapida'));
-    const a = await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-estrutura'));
+    const a = await comoServidor(db, tx => reservar(tx, dani, id, 0.0001, 'argumenta-estrutura'));
     assert.strictEqual(a.ok, true);
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-questoes'))).motivo, 'em_andamento');
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, dani, id, 0.0001, 'argumenta-questoes'))).motivo, 'em_andamento');
     await comoServidor(db, tx => finalizar(tx, a.reserva_id!, 0.0001));
-    const b = await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-questoes'));
+    const b = await comoServidor(db, tx => reservar(tx, dani, id, 0.0001, 'argumenta-questoes'));
     assert.strictEqual(b.ok, true);
     await comoServidor(db, tx => finalizar(tx, b.reserva_id!, 0.0001));
   });

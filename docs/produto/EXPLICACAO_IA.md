@@ -29,12 +29,12 @@ Na tela de um dispositivo do NormaViva, a pessoa logada pode clicar em **"Explic
 | Limite | Padrão | Ajuste |
 |---|---|---|
 | Explicações novas por usuário | **cota do plano**, por período: Gratuito 10 por semana, Essencial 200 por mês, Profissional 500 por mês (tipo `explicacao` em `plano_cotas`; semana de segunda a domingo no horário de Brasília) | banco, por migração |
-| Gasto de todos os usuários somados no mês | US$ 5,00 | `IA_ORCAMENTO_MES_USD` |
+| Gasto do mês | dois fundos: Gratuito US$ 15,00 e pagantes US$ 5,00 (cada um soma todas as tarefas de quem está no grupo) | tabela `ia_fundos` (SQL), ver `PLANOS_E_COBRANCA.md` §3.2 |
 | Uma explicação de cada vez por usuário | (fixo) | chamada "reservada" há menos de 2 minutos barra a próxima |
 | Teto da resposta | 2.000 tokens | `maxTokensSaida` (contrato) |
 | Tempo da chamada | 30 s, 1 nova tentativa só em falha transitória | código |
 
-O orçamento do ambiente pode, no máximo, dobrar o padrão; valor inválido cai no padrão. Falha, recusa e resposta fora do formato **não gastam a cota do cliente** (a vaga é liberada), mas o custo real cobrado pelo provedor entra no orçamento do mês. Servir do cache também não gasta cota. O orçamento soma o custo real das chamadas feitas e o custo máximo das que estão em curso: nunca passa do teto.
+Falha, recusa e resposta fora do formato **não gastam a cota do cliente** (a vaga é liberada), mas o custo real cobrado pelo provedor entra no orçamento do mês. Servir do cache também não gasta cota. O orçamento soma o custo real das chamadas feitas e o custo máximo das que estão em curso: nunca passa do teto.
 
 ## 4. Modelo e custo
 
