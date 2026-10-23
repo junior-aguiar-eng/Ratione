@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Download } from 'lucide-react';
 import PageHeader from '../../../components/PageHeader';
 import EmptyState from '../../../components/EmptyState';
 import Notice from '../../../components/Notice';
+import Assinatura from './Assinatura';
 import { useSessao } from '../../../lib/useSessao';
 import { obterSupabase } from '../../../lib/supabase/client';
 import {
@@ -52,6 +53,11 @@ export default function MeuUsoPage() {
   const [truncado, setTruncado] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<Filtro>('todas');
+  // Muda quando a assinatura muda (assinou, cancelou): relê o plano e a cota
+  const [versao, setVersao] = useState(0);
+  const recarregar = useCallback(() => setVersao(v => v + 1), []);
+  // A seção de planos só existe quando a cobrança está liberada para este usuário; senão, o aviso de "planos pagos ainda não disponíveis"
+  const [haPlanos, setHaPlanos] = useState(false);
 
   const usuarioId = usuario?.id;
   useEffect(() => {
@@ -86,7 +92,7 @@ export default function MeuUsoPage() {
     return () => {
       ativa = false;
     };
-  }, [usuarioId]);
+  }, [usuarioId, versao]);
 
   const plano = resumo?.[0];
   const cotas = useMemo(() => cotasDoPlano(resumo ?? []), [resumo]);
@@ -171,12 +177,14 @@ export default function MeuUsoPage() {
                 );
               })}
             </Card>
-            {plano.plano === 'gratuito' && (
+            {plano.plano === 'gratuito' && !haPlanos && (
               <Notice tom="info" titulo="Você está no plano Gratuito">
                 Os planos pagos, com mais análises, ainda não estão disponíveis. Quando estiverem, as cobranças e o recibo de cada uma aparecem aqui.
               </Notice>
             )}
           </section>
+
+          <Assinatura aoMudar={recarregar} aoSaberSeHaPlanos={setHaPlanos} />
 
           <section aria-labelledby="uso-historico" className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center justify-between gap-3">

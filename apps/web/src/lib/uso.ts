@@ -86,6 +86,11 @@ export function dataCurta(iso: string): string {
   return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', timeZone: 'America/Sao_Paulo' });
 }
 
+/** "R$ 29,00" a partir de centavos. */
+export function precoEmReais(centavos: number): string {
+  return (centavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace(/ /g, ' ');
+}
+
 export const MAX_ROTULO = 80;
 
 /**

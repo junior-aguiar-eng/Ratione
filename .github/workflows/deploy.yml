@@ -68,13 +68,22 @@ jobs:
             SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
             IA="IA_EXPLICACAO_LIGADA=sim"
           fi
+          # Cobrança com o Mercado Pago (F8-05): DESLIGADA por padrão. Só com a variável COBRANCA = sim o servidor recebe os segredos do
+          # Mercado Pago (mercadopago-access-token e mercadopago-webhook-secret, no Secret Manager) e a cobrança liga. COBRANCA_AMBIENTE
+          # (padrão: teste) e COBRANCA_TESTE_EMAILS (e-mails liberados em teste, separados por ponto e vírgula) também vêm de variáveis do repositório.
+          # O separador "^@^" deixa o gcloud aceitar vírgula e ponto e vírgula nos valores. Passo a passo: docs/produto/PLANOS_E_COBRANCA.md §7.4.
+          COBRANCA="COBRANCA_LIGADA=nao"
+          if [ "${{ vars.COBRANCA }}" = "sim" ]; then
+            SEGREDOS="$SEGREDOS,MERCADOPAGO_ACCESS_TOKEN=mercadopago-access-token:latest,MERCADOPAGO_WEBHOOK_SECRET=mercadopago-webhook-secret:latest"
+            COBRANCA="COBRANCA_LIGADA=sim@COBRANCA_AMBIENTE=${{ vars.COBRANCA_AMBIENTE || 'teste' }}@COBRANCA_TESTE_EMAILS=${{ vars.COBRANCA_TESTE_EMAILS }}"
+          fi
           gcloud run deploy "$SERVICO" \
             --project "${{ vars.GCP_PROJECT_ID }}" \
             --region "$REGIAO" \
             --image "${{ steps.imagem.outputs.nome }}" \
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
             --set-secrets "$SEGREDOS" \
-            --update-env-vars "$IA" \
+            --update-env-vars "^@^${IA}@${COBRANCA}" \
             --allow-unauthenticated \
             --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \

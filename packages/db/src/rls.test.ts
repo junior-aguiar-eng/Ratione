@@ -135,6 +135,8 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         // Cada cliente lê só as próprias análises e assinaturas (RLS); quem escreve é o servidor, pelas funções da migração
         'authenticated analises: SELECT',
         'authenticated assinaturas: SELECT',
+        // Cobranças do Mercado Pago (F8-05): o cliente lê só as próprias; quem escreve é o servidor, pelas funções da migração
+        'authenticated cobrancas: SELECT',
         'authenticated dispositivos: SELECT',
         'authenticated ia_uso: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',

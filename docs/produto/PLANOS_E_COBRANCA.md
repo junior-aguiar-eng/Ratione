@@ -152,7 +152,7 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 
 | Peça | Uso | Observação |
 |---|---|---|
-| **Assinaturas** (API de planos `preapproval_plan` e assinaturas `preapproval`) | Cobrança mensal recorrente dos planos Essencial e Profissional | A documentação do Mercado Pago descreve criar o plano (título, valor, frequência), criar a assinatura a partir dele e gerenciá-la (alterar valor, trocar cartão, pausar, cancelar, reativar, teste grátis). Cada plano tem um `preapproval_plan_id` |
+| **Assinaturas** (API `preapproval`, **sem plano associado e com pagamento pendente**) | Cobrança mensal recorrente dos planos Essencial e Profissional | **Decidido na implementação (23/10/2026):** em vez de criar planos no Mercado Pago (`preapproval_plan`), cada assinatura nasce por usuário (`POST /preapproval` com `status: pending`), com `external_reference` igual ao id da nossa assinatura, e devolve o link da página de pagamento. Assim o aviso do Mercado Pago volta já amarrado ao nosso usuário, e **não há planos a criar nem a migrar** quando a conta mudar. O valor vem de `planos.preco_mensal_centavos`, no banco |
 | **Página de pagamento do Mercado Pago** (a assinatura nasce na página do Mercado Pago, e o cliente volta ao Ratione) | Para o cliente informar o cartão | O cartão nunca passa pelo nosso servidor (escopo de segurança de dados de cartão reduzido) |
 | **Webhooks** | O Mercado Pago avisa mudanças de assinatura e de pagamento | Validação da assinatura do aviso com o cabeçalho `x-signature`, `x-request-id` e o `data.id` da consulta, com o segredo da aplicação (o SDK oficial `mercadopago` tem `WebhookSignatureValidator`) |
 | **Preferência de pagamento** (Checkout Pro) | **Fase posterior**: compra de 30 dias de acesso por Pix ou boleto, sem renovação automática, para quem não quer cartão | O campo `external_reference` liga o pagamento ao nosso pedido; `notification_url` recebe o aviso |
@@ -163,7 +163,7 @@ Tela no Meu espaço (`/meu-espaco/uso`), alimentada pelo banco do próprio Ratio
 
 ```text
 Cliente (logado) clica em "Assinar Essencial"
-  → servidor cria a assinatura a partir do plano (preapproval_plan_id), com external_reference = id do cliente + id interno
+  → servidor cria a nossa assinatura pendente (preço do banco) e a assinatura pendente no Mercado Pago, com external_reference = id da nossa
   → redireciona para a página do Mercado Pago (cartão)
   → cliente volta ao Ratione (back_url) para uma tela "Estamos confirmando seu pagamento"
   → o Mercado Pago chama /api/mercadopago/webhook
@@ -198,20 +198,35 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 
 | Regra | Como |
 |---|---|
-| **Duas chaves de liga** | `COBRANCA_LIGADA` (servidor) e `NEXT_PUBLIC_COBRANCA` (build), ambas **`nao` por padrão**. Desligada: as telas de plano mostram "Em breve" ou ficam ocultas, a rota de assinar responde 503 e o webhook não processa nada |
-| **Só credenciais de teste enquanto for pessoa física** | O token de acesso e o segredo do webhook vêm do Secret Manager (`mercadopago-access-token`, `mercadopago-webhook-secret`). O código recusa iniciar a cobrança se o token for de produção e `COBRANCA_AMBIENTE` não for `producao` (e o inverso) |
-| **Nada da conta fixo no código** | Os identificadores dos planos do Mercado Pago ficam em tabela ou variável, não no código. Um comando idempotente (`pnpm mp:planos`) cria ou atualiza os planos **na conta cujas credenciais estiverem ativas** e grava os `preapproval_plan_id` |
-| **Troca de conta = trocar segredos e rodar o comando** | Ao abrir o MEI: nova conta no Mercado Pago, novas credenciais nos segredos, `pnpm mp:planos`, nova URL de webhook no painel, `COBRANCA_AMBIENTE=producao`, teste de ponta a ponta com valor baixo, e só então `COBRANCA_LIGADA=sim` |
+| **Chave de liga única, no servidor** | `COBRANCA_LIGADA`, **`nao` por padrão** (variável de repositório `COBRANCA`, no deploy). Desligada: `GET /api/cobranca/situacao` responde `{ disponivel: false }`, assinar e cancelar respondem 503, o webhook responde 503 e não lê nada, e a tela **nem mostra a seção de planos**. Não há chave no navegador: quem decide o que a tela mostra é o servidor |
+| **Em teste, só uma lista de e-mails** | `COBRANCA_AMBIENTE` vale `teste` a menos que seja exatamente `producao`. Em teste, só os e-mails de `COBRANCA_TESTE_EMAILS` (variável `COBRANCA_TESTE_EMAILS` do repositório, separados por ponto e vírgula) veem e usam a cobrança; para todos os outros, o site é idêntico ao de hoje. Só `producao` abre a cobrança a todo usuário logado |
+| **Segredos** | `MERCADOPAGO_ACCESS_TOKEN` e `MERCADOPAGO_WEBHOOK_SECRET` vêm do Secret Manager (`mercadopago-access-token`, `mercadopago-webhook-secret`), só quando a variável `COBRANCA` é `sim`. Sem eles, a cobrança não fica pronta, mesmo ligada |
+| **Nada da conta fixo no código** | Não há plano nem identificador do Mercado Pago no código: o preço é do banco e cada assinatura é criada por usuário. **Não existe `pnpm mp:planos`** |
+| **Troca de conta = trocar segredos e a URL do webhook** | Ao abrir o MEI: nova conta no Mercado Pago, novas credenciais nos segredos, nova URL de webhook no painel de lá, `COBRANCA_AMBIENTE=producao`, apagar o que foi feito em teste (`delete from public.assinaturas where ambiente = 'teste';`), teste de ponta a ponta com valor baixo |
 | **Identificação do fornecedor configurável** | Nome empresarial, CNPJ, endereço e e-mail de contato dos Termos, da Privacidade e do rodapé vêm de uma configuração única. Hoje com marcador explícito de "pendente"; o Decreto 7.962/2013 exige o dado real antes de vender |
 | **Sem cliente pagante real antes da conta definitiva** | Nenhuma assinatura de produção é criada na conta de pessoa física |
 
 **Checklist de ativação (quando houver MEI ou empresa):**
 1. CNPJ aberto com atividade compatível; alvará e inscrição municipal de Maceió, se exigidos; forma de emitir nota fiscal definida com o contador (o MEI pode ter dispensa de nota para venda a pessoa física, mas escritórios e empresas costumam exigi-la; **confirmar as regras de Maceió**).
 2. Conta do Mercado Pago do CNPJ aberta e verificada; credenciais e segredo do webhook no Secret Manager; deploy.
-3. `pnpm mp:planos` na conta nova; webhook cadastrado; teste de assinatura, cancelamento e reembolso com valor baixo.
+3. Webhook cadastrado na conta nova; apagar as assinaturas de teste do banco; teste de assinatura, cancelamento e reembolso com valor baixo.
 4. Termos, Privacidade e rodapé com os dados do fornecedor; revisão por advogado (T-03).
 5. Seguro de responsabilidade avaliado (PLANO §8).
-6. Ligar as duas chaves e anunciar.
+6. Trocar `COBRANCA_AMBIENTE` para `producao`, fazer o deploy e anunciar.
+
+### 7.4.1 Como testar com as contas de teste do Mercado Pago
+
+Precisa de **duas contas de teste** do Mercado Pago (uma de vendedor, uma de comprador, com cartões de teste), criadas no painel de desenvolvedores, e das credenciais de teste do vendedor. Passos:
+
+1. **Aplicar a migração** `20261023000003_cobranca_mercadopago.sql` no SQL Editor (`supabase/LEIA-ME.md`) **antes** de publicar o código.
+2. **Definir os preços de teste** (a decisão do preço real continua aberta): `update public.planos set preco_mensal_centavos = 1000 where id = 'essencial';` (e `profissional`). Sem preço, a assinatura é recusada.
+3. **Guardar no Secret Manager** (`ratione-nexojuris`), com acesso para `ratione-web@…` (papel *Secret Manager Secret Accessor*): `mercadopago-access-token` (o *Access Token* **de teste** do vendedor) e `mercadopago-webhook-secret` (a chave secreta do webhook). Nunca no chat, no repositório ou em arquivo.
+4. **Configurar o webhook** no painel do Mercado Pago (a aplicação de teste): URL `https://ratione.nexojuris.ia.br/api/mercadopago/webhook`, com os eventos de **assinaturas** (`subscription_preapproval` e `subscription_authorized_payment`) ligados. A chave secreta que o painel mostra é a do item 3.
+5. **Variáveis do repositório** (GitHub, *Settings → Variables*): `COBRANCA = sim`, `COBRANCA_AMBIENTE = teste` e `COBRANCA_TESTE_EMAILS` com o seu e-mail de login no Ratione. Depois, disparar o deploy (*Actions → Publicar (Cloud Run) → Run workflow*).
+6. **Testar:** entrar no Ratione com o e-mail da lista, abrir "Meu uso", assinar, pagar com a conta e o cartão **de teste** do comprador, voltar ao site e conferir que o plano ficou ativo; depois cancelar. Conferir no banco: `select situacao, mp_situacao, ciclo_fim from public.assinaturas;`, `select * from public.cobrancas;` e `select topico, resultado from public.mp_eventos order by id desc;`.
+7. **Desligar:** variável `COBRANCA = nao` e novo deploy. Nada mais precisa ser desfeito.
+
+**O que o teste real precisa confirmar** (a leitura das respostas do Mercado Pago foi escrita pela documentação de 23/10/2026 e ainda não foi vista no sandbox): que a criação da assinatura pendente devolve o link da página de pagamento (`init_point`); o formato do aviso de cobrança (`subscription_authorized_payment`) e o campo da data da próxima cobrança (`next_payment_date`); e se a assinatura aceita só cartão ou também outros meios. O código lê tudo de forma tolerante (o que não vier no formato esperado é ignorado), então uma divergência não corrompe dados, mas pode deixar uma assinatura sem atualizar até o ajuste.
 
 ### 7.5 Segurança e conformidade
 
@@ -233,6 +248,7 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 | F8-04 | Tela "Meu uso" (resumo, histórico, falhas, aviso antes de enviar, exportação) e painel administrativo | F8-03 |
 | | **Feito em 23/10/2026 (tela do cliente):** `/meu-espaco/uso` com o plano e a renovação, a cota por tipo (usadas, restantes e barra), o histórico (30 dias no Gratuito, 12 meses nos pagos; filtro por análises e explicações; estado de cada uma e se gastou cota), o aviso de quantas tentativas não gastaram cota, a exportação em CSV nos planos pagos (com neutralização de fórmula no nome da análise) e o texto de como a cota é contada. O cliente pode dar **nome opcional** à análise no Argumenta (até 80 caracteres; o servidor recusa dado pessoal reconhecível). Lógica em `lib/uso.ts`, com testes. **Falta:** o painel administrativo para o responsável (custo real, receita, margem por plano, gasto contra o teto) e a lista de cobranças, que dependem da cobrança (F8-05); o tamanho da decisão (parágrafos) no histórico, que pede uma coluna nova | |
 | F8-05 | Mercado Pago em **teste**: criar planos, assinatura pela página do Mercado Pago, volta, webhook validado e idempotente, estados | F8-02 |
+| | **Feito em 23/10/2026 (código; teste real pendente):** migração `20261023000003` (preço dos planos, vínculo e situação do Mercado Pago em `assinaturas`, `cobrancas`, `mp_eventos` e as funções); cliente do Mercado Pago só com `fetch`; validação do webhook (HMAC-SHA256 do manifesto, tempo constante); processamento que **relê o recurso na API** e é idempotente por `x-request-id`, com o registro descartado se falhar (o Mercado Pago reenvia); rotas `GET /api/cobranca/situacao`, `POST /api/cobranca/assinar`, `POST /api/cobranca/cancelar` e `POST /api/mercadopago/webhook`, **todas desligadas por padrão**; seção "Planos e assinatura" em "Meu uso", só para quem o servidor libera; deploy condicional (variável `COBRANCA`). Testes de banco e da lógica; **ainda não testado contra o sandbox do Mercado Pago** (§7.4.1). Mudou em relação ao plano: não há planos no Mercado Pago, e a chave de liga é só a do servidor | |
 | F8-06 | Cancelamento, arrependimento com reembolso, subir e descer de plano, troca de cartão | F8-05 |
 | F8-07 | Documentos legais atualizados e revisados (T-03); planilha de custo e preços (T-04) | F8-01, F8-04 |
 | F8-08 | Nível completa: contrato por nível, preço do modelo em `politica.ts`, divisão de decisão longa, depois do corpus | F5-05, F5-04 |
