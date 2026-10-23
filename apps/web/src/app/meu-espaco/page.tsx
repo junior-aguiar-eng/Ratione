@@ -87,6 +87,13 @@ export default function MeuEspacoPage() {
       <PageHeader
         eyebrow="Biblioteca pessoal"
         title="Meu espaço"
+        actions={
+          usuario ? (
+            <Link href="/meu-espaco/uso" className={buttonVariants({ variant: 'secondary' })}>
+              Meu uso de IA
+            </Link>
+          ) : undefined
+        }
         description={
           origem === 'conta'
             ? 'Os cálculos, normas, teses e análises que você salvou. Os registros ficam guardados na sua conta.'
