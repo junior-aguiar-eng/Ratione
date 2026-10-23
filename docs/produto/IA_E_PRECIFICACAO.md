@@ -99,6 +99,8 @@ ai.resumirEmenta(ementa)          -> { resumo }
 
 ## 4. Planos (sem plano empresarial neste momento)
 
+> **Substituída em 23/10/2026** pela proposta de [`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md): planos Gratuito, Básico e Avançado, cota por análise (em vez de créditos) e cobrança pelo Mercado Pago. A tabela abaixo fica como origem do conteúdo; **não é seguida**.
+
 | | **Gratuito** | **Pro** | **Pro Estudo** (concurseiros) |
 |---|---|---|---|
 | Ferramentas sem IA | Com limites de uso razoável | Uso razoável ampliado | Uso razoável ampliado |

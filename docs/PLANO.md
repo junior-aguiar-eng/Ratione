@@ -231,7 +231,7 @@ Pesquisa de autoridade (localizar, verificar, obter metadados) passa por um **Ju
 ## 7. Plataforma e operação
 
 - **Conta e perfil:** e-mail e senha, Google, link mágico; verificação de e-mail; 2FA opcional; nome, profissão, OAB (declaratória), tribunal e UF padrão. Direitos LGPD no produto: exportar dados, excluir conta, revogar consentimento (art. 18).
-- **Planos (hipóteses a validar):** *Gratuito* (ferramentas sem IA, uso razoável), *Pro* (uso ampliado, alertas por e-mail, `.ics`/PDF, histórico, créditos de IA) e *Pro Estudo* (concurseiros, preço menor). **Sem plano empresarial agora.** IA medida em créditos, com teto global. **Beta gratuito** até haver meio regular de cobrança e emissão fiscal. Cobrança com Pix Automático, cartão, boleto e NFS-e (ex.: Asaas). Informações claras e cancelamento (Decreto 7.962/2013) e arrependimento de 7 dias (CDC, art. 49). Detalhe: [`produto/IA_E_PRECIFICACAO.md`](produto/IA_E_PRECIFICACAO.md).
+- **Planos (hipóteses a validar):** *Gratuito* (ferramentas sem IA, uso razoável), *Pro* (uso ampliado, alertas por e-mail, `.ics`/PDF, histórico, créditos de IA) e *Pro Estudo* (concurseiros, preço menor). **Sem plano empresarial agora.** IA medida em créditos, com teto global. **Beta gratuito** até haver meio regular de cobrança e emissão fiscal. Cobrança pelo **Mercado Pago** (assinaturas; ver F8) e NFS-e conforme a forma jurídica (T-01). Informações claras e cancelamento (Decreto 7.962/2013) e arrependimento de 7 dias (CDC, art. 49). Detalhe: [`produto/IA_E_PRECIFICACAO.md`](produto/IA_E_PRECIFICACAO.md).
 - **Ambientes:** `dev` → `staging` → `prod`; deploy automático por PR; migrações versionadas; backups com restauração testada; painel de saúde das ingestões; suporte (formulário e e-mail); página de status.
 - **Segurança:** OWASP ASVS nível 1, CSP, rate limit, segredos fora do repositório, RLS com testes, revisão de dependências, backups com PITR. Toda ingestão é idempotente, com hash, e **falha de forma visível**.
 - **Acessibilidade:** WCAG 2.2 AA. **Desempenho:** orçamento por página; cache de normas e calendário.
@@ -377,14 +377,18 @@ Argumenta: atacar, defender, contratese, recurso × decisão. NormaViva: versõe
 
 Favoritos, histórico, compartilhamento, exportação, referências, atalhos, busca global, desempenho, mobile; depois multiusuário (escritório), API pública (Fastify), integração Comunica/DJEN, SEO e indicação. Estado: não iniciado.
 
+### F8 — Planos, uso transparente e cobrança
+
+Proposta de 23/10/2026 em [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md): três planos (Gratuito com 1 uso de IA por semana, Básico e Avançado), dois níveis de análise por complexidade (básica com Haiku; aprofundada, com Sonnet, quando houver conteúdo e corpus que a justifiquem), a **análise como unidade de cota** (falha não consome), a tela "Meu uso" para o cliente e a cobrança recorrente pela API de assinaturas do **Mercado Pago**, com webhook validado. Substitui *Pro* e *Pro Estudo* e o Asaas. Itens F8-01 a F8-10 no documento. Estado: **proposta, aguardando as decisões da §9 do documento**.
+
 ### Trilhas transversais (não são código)
 
 | ID | Item | Estado |
 |---|---|---|
-| T-01 | CNPJ e forma de cobrança | não iniciado |
+| T-01 | CNPJ e forma de cobrança | não iniciado. Agora **precede o lançamento da cobrança** (F8): define em nome de quem o Mercado Pago recebe e como a nota fiscal sai |
 | T-02 | Marca: busca por radical e fonética, classes, depósito | não iniciado |
 | T-03 | Revisão das minutas jurídicas por advogado | parcial (minutas escritas) |
-| T-04 | Preços de Pro e Pro Estudo; planilha de custo e teto de IA | não iniciado |
+| T-04 | Preços dos planos Básico e Avançado; planilha de custo e teto de IA | não iniciado. Método na §3 de [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md): o custo vem da média de `ia_uso` por análise |
 | T-05 | Horário fixo do responsável para validar calendário e cenários | não definido |
 | T-06 | Testes de bancada das fontes (`FONTES_E_PIPELINES.md` §5) | liberados: os hosts passaram a responder pelo script de acesso |
 
@@ -440,6 +444,7 @@ Favoritos, histórico, compartilhamento, exportação, referências, atalhos, bu
 | [`produto/VERIFICACAO_FONTES.md`](produto/VERIFICACAO_FONTES.md) | Fontes lidas em 07/10/2026, correções feitas e dúvidas para o revisor jurídico |
 | [`produto/REVISAO_CENARIOS.md`](produto/REVISAO_CENARIOS.md) | Os 100 cenários do PrazoZero para o revisor jurídico validar (gerado pelo oráculo; não editar à mão) |
 | [`produto/FONTES_E_PIPELINES.md`](produto/FONTES_E_PIPELINES.md) | Viabilidade das fontes e testes de bancada |
-| [`produto/IA_E_PRECIFICACAO.md`](produto/IA_E_PRECIFICACAO.md) | Uso de IA, créditos, planos e custos |
+| [`produto/IA_E_PRECIFICACAO.md`](produto/IA_E_PRECIFICACAO.md) | Uso de IA, créditos e custos (a tabela de planos foi substituída por `PLANOS_E_COBRANCA.md`) |
+| [`produto/PLANOS_E_COBRANCA.md`](produto/PLANOS_E_COBRANCA.md) | Planos, níveis de análise, tela "Meu uso" e cobrança com Mercado Pago (proposta) |
 | [`juridico/`](juridico/) | Minutas de termos, privacidade, cookies, uso de IA e aviso legal |
 | [`arquivo/`](arquivo/) | Planos anteriores (Mestre, Execução, Correções Visuais), só como origem do conteúdo |
