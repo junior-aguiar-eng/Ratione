@@ -57,6 +57,31 @@ describe('Argumenta: segmentação em parágrafos', () => {
     ]);
   });
 
+  it('PDF do PJe: tira o rodapé de cada página e junta frases cortadas por linha em branco', () => {
+    const pje = `Os autos tratam de fraude.
+
+Assinado eletronicamente por: FULANO DE TAL - 23/06/2026 15:57:00 https://exemplo.jus.br/documento?x=1
+Número do documento: 26062315570079500000254276618
+
+Pág. 1
+
+1.
+
+Trata-se de recurso interposto pelo autor contra a
+
+sentença que julgou improcedente o pedido.
+
+Da culpa exclusiva
+
+A autora instalou o aplicativo.`;
+    assert.deepEqual(segmentar(pje), [
+      'Os autos tratam de fraude.',
+      '1. Trata-se de recurso interposto pelo autor contra a sentença que julgou improcedente o pedido.',
+      'Da culpa exclusiva',
+      'A autora instalou o aplicativo.'
+    ]);
+  });
+
   it('texto vazio não gera parágrafo', () => {
     assert.deepEqual(segmentar(' \n\n \r\n'), []);
   });
