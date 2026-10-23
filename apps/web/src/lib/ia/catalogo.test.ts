@@ -50,8 +50,10 @@ describe('Catálogo de tarefas de IA: contrato de cada tarefa', () => {
       assert.ok(['low', 'medium'].includes(t.esforco), 'esforço baixo ou médio');
       assert.ok(t.maxTokensSaida > 0 && t.maxTokensSaida <= TETOS.maxTokensSaida);
       assert.ok(t.maxCaracteresMensagem > 0 && t.maxCaracteresMensagem <= TETOS.maxCaracteresMensagem);
-      assert.ok(t.limitesPorUsuario.porDia >= 1 && t.limitesPorUsuario.porDia <= TETOS.porDia);
-      assert.ok(t.limitesPorUsuario.porMes >= t.limitesPorUsuario.porDia && t.limitesPorUsuario.porMes <= TETOS.porMes);
+      assert.ok(['rapida', 'completa', 'explicacao'].includes(t.cota.tipo), 'cota de um tipo que o plano conhece');
+      assert.ok(['por-chamada', 'por-analise'].includes(t.cota.modo));
+      if (t.cota.modo === 'por-analise') assert.equal(typeof t.analiseDe, 'function', 'tarefa por análise diz de onde vem o id da análise');
+      else assert.equal(t.analiseDe, undefined);
       assert.match(t.versao, /^v\d+-\d{4}-\d{2}-\d{2}$/, 'versão com data');
       assert.equal(typeof t.guardaResultado, 'boolean', 'decide se a resposta vai para o cache');
       if (t.id.startsWith('argumenta-')) assert.equal(t.guardaResultado, false, 'material do usuário nunca vai para o cache');

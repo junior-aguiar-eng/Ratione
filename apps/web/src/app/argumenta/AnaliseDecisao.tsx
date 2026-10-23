@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { campoClasses } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useSessao } from '../../lib/useSessao';
+import { obterSupabase } from '../../lib/supabase/client';
 import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
 
 /**
@@ -90,21 +91,39 @@ function rotuloParagrafos(numeros: readonly number[]): string {
   return `${ns.length > 1 ? '§§' : '§'} ${partes.join(', ')}`;
 }
 
-async function pedir(etapa: Etapa, entrada: unknown): Promise<unknown> {
+/** Erro do servidor com o motivo, para a tela decidir se pode tentar de novo. */
+class ErroDeAnalise extends Error {
+  constructor(
+    mensagem: string,
+    readonly motivo?: string
+  ) {
+    super(mensagem);
+  }
+}
+
+async function enviar(url: string, corpo: unknown): Promise<Record<string, any>> {
   let r: Response;
   try {
-    r = await fetch(`/api/ia/argumenta-${etapa}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ entrada })
-    });
+    r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
   } catch {
-    throw new Error('Sem conexão. Tente de novo.');
+    throw new ErroDeAnalise('Sem conexão. Tente de novo.');
   }
-  const corpo = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(corpo.mensagem ?? 'A análise por IA falhou agora.');
-  return corpo.resposta;
+  const resposta = await r.json().catch(() => ({}));
+  if (!r.ok) throw new ErroDeAnalise(resposta.mensagem ?? 'A análise por IA falhou agora.', resposta.motivo);
+  return resposta;
 }
+
+const pedir = async (etapa: Etapa, entrada: unknown): Promise<unknown> => (await enviar(`/api/ia/argumenta-${etapa}`, { entrada })).resposta;
+
+/** O que o plano do usuário ainda permite de análises rápidas no período (função `uso_resumo` do banco; só lê o próprio uso). */
+interface UsoRapida {
+  plano: string;
+  quantidade: number;
+  restantes: number;
+  renovaEm: string;
+}
+
+const dataCurta = (iso: string) => new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', timeZone: 'America/Sao_Paulo' });
 
 export default function AnaliseDecisao() {
   const { usuario, carregando, contaDisponivel } = useSessao();
@@ -116,6 +135,9 @@ export default function AnaliseDecisao() {
   const [erro, setErro] = useState<string | null>(null);
   const [aba, setAba] = useState('geral');
   const [ativo, setAtivo] = useState<number | null>(null);
+  const [analiseId, setAnaliseId] = useState<string | null>(null);
+  const [encerrada, setEncerrada] = useState(false);
+  const [uso, setUso] = useState<UsoRapida | null>(null);
   const listaRef = useRef<HTMLOListElement | null>(null);
 
   const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
@@ -129,6 +151,24 @@ export default function AnaliseDecisao() {
     if (el) listaRef.current.scrollTo({ top: Math.max(el.offsetTop - 8, 0), behavior: 'smooth' });
   }, [ativo]);
 
+  // O que resta da cota do plano: lido ao abrir e sempre que o formulário volta (depois de uma análise)
+  const usuarioId = usuario?.id;
+  useEffect(() => {
+    if (!usuarioId || enviada) return;
+    let ativa = true;
+    void (async () => {
+      const sb = obterSupabase();
+      if (!sb) return;
+      const { data, error } = await sb.rpc('uso_resumo');
+      if (!ativa || error || !Array.isArray(data)) return;
+      const l = data.find((x: { tipo: string }) => x.tipo === 'rapida');
+      if (l) setUso({ plano: l.plano_nome, quantidade: l.quantidade, restantes: l.restantes, renovaEm: l.fim });
+    })();
+    return () => {
+      ativa = false;
+    };
+  }, [usuarioId, enviada]);
+
   if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
     return (
       <Notice tom="info" titulo="Análise de decisões">
@@ -137,28 +177,43 @@ export default function AnaliseDecisao() {
     );
   }
 
-  const executar = async (decisao: DecisaoPreparada, atuais: Resultados) => {
+  /**
+   * Roda as etapas que faltam. A análise é iniciada UMA vez (aqui a cota do plano é conferida) e as três etapas carregam o mesmo
+   * `analiseId`; "Tentar de novo" continua a mesma análise, sem gastar outra. Falha não consome a cota.
+   */
+  const executar = async (decisao: DecisaoPreparada, atuais: Resultados, analiseAtual: string | null) => {
     setErro(null);
     let feitos = { ...atuais };
+    let id = analiseAtual;
     try {
+      if (!id) {
+        setAndamento('estrutura');
+        const inicio = await enviar('/api/analises', { tipo: 'rapida' });
+        id = inicio.analiseId as string;
+        setAnaliseId(id);
+        setUso(u => (u ? { ...u, restantes: inicio.restantes, renovaEm: inicio.renovaEm } : u));
+      }
+      const base = { analiseId: id, paragrafos: decisao.paragrafos };
       if (!feitos.estrutura) {
         setAndamento('estrutura');
-        feitos = { ...feitos, estrutura: (await pedir('estrutura', { paragrafos: decisao.paragrafos })) as SaidaEstrutura };
+        feitos = { ...feitos, estrutura: (await pedir('estrutura', base)) as SaidaEstrutura };
         setResultados(feitos);
       }
       if (!feitos.questoes) {
         setAndamento('questoes');
-        feitos = { ...feitos, questoes: (await pedir('questoes', { paragrafos: decisao.paragrafos })) as SaidaQuestoes };
+        feitos = { ...feitos, questoes: (await pedir('questoes', base)) as SaidaQuestoes };
         setResultados(feitos);
       }
       if (!feitos.fundamentos) {
         setAndamento('fundamentos');
         const questoes = feitos.questoes!.questoes.map(q => ({ id: q.id, enunciado: q.enunciado, conclusao: q.conclusao }));
-        feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { paragrafos: decisao.paragrafos, questoes })) as SaidaFundamentos };
+        feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { ...base, questoes })) as SaidaFundamentos };
         setResultados(feitos);
       }
     } catch (e) {
       setErro((e as Error).message);
+      // Análise que o servidor encerrou (falhas sem solução, estornada): não adianta tentar de novo, só começar outra
+      if (e instanceof ErroDeAnalise && e.motivo === 'analise_invalida') setEncerrada(true);
     } finally {
       setAndamento(null);
     }
@@ -167,14 +222,18 @@ export default function AnaliseDecisao() {
   const analisar = () => {
     setEnviada(preparo);
     setResultados({});
+    setAnaliseId(null);
+    setEncerrada(false);
     setAba('geral');
     setAtivo(null);
-    void executar(preparo, {});
+    void executar(preparo, {}, null);
   };
 
   const novaAnalise = () => {
     setEnviada(null);
     setResultados({});
+    setAnaliseId(null);
+    setEncerrada(false);
     setErro(null);
     setAtivo(null);
   };
@@ -259,7 +318,7 @@ export default function AnaliseDecisao() {
         </details>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button type="button" onClick={analisar} disabled={!usuario || vazio || longo}>
+          <Button type="button" onClick={analisar} disabled={!usuario || vazio || longo || uso?.restantes === 0}>
             <Sparkles className="w-4 h-4" />
             Analisar decisão
           </Button>
@@ -272,10 +331,14 @@ export default function AnaliseDecisao() {
             </span>
           )}
         </div>
-        <p className="text-sm text-ink-mute">
-          Nada do texto nem da análise fica guardado no Ratione: ao sair desta página, a análise se perde. Cada análise usa três pedidos de IA
-          do seu limite diário.
-        </p>
+        {uso && (
+          <p className={`text-sm ${uso.restantes === 0 ? 'text-danger-text' : 'text-ink-soft'}`} aria-live="polite">
+            {uso.restantes === 0
+              ? `Você usou todas as ${uso.quantidade} análises rápidas do plano ${uso.plano} neste período. A cota renova em ${dataCurta(uso.renovaEm)}.`
+              : `Esta análise usa 1 das suas ${uso.restantes} análises rápidas restantes (de ${uso.quantidade}, plano ${uso.plano}), até ${dataCurta(uso.renovaEm)}. Se a análise falhar, a cota não é gasta.`}
+          </p>
+        )}
+        <p className="text-sm text-ink-mute">Nada do texto nem da análise fica guardado no Ratione: ao sair desta página, a análise se perde.</p>
       </Card>
     );
   }
@@ -327,9 +390,11 @@ export default function AnaliseDecisao() {
           {erro && (
             <div className="flex flex-wrap items-center gap-3">
               <p className="text-sm text-danger-text">{erro}</p>
-              <Button variant="secondary" type="button" onClick={() => void executar(enviada, resultados)}>
-                Tentar de novo
-              </Button>
+              {!encerrada && (
+                <Button variant="secondary" type="button" onClick={() => void executar(enviada, resultados, analiseId)}>
+                  Tentar de novo
+                </Button>
+              )}
             </div>
           )}
         </Card>

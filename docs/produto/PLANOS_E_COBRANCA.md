@@ -195,7 +195,9 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 |---|---|---|
 | F8-01 | **Decisões do responsável** (§9). Forma de recebimento decidida (§7); resta cotas, preços e as demais | — |
 | F8-02 | Modelo de dados: planos, assinaturas, análises, cobranças, eventos do Mercado Pago, com RLS e testes de RLS | F8-01 |
+| | **Feito em 23/10/2026 (parcial):** `planos`, `plano_cotas`, `assinaturas` e `analises`, com RLS e testes (`packages/db/src/planos.test.ts`). **Falta** `cobrancas` e os eventos do Mercado Pago, que entram com o F8-05, quando se souber o formato exato do que o Mercado Pago devolve. Migração `20261023000001` **ainda não aplicada em produção** | |
 | F8-03 | Análise como unidade de cota: `analise_iniciar`, estorno de falha, `analise_id` nas chamadas, trava por chamada só como anti-abuso | F8-02 |
+| | **Feito em 23/10/2026:** cota conferida uma vez em `POST /api/analises`, consumo na 1ª etapa, estorno na falha sem solução, `ia_reservar` ligada à análise, cotas por chamada removidas, tela do Argumenta mostra o que resta. A explicação de dispositivo usa a mesma cota (tipo `explicacao`). **Fica para depois:** os dois fundos de gasto da §3.2 (o teto de US$ 5 segue como está) | |
 | F8-04 | Tela "Meu uso" (resumo, histórico, falhas, aviso antes de enviar, exportação) e painel administrativo | F8-03 |
 | F8-05 | Mercado Pago em **teste**: criar planos, assinatura pela página do Mercado Pago, volta, webhook validado e idempotente, estados | F8-02 |
 | F8-06 | Cancelamento, arrependimento com reembolso, subir e descer de plano, troca de cartão | F8-05 |

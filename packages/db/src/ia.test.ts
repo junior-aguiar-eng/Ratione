@@ -11,16 +11,24 @@ const comoServidor = <T>(db: PGlite, fn: (tx: Tx) => Promise<T>) =>
   });
 
 const CHAVE = 'a'.repeat(64);
-const reservar = (tx: Tx, usuario: string, porDia = 2, porMes = 10, orcamento = 1, custoMax = 0.01, tarefa = 'explicar-dispositivo') =>
+/** Inicia uma análise (a cota do período é conferida aqui) e devolve o id. */
+const iniciar = (tx: Tx, usuario: string, tipo = 'explicacao') =>
+  tx.query<{ ok: boolean; analise_id: string | null }>('select * from public.analise_iniciar($1, $2)', [usuario, tipo]).then(r => r.rows[0].analise_id!);
+const reservar = (tx: Tx, usuario: string, analise: string, orcamento = 1, custoMax = 0.01, tarefa = 'explicar-dispositivo') =>
   tx
-    .query<{ ok: boolean; motivo: string | null; reserva_id: string | null; restantes_hoje: number | null }>(
-      'select * from public.ia_reservar($1, $2, $3, $4, $5, $6, $7, $8)',
-      [tarefa, usuario, 'LEI-13105-2015|corpo|art. 85', CHAVE, porDia, porMes, orcamento, custoMax]
-    )
+    .query<{ ok: boolean; motivo: string | null; reserva_id: string | null }>('select * from public.ia_reservar($1, $2, $3, $4, $5, $6, $7)', [
+      tarefa,
+      usuario,
+      'LEI-13105-2015|corpo|art. 85',
+      CHAVE,
+      analise,
+      orcamento,
+      custoMax
+    ])
     .then(r => r.rows[0]);
 const finalizar = (tx: Tx, id: string, custo = 0.001) => tx.query("select public.ia_finalizar($1, 'gerada', 100, 50, 0, 0, $2)", [id, custo]);
 
-describe('IA: cota por tarefa, orçamento global e acesso (catálogo de tarefas)', () => {
+describe('IA: chamadas dentro de uma análise, orçamento global e acesso (catálogo de tarefas)', () => {
   let db: PGlite;
   let ana: string;
   let beto: string;
@@ -32,7 +40,8 @@ describe('IA: cota por tarefa, orçamento global e acesso (catálogo de tarefas)
   });
 
   it('o navegador (anon ou logado) não chama as funções nem escreve nas tabelas', async () => {
-    await assert.rejects(como(db, ana, tx => reservar(tx, ana)), /permission denied/);
+    const id = await comoServidor(db, tx => iniciar(tx, ana));
+    await assert.rejects(como(db, ana, tx => reservar(tx, ana, id)), /permission denied/);
     await assert.rejects(como(db, ana, tx => tx.query("select public.ia_registrar_cache('explicar-dispositivo', $1, 'x', 'y')", [ana])), /permission denied/);
     await assert.rejects(
       como(db, ana, tx => tx.query("insert into public.ia_uso (tarefa, usuario_id, referencia, chave, situacao) values ('explicar-dispositivo', $1, 'x', 'y', 'gerada')", [ana])),
@@ -42,46 +51,56 @@ describe('IA: cota por tarefa, orçamento global e acesso (catálogo de tarefas)
     await assert.rejects(como(db, null, tx => tx.query('select * from public.ia_uso')), /permission denied/);
   });
 
-  it('reserva, chamada em andamento barrada, finalização com o custo real e limite do dia', async () => {
-    const r1 = await comoServidor(db, tx => reservar(tx, ana));
-    assert.strictEqual(r1.ok, true);
-    assert.strictEqual(r1.restantes_hoje, 1);
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, ana))).motivo, 'em_andamento', 'duas abas ao mesmo tempo');
-    await comoServidor(db, tx => finalizar(tx, r1.reserva_id!));
-    const r2 = await comoServidor(db, tx => reservar(tx, ana));
-    assert.strictEqual(r2.ok, true);
-    await comoServidor(db, tx => finalizar(tx, r2.reserva_id!));
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, ana))).motivo, 'limite_dia');
-    // O limite é por usuário
-    const b = await comoServidor(db, tx => reservar(tx, beto));
-    assert.strictEqual(b.ok, true);
-    await comoServidor(db, tx => finalizar(tx, b.reserva_id!));
+  it('a reserva exige análise do próprio usuário e em andamento', async () => {
+    const daAna = await comoServidor(db, tx => iniciar(tx, ana));
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, beto, daAna))).motivo, 'analise_invalida', 'análise de outro usuário');
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, ana, '00000000-0000-0000-0000-000000000000'))).motivo, 'analise_invalida', 'análise inexistente');
+    await comoServidor(db, tx => tx.query('select public.analise_concluir($1, $2)', [daAna, ana]));
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, ana, daAna))).motivo, 'analise_invalida', 'análise já concluída');
   });
 
-  it('uso do cache não conta na cota nem no orçamento', async () => {
+  it('reserva, chamada em andamento barrada e finalização com o custo real, ligadas à análise', async () => {
+    const id = await comoServidor(db, tx => iniciar(tx, ana));
+    const r1 = await comoServidor(db, tx => reservar(tx, ana, id));
+    assert.strictEqual(r1.ok, true);
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, ana, id))).motivo, 'em_andamento', 'duas abas ao mesmo tempo');
+    await comoServidor(db, tx => finalizar(tx, r1.reserva_id!));
+    const r2 = await comoServidor(db, tx => reservar(tx, ana, id));
+    assert.strictEqual(r2.ok, true, 'a mesma análise faz várias chamadas sem cota nova');
+    await comoServidor(db, tx => finalizar(tx, r2.reserva_id!));
+    const ligadas = await comoServidor(db, tx => tx.query<{ n: number }>('select count(*)::int as n from public.ia_uso where analise_id = $1', [id]));
+    assert.strictEqual(ligadas.rows[0].n, 2);
+    await comoServidor(db, tx => tx.query('select public.analise_concluir($1, $2)', [id, ana]));
+  });
+
+  it('uso do cache não conta no orçamento', async () => {
     await comoServidor(db, tx => tx.query("select public.ia_registrar_cache('explicar-dispositivo', $1, 'x', $2)", [beto, CHAVE]));
-    const r = await comoServidor(db, tx => reservar(tx, beto));
+    const id = await comoServidor(db, tx => iniciar(tx, beto));
+    const r = await comoServidor(db, tx => reservar(tx, beto, id));
     assert.strictEqual(r.ok, true);
-    assert.strictEqual(r.restantes_hoje, 0, 'só a chamada anterior conta');
     await comoServidor(db, tx => finalizar(tx, r.reserva_id!));
+    await comoServidor(db, tx => tx.query('select public.analise_concluir($1, $2)', [id, beto]));
   });
 
   it('o orçamento do mês soma todos os usuários e o custo máximo da chamada em curso', async () => {
     const carlos = await criarUsuario(db, 'carlos@exemplo.com');
-    // Gasto até aqui: 3 chamadas de 0,001 de Ana e Beto; orçamento de 0,0035 não comporta mais uma de custo máximo 0,001
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, 5, 10, 0.0035, 0.001))).motivo, 'orcamento');
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, 5, 10, 1, 0.001))).ok, true);
+    const id = await comoServidor(db, tx => iniciar(tx, carlos));
+    const gasto = await comoServidor(db, tx => tx.query<{ s: string }>('select coalesce(sum(custo_usd), 0)::text as s from public.ia_uso'));
+    const jaGasto = Number(gasto.rows[0].s);
+    assert.ok(jaGasto > 0);
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, jaGasto + 0.0005, 0.001))).motivo, 'orcamento');
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, carlos, id, 1, 0.001))).ok, true);
   });
 
-  it('a cota é por tarefa; "uma de cada vez" vale para todas', async () => {
+  it('"uma de cada vez" vale para todas as tarefas do mesmo usuário', async () => {
     const dani = await criarUsuario(db, 'dani@exemplo.com');
-    const a = await comoServidor(db, tx => reservar(tx, dani, 1, 10, 1, 0.0001));
+    const id = await comoServidor(db, tx => iniciar(tx, dani, 'rapida'));
+    const a = await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-estrutura'));
     assert.strictEqual(a.ok, true);
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, dani, 1, 10, 1, 0.0001, 'outra-tarefa'))).motivo, 'em_andamento');
+    assert.strictEqual((await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-questoes'))).motivo, 'em_andamento');
     await comoServidor(db, tx => finalizar(tx, a.reserva_id!, 0.0001));
-    assert.strictEqual((await comoServidor(db, tx => reservar(tx, dani, 1, 10, 1, 0.0001))).motivo, 'limite_dia', 'a mesma tarefa esgotou');
-    const b = await comoServidor(db, tx => reservar(tx, dani, 1, 10, 1, 0.0001, 'outra-tarefa'));
-    assert.strictEqual(b.ok, true, 'outra tarefa tem a própria cota');
+    const b = await comoServidor(db, tx => reservar(tx, dani, id, 1, 0.0001, 'argumenta-questoes'));
+    assert.strictEqual(b.ok, true);
     await comoServidor(db, tx => finalizar(tx, b.reserva_id!, 0.0001));
   });
 

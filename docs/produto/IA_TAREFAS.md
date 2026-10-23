@@ -22,7 +22,7 @@
 | `instrucoes`, `mensagem` | Instruções fixas (sem data nem dado variável) e a mensagem com o material delimitado |
 | `ferramentas` | Sempre vazio: etapas com consulta são código, fora do modelo |
 | `esquemaSaida`, `saida`, `conferirSaida` | Formato fechado da resposta, validação no servidor e conferência opcional contra o contexto |
-| `limitesPorUsuario` | Cota por dia e por mês nesta tarefa |
+| `cota` (e `analiseDe`) | Como a tarefa conta na **cota do plano** do usuário ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md)): o tipo (`rapida`, `completa`, `explicacao`) e o modo. `por-chamada`: cada execução é uma análise própria (a explicação de dispositivo). `por-analise`: a tela inicia a análise (`POST /api/analises`), e a entrada traz o `analiseId` (`analiseDe` diz de onde tirá-lo); `consome` marca a etapa que passa a contar na cota e `conclui`, a última. As **quantidades** ficam no banco, por plano, não no contrato |
 | `versao` | Muda quando instruções, mensagem ou esquema mudam (invalida o cache) |
 | `guardaResultado` | Se a resposta vai para o cache compartilhado. **Falso quando a entrada é material do usuário** (decisão colada no Argumenta): aí nem o texto nem a resposta ficam no banco, só o registro de uso com o hash |
 
@@ -30,9 +30,9 @@
 
 Toda tarefa passa pela mesma sequência, que nenhuma tarefa altera:
 
-1. IA ligada nesta instalação → 2. tarefa existe no catálogo → 3. usuário logado → 4. entrada válida → 5. contexto montado das fontes → 6. tamanho dentro do limite → 7. **cache** (se já existe, devolve sem custo e fora da cota; pulado quando `guardaResultado` é falso) → 8. **reserva** atômica no banco (cota da tarefa, uma chamada de cada vez por usuário, orçamento do mês) → 9. **uma** chamada ao modelo, sem ferramentas → 10. validação da saída (formato e conferência) → 11. registro do custo real → 12. gravação no cache (também pulada quando `guardaResultado` é falso).
+1. IA ligada nesta instalação → 2. tarefa existe no catálogo → 3. usuário logado → 4. entrada válida → 5. contexto montado das fontes → 6. tamanho dentro do limite → 7. **cache** (se já existe, devolve sem custo e fora da cota; pulado quando `guardaResultado` é falso) → 8. **cota do plano**: a tarefa `por-chamada` inicia a própria análise (`analise_iniciar`, atômica: confere a cota do período do plano do usuário uma única vez); a `por-analise` usa a análise que a tela iniciou → 9. **reserva** atômica no banco (`ia_reservar`: a análise é do usuário e está em andamento, uma chamada de cada vez por usuário, orçamento do mês) → 10. **uma** chamada ao modelo, sem ferramentas → 11. validação da saída (formato e conferência) → 12. registro do custo real → 13. a análise é consumida (1ª etapa), concluída (última etapa ou chamada única) → 14. gravação no cache (também pulada quando `guardaResultado` é falso).
 
-Falha, recusa e saída fora do formato são registradas e **contam na cota** (insistir não contorna o limite); nada disso é mostrado nem guardado.
+**Falha não consome a cota do cliente.** Falha, recusa e saída fora do formato são registradas no log e com o custo real em `ia_uso` (é custo nosso), mas a análise é tratada assim: na `por-chamada`, é cancelada e a vaga volta; na `por-analise`, a falha é contada (`analise_falha`): antes da 1ª etapa entregue, o cliente pode tentar de novo e a 3ª falha desiste; depois dela, a 2ª falha desiste e **estorna** a cota. Chamada servida do cache não gasta cota.
 
 ## 4. Tarefas de várias etapas
 
@@ -55,7 +55,7 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 |---|---|
 | Orçamento de todas as tarefas somadas no mês | US$ 5 (`IA_ORCAMENTO_MES_USD` pode apertar ou, no máximo, dobrar) |
 | Uma chamada de cada vez por usuário | em todas as tarefas |
-| Teto de cota de qualquer tarefa | 20 por dia, 200 por mês por usuário (`IA_LIMITE_DIA` e `IA_LIMITE_MES` só apertam) |
+| Cota de uso | **do plano do usuário**, por análise e por período (Gratuito: semana; pagos: ciclo de cobrança), conferida uma vez ao iniciar a análise; quantidades em `plano_cotas` (migração `20261023000001`). As variáveis `IA_LIMITE_DIA` e `IA_LIMITE_MES` deixaram de existir |
 | Teto de resposta / mensagem | 4.000 tokens / 30.000 caracteres |
 | Modelos | só com preço registrado (hoje, Claude Haiku 5.5) |
 

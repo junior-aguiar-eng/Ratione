@@ -10,8 +10,8 @@ export const PRECO_USD_POR_MILHAO: Record<ModeloPermitido, { entrada: number; sa
   'claude-haiku-5-5': { entrada: 0.1, saida: 0.5, leituraCache: 0.01, escritaCache: 0.125 }
 };
 
-/** Tetos que nenhuma tarefa pode passar (conferidos em teste para todo o catálogo). */
-export const TETOS = { maxTokensSaida: 4_000, maxCaracteresMensagem: 30_000, porDia: 20, porMes: 200 } as const;
+/** Tetos que nenhuma tarefa pode passar (conferidos em teste para todo o catálogo). A cota de uso vem do plano do usuário, no banco. */
+export const TETOS = { maxTokensSaida: 4_000, maxCaracteresMensagem: 30_000 } as const;
 
 /** Tempo máximo de uma chamada, em milissegundos, e uma nova tentativa só em falha transitória. */
 export const TEMPO_MAXIMO_MS = 30_000;
@@ -33,15 +33,6 @@ const lerNumero = (env: Record<string, string | undefined>, nome: string, padrao
 /** Orçamento do mês: o ambiente pode apertar ou, no máximo, dobrar o padrão; valor inválido cai no padrão. */
 export function orcamentoDoAmbiente(env: Record<string, string | undefined>): number {
   return lerNumero(env, 'IA_ORCAMENTO_MES_USD', ORCAMENTO_MENSAL_PADRAO_USD);
-}
-
-/** Limites de uma tarefa para o usuário: os do contrato, que o ambiente só pode apertar (`IA_LIMITE_DIA`, `IA_LIMITE_MES`). */
-export function limitesDaTarefa(t: QualquerTarefa, env: Record<string, string | undefined>): { porDia: number; porMes: number } {
-  const aperto = (nome: string, doContrato: number) => {
-    const v = Number(env[nome]);
-    return env[nome] !== undefined && Number.isFinite(v) && v >= 0 ? Math.min(v, doContrato) : doContrato;
-  };
-  return { porDia: aperto('IA_LIMITE_DIA', t.limitesPorUsuario.porDia), porMes: aperto('IA_LIMITE_MES', t.limitesPorUsuario.porMes) };
 }
 
 /** Custo de uma chamada em US$, pelo `usage` que a API devolve. */

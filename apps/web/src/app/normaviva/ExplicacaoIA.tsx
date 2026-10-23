@@ -10,7 +10,7 @@ import type { SaidaExplicacao } from '../../lib/ia/tarefas/explicarDispositivo';
 type Estado =
   | { tipo: 'ocioso' }
   | { tipo: 'carregando' }
-  | { tipo: 'pronto'; explicacao: SaidaExplicacao; doCache: boolean; restantesHoje: number | null }
+  | { tipo: 'pronto'; explicacao: SaidaExplicacao; doCache: boolean; restantes: number | null }
   | { tipo: 'erro'; mensagem: string };
 
 /**
@@ -34,7 +34,7 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
         body: JSON.stringify({ entrada: { dispositivoId } })
       });
       const corpo = await r.json().catch(() => ({}));
-      if (r.ok) setEstado({ tipo: 'pronto', explicacao: corpo.resposta, doCache: !!corpo.doCache, restantesHoje: corpo.restantesHoje ?? null });
+      if (r.ok) setEstado({ tipo: 'pronto', explicacao: corpo.resposta, doCache: !!corpo.doCache, restantes: corpo.restantes ?? null });
       else setEstado({ tipo: 'erro', mensagem: corpo.mensagem ?? 'A explicação por IA falhou agora.' });
     } catch {
       setEstado({ tipo: 'erro', mensagem: 'Sem conexão. Tente de novo.' });
@@ -86,8 +86,8 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
           <Notice titulo="Explicação gerada por IA (Claude Haiku 5.5)">
             Feita só a partir do texto acima, sem jurisprudência nem outras fontes. Pode conter erro e não substitui o texto da lei nem orientação
             jurídica.
-            {estado.restantesHoje !== null && ` Você ainda pode pedir ${estado.restantesHoje} explicação(ões) nova(s) hoje.`}
-            {estado.doCache && ' Esta explicação já tinha sido gerada e não contou no seu limite.'}
+            {estado.restantes !== null && ` Restam ${estado.restantes} explicação(ões) no seu plano neste período.`}
+            {estado.doCache && ' Esta explicação já tinha sido gerada e não contou na sua cota.'}
           </Notice>
         </div>
       )}
