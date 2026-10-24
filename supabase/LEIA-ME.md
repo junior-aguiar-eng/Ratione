@@ -156,3 +156,11 @@ Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → co
 ## Depois
 
 Avise quando terminar o passo 5. O próximo passo (login na tela, salvar cálculos na conta e migrar o histórico que hoje fica só no navegador) é código meu.
+
+**Acesso administrativo (24/10/2026):** atalho em Meu espaço apenas após resposta autorizada de GET /api/admin/acesso (private, no-store, Vary Cookie). Falha, saída ou troca de conta ocultam o atalho. Página e API financeira mantêm autorização independente no servidor. O workflow entrega RATIONE_ADMIN_USUARIO_IDS da variável de repositório ao Cloud Run; UUID real fora do código. Conta escolhida explicitamente pelo responsável; cobrança permanece desligada.
+
+## Administração e suporte de contas — 24/10/2026
+
+Migrações 20261024000003_estatisticas_administrativas e 20261024000004_administracao_contas aplicadas no Supabase Ratione após autorização. RPCs admin_estatisticas e admin_contas conferidas: acesso exclusivo de service_role, sem conceder leitura de auth.users. A busca retorna e-mail mascarado, UUID e situação de cadastro. Trilha admin_acesso_eventos exclusiva do serviço. Política restritiva conta_ativa_restritiva em 20 tabelas com RLS, incluindo a trilha, e guarda em uso_resumo; novas tabelas privadas precisam manter a barreira. Duas contas preservadas, nenhuma suspensa nem alterada como teste. Estatísticas reais conferidas por leitura: 2 contas, 19 execuções de IA no mês; cobrança desligada.
+
+O workflow passou a entregar RATIONE_ADMIN_USUARIO_IDS da variável de repositório ao servidor. Somente a conta escolhida expressamente pelo responsável foi configurada; UUID não consta no código. O teste de suspensão/reativação ocorre em banco e Auth simulados locais; não é teste de operação destrutiva em produção.

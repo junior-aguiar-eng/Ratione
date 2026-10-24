@@ -41,6 +41,10 @@ jobs:
       - name: Testes
         run: pnpm test
 
+      # Caminhos explícitos: o shell Linux não inclui subdiretórios no glob atual de pnpm test.
+      - name: Acesso administrativo
+        run: pnpm --filter web exec tsx --test src/lib/admin/acesso.test.ts src/lib/admin/situacao.test.ts src/lib/admin/contas.test.ts src/lib/admin/estatisticas.test.ts src/lib/admin/financeiro.test.ts
+
       # O gabarito dos cenários vem do oráculo independente em Python; se o JSON versionado
       # divergir do que o oráculo gera, alguém mudou um sem o outro.
       - uses: actions/setup-python@v7

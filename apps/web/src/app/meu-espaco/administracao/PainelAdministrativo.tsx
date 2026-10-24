@@ -13,6 +13,8 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import EstatisticasUso from './EstatisticasUso';
+import ContasAdministradas from './ContasAdministradas';
 
 const NOMES = { gratuito: 'Gratuito', essencial: 'Essencial', profissional: 'Profissional', sem_atribuicao: 'Sem atribuição histórica' };
 
@@ -62,9 +64,11 @@ function ResumoAdministrativo() {
 
   return (
     <div>
-      <PageHeader eyebrow="Administração" title="Uso e receita" description="Custos de IA, cobranças registradas e situação dos fundos. Acesso restrito ao responsável; somente leitura."
+      <PageHeader eyebrow="Administração" title="Uso e receita" description="Estatísticas de uso e custos de IA, situação dos fundos e gestão de acesso das contas. Acesso restrito ao responsável."
         actions={<Link href="/meu-espaco" className={buttonVariants({ variant: 'secondary' })}>Meu espaço</Link>} />
       <div className="flex flex-col gap-8">
+        <EstatisticasUso />
+        <ContasAdministradas />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-ink-soft">{dados ? `Mês de ${new Date(dados.inicio).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric', timeZone: 'America/Sao_Paulo' })}. Horário de Brasília.` : 'Mês corrente, no horário de Brasília.'}</p>
           <Button type="button" variant="secondary" disabled={ocupado} onClick={() => { setPagina(0); setVersao(v=>v+1); }}>Atualizar painel</Button>

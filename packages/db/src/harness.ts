@@ -15,7 +15,7 @@ const BASE_SUPABASE = `
   create schema auth;
   -- No Supabase, as extensões ficam no schema "extensions"; a "unaccent" vem embutida no PGlite (ver criarBanco)
   create schema extensions;
-  create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, raw_user_meta_data jsonb not null default '{}', created_at timestamptz not null default now());
+  create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, raw_user_meta_data jsonb not null default '{}', created_at timestamptz not null default now(), is_anonymous boolean default false, deleted_at timestamptz, banned_until timestamptz, email_confirmed_at timestamptz, last_sign_in_at timestamptz);
   create function auth.uid() returns uuid language sql stable as
     $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
   grant usage on schema public to anon, authenticated, service_role;
