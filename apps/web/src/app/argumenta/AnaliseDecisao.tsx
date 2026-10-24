@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Check, Loader2, Sparkles } from 'lucide-react';
+import { Check, ChevronDown, Loader2, Sparkles } from 'lucide-react';
 import { LIMITE_CARACTERES_DECISAO, MAX_PARAGRAFOS, prepararDecisao, restaurar, type DecisaoPreparada } from '@ratione/argumenta';
 import Notice from '../../components/Notice';
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ import { useSessao } from '../../lib/useSessao';
 import { obterSupabase } from '../../lib/supabase/client';
 import { dataCurta } from '../../lib/uso';
 import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
+import { referenciaVisual } from './referencias';
 
 /**
  * Análise de decisão colada (F5-03, etapas 1 a 4). O texto é segmentado e pseudonimizado aqui, no navegador; só os parágrafos com
@@ -79,19 +80,6 @@ const FUNDAMENTO: Record<SaidaFundamentos['fundamentos'][number]['tipo'], { rotu
   argumento: { rotulo: 'Argumento', tom: 'brand' }
 };
 
-/** "§ 4", "§§ 4–6, 9": números em ordem, com intervalos juntos. */
-function rotuloParagrafos(numeros: readonly number[]): string {
-  const ns = [...new Set(numeros)].sort((a, b) => a - b);
-  const partes: string[] = [];
-  for (let i = 0; i < ns.length; i++) {
-    let j = i;
-    while (j + 1 < ns.length && ns[j + 1] === ns[j] + 1) j++;
-    partes.push(j > i ? `${ns[i]}–${ns[j]}` : `${ns[i]}`);
-    i = j;
-  }
-  return `${ns.length > 1 ? '§§' : '§'} ${partes.join(', ')}`;
-}
-
 /** Erro do servidor com o motivo, para a tela decidir se pode tentar de novo. */
 class ErroDeAnalise extends Error {
   constructor(
@@ -134,23 +122,25 @@ export default function AnaliseDecisao() {
   const [andamento, setAndamento] = useState<Etapa | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [aba, setAba] = useState('geral');
-  const [ativo, setAtivo] = useState<number | null>(null);
+  const [ativos, setAtivos] = useState<number[]>([]);
+  const [textoAberto, setTextoAberto] = useState(false);
   const [analiseId, setAnaliseId] = useState<string | null>(null);
   const [encerrada, setEncerrada] = useState(false);
   const [rotulo, setRotulo] = useState('');
   const [uso, setUso] = useState<UsoRapida | null>(null);
-  const listaRef = useRef<HTMLOListElement | null>(null);
+  const listaRef = useRef<HTMLDivElement | null>(null);
 
   const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
   const vazio = preparo.paragrafos.length === 0 || !texto.trim();
   const longo = preparo.caracteres > LIMITE_CARACTERES_DECISAO || preparo.paragrafos.length > MAX_PARAGRAFOS;
 
-  // Rola só a lista de parágrafos (nunca a página), depois de um clique numa referência
+  // Só abre a decisão quando a pessoa pede o texto; referências abrem e rolam até os trechos citados.
   useEffect(() => {
-    if (ativo === null || !listaRef.current) return;
-    const el = listaRef.current.querySelector<HTMLElement>(`[data-paragrafo="${ativo}"]`);
+    if (!textoAberto || ativos.length === 0 || !listaRef.current) return;
+    listaRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const el = listaRef.current.querySelector<HTMLElement>(`[data-paragrafo="${ativos[0]}"]`);
     if (el) listaRef.current.scrollTo({ top: Math.max(el.offsetTop - 8, 0), behavior: 'smooth' });
-  }, [ativo]);
+  }, [ativos, textoAberto]);
 
   // O que resta da cota do plano: lido ao abrir e sempre que o formulário volta (depois de uma análise)
   const usuarioId = usuario?.id;
@@ -226,7 +216,8 @@ export default function AnaliseDecisao() {
     setAnaliseId(null);
     setEncerrada(false);
     setAba('geral');
-    setAtivo(null);
+    setAtivos([]);
+    setTextoAberto(false);
     void executar(preparo, {}, null);
   };
 
@@ -236,7 +227,8 @@ export default function AnaliseDecisao() {
     setAnaliseId(null);
     setEncerrada(false);
     setErro(null);
-    setAtivo(null);
+    setAtivos([]);
+    setTextoAberto(false);
   };
 
   // Formulário
@@ -248,7 +240,7 @@ export default function AnaliseDecisao() {
           <h2 className="font-serif text-2xl font-semibold text-ink">Analisar uma decisão</h2>
           <p className="text-base text-ink-soft">
             Cole o texto de uma sentença, acórdão ou decisão. O Argumenta identifica a estrutura, as questões resolvidas, as conclusões e os
-            fundamentos de cada uma, com o parágrafo de origem.
+            fundamentos de cada uma, com acesso aos trechos correspondentes da decisão.
           </p>
         </div>
 
@@ -320,14 +312,12 @@ export default function AnaliseDecisao() {
             </div>
             {!vazio && (
               <details>
-                <summary className="cursor-pointer text-sm text-brand-text">Ver o texto exatamente como será enviado</summary>
-                <ol className="mt-2 max-h-72 overflow-y-auto flex flex-col gap-2 text-sm text-ink-soft">
+                <summary className="cursor-pointer text-sm text-brand-text">Conferir o texto preparado para análise</summary>
+                <div className="mt-2 max-h-72 overflow-y-auto flex flex-col gap-3 text-sm text-ink-soft">
                   {preparo.paragrafos.map((p, i) => (
-                    <li key={i}>
-                      <span className="text-ink-mute">§{i + 1}.</span> {p}
-                    </li>
+                    <p key={i}>{p}</p>
                   ))}
-                </ol>
+                </div>
               </details>
             )}
           </div>
@@ -357,7 +347,7 @@ export default function AnaliseDecisao() {
             </Link>
           </p>
         )}
-        <p className="text-sm text-ink-mute">Nada do texto nem da resposta fica guardado no Ratione: ao sair desta página, a análise se perde. O histórico guarda só informações de uso, incluindo a quantidade de parágrafos.</p>
+        <p className="text-sm text-ink-mute">Nada do texto nem da resposta fica guardado no Ratione: ao sair desta página, a análise se perde. O histórico guarda só informações de uso e o tamanho da decisão.</p>
       </Card>
     );
   }
@@ -365,24 +355,37 @@ export default function AnaliseDecisao() {
   // Análise
   const r = (s: string) => restaurar(s, enviada.substituicoes);
   const { estrutura, questoes, fundamentos } = resultados;
-  const ref = (numeros: readonly number[]) =>
-    numeros.length > 0 && (
+  const ref = (numeros: readonly number[]) => {
+    if (numeros.length === 0) return null;
+    const referencia = referenciaVisual(numeros);
+    return (
       <button
         type="button"
-        onClick={() => setAtivo(Math.min(...numeros))}
+        onClick={() => {
+          setTextoAberto(true);
+          setAtivos(referencia.trechos);
+        }}
+        aria-label={referencia.descricao}
         className="text-sm text-brand-text hover:underline underline-offset-2"
       >
-        {rotuloParagrafos(numeros)}
+        {referencia.rotulo}
       </button>
     );
+  };
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-serif text-2xl font-semibold text-ink">Sua decisão</h2>
-        <Button variant="secondary" type="button" onClick={novaAnalise} disabled={andamento !== null}>
-          Nova análise
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="secondary" type="button" onClick={() => setTextoAberto(aberto => !aberto)} aria-expanded={textoAberto} aria-controls="texto-da-decisao">
+            {textoAberto ? 'Ocultar texto' : 'Consultar texto da decisão'}
+            <ChevronDown className={`w-4 h-4 transition-transform ${textoAberto ? 'rotate-180' : ''}`} aria-hidden />
+          </Button>
+          <Button variant="secondary" type="button" onClick={novaAnalise} disabled={andamento !== null}>
+            Nova análise
+          </Button>
+        </div>
       </div>
 
       {(andamento || erro) && (
@@ -420,23 +423,22 @@ export default function AnaliseDecisao() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        <Card className="lg:col-span-5 lg:sticky lg:top-24 overflow-hidden">
-          <h3 className="px-5 py-3 text-sm font-semibold text-ink border-b border-line bg-surface-2">Texto da decisão</h3>
-          <ol ref={listaRef} className="relative max-h-[560px] overflow-y-auto divide-y divide-line">
+        <Card className={`${textoAberto ? 'lg:col-span-5 lg:sticky lg:top-24' : 'hidden'} overflow-hidden`} id="texto-da-decisao">
+          <h3 className="px-5 py-3 text-sm font-semibold text-ink border-b border-line bg-surface-2">Texto completo da decisão</h3>
+          <div ref={listaRef} className="relative max-h-[560px] overflow-y-auto px-5 py-4 space-y-3">
             {enviada.paragrafos.map((p, i) => (
-              <li
+              <p
                 key={i}
                 data-paragrafo={i + 1}
-                className={`px-5 py-3 border-l-[3px] ${ativo === i + 1 ? 'bg-brand-tint border-brand' : 'border-transparent'}`}
+                className={`rounded-sm px-3 py-2 font-serif text-[15px] leading-relaxed text-ink ${ativos.includes(i + 1) ? 'bg-brand-tint border-l-[3px] border-brand' : ''}`}
               >
-                <span className="block text-xs text-ink-mute mb-1">§ {i + 1}</span>
-                <span className="block font-serif text-[15px] leading-relaxed text-ink">{r(p)}</span>
-              </li>
+                {r(p)}
+              </p>
             ))}
-          </ol>
+          </div>
         </Card>
 
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className={`${textoAberto ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col gap-6`}>
           {!estrutura ? (
             <p className="text-base text-ink-soft">{erro ? 'A análise não foi concluída.' : 'Preparando a análise…'}</p>
           ) : (
@@ -538,8 +540,7 @@ export default function AnaliseDecisao() {
           )}
 
           <Notice titulo="Análise gerada por IA (Claude Haiku 5.5)">
-            Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira cada ponto no parágrafo
-            indicado. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
+            Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
             página, a análise se perde.
           </Notice>
         </div>

@@ -96,7 +96,7 @@ export default function ArgumentaPage() {
       <PageHeader
         eyebrow="Argumenta"
         title="Análise da decisão"
-        description="Veja como a decisão foi construída: teses, premissas, conclusões e pontos de atenção da fundamentação, com o trecho original ao lado."
+        description="Veja como a decisão foi construída: teses, premissas, conclusões e pontos de atenção da fundamentação, com acesso aos trechos originais."
         actions={
           <>
             <Button variant="secondary" type="button" onClick={salvar}>
@@ -182,7 +182,7 @@ export default function ArgumentaPage() {
                       <span className="flex items-center justify-between text-xs text-ink-mute mb-1.5">
                         <span>{t.secao}</span>
                         <span>
-                          p. {t.pagina}, § {t.paragrafo}
+                          p. {t.pagina}
                         </span>
                       </span>
                       <span className="block font-serif text-[15px] leading-relaxed text-ink">{t.texto}</span>
@@ -376,7 +376,7 @@ export default function ArgumentaPage() {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <Badge variant="danger">{INCISO_ROTULO[v.tipoInciso]}</Badge>
                       <span className="text-sm text-ink-mute">
-                        p. {v.pagina}, § {v.paragrafo}
+                        p. {v.pagina}
                       </span>
                     </div>
                     <h2 className="font-serif text-xl font-semibold text-ink leading-snug">{v.titulo}</h2>
