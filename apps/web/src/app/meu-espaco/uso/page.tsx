@@ -9,6 +9,7 @@ import Notice from '../../../components/Notice';
 import Assinatura from './Assinatura';
 import { useSessao } from '../../../lib/useSessao';
 import { obterSupabase } from '../../../lib/supabase/client';
+import { lerHistoricoAnalises, LIMITE_ANALISES_HISTORICO as LIMITE_DE_LINHAS } from '../../../lib/historicoAnalises';
 import {
   ESTADO,
   ROTULO_TIPO,
@@ -19,18 +20,15 @@ import {
   estadoExibido,
   gastouCota,
   historicoEmCsv,
-  inicioDoHistorico,
   nomeDoCsv,
   podeExportar,
+  tamanhoDaAnalise,
   type LinhaAnalise,
   type LinhaResumo
 } from '../../../lib/uso';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
-/** Quantas linhas do histórico a tela lê de uma vez. Passando disso, avisa e manda exportar. */
-const LIMITE_DE_LINHAS = 500;
 
 type Filtro = 'todas' | 'analises' | 'explicacoes';
 const FILTROS: { id: Filtro; rotulo: string }[] = [
@@ -74,20 +72,14 @@ export default function MeuUsoPage() {
         return;
       }
       setResumo(linhas);
-      const h = await sb
-        .from('analises')
-        .select('id, tipo, rotulo, situacao, consumiu, falhas, criada_em, concluida_em')
-        .gte('criada_em', inicioDoHistorico(linhas[0].plano))
-        .order('criada_em', { ascending: false })
-        .limit(LIMITE_DE_LINHAS + 1);
-      if (!ativa) return;
-      if (h.error) {
-        setErro('Não foi possível ler o seu histórico agora. Tente de novo em alguns minutos.');
-        return;
+      try {
+        const h = await lerHistoricoAnalises(sb,linhas[0].plano);
+        if (!ativa) return;
+        setTruncado(h.truncado);
+        setHistorico(h.historico);
+      } catch (e) {
+        if (ativa) setErro((e as Error).message);
       }
-      const todas = (h.data ?? []) as LinhaAnalise[];
-      setTruncado(todas.length > LIMITE_DE_LINHAS);
-      setHistorico(todas.slice(0, LIMITE_DE_LINHAS));
     })();
     return () => {
       ativa = false;
@@ -118,7 +110,7 @@ export default function MeuUsoPage() {
       <PageHeader
         eyebrow="Meu espaço"
         title="Meu uso"
-        description="Quanto da sua cota de IA você usou, o que ainda resta e o histórico de cada análise. Só aparecem datas, tipos e resultados: o texto das decisões não fica guardado."
+        description="Quanto da sua cota de IA você usou, o que ainda resta e o histórico de cada análise, com a quantidade de parágrafos da decisão. O texto das decisões não fica guardado."
         actions={
           <Link href="/meu-espaco" className={buttonVariants({ variant: 'secondary' })}>
             <ArrowLeft className="w-4 h-4" />
@@ -235,6 +227,7 @@ export default function MeuUsoPage() {
                   const estado = estadoExibido(a);
                   const info = ESTADO[estado];
                   const gastou = gastouCota(a);
+                  const tamanho = tamanhoDaAnalise(a);
                   return (
                     <li key={a.id} className="py-4 flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                       <div className="min-w-0 flex flex-col gap-0.5">
@@ -244,6 +237,7 @@ export default function MeuUsoPage() {
                           {dataHora(a.criada_em)}
                         </p>
                         <p className="text-sm text-ink-soft">{info.explicacao}</p>
+                        {tamanho && <p className="text-sm text-ink-mute">{tamanho}</p>}
                       </div>
                       <div className="flex items-center gap-3 sm:flex-col sm:items-end sm:gap-1.5 shrink-0">
                         <Badge variant={info.tom}>{info.rotulo}</Badge>

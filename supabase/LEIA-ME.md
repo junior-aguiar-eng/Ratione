@@ -139,9 +139,15 @@ Tudo acima foi feito para o projeto `ratione`. O site publicado é `https://rati
 
 `migrations/20261024000001_painel_administrativo.sql`, depois de `20261023000003`, registra `plano_id` em novos usos de IA e cobranças por gatilho; registros antigos ficam sem atribuição. Acrescenta o índice de data das cobranças e a RPC **somente leitura** `admin_financeiro(integer)`, exclusiva de `service_role`, que agrega o mês de Brasília e pagina contas em blocos de 20. Não muda os valores dos fundos, custo já registrado, preços ou situação das assinaturas. Não há tabela nova nem mudança de RLS.
 
-**Aplicada apenas em bancos locais de teste nesta entrega.** Não foi aplicada no projeto remoto. Para uma futura aplicação autorizada, conferir depois: colunas `ia_uso.plano_id` e `cobrancas.plano_id`, dois gatilhos de inserção, índice `cobrancas_mes` e privilégios de `admin_financeiro(integer)` (`anon` e `authenticated`: sem EXECUTE; `service_role`: com EXECUTE). Não preencher planos históricos por inferência.
+**Aplicada no projeto remoto Ratione em 24/10/2026**, após autorização de deploy. A RPC respondeu à consulta de leitura; `anon` e `authenticated` não têm EXECUTE e `service_role` tem EXECUTE. Contagens preservadas: 4 análises, 19 usos e nenhuma cobrança; fundos mantidos em US$ 15 e US$ 5. Não foram atribuídos planos históricos. O painel permanece fechado sem `RATIONE_ADMIN_USUARIO_IDS`.
 
 A página `/meu-espaco/administracao` e a API `/api/admin/financeiro` exigem `RATIONE_ADMIN_USUARIO_IDS` no servidor e sessão verificada. Sem configuração válida, negam acesso; ter plano pago ou declarar `admin` em metadados não autoriza. Não usar `NEXT_PUBLIC_` nem levar a chave de serviço ao navegador. A configuração é independente de `COBRANCA_LIGADA`; ver método e limitações em `docs/produto/PLANOS_E_COBRANCA.md` §4.1.
+
+## Tamanho da decisão no histórico (F8-04, entrega local de 24/10/2026)
+
+`migrations/20261024000002_tamanho_analise.sql`, depois de `20261024000001`, acrescenta `analises.paragrafos` (inteiro de 1 a 800; nulo para registros antigos; explicação sem tamanho) e `analise_iniciar_com_tamanho(uuid,text,text,integer)`, exclusiva de `service_role`. Essa função reutiliza a reserva/cota/fundos da função anterior e grava a contagem na mesma transação. `analise_iniciar` permanece intacta e compatível. RLS e privilégios das tabelas não mudam.
+
+**Aplicada no projeto remoto Ratione em 24/10/2026**, antes da publicação do frontend. Conferidos os privilégios da nova função (nenhum EXECUTE para `anon`/`authenticated`, EXECUTE para `service_role`); as quatro análises anteriores continuam sem tamanho registrado. O novo início com tamanho exige essa função. Não há texto de decisão nem páginas estimadas nessa coluna.
 
 ## Migrações posteriores
 
