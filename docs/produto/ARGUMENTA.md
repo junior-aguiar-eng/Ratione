@@ -9,10 +9,10 @@
 No `/argumenta`, a pessoa logada cola o texto de uma sentença, acórdão ou decisão e clica em **"Analisar decisão"**. A tela mostra:
 
 - **Visão geral:** tipo de decisão, resultado, resumo e pedidos;
-- **Estrutura:** as partes da decisão (cabeçalho, ementa, relatório, preliminares, fundamentação, dispositivo) com o intervalo de parágrafos;
+- **Estrutura:** as partes da decisão (cabeçalho, ementa, relatório, preliminares, fundamentação, dispositivo) com acesso aos trechos correspondentes;
 - **Questões e fundamentos:** cada questão resolvida (preliminar, prejudicial, mérito ou acessória), a conclusão, como a alegação foi tratada (acolhida, rejeitada…) e os fundamentos dela (fato, prova, norma, precedente, doutrina, argumento), com a citação como aparece no texto.
 
-Cada item aponta o parágrafo de origem (§), e o clique destaca o **texto original** do parágrafo ao lado. O modelo nunca escreve o trecho mostrado: só indica números de parágrafo.
+Cada item permite localizar e destacar os **trechos originais** correspondentes, sem exibir a numeração técnica. O texto integral fica recolhido durante a leitura dos resultados e abre quando a pessoa escolhe “Consultar texto da decisão” ou “Ver no texto”; os trechos destacados aparecem em fluxo de leitura, sem cartões ou rótulos por fragmento. O modelo nunca escreve o trecho mostrado: só indica posições internas no texto preparado.
 
 ## 2. Fluxo
 

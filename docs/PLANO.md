@@ -423,6 +423,14 @@ Validação: 931 testes locais aprovados, tipos e build aprovados, revisão sem 
 - Pendências de produto: F5-03 (etapas restantes), F5-04 (citações), F5-05 (corpus e métricas), calibração de custo/preços (F5-06/T-04), RIPD antes de upload (F5-07/F5-01/F5-02); recibo do Mercado Pago (F8-04), sandbox real (F8-05), complemento e teste real dos fluxos de cancelamento/reembolso/troca (F8-06), revisão jurídica e planilha (F8-07/T-03/T-04). Nível completo depende do corpus (F8-08). Cobrança comercial permanece deliberadamente desligada até T-01/F8-10; calendários de 2027 dependem de atos externos. F6/F7 continuam futuras, não autorizam ampliar o debug.
 - Evidências e limites: `produto/DEBUG_E2E_2026-10-24.md`. Não houve chamada a modelo, ativação de cobrança, envio de e-mail ou operação de suspensão real neste debug.
 
+### F5-03 — experiência de leitura da análise
+
+Pronto quando: o cliente lê o resultado, as questões e os fundamentos sem uma lista de fragmentos técnicos, e pode conferir a origem de cada ponto sob demanda. Segmentação, identificadores, grafos, contratos de IA e corpus são preservados.
+
+Implementado: texto integral recolhido inicialmente; “Consultar texto da decisão” e “Ver no texto” abrem a leitura com os pontos citados destacados. Sem rótulos técnicos ou separadores por fragmento. As referências jurídicas reais e as páginas da demonstração continuam visíveis.
+
+Validação local: navegação em Chromium com sessão e respostas fictícias, referência individual e múltipla, rolagem ao ponto citado, 375 px sem transbordamento e zero erros de página. Os mesmos 94 parágrafos internos foram enviados às três etapas; nenhum diff em segmentação, tarefas de IA ou grafos. Prévia interativa aprovada pelo responsável em 24/10/2026, com autorização de commit, push e deploy. Cobrança permanece desligada.
+
 ## 11. Riscos
 
 | Risco | Prob./Impacto | Mitigação |
