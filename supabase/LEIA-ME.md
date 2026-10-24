@@ -135,6 +135,20 @@ Tudo acima foi feito para o projeto `ratione`. O site publicado é `https://rati
 
 **SMTP: Resend, com domínio próprio.** Host `smtp.resend.com`, porta `465`, usuário `resend`, senha = chave de API do Resend (permissão só de envio, restrita ao domínio `nexojuris.ia.br`), remetente `nao-responda@nexojuris.ia.br` ("Ratione"). Substituiu o Gmail, que o painel desaconselha para produção e limita a 30 e-mails por hora. A chave fica só no painel do Supabase; para trocá-la, crie outra no Resend, cole no campo de senha do SMTP e apague a antiga. Testado em 10/10/2026: cadastro com confirmação e recuperação de senha, com os links abrindo no domínio publicado.
 
+## Painel administrativo da F8-04 (entrega local de 24/10/2026)
+
+`migrations/20261024000001_painel_administrativo.sql`, depois de `20261023000003`, registra `plano_id` em novos usos de IA e cobranças por gatilho; registros antigos ficam sem atribuição. Acrescenta o índice de data das cobranças e a RPC **somente leitura** `admin_financeiro(integer)`, exclusiva de `service_role`, que agrega o mês de Brasília e pagina contas em blocos de 20. Não muda os valores dos fundos, custo já registrado, preços ou situação das assinaturas. Não há tabela nova nem mudança de RLS.
+
+**Aplicada no projeto remoto Ratione em 24/10/2026**, após autorização de deploy. A RPC respondeu à consulta de leitura; `anon` e `authenticated` não têm EXECUTE e `service_role` tem EXECUTE. Contagens preservadas: 4 análises, 19 usos e nenhuma cobrança; fundos mantidos em US$ 15 e US$ 5. Não foram atribuídos planos históricos. O painel permanece fechado sem `RATIONE_ADMIN_USUARIO_IDS`.
+
+A página `/meu-espaco/administracao` e a API `/api/admin/financeiro` exigem `RATIONE_ADMIN_USUARIO_IDS` no servidor e sessão verificada. Sem configuração válida, negam acesso; ter plano pago ou declarar `admin` em metadados não autoriza. Não usar `NEXT_PUBLIC_` nem levar a chave de serviço ao navegador. A configuração é independente de `COBRANCA_LIGADA`; ver método e limitações em `docs/produto/PLANOS_E_COBRANCA.md` §4.1.
+
+## Tamanho da decisão no histórico (F8-04, entrega local de 24/10/2026)
+
+`migrations/20261024000002_tamanho_analise.sql`, depois de `20261024000001`, acrescenta `analises.paragrafos` (inteiro de 1 a 800; nulo para registros antigos; explicação sem tamanho) e `analise_iniciar_com_tamanho(uuid,text,text,integer)`, exclusiva de `service_role`. Essa função reutiliza a reserva/cota/fundos da função anterior e grava a contagem na mesma transação. `analise_iniciar` permanece intacta e compatível. RLS e privilégios das tabelas não mudam.
+
+**Aplicada no projeto remoto Ratione em 24/10/2026**, antes da publicação do frontend. Conferidos os privilégios da nova função (nenhum EXECUTE para `anon`/`authenticated`, EXECUTE para `service_role`); as quatro análises anteriores continuam sem tamanho registrado. O novo início com tamanho exige essa função. Não há texto de decisão nem páginas estimadas nessa coluna.
+
 ## Migrações posteriores
 
 Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O último é `20261011000003_aceites_termos.sql` (aceite dos Termos gravado pelo servidor, F1-02); depois de rodar, conferir em *Table Editor* que existe `aceites_termos` e que cada conta já criada tem uma linha.

@@ -10,8 +10,11 @@ import { registrar } from '../log';
 type LinhaInicio = { ok: boolean; motivo: string | null; analise_id: string | null; restantes: number | null; plano: string; renova_em: string };
 
 /** Inicia uma análise no banco: confere a cota do plano do usuário e reserva a vaga. */
-export async function iniciarAnaliseNoBanco(servidor: SupabaseClient, usuarioId: string, tipo: string, rotulo: string | null = null): Promise<InicioDeAnalise & { plano: string }> {
-  const { data, error } = await servidor.rpc('analise_iniciar', { p_usuario: usuarioId, p_tipo: tipo, p_rotulo: rotulo });
+export async function iniciarAnaliseNoBanco(servidor: SupabaseClient, usuarioId: string, tipo: string, rotulo: string | null = null, paragrafos: number | null = null): Promise<InicioDeAnalise & { plano: string }> {
+  const argumentos = { p_usuario: usuarioId, p_tipo: tipo, p_rotulo: rotulo };
+  const { data, error } = paragrafos === null
+    ? await servidor.rpc('analise_iniciar', argumentos)
+    : await servidor.rpc('analise_iniciar_com_tamanho', { ...argumentos, p_paragrafos: paragrafos });
   if (error) throw new Error(`iniciar análise: ${error.message}`);
   const l = (data as LinhaInicio[])[0];
   if (l.ok && l.analise_id) return { ok: true, analiseId: l.analise_id, restantes: l.restantes ?? 0, renovaEm: l.renova_em, plano: l.plano };

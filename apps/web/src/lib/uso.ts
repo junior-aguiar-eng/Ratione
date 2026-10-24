@@ -3,7 +3,7 @@
  * `uso_resumo()` e a tabela `analises` (a RLS entrega só as linhas do usuário) e usa estas funções para mostrar e exportar.
  */
 
-import { temDadoPessoal } from '@ratione/argumenta';
+import { MAX_PARAGRAFOS, temDadoPessoal } from '@ratione/argumenta';
 
 export type TipoAnalise = 'rapida' | 'completa' | 'explicacao';
 export type SituacaoAnalise = 'em_andamento' | 'concluida' | 'falhou' | 'cancelada';
@@ -18,6 +18,8 @@ export interface LinhaAnalise {
   falhas: number;
   criada_em: string;
   concluida_em: string | null;
+  /** Ausente/nulo em registros antigos; nunca estimado em páginas. */
+  paragrafos?: number | null;
 }
 
 /** Linha de `uso_resumo()`: o plano em vigor e, por tipo, quanto da cota já foi usado na janela. */
@@ -93,6 +95,21 @@ export function precoEmReais(centavos: number): string {
 
 export const MAX_ROTULO = 80;
 
+export function paragrafosDaAnalise(valor: unknown): { ok: true; paragrafos: number | null } | { ok: false; mensagem: string } {
+  if (valor === undefined || valor === null) return { ok: true, paragrafos: null };
+  if (typeof valor !== 'number' || !Number.isInteger(valor) || valor < 1 || valor > MAX_PARAGRAFOS) {
+    return { ok: false, mensagem: `O tamanho da decisão deve ser um número inteiro de 1 a ${MAX_PARAGRAFOS} parágrafos.` };
+  }
+  return { ok: true, paragrafos: valor };
+}
+
+export function tamanhoDaAnalise(analise: Pick<LinhaAnalise, 'tipo' | 'paragrafos'>): string | null {
+  if (analise.tipo === 'explicacao') return null;
+  const tamanho = paragrafosDaAnalise(analise.paragrafos);
+  if (!tamanho.ok || tamanho.paragrafos === null) return 'Tamanho não registrado';
+  return `${tamanho.paragrafos} ${tamanho.paragrafos === 1 ? 'parágrafo' : 'parágrafos'}`;
+}
+
 /**
  * Nome que o cliente dá à análise. É texto livre guardado no banco, então o servidor confere: no máximo 80 caracteres, uma linha, e nada
  * que a detecção de dados pessoais do Argumenta reconheça (CPF, CNPJ, número de processo, e-mail, nome rotulado como "Autor:" etc.).
@@ -127,10 +144,12 @@ export function celulaCsv(valor: string): string {
 
 /** CSV do histórico (separador `;`, que o Excel em português abre direto), com BOM para os acentos. Só metadados: nunca o texto da decisão. */
 export function historicoEmCsv(linhas: readonly LinhaAnalise[], agora: Date = new Date()): string {
-  const cabecalho = ['Data e hora (Brasília)', 'Tipo', 'Nome', 'Resultado', 'Gastou cota'].map(celulaCsv).join(';');
+  const cabecalho = ['Data e hora (Brasília)', 'Tipo', 'Nome', 'Resultado', 'Gastou cota', 'Parágrafos'].map(celulaCsv).join(';');
   const corpo = linhas.map(a => {
     const estado = estadoExibido(a, agora);
-    return [dataHora(a.criada_em), ROTULO_TIPO[a.tipo], a.rotulo ?? '', ESTADO[estado].rotulo, gastouCota(a, agora) ? 'Sim' : 'Não'].map(celulaCsv).join(';');
+    const tamanho = paragrafosDaAnalise(a.paragrafos);
+    const n = a.tipo !== 'explicacao' && tamanho.ok ? tamanho.paragrafos : null;
+    return [dataHora(a.criada_em), ROTULO_TIPO[a.tipo], a.rotulo ?? '', ESTADO[estado].rotulo, gastouCota(a, agora) ? 'Sim' : 'Não', n === null ? '' : String(n)].map(celulaCsv).join(';');
   });
   return '﻿' + [cabecalho, ...corpo].join('\r\n') + '\r\n';
 }

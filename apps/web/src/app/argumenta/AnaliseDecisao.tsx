@@ -189,7 +189,7 @@ export default function AnaliseDecisao() {
     try {
       if (!id) {
         setAndamento('estrutura');
-        const inicio = await enviar('/api/analises', { tipo: 'rapida', rotulo: rotulo.trim() || undefined });
+        const inicio = await enviar('/api/analises', { tipo: 'rapida', rotulo: rotulo.trim() || undefined, paragrafos: decisao.paragrafos.length });
         id = inicio.analiseId as string;
         setAnaliseId(id);
         setUso(u => (u ? { ...u, restantes: inicio.restantes, renovaEm: inicio.renovaEm } : u));
@@ -357,7 +357,7 @@ export default function AnaliseDecisao() {
             </Link>
           </p>
         )}
-        <p className="text-sm text-ink-mute">Nada do texto nem da análise fica guardado no Ratione: ao sair desta página, a análise se perde.</p>
+        <p className="text-sm text-ink-mute">Nada do texto nem da resposta fica guardado no Ratione: ao sair desta página, a análise se perde. O histórico guarda só informações de uso, incluindo a quantidade de parágrafos.</p>
       </Card>
     );
   }

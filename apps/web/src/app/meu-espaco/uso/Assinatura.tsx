@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import Notice from '../../../components/Notice';
+import HistoricoCobrancas from './HistoricoCobrancas';
 import { dataCurta, precoEmReais } from '../../../lib/uso';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -32,7 +33,7 @@ async function chamar(url: string, corpo?: unknown): Promise<{ ok: boolean; dado
   }
 }
 
-export default function Assinatura({ aoMudar, aoSaberSeHaPlanos }: { aoMudar: () => void; aoSaberSeHaPlanos: (disponivel: boolean) => void }) {
+export default function Assinatura({ usuarioId, aoMudar, aoSaberSeHaPlanos }: { usuarioId: string; aoMudar: () => void; aoSaberSeHaPlanos: (disponivel: boolean) => void }) {
   const [s, setS] = useState<Situacao | null>(null);
   const [ocupado, setOcupado] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
@@ -181,6 +182,7 @@ export default function Assinatura({ aoMudar, aoSaberSeHaPlanos }: { aoMudar: ()
           )}
         </>
       )}
+      {s.ambiente && <HistoricoCobrancas key={`${usuarioId}:${s.ambiente}`} usuarioId={usuarioId} ambiente={s.ambiente} atualizacao={a?.situacao} />}
     </section>
   );
 }

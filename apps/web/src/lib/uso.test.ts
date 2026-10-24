@@ -112,11 +112,11 @@ describe('Meu uso: exportação em CSV', () => {
       [linha({ rotulo: 'Cobrança X' }), linha({ id: 'a2', tipo: 'explicacao', situacao: 'falhou', consumiu: false, criada_em: '2026-10-23T12:00:00.000Z' })],
       AGORA
     );
-    assert.ok(csv.startsWith('﻿"Data e hora (Brasília)";"Tipo";"Nome";"Resultado";"Gastou cota"\r\n'));
+    assert.ok(csv.startsWith('﻿"Data e hora (Brasília)";"Tipo";"Nome";"Resultado";"Gastou cota";"Parágrafos"\r\n'));
     const linhas = csv.trim().split('\r\n');
     assert.equal(linhas.length, 3);
-    assert.equal(linhas[1], '"23/10/2026 13:05";"Análise rápida";"Cobrança X";"Concluída";"Sim"');
-    assert.equal(linhas[2], '"23/10/2026 09:00";"Explicação de dispositivo";"";"Falhou";"Não"');
+    assert.equal(linhas[1], '"23/10/2026 13:05";"Análise rápida";"Cobrança X";"Concluída";"Sim";""');
+    assert.equal(linhas[2], '"23/10/2026 09:00";"Explicação de dispositivo";"";"Falhou";"Não";""');
   });
 
   it('o nome é texto do cliente: aspas dobradas e fórmula neutralizada', () => {
