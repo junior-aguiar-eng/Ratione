@@ -18,6 +18,7 @@ import {
 } from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
 import AvisosAtivos from './AvisosAtivos';
+import AcessoAdministrativo from './AcessoAdministrativo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -89,9 +90,12 @@ export default function MeuEspacoPage() {
         title="Meu espaço"
         actions={
           usuario ? (
+            <div className="flex flex-wrap gap-2">
             <Link href="/meu-espaco/uso" className={buttonVariants({ variant: 'secondary' })}>
               Meu uso de IA
             </Link>
+            <AcessoAdministrativo key={usuario.id} usuarioId={usuario.id} />
+            </div>
           ) : undefined
         }
         description={
