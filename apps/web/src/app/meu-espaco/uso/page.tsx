@@ -184,7 +184,7 @@ export default function MeuUsoPage() {
             )}
           </section>
 
-          <Assinatura aoMudar={recarregar} aoSaberSeHaPlanos={setHaPlanos} />
+          {usuarioId && <Assinatura key={usuarioId} usuarioId={usuarioId} aoMudar={recarregar} aoSaberSeHaPlanos={setHaPlanos} />}
 
           <section aria-labelledby="uso-historico" className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
