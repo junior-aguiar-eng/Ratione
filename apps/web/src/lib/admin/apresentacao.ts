@@ -19,3 +19,6 @@ export function situacaoFundo(orcamento: number, custo: number, reservado: numbe
 }
 
 export const dolares = (valor: number) => `US$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 6 })}`;
+
+/** "1 conta", "0 contas", "2 contas": só o 1 fica no singular. */
+export const plural = (quantidade: number, singular: string, plural: string) => (quantidade === 1 ? singular : plural);

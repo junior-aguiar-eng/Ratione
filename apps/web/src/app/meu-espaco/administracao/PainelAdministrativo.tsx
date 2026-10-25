@@ -7,7 +7,7 @@ import Notice from '../../../components/Notice';
 import EmptyState from '../../../components/EmptyState';
 import { useSessao } from '../../../lib/useSessao';
 import { precoEmReais } from '../../../lib/uso';
-import { dolares, lerCotacao, margemAposIa, situacaoFundo } from '../../../lib/admin/apresentacao';
+import { dolares, lerCotacao, margemAposIa, plural, situacaoFundo } from '../../../lib/admin/apresentacao';
 import type { ResumoFinanceiro } from '../../../lib/admin/financeiro';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -138,7 +138,7 @@ function ResumoAdministrativo() {
 
           <section aria-labelledby="admin-clientes" className="flex flex-col gap-4">
             <h2 id="admin-clientes" className="font-serif text-2xl font-semibold text-ink">Custo de IA por conta</h2>
-            <p className="text-sm text-ink-soft">{dados.total_clientes} contas com chamadas registradas no mês, excluído o cache. Identificação pelo ID da conta, sem nomes, e-mails ou conteúdo das análises.</p>
+            <p className="text-sm text-ink-soft">{dados.total_clientes} {plural(dados.total_clientes, 'conta', 'contas')} com chamadas registradas no mês, excluído o cache. Identificação pelo ID da conta, sem nomes, e-mails ou conteúdo das análises.</p>
             {dados.clientes.length === 0 ? <EmptyState titulo="Nenhuma conta nesta página">Ainda não há uso no período ou a página ficou vazia. Atualize o painel ou volte à página anterior.</EmptyState> : (
               <ul className="divide-y divide-line border-y border-line">{dados.clientes.map(c=><li key={c.usuario_id} className="py-4 flex flex-col gap-2 sm:flex-row sm:justify-between sm:gap-6">
                 <p className="text-sm text-ink break-all min-w-0">Conta {c.usuario_id}</p><p className="text-sm text-ink-soft shrink-0">Custo real: {dolares(c.custo_real_usd)} · reservas: {dolares(c.reservado_usd)}</p>
