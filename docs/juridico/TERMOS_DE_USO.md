@@ -4,6 +4,7 @@
 **Fornecedor:** [NOME_RESPONSAVEL], [CPF_OU_CNPJ], [ENDERECO] · **Contato:** [EMAIL_CONTATO]
 
 > RASCUNHO PARA REVISÃO DO ADVOGADO RESPONSÁVEL. Ver `README.md` desta pasta.
+> **Atualizado em 25/10/2026 conforme o código e os documentos do produto** (`docs/produto/PLANOS_E_COBRANCA.md`, `docs/produto/ARGUMENTA.md`, `docs/produto/IA_TAREFAS.md`). Itens marcados **[CONFIRMAR]** dependem de decisão ou de conferência do responsável; **[FUTURO]** descreve o que ainda não está no ar (cobrança, envio de arquivos).
 
 ---
 
@@ -14,7 +15,7 @@
 
 ## 2. O que é o Ratione
 2.1. O Ratione é um conjunto de ferramentas de **apoio ao trabalho jurídico e ao estudo do Direito**, atualmente: **PrazoZero** (cálculo de prazos), **NormaViva** (consulta à redação de normas no tempo), **TeseMap** (mapa de precedentes) e **Argumenta** (análise de fundamentação de decisões).
-2.2. Algumas ferramentas **não usam inteligência artificial**; outras a usam de forma **opcional ou central**, conforme a **Política de Uso de IA**.
+2.2. Algumas ferramentas **não usam inteligência artificial** (PrazoZero, consulta à redação das normas e mapa de precedentes). **Hoje usam IA, só quando você as aciona:** a análise de uma decisão colada (Argumenta) e a explicação de um dispositivo de lei (NormaViva), conforme a **Política de Uso de IA**.
 2.3. Funcionalidades podem estar em fase de **demonstração ou prévia**, o que é informado na própria ferramenta.
 
 ## 3. O que o Ratione NÃO é
@@ -29,15 +30,15 @@
 
 ## 5. Uso permitido e proibido
 5.1. É permitido o uso **pessoal e profissional** para atividades lícitas.
-5.2. É proibido: (a) violar a lei ou direitos de terceiros; (b) tentar acessar áreas ou dados não autorizados; (c) **coleta automatizada em massa** (scraping), engenharia reversa ou sobrecarga da Plataforma; (d) **revender, sublicenciar ou compartilhar** o acesso; (e) contornar limites de uso, créditos ou mecanismos de segurança; (f) enviar conteúdo ilícito, malicioso ou sem autorização; (g) usar a Plataforma para treinar modelos de IA concorrentes.
+5.2. É proibido: (a) violar a lei ou direitos de terceiros; (b) tentar acessar áreas ou dados não autorizados; (c) **coleta automatizada em massa** (scraping), engenharia reversa ou sobrecarga da Plataforma; (d) **revender, sublicenciar ou compartilhar** o acesso; (e) contornar limites de uso, cotas ou mecanismos de segurança; (f) enviar conteúdo ilícito, malicioso ou sem autorização; (g) usar a Plataforma para treinar modelos de IA concorrentes.
 5.3. Podemos aplicar **limites razoáveis de uso** para preservar a estabilidade do serviço (ver item 9).
 
 ## 6. Conteúdo enviado por você
 6.1. Você mantém a titularidade do conteúdo que enviar (ex.: decisões, peças, textos).
-6.2. Você nos concede **licença limitada, não exclusiva e revogável**, apenas para **hospedar, processar e exibir** o conteúdo com a finalidade de prestar o serviço contratado.
+6.2. Você nos concede **licença limitada, não exclusiva e revogável**, apenas para **processar** o conteúdo (e, quando houver armazenamento **[FUTURO]**, hospedá-lo e exibi-lo) com a finalidade de prestar o serviço contratado.
 6.3. **Você declara ter base legal e autorização** para enviar o conteúdo, inclusive quando houver **dados pessoais de terceiros, dados de clientes ou documentos protegidos por sigilo profissional ou segredo de justiça**. Você é o **responsável por decidir se pode enviar** cada documento.
-6.4. Recomendamos **remover ou ocultar dados pessoais** antes do envio. A Plataforma oferece **pseudonimização automática** em recursos de IA, que **não elimina** a sua responsabilidade.
-6.5. **Não utilizamos o conteúdo enviado por você para treinar modelos de IA** nem o incluímos em bases públicas. Detalhes na Política de Privacidade e na Política de Uso de IA.
+6.4. Recomendamos **remover ou ocultar dados pessoais** antes do envio. Nos recursos de IA, a Plataforma faz **pseudonimização automática no seu navegador**, antes do envio: troca por marcadores identificadores formatados (CPF, CNPJ, RG, OAB, e-mail, telefone, CEP, endereço e número de processo) e nomes de partes e advogados indicados por rótulos. Ela **não pega todo nome** que aparece no meio do texto e **não elimina** a sua responsabilidade: confira o texto que será enviado e acrescente os nomes que faltarem.
+6.5. **O Ratione não utiliza o conteúdo enviado por você para treinar modelos de IA** nem o inclui em bases públicas. Sobre o provedor de IA, ver o item 4 da Política de Uso de IA e a Política de Privacidade. **[CONFIRMAR]**
 6.6. Você pode **excluir** o seu conteúdo a qualquer momento (ver Política de Privacidade).
 
 ## 7. Conteúdo jurídico e fontes
@@ -47,25 +48,37 @@
 7.4. Doutrina e conteúdo de terceiros protegidos por direitos autorais **não** são reproduzidos sem licença.
 
 ## 8. Recursos de IA
-8.1. Resultados gerados com IA são **identificados** e podem conter **erros, omissões ou "alucinações"**. Devem ser **conferidos** nas fontes antes de qualquer uso profissional.
+8.1. Resultados gerados com IA são **identificados** como gerados por inteligência artificial e podem conter **erros, omissões ou "alucinações"**. Devem ser **conferidos** nas fontes antes de qualquer uso profissional.
 8.2. A IA **não calcula prazos** nem determina a vigência de normas.
-8.3. O uso é **medido em créditos** e sujeito a limites do plano (item 9).
-8.4. Aplica-se a **Política de Uso de IA**, que integra estes Termos.
+8.3. **Selo de citações.** Na análise de decisões, cada citação de norma ou precedente é conferida automaticamente contra as bases do NormaViva e do TeseMap e recebe um selo (**Encontrada na base**, **Não localizada na base** ou **Fora da base**). O selo indica **apenas se a citação existe na base do Ratione**: não atesta que esteja correta ou atual, nem que o precedente diga o que a decisão afirma.
+8.4. O uso de IA é medido por **análises e explicações**, conforme a cota do plano (item 9), e não por créditos.
+8.5. Aplica-se a **Política de Uso de IA**, que integra estes Termos.
 
-## 9. Planos, créditos e pagamento
-9.1. A Plataforma possui plano **Gratuito** e planos **pagos** (**Pro** e **Pro Estudo**), com preços, limites e funcionalidades informados **antes da contratação**: [PRECOS].
-9.2. **Créditos de IA:** os créditos mensais do plano **não acumulam** para o mês seguinte. **Pacotes avulsos** de créditos têm validade de **12 meses** a partir da compra.
-9.3. **Cobrança:** recorrente, no ciclo escolhido (mensal ou anual), pelos meios exibidos no momento da contratação, por meio de **operador de pagamento terceirizado**. **Não armazenamos dados completos de cartão.**
-9.4. **Reajustes:** alteração de preço será comunicada com **antecedência mínima de 30 dias**, sem efeito sobre o ciclo já pago. Se não concordar, você poderá cancelar.
-9.5. **Inadimplência:** após [X] dias de atraso, a conta poderá retornar ao plano Gratuito; **seu conteúdo não será excluído imediatamente** e você terá o prazo de [X] dias para exportá-lo.
-9.6. Tributos e **documento fiscal** serão emitidos conforme a legislação aplicável ao Fornecedor.
-9.7. **Limites e uso razoável:** podemos aplicar limites técnicos (requisições, tamanho de arquivos, armazenamento). Haverá aviso antes de o limite ser atingido.
+## 9. Planos, cota de IA e pagamento
+9.1. A Plataforma possui o plano **Gratuito** e os planos pagos **Essencial** e **Profissional**, com preços, cotas e funcionalidades informados **antes da contratação**: [PRECOS]. O plano "Pro Estudo", previsto em versões anteriores, está fora da primeira versão. **[CONFIRMAR]**
+9.2. **Cota de IA.** A unidade de cota é a **análise** (Argumenta) e a **explicação de dispositivo** (NormaViva), e não a chamada ao modelo. A cota é **semanal** no Gratuito (de segunda a domingo, horário de Brasília) e **mensal** nos planos pagos (ciclo de cobrança); a data de renovação é sempre exibida. **A cota não acumula** de um período para o outro. As quantidades de cada plano ficam em [PRECOS] e podem ser ampliadas, mas não reduzidas, durante o beta. **[CONFIRMAR]**
+9.3. **Quando a cota é consumida:**
+(a) análise concluída consome **1 análise**;
+(b) **falha do sistema ou da API, recusa do modelo ou saída descartada não consomem cota** (estorno automático);
+(c) fechar a página **depois** de a primeira etapa ser entregue consome a cota (a análise fica registrada como interrompida); antes disso, não consome;
+(d) "tentar de novo" depois de uma falha parcial continua a **mesma** análise, sem consumir outra;
+(e) analisar de novo a mesma decisão é **nova análise** (o texto não é guardado, então não pode ser reaproveitado);
+(f) explicação já gerada para outro usuário e servida do cache não consome cota.
+9.4. **Plano Gratuito.** O gasto de IA do Gratuito sai de um **fundo mensal próprio**. Se o fundo do mês acabar, **só o Gratuito pausa** até o mês seguinte (ou até a assinatura de um plano pago); os planos pagos não são afetados.
+9.5. **Histórico.** A tela "Meu uso" mostra o consumo (30 dias no Gratuito; 12 meses nos planos pagos) e permite exportar o histórico em CSV nos planos pagos.
+9.6. **Cobrança [FUTURO].** Nos planos pagos, a cobrança é recorrente **mensal**, sem fidelidade, feita por **operador de pagamento terceirizado (Mercado Pago)**, na página dele. **Não armazenamos dados de cartão.** A cobrança permanece desligada até a abertura de CNPJ ou MEI; estas regras valem a partir da ativação.
+9.7. **Reajustes:** alteração de preço será comunicada com **antecedência mínima de 30 dias**, sem efeito sobre o ciclo já pago. Se não concordar, você poderá cancelar.
+9.8. **Inadimplência:** após [X] dias de atraso (carência de [3] dias proposta, **[CONFIRMAR]**), a conta poderá retornar ao plano Gratuito; **seu conteúdo não será excluído imediatamente** e você terá o prazo de [X] dias para exportá-lo.
+9.9. Tributos e **documento fiscal** serão emitidos conforme a legislação aplicável ao Fornecedor.
+9.10. **Limites e uso razoável:** podemos aplicar limites técnicos (requisições, tamanho da decisão, armazenamento). A cota restante é exibida antes do envio.
+9.11. **Pacote avulso** de análises: fora da primeira versão. Se entrar, a validade deve ser revista à luz do CDC (a minuta anterior propunha 12 meses). **[REVISAR]**
 
 ## 10. Arrependimento, cancelamento e reembolso
 10.1. **Direito de arrependimento:** na contratação à distância, você pode desistir **em até 7 (sete) dias** a contar da contratação, com **reembolso integral** dos valores pagos, nos termos do **art. 49 do CDC** e do **Decreto 7.962/2013**.
-10.2. **Cancelamento:** pode ser feito **a qualquer tempo**, pela própria conta, **sem multa**. O acesso permanece até o **fim do período já pago**.
-10.3. Após o prazo de arrependimento, **não há reembolso proporcional** de períodos já iniciados nem de **créditos já consumidos**, salvo falha comprovada do serviço ou determinação legal. **[REVISAR]**
-10.4. Em caso de **falha do sistema** que consuma créditos sem entregar o resultado, os créditos serão **estornados**.
+10.2. **Cancelamento:** pode ser feito **a qualquer tempo**, pela própria conta ("Meu uso"), **sem multa**. O plano vale até o **fim do período já pago**.
+10.3. **Mudança de plano:** subir de plano (Essencial para Profissional) vale **na próxima renovação**, sem valor proporcional; descer de plano vale no fim do ciclo pago. **[PROPOSTA, CONFIRMAR]**
+10.4. Após o prazo de arrependimento, **não há reembolso proporcional** de períodos já iniciados nem de **análises já consumidas**, salvo falha comprovada do serviço ou determinação legal. **[REVISAR]**
+10.5. Em caso de **falha do sistema**, a análise **não consome cota** (item 9.3).
 
 ## 11. Disponibilidade e suporte
 11.1. Empregamos esforços razoáveis para manter a Plataforma disponível, mas **não garantimos funcionamento ininterrupto**. Podem ocorrer manutenções e indisponibilidades de fontes externas (ex.: sites de tribunais).
@@ -86,6 +99,7 @@
 ## 15. Suspensão e encerramento
 15.1. Podemos **suspender ou encerrar** contas em caso de **violação destes Termos**, fraude, uso abusivo ou ordem legal, com **aviso prévio** quando possível.
 15.2. Em caso de encerramento sem culpa do usuário, será permitido **exportar** seus dados por [X] dias.
+15.3. A administração pode **suspender** e **reativar** uma conta. A suspensão bloqueia o acesso, é **registrada** e não exclui os dados. Contas administradoras não são suspensas por esse meio.
 
 ## 16. Alterações destes Termos
 16.1. Podemos alterar estes Termos. Mudanças relevantes serão **comunicadas por e-mail e na Plataforma com antecedência mínima de 30 dias**. O uso após a vigência indica concordância; você pode **cancelar** sem ônus.
