@@ -7,6 +7,7 @@ import { dependenciasDoBanco } from '../../../../lib/ia/banco';
 import { criarChamadaAoModelo } from '../../../../lib/ia/cliente';
 import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositivoDoBanco';
 import { iaLigada } from '../../../../lib/ia/politica';
+import { gravidadeDoAviso } from '../../../../lib/ia/gravidade';
 import { origemPublica } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
@@ -55,7 +56,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
       },
       ...dependenciasDoBanco(servidor),
       chamarModelo: criarChamadaAoModelo(chaveApi),
-      avisar: (mensagem, campos) => registrar('WARNING', mensagem, campos)
+      // Saldo esgotado ou chave inválida: ERROR, para o alerta por e-mail avisar o responsável (lib/ia/gravidade.ts)
+      avisar: (mensagem, campos) => registrar(gravidadeDoAviso(mensagem, campos), mensagem, campos)
     });
     return NextResponse.json(r.corpo, { status: r.status });
   } catch (e) {
