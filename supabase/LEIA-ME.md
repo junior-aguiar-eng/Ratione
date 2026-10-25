@@ -155,7 +155,7 @@ Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → co
 
 ### Índice das migrações
 
-Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A `20261025000001_limpeza_por_prazo` **ainda não foi aplicada** (ver a seção "Limpeza por prazo", abaixo). A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
+Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A `20261025000001_limpeza_por_prazo` foi **aplicada em 25/10/2026** (ver a seção "Limpeza por prazo", abaixo). A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
 
 | Migração | O que faz |
 |---|---|
@@ -205,7 +205,7 @@ O workflow passou a entregar RATIONE_ADMIN_USUARIO_IDS da variável de repositó
 
 Não expiram: conta, perfil, registros salvos e aceites dos Termos (saem com a exclusão da conta). `cobrancas` e `assinaturas` ficam fora até se definir o prazo fiscal. A função é exclusiva da `service_role`; nenhum usuário apaga o próprio histórico por aqui, porque a cota é contada a partir dessas linhas.
 
-**Aplicar ANTES de publicar a Política de Privacidade v1.2**, que já descreve esses prazos: *SQL Editor → New query*, colar o arquivo inteiro → *Run*. Confirme o projeto `ratione` e "PRODUCTION" na tela. A migração tenta ativar o `pg_cron`; se o Supabase recusar, ative em *Database → Extensions* e rode só o bloco `do $$ ... $$` do fim do arquivo.
+**Aplicada no projeto remoto em 25/10/2026**, antes de publicar a Política de Privacidade v1.2, que descreve esses prazos. Conferido por consulta de leitura: a função existe; `anon` e `authenticated` não a executam e `service_role` sim; o agendamento `limpeza-por-prazo` (`17 6 * * *`) está ativo; e nenhuma linha estava vencida (a primeira execução não apaga nada). Para reaplicar em outro ambiente: *SQL Editor → New query*, colar o arquivo inteiro → *Run*. Confirme o projeto `ratione` e "PRODUCTION" na tela. A migração tenta ativar o `pg_cron`; se o Supabase recusar, ative em *Database → Extensions* e rode só o bloco `do $$ ... $$` do fim do arquivo.
 
 Conferência depois de aplicar (só leitura):
 
