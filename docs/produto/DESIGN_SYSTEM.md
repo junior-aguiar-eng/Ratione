@@ -11,6 +11,19 @@ Base: **shadcn/ui** (estilo `new-york`) sobre **Radix** (`radix-ui`) e **Tailwin
 5. **Espaço entre irmãos é `flex flex-col gap-N`, nunca `space-y-N`.** No Tailwind 4 o `space-y` é margem: não vale em filho inline, não funciona com `<legend>` e soma com o `mt-*` do filho. Cuidado: num pai `flex-col` o filho inline (`Button`, link, `<button>` de texto) **estica na largura**; dê `self-start` (ou `w-full` de propósito). Um elemento vazio de região `aria-live` também ganha gap, ao contrário da margem que colapsava; compense com `-mt-*` enquanto estiver vazio (ver o aviso do `/entrar`).
 6. **Nativo quando basta.** Lista suspensa é `<select>` nativo (`NativeSelect`: teclado, leitor de tela e seletor do celular de graça) e “Opções avançadas” é `<details>`. Não usar o `Select` do Radix, que troca o `<select>` por um menu próprio.
 
+## Fundo, névoa e elevação (25/10/2026)
+
+O canvas não é um cinza chapado: `body::before` (em `globals.css`) pinta, fixa atrás do conteúdo, uma **névoa** de três halos suaves, um em cada canto (petróleo no alto à esquerda, azul no alto à direita, lilás embaixo). Não pesa na rolagem (não usa `background-attachment: fixed`) e some na impressão.
+
+| Token | Para quê | Claro | Escuro |
+|---|---|---|---|
+| `--mist-1`, `--mist-2`, `--mist-3` | cor de cada halo (petróleo, azul, lilás: as mesmas da marca, de `--info` e de `--rel`) | `43 111 106`, `79 127 200`, `128 105 176` | iguais |
+| `--mist-a`, `--mist-b`, `--mist-c` | força de cada halo (opacidade) | 0,26 · 0,22 · 0,17 | 0,38 · 0,28 · 0,24 |
+| `--sombra` | cor da sombra dos cartões | `23 32 42` | `0 0 0` |
+| `shadow-card` (utilitário) | elevação sutil de cartões e painéis | sombra em duas camadas, de `--sombra` | idem |
+
+Regras: **os cartões continuam opacos ou quase (`bg-surface/85`)**, para o texto manter o contraste sobre a névoa; para mudar a força da névoa, mexa só nos três `--mist-*`; cor nova de halo é um token novo, nunca um valor solto. O painel `Card` (`cardClasses`) já traz `shadow-card`. O cabeçalho é translúcido com desfoque (`bg-canvas/70 backdrop-blur-md`), então a névoa passa por ele. O logo do cabeçalho é `<Logo grande />` (símbolo de 40 px, nome em `text-xl`); o padrão (30 px) serve ao rodapé.
+
 ## Componentes
 
 | Componente | Arquivo | Variações | Substituiu |
@@ -40,7 +53,7 @@ Depois de rodar, **conferir antes de commitar**:
 
 - **Importação do `cn`.** Com o `components.json` atual o CLI chegou a gerar `import { cn } from "cn"` e a instalar o pacote npm `cn` (que **não** é o helper do shadcn). O correto é `import { cn } from '@/lib/utils'`; troque as importações e remova `cn` do `package.json` (`pnpm remove cn`).
 - **`class-variance-authority`** precisa estar no `package.json` (`pnpm add class-variance-authority` se faltar).
-- **Visual.** O componente vem com os valores padrão do shadcn (cantos, sombra, altura de 36 px). Ajuste para o padrão do Ratione: raio `rounded-md`/`rounded-lg`, sem sombra, `px-3 py-2.5` nos campos, cores por token.
+- **Visual.** O componente vem com os valores padrão do shadcn (cantos, sombra, altura de 36 px). Ajuste para o padrão do Ratione: raio `rounded-md`/`rounded-lg`, elevação só pelo `shadow-card`, `px-3 py-2.5` nos campos, cores por token.
 - **Tema escuro.** Abrir a tela nos dois temas.
 
 ## Verificação feita na adoção (F0-07)

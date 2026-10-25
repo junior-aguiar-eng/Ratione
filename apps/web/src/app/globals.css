@@ -59,6 +59,9 @@
   --color-input: rgb(var(--line-strong));
   --color-ring: rgb(var(--brand));
 
+  /* Elevação dos cartões: a cor da sombra vem do token --sombra (clara no tema claro, preta no escuro) */
+  --shadow-card: 0 1px 2px rgb(var(--sombra) / 0.05), 0 14px 32px -18px rgb(var(--sombra) / 0.22);
+
   --font-sans:
     var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: var(--font-source-serif), 'Source Serif 4', Georgia, serif;
@@ -116,6 +119,15 @@
     --rel: 128 105 176; /* #8069B0 */
     --rel-text: 101 80 154;
     --rel-tint: 238 234 247;
+
+    /* Névoa do fundo: três halos suaves (petróleo, azul, lilás) sobre o canvas. `--mist-a/b/c` é a força de cada um. */
+    --mist-1: 43 111 106;
+    --mist-2: 79 127 200;
+    --mist-3: 128 105 176;
+    --mist-a: 0.26;
+    --mist-b: 0.22;
+    --mist-c: 0.17;
+    --sombra: 23 32 42;
   }
 
   [data-theme='dark'] {
@@ -143,6 +155,11 @@
     --danger-tint: 42 22 22;
     --rel-text: 160 138 205;
     --rel-tint: 30 24 42;
+
+    --mist-a: 0.38;
+    --mist-b: 0.28;
+    --mist-c: 0.24;
+    --sombra: 0 0 0;
   }
 }
 
@@ -160,6 +177,19 @@
     font-feature-settings: 'cv11', 'ss01';
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  /* Névoa fixa atrás do conteúdo: não pesa na rolagem (não é `background-attachment: fixed`) e some na impressão. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(58rem 38rem at 6% -6%, rgb(var(--mist-1) / var(--mist-a)), transparent 62%),
+      radial-gradient(50rem 34rem at 98% 2%, rgb(var(--mist-2) / var(--mist-b)), transparent 64%),
+      radial-gradient(66rem 38rem at 52% 112%, rgb(var(--mist-3) / var(--mist-c)), transparent 62%);
   }
 
   h1,
@@ -213,5 +243,9 @@ html .react-flow__controls-button svg {
 
   body {
     background: #fff;
+  }
+
+  body::before {
+    display: none;
   }
 }
