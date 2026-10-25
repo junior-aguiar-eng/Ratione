@@ -3,13 +3,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Download, LogOut } from 'lucide-react';
+import { Download } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { irParaPagina } from '../../lib/navegacao';
+import { avisarPerfilAtualizado } from '../../lib/useNomeDoUsuario';
 import { traduzirErroAuth } from '../../lib/erros-auth';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import { Button } from '@/components/ui/button';
@@ -100,7 +101,10 @@ export default function ContaPage() {
       .eq('id', usuario.id);
     setOcupado(false);
     if (error) aviso('danger', 'Não foi possível salvar o perfil. Confira os campos e tente de novo.');
-    else aviso('info', 'Perfil salvo.');
+    else {
+      avisarPerfilAtualizado(perfil.nome.trim() || null);
+      aviso('info', 'Perfil salvo.');
+    }
   };
 
   const trocarSenha = async (e: React.FormEvent) => {
@@ -116,11 +120,6 @@ export default function ContaPage() {
       setNovaSenha('');
       aviso('info', 'Senha alterada.');
     }
-  };
-
-  const sair = async () => {
-    await obterSupabase()?.auth.signOut();
-    irParaPagina('/');
   };
 
   const exportar = async () => {
@@ -362,11 +361,6 @@ export default function ContaPage() {
             </Button>
           )}
         </form>
-
-        <Button variant="secondary" type="button" onClick={sair} className="self-start">
-          <LogOut className="w-4 h-4" />
-          Sair
-        </Button>
       </div>
     </div>
   );

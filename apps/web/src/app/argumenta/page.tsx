@@ -117,8 +117,8 @@ export default function ArgumentaPage() {
       <div className="mb-8 flex flex-col gap-4">
         <h2 className="font-serif text-2xl font-semibold text-ink border-t border-line pt-10">Exemplo de análise completa</h2>
         <Notice tom="info" titulo="Análise de exemplo">
-          Esta é uma decisão ilustrativa, criada para mostrar aonde o módulo vai chegar: teses, premissas, pontos de atenção e estratégia. A
-          análise de uma decisão sua mostra, por enquanto, a estrutura, as questões, as conclusões e os fundamentos. O envio de arquivos (PDF,
+          Esta é uma decisão ilustrativa, criada para mostrar o que a análise completa vai trazer: teses, premissas, pontos de atenção e estratégia. A
+          análise de uma decisão sua traz, por enquanto, a estrutura, as questões, as conclusões e os fundamentos. O envio de arquivos (PDF,
           DOCX) ainda não está disponível.
         </Notice>
       </div>

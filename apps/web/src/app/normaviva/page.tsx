@@ -147,7 +147,7 @@ export default function NormaVivaPage() {
 
         {resultado.tipo === 'vazio' && !erro && (
           <p className="text-sm text-ink-soft max-w-2xl">
-            A base reúne {normas.length || 28} normas federais (Constituição, códigos e leis de maior uso), lidas do Planalto. Exemplos: <em>art. 489 CPC</em>, <em>Lei 14.133</em>,{' '}
+            Constituição, códigos e as principais leis federais. Exemplos: <em>art. 489 CPC</em>, <em>Lei 14.133</em>,{' '}
             <em>desconsideração da personalidade jurídica</em>.
           </p>
         )}
@@ -448,10 +448,8 @@ export default function NormaVivaPage() {
       )}
 
       <div className="mt-14 max-w-3xl">
-        <Notice tom="info" titulo="Como ler esta base">
-          O texto foi extraído automaticamente do Planalto e pode ter falhas de formatação: confira na fonte oficial antes de citá-lo. Na maioria dos dispositivos a base guarda só a
-          redação vigente; em alguns há também a redação anterior (veja a linha do tempo), ainda sem conferência no Diário Oficial. As datas de vigência mostradas são as de publicação
-          do ato, usadas como datas provisórias.
+        <Notice tom="info" titulo="Antes de citar">
+          Confira o texto na fonte oficial antes de citá-lo. As datas de vigência são provisórias, e as redações anteriores ainda aguardam conferência no Diário Oficial.
         </Notice>
       </div>
     </div>

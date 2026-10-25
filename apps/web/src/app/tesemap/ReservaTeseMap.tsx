@@ -9,7 +9,7 @@ import GrafoMinimoVitrine from '../../components/GrafoMinimoVitrine';
 export default function ReservaTeseMap() {
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader eyebrow="TeseMap" title="Mapa da tese" description="Precedentes qualificados com a tese firmada, a fonte oficial e as relações que uma pessoa validou." />
+      <PageHeader eyebrow="TeseMap" title="Mapa da tese" description="Precedentes com a tese firmada, a fonte oficial e as relações conferidas entre eles." />
       <Notice tom="warn" titulo="Base do TeseMap indisponível no momento">
         A pesquisa nos precedentes do STJ e do STF volta assim que a conexão com o banco for restabelecida. Abaixo, o mapa do Tema 1.076/STJ, que acompanha o
         sistema e tem as mesmas relações validadas.

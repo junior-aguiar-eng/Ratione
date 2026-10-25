@@ -126,12 +126,18 @@ export default function TeseMapPage() {
       <PageHeader
         eyebrow="TeseMap"
         title="Mapa da tese"
-        description="Precedentes qualificados com a tese firmada, a fonte oficial e as relações que uma pessoa validou."
+        description="Precedentes com a tese firmada, a fonte oficial e as relações conferidas entre eles."
       />
 
-      <p className="text-sm text-ink-soft mb-6 max-w-3xl" data-testid="cobertura">
-        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fontes: STJ, Dados Abertos (licença CC BY), e STF (Portal da Transparência e base de jurisprudência). Não é toda a jurisprudência: é o conjunto declarado acima.
-      </p>
+      <div className="mb-6 max-w-3xl text-sm text-ink-soft" data-testid="cobertura">
+        <p>
+          Reúne {declarada}. Atualizado em {atualizado ? dataCurta(atualizado) : '—'}. Não cobre toda a jurisprudência: apenas o conjunto indicado.
+        </p>
+        <details className="mt-1">
+          <summary className="cursor-pointer text-ink-mute hover:text-ink">Fontes</summary>
+          <p className="mt-1">STJ, Dados Abertos (licença CC BY); STF, Portal da Transparência e base de jurisprudência.</p>
+        </details>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 mb-6">
         <div className="sm:col-span-6">

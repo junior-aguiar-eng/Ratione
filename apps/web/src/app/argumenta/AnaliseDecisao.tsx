@@ -188,7 +188,7 @@ export default function AnaliseDecisao() {
   if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
     return (
       <Notice tom="info" titulo="Análise de decisões">
-        A análise de uma decisão sua ainda não está disponível nesta instalação. Abaixo, uma análise de exemplo.
+        A análise de uma decisão sua ainda não está disponível. Abaixo, uma análise de exemplo.
       </Notice>
     );
   }
@@ -565,7 +565,7 @@ export default function AnaliseDecisao() {
             </Tabs>
           )}
 
-          <Notice titulo="Análise gerada por IA (Claude Haiku 5.5)">
+          <Notice titulo="Análise gerada por inteligência artificial">
             Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
             página, a análise se perde.
           </Notice>
