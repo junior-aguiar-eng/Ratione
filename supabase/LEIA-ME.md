@@ -151,7 +151,33 @@ A página `/meu-espaco/administracao` e a API `/api/admin/financeiro` exigem `RA
 
 ## Migrações posteriores
 
-Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O último é `20261011000003_aceites_termos.sql` (aceite dos Termos gravado pelo servidor, F1-02); depois de rodar, conferir em *Table Editor* que existe `aceites_termos` e que cada conta já criada tem uma linha.
+Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O deploy **não** aplica migrações. Confira o índice abaixo antes de presumir o que está no banco.
+
+### Índice das migrações
+
+Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
+
+| Migração | O que faz |
+|---|---|
+| `20261007000001_perfis_e_itens_salvos` | Perfis e itens salvos em Meu espaço, com RLS |
+| `20261011000001_lembretes_prazo` · `…000002_lembretes_prazo_service_role` | Lembretes de prazo por conta e acesso do servidor |
+| `20261011000003_aceites_termos` | Aceite dos Termos gravado pelo servidor (F1-02) |
+| `20261019000001_normaviva` · `…000002_resolver_destinos` | Corpus do NormaViva e ligação das remissões ao destino |
+| `20261020000001_busca_por_proximidade` | Busca por assunto com proximidade |
+| `20261020000002_limite_itens_salvos` | Teto de 1.000 itens salvos por conta |
+| `20261021000001_versoes_anteriores` | Redações anteriores dos dispositivos (F3-04) |
+| `20261022000001_explicacao_ia` · `…000002_ia_tarefas` | Cache e uso de IA; catálogo de tarefas |
+| `20261022000003_tesemap` · `…000005_tesemap_busca` | Grafo do TeseMap e sua pesquisa |
+| `20261022000004_busca_sem_acento` · `…000006_normaviva_busca_sem_acento` | Busca sem acento (TeseMap e NormaViva) |
+| `20261023000001_planos_e_analises` | Planos, assinaturas, análises e cota por análise (F8-02, F8-03) |
+| `20261023000002_fundos_de_gasto` | Dois fundos de gasto de IA: gratuito e pagantes |
+| `20261023000003_cobranca_mercadopago` | Cobranças, avisos do Mercado Pago e funções de assinatura (F8-05) |
+| `20261024000001_painel_administrativo` | `plano_id` nos registros e `admin_financeiro` (F8-04) |
+| `20261024000002_tamanho_analise` | Tamanho da decisão no histórico (`analises.paragrafos`) |
+| `20261024000003_estatisticas_administrativas` | `admin_estatisticas` |
+| `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
+
+**Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
 
 ## Depois
 
