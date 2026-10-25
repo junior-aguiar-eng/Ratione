@@ -16,11 +16,12 @@ export function Simbolo({ tamanho = 30 }: { tamanho?: number }) {
   );
 }
 
-export default function Logo() {
+/** `grande` é o do cabeçalho; o padrão serve ao rodapé e a outros cantos. */
+export default function Logo({ grande = false }: { grande?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <Simbolo />
-      <span className="text-[15px] font-semibold tracking-[0.18em] text-ink">RATIONE</span>
+    <span className={`inline-flex items-center ${grande ? 'gap-3' : 'gap-2.5'}`}>
+      <Simbolo tamanho={grande ? 40 : 30} />
+      <span className={`${grande ? 'text-xl tracking-[0.16em]' : 'text-[15px] tracking-[0.18em]'} font-semibold text-ink`}>RATIONE</span>
     </span>
   );
 }

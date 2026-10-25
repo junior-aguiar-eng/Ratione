@@ -14,7 +14,7 @@ export default function UsuarioMenu({ nome, ativo }: { nome: string; ativo: bool
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
-        className={`hidden md:inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+        className={`hidden md:inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-[15px] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand ${
           ativo ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
         }`}
         aria-label={`Menu da conta de ${nome}`}

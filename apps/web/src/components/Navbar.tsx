@@ -21,10 +21,10 @@ export default function Navbar() {
   const contaAtiva = pathname.startsWith('/conta') || pathname.startsWith('/entrar');
 
   return (
-    <header className="sticky top-0 z-50 bg-canvas/90 backdrop-blur-sm border-b border-line">
-      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-canvas/70 backdrop-blur-md border-b border-line">
+      <div className="max-w-[1320px] mx-auto px-5 sm:px-8 h-[72px] flex items-center justify-between">
         <Link href="/" aria-label="Ratione, página inicial" onClick={() => setAberto(false)}>
-          <Logo />
+          <Logo grande />
         </Link>
 
         <nav className="hidden md:flex items-center gap-9" aria-label="Ferramentas">
@@ -35,7 +35,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={ativo ? 'page' : undefined}
-                className={`relative py-5 text-sm font-medium transition-colors ${
+                className={`relative py-6 text-base font-medium transition-colors ${
                   ativo ? 'text-ink' : 'text-ink-soft hover:text-ink'
                 }`}
               >
@@ -51,7 +51,7 @@ export default function Navbar() {
           <Link
             href="/meu-espaco"
             aria-current={meuEspacoAtivo ? 'page' : undefined}
-            className={`hidden md:inline-flex text-sm font-medium px-3 py-2 rounded-md transition-colors ${
+            className={`hidden md:inline-flex text-[15px] font-medium px-3 py-2 rounded-md transition-colors ${
               meuEspacoAtivo ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
             }`}
           >
@@ -64,7 +64,7 @@ export default function Navbar() {
               <Link
                 href="/entrar"
                 aria-current={contaAtiva ? 'page' : undefined}
-                className={`hidden md:inline-flex text-sm font-medium px-3 py-2 rounded-md transition-colors ${
+                className={`hidden md:inline-flex text-[15px] font-medium px-3 py-2 rounded-md transition-colors ${
                   contaAtiva ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
                 }`}
               >

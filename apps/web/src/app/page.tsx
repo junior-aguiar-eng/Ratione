@@ -35,7 +35,7 @@ function Secao({
 }) {
   const status = MODULOS.find(m => m.href === href)?.status;
   return (
-    <section id={id} className="py-14 border-t border-line grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <section id={id} className="py-16 border-t border-line/70 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
       <div className={`lg:col-span-5 flex flex-col gap-5 ${invertido ? 'lg:order-2' : ''}`}>
         <div className="flex items-center gap-3">
           <span className="eyebrow">{nome}</span>
@@ -50,7 +50,7 @@ function Secao({
       </div>
 
       <div className={`lg:col-span-7 ${invertido ? 'lg:order-1' : ''}`}>
-        <div className="bg-surface border border-line rounded-xl p-6 sm:p-8">{children}</div>
+        <div className="bg-surface/85 backdrop-blur-sm border border-line rounded-2xl shadow-card p-6 sm:p-8">{children}</div>
         <p className="text-sm text-ink-mute mt-3">{legenda}</p>
       </div>
     </section>
@@ -183,26 +183,42 @@ function VisualPrazoZero() {
 export default function HomePage() {
   return (
     <div>
-      <section className="pt-10 sm:pt-16 pb-16 max-w-3xl flex flex-col gap-6">
-        <h1 className="font-serif text-5xl sm:text-6xl font-semibold tracking-tight text-ink leading-[1.05] sm:leading-none">
-          Direito, estruturado.
-        </h1>
-        <p className="text-lg sm:text-xl text-ink-soft leading-relaxed sm:leading-7">
-          Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular
-          prazos.
-        </p>
-        <div className="flex flex-wrap gap-3 pt-2">
-          <Link href="/prazozero" className={buttonVariants()}>
-            <span>Calcular prazo</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link href="#ferramentas" className={buttonVariants({ variant: 'secondary' })}>
-            Ver as ferramentas
-          </Link>
+      <section className="pt-12 sm:pt-20 pb-20 flex flex-col gap-8">
+        <div className="max-w-3xl flex flex-col gap-6">
+          <span className="inline-flex self-start items-center gap-2 rounded-full border border-line bg-surface/70 backdrop-blur-sm px-3.5 py-1.5 text-sm font-medium text-brand-text shadow-card">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
+            Plataforma de inteligência e rigor jurídico
+          </span>
+          <h1 className="font-serif text-5xl sm:text-7xl font-semibold tracking-tight text-ink leading-[1.04]">Direito, estruturado.</h1>
+          <p className="text-lg sm:text-2xl text-ink-soft leading-relaxed max-w-2xl">
+            Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular prazos.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <Link href="/prazozero" className={cn(buttonVariants(), 'h-11 px-5 text-base')}>
+              <span>Calcular prazo</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="#ferramentas" className={cn(buttonVariants({ variant: 'secondary' }), 'h-11 px-5 text-base')}>
+              Ver as ferramentas
+            </Link>
+          </div>
         </div>
+
+        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl" aria-label="O que a plataforma já reúne">
+          {[
+            ['28', 'normas federais, com a redação ao longo do tempo'],
+            ['7.700+', 'precedentes, temas e súmulas do STJ e do STF'],
+            ['121', 'cenários de prazo conferidos por revisão jurídica']
+          ].map(([numero, rotulo]) => (
+            <div key={rotulo} className="rounded-xl border border-line bg-surface/70 backdrop-blur-sm shadow-card px-4 py-3.5">
+              <dt className="font-serif text-3xl font-semibold text-ink num">{numero}</dt>
+              <dd className="text-sm text-ink-soft leading-snug mt-0.5">{rotulo}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      <div id="ferramentas" className="scroll-mt-20">
+      <div id="ferramentas" className="scroll-mt-24">
         <h2 className="sr-only">O que você quer fazer?</h2>
 
         <Secao
