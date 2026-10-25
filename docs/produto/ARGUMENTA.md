@@ -74,3 +74,18 @@ O corpus de **30 decisões públicas** avalia a **extração estrutural**, não 
 ## 7. Ligar
 
 As tarefas usam a mesma chave da IA do resto do site (`IA_EXPLICACAO_LIGADA=sim` e `ANTHROPIC_API_KEY` no servidor; `NEXT_PUBLIC_IA_EXPLICACAO=sim` no build para mostrar o formulário). Exige a migração `20261023000001_planos_e_analises.sql` (planos, análises e a cota por análise), **aplicada antes** de publicar este código (`supabase/LEIA-ME.md`). A contagem de parágrafos das novas análises também exige `20261024000002_tamanho_analise.sql` antes de disponibilizar o frontend novo (§4.2 de `PLANOS_E_COBRANCA.md`); nesta entrega só foi aplicada em teste local. Sem a IA ligada, a tela mostra só a análise de exemplo.
+
+## 8. Verificação de citações (F5-04)
+
+Depois que os fundamentos chegam, a tela confere a **citação** de cada um (`"CDC, art. 14"`, `"Súmula 479 do STJ"`) contra o corpus público e mostra um selo ao lado dela. É **código, sem IA**: `lib/argumenta/citacoes.ts` reconhece o formato e `lib/argumenta/verificarCitacoes.ts` consulta o banco.
+
+| Reconhece | Confere em | Selo |
+|---|---|---|
+| Artigo de uma das 28 normas (com parágrafo, inciso ou alínea) e lei por número e ano | `dispositivos` e `normas` (NormaViva) | **Encontrada na base**, com link; se só o artigo existe, avisa que o detalhe não foi conferido |
+| Súmula do STF ou do STJ, vinculante ou não; tema de repercussão geral (STF) ou repetitivo (STJ) | `tesemap_nos` (TeseMap) | **Encontrada na base**, com link, ou **Não localizada na base** |
+| ADI, ADPF, ADC e ADO | `tesemap_nos` | **Encontrada** ou **Fora da base** (a base só tem as de mérito julgado) |
+| Norma ou súmula de outro tribunal, lei fora das 28 | não confere | **Fora da base** |
+
+**Regras.** O selo diz se a base do Ratione tem a citação; **não diz que ela esteja certa ou errada**, e não confere o que o precedente afirma. Doutrina, recurso (`REsp 1.234.567`), "art. 14" sem norma e várias súmulas numa citação só ficam **sem selo**, e falha de leitura também: na dúvida, a tela não afirma nada. A leitura é a de qualquer visitante (chave publicável, RLS), feita pelo navegador; **só a string da citação sai da página**, nunca o texto da decisão, e nada é gravado. No máximo 60 citações distintas por análise.
+
+**Conferência no banco de produção (25/10/2026, como visitante anônimo, só leitura):** `STJ-TEMA-1076`, `STF-RG-660` e `STF-ADI-4675` existem pelo id; `Súmula 479` (STJ), `SV 10` e `Súmula 339` (STF) existem por `tribunal` + `numero_referencia`; `art. 14` do CDC e `art. 85, § 2º` do CPC existem em `dispositivos`; `art. 9999` do CDC não existe. É o formato em que o reconhecedor monta a consulta.
