@@ -127,8 +127,10 @@ export default function PrivacidadePage() {
 
         <Secao numero={5} titulo="Por quanto tempo guardamos">
           <Lista>
-            <li>Conta, perfil, registros e avisos: enquanto você não os apagar nem excluir a conta.</li>
-            <li>Registro de uso dos recursos de inteligência artificial e histórico de análises: enquanto a conta existir. Hoje não há prazo menor.</li>
+            <li>Conta, perfil e registros salvos: enquanto você não os apagar nem excluir a conta.</li>
+            <li>Avisos de prazo: até 30 dias depois do vencimento, quando são apagados automaticamente, ou antes, se você os apagar.</li>
+            <li>Registro de uso dos recursos de inteligência artificial e histórico de análises: 13 meses, depois são apagados automaticamente.</li>
+            <li>Registro das ações administrativas (suspensão e reativação de contas): 12 meses, depois são apagados automaticamente.</li>
             <li>
               Excluir a conta remove, de uma vez, o cadastro, o perfil, os registros, os avisos e o registro de uso de inteligência artificial. Cópias de segurança do prestador de banco de dados
               podem manter os dados por um período limitado depois disso.

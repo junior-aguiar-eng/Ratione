@@ -155,7 +155,7 @@ Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → co
 
 ### Índice das migrações
 
-Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
+Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A `20261025000001_limpeza_por_prazo` **ainda não foi aplicada** (ver a seção "Limpeza por prazo", abaixo). A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
 
 | Migração | O que faz |
 |---|---|
@@ -176,6 +176,7 @@ Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por cons
 | `20261024000002_tamanho_analise` | Tamanho da decisão no histórico (`analises.paragrafos`) |
 | `20261024000003_estatisticas_administrativas` | `admin_estatisticas` |
 | `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
+| `20261025000001_limpeza_por_prazo` | `limpar_dados_vencidos()` e o agendamento diário no `pg_cron` |
 
 **Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
 
@@ -190,3 +191,26 @@ Avise quando terminar o passo 5. O próximo passo (login na tela, salvar cálcul
 Migrações 20261024000003_estatisticas_administrativas e 20261024000004_administracao_contas aplicadas no Supabase Ratione após autorização. RPCs admin_estatisticas e admin_contas conferidas: acesso exclusivo de service_role, sem conceder leitura de auth.users. A busca retorna e-mail mascarado, UUID e situação de cadastro. Trilha admin_acesso_eventos exclusiva do serviço. Política restritiva conta_ativa_restritiva em 20 tabelas com RLS, incluindo a trilha, e guarda em uso_resumo; novas tabelas privadas precisam manter a barreira. Duas contas preservadas, nenhuma suspensa nem alterada como teste. Estatísticas reais conferidas por leitura: 2 contas, 19 execuções de IA no mês; cobrança desligada.
 
 O workflow passou a entregar RATIONE_ADMIN_USUARIO_IDS da variável de repositório ao servidor. Somente a conta escolhida expressamente pelo responsável foi configurada; UUID não consta no código. O teste de suspensão/reativação ocorre em banco e Auth simulados locais; não é teste de operação destrutiva em produção.
+
+## Limpeza por prazo (25/10/2026)
+
+`migrations/20261025000001_limpeza_por_prazo.sql` cria `public.limpar_dados_vencidos()` e a agenda no `pg_cron` (todo dia às 06:17 UTC, 03:17 em Brasília). O banco passa a guardar só o estritamente necessário (decisão do responsável, 25/10/2026):
+
+| Tabela | Prazo |
+|---|---|
+| `ia_uso` e `analises` | 13 meses |
+| `lembretes_prazo` | 30 dias depois do vencimento |
+| `mp_eventos` | 90 dias |
+| `admin_acesso_eventos` | 12 meses |
+
+Não expiram: conta, perfil, registros salvos e aceites dos Termos (saem com a exclusão da conta). `cobrancas` e `assinaturas` ficam fora até se definir o prazo fiscal. A função é exclusiva da `service_role`; nenhum usuário apaga o próprio histórico por aqui, porque a cota é contada a partir dessas linhas.
+
+**Aplicar ANTES de publicar a Política de Privacidade v1.2**, que já descreve esses prazos: *SQL Editor → New query*, colar o arquivo inteiro → *Run*. Confirme o projeto `ratione` e "PRODUCTION" na tela. A migração tenta ativar o `pg_cron`; se o Supabase recusar, ative em *Database → Extensions* e rode só o bloco `do $$ ... $$` do fim do arquivo.
+
+Conferência depois de aplicar (só leitura):
+
+- `select proname from pg_proc where proname = 'limpar_dados_vencidos';` deve listar a função;
+- `select jobname, schedule, active from cron.job;` deve mostrar `limpeza-por-prazo`, `17 6 * * *`, `true`;
+- `select has_function_privilege('anon', 'public.limpar_dados_vencidos()', 'execute') as anon, has_function_privilege('service_role', 'public.limpar_dados_vencidos()', 'execute') as servidor;` deve dar `false` e `true`.
+
+A primeira execução (a agendada ou `select public.limpar_dados_vencidos();` no editor) devolve quantas linhas apagou de cada tabela. Hoje só há dados de outubro de 2026, então o esperado é zero, exceto avisos de prazo vencidos há mais de 30 dias. Depois, `select jobname, status, start_time from cron.job_run_details order by start_time desc limit 5;` mostra as execuções do agendador.
