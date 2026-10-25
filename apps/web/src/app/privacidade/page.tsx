@@ -24,8 +24,8 @@ export default function PrivacidadePage() {
 
         <Secao numero={2} titulo="O que guardamos e para quê">
           <p>
-            Os cálculos do PrazoZero são feitos no seu navegador: o que você digita nas ferramentas não vai ao servidor, a menos que você
-            escolha salvar (item abaixo). O uso exige uma conta. Com ela, guardamos:
+            Os cálculos do PrazoZero são feitos no seu navegador: o que você digita nele não vai ao servidor, a menos que você escolha salvar
+            (item abaixo). A exceção são os recursos de inteligência artificial, descritos no item 3. O uso exige uma conta. Com ela, guardamos:
           </p>
           <Lista>
             <li>
@@ -42,6 +42,13 @@ export default function PrivacidadePage() {
               de processo nem dado de cliente</Destaque>.
             </li>
             <li>
+              <Destaque>Uso dos recursos de inteligência artificial:</Destaque> o plano da conta e, a cada análise ou explicação, a ferramenta
+              usada, a data e a hora, o resultado (gerada, falhou ou recusada), a quantidade de tokens e o custo, um código (hash) do texto
+              enviado, a quantidade de parágrafos da decisão e o nome que você der à análise (opcional). <Destaque>O texto da decisão e o
+              resultado da análise não ficam guardados.</Destaque> Para aplicar a cota do seu plano e mostrar o seu histórico em &ldquo;Meu
+              uso&rdquo; (execução de contrato, art. 7º, V).
+            </li>
+            <li>
               <Destaque>Avisos por e-mail:</Destaque> o nome que você deu ao aviso, o tribunal, a data do vencimento, quais avisos escolheu
               (3 dias e 1 dia antes) e quando cada e-mail foi enviado. Para enviar o aviso que você pediu.
             </li>
@@ -53,15 +60,49 @@ export default function PrivacidadePage() {
           </Lista>
           <p>
             Não usamos ferramentas de estatística de uso nem de publicidade, não colocamos serviços de terceiros que rastreiam você e não vendemos
-            dados pessoais. Hoje nenhuma ferramenta usa inteligência artificial e não tomamos decisões automatizadas sobre você.
+            dados pessoais. A pessoa responsável pelo Ratione, em área restrita, vê totais de uso e custo e uma lista de contas com o e-mail
+            parcialmente oculto, as datas de cadastro e do último acesso, e pode suspender ou reativar uma conta; essas ações ficam registradas.
+            Os resultados de inteligência artificial são sugestões para você conferir, e não tomamos decisões automatizadas sobre você.
           </p>
         </Secao>
 
-        <Secao numero={3} titulo="Com quem compartilhamos">
+        <Secao numero={3} titulo="Inteligência artificial">
+          <p>
+            Dois recursos usam inteligência artificial, e só quando você os aciona: a análise de uma decisão colada (Argumenta) e a explicação de
+            um dispositivo de lei (NormaViva).
+          </p>
+          <Lista>
+            <li>
+              <Destaque>Argumenta:</Destaque> o texto que você cola é dividido em parágrafos e, <Destaque>no seu navegador, antes do envio</Destaque>,
+              identificadores como CPF, CNPJ, RG, OAB, e-mail, telefone, CEP, endereço, número de processo e nomes de partes e advogados
+              indicados por rótulos (&ldquo;Autor:&rdquo;, &ldquo;em face de&rdquo;) são trocados por marcadores. A tabela de troca fica só na sua tela,
+              que mostra os dados reais para você, e o servidor recusa o envio se ainda detectar dado pessoal. A detecção é automática e{' '}
+              <Destaque>não pega todo nome que aparece no meio do texto</Destaque>: confira o que será enviado, acrescente os nomes que faltarem à
+              lista de ocultação e <Destaque>não envie documento em segredo de justiça</Destaque>.
+            </li>
+            <li>
+              <Destaque>NormaViva:</Destaque> só o texto do dispositivo de lei, que é público, vai ao modelo. Nenhum dado seu é enviado.
+            </li>
+            <li>
+              O texto enviado serve apenas para gerar a resposta. Ele e o resultado não ficam guardados: a análise some quando você sai da
+              página. Guardamos só o registro de uso descrito no item 2.
+            </li>
+          </Lista>
+          <p>
+            Os modelos são da Anthropic (Claude), que recebe o texto enviado como prestadora, nos termos do item 4. O resultado pode conter
+            erro: confira sempre nas fontes.
+          </p>
+        </Secao>
+
+        <Secao numero={4} titulo="Com quem compartilhamos">
           <p>Só com os prestadores necessários para o serviço funcionar (operadores):</p>
           <Lista>
             <li>
               <Destaque>Supabase</Destaque> (banco de dados e login): região de São Paulo. Guarda a conta, o perfil, os registros e os avisos.
+            </li>
+            <li>
+              <Destaque>Anthropic</Destaque> (modelos de inteligência artificial): recebe o texto pseudonimizado das decisões que você manda
+              analisar e o texto dos dispositivos que você pede para explicar, só para gerar a resposta. Pode processar dados fora do Brasil.
             </li>
             <li>
               <Destaque>Google Cloud</Destaque> (hospedagem do site): servidor em São Paulo. Os registros técnicos de acesso, mantidos por 30 dias,
@@ -84,22 +125,24 @@ export default function PrivacidadePage() {
           </p>
         </Secao>
 
-        <Secao numero={4} titulo="Por quanto tempo guardamos">
+        <Secao numero={5} titulo="Por quanto tempo guardamos">
           <Lista>
             <li>Conta, perfil, registros e avisos: enquanto você não os apagar nem excluir a conta.</li>
+            <li>Registro de uso dos recursos de inteligência artificial e histórico de análises: enquanto a conta existir. Hoje não há prazo menor.</li>
             <li>
-              Excluir a conta remove, de uma vez, o cadastro, o perfil, os registros e os avisos. Cópias de segurança do prestador de banco de dados
+              Excluir a conta remove, de uma vez, o cadastro, o perfil, os registros, os avisos e o registro de uso de inteligência artificial. Cópias de segurança do prestador de banco de dados
               podem manter os dados por um período limitado depois disso.
             </li>
             <li>Registros técnicos de acesso do Google Cloud: 30 dias. Registros de login e de e-mail seguem o prazo de cada prestador.</li>
           </Lista>
         </Secao>
 
-        <Secao numero={5} titulo="Seus direitos e como exercê-los">
+        <Secao numero={6} titulo="Seus direitos e como exercê-los">
           <p>A LGPD (art. 18) garante, entre outros, confirmação do tratamento, acesso, correção, eliminação, portabilidade e informação sobre compartilhamento. Em &ldquo;Minha conta&rdquo; você pode, sem falar com ninguém:</p>
           <Lista>
             <li>corrigir o perfil e trocar a senha;</li>
-            <li>baixar todos os seus dados;</li>
+            <li>baixar os seus dados (perfil, registros salvos, avisos e aceites dos Termos);</li>
+            <li>ver o histórico de uso de inteligência artificial em &ldquo;Meu uso&rdquo;;</li>
             <li>apagar os registros salvos e os avisos;</li>
             <li>excluir a conta por completo (pede a senha atual e não pode ser desfeito).</li>
           </Lista>
@@ -109,7 +152,7 @@ export default function PrivacidadePage() {
           </p>
         </Secao>
 
-        <Secao numero={6} titulo="Segurança">
+        <Secao numero={7} titulo="Segurança">
           <p>
             A conexão com o site é protegida por HTTPS. Cada conta só acessa os próprios dados: o isolamento é feito no banco de dados e testado
             automaticamente. As chaves de acesso aos serviços ficam fora do código. Nenhum sistema é totalmente imune; em caso de incidente
@@ -117,7 +160,7 @@ export default function PrivacidadePage() {
           </p>
         </Secao>
 
-        <Secao numero={7} titulo="Cookies e armazenamento no seu navegador" id="cookies">
+        <Secao numero={8} titulo="Cookies e armazenamento no seu navegador" id="cookies">
           <p>Usamos só o que o site precisa para funcionar. Nada serve a publicidade ou a medição de uso.</p>
           <Lista>
             <li>
@@ -139,14 +182,14 @@ export default function PrivacidadePage() {
           </p>
         </Secao>
 
-        <Secao numero={8} titulo="Crianças e adolescentes">
+        <Secao numero={9} titulo="Crianças e adolescentes">
           <p>O Ratione é destinado a maiores de 18 anos. Não coletamos dados de menores de propósito; se souber de algum caso, avise.</p>
         </Secao>
 
-        <Secao numero={9} titulo="Mudanças nesta política">
+        <Secao numero={10} titulo="Mudanças nesta política">
           <p>
-            Antes de lançar qualquer funcionalidade que envolva envio de documentos, inteligência artificial ou cobrança, esta política será
-            atualizada com as novas regras (armazenamento, retenção, exclusão e prestadores). Mudanças relevantes serão comunicadas na plataforma
+            Antes de lançar qualquer funcionalidade que envolva envio de arquivos, cobrança ou outro uso de inteligência artificial além do
+            descrito acima, esta política será atualizada com as novas regras (armazenamento, retenção, exclusão e prestadores). Mudanças relevantes serão comunicadas na plataforma
             e por e-mail, e a versão e a data acima serão atualizadas. Os <Link href="/termos" className={link}>Termos de uso</Link> também
             se aplicam.
           </p>
