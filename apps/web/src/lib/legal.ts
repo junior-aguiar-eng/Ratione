@@ -9,9 +9,9 @@ export const RESPONSAVEL = {
   email: 'contato@nexojuris.ia.br'
 } as const;
 
-export const VERSAO_TEXTOS = '1.0';
+export const VERSAO_TEXTOS = '1.1';
 /** ISO. */
-export const VIGENCIA_TEXTOS = '2026-10-10';
+export const VIGENCIA_TEXTOS = '2026-10-25';
 
 /**
  * Enviado no cadastro (`signUp`, `options.data`): qual versão dos Termos a pessoa aceitou ao marcar a caixa.
