@@ -64,12 +64,12 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 
 - A pseudonimização acha identificadores formatados e nomes **rotulados**; um nome citado só no meio do texto, sem rótulo, passa, se o usuário não o acrescentar à lista. Por isso a tela mostra o texto como será enviado.
 - A segmentação de texto copiado de PDF usa heurística (linha mais curta terminada em ponto encerra o parágrafo; título em caixa alta e linha com rótulo ficam sozinhos). Não há página: a âncora é o parágrafo. Página e posição vêm com o Docling (F5-02).
-- A citação é a do texto, **não verificada**: a verificação contra NormaViva e TeseMap é a F5-04.
+- A citação é a do texto. O selo da F5-04 (§8) diz se a base do Ratione a tem, mas não se ela está certa nem o que o precedente afirma.
 - Sem fragilidades, teses, mapa nem estratégias: a análise de exemplo, abaixo do formulário, mostra aonde o módulo vai chegar.
 
 ## 6. Avaliação (F5-05)
 
-O corpus de **30 decisões públicas** avalia a **extração estrutural**, não a concordância perfeita com a IA. Para cada decisão: fonte e data de acesso, texto, e o esperado conferido por jurista (`validado_por`): intervalo do dispositivo, questões com a conclusão e os parágrafos, e os fundamentos citados (normas e precedentes). Métricas: acerto do intervalo do dispositivo, questões esperadas encontradas (por sobreposição de parágrafos), citações esperadas encontradas e taxa de saídas descartadas. Estado: formato definido; decisões ainda a reunir.
+O corpus de **30 decisões públicas** avalia a **extração estrutural**, não a concordância perfeita com a IA. Para cada decisão: fonte e data de acesso, texto, e o esperado conferido por jurista (`validado_por`): intervalo do dispositivo, questões com a conclusão e os parágrafos, e os fundamentos citados (normas e precedentes). Métricas: acerto do intervalo do dispositivo, questões esperadas encontradas (por sobreposição de parágrafos), citações esperadas encontradas e taxa de saídas descartadas. **Ferramentas prontas (25/10/2026):** `pnpm --filter web avaliacao` cria o caso, gera a folha de conferência, valida o gabarito, roda o pipeline (com `--confirmar`, por gastar dinheiro) e escreve o relatório; fluxo e definição de cada métrica em [`packages/argumenta/corpus/LEIA-ME.md`](../../packages/argumenta/corpus/LEIA-ME.md). **Estado:** decisões ainda a reunir e gabaritos a validar pelo revisor.
 
 ## 7. Ligar
 
