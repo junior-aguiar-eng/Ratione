@@ -26,6 +26,11 @@
       "import": "./src/busca/consulta.ts",
       "default": "./src/busca/consulta.ts"
     },
+    "./apelidos": {
+      "types": "./src/busca/apelidos.ts",
+      "import": "./src/busca/apelidos.ts",
+      "default": "./src/busca/apelidos.ts"
+    },
     "./referencias": {
       "types": "./src/busca/referencias.ts",
       "import": "./src/busca/referencias.ts",
