@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { MotorPrazoZero } from '@ratione/prazozero';
 import { MotorNormaViva } from '@ratione/normaviva';
 import RecentesHome from '../components/RecentesHome';
+import DemoHero from '../components/demo/DemoHero';
 import GrafoMinimoVitrine from '../components/GrafoMinimoVitrine';
 import { MODULOS } from '../lib/modulos';
 import { DECISAO_DEMO } from '../lib/decisaoDemo';
@@ -183,14 +184,15 @@ function VisualPrazoZero() {
 export default function HomePage() {
   return (
     <div>
-      <section className="pt-12 sm:pt-20 pb-20 flex flex-col gap-8">
-        <div className="max-w-3xl flex flex-col gap-6">
+      <section className="pt-12 sm:pt-20 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+        <div className="lg:col-span-6 flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
           <span className="inline-flex self-start items-center gap-2 rounded-full border border-line bg-surface/70 backdrop-blur-sm px-3.5 py-1.5 text-sm font-medium text-brand-text shadow-card">
             <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
             Plataforma de inteligência e rigor jurídico
           </span>
-          <h1 className="font-serif text-5xl sm:text-7xl font-semibold tracking-tight text-ink leading-[1.04]">Direito, estruturado.</h1>
-          <p className="text-lg sm:text-2xl text-ink-soft leading-relaxed max-w-2xl">
+          <h1 className="font-serif text-5xl sm:text-6xl xl:text-7xl font-semibold tracking-tight text-ink leading-[1.04]">Direito, estruturado.</h1>
+          <p className="text-lg sm:text-xl text-ink-soft leading-relaxed max-w-xl">
             Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular prazos.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
@@ -204,7 +206,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl" aria-label="O que a plataforma já reúne">
+        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3" aria-label="O que a plataforma já reúne">
           {[
             ['28', 'normas federais, com a redação ao longo do tempo'],
             ['7.700+', 'precedentes, temas e súmulas do STJ e do STF'],
@@ -216,6 +218,11 @@ export default function HomePage() {
             </div>
           ))}
         </dl>
+        </div>
+
+        <div className="lg:col-span-6">
+          <DemoHero />
+        </div>
       </section>
 
       <div id="ferramentas" className="scroll-mt-24">
