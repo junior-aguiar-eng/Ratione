@@ -249,6 +249,7 @@ Pesquisa de autoridade (localizar, verificar, obter metadados) passa por um **Ju
 | DPA e transferência internacional | Contratos com nuvem, e-mail, IA e pagamento (LGPD, art. 33) |
 | ROPA, RIPD, encarregado (DPO) | RIPD antes do Argumenta; verificar enquadramento como agente de pequeno porte (Res. CD/ANPD 2/2022) |
 | Política de IA | Transparência sobre sugestões automáticas; seguir as recomendações da OAB sobre IA generativa |
+| Retenção mínima de dados | **Decidido em 25/10/2026:** só o estritamente necessário. Limpeza diária por prazo (`limpar_dados_vencidos()`, `pg_cron`): uso de IA e análises 13 meses; ações administrativas 12 meses; avisos de prazo 30 dias após o vencimento; avisos do Mercado Pago 90 dias. Conta, perfil, registros e aceites ficam até a exclusão da conta; cobranças e assinaturas, até definir o prazo fiscal. **Migração `20261025000001` aplicada no Supabase em 25/10/2026** (função, privilégios e agendamento `limpeza-por-prazo` conferidos; nenhuma linha vencida na primeira conferência) |
 | Licenças de dados | Respeitar os termos de cada fonte (ex.: dados abertos do STJ) |
 | Seguro | Avaliar seguro de responsabilidade civil/E&O **antes de cobrar pelo PrazoZero** |
 

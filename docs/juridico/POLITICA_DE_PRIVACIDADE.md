@@ -69,8 +69,10 @@ Alguns fornecedores armazenam ou processam dados **fora do Brasil**. Adotamos os
 | Dado | Prazo |
 |---|---|
 | Conta e itens salvos | Enquanto a conta estiver ativa; exclusão em até [30] dias após o pedido |
-| **Registro de uso de IA e histórico de análises** | Enquanto a conta existir; removidos com a exclusão da conta. Hoje não há prazo menor |
-| Registro das ações administrativas (suspensão e reativação) | Mantido sem a identificação da conta quando ela é excluída **[CONFIRMAR]** |
+| **Registro de uso de IA e histórico de análises** | **13 meses**, depois apagados automaticamente (e antes, com a exclusão da conta) |
+| Avisos de prazo | Até 30 dias depois do vencimento, ou antes, se você os apagar |
+| Registro das ações administrativas (suspensão e reativação) | **12 meses**; se a conta é excluída antes, o registro fica sem a identificação dela |
+| Avisos de pagamento do operador (Mercado Pago) **[FUTURO]** | 90 dias; servem só para não processar o mesmo aviso duas vezes |
 | **Documentos enviados e textos extraídos** | Até [X] dias (padrão curto) ou até você excluir |
 | Cobrança e documentos fiscais | **Prazos legais fiscais e tributários** |
 | Registros de acesso | **Prazo legal aplicável** (Marco Civil da Internet) |
