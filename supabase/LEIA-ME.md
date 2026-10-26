@@ -177,6 +177,7 @@ Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por cons
 | `20261024000003_estatisticas_administrativas` | `admin_estatisticas` |
 | `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
 | `20261025000001_limpeza_por_prazo` | `limpar_dados_vencidos()` e o agendamento diário no `pg_cron` |
+| `20261026000001_tesemap_filtro_por_especie` | `tesemap_buscar` ganha o parâmetro opcional `prefixo` (filtro por espécie: tema repetitivo, IAC, repercussão geral…). **A aplicar** no SQL Editor; até lá o filtro "Espécie" do TeseMap acusa erro, e a pesquisa sem ele segue igual |
 
 **Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
 

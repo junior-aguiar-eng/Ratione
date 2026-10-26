@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Search, Trash2 } from 'lucide-react';
+import { Search, Trash2, Undo2 } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import EmptyState from '../../components/EmptyState';
 import Notice from '../../components/Notice';
@@ -30,8 +30,15 @@ const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
   { id: 'prazo', rotulo: 'Prazos' }
 ];
 
+/** Quanto tempo o "Desfazer" fica à mão antes de a remoção valer de fato. */
+const MS_PARA_DESFAZER = 7000;
+
 export default function MeuEspacoPage() {
   const [registros, setRegistros] = useState<RegistroHistorico[]>([]);
+  // Removidos que ainda dá para desfazer: somem da lista na hora, mas só são apagados de verdade depois do prazo.
+  const [removidos, setRemovidos] = useState<RegistroHistorico[]>([]);
+  const prazos = useRef(new Map<string, { registro: RegistroHistorico; timer: ReturnType<typeof setTimeout> }>());
+  const origemRef = useRef<'conta' | 'navegador'>('navegador');
   const [carregado, setCarregado] = useState(false);
   const { usuario, carregando } = useSessao();
   const [origem, setOrigem] = useState<'conta' | 'navegador'>('navegador');
@@ -45,6 +52,7 @@ export default function MeuEspacoPage() {
     const h = await carregarHistorico();
     setRegistros(h.itens);
     setOrigem(h.origem);
+    origemRef.current = h.origem;
     setLocais(lerHistorico().length);
     setCarregado(true);
   };
@@ -66,22 +74,50 @@ export default function MeuEspacoPage() {
     await recarregar();
   };
 
-  const remover = async (r: RegistroHistorico) => {
-    if (origem === 'conta') {
+  /** Apaga de verdade: na conta, no banco; sem login, neste navegador. Se a conta não apagar, o registro volta para a lista. */
+  const apagar = useCallback(async (r: RegistroHistorico) => {
+    prazos.current.delete(r.id);
+    if (origemRef.current === 'conta') {
       if (await removerDaConta(r.id)) setRegistros(atuais => atuais.filter(x => x.id !== r.id));
     } else {
       setRegistros(removerRegistro(r.id));
     }
+    setRemovidos(atuais => atuais.filter(x => x.id !== r.id));
+  }, []);
+
+  const remover = (r: RegistroHistorico) => {
+    setRemovidos(atuais => [...atuais, r]);
+    prazos.current.set(r.id, { registro: r, timer: setTimeout(() => void apagar(r), MS_PARA_DESFAZER) });
   };
+
+  const desfazer = (r: RegistroHistorico) => {
+    const p = prazos.current.get(r.id);
+    if (p) clearTimeout(p.timer);
+    prazos.current.delete(r.id);
+    setRemovidos(atuais => atuais.filter(x => x.id !== r.id));
+  };
+
+  // Quem sai da página com remoções à espera já decidiu: elas valem na hora, sem esperar o prazo.
+  useEffect(() => {
+    const pendentes = prazos.current;
+    return () => {
+      for (const { registro, timer } of pendentes.values()) {
+        clearTimeout(timer);
+        void apagar(registro);
+      }
+    };
+  }, [apagar]);
+
+  const restantes = useMemo(() => registros.filter(r => !removidos.some(x => x.id === r.id)), [registros, removidos]);
 
   const visiveis = useMemo(() => {
     const q = busca.trim().toLowerCase();
-    return registros.filter(
+    return restantes.filter(
       r =>
         (filtro === 'todos' || r.tipo === filtro) &&
         (q === '' || `${r.titulo} ${r.detalhe ?? ''} ${r.modulo}`.toLowerCase().includes(q))
     );
-  }, [registros, filtro, busca]);
+  }, [restantes, filtro, busca]);
 
   return (
     <div>
@@ -156,7 +192,30 @@ export default function MeuEspacoPage() {
         </div>
       </div>
 
-      {!carregado ? null : registros.length === 0 ? (
+      <div aria-live="polite">
+        {removidos.length > 0 && (
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-line bg-surface-2 px-4 py-3 text-sm text-ink">
+            <span className="min-w-0">
+              {removidos.length === 1 ? (
+                <>
+                  <span className="font-medium">{removidos[0].titulo}</span> foi removido.
+                </>
+              ) : (
+                `${removidos.length} registros foram removidos.`
+              )}
+            </span>
+            <button
+              type="button"
+              onClick={() => desfazer(removidos[removidos.length - 1])}
+              className="inline-flex items-center gap-1.5 font-medium text-brand-text hover:underline"
+            >
+              <Undo2 className="w-4 h-4" aria-hidden /> Desfazer
+            </button>
+          </div>
+        )}
+      </div>
+
+      {!carregado ? null : restantes.length === 0 && removidos.length === 0 ? (
         <EmptyState
           titulo="Você ainda não salvou nada"
           acao={
@@ -184,7 +243,7 @@ export default function MeuEspacoPage() {
               </div>
               <button
                 type="button"
-                onClick={() => void remover(r)}
+                onClick={() => remover(r)}
                 aria-label={`Remover ${r.titulo}`}
                 className="p-2 rounded-md text-ink-mute hover:text-danger-text hover:bg-danger-tint transition-colors shrink-0"
               >
