@@ -143,7 +143,7 @@ export default function PrivacidadePage() {
           <p>A LGPD (art. 18) garante, entre outros, confirmação do tratamento, acesso, correção, eliminação, portabilidade e informação sobre compartilhamento. Em &ldquo;Minha conta&rdquo; você pode, sem falar com ninguém:</p>
           <Lista>
             <li>corrigir o perfil e trocar a senha;</li>
-            <li>baixar os seus dados (perfil, registros salvos, avisos e aceites dos Termos);</li>
+            <li>baixar os seus dados (perfil, registros salvos, avisos, aceites dos Termos, registro de uso de inteligência artificial, análises, assinatura e cobranças);</li>
             <li>ver o histórico de uso de inteligência artificial em &ldquo;Meu uso&rdquo;;</li>
             <li>apagar os registros salvos e os avisos;</li>
             <li>excluir a conta por completo (pede a senha atual e não pode ser desfeito).</li>

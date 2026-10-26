@@ -80,7 +80,7 @@ Alguns fornecedores armazenam ou processam dados **fora do Brasil**. Adotamos os
 
 ## 9. Seus direitos (LGPD, art. 18)
 Você pode, a qualquer tempo e mediante requisição a [EMAIL_PRIVACIDADE]: confirmar a existência de tratamento; **acessar**; **corrigir**; **anonimizar, bloquear ou eliminar**; pedir **portabilidade**; obter informação sobre **compartilhamento**; saber das consequências de **não consentir**; **revogar o consentimento**; **opor-se** a tratamento em desconformidade; e **peticionar à ANPD**.
-Na Plataforma você pode **exportar seus dados** (hoje: perfil, registros salvos, avisos e aceites dos Termos) e **excluir a conta**. **[LACUNA]** O histórico de análises e o registro de uso de IA ainda **não** entram na exportação; consulte-os em "Meu uso". Respondemos em até [15] dias. Quando atuamos como **operador**, encaminhamos o pedido ao **controlador** (você ou o titular, conforme o caso).
+Na Plataforma você pode **exportar seus dados** (perfil, registros salvos, avisos, aceites dos Termos, registro de uso de IA, análises, assinatura e cobranças) e **excluir a conta**. Respondemos em até [15] dias. Quando atuamos como **operador**, encaminhamos o pedido ao **controlador** (você ou o titular, conforme o caso).
 
 ## 10. Segurança
 Adotamos medidas técnicas e organizacionais, incluindo: **criptografia em trânsito e em repouso**, controle de acesso por usuário (isolamento de dados), senhas com *hash*, **segredos fora do código**, monitoramento, **backups** e revisão de dependências. Nenhum sistema é totalmente imune; em caso de **incidente relevante**, comunicaremos a **ANPD** e os titulares nos termos da LGPD (art. 48).
