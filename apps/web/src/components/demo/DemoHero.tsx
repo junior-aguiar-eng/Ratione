@@ -53,7 +53,7 @@ export default function DemoHero() {
       onKeyDown={() => setInteragiu(true)}
     >
       <Tabs value={aba} onValueChange={setAba}>
-        <div className="flex items-center gap-3 border-b border-line px-4 pt-3 bg-surface-2/60">
+        <div className="flex items-center gap-3 border-b border-line px-2 sm:px-4 pt-3 bg-surface-2/60">
           <div className="hidden xl:flex gap-1.5 pb-3" aria-hidden>
             <span className="h-2.5 w-2.5 rounded-full bg-line-strong" />
             <span className="h-2.5 w-2.5 rounded-full bg-line-strong" />
@@ -61,7 +61,7 @@ export default function DemoHero() {
           </div>
           <TabsList className="border-b-0 flex-1 gap-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Demonstração de cada ferramenta">
             {ABAS.map(a => (
-              <TabsTrigger key={a.id} value={a.id} className="px-2.5 sm:px-4">
+              <TabsTrigger key={a.id} value={a.id} className="px-1.5 text-[13px] sm:px-4 sm:text-sm">
                 {a.nome}
               </TabsTrigger>
             ))}

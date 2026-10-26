@@ -137,20 +137,20 @@ export default function DemoArgumenta({ semMovimento }: { semMovimento: boolean 
                 onMouseLeave={() => setFoco(null)}
                 onFocus={() => setFoco(a.id)}
                 onBlur={() => setFoco(null)}
-                className={`w-full flex items-center gap-3 rounded-lg border px-3 py-1.5 text-left transition-colors ${
+                className={`w-full flex flex-wrap sm:flex-nowrap items-center gap-x-3 gap-y-1 rounded-lg border px-3 py-1.5 text-left transition-colors ${
                   foco === a.id ? 'border-brand bg-surface-2' : 'border-line bg-surface/60'
                 }`}
               >
                 <Badge variant={a.tom} className="w-24 justify-center shrink-0">
                   {a.rotulo}
                 </Badge>
-                <span className="flex-1 text-sm text-ink leading-snug">{a.texto}</span>
+                <span className="order-last w-full sm:order-none sm:w-auto sm:flex-1 text-sm text-ink leading-snug">{a.texto}</span>
                 {a.selo ? (
-                  <span className="inline-flex items-center gap-1 text-xs font-medium text-ok-text shrink-0">
+                  <span className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-ok-text shrink-0">
                     <Check className="w-3.5 h-3.5" aria-hidden /> Encontrada na base
                   </span>
                 ) : (
-                  <span className="text-xs text-ink-mute shrink-0">p. {a.pagina}</span>
+                  <span className="ml-auto text-xs text-ink-mute shrink-0">p. {a.pagina}</span>
                 )}
               </button>
             </li>
