@@ -1,0 +1,30 @@
+defaultService: https://www.googleapis.com/compute/v1/projects/project-bbbe1209-c295-4720-867/global/backendServices/forgelex-api-hml-backend
+fingerprint: lS3c-ty5Qfg=
+hostRules:
+- hosts:
+  - hml.nexojuris.ia.br
+  pathMatcher: hml-isolated
+- hosts:
+  - nexojuris.ia.br
+  pathMatcher: nexohub-root
+name: forgelex-api-hml-map
+pathMatchers:
+- defaultService: https://www.googleapis.com/compute/v1/projects/project-bbbe1209-c295-4720-867/global/backendServices/forgelex-api-hml-isolated-backend
+  name: hml-isolated
+- defaultService: https://www.googleapis.com/compute/v1/projects/project-bbbe1209-c295-4720-867/global/backendServices/forgelex-api-prod-backend
+  name: prod-root
+- defaultService: https://www.googleapis.com/compute/v1/projects/project-bbbe1209-c295-4720-867/global/backendServices/forgelex-api-prod-backend
+  name: nexohub-root
+  pathRules:
+  - paths:
+    - /hub
+    urlRedirect:
+      pathRedirect: /hub/
+      redirectResponseCode: MOVED_PERMANENTLY_DEFAULT
+      stripQuery: false
+  - paths:
+    - /hub/*
+    routeAction:
+      urlRewrite:
+        pathPrefixRewrite: /
+    service: https://www.googleapis.com/compute/v1/projects/project-bbbe1209-c295-4720-867/global/backendServices/nexohub-hub-backend
