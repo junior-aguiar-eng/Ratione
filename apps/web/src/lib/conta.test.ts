@@ -56,6 +56,10 @@ describe('Exclusão da conta (LGPD)', () => {
         chamadas.push('senha');
         return true;
       },
+      encerrarAssinaturas: async id => {
+        chamadas.push(`assinaturas:${id}`);
+        return true;
+      },
       apagarUsuario: async id => {
         chamadas.push(`apagar:${id}`);
         return true;
@@ -68,7 +72,7 @@ describe('Exclusão da conta (LGPD)', () => {
   it('com sessão e senha corretas, apaga o usuário da sessão', async () => {
     const { dep, chamadas } = montar();
     assert.deepStrictEqual(await excluirConta('segredo123', dep), { ok: true });
-    assert.deepStrictEqual(chamadas, ['senha', 'apagar:u1']);
+    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'apagar:u1'], 'a assinatura é cancelada antes de a conta sumir');
   });
 
   it('sem senha, ou com senha de tipo errado, recusa sem tocar em nada', async () => {
@@ -92,6 +96,15 @@ describe('Exclusão da conta (LGPD)', () => {
     const r = await excluirConta('errada', dep);
     assert.ok(!r.ok && r.status === 403);
     assert.deepStrictEqual(chamadas, []);
+  });
+
+  it('assinatura que não pôde ser cancelada: a conta NÃO é apagada (senão o cartão continuaria sendo cobrado)', async () => {
+    for (const falha of [async () => false, async () => Promise.reject(new Error('Mercado Pago fora do ar'))]) {
+      const { dep, chamadas } = montar({ encerrarAssinaturas: falha });
+      const r = await excluirConta('segredo123', dep);
+      assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('assinatura') && r.mensagem.includes('Nada foi apagado'));
+      assert.deepStrictEqual(chamadas, ['senha'], 'só a senha foi conferida; nada foi apagado');
+    }
   });
 
   it('falha ao apagar: 500 e a mensagem diz que nada foi apagado', async () => {

@@ -3,6 +3,9 @@ import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { excluirConta } from '../../../../lib/excluir-conta';
+import { lerConfigCobranca } from '../../../../lib/cobranca/config';
+import { encerrarAssinaturasDoUsuario } from '../../../../lib/cobranca/encerrar';
+import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { origemPublica } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
@@ -50,6 +53,8 @@ export async function POST(request: Request) {
       const { error } = await createClient(url, publicavel, semSessao).auth.signInWithPassword({ email, password: senha });
       return !error;
     },
+    // Assinatura viva no Mercado Pago é cancelada antes de apagar a conta (lib/cobranca/encerrar.ts)
+    encerrarAssinaturas: id => encerrarAssinaturasDoUsuario(createClient(url, secreta, semSessao), id, lerConfigCobranca(process.env), criarClienteMp),
     apagarUsuario: async id => {
       const { error } = await createClient(url, secreta, semSessao).auth.admin.deleteUser(id);
       // Só no log do servidor: "Invalid API key" aqui indica SUPABASE_SERVICE_ROLE_KEY errada ou revogada
