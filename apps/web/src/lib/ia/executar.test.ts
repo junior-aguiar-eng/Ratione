@@ -146,6 +146,41 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
     }
   });
 
+  it('o banco falhar depois de gerar não perde o resultado: o cliente recebe a resposta e o erro vai para o log', async () => {
+    const avisos: Array<{ m: string; etapa: unknown }> = [];
+    const quebra = async () => {
+      throw new Error('banco fora do ar');
+    };
+    const { dep } = deps({ concluirAnalise: quebra, gravarCache: quebra, finalizar: quebra, avisar: (m, c) => void avisos.push({ m, etapa: c.etapa }) });
+    const r = await executarTarefa(TAREFA, ENTRADA, dep);
+    assert.equal(r.status, 200);
+    assert.ok(r.status === 200 && r.corpo.doCache === false && !!r.corpo.resposta);
+    assert.deepEqual(avisos.map(a => a.etapa), ['finalizar', 'concluir', 'gravar_cache']);
+    assert.ok(avisos.every(a => a.m === 'IA: resultado gerado, mas o registro falhou'));
+  });
+
+  it('o banco falhar entre abrir a análise e reservar libera a vaga da explicação e repassa o erro', async () => {
+    const { dep, registro } = deps({
+      reservar: async () => {
+        throw new Error('banco fora do ar');
+      }
+    });
+    await assert.rejects(executarTarefa(TAREFA, ENTRADA, dep), /banco fora do ar/);
+    assert.deepEqual(registro, ['iniciar', 'cancelar']);
+  });
+
+  it('o cliente do modelo lançar em vez de devolver falha: reserva fechada como falhou, vaga liberada, 502', async () => {
+    const { dep, registro, finalizados } = deps({
+      chamarModelo: async () => {
+        throw new Error('socket hang up');
+      }
+    });
+    const r = await executarTarefa(TAREFA, ENTRADA, dep);
+    assert.equal(r.status, 502);
+    assert.deepEqual(finalizados, [{ situacao: 'falhou', custo: 0 }]);
+    assert.deepEqual(registro, ['iniciar', 'reservar', 'cancelar']);
+  });
+
   it('a chave do cache muda com o texto (lei alterada gera resultado novo) e com a versão da tarefa', () => {
     const m = mensagemDoDispositivo(D);
     assert.equal(chaveDoCache(explicarDispositivo, m), chaveDoCache(explicarDispositivo, mensagemDoDispositivo({ ...D })));

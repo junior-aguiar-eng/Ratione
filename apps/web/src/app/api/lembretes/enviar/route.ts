@@ -15,6 +15,7 @@ import { registrar } from '../../../../lib/log';
 export const dynamic = 'force-dynamic';
 
 const PAGINA = 1000;
+const TEMPO_MAXIMO_EMAIL_MS = 15_000;
 const REMETENTE_PADRAO = 'Ratione <nao-responda@nexojuris.ia.br>';
 
 function segredoConfere(recebido: string | null, esperado: string): boolean {
@@ -70,7 +71,9 @@ export async function POST(request: Request) {
       const resposta = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${chaveEmail}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from: remetente, to: [para], subject: email.assunto, text: email.texto, html: email.html })
+        body: JSON.stringify({ from: remetente, to: [para], subject: email.assunto, text: email.texto, html: email.html }),
+        // Sem limite, um provedor travado seguraria o envio todo com a marca de "enviado" já gravada; estourar o tempo cai no catch do laço, que libera a marca
+        signal: AbortSignal.timeout(TEMPO_MAXIMO_EMAIL_MS)
       });
       // Só o status vai para o log: a resposta do provedor pode repetir o endereço do destinatário
       if (!resposta.ok) registrar('WARNING', 'Lembrete: o provedor de e-mail recusou o envio', { status: resposta.status });

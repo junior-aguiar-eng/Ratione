@@ -28,6 +28,10 @@ describe('IA: gravidade do aviso de falha', () => {
     for (const m of ['IA: modelo recusou', 'IA: resposta cortada', 'IA: saída descartada']) assert.equal(gravidadeDoAviso(m, { erro_mensagem: 'credit balance' }), 'WARNING');
   });
 
+  it('resultado gerado mas registro no banco falhou vira ERROR: o custo ou a cota ficaram sem registro', () => {
+    assert.equal(gravidadeDoAviso('IA: resultado gerado, mas o registro falhou', { etapa: 'concluir', erro_mensagem: 'timeout' }), 'ERROR');
+  });
+
   it('sem mensagem de erro, WARNING', () => {
     assert.equal(gravidadeDoAviso('IA: chamada falhou', {}), 'WARNING');
   });

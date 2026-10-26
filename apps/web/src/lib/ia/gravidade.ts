@@ -10,6 +10,8 @@ type Campos = Record<string, string | number | boolean | null | undefined>;
 const PRECISA_DE_ACAO = /credit balance|billing|saldo|chave da API inv[aá]lida|\(401\)|\(403\)/i;
 
 export function gravidadeDoAviso(mensagem: string, campos: Campos): Gravidade {
+  // A IA gerou e cobrou, mas o banco não registrou (cota, custo ou cache): só o responsável resolve
+  if (mensagem === 'IA: resultado gerado, mas o registro falhou') return 'ERROR';
   if (mensagem !== 'IA: chamada falhou') return 'WARNING';
   return PRECISA_DE_ACAO.test(String(campos.erro_mensagem ?? '')) ? 'ERROR' : 'WARNING';
 }
