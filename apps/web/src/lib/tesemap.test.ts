@@ -123,9 +123,6 @@ describe('Espécies do TeseMap: o STJ separado por espécie', () => {
   it('reconhece a espécie pelo começo do id, mesmo com o banco guardando tudo como precedente', () => {
     assert.equal(especieDoNo(de('STJ-TEMA-1076', 'precedente'))?.curto, 'Tema repetitivo');
     assert.equal(especieDoNo(de('STJ-IAC-5', 'precedente'))?.curto, 'IAC');
-    assert.equal(especieDoNo(de('STJ-CONTROVERSIA-12', 'precedente'))?.curto, 'Controvérsia');
-    assert.equal(especieDoNo(de('STJ-SIRDR-3', 'precedente'))?.curto, 'SIRDR');
-    assert.equal(especieDoNo(de('STJ-PUIL-1', 'precedente'))?.curto, 'PUIL');
     assert.equal(especieDoNo(de('STF-RG-1255', 'precedente'))?.curto, 'Repercussão geral');
     assert.equal(especieDoNo(de('STF-RG-118', 'tema'))?.curto, 'Repercussão geral');
     for (const id of ['STF-ADI-5766', 'STF-ADC-43', 'STF-ADO-26', 'STF-ADPF-347']) assert.equal(especieDoNo(de(id, 'precedente'))?.curto, 'Controle concentrado');

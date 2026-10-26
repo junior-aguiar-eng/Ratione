@@ -114,12 +114,10 @@ export interface Especie {
   prefixo?: string;
 }
 
+// Só o que o banco tem: Controvérsia, SIRDR e PUIL entram quando houver nó com tese firmada (ids `STJ-CONTROVERSIA-`, `STJ-SIRDR-`, `STJ-PUIL-`).
 export const ESPECIES: readonly Especie[] = [
   { id: 'tema-stj', rotulo: 'Tema repetitivo (STJ)', curto: 'Tema repetitivo', tribunal: 'STJ', prefixo: 'STJ-TEMA-' },
   { id: 'iac-stj', rotulo: 'IAC (STJ)', curto: 'IAC', tribunal: 'STJ', prefixo: 'STJ-IAC-' },
-  { id: 'controversia-stj', rotulo: 'Controvérsia (STJ)', curto: 'Controvérsia', tribunal: 'STJ', prefixo: 'STJ-CONTROVERSIA-' },
-  { id: 'sirdr-stj', rotulo: 'SIRDR (STJ)', curto: 'SIRDR', tribunal: 'STJ', prefixo: 'STJ-SIRDR-' },
-  { id: 'puil-stj', rotulo: 'PUIL (STJ)', curto: 'PUIL', tribunal: 'STJ', prefixo: 'STJ-PUIL-' },
   { id: 'rg-stf', rotulo: 'Repercussão geral (STF)', curto: 'Repercussão geral', tribunal: 'STF', prefixo: 'STF-RG-' },
   { id: 'controle-stf', rotulo: 'Controle concentrado (STF)', curto: 'Controle concentrado', tribunal: 'STF', prefixo: 'STF-AD' },
   { id: 'sumula', rotulo: 'Súmula', curto: 'Súmula', tipo: 'sumula' },
