@@ -125,14 +125,29 @@ export default function ContaPage() {
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }] = await Promise.all([
+    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }, { data: usoDeIa }, { data: analises }, { data: assinaturas }, { data: cobrancas }] = await Promise.all([
       sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
       sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
       sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
-      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true })
+      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true }),
+      sb.from('ia_uso').select('*').order('criado_em', { ascending: false }),
+      sb.from('analises').select('*').order('criada_em', { ascending: false }),
+      sb.from('assinaturas').select('*'),
+      sb.from('cobrancas').select('*').order('criada_em', { ascending: false })
     ]);
     const conteudo = JSON.stringify(
-      { exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens, avisosPorEmail: avisos, aceitesDosTermos: aceites },
+      {
+        exportadoEm: new Date().toISOString(),
+        email: usuario.email,
+        perfil: perfilBd,
+        itensSalvos: itens,
+        avisosPorEmail: avisos,
+        aceitesDosTermos: aceites,
+        usoDeIa,
+        analises,
+        assinaturas,
+        cobrancas
+      },
       null,
       2
     );

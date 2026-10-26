@@ -14,8 +14,7 @@ export function useSessao(): { usuario: User | null; carregando: boolean; contaD
   const [disponivel, setDisponivel] = useState(false);
 
   useEffect(() => {
-    setUsuario(null);
-    setCarregando(true);
+    // Sem zerar o usuário aqui: o cabeçalho continua montado entre páginas e não deve piscar "Entrar" a cada navegação enquanto revalida.
     const sb = obterSupabase();
     if (!sb) {
       setCarregando(false);
@@ -36,11 +35,15 @@ export function useSessao(): { usuario: User | null; carregando: boolean; contaD
     verificar();
     const { data: inscricao } = sb.auth.onAuthStateChange((_evento, sessao) => {
       ++geracao;
-      setUsuario(null);
-      setCarregando(!!sessao);
       clearTimeout(agendado);
+      if (!sessao) {
+        setUsuario(null);
+        setCarregando(false);
+        return;
+      }
+      // O Auth também avisa ao voltar para a aba ou renovar o token: quem já foi validado fica na tela enquanto o servidor confirma de novo.
       // Fora do callback do Auth: getSession dentro dele pode aguardar o mesmo lock.
-      if (sessao) agendado = setTimeout(verificar, 0);
+      agendado = setTimeout(verificar, 0);
     });
     return () => {
       ativo = false;
