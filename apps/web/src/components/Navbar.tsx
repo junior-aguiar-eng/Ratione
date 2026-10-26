@@ -16,7 +16,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [aberto, setAberto] = useState(false);
   const meuEspacoAtivo = pathname.startsWith('/meu-espaco');
-  const { usuario, contaDisponivel } = useSessao();
+  const { usuario, carregando, contaDisponivel } = useSessao();
   const nome = useNomeDoUsuario(usuario);
   const contaAtiva = pathname.startsWith('/conta') || pathname.startsWith('/entrar');
 
@@ -58,7 +58,9 @@ export default function Navbar() {
             Meu espaço
           </Link>
           {contaDisponivel &&
-            (usuario && nome ? (
+            (carregando ? (
+              <span className="hidden md:inline-block h-9 w-24" aria-hidden />
+            ) : usuario && nome ? (
               <UsuarioMenu nome={nome} ativo={pathname.startsWith('/conta')} />
             ) : (
               <Link
