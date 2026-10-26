@@ -177,6 +177,7 @@ Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por cons
 | `20261024000003_estatisticas_administrativas` | `admin_estatisticas` |
 | `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
 | `20261025000001_limpeza_por_prazo` | `limpar_dados_vencidos()` e o agendamento diário no `pg_cron` |
+| `20261026000002_retencao_fiscal` | `cobrancas` e `assinaturas` deixam de apagar com a conta: `usuario_id` vira nulo e a limpeza diária apaga o registro sem dono depois de 5 anos (provisório). **A aplicar** no SQL Editor; não muda dado existente |
 | `20261026000001_tesemap_filtro_por_especie` | `tesemap_buscar` ganha o parâmetro opcional `prefixo` (filtro por espécie: tema repetitivo, IAC, repercussão geral…). **A aplicar** no SQL Editor; até lá o filtro "Espécie" do TeseMap acusa erro, e a pesquisa sem ele segue igual |
 
 **Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
@@ -204,7 +205,7 @@ O workflow passou a entregar RATIONE_ADMIN_USUARIO_IDS da variável de repositó
 | `mp_eventos` | 90 dias |
 | `admin_acesso_eventos` | 12 meses |
 
-Não expiram: conta, perfil, registros salvos e aceites dos Termos (saem com a exclusão da conta). `cobrancas` e `assinaturas` ficam fora até se definir o prazo fiscal. A função é exclusiva da `service_role`; nenhum usuário apaga o próprio histórico por aqui, porque a cota é contada a partir dessas linhas.
+Não expiram: conta, perfil, registros salvos e aceites dos Termos (saem com a exclusão da conta). `cobrancas` e `assinaturas` seguem a **retenção fiscal** (`20261026000002_retencao_fiscal.sql`, decidida em 26/10/2026): ao excluir a conta, `usuario_id` vira nulo (o registro fica sem identificar a pessoa) e a mesma limpeza o apaga depois de **5 anos** (provisório, o contador confirma; é a constante `v_prazo_fiscal`); o de ambiente `teste` sai na hora. Quem ainda tem conta não expira. A função é exclusiva da `service_role`; nenhum usuário apaga o próprio histórico por aqui, porque a cota é contada a partir dessas linhas.
 
 **Aplicada no projeto remoto em 25/10/2026**, antes de publicar a Política de Privacidade v1.2, que descreve esses prazos. Conferido por consulta de leitura: a função existe; `anon` e `authenticated` não a executam e `service_role` sim; o agendamento `limpeza-por-prazo` (`17 6 * * *`) está ativo; e nenhuma linha estava vencida (a primeira execução não apaga nada). Para reaplicar em outro ambiente: *SQL Editor → New query*, colar o arquivo inteiro → *Run*. Confirme o projeto `ratione` e "PRODUCTION" na tela. A migração tenta ativar o `pg_cron`; se o Supabase recusar, ative em *Database → Extensions* e rode só o bloco `do $$ ... $$` do fim do arquivo.
 

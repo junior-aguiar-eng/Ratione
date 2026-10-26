@@ -32,7 +32,7 @@ describe('Limpeza por prazo', () => {
 
   it('apaga só o que passou do prazo e informa quanto apagou de cada tabela', async () => {
     const r = await limpar(db);
-    assert.deepEqual(r, { ia_uso: 1, analises: 1, lembretes_prazo: 1, mp_eventos: 1, admin_acesso_eventos: 1 });
+    assert.deepEqual(r, { ia_uso: 1, analises: 1, lembretes_prazo: 1, mp_eventos: 1, admin_acesso_eventos: 1, cobrancas_sem_dono: 0, assinaturas_sem_dono: 0 });
     assert.deepEqual((await db.query<{ referencia: string }>('select referencia from public.ia_uso order by referencia')).rows.map(x => x.referencia), ['ligado', 'recente']);
     assert.deepEqual((await db.query<{ titulo: string }>('select titulo from public.lembretes_prazo order by titulo')).rows.map(x => x.titulo), ['futuro', 'vencido recente']);
     assert.equal(await contar(db, 'mp_eventos'), 1);
@@ -52,7 +52,7 @@ describe('Limpeza por prazo', () => {
   });
 
   it('é idempotente: uma segunda execução não apaga mais nada', async () => {
-    assert.deepEqual(await limpar(db), { ia_uso: 0, analises: 0, lembretes_prazo: 0, mp_eventos: 0, admin_acesso_eventos: 0 });
+    assert.deepEqual(await limpar(db), { ia_uso: 0, analises: 0, lembretes_prazo: 0, mp_eventos: 0, admin_acesso_eventos: 0, cobrancas_sem_dono: 0, assinaturas_sem_dono: 0 });
   });
 
   it('só o servidor executa: visitante e usuário logado são recusados', async () => {

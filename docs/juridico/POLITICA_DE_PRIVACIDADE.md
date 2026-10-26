@@ -74,7 +74,7 @@ Alguns fornecedores armazenam ou processam dados **fora do Brasil**. Adotamos os
 | Registro das ações administrativas (suspensão e reativação) | **12 meses**; se a conta é excluída antes, o registro fica sem a identificação dela |
 | Avisos de pagamento do operador (Mercado Pago) **[FUTURO]** | 90 dias; servem só para não processar o mesmo aviso duas vezes |
 | **Documentos enviados e textos extraídos** | Até [X] dias (padrão curto) ou até você excluir |
-| Cobrança e documentos fiscais | **Prazos legais fiscais e tributários** |
+| Cobrança e documentos fiscais | Enquanto a conta existir, você vê e baixa suas cobranças. **Depois da exclusão da conta, guardamos só o registro financeiro de cada cobrança (identificador do pagamento, valor, situação, meio de pagamento, datas e plano), sem ligá-lo a você, por 5 anos [CONFIRMAR o prazo com o contador]**, por obrigação legal (LGPD, art. 16, I). Depois, apagamos automaticamente. **[PUBLICAR na página com a ativação da cobrança, em versão 1.3 dos textos.]** |
 | Registros de acesso | **Prazo legal aplicável** (Marco Civil da Internet) |
 | Backups | Até [X] dias após a exclusão |
 

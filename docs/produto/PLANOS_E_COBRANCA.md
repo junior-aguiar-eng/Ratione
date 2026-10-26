@@ -240,7 +240,7 @@ Para que a ligação futura seja só troca de credencial e de chave, **sem mexer
 1. CNPJ aberto com atividade compatível; alvará e inscrição municipal de Maceió, se exigidos; forma de emitir nota fiscal definida com o contador (o MEI pode ter dispensa de nota para venda a pessoa física, mas escritórios e empresas costumam exigi-la; **confirmar as regras de Maceió**).
 2. Conta do Mercado Pago do CNPJ aberta e verificada; credenciais e segredo do webhook no Secret Manager; deploy.
 3. Webhook cadastrado na conta nova; apagar as assinaturas de teste do banco; teste de assinatura, cancelamento e reembolso com valor baixo.
-4. Termos, Privacidade e rodapé com os dados do fornecedor; revisão por advogado (T-03).
+4. Termos, Privacidade e rodapé com os dados do fornecedor; revisão por advogado (T-03). **Privacidade em versão 1.3 com a linha da retenção fiscal** (texto pronto em `juridico/POLITICA_DE_PRIVACIDADE.md`, §8), **o prazo de 5 anos confirmado pelo contador** (constante `v_prazo_fiscal` em `limpar_dados_vencidos()`) e a migração `20261026000002_retencao_fiscal.sql` aplicada.
 5. Seguro de responsabilidade avaliado (PLANO §8).
 6. Trocar `COBRANCA_AMBIENTE` para `producao`, fazer o deploy e anunciar.
 
@@ -261,7 +261,7 @@ Precisa de **duas contas de teste** do Mercado Pago (uma de vendedor, uma de com
 ### 7.5 Segurança e conformidade
 
 - **Credenciais:** o token de acesso e o segredo do webhook ficam no Secret Manager do Google Cloud (`mercadopago-access-token`, `mercadopago-webhook-secret`), entregues ao Cloud Run pelo workflow de deploy como já se faz com a Anthropic. Nunca no repositório, na imagem ou no navegador.
-- **Dados guardados:** identificadores do Mercado Pago (assinatura, pagamento), valor, data, situação e forma de pagamento. **Não** guardamos número de cartão, validade nem CPF além do que a nota fiscal exigir.
+- **Dados guardados:** identificadores do Mercado Pago (assinatura, pagamento), valor, data, situação e forma de pagamento. **Não** guardamos número de cartão, validade nem CPF além do que a nota fiscal exigir. **Retenção:** enquanto a conta existir, ligados a ela; ao excluir a conta, o registro de cada cobrança fica **sem o vínculo com a pessoa** por 5 anos (provisório, o contador confirma) e depois é apagado pela limpeza diária (migração `20261026000002`). Cobrança que o Mercado Pago ainda fizer depois da exclusão também é registrada sem dono.
 - **Webhook:** só HTTPS, assinatura validada, idempotente, sempre consulta o recurso na API, resposta 200 rápida e processamento seguro para reentrega.
 - **Ambientes:** credenciais de teste e usuários de teste do Mercado Pago para tudo antes do lançamento; credenciais de produção só no deploy final.
 - **Documentos a atualizar:** Termos de Uso (planos, cancelamento, arrependimento, o que acontece com a cota), Política de Privacidade (Mercado Pago como operador de dados de pagamento), Política de Uso de IA (nível e detalhes do modelo), Metodologia.
