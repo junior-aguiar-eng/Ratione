@@ -29,7 +29,7 @@ export default function DemoTeseMap() {
 
   return (
     <div className="flex flex-col gap-4">
-      <svg viewBox="0 0 640 320" className="w-full h-auto hidden sm:block" role="group" aria-label="Mapa do Tema 1.076 do STJ: escolha um item para ver as relações dele">
+      <svg viewBox="0 0 640 320" className="w-full h-auto max-h-48 hidden sm:block" role="group" aria-label="Mapa do Tema 1.076 do STJ: escolha um item para ver as relações dele">
         <defs>
           <marker id="seta-demo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0 0L10 5L0 10z" fill="rgb(var(--ink-mute))" />
@@ -101,7 +101,7 @@ export default function DemoTeseMap() {
         ))}
       </div>
 
-      <ul aria-live="polite" className="flex flex-col gap-2.5 min-h-[6.5rem]">
+      <ul aria-live="polite" tabIndex={0} aria-label="Relações do item escolhido" className="flex flex-col gap-2.5 min-h-[6.5rem] lg:max-h-[9.5rem] lg:overflow-y-auto lg:pr-2">
         {relacoes.map(a => (
           <li key={a.id} className="text-sm leading-snug text-ink-soft">
             <span className="font-medium text-ink">{rotuloDoNo(a.origem)}</span> <span className="text-brand-text">{a.tipo}</span>{' '}

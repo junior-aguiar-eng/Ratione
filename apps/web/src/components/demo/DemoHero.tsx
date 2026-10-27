@@ -68,7 +68,8 @@ export default function DemoHero() {
           </TabsList>
         </div>
 
-        <div className="p-5 sm:p-6 min-h-[26rem]">
+        {/* Altura única no desktop: a janela não pula quando a demonstração troca de aba (a mais alta cabe em 33rem) */}
+        <div className="p-5 sm:p-6 min-h-[26rem] lg:min-h-[33rem]">
           <TabsContent value="prazozero">
             <DemoPrazoZero />
           </TabsContent>
