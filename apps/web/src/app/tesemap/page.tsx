@@ -11,7 +11,7 @@ import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
-import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
+import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import ReservaTeseMap from './ReservaTeseMap';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -34,7 +34,7 @@ export default function TeseMapPage() {
   const [cobertura, setCobertura] = useState<{ itens: Cobertura[]; indisponivel: boolean } | null>(null);
   const [busca, setBusca] = useState('');
   const [tribunal, setTribunal] = useState('');
-  const [tipo, setTipo] = useState('');
+  const [especieId, setEspecieId] = useState('');
   const [lista, setLista] = useState<NoTese[]>([]);
   const [buscando, setBuscando] = useState(false);
   const [noId, setNoId] = useState<string | null>(null);
@@ -65,7 +65,8 @@ export default function TeseMapPage() {
     setBuscando(true);
     const t = setTimeout(async () => {
       try {
-        const r = await buscarNos(db, { texto: busca, tribunal, tipo });
+        const esp = ESPECIES.find(e => e.id === especieId);
+        const r = await buscarNos(db, { texto: busca, tribunal, tipo: esp?.tipo ?? '', prefixo: esp?.prefixo });
         if (minha === sequencia.current) {
           setLista(r);
           setErro(null);
@@ -77,7 +78,7 @@ export default function TeseMapPage() {
       }
     }, 300);
     return () => clearTimeout(t);
-  }, [db, cobertura, semDados, busca, tribunal, tipo]);
+  }, [db, cobertura, semDados, busca, tribunal, especieId]);
 
   useEffect(() => {
     if (!db || !noId || semDados) return;
@@ -110,7 +111,7 @@ export default function TeseMapPage() {
   if (db && !cobertura) return <p className="text-sm text-ink-soft py-10">{erro ?? 'Carregando o TeseMap…'}</p>;
 
   const tribunais = [...new Set((cobertura?.itens ?? []).map(c => c.tribunal).filter(Boolean))].sort();
-  const tipos = [...new Set((cobertura?.itens ?? []).map(c => c.tipo))].sort();
+  const especies = especiesDoTribunal(tribunal);
   const total = (cobertura?.itens ?? []).reduce((s, c) => s + c.total, 0);
   const atualizado = (cobertura?.itens ?? []).map(c => c.atualizado_em).sort().pop();
   const declarada = coberturaPorExtenso(cobertura?.itens ?? []);
@@ -126,12 +127,18 @@ export default function TeseMapPage() {
       <PageHeader
         eyebrow="TeseMap"
         title="Mapa da tese"
-        description="Precedentes qualificados com a tese firmada, a fonte oficial e as relações que uma pessoa validou."
+        description="Precedentes com a tese firmada, a fonte oficial e as relações conferidas entre eles."
       />
 
-      <p className="text-sm text-ink-soft mb-6 max-w-3xl" data-testid="cobertura">
-        Cobertura: {declarada}. Dados lidos em {atualizado ? dataCurta(atualizado) : '—'}. Fontes: STJ, Dados Abertos (licença CC BY), e STF (Portal da Transparência e base de jurisprudência). Não é toda a jurisprudência: é o conjunto declarado acima.
-      </p>
+      <div className="mb-6 max-w-3xl text-sm text-ink-soft" data-testid="cobertura">
+        <p>
+          Reúne {declarada}. Atualizado em {atualizado ? dataCurta(atualizado) : '—'}. Não cobre toda a jurisprudência: apenas o conjunto indicado.
+        </p>
+        <details className="mt-1">
+          <summary className="cursor-pointer text-ink-mute hover:text-ink">Fontes</summary>
+          <p className="mt-1">STJ, Dados Abertos (licença CC BY); STF, Portal da Transparência e base de jurisprudência.</p>
+        </details>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 mb-6">
         <div className="sm:col-span-6">
@@ -143,7 +150,15 @@ export default function TeseMapPage() {
         </div>
         <div className="sm:col-span-3">
           <Label htmlFor="tribunal-tese">Tribunal</Label>
-          <NativeSelect id="tribunal-tese" value={tribunal} onChange={e => setTribunal(e.target.value)}>
+          <NativeSelect
+            id="tribunal-tese"
+            value={tribunal}
+            onChange={e => {
+              setTribunal(e.target.value);
+              // Troca de tribunal que deixa a espécie escolhida sem sentido (IAC do STJ com STF): volta para "Todas"
+              if (!especiesDoTribunal(e.target.value).some(x => x.id === especieId)) setEspecieId('');
+            }}
+          >
             <option value="">Todos</option>
             {tribunais.map(t => (
               <option key={t} value={t}>
@@ -153,12 +168,12 @@ export default function TeseMapPage() {
           </NativeSelect>
         </div>
         <div className="sm:col-span-3">
-          <Label htmlFor="tipo-tese">Tipo</Label>
-          <NativeSelect id="tipo-tese" value={tipo} onChange={e => setTipo(e.target.value)}>
-            <option value="">Todos</option>
-            {tipos.map(t => (
-              <option key={t} value={t}>
-                {ROTULO_TIPO[t] ?? t}
+          <Label htmlFor="tipo-tese">Espécie</Label>
+          <NativeSelect id="tipo-tese" value={especieId} onChange={e => setEspecieId(e.target.value)}>
+            <option value="">Todas</option>
+            {especies.map(e => (
+              <option key={e.id} value={e.id}>
+                {e.rotulo}
               </option>
             ))}
           </NativeSelect>
@@ -203,7 +218,7 @@ export default function TeseMapPage() {
             <article className={cn(cardClasses, 'p-6 flex flex-col gap-6')} aria-label="Precedente selecionado">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="warn">{ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
+                  <Badge variant="warn">{especieDoNo(no)?.curto ?? ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
                   {no.detalhes.vinculante === true && <Badge variant="brand">Vinculante</Badge>}
                   {texto(no.detalhes.situacao) && <Badge variant="neutral">{texto(no.detalhes.situacao)}</Badge>}
                 </div>

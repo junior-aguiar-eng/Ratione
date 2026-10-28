@@ -3,13 +3,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Download, LogOut } from 'lucide-react';
+import { Download } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
 import EmptyState from '../../components/EmptyState';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { irParaPagina } from '../../lib/navegacao';
+import { avisarPerfilAtualizado } from '../../lib/useNomeDoUsuario';
 import { traduzirErroAuth } from '../../lib/erros-auth';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import { Button } from '@/components/ui/button';
@@ -100,7 +101,10 @@ export default function ContaPage() {
       .eq('id', usuario.id);
     setOcupado(false);
     if (error) aviso('danger', 'Não foi possível salvar o perfil. Confira os campos e tente de novo.');
-    else aviso('info', 'Perfil salvo.');
+    else {
+      avisarPerfilAtualizado(perfil.nome.trim() || null);
+      aviso('info', 'Perfil salvo.');
+    }
   };
 
   const trocarSenha = async (e: React.FormEvent) => {
@@ -118,22 +122,32 @@ export default function ContaPage() {
     }
   };
 
-  const sair = async () => {
-    await obterSupabase()?.auth.signOut();
-    irParaPagina('/');
-  };
-
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }] = await Promise.all([
+    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }, { data: usoDeIa }, { data: analises }, { data: assinaturas }, { data: cobrancas }] = await Promise.all([
       sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
       sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
       sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
-      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true })
+      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true }),
+      sb.from('ia_uso').select('*').order('criado_em', { ascending: false }),
+      sb.from('analises').select('*').order('criada_em', { ascending: false }),
+      sb.from('assinaturas').select('*'),
+      sb.from('cobrancas').select('*').order('criada_em', { ascending: false })
     ]);
     const conteudo = JSON.stringify(
-      { exportadoEm: new Date().toISOString(), email: usuario.email, perfil: perfilBd, itensSalvos: itens, avisosPorEmail: avisos, aceitesDosTermos: aceites },
+      {
+        exportadoEm: new Date().toISOString(),
+        email: usuario.email,
+        perfil: perfilBd,
+        itensSalvos: itens,
+        avisosPorEmail: avisos,
+        aceitesDosTermos: aceites,
+        usoDeIa,
+        analises,
+        assinaturas,
+        cobrancas
+      },
       null,
       2
     );
@@ -362,11 +376,6 @@ export default function ContaPage() {
             </Button>
           )}
         </form>
-
-        <Button variant="secondary" type="button" onClick={sair} className="self-start">
-          <LogOut className="w-4 h-4" />
-          Sair
-        </Button>
       </div>
     </div>
   );

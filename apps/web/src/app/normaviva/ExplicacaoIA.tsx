@@ -83,7 +83,7 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
               ))}
             </ul>
           )}
-          <Notice titulo="Explicação gerada por IA (Claude Haiku 5.5)">
+          <Notice titulo="Explicação gerada por inteligência artificial">
             Feita só a partir do texto acima, sem jurisprudência nem outras fontes. Pode conter erro e não substitui o texto da lei nem orientação
             jurídica.
             {estado.restantes !== null && ` Restam ${estado.restantes} explicação(ões) no seu plano neste período.`}

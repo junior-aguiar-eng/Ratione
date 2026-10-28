@@ -15,6 +15,9 @@ import { useSessao } from '../../lib/useSessao';
 import { obterSupabase } from '../../lib/supabase/client';
 import { dataCurta } from '../../lib/uso';
 import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
+import { listarNormas } from '../../lib/normaviva';
+import { bancoSupabase, verificarCitacoes, type VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
+import SeloCitacao from './SeloCitacao';
 import { referenciaVisual } from './referencias';
 
 /**
@@ -128,6 +131,7 @@ export default function AnaliseDecisao() {
   const [encerrada, setEncerrada] = useState(false);
   const [rotulo, setRotulo] = useState('');
   const [uso, setUso] = useState<UsoRapida | null>(null);
+  const [selos, setSelos] = useState<Map<string, VerificacaoDaCitacao>>(new Map());
   const listaRef = useRef<HTMLDivElement | null>(null);
 
   const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
@@ -141,6 +145,27 @@ export default function AnaliseDecisao() {
     const el = listaRef.current.querySelector<HTMLElement>(`[data-paragrafo="${ativos[0]}"]`);
     if (el) listaRef.current.scrollTo({ top: Math.max(el.offsetTop - 8, 0), behavior: 'smooth' });
   }, [ativos, textoAberto]);
+
+  // F5-04: confere as citações no corpus público. Sai da página só a citação ("CDC, art. 14"), nunca o texto da decisão.
+  const fundamentosProntos = resultados.fundamentos;
+  useEffect(() => {
+    setSelos(new Map());
+    const sb = obterSupabase();
+    if (!fundamentosProntos || !sb) return;
+    let ativa = true;
+    void (async () => {
+      try {
+        const normas = (await listarNormas(sb)).map(n => n.id);
+        const confirmadas = await verificarCitacoes(fundamentosProntos.fundamentos.map(f => f.citacao), normas, bancoSupabase(sb));
+        if (ativa) setSelos(confirmadas);
+      } catch {
+        /* sem selo: a tela não afirma nada sobre a citação */
+      }
+    })();
+    return () => {
+      ativa = false;
+    };
+  }, [fundamentosProntos]);
 
   // O que resta da cota do plano: lido ao abrir e sempre que o formulário volta (depois de uma análise)
   const usuarioId = usuario?.id;
@@ -163,7 +188,7 @@ export default function AnaliseDecisao() {
   if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
     return (
       <Notice tom="info" titulo="Análise de decisões">
-        A análise de uma decisão sua ainda não está disponível nesta instalação. Abaixo, uma análise de exemplo.
+        A análise de uma decisão sua ainda não está disponível. Abaixo, uma análise de exemplo.
       </Notice>
     );
   }
@@ -522,6 +547,7 @@ export default function AnaliseDecisao() {
                                     {f.citacao && <span className="text-sm text-ink-soft">{r(f.citacao)}</span>}
                                     {ref(f.paragrafos)}
                                   </div>
+                                  {selos.get(f.citacao.trim()) && <SeloCitacao verificacao={selos.get(f.citacao.trim())!} />}
                                 </div>
                               </li>
                             ))}
@@ -539,7 +565,7 @@ export default function AnaliseDecisao() {
             </Tabs>
           )}
 
-          <Notice titulo="Análise gerada por IA (Claude Haiku 5.5)">
+          <Notice titulo="Análise gerada por inteligência artificial">
             Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
             página, a análise se perde.
           </Notice>

@@ -95,6 +95,44 @@ export interface FiltroDeNos {
   texto: string;
   tribunal: string;
   tipo: string;
+  /** Começo do id do nó (`STJ-TEMA-`): separa as espécies que o banco guarda todas como `precedente`. */
+  prefixo?: string;
+}
+
+/**
+ * Espécies que a pessoa reconhece ("Tema repetitivo do STJ", "IAC", "Repercussão geral"). O banco guarda o STJ inteiro como `precedente`
+ * (e o STF decidido também); a espécie sai do começo do id, que é estável (`STJ-TEMA-1076`, `STF-RG-1255`, `STF-ADI-5766`).
+ */
+export interface Especie {
+  id: string;
+  /** Texto do filtro, com o tribunal. */
+  rotulo: string;
+  /** Texto da etiqueta do nó, onde o tribunal já aparece. */
+  curto: string;
+  tribunal?: 'STF' | 'STJ';
+  tipo?: string;
+  prefixo?: string;
+}
+
+// Só o que o banco tem: Controvérsia, SIRDR e PUIL entram quando houver nó com tese firmada (ids `STJ-CONTROVERSIA-`, `STJ-SIRDR-`, `STJ-PUIL-`).
+export const ESPECIES: readonly Especie[] = [
+  { id: 'tema-stj', rotulo: 'Tema repetitivo (STJ)', curto: 'Tema repetitivo', tribunal: 'STJ', prefixo: 'STJ-TEMA-' },
+  { id: 'iac-stj', rotulo: 'IAC (STJ)', curto: 'IAC', tribunal: 'STJ', prefixo: 'STJ-IAC-' },
+  { id: 'rg-stf', rotulo: 'Repercussão geral (STF)', curto: 'Repercussão geral', tribunal: 'STF', prefixo: 'STF-RG-' },
+  { id: 'controle-stf', rotulo: 'Controle concentrado (STF)', curto: 'Controle concentrado', tribunal: 'STF', prefixo: 'STF-AD' },
+  { id: 'sumula', rotulo: 'Súmula', curto: 'Súmula', tipo: 'sumula' },
+  { id: 'dispositivo', rotulo: 'Dispositivo de lei', curto: 'Dispositivo', tipo: 'dispositivo' }
+];
+
+/** As espécies que cabem no tribunal escolhido (sem tribunal, todas; o dispositivo de lei não tem tribunal). */
+export function especiesDoTribunal(tribunal: string): readonly Especie[] {
+  if (!tribunal) return ESPECIES;
+  return ESPECIES.filter(e => (e.tribunal ? e.tribunal === tribunal : e.id !== 'dispositivo'));
+}
+
+/** A espécie do nó, pelo começo do id ou, na falta, pelo tipo; `null` quando nenhuma conhece o nó. */
+export function especieDoNo(n: Pick<NoTese, 'id' | 'tipo'>): Especie | null {
+  return ESPECIES.find(e => (e.prefixo ? n.id.startsWith(e.prefixo) : e.tipo === n.tipo)) ?? null;
 }
 
 /**
@@ -102,7 +140,14 @@ export interface FiltroDeNos {
  * lista tudo. Os mais recentemente julgados primeiro quando a relevância empata.
  */
 export async function buscarNos(db: SupabaseClient, f: FiltroDeNos): Promise<NoTese[]> {
-  const r = await db.rpc('tesemap_buscar', { consulta: textoDaPesquisa(f.texto), tribunal: f.tribunal || null, tipo: f.tipo || null, limite: LIMITE_DA_LISTA });
+  // `prefixo` só vai quando há filtro por espécie: sem ele a chamada é a de sempre e não depende da migração 20261026000001
+  const r = await db.rpc('tesemap_buscar', {
+    consulta: textoDaPesquisa(f.texto),
+    tribunal: f.tribunal || null,
+    tipo: f.tipo || null,
+    limite: LIMITE_DA_LISTA,
+    ...(f.prefixo ? { prefixo: f.prefixo } : {})
+  });
   if (r.error) falhou(r.error, 'buscar precedentes');
   return (r.data ?? []) as NoTese[];
 }

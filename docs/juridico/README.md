@@ -1,12 +1,12 @@
 # RATIONE — MINUTAS JURÍDICAS (rascunho para revisão do advogado responsável)
 
 > **Status:** minutas para **revisão e adaptação** pelo advogado responsável. Não publicar sem revisão.
-> **Versão-alvo:** estas minutas descrevem o produto **com conta, cobrança e IA** (fase futura) e **não estão publicadas**. O que está no ar hoje é o texto do **beta gratuito** (`/termos`, `/privacidade`, `/metodologia`), conferido contra o sistema em [`AUDITORIA_BETA.md`](AUDITORIA_BETA.md), que também lista o que depende do responsável.
+> **Versão-alvo:** estas minutas descrevem o produto **com conta, IA, cobrança e envio de arquivos** e **não estão publicadas**. Foram **atualizadas em 25/10/2026 ao código** (IA, planos e cota por análise, registro de uso, acesso administrativo); cobrança e envio de arquivos seguem como **[FUTURO]**. O que está no ar hoje é o texto do **beta gratuito com IA** (`/termos`, `/privacidade`, `/metodologia`; versão 1.1 desde 25/10/2026), conferido contra o sistema em [`AUDITORIA_BETA.md`](AUDITORIA_BETA.md), que também lista o que depende do responsável.
 
 ## Conteúdo
 | Arquivo | Finalidade |
 |---|---|
-| `TERMOS_DE_USO.md` | Termos de uso e condições de contratação (inclui regras de planos, créditos e cancelamento) |
+| `TERMOS_DE_USO.md` | Termos de uso e condições de contratação (planos Gratuito, Essencial e Profissional, cota por análise, cancelamento) |
 | `POLITICA_DE_PRIVACIDADE.md` | LGPD: papéis, bases legais, direitos, transferência internacional, retenção |
 | `POLITICA_DE_USO_DE_IA.md` | Transparência, limites e responsabilidade no uso de IA |
 | `POLITICA_DE_COOKIES.md` | Cookies e armazenamento local |
@@ -21,9 +21,9 @@
 3. **Limitação de responsabilidade (CDC, art. 51, I):** com consumidor pessoa física, cláusula de exoneração é nula; só limitação **justificada** para pessoa jurídica. A minuta limita "na máxima extensão permitida em lei". **Reavaliar.**
 4. **Papéis na LGPD:** *controlador* para dados de conta/cobrança; *operador* para documentos e dados processuais que o usuário envia (o usuário é o controlador). Confirmar.
 5. **Segredo de justiça e sigilo profissional (Lei 8.906/1994; Código de Ética da OAB):** o upload de peças com dados de clientes exige cautela do advogado. A minuta transfere ao usuário a declaração de base legal e oferece pseudonimização.
-6. **Transferência internacional (LGPD, art. 33) e Regulamento da ANPD sobre o tema:** verificar o mecanismo adotado com cada provedor de IA/nuvem.
+6. **Transferência internacional (LGPD, art. 33) e Regulamento da ANPD sobre o tema:** verificar o mecanismo adotado com cada provedor. O DPA da Anthropic (Cláusulas Contratuais Padrão) é incorporado aos Commercial Terms; confirmar a aceitação pela conta e a região. **Treino e retenção pelo provedor:** ver o item 4 de `POLITICA_DE_USO_DE_IA.md`.
 7. **Encarregado/DPO e agente de pequeno porte (Res. CD/ANPD nº 2/2022):** confirmar enquadramento e canal do titular.
-8. **Validade de créditos pré-pagos:** prazo de 12 meses proposto; avaliar à luz do CDC.
+8. **Pacote avulso de análises:** fora da primeira versão; se entrar, a validade (12 meses na minuta antiga) deve ser avaliada à luz do CDC. Não há mais "créditos": a unidade é a análise.
 9. **Foro e arbitragem:** consumidor tem foro do próprio domicílio; confirmar a cláusula.
 10. **Recomendações da OAB sobre IA generativa:** conferir a versão vigente e alinhar a política.
 11. **Legislação citada:** conferir **número, artigo e redação vigente** de cada dispositivo antes de publicar.

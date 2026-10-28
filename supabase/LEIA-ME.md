@@ -151,7 +151,36 @@ A página `/meu-espaco/administracao` e a API `/api/admin/financeiro` exigem `RA
 
 ## Migrações posteriores
 
-Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O último é `20261011000003_aceites_termos.sql` (aceite dos Termos gravado pelo servidor, F1-02); depois de rodar, conferir em *Table Editor* que existe `aceites_termos` e que cada conta já criada tem uma linha.
+Cada arquivo de `migrations/` novo é aplicado do mesmo jeito (SQL Editor → colar o arquivo inteiro → *Run*), em ordem de nome. O deploy **não** aplica migrações. Confira o índice abaixo antes de presumir o que está no banco.
+
+### Índice das migrações
+
+Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por consulta de leitura ao catálogo (`to_regclass` e `to_regprocedure`): **todas aplicadas, até `20261024000004`**. A `20261025000001_limpeza_por_prazo` foi **aplicada em 25/10/2026** (ver a seção "Limpeza por prazo", abaixo). A conferência prova que as tabelas, colunas e funções existem; não compara o corpo das funções com os arquivos.
+
+| Migração | O que faz |
+|---|---|
+| `20261007000001_perfis_e_itens_salvos` | Perfis e itens salvos em Meu espaço, com RLS |
+| `20261011000001_lembretes_prazo` · `…000002_lembretes_prazo_service_role` | Lembretes de prazo por conta e acesso do servidor |
+| `20261011000003_aceites_termos` | Aceite dos Termos gravado pelo servidor (F1-02) |
+| `20261019000001_normaviva` · `…000002_resolver_destinos` | Corpus do NormaViva e ligação das remissões ao destino |
+| `20261020000001_busca_por_proximidade` | Busca por assunto com proximidade |
+| `20261020000002_limite_itens_salvos` | Teto de 1.000 itens salvos por conta |
+| `20261021000001_versoes_anteriores` | Redações anteriores dos dispositivos (F3-04) |
+| `20261022000001_explicacao_ia` · `…000002_ia_tarefas` | Cache e uso de IA; catálogo de tarefas |
+| `20261022000003_tesemap` · `…000005_tesemap_busca` | Grafo do TeseMap e sua pesquisa |
+| `20261022000004_busca_sem_acento` · `…000006_normaviva_busca_sem_acento` | Busca sem acento (TeseMap e NormaViva) |
+| `20261023000001_planos_e_analises` | Planos, assinaturas, análises e cota por análise (F8-02, F8-03) |
+| `20261023000002_fundos_de_gasto` | Dois fundos de gasto de IA: gratuito e pagantes |
+| `20261023000003_cobranca_mercadopago` | Cobranças, avisos do Mercado Pago e funções de assinatura (F8-05) |
+| `20261024000001_painel_administrativo` | `plano_id` nos registros e `admin_financeiro` (F8-04) |
+| `20261024000002_tamanho_analise` | Tamanho da decisão no histórico (`analises.paragrafos`) |
+| `20261024000003_estatisticas_administrativas` | `admin_estatisticas` |
+| `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
+| `20261025000001_limpeza_por_prazo` | `limpar_dados_vencidos()` e o agendamento diário no `pg_cron` |
+| `20261026000002_retencao_fiscal` | `cobrancas` e `assinaturas` deixam de apagar com a conta: `usuario_id` vira nulo e a limpeza diária apaga o registro sem dono depois de 5 anos (provisório). **A aplicar** no SQL Editor; não muda dado existente |
+| `20261026000001_tesemap_filtro_por_especie` | `tesemap_buscar` ganha o parâmetro opcional `prefixo` (filtro por espécie: tema repetitivo, IAC, repercussão geral…). **A aplicar** no SQL Editor; até lá o filtro "Espécie" do TeseMap acusa erro, e a pesquisa sem ele segue igual |
+
+**Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
 
 ## Depois
 
@@ -164,3 +193,26 @@ Avise quando terminar o passo 5. O próximo passo (login na tela, salvar cálcul
 Migrações 20261024000003_estatisticas_administrativas e 20261024000004_administracao_contas aplicadas no Supabase Ratione após autorização. RPCs admin_estatisticas e admin_contas conferidas: acesso exclusivo de service_role, sem conceder leitura de auth.users. A busca retorna e-mail mascarado, UUID e situação de cadastro. Trilha admin_acesso_eventos exclusiva do serviço. Política restritiva conta_ativa_restritiva em 20 tabelas com RLS, incluindo a trilha, e guarda em uso_resumo; novas tabelas privadas precisam manter a barreira. Duas contas preservadas, nenhuma suspensa nem alterada como teste. Estatísticas reais conferidas por leitura: 2 contas, 19 execuções de IA no mês; cobrança desligada.
 
 O workflow passou a entregar RATIONE_ADMIN_USUARIO_IDS da variável de repositório ao servidor. Somente a conta escolhida expressamente pelo responsável foi configurada; UUID não consta no código. O teste de suspensão/reativação ocorre em banco e Auth simulados locais; não é teste de operação destrutiva em produção.
+
+## Limpeza por prazo (25/10/2026)
+
+`migrations/20261025000001_limpeza_por_prazo.sql` cria `public.limpar_dados_vencidos()` e a agenda no `pg_cron` (todo dia às 06:17 UTC, 03:17 em Brasília). O banco passa a guardar só o estritamente necessário (decisão do responsável, 25/10/2026):
+
+| Tabela | Prazo |
+|---|---|
+| `ia_uso` e `analises` | 13 meses |
+| `lembretes_prazo` | 30 dias depois do vencimento |
+| `mp_eventos` | 90 dias |
+| `admin_acesso_eventos` | 12 meses |
+
+Não expiram: conta, perfil, registros salvos e aceites dos Termos (saem com a exclusão da conta). `cobrancas` e `assinaturas` seguem a **retenção fiscal** (`20261026000002_retencao_fiscal.sql`, decidida em 26/10/2026): ao excluir a conta, `usuario_id` vira nulo (o registro fica sem identificar a pessoa) e a mesma limpeza o apaga depois de **5 anos** (provisório, o contador confirma; é a constante `v_prazo_fiscal`); o de ambiente `teste` sai na hora. Quem ainda tem conta não expira. A função é exclusiva da `service_role`; nenhum usuário apaga o próprio histórico por aqui, porque a cota é contada a partir dessas linhas.
+
+**Aplicada no projeto remoto em 25/10/2026**, antes de publicar a Política de Privacidade v1.2, que descreve esses prazos. Conferido por consulta de leitura: a função existe; `anon` e `authenticated` não a executam e `service_role` sim; o agendamento `limpeza-por-prazo` (`17 6 * * *`) está ativo; e nenhuma linha estava vencida (a primeira execução não apaga nada). Para reaplicar em outro ambiente: *SQL Editor → New query*, colar o arquivo inteiro → *Run*. Confirme o projeto `ratione` e "PRODUCTION" na tela. A migração tenta ativar o `pg_cron`; se o Supabase recusar, ative em *Database → Extensions* e rode só o bloco `do $$ ... $$` do fim do arquivo.
+
+Conferência depois de aplicar (só leitura):
+
+- `select proname from pg_proc where proname = 'limpar_dados_vencidos';` deve listar a função;
+- `select jobname, schedule, active from cron.job;` deve mostrar `limpeza-por-prazo`, `17 6 * * *`, `true`;
+- `select has_function_privilege('anon', 'public.limpar_dados_vencidos()', 'execute') as anon, has_function_privilege('service_role', 'public.limpar_dados_vencidos()', 'execute') as servidor;` deve dar `false` e `true`.
+
+A primeira execução (a agendada ou `select public.limpar_dados_vencidos();` no editor) devolve quantas linhas apagou de cada tabela. Hoje só há dados de outubro de 2026, então o esperado é zero, exceto avisos de prazo vencidos há mais de 30 dias. Depois, `select jobname, status, start_time from cron.job_run_details order by start_time desc limit 5;` mostra as execuções do agendador.

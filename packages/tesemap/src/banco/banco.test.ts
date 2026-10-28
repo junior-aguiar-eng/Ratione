@@ -129,6 +129,26 @@ describe('Banco do TeseMap: regras e RLS (F4-03)', () => {
     assert.deepEqual(await buscar('palavraquenaoexiste'), []);
   });
 
+  it('busca por espécie: o prefixo do id separa tema repetitivo, IAC e repercussão geral, sem tocar nas chamadas antigas', async () => {
+    const outro = await criarBanco();
+    await comoServidor(outro, tx =>
+      inserirNos(tx, [
+        no('STJ-TEMA-1076', { rotulo: 'Tema 1076 do STJ', numero_referencia: 'Tema 1076', descricao: 'Honorários e equidade.', detalhes: { dataJulgamento: '2022-03-16' } }),
+        no('STJ-IAC-5', { rotulo: 'IAC 5 do STJ', descricao: 'Honorários em incidente.', detalhes: { dataJulgamento: '2021-01-01' } }),
+        no('STF-RG-1255', { tribunal: 'STF', rotulo: 'Tema 1255 do STF', descricao: 'Honorários e repercussão.', detalhes: { dataJulgamento: '2023-01-01' } })
+      ])
+    );
+    const buscar = (prefixo: string | null, tribunal: string | null = null) =>
+      como(outro, null, tx => tx.query<{ id: string }>('select id from public.tesemap_buscar($1, $2, null, 40, $3)', ['honorarios', tribunal, prefixo])).then(r => r.rows.map(x => x.id));
+    assert.deepEqual(await buscar('STJ-TEMA-'), ['STJ-TEMA-1076']);
+    assert.deepEqual(await buscar('STJ-IAC-'), ['STJ-IAC-5']);
+    assert.deepEqual(await buscar('STF-RG-', 'STF'), ['STF-RG-1255']);
+    assert.deepEqual(await buscar('STJ-TEMA-', 'STF'), [], 'prefixo e tribunal se combinam (E)');
+    assert.deepEqual((await buscar(null)).sort(), ['STF-RG-1255', 'STJ-IAC-5', 'STJ-TEMA-1076'], 'sem prefixo, tudo');
+    const antiga = await como(outro, null, tx => tx.query<{ id: string }>("select id from public.tesemap_buscar('honorarios', null, null, 40)"));
+    assert.equal(antiga.rows.length, 3, 'a chamada de quatro argumentos continua valendo');
+  });
+
   it('apagar um nó leva as arestas dele (cascata)', async () => {
     await comoServidor(db, tx => tx.query("delete from public.tesemap_nos where id = 'IA-VALIDADA'"));
     const r = await comoServidor(db, tx => tx.query<{ n: string }>("select count(*) as n from public.tesemap_arestas where destino_id = 'IA-VALIDADA'"));

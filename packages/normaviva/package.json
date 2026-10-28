@@ -26,6 +26,11 @@
       "import": "./src/busca/consulta.ts",
       "default": "./src/busca/consulta.ts"
     },
+    "./apelidos": {
+      "types": "./src/busca/apelidos.ts",
+      "import": "./src/busca/apelidos.ts",
+      "default": "./src/busca/apelidos.ts"
+    },
     "./referencias": {
       "types": "./src/busca/referencias.ts",
       "import": "./src/busca/referencias.ts",
@@ -56,7 +61,7 @@
   },
   "dependencies": {
     "@ratione/core": "workspace:*",
-    "zod": "^4.6.5"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 /** Para dar o visual de card a outra tag (`<form>`, `<aside>`): `className={cn(cardClasses, 'p-6')}`. */
-const cardClasses = 'bg-card text-card-foreground border rounded-lg';
+const cardClasses = 'bg-card text-card-foreground border rounded-lg shadow-card';
 
 /** Superfície com borda. O espaçamento interno fica por conta de quem usa (`p-5`, `p-6`) ou de `CardContent`. */
 function Card({ className, ...props }: React.ComponentProps<'div'>) {

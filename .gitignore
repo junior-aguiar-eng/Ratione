@@ -54,3 +54,6 @@ packages/normaviva/corpus/feeds-alertas.json
 # Relatório da verificação periódica do TeseMap (pnpm verificar:tesemap): efêmero, vira issue no workflow
 packages/tesemap/corpus/atualizacao-relatorio.json
 packages/tesemap/corpus/atualizacao-relatorio.md
+
+# F5-05: folhas de conferência são geradas do caso
+packages/argumenta/corpus/folhas/

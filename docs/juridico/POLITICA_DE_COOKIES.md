@@ -3,6 +3,7 @@
 **Versão:** [VERSAO] · **Vigência:** [DATA_VIGENCIA]
 
 > RASCUNHO PARA REVISÃO DO ADVOGADO RESPONSÁVEL.
+> **Atualizado em 25/10/2026 conforme o código e os documentos do produto** (`docs/produto/PLANOS_E_COBRANCA.md`, `docs/produto/ARGUMENTA.md`, `docs/produto/IA_TAREFAS.md`). Itens marcados **[CONFIRMAR]** dependem de decisão ou de conferência do responsável; **[FUTURO]** descreve o que ainda não está no ar (cobrança, envio de arquivos).
 
 ---
 
@@ -11,8 +12,8 @@ Usamos **cookies** e o **armazenamento local do navegador** (`localStorage`) par
 
 | Nome / finalidade | Tipo | Duração | Base legal | Consentimento |
 |---|---|---|---|---|
-| Sessão e autenticação | Essencial | Sessão / [X] dias | Execução de contrato | Não exigido |
-| Segurança (anti-fraude, proteção CSRF) | Essencial | Sessão | Legítimo interesse | Não exigido |
+| Sessão e autenticação (cookie do Supabase, nome começando por `sb-`) | Essencial | Até você sair | Execução de contrato | Não exigido |
+| Segurança | — | — | — | **Não há cookie próprio.** As rotas que alteram dados conferem o cabeçalho `Origin`; a sessão é validada no servidor |
 | `ratione_tema` (tema claro/escuro) | Preferência | Até você limpar | Execução de contrato | Não exigido |
 | `ratione_historico_recente` (itens salvos neste navegador antes da conta; é enviado à conta se o usuário aceitar e depois apagado) | Funcional | Até você limpar | Execução de contrato | Não exigido |
 | Medição de uso e desempenho (analytics) **[SE ADOTADO]** | Estatístico | [X] | Consentimento | **Exigido** |

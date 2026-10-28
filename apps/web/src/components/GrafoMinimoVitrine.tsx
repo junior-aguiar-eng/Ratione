@@ -1,57 +1,14 @@
 import Link from 'next/link';
-import grafoMinimo from '@ratione/tesemap/grafo-minimo.json';
 import { dataCurta } from '../lib/datas';
+import { ALTURA_DO_NO as ALTURA, COR_DO_PAPEL as COR, LEGENDA_DO_GRAFO as LEGENDA, POSICOES_DO_GRAFO as POSICOES, arestasValidadas, papelDoNo, rotuloDoNo } from '../lib/grafoVitrine';
 
 /**
  * Vitrine do TeseMap: o grafo mínimo do Tema 1.076/STJ (F4-05), o mesmo que está no banco, lido do arquivo do repositório no build. Só mostra as
  * relações validadas, cada uma com fonte oficial e trecho literal conferido; serve à página inicial e à reserva do /tesemap quando o banco não responde.
  */
-type Papel = 'precedente' | 'dispositivo' | 'tema';
-
-interface ArestaVitrine {
-  id: string;
-  origem: string;
-  destino: string;
-  tipo: string;
-  rotulo: string;
-  validacao: { status: string; por: string | null; em: string | null };
-}
-
-const PREFIXO_DISPOSITIVO = 'NV|';
-
-const rotuloDoNo = (id: string) => {
-  if (id.startsWith(PREFIXO_DISPOSITIVO)) return grafoMinimo.dispositivos.find(d => PREFIXO_DISPOSITIVO + d.id === id)?.rotulo ?? id;
-  const stj = id.match(/^STJ-TEMA-(\d+)$/);
-  if (stj) return `Tema ${Number(stj[1]).toLocaleString('pt-BR')} do STJ`;
-  const rg = id.match(/^STF-RG-(\d+)$/);
-  if (rg) return `Tema ${Number(rg[1]).toLocaleString('pt-BR')} do STF (repercussão geral)`;
-  return id;
-};
-
-const papelDoNo = (id: string): Papel => (id.startsWith(PREFIXO_DISPOSITIVO) ? 'dispositivo' : id.startsWith('STF-RG-') ? 'tema' : 'precedente');
-
-const COR: Record<Papel, string> = { precedente: 'rgb(var(--warn))', dispositivo: 'rgb(var(--info))', tema: 'rgb(var(--rel))' };
-const LEGENDA: Array<[string, string]> = [
-  ['bg-warn', 'Precedente qualificado do STJ'],
-  ['bg-info', 'Dispositivo de lei (NormaViva)'],
-  ['bg-rel', 'Tema de repercussão geral do STF']
-];
-
-// Duas colunas (viewBox 640x320): o Tema 1.076 no meio da esquerda, o § 6º-A acima dele e o Tema 1.255 abaixo; os parágrafos que ele interpreta à direita.
-const ALTURA = 62;
-const ESQ = { x: 10, w: 250 };
-const DIR = { x: 380, w: 250 };
-const POSICOES: Record<string, { x: number; y: number; w: number }> = {
-  'NV|LEI-13105-2015|corpo|art. 85, § 6º-A': { ...ESQ, y: 8 },
-  'STJ-TEMA-1076': { ...ESQ, y: 128 },
-  'STF-RG-1255': { ...ESQ, y: 248 },
-  'NV|LEI-13105-2015|corpo|art. 85, § 2º': { ...DIR, y: 8 },
-  'NV|LEI-13105-2015|corpo|art. 85, § 3º': { ...DIR, y: 128 },
-  'NV|LEI-13105-2015|corpo|art. 85, § 8º': { ...DIR, y: 248 }
-};
 
 export default function GrafoMinimoVitrine() {
-  const validadas = (grafoMinimo.arestas as ArestaVitrine[]).filter(a => a.validacao.status === 'validado');
+  const validadas = arestasValidadas();
   const desenhaveis = validadas.filter(a => POSICOES[a.origem] && POSICOES[a.destino]);
   const ponta = (id: string, lado: 'dir' | 'esq' | 'cima' | 'baixo') => {
     const p = POSICOES[id];

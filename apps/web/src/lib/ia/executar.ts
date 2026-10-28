@@ -90,6 +90,9 @@ const MENSAGEM_NEGADO: Record<MotivoFundo | 'em_andamento', string> = {
   em_andamento: 'Já há um pedido seu de IA em andamento. Aguarde ele terminar.'
 };
 
+/** Mensagem do aviso quando o resultado foi gerado mas o banco não registrou (lib/ia/gravidade.ts a trata como ERROR). */
+export const MENSAGEM_REGISTRO_FALHOU = 'IA: resultado gerado, mas o registro falhou';
+
 const ANALISE_INVALIDA = 'Esta análise não está mais aberta. Comece uma nova.';
 const FALHOU = 'O recurso de IA falhou agora. Sua cota não foi gasta. Tente de novo em alguns minutos.';
 const NAO_GEROU = 'Não foi possível gerar o resultado agora. Sua cota não foi gasta.';
@@ -142,21 +145,34 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
   /** Falha sem entregar: a explicação libera a vaga; a etapa de uma análise conta a falha (o banco decide a hora de desistir e estornar). */
   const falhou = () => (porChamada ? dep.cancelarAnalise(analiseId, usuario.id) : dep.falhaAnalise(analiseId, usuario.id));
 
-  const reserva = await dep.reservar({
-    tarefa: t.id,
-    usuarioId: usuario.id,
-    referencia,
-    chave,
-    analiseId,
-    custoMaximoUsd: custoMaximoUsd(t)
-  });
+  let reserva: Reserva;
+  try {
+    reserva = await dep.reservar({
+      tarefa: t.id,
+      usuarioId: usuario.id,
+      referencia,
+      chave,
+      analiseId,
+      custoMaximoUsd: custoMaximoUsd(t)
+    });
+  } catch (e) {
+    // O banco falhou entre abrir a análise e reservar: a vaga da explicação não pode ficar aberta (a rota responde 500)
+    if (porChamada) await dep.cancelarAnalise(analiseId, usuario.id).catch(() => undefined);
+    throw e;
+  }
   if (!reserva.ok) {
     if (porChamada) await dep.cancelarAnalise(analiseId, usuario.id);
     if (reserva.motivo === 'analise_invalida') return { status: 400, corpo: { mensagem: ANALISE_INVALIDA, motivo: 'analise_invalida' } };
     return { status: 429, corpo: { mensagem: MENSAGEM_NEGADO[reserva.motivo], motivo: reserva.motivo } };
   }
 
-  const r = await dep.chamarModelo({ modelo: t.modelo, esforco: t.esforco, maxTokens: t.maxTokensSaida, instrucoes: t.instrucoes, mensagem, esquema: t.esquemaSaida });
+  let r: ResultadoModelo;
+  try {
+    r = await dep.chamarModelo({ modelo: t.modelo, esforco: t.esforco, maxTokens: t.maxTokensSaida, instrucoes: t.instrucoes, mensagem, esquema: t.esquemaSaida });
+  } catch (e) {
+    // O cliente do modelo já devolve falha em vez de lançar; se lançar mesmo assim, a reserva não pode ficar presa
+    r = { tipo: 'falha', mensagem: (e as Error).message };
+  }
   if (r.tipo === 'falha') {
     dep.avisar?.('IA: chamada falhou', { tarefa: t.id, referencia, erro_mensagem: r.mensagem });
     await dep.finalizar(reserva.id, 'falhou', null, 0);
@@ -186,9 +202,15 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
     return { status: 502, corpo: { mensagem: NAO_GEROU } };
   }
 
-  await dep.finalizar(reserva.id, 'gerada', r.uso, custo);
-  if (porChamada || t.cota.conclui) await dep.concluirAnalise(analiseId, usuario.id);
-  else if (t.cota.consome) await dep.consumirAnalise(analiseId, usuario.id);
-  if (t.guardaResultado) await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data });
+  // Já gerou (e já custou): se o registro no banco falhar daqui para a frente, o cliente ainda recebe o que foi gerado. A falha vai para o log
+  // como ERROR (gravidade.ts), que dispara o alerta por e-mail: é o responsável quem precisa olhar o banco.
+  const registrarFalha = (etapa: string) => (e: unknown) =>
+    dep.avisar?.(MENSAGEM_REGISTRO_FALHOU, { tarefa: t.id, referencia, etapa, erro_mensagem: e instanceof Error ? e.message : String(e) });
+  await dep.finalizar(reserva.id, 'gerada', r.uso, custo).catch(registrarFalha('finalizar'));
+  if (porChamada || t.cota.conclui) await dep.concluirAnalise(analiseId, usuario.id).catch(registrarFalha('concluir'));
+  else if (t.cota.consome) await dep.consumirAnalise(analiseId, usuario.id).catch(registrarFalha('consumir'));
+  if (t.guardaResultado) {
+    await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data }).catch(registrarFalha('gravar_cache'));
+  }
   return { status: 200, corpo: { resposta: saida.data, doCache: false, modelo: t.modelo, restantes } };
 }

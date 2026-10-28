@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { aplicacaoDoNo, citacoesDoNo, coberturaPorExtenso, idsLigadosPeloProprioNo, numerosDeRepercussaoGeral, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, textoDoTotalDeAplicacao, type NoTese } from './tesemap';
+import { aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, idsLigadosPeloProprioNo, numerosDeRepercussaoGeral, posicoesRadiais, resumoDoNo, tabelaAusente, textoDaPesquisa, textoDoTotalDeAplicacao, type NoTese } from './tesemap';
 
 const dc = (iso: string) => iso.split('-').reverse().join('/');
 const no = (detalhes: Record<string, unknown>): NoTese => ({
@@ -114,5 +114,49 @@ describe('Aplicação do tema na tela (F4-02)', () => {
     assert.equal(textoDoTotalDeAplicacao({ ...base, total: 8890 }), '8.890 decisões entre 2020 e 2026');
     assert.equal(textoDoTotalDeAplicacao({ ...base, total: 1 }), '1 decisão entre 2020 e 2026');
     assert.equal(textoDoTotalDeAplicacao({ ...base, total: 0 }), 'nenhuma decisão registrada entre 2020 e 2026');
+  });
+});
+
+describe('Espécies do TeseMap: o STJ separado por espécie', () => {
+  const de = (id: string, tipo: string) => ({ id, tipo });
+
+  it('reconhece a espécie pelo começo do id, mesmo com o banco guardando tudo como precedente', () => {
+    assert.equal(especieDoNo(de('STJ-TEMA-1076', 'precedente'))?.curto, 'Tema repetitivo');
+    assert.equal(especieDoNo(de('STJ-IAC-5', 'precedente'))?.curto, 'IAC');
+    assert.equal(especieDoNo(de('STF-RG-1255', 'precedente'))?.curto, 'Repercussão geral');
+    assert.equal(especieDoNo(de('STF-RG-118', 'tema'))?.curto, 'Repercussão geral');
+    for (const id of ['STF-ADI-5766', 'STF-ADC-43', 'STF-ADO-26', 'STF-ADPF-347']) assert.equal(especieDoNo(de(id, 'precedente'))?.curto, 'Controle concentrado');
+  });
+
+  it('súmula e dispositivo vêm do tipo; o que ninguém conhece fica sem espécie', () => {
+    assert.equal(especieDoNo(de('STJ-SUMULA-479', 'sumula'))?.curto, 'Súmula');
+    assert.equal(especieDoNo(de('STF-SV-13', 'sumula'))?.curto, 'Súmula');
+    assert.equal(especieDoNo(de('NV|cpc-85', 'dispositivo'))?.curto, 'Dispositivo');
+    assert.equal(especieDoNo(de('OUTRO-1', 'conceito')), null);
+  });
+
+  it('o filtro só oferece as espécies que cabem no tribunal escolhido', () => {
+    assert.equal(especiesDoTribunal('').length, ESPECIES.length);
+    const stj = especiesDoTribunal('STJ').map(e => e.id);
+    assert.ok(stj.includes('tema-stj') && stj.includes('sumula'));
+    assert.ok(!stj.includes('rg-stf') && !stj.includes('dispositivo'));
+    const stf = especiesDoTribunal('STF').map(e => e.id);
+    assert.ok(stf.includes('rg-stf') && stf.includes('controle-stf') && !stf.includes('tema-stj'));
+  });
+
+  it('as espécies têm id e prefixo únicos, e cada uma filtra por prefixo ou por tipo', () => {
+    assert.equal(new Set(ESPECIES.map(e => e.id)).size, ESPECIES.length);
+    for (const e of ESPECIES) assert.ok(!!e.prefixo !== !!e.tipo, e.id);
+  });
+
+  it('só envia o prefixo ao banco quando há filtro por espécie', async () => {
+    const chamadas: Array<Record<string, unknown>> = [];
+    const db = { rpc: async (_nome: string, args: Record<string, unknown>) => { chamadas.push(args); return { data: [], error: null }; } };
+    await buscarNos(db as never, { texto: 'honorários', tribunal: '', tipo: '' });
+    await buscarNos(db as never, { texto: '', tribunal: 'STJ', tipo: '', prefixo: 'STJ-TEMA-' });
+    assert.ok(!('prefixo' in chamadas[0]));
+    assert.equal(chamadas[1].prefixo, 'STJ-TEMA-');
+    assert.equal(chamadas[1].tribunal, 'STJ');
+    assert.equal(chamadas[1].tipo, null);
   });
 });
