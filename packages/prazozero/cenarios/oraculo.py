@@ -36,7 +36,7 @@ PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"
     ("TJAC", d) for d in ["06-04", "08-06"]} | {
     ("TJAP", d) for d in ["06-04", "10-30", "11-30"]} | {
     ("TJTO", d) for d in ["04-20", "06-04", "06-05", "08-10"]} | {
-    ("TJSE", d) for d in ["02-16", "02-18", "04-02", "04-20", "06-05", "06-29", "08-10", "12-07", "12-14"]}
+    ("TJSE", d) for d in ["12-07", "12-14"]}
 
 # Tribunal usado nos cenários que precisam de um calendário SEM ato lido (dias pendentes). Ao ler o ato dele, trocar por outro ainda sem ato
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
@@ -108,7 +108,7 @@ TJAP_2026_NU = ["02-16", "02-17", "02-18", "03-19", "03-20", "04-01", "04-02", "
 TJTO_2026_NU = ["02-16", "02-17", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "08-10", "08-11", "09-08", "10-05", "10-30", "12-18"]
 #  TJPI: Provimento 59/2025, art. 1º (sem expediente) e art. 5º (prazos prorrogados): Carnaval e Cinzas, 02 e 03/04, 04/06, 11/08, 19/10, 28/10 e 08/12; mais os 4 pontos facultativos da Portaria 169/2026, arts. 1º, 2º e 7º (sem expediente): 20/04, 05/06, 10/08 e 07/12; fora: federais, municipais, 14/12 (só Ministério Público) e recesso.
 TJPI_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "08-10", "08-11", "10-19", "10-28", "12-07", "12-08"]
-#  TJSE: calendário do tribunal (sem portaria lida): contam os feriados sem município (17/02, 03/04, 04/06, 24/06, 08/07, 11/08, 30/10, 08/12); alertam os "previsão de pontos facultativos" e 14/12; fora: feriados com município, 16/03 (Aracaju e Tribunal) e recesso.
+#  TJSE: calendário do tribunal: contam os feriados sem município (17/02, 03/04, 04/06, 24/06, 08/07, 11/08, 30/10, 08/12) e os pontos facultativos com portaria normativa e comunicado oficial (16/02 e 18/02 PN 10/2026, 02/04 PN 18/2026, 20/04 PN 24/2026, 05/06 PN 46/2026, 29/06 PN 52/2026, 10/08 PN 72/2026: sem expediente, prazos prorrogados); alertam 07/12 (sem portaria) e 14/12; fora: feriados com município, 16/03 (Aracaju e Tribunal) e recesso.
 TJSE_2026_NU = ["02-16", "02-17", "02-18", "04-02", "04-03", "04-20", "06-04", "06-05", "06-24", "06-29", "07-08", "08-10", "08-11", "10-30", "12-07", "12-08", "12-14"]
 #  TJRR: Portaria 1558/2025, art. 3º e Anexo Único ("Todas as Comarcas"; suspensos o expediente e os prazos em feriados e pontos facultativos, que contam); fora: federais, linhas só de Boa Vista, municípios do interior e recesso.
 TJRR_2026_NU = ["02-16", "02-17", "02-18", "04-01", "04-02", "04-03", "04-20", "06-04", "06-05", "08-10", "08-11", "10-05", "10-28", "12-07", "12-08"]
@@ -1242,20 +1242,20 @@ add("tjpi-2026-dia-da-justica", "verificado", "TJPI 2026: 07/12 (ponto facultati
 add("tjpi-2026-ponto-facultativo-20-abril", "verificado", "TJPI 2026: 20/04 (ponto facultativo, Portaria 169/2026) e 21/04 (Tiradentes) não contam", TJPI,
     entrada("2026-04-16", "publicacao", 3, "TJPI"))
 # TJSE 2026: calendário do tribunal (lido em 14/10/2026; nenhuma portaria lida). Nascem pendentes de validação do revisor.
-TJSE = "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224"
-add("tjse-2026-carnaval", "pendente", "TJSE 2026: 16/02 (ponto facultativo) e 18/02 (Cinzas, ponto facultativo) só alertam; 17/02 (Carnaval, feriado) não conta", TJSE,
+TJSE = "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224"
+add("tjse-2026-carnaval", "verificado", "TJSE 2026: 16/02 e 18/02 (pontos facultativos, Portaria Normativa 10/2026) e 17/02 (Carnaval, feriado) não contam", TJSE,
     entrada("2026-02-12", "publicacao", 3, "TJSE"))
-add("tjse-2026-semana-santa", "pendente", "TJSE 2026: 02/04 (Quinta-feira Santa, ponto facultativo) só alerta; 03/04 (Paixão de Cristo) não conta", TJSE,
+add("tjse-2026-semana-santa", "verificado", "TJSE 2026: 02/04 (Quinta-feira Santa, ponto facultativo, Portaria Normativa 18/2026) e 03/04 (Paixão de Cristo) não contam", TJSE,
     entrada("2026-03-31", "publicacao", 3, "TJSE"))
-add("tjse-2026-ponto-facultativo-20-abril", "pendente", "TJSE 2026: 20/04 (ponto facultativo) só alerta; 21/04 (Tiradentes) não conta", TJSE,
+add("tjse-2026-ponto-facultativo-20-abril", "verificado", "TJSE 2026: 20/04 (ponto facultativo, Portaria Normativa 24/2026) e 21/04 (Tiradentes) não contam", TJSE,
     entrada("2026-04-16", "publicacao", 3, "TJSE"))
-add("tjse-2026-corpus-christi", "pendente", "TJSE 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta", TJSE,
+add("tjse-2026-corpus-christi", "verificado", "TJSE 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria Normativa 46/2026) não contam", TJSE,
     entrada("2026-06-02", "publicacao", 3, "TJSE"))
-add("tjse-2026-festejos-juninos", "pendente", "TJSE 2026: 24/06 (São João, feriado) não conta e 29/06 (São Pedro, ponto facultativo) só alerta", TJSE,
+add("tjse-2026-festejos-juninos", "verificado", "TJSE 2026: 24/06 (São João, feriado) e 29/06 (São Pedro, ponto facultativo, Portaria Normativa 52/2026) não contam", TJSE,
     entrada("2026-06-23", "publicacao", 3, "TJSE"))
 add("tjse-2026-emancipacao-de-sergipe", "verificado", "TJSE 2026: 08/07 (Emancipação Política de Sergipe) não conta", TJSE,
     entrada("2026-07-07", "publicacao", 2, "TJSE"))
-add("tjse-2026-dia-do-magistrado", "pendente", "TJSE 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Dia do Magistrado) não conta", TJSE,
+add("tjse-2026-dia-do-magistrado", "verificado", "TJSE 2026: 10/08 (ponto facultativo, Portaria Normativa 72/2026) e 11/08 (Dia do Magistrado) não contam", TJSE,
     entrada("2026-08-07", "publicacao", 3, "TJSE"))
 add("tjse-2026-dia-do-funcionario-publico", "verificado", "TJSE 2026: 28/10 conta e 30/10 (Dia do Funcionário Público, feriado) não conta", TJSE,
     entrada("2026-10-27", "publicacao", 3, "TJSE"))
