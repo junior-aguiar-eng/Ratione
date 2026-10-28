@@ -11706,9 +11706,9 @@
   },
   {
     "id": "tjse-2026-carnaval",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 16/02 (ponto facultativo) e 18/02 (Cinzas, ponto facultativo) só alertam; 17/02 (Carnaval, feriado) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 16/02 e 18/02 (pontos facultativos, Portaria Normativa 10/2026) e 17/02 (Carnaval, feriado) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-02-12",
       "tipoEvento": "publicacao",
@@ -11718,7 +11718,7 @@
     "esperado": {
       "dataPublicacao": "2026-02-12",
       "dataTermoInicial": "2026-02-13",
-      "dataVencimentoFinal": "2026-02-18",
+      "dataVencimentoFinal": "2026-02-20",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11728,7 +11728,15 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-02-16",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
             "data": "2026-02-17",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-02-18",
             "motivo": "TJSE: calendário 2026 do tribunal"
           }
         ]
@@ -11736,16 +11744,16 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-02-20"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-semana-santa",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 02/04 (Quinta-feira Santa, ponto facultativo) só alerta; 03/04 (Paixão de Cristo) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 02/04 (Quinta-feira Santa, ponto facultativo, Portaria Normativa 18/2026) e 03/04 (Paixão de Cristo) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-03-31",
       "tipoEvento": "publicacao",
@@ -11755,7 +11763,7 @@
     "esperado": {
       "dataPublicacao": "2026-03-31",
       "dataTermoInicial": "2026-04-01",
-      "dataVencimentoFinal": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-07",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11764,6 +11772,10 @@
         "suspensaoDe": null,
         "suspensaoAte": null,
         "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
           {
             "data": "2026-04-03",
             "motivo": "TJSE: calendário 2026 do tribunal"
@@ -11773,16 +11785,16 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-04-07"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-ponto-facultativo-20-abril",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 20/04 (ponto facultativo) só alerta; 21/04 (Tiradentes) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 20/04 (ponto facultativo, Portaria Normativa 24/2026) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-04-16",
       "tipoEvento": "publicacao",
@@ -11792,7 +11804,7 @@
     "esperado": {
       "dataPublicacao": "2026-04-16",
       "dataTermoInicial": "2026-04-17",
-      "dataVencimentoFinal": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-23",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11802,6 +11814,10 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-04-20",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
             "data": "2026-04-21",
             "motivo": "Tiradentes"
           }
@@ -11810,16 +11826,16 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-04-23"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-corpus-christi",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria Normativa 46/2026) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-06-02",
       "tipoEvento": "publicacao",
@@ -11829,7 +11845,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-02",
       "dataTermoInicial": "2026-06-03",
-      "dataVencimentoFinal": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-09",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11841,22 +11857,26 @@
           {
             "data": "2026-06-04",
             "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "TJSE: calendário 2026 do tribunal"
           }
         ]
       }
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-06-09"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-festejos-juninos",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 24/06 (São João, feriado) não conta e 29/06 (São Pedro, ponto facultativo) só alerta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 24/06 (São João, feriado) e 29/06 (São Pedro, ponto facultativo, Portaria Normativa 52/2026) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-06-23",
       "tipoEvento": "publicacao",
@@ -11866,7 +11886,7 @@
     "esperado": {
       "dataPublicacao": "2026-06-23",
       "dataTermoInicial": "2026-06-25",
-      "dataVencimentoFinal": "2026-06-29",
+      "dataVencimentoFinal": "2026-06-30",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11878,22 +11898,26 @@
           {
             "data": "2026-06-24",
             "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJSE: calendário 2026 do tribunal"
           }
         ]
       }
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-06-30"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-emancipacao-de-sergipe",
     "categoria": "verificado",
     "descricao": "TJSE 2026: 08/07 (Emancipação Política de Sergipe) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-07-07",
       "tipoEvento": "publicacao",
@@ -11928,9 +11952,9 @@
   },
   {
     "id": "tjse-2026-dia-do-magistrado",
-    "categoria": "pendente",
-    "descricao": "TJSE 2026: 10/08 (ponto facultativo) só alerta e 11/08 (Dia do Magistrado) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "categoria": "verificado",
+    "descricao": "TJSE 2026: 10/08 (ponto facultativo, Portaria Normativa 72/2026) e 11/08 (Dia do Magistrado) não contam",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-08-07",
       "tipoEvento": "publicacao",
@@ -11939,8 +11963,8 @@
     },
     "esperado": {
       "dataPublicacao": "2026-08-07",
-      "dataTermoInicial": "2026-08-10",
-      "dataVencimentoFinal": "2026-08-13",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
@@ -11950,6 +11974,10 @@
         "suspensaoAte": null,
         "diasNaoUteis": [
           {
+            "data": "2026-08-10",
+            "motivo": "TJSE: calendário 2026 do tribunal"
+          },
+          {
             "data": "2026-08-11",
             "motivo": "TJSE: calendário 2026 do tribunal"
           }
@@ -11958,16 +11986,16 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-14"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-08-14"
+    "alternativaEsperada": null
   },
   {
     "id": "tjse-2026-dia-do-funcionario-publico",
     "categoria": "verificado",
     "descricao": "TJSE 2026: 28/10 conta e 30/10 (Dia do Funcionário Público, feriado) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-10-27",
       "tipoEvento": "publicacao",
@@ -12008,7 +12036,7 @@
     "id": "tjse-2026-dia-da-justica",
     "categoria": "pendente",
     "descricao": "TJSE 2026: 07/12 (ponto facultativo) só alerta e 08/12 (Dia da Justiça) não conta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-12-04",
       "tipoEvento": "publicacao",
@@ -12045,7 +12073,7 @@
     "id": "tjse-2026-dia-do-ministerio-publico",
     "categoria": "pendente",
     "descricao": "TJSE 2026: 14/12 (Dia do Ministério Público) só alerta",
-    "fundamento": "Calendário 2026 do TJSE, sem portaria lida (lido em 14/10/2026); CPC, arts. 219 e 224",
+    "fundamento": "Calendário 2026 do TJSE (14/10/2026) e comunicados oficiais das Portarias Normativas 10, 18, 24, 46, 52 e 72/2026 (28/10/2026; as portarias em si não foram lidas); CPC, arts. 219 e 224",
     "entrada": {
       "dataEvento": "2026-12-11",
       "tipoEvento": "publicacao",
