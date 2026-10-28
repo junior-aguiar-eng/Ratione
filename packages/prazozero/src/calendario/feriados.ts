@@ -233,7 +233,7 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
       percorrer(ev.inicio, ev.fim, iso => aplicar(iso, ev));
     }
     for (const regra of REGRAS_ANUAIS) {
-      if (!regra.tribunais.includes(trib)) continue;
+      if (!regra.tribunais.includes(trib) || regra.exceto?.includes(ano)) continue;
       if (regra.quando.tipo === 'pascoa') {
         for (const desloc of regra.quando.deslocamentos) aplicar(somarDiasIso(pascoa, desloc), regra);
       } else {

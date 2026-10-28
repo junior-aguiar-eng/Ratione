@@ -35,6 +35,8 @@ export interface RegraAnual {
   verificacao: VerificacaoEvento;
   fundamento: string;
   fonte: keyof typeof FONTES_CALENDARIO;
+  /** Anos em que a regra não vale porque um evento do próprio ano já traz o período lido. */
+  exceto?: number[];
   quando:
     | { tipo: 'pascoa'; deslocamentos: number[] }
     | { tipo: 'intervalo'; de: [number, number]; ate: [number, number] };
@@ -124,6 +126,12 @@ export const FONTES_CALENDARIO = {
     url: 'https://tjal.jus.br/noticia/tribunal-de-justica-de-alagoas-regulamenta-feriados-de-2026/visualizar',
     lido: 'página do Diário Oficial com o texto do ato (arts. 1º a 6º), fornecida pelo responsável; o número do ato está na página anterior, que não foi lida (o 03/2026 vem da notícia oficial)',
     lidoEm: LIDO
+  },
+  'tjal-recesso-junho-2026': {
+    ato: 'TJAL, notícia oficial de 19/06/2026 sobre o plantão do recesso forense (22 a 30/06/2026, retorno em 1º/07); o ato que fixa o período não foi localizado',
+    url: 'https://www.tjal.jus.br/noticia/judiciario-de-alagoas-funciona-em-regime-de-plantao-a-partir-desta-segunda-22/visualizar',
+    lido: 'notícia oficial do tribunal, lida por inteiro em 28/10/2026: o plantão começa na segunda (22/06), os prazos ficam suspensos e as atividades voltam em 1º de julho; em 2025 foi de 23 a 30/06 (notícia de 18/06/2025, que cita o art. 37 da Lei 6.564/2005) e em 2024 de 22/06 a 1º/07, então o período varia por ano e não é o intervalo do art. 37',
+    lidoEm: '2026-10-28'
   },
   'tjal-lei-6564': {
     ato: 'Lei estadual nº 6.564/2005 (Código de Organização Judiciária de Alagoas), arts. 36 e 37',
@@ -826,6 +834,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
     fundamento: 'Ato Normativo TJAL 03/2026, arts. 1º, 2º, 3º e 5º',
     fonte: 'tjal-an-03-2026' as const
   })),
+  { tribunais: ['TJAL'], inicio: '2026-06-22', fim: '2026-06-30', nome: 'Recesso forense de junho (prazos suspensos; retorno em 1º de julho)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 37; período de 2026 pela notícia oficial do TJAL de 19/06/2026', fonte: 'tjal-recesso-junho-2026' },
   { tribunais: ['TJAL'], inicio: '2026-08-28', fim: '2026-08-28', nome: 'Nossa Senhora dos Prazeres: suspensão só nos municípios que preveem o feriado (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato Normativo TJAL 03/2026, art. 4º', fonte: 'tjal-an-03-2026' },
 
   // ---------- TRF1, 2026: Portaria Presi 5/2026 (pontos facultativos viram alerta, ver PONTOS_FACULTATIVOS) ----------
@@ -1392,7 +1401,7 @@ function comoAlerta(e: EventoCalendario): EventoCalendario {
 export const EVENTOS_CALENDARIO: EventoCalendario[] = EVENTOS_BASE.map(comoAlerta);
 
 
-/** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente e as do TJAL da Lei estadual 6.564/2005 (consolidada); só o recesso de 23/06 a 01/07 do TJAL fica pendente. */
+/** Regras que se repetem todo ano. As do TJMG vêm de resolução permanente e as do TJAL da Lei estadual 6.564/2005 (consolidada); só o recesso de junho do TJAL fica pendente (em 2026 vale o período lido, 22 a 30/06). */
 export const REGRAS_ANUAIS: RegraAnual[] = [
   { tribunais: ['TJMG'], nome: 'Carnaval (segunda a quarta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, III', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
   { tribunais: ['TJMG'], nome: 'Semana Santa (quarta a sexta-feira)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, IV', fonte: 'tjmg-res-458', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
@@ -1413,7 +1422,7 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
   { tribunais: ['TJAL'], nome: 'Semana Santa (quarta a domingo de Páscoa)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, I', fonte: 'tjal-lei-6564', quando: { tipo: 'pascoa', deslocamentos: [-4, -3, -2] } },
   { tribunais: ['TJAL'], nome: '11 de agosto', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [8, 11], ate: [8, 11] } },
   { tribunais: ['TJAL'], nome: '8 de dezembro', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 36, II', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
-  { tribunais: ['TJAL'], nome: 'Feriados forenses de 23 de junho a 1º de julho', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 37 (vigência atual não confirmada)', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [6, 23], ate: [7, 1] } },
+  { tribunais: ['TJAL'], nome: 'Feriados forenses de 23 de junho a 1º de julho', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual AL 6.564/2005, art. 37 (vigência atual não confirmada; o tribunal fixa o período a cada ano)', fonte: 'tjal-lei-6564', exceto: [2026], quando: { tipo: 'intervalo', de: [6, 23], ate: [7, 1] } },
   { tribunais: ['TJAL'], nome: 'Feriados forenses de 20 a 31 de dezembro', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Lei estadual AL 6.564/2005, art. 37', fonte: 'tjal-lei-6564', quando: { tipo: 'intervalo', de: [12, 20], ate: [12, 31] } }
 ];
 

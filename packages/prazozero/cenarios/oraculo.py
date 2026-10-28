@@ -48,7 +48,7 @@ ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
 #  TJSP: Provimento CSM 2.813/2025, art. 1º e 2º (e 30/10 em lugar de 28/10, conforme nota do próprio provimento)
 #  TJMG: Portaria Conjunta 1.764/PR/2026, art. 1º; permanentes: Res. OE 458/2004, art. 1º
-#  TJAL: Ato Normativo 03/2026 (DJE 28/01/2026, p. 7; 28/08 só em municípios: pendente); permanentes: Lei estadual 6.564/2005 consolidada, art. 36 e art. 37 (dezembro); pendente: art. 37, 23/06 a 01/07
+#  TJAL: Ato Normativo 03/2026 (DJE 28/01/2026, p. 7; 28/08 só em municípios: pendente); permanentes: Lei estadual 6.564/2005 consolidada, art. 36 e art. 37 (dezembro); recesso de junho de 2026: 22 a 30/06 (notícia oficial de 19/06/2026); em outros anos o art. 37 (23/06 a 01/07) segue pendente
 TJSP_2026_NU = ["02-16", "02-17", "04-02", "04-03", "04-20", "06-04", "06-05", "07-09", "07-10", "10-30", "12-07", "12-08"]
 TJSP_2026_RECESSO = [(1, 1, 1, 6), (12, 20, 12, 31)]
 #  TJPR: Decreto Judiciário 621/2025, arts. 1º a 3º (art. 4º, feriados municipais, não entra: CPC, art. 1.003, § 6º); recesso coincide com o CPC, art. 220
@@ -317,6 +317,8 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
     if ano == 2026 and trib == "TJAL":
         for s in TJAL_2026_NU:
             ev(dia(s), True, "TJAL: Ato Normativo 03/2026")
+        for d in intervalo(date(2026, 6, 22), date(2026, 6, 30)):
+            ev(d, True, "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)")
         ev(date(2026, 8, 28), False, "TJAL: 28/08 só nos municípios que preveem o feriado")
     if ano == 2026 and trib in ("TRF1", "TRF6"):
         for mes, dd, eh_parcial in PF_2026:
@@ -406,8 +408,9 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             ev(p + timedelta(off), True, "TJAL: Carnaval/Semana Santa (Lei 6.564/2005)")
         ev(date(ano, 8, 11), True, "TJAL: 11 de agosto (Lei 6.564/2005)")
         ev(date(ano, 12, 8), True, "TJAL: 8 de dezembro (Lei 6.564/2005)")
-        for d in intervalo(date(ano, 6, 23), date(ano, 7, 1)):
-            ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
+        if ano != 2026:  # em 2026 vale o período lido (22 a 30/06), acima
+            for d in intervalo(date(ano, 6, 23), date(ano, 7, 1)):
+                ev(d, False, "TJAL: feriados forenses de junho (Lei 6.564/2005, art. 37)")
         for d in intervalo(date(ano, 12, 20), date(ano, 12, 31)):
             ev(d, True, "TJAL: feriados forenses de dezembro (Lei 6.564/2005, art. 37)")
     if completo and not coberto and uf in FERIADOS_ESTADUAIS_PENDENTES:
@@ -792,8 +795,10 @@ add("tjmg-corpus-christi-comarca", "pendente", "TJMG: 4 e 5/06 dependem da comar
     entrada("2026-06-02", "publicacao", 3, "TJMG"))
 add("tjal-atos-2026", "verificado", "TJAL 2026: 20/04 (Tiradentes, suspensão) e 21/04 não contam", "Ato Normativo TJAL 03/2026 (notícia oficial do tribunal)",
     entrada("2026-04-16", "publicacao", 3, "TJAL"))
-add("tjal-junho-art37-pendente", "pendente", "TJAL: o art. 37 da Lei 6.564/2005 (feriados forenses de 23/06 a 01/07) ainda não teve a vigência confirmada: data alternativa grande", "Lei estadual AL 6.564/2005, art. 37; " + PEND,
+add("tjal-recesso-junho-2026", "verificado", "TJAL 2026: o recesso forense de 22 a 30/06 suspende o prazo e a contagem retoma em 1º de julho", "Lei estadual AL 6.564/2005, art. 37; notícia oficial do TJAL de 19/06/2026 (período de 2026)",
     entrada("2026-06-19", "publicacao", 5, "TJAL"))
+add("tjal-recesso-junho-2026-vence-dentro", "verificado", "TJAL 2026: prazo que passaria a vencer em 22/06 (primeiro dia do recesso) é prorrogado para 1º de julho", "Lei estadual AL 6.564/2005, art. 37; notícia oficial do TJAL de 19/06/2026 (período de 2026); CPC, art. 224, § 1º",
+    entrada("2026-06-17", "publicacao", 3, "TJAL"))
 
 
 # ---- TJRJ 2026 (F2-04): informativo oficial, sem selo ----
