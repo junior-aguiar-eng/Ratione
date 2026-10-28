@@ -3999,10 +3999,10 @@
     "alternativaEsperada": null
   },
   {
-    "id": "tjal-junho-art37-pendente",
-    "categoria": "pendente",
-    "descricao": "TJAL: o art. 37 da Lei 6.564/2005 (feriados forenses de 23/06 a 01/07) ainda não teve a vigência confirmada: data alternativa grande",
-    "fundamento": "Lei estadual AL 6.564/2005, art. 37; Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar",
+    "id": "tjal-recesso-junho-2026",
+    "categoria": "verificado",
+    "descricao": "TJAL 2026: o recesso forense de 22 a 30/06 suspende o prazo e a contagem retoma em 1º de julho",
+    "fundamento": "Lei estadual AL 6.564/2005, art. 37; notícia oficial do TJAL de 19/06/2026 (período de 2026)",
     "entrada": {
       "dataEvento": "2026-06-19",
       "tipoEvento": "publicacao",
@@ -4011,24 +4011,114 @@
     },
     "esperado": {
       "dataPublicacao": "2026-06-19",
-      "dataTermoInicial": "2026-06-22",
-      "dataVencimentoFinal": "2026-06-26",
+      "dataTermoInicial": "2026-07-01",
+      "dataVencimentoFinal": "2026-07-07",
       "foiProrrogadoTermoFinal": false,
       "calendarioVerificado": true,
       "rastro": {
-        "fimsDeSemana": 2,
+        "fimsDeSemana": 6,
         "suspensaoDias": 0,
         "suspensaoDe": null,
         "suspensaoAte": null,
-        "diasNaoUteis": []
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-22",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-24",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-25",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-26",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-30",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          }
+        ]
       }
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-07-07"
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tjal-recesso-junho-2026-vence-dentro",
+    "categoria": "verificado",
+    "descricao": "TJAL 2026: prazo que passaria a vencer em 22/06 (primeiro dia do recesso) é prorrogado para 1º de julho",
+    "fundamento": "Lei estadual AL 6.564/2005, art. 37; notícia oficial do TJAL de 19/06/2026 (período de 2026); CPC, art. 224, § 1º",
+    "entrada": {
+      "dataEvento": "2026-06-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TJAL"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-17",
+      "dataTermoInicial": "2026-06-18",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-22",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-24",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-25",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-26",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-29",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          },
+          {
+            "data": "2026-06-30",
+            "motivo": "TJAL: recesso forense de junho (notícia oficial de 19/06/2026)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "tjrj-carnaval-2026",
