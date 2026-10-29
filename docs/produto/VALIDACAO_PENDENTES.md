@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 60. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **379** cenários · validados: **319** · pendentes: **60**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 68. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **387** cenários · validados: **319** · pendentes: **68**
 
 ## Como responder
 
@@ -13,9 +13,9 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 60 | 60 |
+| Calendário verificado (tribunais com ato lido) | 1 a 68 | 68 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 60)
+## Calendário verificado (tribunais com ato lido) (1 a 68)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -81,4 +81,12 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 58 | `trt23-corpus-christi`<br>TRT23 2026: 04/06 (Corpus Christi regimental) não conta | publicação em 03/06/2026 (quarta-feira); 2 dias (CLT, dias úteis); TRT23; modo conservador | **08/06/2026 (segunda-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (regimental) |
 | 59 | `trt23-suspensao-28-outubro`<br>TRT23 2026: 28/10 (suspensão de prazo) e 30/10 (Dia do Servidor) não contam | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT23; modo conservador | **04/11/2026 (quarta-feira)** | 2 sáb./dom.; 28/10 Suspensão de prazo (Portaria Conjunta 007/2026); 30/10 Dia do Servidor Público (regimental); 02/11 Todos os Santos (regimental) e Finados |
 | 60 | `trt23-dia-da-justica`<br>TRT23 2026: 08/12 (Dia da Justiça) não conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT23; modo conservador | **10/12/2026 (quinta-feira)** | 2 sáb./dom.; 08/12 Dia da Justiça (regimental) |
+| 61 | `trt16-carnaval-cinzas`<br>TRT16 2026: Carnaval e quarta-feira (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT16; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval (segunda, terça e quarta-feira); 17/02 Carnaval (segunda, terça e quarta-feira); 18/02 Carnaval (segunda, terça e quarta-feira) |
+| 62 | `trt16-ponto-facultativo-abril`<br>TRT16 2026: 20/04 (ponto facultativo com suspensão) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT16; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Ponto facultativo com suspensão do expediente e dos prazos; 21/04 Tiradentes |
+| 63 | `trt16-adesao-maranhao`<br>TRT16 2026: 27/07 (feriado de 28/07 transferido) não conta | publicação em 24/07/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT16; modo conservador | **30/07/2026 (quinta-feira)** | 2 sáb./dom.; 27/07 Adesão do Maranhão à Independência (feriado transferido de 28/07) |
+| 64 | `trt16-dia-do-servidor`<br>TRT16 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT16; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (feriado transferido de 28/10); 02/11 Finados |
+| 65 | `trt24-carnaval-cinzas`<br>TRT24 2026: Carnaval (16 e 17/02) não conta e a quarta-feira de Cinzas (até as 13h) protrai o começo | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT24; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval (Lei 5.010, art. 62, III); 17/02 Carnaval (Lei 5.010, art. 62, III); 18/02 Quarta-feira de Cinzas (suspensão do expediente até as 13h): protrai o dia do começo |
+| 66 | `trt24-suspensao-abril`<br>TRT24 2026: 20/04 (suspensão) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão do expediente (Portaria 51/2025); 21/04 Tiradentes |
+| 67 | `trt24-corpus-christi-suspensao`<br>TRT24 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (Lei 9.093/1995; Lei municipal 1.019/1967); 05/06 Suspensão do expediente (Portaria 51/2025) |
+| 68 | `trt24-dia-do-servidor`<br>TRT24 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados (Lei 5.010, art. 62, IV) |
 

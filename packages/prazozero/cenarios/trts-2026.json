@@ -525,5 +525,73 @@
       ["suspensao-28-outubro", "28/10 (suspensão de prazo) e 30/10 (Dia do Servidor) não contam", "2026-10-27", 3],
       ["dia-da-justica", "08/12 (Dia da Justiça) não conta", "2026-12-04", 3]
     ]
+  },
+  {
+    "id": "TRT16",
+    "fontes": [
+      {
+        "chave": "trt16-portaria-gp-681-2025",
+        "ato": "Portaria GP/TRT16 nº 681/2025 (assinada em 19/09/2025, SEI 000006304/2025): aprova o Calendário Institucional de 2026 do TRT16, decreta pontos facultativos e transfere feriados",
+        "url": "https://www.trt16.jus.br/site/conteudo/publicacoes/pub_inteiro_teor.php?id=76277",
+        "lido": "inteiro teor da portaria e do Calendário 2026 anexo (PDF de 9 páginas), lidos em 28/10/2026 (cópia baixada direto, porque o script de acesso devolve o PDF corrompido neste host). O art. 2º decreta ponto facultativo com suspensão do expediente, dos prazos judiciais, das audiências e do atendimento em 20/04, 05/06 e 07/12, com prorrogação dos prazos; o art. 3º transfere, com a mesma suspensão, os feriados de 28/07 para 27/07, de 11/08 para 10/08 e de 28/10 para 30/10. Por isso todos esses dias contam como dia sem expediente. Contam também, pelo calendário anexo, o recesso de 02 a 06/01 e de 20 a 31/12, Carnaval de 16 a 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi) e 08/12 (Dia da Justiça). Fora: os feriados municipais (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense"],
+      ["2026-02-16/2026-02-18", "Carnaval (segunda, terça e quarta-feira)"],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Ponto facultativo com suspensão do expediente e dos prazos", {"fund": "Portaria GP/TRT16 681/2025, art. 2º"}],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Ponto facultativo com suspensão do expediente e dos prazos", {"fund": "Portaria GP/TRT16 681/2025, art. 2º"}],
+      ["2026-07-27", "Adesão do Maranhão à Independência (feriado transferido de 28/07)", {"fund": "Portaria GP/TRT16 681/2025, art. 3º"}],
+      ["2026-08-10", "Criação dos Cursos Jurídicos (feriado transferido de 11/08)", {"fund": "Portaria GP/TRT16 681/2025, art. 3º"}],
+      ["2026-10-30", "Dia do Servidor Público (feriado transferido de 28/10)", {"fund": "Portaria GP/TRT16 681/2025, art. 3º"}],
+      ["2026-12-07", "Ponto facultativo com suspensão do expediente e dos prazos", {"fund": "Portaria GP/TRT16 681/2025, art. 2º"}],
+      ["2026-12-08", "Nossa Senhora da Conceição e Dia da Justiça"],
+      ["2026-12-20/2026-12-31", "Recesso forense"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e quarta-feira (16 a 18/02) não contam", "2026-02-13", 5],
+      ["ponto-facultativo-abril", "20/04 (ponto facultativo com suspensão) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["adesao-maranhao", "27/07 (feriado de 28/07 transferido) não conta", "2026-07-24", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT24",
+    "fontes": [
+      {
+        "chave": "trt24-calendario-2026",
+        "ato": "Calendário 2026 do TRT24 (PDF institucional do tribunal, com a legenda de feriados e suspensões \"Portaria TRT/GP/SGJ nº 51/2025\")",
+        "url": "https://www.trt24.jus.br/documents/20182/0/Calend%C3%A1rio+2026.pdf/ed8dc485-5c7e-e05c-e569-215ec9cd1389?t=1767889939074",
+        "lido": "PDF inteiro lido em 28/10/2026 (cópia baixada direto; o script de acesso expira neste host). Não é o ato normativo: a Portaria TRT/GP/SGJ 51/2025 não foi lida. Contam os dias da legenda: Carnaval em 16 e 17/02, suspensão do expediente em 20/04, 05/06 e 10/08 (Portaria 51/2025), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi, Lei 9.093/1995 c/c Lei municipal 1.019/1967, listado sem a ressalva \"exclusivo da Capital\" que a legenda faz em 26/08), 11/08, 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12; 18/02 vale só até as 13h (expediente parcial). 07/12 só alerta: a legenda traz \"07 de novembro - Suspensão expediente\", provável erro de digitação. O recesso (02 a 06/01 e 20 a 31/12) não tem as datas na legenda: aplicou-se o padrão do art. 62, I, da Lei 5.010. Ficam fora o padroeiro de Campo Grande (13/06, sábado), 26/08 (só a Capital) e 11/10 (domingo). Uma notícia do tribunal fala em suspensão de prazos de 20/12 a 23/01, não modelada e de ano não conferido. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (padrão do art. 62, I, da Lei 5.010)"],
+      ["2026-02-16/2026-02-17", "Carnaval (Lei 5.010, art. 62, III)"],
+      ["2026-02-18", "Quarta-feira de Cinzas (suspensão do expediente até as 13h)", {"parcial": true}],
+      ["2026-04-01/2026-04-03", "Semana Santa (Lei 5.010, art. 62, II)"],
+      ["2026-04-20", "Suspensão do expediente (Portaria 51/2025)"],
+      ["2026-06-04", "Corpus Christi (Lei 9.093/1995; Lei municipal 1.019/1967)"],
+      ["2026-06-05", "Suspensão do expediente (Portaria 51/2025)"],
+      ["2026-08-10", "Suspensão do expediente (Portaria 51/2025)"],
+      ["2026-08-11", "Criação dos Cursos Jurídicos (Lei 5.010, art. 62, IV)"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10)"],
+      ["2026-11-01/2026-11-02", "Todos os Santos e Finados (Lei 5.010, art. 62, IV)"],
+      ["2026-12-07", "Suspensão do expediente (a legenda traz \"07 de novembro\"): só alerta", {"pf": true}],
+      ["2026-12-08", "Dia da Justiça (Lei 5.010, art. 62, IV)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (padrão do art. 62, I, da Lei 5.010)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval (16 e 17/02) não conta e a quarta-feira de Cinzas (até as 13h) protrai o começo", "2026-02-13", 5],
+      ["suspensao-abril", "20/04 (suspensão) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["corpus-christi-suspensao", "04/06 (Corpus Christi) e 05/06 (suspensão) não contam", "2026-06-03", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
   }
 ]

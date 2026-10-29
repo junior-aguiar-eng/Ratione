@@ -104,6 +104,18 @@ export const FONTES_TRTS = {
     "url": "https://portal.trt23.jus.br/portal/sites/portal/files/groups/governanca/portaria_unificada_calendario_forense_2026.pdf",
     "lido": "inteiro teor da portaria e do anexo (PDF de 4 páginas; as tabelas foram conferidas em imagem), lidos em 28/10/2026 pelo script de acesso. Contam as linhas de alcance \"Nacional\" e \"Regional\" que são feriado, recesso ou suspensão de prazo: recesso de 02 a 06/01 e de 20 a 31/12, Carnaval de 16 a 18/02, Semana Santa de 01 a 05/04, Corpus Christi em 04/06 (regimental, Portaria Conjunta 31/2015), Dia do Advogado em 11/08, suspensão de prazo em 28/10 (Portaria Conjunta 007/2026), 30/10 (Dia do Servidor Público regimental), 01 e 02/11, 20/11 e 08/12. Fora: as linhas municipais (CPC, art. 1.003, § 6º) e a Semana Jurídica de 04 a 08/05 e de 14 a 18/12, que o anexo trata como categoria própria e não como suspensão de prazo. A suspensão de 07 a 20/01 (CPC, art. 220) já está no motor. O ato-base 028/2025 não foi lido; atos posteriores não lidos",
     "lidoEm": "2026-10-28"
+  },
+  "trt16-portaria-gp-681-2025": {
+    "ato": "Portaria GP/TRT16 nº 681/2025 (assinada em 19/09/2025, SEI 000006304/2025): aprova o Calendário Institucional de 2026 do TRT16, decreta pontos facultativos e transfere feriados",
+    "url": "https://www.trt16.jus.br/site/conteudo/publicacoes/pub_inteiro_teor.php?id=76277",
+    "lido": "inteiro teor da portaria e do Calendário 2026 anexo (PDF de 9 páginas), lidos em 28/10/2026 (cópia baixada direto, porque o script de acesso devolve o PDF corrompido neste host). O art. 2º decreta ponto facultativo com suspensão do expediente, dos prazos judiciais, das audiências e do atendimento em 20/04, 05/06 e 07/12, com prorrogação dos prazos; o art. 3º transfere, com a mesma suspensão, os feriados de 28/07 para 27/07, de 11/08 para 10/08 e de 28/10 para 30/10. Por isso todos esses dias contam como dia sem expediente. Contam também, pelo calendário anexo, o recesso de 02 a 06/01 e de 20 a 31/12, Carnaval de 16 a 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi) e 08/12 (Dia da Justiça). Fora: os feriados municipais (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt24-calendario-2026": {
+    "ato": "Calendário 2026 do TRT24 (PDF institucional do tribunal, com a legenda de feriados e suspensões \"Portaria TRT/GP/SGJ nº 51/2025\")",
+    "url": "https://www.trt24.jus.br/documents/20182/0/Calend%C3%A1rio+2026.pdf/ed8dc485-5c7e-e05c-e569-215ec9cd1389?t=1767889939074",
+    "lido": "PDF inteiro lido em 28/10/2026 (cópia baixada direto; o script de acesso expira neste host). Não é o ato normativo: a Portaria TRT/GP/SGJ 51/2025 não foi lida. Contam os dias da legenda: Carnaval em 16 e 17/02, suspensão do expediente em 20/04, 05/06 e 10/08 (Portaria 51/2025), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi, Lei 9.093/1995 c/c Lei municipal 1.019/1967, listado sem a ressalva \"exclusivo da Capital\" que a legenda faz em 26/08), 11/08, 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12; 18/02 vale só até as 13h (expediente parcial). 07/12 só alerta: a legenda traz \"07 de novembro - Suspensão expediente\", provável erro de digitação. O recesso (02 a 06/01 e 20 a 31/12) não tem as datas na legenda: aplicou-se o padrão do art. 62, I, da Lei 5.010. Ficam fora o padroeiro de Campo Grande (13/06, sábado), 26/08 (só a Capital) e 11/10 (domingo). Uma notícia do tribunal fala em suspensão de prazos de 20/12 a 23/01, não modelada e de ano não conferido. Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -2482,6 +2494,318 @@ export const EVENTOS_TRTS: EventoDeTRT[] = [
     "verificacao": "ato_do_tribunal",
     "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
     "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-18",
+    "nome": "Carnaval (segunda, terça e quarta-feira)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 2º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 2º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-07-27",
+    "fim": "2026-07-27",
+    "nome": "Adesão do Maranhão à Independência (feriado transferido de 28/07)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 3º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Criação dos Cursos Jurídicos (feriado transferido de 11/08)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 3º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (feriado transferido de 28/10)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 3º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025, art. 2º",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Nossa Senhora da Conceição e Dia da Justiça",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT16"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026",
+    "fonte": "trt16-portaria-gp-681-2025"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (padrão do art. 62, I, da Lei 5.010)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval (Lei 5.010, art. 62, III)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (suspensão do expediente até as 13h)",
+    "efeito": "expediente_parcial",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa (Lei 5.010, art. 62, II)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão do expediente (Portaria 51/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (Lei 9.093/1995; Lei municipal 1.019/1967)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Suspensão do expediente (Portaria 51/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Suspensão do expediente (Portaria 51/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Criação dos Cursos Jurídicos (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferido de 28/10)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Suspensão do expediente (a legenda traz \"07 de novembro\"): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT24"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (padrão do art. 62, I, da Lei 5.010)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
+    "fonte": "trt24-calendario-2026"
   }
 ];
 
@@ -2517,6 +2841,9 @@ export const PONTOS_FACULTATIVOS_TRTS: Record<string, string[]> = {
     "2026-04-20",
     "2026-06-05",
     "2026-08-10",
+    "2026-12-07"
+  ],
+  "TRT24": [
     "2026-12-07"
   ]
 };
@@ -2642,6 +2969,22 @@ export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyo
     ],
     "fontes": [
       "trt23-portaria-conjunta-007-2026"
+    ]
+  },
+  "TRT16": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt16-portaria-gp-681-2025"
+    ]
+  },
+  "TRT24": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt24-calendario-2026"
     ]
   }
 };
