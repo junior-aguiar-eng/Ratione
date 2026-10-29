@@ -15,6 +15,7 @@ import { avisosDoArtigo } from '@ratione/normaviva/vigencia-futura';
 import { linhaDoTempo } from '../../lib/linhaDoTempo';
 import { DiffTexto, LinhaDoTempo } from './Historico';
 import ExplicacaoIA from './ExplicacaoIA';
+import LigacoesDoDispositivo from './LigacoesDoDispositivo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -426,6 +427,8 @@ export default function NormaVivaPage() {
                       </ul>
                     </section>
                   )}
+
+                  <LigacoesDoDispositivo dispositivoId={detalhe.dispositivo.id} db={db} />
 
                   <section className="border-t border-line pt-6">
                     <h3 className="font-serif text-xl font-semibold text-ink mb-3">Fonte</h3>

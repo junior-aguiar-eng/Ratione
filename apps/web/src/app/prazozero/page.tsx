@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { Bookmark, CalendarPlus, Check, ChevronDown, Copy, ExternalLink, FileDown } from 'lucide-react';
+import { Bookmark, CalendarPlus, Check, ChevronDown, Copy, FileDown } from 'lucide-react';
 import {
   MotorPrazoZero,
   ParametrosCalculoPrazo,
@@ -28,6 +28,7 @@ import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import ResultadoMaterial from './ResultadoMaterial';
+import LigacoesDoPrazo from '../../components/LigacoesDoPrazo';
 import RelatorioAlteracoes from './RelatorioAlteracoes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -400,6 +401,7 @@ export default function PrazoZeroPage() {
                 resultado={resultadoMaterial}
                 titulo={nomeAto}
                 tribunalId={tribunalId}
+                atoId={atoId}
                 urlSalvo={urlDoPrazoZero({ atoId, data: dataEvento, tribunalId })}
               />
             ) : (
@@ -624,15 +626,7 @@ export default function PrazoZeroPage() {
                 .
               </Notice>
 
-              <p className="text-sm text-ink-soft no-print">
-                <Link
-                  href="/normaviva"
-                  className="inline-flex items-center gap-1.5 text-brand-text font-medium hover:underline underline-offset-2"
-                >
-                  Ver o fundamento legal no NormaViva
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </Link>
-              </p>
+              <LigacoesDoPrazo prazoId={atoId} em={dataEvento} />
             </>
           )}
         </div>
