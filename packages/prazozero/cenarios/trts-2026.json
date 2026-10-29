@@ -314,5 +314,184 @@
       ["julho-2-e-3", "02/07 (Independência da Bahia) e 03/07 (ponto facultativo com suspensão) não contam", "2026-07-01", 3],
       ["dia-do-servidor", "28/10 conta e 30/10 (transferido pelo Ato GP 16/2026) não conta", "2026-10-27", 3]
     ]
+  },
+  {
+    "id": "TRT8",
+    "fontes": [
+      {
+        "chave": "trt8-calendario-2026",
+        "ato": "Calendário 2026 do TRT8 (PDF institucional \"02. Calendário 2026.ATUAL\", com a legenda \"Feriados – Portaria PRESI nº 1200/2025\"; o cabeçalho a chama também de Resolução nº 1.200/2025)",
+        "url": "https://www.trt8.jus.br/sites/portal/files/roles/institucional/02._calendario_2026.atual__9.pdf",
+        "lido": "PDF de 2 páginas lido por inteiro em 28/10/2026 pelo script de acesso (texto e legenda). Não é o ato normativo: nem a Portaria PRESI 1200/2025 nem o PROAD 7958/2025 foram lidos. Contam os dias que a legenda dá como feriado ou \"suspensão de expediente - Portaria nº 1200/2025\": Carnaval 16 e 17/02, Semana Santa de 01 a 03/04, suspensões em 20/04, 05/06, 10/08 e 07/12, 11/08, 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12, mais o recesso do art. 62, I (02 a 06/01 e 20 a 31/12). 18/02 só alerta (\"ponto facultativo - PROAD 7958/2025\"). Ficam fora: Corpus Christi em 04/06 (Lei municipal de Belém 6.307/1967; CPC, art. 1.003, § 6º), o Círio em 26/10 (ponto facultativo local) e 15/08 (Adesão do Pará, sábado). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Calendário 2026 do TRT8 (Portaria PRESI 1200/2025)",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010, art. 62, I)"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-02-18", "Quarta-feira de Cinzas (ponto facultativo, PROAD 7958/2025): só alerta", {"pf": true, "fund": "Calendário 2026 do TRT8 (PROAD 7958/2025)"}],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Suspensão de expediente (Portaria 1200/2025)"],
+      ["2026-06-05", "Suspensão de expediente (Portaria 1200/2025)"],
+      ["2026-08-10", "Suspensão de expediente (Portaria 1200/2025)"],
+      ["2026-08-11", "Instalação dos Cursos Jurídicos (Lei 5.010, art. 62, IV)"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10)"],
+      ["2026-11-01/2026-11-02", "Todos os Santos e Finados (Lei 5.010, art. 62, IV)"],
+      ["2026-12-07", "Suspensão de expediente (Portaria 1200/2025)"],
+      ["2026-12-08", "Dia da Justiça (Lei 5.010, art. 62, IV)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010, art. 62, I)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval (16 e 17/02) não conta e Cinzas (ponto facultativo) só alerta", "2026-02-13", 5],
+      ["suspensao-abril", "20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["agosto-suspensao", "10/08 (suspensão) e 11/08 não contam", "2026-08-07", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT10",
+    "fontes": [
+      {
+        "chave": "trt10-calendario-2026",
+        "ato": "Calendário 2026 do TRT10 (PDF institucional do tribunal, com a lista de feriados e os recessos)",
+        "url": "https://www.trt10.jus.br/docsweb/institucional/calendario/pdf/calendario_2026.pdf",
+        "lido": "PDF lido por inteiro em 28/10/2026 pelo script de acesso (calendário ilustrado com a lista de feriados e a nota do recesso: \"Recesso Forense: 2 a 6/1 e 20 a 31/12\" e, pelo art. 256, § 2º, do Regimento Interno, de 7 a 20/1). Não é um ato normativo: nenhuma portaria do tribunal foi lida. Contam os feriados da lista geral: Carnaval em 16 e 17/02, Semana Santa de 01 a 05/04, 04/06 (Corpus Christi), 11/08, 01 e 02/11 e 08/12, mais o recesso. 28/10 (Dia do Servidor) vem sem transferência no calendário, mas TST e vários TRTs a transferiram para 30/10: 28/10 e 30/10 só alertam. Cinzas, 20/04, 05/06, 10/08 e 07/12 não constam. Ficam fora os feriados estaduais de Tocantins (08/09 e 05/10) e os municipais de Palmas e do interior, que valem só nas unidades locais (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Calendário 2026 do TRT10",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010, art. 62, I)"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-04-01/2026-04-05", "Semana Santa"],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-08-11", "Instalação dos Cursos Jurídicos e Dia do Advogado"],
+      ["2026-10-28", "Dia do Servidor Público (o calendário não o transfere; TST e outros TRTs o transferiram para 30/10): só alerta", {"pf": true}],
+      ["2026-10-30", "Possível transferência do Dia do Servidor Público (ato não lido): só alerta", {"pf": true}],
+      ["2026-11-01/2026-11-02", "Todos os Santos e Finados"],
+      ["2026-12-08", "Dia da Justiça"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010, art. 62, I)"]
+    ],
+    "cenarios": [
+      ["carnaval", "Carnaval (16 e 17/02) não conta", "2026-02-13", 5],
+      ["corpus-christi", "04/06 (Corpus Christi) não conta", "2026-06-03", 2],
+      ["cursos-juridicos", "11/08 não conta", "2026-08-10", 2],
+      ["dia-do-servidor", "28/10 e 30/10 só alertam; 02/11 (Finados) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT14",
+    "fontes": [
+      {
+        "chave": "trt14-portaria-gp-1640-2025",
+        "ato": "Portaria GP nº 1640/2025 do TRT14, com o Anexo Único \"Calendário de Feriados e Recesso Forense 2026\" (PROAD 6972/2025, doc. 530, juntado em 18/12/2025), e a notícia oficial que informa a transferência do Dia do Servidor para 30/10",
+        "url": "https://files.trt14.jus.br/portal/public/feriados-2025-12/PORTARIA%201640-2025-Anexo%20%C3%BAnico%20-%20Calend%C3%A1rio%202026.pdf",
+        "lido": "Anexo Único inteiro (PDF de 3 páginas, lido em 28/10/2026 pelo script de acesso); o texto da portaria em si não foi lido. Contam as linhas de alcance Nacional e Regimental: recesso de 01 a 06/01 e de 20 a 31/12, 16/02 (feriado regimental), 17/02 (Carnaval), 18/02 (Cinzas), 01 a 03/04 (Quarta e Quinta Santa e Sexta-feira da Paixão), 04/06 (Corpus Christi, \"Nacional\"), 11/08, 08/12 e 30/10, que a notícia oficial informa ter sido transferido de 28/10 pela mesma portaria (não há expediente e os prazos são prorrogados). Alertam 23/01 e 17/11 (feriados do Estado do Acre, válidos só nas unidades acreanas). Fora: feriados municipais e o feriado estadual de Rondônia que cai em domingo (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      },
+      {
+        "chave": "trt14-portaria-gp-550-2026",
+        "ato": "Portaria GP nº 0550, de 19/05/2026, do TRT14: ponto facultativo em 05/06/2026 em todas as unidades de Rondônia e do Acre",
+        "url": "http://portal.trt14.jus.br/portal/noticias/justica-do-trabalho-decreta-ponto-facultativo-no-dia-5-de-junho-apos-feriado-de-corpus",
+        "lido": "só a notícia oficial do tribunal, lida em 28/10/2026: o funcionamento será exclusivamente em plantão judiciário e os prazos processuais são prorrogados automaticamente para o próximo dia útil; o texto da portaria não foi lido. Por isso 05/06 conta como dia sem expediente",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Portaria GP TRT14 1640/2025, Anexo Único",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (regimental)"],
+      ["2026-01-23", "Dia do Evangélico no Estado do Acre (só nas unidades do Acre): só alerta", {"pf": true}],
+      ["2026-02-16", "Feriado regimental (Carnaval)"],
+      ["2026-02-17", "Carnaval"],
+      ["2026-02-18", "Quarta-feira de Cinzas (regimental)"],
+      ["2026-04-01/2026-04-03", "Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão)"],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Ponto facultativo (plantão; prazos prorrogados, Portaria GP 550/2026)", {"fonte": "trt14-portaria-gp-550-2026", "fund": "Portaria GP TRT14 550/2026 (notícia oficial)"}],
+      ["2026-08-11", "Criação dos Cursos Jurídicos, da Magistratura e do Advogado (regimental)"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10)"],
+      ["2026-11-17", "Tratado de Petrópolis (feriado do Estado do Acre, só nas unidades do Acre): só alerta", {"pf": true}],
+      ["2026-12-08", "Dia da Justiça (regimental)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (regimental)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "16/02 (regimental), Carnaval e Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["semana-santa", "Quarta, Quinta e Sexta-feira Santa (01 a 03/04) não contam", "2026-03-31", 3],
+      ["corpus-christi-ponto-facultativo", "04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria GP 550/2026) não contam", "2026-06-03", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT19",
+    "fontes": [
+      {
+        "chave": "trt19-ato-170-2025",
+        "ato": "Ato nº 170/GP/TRT 19ª, de 29/09/2025 (DEJT e BI nº 10, de 08/10/2025): feriados e pontos facultativos de 2026 na Justiça do Trabalho da 19ª Região",
+        "url": "https://asp1.trt19.jus.br/docspdf/rhdocs/BOLETIM_20251008092236621.PDF",
+        "lido": "inteiro teor (PDF de 2 páginas, lido em 28/10/2026 pelo script de acesso). O art. 1º divulga os feriados e estabelece os pontos facultativos de 20/04, 05/06, 10/08 e 07/12 (iguais aos do STF), sem dizer que não haverá expediente; por isso esses quatro dias só alertam. Contam os demais dias da tabela: recesso de 02 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 24/06 (São João, Lei estadual 5.508/1993), 29/06 (São Pedro, Lei estadual 5.509/1993), 11/08, 16/09 (Emancipação Política de Alagoas), 30/10 (transferência do Dia do Servidor) e 08/12 (Dia da Justiça). O art. 2º manda observar os arts. 219 e 224, § 1º, do CPC. Fora: 27/08 (Padroeira de Maceió, municipal) e os feriados locais do interior (art. 3º; CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Ato 170/GP/TRT 19ª de 2025",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010)"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-02-18", "Cinzas"],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Ponto facultativo (Ato 170/2025): só alerta", {"pf": true}],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Ponto facultativo (Ato 170/2025): só alerta", {"pf": true}],
+      ["2026-06-24", "São João (Lei estadual 5.508/1993)"],
+      ["2026-06-29", "São Pedro (Lei estadual 5.509/1993)"],
+      ["2026-08-10", "Ponto facultativo (Ato 170/2025): só alerta", {"pf": true}],
+      ["2026-08-11", "Criação dos Cursos Jurídicos, Dia da Magistratura e do Advogado"],
+      ["2026-09-16", "Emancipação Política do Estado de Alagoas"],
+      ["2026-10-30", "Transferência do Dia do Servidor Público (28/10)"],
+      ["2026-12-07", "Ponto facultativo (Ato 170/2025): só alerta", {"pf": true}],
+      ["2026-12-08", "Dia da Justiça"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["sao-pedro", "29/06 (São Pedro, feriado estadual) não conta", "2026-06-26", 2],
+      ["emancipacao-alagoas", "16/09 (Emancipação Política de Alagoas) não conta", "2026-09-15", 2],
+      ["pontos-facultativos-abril", "20/04 (ponto facultativo) só alerta e 21/04 (Tiradentes) não conta", "2026-04-17", 3]
+    ]
+  },
+  {
+    "id": "TRT20",
+    "fontes": [
+      {
+        "chave": "trt20-calendario-2026",
+        "ato": "Calendário 2026 do TRT20 (PDF institucional \"Calendário 2026 - TRT da 20ª Região\", com carimbo de assinatura de 16/01/2026); notícia oficial \"TRT-SE disponibiliza calendário de feriados para o exercício de 2026\"",
+        "url": "https://www.trt20.jus.br/images/documentos/calendario/Calendario_2026.pdf",
+        "lido": "PDF de 1 página (digitalizado), lido em imagem em 28/10/2026, e a notícia oficial, que diz que nos feriados nacionais e estaduais ficam suspensos o expediente, o atendimento ao público e os prazos em todas as unidades. Não é o ato normativo: nenhum ato do tribunal foi lido. Contam os dias \"Toda a Região\" que o calendário dá como feriado: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02 (feriado regimental), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 24/06 (São João), 08/07 (Independência de Sergipe), 11/08, 30/10 (Dia do Servidor, remanejado de 28/10) e 08/12. Os pontos facultativos 20/04, 05/06, 10/08 e 07/12 só são rotulados \"ponto facultativo\" e por isso só alertam. Fora: os feriados municipais (Aracaju e interior; CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Calendário 2026 do TRT20",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010)"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-02-18", "Quarta-feira de Cinzas (feriado regimental)"],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Ponto facultativo: só alerta", {"pf": true}],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Ponto facultativo: só alerta", {"pf": true}],
+      ["2026-06-24", "São João"],
+      ["2026-07-08", "Independência de Sergipe (Constituição do Estado)"],
+      ["2026-08-10", "Ponto facultativo: só alerta", {"pf": true}],
+      ["2026-08-11", "Dia do Magistrado (Lei 5.010)"],
+      ["2026-10-30", "Dia do Servidor Público (remanejado de 28/10)"],
+      ["2026-12-07", "Ponto facultativo: só alerta", {"pf": true}],
+      ["2026-12-08", "Nossa Senhora da Conceição (Lei 5.010, Dia da Justiça)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["corpus-christi", "04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta", "2026-06-03", 3],
+      ["independencia-sergipe", "08/07 (Independência de Sergipe) não conta", "2026-07-07", 2],
+      ["dia-do-servidor", "28/10 conta e 30/10 (remanejado) não conta", "2026-10-27", 3]
+    ]
   }
 ]

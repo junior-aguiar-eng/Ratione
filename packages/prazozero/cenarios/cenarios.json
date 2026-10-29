@@ -13780,5 +13780,824 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "trt8-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT8 2026: Carnaval (16 e 17/02) não conta e Cinzas (ponto facultativo) só alerta",
+    "fundamento": "Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT8",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-18",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-02-25"
+  },
+  {
+    "id": "trt8-suspensao-abril",
+    "categoria": "verificado",
+    "descricao": "TRT8 2026: 20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT8",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-17",
+      "dataTermoInicial": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "Suspensão de expediente (Portaria 1200/2025)"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt8-agosto-suspensao",
+    "categoria": "verificado",
+    "descricao": "TRT8 2026: 10/08 (suspensão) e 11/08 não contam",
+    "fundamento": "Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT8",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Suspensão de expediente (Portaria 1200/2025)"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "Instalação dos Cursos Jurídicos (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt8-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT8 2026: 28/10 conta e 30/10 (transferido) não conta",
+    "fundamento": "Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT8",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (transferido de 28/10)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Todos os Santos e Finados (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt10-carnaval",
+    "categoria": "verificado",
+    "descricao": "TRT10 2026: Carnaval (16 e 17/02) não conta",
+    "fundamento": "Calendário 2026 do TRT10; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT10",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-18",
+      "dataVencimentoFinal": "2026-02-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt10-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TRT10 2026: 04/06 (Corpus Christi) não conta",
+    "fundamento": "Calendário 2026 do TRT10; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT10",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-05",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt10-cursos-juridicos",
+    "categoria": "verificado",
+    "descricao": "TRT10 2026: 11/08 não conta",
+    "fundamento": "Calendário 2026 do TRT10; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-08-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT10",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-10",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-13",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-11",
+            "motivo": "Instalação dos Cursos Jurídicos e Dia do Advogado"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt10-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT10 2026: 28/10 e 30/10 só alertam; 02/11 (Finados) não conta",
+    "fundamento": "Calendário 2026 do TRT10; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT10",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-11-04"
+  },
+  {
+    "id": "trt14-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT14 2026: 16/02 (regimental), Carnaval e Cinzas (16 a 18/02) não contam",
+    "fundamento": "Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT14",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Feriado regimental (Carnaval)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (regimental)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt14-semana-santa",
+    "categoria": "verificado",
+    "descricao": "TRT14 2026: Quarta, Quinta e Sexta-feira Santa (01 a 03/04) não contam",
+    "fundamento": "Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-03-31",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT14",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-31",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-01",
+            "motivo": "Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão)"
+          },
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt14-corpus-christi-ponto-facultativo",
+    "categoria": "verificado",
+    "descricao": "TRT14 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria GP 550/2026) não contam",
+    "fundamento": "Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT14",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "Ponto facultativo (plantão; prazos prorrogados, Portaria GP 550/2026)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt14-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT14 2026: 28/10 conta e 30/10 (transferido) não conta",
+    "fundamento": "Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT14",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (transferido de 28/10)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt19-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT19 2026: Carnaval e Cinzas (16 a 18/02) não contam",
+    "fundamento": "Ato 170/GP/TRT 19ª de 2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT19",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Cinzas"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt19-sao-pedro",
+    "categoria": "verificado",
+    "descricao": "TRT19 2026: 29/06 (São Pedro, feriado estadual) não conta",
+    "fundamento": "Ato 170/GP/TRT 19ª de 2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-26",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT19",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-26",
+      "dataTermoInicial": "2026-06-30",
+      "dataVencimentoFinal": "2026-07-01",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-29",
+            "motivo": "São Pedro (Lei estadual 5.509/1993)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt19-emancipacao-alagoas",
+    "categoria": "verificado",
+    "descricao": "TRT19 2026: 16/09 (Emancipação Política de Alagoas) não conta",
+    "fundamento": "Ato 170/GP/TRT 19ª de 2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-09-15",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT19",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-09-15",
+      "dataTermoInicial": "2026-09-17",
+      "dataVencimentoFinal": "2026-09-18",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-09-16",
+            "motivo": "Emancipação Política do Estado de Alagoas"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt19-pontos-facultativos-abril",
+    "categoria": "verificado",
+    "descricao": "TRT19 2026: 20/04 (ponto facultativo) só alerta e 21/04 (Tiradentes) não conta",
+    "fundamento": "Ato 170/GP/TRT 19ª de 2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT19",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-17",
+      "dataTermoInicial": "2026-04-20",
+      "dataVencimentoFinal": "2026-04-23",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-04-24"
+  },
+  {
+    "id": "trt20-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT20 2026: Carnaval e Cinzas (16 a 18/02) não contam",
+    "fundamento": "Calendário 2026 do TRT20; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT20",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (feriado regimental)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt20-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TRT20 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta",
+    "fundamento": "Calendário 2026 do TRT20; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT20",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-05",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-10"
+  },
+  {
+    "id": "trt20-independencia-sergipe",
+    "categoria": "verificado",
+    "descricao": "TRT20 2026: 08/07 (Independência de Sergipe) não conta",
+    "fundamento": "Calendário 2026 do TRT20; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-07-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT20",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-07-07",
+      "dataTermoInicial": "2026-07-09",
+      "dataVencimentoFinal": "2026-07-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-07-08",
+            "motivo": "Independência de Sergipe (Constituição do Estado)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt20-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT20 2026: 28/10 conta e 30/10 (remanejado) não conta",
+    "fundamento": "Calendário 2026 do TRT20; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT20",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (remanejado de 28/10)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

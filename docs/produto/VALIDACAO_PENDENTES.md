@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 36. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **355** cenários · validados: **319** · pendentes: **36**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 56. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **375** cenários · validados: **319** · pendentes: **56**
 
 ## Como responder
 
@@ -13,9 +13,9 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 36 | 36 |
+| Calendário verificado (tribunais com ato lido) | 1 a 56 | 56 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 36)
+## Calendário verificado (tribunais com ato lido) (1 a 56)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -57,4 +57,24 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 34 | `trt5-sao-joao`<br>TRT5 2026: 23/06 (Véspera de São João) e 24/06 (São João) não contam | publicação em 22/06/2026 (segunda-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **29/06/2026 (segunda-feira)** | 2 sáb./dom.; 23/06 Véspera de São João; 24/06 São João |
 | 35 | `trt5-julho-2-e-3`<br>TRT5 2026: 02/07 (Independência da Bahia) e 03/07 (ponto facultativo com suspensão) não contam | publicação em 01/07/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **08/07/2026 (quarta-feira)** | 2 sáb./dom.; 02/07 Independência da Bahia; 03/07 Ponto facultativo com suspensão do expediente e dos prazos |
 | 36 | `trt5-dia-do-servidor`<br>TRT5 2026: 28/10 conta e 30/10 (transferido pelo Ato GP 16/2026) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados |
+| 37 | `trt8-carnaval-cinzas`<br>TRT8 2026: Carnaval (16 e 17/02) não conta e Cinzas (ponto facultativo) só alerta | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT8; modo conservador | **24/02/2026 (terça-feira)**<br>Alternativa: 25/02/2026 (quarta-feira) | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval |
+| 38 | `trt8-suspensao-abril`<br>TRT8 2026: 20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT8; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão de expediente (Portaria 1200/2025); 21/04 Tiradentes |
+| 39 | `trt8-agosto-suspensao`<br>TRT8 2026: 10/08 (suspensão) e 11/08 não contam | publicação em 07/08/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT8; modo conservador | **14/08/2026 (sexta-feira)** | 2 sáb./dom.; 10/08 Suspensão de expediente (Portaria 1200/2025); 11/08 Instalação dos Cursos Jurídicos (Lei 5.010, art. 62, IV) |
+| 40 | `trt8-dia-do-servidor`<br>TRT8 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT8; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados (Lei 5.010, art. 62, IV) |
+| 41 | `trt10-carnaval`<br>TRT10 2026: Carnaval (16 e 17/02) não conta | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT10; modo conservador | **24/02/2026 (terça-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval |
+| 42 | `trt10-corpus-christi`<br>TRT10 2026: 04/06 (Corpus Christi) não conta | publicação em 03/06/2026 (quarta-feira); 2 dias (CLT, dias úteis); TRT10; modo conservador | **08/06/2026 (segunda-feira)** | 2 sáb./dom.; 04/06 Corpus Christi |
+| 43 | `trt10-cursos-juridicos`<br>TRT10 2026: 11/08 não conta | publicação em 10/08/2026 (segunda-feira); 2 dias (CLT, dias úteis); TRT10; modo conservador | **13/08/2026 (quinta-feira)** | 11/08 Instalação dos Cursos Jurídicos e Dia do Advogado |
+| 44 | `trt10-dia-do-servidor`<br>TRT10 2026: 28/10 e 30/10 só alertam; 02/11 (Finados) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT10; modo conservador | **30/10/2026 (sexta-feira)**<br>Alternativa: 04/11/2026 (quarta-feira) | só o dia do começo |
+| 45 | `trt14-carnaval-cinzas`<br>TRT14 2026: 16/02 (regimental), Carnaval e Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT14; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Feriado regimental (Carnaval); 17/02 Carnaval; 18/02 Quarta-feira de Cinzas (regimental) |
+| 46 | `trt14-semana-santa`<br>TRT14 2026: Quarta, Quinta e Sexta-feira Santa (01 a 03/04) não contam | publicação em 31/03/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT14; modo conservador | **08/04/2026 (quarta-feira)** | 2 sáb./dom.; 01/04 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão); 02/04 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão); 03/04 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão) |
+| 47 | `trt14-corpus-christi-ponto-facultativo`<br>TRT14 2026: 04/06 (Corpus Christi) e 05/06 (ponto facultativo, Portaria GP 550/2026) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT14; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi; 05/06 Ponto facultativo (plantão; prazos prorrogados, Portaria GP 550/2026) |
+| 48 | `trt14-dia-do-servidor`<br>TRT14 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT14; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Finados |
+| 49 | `trt19-carnaval-cinzas`<br>TRT19 2026: Carnaval e Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT19; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Cinzas |
+| 50 | `trt19-sao-pedro`<br>TRT19 2026: 29/06 (São Pedro, feriado estadual) não conta | publicação em 26/06/2026 (sexta-feira); 2 dias (CLT, dias úteis); TRT19; modo conservador | **01/07/2026 (quarta-feira)** | 2 sáb./dom.; 29/06 São Pedro (Lei estadual 5.509/1993) |
+| 51 | `trt19-emancipacao-alagoas`<br>TRT19 2026: 16/09 (Emancipação Política de Alagoas) não conta | publicação em 15/09/2026 (terça-feira); 2 dias (CLT, dias úteis); TRT19; modo conservador | **18/09/2026 (sexta-feira)** | 16/09 Emancipação Política do Estado de Alagoas |
+| 52 | `trt19-pontos-facultativos-abril`<br>TRT19 2026: 20/04 (ponto facultativo) só alerta e 21/04 (Tiradentes) não conta | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT19; modo conservador | **23/04/2026 (quinta-feira)**<br>Alternativa: 24/04/2026 (sexta-feira) | 2 sáb./dom.; 21/04 Tiradentes |
+| 53 | `trt20-carnaval-cinzas`<br>TRT20 2026: Carnaval e Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT20; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Quarta-feira de Cinzas (feriado regimental) |
+| 54 | `trt20-corpus-christi`<br>TRT20 2026: 04/06 (Corpus Christi) não conta e 05/06 (ponto facultativo) só alerta | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT20; modo conservador | **09/06/2026 (terça-feira)**<br>Alternativa: 10/06/2026 (quarta-feira) | 2 sáb./dom.; 04/06 Corpus Christi |
+| 55 | `trt20-independencia-sergipe`<br>TRT20 2026: 08/07 (Independência de Sergipe) não conta | publicação em 07/07/2026 (terça-feira); 2 dias (CLT, dias úteis); TRT20; modo conservador | **10/07/2026 (sexta-feira)** | 08/07 Independência de Sergipe (Constituição do Estado) |
+| 56 | `trt20-dia-do-servidor`<br>TRT20 2026: 28/10 conta e 30/10 (remanejado) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT20; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (remanejado de 28/10); 02/11 Finados |
 
