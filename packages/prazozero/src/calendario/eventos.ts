@@ -4,6 +4,8 @@
  * Para incluir um tribunal ou ano: ler o ato, registrar a fonte aqui, listar os eventos e,
  * se o ano estiver completo, declarar a cobertura (o resultado passa a exibir o selo de calendário conferido).
  */
+import { COBERTURA_TRTS, EVENTOS_TRTS, FONTES_TRTS, PONTOS_FACULTATIVOS_TRTS } from './trts-dados';
+
 export type EfeitoEvento = 'nao_util' | 'expediente_parcial' | 'ponto_facultativo';
 export type VerificacaoEvento = 'ato_do_tribunal' | 'lei_estadual' | 'pendente';
 
@@ -50,6 +52,8 @@ const LIDO_19_10 = '2026-10-19';
 const LIDO_28_10 = '2026-10-28';
 
 export const FONTES_CALENDARIO = {
+  // Tribunais Regionais do Trabalho: gerado de `cenarios/trts-2026.json` (ver `trts-dados.ts`)
+  ...FONTES_TRTS,
   'stj-gdg-1010': {
     ato: 'Portaria STJ/GDG nº 1.010/2025 (DJe 26/12/2025): feriados e pontos facultativos de 2026',
     url: 'https://bdjur.stj.jus.br/server/api/core/bitstreams/6257b5ff-8c9d-408f-a7d5-c6d7064af8eb/content',
@@ -466,6 +470,8 @@ const PF_2026: Array<{ data: string; nome: string; parcial?: boolean }> = [
 ];
 
 const EVENTOS_BASE: EventoCalendario[] = [
+  ...EVENTOS_TRTS,
+
   // ---------- STF e STJ, 2026 ----------
   ...PF_2026.map(pf => ({
     tribunais: ['STJ'],
@@ -1386,6 +1392,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
  * da Lei estadual 10.633/2024: não há expediente nos dias declarados ponto facultativo nas repartições estaduais; Atos Executivos 20, 79 e 91/2026). Também conta o dia que o ato trata como feriado ou suspensão decretada (Copa com prazos prorrogados).
  */
 const PONTOS_FACULTATIVOS: Record<string, string[]> = {
+  ...PONTOS_FACULTATIVOS_TRTS,
   // TRF1 e TRF6: os atos só "divulgam" o ponto facultativo e não dizem que não haverá expediente (diferente de TRF2, TRF3 e TRF5, cujos atos dizem)
   TRF1: ['2026-04-20', '2026-06-04', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
   TRF6: ['2026-04-20', '2026-06-05', '2026-08-10', '2026-10-30', '2026-12-07'],
@@ -1454,6 +1461,7 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
  * "calendário conferido". Feriados municipais nunca entram (CPC, art. 1.003, § 6º).
  */
 export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Array<keyof typeof FONTES_CALENDARIO> }> = {
+  ...COBERTURA_TRTS,
   STJ: { anos: [2026], fontes: ['stj-gdg-1010', 'stj-horarios'] },
   STF: { anos: [2026], fontes: ['stf-cal-2026'] },
   TST: { anos: [2026], fontes: ['tst-ato-conjunto-5-2026'] },
