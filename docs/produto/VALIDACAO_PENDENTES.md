@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 68. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **387** cenários · validados: **319** · pendentes: **68**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 76. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **395** cenários · validados: **319** · pendentes: **76**
 
 ## Como responder
 
@@ -13,9 +13,9 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 68 | 68 |
+| Calendário verificado (tribunais com ato lido) | 1 a 76 | 76 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 68)
+## Calendário verificado (tribunais com ato lido) (1 a 76)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -89,4 +89,12 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 66 | `trt24-suspensao-abril`<br>TRT24 2026: 20/04 (suspensão) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão do expediente (Portaria 51/2025); 21/04 Tiradentes |
 | 67 | `trt24-corpus-christi-suspensao`<br>TRT24 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (Lei 9.093/1995; Lei municipal 1.019/1967); 05/06 Suspensão do expediente (Portaria 51/2025) |
 | 68 | `trt24-dia-do-servidor`<br>TRT24 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT24; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados (Lei 5.010, art. 62, IV) |
+| 69 | `trt22-carnaval-cinzas`<br>TRT22 2026: Carnaval e Cinzas (suspensão), 16 a 18/02, não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT22; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval (Lei 5.010, art. 62, III); 17/02 Carnaval (Lei 5.010, art. 62, III); 18/02 Quarta-feira de Cinzas (suspensão excepcional das atividades) |
+| 70 | `trt22-semana-institucional-maio`<br>TRT22 2026: 11 a 15/05 (prazos suspensos na Semana Institucional) não contam | publicação em 08/05/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT22; modo conservador | **20/05/2026 (quarta-feira)** | 4 sáb./dom.; 11/05 Semana Institucional (prazos suspensos, Ato GP 185/2025); 12/05 Semana Institucional (prazos suspensos, Ato GP 185/2025); 13/05 Semana Institucional (prazos suspensos, Ato GP 185/2025); 14/05 Semana Institucional (prazos suspensos, Ato GP 185/2025); 15/05 Semana Institucional (prazos suspensos, Ato GP 185/2025) |
+| 71 | `trt22-dia-do-piaui`<br>TRT22 2026: 19/10 (Dia do Piauí) não conta | publicação em 16/10/2026 (sexta-feira); 2 dias (CLT, dias úteis); TRT22; modo conservador | **21/10/2026 (quarta-feira)** | 2 sáb./dom.; 19/10 Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937) |
+| 72 | `trt22-dia-do-servidor`<br>TRT22 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT22; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados |
+| 73 | `trt11-carnaval-cinzas`<br>TRT11 2026: Carnaval e Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT11; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Quarta-feira de Cinzas |
+| 74 | `trt11-suspensao-abril`<br>TRT11 2026: 20/04 (suspensão do expediente) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT11; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão do expediente (RA 322/2025); 21/04 Tiradentes |
+| 75 | `trt11-instalacao-trt11`<br>TRT11 2026: 15/12 (Instalação do TRT11) não conta | publicação em 14/12/2026 (segunda-feira); 2 dias (CLT, dias úteis); TRT11; modo conservador | **17/12/2026 (quinta-feira)** | 15/12 Instalação do TRT11 |
+| 76 | `trt11-dia-do-servidor`<br>TRT11 2026: 28/10 (Dia do Servidor) não conta | publicação em 27/10/2026 (terça-feira); 2 dias (CLT, dias úteis); TRT11; modo conservador | **30/10/2026 (sexta-feira)** | 28/10 Dia do Servidor Público |
 

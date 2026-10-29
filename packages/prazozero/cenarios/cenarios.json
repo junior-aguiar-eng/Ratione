@@ -15107,5 +15107,349 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "trt22-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT22 2026: Carnaval e Cinzas (suspensão), 16 a 18/02, não contam",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT22",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (Lei 5.010, art. 62, III)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (Lei 5.010, art. 62, III)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (suspensão excepcional das atividades)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt22-semana-institucional-maio",
+    "categoria": "verificado",
+    "descricao": "TRT22 2026: 11 a 15/05 (prazos suspensos na Semana Institucional) não contam",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-05-08",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT22",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-05-08",
+      "dataTermoInicial": "2026-05-18",
+      "dataVencimentoFinal": "2026-05-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-05-11",
+            "motivo": "Semana Institucional (prazos suspensos, Ato GP 185/2025)"
+          },
+          {
+            "data": "2026-05-12",
+            "motivo": "Semana Institucional (prazos suspensos, Ato GP 185/2025)"
+          },
+          {
+            "data": "2026-05-13",
+            "motivo": "Semana Institucional (prazos suspensos, Ato GP 185/2025)"
+          },
+          {
+            "data": "2026-05-14",
+            "motivo": "Semana Institucional (prazos suspensos, Ato GP 185/2025)"
+          },
+          {
+            "data": "2026-05-15",
+            "motivo": "Semana Institucional (prazos suspensos, Ato GP 185/2025)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt22-dia-do-piaui",
+    "categoria": "verificado",
+    "descricao": "TRT22 2026: 19/10 (Dia do Piauí) não conta",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-16",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT22",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-16",
+      "dataTermoInicial": "2026-10-20",
+      "dataVencimentoFinal": "2026-10-21",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-19",
+            "motivo": "Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt22-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT22 2026: 28/10 conta e 30/10 (transferido) não conta",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT22",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (transferido de 28/10)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Todos os Santos e Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt11-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT11 2026: Carnaval e Cinzas (16 a 18/02) não contam",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT11",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt11-suspensao-abril",
+    "categoria": "verificado",
+    "descricao": "TRT11 2026: 20/04 (suspensão do expediente) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT11",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-17",
+      "dataTermoInicial": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "Suspensão do expediente (RA 322/2025)"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt11-instalacao-trt11",
+    "categoria": "verificado",
+    "descricao": "TRT11 2026: 15/12 (Instalação do TRT11) não conta",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-12-14",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT11",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-14",
+      "dataTermoInicial": "2026-12-16",
+      "dataVencimentoFinal": "2026-12-17",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-15",
+            "motivo": "Instalação do TRT11"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt11-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT11 2026: 28/10 (Dia do Servidor) não conta",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT11",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "Dia do Servidor Público"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

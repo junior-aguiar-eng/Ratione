@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **387** · validados: **319** · pendentes: **68**
+> Cenários: **395** · validados: **319** · pendentes: **76**
 
 ## Como revisar
 
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 59 |
-| Calendário verificado (tribunais com ato lido) | 262 |
+| Calendário verificado (tribunais com ato lido) | 270 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -4629,9 +4629,105 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
+### 377. `trt22-carnaval-cinzas`
+
+**TRT22 2026: Carnaval e Cinzas (suspensão), 16 a 18/02, não contam**
+
+- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CLT, dias úteis) · tribunal **TRT22** · modo conservador
+- **Publicação / dia do começo:** 13/02/2026 (sexta-feira) · **início da contagem:** 19/02/2026 (quinta-feira)
+- **Vencimento esperado:** **25/02/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (Lei 5.010, art. 62, III); 17/02/2026 Carnaval (Lei 5.010, art. 62, III); 18/02/2026 Quarta-feira de Cinzas (suspensão excepcional das atividades)
+- **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 378. `trt22-semana-institucional-maio`
+
+**TRT22 2026: 11 a 15/05 (prazos suspensos na Semana Institucional) não contam**
+
+- **Entrada:** publicação em **08/05/2026 (sexta-feira)** · prazo de **3 dias** (CLT, dias úteis) · tribunal **TRT22** · modo conservador
+- **Publicação / dia do começo:** 08/05/2026 (sexta-feira) · **início da contagem:** 18/05/2026 (segunda-feira)
+- **Vencimento esperado:** **20/05/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 11/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 12/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 13/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 14/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 15/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025)
+- **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 379. `trt22-dia-do-piaui`
+
+**TRT22 2026: 19/10 (Dia do Piauí) não conta**
+
+- **Entrada:** publicação em **16/10/2026 (sexta-feira)** · prazo de **2 dias** (CLT, dias úteis) · tribunal **TRT22** · modo conservador
+- **Publicação / dia do começo:** 16/10/2026 (sexta-feira) · **início da contagem:** 20/10/2026 (terça-feira)
+- **Vencimento esperado:** **21/10/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/10/2026 Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937)
+- **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 380. `trt22-dia-do-servidor`
+
+**TRT22 2026: 28/10 conta e 30/10 (transferido) não conta**
+
+- **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **3 dias** (CLT, dias úteis) · tribunal **TRT22** · modo conservador
+- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 28/10/2026 (quarta-feira)
+- **Vencimento esperado:** **03/11/2026 (terça-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Todos os Santos e Finados
+- **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 381. `trt11-carnaval-cinzas`
+
+**TRT11 2026: Carnaval e Cinzas (16 a 18/02) não contam**
+
+- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CLT, dias úteis) · tribunal **TRT11** · modo conservador
+- **Publicação / dia do começo:** 13/02/2026 (sexta-feira) · **início da contagem:** 19/02/2026 (quinta-feira)
+- **Vencimento esperado:** **25/02/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas
+- **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 382. `trt11-suspensao-abril`
+
+**TRT11 2026: 20/04 (suspensão do expediente) e 21/04 (Tiradentes) não contam**
+
+- **Entrada:** publicação em **17/04/2026 (sexta-feira)** · prazo de **3 dias** (CLT, dias úteis) · tribunal **TRT11** · modo conservador
+- **Publicação / dia do começo:** 17/04/2026 (sexta-feira) · **início da contagem:** 22/04/2026 (quarta-feira)
+- **Vencimento esperado:** **24/04/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão do expediente (RA 322/2025); 21/04/2026 Tiradentes
+- **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 383. `trt11-instalacao-trt11`
+
+**TRT11 2026: 15/12 (Instalação do TRT11) não conta**
+
+- **Entrada:** publicação em **14/12/2026 (segunda-feira)** · prazo de **2 dias** (CLT, dias úteis) · tribunal **TRT11** · modo conservador
+- **Publicação / dia do começo:** 14/12/2026 (segunda-feira) · **início da contagem:** 16/12/2026 (quarta-feira)
+- **Vencimento esperado:** **17/12/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 15/12/2026 Instalação do TRT11
+- **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 384. `trt11-dia-do-servidor`
+
+**TRT11 2026: 28/10 (Dia do Servidor) não conta**
+
+- **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **2 dias** (CLT, dias úteis) · tribunal **TRT11** · modo conservador
+- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
+- **Vencimento esperado:** **30/10/2026 (sexta-feira)**
+- **Como foi contado (dias excluídos):** 28/10/2026 Dia do Servidor Público
+- **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
 ## Intimação eletrônica
 
-### 377. `portal-segunda`
+### 385. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -4643,7 +4739,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 378. `portal-sexta`
+### 386. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -4655,7 +4751,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 379. `portal-sabado`
+### 387. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -4667,7 +4763,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 380. `portal-feriado`
+### 388. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -4679,7 +4775,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 381. `portal-recesso`
+### 389. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -4693,7 +4789,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 382. `jef-5d-embargos`
+### 390. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -4705,7 +4801,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 383. `jef-10d-recurso`
+### 391. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -4717,7 +4813,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 384. `jef-dobro-ignorado`
+### 392. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -4729,7 +4825,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 385. `jef-recesso`
+### 393. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -4741,7 +4837,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 386. `jef-recesso-desligado`
+### 394. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -4753,7 +4849,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 387. `jef-dje-sexta`
+### 395. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 

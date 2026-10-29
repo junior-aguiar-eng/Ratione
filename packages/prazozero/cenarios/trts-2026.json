@@ -593,5 +593,74 @@
       ["corpus-christi-suspensao", "04/06 (Corpus Christi) e 05/06 (suspensão) não contam", "2026-06-03", 3],
       ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
     ]
+  },
+  {
+    "id": "TRT22",
+    "fontes": [
+      {
+        "chave": "trt22-ato-gp-184-2025",
+        "ato": "Ato GP nº 184/2025 do TRT22 (calendário de feriados de 2026, divulgado em 16/12/2025) e Ato GP nº 185/2025 (suspensão de prazos nas Semanas Institucionais), pelo calendário institucional \"calendário 2026\" e pela notícia oficial do tribunal",
+        "url": "https://www.trt22.jus.br/sites/default/files/drive-imce/estrutura-do-tribunal/calendarios/2026/calendario-2026-v1.pdf",
+        "lido": "calendário institucional (PDF de 1 página, lido em 28/10/2026 pelo download direto) e notícia oficial \"TRT Piauí divulga calendário oficial de feriados para 2026\"; os Atos GP 184/2025 e 185/2025 em si não foram lidos. Contam os dias de toda a região: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, 18/02 (suspensão excepcional das atividades), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 11/08, 19/10 (Dia do Piauí, Lei estadual 176/1937), 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12, e as semanas institucionais em que os prazos ficam suspensos (11 a 15/05 e 14 a 18/09, Ato GP 185/2025; prazos que terminam nelas passam ao primeiro dia útil). Ficam fora os feriados locais \"somente na Vara\" ou \"somente no Posto\" (CPC, art. 1.003, § 6º), inclusive 08/12 de Oeiras. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010, art. 62, I)"],
+      ["2026-02-16/2026-02-17", "Carnaval (Lei 5.010, art. 62, III)"],
+      ["2026-02-18", "Quarta-feira de Cinzas (suspensão excepcional das atividades)"],
+      ["2026-04-01/2026-04-03", "Semana Santa (Lei 5.010, art. 62, II)"],
+      ["2026-05-11/2026-05-15", "Semana Institucional (prazos suspensos, Ato GP 185/2025)", {"fund": "Ato GP TRT22 185/2025"}],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-08-11", "Criação dos Cursos Jurídicos, Dia do Advogado e do Magistrado (Lei 5.010, art. 62, IV)"],
+      ["2026-09-14/2026-09-18", "Semana Institucional (prazos suspensos, Ato GP 185/2025)", {"fund": "Ato GP TRT22 185/2025"}],
+      ["2026-10-19", "Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937)"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10)"],
+      ["2026-11-01/2026-11-02", "Todos os Santos e Finados"],
+      ["2026-12-08", "Dia da Justiça (Lei 5.010, art. 62, IV)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010, art. 62, I)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (suspensão), 16 a 18/02, não contam", "2026-02-13", 5],
+      ["semana-institucional-maio", "11 a 15/05 (prazos suspensos na Semana Institucional) não contam", "2026-05-08", 3],
+      ["dia-do-piaui", "19/10 (Dia do Piauí) não conta", "2026-10-16", 2],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT11",
+    "fontes": [
+      {
+        "chave": "trt11-calendario-2026",
+        "ato": "Calendário 2026 do TRT11 (PDF \"Aprovado pela Resolução Administrativa nº 322/2025 e alterado pela RA nº 214/2026\", com legenda de feriados, suspensão do expediente e suspensão de prazos)",
+        "url": "https://portal.trt11.jus.br/images/arquivos/Calendarios/2026/Calendario_2026_Aprovado_Alterado_ANEXO_RA_214-2026_-_Calendrio_2026.pdf",
+        "lido": "PDF de 1 página lido em 28/10/2026 (texto e imagem, onde os dias em vermelho são feriados e em laranja a \"suspensão do expediente RA nº 322/2025\"). Não é o ato normativo: as RAs 322/2025 e 214/2026 não foram lidas. Contam os feriados da legenda: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 11/08, 28/10 (Dia do Servidor, sem transferência no calendário), 02/11, 08/12 e 15/12 (Instalação do TRT11), e as suspensões de expediente em laranja: 20/04, 05/06 e 10/08. Ficam fora os feriados que caem em fim de semana e os municipais (CPC, art. 1.003, § 6º). A suspensão de prazos de 20/12 a 20/01 (CPC, art. 220) já está no motor. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-02-18", "Quarta-feira de Cinzas"],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Suspensão do expediente (RA 322/2025)"],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Suspensão do expediente (RA 322/2025)"],
+      ["2026-08-10", "Suspensão do expediente (RA 322/2025)"],
+      ["2026-08-11", "Instituição dos Cursos Jurídicos"],
+      ["2026-10-28", "Dia do Servidor Público"],
+      ["2026-11-02", "Finados"],
+      ["2026-12-08", "Dia da Justiça e de Nossa Senhora da Conceição"],
+      ["2026-12-15", "Instalação do TRT11"],
+      ["2026-12-20/2026-12-31", "Recesso forense"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["suspensao-abril", "20/04 (suspensão do expediente) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["instalacao-trt11", "15/12 (Instalação do TRT11) não conta", "2026-12-14", 2],
+      ["dia-do-servidor", "28/10 (Dia do Servidor) não conta", "2026-10-27", 2]
+    ]
   }
 ]

@@ -116,6 +116,18 @@ export const FONTES_TRTS = {
     "url": "https://www.trt24.jus.br/documents/20182/0/Calend%C3%A1rio+2026.pdf/ed8dc485-5c7e-e05c-e569-215ec9cd1389?t=1767889939074",
     "lido": "PDF inteiro lido em 28/10/2026 (cópia baixada direto; o script de acesso expira neste host). Não é o ato normativo: a Portaria TRT/GP/SGJ 51/2025 não foi lida. Contam os dias da legenda: Carnaval em 16 e 17/02, suspensão do expediente em 20/04, 05/06 e 10/08 (Portaria 51/2025), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi, Lei 9.093/1995 c/c Lei municipal 1.019/1967, listado sem a ressalva \"exclusivo da Capital\" que a legenda faz em 26/08), 11/08, 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12; 18/02 vale só até as 13h (expediente parcial). 07/12 só alerta: a legenda traz \"07 de novembro - Suspensão expediente\", provável erro de digitação. O recesso (02 a 06/01 e 20 a 31/12) não tem as datas na legenda: aplicou-se o padrão do art. 62, I, da Lei 5.010. Ficam fora o padroeiro de Campo Grande (13/06, sábado), 26/08 (só a Capital) e 11/10 (domingo). Uma notícia do tribunal fala em suspensão de prazos de 20/12 a 23/01, não modelada e de ano não conferido. Atos posteriores não lidos",
     "lidoEm": "2026-10-28"
+  },
+  "trt22-ato-gp-184-2025": {
+    "ato": "Ato GP nº 184/2025 do TRT22 (calendário de feriados de 2026, divulgado em 16/12/2025) e Ato GP nº 185/2025 (suspensão de prazos nas Semanas Institucionais), pelo calendário institucional \"calendário 2026\" e pela notícia oficial do tribunal",
+    "url": "https://www.trt22.jus.br/sites/default/files/drive-imce/estrutura-do-tribunal/calendarios/2026/calendario-2026-v1.pdf",
+    "lido": "calendário institucional (PDF de 1 página, lido em 28/10/2026 pelo download direto) e notícia oficial \"TRT Piauí divulga calendário oficial de feriados para 2026\"; os Atos GP 184/2025 e 185/2025 em si não foram lidos. Contam os dias de toda a região: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, 18/02 (suspensão excepcional das atividades), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 11/08, 19/10 (Dia do Piauí, Lei estadual 176/1937), 30/10 (Dia do Servidor transferido de 28/10), 01 e 02/11 e 08/12, e as semanas institucionais em que os prazos ficam suspensos (11 a 15/05 e 14 a 18/09, Ato GP 185/2025; prazos que terminam nelas passam ao primeiro dia útil). Ficam fora os feriados locais \"somente na Vara\" ou \"somente no Posto\" (CPC, art. 1.003, § 6º), inclusive 08/12 de Oeiras. Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt11-calendario-2026": {
+    "ato": "Calendário 2026 do TRT11 (PDF \"Aprovado pela Resolução Administrativa nº 322/2025 e alterado pela RA nº 214/2026\", com legenda de feriados, suspensão do expediente e suspensão de prazos)",
+    "url": "https://portal.trt11.jus.br/images/arquivos/Calendarios/2026/Calendario_2026_Aprovado_Alterado_ANEXO_RA_214-2026_-_Calendrio_2026.pdf",
+    "lido": "PDF de 1 página lido em 28/10/2026 (texto e imagem, onde os dias em vermelho são feriados e em laranja a \"suspensão do expediente RA nº 322/2025\"). Não é o ato normativo: as RAs 322/2025 e 214/2026 não foram lidas. Contam os feriados da legenda: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 11/08, 28/10 (Dia do Servidor, sem transferência no calendário), 02/11, 08/12 e 15/12 (Instalação do TRT11), e as suspensões de expediente em laranja: 20/04, 05/06 e 10/08. Ficam fora os feriados que caem em fim de semana e os municipais (CPC, art. 1.003, § 6º). A suspensão de prazos de 20/12 a 20/01 (CPC, art. 220) já está no motor. Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -2806,6 +2818,330 @@ export const EVENTOS_TRTS: EventoDeTRT[] = [
     "verificacao": "ato_do_tribunal",
     "fundamento": "Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025)",
     "fonte": "trt24-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval (Lei 5.010, art. 62, III)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (suspensão excepcional das atividades)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa (Lei 5.010, art. 62, II)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-05-11",
+    "fim": "2026-05-15",
+    "nome": "Semana Institucional (prazos suspensos, Ato GP 185/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 185/2025",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Criação dos Cursos Jurídicos, Dia do Advogado e do Magistrado (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-09-14",
+    "fim": "2026-09-18",
+    "nome": "Semana Institucional (prazos suspensos, Ato GP 185/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 185/2025",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-10-19",
+    "fim": "2026-10-19",
+    "nome": "Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferido de 28/10)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT22"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT22 184/2025 (calendário 2026)",
+    "fonte": "trt22-ato-gp-184-2025"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão do expediente (RA 322/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Suspensão do expediente (RA 322/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Suspensão do expediente (RA 322/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Instituição dos Cursos Jurídicos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-10-28",
+    "fim": "2026-10-28",
+    "nome": "Dia do Servidor Público",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-11-02",
+    "fim": "2026-11-02",
+    "nome": "Finados",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça e de Nossa Senhora da Conceição",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-12-15",
+    "fim": "2026-12-15",
+    "nome": "Instalação do TRT11",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT11"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
+    "fonte": "trt11-calendario-2026"
   }
 ];
 
@@ -2985,6 +3321,22 @@ export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyo
     ],
     "fontes": [
       "trt24-calendario-2026"
+    ]
+  },
+  "TRT22": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt22-ato-gp-184-2025"
+    ]
+  },
+  "TRT11": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt11-calendario-2026"
     ]
   }
 };
