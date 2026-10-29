@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 16. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **335** cenários · validados: **319** · pendentes: **16**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 36. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **355** cenários · validados: **319** · pendentes: **36**
 
 ## Como responder
 
@@ -13,9 +13,9 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 16 | 16 |
+| Calendário verificado (tribunais com ato lido) | 1 a 36 | 36 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 16)
+## Calendário verificado (tribunais com ato lido) (1 a 36)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -37,4 +37,24 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 14 | `trt15-suspensoes-abril`<br>TRT15 2026: 20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT15; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão de expediente; 21/04 Tiradentes |
 | 15 | `trt15-data-magna-sao-paulo`<br>TRT15 2026: 09/07 (Data Magna) e 10/07 (suspensão de expediente) não contam | publicação em 08/07/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT15; modo conservador | **15/07/2026 (quarta-feira)** | 2 sáb./dom.; 09/07 Data Magna do Estado de São Paulo; 10/07 Suspensão de expediente |
 | 16 | `trt15-cursos-juridicos-agosto`<br>TRT15 2026: 10/08 (suspensão) não conta e 11/08 (transferido) conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT15; modo conservador | **13/08/2026 (quinta-feira)** | 2 sáb./dom.; 10/08 Suspensão de expediente (feriado dos Cursos Jurídicos transferido de 11/08) |
+| 17 | `trt12-carnaval-cinzas`<br>TRT12 2026: Carnaval e Quarta-feira de Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT12; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154); 17/02 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154); 18/02 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154) |
+| 18 | `trt12-semana-santa`<br>TRT12 2026: Semana Santa de quarta a domingo (01 a 05/04) não conta | publicação em 31/03/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT12; modo conservador | **08/04/2026 (quarta-feira)** | 2 sáb./dom.; 01/04 Semana Santa (Regimento Interno, art. 154); 02/04 Semana Santa (Regimento Interno, art. 154); 03/04 Semana Santa (Regimento Interno, art. 154) |
+| 19 | `trt12-agosto-transferido`<br>TRT12 2026: 10/08 (feriado transferido) não conta e 11/08 conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT12; modo conservador | **13/08/2026 (quinta-feira)** | 2 sáb./dom.; 10/08 Dia do Magistrado e do Advogado (transferido de 11/08, art. 2º) |
+| 20 | `trt12-dezembro-transferido`<br>TRT12 2026: 07/12 (Dia da Justiça transferido) não conta e 08/12 conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT12; modo conservador | **10/12/2026 (quinta-feira)** | 2 sáb./dom.; 07/12 Dia da Justiça (transferido de 08/12, art. 2º) |
+| 21 | `trt1-carnaval-cinzas`<br>TRT1 2026: Carnaval e Quarta-feira de Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT1; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval (inclui a Quarta-feira de Cinzas); 17/02 Carnaval (inclui a Quarta-feira de Cinzas); 18/02 Carnaval (inclui a Quarta-feira de Cinzas) |
+| 22 | `trt1-sao-jorge`<br>TRT1 2026: 23/04 (São Jorge, feriado estadual) não conta | publicação em 22/04/2026 (quarta-feira); 2 dias (CLT, dias úteis); TRT1; modo conservador | **27/04/2026 (segunda-feira)** | 2 sáb./dom.; 23/04 São Jorge (Lei estadual 5.198/2008) |
+| 23 | `trt1-corpus-christi-suspensao`<br>TRT1 2026: 04/06 (Corpus Christi) e 05/06 (suspensão pelo Ato 56/2026) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT1; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (Lei 9.093/1995; Lei estadual 11.002/2025); 05/06 Suspensão do expediente e dos prazos (Ato 56/2026) |
+| 24 | `trt1-agosto-trabalho-a-distancia`<br>TRT1 2026: 10/08 (trabalho a distância) só alerta e 11/08 não conta | publicação em 07/08/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT1; modo conservador | **13/08/2026 (quinta-feira)**<br>Alternativa: 14/08/2026 (sexta-feira) | 2 sáb./dom.; 11/08 Instituição dos Cursos Jurídicos (Lei 5.010, art. 62, IV) |
+| 25 | `trt2-carnaval-cinzas`<br>TRT2 2026: Carnaval e Quarta-feira de Cinzas (suspensão) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT2; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Quarta-feira de Cinzas (suspensão do expediente) |
+| 26 | `trt2-suspensoes-abril`<br>TRT2 2026: 20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT2; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão do expediente; 21/04 Tiradentes |
+| 27 | `trt2-data-magna-sao-paulo`<br>TRT2 2026: 09/07 (Data Magna) e 10/07 (suspensão) não contam | publicação em 08/07/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT2; modo conservador | **15/07/2026 (quarta-feira)** | 2 sáb./dom.; 09/07 Data Magna do Estado de São Paulo (Lei estadual 9.497/1997); 10/07 Suspensão do expediente |
+| 28 | `trt2-dia-da-justica-antecipado`<br>TRT2 2026: 07/12 (antecipação do Dia da Justiça) não conta e 08/12 conta | publicação em 04/12/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT2; modo conservador | **10/12/2026 (quinta-feira)** | 2 sáb./dom.; 07/12 Antecipação do Dia da Justiça |
+| 29 | `trt3-carnaval-cinzas`<br>TRT3 2026: Carnaval e Quarta-feira de Cinzas (suspensão) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT3; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Quarta-feira de Cinzas (suspensão de expediente) |
+| 30 | `trt3-tiradentes-suspensao`<br>TRT3 2026: 20/04 (suspensão de expediente) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT3; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão de expediente (feriado de Tiradentes no dia seguinte); 21/04 Tiradentes e Data Magna de Minas Gerais |
+| 31 | `trt3-cursos-juridicos-14-agosto`<br>TRT3 2026: 14/08 (feriado alterado) não conta e 11/08 conta | publicação em 10/08/2026 (segunda-feira); 3 dias (CLT, dias úteis); TRT3; modo conservador | **13/08/2026 (quinta-feira)** | só o dia do começo |
+| 32 | `trt3-dia-do-servidor`<br>TRT3 2026: 28/10 conta e 30/10 (alterado) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT3; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (alterado de 28/10); 02/11 Todos os Santos e Finados (Lei 5.010, art. 62, IV) |
+| 33 | `trt5-carnaval-cinzas`<br>TRT5 2026: Carnaval e Quarta-feira de Cinzas (16 a 18/02) não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT5; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval; 17/02 Carnaval; 18/02 Quarta-feira de Cinzas |
+| 34 | `trt5-sao-joao`<br>TRT5 2026: 23/06 (Véspera de São João) e 24/06 (São João) não contam | publicação em 22/06/2026 (segunda-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **29/06/2026 (segunda-feira)** | 2 sáb./dom.; 23/06 Véspera de São João; 24/06 São João |
+| 35 | `trt5-julho-2-e-3`<br>TRT5 2026: 02/07 (Independência da Bahia) e 03/07 (ponto facultativo com suspensão) não contam | publicação em 01/07/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **08/07/2026 (quarta-feira)** | 2 sáb./dom.; 02/07 Independência da Bahia; 03/07 Ponto facultativo com suspensão do expediente e dos prazos |
+| 36 | `trt5-dia-do-servidor`<br>TRT5 2026: 28/10 conta e 30/10 (transferido pelo Ato GP 16/2026) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT5; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10); 02/11 Todos os Santos e Finados |
 

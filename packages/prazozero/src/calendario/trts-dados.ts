@@ -32,6 +32,36 @@ export const FONTES_TRTS = {
     "url": "https://trt15.jus.br/legislacao/normas-institucionais/portarias/portaria-gp-cr-no-0162025",
     "lido": "texto da portaria e Anexo (PDF de 1 página, lido por inteiro em 28/10/2026 pelo script de acesso; a tabela foi conferida em imagem, onde 11/08 e 28/10 aparecem riscados por terem sido transferidos para 10/08 e 30/10). Contam os dias da tabela marcados como feriado, recesso ou suspensão de expediente: 02 a 06/01, 16 a 18/02, 01 a 03/04, 20/04, 05/06, 09 e 10/07 (Data Magna do Estado de São Paulo e suspensão), 10/08, 30/10, 07 e 08/12 e 21 a 31/12. Ficam de fora os dias que a própria tabela dá como municipais de Campinas (Corpus Christi em 04/06, Dia do Evangélico em 12/08 e Padroeira em 08/12; CPC, art. 1.003, § 6º, mas 08/12 conta como Dia da Justiça). Atos posteriores não lidos",
     "lidoEm": "2026-10-28"
+  },
+  "trt12-portaria-seap-191-2024": {
+    "ato": "Portaria SEAP nº 191, de 19/11/2024 (republicada no DEJT de 20/03/2026 por erro material, com as alterações da Portaria SEAP nº 52, de 16/03/2026), do TRT12: feriados de 2026 na 12ª Região, com o Anexo I (nacionais, estaduais e regimentais) e o Anexo II (municipais); Portaria SEAP nº 25, de 02/02/2026 (DEJT de 04/02/2026)",
+    "url": "https://dspace.trt12.jus.br/server/api/core/bitstreams/6ff50119-8297-4376-8920-9e84ef24fccf/content",
+    "lido": "inteiro teor da Portaria 191/2024 republicada (PDF de 5 páginas, tabelas conferidas em imagem) e da Portaria 25/2026, lidos em 28/10/2026 pelo script de acesso. Contam os feriados regimentais do Anexo I (art. 153 e art. 154 do Regimento Interno): 02 a 06/01, 16 a 18/02 (Carnaval e Cinzas), 01 a 05/04 (Semana Santa), 10/08 (transferido de 11/08), 30/10 (transferido de 28/10), 01 e 02/11, 07/12 (transferido de 08/12) e 20 a 31/12; o art. 2º da portaria transfere esses três feriados. Os feriados estaduais de SC (16/08 e 29/11) caem em domingo. Alertam: 20/04 e 05/06, que a Portaria 25/2026 acrescentou à tabela de \"Feriados Regimentais/Pontos Facultativos\" mas que a republicação de 20/03/2026 (Portaria 52/2026, não lida) já não traz na tabela, e 04/06 (Corpus Christi, \"feriado em todos os Municípios-Sede\" no Anexo II, mas de lei municipal; CPC, art. 1.003, § 6º). Fora: os demais feriados municipais do Anexo II. Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt1-ato-109-2025": {
+    "ato": "Ato TRT1 nº 109/2025 (DEJT de 07/10/2025): dias sem expediente nos órgãos da Justiça do Trabalho da 1ª Região em 2026; Ato TRT1 nº 56/2026 (DEJT de 07/03/2026): suspensão do expediente e dos prazos em 20/04 e 05/06/2026",
+    "url": "https://bibliotecadigital.trt1.jus.br/jspui/html/1001/4472618/Ato2025-0109-C.htm",
+    "lido": "inteiro teor dos dois atos (páginas da Biblioteca Digital do TRT1, lidas em 28/10/2026 pelo script de acesso). O Ato 109/2025 lista os feriados em que não haverá expediente (recesso de 02 a 06/01, Carnaval de 16 a 18/02, Semana Santa de 01 a 03/04, São Jorge em 23/04 pela Lei estadual 5.198/2008, Corpus Christi em 04/06, 11/08, 30/10 em lugar de 28/10, 08/12 e recesso de 20 a 31/12; os feriados municipais ficam no Ato 110/2025, fora: CPC, art. 1.003, § 6º). O art. 2º manda trabalhar a distância em 20/04, 05/06, 10/08 e 07/12, com suspensão só do atendimento presencial e dos prazos dos processos migrados que dependam de volumes físicos; por isso 10/08 e 07/12 só alertam. O Ato 56/2026 suspendeu o expediente e todos os prazos processuais em 20/04 e 05/06, que passam a contar como dia sem expediente. Ato 110/2025 e atos posteriores a abril/2026 não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt2-portaria-gp-50-2025": {
+    "ato": "Portaria GP nº 50, de 02/10/2025 (DEJT nº 4322), do TRT2: calendário de feriados de 2026 dos órgãos da Justiça do Trabalho da 2ª Região, com Anexo",
+    "url": "https://basis.trt2.jus.br/bitstream/handle/123456789/17686/2025_port0050_gp.pdf?sequence=4&isAllowed=y",
+    "lido": "inteiro teor (PDF de 5 páginas do repositório do TRT2, lido em 28/10/2026 pelo script de acesso). Contam só as linhas do Anexo com abrangência \"Segunda Região\" (toda a jurisdição): recesso de 02 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02 (suspensão do expediente), Semana Santa de 01 a 05/04, suspensões de expediente em 20/04, 05/06 e 10/07, Data Magna do Estado de São Paulo em 09/07, 10/08 (antecipação do Dia dos Cursos Jurídicos), 30/10 (transferência do Dia do Servidor), 01 e 02/11 e 07/12 (antecipação do Dia da Justiça). Ficam fora as linhas de abrangência municipal (CPC, art. 1.003, § 6º), inclusive Corpus Christi. O art. 1º, parágrafo único, manda observar os arts. 219 e 224, § 1º, do CPC. A Portaria GP 19/2026 trata só do calendário de 2027. Atos de suspensão local e posteriores não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt3-ra-109-2025": {
+    "ato": "Resolução Administrativa TRT3 nº 109, de 12/08/2025 (DEJT nº 4285, de 13/08/2025, p. 14-16): calendário institucional de 2026 da Justiça do Trabalho da 3ª Região",
+    "url": "https://portal.trt3.jus.br/internet/conheca-o-trt/comunicacao/noticias-institucionais/downloads/ra-trt3_setpoe-109_2025-orig-1.pdf",
+    "lido": "inteiro teor (PDF de 4 páginas, lido em 28/10/2026; cópia obtida pela ferramenta de leitura de páginas porque o script expira neste host). Contam os feriados em todo o Estado e as suspensões de expediente em todos os órgãos: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02 (suspensão), Semana Santa de 01 a 05/04, 20/04 (suspensão), 21/04 (Tiradentes e Data Magna de Minas), 14/08 (feriado dos Cursos Jurídicos alterado de 11 para 14/08), 30/10 (alterado de 28/10), 01 e 02/11, 08/12. Fora: os feriados municipais de Belo Horizonte (04/06, 05/06 e 15/08) e do interior (CPC, art. 1.003, § 6º). Atos posteriores não lidos, inclusive eventuais pontos facultativos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt5-ra-37-2025": {
+    "ato": "Resolução Administrativa TRT5 nº 037, de 10/06/2025 (DEJT, caderno administrativo de 10/06/2025): calendário de 2026 do TRT5 (Anexo: feriados comuns a toda a região); Ato GP nº 16, de 13/01/2026: altera o calendário, transfere o Dia do Servidor e institui pontos facultativos com suspensão de expediente e de prazos",
+    "url": "https://www.trt5.jus.br/sites/default/files/sistema/normas/2025-06/0037-2025_aprova_calendario_exercicio_de_2026.pdf",
+    "lido": "inteiro teor da RA 037/2025 (PDF de 4 páginas) e do Ato GP 16/2026 (PDF de 1 página), lidos em 28/10/2026 pelo script de acesso. Contam os \"feriados comuns a toda a região\" da RA 037/2025: recesso 01 a 06/01 e 20 a 31/12, Carnaval 16 e 17/02, Cinzas 18/02, Semana Santa 01 a 05/04, 04/06 (Corpus Christi), 23 e 24/06 (Véspera de São João e São João), 02/07 (Independência da Bahia), 11/08, 01 e 02/11 e 08/12 (Padroeira do Estado e feriado forense). O Ato GP 16/2026 transfere o Dia do Servidor de 28 para 30/10 e, no art. 2º, declara ponto facultativo com suspensão do expediente e dos prazos processuais em toda a região em 20/04, 05/06, 03/07, 10/08 e 07/12, com retomada da contagem no primeiro dia útil seguinte: esses cinco dias contam como dia sem expediente. Ficam fora os feriados das cidades (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -682,11 +712,813 @@ export const EVENTOS_TRTS: EventoDeTRT[] = [
     "verificacao": "ato_do_tribunal",
     "fundamento": "Portaria GP-CR TRT15 016/2025, Anexo",
     "fonte": "trt15-portaria-gp-cr-16-2025"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (Regimento Interno, art. 153)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-18",
+    "nome": "Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-05",
+    "nome": "Semana Santa (Regimento Interno, art. 154)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Feriado regimental/ponto facultativo (Portaria SEAP 25/2026; a republicação de 20/03/2026 não o traz)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 25/2026",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (feriado municipal nos municípios-sede; Anexo II)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024, Anexo II",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Feriado regimental/ponto facultativo (Portaria SEAP 25/2026; a republicação de 20/03/2026 não o traz)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 25/2026",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Dia do Magistrado e do Advogado (transferido de 11/08, art. 2º)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferido de 28/10, art. 2º)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados (Regimento Interno, art. 154)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Dia da Justiça (transferido de 08/12, art. 2º)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT12"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (Regimento Interno, art. 153)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria SEAP TRT12 191/2024 (republicada), Anexo I",
+    "fonte": "trt12-portaria-seap-191-2024"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-18",
+    "nome": "Carnaval (inclui a Quarta-feira de Cinzas)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão do expediente e dos prazos (Ato 56/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 56/2026, arts. 1º e 2º",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-04-23",
+    "fim": "2026-04-23",
+    "nome": "São Jorge (Lei estadual 5.198/2008)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (Lei 9.093/1995; Lei estadual 11.002/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Suspensão do expediente e dos prazos (Ato 56/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 56/2026, arts. 1º e 2º",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Trabalho a distância (Ato 109/2025, art. 2º): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025, art. 2º",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Instituição dos Cursos Jurídicos (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Trabalho a distância (Ato 109/2025, art. 2º): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025, art. 2º",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT1"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato TRT1 109/2025",
+    "fonte": "trt1-ato-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (suspensão do expediente)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-05",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão do expediente",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Suspensão do expediente",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-07-09",
+    "fim": "2026-07-09",
+    "nome": "Data Magna do Estado de São Paulo (Lei estadual 9.497/1997)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-07-10",
+    "fim": "2026-07-10",
+    "nome": "Suspensão do expediente",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Antecipação do Dia da Instalação dos Cursos Jurídicos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferência)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Antecipação do Dia da Justiça",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT2"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria GP TRT2 50/2025, Anexo",
+    "fonte": "trt2-portaria-gp-50-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (suspensão de expediente)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-05",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão de expediente (feriado de Tiradentes no dia seguinte)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-04-21",
+    "fim": "2026-04-21",
+    "nome": "Tiradentes e Data Magna de Minas Gerais",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-08-14",
+    "fim": "2026-08-14",
+    "nome": "Dia da Criação dos Cursos Jurídicos (alterado de 11/08)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (alterado de 28/10)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (Lei 5.010, art. 62, IV)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT3"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (Lei 5.010, art. 62, I)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT3 109/2025",
+    "fonte": "trt3-ra-109-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-05",
+    "nome": "Semana Santa",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 2º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 2º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-06-23",
+    "fim": "2026-06-23",
+    "nome": "Véspera de São João",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-06-24",
+    "fim": "2026-06-24",
+    "nome": "São João",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-07-02",
+    "fim": "2026-07-02",
+    "nome": "Independência da Bahia",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-07-03",
+    "fim": "2026-07-03",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 2º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 2º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Dia do Magistrado",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferido de 28/10)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 1º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos e Finados",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Ponto facultativo com suspensão do expediente e dos prazos",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato GP TRT5 16/2026, art. 2º",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Padroeira do Estado da Bahia e feriado forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
+  },
+  {
+    "tribunais": [
+      "TRT5"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região)",
+    "fonte": "trt5-ra-37-2025"
   }
 ];
 
 /** Pontos facultativos que só alertam (o ato não diz que não haverá expediente). */
-export const PONTOS_FACULTATIVOS_TRTS: Record<string, string[]> = {};
+export const PONTOS_FACULTATIVOS_TRTS: Record<string, string[]> = {
+  "TRT12": [
+    "2026-04-20",
+    "2026-06-04",
+    "2026-06-05"
+  ],
+  "TRT1": [
+    "2026-08-10",
+    "2026-12-07"
+  ]
+};
 
 export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyof typeof FONTES_TRTS> }> = {
   "TRT7": {
@@ -720,6 +1552,46 @@ export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyo
     ],
     "fontes": [
       "trt15-portaria-gp-cr-16-2025"
+    ]
+  },
+  "TRT12": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt12-portaria-seap-191-2024"
+    ]
+  },
+  "TRT1": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt1-ato-109-2025"
+    ]
+  },
+  "TRT2": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt2-portaria-gp-50-2025"
+    ]
+  },
+  "TRT3": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt3-ra-109-2025"
+    ]
+  },
+  "TRT5": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt5-ra-37-2025"
     ]
   }
 };
