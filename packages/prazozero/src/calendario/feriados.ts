@@ -33,10 +33,10 @@ export const CALENDARIO_VERIFICADO: Record<string, { anos: number[]; fontes: Arr
   ])
 );
 
-/** Justiça Federal e tribunais que aplicam a Lei 5.010/1966, art. 62 (texto da lei e atos de STF e STJ de 2026, conferidos em 07/10/2026). */
-const APLICAM_LEI_5010_ART_62 = new Set(['STF', 'STJ', 'TRF1', 'TRF2', 'TRF3', 'TRF4', 'TRF5', 'TRF6']);
+/** Justiça Federal e tribunais que aplicam a Lei 5.010/1966, art. 62 (texto da lei e atos de STF e STJ de 2026, conferidos em 07/10/2026; TST pelo Ato Conjunto TST.CSJT.GP nº 5/2026, lido em 28/10/2026). */
+const APLICAM_LEI_5010_ART_62 = new Set(['STF', 'STJ', 'TST', 'TRF1', 'TRF2', 'TRF3', 'TRF4', 'TRF5', 'TRF6']);
 /** O art. 62 menciona "Tribunais Superiores", mas não há ato próprio conferido para estes. */
-const OUTROS_SUPERIORES = new Set(['TST', 'TSE']);
+const OUTROS_SUPERIORES = new Set(['TSE']);
 
 /** Domingo de Páscoa (ISO), calendário gregoriano: ver `datas/civil.ts`. */
 export const calcularPascoa = pascoaIso;
