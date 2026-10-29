@@ -12269,5 +12269,173 @@
       "em": "2026-10-14"
     },
     "alternativaEsperada": "2026-12-17"
+  },
+  {
+    "id": "trt7-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT7 2026: Carnaval e Quarta-feira de Cinzas (16 a 18/02) não contam",
+    "fundamento": "Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT7",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (sem expediente)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt7-data-magna-ceara",
+    "categoria": "verificado",
+    "descricao": "TRT7 2026: 25/03 (Data Magna do Ceará) não conta",
+    "fundamento": "Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-03-24",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT7",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-03-24",
+      "dataTermoInicial": "2026-03-26",
+      "dataVencimentoFinal": "2026-03-27",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-03-25",
+            "motivo": "Data Magna do Ceará"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt7-pontos-facultativos-agosto",
+    "categoria": "verificado",
+    "descricao": "TRT7 2026: 10/08 (ponto facultativo, Portaria 64/2026) e 11/08 não contam",
+    "fundamento": "Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT7",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Ponto facultativo (sem expediente, Portaria 64/2026)"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "Criação dos Cursos Jurídicos"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt7-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT7 2026: 28/10 conta e 30/10 (transferência do Dia do Servidor) não conta",
+    "fundamento": "Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT7",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (transferido de 28/10)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TRT7",
+    "fontes": [
+      {
+        "chave": "trt7-portaria-518-2025",
+        "ato": "Portaria TRT7.GP nº 518, de 18/11/2025 (DEJT nº 4354), alterada pelas Portarias TRT7.GP nº 64, de 20/02/2026 (DEJT nº 4420, inclui os pontos facultativos de 20/04, 05/06, 10/08 e 07/12) e nº 127, de 09/04/2026 (DEJT nº 4448, só feriados municipais): dias sem expediente na Justiça do Trabalho da 7ª Região em 2026",
+        "url": "https://www.trt7.jus.br/files/atos_normativos/portarias_presidencia/2025/PORTARIA%20PRESI%20518-2025%20este.pdf",
+        "lido": "inteiro teor da Portaria 518/2025 (PDF republicado, 6 páginas) e da Portaria 64/2026, lidos em 28/10/2026 pelo script de acesso; a Portaria 127/2026 só pelo resumo de busca (altera feriados municipais). O art. 1º determina que não haverá expediente nos dias da tabela, os pontos facultativos incluídos, e o art. 3º prorroga para o primeiro dia útil os prazos que começam ou vencem nessas datas; por isso todos contam como dia sem expediente (e 28/10, Dia do Servidor, foi transferido para 30/10). Fora: os feriados municipais do art. 2º (CPC, art. 1.003, § 6º), 20 a 31/12 e 02 a 06/01 já no recesso. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010, art. 62, I)"],
+      ["2026-02-16/2026-02-17", "Carnaval"],
+      ["2026-02-18", "Quarta-feira de Cinzas (sem expediente)"],
+      ["2026-03-25", "Data Magna do Ceará"],
+      ["2026-04-01/2026-04-03", "Semana Santa"],
+      ["2026-04-20", "Ponto facultativo (sem expediente, Portaria 64/2026)"],
+      ["2026-06-04", "Corpus Christi"],
+      ["2026-06-05", "Ponto facultativo (sem expediente, Portaria 64/2026)"],
+      ["2026-08-10", "Ponto facultativo (sem expediente, Portaria 64/2026)"],
+      ["2026-08-11", "Criação dos Cursos Jurídicos"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10)"],
+      ["2026-12-07", "Ponto facultativo (sem expediente, Portaria 64/2026)"],
+      ["2026-12-08", "Dia da Justiça"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010, art. 62, I)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Quarta-feira de Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["data-magna-ceara", "25/03 (Data Magna do Ceará) não conta", "2026-03-24", 2],
+      ["pontos-facultativos-agosto", "10/08 (ponto facultativo, Portaria 64/2026) e 11/08 não contam", "2026-08-07", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferência do Dia do Servidor) não conta", "2026-10-27", 3]
+    ]
+  }
+]

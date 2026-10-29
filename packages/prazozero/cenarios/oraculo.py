@@ -19,8 +19,10 @@ from pathlib import Path
 LEI_5010 = {"STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6"}
 SUPERIORES_SEM_ATO = {"TSE"}  # citado no art. 62, sem ato próprio conferido: pendente (o TST tem o Ato Conjunto 5/2026)
 # Só tribunais estaduais: a Justiça Federal segue a Lei 5.010, art. 62, e não a tabela estadual.
-UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR": "PR", "TJSC": "SC", "TJBA": "BA", "TJDF": "DF",
+UF_DO_TRIBUNAL = {"TRT1": "RJ", "TRT2": "SP", "TRT3": "MG", "TRT4": "RS", "TRT5": "BA", "TRT6": "PE", "TRT7": "CE", "TRT8": "PA", "TRT9": "PR", "TRT10": "DF", "TRT11": "AM", "TRT12": "SC", "TRT13": "PB", "TRT14": "RO", "TRT15": "SP", "TRT16": "MA", "TRT17": "ES", "TRT18": "GO", "TRT19": "AL", "TRT20": "SE", "TRT21": "RN", "TRT22": "PI", "TRT23": "MT", "TRT24": "MS", "TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR": "PR", "TJSC": "SC", "TJBA": "BA", "TJDF": "DF",
                   "TJGO": "GO", "TJPE": "PE", "TJCE": "CE", "TJAL": "AL", "TJES": "ES", "TJPA": "PA", "TJMA": "MA", "TJMT": "MT", "TJAM": "AM", "TJMS": "MS", "TJRO": "RO", "TJPB": "PB", "TJRN": "RN", "TJAC": "AC", "TJRR": "RR", "TJAP": "AP", "TJTO": "TO", "TJPI": "PI", "TJSE": "SE"}
+# Calendários dos Tribunais Regionais do Trabalho (dado compartilhado com o motor: ver gerar_trts.py)
+TRTS = {t["id"]: t for t in json.loads(Path(__file__).with_name("trts-2026.json").read_text(encoding="utf-8"))}
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
 # Pontos facultativos de 2026, idênticos nos atos de STF, STJ e TST: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
@@ -174,6 +176,10 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 }
 
 
+for _trt in TRTS:
+    ANOS_VERIFICADOS[_trt] = {2026}
+
+
 def calendario(ano: int, trib: str, uf: str, completo: bool):
     """Retorna (nao_util, parcial, nomes) do ano. `completo` inclui os dias ainda pendentes de conferência."""
     nao_util, parcial, nomes, facultativo = set(), set(), {}, set()
@@ -242,6 +248,17 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             yield d
             d += timedelta(1)
 
+    if ano == 2026 and trib in TRTS:
+        for item in TRTS[trib]["dias"]:
+            spec, nome, *resto = item
+            op = resto[0] if resto else {}
+            ini, _, fim = spec.partition("/")
+            for d in intervalo(date.fromisoformat(ini), date.fromisoformat(fim or ini)):
+                if op.get("parcial"):
+                    parcial.add(d)
+                    nomes[d] = nome
+                else:
+                    ev(d, not op.get("pf"), nome)
     if ano == 2026 and trib == "TJSP":
         for s in TJSP_2026_NU:
             ev(dia(s), True, "TJSP: " + s)
@@ -1273,6 +1290,13 @@ add("tjse-2026-dia-da-justica", "pendente", "TJSE 2026: 07/12 (ponto facultativo
 add("tjse-2026-dia-do-ministerio-publico", "pendente", "TJSE 2026: 14/12 (Dia do Ministério Público) só alerta", TJSE,
     entrada("2026-12-11", "publicacao", 3, "TJSE"))
 
+# Tribunais Regionais do Trabalho: cenários de cada tribunal, escolhidos nos dias próprios dele (campo `cenarios` do JSON)
+for _id, _t in TRTS.items():
+    for _suf, _desc, _pub, _dias in _t.get("cenarios", []):
+        add(f"{_id.lower()}-{_suf}", "verificado", f"{_id} 2026: {_desc}", _t["fund"] + "; CLT, art. 775",
+            entrada(_pub, "publicacao", _dias, _id, regime="clt_dias_uteis"))
+
+
 def validacoes_existentes(destino):
     """Lê as validações já registradas em cenarios.json para que regenerar o gabarito nunca as apague."""
     if not destino.exists():
@@ -1485,7 +1509,7 @@ def gerar_aleatorios(n=600, semente=20261007):
     """Entradas pseudoaleatórias (semente fixa) com o resultado do oráculo: o teste compara motor e oráculo em todas."""
     import random
     r = random.Random(semente)
-    tribunais = ["STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", "TJPA", "TJMA", "TJMT", "TJAM", "TJMS", "TJRO", "TJPB", "TJRN", "TJAC", "TJRR", "TJAP", "TJTO", "TJPI", "TJSE", None]
+    tribunais = ["STF", "STJ", "TST"] + sorted(TRTS) + ["TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6", "TJSP", "TJMG", "TJRJ", "TJAL", "TJPR", "TJDF", "TJPE", "TJRS", "TJGO", "TJES", "TJCE", "TJPA", "TJMA", "TJMT", "TJAM", "TJMS", "TJRO", "TJPB", "TJRN", "TJAC", "TJRR", "TJAP", "TJTO", "TJPI", "TJSE", None]
     regimes = ["cpc_dias_uteis", "clt_dias_uteis", "jef_dias_uteis", "cpp_dias_corridos"]
     tipos = ["disponibilizacao_dje", "publicacao", "intimacao_portal", "carga_ou_audiencia"]
     saida = []
@@ -1518,6 +1542,9 @@ if __name__ == "__main__":
     conhecidas = {2023: (4, 9), 2024: (3, 31), 2025: (4, 20), 2026: (4, 5), 2027: (3, 28), 2028: (4, 16), 2029: (4, 1), 2030: (4, 21)}
     for ano, (m, d) in conhecidas.items():
         assert pascoa(ano) == date(ano, m, d), f"Páscoa {ano} divergente"
+    import subprocess
+    import sys
+    subprocess.run([sys.executable, "-I", str(Path(__file__).with_name("gerar_trts.py"))], check=True)
     destino = Path(__file__).with_name("cenarios.json")
     cenarios = gerar(validacoes_existentes(destino))
     destino.write_text(json.dumps(cenarios, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
