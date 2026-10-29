@@ -975,7 +975,7 @@
       "dataTermoInicial": "2026-03-05",
       "dataVencimentoFinal": "2026-03-16",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 4,
         "suspensaoDias": 0,
@@ -986,8 +986,8 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
     "alternativaEsperada": null
   },
@@ -1904,9 +1904,9 @@
   },
   {
     "id": "tst-semana-santa-conservador",
-    "categoria": "pendente",
-    "descricao": "TST: art. 62 cita 'Tribunais Superiores', mas não há ato do TST conferido (conservador)",
-    "fundamento": "Dia pendente de conferência (METODO_CALENDARIO_FORENSE.md); ato do tribunal a confirmar; Lei 5.010/1966, art. 62, II",
+    "categoria": "verificado",
+    "descricao": "TST: Quarta, Quinta e Sexta Santas de 2026 (1 a 3/04) não contam",
+    "fundamento": "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026); Lei 5.010/1966, art. 62, II",
     "entrada": {
       "dataEvento": "2026-04-01",
       "tipoEvento": "publicacao",
@@ -1915,10 +1915,51 @@
     },
     "esperado": {
       "dataPublicacao": "2026-04-01",
-      "dataTermoInicial": "2026-04-02",
-      "dataVencimentoFinal": "2026-04-06",
+      "dataTermoInicial": "2026-04-06",
+      "dataVencimentoFinal": "2026-04-08",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-02",
+            "motivo": "Semana Santa (quinta)"
+          },
+          {
+            "data": "2026-04-03",
+            "motivo": "Sexta-feira Santa"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tst-corpus-christi-2026",
+    "categoria": "verificado",
+    "descricao": "TST: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta",
+    "fundamento": "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026)",
+    "entrada": {
+      "dataEvento": "2026-06-02",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TST"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-02",
+      "dataTermoInicial": "2026-06-03",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -1929,10 +1970,138 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
-    "alternativaEsperada": "2026-04-08"
+    "alternativaEsperada": "2026-06-11"
+  },
+  {
+    "id": "tst-onze-agosto-2026",
+    "categoria": "verificado",
+    "descricao": "TST: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam no começo e no fim do prazo",
+    "fundamento": "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026)",
+    "entrada": {
+      "dataEvento": "2026-08-07",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TST"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-08-07",
+      "dataTermoInicial": "2026-08-12",
+      "dataVencimentoFinal": "2026-08-14",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-08-10",
+            "motivo": "Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo"
+          },
+          {
+            "data": "2026-08-11",
+            "motivo": "11 de agosto (Lei 5.010, art. 62, IV)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tst-ponto-facultativo-30-out",
+    "categoria": "verificado",
+    "descricao": "TST: 30/10/2026 (transferência do ponto facultativo do Dia do Servidor) e Finados (02/11) não contam",
+    "fundamento": "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026)",
+    "entrada": {
+      "dataEvento": "2026-10-28",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TST"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-28",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Ponto facultativo (ato do tribunal): prorroga o início ou o fim do prazo"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "tst-clt-cinzas-2026",
+    "categoria": "verificado",
+    "descricao": "TST (CLT): Carnaval e Quarta-feira de Cinzas (até as 14h) protraem o começo do prazo de 8 dias",
+    "fundamento": "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 8,
+      "tribunalId": "TST",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-03-02",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 6,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (segunda)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (terça)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (ponto facultativo até as 14h): protrai o dia do começo"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "validado",
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
+    },
+    "alternativaEsperada": null
   },
   {
     "id": "stj-onze-agosto-2026",
@@ -3087,7 +3256,7 @@
       "dataTermoInicial": "2026-09-04",
       "dataVencimentoFinal": "2026-09-11",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 0,
@@ -3103,8 +3272,8 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
     "alternativaEsperada": null
   },
@@ -3125,7 +3294,7 @@
       "dataTermoInicial": "2026-01-21",
       "dataVencimentoFinal": "2026-01-23",
       "foiProrrogadoTermoFinal": false,
-      "calendarioVerificado": false,
+      "calendarioVerificado": true,
       "rastro": {
         "fimsDeSemana": 2,
         "suspensaoDias": 2,
@@ -3136,8 +3305,8 @@
     },
     "validacao": {
       "status": "validado",
-      "por": "Junior Aguiar (revisor jurídico)",
-      "em": "2026-10-07"
+      "por": "José Bonifácio de Aguiar Santos Júnior (analista validador jurídico)",
+      "em": "2026-10-28"
     },
     "alternativaEsperada": null
   },

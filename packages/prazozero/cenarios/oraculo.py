@@ -16,13 +16,13 @@ from pathlib import Path
 
 # Lei 5.010/1966, art. 62 (texto conferido no Planalto): Justiça Federal e tribunais que a aplicam.
 # STF e STJ: confirmado nos atos de 2026 (Portaria STJ/GDG 1.010/2025; calendário STF 2026, Portaria GDG/STF 189/2025).
-LEI_5010 = {"STF", "STJ", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6"}
-SUPERIORES_SEM_ATO = {"TST", "TSE"}  # citados no art. 62, sem ato próprio conferido: pendente
+LEI_5010 = {"STF", "STJ", "TST", "TRF1", "TRF2", "TRF3", "TRF4", "TRF5", "TRF6"}
+SUPERIORES_SEM_ATO = {"TSE"}  # citado no art. 62, sem ato próprio conferido: pendente (o TST tem o Ato Conjunto 5/2026)
 # Só tribunais estaduais: a Justiça Federal segue a Lei 5.010, art. 62, e não a tabela estadual.
 UF_DO_TRIBUNAL = {"TJSP": "SP", "TJRJ": "RJ", "TJMG": "MG", "TJRS": "RS", "TJPR": "PR", "TJSC": "SC", "TJBA": "BA", "TJDF": "DF",
                   "TJGO": "GO", "TJPE": "PE", "TJCE": "CE", "TJAL": "AL", "TJES": "ES", "TJPA": "PA", "TJMA": "MA", "TJMT": "MT", "TJAM": "AM", "TJMS": "MS", "TJRO": "RO", "TJPB": "PB", "TJRN": "RN", "TJAC": "AC", "TJRR": "RR", "TJAP": "AP", "TJTO": "TO", "TJPI": "PI", "TJSE": "SE"}
 FIXOS_VERIFICADOS = [(1, 1), (4, 21), (5, 1), (9, 7), (10, 12), (11, 2), (11, 15), (12, 25)]
-# Pontos facultativos de 2026, idênticos nos atos de STF e STJ: (mês, dia, parcial)
+# Pontos facultativos de 2026, idênticos nos atos de STF, STJ e TST: (mês, dia, parcial)
 PF_2026 = [(2, 18, True), (4, 20, False), (6, 4, False), (6, 5, False), (8, 10, False), (10, 30, False), (12, 7, False)]
 # Pontos facultativos (decisão do revisor jurídico em 10/10/2026): viram alerta (dia pendente), salvo quando o ato prevê expressamente que não haverá expediente
 # (TJBA, TJCE e TJDFT: contam como dia sem expediente). Espelha PONTOS_FACULTATIVOS de eventos.ts.
@@ -42,7 +42,7 @@ PF = {("TJES", d) for d in ["04-20", "06-04", "06-05", "08-10", "10-30", "12-07"
 # (hoje nenhum: todos os tribunais estaduais cadastrados já têm ato lido, e por isso o exemplo é "sem tribunal informado", que mantém os mesmos dias pendentes) e acertar o mesmo tribunal em src/motor/relatorio.test.ts.
 TRIBUNAL_SEM_ATO = None
 
-ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}, "TJPE": {2026}, "TJCE": {2026}, "TJES": {2026}, "TJGO": {2026},
+ANOS_VERIFICADOS = {"STF": {2026}, "STJ": {2026}, "TST": {2026}, "TJSP": {2026}, "TJMG": {2026}, "TJAL": {2026}, "TJPR": {2026}, "TJRS": {2026, 2027}, "TJBA": {2026}, "TJDF": {2026}, "TJSC": {2026}, "TJPE": {2026}, "TJCE": {2026}, "TJES": {2026}, "TJGO": {2026},
                     "TRF1": {2026}, "TRF2": {2026}, "TRF3": {2026}, "TRF4": {2026}, "TRF5": {2026}, "TRF6": {2026}, "TJPA": {2026}, "TJMA": {2026}, "TJMT": {2026}, "TJAM": {2026}, "TJMS": {2026}, "TJRO": {2026}, "TJPB": {2026}, "TJRN": {2026}, "TJAC": {2026}, "TJRR": {2026}, "TJAP": {2026}, "TJTO": {2026}, "TJPI": {2026}, "TJSE": {2026}}
 
 # Calendário dos tribunais estaduais, 2026, transcrito dos atos (independente do eventos.ts):
@@ -210,7 +210,7 @@ def calendario(ano: int, trib: str, uf: str, completo: bool):
             nu(date(ano, 12, dia), aplica, "Recesso (Lei 5.010, art. 62, I)")
         for dia in range(2, 7):
             nu(date(ano, 1, dia), aplica, "Recesso (Lei 5.010, art. 62, I)")
-    if ano == 2026 and trib in ("STF", "STJ"):
+    if ano == 2026 and trib in ("STF", "STJ", "TST"):
         for mes, dia, eh_parcial in PF_2026:
             d = date(ano, mes, dia)
             if eh_parcial:
@@ -669,8 +669,17 @@ add("stj-semana-santa-2026", "verificado", "STJ: Quarta, Quinta e Sexta Santas d
     entrada("2026-04-01", "publicacao", 3, "STJ"))
 add("trf3-semana-santa-2026", "verificado", "TRF3: Semana Santa é feriado forense pela Lei 5.010 (Justiça Federal)", "Lei 5.010/1966, art. 62, II",
     entrada("2026-04-01", "publicacao", 3, "TRF3"))
-add("tst-semana-santa-conservador", "pendente", "TST: art. 62 cita 'Tribunais Superiores', mas não há ato do TST conferido (conservador)", PEND + "; Lei 5.010/1966, art. 62, II",
+TST_ATO = "Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026 (lido em 28/10/2026)"
+add("tst-semana-santa-conservador", "verificado", "TST: Quarta, Quinta e Sexta Santas de 2026 (1 a 3/04) não contam", TST_ATO + "; Lei 5.010/1966, art. 62, II",
     entrada("2026-04-01", "publicacao", 3, "TST"))
+add("tst-corpus-christi-2026", "verificado", "TST: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", TST_ATO,
+    entrada("2026-06-02", "publicacao", 5, "TST"))
+add("tst-onze-agosto-2026", "verificado", "TST: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam no começo e no fim do prazo", TST_ATO,
+    entrada("2026-08-07", "publicacao", 3, "TST"))
+add("tst-ponto-facultativo-30-out", "verificado", "TST: 30/10/2026 (transferência do ponto facultativo do Dia do Servidor) e Finados (02/11) não contam", TST_ATO,
+    entrada("2026-10-28", "publicacao", 2, "TST"))
+add("tst-clt-cinzas-2026", "verificado", "TST (CLT): Carnaval e Quarta-feira de Cinzas (até as 14h) protraem o começo do prazo de 8 dias", TST_ATO + "; CLT, art. 775",
+    entrada("2026-02-13", "publicacao", 8, "TST", regime="clt_dias_uteis"))
 add("stj-onze-agosto-2026", "verificado", "STJ: 10/08 (ponto facultativo) e 11/08 (Lei 5.010, art. 62, IV) não contam", P1010 + ", art. 1º, X e XI",
     entrada("2026-08-07", "publicacao", 3, "STJ"))
 add("stj-corpus-christi-2026", "verificado", "STJ: 04/06 (Corpus Christi) e 05/06 são pontos facultativos no meio do prazo: contam no modo conservador; a alternativa não os conta", P1010 + ", art. 1º, VIII e IX",

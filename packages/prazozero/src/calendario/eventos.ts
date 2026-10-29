@@ -128,6 +128,12 @@ export const FONTES_CALENDARIO = {
     lido: 'página do Diário Oficial com o texto do ato (arts. 1º a 6º), fornecida pelo responsável; o número do ato está na página anterior, que não foi lida (o 03/2026 vem da notícia oficial)',
     lidoEm: LIDO
   },
+  'tst-ato-conjunto-5-2026': {
+    ato: 'Ato Conjunto TST.CSJT.GP nº 5, de 29/01/2026 (DEJT, caderno administrativo do CSJT, nº 4403, p. 1): altera e republica o anexo do Ato Conjunto TST.CSJT.GP nº 61, de 17/10/2025, com o calendário oficial do TST e do CSJT de 2026 (citado também o Ato GDGSET.GP nº 829/2025)',
+    url: 'https://juslaboris.tst.jus.br/handle/20.500.12178/259927',
+    lido: 'inteiro teor (PDF de 2 páginas do repositório JusLaboris do TST, lido em 28/10/2026 pelo script de acesso). O anexo lista os feriados e pontos facultativos: feriados pela Lei 662/1949 e pelo art. 62 da Lei 5.010/1966 (Carnaval 16 e 17/02; 1º a 5/04, Semana Santa; 11/08; 1º e 2/11; 08/12; 25/12 e os nacionais), pontos facultativos em 18/02 (até as 14h), 20/04, 04/06 (Corpus Christi), 05/06, 10/08, 30/10 (transferência do ponto facultativo do Dia do Servidor, 28/10) e 07/12, além do recesso forense e das férias coletivas dos Ministros. O ato só rotula esses dias de ponto facultativo: não diz que não haverá expediente. Como STF e STJ (atos com as mesmas sete datas), tratados como ponto facultativo de efeito próprio (decisão do revisor de 19/10/2026 para STF e STJ, estendida ao TST: depende de validação). Não modelado: o efeito das férias coletivas de julho sobre os prazos no TST (o anexo só as indica), nem os atos posteriores',
+    lidoEm: LIDO_28_10
+  },
   'tjal-recesso-junho-2026': {
     ato: 'TJAL, notícia oficial de 19/06/2026 sobre o plantão do recesso forense (22 a 30/06/2026, retorno em 1º/07); o ato que fixa o período não foi localizado',
     url: 'https://www.tjal.jus.br/noticia/judiciario-de-alagoas-funciona-em-regime-de-plantao-a-partir-desta-segunda-22/visualizar',
@@ -448,7 +454,7 @@ export const FONTES_CALENDARIO = {
   }
 } satisfies Record<string, FonteCalendario>;
 
-/** Pontos facultativos de 2026, idênticos nos atos de STF e STJ. */
+/** Pontos facultativos de 2026, idênticos nos atos de STF, STJ e TST. */
 const PF_2026: Array<{ data: string; nome: string; parcial?: boolean }> = [
   { data: '2026-02-18', nome: 'Quarta-feira de Cinzas (ponto facultativo até as 14h)', parcial: true },
   { data: '2026-04-20', nome: 'Ponto facultativo' },
@@ -480,6 +486,16 @@ const EVENTOS_BASE: EventoCalendario[] = [
     verificacao: 'ato_do_tribunal' as const,
     fundamento: 'Calendário oficial do STF 2026 (Portaria GDG/STF 189/2025)',
     fonte: 'stf-cal-2026' as const
+  })),
+  ...PF_2026.map(pf => ({
+    tribunais: ['TST'],
+    inicio: pf.data,
+    fim: pf.data,
+    nome: pf.nome,
+    efeito: (pf.parcial ? 'expediente_parcial' : 'ponto_facultativo') as EfeitoEvento,
+    verificacao: 'ato_do_tribunal' as const,
+    fundamento: 'Ato Conjunto TST.CSJT.GP 61/2025, com o anexo republicado pelo Ato Conjunto TST.CSJT.GP 5/2026',
+    fonte: 'tst-ato-conjunto-5-2026' as const
   })),
 
   // ---------- TJSP, 2026: Provimento CSM 2.813/2025, art. 1º ----------
@@ -1440,6 +1456,7 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
 export const COBERTURA_CALENDARIO: Record<string, { anos: number[]; fontes: Array<keyof typeof FONTES_CALENDARIO> }> = {
   STJ: { anos: [2026], fontes: ['stj-gdg-1010', 'stj-horarios'] },
   STF: { anos: [2026], fontes: ['stf-cal-2026'] },
+  TST: { anos: [2026], fontes: ['tst-ato-conjunto-5-2026'] },
   TJSP: { anos: [2026], fontes: ['tjsp-csm-2813'] },
   TJMG: { anos: [2026], fontes: ['tjmg-pc-1764', 'tjmg-res-458'] },
   TJAL: { anos: [2026], fontes: ['tjal-an-03-2026', 'tjal-lei-6564'] },
