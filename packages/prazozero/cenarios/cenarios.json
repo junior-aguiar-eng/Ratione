@@ -14599,5 +14599,173 @@
       "em": null
     },
     "alternativaEsperada": null
+  },
+  {
+    "id": "trt23-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT23 2026: Carnaval e Cinzas (16 a 18/02) não contam",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT23",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (regimental)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (regimental)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Carnaval (regimental)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt23-corpus-christi",
+    "categoria": "verificado",
+    "descricao": "TRT23 2026: 04/06 (Corpus Christi regimental) não conta",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT23",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-05",
+      "dataVencimentoFinal": "2026-06-08",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi (regimental)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt23-suspensao-28-outubro",
+    "categoria": "verificado",
+    "descricao": "TRT23 2026: 28/10 (suspensão de prazo) e 30/10 (Dia do Servidor) não contam",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT23",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-29",
+      "dataVencimentoFinal": "2026-11-04",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-28",
+            "motivo": "Suspensão de prazo (Portaria Conjunta 007/2026)"
+          },
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (regimental)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Todos os Santos (regimental) e Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt23-dia-da-justica",
+    "categoria": "verificado",
+    "descricao": "TRT23 2026: 08/12 (Dia da Justiça) não conta",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT23",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-12-08",
+            "motivo": "Dia da Justiça (regimental)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

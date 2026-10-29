@@ -493,5 +493,37 @@
       ["independencia-sergipe", "08/07 (Independência de Sergipe) não conta", "2026-07-07", 2],
       ["dia-do-servidor", "28/10 conta e 30/10 (remanejado) não conta", "2026-10-27", 3]
     ]
+  },
+  {
+    "id": "TRT23",
+    "fontes": [
+      {
+        "chave": "trt23-portaria-conjunta-007-2026",
+        "ato": "Portaria Conjunta TRT CORREG GP nº 007/2026 (assinada em 05 e 06/08/2026), que altera o Calendário Forense de 2026 do TRT23 estabelecido pela Portaria Conjunta TRT CORREG GP nº 028/2025, na forma do anexo \"Calendário - 2026\"",
+        "url": "https://portal.trt23.jus.br/portal/sites/portal/files/groups/governanca/portaria_unificada_calendario_forense_2026.pdf",
+        "lido": "inteiro teor da portaria e do anexo (PDF de 4 páginas; as tabelas foram conferidas em imagem), lidos em 28/10/2026 pelo script de acesso. Contam as linhas de alcance \"Nacional\" e \"Regional\" que são feriado, recesso ou suspensão de prazo: recesso de 02 a 06/01 e de 20 a 31/12, Carnaval de 16 a 18/02, Semana Santa de 01 a 05/04, Corpus Christi em 04/06 (regimental, Portaria Conjunta 31/2015), Dia do Advogado em 11/08, suspensão de prazo em 28/10 (Portaria Conjunta 007/2026), 30/10 (Dia do Servidor Público regimental), 01 e 02/11, 20/11 e 08/12. Fora: as linhas municipais (CPC, art. 1.003, § 6º) e a Semana Jurídica de 04 a 08/05 e de 14 a 18/12, que o anexo trata como categoria própria e não como suspensão de prazo. A suspensão de 07 a 20/01 (CPC, art. 220) já está no motor. O ato-base 028/2025 não foi lido; atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (regimental)"],
+      ["2026-02-16/2026-02-18", "Carnaval (regimental)"],
+      ["2026-04-01/2026-04-05", "Semana Santa (regimental)"],
+      ["2026-06-04", "Corpus Christi (regimental)"],
+      ["2026-08-11", "Dia do Advogado (regimental)"],
+      ["2026-10-28", "Suspensão de prazo (Portaria Conjunta 007/2026)"],
+      ["2026-10-30", "Dia do Servidor Público (regimental)"],
+      ["2026-11-01/2026-11-02", "Todos os Santos (regimental) e Finados"],
+      ["2026-11-20", "Dia Nacional de Zumbi dos Palmares e da Consciência Negra"],
+      ["2026-12-08", "Dia da Justiça (regimental)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (regimental)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (16 a 18/02) não contam", "2026-02-13", 5],
+      ["corpus-christi", "04/06 (Corpus Christi regimental) não conta", "2026-06-03", 2],
+      ["suspensao-28-outubro", "28/10 (suspensão de prazo) e 30/10 (Dia do Servidor) não contam", "2026-10-27", 3],
+      ["dia-da-justica", "08/12 (Dia da Justiça) não conta", "2026-12-04", 3]
+    ]
   }
 ]

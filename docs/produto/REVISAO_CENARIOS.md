@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **375** · validados: **319** · pendentes: **56**
+> Cenários: **379** · validados: **319** · pendentes: **60**
 
 ## Como revisar
 
@@ -32,7 +32,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 | CPP (prazos criminais) | 15 |
 | Tribunais superiores | 1 |
 | Dias ainda pendentes de conferência | 59 |
-| Calendário verificado (tribunais com ato lido) | 250 |
+| Calendário verificado (tribunais com ato lido) | 254 |
 | Intimação eletrônica | 5 |
 | Juizados Especiais | 6 |
 
@@ -4485,9 +4485,57 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
 
+### 365. `trt23-carnaval-cinzas`
+
+**TRT23 2026: Carnaval e Cinzas (16 a 18/02) não contam**
+
+- **Entrada:** publicação em **13/02/2026 (sexta-feira)** · prazo de **5 dias** (CLT, dias úteis) · tribunal **TRT23** · modo conservador
+- **Publicação / dia do começo:** 13/02/2026 (sexta-feira) · **início da contagem:** 19/02/2026 (quinta-feira)
+- **Vencimento esperado:** **25/02/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (regimental); 17/02/2026 Carnaval (regimental); 18/02/2026 Carnaval (regimental)
+- **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 366. `trt23-corpus-christi`
+
+**TRT23 2026: 04/06 (Corpus Christi regimental) não conta**
+
+- **Entrada:** publicação em **03/06/2026 (quarta-feira)** · prazo de **2 dias** (CLT, dias úteis) · tribunal **TRT23** · modo conservador
+- **Publicação / dia do começo:** 03/06/2026 (quarta-feira) · **início da contagem:** 05/06/2026 (sexta-feira)
+- **Vencimento esperado:** **08/06/2026 (segunda-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (regimental)
+- **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 367. `trt23-suspensao-28-outubro`
+
+**TRT23 2026: 28/10 (suspensão de prazo) e 30/10 (Dia do Servidor) não contam**
+
+- **Entrada:** publicação em **27/10/2026 (terça-feira)** · prazo de **3 dias** (CLT, dias úteis) · tribunal **TRT23** · modo conservador
+- **Publicação / dia do começo:** 27/10/2026 (terça-feira) · **início da contagem:** 29/10/2026 (quinta-feira)
+- **Vencimento esperado:** **04/11/2026 (quarta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 Suspensão de prazo (Portaria Conjunta 007/2026); 30/10/2026 Dia do Servidor Público (regimental); 02/11/2026 Todos os Santos (regimental) e Finados
+- **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
+### 368. `trt23-dia-da-justica`
+
+**TRT23 2026: 08/12 (Dia da Justiça) não conta**
+
+- **Entrada:** publicação em **04/12/2026 (sexta-feira)** · prazo de **3 dias** (CLT, dias úteis) · tribunal **TRT23** · modo conservador
+- **Publicação / dia do começo:** 04/12/2026 (sexta-feira) · **início da contagem:** 07/12/2026 (segunda-feira)
+- **Vencimento esperado:** **10/12/2026 (quinta-feira)**
+- **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 Dia da Justiça (regimental)
+- **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
+- **Calendário do tribunal verificado:** sim
+- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+
 ## Intimação eletrônica
 
-### 365. `portal-segunda`
+### 369. `portal-segunda`
 
 **Intimação eletrônica: consulta na segunda; dia do começo na terça; contagem a partir de quarta**
 
@@ -4499,7 +4547,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 366. `portal-sexta`
+### 370. `portal-sexta`
 
 **Intimação eletrônica: consulta na sexta; dia do começo na segunda**
 
@@ -4511,7 +4559,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 367. `portal-sabado`
+### 371. `portal-sabado`
 
 **Intimação eletrônica: consulta no sábado; a intimação se realiza na segunda (dia do começo) e a contagem começa na terça (leitura A, validada)**
 
@@ -4523,7 +4571,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 368. `portal-feriado`
+### 372. `portal-feriado`
 
 **Intimação eletrônica: consulta na véspera de Tiradentes; dia do começo é o dia útil seguinte**
 
@@ -4535,7 +4583,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 369. `portal-recesso`
+### 373. `portal-recesso`
 
 **Intimação eletrônica consultada em 19/12/2025: o dia do começo é 21/01/2026, depois do recesso**
 
@@ -4549,7 +4597,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 
 ## Juizados Especiais
 
-### 370. `jef-5d-embargos`
+### 374. `jef-5d-embargos`
 
 **JEF: embargos de declaração em 5 dias úteis (Lei 9.099, art. 49)**
 
@@ -4561,7 +4609,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 371. `jef-10d-recurso`
+### 375. `jef-10d-recurso`
 
 **JEF: recurso inominado em 10 dias úteis (Lei 9.099, arts. 42 e 12-A)**
 
@@ -4573,7 +4621,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 372. `jef-dobro-ignorado`
+### 376. `jef-dobro-ignorado`
 
 **JEF: o prazo em dobro não é aplicado a ente público (Lei 10.259, art. 9º; Lei 12.153, art. 7º)**
 
@@ -4585,7 +4633,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** sim
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 373. `jef-recesso`
+### 377. `jef-recesso`
 
 **JEF: a suspensão de 20/12 a 20/01 vale nos Juizados (Res. CNJ 244/2016, art. 3º)**
 
@@ -4597,7 +4645,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 374. `jef-recesso-desligado`
+### 378. `jef-recesso-desligado`
 
 **JEF: suspensão desligada pelo usuário conta o recesso (resultado de quem opta por não suspender)**
 
@@ -4609,7 +4657,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Calendário do tribunal verificado:** não
 - **Validação jurídica:** ☑ validado por Junior Aguiar (revisor jurídico) em 2026-10-07
 
-### 375. `jef-dje-sexta`
+### 379. `jef-dje-sexta`
 
 **JEF: disponibilização na sexta 13/03, publicação na segunda, recurso inominado de 10 dias úteis**
 

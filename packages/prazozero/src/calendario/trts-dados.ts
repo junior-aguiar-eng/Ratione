@@ -98,6 +98,12 @@ export const FONTES_TRTS = {
     "url": "https://www.trt20.jus.br/images/documentos/calendario/Calendario_2026.pdf",
     "lido": "PDF de 1 página (digitalizado), lido em imagem em 28/10/2026, e a notícia oficial, que diz que nos feriados nacionais e estaduais ficam suspensos o expediente, o atendimento ao público e os prazos em todas as unidades. Não é o ato normativo: nenhum ato do tribunal foi lido. Contam os dias \"Toda a Região\" que o calendário dá como feriado: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02 (feriado regimental), Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 24/06 (São João), 08/07 (Independência de Sergipe), 11/08, 30/10 (Dia do Servidor, remanejado de 28/10) e 08/12. Os pontos facultativos 20/04, 05/06, 10/08 e 07/12 só são rotulados \"ponto facultativo\" e por isso só alertam. Fora: os feriados municipais (Aracaju e interior; CPC, art. 1.003, § 6º). Atos posteriores não lidos",
     "lidoEm": "2026-10-28"
+  },
+  "trt23-portaria-conjunta-007-2026": {
+    "ato": "Portaria Conjunta TRT CORREG GP nº 007/2026 (assinada em 05 e 06/08/2026), que altera o Calendário Forense de 2026 do TRT23 estabelecido pela Portaria Conjunta TRT CORREG GP nº 028/2025, na forma do anexo \"Calendário - 2026\"",
+    "url": "https://portal.trt23.jus.br/portal/sites/portal/files/groups/governanca/portaria_unificada_calendario_forense_2026.pdf",
+    "lido": "inteiro teor da portaria e do anexo (PDF de 4 páginas; as tabelas foram conferidas em imagem), lidos em 28/10/2026 pelo script de acesso. Contam as linhas de alcance \"Nacional\" e \"Regional\" que são feriado, recesso ou suspensão de prazo: recesso de 02 a 06/01 e de 20 a 31/12, Carnaval de 16 a 18/02, Semana Santa de 01 a 05/04, Corpus Christi em 04/06 (regimental, Portaria Conjunta 31/2015), Dia do Advogado em 11/08, suspensão de prazo em 28/10 (Portaria Conjunta 007/2026), 30/10 (Dia do Servidor Público regimental), 01 e 02/11, 20/11 e 08/12. Fora: as linhas municipais (CPC, art. 1.003, § 6º) e a Semana Jurídica de 04 a 08/05 e de 14 a 18/12, que o anexo trata como categoria própria e não como suspensão de prazo. A suspensão de 07 a 20/01 (CPC, art. 220) já está no motor. O ato-base 028/2025 não foi lido; atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -2344,6 +2350,138 @@ export const EVENTOS_TRTS: EventoDeTRT[] = [
     "verificacao": "ato_do_tribunal",
     "fundamento": "Calendário 2026 do TRT20",
     "fonte": "trt20-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso forense (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-18",
+    "nome": "Carnaval (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-05",
+    "nome": "Semana Santa (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Dia do Advogado (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-10-28",
+    "fim": "2026-10-28",
+    "nome": "Suspensão de prazo (Portaria Conjunta 007/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-11-01",
+    "fim": "2026-11-02",
+    "nome": "Todos os Santos (regimental) e Finados",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-11-20",
+    "fim": "2026-11-20",
+    "nome": "Dia Nacional de Zumbi dos Palmares e da Consciência Negra",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
+  },
+  {
+    "tribunais": [
+      "TRT23"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso forense (regimental)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026",
+    "fonte": "trt23-portaria-conjunta-007-2026"
   }
 ];
 
@@ -2496,6 +2634,14 @@ export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyo
     ],
     "fontes": [
       "trt20-calendario-2026"
+    ]
+  },
+  "TRT23": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt23-portaria-conjunta-007-2026"
     ]
   }
 };
