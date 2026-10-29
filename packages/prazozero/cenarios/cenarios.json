@@ -15777,5 +15777,483 @@
       "em": null
     },
     "alternativaEsperada": "2026-12-11"
+  },
+  {
+    "id": "trt17-carnaval-cinzas",
+    "categoria": "verificado",
+    "descricao": "TRT17 2026: Carnaval e Cinzas (suspensão), 16 a 18/02, não contam",
+    "fundamento": "Ato Presi Secor TRT17 44/2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-13",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 5,
+      "tribunalId": "TRT17",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-13",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-25",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 4,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-16",
+            "motivo": "Carnaval (Lei 5.010)"
+          },
+          {
+            "data": "2026-02-17",
+            "motivo": "Carnaval (Lei 5.010)"
+          },
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (suspensão de atividades e prazos, Ato Presi Secor 45/2025)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt17-nossa-senhora-da-penha",
+    "categoria": "verificado",
+    "descricao": "TRT17 2026: 13/04 (Nossa Senhora da Penha, feriado estadual) não conta",
+    "fundamento": "Ato Presi Secor TRT17 44/2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-10",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT17",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-10",
+      "dataTermoInicial": "2026-04-14",
+      "dataVencimentoFinal": "2026-04-15",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-13",
+            "motivo": "Nossa Senhora da Penha (leis estaduais 3.599/1983 e 11.010/2019)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt17-corpus-christi-suspensao",
+    "categoria": "verificado",
+    "descricao": "TRT17 2026: 04/06 (Corpus Christi) e 05/06 (suspensão, Ato 45/2025) não contam",
+    "fundamento": "Ato Presi Secor TRT17 44/2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT17",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi (feriado religioso)"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "Suspensão de atividades e prazos (Ato Presi Secor 45/2025)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt17-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT17 2026: 28/10 e 30/10 só alertam (ponto facultativo)",
+    "fundamento": "Ato Presi Secor TRT17 44/2025; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT17",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-10-30",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": true,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-11-04"
+  },
+  {
+    "id": "trt18-cinzas-suspensao",
+    "categoria": "verificado",
+    "descricao": "TRT18 2026: 18/02 (suspensão de atividades) não conta",
+    "fundamento": "Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-02-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 2,
+      "tribunalId": "TRT18",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-02-17",
+      "dataTermoInicial": "2026-02-19",
+      "dataVencimentoFinal": "2026-02-20",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 0,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-02-18",
+            "motivo": "Quarta-feira de Cinzas (suspensão de atividades)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt18-suspensao-abril",
+    "categoria": "verificado",
+    "descricao": "TRT18 2026: 20/04 (suspensão) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT18",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-17",
+      "dataTermoInicial": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "Suspensão de atividades (véspera de Tiradentes)"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt18-corpus-christi-suspensao",
+    "categoria": "verificado",
+    "descricao": "TRT18 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam",
+    "fundamento": "Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT18",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-08",
+      "dataVencimentoFinal": "2026-06-10",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-04",
+            "motivo": "Corpus Christi (feriado regimental)"
+          },
+          {
+            "data": "2026-06-05",
+            "motivo": "Suspensão de atividades (após Corpus Christi)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt18-dia-do-servidor",
+    "categoria": "verificado",
+    "descricao": "TRT18 2026: 28/10 conta e 30/10 (transferido) não conta",
+    "fundamento": "Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-10-27",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT18",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-10-27",
+      "dataTermoInicial": "2026-10-28",
+      "dataVencimentoFinal": "2026-11-03",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-10-30",
+            "motivo": "Dia do Servidor Público (transferido de 28/10, Portaria 358/2026)"
+          },
+          {
+            "data": "2026-11-02",
+            "motivo": "Finados"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt13-suspensao-abril",
+    "categoria": "verificado",
+    "descricao": "TRT13 2026: 20/04 (suspensão, Ato 39/2026) e 21/04 (Tiradentes) não contam",
+    "fundamento": "Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-04-17",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT13",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-04-17",
+      "dataTermoInicial": "2026-04-22",
+      "dataVencimentoFinal": "2026-04-24",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-04-20",
+            "motivo": "Suspensão do expediente e dos prazos (Ato 39/2026)"
+          },
+          {
+            "data": "2026-04-21",
+            "motivo": "Tiradentes"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt13-corpus-christi-suspensao",
+    "categoria": "verificado",
+    "descricao": "TRT13 2026: 04/06 (ponto facultativo) só alerta e 05/06 (suspensão) não conta",
+    "fundamento": "Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-03",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT13",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-03",
+      "dataTermoInicial": "2026-06-04",
+      "dataVencimentoFinal": "2026-06-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-05",
+            "motivo": "Suspensão do expediente e dos prazos (Ato 39/2026)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": "2026-06-10"
+  },
+  {
+    "id": "trt13-junho-22-e-23",
+    "categoria": "verificado",
+    "descricao": "TRT13 2026: 22/06 (suspensão) e 23/06 (feriado transferido) não contam",
+    "fundamento": "Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-06-19",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT13",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-06-19",
+      "dataTermoInicial": "2026-06-24",
+      "dataVencimentoFinal": "2026-06-26",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": [
+          {
+            "data": "2026-06-22",
+            "motivo": "Suspensão do expediente e dos prazos (Ato 39/2026, alterado pelo Ato 75/2026)"
+          },
+          {
+            "data": "2026-06-23",
+            "motivo": "Feriado transferido (Atos 75 e 76/2026)"
+          }
+        ]
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
+  },
+  {
+    "id": "trt13-dezembro-7-conta",
+    "categoria": "verificado",
+    "descricao": "TRT13 2026: 07/12 conta: o Ato 75/2026 retirou a suspensão",
+    "fundamento": "Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775",
+    "entrada": {
+      "dataEvento": "2026-12-04",
+      "tipoEvento": "publicacao",
+      "diasPrazo": 3,
+      "tribunalId": "TRT13",
+      "regime": "clt_dias_uteis"
+    },
+    "esperado": {
+      "dataPublicacao": "2026-12-04",
+      "dataTermoInicial": "2026-12-07",
+      "dataVencimentoFinal": "2026-12-09",
+      "foiProrrogadoTermoFinal": false,
+      "calendarioVerificado": false,
+      "rastro": {
+        "fimsDeSemana": 2,
+        "suspensaoDias": 0,
+        "suspensaoDe": null,
+        "suspensaoAte": null,
+        "diasNaoUteis": []
+      }
+    },
+    "validacao": {
+      "status": "pendente",
+      "por": null,
+      "em": null
+    },
+    "alternativaEsperada": null
   }
 ]

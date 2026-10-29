@@ -734,5 +734,100 @@
       ["pontos-facultativos-junho", "04/06 e 05/06 (pontos facultativos) só alertam", "2026-06-03", 3],
       ["dia-da-justica", "08/12 (Dia da Justiça) não conta e 07/12 (ponto facultativo) só alerta", "2026-12-04", 3]
     ]
+  },
+  {
+    "id": "TRT17",
+    "fontes": [
+      {
+        "chave": "trt17-ato-presi-secor-44-2025",
+        "ato": "Ato Presi Secor nº 44/2025 (republicado por erro material; DEJT de 27/08/2025): calendário de 2026 do TRT17; Ato Presi Secor nº 45/2025 (DEJT de 14/08/2025): suspensão de atividades e prazos em 18/02, 20/04, 05/06 e 10/08/2026",
+        "url": "https://www.trt17.jus.br/documents/652773/1081244/ATO+PRESI+SECOR+n%C2%BA+44-2025+-+CALEND%C3%81RIO+2026+%28REPUBLICA%C3%87%C3%83O%29.pdf",
+        "lido": "inteiro teor dos dois atos (PDFs lidos em 28/10/2026 por download direto). O Ato 44/2025 lista os feriados nacionais, os forenses (recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Semana Santa de 01 a 03/04, 11/08, 01 e 02/11 e 08/12) e os religiosos: 13/04 (Nossa Senhora da Penha, leis estaduais 3.599/1983 e 11.010/2019) e 04/06 (Corpus Christi). O Ato 45/2025 suspende as atividades e os prazos processuais em 18/02, 20/04, 05/06 e 10/08. O Dia do Servidor aparece como ponto facultativo em 28/10 no texto republicado, mas o calendário eletrônico do tribunal o mostra em 30/10: os dois dias só alertam. Fora: os feriados municipais (CPC, art. 1.003, § 6º). O art. 2º do Ato 44/2025 suspende os prazos de 07 a 20/01 (CPC, art. 220), já no motor. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Ato Presi Secor TRT17 44/2025",
+    "dias": [
+      ["2026-01-02/2026-01-06", "Recesso forense (Lei 5.010)"],
+      ["2026-02-16/2026-02-17", "Carnaval (Lei 5.010)"],
+      ["2026-02-18", "Quarta-feira de Cinzas (suspensão de atividades e prazos, Ato Presi Secor 45/2025)", {"fund": "Ato Presi Secor TRT17 45/2025, art. 1º"}],
+      ["2026-04-01/2026-04-03", "Semana Santa (Lei 5.010)"],
+      ["2026-04-13", "Nossa Senhora da Penha (leis estaduais 3.599/1983 e 11.010/2019)"],
+      ["2026-04-20", "Suspensão de atividades e prazos (Ato Presi Secor 45/2025)", {"fund": "Ato Presi Secor TRT17 45/2025, art. 1º"}],
+      ["2026-06-04", "Corpus Christi (feriado religioso)"],
+      ["2026-06-05", "Suspensão de atividades e prazos (Ato Presi Secor 45/2025)", {"fund": "Ato Presi Secor TRT17 45/2025, art. 1º"}],
+      ["2026-08-10", "Suspensão de atividades e prazos (Ato Presi Secor 45/2025)", {"fund": "Ato Presi Secor TRT17 45/2025, art. 1º"}],
+      ["2026-08-11", "Criação dos Cursos Jurídicos, Dia do Magistrado e do Advogado (Lei 5.010)"],
+      ["2026-10-28", "Dia do Funcionário Público (ponto facultativo no Ato 44/2025): só alerta", {"pf": true}],
+      ["2026-10-30", "Dia do Servidor Público (mostrado no calendário eletrônico do tribunal): só alerta", {"pf": true}],
+      ["2026-11-01/2026-11-02", "Todos os Santos e Finados (Lei 5.010)"],
+      ["2026-12-08", "Dia da Justiça (Lei 5.010)"],
+      ["2026-12-20/2026-12-31", "Recesso forense (Lei 5.010)"]
+    ],
+    "cenarios": [
+      ["carnaval-cinzas", "Carnaval e Cinzas (suspensão), 16 a 18/02, não contam", "2026-02-13", 5],
+      ["nossa-senhora-da-penha", "13/04 (Nossa Senhora da Penha, feriado estadual) não conta", "2026-04-10", 2],
+      ["corpus-christi-suspensao", "04/06 (Corpus Christi) e 05/06 (suspensão, Ato 45/2025) não contam", "2026-06-03", 3],
+      ["dia-do-servidor", "28/10 e 30/10 só alertam (ponto facultativo)", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT18",
+    "semSelo": true,
+    "fontes": [
+      {
+        "chave": "trt18-portaria-2329-2025",
+        "ato": "Portaria TRT 18ª GP/DG nº 2329/2025 (suspensão de atividades em dias intercalados de 2026), com a Portaria TRT 18ª nº 358/2026 (DEJT de 24/02/2026, que transfere o Dia do Servidor para 30/10)",
+        "url": "https://bibliotecadigital.trt18.jus.br/xmlui/bitstream/handle/bdtrt18/34221/Portaria_TRT18_2329_2025.PDF?sequence=1&isAllowed=y",
+        "lido": "inteiro teor das duas portarias (PDFs lidos em 28/10/2026 por download direto). A Portaria 2329/2025 suspende as atividades e prorroga para o primeiro dia útil os prazos que começam, estão em curso ou terminam em 18/02, 20/04, 05/06, 10/08 e 07/12; a 358/2026 transfere o feriado de 28/10 para 30/10, com a mesma prorrogação. Contam também, pelo texto da 2329/2025, os feriados regimentais que ela menciona: Corpus Christi (04/06), Dia do Magistrado e Advogado (11/08) e Dia da Justiça (08/12), e, pelo título de notícia oficial do tribunal, 16 e 17/02 (Carnaval). SEM SELO DE CALENDÁRIO CONFERIDO: a lista completa de feriados do TRT18 (Semana Santa, recesso, feriados estaduais) está no calendário institucional em PDF, que não foi lido por inteiro; só os dias acima foram carregados. Fora: feriados municipais e estaduais intercalados (art. 2º; CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026",
+    "dias": [
+      ["2026-02-16/2026-02-17", "Carnaval (notícia oficial do tribunal)"],
+      ["2026-02-18", "Quarta-feira de Cinzas (suspensão de atividades)"],
+      ["2026-04-20", "Suspensão de atividades (véspera de Tiradentes)"],
+      ["2026-06-04", "Corpus Christi (feriado regimental)"],
+      ["2026-06-05", "Suspensão de atividades (após Corpus Christi)"],
+      ["2026-08-10", "Suspensão de atividades (véspera do Dia do Magistrado e Advogado)"],
+      ["2026-08-11", "Dia do Magistrado e Advogado (feriado regimental)"],
+      ["2026-10-30", "Dia do Servidor Público (transferido de 28/10, Portaria 358/2026)", {"fund": "Portaria TRT 18ª 358/2026"}],
+      ["2026-12-07", "Suspensão de atividades (véspera do Dia da Justiça)"],
+      ["2026-12-08", "Dia da Justiça (feriado regimental)"]
+    ],
+    "cenarios": [
+      ["cinzas-suspensao", "18/02 (suspensão de atividades) não conta", "2026-02-17", 2],
+      ["suspensao-abril", "20/04 (suspensão) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["corpus-christi-suspensao", "04/06 (Corpus Christi) e 05/06 (suspensão) não contam", "2026-06-03", 3],
+      ["dia-do-servidor", "28/10 conta e 30/10 (transferido) não conta", "2026-10-27", 3]
+    ]
+  },
+  {
+    "id": "TRT13",
+    "semSelo": true,
+    "fontes": [
+      {
+        "chave": "trt13-ato-sgp-39-2026",
+        "ato": "Ato TRT13.SGP nº 39, de 18/03/2026, alterado pelos Atos TRT13.SGP nº 75 (19/05/2026) e nº 76/2026: suspensão do expediente interno e do atendimento ao público e dos prazos em datas específicas de 2026; o Ato TRT13.SGP nº 181, de 30/10/2025 (divulgação dos feriados e pontos facultativos), é citado mas não foi lido",
+        "url": "https://normasinternas.trt13.jus.br/xmlui/bitstream/handle/bdtrt7/129941/ATO%20TRT13%20SGP%20N.%C2%BA%20039-2026.pdf?sequence=2&isAllowed=y",
+        "lido": "inteiro teor do Ato 39/2026 (PDF) e do Ato 75/2026 consolidado (página HTML), lidos em 28/10/2026 por download direto. O Ato 39/2026 suspendeu o expediente e os prazos em 20/04, 05/06 e 07/12 (art. 2º: prazos suspensos nas datas sem expediente, CPC, arts. 216 e 219); o Ato 75/2026 trocou 07/12 por 22/06 e transferiu um feriado para 23/06 (o texto consolidado diz 11/08 e o Ato 76/2026 o corrigiu para 05/08, data magna da Paraíba). 04/06 (Corpus Christi) só alerta: o Ato 39/2026 o cita como ponto facultativo do Ato 181/2025. SEM SELO DE CALENDÁRIO CONFERIDO: a lista de feriados do TRT13 está no Ato 181/2025, não encontrado; só os dias dos Atos 39, 75 e 76 foram carregados. Atos posteriores não lidos",
+        "lidoEm": "2026-10-28"
+      }
+    ],
+    "fund": "Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026)",
+    "dias": [
+      ["2026-04-20", "Suspensão do expediente e dos prazos (Ato 39/2026)"],
+      ["2026-06-04", "Corpus Christi (ponto facultativo do Ato 181/2025): só alerta", {"pf": true}],
+      ["2026-06-05", "Suspensão do expediente e dos prazos (Ato 39/2026)"],
+      ["2026-06-22", "Suspensão do expediente e dos prazos (Ato 39/2026, alterado pelo Ato 75/2026)", {"fund": "Ato TRT13.SGP 75/2026"}],
+      ["2026-06-23", "Feriado transferido (Atos 75 e 76/2026)", {"fund": "Atos TRT13.SGP 75 e 76/2026"}]
+    ],
+    "cenarios": [
+      ["suspensao-abril", "20/04 (suspensão, Ato 39/2026) e 21/04 (Tiradentes) não contam", "2026-04-17", 3],
+      ["corpus-christi-suspensao", "04/06 (ponto facultativo) só alerta e 05/06 (suspensão) não conta", "2026-06-03", 3],
+      ["junho-22-e-23", "22/06 (suspensão) e 23/06 (feriado transferido) não contam", "2026-06-19", 3],
+      ["dezembro-7-conta", "07/12 conta: o Ato 75/2026 retirou a suspensão", "2026-12-04", 3]
+    ]
   }
 ]

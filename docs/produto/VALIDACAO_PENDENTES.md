@@ -1,7 +1,7 @@
 # RATIONE — CENÁRIOS PENDENTES DE VALIDAÇÃO
 
-> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 84. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
-> Total: **403** cenários · validados: **319** · pendentes: **84**
+> **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite à mão.** Lista os cenários ainda não validados, numerados de 1 a 96. Detalhe de cada um (fundamento e contagem completa): `REVISAO_CENARIOS.md`, pelo identificador.
+> Total: **415** cenários · validados: **319** · pendentes: **96**
 
 ## Como responder
 
@@ -13,9 +13,9 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 
 | Grupo | Números | Cenários |
 |---|---|---|
-| Calendário verificado (tribunais com ato lido) | 1 a 84 | 84 |
+| Calendário verificado (tribunais com ato lido) | 1 a 96 | 96 |
 
-## Calendário verificado (tribunais com ato lido) (1 a 84)
+## Calendário verificado (tribunais com ato lido) (1 a 96)
 
 *O calendário do tribunal foi lido no ato oficial. O que se valida é a **regra de contagem** e se o dia citado realmente não conta.*
 
@@ -105,4 +105,16 @@ Convenções: o **dia do começo não conta** e o do vencimento conta (CPC, art.
 | 82 | `trt21-semana-santa`<br>TRT21 2026: Semana Santa (01 a 03/04) não conta | publicação em 31/03/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT21; modo conservador | **08/04/2026 (quarta-feira)** | 2 sáb./dom.; 01/04 Semana Santa (feriado regimental, art. 279, b); 02/04 Semana Santa (feriado regimental, art. 279, b); 03/04 Semana Santa (feriado regimental, art. 279, b) |
 | 83 | `trt21-pontos-facultativos-junho`<br>TRT21 2026: 04/06 e 05/06 (pontos facultativos) só alertam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT21; modo conservador | **08/06/2026 (segunda-feira)**<br>Alternativa: 10/06/2026 (quarta-feira) | 2 sáb./dom. |
 | 84 | `trt21-dia-da-justica`<br>TRT21 2026: 08/12 (Dia da Justiça) não conta e 07/12 (ponto facultativo) só alerta | publicação em 04/12/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT21; modo conservador | **10/12/2026 (quinta-feira)**<br>Alternativa: 11/12/2026 (sexta-feira) | 2 sáb./dom.; 08/12 Dia da Justiça (feriado regimental, art. 279, c) |
+| 85 | `trt17-carnaval-cinzas`<br>TRT17 2026: Carnaval e Cinzas (suspensão), 16 a 18/02, não contam | publicação em 13/02/2026 (sexta-feira); 5 dias (CLT, dias úteis); TRT17; modo conservador | **25/02/2026 (quarta-feira)** | 4 sáb./dom.; 16/02 Carnaval (Lei 5.010); 17/02 Carnaval (Lei 5.010); 18/02 Quarta-feira de Cinzas (suspensão de atividades e prazos, Ato Presi Secor 45/2025) |
+| 86 | `trt17-nossa-senhora-da-penha`<br>TRT17 2026: 13/04 (Nossa Senhora da Penha, feriado estadual) não conta | publicação em 10/04/2026 (sexta-feira); 2 dias (CLT, dias úteis); TRT17; modo conservador | **15/04/2026 (quarta-feira)** | 2 sáb./dom.; 13/04 Nossa Senhora da Penha (leis estaduais 3.599/1983 e 11.010/2019) |
+| 87 | `trt17-corpus-christi-suspensao`<br>TRT17 2026: 04/06 (Corpus Christi) e 05/06 (suspensão, Ato 45/2025) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT17; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (feriado religioso); 05/06 Suspensão de atividades e prazos (Ato Presi Secor 45/2025) |
+| 88 | `trt17-dia-do-servidor`<br>TRT17 2026: 28/10 e 30/10 só alertam (ponto facultativo) | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT17; modo conservador | **30/10/2026 (sexta-feira)**<br>Alternativa: 04/11/2026 (quarta-feira) | só o dia do começo |
+| 89 | `trt18-cinzas-suspensao`<br>TRT18 2026: 18/02 (suspensão de atividades) não conta | publicação em 17/02/2026 (terça-feira); 2 dias (CLT, dias úteis); TRT18; modo conservador | **20/02/2026 (sexta-feira)** | 18/02 Quarta-feira de Cinzas (suspensão de atividades) |
+| 90 | `trt18-suspensao-abril`<br>TRT18 2026: 20/04 (suspensão) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT18; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão de atividades (véspera de Tiradentes); 21/04 Tiradentes |
+| 91 | `trt18-corpus-christi-suspensao`<br>TRT18 2026: 04/06 (Corpus Christi) e 05/06 (suspensão) não contam | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT18; modo conservador | **10/06/2026 (quarta-feira)** | 2 sáb./dom.; 04/06 Corpus Christi (feriado regimental); 05/06 Suspensão de atividades (após Corpus Christi) |
+| 92 | `trt18-dia-do-servidor`<br>TRT18 2026: 28/10 conta e 30/10 (transferido) não conta | publicação em 27/10/2026 (terça-feira); 3 dias (CLT, dias úteis); TRT18; modo conservador | **03/11/2026 (terça-feira)** | 2 sáb./dom.; 30/10 Dia do Servidor Público (transferido de 28/10, Portaria 358/2026); 02/11 Finados |
+| 93 | `trt13-suspensao-abril`<br>TRT13 2026: 20/04 (suspensão, Ato 39/2026) e 21/04 (Tiradentes) não contam | publicação em 17/04/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT13; modo conservador | **24/04/2026 (sexta-feira)** | 2 sáb./dom.; 20/04 Suspensão do expediente e dos prazos (Ato 39/2026); 21/04 Tiradentes |
+| 94 | `trt13-corpus-christi-suspensao`<br>TRT13 2026: 04/06 (ponto facultativo) só alerta e 05/06 (suspensão) não conta | publicação em 03/06/2026 (quarta-feira); 3 dias (CLT, dias úteis); TRT13; modo conservador | **09/06/2026 (terça-feira)**<br>Alternativa: 10/06/2026 (quarta-feira) | 2 sáb./dom.; 05/06 Suspensão do expediente e dos prazos (Ato 39/2026) |
+| 95 | `trt13-junho-22-e-23`<br>TRT13 2026: 22/06 (suspensão) e 23/06 (feriado transferido) não contam | publicação em 19/06/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT13; modo conservador | **26/06/2026 (sexta-feira)** | 2 sáb./dom.; 22/06 Suspensão do expediente e dos prazos (Ato 39/2026, alterado pelo Ato 75/2026); 23/06 Feriado transferido (Atos 75 e 76/2026) |
+| 96 | `trt13-dezembro-7-conta`<br>TRT13 2026: 07/12 conta: o Ato 75/2026 retirou a suspensão | publicação em 04/12/2026 (sexta-feira); 3 dias (CLT, dias úteis); TRT13; modo conservador | **09/12/2026 (quarta-feira)** | 2 sáb./dom. |
 

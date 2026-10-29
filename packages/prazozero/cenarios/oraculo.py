@@ -176,8 +176,9 @@ FERIADOS_ESTADUAIS_PENDENTES = {
 }
 
 
-for _trt in TRTS:
-    ANOS_VERIFICADOS[_trt] = {2026}
+for _trt, _dados in TRTS.items():
+    if not _dados.get("semSelo"):  # `semSelo`: só parte do calendário foi lida (sem o selo de calendário conferido)
+        ANOS_VERIFICADOS[_trt] = {2026}
 
 
 def calendario(ano: int, trib: str, uf: str, completo: bool):

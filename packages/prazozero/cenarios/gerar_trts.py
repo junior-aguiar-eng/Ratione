@@ -51,7 +51,9 @@ def gerar() -> str:
             )
             if opcoes.get("pf"):
                 pf.setdefault(trib, []).append(ini)
-        cobertura[trib] = {"anos": [ANO], "fontes": [f["chave"] for f in t["fontes"]]}
+        # `semSelo`: só parte do calendário foi lida; os dias lidos valem, mas o tribunal não ganha o selo de calendário conferido
+        if not t.get("semSelo"):
+            cobertura[trib] = {"anos": [ANO], "fontes": [f["chave"] for f in t["fontes"]]}
 
     def j(x):
         return json.dumps(x, ensure_ascii=False, indent=2)
