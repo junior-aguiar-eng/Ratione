@@ -128,6 +128,18 @@ export const FONTES_TRTS = {
     "url": "https://portal.trt11.jus.br/images/arquivos/Calendarios/2026/Calendario_2026_Aprovado_Alterado_ANEXO_RA_214-2026_-_Calendrio_2026.pdf",
     "lido": "PDF de 1 página lido em 28/10/2026 (texto e imagem, onde os dias em vermelho são feriados e em laranja a \"suspensão do expediente RA nº 322/2025\"). Não é o ato normativo: as RAs 322/2025 e 214/2026 não foram lidas. Contam os feriados da legenda: recesso de 01 a 06/01 e de 20 a 31/12, Carnaval em 16 e 17/02, Cinzas em 18/02, Semana Santa de 01 a 03/04, 04/06 (Corpus Christi), 11/08, 28/10 (Dia do Servidor, sem transferência no calendário), 02/11, 08/12 e 15/12 (Instalação do TRT11), e as suspensões de expediente em laranja: 20/04, 05/06 e 10/08. Ficam fora os feriados que caem em fim de semana e os municipais (CPC, art. 1.003, § 6º). A suspensão de prazos de 20/12 a 20/01 (CPC, art. 220) já está no motor. Atos posteriores não lidos",
     "lidoEm": "2026-10-28"
+  },
+  "trt9-calendario-2026": {
+    "ato": "Calendário do Judiciário e dos feriados locais do TRT9 (página institucional, linhas de abrangência Nacional e Estadual de 2026, com as portarias citadas); Portaria Conjunta PRES-CORREG nº 2, de 02/03/2026 (DEJT de 03/03/2026)",
+    "url": "https://www.trt9.jus.br/institucional/calendario.xhtml",
+    "lido": "a página do calendário (lida em 28/10/2026 pelo navegador do app, que executa o JavaScript) e, por inteiro, a Portaria Conjunta PRES-CORREG 2/2026 (suspende expedientes e prazos em 20/04 e 05/06, prorroga os prazos que começam ou terminam nessas datas e não os computa nos prazos em curso). Contam as linhas de abrangência Nacional e Estadual do calendário: recesso de 01 a 06/01 e de 20 a 31/12, suspensão de prazos de 21 a 23/01 (Portaria Presid-Correg 6/2025), Carnaval em 16 e 17/02, Cinzas em 18/02, Semana Santa de 01 a 03/04, 20/04 e 05/06 (Portaria 2/2026), 04/06 (Corpus Christi), 29/06 (suspensão de prazos pelo jogo da Copa, Portaria 7/2026), 14/08 (feriado de 11/08 transferido, Portaria 1/2025), 28/08, 01/09 e 11/09 (suspensões de prazos, Portarias 8, 9 e 10/2026), 30/10 (transferência do Dia do Servidor) e 18/12 (transferência do Dia da Justiça de 08/12). Só a Portaria 2/2026 foi lida; as demais portarias são citadas pela página. Fora: feriados municipais e de órgão julgador (CPC, art. 1.003, § 6º). Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
+  },
+  "trt21-ato-conjunto-4-2026": {
+    "ato": "Ato Conjunto TRT21-GP/CR nº 4/2026, de 20/02/2026 (DEJT nº 4418/2026): fixa o calendário dos feriados nacionais e pontos facultativos de 2026 (revoga o Ato Conjunto nº 17/2025); Ato Conjunto TRT21-GP/CR nº 3/2026, de 20/02/2026: ponto facultativo em 10/08 e 07/12",
+    "url": "https://www.trt21.jus.br/legislacao/atos-normativos/53340",
+    "lido": "inteiro teor do Ato Conjunto 4/2026 (página do tribunal lida em 28/10/2026 pelo navegador do app) e da ementa e texto do Ato Conjunto 3/2026. Contam os feriados regimentais e nacionais: Carnaval em 16 e 17/02, Semana Santa de 01 a 03/04, 11/08 (Dia da Criação dos Cursos Jurídicos) e 08/12 (Dia da Justiça). Os pontos facultativos (18/02, 04/06, 05/06, 26/06, 29/06, 10/08, 30/10, 07/12, 24/12 e 31/12) são só rotulados \"ponto facultativo\" e o ato não diz que não haverá expediente: só alertam. O ato não prevê recesso de 20 a 31/12 (24 e 31/12 são pontos facultativos), então nenhum recesso foi acrescentado além da suspensão do CPC, art. 220, que já está no motor. Atos posteriores não lidos",
+    "lidoEm": "2026-10-28"
   }
 } satisfies Record<string, FonteCalendario>;
 
@@ -3142,6 +3154,366 @@ export const EVENTOS_TRTS: EventoDeTRT[] = [
     "verificacao": "ato_do_tribunal",
     "fundamento": "Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026)",
     "fonte": "trt11-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-01-02",
+    "fim": "2026-01-06",
+    "nome": "Recesso judiciário (Lei 5.010/1966)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-01-21",
+    "fim": "2026-01-23",
+    "nome": "Suspensão dos prazos processuais (Portaria Presid-Correg 6/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 6/2025",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval (Regimento Interno, art. 292, a)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (Regimento Interno, art. 292, b)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa (Regimento Interno, art. 292, a)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-04-20",
+    "fim": "2026-04-20",
+    "nome": "Suspensão de expediente e prazos (Portaria Conjunta 2/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta PRES-CORREG TRT9 2/2026, art. 1º",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (Lei 9.093/1995)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Suspensão de expediente e prazos (Portaria Conjunta 2/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Conjunta PRES-CORREG TRT9 2/2026, art. 1º",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-06-29",
+    "fim": "2026-06-29",
+    "nome": "Suspensão de prazos pelo jogo da Copa (Portaria Presid-Correg 7/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 7/2026",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-08-14",
+    "fim": "2026-08-14",
+    "nome": "Transferência do feriado de 11/08 (Portaria Presid-Correg 1/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 1/2025",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-08-28",
+    "fim": "2026-08-28",
+    "nome": "Suspensão de prazos (Portaria Presid-Correg 8/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 8/2026",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-09-01",
+    "fim": "2026-09-01",
+    "nome": "Suspensão de prazos (Portaria Presid-Correg 9/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 9/2026",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-09-11",
+    "fim": "2026-09-11",
+    "nome": "Suspensão de prazos (Portaria Presid-Correg 10/2026)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 10/2026",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (transferido de 28/10, Portaria Presid-Correg 1/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 1/2025",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-12-18",
+    "fim": "2026-12-18",
+    "nome": "Dia da Justiça (transferido de 08/12, Portaria Presid-Correg 1/2025)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Portaria Presid-Correg TRT9 1/2025",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT9"
+    ],
+    "inicio": "2026-12-20",
+    "fim": "2026-12-31",
+    "nome": "Recesso judiciário (Lei 5.010/1966)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Calendário 2026 do TRT9 e portarias Presid-Correg",
+    "fonte": "trt9-calendario-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-02-16",
+    "fim": "2026-02-17",
+    "nome": "Carnaval (feriado regimental, art. 279, a)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-02-18",
+    "fim": "2026-02-18",
+    "nome": "Quarta-feira de Cinzas (ponto facultativo regimental): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-04-01",
+    "fim": "2026-04-03",
+    "nome": "Semana Santa (feriado regimental, art. 279, b)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-06-04",
+    "fim": "2026-06-04",
+    "nome": "Corpus Christi (ponto facultativo regimental): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-06-05",
+    "fim": "2026-06-05",
+    "nome": "Ponto facultativo (Ato Conjunto 16/2025): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-06-26",
+    "fim": "2026-06-26",
+    "nome": "Dia de São João (ponto facultativo transferido de 24/06): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-06-29",
+    "fim": "2026-06-29",
+    "nome": "Dia de São Pedro (ponto facultativo regimental): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-08-10",
+    "fim": "2026-08-10",
+    "nome": "Ponto facultativo (Ato Conjunto 3/2026): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 3/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-08-11",
+    "fim": "2026-08-11",
+    "nome": "Criação dos Cursos Jurídicos e Dia do Advogado (feriado regimental, art. 279, c)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-10-30",
+    "fim": "2026-10-30",
+    "nome": "Dia do Servidor Público (ponto facultativo transferido de 28/10): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-12-07",
+    "fim": "2026-12-07",
+    "nome": "Ponto facultativo (Ato Conjunto 3/2026): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 3/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-12-08",
+    "fim": "2026-12-08",
+    "nome": "Dia da Justiça (feriado regimental, art. 279, c)",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-12-24",
+    "fim": "2026-12-24",
+    "nome": "Véspera do Natal (ponto facultativo regimental): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
+  },
+  {
+    "tribunais": [
+      "TRT21"
+    ],
+    "inicio": "2026-12-31",
+    "fim": "2026-12-31",
+    "nome": "Véspera do Ano Novo (ponto facultativo regimental): só alerta",
+    "efeito": "nao_util",
+    "verificacao": "ato_do_tribunal",
+    "fundamento": "Ato Conjunto TRT21-GP/CR 4/2026",
+    "fonte": "trt21-ato-conjunto-4-2026"
   }
 ];
 
@@ -3181,6 +3553,18 @@ export const PONTOS_FACULTATIVOS_TRTS: Record<string, string[]> = {
   ],
   "TRT24": [
     "2026-12-07"
+  ],
+  "TRT21": [
+    "2026-02-18",
+    "2026-06-04",
+    "2026-06-05",
+    "2026-06-26",
+    "2026-06-29",
+    "2026-08-10",
+    "2026-10-30",
+    "2026-12-07",
+    "2026-12-24",
+    "2026-12-31"
   ]
 };
 
@@ -3337,6 +3721,22 @@ export const COBERTURA_TRTS: Record<string, { anos: number[]; fontes: Array<keyo
     ],
     "fontes": [
       "trt11-calendario-2026"
+    ]
+  },
+  "TRT9": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt9-calendario-2026"
+    ]
+  },
+  "TRT21": {
+    "anos": [
+      2026
+    ],
+    "fontes": [
+      "trt21-ato-conjunto-4-2026"
     ]
   }
 };
