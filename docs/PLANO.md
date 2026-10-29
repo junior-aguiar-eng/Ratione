@@ -264,7 +264,7 @@ Sem transformar desenvolvimento em homologação interminável: validação auto
 | Módulo | Suíte | Estado |
 |---|---|---|
 | PrazoZero | ≥ 100 cenários com entrada, calendário, resultado esperado, fundamento e autor/data da validação; testes de propriedade (vencimento nunca em dia não útil; monotonicidade); oráculo independente em Python | 121 gerados, **0 validados por jurista** |
-| NormaViva | ~30 normas com histórico conhecido (`data A → redação A`, `data B → redação B`) | parcial: 57 casos em 25 normas, pendentes de validação (F3-07) |
+| NormaViva | ~30 normas com histórico conhecido (`data A → redação A`, `data B → redação B`) | **57 casos em 25 normas, todos validados** pelo revisor (F3-07; conferido em 28/10/2026 em `historico-conhecido.json`) |
 | Argumenta | ~30 decisões públicas com dispositivo, questão, tese principal e fundamentos; avalia-se a **extração estrutural**, não a concordância perfeita da IA | formato definido; decisões a reunir. Testes automáticos da segmentação, da pseudonimização e das tarefas feitos |
 | TeseMap | Grafo pequeno e conhecido (`A cita B`, `B interpreta C`, `D distingue B`), sem depender de terceiros | feito: grafo mínimo do Tema 1.076/STJ (F4-05), com trecho literal conferido e teste no esquema real |
 | Transversal | CI a cada push; E2E dos fluxos críticos; regressão visual nas telas-chave; teste de RLS | CI feito |
