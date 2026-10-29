@@ -1,7 +1,7 @@
 # RATIONE — REVISÃO DOS CENÁRIOS DO PRAZOZERO
 
 > **Gerado por `packages/prazozero/cenarios/oraculo.py`. Não edite este arquivo à mão:** a validação é registrada em `cenarios.json` (campo `validacao`) e este documento é regenerado.
-> Cenários: **415** · validados: **319** · pendentes: **96**
+> Cenários: **415** · validados: **415** · pendentes: **0**
 
 ## Como revisar
 
@@ -3818,7 +3818,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (sem expediente)
 - **Fundamento:** Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 310. `trt7-data-magna-ceara`
 
@@ -3830,7 +3830,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 25/03/2026 Data Magna do Ceará
 - **Fundamento:** Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 311. `trt7-pontos-facultativos-agosto`
 
@@ -3842,7 +3842,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Ponto facultativo (sem expediente, Portaria 64/2026); 11/08/2026 Criação dos Cursos Jurídicos
 - **Fundamento:** Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 312. `trt7-dia-do-servidor`
 
@@ -3854,7 +3854,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Finados
 - **Fundamento:** Portaria TRT7.GP 518/2025, art. 1º, com a Portaria 64/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 313. `trt4-carnaval-cinzas`
 
@@ -3866,7 +3866,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (ponto facultativo: não há contagem de prazos)
 - **Fundamento:** Portaria TRT4 08/2025 (compilada), Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 314. `trt4-pontos-facultativos-abril`
 
@@ -3878,7 +3878,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Ponto facultativo (não há contagem de prazos); 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TRT4 08/2025 (compilada), Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 315. `trt4-pontos-facultativos-agosto`
 
@@ -3890,7 +3890,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Ponto facultativo (não há contagem de prazos); 11/08/2026 Dia do Magistrado e do Advogado (Lei 5.010, art. 62, IV)
 - **Fundamento:** Portaria TRT4 08/2025 (compilada), Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 316. `trt4-dia-do-servidor`
 
@@ -3902,7 +3902,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Finados
 - **Fundamento:** Portaria TRT4 08/2025 (compilada), Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 317. `trt6-carnaval-cinzas`
 
@@ -3914,7 +3914,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (feriado regimental)
 - **Fundamento:** Portaria TRT6-GP 495/2025, art. 1º; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 318. `trt6-data-magna-pernambuco`
 
@@ -3926,7 +3926,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 06/03/2026 Data Magna do Estado de Pernambuco
 - **Fundamento:** Portaria TRT6-GP 495/2025, art. 1º; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 319. `trt6-corpus-christi-sao-joao`
 
@@ -3938,7 +3938,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/06/2026 Corpus Christi (adiamento do feriado religioso); 24/06/2026 São João (feriado estadual e regimental)
 - **Fundamento:** Portaria TRT6-GP 495/2025, art. 1º; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 320. `trt6-dia-do-servidor`
 
@@ -3950,7 +3950,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (adiamento do feriado); 02/11/2026 Finados (Lei 5.010, art. 62, IV)
 - **Fundamento:** Portaria TRT6-GP 495/2025, art. 1º; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 321. `trt15-carnaval-cinzas`
 
@@ -3962,7 +3962,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (suspensão de expediente)
 - **Fundamento:** Portaria GP-CR TRT15 016/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 322. `trt15-suspensoes-abril`
 
@@ -3974,7 +3974,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão de expediente; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria GP-CR TRT15 016/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 323. `trt15-data-magna-sao-paulo`
 
@@ -3986,7 +3986,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 09/07/2026 Data Magna do Estado de São Paulo; 10/07/2026 Suspensão de expediente
 - **Fundamento:** Portaria GP-CR TRT15 016/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 324. `trt15-cursos-juridicos-agosto`
 
@@ -3998,7 +3998,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Suspensão de expediente (feriado dos Cursos Jurídicos transferido de 11/08)
 - **Fundamento:** Portaria GP-CR TRT15 016/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 325. `trt12-carnaval-cinzas`
 
@@ -4010,7 +4010,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154); 17/02/2026 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154); 18/02/2026 Carnaval e Quarta-feira de Cinzas (Regimento Interno, art. 154)
 - **Fundamento:** Portaria SEAP TRT12 191/2024 (republicada), Anexo I; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 326. `trt12-semana-santa`
 
@@ -4022,7 +4022,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 Semana Santa (Regimento Interno, art. 154); 02/04/2026 Semana Santa (Regimento Interno, art. 154); 03/04/2026 Semana Santa (Regimento Interno, art. 154)
 - **Fundamento:** Portaria SEAP TRT12 191/2024 (republicada), Anexo I; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 327. `trt12-agosto-transferido`
 
@@ -4034,7 +4034,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Dia do Magistrado e do Advogado (transferido de 11/08, art. 2º)
 - **Fundamento:** Portaria SEAP TRT12 191/2024 (republicada), Anexo I; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 328. `trt12-dezembro-transferido`
 
@@ -4046,7 +4046,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 Dia da Justiça (transferido de 08/12, art. 2º)
 - **Fundamento:** Portaria SEAP TRT12 191/2024 (republicada), Anexo I; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 329. `trt1-carnaval-cinzas`
 
@@ -4058,7 +4058,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (inclui a Quarta-feira de Cinzas); 17/02/2026 Carnaval (inclui a Quarta-feira de Cinzas); 18/02/2026 Carnaval (inclui a Quarta-feira de Cinzas)
 - **Fundamento:** Ato TRT1 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 330. `trt1-sao-jorge`
 
@@ -4070,7 +4070,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/04/2026 São Jorge (Lei estadual 5.198/2008)
 - **Fundamento:** Ato TRT1 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 331. `trt1-corpus-christi-suspensao`
 
@@ -4082,7 +4082,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (Lei 9.093/1995; Lei estadual 11.002/2025); 05/06/2026 Suspensão do expediente e dos prazos (Ato 56/2026)
 - **Fundamento:** Ato TRT1 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 332. `trt1-agosto-trabalho-a-distancia`
 
@@ -4095,7 +4095,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 11/08/2026 Instituição dos Cursos Jurídicos (Lei 5.010, art. 62, IV)
 - **Fundamento:** Ato TRT1 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 333. `trt2-carnaval-cinzas`
 
@@ -4107,7 +4107,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (suspensão do expediente)
 - **Fundamento:** Portaria GP TRT2 50/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 334. `trt2-suspensoes-abril`
 
@@ -4119,7 +4119,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão do expediente; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria GP TRT2 50/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 335. `trt2-data-magna-sao-paulo`
 
@@ -4131,7 +4131,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 09/07/2026 Data Magna do Estado de São Paulo (Lei estadual 9.497/1997); 10/07/2026 Suspensão do expediente
 - **Fundamento:** Portaria GP TRT2 50/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 336. `trt2-dia-da-justica-antecipado`
 
@@ -4143,7 +4143,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 07/12/2026 Antecipação do Dia da Justiça
 - **Fundamento:** Portaria GP TRT2 50/2025, Anexo; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 337. `trt3-carnaval-cinzas`
 
@@ -4155,7 +4155,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (suspensão de expediente)
 - **Fundamento:** Resolução Administrativa TRT3 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 338. `trt3-tiradentes-suspensao`
 
@@ -4167,7 +4167,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão de expediente (feriado de Tiradentes no dia seguinte); 21/04/2026 Tiradentes e Data Magna de Minas Gerais
 - **Fundamento:** Resolução Administrativa TRT3 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 339. `trt3-cursos-juridicos-14-agosto`
 
@@ -4179,7 +4179,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Resolução Administrativa TRT3 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 340. `trt3-dia-do-servidor`
 
@@ -4191,7 +4191,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (alterado de 28/10); 02/11/2026 Todos os Santos e Finados (Lei 5.010, art. 62, IV)
 - **Fundamento:** Resolução Administrativa TRT3 109/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 341. `trt5-carnaval-cinzas`
 
@@ -4203,7 +4203,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas
 - **Fundamento:** Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 342. `trt5-sao-joao`
 
@@ -4215,7 +4215,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 23/06/2026 Véspera de São João; 24/06/2026 São João
 - **Fundamento:** Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 343. `trt5-julho-2-e-3`
 
@@ -4227,7 +4227,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 02/07/2026 Independência da Bahia; 03/07/2026 Ponto facultativo com suspensão do expediente e dos prazos
 - **Fundamento:** Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 344. `trt5-dia-do-servidor`
 
@@ -4239,7 +4239,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Todos os Santos e Finados
 - **Fundamento:** Resolução Administrativa TRT5 037/2025, Anexo (feriados comuns a toda a região); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 345. `trt8-carnaval-cinzas`
 
@@ -4252,7 +4252,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval
 - **Fundamento:** Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 346. `trt8-suspensao-abril`
 
@@ -4264,7 +4264,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão de expediente (Portaria 1200/2025); 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 347. `trt8-agosto-suspensao`
 
@@ -4276,7 +4276,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 10/08/2026 Suspensão de expediente (Portaria 1200/2025); 11/08/2026 Instalação dos Cursos Jurídicos (Lei 5.010, art. 62, IV)
 - **Fundamento:** Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 348. `trt8-dia-do-servidor`
 
@@ -4288,7 +4288,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Todos os Santos e Finados (Lei 5.010, art. 62, IV)
 - **Fundamento:** Calendário 2026 do TRT8 (Portaria PRESI 1200/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 349. `trt10-carnaval`
 
@@ -4300,7 +4300,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval
 - **Fundamento:** Calendário 2026 do TRT10; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 350. `trt10-corpus-christi`
 
@@ -4312,7 +4312,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi
 - **Fundamento:** Calendário 2026 do TRT10; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 351. `trt10-cursos-juridicos`
 
@@ -4324,7 +4324,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 11/08/2026 Instalação dos Cursos Jurídicos e Dia do Advogado
 - **Fundamento:** Calendário 2026 do TRT10; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 352. `trt10-dia-do-servidor`
 
@@ -4337,7 +4337,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Calendário 2026 do TRT10; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 353. `trt14-carnaval-cinzas`
 
@@ -4349,7 +4349,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Feriado regimental (Carnaval); 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (regimental)
 - **Fundamento:** Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 354. `trt14-semana-santa`
 
@@ -4361,7 +4361,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão); 02/04/2026 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão); 03/04/2026 Semana Santa (Quarta e Quinta Santa regimentais; Sexta-feira da Paixão)
 - **Fundamento:** Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 355. `trt14-corpus-christi-ponto-facultativo`
 
@@ -4373,7 +4373,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi; 05/06/2026 Ponto facultativo (plantão; prazos prorrogados, Portaria GP 550/2026)
 - **Fundamento:** Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 356. `trt14-dia-do-servidor`
 
@@ -4385,7 +4385,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Finados
 - **Fundamento:** Portaria GP TRT14 1640/2025, Anexo Único; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 357. `trt19-carnaval-cinzas`
 
@@ -4397,7 +4397,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Cinzas
 - **Fundamento:** Ato 170/GP/TRT 19ª de 2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 358. `trt19-sao-pedro`
 
@@ -4409,7 +4409,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 29/06/2026 São Pedro (Lei estadual 5.509/1993)
 - **Fundamento:** Ato 170/GP/TRT 19ª de 2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 359. `trt19-emancipacao-alagoas`
 
@@ -4421,7 +4421,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 16/09/2026 Emancipação Política do Estado de Alagoas
 - **Fundamento:** Ato 170/GP/TRT 19ª de 2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 360. `trt19-pontos-facultativos-abril`
 
@@ -4434,7 +4434,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/04/2026 Tiradentes
 - **Fundamento:** Ato 170/GP/TRT 19ª de 2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 361. `trt20-carnaval-cinzas`
 
@@ -4446,7 +4446,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas (feriado regimental)
 - **Fundamento:** Calendário 2026 do TRT20; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 362. `trt20-corpus-christi`
 
@@ -4459,7 +4459,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi
 - **Fundamento:** Calendário 2026 do TRT20; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 363. `trt20-independencia-sergipe`
 
@@ -4471,7 +4471,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 08/07/2026 Independência de Sergipe (Constituição do Estado)
 - **Fundamento:** Calendário 2026 do TRT20; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 364. `trt20-dia-do-servidor`
 
@@ -4483,7 +4483,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (remanejado de 28/10); 02/11/2026 Finados
 - **Fundamento:** Calendário 2026 do TRT20; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 365. `trt23-carnaval-cinzas`
 
@@ -4495,7 +4495,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (regimental); 17/02/2026 Carnaval (regimental); 18/02/2026 Carnaval (regimental)
 - **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 366. `trt23-corpus-christi`
 
@@ -4507,7 +4507,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (regimental)
 - **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 367. `trt23-suspensao-28-outubro`
 
@@ -4519,7 +4519,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 28/10/2026 Suspensão de prazo (Portaria Conjunta 007/2026); 30/10/2026 Dia do Servidor Público (regimental); 02/11/2026 Todos os Santos (regimental) e Finados
 - **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 368. `trt23-dia-da-justica`
 
@@ -4531,7 +4531,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 Dia da Justiça (regimental)
 - **Fundamento:** Portaria Conjunta TRT CORREG GP 007/2026, Calendário 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 369. `trt16-carnaval-cinzas`
 
@@ -4543,7 +4543,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (segunda, terça e quarta-feira); 17/02/2026 Carnaval (segunda, terça e quarta-feira); 18/02/2026 Carnaval (segunda, terça e quarta-feira)
 - **Fundamento:** Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 370. `trt16-ponto-facultativo-abril`
 
@@ -4555,7 +4555,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Ponto facultativo com suspensão do expediente e dos prazos; 21/04/2026 Tiradentes
 - **Fundamento:** Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 371. `trt16-adesao-maranhao`
 
@@ -4567,7 +4567,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 27/07/2026 Adesão do Maranhão à Independência (feriado transferido de 28/07)
 - **Fundamento:** Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 372. `trt16-dia-do-servidor`
 
@@ -4579,7 +4579,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (feriado transferido de 28/10); 02/11/2026 Finados
 - **Fundamento:** Portaria GP/TRT16 681/2025 e Calendário Institucional de 2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 373. `trt24-carnaval-cinzas`
 
@@ -4591,7 +4591,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (Lei 5.010, art. 62, III); 17/02/2026 Carnaval (Lei 5.010, art. 62, III); 18/02/2026 Quarta-feira de Cinzas (suspensão do expediente até as 13h): protrai o dia do começo
 - **Fundamento:** Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 374. `trt24-suspensao-abril`
 
@@ -4603,7 +4603,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão do expediente (Portaria 51/2025); 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 375. `trt24-corpus-christi-suspensao`
 
@@ -4615,7 +4615,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (Lei 9.093/1995; Lei municipal 1.019/1967); 05/06/2026 Suspensão do expediente (Portaria 51/2025)
 - **Fundamento:** Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 376. `trt24-dia-do-servidor`
 
@@ -4627,7 +4627,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Todos os Santos e Finados (Lei 5.010, art. 62, IV)
 - **Fundamento:** Calendário 2026 do TRT24 (Portaria TRT/GP/SGJ 51/2025); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 377. `trt22-carnaval-cinzas`
 
@@ -4639,7 +4639,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (Lei 5.010, art. 62, III); 17/02/2026 Carnaval (Lei 5.010, art. 62, III); 18/02/2026 Quarta-feira de Cinzas (suspensão excepcional das atividades)
 - **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 378. `trt22-semana-institucional-maio`
 
@@ -4651,7 +4651,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 11/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 12/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 13/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 14/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025); 15/05/2026 Semana Institucional (prazos suspensos, Ato GP 185/2025)
 - **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 379. `trt22-dia-do-piaui`
 
@@ -4663,7 +4663,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 19/10/2026 Dia do Piauí (Lei 9.093/1995; Lei estadual 176/1937)
 - **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 380. `trt22-dia-do-servidor`
 
@@ -4675,7 +4675,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10); 02/11/2026 Todos os Santos e Finados
 - **Fundamento:** Ato GP TRT22 184/2025 (calendário 2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 381. `trt11-carnaval-cinzas`
 
@@ -4687,7 +4687,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval; 17/02/2026 Carnaval; 18/02/2026 Quarta-feira de Cinzas
 - **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 382. `trt11-suspensao-abril`
 
@@ -4699,7 +4699,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão do expediente (RA 322/2025); 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 383. `trt11-instalacao-trt11`
 
@@ -4711,7 +4711,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 15/12/2026 Instalação do TRT11
 - **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 384. `trt11-dia-do-servidor`
 
@@ -4723,7 +4723,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 28/10/2026 Dia do Servidor Público
 - **Fundamento:** Calendário 2026 do TRT11 (RA 322/2025, alterada pela RA 214/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 385. `trt9-carnaval-cinzas`
 
@@ -4735,7 +4735,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (Regimento Interno, art. 292, a); 17/02/2026 Carnaval (Regimento Interno, art. 292, a); 18/02/2026 Quarta-feira de Cinzas (Regimento Interno, art. 292, b)
 - **Fundamento:** Calendário 2026 do TRT9 e portarias Presid-Correg; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 386. `trt9-suspensao-21-a-23-janeiro`
 
@@ -4747,7 +4747,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 21/01/2026 Suspensão dos prazos processuais (Portaria Presid-Correg 6/2025); 22/01/2026 Suspensão dos prazos processuais (Portaria Presid-Correg 6/2025); 23/01/2026 Suspensão dos prazos processuais (Portaria Presid-Correg 6/2025)
 - **Fundamento:** Calendário 2026 do TRT9 e portarias Presid-Correg; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 387. `trt9-suspensao-abril`
 
@@ -4759,7 +4759,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão de expediente e prazos (Portaria Conjunta 2/2026); 21/04/2026 Tiradentes
 - **Fundamento:** Calendário 2026 do TRT9 e portarias Presid-Correg; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 388. `trt9-dia-da-justica-transferido`
 
@@ -4771,7 +4771,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Calendário 2026 do TRT9 e portarias Presid-Correg; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 389. `trt21-carnaval-cinzas`
 
@@ -4784,7 +4784,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (feriado regimental, art. 279, a); 17/02/2026 Carnaval (feriado regimental, art. 279, a)
 - **Fundamento:** Ato Conjunto TRT21-GP/CR 4/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 390. `trt21-semana-santa`
 
@@ -4796,7 +4796,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 01/04/2026 Semana Santa (feriado regimental, art. 279, b); 02/04/2026 Semana Santa (feriado regimental, art. 279, b); 03/04/2026 Semana Santa (feriado regimental, art. 279, b)
 - **Fundamento:** Ato Conjunto TRT21-GP/CR 4/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 391. `trt21-pontos-facultativos-junho`
 
@@ -4809,7 +4809,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Ato Conjunto TRT21-GP/CR 4/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 392. `trt21-dia-da-justica`
 
@@ -4822,7 +4822,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 08/12/2026 Dia da Justiça (feriado regimental, art. 279, c)
 - **Fundamento:** Ato Conjunto TRT21-GP/CR 4/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 393. `trt17-carnaval-cinzas`
 
@@ -4834,7 +4834,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 4 sábados/domingos; 16/02/2026 Carnaval (Lei 5.010); 17/02/2026 Carnaval (Lei 5.010); 18/02/2026 Quarta-feira de Cinzas (suspensão de atividades e prazos, Ato Presi Secor 45/2025)
 - **Fundamento:** Ato Presi Secor TRT17 44/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 394. `trt17-nossa-senhora-da-penha`
 
@@ -4846,7 +4846,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 13/04/2026 Nossa Senhora da Penha (leis estaduais 3.599/1983 e 11.010/2019)
 - **Fundamento:** Ato Presi Secor TRT17 44/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 395. `trt17-corpus-christi-suspensao`
 
@@ -4858,7 +4858,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (feriado religioso); 05/06/2026 Suspensão de atividades e prazos (Ato Presi Secor 45/2025)
 - **Fundamento:** Ato Presi Secor TRT17 44/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 396. `trt17-dia-do-servidor`
 
@@ -4871,7 +4871,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** nenhum além do dia do começo
 - **Fundamento:** Ato Presi Secor TRT17 44/2025; CLT, art. 775
 - **Calendário do tribunal verificado:** sim
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 397. `trt18-cinzas-suspensao`
 
@@ -4883,7 +4883,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 18/02/2026 Quarta-feira de Cinzas (suspensão de atividades)
 - **Fundamento:** Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 398. `trt18-suspensao-abril`
 
@@ -4895,7 +4895,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão de atividades (véspera de Tiradentes); 21/04/2026 Tiradentes
 - **Fundamento:** Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 399. `trt18-corpus-christi-suspensao`
 
@@ -4907,7 +4907,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 04/06/2026 Corpus Christi (feriado regimental); 05/06/2026 Suspensão de atividades (após Corpus Christi)
 - **Fundamento:** Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 400. `trt18-dia-do-servidor`
 
@@ -4919,7 +4919,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 30/10/2026 Dia do Servidor Público (transferido de 28/10, Portaria 358/2026); 02/11/2026 Finados
 - **Fundamento:** Portaria TRT 18ª GP/DG 2329/2025 e Portaria 358/2026; CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 401. `trt13-suspensao-abril`
 
@@ -4931,7 +4931,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 20/04/2026 Suspensão do expediente e dos prazos (Ato 39/2026); 21/04/2026 Tiradentes
 - **Fundamento:** Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 402. `trt13-corpus-christi-suspensao`
 
@@ -4944,7 +4944,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 05/06/2026 Suspensão do expediente e dos prazos (Ato 39/2026)
 - **Fundamento:** Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 403. `trt13-junho-22-e-23`
 
@@ -4956,7 +4956,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos; 22/06/2026 Suspensão do expediente e dos prazos (Ato 39/2026, alterado pelo Ato 75/2026); 23/06/2026 Feriado transferido (Atos 75 e 76/2026)
 - **Fundamento:** Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ### 404. `trt13-dezembro-7-conta`
 
@@ -4968,7 +4968,7 @@ Para cada cenário: refaça a contagem com a lei na mão e confira (1) o **funda
 - **Como foi contado (dias excluídos):** 2 sábados/domingos
 - **Fundamento:** Ato TRT13.SGP 39/2026 (alterado pelos Atos 75 e 76/2026); CLT, art. 775
 - **Calendário do tribunal verificado:** não
-- **Validação jurídica:** ☐ confere  ☐ diverge · Observações: ______________________ · Revisor: __________ · Data: ___/___/____
+- **Validação jurídica:** ☑ validado por José Bonifácio de Aguiar Santos Júnior (analista validador jurídico) em 2026-10-28
 
 ## Intimação eletrônica
 
