@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Bookmark, CalendarPlus, Check, Copy, FileDown } from 'lucide-react';
 import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
+import LigacoesDoPrazo from '../../components/LigacoesDoPrazo';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
@@ -12,7 +13,7 @@ import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import { Button } from '@/components/ui/button';
 
-export default function ResultadoMaterial({ resultado, titulo, tribunalId, urlSalvo }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string; urlSalvo: string }) {
+export default function ResultadoMaterial({ resultado, titulo, tribunalId, atoId, urlSalvo }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string; atoId: string; urlSalvo: string }) {
   const [copiado, setCopiado] = useState(false);
   const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
   const salvo = estadoSalvo === 'salvo';
@@ -137,6 +138,8 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId, urlSa
           {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
         </Button>
       </div>
+
+      <LigacoesDoPrazo prazoId={atoId} em={resultado.dataInicio} />
 
       <AvisoPorEmail tituloPadrao={`${titulo} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataLimite} />
     </section>
