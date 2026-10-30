@@ -1,0 +1,284 @@
+{
+  "casoId": "trt4-rot-0022282-trab",
+  "paragrafos": 91,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso do reclamante não conhecido quanto ao benefício da justiça gratuita e provido em parte para acrescer multa do art. 477, §8º, da CLT, indenização por dano moral de R$ 2.000,00 e honorários assistenciais de 15%.",
+      "resumo": "O reclamante recorreu da sentença quanto às verbas rescisórias, plus salarial, insalubridade, dano moral e honorários assistenciais. A Turma não conheceu do pedido de justiça gratuita, por falta de interesse, e negou os pedidos de plus salarial e insalubridade. Deu provimento parcial para deferir a multa do art. 477, §8º, o dano moral pelo atraso salarial e os honorários assistenciais.",
+      "pedidos": [
+        {
+          "descricao": "Ordem de consignação das verbas rescisórias e condenação às multas dos arts. 467 e 477 da CLT (multa do art. 467 indeferida; multa do art. 477, §8º, deferida).",
+          "paragrafos": [
+            33,
+            36,
+            37,
+            38,
+            39
+          ]
+        },
+        {
+          "descricao": "Pagamento de plus salarial por atividades diversas das de vigia (atendimento telefônico, cancela e transporte de equipamentos). Indeferido.",
+          "paragrafos": [
+            41,
+            48,
+            49,
+            50,
+            54,
+            55
+          ]
+        },
+        {
+          "descricao": "Adicional de insalubridade por rondas em dias chuvosos e umidade. Indeferido.",
+          "paragrafos": [
+            57,
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "descricao": "Indenização por dano moral decorrente do atraso no pagamento dos salários. Deferida no valor de R$ 2.000,00.",
+          "paragrafos": [
+            65,
+            66,
+            74,
+            75,
+            79
+          ]
+        },
+        {
+          "descricao": "Honorários assistenciais de 15% do valor bruto da condenação. Deferidos.",
+          "paragrafos": [
+            81,
+            82,
+            83
+          ]
+        },
+        {
+          "descricao": "Aplicação do art. 790, §3º, da CLT (benefício da justiça gratuita). Não conhecido por falta de interesse.",
+          "paragrafos": [
+            28,
+            29,
+            30
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 11
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 12,
+          "fim": 13
+        },
+        {
+          "tipo": "outro",
+          "inicio": 14,
+          "fim": 15
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 16,
+          "fim": 18
+        },
+        {
+          "tipo": "outro",
+          "inicio": 19,
+          "fim": 20
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 21,
+          "fim": 24
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 25,
+          "fim": 30
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 31,
+          "fim": 83
+        },
+        {
+          "tipo": "outro",
+          "inicio": 84,
+          "fim": 91
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8801,
+      "output_tokens": 2157,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001959
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O reclamante tem interesse em recorrer quanto ao pedido de aplicação do art. 790, §3º, da CLT (justiça gratuita)?",
+          "conclusao": "Não conheceu do recurso no ponto, pois o benefício requerido é exatamente o já concedido em sentença, faltando interesse recursal.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "paragrafosConclusao": [
+            16,
+            30
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "São devidas as multas dos arts. 467 e 477 da CLT pelo não pagamento das verbas rescisórias?",
+          "conclusao": "A multa do art. 467 não é devida por haver controvérsia sobre a rescisão; a multa do art. 477, §8º, é devida por atraso no pagamento das verbas rescisórias.",
+          "resultado": "parcialmente_acolhida",
+          "paragrafos": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "paragrafosConclusao": [
+            39
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "As atividades de atendimento telefônico e de transporte de equipamentos geram direito a plus salarial?",
+          "conclusao": "Não geram plus salarial, pois são compatíveis com a condição pessoal do reclamante e não houve alteração objetiva do contrato.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "paragrafosConclusao": [
+            51,
+            55
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "A realização de rondas em dias de chuva enseja adicional de insalubridade por umidade excessiva?",
+          "conclusao": "Não enseja, pois não houve trabalho habitual em local alagado ou encharcado, como exige o Anexo 10 da NR-15.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "paragrafosConclusao": [
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "O atraso reiterado no pagamento de salários gera direito à indenização por dano moral?",
+          "conclusao": "Sim, o dano é presumido e a indenização por dano moral foi fixada em R$ 2.000,00.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "paragrafosConclusao": [
+            75,
+            79
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "acessoria",
+          "enunciado": "É devida a condenação da reclamada em honorários assistenciais mesmo sem assistência de advogado credenciado pelo sindicato?",
+          "conclusao": "Sim, concedida a justiça gratuita, são devidos honorários assistenciais de 15% do valor bruto da condenação.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            80,
+            81,
+            82,
+            83
+          ],
+          "paragrafosConclusao": [
+            83
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9340,
+      "output_tokens": 1594,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001731
+  },
+  "fundamentos": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato (fundamentos: Too big: expected array to have <=30 items)",
+    "uso": {
+      "input_tokens": 9664,
+      "output_tokens": 3122,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002527
+  }
+}

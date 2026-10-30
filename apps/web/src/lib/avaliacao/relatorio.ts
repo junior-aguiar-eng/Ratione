@@ -13,6 +13,28 @@ export interface EntradaDoRelatorio {
   resultados: readonly ResultadoDoCaso[];
 }
 
+const seg = (ms: number) => `${(ms / 1000).toFixed(1).replace('.', ',')} s`;
+
+/** Tempo médio e máximo das chamadas por etapa (e o caso mais lento), base para decidir o tempo máximo por chamada. */
+function linhasDeTempo(resultados: readonly ResultadoDoCaso[]): string[] {
+  const etapas: Array<[string, (r: ResultadoDoCaso) => { duracaoMs?: number }]> = [
+    ['estrutura', r => r.estrutura],
+    ['questões', r => r.questoes],
+    ['fundamentos', r => r.fundamentos]
+  ];
+  const linhas: string[] = [];
+  for (const [nome, de] of etapas) {
+    const medidas = resultados.flatMap(r => (de(r).duracaoMs !== undefined ? [{ id: r.casoId, ms: de(r).duracaoMs as number }] : []));
+    if (medidas.length === 0) continue;
+    const media = medidas.reduce((s, m) => s + m.ms, 0) / medidas.length;
+    const mais = medidas.reduce((a, b) => (b.ms > a.ms ? b : a));
+    linhas.push(`| ${nome} | ${medidas.length} | ${seg(media)} | ${seg(mais.ms)} (${mais.id}) |`);
+  }
+  return linhas.length === 0
+    ? ['Sem medição de tempo nesta rodada (ela é anterior ao registro da duração).']
+    : ['| Etapa | Chamadas | Média | Máximo (caso) |', '|---|---|---|---|', ...linhas];
+}
+
 /** Relatório em Markdown de uma rodada. Só os casos enviáveis e com gabarito validado entram nas taxas. */
 export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDoRelatorio): string {
   const porId = new Map(casos.map(c => [c.id, c]));
@@ -46,6 +68,10 @@ export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDo
     '## Custo',
     '',
     `Total da rodada: **${usd(chamadas.custoUsd)}** · médio por decisão avaliada: **${usd(custoMedio)}** (três etapas, preço do \`politica.ts\`).`,
+    '',
+    '## Tempo por etapa',
+    '',
+    ...linhasDeTempo(resultados),
     '',
     '## Por decisão',
     '',

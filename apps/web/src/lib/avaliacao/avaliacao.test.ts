@@ -87,6 +87,14 @@ describe('F5-05: executor do caso', () => {
     assert.deepEqual(contarChamadas([r]), { chamadas: 2, descartadas: 2, custoUsd: contarChamadas([r]).custoUsd });
   });
 
+  it('o motivo do descarte traz a regra do esquema que recusou a saída, e cada etapa que rodou traz a duração', async () => {
+    const r = await executarCaso(CASO, async () => ({ tipo: 'ok', json: '{"lixo":true}', uso: { input_tokens: 10, output_tokens: 5 } }));
+    assert.match(r.estrutura.motivo ?? '', /^fora do formato \(.+\)/);
+    assert.equal(typeof r.estrutura.duracaoMs, 'number');
+    assert.equal(typeof r.questoes.duracaoMs, 'number');
+    assert.equal(r.fundamentos.duracaoMs, undefined); // não rodou
+  });
+
   it('parágrafo inexistente na saída é descartado pela conferência da própria tarefa', async () => {
     const r = await executarCaso(CASO, async p =>
       Object.keys(p.esquema.properties).includes('secoes')

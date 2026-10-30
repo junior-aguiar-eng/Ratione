@@ -1,0 +1,250 @@
+{
+  "casoId": "stj-resp-1144810-adm",
+  "paragrafos": 60,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial negado (improvido), por unanimidade da Primeira Seção.",
+      "resumo": "A União recorreu de acórdão do TRF da 1ª Região que afastou a exigência de pagamento de multas e despesas para liberar veículo retido. O STJ negou provimento ao recurso. Decidiu que a liberação do veículo retido por transporte irregular de passageiros (art. 231, VIII, do CTB) não está condicionada ao pagamento de multas e despesas.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão recorrido para admitir a exigência de pagamento de multa e despesas de transbordo como condição para liberar o veículo apreendido (arts. 231, VIII, e 262, § 2º, do CTB e art. 85, § 3º, do Decreto 2521/98).",
+          "paragrafos": [
+            17
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 5
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 6,
+          "fim": 10
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 16,
+          "fim": 18
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 26,
+          "fim": 28
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 29,
+          "fim": 36
+        },
+        {
+          "tipo": "outro",
+          "inicio": 37,
+          "fim": 60
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6284,
+      "output_tokens": 1917,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001587
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial pode ser conhecido quanto ao art. 262, § 2º, do CTB, diante da falta de prequestionamento?",
+          "conclusao": "Não conhecido o recurso quanto ao art. 262, § 2º, do CTB, por ausência de prequestionamento, aplicando por analogia a Súmula 282 do STF.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            28
+          ],
+          "paragrafosConclusao": [
+            28
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A liberação de veículo retido por transporte irregular de passageiros (art. 231, VIII, do CTB) pode ser condicionada ao pagamento de multas e despesas?",
+          "conclusao": "A liberação do veículo retido com base no art. 231, VIII, do CTB independe do recolhimento de multas e demais despesas.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            27,
+            29,
+            30,
+            31,
+            32,
+            33
+          ],
+          "paragrafosConclusao": [
+            29,
+            33
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "O art. 85, § 3º, do Decreto 2.521/98 autoriza exigir o pagamento de multas e despesas para liberar o veículo retido?",
+          "conclusao": "Não autoriza. O dispositivo do decreto não se aplica à retenção, pois a medida não está associada à previsão de pagamento prévio de multas e despesas; nega-se provimento ao recurso.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            34,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6823,
+      "output_tokens": 1226,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001295
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acórdão recorrido não emitiu juízo sobre a matéria do art. 262, § 2º, do CTB, e não houve embargos de declaração para prequestioná-la.",
+          "citacao": "",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Ausência de prequestionamento impede o conhecimento do recurso quanto ao dispositivo, por analogia à Súmula 282 do STF.",
+          "citacao": "Súmula 282 do STF",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Orientação consolidada do STJ: a liberação do veículo retido com base no art. 231, VIII, do CTB independe do recolhimento de multas e despesas.",
+          "citacao": "AgRg no REsp 1129844/RJ, 1ª T., Min. Hamilton Carvalhido, DJe 02/12/2009",
+          "paragrafos": [
+            29,
+            30
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "O STJ entendeu ilegítimo condicionar a liberação de veículo retido por transporte irregular de passageiros ao pagamento de multa.",
+          "citacao": "AgRg no REsp 1027557/RJ, 2ª T., Min. Humberto Martins, DJe 26/02/2009",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O art. 231, VIII, do CTB é a infração que fundamenta a retenção do veículo por transporte irregular de passageiros.",
+          "citacao": "CTB, art. 231, VIII",
+          "paragrafos": [
+            27,
+            29
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O caso trata de liberação por transporte irregular de passageiros, distinto da remoção do REsp 1104775/RS, que cuidava de veículo sem licenciamento.",
+          "citacao": "",
+          "paragrafos": [
+            27
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Citado como precedente de tema distinto (remoção de veículo sem licenciamento); o texto o distingue e não o aplica como fundamento da liberação.",
+          "citacao": "REsp 1104775/RS",
+          "paragrafos": [
+            27
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O Decreto 2.521/98 regulamenta a Lei 8.987/95 e não pode inovar para restringir o direito de propriedade, sob pena de violar o art. 5º, II, da CF.",
+          "citacao": "Constituição Federal, art. 5º, II; Lei 8.987/95; Decreto 2.521/98, art. 85, § 3º",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Retenção administrativa não se confunde com apreensão; na retenção não há previsão de pagamento prévio de multas e despesas para liberação.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "No caso da apreensão, o art. 262, § 2º, do CTB prevê a possibilidade de pagamento prévio de multas e despesas.",
+          "citacao": "CTB, art. 262, § 2º",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "doutrina",
+          "descricao": "Parecer do Ministério Público Federal, transcrito no voto, como fundamento quanto ao art. 85, § 3º, do Decreto 2.521/98.",
+          "citacao": "Parecer do Ministério Público Federal",
+          "paragrafos": [
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Nega-se provimento ao recurso especial, mantendo a decisão recorrida que afastou a exigência de pagamento para liberar o veículo.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6918,
+      "output_tokens": 1344,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001364
+  }
+}

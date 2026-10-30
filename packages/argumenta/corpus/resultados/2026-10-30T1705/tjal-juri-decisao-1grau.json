@@ -1,0 +1,271 @@
+{
+  "casoId": "tjal-juri-decisao-1grau",
+  "paragrafos": 29,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "decisao_interlocutoria",
+      "resultado": "Pedidos de transferência do acusado e de permissão de saída indeferidos; a permissão de saída cabe ao Comandante da Polícia Militar, segundo o juízo.",
+      "resumo": "O Comando da Polícia Militar pediu a transferência do acusado para o presídio da capital e autorização para sua saída para exames médicos e vacinação, e a Defesa pediu exames médicos e a manutenção do acusado na sala atual. O juízo indeferiu a transferência, com base na Lei Estadual n. 8.499/2021, e indeferiu a permissão de saída por não ser a autoridade competente, nos termos do art. 120 da LEP.",
+      "pedidos": [
+        {
+          "descricao": "Transferência do acusado para o presídio da capital, requerida pelo Comando da Polícia Militar.",
+          "paragrafos": [
+            7,
+            12,
+            17,
+            25
+          ]
+        },
+        {
+          "descricao": "Permissão para saída do acusado para procedimentos médicos e vacinação, solicitada pelo Comandante da Polícia Militar.",
+          "paragrafos": [
+            9,
+            18,
+            19,
+            25
+          ]
+        },
+        {
+          "descricao": "Realização de exames médicos, requerida pela Defesa.",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "descricao": "Manutenção do acusado na sala em que se encontra, requerida pela Defesa.",
+          "paragrafos": [
+            8
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 5
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 6,
+          "fim": 10
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 11,
+          "fim": 24
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 25,
+          "fim": 26
+        },
+        {
+          "tipo": "outro",
+          "inicio": 27,
+          "fim": 29
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3332,
+      "output_tokens": 1352,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001009
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A PM pode ser autorizada a transferir o acusado para presídio da capital, em sala de Estado Maior?",
+          "conclusao": "O pedido foi indeferido. A Lei Estadual 8.499/2021 exige que a sala de Estado Maior fique fora de qualquer unidade prisional, por isso não cabe a transferência.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            25
+          ],
+          "paragrafosConclusao": [
+            17,
+            25
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O juízo pode autorizar a saída do acusado para exames médicos e vacinação?",
+          "conclusao": "O juízo se considerou incompetente para autorizar a saída. Segundo o art. 120 da LEP, a competência é do responsável pelo estabelecimento, por isso o pedido foi indeferido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            6,
+            9,
+            10,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26
+          ],
+          "paragrafosConclusao": [
+            19,
+            25
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3871,
+      "output_tokens": 664,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000719
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acusado está em sala similar à de Estado Maior, na Escola da Polícia Militar, sob responsabilidade do Comandante da PM.",
+          "citacao": "",
+          "paragrafos": [
+            7
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O Comandante da PM pediu a transferência para o presídio da capital, alegando que lá há módulo de Estado Maior e atendimento médico necessário.",
+          "citacao": "",
+          "paragrafos": [
+            7
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O Ministério Público opinou pela não transferência, pois a sala de Estado Maior não pode ficar dentro de unidade ou estabelecimento prisional.",
+          "citacao": "",
+          "paragrafos": [
+            10
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei Estadual define sala de Estado Maior como sala sem grades, fora de qualquer unidade ou estabelecimento prisional.",
+          "citacao": "Lei Estadual n. 8.499/2021, art. 1º",
+          "paragrafos": [
+            13,
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A lei estadual remete ao direito de sala de Estado Maior previsto no Estatuto da Advocacia para advogados.",
+          "citacao": "Lei Federal nº 8.906/1994, art. 7º, V",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Como a sala de Estado Maior não pode ficar em unidade prisional, o estabelecimento de reclusão do acusado não pode ser prisional; por isso o pedido de transferência é indeferido.",
+          "citacao": "",
+          "paragrafos": [
+            16,
+            17,
+            25
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A Defesa pediu a realização de exames médicos para o acusado.",
+          "citacao": "",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O Comandante da PM pediu permissão para que o acusado saia do estabelecimento para procedimentos médicos e vacinação.",
+          "citacao": "",
+          "paragrafos": [
+            9
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O Ministério Público não vislumbrou óbice à saída do acusado para exames médicos e vacinação contra a COVID.",
+          "citacao": "",
+          "paragrafos": [
+            10
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O juízo não vê óbice à concessão da saída, mas entende que a análise não cabe ao juízo e sim à autoridade do estabelecimento onde o preso está.",
+          "citacao": "",
+          "paragrafos": [
+            18,
+            19
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A LEP atribui ao responsável pela administração do local de recolhimento a competência para autorizar a saída de presos provisórios para tratamento médico.",
+          "citacao": "LEP, art. 120",
+          "paragrafos": [
+            20,
+            21,
+            23,
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O juízo se considera sem competência para autorizar a saída; o pedido é indeferido e a análise cabe ao Comandante da PM.",
+          "citacao": "",
+          "paragrafos": [
+            25
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3823,
+      "output_tokens": 1142,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000953
+  }
+}

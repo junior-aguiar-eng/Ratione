@@ -22,6 +22,8 @@ export interface Etapa<T> {
   motivo?: string;
   uso?: Uso;
   custoUsd: number;
+  /** Tempo da chamada ao modelo, em ms (medido na rodada; base para decidir o tempo máximo por chamada). Ausente se a etapa não rodou. */
+  duracaoMs?: number;
 }
 
 export interface ResultadoDoCaso {
@@ -37,8 +39,14 @@ export interface ResultadoDoCaso {
 const ENTRADA_RECUSADA = 'entrada recusada pela tarefa';
 const vazia = <T>(motivo?: string): Etapa<T> => ({ estado: 'nao_rodou', saida: null, motivo, custoUsd: 0 });
 
-/** Roda uma tarefa do catálogo sobre a entrada, sem cota nem registro. */
+/** Roda uma tarefa do catálogo sobre a entrada, sem cota nem registro, e mede quanto a etapa levou. */
 async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo): Promise<Etapa<T>> {
+  const inicio = Date.now();
+  const e = await etapaSemTempo<T>(t, entrada, chamar);
+  return e.estado === 'nao_rodou' ? e : { ...e, duracaoMs: Date.now() - inicio };
+}
+
+async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo): Promise<Etapa<T>> {
   const valida = t.validarEntrada(entrada);
   if (valida === null) return vazia<T>(ENTRADA_RECUSADA);
   const contexto = await t.montarContexto(valida, { lerDispositivo: async () => null });

@@ -1,0 +1,443 @@
+{
+  "casoId": "tst-airr-1001572-trab",
+  "paragrafos": 116,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Agravo de instrumento a que se nega provimento, por ausência de transcendência da causa.",
+      "resumo": "O agravante pleiteou a responsabilização subsidiária das 2ª a 7ª reclamadas, alegando prestação de serviços comprovada e contrariedade à Súmula 331, IV, do TST. O Tribunal entendeu que não há transcendência e que o reclamante não comprovou a prestação de serviços em favor das tomadoras, encargo que lhe cabia. O agravo foi negado por unanimidade.",
+      "pedidos": [
+        {
+          "descricao": "Responsabilização subsidiária das 2ª a 7ª reclamadas pela prestação de serviços comprovada por prova oral e documental.",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "descricao": "Reforma do despacho denegatório do recurso de revista por suposta contrariedade à Súmula 331, IV, do TST.",
+          "paragrafos": [
+            38,
+            40
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 7
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 8,
+          "fim": 9
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 10,
+          "fim": 24
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 25,
+          "fim": 30
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 31,
+          "fim": 108
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 109,
+          "fim": 112
+        },
+        {
+          "tipo": "outro",
+          "inicio": 113,
+          "fim": 116
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8876,
+      "output_tokens": 1930,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001853
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O agravo de instrumento preenche os pressupostos de admissibilidade para ser conhecido?",
+          "conclusao": "O agravo de instrumento foi conhecido, por estarem presentes os pressupostos de admissibilidade.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            32,
+            33
+          ],
+          "paragrafosConclusao": [
+            33
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "A pretensão de responsabilização subsidiária exige reexame de fatos e provas, vedado pela Súmula 126 do TST?",
+          "conclusao": "Sim. Acolher a pretensão implicaria revisão de fatos e provas, o que é vedado pela Súmula 126 do TST.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            44,
+            45,
+            69,
+            101,
+            102,
+            103
+          ],
+          "paragrafosConclusao": [
+            45,
+            101
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "preliminar",
+          "enunciado": "A causa apresenta transcendência econômica, política, social ou jurídica para o exame do recurso de revista?",
+          "conclusao": "Não. A causa não apresenta transcendência, por não atender a nenhum dos indicadores do artigo 896-A da CLT, e o agravo foi desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            55,
+            56,
+            62,
+            63,
+            64,
+            66,
+            67,
+            104,
+            105,
+            106,
+            107,
+            108
+          ],
+          "paragrafosConclusao": [
+            108
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "As 3ª a 7ª reclamadas respondem subsidiariamente, considerando o ônus de provar a prestação de serviços em seu favor?",
+          "conclusao": "Não. Cabia ao reclamante provar a prestação de serviços em favor das reclamadas, encargo do qual não se desincumbiu; por isso não há responsabilidade subsidiária.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            44,
+            68,
+            69,
+            71,
+            72,
+            75,
+            76,
+            77,
+            79,
+            80,
+            82,
+            84,
+            86,
+            89,
+            91,
+            93,
+            99
+          ],
+          "paragrafosConclusao": [
+            80,
+            82
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9415,
+      "output_tokens": 2394,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002139
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Agravo conhecido por estarem presentes os pressupostos de admissibilidade.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Recurso de revista interposto sob a vigência da Lei 13.467/2017; a parte atendeu o pressuposto do § 1º-A do art. 896.",
+          "citacao": "CLT, art. 896, § 1º-A",
+          "paragrafos": [
+            49,
+            50,
+            52,
+            53,
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Exame prévio de transcendência do recurso de revista, com indicadores exemplificativos.",
+          "citacao": "CLT, art. 896-A",
+          "paragrafos": [
+            54,
+            55,
+            56,
+            57,
+            62
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Vedação ao reexame de fatos e provas em recurso de revista; a pretensão implicaria revisão do quadro fático-probatório.",
+          "citacao": "Súmula 126 do TST",
+          "paragrafos": [
+            45,
+            69,
+            101,
+            102
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O recorrente pretende contexto fático diverso do registrado no acórdão regional, o que impõe reexame de provas.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            101
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Responsabilidade subsidiária da tomadora de serviços conforme a Súmula 331 do TST, cuja aplicação foi afastada por ausência de prova da prestação de serviços.",
+          "citacao": "Súmula 331 do C. TST",
+          "paragrafos": [
+            71,
+            80
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A segunda reclamada já foi condenada subsidiariamente em primeira instância sem recurso ordinário, o que afasta interesse recursal quanto a ela.",
+          "citacao": "",
+          "paragrafos": [
+            68
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Transcendência econômica afastada: o valor das verbas, R$ 8.000,00, não ultrapassa o limite de referência do art. 852-A da CLT.",
+          "citacao": "CLT, art. 852-A",
+          "paragrafos": [
+            64,
+            65,
+            66
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Transcendência política afastada: não há contrariedade à súmula, OJ, precedente obrigatório ou divergência atual entre Turmas.",
+          "citacao": "",
+          "paragrafos": [
+            67,
+            101,
+            104,
+            108
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Transcendência social inaplicável: aplica-se apenas a recurso do empregado postulando direito social constitucionalmente assegurado, o que não é o caso.",
+          "citacao": "CLT, art. 896-A, § 1º, III",
+          "paragrafos": [
+            105
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Transcendência jurídica afastada: não há questão nova sobre a legislação trabalhista nem violação frontal à Constituição.",
+          "citacao": "",
+          "paragrafos": [
+            106,
+            107
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Indicador de transcendência política: desrespeito à jurisprudência sumulada do TST ou do STF.",
+          "citacao": "CLT, art. 896-A, § 1º, II",
+          "paragrafos": [
+            59,
+            67
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Precedentes da própria Turma citados para afastar a transcendência política; o texto não descreve a tese.",
+          "citacao": "TST-Ag-AIRR-1226-02.2017.5.12.0029, Relator Ministro Evandro Pereira Valadão Lopes",
+          "paragrafos": [
+            104
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Precedente citado para afastar a transcendência política; o texto não descreve a tese.",
+          "citacao": "TST-Ag-AIRR-10444-47.2014.5.15.0103, Relator Ministro Evandro Pereira Valadão Lopes",
+          "paragrafos": [
+            104
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Precedente da 7ª Turma citado para a transcendência jurídica, que abrange afronta a direitos e garantias constitucionais de especial relevância; o texto não descreve a tese do caso.",
+          "citacao": "TST-AIRR-21132-48.2017-5.04.0304, Relator Ministro Cláudio Mascarenhas Brandão",
+          "paragrafos": [
+            106
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Agravo desprovido por não atendido o pressuposto intrínseco da transcendência da causa.",
+          "citacao": "",
+          "paragrafos": [
+            108,
+            112
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Ônus da prova do fato constitutivo cabe ao reclamante, conforme art. 818 da CLT e art. 373, I, do CPC.",
+          "citacao": "CLT, art. 818; CPC, art. 373, I",
+          "paragrafos": [
+            75,
+            76,
+            82
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Reclamante não produziu prova de que laborou em favor das reclamadas; as reclamadas negaram contrato e prestação de serviços.",
+          "citacao": "",
+          "paragrafos": [
+            72,
+            74,
+            77,
+            79
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não há comprovação de que as 3ª a 7ª reclamadas contrataram a 1ª reclamada, logo não se evidencia tomadora dos serviços.",
+          "citacao": "",
+          "paragrafos": [
+            79,
+            80
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente da 1ª Turma (RR-812-87.2012.5.05.0024): cabe ao reclamante provar a prestação de serviços à tomadora; contrato entre reclamadas não basta para responsabilidade subsidiária.",
+          "citacao": "RR-812-87.2012.5.05.0024, Relator Ministro Walmir Oliveira da Costa, 1ª Turma",
+          "paragrafos": [
+            84
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente (RR-3-22.2010.5.05.0007) no sentido de que a responsabilidade subsidiária pressupõe prova da prestação de serviços, cujo ônus é do autor quando negada na contestação.",
+          "citacao": "RR-3-22.2010.5.05.0007, Relatora Ministra Delaíde Miranda Arantes, 2ª Turma",
+          "paragrafos": [
+            86,
+            87
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente (E-RR 737188-75.2001.5.17.5555) no sentido de que o ônus de provar a prestação de serviços é do autor e não se exige do tomador prova negativa.",
+          "citacao": "RR 737188-75.2001.5.17.5555, Relator Ministro Lelio Bentes Corrêa, SDI-I",
+          "paragrafos": [
+            89
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente (RR-503-59.2014.5.05.0036) no sentido de que é do empregado o encargo de provar a prestação de serviços à tomadora.",
+          "citacao": "RR-503-59.2014.5.05.0036, Relator Ministro Aloysio Corrêa da Veiga, 6ª Turma",
+          "paragrafos": [
+            91
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente (RR de 2018) no sentido de que, negada a prestação pela tomadora, o reclamante deve comprovar o labor; sem prova, não há responsabilidade subsidiária.",
+          "citacao": "RR-[PROCESSO_2], Relator Ministro Alexandre de Souza Agra Belmonte, 3ª Turma",
+          "paragrafos": [
+            93,
+            94
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Precedente (ARR-21822-39.2015.5.04.0016) no sentido de que incumbe ao empregado comprovar a prestação de serviços em benefício da tomadora, diante da negativa em contestação.",
+          "citacao": "ARR-21822-39.2015.5.04.0016, Relatora Ministra Maria Cristina Irigoyen Peduzzi, 8ª Turma",
+          "paragrafos": [
+            99,
+            100
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9557,
+      "output_tokens": 2912,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002412
+  }
+}

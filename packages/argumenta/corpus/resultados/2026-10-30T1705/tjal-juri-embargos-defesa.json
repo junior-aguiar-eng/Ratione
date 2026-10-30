@@ -1,0 +1,92 @@
+{
+  "casoId": "tjal-juri-embargos-defesa",
+  "paragrafos": 62,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Não se trata de decisão judicial, e sim de embargos de declaração opostos pela defesa, que pede o reconhecimento de omissões e contradições no acórdão.",
+      "resumo": "A defesa pede que a circunstância judicial das consequências do crime seja neutralizada, que seja reconhecido bis in idem entre a agravante de crime contra cônjuge e a qualificadora de feminicídio, e que a redução pela tentativa seja aplicada no patamar máximo. Os embargos são fundamentados em omissões e contradições atribuídas ao acórdão.",
+      "pedidos": [
+        {
+          "descricao": "Neutralizar a circunstância judicial das consequências do crime.",
+          "paragrafos": [
+            5,
+            6,
+            14,
+            58
+          ]
+        },
+        {
+          "descricao": "Reconhecer bis in idem na aplicação da agravante de crime cometido contra cônjuge juntamente com a qualificadora de feminicídio, afastando a agravante da condenação.",
+          "paragrafos": [
+            15,
+            16,
+            17,
+            18,
+            37,
+            58
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução pela tentativa no patamar máximo de 2/3.",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            53,
+            54,
+            55,
+            58
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 5,
+          "fim": 55
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 56,
+          "fim": 62
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6139,
+      "output_tokens": 1095,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001161
+  },
+  "questoes": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato (questoes: Too small: expected array to have >=1 items)",
+    "uso": {
+      "input_tokens": 6678,
+      "output_tokens": 219,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000777
+  },
+  "fundamentos": {
+    "estado": "nao_rodou",
+    "saida": null,
+    "motivo": "sem questões válidas",
+    "custoUsd": 0
+  }
+}
