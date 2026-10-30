@@ -137,7 +137,8 @@ export const argumentaEstrutura: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaE
 // ─── Etapas 2 e 3: questões e conclusões ──────────────────────────────────────────────────────────────────────────────────────
 
 export const CATEGORIAS_QUESTAO = ['preliminar', 'prejudicial', 'merito', 'acessoria'] as const;
-export const RESULTADOS_QUESTAO = ['acolhida', 'rejeitada', 'parcialmente_acolhida', 'nao_conhecida', 'prejudicada'] as const;
+// `pendente`: tese ou pedido de uma peça de parte (denúncia, recurso, embargos, contrarrazões), que ainda não foi decidido.
+export const RESULTADOS_QUESTAO = ['acolhida', 'rejeitada', 'parcialmente_acolhida', 'nao_conhecida', 'prejudicada', 'pendente'] as const;
 const ID_QUESTAO = /^Q(?:[1-9]|10)$/;
 const MAX_QUESTOES = 10;
 
@@ -166,12 +167,13 @@ Para cada questão (no máximo 10, na ordem em que aparecem no texto), preencha:
 - categoria: preliminar (questão processual examinada antes do mérito), prejudicial (ex.: prescrição, decadência), mérito ou acessória (custas, honorários, juros, correção monetária).
 - enunciado: a questão em forma de pergunta, com até 300 caracteres (ex.: "O banco responde por transferências feitas por fraudador?").
 - conclusao: o que a decisão concluiu, em uma frase de até 300 caracteres.
-- resultado: como a decisão tratou a alegação ou o pedido ligado à questão: acolhida, rejeitada, parcialmente acolhida, não conhecida ou prejudicada.
+- resultado: como a decisão tratou a alegação ou o pedido ligado à questão: acolhida, rejeitada, parcialmente acolhida, não conhecida ou prejudicada; pendente quando o texto é uma peça de parte e o pedido ainda não foi decidido.
 - paragrafos: onde a questão é discutida; paragrafosConclusao: onde está a conclusão (ao menos um).
 
 Uma questão é algo que a decisão precisou resolver. Não liste fatos nem argumentos soltos como questões.
 - Não crie questão separada para o que é só consequência de outra (ex.: se a decisão julga improcedente o pedido de restituição por culpa exclusiva da vítima, o pedido de dano moral que cai junto não é questão nova; trate-o na conclusão da mesma questão). Crie questão própria quando a decisão usa outro fundamento para resolvê-la.
 - Inclua como questão acessória o que a decisão decide sobre custas, honorários, gratuidade, juros ou correção, quando decidir.
+- Se o texto não é uma decisão, mas uma peça de parte ou do Ministério Público (denúncia, petição, recurso, embargos, contrarrazões, parecer), ele não resolve nada: registre como questões as teses ou os pedidos que a peça defende, com o pedido na conclusão e resultado pendente. Nunca devolva a lista vazia quando o texto levanta ao menos um pedido.
 - Inclua como questão preliminar o juízo de admissibilidade, quando a decisão se manifesta sobre ele, mesmo em uma frase: conhecimento do recurso, prequestionamento, súmulas que impedem o exame (ex.: Súmula 7 do STJ, 126 do TST) e requisitos como a transcendência. Cada ponto que a decisão resolve em separado é uma questão; "conheço do recurso, presentes os pressupostos" é uma questão (resultado: acolhida; se não conhece, não conhecida).
 - O relatório e a ementa do acórdão recorrido descrevem o que outro órgão decidiu antes: não são questões desta decisão, e o que consta só ali (por exemplo, juros de mora que o tribunal de origem fixou e que esta decisão não examina) não deve virar questão.
 - A decisão pode transcrever ementas ou trechos de outros julgados. Isso não é questão da decisão: só conta o que o órgão julgador resolve neste caso.
@@ -243,7 +245,16 @@ export interface DecisaoComQuestoes extends DecisaoEnviada {
   questoes: QuestaoEnviada[];
 }
 
-export const SaidaFundamentos = z.object({
+const MAX_FUNDAMENTOS = 50;
+
+// Decisões com muitas questões passam de 30 fundamentos (6 questões já deram mais), então o teto subiu para 50. Se o modelo ainda passar,
+// guardam-se os primeiros MAX_FUNDAMENTOS em vez de descartar a etapa inteira, que perderia tudo e o custo dela.
+const limitarFundamentos = (v: unknown): unknown =>
+  v !== null && typeof v === 'object' && Array.isArray((v as { fundamentos?: unknown }).fundamentos)
+    ? { ...(v as object), fundamentos: (v as { fundamentos: unknown[] }).fundamentos.slice(0, MAX_FUNDAMENTOS) }
+    : v;
+
+export const SaidaFundamentos = z.preprocess(limitarFundamentos, z.object({
   fundamentos: z
     .array(
       z.object({
@@ -254,13 +265,13 @@ export const SaidaFundamentos = z.object({
         paragrafos: Paragrafos.min(1)
       })
     )
-    .max(30)
-});
+    .max(MAX_FUNDAMENTOS)
+}));
 export type SaidaFundamentos = z.infer<typeof SaidaFundamentos>;
 
 const INSTRUCOES_FUNDAMENTOS = `Você identifica os fundamentos que uma decisão judicial brasileira usa para chegar a cada conclusão.
 
-O pedido traz, entre as marcas <questoes> e </questoes>, as questões já identificadas na decisão e a conclusão de cada uma. Para cada questão, liste os fundamentos que a decisão usa para chegar àquela conclusão (no máximo 30 no total), preenchendo:
+O pedido traz, entre as marcas <questoes> e </questoes>, as questões já identificadas na decisão e a conclusão de cada uma. Para cada questão, liste os fundamentos que a decisão usa para chegar àquela conclusão (no máximo 50 no total; com várias questões, distribua-os entre elas, com os de maior peso para a conclusão primeiro, para nenhuma ficar sem fundamento), preenchendo:
 - questao: o id da questão (Q1, Q2…), exatamente como veio.
 - tipo: fato (fato tido por ocorrido), prova (meio de prova invocado), norma (Constituição, lei, código ou decreto citado como regra), precedente (julgado, súmula, tema repetitivo ou de repercussão geral), doutrina (autor citado) ou argumento (raciocínio da própria decisão que não é nenhum dos anteriores).
 - descricao: o fundamento em uma frase de até 300 caracteres.
@@ -281,7 +292,8 @@ export const argumentaFundamentos: TarefaIA<DecisaoComQuestoes, DecisaoComQuesto
   // Esforço baixo de propósito: é extração, e o raciocínio do esforço médio conta dentro de `maxTokensSaida`. Medido em 30/10/2026 numa
   // decisão de 97 parágrafos: médio gastou 2.946 de 4.581 tokens só pensando e a resposta foi cortada; baixo, 0 de raciocínio, 2.142 tokens.
   esforco: 'low',
-  maxTokensSaida: 4_000,
+  // 7.000: até 50 fundamentos (cerca de 90 tokens cada, 4.500 no pior caso) com folga. Custo máximo por chamada: US$ 0,0035; o médio é bem menor.
+  maxTokensSaida: 7_000,
   maxCaracteresMensagem: 30_000,
   versao: 'v4-2026-10-30',
   guardaResultado: false,

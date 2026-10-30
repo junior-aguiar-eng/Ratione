@@ -71,7 +71,8 @@ const RESULTADO: Record<Questao['resultado'], { rotulo: string; tom: BadgeTom }>
   rejeitada: { rotulo: 'Rejeitada', tom: 'danger' },
   parcialmente_acolhida: { rotulo: 'Parcialmente acolhida', tom: 'warn' },
   nao_conhecida: { rotulo: 'Não conhecida', tom: 'neutral' },
-  prejudicada: { rotulo: 'Prejudicada', tom: 'neutral' }
+  prejudicada: { rotulo: 'Prejudicada', tom: 'neutral' },
+  pendente: { rotulo: 'Pedido ainda não decidido', tom: 'neutral' }
 };
 
 const FUNDAMENTO: Record<SaidaFundamentos['fundamentos'][number]['tipo'], { rotulo: string; tom: BadgeTom }> = {

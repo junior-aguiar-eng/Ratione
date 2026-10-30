@@ -56,8 +56,8 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 |---|---|
 | Cota | **do plano do usuário**, por análise rápida: Gratuito 3 por semana, Essencial 40 e Profissional 150 por mês ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md) §2.2). A cota é conferida uma vez, ao iniciar a análise (`POST /api/analises`); as três etapas carregam o mesmo `analiseId`. A análise passa a contar quando a **1ª etapa** é entregue; falha sem solução **estorna**. "Tentar de novo" continua a mesma análise |
 | Mensagem | 30.000 caracteres (a decisão até 21.000, mais até 10 questões na etapa de fundamentos) |
-| Resposta | 3.000 tokens (estrutura) e 4.000 (questões, fundamentos). O raciocínio do modelo conta dentro desse limite; por isso a etapa de fundamentos roda em esforço **baixo** (30/10/2026: em esforço médio, numa decisão de 97 parágrafos, 2.946 de 4.581 tokens foram só raciocínio e a resposta foi cortada; em baixo, 2.142 tokens, sem raciocínio) |
-| Itens | até 15 pedidos, 15 partes, 10 questões e 30 fundamentos |
+| Resposta | 3.000 tokens (estrutura) e 4.000 (questões) e 7.000 (fundamentos, até 50 itens). O raciocínio do modelo conta dentro desse limite; por isso a etapa de fundamentos roda em esforço **baixo** (30/10/2026: em esforço médio, numa decisão de 97 parágrafos, 2.946 de 4.581 tokens foram só raciocínio e a resposta foi cortada; em baixo, 2.142 tokens, sem raciocínio) |
+| Itens | até 15 pedidos, 15 partes, 10 questões e 50 fundamentos (subiu de 30 em 30/10/2026: uma decisão com 6 questões passou de 30; acima de 50 guardam-se os 50 primeiros, sem descartar a etapa) |
 | Custo estimado | cerca de US$ 0,004 por análise com o Haiku 5.5 (três chamadas; conferido em 23/10/2026 com os preços de `politica.ts` e com o gasto do Console da Anthropic) |
 
 ## 5. Limitações conhecidas
