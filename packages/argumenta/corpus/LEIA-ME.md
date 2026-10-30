@@ -22,9 +22,9 @@ Todos os comandos rodam na raiz do repositório.
 
    Gera `casos/caso-001.json` (sem gabarito) e a folha `folhas/caso-001.md`, com os parágrafos numerados **como o modelo os recebe**.
 3. **Preencher o gabarito.** Leia a folha e edite o campo `gabarito` do JSON:
-   - `dispositivo`: primeiro e último parágrafo da parte que decide. O acórdão costuma ter **dois blocos que decidem** (o bloco "Acórdão", com o resultado do julgamento, e o fim do voto): ponha um em `dispositivo` e o outro em `dispositivoAlternativo` (lista de intervalos); qualquer um vale na métrica. Decisão do revisor de 30/10/2026;
+   - `dispositivo`: primeiro e último parágrafo da parte que decide. O acórdão costuma ter **dois blocos que decidem** (o bloco "Acórdão", com o resultado do julgamento, e o fim do voto): ponha um em `dispositivo` e o outro em `dispositivoAlternativo` (lista de intervalos); qualquer um vale na métrica. Decisão do revisor de 30/10/2026. **Convenção do intervalo:** inclui o parágrafo-título ("Dispositivo", "ACÓRDÃO") quando houver e termina na última linha que decide; não inclui a fórmula de encerramento ("É como voto") nem cabeçalho ou rodapé de página;
    - `questoes`: cada questão que a decisão **resolve** (preliminar, prejudicial, mérito, e custas, honorários ou juros quando decididos), com a conclusão e **todos** os parágrafos onde é discutida e decidida. Não é questão o fato solto, o argumento solto, nem a consequência automática de outra questão;
-   - `citacoes`: as normas e os precedentes que a decisão cita, como estão no texto. O que ela só transcreve de outro julgado não conta.
+   - `citacoes`: as normas e os precedentes que a decisão cita, como estão no texto. O que ela só transcreve de outro julgado não conta, e **o rito do recurso repetitivo** (art. 543-C do CPC/1973, art. 1.040 do CPC/2015, Resolução STJ 8/2008) **também não**: descreve o procedimento, não é fundamento de conclusão, e a etapa 4 só lista fundamentos (decisão do revisor, 30/10/2026).
 4. **Validar:**
 
    ```bash
