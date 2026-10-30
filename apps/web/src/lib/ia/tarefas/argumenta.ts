@@ -172,6 +172,8 @@ Para cada questão (no máximo 10, na ordem em que aparecem no texto), preencha:
 Uma questão é algo que a decisão precisou resolver. Não liste fatos nem argumentos soltos como questões.
 - Não crie questão separada para o que é só consequência de outra (ex.: se a decisão julga improcedente o pedido de restituição por culpa exclusiva da vítima, o pedido de dano moral que cai junto não é questão nova; trate-o na conclusão da mesma questão). Crie questão própria quando a decisão usa outro fundamento para resolvê-la.
 - Inclua como questão acessória o que a decisão decide sobre custas, honorários, gratuidade, juros ou correção, quando decidir.
+- Inclua como questão preliminar o juízo de admissibilidade, quando a decisão se manifesta sobre ele, mesmo em uma frase: conhecimento do recurso, prequestionamento, súmulas que impedem o exame (ex.: Súmula 7 do STJ, 126 do TST) e requisitos como a transcendência. Cada ponto que a decisão resolve em separado é uma questão; "conheço do recurso, presentes os pressupostos" é uma questão (resultado: acolhida; se não conhece, não conhecida).
+- O relatório e a ementa do acórdão recorrido descrevem o que outro órgão decidiu antes: não são questões desta decisão, e o que consta só ali (por exemplo, juros de mora que o tribunal de origem fixou e que esta decisão não examina) não deve virar questão.
 - A decisão pode transcrever ementas ou trechos de outros julgados. Isso não é questão da decisão: só conta o que o órgão julgador resolve neste caso.
 
 ${REGRAS}`;
@@ -184,7 +186,7 @@ export const argumentaQuestoes: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaQu
   esforco: 'medium',
   maxTokensSaida: 4_000,
   maxCaracteresMensagem: 30_000,
-  versao: VERSAO,
+  versao: 'v4-2026-10-30',
   guardaResultado: false,
   instrucoes: INSTRUCOES_QUESTOES,
   ferramentas: [],
