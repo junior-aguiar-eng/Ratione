@@ -21,7 +21,7 @@
 |---|---|---|
 | Para quê | Decisão curta e de uma tese: entender a estrutura, as questões, as conclusões e os fundamentos | Acórdão ou sentença longa, várias teses, preliminares, votos divergentes |
 | O que entrega | Hoje: etapas 1 a 4 do pipeline (estrutura, questões, conclusões, fundamentos), com o parágrafo de origem | Tudo da rápida **mais** as etapas seguintes do PLANO §6.4: fragilidades da fundamentação (CPC, art. 489, § 1º), mapa de argumentos e verificação de citações contra NormaViva e TeseMap, **conforme forem ficando prontas** (F5-04) |
-| Tamanho máximo | ~6 páginas (21.000 caracteres, como hoje) | ~15 páginas, o que exige dividir a decisão em partes (a mensagem de uma chamada hoje é limitada a 30.000 caracteres) |
+| Tamanho máximo | ~20 páginas (70.000 caracteres; era ~6 páginas, 21.000, até 30/10/2026) | o mesmo: o tamanho deixou de distinguir os níveis, que agora diferem pela profundidade (modelo e etapas 5 a 9) |
 | Modelo | Claude Haiku 5.5 | Claude Sonnet 5.5 (a confirmar pelo corpus da F5-05, §6) |
 | Quando faz sentido | Primeira leitura, triagem, estudo | Peça que vai embasar recurso ou parecer |
 
@@ -34,7 +34,7 @@ A completa **não existe até haver conteúdo que a justifique**: hoje ela seria
 | Análise rápida (Haiku) | **3 por semana** | 40 por mês | 150 por mês |
 | Análise completa (Sonnet) | — | — | 25 por mês (entra quando a completa existir, §2.1) |
 | Explicar dispositivo (NormaViva) | 10 por semana | 200 por mês | 500 por mês |
-| Tamanho da decisão | até 6 páginas | até 6 páginas | até 6 páginas (rápida) e 15 (completa) |
+| Tamanho da decisão | até 20 páginas | até 20 páginas | até 20 páginas (rápida e completa) |
 | Histórico de consumo | 30 dias | 12 meses | 12 meses |
 | Exportar histórico (CSV) | — | sim | sim |
 | Ferramentas sem IA (PrazoZero, NormaViva, TeseMap) | todas, uso razoável | todas | todas |

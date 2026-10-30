@@ -11,10 +11,10 @@ export const PRECO_USD_POR_MILHAO: Record<ModeloPermitido, { entrada: number; sa
 };
 
 /** Tetos que nenhuma tarefa pode passar (conferidos em teste para todo o catálogo). A cota de uso vem do plano do usuário, no banco. */
-export const TETOS = { maxTokensSaida: 7_000, maxCaracteresMensagem: 30_000 } as const;
+export const TETOS = { maxTokensSaida: 7_000, maxCaracteresMensagem: 85_000 } as const;
 
 /** Tempo máximo de uma chamada, em milissegundos, e uma nova tentativa só em falha transitória. */
-export const TEMPO_MAXIMO_MS = 30_000;
+export const TEMPO_MAXIMO_MS = 45_000;
 export const TENTATIVAS_EXTRAS = 1;
 
 /** O teto de gasto do mês não fica aqui: são dois fundos (gratuito e pagantes) na tabela `ia_fundos` do banco, que o responsável ajusta com uma linha de SQL. */

@@ -47,7 +47,7 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 | Pessoas jurídicas de direito público rotuladas (União, Estado, Município, INSS, Ministério Público…) ficam no texto | Não são dado pessoal e ajudam a análise; o usuário pode ocultá-las pela lista de nomes |
 | Texto e resposta não ficam guardados | `guardaResultado: false`: o executor não lê nem grava o cache; o registro de uso (`ia_uso`) leva só o hash da decisão (`decisao:<16 hex>`) e o hash da mensagem; os logs só levam tarefa, referência e motivo. `analises` guarda metadados de uso, incluindo nome opcional e, nas novas análises, quantidade de parágrafos, sem conteúdo |
 | Resposta só cita parágrafos que existem | `conferirSaida` descarta a resposta inteira se citar parágrafo fora da decisão, questão repetida ou fundamento de questão que não veio |
-| Texto longo não é cortado em silêncio | Acima de 21.000 caracteres (cerca de 6 páginas) ou 800 parágrafos, a tela avisa e o servidor recusa (400) |
+| Texto longo não é cortado em silêncio | Acima de 70.000 caracteres (cerca de 20 páginas; eram 21.000 até 30/10/2026) ou 800 parágrafos, a tela avisa e o servidor recusa (400). O de parágrafos está também no banco (`analises.paragrafos`, de 1 a 800): subi-lo exige migração antes do código |
 | Sem ferramentas, sem busca, sem dado de outra base | `ferramentas: []`; o contexto é só a decisão enviada |
 
 ## 4. Limites
@@ -55,7 +55,7 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 | Limite | Valor |
 |---|---|
 | Cota | **do plano do usuário**, por análise rápida: Gratuito 3 por semana, Essencial 40 e Profissional 150 por mês ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md) §2.2). A cota é conferida uma vez, ao iniciar a análise (`POST /api/analises`); as três etapas carregam o mesmo `analiseId`. A análise passa a contar quando a **1ª etapa** é entregue; falha sem solução **estorna**. "Tentar de novo" continua a mesma análise |
-| Mensagem | 30.000 caracteres (a decisão até 21.000, mais até 10 questões na etapa de fundamentos) |
+| Mensagem | 85.000 caracteres (a decisão até 70.000, mais até 10 questões na etapa de fundamentos) |
 | Resposta | 3.000 tokens (estrutura) e 4.000 (questões) e 7.000 (fundamentos, até 50 itens). O raciocínio do modelo conta dentro desse limite; por isso a etapa de fundamentos roda em esforço **baixo** (30/10/2026: em esforço médio, numa decisão de 97 parágrafos, 2.946 de 4.581 tokens foram só raciocínio e a resposta foi cortada; em baixo, 2.142 tokens, sem raciocínio) |
 | Itens | até 15 pedidos, 15 partes, 10 questões e 50 fundamentos (subiu de 30 em 30/10/2026: uma decisão com 6 questões passou de 30; acima de 50 guardam-se os 50 primeiros, sem descartar a etapa) |
 | Custo estimado | cerca de US$ 0,004 por análise com o Haiku 5.5 (três chamadas; conferido em 23/10/2026 com os preços de `politica.ts` e com o gasto do Console da Anthropic) |

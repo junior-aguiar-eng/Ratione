@@ -113,7 +113,7 @@ describe('F5-05: executor do caso', () => {
   });
 
   it('decisão longa demais fica fora, sem chamar o modelo', async () => {
-    const longa = { id: 'caso-longo', texto: Array.from({ length: 30 }, (_, i) => `Parágrafo ${i}. ${'palavra '.repeat(150)}`).join('\n\n') };
+    const longa = { id: 'caso-longo', texto: Array.from({ length: 90 }, (_, i) => `Parágrafo ${i}. ${'palavra '.repeat(150)}`).join('\n\n') };
     let n = 0;
     const r = await executarCaso(longa, async () => {
       n++;
