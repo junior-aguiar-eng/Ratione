@@ -33,6 +33,13 @@ describe('F5-05: dispositivo', () => {
     assert.equal(m.achou, true);
     assert.equal(m.acertou, false);
   });
+  it('o intervalo alternativo também vale: o acórdão tem dois blocos que decidem', () => {
+    const g: Gabarito = { ...GAB, dispositivoAlternativo: [{ inicio: 3, fim: 5 }] };
+    assert.equal(medirDispositivo(sec(20, 24), g).acertou, true);
+    assert.equal(medirDispositivo(sec(3, 5), g).acertou, true);
+    assert.equal(medirDispositivo(sec(3, 5), GAB).acertou, false); // sem o alternativo, o bloco do início erra
+    assert.equal(medirDispositivo(sec(8, 12), g).acertou, false);
+  });
   it('sem seção de dispositivo, ou sem a etapa, não acerta', () => {
     assert.deepEqual(medirDispositivo({ secoes: [{ tipo: 'relatorio', inicio: 1, fim: 4 }] }, GAB), { achou: false, sobreposicao: 0, acertou: false });
     assert.equal(medirDispositivo(null, GAB).acertou, false);
@@ -138,6 +145,10 @@ describe('F5-05: formato do caso', () => {
     assert.equal(CasoSchema.safeParse({ ...base, id: 'Caso 1' }).success, false);
     assert.equal(CasoSchema.safeParse({ ...base, fonte: { ...base.fonte, acessadoEm: '25/10/2026' } }).success, false);
     assert.equal(CasoSchema.safeParse({ ...base, extra: 1 }).success, false);
+  });
+  it('aponta parágrafo do gabarito que não existe na decisão, inclusive no dispositivo alternativo', () => {
+    const g: Gabarito = { ...GAB, dispositivoAlternativo: [{ inicio: 3, fim: 99 }] };
+    assert.deepEqual(problemasDoGabarito(g, 50), ['dispositivo alternativo 1 fora da decisão (1 a 50)']);
   });
   it('aponta parágrafo do gabarito que não existe na decisão', () => {
     assert.deepEqual(problemasDoGabarito(GAB, 30), []);

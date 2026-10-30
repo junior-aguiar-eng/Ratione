@@ -12,6 +12,12 @@
       "inicio": 56,
       "fim": 57
     },
+    "dispositivoAlternativo": [
+      {
+        "inicio": 7,
+        "fim": 14
+      }
+    ],
     "questoes": [
       {
         "enunciado": "O recurso especial deve ser conhecido?",
