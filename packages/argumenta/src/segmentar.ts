@@ -3,7 +3,10 @@
  * As etapas seguintes só citam parágrafos por esse número, e a tela mostra o texto original do parágrafo, nunca um trecho escrito pelo modelo.
  */
 
-/** Acima disso a decisão é recusada, não cortada (o limite que pesa na prática é `LIMITE_CARACTERES_DECISAO`). */
+/**
+ * Acima disso a decisão é recusada, não cortada (o limite que pesa na prática é `LIMITE_CARACTERES_DECISAO`). Também está no banco
+ * (`analises.paragrafos` entre 1 e 800, migração `20261024000002`): subir exige migração antes do código.
+ */
 export const MAX_PARAGRAFOS = 800;
 
 /** Linha que termina frase: ponto, dois-pontos, ponto e vírgula, interrogação, exclamação, fechamento de aspas ou parêntese. */

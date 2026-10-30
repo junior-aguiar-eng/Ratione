@@ -56,7 +56,7 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | Orçamento de gasto do mês | **dois fundos** na tabela `ia_fundos` do banco, somando todas as tarefas de cada grupo: `gratuito` US$ 15 (quem está no plano Gratuito) e `pagantes` US$ 5 (quem tem plano pago). Um fundo que acaba não derruba o outro. Ajuste: `update public.ia_fundos set orcamento_mes_usd = … where fundo = …`; situação: `select * from public.ia_fundos_situacao();` ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md) §3.2). A variável `IA_ORCAMENTO_MES_USD` deixou de existir |
 | Uma chamada de cada vez por usuário | em todas as tarefas |
 | Cota de uso | **do plano do usuário**, por análise e por período (Gratuito: semana; pagos: ciclo de cobrança), conferida uma vez ao iniciar a análise; quantidades em `plano_cotas` (migração `20261023000001`). As variáveis `IA_LIMITE_DIA` e `IA_LIMITE_MES` deixaram de existir |
-| Teto de resposta / mensagem | 7.000 tokens (a etapa de fundamentos; as outras usam 3.000 e 4.000) / 30.000 caracteres |
+| Teto de resposta / mensagem | 7.000 tokens (a etapa de fundamentos; as outras usam 3.000 e 4.000) / 85.000 caracteres (tempo máximo por chamada: 45 s) |
 | Modelos | só com preço registrado (hoje, Claude Haiku 5.5) |
 
 ## 7. Como acrescentar uma tarefa

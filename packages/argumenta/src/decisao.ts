@@ -7,10 +7,11 @@ import { pseudonimizar, type Substituicao } from './pseudonimizar';
  */
 
 /**
- * Tamanho máximo da decisão montada para o modelo (cerca de 6 a 7 páginas). Com as até 10 questões que a etapa de fundamentos recebe
- * junto, a mensagem fica abaixo do teto de 30.000 caracteres da política de IA.
+ * Tamanho máximo da decisão montada para o modelo (cerca de 20 páginas). Com as até 10 questões que a etapa de fundamentos recebe
+ * junto, a mensagem fica abaixo do teto de 85.000 caracteres da política de IA. Era 21.000 (cerca de 6 páginas) até 30/10/2026: a
+ * medição do corpus mostrou chamadas de até 13 s com entradas de 30 mil caracteres, e a saída é limitada por itens, não pela entrada.
  */
-export const LIMITE_CARACTERES_DECISAO = 21_000;
+export const LIMITE_CARACTERES_DECISAO = 70_000;
 
 export interface DecisaoPreparada {
   /** Parágrafos com marcadores no lugar dos dados pessoais: é só isso que vai ao servidor. */

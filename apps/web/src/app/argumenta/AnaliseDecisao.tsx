@@ -284,7 +284,7 @@ export default function AnaliseDecisao() {
           />
           <p id="argumenta-tamanho" className={`mt-1.5 text-sm ${longo ? 'text-danger-text' : 'text-ink-mute'}`}>
             {vazio
-              ? `Até cerca de 6 páginas (${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres).`
+              ? `Até cerca de 20 páginas (${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres).`
               : `${preparo.paragrafos.length} parágrafo(s) · ${preparo.caracteres.toLocaleString('pt-BR')} de ${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres${
                   longo ? '. O texto passou do limite: analise uma parte menor (por exemplo, sem o relatório).' : ''
                 }`}

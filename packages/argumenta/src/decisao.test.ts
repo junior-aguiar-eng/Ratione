@@ -153,10 +153,12 @@ describe('Argumenta: decisão preparada para envio', () => {
   });
 
   it('paragrafosValidos recusa o que não é lista de parágrafos ou passa do limite', () => {
-    for (const ruim of [undefined, 'texto', [], [''], [1], ['a\n\nb'], ['x'.repeat(8_001)], Array(30).fill('y'.repeat(1_000))]) {
+    for (const ruim of [undefined, 'texto', [], [''], [1], ['a\n\nb'], ['x'.repeat(8_001)], Array(80).fill('y'.repeat(1_000))]) {
       assert.equal(paragrafosValidos(ruim), false);
     }
-    assert.ok(Array(20).fill('y'.repeat(1_000)).join('').length < LIMITE_CARACTERES_DECISAO);
+    assert.ok(Array(60).fill('y'.repeat(1_000)).join('').length < LIMITE_CARACTERES_DECISAO);
+    assert.equal(LIMITE_CARACTERES_DECISAO, 70_000);
+    assert.equal(paragrafosValidos(Array(60).fill('y'.repeat(1_000))), true); // 60 mil caracteres cabem (eram recusados acima de 21 mil)
   });
 
   it('paragrafosExistem confere números citados', () => {
