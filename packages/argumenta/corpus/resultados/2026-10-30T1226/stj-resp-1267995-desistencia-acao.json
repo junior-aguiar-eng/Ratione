@@ -1,0 +1,298 @@
+{
+  "casoId": "stj-resp-1267995-desistencia-acao",
+  "paragrafos": 80,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido.",
+      "resumo": "O INSS recorreu de acórdão que homologou a desistência de ação de servidor inativo sem condicionar a concordância à renúncia ao direito em que se funda a ação. Alegou violação ao art. 3º da Lei 9.469/97. A Primeira Seção do STJ, por unanimidade, deu provimento ao recurso especial.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão recorrido para impedir a homologação da desistência sem renúncia ao direito em que se funda a ação, com base no art. 3º da Lei 9.469/97.",
+          "paragrafos": [
+            22,
+            27
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 6
+        },
+        {
+          "tipo": "outro",
+          "inicio": 7,
+          "fim": 19
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 20,
+          "fim": 31
+        },
+        {
+          "tipo": "outro",
+          "inicio": 32,
+          "fim": 34
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 35,
+          "fim": 35
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 36,
+          "fim": 56
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 57,
+          "fim": 57
+        },
+        {
+          "tipo": "outro",
+          "inicio": 58,
+          "fim": 80
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9764,
+      "output_tokens": 1782,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001867
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Após a apresentação da resposta, o autor pode desistir da ação sem o consentimento do réu?",
+          "conclusao": "Não. Após a resposta, a desistência depende do consentimento do réu, e a discordância deve ser fundamentada, sem configurar abuso de direito.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            41,
+            42,
+            46
+          ],
+          "paragrafosConclusao": [
+            41,
+            42,
+            46
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A oposição do INSS à desistência, fundada no art. 3º da Lei 9.469/97, pode obstar a homologação do pedido?",
+          "conclusao": "Sim. A exigência de renúncia expressa ao direito do art. 3º justifica a oposição, que condiciona a desistência à renúncia. O recurso especial foi provido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            43,
+            44,
+            45,
+            46,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "paragrafosConclusao": [
+            45,
+            56,
+            57
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10019,
+      "output_tokens": 1361,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001682
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Após o oferecimento da resposta, é defeso ao autor desistir da ação sem o consentimento do réu.",
+          "citacao": "CPC, art. 267, § 4º",
+          "paragrafos": [
+            6,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A regra que exige consentimento do réu decorre da bilateralidade formada no processo, assistindo ao réu o direito de solucionar o conflito.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A discordância do réu quanto à desistência deve ser fundamentada, pois a mera oposição sem justificativa plausível importa abuso de direito.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ (1ª Turma, Min. Luiz Fux) que, após a resposta, exige consentimento do réu para a desistência e admite recusa fundamentada. Resultado: recurso especial provido.",
+          "citacao": "REsp 1.184.935/MG, 1ª Turma, Rel. Min. Luiz Fux, DJe de 17.11.2010",
+          "paragrafos": [
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ (2ª Turma, Min. Eliana Calmon) que exige consentimento do réu após a citação e admite oposição com justo motivo. Resultado: recurso especial provido.",
+          "citacao": "REsp 1.173.663/PR, 2ª Turma, Rel. Min. Eliana Calmon, DJe de 8.4.2010",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ (1ª Turma, Min. Teori Albino Zavascki) que admite oposição à desistência fundada no art. 3º da Lei 9.469/97. Resultado: recurso especial provido.",
+          "citacao": "REsp 651.721/RJ, 1ª Turma, Rel. Min. Teori Albino Zavascki, DJ de 28.9.2006",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Precedentes citados no acórdão sobre consentimento do réu após a resposta, sem descrição individual da tese no texto.",
+          "citacao": "REsp 638.382/DF; REsp 241.780/PR; REsp 864432/PR; REsp 976861/SP; REsp 115642/SP",
+          "paragrafos": [
+            48,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 90738/RJ",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A Fazenda Nacional somente pode concordar com a desistência se o autor renunciar expressamente ao direito sobre o qual se funda a ação.",
+          "citacao": "Lei 9.469/97, art. 3º",
+          "paragrafos": [
+            36,
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O ente público recorrente condicionou sua anuência ao pedido de desistência à renúncia expressa do autor ao direito em que se funda a ação.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            43
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A existência dessa imposição legal, por si só, justifica a concordância condicional do recorrente e obsta a homologação da desistência.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            45
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ que considera a oposição à desistência fundada no art. 3º da Lei 9.469/97 justificável, admitindo-a como motivo para obstar a homologação.",
+          "citacao": "REsp 1.173.663/PR, 2ª Turma, Rel. Min. Eliana Calmon, DJe de 8.4.2010",
+          "paragrafos": [
+            52,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ (1ª Turma) que admite oposição à desistência fundada no art. 3º da Lei 9.469/97.",
+          "citacao": "REsp 651.721/RJ, 1ª Turma, Rel. Min. Teori Albino Zavascki, DJ de 28.9.2006",
+          "paragrafos": [
+            51,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ (2ª Turma) citado como precedente de que a oposição fundada no art. 3º da Lei 9.469/97 é legítima.",
+          "citacao": "REsp 460.748/DF, 2ª Turma, Rel. Min. João Otávio de Noronha",
+          "paragrafos": [
+            51,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A oposição à desistência, quando fundamentada, não configura abuso de direito.",
+          "citacao": "",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Assim, merece reforma o acórdão recorrido, dando-se provimento ao recurso especial para que a demanda prossiga.",
+          "citacao": "",
+          "paragrafos": [
+            56,
+            57
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10245,
+      "output_tokens": 1857,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001953
+  }
+}
