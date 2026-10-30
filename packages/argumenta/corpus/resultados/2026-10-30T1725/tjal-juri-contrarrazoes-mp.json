@@ -1,0 +1,311 @@
+{
+  "casoId": "tjal-juri-contrarrazoes-mp",
+  "paragrafos": 39,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Ministério Público manifesta-se pelo não conhecimento dos embargos de declaração.",
+      "resumo": "O embargante pede a neutralização de circunstância judicial, o reconhecimento de bis in idem entre agravante e qualificadora e a redução pela tentativa no patamar máximo. O Ministério Público opina pelo não conhecimento, por não haver omissão, contradição ou obscuridade. Subsidiariamente, pede a manutenção do acórdão embargado.",
+      "pedidos": [
+        {
+          "descricao": "Neutralizar a circunstância judicial das circunstâncias do delito.",
+          "paragrafos": [
+            11
+          ]
+        },
+        {
+          "descricao": "Reconhecer bis in idem na aplicação da agravante de crime contra cônjuge com a qualificadora do feminicídio.",
+          "paragrafos": [
+            11
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução da pena pela tentativa no patamar máximo.",
+          "paragrafos": [
+            11
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 8
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 9,
+          "fim": 14
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 15,
+          "fim": 35
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 36,
+          "fim": 36
+        },
+        {
+          "tipo": "outro",
+          "inicio": 37,
+          "fim": 39
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4335,
+      "output_tokens": 1383,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001125,
+    "duracaoMs": 6482
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Os embargos de declaração devem ser conhecidos, por haver omissão, contradição ou obscuridade no acórdão?",
+          "conclusao": "O Ministério Público pede o não conhecimento dos embargos, por não haver omissão, contradição ou obscuridade a ser sanada pela via eleita.",
+          "resultado": "pendente",
+          "paragrafos": [
+            13,
+            16,
+            17,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            13,
+            36
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Há bis in idem entre a agravante do art. 61, II, e, do CP (crime contra cônjuge) e a qualificadora do feminicídio?",
+          "conclusao": "O Ministério Público sustenta que a alegação de bis in idem é improcedente, pois a agravante e a qualificadora têm fundamentos distintos.",
+          "resultado": "pendente",
+          "paragrafos": [
+            11,
+            18,
+            24,
+            25,
+            26,
+            27,
+            34
+          ],
+          "paragrafosConclusao": [
+            24,
+            25
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "As consequências do delito podem ser valoradas como circunstância judicial desfavorável na primeira fase da dosimetria?",
+          "conclusao": "O Ministério Público sustenta que as consequências do delito, como a perda de movimento de dedo e a necessidade de tratamento, extrapolam o resultado normal e justificam a majoração da pena-base.",
+          "resultado": "pendente",
+          "paragrafos": [
+            11,
+            18,
+            19,
+            20,
+            21
+          ],
+          "paragrafosConclusao": [
+            21
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "A redução da pena pela tentativa deve ser fixada no patamar máximo de 2/3?",
+          "conclusao": "O Ministério Público sustenta que a redução de 1/3 é adequada, pois o crime esteve próximo da consumação, e que o magistrado segue critérios de razoabilidade e proporcionalidade.",
+          "resultado": "pendente",
+          "paragrafos": [
+            11,
+            18,
+            29,
+            30,
+            31,
+            32
+          ],
+          "paragrafosConclusao": [
+            31,
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5052,
+      "output_tokens": 1643,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001327,
+    "duracaoMs": 7294
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Na forma do art. 620 do CPP, só cabem embargos contra acórdão com ambiguidade, obscuridade, contradição ou omissão.",
+          "citacao": "CPP, art. 620",
+          "paragrafos": [
+            16
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há omissão, contradição ou obscuridade no acórdão; o recurso não serve para sustentar tese contrária à já decidida nem para atacar o conteúdo do julgado.",
+          "citacao": "",
+          "paragrafos": [
+            13,
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Inconformismo com o resultado não configura omissão; se houve erro de julgamento, o recurso cabível é outro.",
+          "citacao": "",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O acórdão rechaçou de forma clara e objetiva os argumentos da apelação sobre a pena-base, a agravante e a redução pela tentativa.",
+          "citacao": "",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A agravante do art. 61, II, e, do CP incide quando o crime é cometido contra cônjuge.",
+          "citacao": "CP, art. 61, II, e",
+          "paragrafos": [
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O feminicídio é o homicídio praticado por razões da condição de sexo feminino, configurado com violência doméstica e familiar.",
+          "citacao": "CP, art. 121, § 2º, VI, e § 2º-A, I",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A alegação de bis in idem é improcedente, pois a agravante e a qualificadora têm fundamentos distintos: a agravante trata da quebra do dever de auxílio entre familiares; a qualificadora, da violência contra a mulher em contexto de desigualdade.",
+          "citacao": "",
+          "paragrafos": [
+            24,
+            25,
+            27
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "A vítima perdeu o movimento de um dedo da mão esquerda e necessitou de tratamento psicológico e psiquiátrico.",
+          "citacao": "",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito inicial atestou lesão grave com incapacidade para ocupações habituais por mais de 30 dias e previu complementação para aferir debilidade permanente.",
+          "citacao": "",
+          "paragrafos": [
+            20
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "A própria vítima declarou sequelas permanentes.",
+          "citacao": "",
+          "paragrafos": [
+            20
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A perda de movimento funcional e a necessidade de tratamento de saúde mental extrapolam o resultado normal da tentativa e justificam a majoração da pena.",
+          "citacao": "",
+          "paragrafos": [
+            21
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "O apelante planejou o ataque com faca contra área vital enquanto a vítima dirigia, causando lesões graves que exigiram internação prolongada e socorro urgente.",
+          "citacao": "",
+          "paragrafos": [
+            29
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "A vítima sobreviveu por circunstâncias alheias à vontade do agente, como o rápido socorro médico, e não por desistência voluntária.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "O crime esteve próximo da consumação, o que torna adequada e proporcional a redução de 1/3 pela tentativa.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            31
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não há obrigação de o magistrado adotar quantum específico de redução; deve observar razoabilidade, proporcionalidade e livre convencimento motivado.",
+          "citacao": "",
+          "paragrafos": [
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5107,
+      "output_tokens": 1437,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001229,
+    "duracaoMs": 5661
+  }
+}

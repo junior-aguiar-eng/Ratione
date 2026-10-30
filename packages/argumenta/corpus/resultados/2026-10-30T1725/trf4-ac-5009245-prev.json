@@ -1,0 +1,261 @@
+{
+  "casoId": "trf4-ac-5009245-prev",
+  "paragrafos": 49,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "decisao_monocratica",
+      "resultado": "Apelação do INSS não conhecida, por ausência de impugnação específica aos fundamentos da sentença.",
+      "resumo": "O INSS apelou da sentença que reconheceu a especialidade de períodos de trabalho e concedeu aposentadoria por tempo de contribuição, alegando não haver prova de exposição a agentes nocivos em nível considerado insalubre. O relator entendeu que o recurso foi genérico e não indicou onde estaria a controvérsia. Por isso, não conheceu da apelação, com base no art. 932, III, do CPC, e majorou os honorários.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença para afastar o reconhecimento da especialidade dos períodos deferidos, por ausência de comprovação de exposição a agentes nocivos.",
+          "paragrafos": [
+            6,
+            23
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 24
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 25,
+          "fim": 28
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 29,
+          "fim": 37
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 38,
+          "fim": 39
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 40,
+          "fim": 41
+        },
+        {
+          "tipo": "outro",
+          "inicio": 42,
+          "fim": 49
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5504,
+      "output_tokens": 1557,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001329,
+    "duracaoMs": 7710
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A apelação do INSS, por ser genérica e não impugnar especificamente os fundamentos da sentença, deve ser conhecida?",
+          "conclusao": "A apelação não foi conhecida por não impugnar especificamente os fundamentos da sentença, violando o art. 1.010 do CPC/2015 e o princípio da dialeticidade.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            30,
+            31,
+            33,
+            34,
+            35,
+            37
+          ],
+          "paragrafosConclusao": [
+            35,
+            37,
+            41
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Cabe majoração dos honorários advocatícios recursais em razão do não conhecimento da apelação?",
+          "conclusao": "Majorou-se a verba honorária em 50% sobre o percentual mínimo da primeira faixa do art. 85, §3º, I, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            39
+          ],
+          "paragrafosConclusao": [
+            39
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "É cabível a remessa necessária da sentença?",
+          "conclusao": "Não há remessa necessária no caso, por isso não há reavaliação da questão pelo Tribunal.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            22,
+            36
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6221,
+      "output_tokens": 477,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000861,
+    "duracaoMs": 3006
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 932, III, do CPC: incumbe ao relator não conhecer de recurso que não tenha impugnado especificamente os fundamentos da decisão recorrida.",
+          "citacao": "art. 932, III, do CPC",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 1.010 do CPC exige arrazoado de fato e de direito que infirme a sentença; a apelação do INSS não atendeu a esse requisito.",
+          "citacao": "art. 1.010 do CPC/2015",
+          "paragrafos": [
+            35,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A peça recursal do INSS indica os períodos reconhecidos como especiais, mas é genérica e não se refere aos formulários e laudos que fundamentaram a sentença.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TRF4, AC [PROCESSO_2], 11ª Turma, relatora Ana Cristina Ferro Blasi: recurso não conhecido por não impugnação aos motivos da sentença, ferindo a dialeticidade.",
+          "citacao": "TRF4, AC [PROCESSO_2], Décima Primeira Turma, Relator Ana Cristina Ferro Blasi",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Apelação Cível 5007105-37.2018.404.9999, 5ª Turma do TRF4: não se conhece do recurso quanto ao mérito por não expressar razões de fato e de direito contra a sentença.",
+          "citacao": "TRF4, Apelação Cível Nº 5007105-37.2018.404.9999, 5ª Turma, Juíza Federal Gisele Lemke",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não é possível avaliar onde estaria a controvérsia recursal, pois o recurso não aponta precisamente a irregularidade da sentença quanto ao reconhecimento da especialidade.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 85, §11, do CPC: majoração dos honorários recursais, aplicável por ser a sentença posterior a 18/3/2016, observados os §§ 2º a 6º.",
+          "citacao": "art. 85, §11, do CPC",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 85, §§2º a 6º, do CPC: critérios e limites a serem observados na majoração.",
+          "citacao": "art. 85, §§ 2º a 6º do NCPC",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A sentença foi proferida após 18/3/2016, data de vigência do NCPC.",
+          "citacao": "",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Majora-se a verba honorária em 50% sobre o percentual mínimo da primeira faixa do art. 85, §3º, I.",
+          "citacao": "art. 85, §3º, inciso I, do NCPC",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Art. 496, §3º, I, do CPC: a sentença não está sujeita à remessa necessária quando o valor não supera o patamar legal, o que o juízo reconheceu para suas demandas.",
+          "citacao": "art. 496, §3º, I, do CPC",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "As demandas em curso no juízo de origem não superam o patamar que exige remessa necessária.",
+          "citacao": "",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "No caso não há remessa necessária, logo não há reavaliação da questão pelo Tribunal.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6099,
+      "output_tokens": 1430,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001325,
+    "duracaoMs": 5775
+  }
+}
