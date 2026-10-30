@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { CasoSchema, ehValidado, problemasDoGabarito, type Gabarito } from './caso';
-import { chaveDaCitacao, correspondencia, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, taxa, totalizar, type SaidasDoCaso } from './metricas';
+import { chaveDaCitacao, citacaoCorresponde, correspondencia, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, taxa, totalizar, type SaidasDoCaso } from './metricas';
 
 const GAB: Gabarito = {
   dispositivo: { inicio: 20, fim: 24 },
@@ -106,6 +106,37 @@ describe('F5-05: citações', () => {
   it('artigo e parágrafo não se confundem quando trocados', () => {
     assert.notEqual(chaveDaCitacao('Lei 9.999/99, art. 5º, § 2º'), chaveDaCitacao('Lei 9.999/99, art. 2º, § 5º'));
     assert.equal(chaveDaCitacao('Lei 9.999/99, art. 5º, § 2º'), chaveDaCitacao('§ 2º do art. 5º da Lei 9.999/99'));
+  });
+  it('corresponde: artigo da base vale com parágrafo escrito de outro jeito e com mais ou menos detalhe', () => {
+    assert.equal(citacaoCorresponde('art. 85, § 11, do CPC', 'Art. 85, §11, do Código de Processo Civil'), true);
+    assert.equal(citacaoCorresponde('art. 43 do CTN', 'CTN, art. 43, I e II'), true);
+    assert.equal(citacaoCorresponde('art. 1.010 do CPC', 'art. 1.010, II, CPC/15'), true);
+    assert.equal(citacaoCorresponde('art. 85, § 3º, I, do CPC', 'Art. 85, § 3º, do CPC'), true);
+  });
+  it('corresponde: artigo ou parágrafo diferente não vale', () => {
+    assert.equal(citacaoCorresponde('art. 85, § 11, do CPC', 'art. 85, § 3º, do CPC'), false);
+    assert.equal(citacaoCorresponde('art. 43 do CTN', 'CTN, art. 44'), false);
+    assert.equal(citacaoCorresponde('art. 85, § 3º, I, do CPC', 'art. 85, § 3º, II, do CPC'), false);
+  });
+  it('corresponde: súmula de outro tribunal vale pelo tribunal e número, sem inciso', () => {
+    assert.equal(citacaoCorresponde('Súmula 331, IV, do TST', 'Súmula 331 do C. TST'), true);
+    assert.equal(citacaoCorresponde('Súmula 126 do TST', 'Súmula 331 do TST'), false);
+    assert.equal(citacaoCorresponde('Súmula 126 do TST', 'Súmula 126 do TSE'), false);
+  });
+  it('corresponde: sigla por extenso e achada mais específica; a mais genérica não vale', () => {
+    assert.equal(citacaoCorresponde('Lei Complementar nº 142/2013', 'LC nº 142/2013, art. 3º, IV'), true);
+    assert.equal(citacaoCorresponde('art. 3º, § 4º, da Lei 7.713/88', 'Lei 7.713/88, art. 3º, § 4º, e art. 5º'), true);
+    assert.equal(citacaoCorresponde('LC nº 142/2013, art. 3º, IV', 'Lei Complementar nº 142/2013'), false);
+    assert.equal(citacaoCorresponde('Lei 9.999/99', 'Lei 8.888/99'), false);
+  });
+  it('corresponde: precedente continua valendo por classe, número e UF', () => {
+    assert.equal(citacaoCorresponde('REsp 927.216/RS', 'REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon'), true);
+    assert.equal(citacaoCorresponde('REsp 927.216/RS', 'REsp 927.216/SC'), false);
+  });
+  it('mede as citações com a correspondência flexível', () => {
+    const gab: Gabarito = { ...GAB, citacoes: ['art. 85, § 11, do CPC', 'Súmula 331, IV, do TST', 'art. 43 do CTN'] };
+    const saida = { fundamentos: [{ citacao: 'art. 85, §11, do CPC' }, { citacao: 'Súmula 331 do C. TST' }] };
+    assert.deepEqual(medirCitacoes(saida, gab), { esperadas: 3, encontradas: 2 });
   });
   it('conta as esperadas achadas', () => {
     const saida = { fundamentos: [{ citacao: 'art. 14 do CDC' }, { citacao: '' }, { citacao: 'Súmula 7 do STJ' }] };

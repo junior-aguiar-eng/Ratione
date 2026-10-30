@@ -1,0 +1,322 @@
+{
+  "casoId": "stj-resp-1349059-adm",
+  "paragrafos": 114,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido, para reconhecer que não se aplica a taxa progressiva de juros às contas vinculadas ao FGTS de trabalhadores avulsos.",
+      "resumo": "A Caixa Econômica Federal recorreu de acórdão que reconheceu a trabalhadores avulsos o direito à taxa progressiva de juros do FGTS. O STJ, em julgamento submetido ao rito dos recursos repetitivos, deu provimento ao recurso, por maioria, por entender que a progressividade exige vínculo empregatício e que o trabalhador avulso não o possui.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão que reconheceu o direito de trabalhador avulso à taxa progressiva de juros nas contas vinculadas ao FGTS (alegada violação dos arts. 4º da Lei 5.107/66, 1º e 2º da Lei 5.705/71 e 1º, §1º, da Lei 5.958/73).",
+          "paragrafos": [
+            31,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de que a taxa progressiva de juros não se aplica às contas vinculadas ao FGTS de trabalhadores avulsos.",
+          "paragrafos": [
+            47,
+            69,
+            81
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 9
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 19
+        },
+        {
+          "tipo": "outro",
+          "inicio": 20,
+          "fim": 28
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 30,
+          "fim": 41
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 46,
+          "fim": 84
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 21,
+          "fim": 22
+        },
+        {
+          "tipo": "outro",
+          "inicio": 90,
+          "fim": 114
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11619,
+      "output_tokens": 617,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00147
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Os trabalhadores avulsos têm direito à taxa progressiva de juros nas contas vinculadas ao FGTS?",
+          "conclusao": "Não têm direito, pois a taxa progressiva exige vínculo empregatício e o trabalhador avulso não mantém vínculo com empresa; deu-se provimento ao recurso especial da CEF.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81
+          ],
+          "paragrafosConclusao": [
+            69,
+            81
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Os juros de mora são devidos e como devem ser aplicados no caso?",
+          "conclusao": "O acórdão recorrido tratou os juros de mora como devidos apenas em caso de levantamento das cotas, mas a decisão do STJ não se manifesta expressamente sobre essa parte.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            32
+          ],
+          "paragrafosConclusao": [
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11874,
+      "output_tokens": 419,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001397
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A taxa progressiva de juros foi criada no art. 4º da Lei 5.107/66, com percentuais que variam conforme o tempo de permanência na mesma empresa.",
+          "citacao": "Lei n. 5.107/66, art. 4º",
+          "paragrafos": [
+            48,
+            49
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 5.705/71 revogou os parágrafos do art. 4º da Lei 5.107/66 e fixou taxa de 3% ao ano para novas capitalizações, mantendo a progressão apenas para optantes existentes.",
+          "citacao": "Lei n. 5.705/71, arts. 1º e 2º",
+          "paragrafos": [
+            52,
+            53,
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 5.958/73 permitiu a opção retroativa ao FGTS, e a decisão entende que se beneficiam da progressão os que optaram até 5.705/71 e os que usaram essa opção retroativa.",
+          "citacao": "Lei n. 5.958/73, art. 1º",
+          "paragrafos": [
+            56,
+            57,
+            58,
+            60
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 8.036/90 manteve o regime de progressão para optantes existentes à data de 22/09/1971.",
+          "citacao": "Lei n. 8.036/90, art. 3º",
+          "paragrafos": [
+            61,
+            62
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 8.630/93 estendeu aos trabalhadores avulsos as disposições das Leis 4.090/62 e 5.107/66, mediante regulamentação do Poder Executivo.",
+          "citacao": "Lei n. 8.630/93, art. 3º",
+          "paragrafos": [
+            63,
+            64
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Desde a criação do fundo, a taxa progressiva estaria vinculada à existência de vínculo empregatício, pois os percentuais variam conforme a permanência na mesma empresa.",
+          "citacao": "",
+          "paragrafos": [
+            65
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Define trabalhador avulso como quem presta serviço a diversas empresas sem vínculo empregatício, com intermediação obrigatória do órgão gestor ou sindicato.",
+          "citacao": "Decreto n. 3.048/99, art. 9º, VI",
+          "paragrafos": [
+            12,
+            66,
+            68
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Como o trabalhador avulso não mantém vínculo empregatício com qualquer empresa, é indevida a ele a aplicação de juros progressivos.",
+          "citacao": "",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "EDcl no AgRg no REsp 1.300.129/SP (Rel. Min. Humberto Martins, Segunda Turma, 09/10/2012): não se aplica taxa progressiva ao trabalhador avulso, por ser essencial a permanência na mesma empresa.",
+          "citacao": "EDcl no AgRg no REsp 1.300.129/SP",
+          "paragrafos": [
+            14,
+            15,
+            16,
+            72
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1313963/RS (Rel. Min. Castro Meira, Segunda Turma, 09/10/2012): a taxa progressiva não se aplica às contas de trabalhadores avulsos.",
+          "citacao": "AgRg no REsp 1313963/RS",
+          "paragrafos": [
+            71
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 1.176.691/ES (Rel. Min. Teori Albino Zavascki, Primeira Turma, 15/06/2010): não se aplica a taxa progressiva às contas de trabalhadores avulsos.",
+          "citacao": "REsp 1.176.691/ES",
+          "paragrafos": [
+            16,
+            17,
+            76
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 1.196.043/ES (Rel. Min. Mauro Campbell Marques, Segunda Turma, 28/09/2010): não se aplica a taxa progressiva às contas de trabalhadores avulsos.",
+          "citacao": "REsp 1.196.043/ES",
+          "paragrafos": [
+            18,
+            75
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "PEDILEF 00110467020054036311 (TNU, 2012): reafirma que não se aplica a taxa progressiva às contas de trabalhadores avulsos.",
+          "citacao": "PEDILEF 00110467020054036311",
+          "paragrafos": [
+            78,
+            80
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Conclusão do relator: dá-se provimento ao recurso especial para reconhecer que não se aplica a taxa progressiva às contas de trabalhadores avulsos, em julgamento sob o rito do art. 543-C do CPC.",
+          "citacao": "",
+          "paragrafos": [
+            81,
+            82,
+            19,
+            21
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O acórdão recorrido fixou que os juros de mora são devidos apenas em caso de levantamento das cotas, a ser apurado em execução; a decisão do STJ não trata expressamente dessa parte.",
+          "citacao": "",
+          "paragrafos": [
+            32,
+            81
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12110,
+      "output_tokens": 1873,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002148
+  }
+}

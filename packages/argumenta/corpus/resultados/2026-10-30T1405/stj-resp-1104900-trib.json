@@ -1,0 +1,290 @@
+{
+  "casoId": "stj-resp-1104900-trib",
+  "paragrafos": 85,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido por unanimidade pela Primeira Seção do STJ, sob a sistemática do art. 543-C do CPC.",
+      "resumo": "O recorrente pediu o provimento do recurso especial para afastar o redirecionamento da execução fiscal contra sócios cujos nomes constam da CDA, alegando ausência das hipóteses do art. 135 do CTN e cabimento de exceção de pré-executividade. A Seção negou provimento ao recurso, entendendo que cabe ao sócio provar a ausência dos requisitos do art. 135 do CTN e que a matéria, por exigir dilação probatória, deve ser discutida em embargos à execução.",
+      "pedidos": [
+        {
+          "descricao": "Afastar a responsabilidade dos sócios cujos nomes constam da CDA, por ausência das hipóteses do art. 135 do CTN (excesso de poderes ou infração de lei, contrato social ou estatutos).",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "descricao": "Reconhecer a ilegalidade da inclusão do nome do responsável na CDA e admitir a exceção de pré-executividade com prova pré-constituída.",
+          "paragrafos": [
+            19
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 5
+        },
+        {
+          "tipo": "outro",
+          "inicio": 6,
+          "fim": 8
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 15,
+          "fim": 29
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 35,
+          "fim": 59
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 60,
+          "fim": 60
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10998,
+      "output_tokens": 576,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001388
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O sócio cujo nome consta da CDA deve provar a ausência das hipóteses do art. 135 do CTN para afastar sua responsabilidade na execução fiscal?",
+          "conclusao": "A decisão entendeu que, havendo o nome do sócio na CDA, cabe a ele o ônus de provar que não ocorreram as circunstâncias do art. 135 do CTN, e negou provimento ao recurso.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            5,
+            18,
+            19,
+            35,
+            36,
+            37,
+            40,
+            41
+          ],
+          "paragrafosConclusao": [
+            35,
+            60
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "É cabível exceção de pré-executividade para discutir a responsabilidade do sócio cujo nome consta da CDA, quando a prova é necessária?",
+          "conclusao": "A decisão concluiu que, por exigir dilação probatória, a matéria deve ser discutida em embargos à execução, e não por exceção de pré-executividade.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            5,
+            19,
+            44,
+            45,
+            47,
+            48,
+            49,
+            58,
+            59
+          ],
+          "paragrafosConclusao": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11253,
+      "output_tokens": 815,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001533
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A Primeira Seção firmou orientação de que, se o nome do sócio consta da CDA, a ele incumbe o ônus de provar que não ocorreram as circunstâncias do art. 135 do CTN.",
+          "citacao": "Primeira Seção do STJ; art. 135 do CTN",
+          "paragrafos": [
+            5,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 135 do CTN, que prevê responsabilidade de representantes por atos com excesso de poderes ou infração de lei, contrato social ou estatutos.",
+          "citacao": "CTN, art. 135",
+          "paragrafos": [
+            5,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "EREsp 702.232/RS: havendo nome do sócio-gerente na CDA como co-responsável, cabe a ele o ônus de provar a ausência dos requisitos do art. 135 do CTN.",
+          "citacao": "EREsp 702.232/RS, 1ª Seção, Rel. Min. Castro Meira",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 900.371/SP: a indicação do sócio na CDA confere legitimidade passiva e gera presunção relativa; a responsabilidade será decidida em embargos à execução.",
+          "citacao": "REsp 900.371/SP, 1ª Turma, Rel. Min. Teori Albino Zavascki",
+          "paragrafos": [
+            37,
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 750.581/RJ: cabe aos sócios com nome inscrito na CDA provar, em embargos, que não agiram com excesso de mandato, infração à lei ou ao contrato social.",
+          "citacao": "REsp 750.581/RJ, 2ª Turma, Rel. Min. Francisco Peçanha Martins",
+          "paragrafos": [
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 704.014/RS: havendo nome do sócio na CDA, cabe a ele provar que não agiu com dolo, má-fé ou excesso de poderes nos embargos; diferente do redirecionamento.",
+          "citacao": "REsp 704.014/RS, 2ª Turma, Rel. Min. Eliana Calmon",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "CDA goza de presunção relativa de liquidez e certeza, o que fundamenta a inversão do ônus da prova em favor da Fazenda.",
+          "citacao": "CTN, art. 204",
+          "paragrafos": [
+            36,
+            37,
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A decisão conclui que, no caso, a inclusão do sócio cujo nome consta da CDA exige que ele prove a ausência das hipóteses do art. 135 do CTN, negando provimento ao recurso.",
+          "citacao": "",
+          "paragrafos": [
+            35,
+            60
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Parecer do Ministério Público Federal: CDA com nome do sócio tem presunção juris tantum e impõe ao sócio o ônus de provar a ausência das situações do art. 135 do CTN.",
+          "citacao": "Parecer do MPF, fls. 119/123",
+          "paragrafos": [
+            26,
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Os embargos à execução são o meio de defesa próprio da execução fiscal.",
+          "citacao": "",
+          "paragrafos": [
+            5,
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Orientação do STJ admite exceção de pré-executividade quando não há necessidade de dilação probatória ou quando a questão pode ser conhecida de ofício.",
+          "citacao": "Orientação do STJ sobre exceção de pré-executividade",
+          "paragrafos": [
+            5,
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 778.467/SP: havendo necessidade de dilação probatória, a ilegitimidade passiva não pode ser apreciada em exceção de pré-executividade.",
+          "citacao": "AgRg no REsp 778.467/SP, 2ª Turma, Rel. Min. Mauro Campbell Marques",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1.049.954/MG: a legitimidade do sócio cujo nome consta da CDA depende de dilação probatória, o que desautoriza a exceção de pré-executividade.",
+          "citacao": "AgRg no REsp 1.049.954/MG, 1ª Turma, Rel. Min. Francisco Falcão",
+          "paragrafos": [
+            59
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 987.231/SP: a exceção de pré-executividade é cabível para prescrição quando não há necessidade de dilação probatória.",
+          "citacao": "AgRg no REsp 987.231/SP, 2ª Turma, Rel. Min. Humberto Martins",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no Ag 1.060.318/SC: a exceção de pré-executividade serve a questões de ordem pública, admitindo prescrição e decadência sem dilação probatória.",
+          "citacao": "AgRg no Ag 1.060.318/SC, 1ª Turma, Rel. Min. Luiz Fux",
+          "paragrafos": [
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "No caso concreto, o exame da responsabilidade dos representantes da executada requer dilação probatória, por isso a matéria deve ser discutida em embargos à execução.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11525,
+      "output_tokens": 2036,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002171
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "casoId": "stj-resp-1267995-desistencia-acao",
+  "paragrafos": 80,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido.",
+      "resumo": "O INSS recorreu de acórdão que homologou a desistência da ação pela parte autora, mesmo sem sua concordância condicionada à renúncia ao direito. A Primeira Seção do STJ deu provimento ao recurso, considerando legítima a oposição fundada no art. 3º da Lei 9.469/97. O acórdão recorrido foi reformado para que a demanda prossiga.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão para aplicar o art. 3º da Lei 9.469/97 e não homologar a desistência sem a renúncia expressa ao direito sobre o qual se funda a ação.",
+          "paragrafos": [
+            24,
+            27
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 6
+        },
+        {
+          "tipo": "outro",
+          "inicio": 7,
+          "fim": 16
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 17,
+          "fim": 19
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 20,
+          "fim": 33
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 34,
+          "fim": 35
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 36,
+          "fim": 56
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 57,
+          "fim": 57
+        },
+        {
+          "tipo": "outro",
+          "inicio": 58,
+          "fim": 80
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9764,
+      "output_tokens": 1743,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001848
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Após a contestação, a desistência da ação pode ser homologada quando o réu condiciona sua anuência à renúncia ao direito, com base no art. 3º da Lei 9.469/97?",
+          "conclusao": "A oposição do réu fundada no art. 3º da Lei 9.469/97 é legítima e obsta a homologação; a desistência fica condicionada à renúncia ao direito. Recurso especial provido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            6,
+            36,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            57
+          ],
+          "paragrafosConclusao": [
+            45,
+            46,
+            57
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10019,
+      "output_tokens": 783,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001393
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Após o oferecimento da resposta, é defeso ao autor desistir da ação sem o consentimento do réu.",
+          "citacao": "CPC, art. 267, § 4º",
+          "paragrafos": [
+            6,
+            41,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Fazenda Nacional só concorda com a desistência se o autor renunciar expressamente ao direito sobre o qual se funda a ação.",
+          "citacao": "Lei 9.469/97, art. 3º",
+          "paragrafos": [
+            6,
+            43,
+            44,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A regra do consentimento do réu decorre da bilateralidade formada no processo, assistindo igualmente ao réu o direito de solucionar o conflito.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A discordância do réu deve ser fundamentada, pois a mera oposição sem justificativa plausível importa abuso de direito.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A existência da imposição legal do art. 3º da Lei 9.469/97 é, por si só, justificativa suficiente para a concordância condicional do réu, obstando a homologação.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Julgado da Primeira Seção: é legítima a oposição à desistência com fundamento no art. 3º da Lei 9.469/97, condicionando a desistência à renúncia ao direito.",
+          "citacao": "REsp 1.267.995/PB, Primeira Seção, Rel. Min. Mauro Campbell Marques (recurso representativo da controvérsia)",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão que decidiu ser legítima a oposição à desistência fundada no art. 3º da Lei 9.469/97, condicionando-a à renúncia ao direito.",
+          "citacao": "REsp 651.721/RJ, 1ª Turma, Rel. Min. Teori Albino Zavascki, DJ de 28.9.2006",
+          "paragrafos": [
+            48,
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão que considerou a falta de anuência da União com fundamento no art. 3º da Lei 9.469/97 motivo suficiente para obstar a homologação da desistência.",
+          "citacao": "REsp 1.173.663/PR, 2ª Turma, Rel. Min. Eliana Calmon, DJe de 8.4.2010",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão que considerou a oposição à desistência fundada no art. 3º da Lei 9.469/97 motivo suficiente para obstar a homologação.",
+          "citacao": "REsp 1.184.935/MG, 1ª Turma, Rel. Min. Luiz Fux, DJe de 17.11.2010",
+          "paragrafos": [
+            53,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão que apontou a recusa fundamentada do réu à desistência como legítima, citado como precedente da mesma linha.",
+          "citacao": "REsp 460.748/DF, 2ª Turma, Rel. Min. João Otávio de Noronha, DJ de 03.08.2006",
+          "paragrafos": [
+            51,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 90738/RJ, Rel. Min. Sálvio de Figueiredo Teixeira, DJ 21.09.1998",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como precedente sobre a aplicação do art. 267, § 4º, do CPC; o texto não descreve a tese específica.",
+          "citacao": "REsp 241.780/PR, 4ª Turma, Rel. Min. Sálvio de Figueiredo Teixeira, DJ 03.04.2000",
+          "paragrafos": [
+            48,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O INSS condicionou sua concordância com a desistência à renúncia ao direito sobre o qual se funda a ação, em ação de servidor inativo.",
+          "citacao": "",
+          "paragrafos": [
+            23,
+            24,
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A oposição do réu fundada no art. 3º da Lei 9.469/97 é legítima e obsta a homologação; recurso especial provido.",
+          "citacao": "",
+          "paragrafos": [
+            57
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10173,
+      "output_tokens": 1672,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001853
+  }
+}

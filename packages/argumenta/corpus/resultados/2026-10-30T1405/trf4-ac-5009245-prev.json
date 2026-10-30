@@ -1,0 +1,239 @@
+{
+  "casoId": "trf4-ac-5009245-prev",
+  "paragrafos": 49,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Apelação do INSS não conhecida por ausência de impugnação específica dos fundamentos da sentença.",
+      "resumo": "O INSS apelou da sentença que reconheceu a especialidade de períodos de trabalho e concedeu aposentadoria por tempo de contribuição, sustentando a não demonstração da exposição a agentes nocivos. O relator entendeu que a apelação foi genérica e não indicou onde estaria a controvérsia. Por isso, não conheceu do recurso.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença para afastar o reconhecimento da especialidade dos períodos deferidos, por não demonstrada a exposição a agentes nocivos.",
+          "paragrafos": [
+            6,
+            23
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 24
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 25,
+          "fim": 37
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 38,
+          "fim": 39
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 40,
+          "fim": 41
+        },
+        {
+          "tipo": "outro",
+          "inicio": 42,
+          "fim": 49
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5504,
+      "output_tokens": 1387,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001244
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A apelação do INSS atende ao requisito de impugnação específica dos fundamentos da sentença?",
+          "conclusao": "A apelação é genérica e não impugna especificamente os fundamentos da sentença, por isso não é conhecida.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            23,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            41
+          ],
+          "paragrafosConclusao": [
+            35,
+            37,
+            41
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Cabe majorar os honorários advocatícios em razão do recurso?",
+          "conclusao": "Os honorários são majorados em 50% sobre o percentual mínimo da primeira faixa, nos termos do art. 85, §11, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            38,
+            39
+          ],
+          "paragrafosConclusao": [
+            39
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5759,
+      "output_tokens": 1049,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0011
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A peça recursal do INSS indica os períodos reconhecidos como especiais, mas é genérica e não faz referência aos formulários e laudos que fundamentaram a sentença.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Incumbe ao relator não conhecer de recurso que não tenha impugnado especificamente os fundamentos da decisão recorrida.",
+          "citacao": "art. 932, III, do CPC de 2015",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "O recurso deve conter arrazoado de fato e de direito que infirme a sentença, combatendo seus fundamentos.",
+          "citacao": "art. 1.010, II, CPC/15",
+          "paragrafos": [
+            33,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TRF4 que não conheceu de recurso por não impugnar os motivos adotados pelo juízo de origem, ferindo a dialeticidade.",
+          "citacao": "TRF4, AC [PROCESSO_2], Décima Primeira Turma, Relator Ana Cristina Ferro Blasi, juntado aos autos em 14/07/2024",
+          "paragrafos": [
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TRF4 que não conheceu do mérito de apelação genérica, por não expressar razões de fato e de direito contra a sentença.",
+          "citacao": "TRF4, Apelação Cível Nº 5007105-37.2018.404.9999, 5ª Turma, Juíza Federal Gisele Lemke, juntado aos autos em 28/05/2018",
+          "paragrafos": [
+            32,
+            34
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A apelação não indica onde estaria a irregularidade quanto ao reconhecimento da especialidade, impedindo avaliar a controvérsia recursal.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Não há remessa necessária no caso, não havendo nova reavaliação da questão.",
+          "citacao": "",
+          "paragrafos": [
+            22,
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A sentença foi proferida após 18/3/2016, data de vigência do novo CPC.",
+          "citacao": "",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Aplica-se a majoração de honorários recursais prevista no art. 85, §11, observando-se os §§ 2º a 6º quanto a critérios e limites.",
+          "citacao": "art. 85, §11, do CPC",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Percentual mínimo da primeira faixa de honorários, que serve de base para a majoração.",
+          "citacao": "artigo 85, §3º, inciso I, do NCPC",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Majora-se a verba honorária em 50% sobre o percentual mínimo da primeira faixa em razão do recurso.",
+          "citacao": "",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TRF4 que aplicou a majoração de honorários do art. 85, §11, do CPC/2015 em apelação não conhecida por genericidade.",
+          "citacao": "TRF4, Apelação Cível Nº 5007105-37.2018.404.9999, 5ª Turma, Juíza Federal Gisele Lemke, juntado aos autos em 28/05/2018",
+          "paragrafos": [
+            34
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5938,
+      "output_tokens": 1314,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001251
+  }
+}
