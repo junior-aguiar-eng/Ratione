@@ -93,18 +93,18 @@ const semAcento = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '');
 const PALAVRAS_VAZIAS = new Set(['do', 'da', 'de', 'dos', 'das', 'no', 'na', 'nos', 'nas', 'o', 'a', 'os', 'as', 'e', 'em', 'n']);
 const PROCESSO = /\b(eresp|aresp|resp|are|re|rhc|hc|rms|ms|rcl|pet|ai|ag)\s*n?[ºo°.]?\s*(\d[\d.]*\d|\d)(?:\s*[/-]?\s*(ac|al|am|ap|ba|ce|df|es|go|ma|mg|ms|mt|pa|pb|pe|pi|pr|rj|rn|ro|rr|rs|sc|se|sp|to)\b)?/;
 
-/**
- * Chave que iguala escritas diferentes da mesma citação. Reconhecida (dispositivo das normas da base, súmula): vale o que foi
- * reconhecido. Processo ("AgRg no REsp 1.282.370/PE, Rel. …"): vale a classe, o número e a UF, sem turma, relator nem data.
- * O resto vale pelas palavras, sem acento, pontuação nem ordem, com o número do artigo e do parágrafo presos ao rótulo
- * ("art. 535 do CPC/1973" = "CPC/1973, art. 535").
- */
-export function chaveDaCitacao(texto: string): string {
-  const r = reconhecerCitacao(texto, NORMAS);
-  if (r && r.tipo !== 'fora') return JSON.stringify(r);
-  const t = semAcento(texto).toLowerCase().replace(/(\d)\.(?=\d)/g, '$1');
-  const processo = PROCESSO.exec(t);
-  if (processo) return `processo ${processo[1]} ${processo[2]!.replace(/\./g, '')} ${processo[3] ?? ''}`.trim();
+const EXPANSOES: Array<[RegExp, string]> = [
+  [/\blc\b/g, 'lei complementar'],
+  [/\bec\b/g, 'emenda constitucional'],
+  [/\bmp\b/g, 'medida provisoria'],
+  [/\bdl\b/g, 'decreto lei']
+];
+const SUMULA_DE_OUTRO_TRIBUNAL = /sumula\s*(?:vinculante\s*)?n?[ºo°.]?\s*(\d{1,4})/;
+const SIGLA_DE_TRIBUNAL = /\b(tst|tse|stm|tcu|tnu|tj[a-z]{2}|trf ?\d|trt ?\d+)\b/;
+
+/** As palavras da citação, sem acento, pontuação nem ordem; o número do artigo e do parágrafo ficam presos ao rótulo. */
+function palavrasDaCitacao(t: string): string {
+  for (const [re, por] of EXPANSOES) t = t.replace(re, por);
   return t
     .replace(/\bart(?:igos?)?\.?\s*(\d+)/g, ' art_$1 ')
     .replace(/§+\s*(\d+)/g, ' par_$1 ')
@@ -113,6 +113,58 @@ export function chaveDaCitacao(texto: string): string {
     .sort()
     .join(' ');
 }
+const minusculas = (texto: string): string => semAcento(texto).toLowerCase().replace(/(\d)\.(?=\d)/g, '$1');
+
+/**
+ * Chave que iguala escritas diferentes da mesma citação. Reconhecida (dispositivo das normas da base, súmula): vale o que foi
+ * reconhecido. Processo ("AgRg no REsp 1.282.370/PE, Rel. …"): vale a classe, o número e a UF, sem turma, relator nem data.
+ * Súmula de outro tribunal ("Súmula 331, IV, do TST" = "Súmula 331 do C. TST"): tribunal e número. O resto vale pelas palavras,
+ * com siglas comuns por extenso (LC, EC, MP, DL): "art. 535 do CPC/1973" = "CPC/1973, art. 535".
+ */
+export function chaveDaCitacao(texto: string): string {
+  const r = reconhecerCitacao(texto, NORMAS);
+  if (r && r.tipo !== 'fora') return JSON.stringify(r);
+  const t = minusculas(texto);
+  const processo = PROCESSO.exec(t);
+  if (processo) return `processo ${processo[1]} ${processo[2]!.replace(/\./g, '')} ${processo[3] ?? ''}`.trim();
+  const sumula = SUMULA_DE_OUTRO_TRIBUNAL.exec(t);
+  const tribunal = SIGLA_DE_TRIBUNAL.exec(t);
+  if (sumula && tribunal) return `sumula ${tribunal[1]!.replace(' ', '')} ${sumula[1]}`;
+  return palavrasDaCitacao(t);
+}
+
+const DETALHE_VAZIO = new Set(['inciso', 'paragrafo', 'alinea', 'o', 'a', 'e']);
+const tokensDoDetalhe = (d: string | null): Set<string> =>
+  new Set(semAcento(d ?? '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w !== '' && !DETALHE_VAZIO.has(w)));
+const contido = (a: ReadonlySet<string>, b: ReadonlySet<string>): boolean => a.size > 0 && [...a].every(x => b.has(x));
+
+/**
+ * A citação achada corresponde à esperada quando é a mesma pela chave, ou:
+ * (1) as duas são artigo da mesma norma da base, com parágrafo, inciso ou alínea compatíveis (um contém o outro: "art. 43 do CTN"
+ *     vale para "CTN, art. 43, I e II", mas "§ 3º" não vale para "§ 11");
+ * (2) uma delas não foi reconhecida (escrita fora do padrão, norma fora da base): as palavras da esperada estão todas na achada,
+ *     e a achada pode ser mais específica ("Lei Complementar nº 142/2013" vale para "LC nº 142/2013, art. 3º, IV"; o inverso não).
+ * Precedente, súmula, tema e ação só valem pela chave.
+ */
+export function citacaoCorresponde(esperada: string, achada: string): boolean {
+  const ke = chaveDaCitacao(esperada);
+  const ka = chaveDaCitacao(achada);
+  if (ke === ka) return true;
+  const re = reconhecerCitacao(esperada, NORMAS);
+  const ra = reconhecerCitacao(achada, NORMAS);
+  if (re?.tipo === 'dispositivo' && ra?.tipo === 'dispositivo') {
+    if (re.normaId !== ra.normaId || re.artigo !== ra.artigo) return false;
+    const de = tokensDoDetalhe(re.detalhe);
+    const da = tokensDoDetalhe(ra.detalhe);
+    return de.size === 0 || da.size === 0 || contido(de, da) || contido(da, de);
+  }
+  const fechada = (r: ReturnType<typeof reconhecerCitacao>, k: string) =>
+    k.startsWith('processo ') || k.startsWith('sumula ') || (r !== null && r.tipo !== 'dispositivo' && r.tipo !== 'fora');
+  if (fechada(re, ke) || fechada(ra, ka)) return false;
+  const pe = new Set(palavrasDaCitacao(minusculas(esperada)).split(' ').filter(w => w !== ''));
+  const pa = new Set(palavrasDaCitacao(minusculas(achada)).split(' '));
+  return contido(pe, pa);
+}
 
 export interface ResultadoCitacoes {
   esperadas: number;
@@ -120,9 +172,9 @@ export interface ResultadoCitacoes {
 }
 
 export function medirCitacoes(saida: SaidasDoCaso['fundamentos'], g: Gabarito): ResultadoCitacoes {
-  const achadas = new Set((saida?.fundamentos ?? []).map(f => f.citacao).filter(c => c.trim()).map(chaveDaCitacao));
-  const esperadas = [...new Set(g.citacoes.map(chaveDaCitacao))];
-  return { esperadas: esperadas.length, encontradas: esperadas.filter(k => achadas.has(k)).length };
+  const achadas = (saida?.fundamentos ?? []).map(f => f.citacao).filter(c => c.trim());
+  const esperadas = g.citacoes.filter((c, i, todas) => todas.findIndex(o => chaveDaCitacao(o) === chaveDaCitacao(c)) === i);
+  return { esperadas: esperadas.length, encontradas: esperadas.filter(e => achadas.some(a => citacaoCorresponde(e, a))).length };
 }
 
 export interface MedidaDoCaso {

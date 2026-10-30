@@ -1,0 +1,315 @@
+{
+  "casoId": "stj-resp-1452840-embargos-terceiro-honorarios",
+  "paragrafos": 118,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido, por unanimidade.",
+      "resumo": "A Fazenda Nacional recorreu de acórdão que a condenou em honorários em embargos de terceiro, alegando violação aos arts. 20, § 4º, e 535 do CPC/1973. O STJ entendeu não haver omissão e aplicou o princípio da causalidade, fixando tese para os embargos de terceiro. O recurso foi negado por unanimidade.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão quanto à condenação da Fazenda Nacional em honorários advocatícios, com alegada violação ao art. 20, § 4º, do CPC/1973.",
+          "paragrafos": [
+            40,
+            49
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de omissão e de violação ao art. 535 do CPC/1973.",
+          "paragrafos": [
+            40,
+            50,
+            53
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 12
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 13,
+          "fim": 16
+        },
+        {
+          "tipo": "outro",
+          "inicio": 17,
+          "fim": 22
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 23,
+          "fim": 33
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 34,
+          "fim": 43
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 44,
+          "fim": 93
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 94,
+          "fim": 94
+        },
+        {
+          "tipo": "outro",
+          "inicio": 95,
+          "fim": 118
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11038,
+      "output_tokens": 2126,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002167
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Houve omissão do acórdão estadual, com ofensa ao art. 535 do CPC/1973?",
+          "conclusao": "Não há ofensa ao art. 535, pois o Tribunal de origem julgou integralmente a lide e solucionou a controvérsia com fundamento suficiente.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            40,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53
+          ],
+          "paragrafosConclusao": [
+            50,
+            53
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Quem deve arcar com os honorários em embargos de terceiro quando o comprador não registrou o imóvel e o credor foi embargado?",
+          "conclusao": "Em regra, não cabe condenar o credor que indicou o bem não registrado. Havendo resistência do credor após ciência da venda, mantém-se a condenação da Fazenda Nacional e nega-se provimento ao recurso.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            40,
+            52,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            67,
+            68,
+            90,
+            91,
+            92,
+            93,
+            94
+          ],
+          "paragrafosConclusao": [
+            58,
+            93,
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11293,
+      "output_tokens": 1363,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001811
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Não há omissão: o Tribunal de origem julgou integralmente a lide e solucionou a controvérsia, sem ofensa ao art. 535 do CPC/1973.",
+          "citacao": "CPC/1973, art. 535",
+          "paragrafos": [
+            14,
+            50
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "O órgão julgador não precisa rebater um a um todos os argumentos, devendo enfrentar as questões relevantes e imprescindíveis à resolução da demanda.",
+          "citacao": "REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon, DJ de 13/8/2007; REsp 855.073/SC, Primeira Turma, Relator Ministro Teori Albino Zavascki, DJ de 28/6/2007",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A irresignação da Fazenda Pública relaciona-se ao mérito da demanda, não havendo omissão a ser suprida.",
+          "citacao": "",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Admite-se embargos de terceiro fundados em posse advinda de compromisso de compra e venda, ainda que sem registro.",
+          "citacao": "Súmula 84/STJ",
+          "paragrafos": [
+            14,
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Em embargos de terceiro, quem deu causa à constrição indevida deve arcar com os honorários advocatícios; a sucumbência segue o princípio da causalidade.",
+          "citacao": "Súmula 303/STJ",
+          "paragrafos": [
+            14,
+            54,
+            56,
+            67,
+            82
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O adquirente que não registra o título expõe o bem à indevida constrição, pois as consultas de localização de bens são feitas nos cartórios, e a omissão não lhe dá a condição de vencedor.",
+          "citacao": "",
+          "paragrafos": [
+            14,
+            56,
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Não pode ser responsabilizado pelos honorários o credor que indica à penhora imóvel transferido mediante compromisso não registrado, pois sem o registro não havia como tomar conhecimento da transmissão.",
+          "citacao": "EREsp 490.605/SC, Corte Especial",
+          "paragrafos": [
+            14,
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Afasta-se a Súmula 303 quando o credor embargado opõe resistência ao terceiro, desafiando o mérito dos embargos; a condenação do credor em honorários é devida nesse caso.",
+          "citacao": "AgRg no REsp 1282370/PE, Rel. Ministro Benedito Gonçalves, Primeira Turma, DJe 06/03/2012",
+          "paragrafos": [
+            15,
+            68,
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Em embargos de terceiro, o embargante vencedor deve arcar com honorários se deixou de registrar a transferência do bem, pela causalidade.",
+          "citacao": "EDcl nos EDcl no REsp 375.026/PR, Segunda Turma, DJe 15/04/2008",
+          "paragrafos": [
+            71,
+            72
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "É devida a condenação em honorários do exequente que indica imóvel à penhora e, sabendo do negócio, apresenta objeção aos embargos de terceiro.",
+          "citacao": "REsp 724.341/MG, Primeira Turma, DJ 12/11/2007",
+          "paragrafos": [
+            83,
+            84,
+            85
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Na via de regra há condenação do sucumbente; excepcionalmente, sem resistência do credor, pode ser afastada sua condenação em honorários; havendo contestação, a verba é devida.",
+          "citacao": "AgRg no REsp 462.647/SC, Rel. Ministro Castro Meira, Segunda Turma, DJ 30/08/2004",
+          "paragrafos": [
+            58,
+            59,
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A Fazenda Nacional se opôs à pretensão do terceiro embargante mesmo com provas cristalinas de sua posse sobre o imóvel, atraindo a sucumbência.",
+          "citacao": "",
+          "paragrafos": [
+            52,
+            90
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em regra não há condenação do credor quando o imóvel não teve a alteração de titularidade registrada, mas excetua-se a hipótese de resistência após ciência da transmissão.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            59,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Ao defender a manutenção da penhora após ciência da transmissão, a parte credora gerou conflito de interesses apto a aplicar o princípio da sucumbência; por isso nega-se provimento ao recurso.",
+          "citacao": "",
+          "paragrafos": [
+            90,
+            93,
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Tese fixada para os fins do art. 1040 do CPC/2015 sobre honorários em embargos de terceiro com penhora de imóvel não registrado.",
+          "citacao": "CPC/2015, art. 1040; CPC/1973, art. 543-C, § 7º",
+          "paragrafos": [
+            14,
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11542,
+      "output_tokens": 1913,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002111
+  }
+}

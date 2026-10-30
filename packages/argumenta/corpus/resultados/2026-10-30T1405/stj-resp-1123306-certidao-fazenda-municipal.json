@@ -1,0 +1,292 @@
+{
+  "casoId": "stj-resp-1123306-certidao-fazenda-municipal",
+  "paragrafos": 97,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido: admitida a expedição de certidão positiva com efeitos de negativa ao município, independentemente de penhora, em execução embargada.",
+      "resumo": "A Fazenda Nacional recorreu de acórdão do TRF da 3ª Região que admitiu certidão positiva com efeitos de negativa para município em execução fiscal embargada, sem penhora, alegando violação aos arts. 205 e 206 do CTN. O STJ, por unanimidade, negou provimento ao recurso especial. O julgado foi submetido ao regime de recurso repetitivo (art. 543-C do CPC).",
+      "pedidos": [
+        {
+          "descricao": "Provimento do recurso especial da Fazenda Nacional para afastar a expedição de certidão positiva com efeitos de negativa ao município sem penhora, por violação aos arts. 205 e 206 do CTN.",
+          "paragrafos": [
+            22,
+            26
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 8
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 10,
+          "fim": 14
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 18,
+          "fim": 27
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 31,
+          "fim": 34
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 38,
+          "fim": 69
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 70,
+          "fim": 74
+        },
+        {
+          "tipo": "outro",
+          "inicio": 75,
+          "fim": 97
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11455,
+      "output_tokens": 2087,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002189
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A Fazenda Municipal, em embargos ou ação anulatória sem penhora, tem direito à certidão positiva com efeitos de negativa?",
+          "conclusao": "Sim. Ajuizados embargos ou ação anulatória pelo Município, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa, independentemente de garantia.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          "paragrafosConclusao": [
+            46,
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11710,
+      "output_tokens": 259,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001301
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 206 do CTN: a certidão positiva tem os efeitos da negativa quando a exigibilidade do crédito esteja suspensa ou haja penhora.",
+          "citacao": "CTN, art. 206",
+          "paragrafos": [
+            6,
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O Município recorrido ajuizou embargos à execução fiscal, sem penhora de bens.",
+          "citacao": "",
+          "paragrafos": [
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Bens públicos são impenhoráveis, por isso a ausência de penhora não impede a certidão.",
+          "citacao": "",
+          "paragrafos": [
+            7,
+            44
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Em embargos ou ação anulatória do Município, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa, independentemente de garantia.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 601.313/RS: proposta ação anulatória pelo Município, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 601.313/RS, Rel. Min. CASTRO MEIRA, DJ de 20.9.2004",
+          "paragrafos": [
+            7,
+            45,
+            56
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Ag 1.150.803/PR: ajuizamento de anulatória ou embargos pela Fazenda municipal enseja a certidão positiva com efeitos de negativa.",
+          "citacao": "Ag 1.150.803/PR, Rel. Min. CASTRO MEIRA, DJ. 05.08.2009",
+          "paragrafos": [
+            7,
+            50
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 1.074.253/MG: certidão positiva com efeitos de negativa para Município, independentemente de garantia, em ação anulatória.",
+          "citacao": "REsp 1.074.253/MG, Rel. Min. BENEDITO GONÇALVES, DJ. 10.03.2009",
+          "paragrafos": [
+            7,
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "AgRg no Ag 936.196/BA: embargos do Município, recebidos e processados, dão direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no Ag 936.196/BA, Rel. Ministra ELIANA CALMON, DJe 29/04/2008",
+          "paragrafos": [
+            7,
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 497923/SC: anulatória pelo Município suspende a exigibilidade e autoriza certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 497923/SC, Rel. Min. JOÃO OTÁVIO DE NORONHA, DJ 02/08/2006",
+          "paragrafos": [
+            7,
+            57
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 736.730/SC: embargos do Município sem penhora dão direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no REsp 736.730/SC, Rel. Ministro FRANCISCO FALCÃO, DJ 17/10/2005",
+          "paragrafos": [
+            7,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 443.024/RS: embargos do Município, recebidos e processados, dão direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 443.024/RS, Rel. Min. LUIZ FUX, DJ de 02.12.02",
+          "paragrafos": [
+            7,
+            63,
+            65
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 381.459/SC: embargos do Município sem garantia por penhora dão direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 381.459/SC, Rel. Min. Humberto Gomes de Barros, DJU de 17.11.03",
+          "paragrafos": [
+            7,
+            68
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 376.341/SC: embargos do Município, recebidos e processados, dão direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 376.341/SC, Rel. Min. Garcia Vieira, DJU de 21.10.02",
+          "paragrafos": [
+            7,
+            69
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Resp 205.815/MG: antes, prevalecia que não cabia certidão sem penhora ou suspensão na forma da lei.",
+          "citacao": "Resp 205.815/MG, Relator Ministro Garcia Vieira, DJ 28.06.99",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A excepcionalidade das prerrogativas da Fazenda Pública justifica a certidão sem garantia para o ente municipal.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11853,
+      "output_tokens": 1818,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002094
+  }
+}
