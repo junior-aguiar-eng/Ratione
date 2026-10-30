@@ -42,7 +42,12 @@ function referenciaDaDecisao(d: DecisaoEnviada): string {
   return `decisao:${createHash('sha256').update(d.paragrafos.join('\n\n')).digest('hex').slice(0, 16)}`;
 }
 
-const Paragrafos = z.array(z.number().int()).max(80);
+const MAX_PARAGRAFOS_LISTA = 80;
+
+// Uma questão de peça longa (razões de apelação de 348 parágrafos) chegou a listar mais de 80 parágrafos e a etapa inteira foi descartada.
+// Guardam-se os primeiros 80 em vez de perder a etapa e o custo dela; a instrução também pede que o modelo fique dentro do limite.
+const limitarLista = (v: unknown): unknown => (Array.isArray(v) ? v.slice(0, MAX_PARAGRAFOS_LISTA) : v);
+const Paragrafos = (minimo = 0) => z.preprocess(limitarLista, z.array(z.number().int()).min(minimo).max(MAX_PARAGRAFOS_LISTA));
 const analiseDe = (d: { analiseId: string }) => d.analiseId;
 const VERSAO = 'v3-2026-10-23';
 const paragrafosJson = (descricao: string) => ({ type: 'array', items: { type: 'integer' }, description: descricao });
@@ -56,7 +61,7 @@ export const SaidaEstrutura = z.object({
   tipo: z.enum(TIPOS_DECISAO),
   resultado: z.string().min(1).max(300),
   resumo: z.string().min(1).max(1_200),
-  pedidos: z.array(z.object({ descricao: z.string().min(1).max(400), paragrafos: Paragrafos })).max(15),
+  pedidos: z.array(z.object({ descricao: z.string().min(1).max(400), paragrafos: Paragrafos() })).max(15),
   secoes: z
     .array(z.object({ tipo: z.enum(TIPOS_SECAO), inicio: z.number().int(), fim: z.number().int() }))
     .min(1)
@@ -151,8 +156,8 @@ export const SaidaQuestoes = z.object({
         enunciado: z.string().min(1).max(400),
         conclusao: z.string().min(1).max(400),
         resultado: z.enum(RESULTADOS_QUESTAO),
-        paragrafos: Paragrafos,
-        paragrafosConclusao: Paragrafos.min(1)
+        paragrafos: Paragrafos(),
+        paragrafosConclusao: Paragrafos(1)
       })
     )
     .min(1)
@@ -168,7 +173,7 @@ Para cada questão (no máximo 10, na ordem em que aparecem no texto), preencha:
 - enunciado: a questão em forma de pergunta, com até 300 caracteres (ex.: "O banco responde por transferências feitas por fraudador?").
 - conclusao: o que a decisão concluiu, em uma frase de até 300 caracteres.
 - resultado: como a decisão tratou a alegação ou o pedido ligado à questão: acolhida, rejeitada, parcialmente acolhida, não conhecida ou prejudicada; pendente quando o texto é uma peça de parte e o pedido ainda não foi decidido.
-- paragrafos: onde a questão é discutida; paragrafosConclusao: onde está a conclusão (ao menos um).
+- paragrafos: onde a questão é discutida (no máximo 80 parágrafos; em peça longa, indique os principais); paragrafosConclusao: onde está a conclusão (ao menos um).
 
 Uma questão é algo que a decisão precisou resolver. Não liste fatos nem argumentos soltos como questões.
 - Não crie questão separada para o que é só consequência de outra (ex.: se a decisão julga improcedente o pedido de restituição por culpa exclusiva da vítima, o pedido de dano moral que cai junto não é questão nova; trate-o na conclusão da mesma questão). Crie questão própria quando a decisão usa outro fundamento para resolvê-la.
@@ -188,7 +193,7 @@ export const argumentaQuestoes: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaQu
   esforco: 'medium',
   maxTokensSaida: 4_000,
   maxCaracteresMensagem: 85_000,
-  versao: 'v4-2026-10-30',
+  versao: 'v5-2026-10-30',
   guardaResultado: false,
   instrucoes: INSTRUCOES_QUESTOES,
   ferramentas: [],
@@ -262,7 +267,7 @@ export const SaidaFundamentos = z.preprocess(limitarFundamentos, z.object({
         tipo: z.enum(TIPOS_FUNDAMENTO),
         descricao: z.string().min(1).max(400),
         citacao: z.string().max(200),
-        paragrafos: Paragrafos.min(1)
+        paragrafos: Paragrafos(1)
       })
     )
     .max(MAX_FUNDAMENTOS)
