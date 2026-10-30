@@ -10,7 +10,7 @@
   "gabarito": {
     "dispositivo": {
       "inicio": 100,
-      "fim": 103
+      "fim": 100
     },
     "dispositivoAlternativo": [
       {
@@ -46,9 +46,7 @@
     "citacoes": [
       "art. 15, I, da Lei 6.830/80",
       "art. 11 da Lei 6.830/80",
-      "EREsp 881.014/RS",
-      "art. 543-C do CPC",
-      "Resolução STJ n.º 08/2008"
+      "EREsp 881.014/RS"
     ]
   },
   "validacao": {
