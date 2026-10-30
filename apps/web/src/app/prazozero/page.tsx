@@ -29,6 +29,7 @@ import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
 import ResultadoMaterial from './ResultadoMaterial';
 import LigacoesDoPrazo from '../../components/LigacoesDoPrazo';
+import BotaoCopiarLink from '../../components/BotaoCopiarLink';
 import RelatorioAlteracoes from './RelatorioAlteracoes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -208,6 +209,19 @@ export default function PrazoZeroPage() {
     });
   };
 
+  /** O endereço do cálculo com todas as opções marcadas: o que "Salvar" guarda e o que "Copiar link" entrega. */
+  const urlDoCalculo = urlDoPrazoZero({
+    atoId,
+    ...(atoId === 'outro' ? { dias, nome: nomeOutro.trim() } : {}),
+    tipoEvento,
+    data: dataEvento,
+    tribunalId,
+    regime,
+    dobro: prazoEmDobro,
+    litisconsortes,
+    excecaoCriminal: regime === 'cpp_dias_corridos' && excecaoCriminal
+  });
+
   const salvar = () => {
     if (!resultado) return;
     salvarNaConta({
@@ -215,17 +229,7 @@ export default function PrazoZeroPage() {
       tipo: 'prazo',
       titulo: `${nomeAto} · ${resultado.diasTotaisComputados} dias ${tipoDias}`,
       detalhe: `${tribunalId} · prazo final em ${dataCurta(resultado.dataVencimentoFinal)}`,
-      url: urlDoPrazoZero({
-        atoId,
-        ...(atoId === 'outro' ? { dias, nome: nomeOutro.trim() } : {}),
-        tipoEvento,
-        data: dataEvento,
-        tribunalId,
-        regime,
-        dobro: prazoEmDobro,
-        litisconsortes,
-        excecaoCriminal: regime === 'cpp_dias_corridos' && excecaoCriminal
-      })
+      url: urlDoCalculo
     });
   };
 
@@ -525,6 +529,7 @@ export default function PrazoZeroPage() {
                     <CalendarPlus className="w-4 h-4" />
                     Adicionar ao calendário
                   </Button>
+                  <BotaoCopiarLink caminho={urlDoCalculo} />
                   <Button variant="secondary" type="button" onClick={salvar}>
                     {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
                     {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}

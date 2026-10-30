@@ -17,7 +17,7 @@ import {
   TipoHistorico
 } from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
-import AvisosAtivos from './AvisosAtivos';
+import AgendaDePrazos from './AgendaDePrazos';
 import AcessoAdministrativo from './AcessoAdministrativo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -160,7 +160,7 @@ export default function MeuEspacoPage() {
         </div>
       )}
 
-      <AvisosAtivos />
+      <AgendaDePrazos />
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div className="flex flex-wrap gap-1" role="group" aria-label="Filtrar por tipo">

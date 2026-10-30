@@ -24,16 +24,12 @@ export function dobrarLinhaIcs(linha: string): string {
   return partes.join('\r\n ');
 }
 
-export function gerarIcs(dataFinal: string, descricao: string, titulo: string): string {
+function eventoIcs(dataFinal: string, descricao: string, titulo: string, carimbo: string): string[] {
   const inicio = dataFinal.replace(/-/g, '');
   const fim = new Date(`${dataFinal}T12:00:00Z`);
   fim.setUTCDate(fim.getUTCDate() + 1);
   const fimStr = fim.toISOString().slice(0, 10).replace(/-/g, '');
-  const carimbo = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
   return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Ratione//PrazoZero//PT',
     'BEGIN:VEVENT',
     `UID:${inicio}-${Math.random().toString(36).slice(2, 10)}@ratione`,
     `DTSTAMP:${carimbo}`,
@@ -41,9 +37,24 @@ export function gerarIcs(dataFinal: string, descricao: string, titulo: string): 
     `DTEND;VALUE=DATE:${fimStr}`,
     `SUMMARY:${escaparTextoIcs(`Prazo final: ${titulo}`)}`,
     `DESCRIPTION:${escaparTextoIcs(descricao)}`,
-    'END:VEVENT',
+    'END:VEVENT'
+  ];
+}
+
+/** Vários prazos num só arquivo de calendário (a agenda de "Meu espaço"). */
+export function gerarIcsDeEventos(eventos: ReadonlyArray<{ data: string; titulo: string; descricao: string }>): string {
+  const carimbo = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Ratione//PrazoZero//PT',
+    ...eventos.flatMap(e => eventoIcs(e.data, e.descricao, e.titulo, carimbo)),
     'END:VCALENDAR'
   ]
     .map(dobrarLinhaIcs)
     .join('\r\n');
+}
+
+export function gerarIcs(dataFinal: string, descricao: string, titulo: string): string {
+  return gerarIcsDeEventos([{ data: dataFinal, titulo, descricao }]);
 }
