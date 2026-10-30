@@ -276,10 +276,12 @@ export const argumentaFundamentos: TarefaIA<DecisaoComQuestoes, DecisaoComQuesto
   descricao: 'Identifica os fundamentos (fatos, provas, normas, precedentes, argumentos) de cada conclusão da decisão colada.',
   gatilho: 'Botão "Analisar decisão" no Argumenta (pessoa logada), terceira etapa, com as questões da etapa anterior.',
   modelo: 'claude-haiku-5-5',
-  esforco: 'medium',
+  // Esforço baixo de propósito: é extração, e o raciocínio do esforço médio conta dentro de `maxTokensSaida`. Medido em 30/10/2026 numa
+  // decisão de 97 parágrafos: médio gastou 2.946 de 4.581 tokens só pensando e a resposta foi cortada; baixo, 0 de raciocínio, 2.142 tokens.
+  esforco: 'low',
   maxTokensSaida: 4_000,
   maxCaracteresMensagem: 30_000,
-  versao: VERSAO,
+  versao: 'v4-2026-10-30',
   guardaResultado: false,
   instrucoes: INSTRUCOES_FUNDAMENTOS,
   ferramentas: [],

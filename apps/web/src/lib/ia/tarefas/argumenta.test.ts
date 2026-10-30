@@ -88,6 +88,13 @@ describe('Argumenta: entrada das tarefas', () => {
   });
 });
 
+describe('Argumenta: esforço da etapa de fundamentos', () => {
+  it('roda em esforço baixo: o raciocínio do esforço médio conta no teto de saída e cortou a resposta de uma decisão longa', () => {
+    assert.equal(argumentaFundamentos.esforco, 'low');
+    assert.equal(argumentaFundamentos.maxTokensSaida, 4_000);
+  });
+});
+
 describe('Argumenta: cota por análise nas três etapas', () => {
   it('a 1ª etapa consome a análise; a 2ª não mexe na cota; a última conclui — todas ligadas à mesma análise', async () => {
     const e1 = deps(JSON.stringify(ESTRUTURA));
