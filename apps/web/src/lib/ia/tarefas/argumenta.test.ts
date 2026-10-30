@@ -106,6 +106,13 @@ describe('Argumenta: limites das saídas das etapas 2 e 3', () => {
   it('fundamento mal formado continua sendo recusado, mesmo dentro do teto', () => {
     assert.equal(SaidaFundamentos.safeParse({ fundamentos: [{ ...FUND, tipo: 'invento' }] }).success, false);
   });
+  it('questão que lista mais de 80 parágrafos guarda os 80 primeiros, em vez de descartar a etapa', () => {
+    const muitos = Array.from({ length: 150 }, (_, i) => i + 1);
+    const r = SaidaQuestoes.parse({ questoes: [{ ...QUESTAO, paragrafos: muitos, paragrafosConclusao: muitos }] });
+    assert.deepEqual(r.questoes[0].paragrafos, muitos.slice(0, 80));
+    assert.equal(r.questoes[0].paragrafosConclusao.length, 80);
+    assert.equal(SaidaQuestoes.safeParse({ questoes: [{ ...QUESTAO, paragrafosConclusao: [] }] }).success, false); // a conclusão continua exigindo ao menos um
+  });
   it('aceita o resultado "pendente", para tese ou pedido de peça de parte', () => {
     assert.equal(SaidaQuestoes.safeParse({ questoes: [QUESTAO] }).success, true);
   });

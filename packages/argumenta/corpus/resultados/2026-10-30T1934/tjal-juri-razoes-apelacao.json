@@ -1,0 +1,113 @@
+{
+  "casoId": "tjal-juri-razoes-apelacao",
+  "paragrafos": 348,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Não há dispositivo decisório: o texto são razões de apelação da defesa, que pedem a reforma da dosimetria da pena.",
+      "resumo": "A defesa recorre de condenação por tentativa de feminicídio e pede a redução da pena-base, com o afastamento das valorações negativas de conduta social, personalidade e consequências do crime. Pede também o reconhecimento de bis in idem na agravante do crime contra cônjuge e a aplicação da redução pela tentativa no patamar máximo de 2/3.",
+      "pedidos": [
+        {
+          "descricao": "Readequação da pena-base nas circunstâncias desfavoráveis, com fração de 1/6 ou 1/8.",
+          "paragrafos": [
+            58,
+            340
+          ]
+        },
+        {
+          "descricao": "Afastamento da valoração negativa da conduta social.",
+          "paragrafos": [
+            150,
+            341
+          ]
+        },
+        {
+          "descricao": "Afastamento da valoração negativa da personalidade do agente.",
+          "paragrafos": [
+            153,
+            218,
+            341
+          ]
+        },
+        {
+          "descricao": "Afastamento da valoração negativa das consequências do crime.",
+          "paragrafos": [
+            255,
+            341
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de bis in idem na agravante do art. 61, II, e, do Código Penal.",
+          "paragrafos": [
+            312,
+            342
+          ]
+        },
+        {
+          "descricao": "Aplicação da redução pela tentativa no patamar máximo de 2/3.",
+          "paragrafos": [
+            336,
+            344
+          ]
+        },
+        {
+          "descricao": "Recebimento das razões e realização das notificações em nome do advogado indicado.",
+          "paragrafos": [
+            339,
+            346
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 7,
+          "fim": 14
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 15,
+          "fim": 336
+        },
+        {
+          "tipo": "outro",
+          "inicio": 337,
+          "fim": 348
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 27987,
+      "output_tokens": 1771,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.003684,
+    "duracaoMs": 8869
+  },
+  "questoes": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato (questoes.1.paragrafos: Too big: expected array to have <=80 items)",
+    "uso": {
+      "input_tokens": 28704,
+      "output_tokens": 1696,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.003718,
+    "duracaoMs": 6657
+  },
+  "fundamentos": {
+    "estado": "nao_rodou",
+    "saida": null,
+    "motivo": "sem questões válidas",
+    "custoUsd": 0
+  }
+}
