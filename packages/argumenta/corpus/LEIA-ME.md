@@ -47,7 +47,7 @@ Todos os comandos rodam na raiz do repositório.
 | Métrica | Conta como acerto quando |
 |---|---|
 | Dispositivo | a seção "dispositivo" achada tem sobreposição de parágrafos ≥ 80% com o intervalo do gabarito ou com qualquer `dispositivoAlternativo` |
-| Questões | cada questão do gabarito tem uma questão achada que **cobre** ≥ 50% dos parágrafos dela **e** cuja **conclusão** cai ≥ 50% dentro deles; vale o menor dos dois e cada achada vale uma só. Precedentes transcritos no meio não penalizam, mas uma questão larga não vale por várias |
+| Questões | cada questão do gabarito tem uma questão achada que **cobre** ≥ 50% dos parágrafos dela **e** em que **ao menos um parágrafo da conclusão** cai dentro deles (a conclusão costuma aparecer também na ementa e no bloco "Acórdão"); cada achada vale uma só. Precedentes transcritos no meio não penalizam, mas uma questão larga não vale por várias |
 | Citações | a citação do gabarito aparece entre os fundamentos, mesmo escrita de outro jeito: "CDC, art. 14" = "art. 14 do CDC"; norma fora da base vale pelas palavras em qualquer ordem ("art. 535 do CPC/1973" = "CPC/1973, art. 535"); precedente vale pela classe, número e UF, sem turma, relator nem data ("REsp 927.216/RS" = "REsp 927.216/RS, 2ª Turma, Rel. …"); artigo de norma da base vale com parágrafo escrito de outro jeito ("§ 11" = "§11") e com mais ou menos detalhe ("art. 43 do CTN" vale para "CTN, art. 43, I e II", mas "§ 3º" não vale para "§ 11"); súmula de outro tribunal vale por tribunal e número ("Súmula 331, IV, do TST" = "Súmula 331 do C. TST"); sigla por extenso (LC, EC, MP, DL); a citação achada pode ser mais específica que a esperada, não o contrário |
 | Descartadas | a etapa chegou ao modelo e a saída foi recusada pelo código (formato ou conferência), sobre as que chegaram |
 
@@ -56,3 +56,5 @@ Os limiares ficam em `apps/web/src/lib/avaliacao/metricas.ts` (`LIMIAR_DISPOSITI
 **Histórico da régua.** Em 30/10/2026, com a primeira rodada (3 casos do STJ), a métrica de questões passou de Jaccard dos parágrafos para cobertura + âncora da conclusão, e a de citações passou a igualar precedentes e normas fora da base por forma canônica. Os limiares não mudaram. Sobre as mesmas saídas do modelo, questões foram de 1 para 4 de 6 e citações de 2 para 8 de 17; a mudança é de régua, não de modelo. Rodadas feitas antes disso não são comparáveis com as seguintes sem refazer o relatório (`avaliacao relatorio <rodada>`).
 
 Em 30/10/2026, com a rodada de 14 decisões, a comparação de citações ficou mais flexível (detalhe de parágrafo e inciso, siglas, súmulas de outros tribunais): sobre as mesmas saídas, de 41 para 57 de 81. Os limiares não mudaram.
+
+Também em 30/10/2026, a âncora da conclusão nas questões passou de "metade dos parágrafos da conclusão dentro da questão esperada" para "ao menos um": o modelo repete a conclusão na ementa, que fica fora. Sobre as saídas da rodada das 14, questões de 21 para 23 de 29 e extras de 9 para 7.

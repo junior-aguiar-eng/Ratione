@@ -74,7 +74,22 @@ describe('F5-05: questões', () => {
     const r = medirQuestoes({ questoes: [q([5, 6, 7, 10, 11, 12, 13], [7])] }, GAB);
     assert.deepEqual(r, { esperadas: 2, encontradas: 1, extras: 0 });
   });
-  it('correspondência: cobertura e âncora, vale o menor', () => {
+  it('âncora: basta um parágrafo da conclusão dentro da esperada (a conclusão também aparece na ementa)', () => {
+    // esperada [38-41,46-48,58]; o modelo aponta a conclusão na ementa (16, 18) e no voto (46)
+    const esperados = set(38, 39, 40, 41, 46, 47, 48, 58);
+    const achados = set(13, 15, 16, 18, 38, 39, 40, 41, 42, 46, 47, 48, 52);
+    assert.equal(correspondencia(esperados, achados, set(16, 18, 46)) >= 0.5, true);
+    assert.equal(correspondencia(esperados, achados, set(16, 18)), 0); // conclusão só fora: não vale
+  });
+  it('âncora: uma questão larga continua não valendo por duas esperadas', () => {
+    const r = medirQuestoes({ questoes: [{ paragrafos: [5, 6, 7, 10, 11, 12, 13], paragrafosConclusao: [7, 99] }] }, GAB);
+    assert.deepEqual(r, { esperadas: 2, encontradas: 1, extras: 0 });
+  });
+  it('correspondência sem parágrafos de conclusão usa a fração dos parágrafos achados', () => {
+    assert.equal(correspondencia(set(1, 2), set(1, 2), set()), 1);
+    assert.equal(correspondencia(set(1, 2), set(1, 2, 3, 4, 5, 6), set()), 1 / 3);
+  });
+  it('correspondência: cobertura e âncora, a âncora é a conclusão', () => {
     assert.equal(correspondencia(set(1, 2, 3, 4), set(1, 2, 3, 4, 9), set(4)), 1);
     assert.equal(correspondencia(set(1, 2, 3, 4), set(1, 2), set(2)), 0.5);
     assert.equal(correspondencia(set(1, 2), set(1, 2, 3), set(3)), 0);

@@ -1,8 +1,8 @@
 /**
  * F5-05: métricas do Argumenta contra o gabarito do revisor. Avaliam a **extração estrutural**, não a concordância com o texto da IA:
  * - dispositivo: o intervalo achado coincide com o do gabarito (sobreposição de parágrafos ≥ LIMIAR_DISPOSITIVO);
- * - questões: cada questão esperada é achada quando a achada **cobre** os parágrafos dela e a **conclusão** da achada cai dentro dela
- *   (ambos ≥ LIMIAR_QUESTAO); cada achada vale uma só esperada;
+ * - questões: cada questão esperada é achada quando a achada **cobre** os parágrafos dela (≥ LIMIAR_QUESTAO) e ao menos um parágrafo
+ *   da **conclusão** da achada cai dentro dela; cada achada vale uma só esperada;
  * - citações: a citação esperada aparece entre os fundamentos, mesmo escrita de outro jeito ("CDC, art. 14" = "art. 14 do CDC";
  *   "REsp 927.216/RS" = "REsp 927.216/RS, 2ª Turma, Rel. …");
  * - descartadas: saídas que o modelo gerou e o código recusou (formato ou conferência), sobre as chamadas feitas.
@@ -59,18 +59,21 @@ export interface ResultadoQuestoes {
 }
 
 /**
- * Uma questão achada corresponde a uma esperada quando (1) cobre pelo menos LIMIAR_QUESTAO dos parágrafos dela e (2) pelo menos
- * LIMIAR_QUESTAO dos parágrafos da própria conclusão ficam dentro dela. A cobertura não pune o modelo por incluir precedentes
- * transcritos no meio; a ancoragem da conclusão impede que uma questão larga demais valha por várias. Vale o menor dos dois.
+ * Uma questão achada corresponde a uma esperada quando (1) cobre pelo menos LIMIAR_QUESTAO dos parágrafos dela e (2) ao menos um
+ * parágrafo da própria conclusão cai dentro dela. A cobertura não pune o modelo por incluir precedentes transcritos no meio; a
+ * âncora da conclusão impede que uma questão larga demais valha por várias (e cada achada vale uma só esperada). Basta um
+ * parágrafo na âncora porque a conclusão costuma aparecer também na ementa e no bloco "Acórdão", fora da questão esperada. Vale a
+ * cobertura se a âncora existe; sem parágrafos de conclusão, vale o menor entre a cobertura e a fração dos parágrafos achados.
  */
 export function correspondencia(esperados: ReadonlySet<number>, achados: ReadonlySet<number>, conclusao: ReadonlySet<number>): number {
   if (esperados.size === 0) return 0;
   let cobertos = 0;
   for (const n of esperados) if (achados.has(n)) cobertos++;
-  const base = conclusao.size > 0 ? conclusao : achados;
-  let ancorados = 0;
-  for (const n of base) if (esperados.has(n)) ancorados++;
-  return Math.min(cobertos / esperados.size, base.size > 0 ? ancorados / base.size : 0);
+  const cobertura = cobertos / esperados.size;
+  if (conclusao.size > 0) return [...conclusao].some(n => esperados.has(n)) ? cobertura : 0;
+  let dentro = 0;
+  for (const n of achados) if (esperados.has(n)) dentro++;
+  return achados.size > 0 ? Math.min(cobertura, dentro / achados.size) : 0;
 }
 
 export function medirQuestoes(saida: SaidasDoCaso['questoes'], g: Gabarito): ResultadoQuestoes {

@@ -38,7 +38,7 @@ export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDo
     '| Métrica | Resultado |',
     '|---|---|',
     `| Intervalo do dispositivo certo (sobreposição ≥ ${LIMIAR_DISPOSITIVO * 100}%) | ${fracao(t.dispositivoAcertos, t.casos)} |`,
-    `| Questões esperadas encontradas (cobertura dos parágrafos e conclusão dentro, ≥ ${LIMIAR_QUESTAO * 100}%) | ${fracao(t.questoesEncontradas, t.questoesEsperadas)} |`,
+    `| Questões esperadas encontradas (cobertura dos parágrafos ≥ ${LIMIAR_QUESTAO * 100}%) | ${fracao(t.questoesEncontradas, t.questoesEsperadas)} |`,
     `| Citações esperadas encontradas | ${fracao(t.citacoesEncontradas, t.citacoesEsperadas)} |`,
     `| Saídas descartadas pelo código | ${fracao(chamadas.descartadas, chamadas.chamadas)} |`,
     `| Questões achadas que o gabarito não tem | ${t.questoesExtras} |`,
