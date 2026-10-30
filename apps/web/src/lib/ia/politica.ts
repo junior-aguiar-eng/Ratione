@@ -11,7 +11,7 @@ export const PRECO_USD_POR_MILHAO: Record<ModeloPermitido, { entrada: number; sa
 };
 
 /** Tetos que nenhuma tarefa pode passar (conferidos em teste para todo o catálogo). A cota de uso vem do plano do usuário, no banco. */
-export const TETOS = { maxTokensSaida: 4_000, maxCaracteresMensagem: 30_000 } as const;
+export const TETOS = { maxTokensSaida: 7_000, maxCaracteresMensagem: 30_000 } as const;
 
 /** Tempo máximo de uma chamada, em milissegundos, e uma nova tentativa só em falha transitória. */
 export const TEMPO_MAXIMO_MS = 30_000;

@@ -1,0 +1,370 @@
+{
+  "casoId": "trf4-ac-5007789-prev",
+  "paragrafos": 74,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Negado provimento à apelação do INSS; honorários advocatícios majorados em 20%; determinada a implantação imediata do benefício pela CEAB.",
+      "resumo": "O INSS apelou da sentença que julgou procedente o pedido de Aposentadoria por Idade da Pessoa com Deficiência à parte autora, por visão monocular congênita. Pediu a reforma da sentença para que o pedido fosse julgado improcedente. A Turma negou provimento ao recurso, manteve a procedência, majorou os honorários e determinou a implantação imediata do benefício.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença para que o pedido seja julgado improcedente (recurso do INSS).",
+          "paragrafos": [
+            15
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 16
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 17,
+          "fim": 64
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 65,
+          "fim": 66
+        },
+        {
+          "tipo": "outro",
+          "inicio": 67,
+          "fim": 74
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7629,
+      "output_tokens": 1009,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001267
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A autora, com visão monocular congênita, tem direito à aposentadoria da pessoa com deficiência por idade, com DER em 27/08/2021, nos termos da LC 142/2013?",
+          "conclusao": "Negado provimento ao apelo do INSS. A visão monocular é deficiência leve para fins previdenciários e a autora preencheu os requisitos do art. 3º, IV, da LC 142/2013, mantendo-se a procedência.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "paragrafosConclusao": [
+            49,
+            66
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "Cabe remessa necessária da sentença de procedência?",
+          "conclusao": "Remessa necessária incabível, nos termos da Súmula 490 do STJ e do art. 496, §3º, I, do CPC, pois o valor da condenação não ultrapassará mil salários mínimos.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            14
+          ],
+          "paragrafosConclusao": [
+            14
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Devem ser majorados os honorários advocatícios fixados na sentença, em razão do recurso desprovido?",
+          "conclusao": "Honorários majorados em 20% sobre a verba fixada na sentença, observados os limites do art. 85, §3º, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            51,
+            52
+          ],
+          "paragrafosConclusao": [
+            52,
+            66
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "acessoria",
+          "enunciado": "Deve o benefício ser implantado imediatamente, por meio da CEAB?",
+          "conclusao": "Determinada a implantação imediata do benefício, no prazo de trinta dias úteis, com DIB em 27/08/2021 e RMI a apurar.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          "paragrafosConclusao": [
+            54,
+            64,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8168,
+      "output_tokens": 1449,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001541
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A LC 142/2013 define pessoa com deficiência como quem tem impedimentos de longo prazo de natureza física, mental, intelectual ou sensorial.",
+          "citacao": "LC 142/2013, art. 2º",
+          "paragrafos": [
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A LC 142/2013 prevê aposentadoria da pessoa com deficiência aos 55 anos de idade para mulher, com 15 anos de contribuição e deficiência durante igual período, independentemente do grau.",
+          "citacao": "LC 142/2013, art. 3º, IV",
+          "paragrafos": [
+            23,
+            27,
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A LC 142/2013 exige avaliação do grau de deficiência, que deve ser médica e funcional, atestada por perícia do INSS.",
+          "citacao": "LC 142/2013, arts. 4º e 5º",
+          "paragrafos": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e, fixa as faixas de pontuação para os graus grave, moderado e leve.",
+          "citacao": "Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e",
+          "paragrafos": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei nº 14.126 classifica a visão monocular como deficiência sensorial, do tipo visual, para todos os efeitos legais.",
+          "citacao": "Lei nº 14.126",
+          "paragrafos": [
+            43,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Perícia oftalmológica atestou cegueira no olho esquerdo (CID H54.4) de natureza congênita, com início da deficiência na data de nascimento.",
+          "citacao": "",
+          "paragrafos": [
+            42,
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Pontuação combinada das avaliações médica e social pelo IFBrA foi de 7.775 pontos, acima do limite de 7.584 para deficiência leve.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TRF4, Apelação Cível nº [PROCESSO_2], 6ª Turma: visão monocular é deficiência leve para fins previdenciários, com direito à aposentadoria da pessoa com deficiência.",
+          "citacao": "TRF4, APELAÇÃO CÍVEL Nº [PROCESSO_2], 6ª Turma, Desembargadora Federal TAIS SCHILLING FERRAZ",
+          "paragrafos": [
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Tema STJ 1124 é citado na ementa transcrita sobre efeitos financeiros e termo inicial da aposentadoria da pessoa com deficiência.",
+          "citacao": "Tema STJ 1124",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A avaliação biopsicossocial serve para aferir existência e grau da deficiência, mas não se sobrepõe à classificação legal da visão monocular como deficiência.",
+          "citacao": "",
+          "paragrafos": [
+            41,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A DER em 27/08/2021, com 55 anos de idade e mais de 15 anos de contribuição cumpridos como pessoa com deficiência, preenche o art. 3º, IV, da LC 142/2013.",
+          "citacao": "",
+          "paragrafos": [
+            47,
+            48
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O CPC, art. 496, §3º, I, afasta a remessa necessária quando a condenação não ultrapassa mil salários mínimos.",
+          "citacao": "CPC, art. 496, §3º, I",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Súmula 490 do STJ: não cabe remessa necessária quando o valor da condenação não ultrapassa mil salários mínimos, ainda que ilíquida a sentença.",
+          "citacao": "Súmula 490 do STJ",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF4 5023876 53.2015.404.7200, Quinta Turma, Relator Roger Raupp Rios: citado para afastar a remessa necessária; o texto não descreve outra tese além da aplicação da súmula.",
+          "citacao": "TRF4 5023876 53.2015.404.7200, QUINTA TURMA, Relator ROGER RAUPP RIOS",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF4 5074445 13.2014.404.7000, Quinta Turma, Relatora Taís Schilling Ferraz: citado para afastar a remessa necessária; o texto não descreve outra tese além da aplicação da súmula.",
+          "citacao": "TRF4 5074445 13.2014.404.7000, QUINTA TURMA, Relator TAÍS SCHILLING FERRAZ",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Mesmo ilíquida a sentença, o valor da condenação jamais ultrapassará mil salários mínimos.",
+          "citacao": "",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O CPC, art. 85, §11, prevê a majoração de honorários em grau recursal, observados os limites das faixas do §3º.",
+          "citacao": "CPC, art. 85, §11 e §3º",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Desprovido o recurso do réu, cabe majorar os honorários para remunerar o trabalho adicional do procurador em segundo grau.",
+          "citacao": "",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "O CPC, art. 497, permite a tutela específica, e a decisão deve ser cumprida imediatamente, observado o prazo de trinta dias úteis.",
+          "citacao": "CPC, art. 497",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "TRF4, AC 2002.71.00.050349-7, Terceira Seção: citado para afirmar que a decisão, em princípio, não está sujeita a recurso com efeito suspensivo.",
+          "citacao": "TRF4, AC 2002.71.00.050349-7, Terceira Seção, Relator para Acórdão Celso Kipper, D.E. 01/10/2007",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Implantação pela CEAB com DIB em 27/08/2021 e RMI a apurar; se já houver benefício, implanta-se só se a renda atual for superior.",
+          "citacao": "",
+          "paragrafos": [
+            55,
+            56,
+            60,
+            63,
+            64
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8335,
+      "output_tokens": 2513,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00209
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "casoId": "tjal-juri-denuncia-mp",
+  "paragrafos": 44,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Não há decisão no texto: trata-se de denúncia do Ministério Público, com pedidos de recebimento, citação e manutenção da prisão preventiva.",
+      "resumo": "O Ministério Público denuncia o acusado por tentativa de homicídio qualificado contra a companheira (art. 121, §2º, VI, c/c art. 14, II, CP) e pede o recebimento da denúncia e o processamento pelo Tribunal do Júri. Pede também a manutenção da prisão preventiva do denunciado. Não há manifestação judicial sobre os pedidos.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento e autuação da denúncia, com citação do denunciado para resposta à acusação e processamento pelo procedimento dos crimes dolosos contra a vida, até pronúncia e julgamento pelo Tribunal do Júri.",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "descricao": "Anexação aos autos da Folha de Antecedentes Criminais do denunciado e ofício à Autoridade Policial e ao IML para remessa do laudo de exame de corpo de delito da vítima.",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "descricao": "Protesto por provar o alegado por todos os meios de prova admitidos em direito, especialmente testemunhas, perícias e documentos.",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "descricao": "Manutenção da prisão preventiva do denunciado.",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "outro",
+          "inicio": 5,
+          "fim": 15
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 16,
+          "fim": 17
+        },
+        {
+          "tipo": "outro",
+          "inicio": 18,
+          "fim": 24
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 25,
+          "fim": 34
+        },
+        {
+          "tipo": "outro",
+          "inicio": 35,
+          "fim": 44
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4434,
+      "output_tokens": 1538,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001212
+  },
+  "questoes": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato (questoes: Too small: expected array to have >=1 items)",
+    "uso": {
+      "input_tokens": 4973,
+      "output_tokens": 287,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000641
+  },
+  "fundamentos": {
+    "estado": "nao_rodou",
+    "saida": null,
+    "motivo": "sem questões válidas",
+    "custoUsd": 0
+  }
+}

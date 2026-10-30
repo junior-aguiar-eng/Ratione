@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { prepararDecisao } from '@ratione/argumenta';
 import { executarTarefa, type DependenciasExecucao } from '../executar';
 import type { PedidoModelo, ResultadoModelo } from '../contrato';
-import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes } from './argumenta';
+import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes, SaidaFundamentos, SaidaQuestoes } from './argumenta';
 
 const TEXTO = `SENTENÇA
 
@@ -96,10 +96,29 @@ describe('Argumenta: instrução da etapa de questões', () => {
   });
 });
 
+describe('Argumenta: limites das saídas das etapas 2 e 3', () => {
+  const FUND = { questao: 'Q1', tipo: 'norma', descricao: 'Responsabilidade objetiva.', citacao: 'CDC, art. 14', paragrafos: [5] };
+  const QUESTAO = { id: 'Q1', categoria: 'merito', enunciado: 'Há dever de indenizar?', conclusao: 'Sim.', resultado: 'pendente', paragrafos: [5], paragrafosConclusao: [5] };
+  it('aceita até 50 fundamentos e guarda os 50 primeiros, em vez de descartar a etapa, se o modelo passar disso', () => {
+    assert.equal(SaidaFundamentos.parse({ fundamentos: Array(40).fill(FUND) }).fundamentos.length, 40);
+    assert.equal(SaidaFundamentos.parse({ fundamentos: Array(60).fill(FUND) }).fundamentos.length, 50);
+  });
+  it('fundamento mal formado continua sendo recusado, mesmo dentro do teto', () => {
+    assert.equal(SaidaFundamentos.safeParse({ fundamentos: [{ ...FUND, tipo: 'invento' }] }).success, false);
+  });
+  it('aceita o resultado "pendente", para tese ou pedido de peça de parte', () => {
+    assert.equal(SaidaQuestoes.safeParse({ questoes: [QUESTAO] }).success, true);
+  });
+  it('a instrução manda registrar as teses de uma peça de parte como questões, e nunca devolver a lista vazia', () => {
+    assert.match(argumentaQuestoes.instrucoes, /peça de parte/);
+    assert.match(argumentaQuestoes.instrucoes, /Nunca devolva a lista vazia/);
+  });
+});
+
 describe('Argumenta: esforço da etapa de fundamentos', () => {
   it('roda em esforço baixo: o raciocínio do esforço médio conta no teto de saída e cortou a resposta de uma decisão longa', () => {
     assert.equal(argumentaFundamentos.esforco, 'low');
-    assert.equal(argumentaFundamentos.maxTokensSaida, 4_000);
+    assert.equal(argumentaFundamentos.maxTokensSaida, 7_000); // folga para até 50 fundamentos
   });
 });
 

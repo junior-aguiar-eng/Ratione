@@ -1,0 +1,664 @@
+{
+  "casoId": "trt4-rot-0022282-trab",
+  "paragrafos": 91,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso do reclamante não conhecido quanto ao benefício da justiça gratuita e parcialmente provido quanto aos demais pedidos.",
+      "resumo": "O reclamante recorreu quanto ao depósito das verbas rescisórias, plus salarial, insalubridade, dano moral e honorários assistenciais. A Turma não conheceu do recurso sobre a justiça gratuita, por falta de interesse. No mérito, deu provimento parcial para acrescer a multa do art. 477, §8º, da CLT, indenização por dano moral de R$ 2.000,00 e honorários assistenciais de 15% do valor bruto da condenação.",
+      "pedidos": [
+        {
+          "descricao": "Ordem para consignação das verbas rescisórias no prazo legal e condenação às multas dos arts. 467 e 477 da CLT, se não pagas.",
+          "paragrafos": [
+            22,
+            33,
+            36,
+            37
+          ]
+        },
+        {
+          "descricao": "Não conhecimento do recurso quanto ao benefício da justiça gratuita (aplicação do art. 790, §3º, da CLT).",
+          "paragrafos": [
+            28,
+            29,
+            30
+          ]
+        },
+        {
+          "descricao": "Pagamento de plus salarial por atividades diversas das de vigia.",
+          "paragrafos": [
+            22,
+            41,
+            48,
+            55
+          ]
+        },
+        {
+          "descricao": "Adicional de insalubridade por rondas em locais úmidos e sem capa de chuva.",
+          "paragrafos": [
+            22,
+            57,
+            61,
+            63
+          ]
+        },
+        {
+          "descricao": "Indenização por dano moral pelo atraso no pagamento dos salários.",
+          "paragrafos": [
+            22,
+            65,
+            75,
+            79
+          ]
+        },
+        {
+          "descricao": "Honorários assistenciais, mesmo sem advogado credenciado pelo sindicato.",
+          "paragrafos": [
+            22,
+            81,
+            82,
+            83
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 11
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 12,
+          "fim": 13
+        },
+        {
+          "tipo": "outro",
+          "inicio": 14,
+          "fim": 15
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 16,
+          "fim": 18
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 21,
+          "fim": 24
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 25,
+          "fim": 30
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 31,
+          "fim": 83
+        },
+        {
+          "tipo": "outro",
+          "inicio": 84,
+          "fim": 91
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8801,
+      "output_tokens": 1741,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001751,
+    "duracaoMs": 7755
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recorrente tem interesse em recorrer contra o indeferimento da aplicação do art. 790, §3º, da CLT, já que a justiça gratuita foi deferida?",
+          "conclusao": "Não conheceu do recurso quanto ao benefício da justiça gratuita, por falta de interesse, pois o benefício pedido já havia sido concedido.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            27,
+            28,
+            29,
+            30
+          ],
+          "paragrafosConclusao": [
+            30
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Cabe a multa do art. 467 da CLT quando a rescisão do contrato é reconhecida judicialmente e havia controvérsia sobre a rescisão indireta?",
+          "conclusao": "Indevida a multa do art. 467 da CLT, pois a rescisão foi reconhecida judicialmente e havia controvérsia sobre a rescisão indireta.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            33,
+            34,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "É devida a multa do art. 477, §8º, da CLT pelo atraso no pagamento das verbas rescisórias, mesmo com rescisão reconhecida em juízo?",
+          "conclusao": "Devida a multa do art. 477, §8º, da CLT, por aplicação analógica da Súmula 58 do TRT4 e considerando a superação da OJ 351 da SDI-I do TST.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            37,
+            38,
+            39
+          ],
+          "paragrafosConclusao": [
+            39
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "Tem direito ao plus salarial o vigia que atendia telefonemas e levava equipamentos às salas de aula?",
+          "conclusao": "Não devido o plus salarial, pois não houve alteração contratual e as tarefas são compatíveis com a condição pessoal do empregado (art. 456, parágrafo único, CLT).",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "paragrafosConclusao": [
+            54,
+            55
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "Tem direito ao adicional de insalubridade o vigia que fazia rondas em dias chuvosos sem capa de chuva?",
+          "conclusao": "Indevido o adicional, pois rondas em dias de chuva não se equiparam ao trabalho em local alagado ou encharcado previsto no Anexo 10 da NR-15.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "paragrafosConclusao": [
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "merito",
+          "enunciado": "O atraso reiterado no pagamento de salários gera dever de indenização por dano moral ao empregado?",
+          "conclusao": "Devida indenização por dano moral de R$ 2.000,00, por dano presumido decorrente do atraso reiterado de salários.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "paragrafosConclusao": [
+            75,
+            79
+          ]
+        },
+        {
+          "id": "Q7",
+          "categoria": "acessoria",
+          "enunciado": "São devidos honorários assistenciais ao reclamante não assistido por advogado credenciado pelo sindicato?",
+          "conclusao": "Devidos honorários assistenciais de 15% do valor bruto da condenação, com base na concessão da justiça gratuita e na declaração de hipossuficiência.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            80,
+            81,
+            82,
+            83
+          ],
+          "paragrafosConclusao": [
+            82,
+            83
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9518,
+      "output_tokens": 1317,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00161,
+    "duracaoMs": 5790
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Pedido de aplicação do art. 790, §3º, da CLT, com garantia de acesso integral e gratuito ao Judiciário.",
+          "citacao": "CLT, art. 790, §3º",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Direito de acesso ao Judiciário de forma integral e gratuita, invocado pelo recorrente.",
+          "citacao": "CF, art. 5º, LXXIV",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O benefício requerido é exatamente o já concedido em sentença à parte.",
+          "citacao": "",
+          "paragrafos": [
+            29
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Ausência de interesse em recorrer, pois o benefício pedido já havia sido concedido.",
+          "citacao": "",
+          "paragrafos": [
+            29,
+            30
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 467 da CLT: multa de 50% sobre verbas rescisórias incontroversas não pagas na data do comparecimento à Justiça do Trabalho.",
+          "citacao": "CLT, art. 467",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A rescisão do contrato foi reconhecida judicialmente, de forma retroativa.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Na primeira audiência o contrato estava em vigor, não havendo parcelas rescisórias a pagar.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Havia controvérsia sobre o reconhecimento da rescisão indireta do contrato.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Por essas razões, a multa do art. 467 da CLT é indevida.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Art. 477, §6º, da CLT: prazo e forma de pagamento das verbas rescisórias, não observados no caso.",
+          "citacao": "CLT, art. 477, §6º",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Incontroverso que o reclamante não recebeu as verbas rescisórias no prazo e na forma legais.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Súmula 58 do TRT4 aplicada por analogia, para devida a multa do art. 477, §8º, da CLT.",
+          "citacao": "Súmula nº 58 do TRT4",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Multa do art. 477, §8º, da CLT devida pelo atraso no pagamento das verbas rescisórias.",
+          "citacao": "CLT, art. 477, §8º",
+          "paragrafos": [
+            37,
+            39
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "OJ 351 da SDI-I do TST, que afastava a multa em caso de reconhecimento judicial, foi cancelada em 25-11-2009.",
+          "citacao": "OJ nº 351 da SDI-I do TST",
+          "paragrafos": [
+            38
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Entendimentos recentes do TST indicam que, sem culpa do trabalhador no atraso, a multa é cabível.",
+          "citacao": "",
+          "paragrafos": [
+            38
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Art. 444 da CLT: autonomia privada quanto à fixação de salários e tarefas.",
+          "citacao": "CLT, art. 444",
+          "paragrafos": [
+            44
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Depoimentos do autor, da representante da reclamada e da testemunha sobre atendimento de telefones e levar equipamentos às salas.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            46,
+            47
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "O reclamante trabalhou como vigia de 16-05-2007 a 14-09-2013.",
+          "citacao": "",
+          "paragrafos": [
+            42
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não houve alteração objetiva do contrato, pois as atividades sempre foram as mesmas, afastando o art. 468 da CLT.",
+          "citacao": "CLT, art. 468",
+          "paragrafos": [
+            48,
+            49
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "A testemunha referiu tarefas atribuídas a todos os vigias, não especificamente ao reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Atividades compatíveis com a condição pessoal do empregado, por aplicação do parágrafo único do art. 456 da CLT.",
+          "citacao": "CLT, art. 456, parágrafo único",
+          "paragrafos": [
+            50,
+            54
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "prova",
+          "descricao": "Laudo pericial do ID 1662819 concluiu por insalubridade em grau médio.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            59
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "Anexo 10 da NR-15: atividades em locais alagados ou encharcados com umidade excessiva.",
+          "citacao": "NR-15, Anexo 10",
+          "paragrafos": [
+            59,
+            61
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "fato",
+          "descricao": "O reclamante fez rondas por curto período, possivelmente em dias de chuva, sem capa de chuva.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            62
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "Rondas em dias de chuva não se equiparam a trabalho constante em local alagado ou encharcado.",
+          "citacao": "",
+          "paragrafos": [
+            61,
+            62
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "fato",
+          "descricao": "A reclamada não contestou o atraso salarial; juntou acordos com o sindicato sobre parcelamento de salários.",
+          "citacao": "",
+          "paragrafos": [
+            66
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "fato",
+          "descricao": "Provado o atraso reiterado no pagamento das parcelas salariais.",
+          "citacao": "",
+          "paragrafos": [
+            66
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "norma",
+          "descricao": "Art. 5º, X, da CF: inviolabilidade da honra e direito à indenização por dano moral.",
+          "citacao": "CF, art. 5º, X",
+          "paragrafos": [
+            69,
+            70
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "norma",
+          "descricao": "Arts. 186 e 927 do Código Civil: ato ilícito que causa dano moral deve ser reparado.",
+          "citacao": "CC, arts. 186 e 927",
+          "paragrafos": [
+            72,
+            73
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "argumento",
+          "descricao": "O atraso reiterado salarial gera angústia e constrangimento, com dano presumido, dispensando prova.",
+          "citacao": "",
+          "paragrafos": [
+            74,
+            75
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "precedente",
+          "descricao": "Acórdão da 1ª Turma do TRT4 (Desembargadora Iris Lima de Moraes): atraso reiterado de salários enseja indenização por danos morais.",
+          "citacao": "TRT da 04ª Região, 1a. Turma, [PROCESSO_2] RO, em 19/03/2014",
+          "paragrafos": [
+            77
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "precedente",
+          "descricao": "Acórdão da 1ª Turma do TRT4 (Desembargadora Laís Helena Jaeger Nicotti): atraso salarial reiterado enseja reparação por dano moral.",
+          "citacao": "TRT da 04ª Região, 1a. Turma, [PROCESSO_3] RO, em 26/02/2014",
+          "paragrafos": [
+            78
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "argumento",
+          "descricao": "Indenização fixada em R$ 2.000,00 pelo dano, caráter pedagógico e capacidade econômica do ofensor.",
+          "citacao": "",
+          "paragrafos": [
+            79
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "fato",
+          "descricao": "O reclamante não está assistido por advogado credenciado pelo sindicato, mas teve justiça gratuita deferida com declaração de hipossuficiência.",
+          "citacao": "",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "norma",
+          "descricao": "Lei 1.060/50 aplicável à assistência judiciária gratuita.",
+          "citacao": "Lei 1.060/50",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Súmula 450 do STF aplicada para os honorários assistenciais.",
+          "citacao": "Súmula 450 do STF",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Súmula 61 do TRT4 aplicada para os honorários assistenciais.",
+          "citacao": "Súmula 61 do TRT4",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Súmulas 219 e 329 do TST afastadas quanto à exigência de assistência sindical.",
+          "citacao": "Súmulas nº 219 e 329 do TST",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "argumento",
+          "descricao": "Justiça gratuita com declaração de hipossuficiência basta para garantir acesso ao Judiciário, sem assistência sindical.",
+          "citacao": "",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "argumento",
+          "descricao": "Honorários assistenciais fixados em 15% do valor bruto da condenação.",
+          "citacao": "",
+          "paragrafos": [
+            83
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9934,
+      "output_tokens": 3484,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002735,
+    "duracaoMs": 12024
+  }
+}

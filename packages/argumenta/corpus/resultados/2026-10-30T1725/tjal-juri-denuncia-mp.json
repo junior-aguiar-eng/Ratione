@@ -1,0 +1,320 @@
+{
+  "casoId": "tjal-juri-denuncia-mp",
+  "paragrafos": 44,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "O texto é uma denúncia do Ministério Público, sem decisão judicial; pede o recebimento da denúncia e a manutenção da prisão preventiva.",
+      "resumo": "O Ministério Público denuncia o acusado por tentativa de homicídio qualificado por razão de sexo feminino, contra sua companheira, com uso de faca. Requer o recebimento e a citação, a juntada de documentos e a manutenção da prisão preventiva. Não há decisão no texto.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento e autuação da denúncia, com citação do denunciado para resposta à acusação, observando-se o procedimento do júri até final condenação.",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "descricao": "Juntada aos autos da Folha de Antecedentes Criminais do denunciado e expedição de ofícios à Autoridade Policial e ao IML para remessa do laudo de exame de corpo de delito.",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "descricao": "Produção de provas por todos os meios admitidos em direito, especialmente testemunhas, perícias e documentos.",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "descricao": "Manutenção da prisão preventiva do denunciado, para garantia da ordem pública.",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 15
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 16,
+          "fim": 17
+        },
+        {
+          "tipo": "outro",
+          "inicio": 18,
+          "fim": 24
+        },
+        {
+          "tipo": "outro",
+          "inicio": 25,
+          "fim": 38
+        },
+        {
+          "tipo": "outro",
+          "inicio": 39,
+          "fim": 44
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4434,
+      "output_tokens": 1358,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001122,
+    "duracaoMs": 6177
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O denunciado deve responder por tentativa de homicídio qualificado, por razões da condição de sexo feminino, contra a companheira?",
+          "conclusao": "O Ministério Público imputa ao denunciado as sanções do art. 121, §2º, VI, c/c art. 14, II, do Código Penal, pedindo que seja condenado.",
+          "resultado": "pendente",
+          "paragrafos": [
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            17
+          ],
+          "paragrafosConclusao": [
+            17
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "A denúncia deve ser recebida e o processo seguir o rito dos crimes dolosos contra a vida, com julgamento pelo Tribunal do Júri?",
+          "conclusao": "O Ministério Público pede o recebimento e a autuação da denúncia, a citação do acusado para resposta e o processamento até a pronúncia e o julgamento pelo Tribunal do Júri.",
+          "resultado": "pendente",
+          "paragrafos": [
+            22
+          ],
+          "paragrafosConclusao": [
+            22
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "A prisão preventiva do denunciado deve ser mantida para garantir a ordem pública?",
+          "conclusao": "O Ministério Público pede a manutenção da prisão preventiva, sustentando a gravidade do delito, a periculosidade do agente e a prova da materialidade e de indícios de autoria.",
+          "resultado": "pendente",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ],
+          "paragrafosConclusao": [
+            34
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "preliminar",
+          "enunciado": "Devem ser juntados aos autos a folha de antecedentes do denunciado e o laudo de exame de corpo de delito, com produção de provas em direito admitidas?",
+          "conclusao": "O Ministério Público requer a juntada da folha de antecedentes, a requisição do laudo ao IML e a produção de provas por testemunhas, perícias e documentos.",
+          "resultado": "pendente",
+          "paragrafos": [
+            23,
+            24,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ],
+          "paragrafosConclusao": [
+            23,
+            24
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5151,
+      "output_tokens": 1561,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001296,
+    "duracaoMs": 7829
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Em 15/09/2021, por volta das 02h, na BR 101, o denunciado desferiu golpes de faca contra a companheira, por razões da condição de sexo feminino, com animus necandi.",
+          "citacao": "",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Após o trajeto, o denunciado puxou faca e golpeou o abdômen da vítima, desferiu socos e mordidas; as agressões só cessaram quando ela conseguiu sair do carro e pedir socorro.",
+          "citacao": "",
+          "paragrafos": [
+            11,
+            12
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A vítima sofreu ferimentos de faca no abdômen, braços, mãos e perna, marcas de mordidas e passou por cirurgia; o denunciado fugiu do local.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Denunciado e vítima conviviam maritalmente há 22 anos e ela já fora agredida física e psicologicamente em outras oportunidades.",
+          "citacao": "",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Confissão do denunciado perante a Autoridade Policial, em depoimento às fls. 150/151.",
+          "citacao": "",
+          "paragrafos": [
+            15
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Imputação de tentativa de homicídio qualificado (inciso VI, feminicídio) com base no art. 121, §2º, VI, c/c art. 14, II.",
+          "citacao": "CP, art. 121, §2º, VI; CP, art. 14, II",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Pedido de procedimento especial dos crimes dolosos contra a vida, com julgamento pelo Tribunal do Júri após a pronúncia.",
+          "citacao": "Código de Processo Penal (procedimento dos crimes dolosos contra a vida)",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Pedido de recebimento e autuação da denúncia e citação do acusado para resposta no prazo de 10 dias.",
+          "citacao": "",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Pressupostos da prisão preventiva: prova da existência do crime e indícios suficientes de autoria.",
+          "citacao": "CPP, art. 312",
+          "paragrafos": [
+            26
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A gravidade do delito, o emprego de arma branca, a violência e a condição de sexo feminino da vítima indicam periculosidade e justificam a garantia da ordem pública.",
+          "citacao": "",
+          "paragrafos": [
+            27,
+            28
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A manutenção da custódia visa acautelar o meio social e assegurar a credibilidade da justiça, diante de crimes que causam repercussão e temor na comunidade.",
+          "citacao": "",
+          "paragrafos": [
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Requer-se a juntada da Folha de Antecedentes Criminais do denunciado aos autos.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Requer-se ofício à Autoridade Policial e ao IML para remessa do laudo de exame de corpo de delito da vítima.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Protesto por provar o alegado por todos os meios admitidos, especialmente testemunhas, perícias e documentos; rol de testemunhas arrolado.",
+          "citacao": "",
+          "paragrafos": [
+            24,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5232,
+      "output_tokens": 1380,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001213,
+    "duracaoMs": 5443
+  }
+}
