@@ -5,9 +5,10 @@
 
 /**
  * Acima disso a decisão é recusada, não cortada (o limite que pesa na prática é `LIMITE_CARACTERES_DECISAO`). Também está no banco
- * (`analises.paragrafos` entre 1 e 800, migração `20261024000002`): subir exige migração antes do código.
+ * (`analises.paragrafos` entre 1 e 1.500, migração `20261030000001`, aplicada antes de subir este valor de 800): subir de novo exige
+ * migração antes do código.
  */
-export const MAX_PARAGRAFOS = 800;
+export const MAX_PARAGRAFOS = 1_500;
 
 /** Linha que termina frase: ponto, dois-pontos, ponto e vírgula, interrogação, exclamação, fechamento de aspas ou parêntese. */
 const FIM_DE_FRASE = /[.:;!?"”)]$/;
