@@ -1,6 +1,6 @@
 # Avaliação do Argumenta: rodada 2026-10-30T1320
 
-Modelo: **claude-haiku-5-5** · casos avaliados: **3** de 3 validados
+Modelo: **claude-haiku-5-5** · casos avaliados: **3** de 14 validados
 
 ## Resultado
 
@@ -8,7 +8,7 @@ Modelo: **claude-haiku-5-5** · casos avaliados: **3** de 3 validados
 |---|---|
 | Intervalo do dispositivo certo (sobreposição ≥ 80%) | 2 de 3 (66,7%) |
 | Questões esperadas encontradas (cobertura dos parágrafos e conclusão dentro, ≥ 50%) | 4 de 6 (66,7%) |
-| Citações esperadas encontradas | 9 de 17 (52,9%) |
+| Citações esperadas encontradas | 9 de 10 (90,0%) |
 | Saídas descartadas pelo código | 0 de 9 (0,0%) |
 | Questões achadas que o gabarito não tem | 0 |
 
@@ -20,9 +20,9 @@ Total da rodada: **US$ 0,0178** · médio por decisão avaliada: **US$ 0,0059** 
 
 | Caso | Parágrafos | Dispositivo | Questões | Citações | Etapas | Custo |
 |---|---|---|---|---|---|---|
-| stj-resp-1123306-certidao-fazenda-municipal | 97 | certo | 1/2 | 1/5 | ok / ok / ok | US$ 0,0058 |
-| stj-resp-1267995-desistencia-acao | 80 | errado (50,0%) | 1/2 | 2/4 | ok / ok / ok | US$ 0,0056 |
-| stj-resp-1452840-embargos-terceiro-honorarios | 118 | certo | 2/2 | 6/8 | ok / ok / ok | US$ 0,0065 |
+| stj-resp-1123306-certidao-fazenda-municipal | 97 | certo | 1/2 | 1/2 | ok / ok / ok | US$ 0,0058 |
+| stj-resp-1267995-desistencia-acao | 80 | errado (50,0%) | 1/2 | 2/2 | ok / ok / ok | US$ 0,0056 |
+| stj-resp-1452840-embargos-terceiro-honorarios | 118 | certo | 2/2 | 6/6 | ok / ok / ok | US$ 0,0065 |
 
 ## Como ler
 
