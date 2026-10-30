@@ -20,7 +20,7 @@ describe('Tamanho da análise: persistência e acesso',()=>{
     const r=await db.query<{paragrafos:number;consumiu:boolean}>('select paragrafos,consumiu from public.analises where id=$1',[primeira.analise_id]);
     assert.deepEqual(r.rows,[{paragrafos:17,consumiu:false}]);
     assert.equal((await iniciar(db,u,1)).ok,true);
-    assert.equal((await iniciar(db,u,800)).ok,true);
+    assert.equal((await iniciar(db,u,1500)).ok,true);
     const negada=await iniciar(db,u,18);
     assert.equal(negada.motivo,'limite_periodo');
     assert.equal((await db.query<{n:number}>('select count(*)::int as n from public.analises where usuario_id=$1',[u])).rows[0].n,3);
@@ -28,7 +28,7 @@ describe('Tamanho da análise: persistência e acesso',()=>{
 
   it('recusa tamanho inválido ou tamanho em explicação sem criar uma análise',async()=>{
     const u=await criarUsuario(db,'invalido@exemplo.com');
-    for(const n of [0,-1,801]) await assert.rejects(iniciar(db,u,n),/tamanho inválido/);
+    for(const n of [0,-1,1501]) await assert.rejects(iniciar(db,u,n),/tamanho inválido/);
     await assert.rejects(iniciar(db,u,1,'explicacao'),/tamanho inválido/);
     assert.equal((await db.query<{n:number}>('select count(*)::int as n from public.analises where usuario_id=$1',[u])).rows[0].n,0);
   });
@@ -40,6 +40,25 @@ describe('Tamanho da análise: persistência e acesso',()=>{
     assert.deepEqual((await como(db,outro,tx=>tx.query('select paragrafos from public.analises'))).rows,[]);
     for(const id of [null,u]) await assert.rejects(como(db,id,tx=>tx.query("select * from public.analise_iniciar_com_tamanho($1,'rapida',null,1)",[u])),/permission denied/);
     await assert.rejects(como(db,u,tx=>tx.query('update public.analises set paragrafos=2 where id=$1',[r.analise_id])),/permission denied/);
+  });
+});
+
+describe('Migração do limite de parágrafos (800 para 1.500)',()=>{
+  it('antes recusa 801; depois aceita até 1.500 e recusa 1.501, mantendo registros antigos e privilégios',async()=>{
+    const db=await criarBanco('20261024000002_tamanho_analise');
+    try{
+      const u=await criarUsuario(db,'limite-1500@exemplo.com');
+      await assert.rejects(iniciar(db,u,801),/tamanho inválido/); // limite antigo
+      const antiga=await iniciar(db,u,800);
+      assert.equal(antiga.ok,true);
+      await aplicarMigracao(db,'20261030000001_paragrafos_ate_1500');
+      assert.deepEqual((await db.query('select paragrafos from public.analises where id=$1',[antiga.analise_id])).rows,[{paragrafos:800}]);
+      assert.equal((await iniciar(db,u,801)).ok,true);
+      assert.equal((await iniciar(db,u,1500)).ok,true);
+      await assert.rejects(iniciar(db,u,1501),/tamanho inválido/);
+      await assert.rejects(db.query("update public.analises set paragrafos=1501 where id=$1",[antiga.analise_id]),/analises_paragrafos_validos/); // a restrição também sobe
+      for(const id of [null,u]) await assert.rejects(como(db,id,tx=>tx.query("select * from public.analise_iniciar_com_tamanho($1,'rapida',null,1)",[u])),/permission denied/);
+    }finally{await db.close();}
   });
 });
 

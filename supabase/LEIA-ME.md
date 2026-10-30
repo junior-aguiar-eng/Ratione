@@ -178,6 +178,7 @@ Estado conferido no projeto real (`ratione`, produção) em 24/10/2026, por cons
 | `20261024000004_administracao_contas` | `admin_contas`, `conta_tem_acesso` e trilha `admin_acesso_eventos` |
 | `20261025000001_limpeza_por_prazo` | `limpar_dados_vencidos()` e o agendamento diário no `pg_cron` |
 | `20261026000002_retencao_fiscal` | `cobrancas` e `assinaturas` deixam de apagar com a conta: `usuario_id` vira nulo e a limpeza diária apaga o registro sem dono depois de 5 anos (provisório). **A aplicar** no SQL Editor; não muda dado existente |
+| `20261030000001_paragrafos_ate_1500` | Limite de parágrafos por análise de 800 para 1.500 (restrição de `analises.paragrafos` e `analise_iniciar_com_tamanho`). **Aplicar à mão no SQL Editor ANTES de publicar o código que sobe `MAX_PARAGRAFOS` para 1.500**: o inverso faz falhar toda análise com 801 a 1.500 parágrafos. Registros existentes (até 800) continuam válidos. Ainda não aplicada no projeto remoto. |
 | `20261026000001_tesemap_filtro_por_especie` | `tesemap_buscar` ganha o parâmetro opcional `prefixo` (filtro por espécie: tema repetitivo, IAC, repercussão geral…). **A aplicar** no SQL Editor; até lá o filtro "Espécie" do TeseMap acusa erro, e a pesquisa sem ele segue igual |
 
 **Ao criar uma migração nova:** acrescente uma linha a esta tabela no mesmo commit, avise no PR que ela precisa ser aplicada e confira por consulta de leitura depois de rodar.
