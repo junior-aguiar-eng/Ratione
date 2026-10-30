@@ -1,8 +1,10 @@
 /**
  * F5-05: métricas do Argumenta contra o gabarito do revisor. Avaliam a **extração estrutural**, não a concordância com o texto da IA:
  * - dispositivo: o intervalo achado coincide com o do gabarito (sobreposição de parágrafos ≥ LIMIAR_DISPOSITIVO);
- * - questões: cada questão esperada é achada por sobreposição de parágrafos (≥ LIMIAR_QUESTAO), cada achada vale uma só esperada;
- * - citações: a citação esperada aparece entre os fundamentos, mesmo escrita de outro jeito ("CDC, art. 14" = "art. 14 do CDC");
+ * - questões: cada questão esperada é achada quando a achada **cobre** os parágrafos dela e a **conclusão** da achada cai dentro dela
+ *   (ambos ≥ LIMIAR_QUESTAO); cada achada vale uma só esperada;
+ * - citações: a citação esperada aparece entre os fundamentos, mesmo escrita de outro jeito ("CDC, art. 14" = "art. 14 do CDC";
+ *   "REsp 927.216/RS" = "REsp 927.216/RS, 2ª Turma, Rel. …");
  * - descartadas: saídas que o modelo gerou e o código recusou (formato ou conferência), sobre as chamadas feitas.
  */
 import { NORMAS_CONHECIDAS } from '@ratione/normaviva/apelidos';
@@ -55,10 +57,25 @@ export interface ResultadoQuestoes {
   extras: number;
 }
 
+/**
+ * Uma questão achada corresponde a uma esperada quando (1) cobre pelo menos LIMIAR_QUESTAO dos parágrafos dela e (2) pelo menos
+ * LIMIAR_QUESTAO dos parágrafos da própria conclusão ficam dentro dela. A cobertura não pune o modelo por incluir precedentes
+ * transcritos no meio; a ancoragem da conclusão impede que uma questão larga demais valha por várias. Vale o menor dos dois.
+ */
+export function correspondencia(esperados: ReadonlySet<number>, achados: ReadonlySet<number>, conclusao: ReadonlySet<number>): number {
+  if (esperados.size === 0) return 0;
+  let cobertos = 0;
+  for (const n of esperados) if (achados.has(n)) cobertos++;
+  const base = conclusao.size > 0 ? conclusao : achados;
+  let ancorados = 0;
+  for (const n of base) if (esperados.has(n)) ancorados++;
+  return Math.min(cobertos / esperados.size, base.size > 0 ? ancorados / base.size : 0);
+}
+
 export function medirQuestoes(saida: SaidasDoCaso['questoes'], g: Gabarito): ResultadoQuestoes {
-  const achadas = (saida?.questoes ?? []).map(q => new Set([...q.paragrafos, ...q.paragrafosConclusao]));
+  const achadas = (saida?.questoes ?? []).map(q => ({ todos: new Set([...q.paragrafos, ...q.paragrafosConclusao]), conclusao: new Set(q.paragrafosConclusao) }));
   const pares: Array<{ e: number; a: number; s: number }> = [];
-  g.questoes.forEach((q, e) => achadas.forEach((p, a) => pares.push({ e, a, s: jaccard(new Set(q.paragrafos), p) })));
+  g.questoes.forEach((q, e) => achadas.forEach((p, a) => pares.push({ e, a, s: correspondencia(new Set(q.paragrafos), p.todos, p.conclusao) })));
   const usadasE = new Set<number>();
   const usadasA = new Set<number>();
   for (const p of pares.sort((x, y) => y.s - x.s)) {
@@ -72,11 +89,28 @@ export function medirQuestoes(saida: SaidasDoCaso['questoes'], g: Gabarito): Res
 
 const semAcento = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '');
 
-/** Chave que iguala escritas diferentes da mesma citação; o que não se reconhece vale pelo texto normalizado. */
+const PALAVRAS_VAZIAS = new Set(['do', 'da', 'de', 'dos', 'das', 'no', 'na', 'nos', 'nas', 'o', 'a', 'os', 'as', 'e', 'em', 'n']);
+const PROCESSO = /\b(eresp|aresp|resp|are|re|rhc|hc|rms|ms|rcl|pet|ai|ag)\s*n?[ºo°.]?\s*(\d[\d.]*\d|\d)(?:\s*[/-]?\s*(ac|al|am|ap|ba|ce|df|es|go|ma|mg|ms|mt|pa|pb|pe|pi|pr|rj|rn|ro|rr|rs|sc|se|sp|to)\b)?/;
+
+/**
+ * Chave que iguala escritas diferentes da mesma citação. Reconhecida (dispositivo das normas da base, súmula): vale o que foi
+ * reconhecido. Processo ("AgRg no REsp 1.282.370/PE, Rel. …"): vale a classe, o número e a UF, sem turma, relator nem data.
+ * O resto vale pelas palavras, sem acento, pontuação nem ordem, com o número do artigo e do parágrafo presos ao rótulo
+ * ("art. 535 do CPC/1973" = "CPC/1973, art. 535").
+ */
 export function chaveDaCitacao(texto: string): string {
   const r = reconhecerCitacao(texto, NORMAS);
   if (r && r.tipo !== 'fora') return JSON.stringify(r);
-  return semAcento(texto).toLowerCase().replace(/(\d)\.(?=\d)/g, '$1').replace(/[^a-z0-9]+/g, ' ').trim();
+  const t = semAcento(texto).toLowerCase().replace(/(\d)\.(?=\d)/g, '$1');
+  const processo = PROCESSO.exec(t);
+  if (processo) return `processo ${processo[1]} ${processo[2]!.replace(/\./g, '')} ${processo[3] ?? ''}`.trim();
+  return t
+    .replace(/\bart(?:igos?)?\.?\s*(\d+)/g, ' art_$1 ')
+    .replace(/§+\s*(\d+)/g, ' par_$1 ')
+    .split(/[^a-z0-9_]+/)
+    .filter(w => w !== '' && !PALAVRAS_VAZIAS.has(w))
+    .sort()
+    .join(' ');
 }
 
 export interface ResultadoCitacoes {

@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { CasoSchema, ehValidado, problemasDoGabarito, type Gabarito } from './caso';
-import { chaveDaCitacao, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, taxa, totalizar, type SaidasDoCaso } from './metricas';
+import { chaveDaCitacao, correspondencia, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, taxa, totalizar, type SaidasDoCaso } from './metricas';
 
 const GAB: Gabarito = {
   dispositivo: { inicio: 20, fim: 24 },
@@ -55,6 +55,24 @@ describe('F5-05: questões', () => {
   it('sem a etapa, nenhuma é achada', () => {
     assert.deepEqual(medirQuestoes(null, GAB), { esperadas: 2, encontradas: 0, extras: 0 });
   });
+  it('questão larga, com precedentes transcritos no meio, ainda vale se a conclusão cai dentro da esperada', () => {
+    const larga = q([5, 6, 7, 8, 9, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30], [7]);
+    assert.equal(medirQuestoes({ questoes: [larga] }, GAB).encontradas, 1);
+    assert.equal(jaccard(set(5, 6, 7), new Set(larga.paragrafos)) < 0.5, true); // com Jaccard puro, não valeria
+  });
+  it('questão larga cuja conclusão está fora da esperada não vale', () => {
+    assert.equal(medirQuestoes({ questoes: [q([5, 6, 7, 8, 9, 10, 11], [30])] }, GAB).encontradas, 0);
+  });
+  it('a conclusão é a âncora: uma questão larga não vale por duas esperadas', () => {
+    const r = medirQuestoes({ questoes: [q([5, 6, 7, 10, 11, 12, 13], [7])] }, GAB);
+    assert.deepEqual(r, { esperadas: 2, encontradas: 1, extras: 0 });
+  });
+  it('correspondência: cobertura e âncora, vale o menor', () => {
+    assert.equal(correspondencia(set(1, 2, 3, 4), set(1, 2, 3, 4, 9), set(4)), 1);
+    assert.equal(correspondencia(set(1, 2, 3, 4), set(1, 2), set(2)), 0.5);
+    assert.equal(correspondencia(set(1, 2), set(1, 2, 3), set(3)), 0);
+    assert.equal(correspondencia(set(), set(1), set(1)), 0);
+  });
 });
 
 describe('F5-05: citações', () => {
@@ -66,6 +84,21 @@ describe('F5-05: citações', () => {
   it('o que não se reconhece vale pelo texto, sem acento nem pontuação', () => {
     assert.equal(chaveDaCitacao('REsp 1.234.567/SP'), chaveDaCitacao('REsp 1234567 SP'));
     assert.equal(chaveDaCitacao('Doutrina: José   Silva'), chaveDaCitacao('doutrina jose silva'));
+  });
+  it('precedente vale pela classe, número e UF, sem turma, relator nem data', () => {
+    assert.equal(chaveDaCitacao('REsp 927.216/RS'), chaveDaCitacao('REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon, DJ de 13/8/2007'));
+    assert.equal(chaveDaCitacao('REsp 1.282.370/PE'), chaveDaCitacao('AgRg no REsp 1282370/PE, Rel. Ministro Benedito Gonçalves'));
+    assert.notEqual(chaveDaCitacao('REsp 927.216/RS'), chaveDaCitacao('REsp 927.216/SC'));
+    assert.notEqual(chaveDaCitacao('REsp 927.216/RS'), chaveDaCitacao('EREsp 927.216/RS'));
+  });
+  it('norma fora da base vale pelas palavras, em qualquer ordem', () => {
+    assert.equal(chaveDaCitacao('art. 535 do CPC/1973'), chaveDaCitacao('CPC/1973, art. 535'));
+    assert.equal(chaveDaCitacao('art. 3º da Lei 9.469/97'), chaveDaCitacao('Lei 9.469/97, art. 3º'));
+    assert.notEqual(chaveDaCitacao('art. 535 do CPC/1973'), chaveDaCitacao('art. 536 do CPC/1973'));
+  });
+  it('artigo e parágrafo não se confundem quando trocados', () => {
+    assert.notEqual(chaveDaCitacao('Lei 9.999/99, art. 5º, § 2º'), chaveDaCitacao('Lei 9.999/99, art. 2º, § 5º'));
+    assert.equal(chaveDaCitacao('Lei 9.999/99, art. 5º, § 2º'), chaveDaCitacao('§ 2º do art. 5º da Lei 9.999/99'));
   });
   it('conta as esperadas achadas', () => {
     const saida = { fundamentos: [{ citacao: 'art. 14 do CDC' }, { citacao: '' }, { citacao: 'Súmula 7 do STJ' }] };

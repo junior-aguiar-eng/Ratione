@@ -1,0 +1,157 @@
+{
+  "casoId": "stj-resp-1123306-certidao-fazenda-municipal",
+  "paragrafos": 97,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido. Admitida a certidão positiva com efeitos de negativa a Município em execução embargada, independentemente de penhora.",
+      "resumo": "A Fazenda Nacional recorreu de acórdão do TRF da 3ª Região que manteve a expedição de certidão positiva com efeitos de negativa ao Município, sem penhora e com embargos à execução. O STJ, em recurso representativo de controvérsia, negou provimento ao recurso, por unanimidade.",
+      "pedidos": [
+        {
+          "descricao": "Expedição de certidão negativa de débito, nos termos do art. 206 do CTN, pelo Município impetrante em mandado de segurança com pedido de liminar.",
+          "paragrafos": [
+            21
+          ]
+        },
+        {
+          "descricao": "Reforma do acórdão do TRF3 por suposta violação aos arts. 205 e 206 do CTN, com provimento do recurso especial da Fazenda Nacional.",
+          "paragrafos": [
+            22,
+            26
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 7
+        },
+        {
+          "tipo": "outro",
+          "inicio": 8,
+          "fim": 17
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 18,
+          "fim": 27
+        },
+        {
+          "tipo": "outro",
+          "inicio": 28,
+          "fim": 30
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 31,
+          "fim": 34
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 35,
+          "fim": 69
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 70,
+          "fim": 74
+        },
+        {
+          "tipo": "outro",
+          "inicio": 75,
+          "fim": 97
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11455,
+      "output_tokens": 2511,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002401
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A Fazenda Municipal que ajuizou embargos à execução ou ação anulatória, sem penhora, tem direito à certidão positiva com efeitos de negativa?",
+          "conclusao": "Sim. A Fazenda Pública faz jus à certidão positiva com efeitos de negativa, independentemente de penhora, pois seus bens são inexpropriáveis e o crédito fica com exigibilidade suspensa.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            5,
+            7,
+            19,
+            20,
+            21,
+            22,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          "paragrafosConclusao": [
+            7,
+            46,
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11710,
+      "output_tokens": 288,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001315
+  },
+  "fundamentos": {
+    "estado": "cortada",
+    "saida": null,
+    "uso": {
+      "input_tokens": 11866,
+      "output_tokens": 4000,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.003187
+  }
+}
