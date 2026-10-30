@@ -32,7 +32,7 @@ Na tela de um dispositivo do NormaViva, a pessoa logada pode clicar em **"Explic
 | Gasto do mês | dois fundos: Gratuito US$ 15,00 e pagantes US$ 5,00 (cada um soma todas as tarefas de quem está no grupo) | tabela `ia_fundos` (SQL), ver `PLANOS_E_COBRANCA.md` §3.2 |
 | Uma explicação de cada vez por usuário | (fixo) | chamada "reservada" há menos de 2 minutos barra a próxima |
 | Teto da resposta | 2.000 tokens | `maxTokensSaida` (contrato) |
-| Tempo da chamada | 30 s, 1 nova tentativa só em falha transitória | código |
+| Tempo da chamada | 45 s (era 30 s até 30/10/2026; vale para todas as tarefas), 1 nova tentativa só em falha transitória | código |
 
 Falha, recusa e resposta fora do formato **não gastam a cota do cliente** (a vaga é liberada), mas o custo real cobrado pelo provedor entra no orçamento do mês. Servir do cache também não gasta cota. O orçamento soma o custo real das chamadas feitas e o custo máximo das que estão em curso: nunca passa do teto.
 
