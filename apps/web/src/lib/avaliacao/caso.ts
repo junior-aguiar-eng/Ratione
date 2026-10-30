@@ -11,10 +11,14 @@ export const REVISOR_PADRAO = 'José Bonifácio de Aguiar Santos Júnior';
 const DataIso = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'use AAAA-MM-DD');
 const Paragrafos = z.array(z.number().int().min(1)).min(1).max(80);
 
+const Intervalo = z.object({ inicio: z.number().int().min(1), fim: z.number().int().min(1) }).refine(d => d.inicio <= d.fim, 'início depois do fim');
+
 export const GabaritoSchema = z
   .object({
     /** Intervalo de parágrafos do dispositivo (inclusive). */
-    dispositivo: z.object({ inicio: z.number().int().min(1), fim: z.number().int().min(1) }).refine(d => d.inicio <= d.fim, 'início depois do fim'),
+    dispositivo: Intervalo,
+    /** Outros intervalos que também valem como o dispositivo: o acórdão traz dois blocos que decidem (o bloco "Acórdão" e o fim do voto). */
+    dispositivoAlternativo: z.array(Intervalo).max(3).optional(),
     /** Questões que a decisão resolve, com os parágrafos onde são discutidas e decididas. */
     questoes: z
       .array(z.object({ enunciado: z.string().min(3).max(400), conclusao: z.string().min(3).max(400), paragrafos: Paragrafos }).strict())
@@ -50,7 +54,9 @@ export const paragrafosDoCaso = (c: Pick<Caso, 'texto'>): string[] => prepararDe
 export function problemasDoGabarito(g: Gabarito, totalParagrafos: number): string[] {
   const problemas: string[] = [];
   const fora = (n: number) => n < 1 || n > totalParagrafos;
-  if (fora(g.dispositivo.inicio) || fora(g.dispositivo.fim)) problemas.push(`dispositivo fora da decisão (1 a ${totalParagrafos})`);
+  [g.dispositivo, ...(g.dispositivoAlternativo ?? [])].forEach((d, i) => {
+    if (fora(d.inicio) || fora(d.fim)) problemas.push(`${i === 0 ? 'dispositivo' : `dispositivo alternativo ${i}`} fora da decisão (1 a ${totalParagrafos})`);
+  });
   g.questoes.forEach((q, i) => {
     if (q.paragrafos.some(fora)) problemas.push(`questão ${i + 1} cita parágrafo fora da decisão (1 a ${totalParagrafos})`);
   });

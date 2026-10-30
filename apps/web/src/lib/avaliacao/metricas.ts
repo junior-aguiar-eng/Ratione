@@ -43,10 +43,11 @@ export interface ResultadoDispositivo {
 }
 
 export function medirDispositivo(estrutura: SaidasDoCaso['estrutura'], g: Gabarito): ResultadoDispositivo {
-  const esperado = intervalo(g.dispositivo.inicio, g.dispositivo.fim);
+  // Vale o intervalo principal ou qualquer alternativo (o acórdão tem dois blocos que decidem); conta o que mais se sobrepõe.
+  const esperados = [g.dispositivo, ...(g.dispositivoAlternativo ?? [])].map(d => intervalo(d.inicio, d.fim));
   const candidatas = (estrutura?.secoes ?? []).filter(s => s.tipo === 'dispositivo');
   if (candidatas.length === 0) return { achou: false, sobreposicao: 0, acertou: false };
-  const sobreposicao = Math.max(...candidatas.map(s => jaccard(esperado, intervalo(s.inicio, s.fim))));
+  const sobreposicao = Math.max(...candidatas.flatMap(s => esperados.map(e => jaccard(e, intervalo(s.inicio, s.fim)))));
   return { achou: true, sobreposicao, acertou: sobreposicao >= LIMIAR_DISPOSITIVO };
 }
 

@@ -17,7 +17,7 @@ export function gerarFolha(caso: Caso): string {
     '',
     'Leia a decisão abaixo e preencha o bloco `gabarito` no arquivo do caso (`packages/argumenta/corpus/casos/' + caso.id + '.json`):',
     '',
-    '- `dispositivo`: primeiro e último parágrafo do dispositivo (a parte que decide).',
+    '- `dispositivo`: primeiro e último parágrafo do dispositivo (a parte que decide). Se o acórdão tem dois blocos que decidem (o bloco "Acórdão" e o fim do voto), ponha o outro em `dispositivoAlternativo` (lista de intervalos): qualquer um vale.',
     '- `questoes`: cada questão que a decisão **resolve** (preliminar, prejudicial, mérito e as acessórias de custas, honorários e juros), com a conclusão e **todos** os parágrafos em que ela é discutida e decidida. Não liste fato nem argumento solto, nem a consequência automática de outra questão.',
     '- `citacoes`: as normas e os precedentes que a decisão cita, como aparecem no texto. O que a decisão apenas transcreve de outro julgado não conta.',
     '',

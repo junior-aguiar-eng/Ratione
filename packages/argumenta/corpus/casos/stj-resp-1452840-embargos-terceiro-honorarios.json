@@ -12,6 +12,12 @@
       "inicio": 94,
       "fim": 94
     },
+    "dispositivoAlternativo": [
+      {
+        "inicio": 17,
+        "fim": 20
+      }
+    ],
     "questoes": [
       {
         "enunciado": "O acórdão recorrido deixou de apreciar a controvérsia, violando o art. 535 do CPC/1973?",
