@@ -88,6 +88,14 @@ describe('Argumenta: entrada das tarefas', () => {
   });
 });
 
+describe('Argumenta: instrução da etapa de questões', () => {
+  it('pede a admissibilidade como questão preliminar e exclui o que só consta da decisão recorrida', () => {
+    assert.match(argumentaQuestoes.instrucoes, /juízo de admissibilidade/);
+    assert.match(argumentaQuestoes.instrucoes, /conhecimento do recurso/);
+    assert.match(argumentaQuestoes.instrucoes, /acórdão recorrido/);
+  });
+});
+
 describe('Argumenta: esforço da etapa de fundamentos', () => {
   it('roda em esforço baixo: o raciocínio do esforço médio conta no teto de saída e cortou a resposta de uma decisão longa', () => {
     assert.equal(argumentaFundamentos.esforco, 'low');

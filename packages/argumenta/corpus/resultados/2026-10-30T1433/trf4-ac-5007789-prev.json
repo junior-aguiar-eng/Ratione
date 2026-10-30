@@ -1,0 +1,336 @@
+{
+  "casoId": "trf4-ac-5007789-prev",
+  "paragrafos": 74,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Apelação do INSS negada; sentença de procedência mantida, com honorários majorados em 20% e implantação imediata do benefício determinada.",
+      "resumo": "A parte autora pediu aposentadoria por idade da pessoa com deficiência, e a sentença julgou procedente o pedido. O INSS apelou pedindo a improcedência, alegando que a avaliação biopsicossocial é indispensável e que a presunção de deficiência leve por visão monocular é ilegal. O Tribunal negou provimento à apelação, majorou os honorários e determinou a implantação imediata do benefício pela CEAB.",
+      "pedidos": [
+        {
+          "descricao": "Concessão de aposentadoria por idade da pessoa com deficiência à parte autora, com reconhecimento de deficiência leve desde o nascimento.",
+          "paragrafos": [
+            6,
+            8,
+            9
+          ]
+        },
+        {
+          "descricao": "Reforma da sentença para que o pedido seja julgado improcedente (apelação do INSS).",
+          "paragrafos": [
+            15
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 16
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 17,
+          "fim": 64
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 65,
+          "fim": 66
+        },
+        {
+          "tipo": "outro",
+          "inicio": 67,
+          "fim": 74
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7629,
+      "output_tokens": 1276,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001401
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O segurado com visão monocular tem direito à aposentadoria da pessoa com deficiência por idade, diante da avaliação biopsicossocial e da pontuação do IFBrA?",
+          "conclusao": "A visão monocular é deficiência leve para fins previdenciários; preenchidos os requisitos do art. 3º, IV, da LC 142/2013, a sentença de procedência foi mantida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            15,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            48,
+            49
+          ],
+          "paragrafosConclusao": [
+            48,
+            49,
+            66
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A deficiência congênita da autora implica que todo o tempo de contribuição foi exercido na condição de pessoa com deficiência?",
+          "conclusao": "Sim. Pela perícia oftalmológica, a deficiência é congênita, e a autora laborou todo o período contributivo como pessoa com deficiência.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            42,
+            47
+          ],
+          "paragrafosConclusao": [
+            47
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Os honorários advocatícios devem ser majorados em grau de recurso, em razão do desprovimento da apelação do INSS?",
+          "conclusao": "Sim. Os honorários fixados na sentença foram majorados em 20%, observados os limites do art. 85, §3º, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            51,
+            52
+          ],
+          "paragrafosConclusao": [
+            52,
+            66
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "acessoria",
+          "enunciado": "O benefício deve ser implantado imediatamente, por meio da CEAB, em razão da tutela específica?",
+          "conclusao": "Sim. O julgado deve ser cumprido imediatamente, no prazo de trinta dias úteis, com implantação pela CEAB se a renda atual for inferior ao benefício deferido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            66
+          ],
+          "paragrafosConclusao": [
+            54,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8168,
+      "output_tokens": 1766,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0017
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A LC 142/2013 prevê aposentadoria da pessoa com deficiência; o art. 3º, IV, exige 60/55 anos de idade, 15 anos de contribuição e deficiência no mesmo período, independentemente do grau.",
+          "citacao": "LC 142/2013, art. 3º, IV",
+          "paragrafos": [
+            27,
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 14.126 classificou a visão monocular como deficiência sensorial, do tipo visual, para todos os efeitos legais.",
+          "citacao": "Lei 14.126",
+          "paragrafos": [
+            43,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Precedente do TRF4 que fixa que o segurado com visão monocular é pessoa com deficiência e que, para fins previdenciários, a limitação é deficiência leve.",
+          "citacao": "TRF4, APELAÇÃO CÍVEL Nº [PROCESSO_2], 6ª Turma, Desembargadora Federal TAIS SCHILLING FERRAZ",
+          "paragrafos": [
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A avaliação biopsicossocial serve para aferir existência e grau da deficiência, mas não se sobrepõe à classificação legal da visão monocular, que corresponde, ao menos, à deficiência leve.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A pontuação do IFBrA (7.775) ficou acima do limite de 7.584 para deficiência leve, mas a sentença interpretou a prova em conformidade com a legislação superveniente e a jurisprudência.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Avaliação biopsicossocial: pontuação combinada das avaliações médica e social segundo o IFBrA.",
+          "citacao": "",
+          "paragrafos": [
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e, define os parâmetros de pontuação para deficiência grave, moderada e leve.",
+          "citacao": "Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e",
+          "paragrafos": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Perícia oftalmológica (evento 88) atestou cegueira no olho esquerdo (CID H54.4) de natureza congênita, com início da deficiência na data de nascimento.",
+          "citacao": "",
+          "paragrafos": [
+            42
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A deficiência da autora é congênita, com início em 08/05/1966, fato irrefutado pela autarquia.",
+          "citacao": "",
+          "paragrafos": [
+            42,
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Como a deficiência é congênita, a autora laborou todo o período contributivo como pessoa com deficiência.",
+          "citacao": "",
+          "paragrafos": [
+            40,
+            47,
+            48
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Art. 85, §11, do CPC autoriza majorar os honorários de sucumbência em grau recursal ao desprover o recurso.",
+          "citacao": "CPC, art. 85, §11",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Os honorários são majorados em 20%, observados os limites das faixas do art. 85, §3º, do CPC.",
+          "citacao": "CPC, art. 85, §3º",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "O recurso do INSS foi desprovido e a sentença de procedência foi mantida.",
+          "citacao": "",
+          "paragrafos": [
+            51,
+            66
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Art. 497 do CPC fundamenta a tutela específica, com cumprimento imediato da decisão, no prazo de trinta dias úteis.",
+          "citacao": "CPC, art. 497",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "TRF4 decidiu que a decisão não está, em princípio, sujeita a recurso com efeito suspensivo.",
+          "citacao": "TRF4, AC 2002.71.00.050349-7, Terceira Seção, Relator para Acórdão Celso Kipper, D.E. 01/10/2007",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Se a parte já recebe benefício, o INSS implanta o deferido apenas se a renda atual for superior; a implantação é feita pela CEAB, com DIB em 27/08/2021.",
+          "citacao": "",
+          "paragrafos": [
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            64
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8355,
+      "output_tokens": 1761,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001716
+  }
+}

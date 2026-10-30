@@ -1,0 +1,261 @@
+{
+  "casoId": "stj-resp-1144810-adm",
+  "paragrafos": 60,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial da União não provido; liberação de veículo retido por transporte irregular de passageiros não condicionada ao pagamento de multas e despesas.",
+      "resumo": "A União recorreu de acórdão do TRF da 1ª Região que considerou indevido condicionar a liberação de veículo retido ao pagamento de multas e demais despesas. Pleiteou a aplicação do art. 231, VIII, 262, § 2º, do CTB e do art. 85, § 3º, do Decreto 2521/98, para exigir o pagamento. A Primeira Seção negou provimento ao recurso, por unanimidade.",
+      "pedidos": [
+        {
+          "descricao": "Reformar o acórdão recorrido para admitir a exigência de pagamento de multa e despesas de transbordo como condição para liberar veículo apreendido, com base no CTB e no Decreto 2521/98.",
+          "paragrafos": [
+            17
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 5
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 6,
+          "fim": 10
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 13,
+          "fim": 15
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 16,
+          "fim": 18
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 21,
+          "fim": 23
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 24,
+          "fim": 25
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 26,
+          "fim": 36
+        },
+        {
+          "tipo": "outro",
+          "inicio": 39,
+          "fim": 59
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6284,
+      "output_tokens": 2268,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001762
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial pode ser conhecido quanto à alegada violação do art. 262, § 2º, do CTB, se o acórdão recorrido não se manifestou sobre essa norma?",
+          "conclusao": "Não houve prequestionamento do art. 262, § 2º, do CTB, e por isso o recurso especial não é conhecido nesse ponto, aplicando-se por analogia a Súmula 282 do STF.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            27,
+            28
+          ],
+          "paragrafosConclusao": [
+            28
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A liberação de veículo retido por transporte irregular de passageiros (art. 231, VIII, do CTB) pode ser condicionada ao pagamento de multas e despesas?",
+          "conclusao": "A liberação do veículo retido por força do art. 231, VIII, do CTB não está condicionada ao pagamento de multas e demais despesas, o que mantém o acórdão recorrido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            29,
+            30,
+            31,
+            32,
+            33
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "O art. 85, § 3º, do Decreto 2.521/98 autoriza exigir o pagamento de despesas para liberar o veículo retido?",
+          "conclusao": "O dispositivo não autoriza essa exigência, pois a retenção não se confunde com a apreensão e o decreto extrapolou a lei que regulamenta, conforme o parecer adotado.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            34,
+            35
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6823,
+      "output_tokens": 1170,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001267
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acórdão recorrido não emitiu juízo sobre a matéria do art. 262, § 2º, do CTB, e não houve embargos de declaração para prequestioná-la.",
+          "citacao": "",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Falta de prequestionamento do art. 262, § 2º, do CTB impede o conhecimento do recurso especial nesse ponto.",
+          "citacao": "CTB, art. 262, § 2º",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Súmula 282 do STF: é inadmissível o recurso quando a questão federal não foi ventilada na decisão recorrida; aplicada por analogia.",
+          "citacao": "Súmula 282 do STF",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A liberação do veículo retido por transporte irregular de passageiros não está condicionada ao pagamento de multas e despesas.",
+          "citacao": "CTB, art. 231, VIII",
+          "paragrafos": [
+            1,
+            5,
+            28,
+            29
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Orientação consolidada no STJ de que a liberação do veículo retido por força do art. 231, VIII, do CTB independe do recolhimento de multas e despesas.",
+          "citacao": "AgRg no REsp 1129844/RJ, 1ª T., Min. Hamilton Carvalhido, DJe 02/12/2009",
+          "paragrafos": [
+            29,
+            30
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Decidiu ser ilegítimo condicionar a liberação de veículo retido por transporte irregular de passageiros ao pagamento de multa.",
+          "citacao": "AgRg no REsp 1027557/RJ, 2ª T., Min. Humberto Martins, DJe 26/02/2009",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A controvérsia deste recurso não se confunde com a do REsp 1104775/RS, que tratava de remoção de veículo sem licenciamento (art. 230, V, do CTB).",
+          "citacao": "",
+          "paragrafos": [
+            27
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O art. 85, § 3º, do Decreto 2.521/98 extrapola a Lei 8.987/95, que regulamenta, pois não há previsão legal de punição nesses termos.",
+          "citacao": "Decreto 2.521/98, art. 85, § 3º",
+          "paragrafos": [
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O dispositivo inova no ordenamento e restringe o direito de propriedade sem lei, violando o princípio da legalidade.",
+          "citacao": "CF, art. 5º, II",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Retenção não se confunde com apreensão; na retenção não há previsão de pagamento prévio de multas e despesas, diferentemente da apreensão.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "doutrina",
+          "descricao": "Parecer do Ministério Público Federal adotado como fundamento para afastar a exigência de despesas prevista no decreto.",
+          "citacao": "Parecer do Ministério Público Federal (fl. 153 e fl. 158)",
+          "paragrafos": [
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Na apreensão, o art. 262, § 2º, do CTB permite exigir pagamento de multas e despesas para liberação, o que não se aplica à retenção.",
+          "citacao": "CTB, art. 262, § 2º",
+          "paragrafos": [
+            35
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6955,
+      "output_tokens": 1332,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001362
+  }
+}
