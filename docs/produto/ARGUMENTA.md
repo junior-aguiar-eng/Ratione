@@ -47,7 +47,7 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 | Pessoas jurídicas de direito público rotuladas (União, Estado, Município, INSS, Ministério Público…) ficam no texto | Não são dado pessoal e ajudam a análise; o usuário pode ocultá-las pela lista de nomes |
 | Texto e resposta não ficam guardados | `guardaResultado: false`: o executor não lê nem grava o cache; o registro de uso (`ia_uso`) leva só o hash da decisão (`decisao:<16 hex>`) e o hash da mensagem; os logs só levam tarefa, referência e motivo. `analises` guarda metadados de uso, incluindo nome opcional e, nas novas análises, quantidade de parágrafos, sem conteúdo |
 | Resposta só cita parágrafos que existem | `conferirSaida` descarta a resposta inteira se citar parágrafo fora da decisão, questão repetida ou fundamento de questão que não veio |
-| Texto longo não é cortado em silêncio | Acima de 70.000 caracteres (cerca de 20 páginas; eram 21.000 até 30/10/2026) ou 800 parágrafos, a tela avisa e o servidor recusa (400). O de parágrafos está também no banco (`analises.paragrafos`, de 1 a 800): subi-lo exige migração antes do código |
+| Texto longo não é cortado em silêncio | Acima de 70.000 caracteres (cerca de 20 páginas; eram 21.000 até 30/10/2026) ou 1.500 parágrafos (eram 800 até 30/10/2026), a tela avisa e o servidor recusa (400). O de parágrafos está também no banco (`analises.paragrafos`, de 1 a 1.500, migração `20261030000001`): subi-lo de novo exige migração antes do código |
 | Sem ferramentas, sem busca, sem dado de outra base | `ferramentas: []`; o contexto é só a decisão enviada |
 
 ## 4. Limites

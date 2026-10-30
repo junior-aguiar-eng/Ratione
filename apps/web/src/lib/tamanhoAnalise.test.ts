@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { historicoEmCsv, paragrafosDaAnalise, tamanhoDaAnalise, type LinhaAnalise } from './uso';
 
 describe('Tamanho da decisão no histórico (F8-04)', () => {
-  it('aceita somente número inteiro entre 1 e o limite de 800 parágrafos', () => {
-    for (const n of [1,17,800]) assert.deepEqual(paragrafosDaAnalise(n),{ok:true,paragrafos:n});
-    for (const n of [0,-1,801,1.5,NaN,Infinity,'17',{},[],true]) assert.equal(paragrafosDaAnalise(n).ok,false);
+  it('aceita somente número inteiro entre 1 e o limite de 1.500 parágrafos', () => {
+    for (const n of [1,17,800,801,1500]) assert.deepEqual(paragrafosDaAnalise(n),{ok:true,paragrafos:n});
+    for (const n of [0,-1,1501,1.5,NaN,Infinity,'17',{},[],true]) assert.equal(paragrafosDaAnalise(n).ok,false);
     for (const n of [null,undefined]) assert.deepEqual(paragrafosDaAnalise(n),{ok:true,paragrafos:null});
   });
   it('distingue singular, plural e tamanho não registrado; explicação não é decisão', () => {
