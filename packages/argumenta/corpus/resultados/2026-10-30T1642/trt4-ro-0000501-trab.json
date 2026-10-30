@@ -1,0 +1,353 @@
+{
+  "casoId": "trt4-ro-0000501-trab",
+  "paragrafos": 47,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso não conhecido quanto à responsabilidade subsidiária da segunda reclamada, por ausência de interesse recursal, e desprovido quanto ao mérito.",
+      "resumo": "A primeira reclamada recorreu da sentença quanto às horas extras e à responsabilidade subsidiária da segunda reclamada. Pleiteou a exclusão da responsabilidade subsidiária, a validade do regime de compensação e a exclusão dos reflexos das horas extras na média remuneratória. O colegiado não conheceu do recurso quanto à responsabilidade subsidiária e negou provimento quanto às horas extras, considerando sem objeto o pedido sobre os reflexos, já indeferidos na sentença.",
+      "pedidos": [
+        {
+          "descricao": "Exclusão da responsabilidade subsidiária da segunda reclamada (USAFLEX - INDÚSTRIA & COMÉRCIO S.A.).",
+          "paragrafos": [
+            20
+          ]
+        },
+        {
+          "descricao": "Reforma da condenação em horas extras, com validade do regime de compensação adotado e exclusão dos minutos do registro de ponto, ou adoção da Súmula nº 85 do TST.",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "descricao": "Reforma quanto aos reflexos das horas extras pelo aumento da média remuneratória nos repousos semanais remunerados e nas integrações sobre férias, gratificação natalina, aviso-prévio e FGTS, por bis in idem (OJ nº 394 da SDI-1 do TST).",
+          "paragrafos": [
+            40
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 7,
+          "fim": 8
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 9,
+          "fim": 10
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 11,
+          "fim": 14
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 17,
+          "fim": 25
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 26,
+          "fim": 47
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6054,
+      "output_tokens": 1839,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001525
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A primeira reclamada tem interesse recursal para pedir a exclusão da responsabilidade subsidiária da segunda reclamada?",
+          "conclusao": "Não há interesse recursal, pois a responsabilidade subsidiária imposta à segunda reclamada não afeta desfavoravelmente a primeira reclamada; recurso não conhecido nesse ponto.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "paragrafosConclusao": [
+            25
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O regime de compensação de jornada adotado pelas partes é válido, ou as horas extras devem ser pagas por jornada habitual e registros em minutos?",
+          "conclusao": "O regime compensatório foi considerado inválido por habitualidade das horas extras; mantida a condenação ao pagamento de diferenças de horas extras conforme os controles de horário.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38
+          ],
+          "paragrafosConclusao": [
+            30,
+            35,
+            37,
+            38
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Deve-se aplicar a Súmula 85 do TST e excluir os minutos de cada registro de ponto, como pedido sucessivo da recorrente?",
+          "conclusao": "O pedido sucessivo ficou sem objeto, pois esses pontos já foram determinados na sentença de origem.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            28,
+            30
+          ],
+          "paragrafosConclusao": [
+            30
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "Os reflexos das horas extras no aumento da média remuneratória devem ser excluídos por bis in idem, conforme a OJ 394 da SDI-1 do TST?",
+          "conclusao": "O recurso perdeu objeto, pois a sentença já indeferira esses reflexos com base na OJ 394; nada a alterar.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "paragrafosConclusao": [
+            43,
+            44,
+            45
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "preliminar",
+          "enunciado": "Consideram-se prequestionados os dispositivos legais e constitucionais suscitados para fins recursais?",
+          "conclusao": "Tem-se por prequestionados todos os dispositivos suscitados, com base na Súmula 297, I, e na OJ 118 da SDI-1 do TST.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            46,
+            47
+          ],
+          "paragrafosConclusao": [
+            47
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6593,
+      "output_tokens": 1629,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001474
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há interesse recursal porque a imputação de responsabilidade subsidiária à segunda reclamada não atinge de forma desfavorável a recorrente, cujas situações fática e processual permanecem inalteradas.",
+          "citacao": "",
+          "paragrafos": [
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Interesse recursal existe quando a parte é colocada em situação desfavorável por conta do pronunciamento judicial.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Controles de horário das fls. 65 e 77 e ss. reputados fidedignos, não ilididos por outro meio de prova, com presunção de veracidade decorrente de confissão da reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Registros de horário e recibos de salários demonstram prestação habitual de horas extras pela reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Habitualidade de horas extras descaracteriza o acordo de compensação de jornada; devido apenas o adicional sobre as horas compensadas.",
+          "citacao": "Súmula 85, IV, do TST",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Dedução de no máximo cinco minutos por marcação, observado o limite de dez minutos, na apuração das horas extras.",
+          "citacao": "CLT, art. 58, § 1º",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ultrapassado o limite de dez minutos, considera-se extra a totalidade do tempo que exceder a jornada normal.",
+          "citacao": "Súmula 366 do TST",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Cotejo entre controles de horário e recibos de salário; exemplo de 22-9-2009 em que a reclamada desconsiderou minutos anteriores e posteriores à jornada.",
+          "citacao": "",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Remanescem diferenças de horas extras favoráveis à reclamante, a serem satisfeitas pela reclamada.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Controles de horário demonstram gozo regular do intervalo intrajornada, não havendo horas extras por esse motivo.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Condenação ao pagamento de horas extras além da oitava diária e quadragésima quarta semanal, apuradas conforme os controles, com integrações e liquidação posterior.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Pedido sucessivo de adoção da Súmula 85 e de exclusão dos minutos em cada registro perde objeto, pois já determinados na sentença de origem.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Pedido de exclusão dos minutos em cada registro de ponto, na forma do art. 58 da CLT, já determinado na sentença.",
+          "citacao": "CLT, art. 58",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Reflexos de horas extras pelo aumento da média remuneratória configuram bis in idem sobre férias, gratificação natalina, aviso-prévio e FGTS.",
+          "citacao": "OJ 394 da SDI-1 do TST",
+          "paragrafos": [
+            41,
+            42
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Recurso perde objeto porque a sentença já indeferiu expressamente esses reflexos com base na OJ 394; nada a alterar.",
+          "citacao": "OJ 394 da SDI-1 do TST",
+          "paragrafos": [
+            43,
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Consideram-se prequestionados todos os dispositivos legais e constitucionais suscitados, pela adoção de tese explícita sobre cada matéria.",
+          "citacao": "Súmula 297, I, do TST",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Prequestionamento de todos os dispositivos suscitados, mesmo não expressamente mencionados.",
+          "citacao": "Orientação Jurisprudencial nº 118 da SDI-1 do TST",
+          "paragrafos": [
+            47
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6893,
+      "output_tokens": 1680,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001529
+  }
+}

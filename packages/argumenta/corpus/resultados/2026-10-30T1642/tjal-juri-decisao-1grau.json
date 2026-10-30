@@ -1,0 +1,281 @@
+{
+  "casoId": "tjal-juri-decisao-1grau",
+  "paragrafos": 29,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "decisao_interlocutoria",
+      "resultado": "Indeferidos o pedido de transferência do acusado para estabelecimento prisional e o pedido de permissão de saída para exames médicos e vacinação, este por incompetência do juízo.",
+      "resumo": "O Comandante da Polícia Militar pediu a transferência do acusado para presídio da capital e permissão para sua saída para procedimentos médicos e vacinação. O Ministério Público opinou pela não transferência e favoravelmente à saída. O juízo indeferiu a transferência, por a sala de Estado Maior não poder ficar em unidade prisional, e indeferiu a saída, por caber ao comandante da Polícia Militar decidir, nos termos do art. 120 da LEP.",
+      "pedidos": [
+        {
+          "descricao": "Transferência do acusado para o presídio da capital, requerida pelo Comando da Polícia Militar.",
+          "paragrafos": [
+            7,
+            12,
+            16,
+            17,
+            25
+          ]
+        },
+        {
+          "descricao": "Permissão para saída do acusado do estabelecimento para procedimentos médicos e vacinação, requerida pelo Comando da Polícia Militar.",
+          "paragrafos": [
+            9,
+            18,
+            19,
+            25,
+            26
+          ]
+        },
+        {
+          "descricao": "Manutenção do acusado na sala em que se encontra, requerida pela Defesa.",
+          "paragrafos": [
+            8
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 5
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 6,
+          "fim": 10
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 11,
+          "fim": 24
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 25,
+          "fim": 26
+        },
+        {
+          "tipo": "outro",
+          "inicio": 27,
+          "fim": 29
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3332,
+      "output_tokens": 1295,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000981
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O acusado pode ser transferido para presídio, em vez de permanecer em sala de Estado Maior na Polícia Militar?",
+          "conclusao": "Não. A Lei Estadual 8.499/2021 exige que a sala de Estado Maior fique fora de qualquer unidade prisional, e o pedido de transferência da Polícia Militar foi indeferido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            7,
+            12,
+            13,
+            14,
+            16,
+            17,
+            25
+          ],
+          "paragrafosConclusao": [
+            17,
+            25
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "O juízo pode autorizar a saída do acusado para exames médicos e vacinação?",
+          "conclusao": "Não. A competência para autorizar a saída é do diretor do estabelecimento onde o preso está, nos termos do art. 120 da LEP, e o pedido foi indeferido por esse motivo.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            9,
+            10,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26
+          ],
+          "paragrafosConclusao": [
+            19,
+            25,
+            26
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3871,
+      "output_tokens": 948,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000861
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O Comandante da Polícia Militar pediu a transferência do acusado para o presídio da capital, alegando módulo de Estado Maior e atendimento médico.",
+          "citacao": "",
+          "paragrafos": [
+            7
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acusado está em sala similar à de Estado Maior na Escola da Polícia Militar.",
+          "citacao": "",
+          "paragrafos": [
+            7
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A Defesa pediu que o acusado permanecesse na sala em que se encontra.",
+          "citacao": "",
+          "paragrafos": [
+            8
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei Estadual 8.499/2021 define sala de Estado Maior como sala fora de qualquer unidade ou estabelecimento prisional, nas dependências de Comando das Forças Armadas ou Auxiliares.",
+          "citacao": "Lei Estadual n. 8.499/2021, art. 1º",
+          "paragrafos": [
+            13,
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A referência legal à sala de Estado Maior é o art. 7º, V, da Lei 8.906/1994.",
+          "citacao": "Lei Federal nº 8.906/1994, art. 7º, V",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O estabelecimento de reclusão do acusado não pode ser dentro de qualquer unidade prisional; por isso o pleito da Polícia Militar é indeferido.",
+          "citacao": "",
+          "paragrafos": [
+            16,
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O representante do Ministério Público opinou pela não transferência, por não poder a sala de Estado Maior ficar em unidade prisional, e a decisão acolhe esse entendimento.",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            12
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O Comandante da Polícia Militar pediu permissão para que o acusado saia do estabelecimento para procedimentos médicos e vacinação.",
+          "citacao": "",
+          "paragrafos": [
+            9
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A Defesa pediu a realização de alguns exames médicos.",
+          "citacao": "",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Não há óbice de mérito à concessão da saída para exames e vacinação.",
+          "citacao": "",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A permissão de saída compete ao diretor do estabelecimento onde se encontra o preso, aplicável também a presos provisórios.",
+          "citacao": "LEP, art. 120, parágrafo único",
+          "paragrafos": [
+            20,
+            21,
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A LEP admite permissão de saída de presos, mediante escolta, para necessidade de tratamento médico.",
+          "citacao": "LEP, art. 120, II",
+          "paragrafos": [
+            21,
+            23
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A análise do pedido não cabe ao juízo, mas à autoridade do estabelecimento onde o preso está recolhido; por isso o pedido é indeferido.",
+          "citacao": "",
+          "paragrafos": [
+            19,
+            25
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O juízo registra o parecer favorável do Ministério Público, mas não decide o pleito, que cabe ao Comandante da Polícia Militar.",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            26
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 3830,
+      "output_tokens": 1290,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001028
+  }
+}

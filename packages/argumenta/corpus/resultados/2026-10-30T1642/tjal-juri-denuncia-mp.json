@@ -1,0 +1,242 @@
+{
+  "casoId": "tjal-juri-denuncia-mp",
+  "paragrafos": 44,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Não é decisão judicial: trata-se de denúncia oferecida pelo Ministério Público, sem dispositivo decisório.",
+      "resumo": "O Ministério Público de Alagoas denuncia [ACUSADO] pela tentativa de homicídio contra a companheira [VÍTIMA], com base no artigo 121, §2º, VI, c/c artigo 14, II, do Código Penal. Requer o recebimento da denúncia, a citação, a juntada de folha de antecedentes e a manutenção da prisão preventiva.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento e autuação da denúncia, com citação do denunciado para resposta à acusação e processamento pelo rito do Tribunal do Júri até final condenação.",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "descricao": "Juntada aos autos da folha de antecedentes criminais do denunciado e expedição de ofícios à Autoridade Policial e ao IML para remessa do laudo de exame de corpo de delito.",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "descricao": "Protesto por prova por todos os meios admitidos em direito, especialmente testemunhas, perícias e documentos.",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "descricao": "Manutenção da prisão preventiva do denunciado.",
+          "paragrafos": [
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "outro",
+          "inicio": 5,
+          "fim": 15
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 16,
+          "fim": 17
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 18,
+          "fim": 24
+        },
+        {
+          "tipo": "outro",
+          "inicio": 25,
+          "fim": 34
+        },
+        {
+          "tipo": "outro",
+          "inicio": 35,
+          "fim": 44
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4434,
+      "output_tokens": 1271,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001079
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O fato narrado configura tentativa de homicídio qualificado, na forma do artigo 121, §2º, inciso VI, c/c artigo 14, II, do Código Penal?",
+          "conclusao": "O Ministério Público imputa ao denunciado a prática do artigo 121, §2º, VI, c/c artigo 14, II, do Código Penal, por tentativa de homicídio contra a companheira.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            17,
+            22
+          ],
+          "paragrafosConclusao": [
+            17
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Estão presentes os requisitos para manter a prisão preventiva do denunciado?",
+          "conclusao": "O Ministério Público requer a manutenção da prisão preventiva, por garantia da ordem pública, gravidade do delito e periculosidade do agente, com prova da materialidade e indícios de autoria.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ],
+          "paragrafosConclusao": [
+            34
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4973,
+      "output_tokens": 1374,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001184
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Na madrugada de 15/09/2021, o denunciado, com animus necandi e usando faca, desferiu golpes contra a companheira, que sobreviveu por circunstâncias alheias à sua vontade.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A vítima foi esfaqueada no abdômen, braços, mãos e perna, e submetida a cirurgia na Santa Casa.",
+          "citacao": "",
+          "paragrafos": [
+            11,
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Confissão do denunciado perante a Autoridade Policial, às fls. 150/151.",
+          "citacao": "",
+          "paragrafos": [
+            15
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O crime foi motivado por razões da condição de sexo feminino da vítima.",
+          "citacao": "",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Relação de convivência marital de 22 anos, com agressões físicas e psicológicas anteriores à vítima.",
+          "citacao": "",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Imputação do crime de homicídio qualificado (inciso VI) em tentativa, por conduta que se enquadra no tipo.",
+          "citacao": "Código Penal, art. 121, §2º, VI, c/c art. 14, II",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Pressupostos da prisão preventiva: prova da existência do crime e indícios suficientes de autoria.",
+          "citacao": "CPP, art. 312",
+          "paragrafos": [
+            26,
+            32
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A gravidade do delito, com arma branca e violência contra mulher, evidencia personalidade perigosa e justifica a garantia da ordem pública.",
+          "citacao": "",
+          "paragrafos": [
+            27,
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A custódia é necessária para acautelar o meio social e assegurar a credibilidade da justiça diante de crimes de repercussão.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Materialidade do crime e indícios suficientes de autoria constantes do inquérito policial.",
+          "citacao": "",
+          "paragrafos": [
+            26,
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4946,
+      "output_tokens": 882,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000936
+  }
+}

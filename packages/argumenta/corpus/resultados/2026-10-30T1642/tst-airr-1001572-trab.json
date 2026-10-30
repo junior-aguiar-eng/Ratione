@@ -1,0 +1,401 @@
+{
+  "casoId": "tst-airr-1001572-trab",
+  "paragrafos": 116,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Agravo de instrumento não provido, por ausência de transcendência da causa.",
+      "resumo": "O reclamante interpôs agravo de instrumento contra a decisão que denegou seguimento ao recurso de revista sobre responsabilidade subsidiária das reclamadas, com ônus da prova da prestação de serviços. A Turma negou provimento ao agravo, por não atendida a transcendência. Entendeu-se que o reclamante não provou a prestação de serviços em favor das reclamadas.",
+      "pedidos": [
+        {
+          "descricao": "Responsabilização subsidiária das 2ª a 7ª reclamadas, com base na prova oral e documental e na Súmula 331, IV, do TST.",
+          "paragrafos": [
+            39,
+            40
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 24
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 25,
+          "fim": 30
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 31,
+          "fim": 108
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 109,
+          "fim": 112
+        },
+        {
+          "tipo": "outro",
+          "inicio": 113,
+          "fim": 116
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8876,
+      "output_tokens": 1126,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001451
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O agravo de instrumento preenche os pressupostos de admissibilidade para ser conhecido?",
+          "conclusao": "O agravo de instrumento foi conhecido por estarem presentes os pressupostos de admissibilidade.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            33,
+            112
+          ],
+          "paragrafosConclusao": [
+            33,
+            112
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "A causa oferece transcendência para o processamento do recurso de revista sob a Lei nº 13.467/2017?",
+          "conclusao": "Não há transcendência econômica, política, social ou jurídica, por isso o agravo foi desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            8,
+            54,
+            55,
+            56,
+            57,
+            62,
+            63,
+            64,
+            66,
+            67,
+            68,
+            104,
+            105,
+            106,
+            107
+          ],
+          "paragrafosConclusao": [
+            8,
+            108
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Cabe ao reclamante provar que as tomadoras se beneficiaram de sua força de trabalho para haver responsabilidade subsidiária?",
+          "conclusao": "Sim, o ônus da prova da prestação de serviços em favor das tomadoras é do reclamante, que não se desincumbiu dele.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            8,
+            39,
+            44,
+            45,
+            69,
+            71,
+            72,
+            75,
+            76,
+            79,
+            80,
+            82,
+            84,
+            93,
+            107
+          ],
+          "paragrafosConclusao": [
+            80,
+            82
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "preliminar",
+          "enunciado": "A Súmula 126 do TST impede o exame, em recurso de revista, da alegação de contrariedade ao quadro fático-probatório?",
+          "conclusao": "Sim, acolher a pretensão exigiria revisão de fatos e provas, o que é inviável em recurso de revista.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            45,
+            69,
+            101,
+            102,
+            103
+          ],
+          "paragrafosConclusao": [
+            101
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9415,
+      "output_tokens": 2131,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002007
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Agravo conhecido por estarem presentes os pressupostos de admissibilidade.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Processamento do recurso de revista sob a Lei 13.467/2017 exige transcendência econômica, política, social ou jurídica; a análise é prévia aos pressupostos intrínsecos.",
+          "citacao": "CLT, art. 896-A",
+          "paragrafos": [
+            8,
+            54,
+            55,
+            56
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Indicadores de transcendência são exemplificativos; o valor da causa não ultrapassa o limite de referência para transcendência econômica.",
+          "citacao": "CLT, art. 896-A, § 1º; CLT, art. 852-A",
+          "paragrafos": [
+            57,
+            62,
+            64,
+            65,
+            66
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Não há transcendência política: não há contrariedade à súmula, OJ, precedentes obrigatórios ou divergência entre Turmas.",
+          "citacao": "",
+          "paragrafos": [
+            67
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A segunda reclamada já fora condenada subsidiariamente sem recurso ordinário, faltando interesse recursal quanto a ela.",
+          "citacao": "",
+          "paragrafos": [
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Transcendência social não se aplica, pois o recurso não é do empregado postulando direito social constitucionalmente assegurado.",
+          "citacao": "CLT, art. 896-A, § 1º, III",
+          "paragrafos": [
+            105
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Não há questão nova de interpretação da legislação trabalhista nem violação frontal à Constituição, afastando a transcendência jurídica.",
+          "citacao": "CLT, art. 896-A, § 1º, IV",
+          "paragrafos": [
+            106,
+            107
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Precedentes citados para afastar a transcendência política (Turma do TST, Ag-AIRR relatados por Evandro Pereira Valadão Lopes).",
+          "citacao": "TST-Ag-AIRR-1226-02.2017.5.12.0029; TST-Ag-AIRR-10444-47.2014.5.15.0103",
+          "paragrafos": [
+            104
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Citado para tratar da transcendência jurídica quanto a afronta a direitos e garantias constitucionais de especial relevância; a decisão o usa como posicionamento da 7ª Turma.",
+          "citacao": "TST-AIRR-21132-48.2017-5.04.0304",
+          "paragrafos": [
+            106
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Agravo desprovido por ausência do pressuposto intrínseco da transcendência.",
+          "citacao": "",
+          "paragrafos": [
+            108,
+            112
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O ônus de provar a prestação de serviços em favor da tomadora cabe ao reclamante, como fato constitutivo do direito.",
+          "citacao": "CLT, art. 818; CPC, art. 373, I",
+          "paragrafos": [
+            75,
+            76,
+            82,
+            93
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "As tomadoras negaram contrato com a primeira reclamada e a prestação de serviços pelo reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            72,
+            74,
+            79
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "O reclamante não produziu prova para comprovar a prestação de serviços em favor das reclamadas.",
+          "citacao": "",
+          "paragrafos": [
+            77,
+            79
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A tomadora não apresentou fato modificativo, impeditivo ou extintivo, apenas negou a prestação de serviços, cabendo ao reclamante o ônus do fato constitutivo.",
+          "citacao": "",
+          "paragrafos": [
+            8,
+            82
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Ônus da prova da prestação de serviços é do reclamante, sem exigir da tomadora prova negativa; recurso de revista conhecido e provido.",
+          "citacao": "RR-812-87.2012.5.05.0024",
+          "paragrafos": [
+            84
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Responsabilidade subsidiária pressupõe prova da prestação de serviços em proveito do tomador, cujo ônus é do autor quando negada na contestação.",
+          "citacao": "RR-3-22.2010.5.05.0007",
+          "paragrafos": [
+            86,
+            87
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Ônus de comprovar a prestação de serviços é do autor; não se exige da tomadora prova negativa de fato. Embargos conhecidos e providos.",
+          "citacao": "RR - 737188-75.2001.5.17.5555",
+          "paragrafos": [
+            89
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Atribuir ao tomador o ônus de provar que o reclamante não lhe prestou serviços diverge da jurisprudência do TST; recurso de revista provido.",
+          "citacao": "RR - 503-59.2014.5.05.0036",
+          "paragrafos": [
+            91
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Negada pela tomadora a prestação de serviços e sem comprovação do labor, não há responsabilidade subsidiária; recurso de revista provido por violação ao art. 818 da CLT.",
+          "citacao": "RR - [PROCESSO_2]",
+          "paragrafos": [
+            93,
+            94
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Incumbe ao empregado comprovar a prestação de serviços em benefício da tomadora, diante da negativa em contestação; recurso de revista conhecido e provido.",
+          "citacao": "ARR - 21822-39.2015.5.04.0016",
+          "paragrafos": [
+            99,
+            100
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Não havendo prova do vínculo com as tomadoras, não há responsabilidade subsidiária nos termos da Súmula 331 do TST.",
+          "citacao": "Súmula 331 do TST",
+          "paragrafos": [
+            80
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Acolher a pretensão exigiria revisão do quadro fático-probatório, vedada em recurso de revista.",
+          "citacao": "Súmula 126 do TST",
+          "paragrafos": [
+            45,
+            69,
+            101,
+            102
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "O recorrente advoga contexto fático diverso do registrado no acórdão regional, o que impõe reexame de provas.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            101
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9515,
+      "output_tokens": 2400,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002152
+  }
+}

@@ -58,3 +58,5 @@ Os limiares ficam em `apps/web/src/lib/avaliacao/metricas.ts` (`LIMIAR_DISPOSITI
 Em 30/10/2026, com a rodada de 14 decisões, a comparação de citações ficou mais flexível (detalhe de parágrafo e inciso, siglas, súmulas de outros tribunais): sobre as mesmas saídas, de 41 para 57 de 81. Os limiares não mudaram.
 
 Também em 30/10/2026, a âncora da conclusão nas questões passou de "metade dos parágrafos da conclusão dentro da questão esperada" para "ao menos um": o modelo repete a conclusão na ementa, que fica fora. Sobre as saídas da rodada das 14, questões de 21 para 23 de 29 e extras de 9 para 7.
+
+Por fim, a comparação de citações trata a sigla e o nome por extenso de códigos e leis como o mesmo termo (CP, CPP, CPC, CC, CLT, CF, CTN, CTB, CDC, LEP, LC, EC, MP, DL) e "SDI-1" como "SDI-I"; "Código Penal" não casa com "Código de Processo Penal". Sobre as saídas da rodada das 24, citações de 88 para 97 de 126. Limiares inalterados.
