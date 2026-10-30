@@ -13,7 +13,7 @@ corpus/
 
 Todos os comandos rodam na raiz do repositório.
 
-1. **Escolher a decisão.** Pública, sem segredo de justiça, de preferência sem dado pessoal além do que a pseudonimização cobre. Anote a fonte (URL) e a data de acesso. Varie tipo, ramo e tamanho (o limite é cerca de 21.000 caracteres) e inclua algumas copiadas de PDF do PJe.
+1. **Escolher a decisão.** Pública, sem segredo de justiça, de preferência sem dado pessoal além do que a pseudonimização cobre. Anote a fonte (URL) e a data de acesso. **Processo sensível** (violência doméstica, vítima ou réu identificáveis, peça enviada pelo responsável a partir dos autos): o repositório é público, então troque todos os dados pessoais por marcadores (`[ACUSADO]`, `[VÍTIMA]`…), tire o número do processo, telefones e endereços, e confira que não sobrou nenhum nome antes de criar o caso; não publique peças acima do limite de tamanho que o pipeline recusa. Varie tipo, ramo e tamanho (o limite é cerca de 21.000 caracteres) e inclua algumas copiadas de PDF do PJe.
 2. **Criar o caso** (salve o texto da decisão num `.txt`):
 
    ```bash
@@ -22,7 +22,7 @@ Todos os comandos rodam na raiz do repositório.
 
    Gera `casos/caso-001.json` (sem gabarito) e a folha `folhas/caso-001.md`, com os parágrafos numerados **como o modelo os recebe**.
 3. **Preencher o gabarito.** Leia a folha e edite o campo `gabarito` do JSON:
-   - `dispositivo`: primeiro e último parágrafo da parte que decide. O acórdão costuma ter **dois blocos que decidem** (o bloco "Acórdão", com o resultado do julgamento, e o fim do voto): ponha um em `dispositivo` e o outro em `dispositivoAlternativo` (lista de intervalos); qualquer um vale na métrica. Decisão do revisor de 30/10/2026. **Convenção do intervalo:** inclui o parágrafo-título ("Dispositivo", "ACÓRDÃO") quando houver e termina na última linha que decide; não inclui a fórmula de encerramento ("É como voto") nem cabeçalho ou rodapé de página;
+   - `dispositivo`: primeiro e último parágrafo da parte que decide. O acórdão costuma ter **dois blocos que decidem** (o bloco "Acórdão", com o resultado do julgamento, e o fim do voto): ponha um em `dispositivo` e o outro em `dispositivoAlternativo` (lista de intervalos); qualquer um vale na métrica. Decisão do revisor de 30/10/2026. Em **peça de parte ou do MP** (denúncia, embargos, razões, contrarrazões), que pede e não decide, o dispositivo é o **requerimento final** e as questões são as **teses ou pedidos que a peça defende**, com o pedido como conclusão (convenção de 30/10/2026, para medir o que o Argumenta faz com texto que não é decisão). **Convenção do intervalo:** inclui o parágrafo-título ("Dispositivo", "ACÓRDÃO") quando houver e termina na última linha que decide; não inclui a fórmula de encerramento ("É como voto") nem cabeçalho ou rodapé de página;
    - `questoes`: cada questão que a decisão **resolve** (preliminar, prejudicial, mérito, e custas, honorários ou juros quando decididos), com a conclusão e **todos** os parágrafos onde é discutida e decidida. Não é questão o fato solto, o argumento solto, nem a consequência automática de outra questão;
    - `citacoes`: as normas e os precedentes que a decisão cita, como estão no texto. O que ela só transcreve de outro julgado não conta, e **o rito do recurso repetitivo** (art. 543-C do CPC/1973, art. 1.040 do CPC/2015, Resolução STJ 8/2008) **também não**: descreve o procedimento, não é fundamento de conclusão, e a etapa 4 só lista fundamentos (decisão do revisor, 30/10/2026).
 4. **Validar:**

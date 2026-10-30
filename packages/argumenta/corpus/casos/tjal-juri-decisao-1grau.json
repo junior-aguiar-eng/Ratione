@@ -1,0 +1,54 @@
+{
+  "id": "tjal-juri-decisao-1grau",
+  "fonte": {
+    "descricao": "Decisão interlocutória de juíza de 1º grau (4ª Vara Criminal, TJAL, 2021) sobre o local de custódia de advogado preso (sala de Estado Maior) e a saída para exames médicos. PDF dos autos fornecido pelo responsável, sem link direto; dados pessoais substituídos por marcadores",
+    "url": "https://www.tjal.jus.br/",
+    "acessadoEm": "2026-10-30"
+  },
+  "tipo": "decisao_interlocutoria",
+  "texto": "Autos nº: [Nº DO PROCESSO]\nAção: Ação Penal de Competência do Júri\nAutor e Indiciante: Ministério Público do Estado de Alagoas e outro\nRéu: [ACUSADO]\nDECISÃO\nCompulsando o feito, observo que às págs. 193/194, a Defesa do acusado\n[ACUSADO] protocolou petição pleiteando a realização de alguns exames médicos.\nÀs págs. 207/209, o Comandante da Policia Militar, responsável pelo\nacautelamento do acusado (que encontra-se em sala similar à de Estado Maior, na\nEscola da Polícia Miliar deste Estado), pugnou pela transferência do acusado para o\npresídio da capital, argumentando que lá possui módulo de Estado Maior, e que tal\nestabelecimento detém o atendimento médico necessário para o acusado.\nÀs págs. 212/214, a Defesa do acusado, solicitou que o acusado\npermanecesse na sala em que se encontra hodiernamente.\nO comandante da Policia Militar oficiou este Juízo, às págs. 220/240,\nsolicitando, em síntese, permissão para que o acusado saia do estabelecimento visando\nrealização de procedimentos médicos e vacinação.\nInstado a se manifestar, o representante do Ministério Público opinou pela\nnão transferência do acusado ao estabelecimento prisional, em razão de a sala de estado\nmaior (ou alojamento similar) não poder ser localizada dentro de qualquer unidade ou\nestabelecimento prisional. Quanto a autorização da saída do acusado para realização de\nexames médicos e vacinação contra o COVID, opinou favorável, por não vislumbrar\nqualquer óbice (págs. 218 e 245).\nDecido.\nPois bem. Quanto a transferência do acusado para o presídio, requerido\npelo Comando da Policia Militar, entendo que razão assiste ao representante do\nMinistério Público, quando afirma que tal pleito não possui amparo legal.\nIsto porque, preconiza a Lei Estadual n. 8.499/2021, que:\nArt. 1º. Para fins do disposto no art. 7º, V, da Lei Federal nº 8.906, de 4 de\njulho de 1994, entende-se por “sala de Estado Maior”, qualquer sala,\ndesprovida de grades, nas dependências de Comando das Forças Armadas\n(Exército, Marinha ou Aeronáutica) ou Auxiliares (Polícia Militar ou Corpo\nde Bombeiros), e fora de qualquer unidade ou estabelecimento prisional, que\npossa, mesmo que potencialmente, ser utilizada, pelos oficiais que nela\natuam, para o desempenho de seu mister funcional, com toda a estrutura\nnecessária para tanto, devendo conter minimamente de forma cumulativa:\n[...].\nLogo, tem-se que o estabelecimento ao qual o acusado deverá ser mantido\nrecluso, não poderá ser dentro de qualquer unidade ou estabelecimento prisional.\nNeste contexto, mister se faz indeferir o pleito da Policia Militar.\nNoutro contexto, quanto a permissão de saída do acusado para realização\nde exames médicos e vacinação, não vislumbro qualquer óbice a concessão desta.\nTodavia, a referida análise não cabe a este Juízo, mas, sim, a Autoridade do\nEstabelecimento em que o preso se encontra recolhido.\nIsto porque, a Lei de Execução Penal (que rege também as hipóteses afetas\naos presos provisórios) atribui tal competência ao responsável pela administração do\nlocal de recolhimento. Senão vejamos:\nArt. 120. Os condenados que cumprem pena em regime fechado ou semiaberto e os presos provisórios poderão obter permissão para sair do\nestabelecimento, mediante escolta, quando ocorrer um dos seguintes fatos:\nI - falecimento ou doença grave do cônjuge, companheira, ascendente,\ndescendente ou irmão;\nII - necessidade de tratamento médico (parágrafo único do artigo 14).\nParágrafo único. A permissão de saída será concedida pelo diretor do\nestabelecimento onde se encontra o preso.\nAnte o exposto, pelos fundamentos acima ventilados, INDEFIRO o pedido\nde transferência do acusado para estabelecimento prisional, bem como INDEFIRO\no pedido de permissão de saída, por não ser Autoridade Competente para tanto,\ncabendo, pois, a analise deste pleito ao Comandante da Policia Militar, nos termos\ndo art. 120, da LEP.\nRegistro, por oportuno, o mesmo posicionamento do Ministério Público, no\nsentido de não vislumbrar qualquer óbice a concessão do pleito, pelo Comandante da\nPolicia Militar.\n[COMARCA] , 27 de outubro de 2021.\n[JUÍZA DE DIREITO]\n Juíza de Direito em Substituição",
+  "gabarito": {
+    "dispositivo": {
+      "inicio": 25,
+      "fim": 25
+    },
+    "questoes": [
+      {
+        "enunciado": "O réu advogado preso pode ser transferido da sala de Estado Maior da Polícia Militar para o presídio, como pede o Comando da PM?",
+        "conclusao": "Não: a Lei Estadual 8.499/2021 exige que a sala de Estado Maior fique fora de estabelecimento prisional; o pedido não tem amparo legal e é indeferido.",
+        "paragrafos": [
+          7,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          25
+        ]
+      },
+      {
+        "enunciado": "Compete ao juízo autorizar a saída do preso para exames médicos e vacinação?",
+        "conclusao": "Não: a permissão de saída cabe à autoridade do estabelecimento (LEP, art. 120, parágrafo único), no caso o Comandante da PM; pedido indeferido por incompetência, sem óbice do juízo nem do MP.",
+        "paragrafos": [
+          18,
+          19,
+          20,
+          21,
+          24,
+          25,
+          26
+        ]
+      }
+    ],
+    "citacoes": [
+      "Lei Estadual n. 8.499/2021",
+      "art. 7º, V, da Lei Federal nº 8.906/1994",
+      "art. 120 da Lei de Execução Penal"
+    ]
+  },
+  "validacao": {
+    "por": "José Bonifácio de Aguiar Santos Júnior",
+    "em": "2026-10-30"
+  }
+}
