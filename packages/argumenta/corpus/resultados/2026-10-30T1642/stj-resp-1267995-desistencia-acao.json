@@ -1,0 +1,334 @@
+{
+  "casoId": "stj-resp-1267995-desistencia-acao",
+  "paragrafos": 80,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido.",
+      "resumo": "O INSS recorreu de acórdão que confirmou a homologação da desistência da ação sem renúncia ao direito, alegando violação ao art. 3º da Lei 9.469/97. A Primeira Seção deu provimento ao recurso, por unanimidade, reconhecendo a legitimidade da oposição à desistência com base nesse dispositivo. O acórdão recorrido foi reformado para que a demanda prossiga.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão que homologou a desistência da ação sem a renúncia ao direito em que se funda a ação, com base no art. 3º da Lei 9.469/97.",
+          "paragrafos": [
+            22,
+            27
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 6
+        },
+        {
+          "tipo": "outro",
+          "inicio": 7,
+          "fim": 14
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 15,
+          "fim": 19
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 20,
+          "fim": 31
+        },
+        {
+          "tipo": "outro",
+          "inicio": 32,
+          "fim": 34
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 35,
+          "fim": 35
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 36,
+          "fim": 56
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 57,
+          "fim": 57
+        },
+        {
+          "tipo": "outro",
+          "inicio": 58,
+          "fim": 80
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9764,
+      "output_tokens": 2019,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001986
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Após a contestação, o autor pode desistir da ação sem o consentimento do réu, quando este condiciona a concordância à renúncia ao direito em que se funda a ação (art. 3º da Lei 9.469/97)?",
+          "conclusao": "Não. Após a resposta, a desistência depende do consentimento do réu. A oposição fundada no art. 3º da Lei 9.469/97 é legítima e obsta a homologação, por isso o recurso do INSS foi provido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            36,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57
+          ],
+          "paragrafosConclusao": [
+            45,
+            46,
+            56,
+            57
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial atende aos pressupostos de admissibilidade recursal?",
+          "conclusao": "Sim. O relator conhece do recurso especial por estarem satisfeitos todos os pressupostos de admissibilidade.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            37
+          ],
+          "paragrafosConclusao": [
+            37
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10303,
+      "output_tokens": 1092,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001576
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Após a resposta, é defeso ao autor desistir da ação sem o consentimento do réu.",
+          "citacao": "art. 267, § 4º, do CPC",
+          "paragrafos": [
+            6,
+            41,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Fazenda pode concordar com a desistência somente se o autor renunciar expressamente ao direito sobre o qual se funda a ação.",
+          "citacao": "Art. 3º da Lei 9.469/97",
+          "paragrafos": [
+            6,
+            44,
+            45,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A bilateralidade do processo assegura ao réu o direito de solucionar o conflito, por isso a regra do consentimento se impõe.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A discordância do réu deve ser fundamentada; a oposição sem justificativa plausível configura abuso de direito.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A existência da imposição legal do art. 3º da Lei 9.469/97 basta como justificativa para a concordância condicional do réu, obstando a homologação.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que é justificável a oposição à desistência fundada no art. 3º da Lei 9.469/97 e deu provimento ao recurso especial.",
+          "citacao": "REsp 651.721/RJ, 1ª Turma, Rel. Min. Teori Albino Zavascki",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que a falta de anuência com fundamento no art. 3º da Lei 9.469/97 constitui motivo suficiente para obstar a homologação da desistência.",
+          "citacao": "REsp 1.173.663/PR, 2ª Turma, Rel. Min. Eliana Calmon, DJe de 8.4.2010",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que a oposição fundada no art. 3º da Lei 9.469/97 é motivo suficiente para obstar a homologação da desistência.",
+          "citacao": "REsp 1.184.935/MG, 1ª Turma, Rel. Min. Luiz Fux, DJe de 17.11.2010",
+          "paragrafos": [
+            53,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 460.748/DF, 2ª Turma, Rel. Min. João Otávio de Noronha",
+          "paragrafos": [
+            51,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que a desistência após a resposta somente pode ser homologada com o consentimento fundamentado do réu.",
+          "citacao": "RESP 638.382/DF, 2ª T., Min. Eliana Calmon, DJ de 09.05.2006",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que, após o decurso do prazo de resposta, a desistência depende do consentimento do réu.",
+          "citacao": "REsp 241.780/PR, 4ª T., Min. Sálvio de Figueiredo Teixeira, DJ 03.04.2000",
+          "paragrafos": [
+            48,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 864432/PR, Rel. Ministro LUIZ FUX, PRIMEIRA TURMA",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 976861/SP, Rel. Ministro CASTRO MEIRA, SEGUNDA TURMA",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 115642/SP, Rel. Ministro FERNANDO GONÇALVES, SEXTA TURMA",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Decidiu que a recusa do réu deve ser fundamentada, não bastando a simples alegação de discordância.",
+          "citacao": "REsp 90738/RJ, Rel. Min. Sálvio de Figueiredo Teixeira, DJ 21.09.1998",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "doutrina",
+          "descricao": "Desistência da ação é instituto de natureza processual, que não atinge em regra o direito material.",
+          "citacao": "Luiz Fux, Curso de Direito Processual Civil, ed. 3ª, p. 449",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O ente público condicionou sua anuência ao pedido de desistência à renúncia expressa do autor ao direito em que se funda a ação.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Recurso especial interposto com base no art. 105, III, a, da Constituição Federal.",
+          "citacao": "art. 105, III, \"a\", da Constituição Federal de 1988",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O relator conhece do recurso especial por estarem satisfeitos todos os pressupostos de admissibilidade recursal.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10273,
+      "output_tokens": 2049,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002052
+  }
+}

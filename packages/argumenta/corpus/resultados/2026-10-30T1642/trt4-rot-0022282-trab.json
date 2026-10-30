@@ -1,0 +1,281 @@
+{
+  "casoId": "trt4-rot-0022282-trab",
+  "paragrafos": 91,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso do reclamante parcialmente provido, com não conhecimento do pedido de justiça gratuita; deferidas a multa do art. 477, §8º, da CLT, indenização por dano moral de R$ 2.000,00 e honorários assistenciais de 15%.",
+      "resumo": "O reclamante recorreu quanto ao depósito das verbas rescisórias, plus salarial, insalubridade, dano moral e honorários assistenciais. A Turma não conheceu do pedido de justiça gratuita e negou provimento ao plus salarial e à insalubridade. Deu provimento ao pedido de multa do art. 477, §8º, de dano moral e de honorários assistenciais, e afastou a multa do art. 467.",
+      "pedidos": [
+        {
+          "descricao": "Ordem para consignação das verbas rescisórias e condenação às multas dos arts. 467 e 477 da CLT, se não pagas.",
+          "paragrafos": [
+            33,
+            36,
+            37,
+            39
+          ]
+        },
+        {
+          "descricao": "Aplicação do art. 790, §3º, da CLT, com acesso integral e gratuito à Justiça.",
+          "paragrafos": [
+            28,
+            29,
+            30
+          ]
+        },
+        {
+          "descricao": "Pagamento de plus salarial por atividades de atendimento telefônico e transporte de equipamentos.",
+          "paragrafos": [
+            41,
+            49,
+            54,
+            55
+          ]
+        },
+        {
+          "descricao": "Adicional de insalubridade por rondas em dias chuvosos, sem capa de chuva.",
+          "paragrafos": [
+            57,
+            58,
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "descricao": "Indenização por dano moral pelo atraso no pagamento de salários.",
+          "paragrafos": [
+            65,
+            74,
+            75,
+            79
+          ]
+        },
+        {
+          "descricao": "Honorários assistenciais, sem assistência de advogado credenciado pelo sindicato.",
+          "paragrafos": [
+            81,
+            82,
+            83
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 11
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 12,
+          "fim": 13
+        },
+        {
+          "tipo": "outro",
+          "inicio": 14,
+          "fim": 15
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 16,
+          "fim": 18
+        },
+        {
+          "tipo": "outro",
+          "inicio": 19,
+          "fim": 20
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 21,
+          "fim": 24
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 25,
+          "fim": 30
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 31,
+          "fim": 83
+        },
+        {
+          "tipo": "outro",
+          "inicio": 84,
+          "fim": 91
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8801,
+      "output_tokens": 2168,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001964
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Cabe conhecer do recurso do reclamante quanto ao benefício da justiça gratuita?",
+          "conclusao": "Não conhecido, pois o benefício requerido é o mesmo já concedido em sentença, faltando interesse recursal.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            28,
+            29,
+            30
+          ],
+          "paragrafosConclusao": [
+            30
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A multa do art. 467 da CLT é devida pela falta de pagamento das verbas rescisórias?",
+          "conclusao": "Multa indevida, pois a rescisão foi reconhecida judicialmente e havia controvérsia sobre sua existência à época da audiência.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            33,
+            34,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            36
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A multa do art. 477, §8º, da CLT é devida pelo atraso no pagamento das verbas rescisórias?",
+          "conclusao": "Multa devida, pois é incontroverso que as verbas rescisórias não foram pagas no prazo legal.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            37,
+            38,
+            39
+          ],
+          "paragrafosConclusao": [
+            39
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "Há direito a plus salarial por atender telefonemas e levar equipamentos às salas de aula?",
+          "conclusao": "Não há plus salarial, pois as tarefas são compatíveis com a condição pessoal do empregado (art. 456, parágrafo único, da CLT).",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "paragrafosConclusao": [
+            55
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "As rondas feitas em dias de chuva geram direito ao adicional de insalubridade?",
+          "conclusao": "Não, pois não houve trabalho habitual em local alagado ou encharcado, com umidade excessiva, como exige o Anexo 10 da NR-15.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "paragrafosConclusao": [
+            63
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "merito",
+          "enunciado": "O atraso reiterado no pagamento de salários gera dano moral indenizável?",
+          "conclusao": "Sim, o dano é presumido; indenização fixada em R$ 2.000,00.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "paragrafosConclusao": [
+            79
+          ]
+        },
+        {
+          "id": "Q7",
+          "categoria": "acessoria",
+          "enunciado": "São devidos honorários assistenciais sem assistência de advogado credenciado pelo sindicato?",
+          "conclusao": "Sim, concedida a justiça gratuita, são devidos honorários assistenciais de 15% do valor bruto da condenação.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            81,
+            82,
+            83
+          ],
+          "paragrafosConclusao": [
+            83
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9340,
+      "output_tokens": 2152,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00201
+  },
+  "fundamentos": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato",
+    "uso": {
+      "input_tokens": 9685,
+      "output_tokens": 3194,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002566
+  }
+}

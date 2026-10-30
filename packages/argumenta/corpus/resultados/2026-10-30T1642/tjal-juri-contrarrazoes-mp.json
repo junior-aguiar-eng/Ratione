@@ -1,0 +1,333 @@
+{
+  "casoId": "tjal-juri-contrarrazoes-mp",
+  "paragrafos": 39,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Manifestação do Ministério Público pelo não conhecimento dos embargos de declaração, por ausência de omissão, contradição ou obscuridade.",
+      "resumo": "O embargante pede a neutralização de circunstância judicial, o reconhecimento de bis in idem entre agravante e qualificadora e a redução da pena da tentativa no patamar máximo. O parecer sustenta que não há omissão, contradição ou obscuridade no acórdão e que os embargos não servem para rediscutir o mérito. Pede o não conhecimento e, subsidiariamente, a manutenção da decisão.",
+      "pedidos": [
+        {
+          "descricao": "Neutralizar a circunstância judicial das circunstâncias do delito na dosimetria da pena.",
+          "paragrafos": [
+            10,
+            11
+          ]
+        },
+        {
+          "descricao": "Reconhecer o bis in idem na aplicação da agravante de crime contra cônjuge com a qualificadora do feminicídio.",
+          "paragrafos": [
+            10,
+            11
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução da pena pela tentativa no patamar máximo.",
+          "paragrafos": [
+            10,
+            11
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 9
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 10,
+          "fim": 14
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 15,
+          "fim": 35
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 36,
+          "fim": 36
+        },
+        {
+          "tipo": "outro",
+          "inicio": 37,
+          "fim": 39
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4335,
+      "output_tokens": 1154,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00101
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Os embargos de declaração preenchem os requisitos de admissibilidade, por haver omissão, contradição ou obscuridade no acórdão?",
+          "conclusao": "O parecer conclui pelo não conhecimento dos embargos, por inexistir omissão, contradição ou obscuridade no acórdão embargado.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            3,
+            5,
+            13,
+            16,
+            17,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            13,
+            16,
+            17,
+            36
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Há bis in idem entre a agravante de crime contra cônjuge e a qualificadora do feminicídio?",
+          "conclusao": "O parecer afirma que o acórdão rejeitou a alegação de bis in idem, por a agravante e a qualificadora terem fundamentos distintos, e opina pela manutenção.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            11,
+            24,
+            25,
+            26,
+            27,
+            32,
+            34
+          ],
+          "paragrafosConclusao": [
+            24,
+            25,
+            27,
+            32,
+            34
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A redução da pena pela tentativa deve ser no patamar máximo de 2/3?",
+          "conclusao": "O parecer sustenta que a redução de 1/3 é adequada e proporcional, por a vítima ter sobrevivido por circunstâncias alheias ao agente, e rejeita a alegação de erro.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            11,
+            29,
+            30,
+            31,
+            32,
+            34
+          ],
+          "paragrafosConclusao": [
+            29,
+            30,
+            31,
+            32
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "As consequências do delito podem ser valoradas como circunstância judicial desfavorável na pena-base?",
+          "conclusao": "O parecer sustenta que a perda de movimento e a necessidade de tratamento justificam a majoração da pena, rejeitando a alegação de erro na dosimetria.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            11,
+            18,
+            19,
+            20,
+            21,
+            32
+          ],
+          "paragrafosConclusao": [
+            19,
+            20,
+            21,
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4874,
+      "output_tokens": 1750,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001362
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Na forma do art. 620 do CPP, só cabem embargos contra acórdão com ambiguidade, obscuridade, contradição ou omissão.",
+          "citacao": "CPP, art. 620",
+          "paragrafos": [
+            16
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há omissão, contradição ou obscuridade no acórdão; os embargos não servem para sustentar tese contrária à já decidida.",
+          "citacao": "",
+          "paragrafos": [
+            3,
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Se a parte entende que houve erro de julgamento, deve usar o recurso próprio, não os embargos.",
+          "citacao": "",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O acórdão foi claro e objetivo ao rechaçar os argumentos da apelação, por isso as alegações não merecem prosperar.",
+          "citacao": "",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A agravante do art. 61, II, e, do CP (crime contra cônjuge) é tratada como agravante de pena aplicável ao caso.",
+          "citacao": "CP, art. 61, II, \"e\"",
+          "paragrafos": [
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O feminicídio é o homicídio por razões da condição de sexo feminino, com violência doméstica e familiar (§ 2º-A).",
+          "citacao": "CP, art. 121, § 2º, VI e § 2º-A, I",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A alegação de bis in idem é improcedente porque a agravante e a qualificadora têm fundamentos distintos: a agravante trata da quebra do dever de auxílio entre familiares; a qualificadora, da violência contra a mulher em contexto de desigualdade.",
+          "citacao": "",
+          "paragrafos": [
+            24,
+            25,
+            27
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "O agente planejou e executou o ataque com faca contra área vital enquanto a vítima dirigia, com lesões graves.",
+          "citacao": "",
+          "paragrafos": [
+            29
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "A vítima sobreviveu por circunstâncias alheias à vontade do agente (rápido socorro médico), não por desistência voluntária.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O crime esteve próximo da consumação, o que reforça a redução de 1/3 como adequada e proporcional.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            31
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Não há obrigação de adotar quantum específico; o juiz deve guiar-se por razoabilidade, proporcionalidade e livre convencimento motivado.",
+          "citacao": "",
+          "paragrafos": [
+            32
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito inicial (fls. 278/279) atestou lesão grave e incapacidade para ocupações habituais por mais de 30 dias.",
+          "citacao": "",
+          "paragrafos": [
+            20
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito inicial (fls. 278/279) e declaração da própria vítima sobre sequelas permanentes.",
+          "citacao": "",
+          "paragrafos": [
+            20
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "A vítima perdeu o movimento de um dedo da mão esquerda e necessitou de tratamento psicológico e psiquiátrico.",
+          "citacao": "",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "A perda de movimento funcional e a necessidade de tratamento de saúde mental extrapolam o resultado normal da tentativa e, por si, justificam a majoração da pena.",
+          "citacao": "",
+          "paragrafos": [
+            21
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não há fundamento para alegação de erro na aplicação da pena, pois a dosimetria correlacionou as situações fáticas e jurídicas.",
+          "citacao": "",
+          "paragrafos": [
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5034,
+      "output_tokens": 1516,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001261
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "casoId": "tjal-juri-embargos-defesa",
+  "paragrafos": 62,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Não há decisão no texto; trata-se de petição de embargos de declaração com pedidos da defesa, sem dispositivo julgado.",
+      "resumo": "A defesa opõe embargos de declaração com efeitos pré-questionatórios contra acórdão do TJAL. Pede a neutralização da circunstância judicial das consequências do crime, o reconhecimento de bis in idem entre a agravante de crime contra cônjuge e a qualificadora de feminicídio e a aplicação da redução de pena pela tentativa no patamar máximo de 2/3.",
+      "pedidos": [
+        {
+          "descricao": "Neutralizar a circunstância judicial das consequências do crime, por ausência de prova pericial complementar.",
+          "paragrafos": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            58
+          ]
+        },
+        {
+          "descricao": "Reconhecer bis in idem entre a agravante do crime cometido contra cônjuge e a qualificadora de feminicídio, afastando a agravante na segunda fase da dosimetria.",
+          "paragrafos": [
+            15,
+            16,
+            17,
+            18,
+            33,
+            34,
+            35,
+            36,
+            37,
+            58
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução pela tentativa no patamar máximo de 2/3, sem condicioná-la à desistência voluntária.",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            58
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 5,
+          "fim": 55
+        },
+        {
+          "tipo": "outro",
+          "inicio": 56,
+          "fim": 62
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6139,
+      "output_tokens": 1083,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001155
+  },
+  "questoes": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato",
+    "uso": {
+      "input_tokens": 6678,
+      "output_tokens": 183,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000759
+  },
+  "fundamentos": {
+    "estado": "nao_rodou",
+    "saida": null,
+    "motivo": "sem questões válidas",
+    "custoUsd": 0
+  }
+}

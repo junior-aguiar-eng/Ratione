@@ -1,0 +1,300 @@
+{
+  "casoId": "stj-resp-1123306-certidao-fazenda-municipal",
+  "paragrafos": 97,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido; admitida a expedição de certidão positiva com efeitos de negativa ao Município, sem penhora, em execução embargada ou ação anulatória.",
+      "resumo": "A Fazenda Nacional recorreu de acórdão do TRF da 3ª Região que manteve a segurança para o Município obter certidão negativa de débito, apontando violação aos arts. 205 e 206 do CTN. A Primeira Seção do STJ, por unanimidade, negou provimento ao recurso especial. Entendeu que, em embargos ou ação anulatória do ente municipal, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa, independentemente de penhora.",
+      "pedidos": [
+        {
+          "descricao": "Expedição, pela autoridade impetrada, de certidão negativa de débito ao Município (mandado de segurança com pedido de liminar), nos termos do art. 206 do CTN.",
+          "paragrafos": [
+            21
+          ]
+        },
+        {
+          "descricao": "Provimento do recurso especial da Fazenda Nacional para afastar a certidão positiva com efeitos de negativa concedida ao Município sem penhora ou garantia, por violação aos arts. 205 e 206 do CTN.",
+          "paragrafos": [
+            19,
+            22,
+            26
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 7
+        },
+        {
+          "tipo": "outro",
+          "inicio": 8,
+          "fim": 17
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 18,
+          "fim": 27
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 31,
+          "fim": 34
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 35,
+          "fim": 69
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 70,
+          "fim": 74
+        },
+        {
+          "tipo": "outro",
+          "inicio": 75,
+          "fim": 97
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11455,
+      "output_tokens": 1837,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002064
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial da Fazenda Nacional deve ser conhecido, com a matéria federal prequestionada?",
+          "conclusao": "O recurso foi conhecido, por estar prequestionada a matéria federal suscitada.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            38
+          ],
+          "paragrafosConclusao": [
+            38
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A Fazenda Municipal que ajuizou embargos à execução, sem penhora, tem direito à certidão positiva com efeitos de negativa?",
+          "conclusao": "Sim. Ajuizados embargos ou ação anulatória pelo município, o crédito tem exigibilidade suspensa e cabe a certidão positiva com efeitos de negativa, independentemente de garantia.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          "paragrafosConclusao": [
+            46,
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11994,
+      "output_tokens": 390,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001394
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A matéria federal suscitada está prequestionada, o que justifica o conhecimento do recurso.",
+          "citacao": "",
+          "paragrafos": [
+            38
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Alegação de violação aos arts. 205 e 206 do CTN, sobre certidão com efeitos de negativa e crédito em fase executiva sem garantia.",
+          "citacao": "CTN, arts. 205 e 206",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O art. 206 do CTN equipara à certidão negativa a certidão de créditos cuja exigibilidade esteja suspensa ou que estejam garantidos por penhora.",
+          "citacao": "CTN, art. 206",
+          "paragrafos": [
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A impenhorabilidade dos bens públicos decorre de preceito constitucional e infraconstitucional sobre execução contra a Fazenda Pública, que admite sequestro, mas não penhora.",
+          "citacao": "",
+          "paragrafos": [
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em embargos ou ação anulatória do Município, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa, independentemente de garantia, em razão da excepcionalidade das prerrogativas da Fazenda Pública.",
+          "citacao": "",
+          "paragrafos": [
+            45,
+            46
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ag 1.150.803/PR: Turmas da Primeira Seção admitem certidão positiva com efeitos de negativa a Município que ajuizou ação anulatória ou embargos à execução.",
+          "citacao": "Ag 1.150.803/PR, Rel. Min. CASTRO MEIRA, DJ 05.08.2009",
+          "paragrafos": [
+            50
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 1.074.253/MG: certidão positiva com efeitos de negativa ao Município, independentemente de garantia, em ação anulatória de débito.",
+          "citacao": "REsp 1.074.253/MG, Rel. Min. BENEDITO GONÇALVES, DJ 10.03.2009",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no Ag 936.196/BA: Município, pessoa jurídica de direito público não sujeita a penhora, com embargos recebidos e processados, tem direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no Ag 936.196/BA, Rel. Ministra ELIANA CALMON, DJe 29/04/2008",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 736.730/SC: negou provimento a agravo regimental, mantendo a tese de que o Município com embargos recebidos tem direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no REsp 736.730/SC, Rel. Ministro FRANCISCO FALCÃO, DJ 17/10/2005",
+          "paragrafos": [
+            53,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 601.313/RS: ajuizados embargos ou anulatória pelo município, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 601.313/RS, Rel. Min. CASTRO MEIRA, DJ 20.9.2004",
+          "paragrafos": [
+            45,
+            56
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 497923/SC: em ação anulatória proposta pela Fazenda municipal, o crédito tem exigibilidade suspensa e cabe certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 497923/SC, Rel. Ministro JOÃO OTÁVIO DE NORONHA, DJ 02/08/2006",
+          "paragrafos": [
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 443.024/RS: na execução fiscal contra Município não sujeita a penhora, com embargos recebidos e processados, o embargante tem direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 443.024/RS, Rel. Min. LUIZ FUX, DJU 02.12.02",
+          "paragrafos": [
+            58,
+            65
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 381.459/SC: na execução fiscal contra Município, com embargos à execução, o embargante tem direito a certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 381.459/SC, Rel. Min. Humberto Gomes de Barros, DJU 17.11.03",
+          "paragrafos": [
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 376.341/SC: na execução fiscal contra Município não sujeita a penhora, com embargos recebidos e processados, o embargante tem direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 376.341/SC, Rel. Min. Garcia Vieira, DJU 21.10.02",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "Resp 205.815/MG, Relator Ministro Garcia Vieira, DJ 28.06.99",
+          "paragrafos": [
+            39
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11933,
+      "output_tokens": 1988,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002187
+  }
+}

@@ -58,7 +58,9 @@ async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModel
     json = undefined;
   }
   const saida = t.saida.safeParse(json);
-  const motivo = !saida.success ? 'fora do formato' : (t.conferirSaida?.(saida.data, contexto) ?? null);
+  // Qual regra do esquema recusou a saída vai no motivo: o relatório diz por que a etapa foi descartada, não só que foi.
+  const erro = saida.success ? null : saida.error.issues.slice(0, 3).map(i => `${i.path.join('.') || 'raiz'}: ${i.message}`).join('; ');
+  const motivo = erro !== null ? `fora do formato (${erro})` : (t.conferirSaida?.(saida.data, contexto) ?? null);
   if (!saida.success || motivo) return { estado: 'descartada', saida: null, motivo: motivo ?? 'fora do formato', uso: r.uso, custoUsd: custo };
   return { estado: 'ok', saida: saida.data as T, uso: r.uso, custoUsd: custo };
 }

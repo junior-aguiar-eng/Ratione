@@ -144,6 +144,17 @@ describe('F5-05: citações', () => {
     assert.equal(citacaoCorresponde('LC nº 142/2013, art. 3º, IV', 'Lei Complementar nº 142/2013'), false);
     assert.equal(citacaoCorresponde('Lei 9.999/99', 'Lei 8.888/99'), false);
   });
+  it('corresponde: sigla do código vale pelo nome por extenso, e a achada pode ter mais detalhe', () => {
+    assert.equal(citacaoCorresponde('art. 61, II, e, do Código Penal', 'CP, art. 61, II, "e"'), true);
+    assert.equal(citacaoCorresponde('art. 35 do Código de Trânsito Brasileiro', 'CTB, art. 35 e parágrafo único'), true);
+    assert.equal(citacaoCorresponde('art. 38, II, do Código de Trânsito Brasileiro', 'CTB, art. 38, inc. II e parágrafo único'), true);
+    assert.equal(citacaoCorresponde('art. 7º, XXII, da Constituição', 'CF/1988, art. 7º, XXII'), true);
+    assert.equal(citacaoCorresponde('art. 61, II, e, do Código Penal', 'CPP, art. 61, II, "e"'), false); // outro código
+  });
+  it('corresponde: SDI-1 e SDI-I são a mesma seção, SDI-2 não', () => {
+    assert.equal(citacaoCorresponde('OJ nº 394 da SDI-I do TST', 'OJ 394 da SDI-1 do TST'), true);
+    assert.equal(citacaoCorresponde('OJ nº 394 da SDI-I do TST', 'OJ 394 da SDI-2 do TST'), false);
+  });
   it('corresponde: precedente continua valendo por classe, número e UF', () => {
     assert.equal(citacaoCorresponde('REsp 927.216/RS', 'REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon'), true);
     assert.equal(citacaoCorresponde('REsp 927.216/RS', 'REsp 927.216/SC'), false);

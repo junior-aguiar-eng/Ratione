@@ -1,0 +1,316 @@
+{
+  "casoId": "trf4-ac-5007789-prev",
+  "paragrafos": 74,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Apelação do INSS desprovida; honorários advocatícios majorados em 20%; determinada a implantação imediata do benefício pela CEAB.",
+      "resumo": "O INSS apelou da sentença que julgou procedente o pedido de Aposentadoria por Idade da Pessoa com Deficiência, com DER em 27/08/2021. O recorrente pediu a reforma da sentença para que o pedido seja julgado improcedente, sob o argumento de que a avaliação biopsicossocial era indispensável. O relator negou provimento ao recurso, majorou os honorários e determinou a implantação imediata do benefício.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença para que o pedido seja julgado improcedente, sob o argumento de que a avaliação biopsicossocial era indispensável e de que a presunção de deficiência adotada pelo juízo de origem seria ilegal.",
+          "paragrafos": [
+            15
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 16
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 17,
+          "fim": 64
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 65,
+          "fim": 66
+        },
+        {
+          "tipo": "outro",
+          "inicio": 67,
+          "fim": 74
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7629,
+      "output_tokens": 1261,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001393
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A autora tem direito à aposentadoria da pessoa com deficiência, com a visão monocular enquadrada como deficiência leve?",
+          "conclusao": "A visão monocular é deficiência leve para fins previdenciários. Todo o tempo contributivo foi exercido na condição de deficiente e os requisitos foram preenchidos. A sentença é mantida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "paragrafosConclusao": [
+            48,
+            49,
+            66
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Os honorários advocatícios devem ser majorados em segundo grau de jurisdição?",
+          "conclusao": "Majorou-se em 20% a verba honorária fixada na sentença, observados os limites máximos das faixas do art. 85, §3º, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            50,
+            51,
+            52
+          ],
+          "paragrafosConclusao": [
+            52,
+            66
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Deve o INSS implantar o benefício de imediato, por meio da CEAB?",
+          "conclusao": "Determinou-se a implantação imediata do benefício, observado o prazo de trinta dias úteis, com requisição à CEAB.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          "paragrafosConclusao": [
+            54,
+            64,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8168,
+      "output_tokens": 1530,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001582
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Lei Complementar 142/2013 define pessoa com deficiência para fins de aposentadoria e fixa requisitos por grau de deficiência.",
+          "citacao": "LC 142/2013, art. 2º e art. 3º",
+          "paragrafos": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A avaliação da deficiência é médica e funcional, atestada por perícia do INSS, e é necessária para a concessão.",
+          "citacao": "LC 142/2013, art. 4º e art. 5º",
+          "paragrafos": [
+            29,
+            30,
+            31,
+            32
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Portaria Interministerial 1/2014 define faixas de pontuação para classificar deficiência grave, moderada e leve.",
+          "citacao": "Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e",
+          "paragrafos": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Lei 14.126 classifica a visão monocular como deficiência sensorial, do tipo visual, para todos os efeitos legais.",
+          "citacao": "Lei nº 14.126",
+          "paragrafos": [
+            43,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Perícia oftalmológica atestou cegueira no olho esquerdo (CID H54.4) de natureza congênita, com início da deficiência na data de nascimento.",
+          "citacao": "",
+          "paragrafos": [
+            42,
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Pontuação combinada das avaliações médica e social pelo IFBrA foi de 7.775 pontos, acima do limite de 7.584 para deficiência leve.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TRF4 decidiu que a visão monocular é deficiência leve para fins previdenciários, com direito à aposentadoria da pessoa com deficiência se preenchidos os demais requisitos.",
+          "citacao": "TRF4, Apelação Cível nº [PROCESSO_2], 6ª Turma, Desembargadora Federal TAIS SCHILLING FERRAZ",
+          "paragrafos": [
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A avaliação pericial serve para graduar a deficiência, mas não se sobrepõe à classificação legal da visão monocular, que corresponde ao menos à deficiência leve.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Como a deficiência é congênita, a autora trabalhou toda a vida contributiva como pessoa com deficiência.",
+          "citacao": "",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Na DER, a autora tinha 55 anos e mais de 15 anos de contribuição, todos na condição de deficiente, cumprindo o art. 3º, IV, da LC 142/2013.",
+          "citacao": "LC 142/2013, art. 3º, IV",
+          "paragrafos": [
+            48,
+            49
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Honorários de advogado são majorados em segundo grau quando o recurso é desprovido, observados os limites das faixas.",
+          "citacao": "CPC, art. 85, §11 e art. 85, §3º",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Determina-se o cumprimento imediato do julgado, observado o prazo de trinta dias úteis, com base no art. 497 do CPC.",
+          "citacao": "CPC, art. 497",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF4 decidiu que a decisão, em princípio, não está sujeita a recurso com efeito suspensivo, fundamentando a execução imediata.",
+          "citacao": "TRF4, AC 2002.71.00.050349-7, Terceira Seção, Relator para Acórdão Celso Kipper",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Na hipótese de benefício já em gozo, a implantação só ocorre se a renda mensal atual for superior à do benefício existente.",
+          "citacao": "",
+          "paragrafos": [
+            55
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Requisição à CEAB com a tabela de implantação (DIB 27/08/2021, RMI a apurar) para cumprimento imediato.",
+          "citacao": "",
+          "paragrafos": [
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8196,
+      "output_tokens": 1673,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001656
+  }
+}

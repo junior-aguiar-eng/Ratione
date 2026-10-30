@@ -100,7 +100,22 @@ const EXPANSOES: Array<[RegExp, string]> = [
   [/\blc\b/g, 'lei complementar'],
   [/\bec\b/g, 'emenda constitucional'],
   [/\bmp\b/g, 'medida provisoria'],
-  [/\bdl\b/g, 'decreto lei']
+  [/\bdl\b/g, 'decreto lei'],
+  // Códigos e leis de uso corrente: nome por extenso e sigla viram o mesmo termo único ("CP, art. 61" = "art. 61 do Código Penal"),
+  // e "Código Penal" não fica contido em "Código de Processo Penal". A ordem importa: o nome mais longo primeiro.
+  [/\bcodigo (?:de )?processo penal\b|\bcpp\b/g, 'codigo_processo_penal'],
+  [/\bcodigo (?:de )?processo civil\b|\bcpc\b/g, 'codigo_processo_civil'],
+  [/\bcodigo penal\b|\bcp\b/g, 'codigo_penal'],
+  [/\bcodigo civil\b|\bcc\b/g, 'codigo_civil'],
+  [/\bconsolidacao das leis do trabalho\b|\bclt\b/g, 'clt'],
+  [/\bconstituicao(?: federal)?\b|\bcf\b/g, 'constituicao_federal'],
+  [/\bcodigo tributario nacional\b|\bctn\b/g, 'codigo_tributario_nacional'],
+  [/\bcodigo de transito brasileiro\b|\bctb\b/g, 'codigo_transito_brasileiro'],
+  [/\bcodigo de defesa do consumidor\b|\bcdc\b/g, 'codigo_defesa_consumidor'],
+  [/\blei de execucao penal\b|\blep\b/g, 'lei_execucao_penal'],
+  // "SDI-1", "SDI-I" e "SDI 1" são a mesma seção
+  [/\bsdi[\s-]*(?:i|1)\b/g, 'sdi1'],
+  [/\bsdi[\s-]*(?:ii|2)\b/g, 'sdi2']
 ];
 const SUMULA_DE_OUTRO_TRIBUNAL = /sumula\s*(?:vinculante\s*)?n?[ºo°.]?\s*(\d{1,4})/;
 const SIGLA_DE_TRIBUNAL = /\b(tst|tse|stm|tcu|tnu|tj[a-z]{2}|trf ?\d|trt ?\d+)\b/;
