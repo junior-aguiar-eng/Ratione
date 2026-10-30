@@ -5,6 +5,7 @@ import { Bookmark, CalendarPlus, Check, Copy, FileDown } from 'lucide-react';
 import type { ResultadoPrazoMaterial } from '@ratione/prazozero';
 import Notice from '../../components/Notice';
 import LigacoesDoPrazo from '../../components/LigacoesDoPrazo';
+import BotaoCopiarLink from '../../components/BotaoCopiarLink';
 import { dataCurta, dataLonga, diaDaSemana } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
@@ -133,6 +134,7 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId, atoId
           <CalendarPlus className="w-4 h-4" />
           Adicionar ao calendário
         </Button>
+        <BotaoCopiarLink caminho={urlSalvo} />
         <Button variant="secondary" type="button" onClick={salvar}>
           {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
           {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
