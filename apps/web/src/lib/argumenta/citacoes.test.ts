@@ -13,6 +13,14 @@ describe('Argumenta F5-04: reconhecimento de citações', () => {
     assert.equal(rec('art. 85, § 2º, do CPC')?.tipo, 'dispositivo');
   });
 
+  it('CPC de 1973 não é conferido no CPC de 2015', () => {
+    for (const t of ['art. 535 do CPC/73', 'CPC/1973, art. 538', 'art. 557 do CPC de 1973', 'Código de Processo Civil de 1973, art. 20', 'art. 515 do CPC antigo', 'Lei 5.869/1973, art. 333']) {
+      assert.equal(rec(t)?.tipo, 'fora', t);
+    }
+    assert.equal(rec('art. 85 do CPC/2015')?.tipo, 'dispositivo');
+    assert.equal(rec('art. 85 do CPC/15')?.tipo, 'dispositivo');
+  });
+
   it('artigo sem norma nomeada não é conferido', () => {
     assert.equal(rec('art. 14'), null);
   });
