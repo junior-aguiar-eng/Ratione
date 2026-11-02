@@ -20,6 +20,7 @@ const OUTRO_TRIBUNAL = /\b(TST|TSE|STM|TCU|TJ[A-Z]{2}|TRF\s?\d|TRT\s?\d+|TRE[A-Z
 const RE_SUMULA = /\bs[úu]mulas?\s+(vinculante\s+)?(?:n[ºo°.]*\s*)?(\d{1,4})\b/i;
 const RE_TEMA = /\btemas?\s+(?:n[ºo°.]*\s*)?(\d{1,2}(?:\.\d{3})+|\d{1,5})\b/i;
 const RE_ACAO = /\b(ADI|ADPF|ADC|ADO)\s*(?:n[ºo°.]*\s*)?(\d{1,2}(?:\.\d{3})+|\d{1,5})\b/;
+const RE_CPC_1973 = /\bCPC\s*\/?\s*(?:de\s*)?(?:19)?73\b|\bCPC\s+(?:antigo|revogado)\b|c[óo]digo de processo civil\s*(?:de|\/)?\s*(?:19)?73\b|\blei\s*(?:n[ºo°.]*\s*)?5\.?869\b/i;
 const RE_LEI_FORA = /^\s*(lei|decreto|emenda|medida provisória|resolução|portaria|instrução normativa)\b/i;
 
 /** Tribunais que o texto nomeia, pelas siglas ou por extenso; vazio se não nomeia nenhum dos dois. */
@@ -68,7 +69,11 @@ export function reconhecerCitacao(entrada: string, normasConhecidas: string[]): 
   const acao = texto.match(RE_ACAO);
   if (acao) return { tipo: 'acao', classe: acao[1] as 'ADI' | 'ADPF' | 'ADC' | 'ADO', numero: acao[2].replace(/\./g, '') };
 
-  const consulta = interpretarConsulta(normaAntesDoArtigo(texto), normasConhecidas);
+  // "CPC" sozinho é o de 2015, mas "CPC/73", "CPC de 1973" e a Lei 5.869 são o código revogado, que a base não tem: sem este corte o artigo
+  // seria conferido no código errado e ganharia um selo de "encontrada" falso
+  if (RE_CPC_1973.test(texto)) return { tipo: 'fora', motivo: 'Código de Processo Civil de 1973 (revogado), que a base não cobre.' };
+
+  const consulta = interpretarConsulta(normaAntesDoArtigo(texto.replace(/\bCPC\s*\/\s*(?:20)?15\b/gi, 'CPC')), normasConhecidas);
   if (consulta.tipo === 'dispositivo') {
     // Sem norma na citação ("art. 14" solto) não há o que conferir
     return consulta.normaId ? { tipo: 'dispositivo', normaId: consulta.normaId, artigo: consulta.artigo, detalhe: consulta.detalhe } : null;
