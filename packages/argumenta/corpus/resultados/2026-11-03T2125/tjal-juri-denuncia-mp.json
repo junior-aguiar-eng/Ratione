@@ -1,0 +1,308 @@
+{
+  "casoId": "tjal-juri-denuncia-mp",
+  "paragrafos": 44,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "O texto não contém decisão judicial nem dispositivo decisório; trata-se de denúncia oferecida pelo Ministério Público.",
+      "resumo": "O Ministério Público denuncia [ACUSADO] por tentativa de homicídio qualificado (art. 121, §2º, VI, c/c art. 14, II, CP), contra a companheira [VÍTIMA], com fatos ocorridos em 15/09/2021. Requer o recebimento e a citação do denunciado, a juntada da folha de antecedentes e a manutenção da prisão preventiva. O texto não traz decisão sobre esses pedidos.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento e autuação da denúncia, com citação do denunciado para resposta à acusação e instauração do procedimento do júri.",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "descricao": "Juntada aos autos da folha de antecedentes criminais do denunciado e expedição de ofícios à Autoridade Policial e ao IML para remessa do laudo de exame de corpo de delito.",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "descricao": "Protesto por provar o alegado por todos os meios de prova admitidos em direito.",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "descricao": "Manutenção da prisão preventiva do denunciado.",
+          "paragrafos": [
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 15
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 16,
+          "fim": 17
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 18,
+          "fim": 24
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 25,
+          "fim": 33
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 34,
+          "fim": 35
+        },
+        {
+          "tipo": "outro",
+          "inicio": 36,
+          "fim": 44
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4434,
+      "output_tokens": 1694,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00129,
+    "duracaoMs": 7562
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Os fatos narrados configuram tentativa de homicídio qualificado por razões de condição de sexo feminino contra a companheira, a ser apurada pelo Tribunal do Júri?",
+          "conclusao": "O Ministério Público imputa ao denunciado a prática do crime do artigo 121, §2º, VI, c/c artigo 14, II, do Código Penal, e requer recebimento da denúncia e julgamento pelo Tribunal do Júri.",
+          "resultado": "pendente",
+          "paragrafos": [
+            4,
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            17,
+            22
+          ],
+          "paragrafosConclusao": [
+            17,
+            22
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Está presente o fundamento para a manutenção da prisão preventiva do denunciado?",
+          "conclusao": "O Ministério Público sustenta a presença dos pressupostos do artigo 312 do CPP e requer a manutenção da prisão preventiva para garantia da ordem pública.",
+          "resultado": "pendente",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ],
+          "paragrafosConclusao": [
+            34
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Devem ser juntados aos autos a folha de antecedentes do denunciado e o laudo de exame de corpo de delito da vítima?",
+          "conclusao": "O Ministério Público requer a juntada da folha de antecedentes criminais e a requisição do laudo de exame de corpo de delito à Autoridade Policial e ao IML.",
+          "resultado": "pendente",
+          "paragrafos": [
+            23
+          ],
+          "paragrafosConclusao": [
+            23
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5176,
+      "output_tokens": 577,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000806,
+    "duracaoMs": 3531
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Denunciado desferiu golpes de faca contra a companheira na madrugada de 15/09/2021, com animus necandi, por razões da condição de sexo feminino.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            11
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Agressões continuaram após o capotamento do veículo e só cessaram quando a vítima conseguiu sair e pedir socorro.",
+          "citacao": "",
+          "paragrafos": [
+            12
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Vítima foi socorrida com ferimentos de faca e passou por cirurgia; denunciado fugiu do local, o que indica a não consumação por circunstâncias alheias à vontade do agente.",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Casal convive maritalmente há 22 anos e a vítima já fora agredida física e psicologicamente em outras ocasiões.",
+          "citacao": "",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Confissão do denunciado perante a Autoridade Policial, às fls. 150/151.",
+          "citacao": "",
+          "paragrafos": [
+            15
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Manancial probatório colhido no Inquérito Policial.",
+          "citacao": "",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Enquadramento do fato no homicídio qualificado (razões de condição de sexo feminino) em tentativa.",
+          "citacao": "CP, art. 121, §2º, VI, c/c art. 14, II",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Atribuição do Ministério Público para oferecer denúncia com base no inquérito.",
+          "citacao": "CF, art. 129; CPP, art. 24",
+          "paragrafos": [
+            4
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Crime doloso contra a vida deve seguir o procedimento do júri, com julgamento pelo Tribunal do Júri após a pronúncia.",
+          "citacao": "",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Pressupostos da prisão preventiva: prova da existência do crime e indícios suficientes de autoria.",
+          "citacao": "CPP, art. 312",
+          "paragrafos": [
+            26,
+            32
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Gravidade do delito, uso de arma branca e violência contra mulher evidenciam personalidade perigosa, justificando a custódia para garantia da ordem pública.",
+          "citacao": "",
+          "paragrafos": [
+            27,
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Necessidade de assegurar a credibilidade da justiça e de reprimir crimes que causam repercussão e temor na comunidade.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Materialidade do crime e indícios suficientes de autoria constantes dos autos.",
+          "citacao": "",
+          "paragrafos": [
+            26,
+            32
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Pedido de juntada da folha de antecedentes criminais e de requisição do laudo de exame de corpo de delito à Autoridade Policial e ao IML.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Necessidade de instruir os autos com o laudo de exame de corpo de delito da vítima para comprovar a materialidade.",
+          "citacao": "",
+          "paragrafos": [
+            23,
+            13
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5124,
+      "output_tokens": 1317,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001171,
+    "duracaoMs": 5818
+  }
+}

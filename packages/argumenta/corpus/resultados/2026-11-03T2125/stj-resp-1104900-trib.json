@@ -1,0 +1,309 @@
+{
+  "casoId": "stj-resp-1104900-trib",
+  "paragrafos": 85,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido, por unanimidade, pela Primeira Seção do STJ.",
+      "resumo": "Os recorrentes pediram a reforma do acórdão que rejeitou a exceção de pré-executividade de sócios cujos nomes constam da CDA, alegando ofensa ao art. 135 do CTN. A Seção negou provimento ao recurso, entendendo que a responsabilidade dos representantes exige dilação probatória e deve ser discutida em embargos à execução.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão para acolher a exceção de pré-executividade e excluir do polo passivo os representantes cujos nomes constam da CDA, com base no art. 135 do CTN.",
+          "paragrafos": [
+            19,
+            35
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 5
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 15,
+          "fim": 29
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 33,
+          "fim": 59
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 60,
+          "fim": 60
+        },
+        {
+          "tipo": "outro",
+          "inicio": 61,
+          "fim": 85
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10998,
+      "output_tokens": 429,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001314,
+    "duracaoMs": 2975
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Quem tem o nome na CDA como co-responsável deve provar a ausência das hipóteses do art. 135 do CTN em execução proposta só contra a pessoa jurídica?",
+          "conclusao": "Cabe ao sócio cujo nome consta da CDA o ônus de provar que não ocorreram as circunstâncias do art. 135 do CTN.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            5,
+            35,
+            36,
+            37,
+            39,
+            40,
+            41
+          ],
+          "paragrafosConclusao": [
+            5,
+            35
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "É cabível a exceção de pré-executividade para discutir a responsabilidade dos representantes da empresa executada?",
+          "conclusao": "Não, pois o exame dessa responsabilidade exige dilação probatória e deve ser feito em embargos à execução.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            5,
+            44,
+            45,
+            47,
+            48,
+            49,
+            58,
+            59
+          ],
+          "paragrafosConclusao": [
+            5,
+            45
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11740,
+      "output_tokens": 366,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001357,
+    "duracaoMs": 2721
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Primeira Seção do STJ: se a execução foi ajuizada só contra a pessoa jurídica, mas o nome do sócio consta da CDA, cabe ao sócio o ônus de provar que não ocorreram as circunstâncias do art. 135 do CTN.",
+          "citacao": "Primeira Seção do STJ (orientação citada no voto); art. 135 do CTN",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 135 do CTN: responsabilidade pessoal dos representantes por atos com excesso de poderes ou infração de lei, contrato social ou estatutos.",
+          "citacao": "CTN, art. 135",
+          "paragrafos": [
+            19,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "EREsp 702.232/RS: caso em que a execução foi proposta só contra a pessoa jurídica e o nome do sócio-gerente constava da CDA como co-responsável; o ônus da prova cabe ao sócio, pela presunção relativa de liquidez e certeza da CDA.",
+          "citacao": "EREsp 702.232/RS, 1ª Seção, Rel. Min. Castro Meira, DJ de 26.9.2005",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Presunção relativa de liquidez e certeza da CDA.",
+          "citacao": "CTN, art. 204",
+          "paragrafos": [
+            36,
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 900.371/SP: a indicação do nome do co-responsável na CDA confere legitimidade passiva, mas não confirma a responsabilidade tributária, que será decidida nos embargos à execução.",
+          "citacao": "REsp 900.371/SP, 1ª Turma, Rel. Min. Teori Albino Zavascki, DJe de 2.6.2008",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 750.581/RJ: sócios com nomes inscritos na CDA devem provar, em embargos à execução, que não agiram com excesso de mandato, infração à lei ou ao contrato social.",
+          "citacao": "REsp 750.581/RJ, 2ª Turma, Rel. Min. Francisco Peçanha Martins, DJ de 7.11.2005",
+          "paragrafos": [
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 704.014/RS: ao sócio que figura na CDA incumbe provar, nos embargos à execução, que não agiu com dolo, má-fé ou excesso de poderes.",
+          "citacao": "REsp 704.014/RS, 2ª Turma, Rel. Min. Eliana Calmon, DJ de 3.10.2005",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "CDA goza de presunção de certeza e liquidez; art. 3º da LEF.",
+          "citacao": "Lei 6.830/80, art. 3º",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A CDA indicava o nome do sócio como co-responsável e a execução foi proposta contra a pessoa jurídica, o que atribui ao sócio o ônus da prova.",
+          "citacao": "",
+          "paragrafos": [
+            35,
+            36
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Parecer do MPF pela aplicação do mesmo entendimento: a CDA com nome do sócio gera presunção juris tantum e impõe ao sócio o ônus de provar o art. 135 do CTN.",
+          "citacao": "Parecer do MPF (fls. 119/123)",
+          "paragrafos": [
+            26,
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Exceção de pré-executividade é admitida quando não há necessidade de dilação probatória ou quando a questão pode ser conhecida de ofício (condições da ação, pressupostos processuais, decadência, prescrição).",
+          "citacao": "",
+          "paragrafos": [
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O exame da responsabilidade dos representantes da empresa executada exige dilação probatória, por isso não cabe na exceção de pré-executividade.",
+          "citacao": "",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os embargos à execução são o meio de defesa próprio da execução fiscal, onde a matéria deve ser aduzida.",
+          "citacao": "",
+          "paragrafos": [
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1.049.954/MG: a aferição da legitimidade passiva do sócio cujo nome consta da CDA depende de dilação probatória, o que afasta a exceção de pré-executividade.",
+          "citacao": "AgRg no REsp 1.049.954/MG, 1ª Turma, Rel. Min. Francisco Falcão, DJe de 27.8.2008",
+          "paragrafos": [
+            59
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 778.467/SP: havendo necessidade de dilação probatória, a ilegitimidade passiva do sócio-gerente não é apreciável em exceção de pré-executividade.",
+          "citacao": "AgRg no REsp 778.467/SP, 2ª Turma, Rel. Min. Mauro Campbell Marques, DJe de 6.2.2009",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no Ag 1.060.318/SC: a exceção de pré-executividade serve a questões conhecíveis de ofício e admite prescrição e decadência desde que não demandem dilação probatória.",
+          "citacao": "AgRg no Ag 1.060.318/SC, 1ª Turma, Rel. Min. Luiz Fux, DJe de 17.12.2008",
+          "paragrafos": [
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 987.231/SP: a exceção de pré-executividade é possível para alegar prescrição quando não há necessidade de dilação probatória.",
+          "citacao": "AgRg no REsp 987.231/SP, 2ª Turma, Rel. Min. Humberto Martins, DJe de 26.2.2009",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A decisão das instâncias ordinárias, que afastou a exceção, foi acolhida como correta; a responsabilidade dos representantes requer dilação probatória.",
+          "citacao": "",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 543-C do CPC: julgamento sob a sistemática de recursos repetitivos, com Resolução 8/2008 do STJ.",
+          "citacao": "CPC, art. 543-C; Resolução 8/2008 - Presidência/STJ",
+          "paragrafos": [
+            5,
+            60
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11527,
+      "output_tokens": 2469,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002387,
+    "duracaoMs": 8947
+  }
+}

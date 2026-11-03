@@ -90,5 +90,8 @@
       "STA nº 175"
     ]
   },
-  "validacao": null
+  "validacao": {
+    "por": "José Bonifácio de Aguiar Santos Júnior",
+    "em": "2026-11-03"
+  }
 }

@@ -1,0 +1,621 @@
+{
+  "casoId": "tjal-juri-resp",
+  "paragrafos": 171,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "O texto não contém decisão judicial; é uma peça de Recurso Especial que pede a reforma da dosimetria da pena.",
+      "resumo": "A defesa recorre de condenação por tentativa de feminicídio e pede o afastamento da valoração negativa das consequências do crime, o reconhecimento de bis in idem na agravante do art. 61, II, e, do CP e a redução pela tentativa no patamar máximo de 2/3. Também pede efeito suspensivo, recebimento do recurso e remessa ao STJ.",
+      "pedidos": [
+        {
+          "descricao": "Aplicar efeito suspensivo ao recurso.",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "descricao": "Afastar a valoração negativa das consequências do crime na pena-base.",
+          "paragrafos": [
+            75,
+            164
+          ]
+        },
+        {
+          "descricao": "Reconhecer bis in idem na agravante do art. 61, II, e, do CP e afastá-la da condenação.",
+          "paragrafos": [
+            134,
+            165,
+            166
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução pela tentativa no patamar máximo de 2/3.",
+          "paragrafos": [
+            158,
+            167,
+            168
+          ]
+        },
+        {
+          "descricao": "Receber o recurso especial, intimar o Ministério Público para contrarrazões e remeter os autos ao STJ.",
+          "paragrafos": [
+            161,
+            162,
+            163
+          ]
+        },
+        {
+          "descricao": "Efetivar as notificações em nome do advogado da defesa.",
+          "paragrafos": [
+            169
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 7
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 8,
+          "fim": 15
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 16,
+          "fim": 26
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 27,
+          "fim": 36
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 37,
+          "fim": 158
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 159,
+          "fim": 171
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12150,
+      "output_tokens": 1579,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002005,
+    "duracaoMs": 7229
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial é tempestivo e atende aos pressupostos de admissibilidade?",
+          "conclusao": "A defesa sustenta que o recurso foi interposto no prazo de 15 dias e que a matéria não esbarra na Súmula 7 do STJ.",
+          "resultado": "pendente",
+          "paragrafos": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ],
+          "paragrafosConclusao": [
+            30,
+            34,
+            36
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A valoração negativa das consequências do crime na pena-base é válida sem prova técnica das sequelas?",
+          "conclusao": "A defesa pede o afastamento da valoração negativa das consequências do crime, por ausência de prova técnica e inércia da vítima no exame complementar.",
+          "resultado": "pendente",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            74,
+            75
+          ],
+          "paragrafosConclusao": [
+            74,
+            75
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A agravante do cônjuge (art. 61, II, e, CP) configura bis in idem com a qualificadora do feminicídio?",
+          "conclusao": "A defesa sustenta que a agravante foi aplicada com base na mesma circunstância que qualifica o crime, pedindo seu afastamento.",
+          "resultado": "pendente",
+          "paragrafos": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134
+          ],
+          "paragrafosConclusao": [
+            133,
+            134
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "A redução pela tentativa deve ser de 2/3, por não haver aproximação do resultado morte?",
+          "conclusao": "A defesa pede a fração máxima de redução (2/3), por não ter havido perigo de vida nem aproximação do resultado morte.",
+          "resultado": "pendente",
+          "paragrafos": [
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158
+          ],
+          "paragrafosConclusao": [
+            157,
+            158
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "acessoria",
+          "enunciado": "Quais são os pedidos finais da defesa no recurso especial?",
+          "conclusao": "A defesa pede recebimento do recurso, intimação para contrarrazões, remessa ao STJ e os reconhecimentos e reduções sustentados nas teses anteriores.",
+          "resultado": "pendente",
+          "paragrafos": [
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169
+          ],
+          "paragrafosConclusao": [
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12892,
+      "output_tokens": 1029,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001804,
+    "duracaoMs": 5052
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A decisão recorrida foi publicada em 06/03/2026 e o recurso foi protocolado no prazo de 15 dias.",
+          "citacao": "",
+          "paragrafos": [
+            29,
+            30
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Prazo de 15 dias para interposição do recurso especial.",
+          "citacao": "Prazo de 15 dias",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A matéria discutida não exige revolvimento de fatos e provas, por isso não incide a Súmula 7 do STJ.",
+          "citacao": "",
+          "paragrafos": [
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Arts. 59, 14, II, e 61, II, 'e', do Código Penal foram debatidos nos autos e a questão não representa supressão de instância.",
+          "citacao": "CP, arts. 59, 14, II e 61, II, e",
+          "paragrafos": [
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Súmula 7 do STJ, invocada para afastar a sua incidência.",
+          "citacao": "Súmula 7 do STJ",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 59 do CP trata das circunstâncias judiciais que fundamentam a pena-base.",
+          "citacao": "CP, art. 59",
+          "paragrafos": [
+            9
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Declarações da vítima e exame de corpo de delito (fls. 278/279) indicaram perda de movimento de dedo, valorada pelo juiz como consequência do crime.",
+          "citacao": "",
+          "paragrafos": [
+            40,
+            41,
+            42
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito não afirma perda permanente de membro nem deformidade permanente; prevê exame complementar em 120 dias não realizado.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            44,
+            46,
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "CPP, art. 158, exige prova pericial para infrações que deixam vestígios; art. 168, §2º, prevê o laudo complementar.",
+          "citacao": "CPP, art. 158; CPP, art. 168, §2º",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A dúvida sobre a extensão das lesões, pela falta de exame complementar, deve favorecer o acusado (in dubio pro reo).",
+          "citacao": "",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "HC 598.765/SP, Quinta Turma do STJ: consequências do crime não podem ser valoradas negativamente sem elementos probatórios concretos e laudo.",
+          "citacao": "HC 598.765/SP, Rel. Ministro Reynaldo Soares da Fonseca, Quinta Turma, julgado em 06/10/2020, DJe 14/10/2020",
+          "paragrafos": [
+            58,
+            59
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Depoimento da filha da vítima afirma que não houve consequências psicológicas nem físicas posteriores ao crime.",
+          "citacao": "",
+          "paragrafos": [
+            61,
+            64,
+            65,
+            71,
+            72,
+            73
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A valoração negativa das consequências foi feita sem prova técnica e diante da inércia da vítima, configurando error in judicando.",
+          "citacao": "",
+          "paragrafos": [
+            74
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "O magistrado aplicou a agravante de crime contra cônjuge porque vítima e réu eram casados.",
+          "citacao": "CP, art. 61, II, e",
+          "paragrafos": [
+            77,
+            78
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Lei 14.994/2024 e Lei 13.104/2015 tratam do feminicídio, como qualificadora e como crime autônomo.",
+          "citacao": "Lei nº 14.994/2024; Lei 13.104/2015",
+          "paragrafos": [
+            79,
+            80
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Art. 5º, I, da Lei Maria da Penha define violência doméstica e familiar, incluindo a relação conjugal.",
+          "citacao": "Lei nº 11.340/2006, art. 5º, I",
+          "paragrafos": [
+            87,
+            88
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A condição de cônjuge já integra o tipo qualificado do feminicídio; usá-la também como agravante configura bis in idem.",
+          "citacao": "",
+          "paragrafos": [
+            89,
+            90,
+            91
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Tema 1197 do STJ: aplicação da agravante do art. 61, II, f, com a Lei Maria da Penha não configura bis in idem. Os acórdãos citados (TJDF) afastaram a agravante no caso concreto por bis in idem.",
+          "citacao": "Tema 1197 do STJ",
+          "paragrafos": [
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJDF que reconheceu bis in idem ao aplicar agravante do art. 61, II, f, em lesão corporal do art. 129, §13, do CP; o texto não identifica número do julgado.",
+          "citacao": "Embargos de declaração em apelação, TJDF",
+          "paragrafos": [
+            110,
+            113,
+            120,
+            126
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Há distinguishing: o julgador não apontou menosprezo ou discriminação à condição de mulher, e os fatos envolvem violência doméstica já prevista no tipo.",
+          "citacao": "",
+          "paragrafos": [
+            130,
+            131
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O juiz, ao reconhecer relacionamento de 22 anos, ciúmes e contexto doméstico, incorreria em venire contra factum proprium.",
+          "citacao": "",
+          "paragrafos": [
+            132
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "O juiz reduziu a pena pela tentativa em 1/3 por a vítima ter ficado seis dias internada e haver proximidade do resultado morte.",
+          "citacao": "",
+          "paragrafos": [
+            12,
+            138
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Art. 14, II, parágrafo único, do CP, sobre a redução da pena da tentativa.",
+          "citacao": "CP, art. 14, II, parágrafo único",
+          "paragrafos": [
+            136,
+            137
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito (quesito 4) indica ausência de perigo de vida; médica legista confirmou apenas incapacidade por mais de 30 dias.",
+          "citacao": "",
+          "paragrafos": [
+            141,
+            143,
+            144
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Depoimento da filha afirma que a vítima não correu risco de vida e não foi à UTI; a vítima estava consciente.",
+          "citacao": "",
+          "paragrafos": [
+            151,
+            154
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Sem aproximação do resultado morte nem perigo de vida, cabe a fração máxima de 2/3 de redução pela tentativa.",
+          "citacao": "",
+          "paragrafos": [
+            139,
+            140,
+            157,
+            158
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "Pedido de recebimento do recurso especial, intimação do Ministério Público para contrarrazões e remessa ao STJ.",
+          "citacao": "",
+          "paragrafos": [
+            161,
+            162,
+            163
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "Pedidos de afastamento da valoração das consequências, reconhecimento do bis in idem e aplicação da redução máxima de 2/3.",
+          "citacao": "",
+          "paragrafos": [
+            164,
+            165,
+            166,
+            167,
+            168
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12946,
+      "output_tokens": 2795,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002692,
+    "duracaoMs": 10938
+  }
+}
