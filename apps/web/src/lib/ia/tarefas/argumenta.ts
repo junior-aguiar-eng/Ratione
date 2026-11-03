@@ -91,7 +91,8 @@ export const argumentaEstrutura: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaE
   gatilho: 'Botão "Analisar decisão" no Argumenta (pessoa logada), primeira etapa.',
   modelo: 'claude-haiku-5-5',
   esforco: 'medium',
-  maxTokensSaida: 3_000,
+  // 6.000: o raciocínio do esforço médio conta dentro do teto, e a sentença do júri (111 parágrafos) foi cortada em 3.000 sem resposta (03/11/2026).
+  maxTokensSaida: 6_000,
   maxCaracteresMensagem: 85_000,
   versao: VERSAO,
   guardaResultado: false,
