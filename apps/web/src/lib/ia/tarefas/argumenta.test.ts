@@ -113,6 +113,14 @@ describe('Argumenta: limites das saídas das etapas 2 e 3', () => {
     assert.equal(r.questoes[0].paragrafosConclusao.length, 80);
     assert.equal(SaidaQuestoes.safeParse({ questoes: [{ ...QUESTAO, paragrafosConclusao: [] }] }).success, false); // a conclusão continua exigindo ao menos um
   });
+  it('o id da questão vem da ordem, e não do que o modelo escreveu: id fora de Q1..Q10 não descarta a etapa', () => {
+    const r = SaidaQuestoes.parse({ questoes: [QUESTAO, { ...QUESTAO, id: 'Q1a' }, { ...QUESTAO, id: 'Q11' }, { ...QUESTAO, id: 'questão 4' }] });
+    assert.deepEqual(r.questoes.map(q => q.id), ['Q1', 'Q2', 'Q3', 'Q4']);
+  });
+  it('mais de 10 questões guarda as 10 primeiras, em vez de descartar a etapa', () => {
+    assert.equal(SaidaQuestoes.parse({ questoes: Array(13).fill(QUESTAO) }).questoes.length, 10);
+    assert.equal(SaidaQuestoes.safeParse({ questoes: [] }).success, false);
+  });
   it('aceita o resultado "pendente", para tese ou pedido de peça de parte', () => {
     assert.equal(SaidaQuestoes.safeParse({ questoes: [QUESTAO] }).success, true);
   });
@@ -189,10 +197,11 @@ describe('Argumenta: cota por análise nas três etapas', () => {
     assert.equal(pedidos.length, 0);
   });
 
-  it('saída que cita parágrafo inexistente é descartada; questões repetidas e fundamento de questão que não veio também', async () => {
+  it('saída que cita parágrafo inexistente é descartada; fundamento de questão que não veio também', async () => {
     const q = (extra: object = {}) => ({ ...QUESTAO, ...extra });
     assert.equal((await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, deps(JSON.stringify({ questoes: [q()] })).dep)).status, 200);
-    assert.equal((await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, deps(JSON.stringify({ questoes: [q(), q()] })).dep)).status, 502);
+    // O id vem da ordem: dois ids iguais na saída do modelo não chegam a existir (viram Q1 e Q2) e não descartam a etapa
+    assert.equal((await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, deps(JSON.stringify({ questoes: [q(), q()] })).dep)).status, 200);
     assert.equal((await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, deps(JSON.stringify({ questoes: [q({ paragrafosConclusao: [0] })] })).dep)).status, 502);
     const entrada = { analiseId: ANALISE, paragrafos, questoes: QUESTOES };
     assert.equal((await executarTarefa('argumenta-fundamentos', entrada, deps(JSON.stringify({ fundamentos: [FUNDAMENTO] })).dep)).status, 200);
