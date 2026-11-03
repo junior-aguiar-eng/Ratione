@@ -64,6 +64,20 @@ function modeloPerfeito(): { chamar: ChamarModelo; chamadas: () => number } {
 }
 
 describe('F5-05: executor do caso', () => {
+  it('troca o modelo das três etapas quando se pede, e calcula o custo pelo preço dele', async () => {
+    const pedidos: string[] = [];
+    const base = modeloPerfeito().chamar;
+    const espia: ChamarModelo = async p => {
+      pedidos.push(p.modelo);
+      return base(p);
+    };
+    const haiku = await executarCaso(CASO, espia);
+    const sonnet = await executarCaso(CASO, espia, 'claude-sonnet-5-5');
+    assert.deepEqual(pedidos, ['claude-haiku-5-5', 'claude-haiku-5-5', 'claude-haiku-5-5', 'claude-sonnet-5-5', 'claude-sonnet-5-5', 'claude-sonnet-5-5']);
+    // 1.000 tokens de entrada e 200 de saída por etapa: US$ 0,0002 no Haiku e US$ 0,004 no Sonnet
+    assert.equal(haiku.estrutura.custoUsd, 0.0002);
+    assert.equal(sonnet.estrutura.custoUsd, 0.004);
+  });
   it('roda as três etapas e devolve as saídas válidas com o custo', async () => {
     const { chamar, chamadas } = modeloPerfeito();
     const r = await executarCaso(CASO, chamar);
