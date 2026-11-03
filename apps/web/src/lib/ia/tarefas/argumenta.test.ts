@@ -88,6 +88,15 @@ describe('Argumenta: entrada das tarefas', () => {
   });
 });
 
+describe('Argumenta: instrução da etapa de estrutura', () => {
+  it('manda marcar sempre o dispositivo e diz o que é o dispositivo em sentença, acórdão e peça de parte', () => {
+    assert.match(argumentaEstrutura.instrucoes, /Marque sempre uma seção dispositivo/);
+    assert.match(argumentaEstrutura.instrucoes, /Providências finais/);
+    assert.match(argumentaEstrutura.instrucoes, /requerimento final/);
+    assert.match(argumentaEstrutura.instrucoes, /É como voto/);
+  });
+});
+
 describe('Argumenta: instrução da etapa de questões', () => {
   it('pede a admissibilidade como questão preliminar e exclui o que só consta da decisão recorrida', () => {
     assert.match(argumentaQuestoes.instrucoes, /juízo de admissibilidade/);
