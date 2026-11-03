@@ -1,0 +1,214 @@
+{
+  "casoId": "stj-resp-1151364-civil",
+  "paragrafos": 70,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial negado provimento, por unanimidade: a CEF, isenta de custas, deve reembolsar as custas adiantadas pela parte vencedora, no limite da sucumbência.",
+      "resumo": "A CEF recorreu alegando isenção de custas nas ações do FGTS, conforme o art. 24-A da Lei 9.028/95, e não deveria reembolsar as custas pagas pelo autor. A parte recorrida pediu a aplicação da Súmula 83/STJ e a manutenção do acórdão. A Primeira Seção negou provimento ao recurso, mantendo o reembolso das custas.",
+      "pedidos": [
+        {
+          "descricao": "Reconhecer a isenção de custas da CEF nas ações do FGTS e afastar a condenação ao reembolso das custas pagas pelo autor.",
+          "paragrafos": [
+            20,
+            21
+          ]
+        },
+        {
+          "descricao": "Aplicação da Súmula 83/STJ e manutenção do acórdão recorrido.",
+          "paragrafos": [
+            22
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 5
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 6,
+          "fim": 7
+        },
+        {
+          "tipo": "outro",
+          "inicio": 8,
+          "fim": 8
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 9,
+          "fim": 9
+        },
+        {
+          "tipo": "outro",
+          "inicio": 10,
+          "fim": 13
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 14,
+          "fim": 18
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 19,
+          "fim": 23
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 26,
+          "fim": 30
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 31,
+          "fim": 32
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 33,
+          "fim": 44
+        },
+        {
+          "tipo": "outro",
+          "inicio": 45,
+          "fim": 70
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7756,
+      "output_tokens": 2524,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002038,
+    "duracaoMs": 12257
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "acessoria",
+          "enunciado": "A CEF, isenta de custas nas ações sobre FGTS, deve reembolsar as custas adiantadas pela parte vencedora quando sucumbente?",
+          "conclusao": "A isenção do parágrafo único do art. 24-A da Lei 9.028/95 não desobriga a CEF de reembolsar as custas adiantadas pelo autor, no limite de sua sucumbência.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            7,
+            20,
+            21,
+            34,
+            36,
+            37,
+            38,
+            41,
+            42,
+            43,
+            44
+          ],
+          "paragrafosConclusao": [
+            37,
+            44
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8048,
+      "output_tokens": 225,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000917,
+    "duracaoMs": 2203
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 24-A da Lei 9.028/95, incluído pela MP 2.180-35/2001: isenção de custas da União, autarquias e fundações, e no parágrafo único, extensiva à pessoa jurídica que representa o FGTS em juízo.",
+          "citacao": "Lei 9.028/95, art. 24-A, parágrafo único",
+          "paragrafos": [
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A norma isenta a CEF de custas, mas o autor que as adiantou deve ser reembolsado no que exceder o limite do decaimento da recorrente.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Com base no princípio da sucumbência, não se pode impor ao autor o ônus das despesas que adiantou.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 902.100/PB: isenção do art. 24-A não implica desnecessidade de reembolsar custas adiantadas pelo autor, até o limite da sucumbência da CEF.",
+          "citacao": "REsp 902.100/PB, 1ª T., Min. Denise Arruda, DJ 29/11/2007",
+          "paragrafos": [
+            37,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 725.595/PB: a isenção do art. 24-A não exime a CEF de reembolsar à parte autora as custas já adiantadas no ajuizamento da ação.",
+          "citacao": "REsp 725.595/PB, 2ª T., Min. Humberto Martins, DJ 14/02/2007",
+          "paragrafos": [
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 806.558/RJ: a isenção de custas do art. 24-A não afasta a restituição das custas antecipadas pelo autor que obteve êxito.",
+          "citacao": "REsp 806.558/RJ, 5ª T., Min. Laurita Vaz, DJe 28/09/2009",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Recurso especial da CEF negado; decisão tomada por unanimidade pela Primeira Seção, submetida ao regime do art. 543-C do CPC.",
+          "citacao": "",
+          "paragrafos": [
+            9,
+            44
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7756,
+      "output_tokens": 860,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001206,
+    "duracaoMs": 4376
+  }
+}

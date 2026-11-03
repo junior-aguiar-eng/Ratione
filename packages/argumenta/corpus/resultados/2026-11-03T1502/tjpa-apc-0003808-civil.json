@@ -1,0 +1,319 @@
+{
+  "casoId": "tjpa-apc-0003808-civil",
+  "paragrafos": 180,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso de apelação conhecido e não provido; sentença de improcedência mantida.",
+      "resumo": "O apelante pediu a reforma da sentença de improcedência de ação de indenização por danos morais e materiais decorrentes de acidente de trânsito, sustentando a culpa dos apelados e, subsidiariamente, a culpa concorrente. A relatora entendeu que o autor não provou a alta velocidade alegada e que o condutor que realiza conversão à esquerda em via de mão dupla responde por presunção de culpa, mantendo a sentença.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença de improcedência, com reconhecimento do direito à indenização por danos morais e materiais.",
+          "paragrafos": [
+            78,
+            79,
+            80,
+            81,
+            99
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de culpa concorrente dos apelados, com fixação das indenizações em patamares condizentes com os danos sofridos.",
+          "paragrafos": [
+            82,
+            99
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 15
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 16,
+          "fim": 47
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 42,
+          "fim": 47
+        },
+        {
+          "tipo": "outro",
+          "inicio": 48,
+          "fim": 49
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 68,
+          "fim": 90
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 96,
+          "fim": 174
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 175,
+          "fim": 176
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9572,
+      "output_tokens": 524,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001219,
+    "duracaoMs": 2979
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso de apelação preenche os pressupostos processuais de admissibilidade?",
+          "conclusao": "A relatora considera os pressupostos regularmente constituídos e conhece do recurso.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            96
+          ],
+          "paragrafosConclusao": [
+            96,
+            176
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O acidente decorreu de culpa do condutor que realizou conversão à esquerda em via de mão dupla, ou dos apelados que vinham em alta velocidade?",
+          "conclusao": "A culpa é presumida do condutor que converteu à esquerda sem as cautelas devidas, e a velocidade alegada não foi provada.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            99,
+            100,
+            101,
+            106,
+            107,
+            108,
+            120
+          ],
+          "paragrafosConclusao": [
+            108,
+            120,
+            174
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Cabia ao apelante provar a alta velocidade do veículo dos apelados como fato constitutivo de seu direito?",
+          "conclusao": "Sim, pelo art. 373, I, do CPC; a alta velocidade não foi demonstrada nos autos, pois o depoimento se baseou em informação de terceiros.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            106,
+            107
+          ],
+          "paragrafosConclusao": [
+            107
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "Cabe reconhecer culpa concorrente e fixar indenizações em patamar menor?",
+          "conclusao": "Não examinado de forma autônoma; a sentença de improcedência é mantida, o que afasta o pedido subsidiário de culpa concorrente.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            82,
+            99
+          ],
+          "paragrafosConclusao": [
+            174,
+            176
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9864,
+      "output_tokens": 641,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001307,
+    "duracaoMs": 4157
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A relatora considera os pressupostos processuais regularmente constituídos e conhece do recurso.",
+          "citacao": "",
+          "paragrafos": [
+            96
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Diagrama do acidente (fl. 14) e documentos de fls. 14 e 275 indicam que a PA 275 tinha circulação em duplo sentido.",
+          "citacao": "",
+          "paragrafos": [
+            100,
+            101
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Depoimento do apelante em audiência, que corrigiu a troca de identificação entre V1 e V2 no croqui e disse não poder precisar a velocidade da L200.",
+          "citacao": "",
+          "paragrafos": [
+            101,
+            106
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Incontroverso que o apelante desejava realizar conversão à esquerda para acessar a PA 275 e não o fez com as devidas cautelas.",
+          "citacao": "",
+          "paragrafos": [
+            108
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Dever do condutor de certificar-se de que pode executar a manobra sem perigo para os demais usuários da via.",
+          "citacao": "CTB, art. 34",
+          "paragrafos": [
+            108,
+            109
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Dever de indicar o propósito de deslocamento lateral, incluindo conversões à esquerda, com antecedência.",
+          "citacao": "CTB, art. 35",
+          "paragrafos": [
+            108,
+            110,
+            116
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Dever do condutor que sai à esquerda de aproximar-se do eixo da pista em via de dois sentidos e ceder passagem aos veículos em sentido contrário.",
+          "citacao": "CTB, art. 38, II e parágrafo único",
+          "paragrafos": [
+            108,
+            118,
+            119
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Apelação Cível Nº 70047403654, TJ-RS: presunção de culpa do condutor que, em via de mão dupla, inflete à esquerda sem cautelas e intercepta veículo em sentido oposto.",
+          "citacao": "Apelação Cível Nº 70047403654, Décima Segunda Câmara Cível, TJ-RS",
+          "paragrafos": [
+            144,
+            145
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Recurso Cível Nº 71007811326, Segunda Turma Recursal Cível, TJ-RS: culpa da condutora que não observou o fluxo ao iniciar conversão à esquerda em via de mão dupla.",
+          "citacao": "Recurso Cível Nº 71007811326, Segunda Turma Recursal Cível, TJ-RS",
+          "paragrafos": [
+            146,
+            168,
+            173
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em casos como o presente, a culpa é presumida do condutor que, em via de mão dupla, converte à esquerda e colide com outro veículo.",
+          "citacao": "",
+          "paragrafos": [
+            120
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A manobra sem as cautelas devidas configura a presunção de culpabilidade do condutor que converteu à esquerda.",
+          "citacao": "",
+          "paragrafos": [
+            46,
+            108,
+            120
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Ao autor compete o ônus de demonstrar o fato constitutivo de seu direito.",
+          "citacao": "CPC, art. 373, I",
+          "paragrafos": [
+            107
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A alta velocidade do veículo dos apelados não foi demonstrada nos autos.",
+          "citacao": "",
+          "paragrafos": [
+            107
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "O depoimento sobre a velocidade se baseou em informação de terceiros, sem demonstração própria.",
+          "citacao": "",
+          "paragrafos": [
+            106,
+            107
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Os argumentos do magistrado de piso são irrepreensíveis, justificando manter a sentença de improcedência em sua integralidade, o que afasta o pedido subsidiário.",
+          "citacao": "",
+          "paragrafos": [
+            174,
+            176
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9825,
+      "output_tokens": 1494,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00173,
+    "duracaoMs": 6417
+  }
+}

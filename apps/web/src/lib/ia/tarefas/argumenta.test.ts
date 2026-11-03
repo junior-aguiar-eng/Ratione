@@ -89,11 +89,13 @@ describe('Argumenta: entrada das tarefas', () => {
 });
 
 describe('Argumenta: instrução da etapa de estrutura', () => {
-  it('manda marcar sempre o dispositivo e diz o que é o dispositivo em sentença, acórdão e peça de parte', () => {
+  it('manda marcar sempre o dispositivo e diz o que é o dispositivo em sentença e em peça de parte', () => {
     assert.match(argumentaEstrutura.instrucoes, /Marque sempre uma seção dispositivo/);
     assert.match(argumentaEstrutura.instrucoes, /Providências finais/);
     assert.match(argumentaEstrutura.instrucoes, /requerimento final/);
     assert.match(argumentaEstrutura.instrucoes, /É como voto/);
+    // Regra própria para acórdão estreitou o intervalo (rodada de 03/11/2026: 20 para 15 de 30 no dispositivo); fica de fora até haver medida melhor
+    assert.doesNotMatch(argumentaEstrutura.instrucoes, /Acórdão: o resultado/);
   });
 });
 

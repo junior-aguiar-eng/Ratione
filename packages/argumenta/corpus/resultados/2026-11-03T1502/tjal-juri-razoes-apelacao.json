@@ -1,0 +1,749 @@
+{
+  "casoId": "tjal-juri-razoes-apelacao",
+  "paragrafos": 348,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Peça de defesa (razões de apelação), não é decisão; requer readequação e redimensionamento da pena.",
+      "resumo": "A defesa recorre de sentença do Tribunal do Júri que condenou o apelante por tentativa de feminicídio. Pede o afastamento das valorações negativas da pena-base (conduta social, personalidade e consequências do crime), o reconhecimento de bis in idem na agravante de crime contra cônjuge e a aplicação da redução de 2/3 pela tentativa.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento das razões de apelação.",
+          "paragrafos": [
+            339
+          ]
+        },
+        {
+          "descricao": "Readequação do cálculo da pena-base nas circunstâncias desfavoráveis, com fração de 1/6 ou 1/8.",
+          "paragrafos": [
+            340
+          ]
+        },
+        {
+          "descricao": "Afastamento das valorações negativas da conduta social, da personalidade e das consequências do crime.",
+          "paragrafos": [
+            341
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de bis in idem na agravante do art. 61, II, e, do Código Penal.",
+          "paragrafos": [
+            342,
+            343
+          ]
+        },
+        {
+          "descricao": "Aplicação da redução pela tentativa em patamar máximo de 2/3.",
+          "paragrafos": [
+            344,
+            345
+          ]
+        },
+        {
+          "descricao": "Que as notificações sejam feitas em nome do advogado da defesa, sob pena de nulidade.",
+          "paragrafos": [
+            346
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 7,
+          "fim": 13
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 14,
+          "fim": 336
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 337,
+          "fim": 346
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 28437,
+      "output_tokens": 1455,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.003571,
+    "duracaoMs": 7873
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O aumento de 3 anos por circunstância judicial desfavorável, na primeira fase da dosimetria, é proporcional e fundamentado?",
+          "conclusao": "A defesa pede a readequação da pena-base, com fração de 1/6 ou 1/8 para as circunstâncias desfavoráveis, por desproporção e falta de fundamentação.",
+          "resultado": "pendente",
+          "paragrafos": [
+            8,
+            9,
+            19,
+            20,
+            21,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            58
+          ],
+          "paragrafosConclusao": [
+            58,
+            340
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A conduta social pode ser valorada negativamente com base apenas no relato da vítima e nos fatos do próprio crime?",
+          "conclusao": "A defesa pede o afastamento da valoração negativa da conduta social, por falta de prova, fundamentação inidônea e bis in idem.",
+          "resultado": "pendente",
+          "paragrafos": [
+            62,
+            63,
+            64,
+            75,
+            76,
+            123,
+            137,
+            138,
+            139,
+            146,
+            147,
+            148,
+            150
+          ],
+          "paragrafosConclusao": [
+            150,
+            341
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A personalidade do agente pode ser valorada negativamente com base nos adjetivos e condutas apontados na sentença?",
+          "conclusao": "A defesa pede o afastamento da valoração negativa da personalidade, por ausência de prova, bis in idem e vínculo com motivo torpe não articulado.",
+          "resultado": "pendente",
+          "paragrafos": [
+            153,
+            154,
+            155,
+            156,
+            157,
+            194,
+            195,
+            196,
+            197,
+            215,
+            216,
+            217,
+            218
+          ],
+          "paragrafosConclusao": [
+            218,
+            341
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "As consequências do crime podem ser valoradas negativamente sem laudo técnico ou complementar nos autos?",
+          "conclusao": "A defesa pede o afastamento da valoração negativa das consequências do crime, por falta de prova técnica e inércia da vítima.",
+          "resultado": "pendente",
+          "paragrafos": [
+            220,
+            221,
+            222,
+            223,
+            224,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            240,
+            241,
+            254,
+            255
+          ],
+          "paragrafosConclusao": [
+            255,
+            341
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "A agravante do crime cometido contra cônjuge (art. 61, II, e, do CP) pode incidir junto com a qualificadora do feminicídio?",
+          "conclusao": "A defesa pede o reconhecimento de bis in idem e a exclusão da agravante da segunda fase da dosimetria.",
+          "resultado": "pendente",
+          "paragrafos": [
+            10,
+            257,
+            258,
+            259,
+            266,
+            267,
+            269,
+            270,
+            271,
+            283,
+            308,
+            309,
+            310,
+            311
+          ],
+          "paragrafosConclusao": [
+            311,
+            312,
+            342
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "merito",
+          "enunciado": "A redução pela tentativa deve ser de 2/3, em vez de 1/3, por não ter havido aproximação do resultado morte?",
+          "conclusao": "A defesa pede a redução pela tentativa no patamar máximo de 2/3, por não ter havido perigo de vida segundo o laudo.",
+          "resultado": "pendente",
+          "paragrafos": [
+            11,
+            314,
+            315,
+            316,
+            317,
+            318,
+            319,
+            321,
+            322,
+            323,
+            324,
+            335,
+            336
+          ],
+          "paragrafosConclusao": [
+            336,
+            344
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 28729,
+      "output_tokens": 2727,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.004236,
+    "duracaoMs": 14242
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Defesa sustenta erro material: cada circunstância negativa foi aumentada em 3 anos, sem fundamentação concreta, excedendo o patamar jurisprudencial.",
+          "citacao": "",
+          "paragrafos": [
+            9,
+            19,
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Dever de fundamentar a pena-base e princípio da proporcionalidade, segundo a defesa.",
+          "citacao": "CP, art. 59 e 68; CF, art. 5º, LIV, e art. 93, IX",
+          "paragrafos": [
+            19,
+            21
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJAL (Apelação Criminal, Homicídio Qualificado, julgado em 17/09/2025): fração de 1/6 por circunstância negativa exige fundamentação expressa.",
+          "citacao": "Apelação Criminal do TJAL, julgada em 17/09/2025 (Des. [RELATOR])",
+          "paragrafos": [
+            30,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJAL (Apelação Criminal, Homicídio Simples, julgado em 03/09/2025): reconhecida de ofício a falta de fundamentação para fração diversa de 1/6 ou 1/8, redimensionando a pena para 7 anos e 10 meses.",
+          "citacao": "Apelação Criminal do TJAL, julgada em 03/09/2025 (Des. [RELATOR])",
+          "paragrafos": [
+            37,
+            46,
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ, AgRg no HC 642.571/SC: fração de 1/8 sobre o intervalo entre penas mínima e máxima, por circunstância desfavorável, é considerada proporcional.",
+          "citacao": "STJ - AgRg no HC 642.571/SC, Rel. Ministro Antônio Saldanha Palheiro, Sexta Turma, julgado em 15/06/2021",
+          "paragrafos": [
+            49,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Defesa afirma que a gravidade concreta do delito, usada para aumentar cada circunstância, não é fundamento idôneo e constitui bis in idem.",
+          "citacao": "",
+          "paragrafos": [
+            25,
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Defesa pede redução da pena-base com fração de 1/6 ou 1/8 em cada circunstância desfavorável.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            340
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A valoração da conduta social baseou-se apenas no relato da vítima sobre o relacionamento, sem outros elementos dos autos.",
+          "citacao": "",
+          "paragrafos": [
+            62,
+            63,
+            64
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Depoimento do irmão da vítima afirmando que o acusado era pessoa pacata e de bem.",
+          "citacao": "",
+          "paragrafos": [
+            64,
+            67
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Depoimento da filha do casal em plenário negando agressões, proibições de trabalhar ou estudar.",
+          "citacao": "",
+          "paragrafos": [
+            79,
+            90,
+            92,
+            95,
+            97,
+            99
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Depoimento da comadre da vítima sobre a liberdade da vítima e o custeio do curso de enfermagem pelo acusado.",
+          "citacao": "",
+          "paragrafos": [
+            100,
+            104,
+            106,
+            109
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Sentença invocou HC 507.207/DF; defesa afirma que a tese do julgado não corresponde à usada na sentença, pois tratava de personalidade com laudo psiquiátrico.",
+          "citacao": "HC n. 507.207/DF, Rel. Ministra Laurita Vaz, Sexta Turma, julgado em 19/5/2020",
+          "paragrafos": [
+            68,
+            69,
+            70,
+            71,
+            72
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "STJ, HC 589.123/SP: valoração negativa da conduta social com base em relato unilateral da vítima constitui constrangimento ilegal.",
+          "citacao": "STJ - HC 589.123/SP, Rel. Ministro Reynaldo Soares da Fonseca, Quinta Turma, julgado em 18/08/2020",
+          "paragrafos": [
+            143,
+            144,
+            145
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A possessividade usada para negativar a conduta social configura bis in idem, pois já compõe a circunstância do delito.",
+          "citacao": "",
+          "paragrafos": [
+            146,
+            194
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "STJ, AgRg no AREsp 1.737.903/MS: qualificadora não pronunciada não pode ser usada na primeira fase da dosimetria, sob pena de usurpar a competência dos jurados.",
+          "citacao": "STJ - AgRg no AREsp n. 1.737.903/MS, Rel. Ministro Ribeiro Dantas, Quinta Turma, julgado em 22/06/2021",
+          "paragrafos": [
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os ciúmes da vítima, usados para negativar a conduta social, correspondem a motivo torpe não articulado na denúncia nem na pronúncia, o que usurparia a competência do júri.",
+          "citacao": "",
+          "paragrafos": [
+            123,
+            137,
+            148
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Na defesa, a conduta social é o comportamento do agente perante a sociedade, e a prova colhida demonstra conduta social ilibada, em aplicação do in dubio pro reo.",
+          "citacao": "",
+          "paragrafos": [
+            76,
+            122,
+            139,
+            147
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A valoração negativa da personalidade não corresponde à realidade e repete argumento já usado para a conduta social.",
+          "citacao": "",
+          "paragrafos": [
+            153,
+            154,
+            155,
+            157
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Depoimentos da filha, da comadre e de irmãos da vítima negando posse, ciúmes ou ameaças por parte do acusado.",
+          "citacao": "",
+          "paragrafos": [
+            157,
+            158,
+            159,
+            160,
+            161,
+            166,
+            167,
+            169,
+            186,
+            189,
+            191,
+            193
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "As condutas de frieza, perversão e egoísmo são inerentes ao tipo penal, e a possessividade configura motivo torpe não articulado na denúncia nem na pronúncia.",
+          "citacao": "",
+          "paragrafos": [
+            153,
+            156,
+            195
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A argumentação da sentença sobre personalidade não vem acompanhada de provas, limitando-se a conceitos vagos e abstratos.",
+          "citacao": "",
+          "paragrafos": [
+            196,
+            216
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "STJ, REsp 1383921/RN: fixação da pena-base exige fundamentação concreta, idônea e individualizada, não bastando termos genéricos.",
+          "citacao": "REsp 1383921/RN, Rel. Ministra Maria Thereza de Assis Moura, Sexta Turma, julgado em 16/06/2015",
+          "paragrafos": [
+            197,
+            202,
+            203,
+            205,
+            206
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJAL (Homicídio Agravado, julgado em 26/03/2025): personalidade negativada com fatos posteriores à denúncia e sem demonstrar caráter voltado a ilícitos foi considerada inadequadamente analisada.",
+          "citacao": "Apelação Criminal do TJAL, julgada em 26/03/2025 (Des. [RELATOR])",
+          "paragrafos": [
+            208,
+            209,
+            210,
+            213,
+            214,
+            215
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não há prova técnica nem laudo complementar que comprove a perda de movimento do dedo; a vítima não compareceu ao exame complementar.",
+          "citacao": "",
+          "paragrafos": [
+            220,
+            221,
+            222,
+            223,
+            224,
+            226,
+            227,
+            228,
+            229,
+            230,
+            234,
+            254
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "CPP, art. 158 (prova pericial para infrações que deixam vestígios) e art. 168, §2º.",
+          "citacao": "CPP, art. 158 e art. 168, §2º",
+          "paragrafos": [
+            231,
+            233
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "STJ, HC 598.765/SP: consequências do crime não podem ser valoradas negativamente sem laudo ou elementos probatórios concretos.",
+          "citacao": "STJ - HC 598.765/SP, Rel. Ministro Reynaldo Soares da Fonseca, Quinta Turma, julgado em 06/10/2020",
+          "paragrafos": [
+            236,
+            237,
+            238,
+            239
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Depoimento da filha da vítima afirmando que ela não teve consequências físicas nem psicológicas posteriores ao delito.",
+          "citacao": "",
+          "paragrafos": [
+            241,
+            243,
+            244,
+            246,
+            250,
+            251,
+            252
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "A alegação de incapacidade permanente é matéria técnica que não pode ser suprida por depoimento da vítima nem por percepção leiga do julgador.",
+          "citacao": "",
+          "paragrafos": [
+            232,
+            234
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "CP, art. 61, II, e (agravante de crime contra cônjuge) e a qualificadora do feminicídio, que já inclui a relação conjugal como elemento do tipo.",
+          "citacao": "CP, art. 61, II, e; Lei nº 13.104/2015 (feminicídio)",
+          "paragrafos": [
+            257,
+            258,
+            259,
+            260,
+            262,
+            263,
+            264,
+            265,
+            269,
+            270
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "Lei Maria da Penha, art. 5º, I: a relação conjugal caracteriza violência doméstica e familiar, aplicável ao tipo penal.",
+          "citacao": "Lei nº 11.340/2006, art. 5º, I",
+          "paragrafos": [
+            267,
+            268
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Tema 1197 do STJ: aplicação da agravante do art. 61, II, f, com a Lei Maria da Penha não configura bis in idem. Acórdão do TJDF afastou a agravante por se tratar de tipo próprio.",
+          "citacao": "Tema 1197 do STJ; Acórdão do TJDF (embargos de declaração em apelação)",
+          "paragrafos": [
+            272,
+            273,
+            274,
+            275,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            287
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJDF: a agravante do art. 61, II, f, não incide no crime do art. 129, §13, do CP por bis in idem, distinguindo-se do Tema 1197.",
+          "citacao": "Acórdão do TJDF (embargos de declaração em apelação, lesão corporal em contexto de violência doméstica)",
+          "paragrafos": [
+            289,
+            292,
+            299,
+            300,
+            303,
+            306,
+            307
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "A violência doméstica já compõe o feminicídio, e a sentença não demonstrou menosprezo ou discriminação à condição de mulher; aplicar a agravante seria venire contra factum proprium.",
+          "citacao": "",
+          "paragrafos": [
+            308,
+            309,
+            310,
+            311,
+            312
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "prova",
+          "descricao": "Laudo de exame de corpo de delito (fls. 278/279), com resposta da médica legista no quesito 4 indicando ausência de perigo de vida.",
+          "citacao": "",
+          "paragrafos": [
+            318,
+            319,
+            321,
+            322,
+            323
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "prova",
+          "descricao": "Depoimento da filha afirmando que a vítima não correu risco de vida, não foi para a UTI e estava consciente.",
+          "citacao": "",
+          "paragrafos": [
+            327,
+            329,
+            331,
+            332,
+            334
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "prova",
+          "descricao": "Termo de declaração da vítima prestado no mesmo dia do fato, que a defesa aponta como indício de ausência de perigo de vida.",
+          "citacao": "",
+          "paragrafos": [
+            324,
+            325,
+            326
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "argumento",
+          "descricao": "A sentença reduziu a pena no mínimo de 1/3 pela internação de seis dias, mas a defesa sustenta que não houve aproximação do resultado morte, devendo ser aplicada a redução de 2/3.",
+          "citacao": "CP, art. 14, II, parágrafo único",
+          "paragrafos": [
+            313,
+            314,
+            315,
+            316,
+            317,
+            318,
+            335,
+            336
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 28935,
+      "output_tokens": 4512,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00515,
+    "duracaoMs": 19289
+  }
+}
