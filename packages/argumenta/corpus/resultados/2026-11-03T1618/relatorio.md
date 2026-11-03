@@ -6,7 +6,7 @@ Modelo: **claude-sonnet-5-5** · casos avaliados: **30** de 30 validados
 
 | Métrica | Resultado |
 |---|---|
-| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 18 de 30 (60,0%) |
+| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 22 de 30 (73,3%) |
 | Questões esperadas encontradas (cobertura dos parágrafos ≥ 50%) | 82 de 101 (81,2%) |
 | Citações esperadas encontradas | 135 de 192 (70,3%) |
 | Saídas descartadas pelo código | 0 de 90 (0,0%) |
@@ -53,10 +53,10 @@ Total da rodada: **US$ 2,8812** · médio por decisão avaliada: **US$ 0,0960** 
 | trf4-ac-5007789-prev | 74 | certo | 3/3 | 6/7 | ok / ok / ok | US$ 0,0764 |
 | trf4-ac-5009245-prev | 49 | certo | 2/2 | 2/5 | ok / ok / ok | US$ 0,0553 |
 | trt4-ro-0000501-trab | 47 | certo | 4/4 | 2/3 | ok / ok / ok | US$ 0,0682 |
-| trt4-rot-0020476-trab | 86 | errado (60,0%) | 3/3 | 7/7 | ok / ok / ok | US$ 0,0874 |
-| trt4-rot-0020592-trab | 117 | errado (33,3%) | 9/9 | 7/14 | ok / ok / ok | US$ 0,1136 |
-| trt4-rot-0021425-trab | 107 | errado (60,0%) | 3/3 (+2) | 9/11 | ok / ok / ok | US$ 0,0999 |
-| trt4-rot-0022282-trab | 91 | errado (60,0%) | 6/6 (+1) | 5/8 | ok / ok / ok | US$ 0,1029 |
+| trt4-rot-0020476-trab | 86 | certo | 3/3 | 7/7 | ok / ok / ok | US$ 0,0874 |
+| trt4-rot-0020592-trab | 117 | certo | 9/9 | 7/14 | ok / ok / ok | US$ 0,1136 |
+| trt4-rot-0021425-trab | 107 | certo | 3/3 (+2) | 9/11 | ok / ok / ok | US$ 0,0999 |
+| trt4-rot-0022282-trab | 91 | certo | 6/6 (+1) | 5/8 | ok / ok / ok | US$ 0,1029 |
 | tst-airr-1001572-trab | 116 | certo | 4/4 (+1) | 6/8 | ok / ok / ok | US$ 0,0982 |
 
 ## Como ler

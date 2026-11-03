@@ -48,8 +48,14 @@ export function medirDispositivo(estrutura: SaidasDoCaso['estrutura'], g: Gabari
   const candidatas = (estrutura?.secoes ?? []).filter(s => s.tipo === 'dispositivo');
   if (candidatas.length === 0) return { achou: false, sobreposicao: 0, acertou: false };
   const sobreposicao = Math.max(...candidatas.flatMap(s => esperados.map(e => jaccard(e, intervalo(s.inicio, s.fim)))));
-  return { achou: true, sobreposicao, acertou: sobreposicao >= LIMIAR_DISPOSITIVO };
+  const contemOResultado = (g.paragrafosDecisivos ?? []).length > 0
+    && candidatas.some(s => s.fim - s.inicio + 1 <= tamanhoMaximoComResultado(g) && g.paragrafosDecisivos!.every(n => n >= s.inicio && n <= s.fim));
+  return { achou: true, sobreposicao, acertou: sobreposicao >= LIMIAR_DISPOSITIVO || contemOResultado };
 }
+
+/** Com parágrafos decisivos, o intervalo achado pode ser maior que o do gabarito, mas não passa do dobro do maior (e de 5 no mínimo). */
+const tamanhoMaximoComResultado = (g: Gabarito): number =>
+  Math.max(5, 2 * Math.max(...[g.dispositivo, ...(g.dispositivoAlternativo ?? [])].map(d => d.fim - d.inicio + 1)));
 
 export interface ResultadoQuestoes {
   esperadas: number;

@@ -17,7 +17,7 @@ export function gerarFolha(caso: Caso): string {
     '',
     'Leia a decisão abaixo e preencha o bloco `gabarito` no arquivo do caso (`packages/argumenta/corpus/casos/' + caso.id + '.json`):',
     '',
-    '- `dispositivo`: primeiro e último parágrafo do dispositivo (a parte que decide). O intervalo inclui o parágrafo-título ("Dispositivo", "ACÓRDÃO") e termina na última linha que decide, sem a fórmula "é como voto" nem cabeçalho ou rodapé de página. Se o acórdão tem dois blocos que decidem (o bloco "Acórdão" e o fim do voto), ponha o outro em `dispositivoAlternativo` (lista de intervalos): qualquer um vale.',
+    '- `dispositivo`: primeiro e último parágrafo do dispositivo (a parte que decide). O intervalo inclui o parágrafo-título ("Dispositivo", "ACÓRDÃO") e termina na última linha que decide, sem a fórmula "é como voto" nem cabeçalho ou rodapé de página. Se o acórdão tem dois blocos que decidem (o bloco "Acórdão" e o fim do voto), ponha o outro em `dispositivoAlternativo` (lista de intervalos): qualquer um vale. Opcional: `paragrafosDecisivos`, os parágrafos que dizem o resultado ("ACORDAM…", "Ante o exposto, dou provimento").',
     '- `questoes`: cada questão que a decisão **resolve** (preliminar, prejudicial, mérito e as acessórias de custas, honorários e juros), com a conclusão e **todos** os parágrafos em que ela é discutida e decidida. Não liste fato nem argumento solto, nem a consequência automática de outra questão.',
     '- `citacoes`: as normas e os precedentes que a decisão cita, como aparecem no texto. O que a decisão apenas transcreve de outro julgado não conta, nem o rito do recurso repetitivo (art. 543-C do CPC/1973, art. 1.040 do CPC/2015, Resolução STJ 8/2008), que não é fundamento de conclusão.',
     '',
