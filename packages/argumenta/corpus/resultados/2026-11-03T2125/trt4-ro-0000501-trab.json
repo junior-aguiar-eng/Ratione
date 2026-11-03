@@ -1,0 +1,321 @@
+{
+  "casoId": "trt4-ro-0000501-trab",
+  "paragrafos": 47,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso não conhecido quanto à responsabilidade subsidiária da segunda reclamada, por ausência de interesse recursal; no mérito, recurso desprovido.",
+      "resumo": "A primeira reclamada recorreu da sentença quanto às horas extras e à responsabilidade subsidiária da segunda reclamada. O recurso não foi conhecido quanto à responsabilidade subsidiária, por ausência de interesse recursal. No mérito, foi negado provimento, mantendo-se a condenação em horas extras e o indeferimento dos reflexos.",
+      "pedidos": [
+        {
+          "descricao": "Exclusão da responsabilidade subsidiária da segunda reclamada.",
+          "paragrafos": [
+            13,
+            20
+          ]
+        },
+        {
+          "descricao": "Validade do regime de compensação adotado e reforma da condenação ao pagamento de horas extras.",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "descricao": "Sucessivamente, adoção da Súmula nº 85 do TST e exclusão dos minutos em cada registro de ponto, na forma do art. 58 da CLT.",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "descricao": "Reforma quanto aos reflexos das horas extras pelo aumento da média remuneratória nos repousos, férias, gratificação natalina, aviso-prévio e FGTS.",
+          "paragrafos": [
+            40
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 7,
+          "fim": 8
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 9,
+          "fim": 10
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 11,
+          "fim": 14
+        },
+        {
+          "tipo": "outro",
+          "inicio": 15,
+          "fim": 17
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 18,
+          "fim": 25
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 26,
+          "fim": 47
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6054,
+      "output_tokens": 1505,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001358,
+    "duracaoMs": 6917
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A primeira reclamada tem interesse recursal para contestar a responsabilidade subsidiária imputada à segunda reclamada?",
+          "conclusao": "Não há interesse recursal, pois a imputação de responsabilidade subsidiária à segunda reclamada não lhe causa situação desfavorável; recurso não conhecido nesse ponto.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "paragrafosConclusao": [
+            25
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O regime de compensação de jornada adotado pela reclamada é válido, ou há horas extras devidas à reclamante?",
+          "conclusao": "O regime compensatório é inválido por habitualidade das horas extras; há diferenças de horas extras devidas, apuradas com desconsideração apenas do tempo excedente ao limite legal, mantida a sentença.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38
+          ],
+          "paragrafosConclusao": [
+            30,
+            37,
+            38
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "São devidos reflexos das horas extras no aumento da média remuneratória sobre férias, gratificação natalina, aviso-prévio e FGTS?",
+          "conclusao": "Não são devidos, por bis in idem (OJ 394 da SDI-1 do TST); a sentença já havia indeferido o pleito, nada a alterar.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "paragrafosConclusao": [
+            43,
+            45
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6796,
+      "output_tokens": 585,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.000972,
+    "duracaoMs": 2926
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Imputar responsabilidade subsidiária à segunda reclamada não atinge de forma desfavorável a primeira reclamada, cujas situações fática e processual permanecem inalteradas; falta interesse recursal.",
+          "citacao": "",
+          "paragrafos": [
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Há interesse recursal quando a parte é colocada em situação desfavorável por conta do pronunciamento judicial.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Controles de horário (cartões de ponto) das fls. 65 e 77 e ss. reputados fidedignos, não ilididos por outro meio de prova; reclamante confessa, com presunção de veracidade dos registros.",
+          "citacao": "",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Recibos de salário juntados aos autos, cotejados com os controles de horário, demonstram diferenças de horas extras favoráveis à reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            33,
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Súmula 85, IV, do TST: a prestação de horas extras habituais descaracteriza o acordo de compensação de jornada; paga-se o adicional sobre as horas destinadas à compensação.",
+          "citacao": "Súmula 85, IV, do TST",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Artigo 58, § 1º, da CLT (redação da Lei 10.243/2001): autoriza dedução de no máximo cinco minutos, observado o limite de dez minutos, nos registros de ponto.",
+          "citacao": "CLT, art. 58, § 1º",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Súmula 366 do TST: ultrapassado o limite de minutos, considera-se extra a totalidade do tempo que exceder a jornada normal.",
+          "citacao": "Súmula 366 do TST",
+          "paragrafos": [
+            34,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Em 22-9-2009 a reclamada desconsiderou minutos anteriores e posteriores à jornada, observada a limitação legal, conforme controle de horário da fl. 77.",
+          "citacao": "",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 59, § 2º, da CLT, invocado pela recorrente para validade do regime de compensação para supressão do trabalho aos sábados.",
+          "citacao": "CLT, art. 59, § 2º",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os registros de ponto indicam habitualidade de horas extras, o que descaracteriza o regime compensatório e desvirtua sua finalidade; por isso o regime é inválido.",
+          "citacao": "",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Intervalos intrajornada foram regularmente gozados segundo os controles de horário, não havendo horas extras por esse motivo.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Mantém-se a sentença que condenou ao pagamento de horas extras, apuradas além da oitava diária e quarenta e quatro semanais, com adicionais e reflexos a serem liquidados.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            37,
+            38
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "OJ 394 da SDI-1 do TST: a majoração do repouso semanal remunerado pela integração de horas extras não repercute no cálculo de férias, gratificação natalina, aviso-prévio e FGTS, sob pena de bis in idem.",
+          "citacao": "OJ 394 da SDI-1 do TST",
+          "paragrafos": [
+            41,
+            42
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "A sentença indeferiu expressamente o pleito de diferenças pelo aumento da média remuneratória derivado das horas extras em repousos semanais.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            44
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Como a sentença já indeferiu o pleito, o recurso fica sem objeto nesse ponto e nada há a alterar.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            45
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6730,
+      "output_tokens": 1600,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001473,
+    "duracaoMs": 5940
+  }
+}

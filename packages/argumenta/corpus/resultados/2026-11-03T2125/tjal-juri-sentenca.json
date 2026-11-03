@@ -1,0 +1,77 @@
+{
+  "casoId": "tjal-juri-sentenca",
+  "paragrafos": 111,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "sentenca",
+      "resultado": "Pedido julgado procedente: réu condenado por tentativa de homicídio qualificado (feminicídio), com pena fixada em 16 anos e 6 meses de reclusão e prisão mantida.",
+      "resumo": "O Ministério Público ofereceu denúncia contra [ACUSADO] por tentativa de homicídio qualificado contra [VÍTIMA]. O Conselho de Sentença, por maioria, reconheceu a responsabilidade do réu e o juiz o condenou. Na dosimetria, a pena-base foi fixada em 27 anos, reduzida a 24 anos e 9 meses pela atenuante da confissão e a 16 anos e 6 meses pela causa de diminuição da tentativa.",
+      "pedidos": [
+        {
+          "descricao": "Condenação do réu pela pretensão punitiva do Ministério Público por tentativa de homicídio qualificado (feminicídio).",
+          "paragrafos": [
+            15,
+            18
+          ]
+        },
+        {
+          "descricao": "Fixação de indenização civil mínima para reparação de danos à vítima.",
+          "paragrafos": [
+            94,
+            98
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 13
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 14,
+          "fim": 17
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 18,
+          "fim": 92
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 93,
+          "fim": 111
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 13780,
+      "output_tokens": 491,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001624,
+    "duracaoMs": 3264
+  },
+  "questoes": {
+    "estado": "descartada",
+    "saida": null,
+    "motivo": "fora do formato (questoes.3.id: Invalid string: must match pattern /^Q(?:[1-9]|10)$/)",
+    "uso": {
+      "input_tokens": 14522,
+      "output_tokens": 1550,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002227,
+    "duracaoMs": 6675
+  },
+  "fundamentos": {
+    "estado": "nao_rodou",
+    "saida": null,
+    "motivo": "sem questões válidas",
+    "custoUsd": 0
+  }
+}

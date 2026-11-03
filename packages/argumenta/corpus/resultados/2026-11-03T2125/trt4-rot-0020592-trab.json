@@ -1,0 +1,621 @@
+{
+  "casoId": "trt4-rot-0020592-trab",
+  "paragrafos": 117,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Não conhecido o recurso ordinário da reclamada quanto a três tópicos e negado provimento ao recurso ordinário da reclamada e ao recurso adesivo da reclamante.",
+      "resumo": "A reclamada recorreu da sentença que afastou a justa causa por abandono de emprego e a condenou às parcelas da dispensa imotivada, à multa do art. 477, §8º, da CLT e a horas extras. A reclamante recorreu adesivamente pedindo indenização por dano moral e multa do art. 467 da CLT. O tribunal não conheceu de parte do recurso da reclamada por falta de interesse recursal, manteve a reversão da justa causa, a multa do art. 477 e as horas extras, e negou provimento aos dois recursos quanto aos demais pontos.",
+      "pedidos": [
+        {
+          "descricao": "Reclamada: reforma para reconhecer a justa causa por abandono de emprego",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "descricao": "Reclamada: exclusão das parcelas decorrentes da dispensa sem justa causa e da indenização do seguro-desemprego",
+          "paragrafos": [
+            60,
+            61
+          ]
+        },
+        {
+          "descricao": "Reclamada: exclusão da multa do art. 477, §8º, da CLT",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "descricao": "Reclamada: afastamento da condenação ao pagamento de diferenças de horas extras e reflexos",
+          "paragrafos": [
+            77
+          ]
+        },
+        {
+          "descricao": "Reclamada: recurso quanto à multa do art. 467, horas intervalares, adicional noturno e diferenças de FGTS",
+          "paragrafos": [
+            25,
+            31,
+            34,
+            38
+          ]
+        },
+        {
+          "descricao": "Reclamante (adesivo): condenação da reclamada ao pagamento de indenização por dano moral",
+          "paragrafos": [
+            93
+          ]
+        },
+        {
+          "descricao": "Reclamante (adesivo): condenação da reclamada ao pagamento da multa do art. 467 da CLT",
+          "paragrafos": [
+            103
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 10
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 11,
+          "fim": 15
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 16,
+          "fim": 20
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 23,
+          "fim": 28
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 30,
+          "fim": 41
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 42,
+          "fim": 109
+        },
+        {
+          "tipo": "outro",
+          "inicio": 110,
+          "fim": 117
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10490,
+      "output_tokens": 858,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001478,
+    "duracaoMs": 3809
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Cabe conhecer do recurso ordinário da reclamada quanto à multa do art. 467 da CLT?",
+          "conclusao": "Não se conhece do recurso nesse tópico por ausência de interesse recursal, pois a sentença não condenou ao pagamento da multa.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            31,
+            32,
+            33
+          ],
+          "paragrafosConclusao": [
+            33
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "preliminar",
+          "enunciado": "Cabe conhecer do recurso ordinário da reclamada quanto a horas intervalares e remuneração do labor noturno?",
+          "conclusao": "Não se conhece do recurso nesses tópicos por ausência de interesse recursal, pois não há condenação nesse sentido.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            34,
+            35,
+            36,
+            37
+          ],
+          "paragrafosConclusao": [
+            37
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "preliminar",
+          "enunciado": "Cabe conhecer do recurso ordinário da reclamada quanto às diferenças dos depósitos do FGTS?",
+          "conclusao": "Não se conhece do recurso nesse ponto por ausência de interesse recursal, pois a condenação se limita à incidência do FGTS sobre as verbas deferidas.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41
+          ],
+          "paragrafosConclusao": [
+            41
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "A reclamada comprovou o abandono de emprego que justificaria a dispensa por justa causa?",
+          "conclusao": "Não. A reclamada não provou as faltas nem o abandono, de modo que a justa causa não se sustenta e a sentença é mantida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "paragrafosConclusao": [
+            57,
+            58
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "Com a reversão da justa causa, são devidas as parcelas rescisórias e a indenização do seguro-desemprego?",
+          "conclusao": "Sim. Revertida a justa causa, são devidos aviso prévio, férias, 13º, FGTS com multa de 40% e indenização do seguro-desemprego se frustrada a obtenção do benefício.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67
+          ],
+          "paragrafosConclusao": [
+            60,
+            61,
+            67
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "merito",
+          "enunciado": "É devida a multa do art. 477, § 8º, da CLT quando a justa causa é revertida em juízo?",
+          "conclusao": "Sim. Diante da reversão da justa causa e do inadimplemento das parcelas rescisórias, a multa do § 8º do art. 477 é cabível.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75
+          ],
+          "paragrafosConclusao": [
+            71,
+            75
+          ]
+        },
+        {
+          "id": "Q7",
+          "categoria": "merito",
+          "enunciado": "A condenação ao pagamento de diferenças de horas extras e reflexos deve ser mantida?",
+          "conclusao": "Sim. A jornada da inicial prevalece por não ter sido comprovada pelos controles, nos termos da Súmula 338 do TST, e os reflexos estão corretos.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90
+          ],
+          "paragrafosConclusao": [
+            85,
+            90
+          ]
+        },
+        {
+          "id": "Q8",
+          "categoria": "merito",
+          "enunciado": "A reclamante tem direito a indenização por dano moral pela dispensa por justa causa revertida?",
+          "conclusao": "Não. A reversão da justa causa, por si só, não gera dano moral, e a reclamante não comprovou prejuízos ou situações vexatórias.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101
+          ],
+          "paragrafosConclusao": [
+            99,
+            100,
+            101
+          ]
+        },
+        {
+          "id": "Q9",
+          "categoria": "merito",
+          "enunciado": "A reclamante tem direito à multa do art. 467 da CLT por falta de pagamento de verbas rescisórias incontroversas?",
+          "conclusao": "Não. As parcelas rescisórias foram contestadas pela reclamada, de modo que não há parcela incontroversa a ensejar a multa.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109
+          ],
+          "paragrafosConclusao": [
+            108,
+            109
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11232,
+      "output_tokens": 2224,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002235,
+    "duracaoMs": 8615
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A sentença não condenou a reclamada ao pagamento da multa do art. 467, pois indeferiu por não haver verbas rescisórias incontroversas.",
+          "citacao": "",
+          "paragrafos": [
+            32
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Sem condenação na sentença sobre a multa, o recurso da reclamada carece de objeto e não é conhecido por falta de interesse recursal.",
+          "citacao": "",
+          "paragrafos": [
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Não há condenação em horas intervalares nem em adicional, hora reduzida ou horas extras noturnas, conforme o dispositivo da sentença.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A jornada fixada na sentença (das 10h às 19h40min) não inclui labor no horário noturno das 22h às 5h, e a empregada fruía regularmente o intervalo do art. 71 da CLT.",
+          "citacao": "CLT, art. 71",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Ausente condenação nesses tópicos, o recurso da reclamada não é conhecido por falta de interesse recursal.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "A condenação sobre FGTS se limita à incidência do fundo sobre as verbas deferidas, conforme letra f do dispositivo.",
+          "citacao": "",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Sem condenação às diferenças de depósitos, o recurso sobre esse ponto não é conhecido por falta de interesse recursal.",
+          "citacao": "",
+          "paragrafos": [
+            40,
+            41
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "O abandono de emprego é justa causa da alínea i do art. 482 da CLT e exige prova robusta do ato faltoso.",
+          "citacao": "CLT, art. 482, i",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "O ônus de provar o abandono cabe ao empregador, pelo princípio da continuidade da relação de emprego.",
+          "citacao": "CLT, art. 818; CPC, art. 333, II",
+          "paragrafos": [
+            49
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Súmula 212 do TST: o ônus de provar o término do contrato, quando negados a prestação de serviço e o despedimento, é do empregador.",
+          "citacao": "Súmula 212 do TST",
+          "paragrafos": [
+            49,
+            50,
+            51
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Os espelhos de ponto indicam registros apenas até 24/08/13 e não comprovam as ausências alegadas.",
+          "citacao": "",
+          "paragrafos": [
+            54,
+            56
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Depoimento da reclamante negando faltas e a fragilidade do depoimento da preposta sobre a assinatura dos espelhos de ponto.",
+          "citacao": "",
+          "paragrafos": [
+            54,
+            55
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "A reclamada não provou as faltas nem o envio de telegramas, não se desincumbindo do ônus; a justa causa não se justifica.",
+          "citacao": "",
+          "paragrafos": [
+            56,
+            57
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "Mantida a afastamento da justa causa, a despedida é considerada por iniciativa do empregador, sem quitação pelo TRCT.",
+          "citacao": "",
+          "paragrafos": [
+            60
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "São devidos aviso prévio proporcional, férias proporcionais com 1/3, 13º proporcional, FGTS e indenização de 40%.",
+          "citacao": "",
+          "paragrafos": [
+            61
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Súmula 389, II, do TST: o não fornecimento da guia do seguro-desemprego dá origem ao direito à indenização.",
+          "citacao": "Súmula 389, II, do TST",
+          "paragrafos": [
+            62,
+            66
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "argumento",
+          "descricao": "Revertida a justa causa para despedida imotivada e inadimplidas as parcelas rescisórias, é cabível a multa do § 8º do art. 477.",
+          "citacao": "CLT, art. 477, § 8º",
+          "paragrafos": [
+            71
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "precedente",
+          "descricao": "RR 222500-10.2009.5.02.0316, 3ª Turma do TST: a multa do art. 477, § 8º, é devida também na reversão judicial de justa causa ou pedido de demissão.",
+          "citacao": "RR - 222500-10.2009.5.02.0316 (3ª Turma do TST, Relator Maurício Godinho Delgado)",
+          "paragrafos": [
+            73,
+            74
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "norma",
+          "descricao": "O art. 74, § 2º, da CLT impõe ao empregador com mais de dez trabalhadores o registro da jornada, o que faz presumir a jornada da inicial se não apresentados os controles.",
+          "citacao": "CLT, art. 74, § 2º",
+          "paragrafos": [
+            79,
+            80
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Súmula 338, I e III, do TST: ausência de registro gera presunção relativa da jornada da inicial, que prevalece se o empregador não se desincumbir do ônus.",
+          "citacao": "Súmula 338, I e III, do TST",
+          "paragrafos": [
+            80,
+            81,
+            82,
+            85
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "prova",
+          "descricao": "Os espelhos de ponto foram impressos em 18/02/14 e a preposta afirmou que os controles eram assinados mensalmente, mas não foram juntados.",
+          "citacao": "",
+          "paragrafos": [
+            84
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "argumento",
+          "descricao": "A jornada da inicial encontra guarida na Súmula 338, I, do TST, não havendo ausência de suporte fático à condenação.",
+          "citacao": "Súmula 338, I, do TST",
+          "paragrafos": [
+            85
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "norma",
+          "descricao": "A alínea a do art. 7º da Lei 605/49 computa as horas extras habitualmente prestadas no repouso semanal remunerado.",
+          "citacao": "Lei 605/49, art. 7º, a",
+          "paragrafos": [
+            87
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Súmula 172 do TST: computam-se no repouso remunerado as horas extras habitualmente prestadas.",
+          "citacao": "Súmula 172 do TST",
+          "paragrafos": [
+            87,
+            88
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "argumento",
+          "descricao": "Os reflexos em férias com 1/3, 13º, FGTS e aviso prévio estão corretos conforme os dispositivos legais e sumulares indicados.",
+          "citacao": "CLT, art. 142, § 5º; Súmula 145 do TST; Lei 8.036/90, art. 15; CLT, art. 487, § 5º",
+          "paragrafos": [
+            89
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "norma",
+          "descricao": "A Constituição (art. 5º, V e X) e o Código Civil (art. 186) asseguram indenização por dano moral.",
+          "citacao": "CF, art. 5º, V e X; CCB, art. 186",
+          "paragrafos": [
+            95,
+            96
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "argumento",
+          "descricao": "A reversão da justa causa, por si só, não gera reparação moral, e os danos alegados são de ordem material.",
+          "citacao": "",
+          "paragrafos": [
+            99
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "argumento",
+          "descricao": "A reclamante não comprovou que deixou de honrar compromissos financeiros em razão da dispensa.",
+          "citacao": "",
+          "paragrafos": [
+            99
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "norma",
+          "descricao": "O art. 467 da CLT exige o pagamento da parte incontroversa das verbas rescisórias, sob pena de acréscimo de 50%.",
+          "citacao": "CLT, art. 467",
+          "paragrafos": [
+            106
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "fato",
+          "descricao": "A reclamada contestou os pedidos relativos aos haveres rescisórios e sustentou a justa causa.",
+          "citacao": "",
+          "paragrafos": [
+            107
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "argumento",
+          "descricao": "Sendo controvertidas as parcelas rescisórias, não se aplica a multa do art. 467 da CLT.",
+          "citacao": "",
+          "paragrafos": [
+            108
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11737,
+      "output_tokens": 3069,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002708,
+    "duracaoMs": 10701
+  }
+}
