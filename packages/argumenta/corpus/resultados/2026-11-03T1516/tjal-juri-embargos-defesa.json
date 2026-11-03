@@ -1,0 +1,381 @@
+{
+  "casoId": "tjal-juri-embargos-defesa",
+  "paragrafos": 62,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Requerimento final pede o conhecimento e o provimento dos embargos de declaração, para neutralizar a circunstância das consequências do crime, reconhecer bis in idem e aplicar a redução da tentativa no patamar máximo.",
+      "resumo": "A defesa opõe embargos de declaração contra acórdão do Tribunal de Justiça de Alagoas, com efeitos pré-questionatórios. Alega omissão e contradição quanto à valoração negativa das consequências do crime, ao bis in idem entre a agravante de crime contra cônjuge e a qualificadora de feminicídio, e à fração de redução pela tentativa. Pede o provimento dos embargos nesses pontos.",
+      "pedidos": [
+        {
+          "descricao": "Conhecimento dos embargos de declaração, por tempestivos.",
+          "paragrafos": [
+            57
+          ]
+        },
+        {
+          "descricao": "Neutralizar a circunstância judicial das consequências do crime.",
+          "paragrafos": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            58
+          ]
+        },
+        {
+          "descricao": "Reconhecer o bis in idem na aplicação da agravante de crime contra cônjuge junto com a qualificadora de feminicídio, afastando-a da condenação.",
+          "paragrafos": [
+            15,
+            16,
+            17,
+            18,
+            37,
+            58
+          ]
+        },
+        {
+          "descricao": "Aplicar a redução pela tentativa no patamar máximo de 2/3.",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            53,
+            54,
+            55,
+            58
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 5,
+          "fim": 55
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 56,
+          "fim": 58
+        },
+        {
+          "tipo": "outro",
+          "inicio": 59,
+          "fim": 62
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6489,
+      "output_tokens": 1595,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001446,
+    "duracaoMs": 7939
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A circunstância judicial das consequências do crime deve ser neutralizada na dosimetria da pena?",
+          "conclusao": "A defesa pede que seja neutralizada a circunstância das consequências do crime, por falta de prova de lesão além da inerente ao tipo, e aponta contradição no acórdão.",
+          "resultado": "pendente",
+          "paragrafos": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "paragrafosConclusao": [
+            14,
+            58
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A agravante do crime contra cônjuge pode incidir junto com a qualificadora do feminicídio sem bis in idem?",
+          "conclusao": "A defesa sustenta bis in idem e pede que a agravante do crime contra cônjuge seja afastada da condenação.",
+          "resultado": "pendente",
+          "paragrafos": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ],
+          "paragrafosConclusao": [
+            37,
+            58
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A redução da pena pela tentativa deve ser aplicada no patamar máximo de 2/3, sem depender de desistência voluntária?",
+          "conclusao": "A defesa pede a fração máxima de 2/3 pela tentativa, com base na ausência de risco de vida e de aproximação da consumação, e alega omissão.",
+          "resultado": "pendente",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "paragrafosConclusao": [
+            53,
+            54,
+            55,
+            58
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6881,
+      "output_tokens": 937,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001157,
+    "duracaoMs": 4490
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A vítima teve de 2021 a 2025 para juntar qualquer prova de consequências além da lesão, e não apresentou nada aos autos.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            7
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Exame de Corpo de Delito aponta apenas lesão com incapacidade por mais de 30 dias, sem outros elementos sobre consequências.",
+          "citacao": "",
+          "paragrafos": [
+            9,
+            10
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há prova de consequências não inerentes ao tipo; a circunstância deve ser neutralizada por ausência de lastro probatório.",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Há contradição no acórdão: exige prova concreta para conduta social e personalidade, mas não a exige para consequências do crime.",
+          "citacao": "",
+          "paragrafos": [
+            11
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "CPP exige perícia para infrações que deixam vestígios, e a perda de movimento seria vestígio que demandaria laudo complementar.",
+          "citacao": "CPP, art. 158",
+          "paragrafos": [
+            12,
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A defesa sustenta ofensa ao art. 59 do Código Penal, devendo a circunstância ser neutralizada.",
+          "citacao": "CP, art. 59",
+          "paragrafos": [
+            14
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A condenação por tentativa de feminicídio se deu apenas pelo contexto de violência doméstica e familiar, relação conjugal entre o casal.",
+          "citacao": "",
+          "paragrafos": [
+            17,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Usar a relação conjugal também como agravante da segunda fase pune duas vezes o mesmo fato, configurando bis in idem.",
+          "citacao": "",
+          "paragrafos": [
+            17,
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Tema 1197 do STJ: a agravante do art. 61, II, f, do CP, junto com a Lei Maria da Penha, não configura bis in idem; no acórdão citado, a agravante foi afastada no crime do art. 24-A da Lei Maria da Penha por bis in idem.",
+          "citacao": "Tema 1197 do STJ",
+          "paragrafos": [
+            27,
+            28,
+            31
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Embargos de declaração em apelação (TJDF) citados como jurisprudência; o trecho transcrito afastou a agravante em crime de descumprimento de medida protetiva.",
+          "citacao": "Ementa: PENAL E PROCESSO PENAL. EMBARGOS DE DECLARAÇÃO EM APELAÇÃO. OMISSÃO. TEMA 1197, STJ.",
+          "paragrafos": [
+            20,
+            22,
+            23,
+            31
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Há distinguishing: o caso concreto trata de violência doméstica e coabitação do casal, e não de menosprezo ou discriminação à condição de mulher.",
+          "citacao": "",
+          "paragrafos": [
+            16,
+            33,
+            34,
+            36
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "A vítima foi ouvida em delegacia no mesmo dia do fato, e não houve aproximação da consumação.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Exame de corpo de delito respondeu negativamente sobre perigo de vida; a filha da vítima afirmou em degravação que não houve risco de vida e que a vítima estava consciente.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            44,
+            47,
+            50
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Sem risco de vida e sem aproximação da consumação, a fração máxima de 2/3 deve ser aplicada, sem depender de desistência voluntária.",
+          "citacao": "",
+          "paragrafos": [
+            42,
+            53,
+            54,
+            55
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Trecho do acórdão afirma que a sobrevivência por socorro médico, e não por desistência, mostra proximidade da consumação; a defesa discorda.",
+          "citacao": "",
+          "paragrafos": [
+            39,
+            40
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Condicionar a redução máxima à desistência voluntária tornaria o instituto inaplicável aos crimes tentados, o que a defesa rejeita.",
+          "citacao": "",
+          "paragrafos": [
+            41,
+            54
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6768,
+      "output_tokens": 1653,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001503,
+    "duracaoMs": 6830
+  }
+}

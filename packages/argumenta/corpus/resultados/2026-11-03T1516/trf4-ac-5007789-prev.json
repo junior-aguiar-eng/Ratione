@@ -1,0 +1,326 @@
+{
+  "casoId": "trf4-ac-5007789-prev",
+  "paragrafos": 74,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Apelação do INSS desprovida, mantida a sentença de procedência, com majoração de honorários de ofício em 20% e determinação de implantação imediata do benefício.",
+      "resumo": "O INSS apelou da sentença que concedeu aposentadoria por idade da pessoa com deficiência a [PARTE_1], com base em visão monocular, e pediu sua reforma para julgar o pedido improcedente. A Turma negou provimento à apelação, considerando que a visão monocular é deficiência leve para fins previdenciários e que a DER de 27/08/2021 atendeu aos requisitos. Os honorários foram majorados em 20% e o benefício deve ser implantado imediatamente pela CEAB.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença para que o pedido de aposentadoria da pessoa com deficiência seja julgado improcedente.",
+          "paragrafos": [
+            15
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 16
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 17,
+          "fim": 64
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 65,
+          "fim": 66
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7979,
+      "output_tokens": 1207,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001401,
+    "duracaoMs": 5602
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A visão monocular de origem congênita enquadra a autora como pessoa com deficiência para a aposentadoria por idade da pessoa com deficiência?",
+          "conclusao": "Negado provimento à apelação do INSS; mantida a sentença que reconheceu deficiência leve desde o nascimento e concedeu o benefício desde a DER.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "paragrafosConclusao": [
+            49,
+            66
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Devem os honorários advocatícios fixados na sentença ser majorados em razão do trabalho em segundo grau?",
+          "conclusao": "Honorários majorados em 20% sobre a verba fixada na sentença, observados os limites do art. 85, §3º, do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            51,
+            52
+          ],
+          "paragrafosConclusao": [
+            52,
+            66
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Deve o benefício ser implantado de imediato, por meio da CEAB, mesmo sem trânsito em julgado?",
+          "conclusao": "Determinada a implantação imediata do benefício pela CEAB, com cumprimento no prazo de trinta dias úteis.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          "paragrafosConclusao": [
+            54,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8371,
+      "output_tokens": 1257,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001466,
+    "duracaoMs": 5888
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Lei Complementar 142/2013 define pessoa com deficiência como quem tem impedimentos de longo prazo de natureza física, mental, intelectual ou sensorial.",
+          "citacao": "LC 142/2013, art. 2º",
+          "paragrafos": [
+            19,
+            20,
+            21
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "LC 142/2013 prevê aposentadoria da pessoa com deficiência aos 60/55 anos de idade, com 15 anos de contribuição e deficiência comprovada no mesmo período, independentemente do grau.",
+          "citacao": "LC 142/2013, art. 3º, IV",
+          "paragrafos": [
+            23,
+            27,
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "LC 142/2013 exige avaliação médica e funcional da deficiência, atestada por perícia do INSS.",
+          "citacao": "LC 142/2013, arts. 4º e 5º",
+          "paragrafos": [
+            29,
+            30,
+            31
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Portaria Interministerial 1/2014, item 4.e, define as faixas de pontuação para deficiência grave, moderada e leve.",
+          "citacao": "Portaria Interministerial AGU/MPS/MF/SEDH/MP nº 1/2014, item 4.e",
+          "paragrafos": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Lei 14.126 classifica a visão monocular, para todos os efeitos legais, como deficiência sensorial, do tipo visual.",
+          "citacao": "Lei nº 14.126",
+          "paragrafos": [
+            43,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Perícia oftalmológica concluiu que a autora tem cegueira no olho esquerdo de natureza congênita, com início da deficiência na data de nascimento.",
+          "citacao": "",
+          "paragrafos": [
+            42,
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Pontuação combinada das avaliações médica e social pelo IFBrA foi de 7.775 pontos, acima do limite de 7.584 para deficiência leve.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TRF4, Apelação Cível 6ª Turma: visão monocular é considerada deficiência de grau leve para fins previdenciários, com direito à aposentadoria da pessoa com deficiência.",
+          "citacao": "TRF4, APELAÇÃO CÍVEL Nº [PROCESSO_2], 6ª Turma, Desembargadora Federal TAIS SCHILLING FERRAZ",
+          "paragrafos": [
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A avaliação biopsicossocial mede o grau da deficiência, mas não se sobrepõe à classificação legal da visão monocular como deficiência.",
+          "citacao": "",
+          "paragrafos": [
+            41,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A sentença interpretou a prova técnica conforme a legislação superveniente e a jurisprudência, sem se afastar da perícia.",
+          "citacao": "",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Como a deficiência foi congênita, a autora laborou toda a vida contributiva como pessoa com deficiência, e na DER de 27/08/2021 tinha 55 anos e mais de 15 anos de contribuição.",
+          "citacao": "",
+          "paragrafos": [
+            47,
+            48
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "CPC art. 85, §11, permite majorar a verba honorária fixada na sentença em razão do trabalho adicional em segundo grau.",
+          "citacao": "CPC, art. 85, §11",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "CPC art. 85, §3º fixa os limites máximos das faixas de incidência dos honorários.",
+          "citacao": "CPC, art. 85, §3º",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Desprovido o recurso do INSS, cabe remunerar o trabalho adicional do procurador da parte adversa em segundo grau.",
+          "citacao": "",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "CPC art. 497 sustenta o cumprimento imediato da tutela específica.",
+          "citacao": "CPC, art. 497",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF4, AC 2002.71.00.050349-7: a decisão, em princípio, não está sujeita a recurso com efeito suspensivo, o que justifica o cumprimento imediato.",
+          "citacao": "TRF4, AC 2002.71.00.050349-7, Terceira Seção, Relator para Acórdão Celso Kipper",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O julgado deve ser cumprido imediatamente, observado o prazo de trinta dias úteis, com DIB em 27/08/2021 e RMI a apurar, pela CEAB.",
+          "citacao": "",
+          "paragrafos": [
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            66
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8253,
+      "output_tokens": 1889,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00177,
+    "duracaoMs": 7219
+  }
+}

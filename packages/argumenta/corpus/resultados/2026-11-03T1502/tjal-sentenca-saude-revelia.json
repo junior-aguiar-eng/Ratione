@@ -1,0 +1,404 @@
+{
+  "casoId": "tjal-sentenca-saude-revelia",
+  "paragrafos": 36,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "sentenca",
+      "resultado": "Pedido julgado procedente, com obrigações de fazer ao Estado de Alagoas para garantir a histeroscopia cirúrgica à autora, multa diária e honorários de R$ 1.500,00.",
+      "resumo": "A autora pediu tutela de urgência para que o Estado de Alagoas autorizasse e custeasse histeroscopia cirúrgica, além da procedência do pedido e da decretação da revelia do réu. Diante da revelia e da prova documental, a sentença julgou procedente o pedido, determinou ao Estado providências para a realização do procedimento e fixou multa diária e possibilidade de sequestro de ativos em caso de descumprimento.",
+      "pedidos": [
+        {
+          "descricao": "Concessão da gratuidade da justiça",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "descricao": "Tutela de urgência para que o réu autorize e custeie imediatamente o procedimento de histeroscopia",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "descricao": "Confirmação da tutela de urgência e procedência do pedido",
+          "paragrafos": [
+            6
+          ]
+        },
+        {
+          "descricao": "Decretação da revelia do réu e julgamento antecipado do mérito",
+          "paragrafos": [
+            9
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 4,
+          "fim": 10
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 11,
+          "fim": 12
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 13,
+          "fim": 23
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 24,
+          "fim": 31
+        },
+        {
+          "tipo": "outro",
+          "inicio": 32,
+          "fim": 34
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5631,
+      "output_tokens": 1341,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001234,
+    "duracaoMs": 7331
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "prejudicial",
+          "enunciado": "A revelia do Estado de Alagoas, por não ter contestado, leva à presunção de veracidade dos fatos alegados pelo autor?",
+          "conclusao": "A revelia foi decretada e, somada à prova documental e à falta de impugnação específica, autoriza reconhecer a pretensão autoral, embora a presunção seja relativa em face da Fazenda Pública.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            11,
+            12,
+            13
+          ],
+          "paragrafosConclusao": [
+            12,
+            13
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O Estado de Alagoas tem o dever de fornecer o procedimento cirúrgico de histeroscopia à autora?",
+          "conclusao": "Há dever do Estado, com base no direito fundamental à saúde e na prova médica e do NATJUS, de custear e garantir o procedimento cirúrgico à autora.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "paragrafosConclusao": [
+            23,
+            24
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A alegação de fila de espera ou burocracia interna justifica a omissão do Estado no fornecimento do tratamento?",
+          "conclusao": "Não. Alegações genéricas de fila de espera, burocracia ou limitações orçamentárias não podem se sobrepor ao direito à saúde.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            21,
+            22,
+            23,
+            28
+          ],
+          "paragrafosConclusao": [
+            23,
+            28
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "acessoria",
+          "enunciado": "Como fica a tutela de urgência e a multa cominatória para o caso de descumprimento das obrigações?",
+          "conclusao": "A tutela de urgência foi confirmada e concedida; fixou-se multa diária de R$ 500,00, limitada a R$ 15.000,00, e autorizou-se sequestro de ativos via SISBAJUD em caso de ineficácia da multa.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            7,
+            24,
+            25,
+            26,
+            27,
+            29,
+            30
+          ],
+          "paragrafosConclusao": [
+            24,
+            29,
+            30
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "acessoria",
+          "enunciado": "Quem deve pagar os honorários advocatícios e as custas processuais?",
+          "conclusao": "O Estado de Alagoas foi condenado a honorários de R$ 1.500,00 por equidade, e não foi condenado às custas por isenção legal da Fazenda Pública.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            31,
+            32
+          ],
+          "paragrafosConclusao": [
+            31,
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5923,
+      "output_tokens": 918,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001051,
+    "duracaoMs": 4631
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Revelia do réu regularmente citado que não contesta; julgamento antecipado do mérito.",
+          "citacao": "CPC, art. 355, II",
+          "paragrafos": [
+            11,
+            12
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Presunção de veracidade dos fatos alegados pelo autor em decorrência da revelia.",
+          "citacao": "CPC, art. 344",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A presunção é relativa em face da Fazenda Pública por envolver direitos indisponíveis.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Prova documental robusta que instrui a inicial e ausência de impugnação específica aos fatos e documentos.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A inércia do ente público em se manifestar sobre necessidade e urgência corrobora a verossimilhança das alegações.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Direito social fundamental à saúde, dever do Estado e acesso universal às ações e serviços.",
+          "citacao": "CF, art. 6º; CF, art. 196",
+          "paragrafos": [
+            15
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Norma de aplicabilidade imediata que impõe aos entes federativos obrigação de fazer.",
+          "citacao": "CF, art. 196",
+          "paragrafos": [
+            16
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Tema 793 da Repercussão Geral do STF: responsabilidade solidária da União, Estados, DF e Municípios na saúde, por isso o polo passivo está composto.",
+          "citacao": "STF, Tema 793 da Repercussão Geral",
+          "paragrafos": [
+            16
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Laudos médicos que atestam o diagnóstico e a indicação terapêutica do procedimento.",
+          "citacao": "",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Nota Técnica do NATJUS que classificou o procedimento como padrão-ouro para a patologia da autora.",
+          "citacao": "NATJUS",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Documentos não impugnados pelo réu revel constituem prova suficiente da imprescindibilidade e urgência do tratamento.",
+          "citacao": "",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TJ-AL, Apelação Cível [PROCESSO_1]: manteve condenação do Estado a custear histeroscopia diagnóstica com biópsia, com preponderância do laudo médico e do parecer do NATJUS.",
+          "citacao": "TJ-AL - Apelação Cível [PROCESSO_1]",
+          "paragrafos": [
+            19,
+            20
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TJ-AL, Apelação Cível [PROCESSO_2]: alegação genérica de fila de espera, sem indicação da posição da autora ou prazo, não serve como justificativa para a omissão.",
+          "citacao": "TJ-AL - Apelação Cível [PROCESSO_2]",
+          "paragrafos": [
+            21,
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Direito à saúde previsto na Constituição, que deve prevalecer sobre entraves administrativos ou orçamentários.",
+          "citacao": "CF, art. 6º; CF, art. 196",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Argumentos genéricos de fila de espera e burocracia interna não podem se sobrepor à necessidade do cidadão.",
+          "citacao": "",
+          "paragrafos": [
+            21,
+            23
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Julgamento de procedência com resolução do mérito, para confirmar e conceder a tutela de urgência.",
+          "citacao": "CPC, art. 487, I",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Determinação de agendamento de consulta e exames e indicação do local e data do procedimento em prazos fixados.",
+          "citacao": "",
+          "paragrafos": [
+            25,
+            26,
+            27
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Vedação de manifestações genéricas; listas de espera, trâmites burocráticos e limitações orçamentárias não serão aceitas como justificativa.",
+          "citacao": "",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Fixação de multa diária de R$ 500,00, limitada a R$ 15.000,00, em caso de descumprimento.",
+          "citacao": "",
+          "paragrafos": [
+            29
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Autorização de sequestro de ativos via SISBAJUD se a multa for ineficaz, mediante três orçamentos idôneos.",
+          "citacao": "",
+          "paragrafos": [
+            30
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "Honorários de sucumbência fixados por apreciação equitativa em R$ 1.500,00.",
+          "citacao": "CPC, art. 85, § 8º",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "Isenção de custas conferida à Fazenda Pública.",
+          "citacao": "Lei nº 6.830/80, art. 39",
+          "paragrafos": [
+            32
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6075,
+      "output_tokens": 2000,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001608,
+    "duracaoMs": 7227
+  }
+}
