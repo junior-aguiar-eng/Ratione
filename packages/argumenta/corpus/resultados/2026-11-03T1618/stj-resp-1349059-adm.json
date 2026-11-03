@@ -1,0 +1,318 @@
+{
+  "casoId": "stj-resp-1349059-adm",
+  "paragrafos": 114,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido, para reconhecer que não se aplica a taxa progressiva de juros às contas do FGTS de trabalhadores avulsos.",
+      "resumo": "A Caixa Econômica Federal recorreu de acórdão que reconheceu a taxa progressiva de juros do FGTS a trabalhador avulso. A Primeira Seção do STJ, por maioria, deu provimento ao recurso especial, pois o trabalhador avulso não tem vínculo empregatício, requisito da progressividade. O acórdão foi submetido ao rito dos recursos repetitivos (art. 543-C do CPC).",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão recorrido, por violação dos arts. 4º da Lei 5.107/66, 1º e 2º da Lei 5.705/71 e 1º, § 1º, da Lei 5.958/73, para afastar a taxa progressiva de juros do FGTS em favor de trabalhador avulso.",
+          "paragrafos": [
+            34,
+            36,
+            37
+          ]
+        },
+        {
+          "descricao": "Manutenção do acórdão recorrido, pedida pela parte recorrida em contrarrazões.",
+          "paragrafos": [
+            38
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 19
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 20,
+          "fim": 22
+        },
+        {
+          "tipo": "outro",
+          "inicio": 23,
+          "fim": 29
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 30,
+          "fim": 41
+        },
+        {
+          "tipo": "outro",
+          "inicio": 42,
+          "fim": 44
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 45,
+          "fim": 80
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 81,
+          "fim": 83
+        },
+        {
+          "tipo": "outro",
+          "inicio": 84,
+          "fim": 114
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12069,
+      "output_tokens": 640,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.030538,
+    "duracaoMs": 5030
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial deve ser julgado pelo rito dos recursos repetitivos (art. 543-C do CPC e Resolução STJ 8/2008)?",
+          "conclusao": "Embora não haja recorrência da matéria, a objetividade da questão e a divergência entre os Tribunais Regionais Federais justificam a análise sob o rito do art. 543-C do CPC.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            39,
+            46
+          ],
+          "paragrafosConclusao": [
+            46
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Os trabalhadores avulsos têm direito à taxa progressiva de juros nas contas vinculadas ao FGTS?",
+          "conclusao": "Não. A taxa progressiva exige vínculo empregatício e permanência na mesma empresa, o que o trabalhador avulso não tem. O recurso da CEF foi provido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            34,
+            37,
+            47,
+            48,
+            52,
+            58,
+            61,
+            63,
+            65,
+            66,
+            69,
+            70,
+            77,
+            81
+          ],
+          "paragrafosConclusao": [
+            69,
+            81
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12361,
+      "output_tokens": 398,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.028702,
+    "duracaoMs": 4097
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Embora não haja recorrência da matéria, a objetividade da questão justifica o julgamento pelo rito dos repetitivos.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Os Tribunais Regionais Federais têm entendimentos diferentes sobre o tema, o que justifica o rito repetitivo.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "O rito dos recursos repetitivos é o previsto no art. 543-C do CPC e na Resolução STJ 8/2008, ao qual o acórdão é submetido.",
+          "citacao": "art. 543-C do CPC e da Resolução STJ 8/2008",
+          "paragrafos": [
+            46,
+            82,
+            83
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O recurso foi admitido na origem e indicado como representativo de controvérsia, o que foi mantido no STJ.",
+          "citacao": "",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A Lei 5.107/66, art. 4º, criou a taxa progressiva de juros vinculada ao tempo de permanência na mesma empresa.",
+          "citacao": "Lei n. 5.107/66, art. 4º",
+          "paragrafos": [
+            48,
+            49,
+            65
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Desde a criação do fundo, a taxa progressiva depende de vínculo empregatício e de permanência na mesma empresa, ainda que a lei aplique o FGTS aos avulsos.",
+          "citacao": "",
+          "paragrafos": [
+            65
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O trabalhador avulso é definido como o que presta serviço a diversas empresas, sem vínculo empregatício, e por isso não cumpre o requisito.",
+          "citacao": "Decreto n. 3.048/99, art. 9º, VI",
+          "paragrafos": [
+            12,
+            66,
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Sem vínculo empregatício com qualquer empresa, os avulsos não têm direito aos juros progressivos.",
+          "citacao": "",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "As Leis 5.705/71 e 5.958/73 e o art. 3º da Lei 8.036/90 mantiveram a progressividade só para optantes, com permanência na mesma empresa.",
+          "citacao": "Leis n. 5.705/71, 5.958/73 e 8.036/90, art. 3º",
+          "paragrafos": [
+            52,
+            54,
+            57,
+            60,
+            62
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A lei aplica ao trabalhador avulso a legislação do FGTS, mas isso não afasta o requisito de vínculo empregatício.",
+          "citacao": "Lei n. 8.630/93",
+          "paragrafos": [
+            63,
+            64,
+            65
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "A taxa progressiva não se aplica às contas de avulsos.",
+          "citacao": "AgRg no REsp 1313963/RS, Rel. Ministro Castro Meira, Segunda Turma, julgado em 9/10/2012",
+          "paragrafos": [
+            71
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Não se aplica a taxa progressiva ao avulso, que trabalha para diversas empresas e não cumpre a permanência exigida.",
+          "citacao": "EDcl no AgRg no REsp 1300129/SP, Rel. Ministro Humberto Martins, Segunda Turma, julgado em 09/10/2012",
+          "paragrafos": [
+            14,
+            72
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Não se aplica a taxa progressiva às contas de avulsos; recurso especial não provido.",
+          "citacao": "REsp 1196043/ES, Rel. Ministro Mauro Campbell Marques, Segunda Turma, julgado em 28/09/2010",
+          "paragrafos": [
+            75,
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Taxa progressiva não se aplica ao trabalhador avulso; recurso especial improvido.",
+          "citacao": "REsp 1176691/ES, Rel. Ministro Teori Albino Zavascki, Primeira Turma, julgado em 15/6/2010",
+          "paragrafos": [
+            76,
+            16
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "A TNU reafirmou que não se aplica a taxa progressiva aos avulsos e julgou improcedente o pedido.",
+          "citacao": "PEDILEF 00110467020054036311, TNU, DOU 01/06/2012",
+          "paragrafos": [
+            77,
+            78,
+            80
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A CEF sustenta que os avulsos não têm vínculo nem permanência na mesma empresa; o MPF opinou pelo provimento.",
+          "citacao": "",
+          "paragrafos": [
+            34,
+            36,
+            37,
+            40
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12181,
+      "output_tokens": 1772,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.042082,
+    "duracaoMs": 10554
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "casoId": "tjal-juri-denuncia-mp",
+  "paragrafos": 44,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Peça de denúncia do Ministério Público, sem decisão judicial: requer o recebimento da denúncia, a citação do denunciado, o processamento pelo rito do Júri e a manutenção da prisão preventiva.",
+      "resumo": "O Ministério Público denuncia [ACUSADO] por tentativa de homicídio qualificado por feminicídio contra a companheira [VÍTIMA], com uso de faca. Requer o recebimento da denúncia, a citação do acusado, o procedimento do Tribunal do Júri e a manutenção da prisão preventiva. Não há decisão judicial.",
+      "pedidos": [
+        {
+          "descricao": "Recebimento e autuação da denúncia, com citação do denunciado para resposta à acusação em 10 dias, e processamento pelo rito dos crimes dolosos contra a vida até o julgamento pelo Tribunal do Júri",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "descricao": "Juntada da folha de antecedentes criminais e expedição de ofícios à Autoridade Policial e ao IML para envio do laudo de exame de corpo de delito da vítima",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "descricao": "Produção de todas as provas admitidas em direito, especialmente testemunhas, perícias e documentos",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "descricao": "Manutenção da prisão preventiva do denunciado",
+          "paragrafos": [
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 4
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 5,
+          "fim": 15
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 16,
+          "fim": 17
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 25,
+          "fim": 33
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 18,
+          "fim": 24
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 34,
+          "fim": 35
+        },
+        {
+          "tipo": "outro",
+          "inicio": 36,
+          "fim": 44
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 4884,
+      "output_tokens": 673,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.016498,
+    "duracaoMs": 5066
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O denunciado deve responder por tentativa de feminicídio (art. 121, §2º, VI, c/c art. 14, II, do CP) por ter esfaqueado a companheira?",
+          "conclusao": "O Ministério Público pede o recebimento da denúncia, a citação do acusado e o julgamento pelo Tribunal do Júri, após a pronúncia, até a condenação.",
+          "resultado": "pendente",
+          "paragrafos": [
+            6,
+            11,
+            12,
+            13,
+            14,
+            15,
+            17,
+            22
+          ],
+          "paragrafosConclusao": [
+            17,
+            22
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Deve ser mantida a prisão preventiva do denunciado para garantia da ordem pública?",
+          "conclusao": "O Ministério Público requer a manutenção da prisão preventiva, por estarem presentes fumus comissi delicti e periculum libertatis, dada a gravidade do crime e a periculosidade do agente.",
+          "resultado": "pendente",
+          "paragrafos": [
+            26,
+            27,
+            28,
+            32,
+            33,
+            34
+          ],
+          "paragrafosConclusao": [
+            34
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Devem ser produzidas as provas requeridas, como antecedentes, laudo de corpo de delito e oitiva de testemunhas?",
+          "conclusao": "O Ministério Público requer a juntada da folha de antecedentes, o envio do laudo pelo IML e a produção de provas, com rol de testemunhas.",
+          "resultado": "pendente",
+          "paragrafos": [
+            23,
+            24,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ],
+          "paragrafosConclusao": [
+            23,
+            24
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5176,
+      "output_tokens": 570,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.016052,
+    "duracaoMs": 5743
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O denunciado, com animus necandi, desferiu golpes de faca no abdômen da companheira e a agrediu com socos e mordidas, sem consumar o crime por circunstâncias alheias à sua vontade.",
+          "citacao": "",
+          "paragrafos": [
+            6,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "A vítima sofreu ferimentos de faca no abdômen, braços, mãos e perna e marcas de mordidas, foi socorrida e operada, e o denunciado fugiu.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O casal convive há 22 anos e a vítima já havia sofrido agressões físicas e psicológicas antes, o que embasa a imputação por razões da condição de sexo feminino.",
+          "citacao": "",
+          "paragrafos": [
+            14,
+            6
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "O denunciado confessou a autoria perante a autoridade policial, em depoimento às fls. 150/151.",
+          "citacao": "",
+          "paragrafos": [
+            15
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "O inquérito policial fornece o conjunto probatório que sustenta a denúncia.",
+          "citacao": "",
+          "paragrafos": [
+            4,
+            6
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A conduta se enquadra no feminicídio tentado, com a qualificadora do inciso VI e a causa de diminuição da tentativa.",
+          "citacao": "artigo 121, §2º, inciso VI, c/c artigo 14, II, ambos do Código Penal",
+          "paragrafos": [
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "O Ministério Público tem atribuição para oferecer a denúncia.",
+          "citacao": "artigos 129 da Constituição Federal e 24 do Código de Processo Penal",
+          "paragrafos": [
+            4
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Estão presentes os pressupostos do art. 312 do CPP: prova da existência do crime e indícios suficientes de autoria.",
+          "citacao": "artigo 312 do Código de Processo Penal",
+          "paragrafos": [
+            26,
+            32
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O crime é grave: foi praticado com arma branca e violência contra mulher, o que revela personalidade perigosa e inadequação ao convívio social.",
+          "citacao": "",
+          "paragrafos": [
+            27,
+            28
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A garantia da ordem pública e a credibilidade da justiça exigem a custódia, diante de crime que causa repercussão e temor na comunidade.",
+          "citacao": "",
+          "paragrafos": [
+            28,
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O fumus comissi delicti decorre da prova da materialidade e dos indícios de autoria, e o periculum libertatis da periculosidade somada à gravidade do delito.",
+          "citacao": "",
+          "paragrafos": [
+            32,
+            28
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A folha de antecedentes e o laudo de corpo de delito da vítima devem ser juntados aos autos para instruir o processo.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O Ministério Público protesta provar o alegado por todos os meios admitidos, em especial testemunhas, perícias e documentos.",
+          "citacao": "",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "O rol de testemunhas inclui dois policiais civis, o irmão da vítima, outra testemunha e a própria vítima.",
+          "citacao": "",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 5105,
+      "output_tokens": 1363,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.02384,
+    "duracaoMs": 8475
+  }
+}

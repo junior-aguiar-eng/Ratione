@@ -1,0 +1,185 @@
+{
+  "casoId": "stj-resp-1151364-civil",
+  "paragrafos": 70,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial conhecido e não provido, mantendo-se o dever da CEF de reembolsar as custas adiantadas pela parte vencedora.",
+      "resumo": "A CEF recorreu contra acórdão do TRF da 5ª Região que a condenou a ressarcir as custas pagas pelo autor, alegando isenção pelo art. 24-A da Lei 9.028/95. A Primeira Seção do STJ, por unanimidade, negou provimento ao recurso. Entendeu que a isenção não desobriga a CEF, quando sucumbente, de reembolsar as custas adiantadas pela parte vencedora.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão do TRF-5 para reconhecer que a CEF é isenta de custas nas ações sobre o FGTS, por ofensa ao art. 24-A da Lei 9.028/95 e dissídio jurisprudencial.",
+          "paragrafos": [
+            20,
+            21
+          ]
+        },
+        {
+          "descricao": "Aplicação da Súmula 83/STJ e manutenção do acórdão recorrido (contrarrazões do recorrido).",
+          "paragrafos": [
+            22
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 5
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 6,
+          "fim": 7
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 8,
+          "fim": 10
+        },
+        {
+          "tipo": "outro",
+          "inicio": 11,
+          "fim": 18
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 19,
+          "fim": 23
+        },
+        {
+          "tipo": "outro",
+          "inicio": 24,
+          "fim": 33
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 34,
+          "fim": 43
+        },
+        {
+          "tipo": "outro",
+          "inicio": 44,
+          "fim": 70
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7756,
+      "output_tokens": 601,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.021522,
+    "duracaoMs": 5880
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "A isenção de custas do art. 24-A, parágrafo único, da Lei 9.028/95 dispensa a CEF, quando sucumbente em ação do FGTS, de reembolsar as custas adiantadas pela parte vencedora?",
+          "conclusao": "A isenção não dispensa a CEF, quando sucumbente, de reembolsar as custas adiantadas pelo autor, até o limite da sucumbência. O recurso especial foi desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            20,
+            21,
+            34,
+            36,
+            37,
+            41,
+            42,
+            43,
+            44
+          ],
+          "paragrafosConclusao": [
+            37,
+            44
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8048,
+      "output_tokens": 242,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.018516,
+    "duracaoMs": 2987
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "O parágrafo único do art. 24-A isenta de custas a pessoa jurídica que representa o FGTS em juízo, mas a isenção não alcança o reembolso das custas adiantadas pelo autor.",
+          "citacao": "Lei 9.028/95, art. 24-A, parágrafo único",
+          "paragrafos": [
+            34,
+            36,
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Pelo princípio da sucumbência, não se admite impor ao autor vencedor o ônus das custas que adiantou; o reembolso vale no que exceder o decaimento da recorrente.",
+          "citacao": "",
+          "paragrafos": [
+            37
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A isenção da CEF não afasta o reembolso das custas adiantadas pelo autor, até o limite da sucumbência.",
+          "citacao": "REsp 902.100/PB, 1ª T., Min. Denise Arruda, DJ 29/11/2007",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A isenção do art. 24-A não exime a CEF de reembolsar à parte autora as custas adiantadas no ajuizamento.",
+          "citacao": "REsp 725.595/PB, 2ª T., Min. Humberto Martins, DJ 14/02/2007",
+          "paragrafos": [
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A isenção de custas da Fazenda Pública Federal não dispensa a restituição das custas antecipadas pelo autor que ao final venceu.",
+          "citacao": "REsp 806.558/RJ, 5ª T., Min. Laurita Vaz, DJe 28/09/2009",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acórdão recorrido condenou a CEF às custas, pois a isenção não a desobriga de ressarcir as custas pagas pelo autor apelado.",
+          "citacao": "",
+          "paragrafos": [
+            20
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 7779,
+      "output_tokens": 724,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.022798,
+    "duracaoMs": 5442
+  }
+}

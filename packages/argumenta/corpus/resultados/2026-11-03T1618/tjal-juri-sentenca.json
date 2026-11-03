@@ -1,0 +1,708 @@
+{
+  "casoId": "tjal-juri-sentenca",
+  "paragrafos": 111,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "sentenca",
+      "resultado": "Pretensão punitiva julgada procedente para condenar o réu por tentativa de homicídio qualificado (feminicídio), com pena de 16 anos e 6 meses de reclusão, mantida a prisão.",
+      "resumo": "O Ministério Público denunciou o réu por tentativa de homicídio qualificado contra a vítima, e o Conselho de Sentença o condenou por maioria. O juiz fixou a pena em 16 anos e 6 meses de reclusão em regime inicial fechado, negou a substituição da pena e o sursis, manteve a prisão e deixou de fixar indenização mínima por falta de pedido na denúncia.",
+      "pedidos": [
+        {
+          "descricao": "Condenação do réu por tentativa de homicídio qualificado (feminicídio) contra a vítima, conforme a denúncia do Ministério Público.",
+          "paragrafos": [
+            15,
+            18
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 10
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 11,
+          "fim": 13
+        },
+        {
+          "tipo": "outro",
+          "inicio": 14,
+          "fim": 14
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 15,
+          "fim": 17
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 18,
+          "fim": 18
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 19,
+          "fim": 78
+        },
+        {
+          "tipo": "outro",
+          "inicio": 79,
+          "fim": 111
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 14230,
+      "output_tokens": 492,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.03338,
+    "duracaoMs": 4552
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Procede a pretensão punitiva para condenar o réu por tentativa de homicídio qualificado por feminicídio contra a vítima, diante do veredicto dos jurados?",
+          "conclusao": "Julgou procedente a pretensão punitiva e condenou o réu por tentativa de homicídio qualificado (feminicídio), conforme decidido pelo Conselho de Sentença.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            18
+          ],
+          "paragrafosConclusao": [
+            18
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Após a Lei 14.994/2024, a qualificadora do feminicídio do art. 121, §2º, VI, ainda pode ser aplicada ao fato anterior?",
+          "conclusao": "Há continuidade normativo-típica e ultratividade da lei anterior, mais benéfica, de modo que a qualificadora se aplica ao caso, sem retroatividade da lei mais gravosa.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            19
+          ],
+          "paragrafosConclusao": [
+            19
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Na primeira fase da dosimetria, quais circunstâncias judiciais são desfavoráveis e qual a pena-base?",
+          "conclusao": "Valorou negativamente culpabilidade, conduta social, personalidade, circunstâncias e consequências, com 3 anos cada. Não valorou antecedentes, motivos nem comportamento da vítima. Pena-base de 27 anos.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            22,
+            24,
+            25,
+            28,
+            35,
+            47,
+            48,
+            49,
+            50,
+            52,
+            53,
+            60,
+            61,
+            63
+          ],
+          "paragrafosConclusao": [
+            60,
+            61,
+            63
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "Na segunda fase, como concorrem a atenuante da confissão e a agravante de crime contra cônjuge, e há bis in idem com o feminicídio?",
+          "conclusao": "Não há bis in idem. A confissão parcial preponderou sobre a agravante, com atenuação de 1/12 e pena intermediária de 24 anos e 9 meses.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            71
+          ],
+          "paragrafosConclusao": [
+            65,
+            66,
+            71
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "merito",
+          "enunciado": "Qual a fração de redução pela tentativa na terceira fase?",
+          "conclusao": "Aplicou a redução mínima de 1/3 pela proximidade do resultado morte, chegando a 16 anos e 6 meses de reclusão.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            72,
+            75
+          ],
+          "paragrafosConclusao": [
+            75
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "merito",
+          "enunciado": "Cabe substituir a pena por restritivas de direitos ou suspender condicionalmente a pena?",
+          "conclusao": "Negou a substituição e o sursis, pela violência, pena superior a 4 anos e circunstâncias judiciais desfavoráveis.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            77,
+            78
+          ],
+          "paragrafosConclusao": [
+            77,
+            78
+          ]
+        },
+        {
+          "id": "Q7",
+          "categoria": "merito",
+          "enunciado": "A detração deve ser computada na sentença para fixar o regime inicial?",
+          "conclusao": "A detração é irrelevante agora, pois não altera o regime inicial. Ficará para o Juízo da Execução Penal.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            80,
+            81,
+            84
+          ],
+          "paragrafosConclusao": [
+            84
+          ]
+        },
+        {
+          "id": "Q8",
+          "categoria": "merito",
+          "enunciado": "Deve ser mantida a prisão do réu com execução imediata da condenação pelo júri?",
+          "conclusao": "Manteve a prisão com base na tese do Tema 1.068 do STF, com recolhimento em cela especial por ser advogado.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            86,
+            89,
+            91
+          ],
+          "paragrafosConclusao": [
+            89,
+            91
+          ]
+        },
+        {
+          "id": "Q9",
+          "categoria": "acessoria",
+          "enunciado": "Deve ser fixado valor mínimo de indenização civil à vítima?",
+          "conclusao": "Não fixou valor mínimo, pois não houve pedido na denúncia.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            94,
+            95,
+            98
+          ],
+          "paragrafosConclusao": [
+            98
+          ]
+        },
+        {
+          "id": "Q10",
+          "categoria": "acessoria",
+          "enunciado": "Quem responde pelas custas processuais?",
+          "conclusao": "Custas a cargo do réu, pela regra da causalidade do art. 804 do CPP.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            107
+          ],
+          "paragrafosConclusao": [
+            107
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 14522,
+      "output_tokens": 1604,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.045084,
+    "duracaoMs": 10796
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O Conselho de Sentença, por maioria, condenou o réu por tentativa de homicídio qualificado pelo feminicídio, e a sentença acompanha o veredicto.",
+          "citacao": "",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Tipificação do crime: homicídio qualificado por feminicídio, na forma tentada.",
+          "citacao": "Código Penal, art. 121, §2º, VI, c/c art. 14, II",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A Lei 14.994/2024 criou tipo autônomo, mas há continuidade normativo-típica. A lei nova é mais gravosa, então a lei anterior mais benéfica tem ultratividade.",
+          "citacao": "",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A vedação de retroatividade da lei penal maléfica impede aplicar a lei nova ao fato anterior.",
+          "citacao": "Constituição Federal, art. 5º, XL",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Lei que transformou o feminicídio em tipo autônomo (art. 121-A do CP).",
+          "citacao": "Lei 14.994/2024",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Réu bacharel em Direito e advogado, com premeditação: pegou faca escondido para esfaquear a vítima no carro. Isso torna a culpabilidade desfavorável.",
+          "citacao": "",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Declarações da vítima em Juízo, corroboradas pela filha, comprovam premeditação e conduta social péssima: controle, impedimento de trabalhar, xingamentos e agressões.",
+          "citacao": "",
+          "paragrafos": [
+            22,
+            25
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Premeditação autoriza valorar negativamente a culpabilidade, se não for elementar, ínsita ao tipo ou pressuposto de qualificadora ou agravante.",
+          "citacao": "Tema Repetitivo n. 1.318 (REsp n. 2.174.008/AL)",
+          "paragrafos": [
+            22,
+            23
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Maior conhecimento do réu sobre a gravidade da conduta justifica culpabilidade mais reprovável.",
+          "citacao": "AgRg no AgRg nos EDcl no HC n. 497.114/SC",
+          "paragrafos": [
+            22
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Conduta social negativa é idônea quando o agente é marido e pai violento.",
+          "citacao": "HC n. 507.207/DF",
+          "paragrafos": [
+            26
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Violência extrema anterior ao homicídio contra a vítima legitima negativar a conduta social.",
+          "citacao": "AgRg no HC n. 832.360/SC",
+          "paragrafos": [
+            27
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Personalidade desfavorável: condutas revelam frieza, insensibilidade, egoísmo e possessividade por ciúmes doentios.",
+          "citacao": "",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Personalidade pode ser valorada com elementos concretos dos autos; egoísmo, possessividade e ciúme descontrolado são fatores negativos válidos.",
+          "citacao": "Tema Repetitivo n. 1.077 (REsp 1.794.854/DF)",
+          "paragrafos": [
+            29,
+            30
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "O ciúme em violência de gênero reforça a dominação masculina e permite exasperar a pena-base.",
+          "citacao": "AgRg no AREsp n. 1.441.372/GO",
+          "paragrafos": [
+            30,
+            31
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "A valoração negativa da personalidade dispensa laudo técnico especializado.",
+          "citacao": "HC n. 704.196/SP",
+          "paragrafos": [
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Frieza, dissimulação e planejamento da ação justificam personalidade negativa.",
+          "citacao": "AgRg no AgRg no AREsp n. 1.843.720/DF",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Motivos não foram valorados: o sentimento de posse configuraria motivo torpe, qualificadora não articulada na denúncia nem na pronúncia, e reconhecê-la usurparia a competência dos jurados.",
+          "citacao": "",
+          "paragrafos": [
+            35,
+            47
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Fato correspondente a qualificadora não submetida aos jurados não pode exasperar a pena-base.",
+          "citacao": "AgRg no AREsp n. 1.737.903/MS",
+          "paragrafos": [
+            36,
+            43,
+            44,
+            46
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Crime com ousadia e violência excessiva: diversos golpes de faca, de madrugada, em rodovia deserta, buscando impunidade. Circunstâncias desfavoráveis.",
+          "citacao": "",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "prova",
+          "descricao": "Laudo de corpo de delito e declarações da vítima: perda de movimento do dedo mindinho e tratamento psicológico e psiquiátrico. Consequências desfavoráveis.",
+          "citacao": "",
+          "paragrafos": [
+            49,
+            50
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Lesão sofrida na tentativa pode valorar negativamente as consequências do delito.",
+          "citacao": "AgRg no AREsp n. 1.766.271/RJ",
+          "paragrafos": [
+            50,
+            51
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "O comportamento da vítima não é analisado em prejuízo do réu, conforme posição do STJ.",
+          "citacao": "HC 217819 BA 2011/0212540-5",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "O STJ validou 3 anos por vetorial negativa em feminicídio, sem direito subjetivo a 1/6 ou 1/8.",
+          "citacao": "AgRg no AREsp n. 1.803.791/MA",
+          "paragrafos": [
+            53,
+            57,
+            58,
+            59
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Cinco circunstâncias a 3 anos somam 15 anos, acrescidos ao mínimo de 12 anos, resultando em pena-base de 27 anos.",
+          "citacao": "",
+          "paragrafos": [
+            60,
+            61,
+            63
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Fixação da pena-base conforme as circunstâncias judiciais.",
+          "citacao": "Código Penal, art. 59",
+          "paragrafos": [
+            20,
+            61
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Confissão parcial em plenário gera atenuante, conforme a súmula do STJ.",
+          "citacao": "Súmula 545 do STJ; Código Penal, art. 65, III, d",
+          "paragrafos": [
+            64
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "prova",
+          "descricao": "Prova plena de que vítima e réu eram casados sustenta a agravante, debatida em plenário.",
+          "citacao": "Código Penal, art. 61, II, e",
+          "paragrafos": [
+            64
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Não há bis in idem: pode haver feminicídio sem casamento, que não é necessário ao contexto de violência doméstica e familiar.",
+          "citacao": "",
+          "paragrafos": [
+            65
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Confissão espontânea, mesmo parcial, preponderava sobre agravantes para fatos até 16/09/2025, pela modulação de efeitos.",
+          "citacao": "Tema n. 1.194 (REsp n. 2.001.973/RS)",
+          "paragrafos": [
+            66,
+            67,
+            68,
+            69,
+            70
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "Pena atenuada em 1/12, resultando em pena intermediária de 24 anos e 9 meses.",
+          "citacao": "",
+          "paragrafos": [
+            71
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "A tentativa reduz a pena de 1/3 a 2/3.",
+          "citacao": "Código Penal, art. 14, II, parágrafo único",
+          "paragrafos": [
+            72
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "A redução é inversamente proporcional ao iter criminis percorrido: quanto mais próximo o resultado, menor a fração.",
+          "citacao": "AgRg no HC n. 798.665/SP",
+          "paragrafos": [
+            73,
+            74
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "fato",
+          "descricao": "Vítima internada seis dias pela gravidade das lesões; só não piorou pelo rápido socorro, o que mostra proximidade da morte.",
+          "citacao": "",
+          "paragrafos": [
+            75
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "prova",
+          "descricao": "Laudo de exame de corpo de delito descreve a gravidade das lesões.",
+          "citacao": "",
+          "paragrafos": [
+            75
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "norma",
+          "descricao": "Substituição por restritivas vedada: violência contra a pessoa, pena acima de 4 anos e circunstâncias judiciais desfavoráveis.",
+          "citacao": "Código Penal, art. 44, I",
+          "paragrafos": [
+            77
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "norma",
+          "descricao": "Sursis negado: pena superior a 2 anos e circunstâncias do art. 59 desfavoráveis.",
+          "citacao": "Código Penal, art. 77",
+          "paragrafos": [
+            78
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "norma",
+          "descricao": "O juiz computa a detração na sentença, mas ela não altera o regime inicial: mesmo descontada a prisão, a pena não fica inferior a 8 anos.",
+          "citacao": "Código de Processo Penal, art. 387, § 2º",
+          "paragrafos": [
+            80,
+            81
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "É irrelevante discutir a detração se o desconto não altera o regime inicial.",
+          "citacao": "AgRg no REsp n. 2.113.425/SP",
+          "paragrafos": [
+            82
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "precedente",
+          "descricao": "Não viola o art. 387, § 2º, do CPP sentença que não faz detração quando ela não alteraria o regime inicial.",
+          "citacao": "REsp n. 1.843.481/PE",
+          "paragrafos": [
+            83
+          ]
+        },
+        {
+          "questao": "Q7",
+          "tipo": "argumento",
+          "descricao": "A detração caberá ao Juízo da Execução Penal, para progressão de regime, sem alterar o regime inicial.",
+          "citacao": "",
+          "paragrafos": [
+            84
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "precedente",
+          "descricao": "A soberania dos veredictos autoriza a execução imediata da condenação do júri, independentemente da pena aplicada.",
+          "citacao": "Tema 1.068 da repercussão geral (RE 1.235.340)",
+          "paragrafos": [
+            86,
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "norma",
+          "descricao": "Prisão mantida com base na regra de execução imediata da condenação pelo júri.",
+          "citacao": "Código de Processo Penal, art. 492, I, e",
+          "paragrafos": [
+            89
+          ]
+        },
+        {
+          "questao": "Q8",
+          "tipo": "norma",
+          "descricao": "Por ser advogado inscrito, o réu tem direito a cela especial equivalente a sala de estado-maior.",
+          "citacao": "Lei 8.906/1994, art. 7º, V",
+          "paragrafos": [
+            91,
+            92
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "precedente",
+          "descricao": "Em violência doméstica, o valor mínimo de dano moral exige pedido expresso da acusação ou da ofendida.",
+          "citacao": "REsp n. 1.643.051/MS",
+          "paragrafos": [
+            95,
+            96,
+            97
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "fato",
+          "descricao": "A denúncia não continha pedido de indenização, por isso não se fixou valor mínimo.",
+          "citacao": "",
+          "paragrafos": [
+            98
+          ]
+        },
+        {
+          "questao": "Q9",
+          "tipo": "norma",
+          "descricao": "O juiz deve fixar valor mínimo de reparação dos danos na sentença condenatória.",
+          "citacao": "Código de Processo Penal, art. 387, IV",
+          "paragrafos": [
+            94
+          ]
+        },
+        {
+          "questao": "Q10",
+          "tipo": "norma",
+          "descricao": "As custas ficam a cargo do réu pela regra da causalidade.",
+          "citacao": "Código de Processo Penal, art. 804",
+          "paragrafos": [
+            107
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 15090,
+      "output_tokens": 4540,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.07558,
+    "duracaoMs": 25272
+  }
+}
