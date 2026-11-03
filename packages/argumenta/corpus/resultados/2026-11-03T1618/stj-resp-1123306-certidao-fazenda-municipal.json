@@ -1,0 +1,297 @@
+{
+  "casoId": "stj-resp-1123306-certidao-fazenda-municipal",
+  "paragrafos": 97,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial conhecido e não provido, por unanimidade, com submissão ao regime dos recursos repetitivos (art. 543-C do CPC).",
+      "resumo": "A Fazenda Nacional recorreu contra acórdão do TRF da 3ª Região que manteve a segurança concedida ao Município para expedição de certidão positiva com efeitos de negativa, sem penhora. A Primeira Seção entendeu que a Fazenda Pública municipal, por ter bens impenhoráveis, tem direito à certidão independentemente de garantia. O recurso especial foi desprovido.",
+      "pedidos": [
+        {
+          "descricao": "A Fazenda Nacional pede o provimento do recurso especial, alegando violação dos arts. 205 e 206 do CTN: haveria crédito em execução sem penhora suficiente e sem exigibilidade suspensa.",
+          "paragrafos": [
+            19,
+            22,
+            26
+          ]
+        },
+        {
+          "descricao": "O Município, impetrante, pediu certidão negativa de débito nos termos do art. 206 do CTN, após o indeferimento administrativo.",
+          "paragrafos": [
+            21
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 7
+        },
+        {
+          "tipo": "outro",
+          "inicio": 8,
+          "fim": 10
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 11,
+          "fim": 12
+        },
+        {
+          "tipo": "outro",
+          "inicio": 13,
+          "fim": 17
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 18,
+          "fim": 27
+        },
+        {
+          "tipo": "outro",
+          "inicio": 28,
+          "fim": 30
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 31,
+          "fim": 34
+        },
+        {
+          "tipo": "outro",
+          "inicio": 35,
+          "fim": 37
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 38,
+          "fim": 38
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 39,
+          "fim": 69
+        },
+        {
+          "tipo": "outro",
+          "inicio": 70,
+          "fim": 97
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11905,
+      "output_tokens": 679,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0306,
+    "duracaoMs": 5850
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial da Fazenda Nacional pode ser conhecido, estando prequestionada a matéria federal?",
+          "conclusao": "Impõe-se o conhecimento do apelo, pois a matéria federal suscitada foi prequestionada.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            38
+          ],
+          "paragrafosConclusao": [
+            38
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O Município, executado fiscal que opõe embargos sem penhora, tem direito à certidão positiva com efeitos de negativa (art. 206 do CTN)?",
+          "conclusao": "Sim. Os bens públicos são impenhoráveis e os embargos suspendem a exigibilidade, então cabe a certidão independentemente de garantia. Recurso da Fazenda Nacional desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            39,
+            40,
+            43,
+            44,
+            45,
+            46,
+            70
+          ],
+          "paragrafosConclusao": [
+            46,
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12197,
+      "output_tokens": 361,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.028004,
+    "duracaoMs": 3417
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O relator afirma preliminarmente que o apelo deve ser conhecido porque a matéria federal suscitada foi prequestionada.",
+          "citacao": "",
+          "paragrafos": [
+            38
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O art. 206 do CTN dá efeito de negativa à certidão de crédito com penhora efetivada ou com exigibilidade suspensa; basta uma das hipóteses.",
+          "citacao": "CTN, art. 206",
+          "paragrafos": [
+            41,
+            42,
+            43
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os bens públicos são impenhoráveis; a execução contra a Fazenda se dá por regime próprio, sem penhora, o que dispensa a garantia.",
+          "citacao": "",
+          "paragrafos": [
+            40,
+            44,
+            46
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os embargos do ente municipal, recebidos e processados, suspendem a execução e a exigibilidade do crédito, pois as garantias do ente público dispensam atos assecuratórios.",
+          "citacao": "",
+          "paragrafos": [
+            40,
+            45
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ajuizados embargos ou anulatória pela Fazenda Municipal, o crédito fica com exigibilidade suspensa e cabe certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 601.313/RS, relator Min. CASTRO MEIRA, DJ de 20.9.2004",
+          "paragrafos": [
+            45,
+            56
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ajuizamento de anulatória ou de embargos pela Fazenda municipal enseja a expedição da certidão positiva com efeitos de negativa.",
+          "citacao": "Ag 1.150.803/PR, Rel. Min. CASTRO MEIRA, DJ. 05.08.2009",
+          "paragrafos": [
+            50
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Devedor Município pode obter a certidão positiva com efeito de negativa independentemente de garantia, na anulatória de débito.",
+          "citacao": "REsp 1.074.253/MG, Rel. Min. BENEDITO GONÇALVES, DJ. 10.03.2009",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Na execução contra Município, não sujeito a penhora, opostos embargos recebidos e processados, há direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no Ag 936.196/BA, Rel. Ministra ELIANA CALMON, SEGUNDA TURMA, julgado em 15/04/2008, DJe 29/04/2008",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Reitera que, opostos embargos pelo Município sem penhora, há direito à certidão positiva com efeitos de negativa.",
+          "citacao": "AgRg no REsp 736.730/SC, Rel. Ministro FRANCISCO FALCÃO, PRIMEIRA TURMA, julgado em 16/08/2005, DJ 17/10/2005",
+          "paragrafos": [
+            53,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Proposta anulatória pela Fazenda municipal, a exigibilidade fica suspensa e cabe a certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 497923/SC, Rel. Ministro JOÃO OTÁVIO DE NORONHA, SEGUNDA TURMA, julgado em 16/05/2006, DJ 02/08/2006",
+          "paragrafos": [
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Na execução contra Município, sem penhora, os embargos dão direito à certidão positiva com efeitos de negativa; recurso improvido.",
+          "citacao": "REsp 443.024/RS, Rel. Min. Luiz Fux, DJU de 02.12.02",
+          "paragrafos": [
+            62,
+            63,
+            65
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Na execução contra Município, não sujeito a penhora, a oposição de embargos dá direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 381.459/SC, Rel. Min. Humberto Gomes de Barros, DJU de 17.11.03",
+          "paragrafos": [
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Opostos embargos pelo Município na execução fiscal, há direito à certidão positiva com efeitos de negativa.",
+          "citacao": "REsp 376.341/SC, Rel. Min. Garcia Vieira, DJU de 21.10.02",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Entendimento anterior: não se fornece certidão positiva com efeito de negativa sem garantia por penhora ou suspensão; a decisão o afasta para o ente público.",
+          "citacao": "Resp 205.815/MG, Relator Ministro Garcia Vieira, DJ 28.06.99",
+          "paragrafos": [
+            39,
+            40
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11996,
+      "output_tokens": 1825,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.042242,
+    "duracaoMs": 11728
+  }
+}

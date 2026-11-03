@@ -1,0 +1,408 @@
+{
+  "casoId": "stj-resp-1090898-trib",
+  "paragrafos": 129,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial não provido, mantendo a recusa da substituição da penhora de máquinas por precatório.",
+      "resumo": "A empresa executada pediu a reforma do acórdão que afastou a substituição da penhora de máquinas por precatório do qual é cessionária, alegando violação dos arts. 620, 655 e 668 do CPC e dos arts. 9º, 11 e 15 da Lei 6.830/80. A Primeira Seção do STJ, por unanimidade, negou provimento ao recurso. O relator entendeu que a substituição sem anuência do credor só é possível por dinheiro ou fiança bancária, e que o precatório é penhora de crédito, de posição posterior na ordem do art. 11 da LEF.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão para admitir a substituição da penhora de máquinas por precatório do qual a executada é cessionária.",
+          "paragrafos": [
+            22,
+            34
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de violação dos arts. 620, 655 e 668 do CPC e dos arts. 9º, 11 e 15 da Lei 6.830/80, com execução menos gravosa ao executado.",
+          "paragrafos": [
+            22,
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 3
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 4,
+          "fim": 7
+        },
+        {
+          "tipo": "outro",
+          "inicio": 8,
+          "fim": 13
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 14,
+          "fim": 16
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 17,
+          "fim": 24
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 27,
+          "fim": 31
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 32,
+          "fim": 99
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 100,
+          "fim": 100
+        },
+        {
+          "tipo": "outro",
+          "inicio": 101,
+          "fim": 129
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12233,
+      "output_tokens": 2011,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002229,
+    "duracaoMs": 10122
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial, interposto com base nas alíneas a e c, pode ser conhecido quanto às violações alegadas?",
+          "conclusao": "O relator conheceu do apelo, por considerar que os dispositivos tidos por violados foram prequestionados na origem.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            35
+          ],
+          "paragrafosConclusao": [
+            35
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "É possível substituir a penhora de máquinas da executada por precatório do qual ela é cessionária, sem anuência da Fazenda exequente?",
+          "conclusao": "Não é possível: a penhora de precatório é penhora de crédito, não de dinheiro, e a Fazenda pode recusar a substituição com base no art. 15 da LEF e no art. 656 do CPC.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            36,
+            37,
+            39,
+            40,
+            82,
+            83,
+            91,
+            93,
+            94,
+            95,
+            98,
+            99
+          ],
+          "paragrafosConclusao": [
+            98,
+            99,
+            100
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12625,
+      "output_tokens": 370,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001448,
+    "duracaoMs": 2514
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Recurso especial fundado nas alíneas a e c do permissivo constitucional.",
+          "citacao": "CF, art. 105, III, \"a\" e \"c\"",
+          "paragrafos": [
+            18
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Os dispositivos tidos por violados foram expressa ou implicitamente prequestionados na origem, razão pela qual o relator conheceu do apelo.",
+          "citacao": "",
+          "paragrafos": [
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Recorrente aponta violação aos arts. 620, 655 e 668 do CPC e aos arts. 9º, 11 e 15 da Lei 6.830/80.",
+          "citacao": "CPC, arts. 620, 655 e 668; Lei 6.830/80, arts. 9º, 11 e 15",
+          "paragrafos": [
+            22,
+            34
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Acórdão recorrido afastou a substituição da penhora de máquinas por precatório, que a executada oferecia como cessionária.",
+          "citacao": "",
+          "paragrafos": [
+            18,
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 15, I, da LEF: a substituição da penhora sem anuência da Fazenda limita-se a depósito em dinheiro ou fiança bancária.",
+          "citacao": "Lei 6.830/80, art. 15, I",
+          "paragrafos": [
+            36,
+            37,
+            99
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A penhora de precatório equivale à penhora de crédito, e não de dinheiro.",
+          "citacao": "",
+          "paragrafos": [
+            95,
+            98
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 11 da LEF fixa a ordem de penhora, com direitos e ações em último lugar, onde se situa a penhora de crédito.",
+          "citacao": "Lei 6.830/80, art. 11",
+          "paragrafos": [
+            95,
+            97,
+            98
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A recusa da Fazenda pode fundar-se em qualquer causa do art. 656 do CPC e nos arts. 11 e 15 da LEF.",
+          "citacao": "CPC, art. 656",
+          "paragrafos": [
+            85,
+            92,
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "EREsp 881.014/RS: precatório é bem penhorável e a recusa do exequente pode ser justificada pelas causas do art. 656 do CPC.",
+          "citacao": "EREsp 881.014/RS, 1ª Seção, Rel. Min. Castro Meira, DJ de 17.03.08",
+          "paragrafos": [
+            6,
+            83,
+            84,
+            85,
+            86,
+            87
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "EREsp 870.428/RS: penhorabilidade do precatório não implica compensabilidade; regime de penhora de crédito; recusa do exequente admitida.",
+          "citacao": "EREsp 870.428/RS, Rel. Min. Teori Albino Zavascki, DJU de 13.08.07",
+          "paragrafos": [
+            85,
+            91,
+            92,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no AG 1.108.499/SP: impossibilidade de substituição de penhora por precatório.",
+          "citacao": "AgRg no AG 1.108.499/SP, Segunda Turma",
+          "paragrafos": [
+            42,
+            43,
+            44
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no AG 1.093.104/SP: créditos de precatório penhoráveis, mas recusa de substituição admitida nos arts. 11 e 15 da LEF.",
+          "citacao": "AgRg no AG 1.093.104/SP, Segunda Turma",
+          "paragrafos": [
+            46,
+            47,
+            48,
+            49
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 646.647/SP: recusa do exequente justificada pelas causas do art. 656 do CPC.",
+          "citacao": "AgRg no REsp 646.647/SP, Segunda Turma",
+          "paragrafos": [
+            50,
+            51,
+            52,
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 939.853/SP: precatório não se inclui nas hipóteses de substituição do art. 15, I, da LEF, o que autoriza a recusa.",
+          "citacao": "REsp 939.853/SP, Segunda Turma",
+          "paragrafos": [
+            56,
+            57,
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 867.305/RS: impossibilidade de substituição de penhora por precatório sem consentimento expresso do credor.",
+          "citacao": "REsp 867.305/RS, Rel. Min. Eliana Calmon",
+          "paragrafos": [
+            60,
+            61,
+            62
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 983.227/RS: substituição por precatório não se enquadra no art. 15, I, da Lei 6.830/80.",
+          "citacao": "AgRg no REsp 983.227/RS, Rel. p/ acórdão Min. Teori Zavascki",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            67,
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1.051.540/RS: substituição por precatório exige concordância expressa do exequente.",
+          "citacao": "AgRg no REsp 1.051.540/RS, Rel. Min. Francisco Falcão",
+          "paragrafos": [
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 825.990/RS: a penhora de precatório equivale à penhora de crédito, não de dinheiro.",
+          "citacao": "AgRg no REsp 825.990/RS, Rel. Min. Denise Arruda",
+          "paragrafos": [
+            79,
+            80,
+            81
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 935.593/SP: precatório não se inclui nas hipóteses de substituição da penhora, justificando a negativa.",
+          "citacao": "AgRg no REsp 935.593/SP, Rel. Min. Humberto Martins",
+          "paragrafos": [
+            37,
+            39,
+            67,
+            76
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 893.519/RS: citado em precedentes sobre impossibilidade de substituição por precatório.",
+          "citacao": "REsp 893.519/RS, Rel. Min. Castro Meira",
+          "paragrafos": [
+            67,
+            76,
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 1.033.511/SP: citado como precedente sobre impossibilidade de substituição da penhora por precatório judicial.",
+          "citacao": "REsp nº 1.033.511/SP, Rel. Min. Teori Albino Zavascki",
+          "paragrafos": [
+            76
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Executada ofereceu precatório contra o Estado de São Paulo do qual é cessionária; Fazenda recusou com base no art. 15 da LEF.",
+          "citacao": "",
+          "paragrafos": [
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Penhora sem anuência do credor de bens móveis não pode ser substituída por precatório, pois a penhora de crédito fica no último inciso do art. 11.",
+          "citacao": "",
+          "paragrafos": [
+            98
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12421,
+      "output_tokens": 2608,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002546,
+    "duracaoMs": 9580
+  }
+}

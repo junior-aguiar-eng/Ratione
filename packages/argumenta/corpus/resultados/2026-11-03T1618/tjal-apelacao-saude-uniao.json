@@ -1,0 +1,513 @@
+{
+  "casoId": "tjal-apelacao-saude-uniao",
+  "paragrafos": 148,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Peça recursal (apelação do Estado de Alagoas) que não decide; requer o conhecimento e o provimento do recurso para reformar a sentença.",
+      "resumo": "O Estado de Alagoas apela de sentença que o condenou a realizar procedimento cirúrgico financiado com recursos federais. Sustenta a necessidade de incluir a União no polo passivo, com incompetência da Justiça Estadual, e a falta de urgência e de subsídios técnicos. Requer a reforma da sentença, o reconhecimento da incompetência e a improcedência dos pedidos.",
+      "pedidos": [
+        {
+          "descricao": "Intimação da parte apelada para apresentar contrarrazões e remessa dos autos ao Tribunal de Justiça.",
+          "paragrafos": [
+            4,
+            5
+          ]
+        },
+        {
+          "descricao": "Inclusão da União Federal no polo passivo, com reconhecimento da incompetência absoluta da Justiça Estadual e extinção do feito sem exame de mérito.",
+          "paragrafos": [
+            70,
+            145
+          ]
+        },
+        {
+          "descricao": "Prévia oitiva do SUS, por meio da entidade gestora, para verificar a disponibilidade do procedimento e a fila de espera.",
+          "paragrafos": [
+            95
+          ]
+        },
+        {
+          "descricao": "Reconhecimento da nulidade da sentença, com retorno dos autos para produção de prova pericial.",
+          "paragrafos": [
+            143
+          ]
+        },
+        {
+          "descricao": "Conhecimento e provimento do recurso, com reforma da sentença e improcedência dos pedidos por ausência de subsídios técnicos e de caráter emergencial.",
+          "paragrafos": [
+            145
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 8
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 9,
+          "fim": 14
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 15,
+          "fim": 143
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 144,
+          "fim": 146
+        },
+        {
+          "tipo": "outro",
+          "inicio": 147,
+          "fim": 148
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 22918,
+      "output_tokens": 686,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.052696,
+    "duracaoMs": 5417
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A União deve integrar o polo passivo, como litisconsórcio necessário, por se tratar de procedimento financiado com recursos federais, com incompetência da Justiça Estadual e extinção sem mérito?",
+          "conclusao": "O Estado de Alagoas pede a inclusão da União no polo passivo, o reconhecimento da incompetência absoluta da Justiça Estadual e a extinção do feito sem exame de mérito.",
+          "resultado": "pendente",
+          "paragrafos": [
+            13,
+            15,
+            16,
+            21,
+            23,
+            34,
+            51,
+            52,
+            55,
+            70,
+            145
+          ],
+          "paragrafosConclusao": [
+            70,
+            145
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A ausência de urgência e a necessidade de respeitar a fila do SUS (isonomia) impedem a ordem judicial para realizar o procedimento?",
+          "conclusao": "O Estado pede a improcedência do pedido, pela falta de prova do caráter emergencial e pela necessidade de observar a fila do SUS e a isonomia, com oitiva prévia do SUS.",
+          "resultado": "pendente",
+          "paragrafos": [
+            71,
+            74,
+            80,
+            81,
+            82,
+            94,
+            95,
+            113,
+            145
+          ],
+          "paragrafosConclusao": [
+            94,
+            95,
+            145
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A falta de laudo médico circunstanciado e de prova pericial justifica a improcedência dos pedidos ou a nulidade da sentença?",
+          "conclusao": "O Estado pede a improcedência por ausência de elementos técnicos e, subsidiariamente, a nulidade da sentença, com retorno dos autos para produção de prova pericial.",
+          "resultado": "pendente",
+          "paragrafos": [
+            114,
+            115,
+            126,
+            128,
+            129,
+            130,
+            131,
+            140,
+            143,
+            145
+          ],
+          "paragrafosConclusao": [
+            128,
+            143,
+            145
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 23210,
+      "output_tokens": 636,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.05278,
+    "duracaoMs": 5063
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A saúde é dever comum dos entes federados, com cooperação regulada por lei complementar, o que sustenta a repartição de responsabilidades.",
+          "citacao": "Constituição Federal, arts. 196 e 23, II e parágrafo único",
+          "paragrafos": [
+            16,
+            17,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Tema 793/STF: responsabilidade solidária, cabendo ao juiz direcionar o cumprimento conforme a repartição de competências e determinar o ressarcimento a quem arcou com o custo.",
+          "citacao": "Tema 793 do STF (RE 855.178, embargos de declaração)",
+          "paragrafos": [
+            9,
+            23,
+            33,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Pelos passos extraídos do voto-condutor, se o ente financiador não integra a lide, o polo passivo deve ser corrigido, ainda que haja declinação de competência.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            47,
+            48,
+            49,
+            50
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Consulta ao SIGTAP mostra que o procedimento integra o Limite Financeiro MAC, financiado pelo Ministério da Saúde.",
+          "citacao": "",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Como o procedimento é financiado com recursos do Ministério da Saúde, a União deve integrar o polo passivo em litisconsórcio necessário, o que gera a incompetência da Justiça Estadual.",
+          "citacao": "",
+          "paragrafos": [
+            55,
+            70
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A Portaria de Consolidação 6/2017 do Ministério da Saúde prevê o financiamento federal do bloco de média e alta complexidade.",
+          "citacao": "Portaria de Consolidação nº 6/2017, do Ministério da Saúde",
+          "paragrafos": [
+            52,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TRF-4 (AG 50507630420194040000): o Tema 793 implica litisconsórcio necessário do ente financeiramente responsável; o custeio da alta complexidade é federal.",
+          "citacao": "TRF-4 - AG: 50507630420194040000 [PROCESSO_2], Relator: Jairo Gilberto Schafer",
+          "paragrafos": [
+            53,
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-RS: aplicando o Tema 793, reconheceu a necessidade de incluir a União quando ela é responsável pelo financiamento; sentença desconstituída.",
+          "citacao": "TJ-RS - AC: 70084142272 RS, Relator: Luiz Felipe Silveira Difini",
+          "paragrafos": [
+            56
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-PR: tratamento oncológico financiado pela União exige emenda da inicial para chamá-la e remessa à Justiça Federal.",
+          "citacao": "TJ-PR - AI: 00483019320198160000 PR, Relator: Juiz Rogério Ribas",
+          "paragrafos": [
+            57,
+            58,
+            59,
+            60,
+            62,
+            63
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-SE: tratamento de maior complexidade é responsabilidade necessária da União, e o recurso deve ser remetido à Justiça Federal.",
+          "citacao": "TJ-SE - AC: 00091691120188250001, Relator: Roberto Eugenio da Fonseca Porto",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STF, RE 1299773/PR: ao incluir a União e remeter os autos à Justiça Federal, o tribunal de origem seguiu a tese do Tema 793.",
+          "citacao": "STF - RE: 1299773 PR, Relator: Alexandre de Moraes, Primeira Turma, 08/03/2021",
+          "paragrafos": [
+            10
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O art. 196 da CF impõe acesso universal e igualitário à saúde, o que exige igualdade no atendimento.",
+          "citacao": "CF/1988, art. 196",
+          "paragrafos": [
+            72,
+            73,
+            74
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A Lei 8.080/90 prevê universalidade de acesso e igualdade da assistência, sem privilégios.",
+          "citacao": "Lei nº 8.080/1990, art. 7º, I e IV",
+          "paragrafos": [
+            75,
+            78,
+            79
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A petição inicial não trouxe documento de profissional do SUS sobre oferta do procedimento, fila de espera ou motivos de prioridade.",
+          "citacao": "",
+          "paragrafos": [
+            81
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O direito à saúde deve ser compatibilizado com a isonomia; sem urgência demonstrada, é incabível ordem judicial que fure a fila do SUS.",
+          "citacao": "",
+          "paragrafos": [
+            80,
+            82,
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TJ-MS: sem caráter emergencial, em cirurgia eletiva, deve ser respeitada a fila do SUS, sob pena de violar a isonomia.",
+          "citacao": "TJ-MS - AI: 14050872020158120000 MS, Relator: Des. Marcos José de Brito Rodrigues",
+          "paragrafos": [
+            83,
+            84,
+            85,
+            86
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF-2: o acesso à saúde deve ser compatibilizado com a isonomia, sem privilégio a quem aciona o Judiciário em detrimento da fila administrativa.",
+          "citacao": "TRF-2 - AC: 00072552020124025101 RJ, Relator: Julio Emilio Abranches Mansur",
+          "paragrafos": [
+            87
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF-5 (Primeira Turma): sem periculum in mora, não se autoriza violar a fila única do SUS, sob pena de ferir a isonomia; agravo não provido.",
+          "citacao": "Agravo de Instrumento, Relator Desembargador Federal Elio Wanderley de Siqueira Filho, TRF 5ª Região, Primeira Turma",
+          "paragrafos": [
+            97,
+            98,
+            99,
+            100,
+            101,
+            110,
+            112
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "doutrina",
+          "descricao": "Os enunciados 51 e 62 do CNJ exigem relatório médico circunstanciado com risco imediato para caracterizar urgência.",
+          "citacao": "Enunciados nº 51 e 62 do CNJ",
+          "paragrafos": [
+            88,
+            89,
+            90,
+            91
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O Enunciado 69 do CNJ recomenda consulta prévia ao ente público sobre a lista de espera, o que fundamenta o pedido de oitiva do SUS.",
+          "citacao": "Enunciado nº 69 do CNJ",
+          "paragrafos": [
+            92,
+            93,
+            95
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O art. 300 do CPC fixa os requisitos da tutela de urgência, entre eles o perigo de dano.",
+          "citacao": "CPC, art. 300",
+          "paragrafos": [
+            103
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Os autos foram instruídos só com encaminhamento médico, sem histórico da evolução clínica e das opções terapêuticas.",
+          "citacao": "",
+          "paragrafos": [
+            115
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "doutrina",
+          "descricao": "Os enunciados 15, 19, 32 e 67 do CNJ exigem relatório médico circunstanciado e documentação completa na inicial.",
+          "citacao": "Enunciados nº 15, 19, 32 e 67 do CNJ",
+          "paragrafos": [
+            115,
+            116,
+            117,
+            118,
+            119
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "STA 175 (Min. Gilmar Mendes): fixa parâmetros para demandas de saúde, como existência de tratamento no SUS e adequação do tratamento pleiteado.",
+          "citacao": "STA nº 175",
+          "paragrafos": [
+            120,
+            121,
+            122,
+            123,
+            124
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Sem laudo circunstanciado e elementos técnicos seguros sobre necessidade e adequação, os pedidos devem ser julgados improcedentes.",
+          "citacao": "",
+          "paragrafos": [
+            126,
+            127,
+            128
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Na falta de subsídios técnicos, deve ser produzida prova pericial; subsidiariamente, a sentença deve ser anulada com retorno dos autos.",
+          "citacao": "",
+          "paragrafos": [
+            130,
+            131,
+            143
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-4 (AG 50035068020194040000): para verificar urgência e requisitos, a parte deve se submeter a perícia judicial prévia.",
+          "citacao": "TRF-4 - AG: 50035068020194040000, Relator: Altair Antonio Gregório",
+          "paragrafos": [
+            132
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-5 (Terceira Turma): laudo de médico ligado ao autor serve para liminar, mas deve ser confirmado por perícia judicial, cuja conclusão prevalece.",
+          "citacao": "TRF-5 - Terceira Turma - Relator Desembargador Federal Fernando Braga Damasceno",
+          "paragrafos": [
+            133,
+            135
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-5 (Apelação 08025013220184058100): a ausência de perícia judicial anula a sentença, com retorno dos autos à origem para a perícia.",
+          "citacao": "TRF-5 - Apelação: 08025013220184058100, Relator: Desembargador Federal Rogério Roberto Gonçalves de Abreu",
+          "paragrafos": [
+            136,
+            139
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "STA 175 AgR: as demandas de saúde exigem instrução processual para evitar peças padronizadas que ignorem as especificidades do caso.",
+          "citacao": "STA 175 AgR, Relator Min. Gilmar Mendes, Tribunal Pleno, julgado em 17/03/2010",
+          "paragrafos": [
+            140,
+            141,
+            142
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 23185,
+      "output_tokens": 3696,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.08333,
+    "duracaoMs": 21813
+  }
+}

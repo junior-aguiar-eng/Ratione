@@ -1,0 +1,223 @@
+{
+  "casoId": "stj-resp-1192556-trib",
+  "paragrafos": 81,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido, para julgar improcedente o pedido inicial e inverter os ônus sucumbenciais.",
+      "resumo": "O Estado de Pernambuco recorreu contra acórdão que reconheceu a natureza indenizatória do abono de permanência e afastou o Imposto de Renda. A Primeira Seção do STJ, por unanimidade, deu provimento ao recurso, por entender que o abono tem natureza remuneratória e sofre incidência do imposto.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão do Tribunal de origem, que considerou o abono de permanência indenizatório e não sujeito ao Imposto de Renda, com reconhecimento da incidência do imposto sobre o abono (violação dos arts. 43, I e II, e 97, VI, do CTN e 3º, § 4º, da Lei 7.713/88, e divergência jurisprudencial).",
+          "paragrafos": [
+            28,
+            29
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 9
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 10,
+          "fim": 16
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 17,
+          "fim": 18
+        },
+        {
+          "tipo": "outro",
+          "inicio": 19,
+          "fim": 26
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 27,
+          "fim": 32
+        },
+        {
+          "tipo": "outro",
+          "inicio": 33,
+          "fim": 37
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 38,
+          "fim": 57
+        },
+        {
+          "tipo": "outro",
+          "inicio": 58,
+          "fim": 81
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8190,
+      "output_tokens": 538,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.02176,
+    "duracaoMs": 5068
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Incide Imposto de Renda sobre o abono de permanência previsto no § 19 do art. 40 da Constituição Federal, na EC 41/2003 e na Lei 10.887/2004?",
+          "conclusao": "Incide o Imposto de Renda: o abono tem natureza remuneratória e gera acréscimo patrimonial, e não há lei que o isente. O recurso especial foi provido e o pedido inicial, julgado improcedente.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            45,
+            46,
+            47,
+            48,
+            52,
+            54,
+            55,
+            58
+          ],
+          "paragrafosConclusao": [
+            46,
+            58
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Como ficam os ônus sucumbenciais após o provimento do recurso do Estado?",
+          "conclusao": "Os ônus sucumbenciais foram invertidos em razão da improcedência do pedido inicial.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            58
+          ],
+          "paragrafosConclusao": [
+            58
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8482,
+      "output_tokens": 377,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.020734,
+    "duracaoMs": 4138
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "O art. 43 do CTN define como fato gerador do IR a disponibilidade de renda ou de proventos, entendidos como acréscimos patrimoniais.",
+          "citacao": "art. 43 do Código Tributário Nacional",
+          "paragrafos": [
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "A tributação independe da denominação dos rendimentos; basta o benefício do contribuinte por qualquer forma e a qualquer título.",
+          "citacao": "§ 1º do art. 43 do CTN; § 4º do art. 3º da Lei 7.713/88",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Abonos pagos pelo exercício de cargos ou funções são rendimentos do trabalho assalariado, sujeitos ao IR.",
+          "citacao": "art. 16 da Lei 4.506/64",
+          "paragrafos": [
+            42,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há lei que autorize considerar o abono de permanência como rendimento isento; por isso incide o IR.",
+          "citacao": "",
+          "paragrafos": [
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A Segunda Turma decidiu pela incidência do IR: o abono é incentivo à permanência, tem natureza remuneratória e gera acréscimo patrimonial.",
+          "citacao": "REsp 1.105.814/SC, 2ª Turma, Rel. Min. Humberto Martins, DJe de 27.5.2009",
+          "paragrafos": [
+            48,
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Incide IR sobre o abono de permanência, por ter natureza remuneratória e conferir acréscimo patrimonial.",
+          "citacao": "REsp 1.178.479/SE, 2ª Turma, Rel. Min. Castro Meira, DJe de 29.4.2010",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A jurisprudência firmou-se pela natureza remuneratória do abono e pela incidência do IR (art. 43 do CTN).",
+          "citacao": "AgRg no Ag 1.203.675/PE, 2ª Turma, Rel. Min. Humberto Martins, DJe de 10.3.2010",
+          "paragrafos": [
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "A Primeira Turma decidiu pela não incidência do IR, por o abono anular o desconto previdenciário. O acórdão foi citado como entendimento divergente.",
+          "citacao": "AgRg no REsp 1.021.817/MG (Rel. Min. Francisco Falcão, DJe de 1º.9.2008)",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Com o provimento do recurso e a improcedência do pedido inicial, os ônus sucumbenciais são invertidos.",
+          "citacao": "",
+          "paragrafos": [
+            58
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8285,
+      "output_tokens": 1066,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.02723,
+    "duracaoMs": 7056
+  }
+}

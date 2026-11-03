@@ -1,0 +1,360 @@
+{
+  "casoId": "tjal-juri-acordao-desaforamento",
+  "paragrafos": 49,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Pedido de desaforamento deferido, com julgamento do processo deslocado para a Comarca de [CAPITAL].",
+      "resumo": "O Ministério Público requereu o desaforamento do julgamento pelo Tribunal do Júri da Comarca de [COMARCA], por dúvida sobre a imparcialidade dos jurados, em razão da atuação profissional do acusado na região. A Câmara Criminal deferiu o pedido e designou a Comarca de [CAPITAL] para o julgamento.",
+      "pedidos": [
+        {
+          "descricao": "Não inclusão do feito em reunião do Tribunal do Júri até a apreciação definitiva do pedido.",
+          "paragrafos": [
+            19
+          ]
+        },
+        {
+          "descricao": "Desaforamento do julgamento para outra comarca, excluindo as comarcas circunvizinhas.",
+          "paragrafos": [
+            19
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 1
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 2,
+          "fim": 3
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 14,
+          "fim": 23
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 24,
+          "fim": 47
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 48,
+          "fim": 48
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 13519,
+      "output_tokens": 438,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001571,
+    "duracaoMs": 2769
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "prejudicial",
+          "enunciado": "Há hipótese do art. 427 do CPP que autorize o desaforamento do julgamento do Tribunal do Júri por dúvida sobre a imparcialidade dos jurados?",
+          "conclusao": "Há dúvida fundada sobre a imparcialidade do júri, em razão da atuação profissional do acusado na comarca, o que autoriza o desaforamento.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            7,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            22,
+            23,
+            26
+          ],
+          "paragrafosConclusao": [
+            20,
+            26
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Para qual comarca o julgamento do acusado deve ser deslocado?",
+          "conclusao": "O julgamento será realizado em uma das Varas Criminais da Comarca de [CAPITAL], com competência para crimes dolosos contra a vida.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            10,
+            11,
+            23,
+            24,
+            27
+          ],
+          "paragrafosConclusao": [
+            11,
+            24,
+            27
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 13811,
+      "output_tokens": 379,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001571,
+    "duracaoMs": 2914
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "CPP, art. 427: desaforamento admitido se houver dúvida sobre a imparcialidade do júri ou a segurança pessoal do acusado.",
+          "citacao": "CPP, art. 427",
+          "paragrafos": [
+            12,
+            22,
+            30,
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Constituição: o acusado deve ser julgado no distrito da culpa por crimes dolosos contra a vida, por seus pares; desaforamento é exceção.",
+          "citacao": "Constituição Federal",
+          "paragrafos": [
+            24
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STF: o desaforamento é matéria de ordem pública ligada à ampla defesa e à plenitude de defesa (art. 5º, XXXVIII).",
+          "citacao": "STF, HC 167960 AgR, Rel. Min. Ricardo Lewandowski, 2a Turma, julg. em 14/05/2019",
+          "paragrafos": [
+            26
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STF: não se exige prova concreta da parcialidade dos jurados, bastando dúvida fundada sobre ela.",
+          "citacao": "STF, HC 167960 AgR, Rel. Min. Ricardo Lewandowski, 2a Turma, julg. em 14/05/2019",
+          "paragrafos": [
+            27
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O acusado é advogado criminalista atuante na comarca, com atuação no Tribunal do Júri local, e já participou de sessões desse tribunal.",
+          "citacao": "",
+          "paragrafos": [
+            28,
+            29,
+            34
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "O réu tem notoriedade local e relação direta com a comunidade, da qual saem os jurados.",
+          "citacao": "",
+          "paragrafos": [
+            28,
+            29
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ: a opinião do juízo de primeiro grau tem relevância por estar mais próximo dos fatos para avaliar a necessidade do desaforamento.",
+          "citacao": "STJ, HC 488.528/PB, Relator Ministro Reynaldo Soares da Fonseca, Quinta Turma, julgado em 6/8/2019",
+          "paragrafos": [
+            9,
+            18,
+            31
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ (HC 811245/PR): concedeu de ofício o desaforamento por dúvida fundada sobre a imparcialidade dos jurados, com motivos concretos como repercussão do delito e pequena cidade.",
+          "citacao": "STJ, HC 811245/PR, Rel. Min. Ribeiro Dantas, 5a Turma, julg. em 27/06/2023",
+          "paragrafos": [
+            8,
+            18,
+            32,
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "prova",
+          "descricao": "Manifestação do juízo de primeiro grau, que opinou pelo deferimento do desaforamento por risco à imparcialidade dos jurados.",
+          "citacao": "",
+          "paragrafos": [
+            8,
+            17,
+            29
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Pedido do Ministério Público, com a alegação de influência do réu e de relações sociais próximas em município pequeno.",
+          "citacao": "",
+          "paragrafos": [
+            3,
+            4,
+            16,
+            17,
+            28
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Há dúvida fundada sobre a imparcialidade do júri, pela atuação profissional do acusado na comarca, o que autoriza o desaforamento.",
+          "citacao": "",
+          "paragrafos": [
+            20,
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJAL, Câmara Criminal, caso análogo: desaforamento deferido por possível comprometimento da imparcialidade dos jurados.",
+          "citacao": "TJAL, Desaforamento de Julgamento no [PROCESSO_1], Rel. Juiz Conv. [JUIZ CONVOCADO], Câmara Criminal, julg. em 12/12/2024",
+          "paragrafos": [
+            21,
+            36,
+            40,
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ, AgRg no HC 490467/PE: desaforamento por dúvida sobre a imparcialidade dos jurados é válido; não há obrigação de remeter à comarca mais próxima.",
+          "citacao": "STJ, AgRg no HC 490467/PE, Rel. Min. Nefi Cordeiro, 6a Turma, julg. em 28/03/2019",
+          "paragrafos": [
+            25,
+            44,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "doutrina",
+          "descricao": "Renato Brasileiro de Lima: a comarca competente é aquela onde deixam de subsistir os motivos do desaforamento, não necessariamente a mais próxima.",
+          "citacao": "Renato Brasileiro de Lima",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ, HC 445.864/RJ, Rel. Ministro Sebastião Reis Júnior, Sexta Turma: citado como precedente no voto do caso análogo da Câmara Criminal.",
+          "citacao": "STJ, Habeas Corpus no 445.864/RJ, Rel. Ministro Sebastião Reis Júnior, Sexta Turma, julgado em 07/06/2018, DJe 13/06/2018",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STJ, RESP 1483838/10, Rel. Ministro Felix Fischer, Quinta Turma: citado como precedente no caso análogo da Câmara Criminal; o texto não descreve a tese.",
+          "citacao": "STJ, RESP no 1483838/10, Rel. Ministro Felix Fischer, Quinta Turma, julgado em 18/06/2015, DJe 04/09/2015",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O acusado está preso preventivamente na Comarca de [CAPITAL].",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Deve-se ponderar a equidistância entre a comarca de origem e a comarca do julgamento, e resguardar a segurança do acusado preso.",
+          "citacao": "",
+          "paragrafos": [
+            10,
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A comarca de julgamento deve ser onde não subsistam os motivos do desaforamento, podendo não ser a mais próxima, em razão de possível comoção regional.",
+          "citacao": "",
+          "paragrafos": [
+            23,
+            24
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "CPP, art. 427: desaforamento para outra comarca da mesma região, onde não existam os motivos, preferindo-se as mais próximas.",
+          "citacao": "CPP, art. 427",
+          "paragrafos": [
+            30,
+            42,
+            43
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Deferido o desaforamento para uma das Varas Criminais da Comarca de [CAPITAL], com competência para crimes dolosos contra a vida e condições mais adequadas.",
+          "citacao": "",
+          "paragrafos": [
+            11,
+            26,
+            27,
+            47,
+            48
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 13600,
+      "output_tokens": 2547,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002634,
+    "duracaoMs": 9559
+  }
+}

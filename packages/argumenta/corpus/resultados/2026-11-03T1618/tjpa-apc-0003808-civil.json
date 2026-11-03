@@ -1,0 +1,291 @@
+{
+  "casoId": "tjpa-apc-0003808-civil",
+  "paragrafos": 180,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Apelação conhecida e não provida, mantida a sentença de improcedência.",
+      "resumo": "O apelante recorreu da sentença que julgou improcedente a ação de indenização por danos morais e materiais decorrentes de acidente de trânsito, ocorrido em conversão à esquerda em via de mão dupla. Pediu a reforma da sentença ou, subsidiariamente, o reconhecimento de culpa concorrente. A Turma, à unanimidade, conheceu do recurso e negou-lhe provimento, mantendo a sentença.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença de improcedência, com o reconhecimento da culpa dos apelados pelo acidente e a indenização por danos morais e materiais",
+          "paragrafos": [
+            79,
+            80,
+            81,
+            99
+          ]
+        },
+        {
+          "descricao": "Subsidiariamente, reconhecimento de culpa concorrente, com fixação das indenizações em patamares condizentes com os danos",
+          "paragrafos": [
+            82,
+            99
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 15
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 16,
+          "fim": 47
+        },
+        {
+          "tipo": "outro",
+          "inicio": 48,
+          "fim": 48
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 49,
+          "fim": 49
+        },
+        {
+          "tipo": "outro",
+          "inicio": 50,
+          "fim": 67
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 68,
+          "fim": 90
+        },
+        {
+          "tipo": "outro",
+          "inicio": 91,
+          "fim": 95
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 96,
+          "fim": 98
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 99,
+          "fim": 174
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 175,
+          "fim": 176
+        },
+        {
+          "tipo": "outro",
+          "inicio": 177,
+          "fim": 180
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9572,
+      "output_tokens": 619,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.025334,
+    "duracaoMs": 9073
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso de apelação preenche os pressupostos de admissibilidade para ser conhecido?",
+          "conclusao": "Avaliados os pressupostos processuais, a relatora os considerou regularmente constituídos e conheceu do recurso.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            96,
+            98
+          ],
+          "paragrafosConclusao": [
+            96,
+            176
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Os apelados são culpados pelo acidente, de modo a indenizar o apelante, ou a culpa é de quem realizou a conversão à esquerda sem as cautelas do Código de Trânsito?",
+          "conclusao": "A culpa foi atribuída ao apelante, que converteu à esquerda sem as cautelas devidas e não provou a alta velocidade alegada. Sentença de improcedência mantida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            99,
+            100,
+            101,
+            106,
+            107,
+            108,
+            120,
+            174
+          ],
+          "paragrafosConclusao": [
+            108,
+            120,
+            174,
+            176
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Deve ser reconhecida a culpa concorrente para reduzir as indenizações?",
+          "conclusao": "O pedido subsidiário não foi acolhido: a culpa foi atribuída ao apelante pela conversão sem cautelas, e a sentença foi mantida integralmente.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            82,
+            99
+          ],
+          "paragrafosConclusao": [
+            174,
+            176
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9864,
+      "output_tokens": 530,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.025028,
+    "duracaoMs": 5082
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A relatora avaliou os pressupostos processuais, considerou-os regularmente constituídos e conheceu do recurso.",
+          "citacao": "",
+          "paragrafos": [
+            96
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Ao autor cabe provar o fato constitutivo do seu direito; a alta velocidade alegada não foi demonstrada, nem no depoimento do apelante, que ouviu a informação de terceiros.",
+          "citacao": "CPC, art. 373, inciso I",
+          "paragrafos": [
+            107
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A lide é apreciada à luz das regras de trânsito sobre manobras, sinalização e conversão à esquerda, que o apelante não observou com as devidas cautelas.",
+          "citacao": "Código de Trânsito Brasileiro (Lei nº 9503/97), arts. 34, 35 e parágrafo único, e 38, inc. II e parágrafo único",
+          "paragrafos": [
+            108,
+            109,
+            110,
+            116,
+            117,
+            118,
+            119
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Documentos das fls. 14 e 275 mostram que a PA 275 tinha circulação em duplo sentido, o que afasta a alegação de que o veículo dos apelados estava na contramão.",
+          "citacao": "",
+          "paragrafos": [
+            100
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "O depoimento do apelante em audiência (fl. 158) corrigiu o croqui e admitiu que não sabia a velocidade da L200, só ouvira de terceiros que era alta.",
+          "citacao": "",
+          "paragrafos": [
+            101,
+            106,
+            107
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "É incontroverso que o apelante queria converter à esquerda para acessar a PA 275 e não o fez com as cautelas exigidas, o que causou o acidente.",
+          "citacao": "",
+          "paragrafos": [
+            100,
+            108
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Conforme jurisprudência firme, presume-se a culpa do condutor que converte à esquerda em via de mão dupla e colide com outro veículo.",
+          "citacao": "",
+          "paragrafos": [
+            120
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Presume-se culpado quem, em via de mão dupla, converte à esquerda sem cautelas, interceptando a trajetória de quem vem em sentido oposto; presunção não elidida.",
+          "citacao": "Apelação Cível Nº 70047403654, Décima Segunda Câmara Cível, Tribunal de Justiça do RS",
+          "paragrafos": [
+            144,
+            145
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Reconheceu a culpa da condutora que não observou o fluxo ao iniciar conversão à esquerda em via de mão dupla; sentença mantida e recurso desprovido.",
+          "citacao": "Recurso Cível Nº 71007811326, Segunda Turma Recursal Cível, Turmas Recursais",
+          "paragrafos": [
+            168,
+            173
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O pedido subsidiário de culpa concorrente não foi acolhido: a culpa foi atribuída ao apelante pela conversão sem cautelas, e a sentença foi mantida integralmente.",
+          "citacao": "",
+          "paragrafos": [
+            108,
+            174,
+            176
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A presunção de culpa de quem converte à esquerda não foi afastada, pois não se provou conduta irregular dos apelados, como a alta velocidade.",
+          "citacao": "",
+          "paragrafos": [
+            107,
+            120
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9764,
+      "output_tokens": 1288,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.032408,
+    "duracaoMs": 8482
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "casoId": "stj-resp-1192556-trib",
+  "paragrafos": 81,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido, por unanimidade, nos termos do voto do relator.",
+      "resumo": "O Estado de Pernambuco recorreu de acórdão do TJPE que deu natureza indenizatória ao abono de permanência e afastou a incidência do Imposto de Renda. O relator entendeu que o abono se sujeita ao Imposto de Renda, pois não há lei que o considere isento. A Primeira Seção deu provimento ao recurso por unanimidade.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão do Tribunal de origem que afastou a incidência do Imposto de Renda sobre o abono de permanência.",
+          "paragrafos": [
+            28,
+            29
+          ]
+        },
+        {
+          "descricao": "Julgamento de improcedência do pedido inicial, com inversão dos ônus sucumbenciais.",
+          "paragrafos": [
+            58
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 9
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 10,
+          "fim": 16
+        },
+        {
+          "tipo": "outro",
+          "inicio": 17,
+          "fim": 20
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 27,
+          "fim": 32
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 37,
+          "fim": 57
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 58,
+          "fim": 58
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8090,
+      "output_tokens": 2324,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001971,
+    "duracaoMs": 11643
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "Incide Imposto de Renda sobre o abono de permanência previsto no art. 40, §19, da CF e na EC 41/2003?",
+          "conclusao": "Sim, os rendimentos recebidos a título de abono de permanência sujeitam-se à incidência do Imposto de Renda, pois não há lei que os torne isentos.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            45,
+            46,
+            47,
+            48,
+            52,
+            54,
+            55,
+            58
+          ],
+          "paragrafosConclusao": [
+            46,
+            58
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "acessoria",
+          "enunciado": "Qual o destino dos ônus sucumbenciais após o provimento do recurso especial?",
+          "conclusao": "O voto determina a inversão dos ônus sucumbenciais, com improcedência do pedido da petição inicial.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            58
+          ],
+          "paragrafosConclusao": [
+            58
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8482,
+      "output_tokens": 339,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001018,
+    "duracaoMs": 2733
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 43 do CTN: fato gerador do imposto de renda é a aquisição de disponibilidade econômica ou jurídica de renda ou proventos.",
+          "citacao": "CTN, art. 43",
+          "paragrafos": [
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 43, §1º do CTN, incluído pela LC 104/2001: tributação independe da denominação dos rendimentos.",
+          "citacao": "CTN, art. 43, §1º",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 3º, §4º da Lei 7.713/88: basta o benefício do contribuinte por qualquer forma e a qualquer título para incidência do imposto.",
+          "citacao": "Lei 7.713/88, art. 3º, §4º",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 16 da Lei 4.506/64: abonos pagos no exercício de cargos ou funções são classificados como rendimentos do trabalho assalariado.",
+          "citacao": "Lei 4.506/64, art. 16",
+          "paragrafos": [
+            42,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Parágrafo único do art. 16 da Lei 4.506/64: outras indenizações pelo atraso no pagamento de remunerações tributáveis também são rendimentos do trabalho assalariado.",
+          "citacao": "Lei 4.506/64, art. 16, parágrafo único",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Sujeitam-se ao imposto de renda os rendimentos do abono de permanência previstos no art. 40, §19, da CF, no art. 2º, §5º e art. 3º, §1º da EC 41/2003 e no art. 7º da Lei 10.887/2004; não há lei que o torne isento.",
+          "citacao": "CF, art. 40, §19; EC 41/2003, art. 2º, §5º e art. 3º, §1º; Lei 10.887/2004, art. 7º",
+          "paragrafos": [
+            13,
+            14,
+            15,
+            39,
+            46
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1.021.817/MG (Primeira Turma): decidiu pela não incidência do imposto de renda sobre o abono de permanência; a decisão o afasta.",
+          "citacao": "AgRg no REsp 1.021.817/MG, Rel. Min. Francisco Falcão, DJe de 1º.9.2008",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 1.105.814/SC (Segunda Turma): decidiu pela incidência do imposto de renda sobre o abono de permanência, por natureza remuneratória e acréscimo patrimonial.",
+          "citacao": "REsp 1.105.814/SC, Rel. Min. Humberto Martins, DJe de 27.5.2009",
+          "paragrafos": [
+            48,
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "REsp 1.178.479/SE (Segunda Turma): decidiu pela incidência do imposto de renda sobre o abono de permanência, por natureza remuneratória.",
+          "citacao": "REsp 1.178.479/SE, 2ª Turma, Rel. Min. Castro Meira, DJe de 29.4.2010",
+          "paragrafos": [
+            54
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "AgRg no Ag 1.203.675/PE (Segunda Turma): jurisprudência firmada de que o abono de permanência é fato gerador do imposto de renda, nos termos do art. 43 do CTN.",
+          "citacao": "AgRg no Ag 1.203.675/PE, 2ª Turma, Rel. Min. Humberto Martins, DJe de 10.3.2010",
+          "paragrafos": [
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O abono de permanência é opção do servidor que não suprime direito nem gera reparação, logo tem natureza remuneratória e acréscimo patrimonial.",
+          "citacao": "",
+          "paragrafos": [
+            48,
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Provido o recurso especial, deve-se julgar improcedente o pedido da petição inicial, com a consequente inversão dos ônus sucumbenciais.",
+          "citacao": "",
+          "paragrafos": [
+            58
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8250,
+      "output_tokens": 1575,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001613,
+    "duracaoMs": 6770
+  }
+}

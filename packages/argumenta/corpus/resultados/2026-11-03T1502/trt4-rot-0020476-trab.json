@@ -1,0 +1,402 @@
+{
+  "casoId": "trt4-rot-0020476-trab",
+  "paragrafos": 86,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Prefacial de coisa julgada rejeitada e recurso ordinário do reclamante não provido, com prescrição bienal mantida.",
+      "resumo": "O reclamante recorreu da sentença que pronunciou a prescrição total de sua ação por indenização por danos materiais e morais decorrentes de acidente de trabalho típico ocorrido em 2007. A reclamada alegou coisa julgada por acordo em ação anterior, mas a Turma rejeitou a prefacial, por entender que a pretensão extracontratual não foi abrangida pela quitação. No mérito, negou provimento ao recurso, mantendo a prescrição com marco inicial em 31.12.2007.",
+      "pedidos": [
+        {
+          "descricao": "Afastar a prescrição total e aplicar os prazos da lei civil (vinte anos até 09.01.2003 e dez anos a partir de 10.01.2003) à indenização por danos materiais, estéticos e morais decorrentes de acidente de trabalho.",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "descricao": "Pagamento de indenização por danos morais e pensionamento vitalício decorrentes de acidente de trabalho típico.",
+          "paragrafos": [
+            40,
+            55
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 10
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 11,
+          "fim": 12
+        },
+        {
+          "tipo": "outro",
+          "inicio": 13,
+          "fim": 14
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 15,
+          "fim": 15
+        },
+        {
+          "tipo": "outro",
+          "inicio": 16,
+          "fim": 19
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 20,
+          "fim": 24
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 26,
+          "fim": 49
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 50,
+          "fim": 67
+        },
+        {
+          "tipo": "outro",
+          "inicio": 68,
+          "fim": 70
+        },
+        {
+          "tipo": "outro",
+          "inicio": 71,
+          "fim": 86
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8732,
+      "output_tokens": 2015,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001881,
+    "duracaoMs": 10102
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A ação do reclamante está impedida pela coisa julgada decorrente do acordo homologado em processo anterior?",
+          "conclusao": "Rejeitada a prefacial: o acordo deu quitação do contrato, mas a pretensão indenizatória extracontratual por acidente não foi abrangida pelo acordo.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "paragrafosConclusao": [
+            48,
+            49
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "prejudicial",
+          "enunciado": "Está prescrita a pretensão de indenização por danos materiais e morais decorrentes de acidente de trabalho ocorrido em 2007?",
+          "conclusao": "Mantida a prescrição total: o termo inicial foi 31.12.2007 e a ação foi ajuizada em 24.03.2015, aplicando-se o prazo bienal do art. 7º, XXIX, da CF.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ],
+          "paragrafosConclusao": [
+            63,
+            64,
+            65,
+            80
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "acessoria",
+          "enunciado": "Deve ser concedido o prequestionamento dos dispositivos legais e constitucionais invocados pelas partes?",
+          "conclusao": "Restam prequestionados, para efeitos de recurso, os dispositivos invocados nas razões e contrarrazões, nos termos da Súmula 297 do TST e OJ 118 da SDI-1.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            67
+          ],
+          "paragrafosConclusao": [
+            67
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9024,
+      "output_tokens": 636,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00122,
+    "duracaoMs": 3955
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Acordo homologado em processo anterior deu quitação total da inicial e do contrato de trabalho.",
+          "citacao": "",
+          "paragrafos": [
+            31,
+            35,
+            36,
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Os pedidos relativos ao acidente de trabalho foram objeto de desistência no processo anterior, e o acordo não expressa compreensão sobre eles.",
+          "citacao": "",
+          "paragrafos": [
+            45
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Coisa julgada ocorre na repetição de ação já decidida por sentença sem recurso; ação idêntica tem mesmas partes, causa de pedir e pedido.",
+          "citacao": "CPC, art. 301, §§ 1º, 2º e 3º",
+          "paragrafos": [
+            41
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Coisa julgada material torna imutável e indiscutível a sentença não mais sujeita a recurso.",
+          "citacao": "CPC, art. 467",
+          "paragrafos": [
+            42
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A pretensão indenizatória é extracontratual, decorre de ato ilícito do empregador e tem natureza civil, não trabalhista.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            44
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Ato ilícito gera responsabilidade civil, fundamento da pretensão indenizatória.",
+          "citacao": "CC, art. 186",
+          "paragrafos": [
+            43
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Competência da Justiça do Trabalho para a causa decorre da relação com o contrato de trabalho, sem atribuir natureza trabalhista ao direito.",
+          "citacao": "CF, art. 114, I",
+          "paragrafos": [
+            44
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Acordo com quitação do contrato não faz coisa julgada em ação de indenização por dano decorrente de acidente do trabalho, por ser pretensão extracontratual não abrangida.",
+          "citacao": "Acórdão TRT4 8ª Turma, [PROCESSO_3] RO, rel. Desembargador Fernando Luiz de Moura Cassal, em 11/12/2014",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Prescrição trabalhista de dois anos para pretensões de indenização por acidente de trabalho após a EC 45/2004.",
+          "citacao": "CF, art. 7º, XXIX",
+          "paragrafos": [
+            30,
+            53,
+            63,
+            64
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ações sobre acidente de trabalho ajuizadas após a EC 45/2004 seguem prescrição trabalhista, conforme entendimento pacificado da SDI-1 e o Conflito de Competência 7.204-1 do STF.",
+          "citacao": "Conflito de Competência n. 7.204-1 do STF",
+          "paragrafos": [
+            12,
+            56
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Para acidente ocorrido sob o Código Civil de 1916, aplica-se a prescrição vintenária do art. 177; ação ajuizada em 2006 não estava prescrita.",
+          "citacao": "RR - 39800-04.2007.5.12.0043 (3ª Turma, DEJT 14/05/2010)",
+          "paragrafos": [
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Termo inicial da prescrição é a ciência inequívoca da incapacidade laboral.",
+          "citacao": "Súmula 278 do STJ",
+          "paragrafos": [
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Termo inicial da prescrição em indenização por acidente do trabalho é a ciência inequívoca da incapacidade laboral ou do resultado gravoso.",
+          "citacao": "Súmula 46 do TST (I Jornada de Direito e Processo do Trabalho)",
+          "paragrafos": [
+            59,
+            60
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Acidente ocorreu em 31.08.2007 e a alta previdenciária em 31.12.2007, conforme CAT e documentos previdenciários.",
+          "citacao": "",
+          "paragrafos": [
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em acidente típico, a ciência inequívoca ocorre no máximo na alta previdenciária, termo a quo pela teoria da actio nata.",
+          "citacao": "",
+          "paragrafos": [
+            62
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A ação foi ajuizada em 24.03.2015.",
+          "citacao": "",
+          "paragrafos": [
+            55,
+            64
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "doutrina",
+          "descricao": "Com a violação do direito surge a pretensão, que se extingue pela inércia do lesado.",
+          "citacao": "Sérgio Cavalieri Filho, Programa de Responsabilidade Civil, 10. ed., 2012, p.143",
+          "paragrafos": [
+            76
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Violado o direito nasce a pretensão, extinta pela prescrição nos prazos dos arts. 205 e 206 do CC.",
+          "citacao": "CC, art. 189",
+          "paragrafos": [
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Divergência: a prescrição é civil, não trabalhista, e a ciência inequívoca em 31.12.2007 gera prescrição trienal total.",
+          "citacao": "CC/2002, art. 206, § 3º, V",
+          "paragrafos": [
+            78,
+            79,
+            80
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Prequestionamento dos dispositivos invocados nas razões recursais e contrarrazões, com tese explícita sobre as questões.",
+          "citacao": "Súmula 297 do TST",
+          "paragrafos": [
+            67
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Orientação Jurisprudencial que trata do prequestionamento, aplicada para considerar prequestionados os dispositivos invocados.",
+          "citacao": "OJ 118 da SDI-1 do TST",
+          "paragrafos": [
+            67
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 8963,
+      "output_tokens": 2195,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001994,
+    "duracaoMs": 8601
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "casoId": "stj-resp-1452840-embargos-terceiro-honorarios",
+  "paragrafos": 118,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial conhecido e desprovido, com fixação de tese em recurso repetitivo sobre honorários em embargos de terceiro.",
+      "resumo": "A Fazenda Nacional recorreu contra acórdão que a condenou em honorários nos embargos de terceiro em que se desconstituiu a penhora de imóvel não registrado. A Primeira Seção negou provimento, pois a Fazenda resistiu à pretensão do embargante mesmo ciente da transmissão do bem. Firmou-se a tese de que os honorários seguem o princípio da causalidade.",
+      "pedidos": [
+        {
+          "descricao": "Reconhecer ofensa ao art. 535 do CPC/1973 por omissão no acórdão recorrido.",
+          "paragrafos": [
+            40,
+            50
+          ]
+        },
+        {
+          "descricao": "Afastar a condenação da Fazenda Nacional em honorários de sucumbência, por violação ao art. 20, § 4º, do CPC/1973 e ao princípio da causalidade.",
+          "paragrafos": [
+            40,
+            49,
+            54
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 12
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 13,
+          "fim": 16
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 17,
+          "fim": 18
+        },
+        {
+          "tipo": "outro",
+          "inicio": 19,
+          "fim": 33
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 34,
+          "fim": 43
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 47,
+          "fim": 93
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 94,
+          "fim": 94
+        },
+        {
+          "tipo": "outro",
+          "inicio": 97,
+          "fim": 116
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11488,
+      "output_tokens": 566,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.028636,
+    "duracaoMs": 5225
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O acórdão recorrido violou o art. 535 do CPC/1973 por omissão?",
+          "conclusao": "Não há ofensa ao art. 535: o tribunal de origem julgou integralmente a lide. A irresignação da Fazenda diz respeito ao mérito, e não há omissão a suprir.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            50,
+            51,
+            52,
+            53
+          ],
+          "paragrafosConclusao": [
+            50,
+            53
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Nos embargos de terceiro acolhidos, quem arca com os honorários quando o adquirente não registrou o imóvel e o credor insiste na penhora após saber da transmissão?",
+          "conclusao": "Aplica-se o princípio da causalidade. O embargante responde se não atualizou os dados cadastrais. O embargado responde se, ciente da transmissão, resistir para manter a penhora, o que ocorreu aqui. Recurso desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            49,
+            54,
+            56,
+            57,
+            58,
+            59,
+            90,
+            93,
+            94
+          ],
+          "paragrafosConclusao": [
+            93,
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11780,
+      "output_tokens": 414,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0277,
+    "duracaoMs": 6449
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O tribunal de origem julgou integralmente a lide e solucionou a controvérsia como apresentada; solução integral com fundamento suficiente não ofende o art. 535.",
+          "citacao": "",
+          "paragrafos": [
+            50,
+            14
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O órgão julgador não precisa rebater todos os argumentos das partes; basta enfrentar as questões relevantes e imprescindíveis à resolução.",
+          "citacao": "",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A irresignação da Fazenda diz respeito ao mérito da demanda, não havendo omissão a ser suprida.",
+          "citacao": "",
+          "paragrafos": [
+            52,
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Alegada violação do art. 535 do CPC/1973, que o relator afasta.",
+          "citacao": "art. 535 do Código de Processo Civil de 1973",
+          "paragrafos": [
+            50,
+            40
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon, DJ de 13/8/2007",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Citado como caso semelhante; o texto não descreve a tese.",
+          "citacao": "REsp 855.073/SC, Primeira Turma, Relator Ministro Teori Albino Zavascki, DJ de 28/6/2007",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Em embargos de terceiro, quem deu causa à constrição indevida deve arcar com os honorários advocatícios.",
+          "citacao": "Súmula 303/STJ",
+          "paragrafos": [
+            54,
+            56
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O adquirente que não registra o título expõe o bem à constrição indevida; a desatualização cadastral leva à penhora, e a omissão não pode torná-lo vencedor para fins de sucumbência.",
+          "citacao": "",
+          "paragrafos": [
+            56,
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em regra não há condenação do embargado se o imóvel não teve a alteração registrada, salvo se o credor, ciente da transmissão, resiste e defende a penhora.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            59
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A parte credora resistiu, defendendo a manutenção da penhora porque só o registro transferiria a propriedade, o que evidenciou conflito de interesses e atraiu a sucumbência.",
+          "citacao": "",
+          "paragrafos": [
+            90,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O tribunal de origem concluiu que a Fazenda se opôs ao embargante mesmo com posse cristalina comprovada.",
+          "citacao": "",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Havendo resistência do credor embargado, é devida a verba honorária à parte vencedora.",
+          "citacao": "AgRg no REsp 462.647/SC, Rel. Ministro CASTRO MEIRA, SEGUNDA TURMA, DJ 30/08/2004",
+          "paragrafos": [
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Afasta-se a Súmula 303 quando o exequente resiste às pretensões do embargante, desafiando o mérito dos embargos.",
+          "citacao": "AgRg no REsp 1282370/PE, Rel. Ministro BENEDITO GONÇALVES, PRIMEIRA TURMA, julgado em 01/03/2012",
+          "paragrafos": [
+            67,
+            68,
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "É cabível condenar nos ônus sucumbenciais o estado credor que impugnou os embargos e apelou ciente da alienação.",
+          "citacao": "REsp 724.341/MG, Rel. Ministra DENISE ARRUDA, PRIMEIRA TURMA, DJ 12/11/2007",
+          "paragrafos": [
+            83,
+            84,
+            85
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "O embargante vencedor que não registrou a transferência deve arcar com honorários, pelo princípio da causalidade.",
+          "citacao": "EDcl nos EDcl no REsp 375.026/PR, Rel. Ministro CARLOS FERNANDO MATHIAS, SEGUNDA TURMA, julgado em 25/03/2008",
+          "paragrafos": [
+            71,
+            72
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "O credor que indica à penhora imóvel transferido por compromisso não registrado não responde por honorários, pois não podia saber da transmissão.",
+          "citacao": "EREsp 490.605/SC, Rel. Ministro ANTÔNIO DE PÁDUA RIBEIRO, CORTE ESPECIAL, DJ 20/09/2004",
+          "paragrafos": [
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "É admissível embargos de terceiro fundados em posse advinda de compromisso de compra e venda, ainda sem registro.",
+          "citacao": "Súmula 84/STJ",
+          "paragrafos": [
+            14,
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Tese firmada para os fins do rito de recursos repetitivos: honorários por causalidade, com responsabilidade do embargado que insiste na penhora após ciência.",
+          "citacao": "art. 1040 do CPC/2015 (antigo art. 543-C, § 7º, do CPC/1973)",
+          "paragrafos": [
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11619,
+      "output_tokens": 2062,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.043858,
+    "duracaoMs": 12361
+  }
+}
