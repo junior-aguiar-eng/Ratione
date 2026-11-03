@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { CasoSchema, ehValidado, problemasDoGabarito, type Gabarito } from './caso';
-import { chaveDaCitacao, citacaoCorresponde, correspondencia, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, taxa, totalizar, type SaidasDoCaso } from './metricas';
+import { chaveDaCitacao, citacaoCorresponde, correspondencia, jaccard, medirCaso, medirCitacoes, medirDispositivo, medirQuestoes, numeroAusenteNoTexto, taxa, totalizar, type SaidasDoCaso } from './metricas';
 
 const GAB: Gabarito = {
   dispositivo: { inicio: 20, fim: 24 },
@@ -105,6 +105,12 @@ describe('F5-05: questões', () => {
 });
 
 describe('F5-05: citações', () => {
+  it('citações achadas que o gabarito não tem são listadas, sem repetir a mesma escrita', () => {
+    const m = medirCitacoes({ fundamentos: [{ citacao: 'art. 14 do CDC' }, { citacao: 'CDC, art. 14' }, { citacao: 'Súmula 999 do STJ' }, { citacao: '' }] }, GAB);
+    assert.equal(m.encontradas, 1);
+    assert.equal(m.achadas, 2);
+    assert.deepEqual(m.foraDoGabarito, ['Súmula 999 do STJ']);
+  });
   it('iguala escritas diferentes da mesma citação', () => {
     assert.equal(chaveDaCitacao('CDC, art. 14'), chaveDaCitacao('art. 14 do CDC'));
     assert.equal(chaveDaCitacao('Súmula 479 do STJ'), chaveDaCitacao('Súmula nº 479/STJ'));
@@ -169,12 +175,28 @@ describe('F5-05: citações', () => {
   it('mede as citações com a correspondência flexível', () => {
     const gab: Gabarito = { ...GAB, citacoes: ['art. 85, § 11, do CPC', 'Súmula 331, IV, do TST', 'art. 43 do CTN'] };
     const saida = { fundamentos: [{ citacao: 'art. 85, §11, do CPC' }, { citacao: 'Súmula 331 do C. TST' }] };
-    assert.deepEqual(medirCitacoes(saida, gab), { esperadas: 3, encontradas: 2 });
+    assert.deepEqual(medirCitacoes(saida, gab), { esperadas: 3, encontradas: 2, achadas: 2, foraDoGabarito: [], semNumeroNoTexto: [] });
   });
   it('conta as esperadas achadas', () => {
     const saida = { fundamentos: [{ citacao: 'art. 14 do CDC' }, { citacao: '' }, { citacao: 'Súmula 7 do STJ' }] };
-    assert.deepEqual(medirCitacoes(saida, GAB), { esperadas: 2, encontradas: 1 });
-    assert.deepEqual(medirCitacoes(null, GAB), { esperadas: 2, encontradas: 0 });
+    assert.deepEqual(medirCitacoes(saida, GAB), { esperadas: 2, encontradas: 1, achadas: 2, foraDoGabarito: ['Súmula 7 do STJ'], semNumeroNoTexto: [] });
+    assert.deepEqual(medirCitacoes(null, GAB), { esperadas: 2, encontradas: 0, achadas: 0, foraDoGabarito: [], semNumeroNoTexto: [] });
+  });
+});
+
+describe('F5-05: citação inventada', () => {
+  const texto = 'O art. 14 do CDC e a Súmula 479 do STJ; REsp 1.234.567/SP.';
+  it('número que não está no texto é indício de invenção', () => {
+    assert.equal(numeroAusenteNoTexto('CDC, art. 14', texto), false);
+    assert.equal(numeroAusenteNoTexto('REsp 1234567/SP', texto), false);
+    assert.equal(numeroAusenteNoTexto('CDC, art. 18', texto), true);
+    assert.equal(numeroAusenteNoTexto('art. 1', texto), true); // 1 sozinho não vale por 14
+    assert.equal(numeroAusenteNoTexto('Nelson Nery Jr.', texto), false); // sem número não se confere
+  });
+  it('medirCitacoes lista as achadas com número ausente quando recebe o texto', () => {
+    const m = medirCitacoes({ fundamentos: [{ citacao: 'CDC, art. 14' }, { citacao: 'CDC, art. 18' }] }, GAB, texto);
+    assert.deepEqual(m.semNumeroNoTexto, ['CDC, art. 18']);
+    assert.deepEqual(medirCitacoes({ fundamentos: [{ citacao: 'CDC, art. 18' }] }, GAB).semNumeroNoTexto, []);
   });
 });
 
@@ -186,7 +208,7 @@ describe('F5-05: totais e taxas', () => {
   };
   it('soma os casos', () => {
     const t = totalizar([medirCaso(completo, GAB), medirCaso({ estrutura: null, questoes: null, fundamentos: null }, GAB)]);
-    assert.deepEqual(t, { casos: 2, dispositivoAcertos: 1, questoesEsperadas: 4, questoesEncontradas: 1, questoesExtras: 0, citacoesEsperadas: 4, citacoesEncontradas: 1 });
+    assert.deepEqual(t, { casos: 2, dispositivoAcertos: 1, questoesEsperadas: 4, questoesEncontradas: 1, questoesExtras: 0, citacoesEsperadas: 4, citacoesEncontradas: 1, citacoesAchadas: 1, citacoesForaDoGabarito: 0, citacoesSemNumeroNoTexto: 0 });
   });
   it('taxa sem denominador é nula, e não zero', () => {
     assert.equal(taxa(1, 4), 0.25);

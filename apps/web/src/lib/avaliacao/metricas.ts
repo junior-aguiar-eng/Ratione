@@ -193,12 +193,33 @@ export function citacaoCorresponde(esperada: string, achada: string): boolean {
 export interface ResultadoCitacoes {
   esperadas: number;
   encontradas: number;
+  /** Citações distintas que o modelo trouxe. */
+  achadas: number;
+  /** As achadas que o gabarito não tem: o gabarito lista só o essencial, então isto é um teto do que o modelo inventou, para o revisor olhar. */
+  foraDoGabarito: string[];
+  /** Achadas com algum número (artigo, súmula, processo) que não aparece no texto da decisão: indício forte de citação inventada. */
+  semNumeroNoTexto: string[];
 }
 
-export function medirCitacoes(saida: SaidasDoCaso['fundamentos'], g: Gabarito): ResultadoCitacoes {
+/** Os números da citação ("art. 14", "REsp 1.234.567/SP") precisam estar todos no texto; citação sem número não se confere assim. */
+export function numeroAusenteNoTexto(citacao: string, texto: string): boolean {
+  const sem = (t: string) => t.replace(/(\d)\.(?=\d)/g, '$1');
+  const numeros = sem(citacao).match(/\d+/g) ?? [];
+  const alvo = sem(texto);
+  return numeros.some(n => !new RegExp(`(?<!\\d)${n}(?!\\d)`).test(alvo));
+}
+
+export function medirCitacoes(saida: SaidasDoCaso['fundamentos'], g: Gabarito, texto?: string): ResultadoCitacoes {
   const achadas = (saida?.fundamentos ?? []).map(f => f.citacao).filter(c => c.trim());
   const esperadas = g.citacoes.filter((c, i, todas) => todas.findIndex(o => chaveDaCitacao(o) === chaveDaCitacao(c)) === i);
-  return { esperadas: esperadas.length, encontradas: esperadas.filter(e => achadas.some(a => citacaoCorresponde(e, a))).length };
+  const distintas = achadas.filter((c, i, todas) => todas.findIndex(o => chaveDaCitacao(o) === chaveDaCitacao(c)) === i);
+  return {
+    esperadas: esperadas.length,
+    encontradas: esperadas.filter(e => achadas.some(a => citacaoCorresponde(e, a))).length,
+    achadas: distintas.length,
+    foraDoGabarito: distintas.filter(a => !esperadas.some(e => citacaoCorresponde(e, a))),
+    semNumeroNoTexto: texto === undefined ? [] : distintas.filter(a => numeroAusenteNoTexto(a, texto))
+  };
 }
 
 export interface MedidaDoCaso {
@@ -207,10 +228,10 @@ export interface MedidaDoCaso {
   citacoes: ResultadoCitacoes;
 }
 
-export const medirCaso = (s: SaidasDoCaso, g: Gabarito): MedidaDoCaso => ({
+export const medirCaso = (s: SaidasDoCaso, g: Gabarito, texto?: string): MedidaDoCaso => ({
   dispositivo: medirDispositivo(s.estrutura, g),
   questoes: medirQuestoes(s.questoes, g),
-  citacoes: medirCitacoes(s.fundamentos, g)
+  citacoes: medirCitacoes(s.fundamentos, g, texto)
 });
 
 export interface Totais {
@@ -221,10 +242,13 @@ export interface Totais {
   questoesExtras: number;
   citacoesEsperadas: number;
   citacoesEncontradas: number;
+  citacoesAchadas: number;
+  citacoesForaDoGabarito: number;
+  citacoesSemNumeroNoTexto: number;
 }
 
 export function totalizar(medidas: readonly MedidaDoCaso[]): Totais {
-  const t: Totais = { casos: medidas.length, dispositivoAcertos: 0, questoesEsperadas: 0, questoesEncontradas: 0, questoesExtras: 0, citacoesEsperadas: 0, citacoesEncontradas: 0 };
+  const t: Totais = { casos: medidas.length, dispositivoAcertos: 0, questoesEsperadas: 0, questoesEncontradas: 0, questoesExtras: 0, citacoesEsperadas: 0, citacoesEncontradas: 0, citacoesAchadas: 0, citacoesForaDoGabarito: 0, citacoesSemNumeroNoTexto: 0 };
   for (const m of medidas) {
     if (m.dispositivo.acertou) t.dispositivoAcertos++;
     t.questoesEsperadas += m.questoes.esperadas;
@@ -232,6 +256,9 @@ export function totalizar(medidas: readonly MedidaDoCaso[]): Totais {
     t.questoesExtras += m.questoes.extras;
     t.citacoesEsperadas += m.citacoes.esperadas;
     t.citacoesEncontradas += m.citacoes.encontradas;
+    t.citacoesAchadas += m.citacoes.achadas;
+    t.citacoesForaDoGabarito += m.citacoes.foraDoGabarito.length;
+    t.citacoesSemNumeroNoTexto += m.citacoes.semNumeroNoTexto.length;
   }
   return t;
 }
