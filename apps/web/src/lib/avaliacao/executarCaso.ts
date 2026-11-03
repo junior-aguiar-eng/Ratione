@@ -4,7 +4,7 @@
  * Uma etapa só roda se a anterior gerou saída válida; a que não roda não entra na taxa de descartadas.
  */
 import { paragrafosValidos } from '@ratione/argumenta';
-import type { PedidoModelo, QualquerTarefa, ResultadoModelo, Uso } from '../ia/contrato';
+import type { ModeloPermitido, PedidoModelo, QualquerTarefa, ResultadoModelo, Uso } from '../ia/contrato';
 import { custoUsd } from '../ia/politica';
 import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes, type SaidaEstrutura, type SaidaFundamentos, type SaidaQuestoes } from '../ia/tarefas/argumenta';
 import { paragrafosDoCaso, type Caso } from './caso';
@@ -40,13 +40,13 @@ const ENTRADA_RECUSADA = 'entrada recusada pela tarefa';
 const vazia = <T>(motivo?: string): Etapa<T> => ({ estado: 'nao_rodou', saida: null, motivo, custoUsd: 0 });
 
 /** Roda uma tarefa do catálogo sobre a entrada, sem cota nem registro, e mede quanto a etapa levou. */
-async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo): Promise<Etapa<T>> {
+async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido): Promise<Etapa<T>> {
   const inicio = Date.now();
-  const e = await etapaSemTempo<T>(t, entrada, chamar);
+  const e = await etapaSemTempo<T>(t, entrada, chamar, modelo);
   return e.estado === 'nao_rodou' ? e : { ...e, duracaoMs: Date.now() - inicio };
 }
 
-async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo): Promise<Etapa<T>> {
+async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido): Promise<Etapa<T>> {
   const valida = t.validarEntrada(entrada);
   if (valida === null) return vazia<T>(ENTRADA_RECUSADA);
   const contexto = await t.montarContexto(valida, { lerDispositivo: async () => null });
@@ -54,9 +54,9 @@ async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: Cha
   const mensagem = t.mensagem(contexto);
   if (mensagem.length > t.maxCaracteresMensagem) return vazia<T>('mensagem acima do limite da tarefa');
 
-  const r = await chamar({ modelo: t.modelo, esforco: t.esforco, maxTokens: t.maxTokensSaida, instrucoes: t.instrucoes, mensagem, esquema: t.esquemaSaida });
+  const r = await chamar({ modelo, esforco: t.esforco, maxTokens: t.maxTokensSaida, instrucoes: t.instrucoes, mensagem, esquema: t.esquemaSaida });
   if (r.tipo === 'falha') return { estado: 'falha', saida: null, motivo: r.mensagem, custoUsd: 0 };
-  const custo = custoUsd(t.modelo, r.uso);
+  const custo = custoUsd(modelo, r.uso);
   if (r.tipo !== 'ok') return { estado: r.tipo, saida: null, uso: r.uso, custoUsd: custo };
 
   let json: unknown;
@@ -73,22 +73,23 @@ async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: Cha
   return { estado: 'ok', saida: saida.data as T, uso: r.uso, custoUsd: custo };
 }
 
-export async function executarCaso(caso: Pick<Caso, 'id' | 'texto'>, chamar: ChamarModelo): Promise<ResultadoDoCaso> {
+/** `modelo` troca o modelo das três etapas só nesta avaliação (para comparar modelos); sem ele, vale o de cada tarefa. */
+export async function executarCaso(caso: Pick<Caso, 'id' | 'texto'>, chamar: ChamarModelo, modelo?: ModeloPermitido): Promise<ResultadoDoCaso> {
   const paragrafos = paragrafosDoCaso(caso);
   const base = { casoId: caso.id, paragrafos: paragrafos.length };
   const semEtapas = { estrutura: vazia<SaidaEstrutura>(), questoes: vazia<SaidaQuestoes>(), fundamentos: vazia<SaidaFundamentos>() };
   if (!paragrafosValidos(paragrafos)) return { ...base, ...semEtapas, naoEnviavel: 'decisão acima dos limites de tamanho' };
 
   const entrada = { analiseId: ANALISE_DE_AVALIACAO, paragrafos };
-  const estrutura = await etapa<SaidaEstrutura>(argumentaEstrutura, entrada, chamar);
+  const estrutura = await etapa<SaidaEstrutura>(argumentaEstrutura, entrada, chamar, modelo ?? argumentaEstrutura.modelo);
   if (estrutura.motivo === ENTRADA_RECUSADA) {
     return { ...base, ...semEtapas, naoEnviavel: 'a decisão ainda tem dado pessoal detectável (acrescente os nomes à pseudonimização)' };
   }
-  const questoes = await etapa<SaidaQuestoes>(argumentaQuestoes, entrada, chamar);
+  const questoes = await etapa<SaidaQuestoes>(argumentaQuestoes, entrada, chamar, modelo ?? argumentaQuestoes.modelo);
   if (!questoes.saida) return { ...base, estrutura, questoes, fundamentos: vazia<SaidaFundamentos>('sem questões válidas') };
 
   const resumo = questoes.saida.questoes.map(q => ({ id: q.id, enunciado: q.enunciado, conclusao: q.conclusao }));
-  const fundamentos = await etapa<SaidaFundamentos>(argumentaFundamentos, { ...entrada, questoes: resumo }, chamar);
+  const fundamentos = await etapa<SaidaFundamentos>(argumentaFundamentos, { ...entrada, questoes: resumo }, chamar, modelo ?? argumentaFundamentos.modelo);
   return { ...base, estrutura, questoes, fundamentos };
 }
 

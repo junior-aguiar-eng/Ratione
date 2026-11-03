@@ -4,7 +4,8 @@
  *   novo <id> --texto arquivo.txt --fonte "descrição" --url URL [--acesso AAAA-MM-DD] [--tipo acordao]
  *   folha <id>                  gera a folha de conferência (parágrafos numerados)
  *   validar <id> [--por "Nome"] confere o gabarito preenchido e registra a validação
- *   rodar [--casos a,b] [--max-usd 1] [--confirmar]    sem --confirmar só mostra a estimativa; com ele chama o modelo
+ *   rodar [--casos a,b] [--max-usd 1] [--modelo claude-sonnet-5-5] [--confirmar]
+ *                               sem --confirmar só mostra a estimativa; com ele chama o modelo (--modelo troca o das três etapas, só na avaliação)
  *   relatorio [rodada]          refaz o relatório de uma rodada (a última, por padrão)
  */
 import { readFile } from 'node:fs/promises';
@@ -15,7 +16,8 @@ import { executarCaso } from '../src/lib/avaliacao/executarCaso';
 import { montarRelatorio } from '../src/lib/avaliacao/relatorio';
 import { gravarCaso, gravarFolha, gravarRelatorio, gravarResultado, gravarRodada, lerCaso, lerCasos, lerResultados, lerRodada, ultimaRodada } from '../src/lib/avaliacao/arquivos';
 import { criarChamadaAoModelo } from '../src/lib/ia/cliente';
-import { custoMaximoUsd } from '../src/lib/ia/politica';
+import type { ModeloPermitido } from '../src/lib/ia/contrato';
+import { custoMaximoUsd, PRECO_USD_POR_MILHAO } from '../src/lib/ia/politica';
 import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes } from '../src/lib/ia/tarefas/argumenta';
 
 const pastas = { raiz: process.env.AVALIACAO_CORPUS ?? path.resolve(process.cwd(), '../../packages/argumenta/corpus') };
@@ -77,9 +79,12 @@ async function rodar(flags: Map<string, string>) {
   const casos = (await lerCasos(pastas)).filter(ehValidado).filter(c => !so || so.includes(c.id));
   if (casos.length === 0) sair('Nenhum caso validado para rodar.');
   const maxUsd = Number(flags.get('max-usd') ?? '1');
-  const tetoPorCaso = TAREFAS.reduce((s, t) => s + custoMaximoUsd(t), 0);
+  const pedido = flags.get('modelo');
+  if (pedido && !(pedido in PRECO_USD_POR_MILHAO)) sair(`Modelo sem preço registrado: ${pedido}. Com preço: ${Object.keys(PRECO_USD_POR_MILHAO).join(', ')}.`);
+  const modelo = (pedido ?? argumentaEstrutura.modelo) as ModeloPermitido;
+  const tetoPorCaso = TAREFAS.reduce((s, t) => s + custoMaximoUsd(t, modelo), 0);
 
-  console.log(`${casos.length} caso(s) validado(s); modelo ${argumentaEstrutura.modelo}; 3 chamadas por caso.`);
+  console.log(`${casos.length} caso(s) validado(s); modelo ${modelo}; 3 chamadas por caso.`);
   console.log(`Teto de custo por caso: US$ ${tetoPorCaso.toFixed(4)}; teto da rodada: US$ ${(tetoPorCaso * casos.length).toFixed(4)} (o custo real costuma ser bem menor).`);
   if (flags.get('confirmar') !== 'sim') {
     console.log('Simulação: nada foi enviado ao modelo. Rode de novo com --confirmar para executar (e --max-usd N para limitar o gasto real).');
@@ -90,14 +95,14 @@ async function rodar(flags: Map<string, string>) {
 
   const agora = new Date();
   const rodada = `${agora.toISOString().slice(0, 10)}T${String(agora.getHours()).padStart(2, '0')}${String(agora.getMinutes()).padStart(2, '0')}`;
-  await gravarRodada(pastas, rodada, { modelo: argumentaEstrutura.modelo, em: hoje() });
+  await gravarRodada(pastas, rodada, { modelo, em: hoje() });
   let gasto = 0;
   for (const caso of casos) {
     if (gasto >= maxUsd) {
       console.log(`Parei antes de ${caso.id}: gasto de US$ ${gasto.toFixed(4)} chegou ao limite de US$ ${maxUsd}.`);
       break;
     }
-    const r = await executarCaso(caso, chamar);
+    const r = await executarCaso(caso, chamar, modelo);
     await gravarResultado(pastas, rodada, r);
     gasto += r.estrutura.custoUsd + r.questoes.custoUsd + r.fundamentos.custoUsd;
     console.log(`${caso.id}: ${[r.estrutura, r.questoes, r.fundamentos].map(e => e.estado).join(' / ')}${r.naoEnviavel ? ` (não enviável: ${r.naoEnviavel})` : ''}`);

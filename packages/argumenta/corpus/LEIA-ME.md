@@ -39,6 +39,8 @@ Todos os comandos rodam na raiz do repositório.
    pnpm --filter web avaliacao rodar --confirmar --max-usd 0.5    # roda e para quando o gasto chegar a US$ 0,50
    ```
 
+   Para comparar com outro modelo, `--modelo claude-sonnet-5-5` troca o das três etapas **só nesta avaliação** (o produto segue com o modelo de cada tarefa). O preço do modelo precisa estar em `politica.ts`; o Sonnet 5.5 custa cerca de 20 vezes o Haiku por token, então a rodada de 30 decisões sai na casa de US$ 3 a 5 (use `--max-usd`).
+
    Defina `ANTHROPIC_API_KEY` **só no terminal** onde vai rodar (PowerShell: `$env:ANTHROPIC_API_KEY = "..."`), nunca em arquivo do repositório. Usa as mesmas tarefas do produto (instruções, esquema e conferência), o mesmo modelo e a mesma pseudonimização.
 6. **Ler o relatório** em `resultados/<rodada>/relatorio.md` (`pnpm --filter web avaliacao relatorio [rodada]` o refaz).
 

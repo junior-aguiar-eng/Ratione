@@ -7,8 +7,11 @@ import type { DispositivoParaExplicar } from './fontes/dispositivoDoBanco';
  * O modelo só preenche o formato de saída. Ver `docs/produto/IA_TAREFAS.md`.
  */
 
-/** Modelos com preço registrado em `politica.ts`. Outro modelo exige decisão do responsável e a linha de preço. */
-export type ModeloPermitido = 'claude-haiku-5-5';
+/**
+ * Modelos com preço registrado em `politica.ts`. Outro modelo exige decisão do responsável e a linha de preço.
+ * `claude-sonnet-5-5` entra só para a avaliação do corpus (F5-05, opção `--modelo`): nenhuma tarefa do produto o usa.
+ */
+export type ModeloPermitido = 'claude-haiku-5-5' | 'claude-sonnet-5-5';
 
 /**
  * Fontes de leitura que uma tarefa pode usar para montar o contexto. Só leitura das bases do Ratione:

@@ -7,7 +7,9 @@ import type { ModeloPermitido, QualquerTarefa, Uso } from './contrato';
 
 /** Preço por modelo (US$ por milhão de tokens, prompt de até 100 mil tokens), conferido em 22/10/2026. Sem linha aqui, o modelo não é usado. */
 export const PRECO_USD_POR_MILHAO: Record<ModeloPermitido, { entrada: number; saida: number; leituraCache: number; escritaCache: number }> = {
-  'claude-haiku-5-5': { entrada: 0.1, saida: 0.5, leituraCache: 0.01, escritaCache: 0.125 }
+  'claude-haiku-5-5': { entrada: 0.1, saida: 0.5, leituraCache: 0.01, escritaCache: 0.125 },
+  // Só para a avaliação do corpus (F5-05); preço da tabela de modelos da API em 03/11/2026, escrita de cache a 1,25x como no Haiku
+  'claude-sonnet-5-5': { entrada: 2, saida: 10, leituraCache: 0.2, escritaCache: 2.5 }
 };
 
 /** Tetos que nenhuma tarefa pode passar (conferidos em teste para todo o catálogo). A cota de uso vem do plano do usuário, no banco. */
@@ -33,6 +35,6 @@ export function custoUsd(modelo: ModeloPermitido, u: Uso): number {
 }
 
 /** Custo máximo de uma chamada da tarefa, reservado no orçamento antes dela (mensagem no teto, ~3 caracteres por token, mais as instruções, e a saída inteira). */
-export function custoMaximoUsd(t: QualquerTarefa): number {
-  return custoUsd(t.modelo, { input_tokens: Math.ceil((t.maxCaracteresMensagem + t.instrucoes.length) / 3) + 500, output_tokens: t.maxTokensSaida });
+export function custoMaximoUsd(t: QualquerTarefa, modelo: ModeloPermitido = t.modelo): number {
+  return custoUsd(modelo, { input_tokens: Math.ceil((t.maxCaracteresMensagem + t.instrucoes.length) / 3) + 500, output_tokens: t.maxTokensSaida });
 }
