@@ -1,0 +1,687 @@
+{
+  "casoId": "tjal-apelacao-saude-uniao",
+  "paragrafos": 148,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "outro",
+      "resultado": "Pede-se que o recurso de apelação seja conhecido e provido, com reforma da sentença.",
+      "resumo": "O Estado de Alagoas apela da sentença. Pede a inclusão da União no polo passivo com remessa do feito à Justiça Federal, a improcedência dos pedidos por falta de subsídios técnicos e caráter emergencial, e, subsidiariamente, a anulação da sentença para produção de perícia. A peça não decide; apresenta requerimentos ao tribunal.",
+      "pedidos": [
+        {
+          "descricao": "Intimação da parte apelada para apresentar contrarrazões após o recebimento do recurso",
+          "paragrafos": [
+            4
+          ]
+        },
+        {
+          "descricao": "Remessa dos autos ao Tribunal de Justiça do Estado de Alagoas",
+          "paragrafos": [
+            5
+          ]
+        },
+        {
+          "descricao": "Reconhecimento da necessidade de inclusão da União no polo passivo e da incompetência da Justiça Estadual",
+          "paragrafos": [
+            70,
+            145
+          ]
+        },
+        {
+          "descricao": "Prévia oitiva do SUS para verificar disponibilidade do procedimento e existência de fila de espera",
+          "paragrafos": [
+            95
+          ]
+        },
+        {
+          "descricao": "Improcedência dos pedidos por ausência de subsídios técnicos e de caráter emergencial",
+          "paragrafos": [
+            128,
+            145
+          ]
+        },
+        {
+          "descricao": "Anulação da sentença e retorno dos autos para produção de prova pericial",
+          "paragrafos": [
+            143
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 2
+        },
+        {
+          "tipo": "outro",
+          "inicio": 3,
+          "fim": 11
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 12,
+          "fim": 14
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 15,
+          "fim": 143
+        },
+        {
+          "tipo": "outro",
+          "inicio": 144,
+          "fim": 144
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 145,
+          "fim": 145
+        },
+        {
+          "tipo": "outro",
+          "inicio": 146,
+          "fim": 148
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 22818,
+      "output_tokens": 2024,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.003294,
+    "duracaoMs": 9989
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "prejudicial",
+          "enunciado": "A União deve integrar o polo passivo da demanda de saúde, com remessa do feito à Justiça Federal?",
+          "conclusao": "O apelante pede o reconhecimento da necessidade de inserir a União no polo passivo e da incompetência da Justiça Estadual, com extinção sem mérito.",
+          "resultado": "pendente",
+          "paragrafos": [
+            9,
+            10,
+            13,
+            15,
+            16,
+            21,
+            23,
+            24,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          "paragrafosConclusao": [
+            70,
+            145
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "A concessão de tutela de urgência para a cirurgia deve ser afastada por ausência de caráter emergencial e por ofensa à isonomia?",
+          "conclusao": "O apelante sustenta que a intervenção judicial é incabível sem urgência comprovada, devendo ser respeitada a fila do SUS e ouvido o SUS previamente.",
+          "resultado": "pendente",
+          "paragrafos": [
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128
+          ],
+          "paragrafosConclusao": [
+            94,
+            95,
+            128,
+            145
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A demanda deve ser julgada improcedente por falta de laudo médico e de prova pericial que atestem a necessidade do procedimento?",
+          "conclusao": "O apelante pede a improcedência por ausência de subsídios técnicos e, subsidiariamente, a anulação da sentença para produção de perícia.",
+          "resultado": "pendente",
+          "paragrafos": [
+            114,
+            115,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143
+          ],
+          "paragrafosConclusao": [
+            128,
+            143,
+            145
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 23210,
+      "output_tokens": 758,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0027,
+    "duracaoMs": 3950
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STF, Tema 793 (RE 855.178 e embargos): entes responsáveis solidariamente; juiz direciona cumprimento conforme repartição de competências e determina ressarcimento. Texto usa a tese para pedir inclusão da União.",
+          "citacao": "STF, RE 855.178 (Tema 793), embargos de declaração; RE 1299773 PR",
+          "paragrafos": [
+            10,
+            23,
+            33
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Constituição, art. 196: saúde é dever do Estado e acesso universal e igualitário.",
+          "citacao": "CF, art. 196",
+          "paragrafos": [
+            16,
+            17
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Constituição, art. 23, II e parágrafo único: competência comum da União, Estados, DF e Municípios para cuidar da saúde.",
+          "citacao": "CF, art. 23, II e parágrafo único",
+          "paragrafos": [
+            16,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Sentença condenou o Estado a realizar cirurgia financiada com recursos do Ministério da Saúde, cuja responsabilidade seria da União.",
+          "citacao": "",
+          "paragrafos": [
+            13
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Consulta ao SIGTAP indica que a intervenção está no componente Limite Financeiro da Média e Alta Complexidade (MAC), financiado pelo Ministério da Saúde.",
+          "citacao": "",
+          "paragrafos": [
+            51,
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Portaria de Consolidação nº 6/2017 do Ministério da Saúde: MAC financiado pelo Ministério da Saúde.",
+          "citacao": "Portaria de Consolidação nº 6/2017",
+          "paragrafos": [
+            52
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Pela tese do Tema 793, a União deve compor o polo passivo quando o procedimento é financiado pelo Ministério da Saúde, em litisconsórcio necessário.",
+          "citacao": "",
+          "paragrafos": [
+            53,
+            55
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "doutrina",
+          "descricao": "Artigo das juízas Luciana da Veiga Oliveira e Ana Carolina Morozowski: recursos da MAC são federais e o custeio das APACs é federal.",
+          "citacao": "Luciana da Veiga Oliveira e Ana Carolina Morozowski, \"Da responsabilidade solidária na assistência à saúde no SUS\"",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-RS, AC 70084142272: sentença desconstituída por necessidade de incluir a União no polo passivo de medicamento fora da lista do SUS.",
+          "citacao": "TJ-RS, AC 70084142272",
+          "paragrafos": [
+            56
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-PR, AI 00483019320198160000: emenda da inicial para chamar a União e remessa à Justiça Federal, por financiamento exclusivo federal do CACON.",
+          "citacao": "TJ-PR, AI 00483019320198160000",
+          "paragrafos": [
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "TJ-SE, AC 00091691120188250001: recurso remetido à Justiça Federal com base no art. 109, I, CF, por responsabilidade necessária da União.",
+          "citacao": "TJ-SE, AC 00091691120188250001",
+          "paragrafos": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Constituição, art. 109, I: competência da Justiça Federal quando a União figura como parte.",
+          "citacao": "CF, art. 109, I",
+          "paragrafos": [
+            66
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Com a inclusão da União, a Justiça Estadual seria absolutamente incompetente, devendo o feito ser extinto sem mérito.",
+          "citacao": "",
+          "paragrafos": [
+            70
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Constituição, art. 196 e Lei 8.080/90, art. 7º, I e IV: universalidade e igualdade de atendimento no SUS.",
+          "citacao": "CF, art. 196; Lei 8.080/1990, art. 7º, I e IV",
+          "paragrafos": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A petição inicial não foi instruída com documento do SUS sobre oferta do procedimento, existência de fila e prioridade.",
+          "citacao": "",
+          "paragrafos": [
+            81
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Direito à saúde deve ser compatibilizado com a isonomia; não cabe ordem judicial de cirurgia sem urgência ou emergência comprovada.",
+          "citacao": "",
+          "paragrafos": [
+            82,
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TJ-MS, AI 14050872020158120000: ausente caráter emergencial de cirurgia eletiva, deve ser respeitada a fila do SUS.",
+          "citacao": "TJ-MS, AI 14050872020158120000",
+          "paragrafos": [
+            83,
+            84,
+            85,
+            86
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF-2, AC 00072552020124025101: apelação desprovida; não cabe ao Judiciário intervir na ordem de atendimento da fila cirúrgica.",
+          "citacao": "TRF-2, AC 00072552020124025101",
+          "paragrafos": [
+            87
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 51 do CNJ: urgência exige relatório médico circunstanciado com quadro de risco imediato.",
+          "citacao": "Enunciado nº 51 do CNJ",
+          "paragrafos": [
+            89
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 62 do CNJ: conceito de urgência e emergência segue o art. 35-C da Lei 9.656/98.",
+          "citacao": "Enunciado nº 62 do CNJ; Lei 9.656/98, art. 35-C",
+          "paragrafos": [
+            90,
+            91
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 69 do CNJ: recomenda consulta prévia ao ente público sobre lista de espera.",
+          "citacao": "Enunciado nº 69 do CNJ",
+          "paragrafos": [
+            92,
+            93,
+            95
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "TRF-5, AC/AG da 1ª Turma: tutela de cirurgia negada por ausência de periculum in mora e respeito à fila de 170 pacientes.",
+          "citacao": "TRF-5, 1ª Turma, agravo de instrumento (processo mascarado)",
+          "paragrafos": [
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Sem elementos de urgência, não há justificativa para intervenção judicial que viole a fila do SUS; pede-se prévia oitiva do SUS.",
+          "citacao": "",
+          "paragrafos": [
+            94,
+            95
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Os autos foram instruídos apenas com encaminhamento médico, sem histórico clínico nem opções terapêuticas.",
+          "citacao": "",
+          "paragrafos": [
+            115
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 15 do CNJ: prescrições devem conter tratamento, DCB/DCI, posologia e período de tratamento.",
+          "citacao": "Enunciado nº 15 do CNJ",
+          "paragrafos": [
+            116
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 19 do CNJ: iniciais de saúde devem ser instruídas com relatório médico circunstanciado.",
+          "citacao": "Enunciado nº 19 do CNJ",
+          "paragrafos": [
+            117
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 32 do CNJ: petição inicial deve trazer documentos sobre diagnóstico e tratamento do paciente.",
+          "citacao": "Enunciado nº 32 do CNJ",
+          "paragrafos": [
+            118
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Enunciado nº 67 do CNJ: receituário deve discriminar a enfermidade e a terapêutica.",
+          "citacao": "Enunciado nº 67 do CNJ",
+          "paragrafos": [
+            119
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "STF, STP 101 ES (STA 175): parâmetros para avaliar pedidos de saúde, incluindo adequação, necessidade e não configuração de tratamento experimental.",
+          "citacao": "STF, STP 101 ES; STA 175",
+          "paragrafos": [
+            120,
+            121,
+            122,
+            123,
+            124
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-4, AG 50353940420184040000: cita parâmetros do STF (STA 175) para o caso concreto. O texto não descreve a tese própria do julgado além dos parâmetros transcritos.",
+          "citacao": "TRF-4, AG 50353940420184040000",
+          "paragrafos": [
+            124,
+            125
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Laudo circunstanciado deveria responder a questões sobre severidade, alternativas, testes prévios e oferta pelo SUS; sem isso, a improcedência se impõe.",
+          "citacao": "",
+          "paragrafos": [
+            126,
+            127,
+            128
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "Faltam subsídios técnicos para atestar a necessidade e adequação da medida pleiteada.",
+          "citacao": "",
+          "paragrafos": [
+            130
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-4, AG 50035068020194040000: exige perícia judicial prévia para verificar urgência e disponibilidade no SUS.",
+          "citacao": "TRF-4, AG 50035068020194040000",
+          "paragrafos": [
+            131,
+            132
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-5, 3ª Turma: laudo de profissional ligado ao autor não basta; perícia judicial deve prevalecer.",
+          "citacao": "TRF-5, 3ª Turma, processo mascarado",
+          "paragrafos": [
+            133,
+            135
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "TRF-5, Apelação 08025013220184058100, 3ª Turma: sentença anulada para produção de perícia médica judicial.",
+          "citacao": "TRF-5, Apelação 08025013220184058100",
+          "paragrafos": [
+            136,
+            137,
+            138,
+            139
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "doutrina",
+          "descricao": "Audiência pública do STF (STA 175) concluiu que a instrução processual é necessária para evitar padronização de demandas de saúde.",
+          "citacao": "STA 175 AgR, Rel. Min. Gilmar Mendes (audiência pública)",
+          "paragrafos": [
+            140,
+            141,
+            142
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Sem perícia, deve ser reconhecida a nulidade da sentença e determinado retorno dos autos para prova pericial.",
+          "citacao": "",
+          "paragrafos": [
+            143,
+            145
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 23118,
+      "output_tokens": 4034,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.004329,
+    "duracaoMs": 14879
+  }
+}

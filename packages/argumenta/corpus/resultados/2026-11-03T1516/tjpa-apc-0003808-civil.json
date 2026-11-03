@@ -1,0 +1,306 @@
+{
+  "casoId": "tjpa-apc-0003808-civil",
+  "paragrafos": 180,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso conhecido e não provido; sentença de improcedência mantida em todos os seus termos, por unanimidade.",
+      "resumo": "O apelante pediu a reforma da sentença que julgou improcedente ação de indenização por danos morais e materiais decorrentes de acidente de trânsito e, subsidiariamente, o reconhecimento de culpa concorrente com fixação de indenização condizente com os danos. A Turma Julgadora conheceu do recurso e negou-lhe provimento, mantendo a sentença. O acórdão entendeu que o condutor que fez a conversão à esquerda em via de mão dupla não adotou as cautelas exigidas, presumindo-se sua culpa.",
+      "pedidos": [
+        {
+          "descricao": "Reforma da sentença de improcedência, com reconhecimento do direito à indenização por danos sofridos no acidente.",
+          "paragrafos": [
+            79,
+            99
+          ]
+        },
+        {
+          "descricao": "Reconhecimento de culpa concorrente dos apelados, caso mantida a improcedência.",
+          "paragrafos": [
+            82,
+            99
+          ]
+        },
+        {
+          "descricao": "Fixação das indenizações em patamares condizentes com os danos sofridos.",
+          "paragrafos": [
+            82
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 15
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 16,
+          "fim": 47
+        },
+        {
+          "tipo": "outro",
+          "inicio": 48,
+          "fim": 49
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 68,
+          "fim": 90
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 96,
+          "fim": 98
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 99,
+          "fim": 174
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 175,
+          "fim": 176
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9472,
+      "output_tokens": 1741,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001818,
+    "duracaoMs": 11656
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso de apelação preenche os pressupostos de admissibilidade?",
+          "conclusao": "Os pressupostos processuais estão regularmente constituídos e o recurso é conhecido.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            96
+          ],
+          "paragrafosConclusao": [
+            96
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Houve culpa do condutor que fez a conversão à esquerda em via de mão dupla, afastando a responsabilidade dos réus pelo acidente?",
+          "conclusao": "Presume-se a culpa do condutor que converte à esquerda sem cautela e interrompe o veículo que trafega em sentido oposto; a alta velocidade não foi provada, e a sentença de improcedência foi mantida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            99,
+            100,
+            101,
+            106,
+            107,
+            108,
+            120,
+            174
+          ],
+          "paragrafosConclusao": [
+            108,
+            120,
+            174
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Cabe reconhecer culpa concorrente dos réus para fixar as indenizações em patamar menor?",
+          "conclusao": "O pedido de culpa concorrente não foi examinado separadamente; prevaleceu a culpa presumida do apelante, e a sentença foi mantida integralmente.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            82,
+            99,
+            174
+          ],
+          "paragrafosConclusao": [
+            174
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9864,
+      "output_tokens": 1168,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.00157,
+    "duracaoMs": 6545
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A relatora considera regularmente constituídos os pressupostos processuais e conhece do recurso.",
+          "citacao": "",
+          "paragrafos": [
+            96
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Documentos de fls. 14 e 275 indicam que a PA 275 tinha circulação em duplo sentido, afastando a alegação de contramão.",
+          "citacao": "",
+          "paragrafos": [
+            100
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Diagrama do acidente (fl. 14), com troca de identificação V1 e V2 corrigida pelo próprio apelante em audiência.",
+          "citacao": "",
+          "paragrafos": [
+            101,
+            106
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "Restou incontroverso que o recorrente desejava realizar conversão à esquerda para acessar a PA 275.",
+          "citacao": "",
+          "paragrafos": [
+            108
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "O condutor que quer executar manobra deve certificar-se de que pode fazê-la sem perigo para os demais usuários.",
+          "citacao": "CTB, art. 34",
+          "paragrafos": [
+            108,
+            109
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Antes de manobra de deslocamento lateral, o condutor deve indicar seu propósito com antecedência, por sinal ou gesto; conversões são deslocamentos laterais.",
+          "citacao": "CTB, art. 35 e parágrafo único",
+          "paragrafos": [
+            108,
+            110,
+            116
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Ao sair à esquerda, o condutor deve aproximar-se do eixo da pista e ceder passagem aos veículos em sentido contrário.",
+          "citacao": "CTB, art. 38, II e parágrafo único",
+          "paragrafos": [
+            108,
+            118,
+            119
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Ônus da prova do autor: alta velocidade não foi demonstrada, pois o depoimento se baseou em informação de terceiros.",
+          "citacao": "CPC, art. 373, I",
+          "paragrafos": [
+            107
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Segundo firme jurisprudência, é presumida a culpa do condutor que, em via de mão dupla, converte à esquerda e colide com outro veículo.",
+          "citacao": "Firme jurisprudência (sem julgado identificado)",
+          "paragrafos": [
+            120
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Apelação Cível nº 70047403654, TJ-RS, 12ª Câmara Cível: decidiu que há presunção de culpa do condutor que inflete à esquerda sem cautela em via de mão dupla e que a presunção não foi elidida.",
+          "citacao": "Apelação Cível Nº 70047403654, Décima Segunda Câmara Cível, TJ-RS",
+          "paragrafos": [
+            144,
+            145
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Recurso Cível nº 71007811326, Segunda Turma Recursal Cível do TJ-RS: decidiu que a condutora que não observou o fluxo ao converter à esquerda em via de mão dupla causou a colisão.",
+          "citacao": "Recurso Cível Nº 71007811326, Segunda Turma Recursal Cível, TJ-RS",
+          "paragrafos": [
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            168,
+            173
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Os argumentos do magistrado de primeiro grau são irrepreensíveis e merecem prestígio integral.",
+          "citacao": "",
+          "paragrafos": [
+            174
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A relatora não examina separadamente a culpa concorrente; mantém a sentença integralmente por ser irrepreensível a fundamentação de primeiro grau.",
+          "citacao": "",
+          "paragrafos": [
+            99,
+            174,
+            176
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A culpa presumida do condutor que converteu à esquerda sem cautela afasta a alegação de culpa concorrente.",
+          "citacao": "",
+          "paragrafos": [
+            120,
+            174
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9748,
+      "output_tokens": 1485,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001717,
+    "duracaoMs": 6057
+  }
+}

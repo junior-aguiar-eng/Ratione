@@ -1,0 +1,470 @@
+{
+  "casoId": "trt4-rot-0021425-trab",
+  "paragrafos": 107,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso ordinário do reclamante provido para acrescer à condenação horas extras e multa do art. 477, § 8º, da CLT.",
+      "resumo": "O reclamante recorreu pedindo a nulidade do regime compensatório semanal e do banco de horas, o pagamento de horas extras e a reforma quanto à multa do art. 477 da CLT. A Turma, por maioria, declarou inválidos os regimes de compensação, por atividade insalubre sem licença prévia, e deferiu horas extras e a multa do art. 477, § 8º, da CLT.",
+      "pedidos": [
+        {
+          "descricao": "Declaração de nulidade do regime compensatório semanal e do banco de horas.",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "descricao": "Condenação da reclamada ao pagamento, como horas extras com reflexos, das horas excedentes da 8ª diária e da 44ª semanal.",
+          "paragrafos": [
+            39
+          ]
+        },
+        {
+          "descricao": "Reforma da sentença quanto à multa do art. 477 da CLT.",
+          "paragrafos": [
+            78
+          ]
+        },
+        {
+          "descricao": "Aplicação das penas de confissão, nos termos do art. 400 do CPC.",
+          "paragrafos": [
+            78
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 7
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 8,
+          "fim": 23
+        },
+        {
+          "tipo": "outro",
+          "inicio": 24,
+          "fim": 25
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 26,
+          "fim": 26
+        },
+        {
+          "tipo": "outro",
+          "inicio": 29,
+          "fim": 30
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 31,
+          "fim": 35
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 36,
+          "fim": 89
+        },
+        {
+          "tipo": "outro",
+          "inicio": 90,
+          "fim": 107
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9484,
+      "output_tokens": 2262,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002079,
+    "duracaoMs": 10313
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "merito",
+          "enunciado": "O regime compensatório semanal e o banco de horas são válidos em atividade insalubre, sem licença prévia das autoridades competentes, mesmo previstos em norma coletiva?",
+          "conclusao": "Não são válidos. Em atividade insalubre sem a inspeção prévia do art. 60 da CLT, ambos os regimes são inválidos, com base na Súmula 85, VI, do TST e na Súmula 67 do TRT4.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            39,
+            46,
+            47,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66
+          ],
+          "paragrafosConclusao": [
+            66
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "O art. 59-B, parágrafo único, da CLT, que limita a consequência ao adicional, aplica-se ao banco de horas e às horas extras habituais?",
+          "conclusao": "Não se aplica ao banco de horas. São devidas horas extras integrais, e não apenas o adicional, pelas horas excedentes da 8ª diária ou 44ª semanal.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            46,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            97,
+            98
+          ],
+          "paragrafosConclusao": [
+            67,
+            68,
+            76
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "A concomitância de regime compensatório semanal e banco de horas é válida ou torna inviáveis os dois regimes?",
+          "conclusao": "É inviável a concomitância, por falta de precisão sobre as horas compensadas, o que impede o controle pelo empregado. Divergência parcial entendeu que só a falta de licença do art. 60 invalida os regimes.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            17,
+            58,
+            102,
+            103
+          ],
+          "paragrafosConclusao": [
+            58,
+            102,
+            103
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "merito",
+          "enunciado": "É devida a multa do art. 477, § 8º, da CLT, em razão da entrega tardia dos documentos rescisórios?",
+          "conclusao": "É devida a multa. Os documentos rescisórios e as chaves do FGTS não foram entregues no prazo, e o atraso no sindicato não exclui a responsabilidade da reclamada.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            78,
+            81,
+            82,
+            85,
+            86,
+            87,
+            88,
+            89
+          ],
+          "paragrafosConclusao": [
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "id": "Q5",
+          "categoria": "acessoria",
+          "enunciado": "Como apurar as horas extras deferidas, incluindo base de cálculo, reflexos e dedução de valores pagos?",
+          "conclusao": "Base de cálculo pela Súmula 264 do TST e art. 58, § 1º, da CLT, com reflexos em RSR, aviso prévio, 13º, férias com 1/3 e FGTS com 40%. Dedução dos pagos sob a mesma rubrica pelo critério global (Tema 252).",
+          "resultado": "acolhida",
+          "paragrafos": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            26
+          ],
+          "paragrafosConclusao": [
+            76,
+            26
+          ]
+        },
+        {
+          "id": "Q6",
+          "categoria": "acessoria",
+          "enunciado": "Quais custas são fixadas na decisão?",
+          "conclusao": "Fixa custas adicionais de R$ 200,00, calculadas sobre o valor de R$ 10.000,00.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            26
+          ],
+          "paragrafosConclusao": [
+            26
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 9876,
+      "output_tokens": 2192,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002084,
+    "duracaoMs": 10229
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 60 da CLT exige inspeção prévia e permissão da autoridade competente para compensação em atividade insalubre.",
+          "citacao": "CLT, art. 60",
+          "paragrafos": [
+            60,
+            66
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Súmula 85, VI, do TST: acordo de compensação em atividade insalubre é inválido sem inspeção prévia e permissão da autoridade, mesmo em norma coletiva.",
+          "citacao": "Súmula nº 85, VI, do TST",
+          "paragrafos": [
+            62,
+            63
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Súmula 67 deste Tribunal: regime de compensação em atividade insalubre é inválido quando não atendidas as exigências do art. 60 da CLT.",
+          "citacao": "Súmula nº 67 deste Tribunal",
+          "paragrafos": [
+            64,
+            65
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 7º, XXII, da CF/88: direito à redução dos riscos inerentes ao trabalho por normas de saúde, higiene e segurança; cláusula normativa que afronta esse direito.",
+          "citacao": "CF/1988, art. 7º, XXII",
+          "paragrafos": [
+            61
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "STF, ARE nº 1121633, citado como base para afastar a validade de cláusula normativa que dispensa as condições de segurança do trabalho.",
+          "citacao": "STF no julgamento da ARE nº 1121633",
+          "paragrafos": [
+            61
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "fato",
+          "descricao": "Atividades do autor eram insalubres em grau médio, conforme recibos de pagamento; não há licença prévia nos autos.",
+          "citacao": "",
+          "paragrafos": [
+            59,
+            60
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A cláusula normativa que dispensa a licença do art. 60 não supre a exigência de licença prévia das autoridades competentes.",
+          "citacao": "",
+          "paragrafos": [
+            60
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 59-B, parágrafo único, da CLT: horas extras habituais não descaracterizam compensação; o texto aplica-se ao contrato, mas o acórdão afasta sua consequência para o banco de horas.",
+          "citacao": "CLT, art. 59-B",
+          "paragrafos": [
+            46,
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A limitação ao adicional do art. 59-B só se aplica ao regime semanal, pois a vinculação à carga de 44 horas não existe no banco de horas.",
+          "citacao": "",
+          "paragrafos": [
+            68,
+            70
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão 1ª Turma do TRT4 no proc. ROT de 18/08/2021, de relatoria do Des. Roger Ballejo Villarinho, adotado como razões de decidir: limitação ao adicional restrita ao regime semanal.",
+          "citacao": "TRT da 4ª Região, 1ª Turma, [PROCESSO_2] ROT, em 18/08/2021",
+          "paragrafos": [
+            69,
+            70
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão 7ª Turma do TRT4 no proc. ROT de 22/06/2022, relatora Desa. Denise Pacheco, citado no mesmo sentido da limitação restrita ao regime semanal.",
+          "citacao": "TRT da 4ª Região, 7ª Turma, [PROCESSO_3] ROT, em 22/06/2022",
+          "paragrafos": [
+            69,
+            71
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Como a compensação é invalidada, são devidas horas extras a partir da 8ª diária ou 44ª semanal, acrescidas do adicional.",
+          "citacao": "",
+          "paragrafos": [
+            67,
+            72
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "A concomitância de regimes é inviável por falta de precisão sobre as horas compensadas, o que impede o controle pelo empregado.",
+          "citacao": "",
+          "paragrafos": [
+            58,
+            17
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Divergência parcial (Des. Raul Zoratto Sanvicente): só a ausência do requisito do art. 60 invalida os regimes; a concomitância não os invalida por si.",
+          "citacao": "",
+          "paragrafos": [
+            102,
+            103
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Divergência (Desa. Beatriz Renck): acompanha a nulidade, mas aplica a Súmula 85, IV, limitando a remuneração ao adicional.",
+          "citacao": "Súmula 85, IV, do TST",
+          "paragrafos": [
+            97,
+            98
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Art. 477, § 6º, da CLT (redação da Lei 13.467/2017): prazo para pagamento das verbas e entrega de documentos rescisórios; base da multa.",
+          "citacao": "CLT, art. 477, § 6º",
+          "paragrafos": [
+            78,
+            87
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "fato",
+          "descricao": "Chaves de liberação do FGTS e documentos rescisórios não foram entregues tempestivamente ao reclamante.",
+          "citacao": "",
+          "paragrafos": [
+            86
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "argumento",
+          "descricao": "O atraso no sindicato não afasta a responsabilidade da reclamada, que deve diligenciar para cumprir o prazo legal.",
+          "citacao": "",
+          "paragrafos": [
+            88
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "norma",
+          "descricao": "Art. 477, § 8º, da CLT: multa aplicada ao caso.",
+          "citacao": "CLT, art. 477, § 8º",
+          "paragrafos": [
+            87,
+            89
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Súmula 264 do TST: base de cálculo das horas extras, aplicada ao caso.",
+          "citacao": "Súmula 264 do TST",
+          "paragrafos": [
+            73,
+            76
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "norma",
+          "descricao": "Art. 58, § 1º, da CLT: critérios de apuração das horas extras.",
+          "citacao": "CLT, art. 58, § 1º",
+          "paragrafos": [
+            74,
+            76
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "precedente",
+          "descricao": "Tema 252 do TST: dedução dos valores pagos sob a mesma rubrica pelo critério global.",
+          "citacao": "TST no julgamento do Tema 252",
+          "paragrafos": [
+            75,
+            76
+          ]
+        },
+        {
+          "questao": "Q5",
+          "tipo": "argumento",
+          "descricao": "Horas extras habituais geram reflexos em RSR, aviso prévio, 13º, férias com 1/3 e FGTS com 40%.",
+          "citacao": "",
+          "paragrafos": [
+            72,
+            76
+          ]
+        },
+        {
+          "questao": "Q6",
+          "tipo": "argumento",
+          "descricao": "Custas adicionais fixadas em R$ 200,00, calculadas sobre o valor de R$ 10.000,00, conforme dispositivo do acórdão.",
+          "citacao": "",
+          "paragrafos": [
+            26
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 10204,
+      "output_tokens": 2514,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002277,
+    "duracaoMs": 9686
+  }
+}
