@@ -6,7 +6,7 @@ Modelo: **claude-haiku-5-5** · casos avaliados: **30** de 30 validados
 
 | Métrica | Resultado |
 |---|---|
-| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 24 de 30 (80,0%) |
+| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 28 de 30 (93,3%) |
 | Questões esperadas encontradas (cobertura dos parágrafos ≥ 50%) | 90 de 101 (89,1%) |
 | Citações esperadas encontradas | 154 de 192 (80,2%) |
 | Saídas descartadas pelo código | 1 de 90 (1,1%) |
@@ -53,10 +53,10 @@ Total da rodada: **US$ 0,1721** · médio por decisão avaliada: **US$ 0,0057** 
 | trf4-ac-5007789-prev | 74 | certo | 3/3 | 7/7 | ok / ok / ok | US$ 0,0046 |
 | trf4-ac-5009245-prev | 49 | certo | 2/2 | 2/5 | ok / ok / ok | US$ 0,0037 |
 | trt4-ro-0000501-trab | 47 | certo | 4/4 | 3/3 | ok / ok / ok | US$ 0,0041 |
-| trt4-rot-0020476-trab | 86 | errado (33,3%) | 3/3 (+1) | 6/7 | ok / ok / ok | US$ 0,0055 |
-| trt4-rot-0020592-trab | 117 | errado (33,3%) | 9/9 | 8/14 | ok / ok / ok | US$ 0,0070 |
-| trt4-rot-0021425-trab | 107 | errado (33,3%) | 3/3 (+3) | 11/11 | ok / ok / ok | US$ 0,0064 |
-| trt4-rot-0022282-trab | 91 | errado (33,3%) | 6/6 | 8/8 | ok / ok / ok | US$ 0,0063 |
+| trt4-rot-0020476-trab | 86 | certo | 3/3 (+1) | 6/7 | ok / ok / ok | US$ 0,0055 |
+| trt4-rot-0020592-trab | 117 | certo | 9/9 | 8/14 | ok / ok / ok | US$ 0,0070 |
+| trt4-rot-0021425-trab | 107 | certo | 3/3 (+3) | 11/11 | ok / ok / ok | US$ 0,0064 |
+| trt4-rot-0022282-trab | 91 | certo | 6/6 | 8/8 | ok / ok / ok | US$ 0,0063 |
 | tst-airr-1001572-trab | 116 | certo | 4/4 (+2) | 7/8 | ok / ok / ok | US$ 0,0055 |
 
 ## Como ler

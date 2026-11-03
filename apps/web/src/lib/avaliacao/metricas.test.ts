@@ -40,6 +40,13 @@ describe('F5-05: dispositivo', () => {
     assert.equal(medirDispositivo(sec(3, 5), GAB).acertou, false); // sem o alternativo, o bloco do início erra
     assert.equal(medirDispositivo(sec(8, 12), g).acertou, false);
   });
+  it('com parágrafo decisivo, o intervalo que o contém vale, e o que não o contém ou é largo demais não', () => {
+    const g: Gabarito = { ...GAB, paragrafosDecisivos: [23] };
+    assert.equal(medirDispositivo(sec(22, 25), g).acertou, true); // contém o 23, mas só 2/6 de sobreposição
+    assert.equal(medirDispositivo(sec(20, 20), g).acertou, false); // só o título: não traz o resultado
+    assert.equal(medirDispositivo(sec(20, 40), g).acertou, false); // contém, mas largo demais (21 > 10)
+    assert.equal(medirDispositivo(sec(22, 25), GAB).acertou, false); // sem o campo, vale só a sobreposição
+  });
   it('sem seção de dispositivo, ou sem a etapa, não acerta', () => {
     assert.deepEqual(medirDispositivo({ secoes: [{ tipo: 'relatorio', inicio: 1, fim: 4 }] }, GAB), { achou: false, sobreposicao: 0, acertou: false });
     assert.equal(medirDispositivo(null, GAB).acertou, false);

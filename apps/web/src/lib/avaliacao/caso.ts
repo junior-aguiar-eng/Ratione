@@ -19,6 +19,11 @@ export const GabaritoSchema = z
     dispositivo: Intervalo,
     /** Outros intervalos que também valem como o dispositivo: o acórdão traz dois blocos que decidem (o bloco "Acórdão" e o fim do voto). */
     dispositivoAlternativo: z.array(Intervalo).max(3).optional(),
+    /**
+     * Parágrafos que dizem o resultado ("ACORDAM… negar provimento", "Ante o exposto, dou provimento"). Quando existem, o dispositivo
+     * também vale se o intervalo achado contém todos eles sem passar de um tamanho razoável: o que o usuário precisa ver é o resultado.
+     */
+    paragrafosDecisivos: z.array(z.number().int().min(1)).min(1).max(10).optional(),
     /** Questões que a decisão resolve, com os parágrafos onde são discutidas e decididas. */
     questoes: z
       .array(z.object({ enunciado: z.string().min(3).max(400), conclusao: z.string().min(3).max(400), paragrafos: Paragrafos }).strict())
@@ -57,6 +62,7 @@ export function problemasDoGabarito(g: Gabarito, totalParagrafos: number): strin
   [g.dispositivo, ...(g.dispositivoAlternativo ?? [])].forEach((d, i) => {
     if (fora(d.inicio) || fora(d.fim)) problemas.push(`${i === 0 ? 'dispositivo' : `dispositivo alternativo ${i}`} fora da decisão (1 a ${totalParagrafos})`);
   });
+  if (g.paragrafosDecisivos?.some(fora)) problemas.push(`parágrafo decisivo fora da decisão (1 a ${totalParagrafos})`);
   g.questoes.forEach((q, i) => {
     if (q.paragrafos.some(fora)) problemas.push(`questão ${i + 1} cita parágrafo fora da decisão (1 a ${totalParagrafos})`);
   });
