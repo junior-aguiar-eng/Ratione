@@ -147,21 +147,30 @@ export const RESULTADOS_QUESTAO = ['acolhida', 'rejeitada', 'parcialmente_acolhi
 const ID_QUESTAO = /^Q(?:[1-9]|10)$/;
 const MAX_QUESTOES = 10;
 
+// A sentença do júri (10 questões no gabarito) teve a etapa inteira descartada porque o modelo devolveu um id fora de Q1..Q10 na 4ª questão.
+// O id é só a ordem (a instrução manda numerar em sequência), então o código o atribui pela posição, e passa a guardar as primeiras 10 em
+// vez de perder a etapa e o custo dela se o modelo passar do limite.
+const numerarQuestoes = (v: unknown): unknown =>
+  Array.isArray(v) ? v.slice(0, MAX_QUESTOES).map((q, i) => (q && typeof q === 'object' ? { ...q, id: `Q${i + 1}` } : q)) : v;
+
 export const SaidaQuestoes = z.object({
-  questoes: z
-    .array(
-      z.object({
-        id: z.string().regex(ID_QUESTAO),
-        categoria: z.enum(CATEGORIAS_QUESTAO),
-        enunciado: z.string().min(1).max(400),
-        conclusao: z.string().min(1).max(400),
-        resultado: z.enum(RESULTADOS_QUESTAO),
-        paragrafos: Paragrafos(),
-        paragrafosConclusao: Paragrafos(1)
-      })
-    )
-    .min(1)
-    .max(MAX_QUESTOES)
+  questoes: z.preprocess(
+    numerarQuestoes,
+    z
+      .array(
+        z.object({
+          id: z.string().regex(ID_QUESTAO),
+          categoria: z.enum(CATEGORIAS_QUESTAO),
+          enunciado: z.string().min(1).max(400),
+          conclusao: z.string().min(1).max(400),
+          resultado: z.enum(RESULTADOS_QUESTAO),
+          paragrafos: Paragrafos(),
+          paragrafosConclusao: Paragrafos(1)
+        })
+      )
+      .min(1)
+      .max(MAX_QUESTOES)
+  )
 });
 export type SaidaQuestoes = z.infer<typeof SaidaQuestoes>;
 
@@ -193,7 +202,7 @@ export const argumentaQuestoes: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaQu
   esforco: 'medium',
   maxTokensSaida: 4_000,
   maxCaracteresMensagem: 85_000,
-  versao: 'v5-2026-10-30',
+  versao: 'v6-2026-11-03',
   guardaResultado: false,
   instrucoes: INSTRUCOES_QUESTOES,
   ferramentas: [],
