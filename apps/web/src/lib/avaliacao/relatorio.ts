@@ -44,7 +44,7 @@ export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDo
     const caso = porId.get(r.casoId);
     if (!caso) continue;
     if (r.naoEnviavel) fora.push(r);
-    else avaliados.push({ r, medida: medirCaso({ estrutura: r.estrutura.saida, questoes: r.questoes.saida, fundamentos: r.fundamentos.saida }, caso.gabarito) });
+    else avaliados.push({ r, medida: medirCaso({ estrutura: r.estrutura.saida, questoes: r.questoes.saida, fundamentos: r.fundamentos.saida }, caso.gabarito, caso.texto) });
   }
   const t = totalizar(avaliados.map(a => a.medida));
   const chamadas = contarChamadas(resultados);
@@ -64,6 +64,8 @@ export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDo
     `| Citações esperadas encontradas | ${fracao(t.citacoesEncontradas, t.citacoesEsperadas)} |`,
     `| Saídas descartadas pelo código | ${fracao(chamadas.descartadas, chamadas.chamadas)} |`,
     `| Questões achadas que o gabarito não tem | ${t.questoesExtras} |`,
+    `| Citações achadas que o gabarito não tem (o gabarito lista só o essencial; ver a lista abaixo) | ${fracao(t.citacoesForaDoGabarito, t.citacoesAchadas)} |`,
+    `| Citações com número que não está no texto da decisão (indício de invenção) | ${fracao(t.citacoesSemNumeroNoTexto, t.citacoesAchadas)} |`,
     '',
     '## Custo',
     '',
@@ -86,6 +88,12 @@ export function montarRelatorio({ rodada, modelo, casos, resultados }: EntradaDo
   ];
   if (fora.length) {
     linhas.push('## Não enviáveis', '', ...fora.map(r => `- **${r.casoId}**: ${r.naoEnviavel}`), '');
+  }
+  const semNumero = avaliados.flatMap(({ r, medida }) => medida.citacoes.semNumeroNoTexto.map(c => `- ${r.casoId}: ${c}`));
+  if (semNumero.length) linhas.push('## Citações com número que não está no texto', '', ...semNumero, '');
+  const foraDoGabarito = avaliados.flatMap(({ r, medida }) => medida.citacoes.foraDoGabarito.map(c => `- ${r.casoId}: ${c}`));
+  if (foraDoGabarito.length) {
+    linhas.push('## Citações que o gabarito não tem', '', 'O gabarito lista só o essencial: nem toda citação daqui é invenção. Conferir cada uma no texto da decisão.', '', ...foraDoGabarito, '');
   }
   const motivos = resultados.flatMap(r => [r.estrutura, r.questoes, r.fundamentos].filter(e => e.motivo && e.estado !== 'nao_rodou').map(e => `${r.casoId}: ${e.estado}, ${e.motivo}`));
   if (motivos.length) linhas.push('## Saídas que não deram resultado', '', ...motivos.map(m => `- ${m}`), '');
