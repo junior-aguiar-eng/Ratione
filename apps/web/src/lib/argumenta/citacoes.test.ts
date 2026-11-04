@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { reconhecerCitacao } from './citacoes';
 
-const NORMAS = ['CF-1988', 'LEI-10406-2002', 'LEI-13105-2015', 'DL-2848-1940', 'LEI-8078-1990', 'LEI-14133-2021', 'LEI-9099-1995'];
+const NORMAS = ['CF-1988', 'LEI-10406-2002', 'LEI-13105-2015', 'DL-2848-1940', 'LEI-8078-1990', 'LEI-14133-2021', 'LEI-9099-1995', 'LEI-11340-2006', 'LEI-6830-1980', 'DL-5452-1943'];
 const rec = (t: string) => reconhecerCitacao(t, NORMAS);
 
 describe('Argumenta F5-04: reconhecimento de citações', () => {
@@ -19,6 +19,34 @@ describe('Argumenta F5-04: reconhecimento de citações', () => {
     }
     assert.equal(rec('art. 85 do CPC/2015')?.tipo, 'dispositivo');
     assert.equal(rec('art. 85 do CPC/15')?.tipo, 'dispositivo');
+  });
+
+  it('escritas correntes da mesma norma: CF/88, Constituição sem "Federal", CC/2002, alínea', () => {
+    assert.deepEqual(rec('CF/1988, art. 7º, XXII'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '7º', detalhe: 'XXII' });
+    assert.equal(rec('art. 5º, X, da Constituição')?.tipo, 'dispositivo');
+    assert.equal(rec('CC/2002, art. 206, § 3º, V')?.tipo, 'dispositivo');
+    // a alínea vai no detalhe para o selo avisar que não foi conferida
+    assert.deepEqual(rec('CP, art. 61, II, e'), { tipo: 'dispositivo', normaId: 'DL-2848-1940', artigo: '61', detalhe: 'II, alínea e' });
+    assert.deepEqual(rec('CLT, art. 482, i'), { tipo: 'dispositivo', normaId: 'DL-5452-1943', artigo: '482', detalhe: 'alínea i' });
+    assert.equal(rec('CF, art. 105, III, "a"')?.tipo, 'dispositivo');
+    assert.equal(rec('CF, art. 105, III, alíneas a e c')?.tipo, 'dispositivo');
+  });
+
+  it('"inciso I" e nome da lei seguido do número entre parênteses', () => {
+    assert.equal(rec('Lei 11.340/2006, art. 5º, inciso I')?.tipo, 'dispositivo');
+    assert.equal(rec('art. 39 da Lei de Execução Fiscal (Lei nº 6.830/80)')?.tipo, 'dispositivo');
+  });
+
+  it('norma da base com mais de um artigo, parágrafo ou inciso fica sem selo, e não "fora da base"', () => {
+    for (const t of ['CP, art. 59 e 68', 'CLT, art. 477, § 6º e § 8º', 'CPC, art. 301, §§ 1º, 2º e 3º', 'CTN, arts. 205 e 206', 'CF, art. 129; CPP, art. 24', 'arts. 196 e 23, II, da Constituição Federal']) {
+      assert.equal(rec(t), null, t);
+    }
+  });
+
+  it('CPC, art. 543-C é do CPC de 1973 (o de 2015 não tem artigo com letra)', () => {
+    assert.equal(rec('CPC, art. 543-C')?.tipo, 'fora');
+    assert.equal(rec('CPC, art. 543-C, § 7º')?.tipo, 'fora');
+    assert.equal(rec('CPC/2015, art. 1.040')?.tipo, 'dispositivo');
   });
 
   it('artigo sem norma nomeada não é conferido', () => {
