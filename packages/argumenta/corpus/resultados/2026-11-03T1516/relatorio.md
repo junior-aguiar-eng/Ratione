@@ -6,7 +6,7 @@ Modelo: **claude-haiku-5-5** · casos avaliados: **30** de 30 validados
 
 | Métrica | Resultado |
 |---|---|
-| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 28 de 30 (93,3%) |
+| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 29 de 30 (96,7%) |
 | Questões esperadas encontradas (cobertura dos parágrafos ≥ 50%) | 90 de 101 (89,1%) |
 | Citações esperadas encontradas | 154 de 192 (80,2%) |
 | Saídas descartadas pelo código | 1 de 90 (1,1%) |
@@ -38,7 +38,7 @@ Total da rodada: **US$ 0,1721** · médio por decisão avaliada: **US$ 0,0057** 
 | stj-resp-1192556-trib | 81 | certo | 1/1 (+1) | 9/9 | ok / ok / ok | US$ 0,0046 |
 | stj-resp-1267995-desistencia-acao | 80 | certo | 2/2 | 2/2 | ok / ok / ok | US$ 0,0060 |
 | stj-resp-1349059-adm | 114 | certo | 1/1 (+1) | 6/6 | ok / ok / ok | US$ 0,0059 |
-| stj-resp-1362524-penal | 129 | errado (33,3%) | 3/3 (+1) | 5/5 | ok / ok / ok | US$ 0,0059 |
+| stj-resp-1362524-penal | 129 | certo | 3/3 (+1) | 5/5 | ok / ok / ok | US$ 0,0059 |
 | stj-resp-1388030-civil | 149 | certo | 2/2 (+1) | 2/2 | ok / ok / ok | US$ 0,0064 |
 | stj-resp-1452840-embargos-terceiro-honorarios | 118 | certo | 2/2 | 4/6 | ok / ok / ok | US$ 0,0063 |
 | tjal-apelacao-saude-uniao | 148 | certo | 3/3 | 3/6 | ok / ok / ok | US$ 0,0103 |
