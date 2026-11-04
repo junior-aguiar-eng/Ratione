@@ -138,7 +138,8 @@ O **upload de arquivos (R10) não deve ser liberado** enquanto as condições da
 
 | Versão | Data | Quem | Mudança |
 |---|---|---|---|
-| 0.1 | 04/11/2026 | Minuta redigida a partir do código e dos documentos do produto | Primeira versão; sem revisão do responsável |
+| 0.1 | 04/11/2026 | Minuta redigida a partir do código e dos documentos do produto | Primeira versão |
+| 0.1 | 04/11/2026 | Responsável | Confirmou o RIPD do Argumenta como está; os itens **[CONFIRMAR]** e a revisão por advogado seguem em aberto (seção 8) |
 
 **Aprovação:** [NOME_RESPONSAVEL] · [DATA]
 
