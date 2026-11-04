@@ -60,6 +60,10 @@ describe('Exclusão da conta (LGPD)', () => {
         chamadas.push(`assinaturas:${id}`);
         return true;
       },
+      apagarDocumentos: async id => {
+        chamadas.push(`documentos:${id}`);
+        return true;
+      },
       apagarUsuario: async id => {
         chamadas.push(`apagar:${id}`);
         return true;
@@ -72,7 +76,7 @@ describe('Exclusão da conta (LGPD)', () => {
   it('com sessão e senha corretas, apaga o usuário da sessão', async () => {
     const { dep, chamadas } = montar();
     assert.deepStrictEqual(await excluirConta('segredo123', dep), { ok: true });
-    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'apagar:u1'], 'a assinatura é cancelada antes de a conta sumir');
+    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'apagar:u1'], 'a assinatura é cancelada antes de a conta sumir');
   });
 
   it('sem senha, ou com senha de tipo errado, recusa sem tocar em nada', async () => {
@@ -104,6 +108,18 @@ describe('Exclusão da conta (LGPD)', () => {
       const r = await excluirConta('segredo123', dep);
       assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('assinatura') && r.mensagem.includes('Nada foi apagado'));
       assert.deepStrictEqual(chamadas, ['senha'], 'só a senha foi conferida; nada foi apagado');
+    }
+  });
+
+  it('documentos enviados: saem antes da conta; se não saírem, a conta NÃO é apagada (o arquivo ficaria sem dono)', async () => {
+    const { dep, chamadas } = montar();
+    await excluirConta('segredo123', dep);
+    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'apagar:u1']);
+    for (const falha of [async () => false, async () => Promise.reject(new Error('armazenamento fora do ar'))]) {
+      const m = montar({ apagarDocumentos: falha });
+      const r = await excluirConta('segredo123', m.dep);
+      assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('arquivos') && r.mensagem.includes('Nada foi apagado'));
+      assert.ok(!m.chamadas.some(c => c.startsWith('apagar:')), 'a conta não foi apagada');
     }
   });
 

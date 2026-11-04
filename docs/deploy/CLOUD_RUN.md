@@ -136,6 +136,25 @@ No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve ca
 
 **Quebra de linha no segredo:** no PowerShell, enviar um valor por pipe (`$valor | gcloud secrets create ... --data-file=-`) acrescenta uma quebra de linha ao segredo. A rota apara espaços e quebras dos dois segredos (`limparSegredo`), então isso não quebra mais o envio; mesmo assim, prefira `[System.IO.File]::WriteAllText` ou `printf '%s'` para gravar o valor exato. Foi o que fez o primeiro disparo do job responder 401 em 11/10/2026.
 
+## Documentos enviados (F5-01) — ainda desligado
+
+O envio de documentos do Argumenta existe no código, mas **fica inerte** até os passos abaixo (e até as condições da seção 7 do [RIPD](../juridico/RIPD_ARGUMENTA.md)). **Nenhum destes passos foi feito**; o `deploy.yml` não foi alterado, para não referenciar segredos que ainda não existem.
+
+1. **Migração:** `supabase/migrations/20261104000001_documentos.sql` no SQL Editor; conferir que o bucket `documentos` existe e é **privado**.
+2. **Segredos no Google Cloud** (legíveis só pela conta de execução do Cloud Run, como os de lembretes): `documentos-chave` (32 bytes aleatórios em base64) e `documentos-limpeza-segredo` (32 caracteres ou mais). Guarde uma cópia da chave fora do Git: **sem ela os arquivos guardados não decifram**.
+```bash
+openssl rand -base64 32 | tr -d '
+' | gcloud secrets create documentos-chave --data-file=-
+openssl rand -base64 48 | tr -d '
+' | gcloud secrets create documentos-limpeza-segredo --data-file=-
+```
+3. **`deploy.yml`:** acrescentar ao `--set-secrets` `DOCUMENTOS_CHAVE=documentos-chave:latest,DOCUMENTOS_LIMPEZA_SEGREDO=documentos-limpeza-segredo:latest`, e a variável `ARGUMENTA_UPLOAD_LIGADO=sim` **só quando for ligar**.
+4. **Agendador** (a cada hora; a faxina funciona mesmo com o envio desligado, então crie-o **antes** de ligar):
+```bash
+gcloud scheduler jobs create http ratione-documentos-limpar --location=southamerica-east1 --schedule="7 * * * *" --time-zone="America/Sao_Paulo" --uri="https://ratione.nexojuris.ia.br/api/documentos/limpar" --http-method=POST --headers="Authorization=Bearer $(gcloud secrets versions access latest --secret=documentos-limpeza-segredo)"
+```
+5. **Teste:** `gcloud scheduler jobs run ratione-documentos-limpar --location=southamerica-east1`; a resposta traz só `{ "apagados": N }`.
+
 ## Monitoramento
 
 Projeto `ratione-nexojuris`. O servidor escreve logs em JSON (`apps/web/src/lib/log.ts`); todo erro não tratado vira `severity=ERROR` (`apps/web/src/instrumentation.ts`).
