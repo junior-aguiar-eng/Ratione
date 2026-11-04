@@ -138,6 +138,8 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         // Cobranças do Mercado Pago (F8-05): o cliente lê só as próprias; quem escreve é o servidor, pelas funções da migração
         'authenticated cobrancas: SELECT',
         'authenticated dispositivos: SELECT',
+        // Documentos enviados (F5-01): o cliente lê só os metadados da própria linha; quem insere e apaga é o servidor (o arquivo cifrado fica no bucket)
+        'authenticated documentos: SELECT',
         'authenticated ia_uso: SELECT',
         'authenticated itens_salvos: DELETE,INSERT,SELECT,UPDATE',
         'authenticated lembretes_prazo: DELETE,INSERT,SELECT',
