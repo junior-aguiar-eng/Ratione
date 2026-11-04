@@ -138,22 +138,26 @@ No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve ca
 
 ## Documentos enviados (F5-01) — ainda desligado
 
-O envio de documentos do Argumenta existe no código, mas **fica inerte** até os passos abaixo (e até as condições da seção 7 do [RIPD](../juridico/RIPD_ARGUMENTA.md)). **Nenhum destes passos foi feito**; o `deploy.yml` não foi alterado, para não referenciar segredos que ainda não existem.
+O envio de documentos do Argumenta existe no código, mas **fica inerte** até os passos abaixo (e até as condições da seção 7 do [RIPD](../juridico/RIPD_ARGUMENTA.md)). Migração e segredos foram feitos pelo responsável em 04/11/2026; faltam a permissão de leitura, a publicação e o agendador.
 
-1. **Migração:** `supabase/migrations/20261104000001_documentos.sql` no SQL Editor; conferir que o bucket `documentos` existe e é **privado**.
-2. **Segredos no Google Cloud** (legíveis só pela conta de execução do Cloud Run, como os de lembretes): `documentos-chave` (32 bytes aleatórios em base64) e `documentos-limpeza-segredo` (32 caracteres ou mais). Guarde uma cópia da chave fora do Git: **sem ela os arquivos guardados não decifram**.
+1. **Migração (aplicada em 04/11/2026):** `supabase/migrations/20261104000001_documentos.sql` no SQL Editor; conferir que o bucket `documentos` existe e é **privado**.
+2. **Segredos no Google Cloud (criados em 04/11/2026)**, legíveis só pela conta de execução do Cloud Run, como os de lembretes: `documentos-chave` (32 bytes aleatórios em base64) e `documentos-limpeza-segredo` (32 caracteres ou mais). Guarde uma cópia da chave fora do Git: **sem ela os arquivos guardados não decifram**.
 ```bash
-openssl rand -base64 32 | tr -d '
-' | gcloud secrets create documentos-chave --data-file=-
-openssl rand -base64 48 | tr -d '
-' | gcloud secrets create documentos-limpeza-segredo --data-file=-
+openssl rand -base64 32 | tr -d '\n' | gcloud secrets create documentos-chave --data-file=-
+openssl rand -base64 48 | tr -d '\n' | gcloud secrets create documentos-limpeza-segredo --data-file=-
 ```
-3. **`deploy.yml`:** acrescentar ao `--set-secrets` `DOCUMENTOS_CHAVE=documentos-chave:latest,DOCUMENTOS_LIMPEZA_SEGREDO=documentos-limpeza-segredo:latest`, e a variável `ARGUMENTA_UPLOAD_LIGADO=sim` **só quando for ligar**.
-4. **Agendador** (a cada hora; a faxina funciona mesmo com o envio desligado, então crie-o **antes** de ligar):
+3. **Permissão de leitura** pela conta de execução do Cloud Run, **antes** de publicar o `deploy.yml` (sem ela a publicação falha; no PowerShell, defina `$GCP_RUNTIME_SA` antes):
 ```bash
-gcloud scheduler jobs create http ratione-documentos-limpar --location=southamerica-east1 --schedule="7 * * * *" --time-zone="America/Sao_Paulo" --uri="https://ratione.nexojuris.ia.br/api/documentos/limpar" --http-method=POST --headers="Authorization=Bearer $(gcloud secrets versions access latest --secret=documentos-limpeza-segredo)"
+gcloud secrets add-iam-policy-binding documentos-chave --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+gcloud secrets add-iam-policy-binding documentos-limpeza-segredo --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
 ```
-5. **Teste:** `gcloud scheduler jobs run ratione-documentos-limpar --location=southamerica-east1`; a resposta traz só `{ "apagados": N }`.
+4. **`deploy.yml` (feito em 04/11/2026):** passa **sempre** o `documentos-limpeza-segredo` (a faxina apaga o que já foi guardado, mesmo com o envio desligado) e só passa a chave de cifra e `ARGUMENTA_UPLOAD_LIGADO=sim` quando a variável do repositório `ARGUMENTA_UPLOAD` vale `sim` (*Settings → Variables*). **Só ligue depois do RIPD.**
+5. **Agendador** (a cada hora; a faxina funciona mesmo com o envio desligado, então crie-o **antes** de ligar e **depois** da publicação do passo 4). No PowerShell:
+```powershell
+$segredo = (gcloud secrets versions access latest --secret=documentos-limpeza-segredo)
+gcloud scheduler jobs create http ratione-documentos-limpar --location=southamerica-east1 --schedule="7 * * * *" --time-zone="America/Sao_Paulo" --uri="https://ratione.nexojuris.ia.br/api/documentos/limpar" --http-method=POST --headers="Authorization=Bearer $segredo"
+```
+6. **Teste:** `gcloud scheduler jobs run ratione-documentos-limpar --location=southamerica-east1`; a resposta da rota traz só `{ "apagados": N }` (confira o log do job, ou chame a rota uma vez com `curl -X POST -H "Authorization: Bearer ..."`).
 
 ## Monitoramento
 
