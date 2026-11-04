@@ -10,6 +10,7 @@
 | `POLITICA_DE_PRIVACIDADE.md` | LGPD: papéis, bases legais, direitos, transferência internacional, retenção |
 | `POLITICA_DE_USO_DE_IA.md` | Transparência, limites e responsabilidade no uso de IA |
 | `POLITICA_DE_COOKIES.md` | Cookies e armazenamento local |
+| `RIPD_ARGUMENTA.md` | Relatório de impacto (LGPD, art. 38) do Argumenta: tipos de dados, metodologia e segurança, riscos e condições para liberar o upload (minuta de 04/11/2026) |
 | `AVISO_LEGAL.md` | Aviso curto de ferramenta de apoio (exibir nos módulos) |
 
 ## Campos a preencher (busque por `[ ]` nos arquivos)
