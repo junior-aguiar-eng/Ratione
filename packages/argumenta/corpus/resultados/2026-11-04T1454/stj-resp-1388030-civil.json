@@ -1,0 +1,419 @@
+{
+  "casoId": "stj-resp-1388030-civil",
+  "paragrafos": 149,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido; teses fixadas para fins do art. 543-C do CPC.",
+      "resumo": "A recorrente [PARTE_1] DPVAT S/A recorreu de acórdão do TJMG que confirmou a prescrição trienal de ação de cobrança de seguro DPVAT, sustentando que o prazo deveria começar com a ciência da invalidez e não com o laudo médico. A Segunda Seção negou provimento ao recurso. Foram fixadas teses: o termo inicial é a ciência inequívoca do caráter permanente da invalidez, e, salvo invalidez permanente notória, essa ciência depende de laudo médico.",
+      "pedidos": [
+        {
+          "descricao": "Reforma do acórdão do TJMG para fixar o termo inicial da prescrição na data em que a vítima teve ciência inequívoca da invalidez, e não na data do laudo médico.",
+          "paragrafos": [
+            43,
+            48
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 9
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 10,
+          "fim": 12
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 14,
+          "fim": 15
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 36,
+          "fim": 50
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 53,
+          "fim": 109
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 110,
+          "fim": 110
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 114,
+          "fim": 116
+        },
+        {
+          "tipo": "outro",
+          "inicio": 119,
+          "fim": 147
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11505,
+      "output_tokens": 3264,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002783,
+    "duracaoMs": 15143
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "prejudicial",
+          "enunciado": "Qual é o termo inicial da prescrição na ação de indenização do seguro DPVAT por invalidez permanente?",
+          "conclusao": "O termo inicial é a data em que o segurado teve ciência inequívoca do caráter permanente da invalidez, que, em regra, ocorre com o laudo médico.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            58,
+            59,
+            60,
+            80,
+            89,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105
+          ],
+          "paragrafosConclusao": [
+            104,
+            105
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "prejudicial",
+          "enunciado": "A ciência inequívoca do caráter permanente da invalidez depende de laudo médico, ou pode ser presumida pelas circunstâncias do caso?",
+          "conclusao": "Exceto na invalidez permanente notória, a ciência depende de laudo médico, sendo relativa a presunção de ciência; a presunção por decurso de tempo ou falta de tratamento não é admitida.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            106,
+            115,
+            116
+          ],
+          "paragrafosConclusao": [
+            106,
+            110,
+            115,
+            116
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "O recurso especial da seguradora, que pede a reforma do acórdão que afastou a prescrição, deve ser provido?",
+          "conclusao": "O recurso especial foi desprovido, mantendo-se o acórdão do Tribunal de Justiça de Minas Gerais que contou a prescrição a partir do laudo médico, apesar de quatro anos após o acidente.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            43,
+            45,
+            48,
+            107,
+            110,
+            114,
+            115,
+            116,
+            144
+          ],
+          "paragrafosConclusao": [
+            107,
+            110,
+            114
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11825,
+      "output_tokens": 1439,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001902,
+    "duracaoMs": 7363
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Art. 543-C do CPC rege o julgamento do recurso como representativo da controvérsia.",
+          "citacao": "CPC, art. 543-C",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            104
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Súmula 278/STJ: o termo inicial é a data em que o segurado teve ciência inequívoca da incapacidade laboral.",
+          "citacao": "Súmula 278/STJ",
+          "paragrafos": [
+            56,
+            57,
+            58
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Condicionar o início do prazo ao laudo sem limite permitiria que o beneficiário manipulasse o prazo, ofendendo a segurança jurídica e a finalidade da prescrição.",
+          "citacao": "",
+          "paragrafos": [
+            100,
+            103,
+            104
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não se presume má-fé; cabe à seguradora diligenciar junto ao IML. Sem isso, prevalece a data do laudo apresentado pela vítima.",
+          "citacao": "",
+          "paragrafos": [
+            104
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Incapacidade laboral não basta; a lei exige invalidez permanente, cujo caráter só se conhece com auxílio médico.",
+          "citacao": "",
+          "paragrafos": [
+            95,
+            96,
+            97,
+            98
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "doutrina",
+          "descricao": "Bermudes e Ferreira: condicionar o início do prazo ao laudo permitiria ao beneficiário se assenhorar do prazo prescricional.",
+          "citacao": "BERMUDES, Sérgio e FERREIRA, Frederico. Termo inicial da prescrição do Seguro DPVAT.",
+          "paragrafos": [
+            100,
+            99
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 334 do CPC: não dependem de prova os fatos notórios e os de presunção legal. A ciência por laudo médico segue a contrario sensu, por ser prova documental.",
+          "citacao": "CPC, art. 334",
+          "paragrafos": [
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Na invalidez notória, como a amputação, o caráter permanente é fato notório, dispensando laudo.",
+          "citacao": "",
+          "paragrafos": [
+            65,
+            88
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A presunção por decurso de tempo, não submissão a tratamento ou interrupção não tem previsão legal e afronta o art. 334 do CPC.",
+          "citacao": "CPC, art. 334",
+          "paragrafos": [
+            89,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O SUS é demorado, e a vítima não perde direito por não persistir em tratamento sem previsão legal.",
+          "citacao": "",
+          "paragrafos": [
+            90,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Consequência imediata do acidente não implica ciência; a perda do baço, por exemplo, só chega ao conhecimento da vítima leiga por médico.",
+          "citacao": "",
+          "paragrafos": [
+            72,
+            73
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "doutrina",
+          "descricao": "Bermudes e Ferreira: dupla amputação gera invalidez imediata, sendo o laudo do IML apenas para quantificar a lesão.",
+          "citacao": "BERMUDES, Sérgio e FERREIRA, Frederico. Termo inicial da prescrição do Seguro DPVAT.",
+          "paragrafos": [
+            69,
+            67
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AREsp 235.825/SP: tribunal de origem contou prazo a partir de segundo exame, apesar da inércia da vítima; o STJ negou seguimento com base na Súmula 7/STJ (primeiro entendimento).",
+          "citacao": "AREsp 235.825/SP",
+          "paragrafos": [
+            62,
+            64,
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ag 1.334.648/MT: tribunal de origem presumiu ciência em 1996, pela amputação; o STJ negou seguimento com base na Súmula 7/STJ (segundo entendimento).",
+          "citacao": "Ag 1.334.648/MT",
+          "paragrafos": [
+            66,
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 1.305.993/MT: tribunal a quo presumiu ciência pelo longo decurso de tempo e falta de tratamento; o STJ negou seguimento com base na Súmula 7/STJ (terceiro entendimento).",
+          "citacao": "REsp 1.305.993/MT",
+          "paragrafos": [
+            75,
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "REsp 1.243.351/MT: laudo elaborado dez anos após a fratura; o STJ negou seguimento com base na Súmula 7/STJ (terceiro entendimento).",
+          "citacao": "REsp 1.243.351/MT",
+          "paragrafos": [
+            76,
+            77
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Ressalva do Ministra Maria Isabel Gallotti: a expressão 'não se admitindo presunção de ciência' impediria o juiz de concluir, no caso concreto, que a vítima já sabia do caráter definitivo da lesão.",
+          "citacao": "",
+          "paragrafos": [
+            115,
+            116
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "fato",
+          "descricao": "O acidente ocorreu e a vítima só obteve laudo do IML quatro anos depois.",
+          "citacao": "",
+          "paragrafos": [
+            48,
+            107
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "O TJMG contou a prescrição a partir do laudo médico, e o acórdão acertou, apesar dos quatro anos entre o acidente e o laudo.",
+          "citacao": "",
+          "paragrafos": [
+            107,
+            110
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Acórdão do TJMG, de 3 anos de prescrição trienal, mantido pelo STJ no caso concreto, com a contagem a partir do laudo médico.",
+          "citacao": "TJ/MG, fl. 184",
+          "paragrafos": [
+            45,
+            110
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Recurso especial da seguradora apontou violação a arts. 193, 206, §3º, IX, e 2.028 do Código Civil e arts. 219, §5º, e 269, IV, do CPC; o relator negou provimento.",
+          "citacao": "CC, arts. 193, 206, §3º, IX, 2.028; CPC, arts. 219, §5º, 269, IV",
+          "paragrafos": [
+            48,
+            110
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11768,
+      "output_tokens": 2355,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002354,
+    "duracaoMs": 9560
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "casoId": "stj-resp-1452840-embargos-terceiro-honorarios",
+  "paragrafos": 118,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial desprovido.",
+      "resumo": "A Fazenda Nacional recorreu contra acórdão que a condenou em honorários advocatícios em embargos de terceiro e alegou violação dos arts. 20, § 4º, e 535 do CPC/1973. O STJ negou provimento ao recurso, por unanimidade, aplicando o princípio da causalidade e o princípio da sucumbência, pois a Fazenda resistiu à pretensão do embargante após ciência da transmissão do imóvel. Foi fixada tese para o art. 1040 do CPC/2015.",
+      "pedidos": [
+        {
+          "descricao": "Reconhecimento de ofensa ao art. 535 do CPC/1973 (omissão no acórdão recorrido).",
+          "paragrafos": [
+            40,
+            50
+          ]
+        },
+        {
+          "descricao": "Afastamento da condenação da Fazenda Nacional em honorários advocatícios, com violação do art. 20, § 4º, do CPC/1973.",
+          "paragrafos": [
+            40,
+            49,
+            52
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 12
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 13,
+          "fim": 16
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 17,
+          "fim": 18
+        },
+        {
+          "tipo": "outro",
+          "inicio": 19,
+          "fim": 22
+        },
+        {
+          "tipo": "cabecalho",
+          "inicio": 23,
+          "fim": 33
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 34,
+          "fim": 43
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 48,
+          "fim": 53
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 54,
+          "fim": 93
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 94,
+          "fim": 94
+        },
+        {
+          "tipo": "outro",
+          "inicio": 97,
+          "fim": 118
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11460,
+      "output_tokens": 3108,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.0027,
+    "duracaoMs": 14734
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "Houve ofensa ao art. 535 do CPC/1973 por omissão do acórdão recorrido?",
+          "conclusao": "Não houve ofensa ao art. 535 do CPC/1973, pois o Tribunal de origem julgou integralmente a lide e solucionou a controvérsia.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            14,
+            50,
+            51,
+            53
+          ],
+          "paragrafosConclusao": [
+            50
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Quem deve arcar com os honorários advocatícios nos embargos de terceiro, quando o adquirente não registrou a transferência do imóvel e a Fazenda Nacional resistiu à pretensão?",
+          "conclusao": "Aplica-se o princípio da causalidade; como a Fazenda resistiu aos embargos após ciência da transmissão, a condenação em honorários foi mantida e o recurso especial foi desprovido.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            52,
+            54,
+            56,
+            57,
+            58,
+            59,
+            90,
+            93
+          ],
+          "paragrafosConclusao": [
+            93,
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11780,
+      "output_tokens": 978,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001667,
+    "duracaoMs": 5451
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "O Tribunal de origem julgou integralmente a lide e solucionou a controvérsia, tal como apresentada.",
+          "citacao": "",
+          "paragrafos": [
+            50
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Não há obrigação de rebater um a um todos os argumentos; o órgão julgador deve enfrentar as questões relevantes e imprescindíveis à resolução da demanda.",
+          "citacao": "CPC/1973, art. 535",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Não é o órgão julgador obrigado a rebater todos os argumentos; deve enfrentar a demanda e as questões relevantes (precedente citado no voto para o mesmo ponto).",
+          "citacao": "REsp 927.216/RS, Segunda Turma, Relatora Ministra Eliana Calmon, DJ de 13/8/2007",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "precedente",
+          "descricao": "Não é o órgão julgador obrigado a rebater todos os argumentos; deve enfrentar a demanda e as questões relevantes (precedente citado no voto para o mesmo ponto).",
+          "citacao": "REsp 855.073/SC, Primeira Turma, Relator Ministro Teori Albino Zavascki, DJ de 28/6/2007",
+          "paragrafos": [
+            51
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "A irresignação da Fazenda relaciona-se ao mérito da demanda, não havendo omissão a ser suprida.",
+          "citacao": "",
+          "paragrafos": [
+            53
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "A Fazenda Nacional reconheceu que não está em discussão o cabimento dos embargos de terceiro, mas apenas a distribuição da sucumbência.",
+          "citacao": "",
+          "paragrafos": [
+            49
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O Tribunal de origem concluiu que a Fazenda Nacional deve arcar com honorários por ter se oposto à pretensão do terceiro embargante, mesmo com provas cristalinas de posse.",
+          "citacao": "",
+          "paragrafos": [
+            52,
+            93
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "A sucumbência, para honorários, deve ter por norte o princípio da causalidade.",
+          "citacao": "Súmula 303/STJ",
+          "paragrafos": [
+            54,
+            82
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "O adquirente que não transcreve o título no cartório expõe o bem à indevida constrição; a omissão em cumprir dever legal não o torna vencedor para fins de sucumbência.",
+          "citacao": "",
+          "paragrafos": [
+            56,
+            57
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Em regra não há condenação da parte embargada quando o imóvel não teve registrada a alteração de titularidade.",
+          "citacao": "",
+          "paragrafos": [
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Excetua-se a hipótese em que o credor, ciente da transmissão, oferece resistência e defende a manutenção da penhora.",
+          "citacao": "",
+          "paragrafos": [
+            59,
+            90
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Acórdão do STJ: a resistência do credor embargado, por contestação, enseja honorários à parte vencedora; afastada a condenação quando não há resistência.",
+          "citacao": "AgRg no REsp 462.647/SC, Rel. Ministro Castro Meira, Segunda Turma, DJ 30/08/2004, p. 244",
+          "paragrafos": [
+            59,
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Afasta-se a Súmula 303/STJ quando o exequente opõe resistência ao mérito dos embargos; honorários de responsabilidade do promitente comprador que não registrou, quando não há resistência.",
+          "citacao": "AgRg no REsp 1282370/PE, Rel. Ministro Benedito Gonçalves, Primeira Turma, DJe 06/03/2012",
+          "paragrafos": [
+            67,
+            68,
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Autor dos embargos, ainda que vencedor, deve arcar com honorários se deixou de registrar a transferência do bem, pelo princípio da causalidade.",
+          "citacao": "EDcl nos EDcl no REsp 375.026/PR, Rel. Ministro Carlos Fernando Mathias, Segunda Turma, DJe 15/04/2008",
+          "paragrafos": [
+            71,
+            72
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Ônus sucumbenciais devem seguir a causalidade; cabível condenação do exequente que apresenta objeção aos embargos após saber da alienação.",
+          "citacao": "REsp 724.341/MG, Rel. Ministra Denise Arruda, Primeira Turma, DJ 12/11/2007, p. 158",
+          "paragrafos": [
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Não pode ser responsabilizado por honorários o credor que indica à penhora imóvel transferido por compromisso não registrado, pois não tinha como conhecer a transmissão.",
+          "citacao": "EREsp 490.605/SC, Rel. Ministro Antônio de Pádua Ribeiro, Corte Especial, DJ 20/09/2004, p. 176",
+          "paragrafos": [
+            14,
+            86,
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Súmula 84/STJ: admissíveis embargos de terceiro fundados em posse de compromisso de compra e venda não registrado.",
+          "citacao": "Súmula 84/STJ",
+          "paragrafos": [
+            14,
+            61
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Como a Fazenda se opôs aos embargos após ciência da transmissão, há conflito de interesses que enseja a sucumbência; recurso especial desprovido.",
+          "citacao": "",
+          "paragrafos": [
+            84,
+            90,
+            93,
+            94
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Tese fixada no rito repetitivo: honorários pela causalidade e exceção quando o credor, ciente da transmissão, resiste à impugnação.",
+          "citacao": "CPC/2015, art. 1040 (antigo art. 543-C, § 7º, do CPC/1973)",
+          "paragrafos": [
+            15,
+            16,
+            94
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11607,
+      "output_tokens": 2290,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002306,
+    "duracaoMs": 9430
+  }
+}

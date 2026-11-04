@@ -1,0 +1,341 @@
+{
+  "casoId": "trt4-ro-0000501-trab",
+  "paragrafos": 47,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso ordinário da primeira reclamada não conhecido quanto à responsabilidade subsidiária da segunda reclamada e não provido no mérito.",
+      "resumo": "A primeira reclamada recorreu da sentença quanto às horas extras e à responsabilidade subsidiária da segunda reclamada. A Turma não conheceu do recurso quanto à responsabilidade subsidiária, por ausência de interesse recursal. No mérito, negou provimento, mantendo a condenação em horas extras e o indeferimento dos reflexos.",
+      "pedidos": [
+        {
+          "descricao": "Exclusão da responsabilidade subsidiária da segunda reclamada.",
+          "paragrafos": [
+            13,
+            20
+          ]
+        },
+        {
+          "descricao": "Reconhecimento da validade do regime de compensação e reforma da condenação em horas extras.",
+          "paragrafos": [
+            28
+          ]
+        },
+        {
+          "descricao": "Na manutenção da condenação, aplicação da Súmula nº 85 do TST e exclusão dos minutos de cada registro de ponto, na forma do art. 58 da CLT.",
+          "paragrafos": [
+            28,
+            30
+          ]
+        },
+        {
+          "descricao": "Exclusão dos reflexos das horas extras no repouso semanal remunerado sobre férias, gratificação natalina, aviso-prévio e FGTS, por bis in idem (OJ nº 394 da SDI-1 do TST).",
+          "paragrafos": [
+            40
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 7,
+          "fim": 8
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 9,
+          "fim": 10
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 11,
+          "fim": 14
+        },
+        {
+          "tipo": "outro",
+          "inicio": 15,
+          "fim": 16
+        },
+        {
+          "tipo": "preliminares",
+          "inicio": 17,
+          "fim": 25
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 26,
+          "fim": 47
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6476,
+      "output_tokens": 1616,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001456,
+    "duracaoMs": 7080
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "A primeira reclamada tem interesse recursal para discutir a responsabilidade subsidiária imputada à segunda reclamada?",
+          "conclusao": "Não conheceu do recurso quanto à responsabilidade subsidiária, por ausência de interesse recursal, pois a imputação não atinge desfavoravelmente a recorrente.",
+          "resultado": "nao_conhecida",
+          "paragrafos": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "paragrafosConclusao": [
+            25
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "É válido o regime de compensação de jornada adotado pela reclamada, e são devidas horas extras com base na contagem minuto a minuto?",
+          "conclusao": "Manteve a sentença que invalidou o regime compensatório por habitualidade de horas extras e reconheceu diferenças de horas extras pela contagem minuto a minuto.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38
+          ],
+          "paragrafosConclusao": [
+            30,
+            37,
+            38
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "merito",
+          "enunciado": "Os reflexos das horas extras no repouso semanal remunerado devem repercutir em férias, gratificação natalina, aviso-prévio e FGTS, sem bis in idem?",
+          "conclusao": "Recurso sem objeto, pois a sentença já indeferira esses reflexos com base na OJ 394 da SDI-1 do TST; nada a alterar.",
+          "resultado": "prejudicada",
+          "paragrafos": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "paragrafosConclusao": [
+            43,
+            45
+          ]
+        },
+        {
+          "id": "Q4",
+          "categoria": "preliminar",
+          "enunciado": "Consideram-se prequestionados, para fins recursais, os dispositivos legais e constitucionais suscitados?",
+          "conclusao": "Teve por prequestionados todos os dispositivos suscitados, por haver tese explícita sobre cada matéria, nos termos da Súmula 297, I, e da OJ 118 da SDI-1 do TST.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            46,
+            47
+          ],
+          "paragrafosConclusao": [
+            47
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6796,
+      "output_tokens": 1193,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001276,
+    "duracaoMs": 5654
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Imputação de responsabilidade subsidiária à segunda reclamada não atinge desfavoravelmente a recorrente, cujas situações fática e processual permanecem inalteradas.",
+          "citacao": "",
+          "paragrafos": [
+            22,
+            23,
+            24,
+            25
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Há interesse recursal apenas quando a parte fica em situação desfavorável por conta do pronunciamento judicial.",
+          "citacao": "",
+          "paragrafos": [
+            23
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Controles de horário das fls. 65 e 77 e ss. são considerados fidedignos e não ilididos por outro meio de prova; reclamante é confessa, com presunção de veracidade.",
+          "citacao": "",
+          "paragrafos": [
+            31
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Cotejo entre controles de horário e recibos de salário demonstra diferenças de horas extras, pois a reclamada não contou todos os minutos registrados.",
+          "citacao": "",
+          "paragrafos": [
+            34,
+            35
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Regime compensatório semanal é inválido porque a reclamante prestou horas extras habitualmente, o que desvirtua sua finalidade.",
+          "citacao": "Súmula 85, IV, do TST",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Autoriza dedução de no máximo cinco minutos nos registros de ponto, observado o limite de dez minutos, na apuração das horas extras.",
+          "citacao": "CLT, art. 58, § 1º",
+          "paragrafos": [
+            34
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Se ultrapassado o limite de dez minutos, considera-se extra a totalidade do tempo que exceder a jornada normal.",
+          "citacao": "Súmula 366 do TST",
+          "paragrafos": [
+            34,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Horas extras habituais descaracterizam o acordo de compensação; devido apenas o adicional sobre horas compensadas, até 44 horas mensais.",
+          "citacao": "Súmula 85, IV, do TST",
+          "paragrafos": [
+            33,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "Pedido sucessivo de adoção da Súmula 85 e exclusão dos minutos já determinados na sentença; recurso sem objeto nesse ponto.",
+          "citacao": "Súmula 85 do TST",
+          "paragrafos": [
+            30,
+            37
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Intervalos intrajornada foram regularmente gozados, não havendo horas extras por esse motivo; diferenças de minutos serão consideradas na apuração.",
+          "citacao": "",
+          "paragrafos": [
+            36
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "Adota-se como razões de decidir os fundamentos da sentença, mantendo-se a condenação ao pagamento de horas extras.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            37,
+            38
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "precedente",
+          "descricao": "Reflexos de horas extras pelo aumento da média remuneratória configuram bis in idem; majoração do RSR não repercute em férias, gratificação natalina, aviso-prévio e FGTS.",
+          "citacao": "OJ nº 394 da SDI-1 do TST",
+          "paragrafos": [
+            41,
+            42
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Sentença já indeferiu expressamente os reflexos pleiteados, razão pela qual o recurso fica sem objeto.",
+          "citacao": "",
+          "paragrafos": [
+            43,
+            44,
+            45
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Tese explícita sobre cada matéria basta para considerar prequestionados os dispositivos suscitados.",
+          "citacao": "Súmula 297, I, do TST",
+          "paragrafos": [
+            47
+          ]
+        },
+        {
+          "questao": "Q4",
+          "tipo": "precedente",
+          "descricao": "Consideram-se prequestionados dispositivos legais e constitucionais suscitados, mesmo não expressamente mencionados.",
+          "citacao": "OJ nº 118 da SDI-1 do TST",
+          "paragrafos": [
+            47
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 6853,
+      "output_tokens": 1513,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001442,
+    "duracaoMs": 6528
+  }
+}
