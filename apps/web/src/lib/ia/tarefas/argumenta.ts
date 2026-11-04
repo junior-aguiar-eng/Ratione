@@ -49,7 +49,7 @@ const MAX_PARAGRAFOS_LISTA = 80;
 const limitarLista = (v: unknown): unknown => (Array.isArray(v) ? v.slice(0, MAX_PARAGRAFOS_LISTA) : v);
 const Paragrafos = (minimo = 0) => z.preprocess(limitarLista, z.array(z.number().int()).min(minimo).max(MAX_PARAGRAFOS_LISTA));
 const analiseDe = (d: { analiseId: string }) => d.analiseId;
-const VERSAO = 'v4-2026-11-03';
+const VERSAO = 'v5-2026-11-04';
 const paragrafosJson = (descricao: string) => ({ type: 'array', items: { type: 'integer' }, description: descricao });
 
 // ─── Etapa 1: estrutura ───────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ O que preencher:
 
 Sobre a seção dispositivo (é a parte que mais importa marcar com precisão):
 - Marque sempre uma seção dispositivo. É a parte que decide, do parágrafo-título ("Dispositivo", "Ante o exposto") até a última linha que decide. Não inclui a fórmula de encerramento ("É como voto"), nem local, data, assinatura, cabeçalho ou rodapé de página.
-- Sentença: o dispositivo é o trecho que julga (condena, absolve, julga procedente ou improcedente) e fixa as obrigações. Providências finais (execução imediata, comunicações, custas, intimações, "publique-se") não são o dispositivo.
+- Sentença: o dispositivo é o trecho que julga (condena, absolve, julga procedente ou improcedente) e fixa as obrigações. Providências finais (execução imediata, comunicações, custas, intimações, "publique-se", seção "Considerações finais") não são o dispositivo. O dispositivo é o parágrafo com "julgo procedente", "condeno" ou "absolvo", mesmo quando vem antes da dosimetria da pena (sentença do júri).
 - Peça de parte ou do Ministério Público (denúncia, recurso, embargos, contrarrazões, petição): a peça não decide nada, e o dispositivo é o requerimento final, do "Ante o exposto, requer…" ou "Pede" até o último pedido. Não deixe de marcá-lo só porque a peça não é uma decisão.
 
 ${REGRAS}`;
