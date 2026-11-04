@@ -62,7 +62,7 @@ jobs:
       # e a rota liga; com qualquer outro valor o segredo nem é referenciado e a rota responde 503 (docs/produto/EXPLICACAO_IA.md).
       - name: Cloud Run
         run: |
-          SEGREDOS="SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest"
+          SEGREDOS="SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest,DOCUMENTOS_LIMPEZA_SEGREDO=documentos-limpeza-segredo:latest"
           IA="IA_EXPLICACAO_LIGADA=nao"
           if [ "${{ vars.IA_EXPLICACAO }}" = "sim" ]; then
             SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
@@ -79,13 +79,20 @@ jobs:
             SEGREDOS="$SEGREDOS,MERCADOPAGO_ACCESS_TOKEN=mercadopago-access-token:latest,MERCADOPAGO_WEBHOOK_SECRET=mercadopago-webhook-secret:latest"
             COBRANCA="COBRANCA_LIGADA=sim@COBRANCA_AMBIENTE=${{ vars.COBRANCA_AMBIENTE || 'teste' }}@COBRANCA_TESTE_EMAILS=${{ vars.COBRANCA_TESTE_EMAILS }}"
           fi
+          # Documentos enviados (F5-01): o segredo da faxina vai sempre (a rota apaga o que já foi guardado, mesmo com o envio desligado);
+          # a chave de cifra e a flag só com a variável ARGUMENTA_UPLOAD = sim, e só depois das condições da seção 7 do RIPD.
+          DOCUMENTOS="ARGUMENTA_UPLOAD_LIGADO=nao"
+          if [ "${{ vars.ARGUMENTA_UPLOAD }}" = "sim" ]; then
+            SEGREDOS="$SEGREDOS,DOCUMENTOS_CHAVE=documentos-chave:latest"
+            DOCUMENTOS="ARGUMENTA_UPLOAD_LIGADO=sim"
+          fi
           gcloud run deploy "$SERVICO" \
             --project "${{ vars.GCP_PROJECT_ID }}" \
             --region "$REGIAO" \
             --image "${{ steps.imagem.outputs.nome }}" \
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
             --set-secrets "$SEGREDOS" \
-            --update-env-vars "^@^${IA}@${COBRANCA}@${ADMIN}" \
+            --update-env-vars "^@^${IA}@${COBRANCA}@${ADMIN}@${DOCUMENTOS}" \
             --allow-unauthenticated \
             --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \
