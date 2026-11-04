@@ -6,7 +6,7 @@ Modelo: **claude-sonnet-5-5** · casos avaliados: **30** de 30 validados
 
 | Métrica | Resultado |
 |---|---|
-| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 22 de 30 (73,3%) |
+| Intervalo do dispositivo certo (sobreposição ≥ 80%) | 23 de 30 (76,7%) |
 | Questões esperadas encontradas (cobertura dos parágrafos ≥ 50%) | 82 de 101 (81,2%) |
 | Citações esperadas encontradas | 135 de 192 (70,3%) |
 | Saídas descartadas pelo código | 0 de 90 (0,0%) |
@@ -38,7 +38,7 @@ Total da rodada: **US$ 2,8812** · médio por decisão avaliada: **US$ 0,0960** 
 | stj-resp-1192556-trib | 81 | errado (40,0%) | 1/1 (+1) | 5/9 | ok / ok / ok | US$ 0,0697 |
 | stj-resp-1267995-desistencia-acao | 80 | errado (62,5%) | 2/2 | 2/2 | ok / ok / ok | US$ 0,0898 |
 | stj-resp-1349059-adm | 114 | certo | 1/1 (+1) | 3/6 | ok / ok / ok | US$ 0,1013 |
-| stj-resp-1362524-penal | 129 | errado (33,3%) | 3/3 | 5/5 | ok / ok / ok | US$ 0,1047 |
+| stj-resp-1362524-penal | 129 | certo | 3/3 | 5/5 | ok / ok / ok | US$ 0,1047 |
 | stj-resp-1388030-civil | 149 | errado (37,5%) | 2/2 (+1) | 2/2 | ok / ok / ok | US$ 0,0962 |
 | stj-resp-1452840-embargos-terceiro-honorarios | 118 | certo | 2/2 | 6/6 | ok / ok / ok | US$ 0,1002 |
 | tjal-apelacao-saude-uniao | 148 | errado (66,7%) | 3/3 | 5/6 | ok / ok / ok | US$ 0,1888 |
