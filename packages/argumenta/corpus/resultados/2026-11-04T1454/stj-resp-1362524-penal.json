@@ -1,0 +1,351 @@
+{
+  "casoId": "stj-resp-1362524-penal",
+  "paragrafos": 129,
+  "estrutura": {
+    "estado": "ok",
+    "saida": {
+      "tipo": "acordao",
+      "resultado": "Recurso especial provido para restabelecer a condenação do recorrido pelo delito de falsa identidade (art. 307 do CP).",
+      "resumo": "O Ministério Público de Minas Gerais recorreu de acórdão que absolveu [PARTE_1] do crime de falsa identidade, por entender que a conduta foi autodefesa. A Terceira Seção do STJ, por unanimidade, deu provimento ao recurso e considerou típica a atribuição de falsa identidade perante autoridade policial, mesmo em alegada autodefesa. O julgamento foi submetido ao rito dos recursos repetitivos.",
+      "pedidos": [
+        {
+          "descricao": "Reconhecimento do crime de falsa identidade (art. 307 do CP) e restabelecimento da condenação do recorrido.",
+          "paragrafos": [
+            35,
+            71,
+            72
+          ]
+        },
+        {
+          "descricao": "Afastamento da tese de autodefesa, por ser o crime formal e consumado mesmo com a posterior revelação do nome verdadeiro.",
+          "paragrafos": [
+            33
+          ]
+        },
+        {
+          "descricao": "Em caráter subsidiário, aplicação do entendimento do STF no RE 640.139, que teria reconhecido a repercussão geral em sentido contrário ao acórdão recorrido.",
+          "paragrafos": [
+            34
+          ]
+        }
+      ],
+      "secoes": [
+        {
+          "tipo": "cabecalho",
+          "inicio": 1,
+          "fim": 6
+        },
+        {
+          "tipo": "ementa",
+          "inicio": 7,
+          "fim": 9
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 10,
+          "fim": 14
+        },
+        {
+          "tipo": "relatorio",
+          "inicio": 19,
+          "fim": 43
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 48,
+          "fim": 70
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 72,
+          "fim": 74
+        },
+        {
+          "tipo": "fundamentacao",
+          "inicio": 79,
+          "fim": 102
+        },
+        {
+          "tipo": "dispositivo",
+          "inicio": 103,
+          "fim": 103
+        },
+        {
+          "tipo": "outro",
+          "inicio": 107,
+          "fim": 129
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11723,
+      "output_tokens": 2799,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002572,
+    "duracaoMs": 19173
+  },
+  "questoes": {
+    "estado": "ok",
+    "saida": {
+      "questoes": [
+        {
+          "id": "Q1",
+          "categoria": "preliminar",
+          "enunciado": "O recurso especial do Ministério Público preenche os requisitos de admissibilidade e deve ser conhecido?",
+          "conclusao": "O recurso foi conhecido pela alínea a, por ser tempestivo, regularmente proposto, com instância esgotada e matéria prequestionada, sem reexame de provas.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            48
+          ],
+          "paragrafosConclusao": [
+            48
+          ]
+        },
+        {
+          "id": "Q2",
+          "categoria": "merito",
+          "enunciado": "Atribuir-se falsa identidade perante autoridade policial, no momento da prisão em flagrante, é conduta típica do art. 307 do CP mesmo quando alegada como autodefesa?",
+          "conclusao": "A conduta é típica, pois o princípio da autodefesa não alcança quem atribui falsa identidade para ocultar maus antecedentes; a absolvição do acórdão recorrido foi reformada.",
+          "resultado": "acolhida",
+          "paragrafos": [
+            49,
+            50,
+            55,
+            59,
+            65,
+            67,
+            82,
+            103
+          ],
+          "paragrafosConclusao": [
+            59,
+            71,
+            72
+          ]
+        },
+        {
+          "id": "Q3",
+          "categoria": "preliminar",
+          "enunciado": "A Súmula 126/STJ impede o exame da questão federal neste recurso especial?",
+          "conclusao": "A Súmula 126/STJ foi afastada, pois o acórdão recorrido não se assentou em fundamento constitucional suficiente para impedir o exame do art. 307 do CP.",
+          "resultado": "rejeitada",
+          "paragrafos": [
+            70
+          ],
+          "paragrafosConclusao": [
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 12043,
+      "output_tokens": 1336,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.001872,
+    "duracaoMs": 6703
+  },
+  "fundamentos": {
+    "estado": "ok",
+    "saida": {
+      "fundamentos": [
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Conhecimento do recurso pela alínea a por ser tempestivo, regularmente proposto, com instância esgotada e matéria prequestionada.",
+          "citacao": "",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "argumento",
+          "descricao": "Não há reexame de provas, pois a questão federal está embasada no acórdão impugnado e os fatos são os conhecidos na instância ordinária.",
+          "citacao": "",
+          "paragrafos": [
+            48
+          ]
+        },
+        {
+          "questao": "Q1",
+          "tipo": "norma",
+          "descricao": "Recurso fundado no art. 105, III, a, da Constituição Federal.",
+          "citacao": "CF, art. 105, III, a",
+          "paragrafos": [
+            20,
+            48
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Art. 307 do Código Penal, aplicado à atribuição de falsa identidade perante autoridade policial.",
+          "citacao": "CP, art. 307",
+          "paragrafos": [
+            49,
+            50,
+            59
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "RE 640.139/DF, com repercussão geral: o STF afirmou que a autodefesa (art. 5º, LXIII, CF) não alcança quem se atribui falsa identidade para ocultar maus antecedentes, sendo típica a conduta.",
+          "citacao": "RE n. 640.139/DF, DJe 14/10/2011",
+          "paragrafos": [
+            8,
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "norma",
+          "descricao": "Princípio constitucional da autodefesa, que não alcança a atribuição de falsa identidade para ocultar maus antecedentes.",
+          "citacao": "CF, art. 5º, LXIII",
+          "paragrafos": [
+            55
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "doutrina",
+          "descricao": "Nucci: a falsa identidade é crime formal e não se estende a garantia da ampla defesa a falsear a própria identidade, por ofender a fé pública e a disciplina social.",
+          "citacao": "NUCCI, Gulherme de Sousa. Código Penal Comentado. 11ª ed., São Paulo: Ed. RT, 2012, pág. 1.132 e 1.133",
+          "paragrafos": [
+            58
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no AgRg no AREsp 185.094/DF (Quinta Turma): atribuir falsa identidade para ocultar maus antecedentes é típico, mesmo sob alegação de autodefesa.",
+          "citacao": "AgRg no AgRg no AREsp n. 185.094/DF, DJe 22/3/2013",
+          "paragrafos": [
+            65,
+            66,
+            67,
+            68
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "HC 196.305 (Ministro Og Fernandes): cita-se em apoio ao entendimento de que a conduta é típica; a decisão não descreve a tese em detalhe.",
+          "citacao": "HC n. 196.305, Ministro Og Fernandes, DJe 15/3/2013",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "HC 179.707 (Ministra Marilza Maynard): citado em apoio ao entendimento de que a conduta é típica.",
+          "citacao": "HC n. 179.707, Ministra Marilza Maynard, DJe 4/3/2013",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "AgRg no REsp 1.350.825 (Ministro Jorge Mussi): citado em apoio ao entendimento de que a conduta é típica.",
+          "citacao": "AgRg no REsp n. 1.350.825, Ministro Jorge Mussi, DJe 7/3/2013",
+          "paragrafos": [
+            69
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "HC 188.937/SP (Quinta Turma): atribuição de falsa identidade para ocultar antecedentes, mesmo com alegação de autodefesa, configura conduta típica.",
+          "citacao": "STJ, HC 188.937/SP, Rel. Ministro Marco Aurélio Bellizze, Quinta Turma, DJe 11/05/2012",
+          "paragrafos": [
+            82,
+            101
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "precedente",
+          "descricao": "HC 151.802/MS (Sexta Turma): atribuir falsa identidade para eximir-se de responsabilidade é típico; a tese de autodefesa é inaplicável.",
+          "citacao": "STJ, HC 151.802/MS, Rel. Ministra Maria Thereza de Assis Moura, Sexta Turma, DJe 30/04/2012",
+          "paragrafos": [
+            82,
+            102
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "fato",
+          "descricao": "O réu, preso em flagrante, atribuiu-se falsamente o nome de outra pessoa, confessado nos autos, e depois foi indiciado com o nome correto.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "prova",
+          "descricao": "Confissão do réu sobre a atribuição de nome falso, constante às fls. 6/6v. e 67/67v.",
+          "citacao": "",
+          "paragrafos": [
+            30,
+            52
+          ]
+        },
+        {
+          "questao": "Q2",
+          "tipo": "argumento",
+          "descricao": "A conduta é típica, pois o acórdão a quo contraria o entendimento do STJ e do STF; a absolvição foi afastada e a condenação restabelecida.",
+          "citacao": "",
+          "paragrafos": [
+            59,
+            71,
+            72
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "Súmula 126/STJ, afastada nesta decisão.",
+          "citacao": "Súmula 126/STJ",
+          "paragrafos": [
+            70
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "argumento",
+          "descricao": "Súmula 126 afastada porque o acórdão a quo não se assentou expressamente em dispositivo constitucional, limitando-se a negar vigência ao art. 307 do CP.",
+          "citacao": "",
+          "paragrafos": [
+            70
+          ]
+        },
+        {
+          "questao": "Q3",
+          "tipo": "norma",
+          "descricao": "O acórdão a quo mencionou, de forma suplementar, preceitos de índole supralegal e constitucional, sem fundamento constitucional suficiente para impedir o exame.",
+          "citacao": "",
+          "paragrafos": [
+            70
+          ]
+        }
+      ]
+    },
+    "uso": {
+      "input_tokens": 11975,
+      "output_tokens": 2189,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0
+    },
+    "custoUsd": 0.002292,
+    "duracaoMs": 8131
+  }
+}
