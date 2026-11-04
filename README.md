@@ -11,7 +11,7 @@ Quatro ferramentas para a prática forense: cálculo determinístico onde há re
 [![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
 
-[**Acessar o site**](https://ratione.nexojuris.ia.br) · [Plano do projeto](docs/PLANO.md) · [Metodologia](apps/web/src/app/metodologia)
+[**Acessar o site**](https://ratione.nexojuris.ia.br) · [Plano do projeto](docs/PLANO.md) · [Documentação](docs/README.md) · [Metodologia](apps/web/src/app/metodologia)
 
 </div>
 
@@ -42,7 +42,7 @@ Cálculo de prazos processuais com **memória auditável**: o resultado mostra a
 - **Prazos materiais** (mandado de segurança e ação rescisória) calculados à parte: decadência não se suspende.
 - **Calendário forense em camadas:** regras de contagem, prazos diferenciados (Fazenda, MP, Defensoria, litisconsortes), feriados nacionais, suspensões, recesso e eventos locais. Cada dia não útil aponta o ato de origem (ato, URL e data).
 - **Modo conservador:** mostra a data mais cedo, com base verificada, e avisa qual dia pendente poderia alterá-la.
-- **Calendários conferidos em 2026:** STF, STJ, TJSP, TJMG e TJAL. Os demais ficam `pendente` e aparecem apenas como data alternativa.
+- **Calendários de 2026 carregados** para STF, STJ, TST, os 6 TRFs, os 27 Tribunais de Justiça e os 24 TRTs, cada um com a fonte registrada. Onde o ato do tribunal ainda não foi lido por inteiro, o calendário fica sem selo e aparece apenas como data alternativa. Os atos de 2027 dependem das portarias que ainda vão sair.
 - **Feriado municipal:** não é calculado por padrão; o sistema avisa e exige comprovação (CPC, art. 1.003, § 6º).
 - Adição do prazo ao calendário e lembretes por conta.
 
@@ -50,7 +50,7 @@ Cálculo de prazos processuais com **memória auditável**: o resultado mostra a
 
 A **linha do tempo de cada norma**. "Como era o art. X em maio de 2019?" é um resultado determinístico, nunca gerado por IA.
 
-- **28 normas** (CF, códigos e leis de maior uso), fragmentadas em artigo, parágrafo, inciso e alínea (parser LC 95/1998), com texto lido da versão compilada do Planalto.
+- **28 normas** (CF, códigos e leis de maior uso), com cerca de **29 mil dispositivos** fragmentados em artigo, parágrafo, inciso e alínea (parser LC 95/1998), com texto lido da versão compilada do Planalto.
 - **Pesquisa** por lei, artigo ou assunto (`art. 489 CPC`, `honorários advocatícios`), sem acento e por proximidade.
 - **Texto vigente, redações anteriores e o que mudou**, com a alteração legislativa que causou a mudança. As redações anteriores só aparecem depois de conferidas por revisor jurídico (57 casos validados).
 - **Relações entre dispositivos** (remissões) com ligação ao artigo de destino.
@@ -70,13 +70,15 @@ O **grafo de precedentes** com o corpus declarado e a data da última atualizaç
 
 ### ⚖️ Argumenta
 
-Análise de uma decisão colada em texto, sem upload e sem guardar o documento.
+Análise de uma decisão colada em texto. Por enquanto, sem envio de arquivos e sem guardar o documento nem o resultado.
 
 - **Visão geral, estrutura e questões:** tipo e resultado da decisão, as partes (relatório, preliminares, fundamentação, dispositivo) e, para cada questão, a conclusão, o tratamento da alegação e os fundamentos (fato, prova, norma, precedente, doutrina, argumento).
 - **Leitura com origem sob demanda:** cada ponto leva ao trecho original, destacado no texto da decisão.
 - **Pseudonimização sempre ligada:** os dados pessoais são substituídos no navegador e a tabela de equivalência nunca sai dele.
 - **Segmentação de PDF do PJe:** remove rodapés e junta frases cortadas.
 - **Selo das citações:** cada norma ou precedente citado é conferido por código contra o NormaViva e o TeseMap e recebe **Encontrada na base** (com link), **Não localizada na base** ou **Fora da base**. O selo diz só se a citação existe na base; não atesta que esteja correta, e só a citação (nunca o texto da decisão) é consultada.
+- **Medido, não presumido:** em 30 decisões públicas com gabarito conferido por revisor jurídico, o modelo acertou o dispositivo em **26**, achou **91 de 101** questões e **160 de 192** citações esperadas, com **0 de 90** saídas descartadas, a cerca de **US$ 0,006 por análise** ([avaliação](docs/produto/ARGUMENTA_AVALIACAO.md)). A amostra é pequena e o resultado oscila entre rodadas: serve para decidir o que melhorar, não é garantia de acerto.
+- **Envio de arquivos (PDF, DOCX) em preparação, desligado:** a base de armazenamento (cifrado, apagado sozinho em 7 dias, excluído com a conta) está pronta, mas só vai ao ar depois de a leitura do texto e das condições do [relatório de impacto](docs/juridico/RIPD_ARGUMENTA.md) estarem cumpridas.
 - Em construção: fragilidades da fundamentação (CPC, art. 489, § 1º) e mapa de argumentos.
 
 ---
@@ -95,12 +97,12 @@ Análise de uma decisão colada em texto, sem upload e sem guardar o documento.
 
 ## Por que confiar nos resultados
 
-- **Prazos conferidos por um oráculo independente.** Um programa em Python, sem código em comum com o motor, confere **121 cenários fixos** e **600 entradas aleatórias**, além de testes de propriedades. Os 121 cenários foram validados por revisão jurídica em 07/10/2026 ([`REVISAO_CENARIOS.md`](docs/produto/REVISAO_CENARIOS.md)).
+- **Prazos conferidos por um oráculo independente.** Um programa em Python, sem código em comum com o motor, confere **415 cenários fixos** e **600 entradas aleatórias**, além de testes de propriedades. Os 415 cenários foram validados um a um por revisão jurídica ([`REVISAO_CENARIOS.md`](docs/produto/REVISAO_CENARIOS.md)).
 - **Sem mock.** NormaViva e TeseMap leem dados reais; cada registro guarda a fonte oficial e a data de leitura.
 - **Validação humana no que é jurídico.** Redação anterior, relação do grafo e calendário só entram depois de conferidos por uma pessoa e registrados em [`VERIFICACAO_FONTES.md`](docs/produto/VERIFICACAO_FONTES.md).
 - **Só a versão compilada da lei.** Trecho tachado nunca é fonte de regra.
 - **A IA não decide o direito.** Ela converte, explica e resume; quem soma os dias e escolhe a redação vigente é código.
-- **A IA é medida, não presumida.** Há ferramentas para avaliar a extração do Argumenta (dispositivo, questões e citações) contra decisões públicas com gabarito conferido por revisor jurídico, com custo por análise ([`packages/argumenta/corpus/LEIA-ME.md`](packages/argumenta/corpus/LEIA-ME.md)). O corpus ainda está em formação, então **não há métrica de acerto publicada**.
+- **A IA é medida, não presumida.** A extração do Argumenta (dispositivo, questões e citações) é avaliada contra 30 decisões públicas com gabarito conferido por revisor jurídico, e os resultados, com o custo por análise, estão publicados com seus limites ([`ARGUMENTA_AVALIACAO.md`](docs/produto/ARGUMENTA_AVALIACAO.md); fluxo em [`corpus/LEIA-ME.md`](packages/argumenta/corpus/LEIA-ME.md)). Cada resultado de IA traz o parágrafo de origem, e cada citação recebe um selo de conferência por código.
 
 ---
 
@@ -120,7 +122,7 @@ Ratione/
 ├── supabase/
 │   ├── migrations/      # Esquema do banco, aplicado à mão no SQL Editor
 │   └── correcoes/       # Correções de dados do NormaViva
-├── docs/                # Plano, método, fontes, IA, cobrança e minutas jurídicas
+├── docs/                # Plano, método, fontes, IA, cobrança, operação e minutas jurídicas (índice em docs/README.md)
 └── .github/workflows/   # CI, deploy e atualização diária de normas e TeseMap
 ```
 
@@ -166,16 +168,17 @@ O passo a passo do Supabase (projeto, migrações, e-mail e cargas de dados) est
 
 | Documento | Conteúdo |
 |---|---|
+| [`docs/README.md`](docs/README.md) | **Mapa da documentação:** o que cada documento é e como mantê-los |
 | [`docs/PLANO.md`](docs/PLANO.md) | **Plano único:** produto, decisões, roteiro e estado de cada item |
 | [`docs/produto/METODO_CALENDARIO_FORENSE.md`](docs/produto/METODO_CALENDARIO_FORENSE.md) | Método do calendário forense e checklist por tribunal |
 | [`docs/produto/VERIFICACAO_FONTES.md`](docs/produto/VERIFICACAO_FONTES.md) | Fontes lidas e o que ainda falta conferir |
-| [`docs/produto/ARGUMENTA.md`](docs/produto/ARGUMENTA.md) | Análise de decisão: fluxo, etapas e privacidade |
+| [`docs/produto/ARGUMENTA.md`](docs/produto/ARGUMENTA.md) · [`ARGUMENTA_AVALIACAO.md`](docs/produto/ARGUMENTA_AVALIACAO.md) | Análise de decisão (fluxo, etapas e privacidade) e a avaliação com 30 decisões |
 | [`docs/produto/IA_TAREFAS.md`](docs/produto/IA_TAREFAS.md) · [`IA_E_PRECIFICACAO.md`](docs/produto/IA_E_PRECIFICACAO.md) | Catálogo de tarefas de IA, custos e cotas |
 | [`docs/produto/PLANOS_E_COBRANCA.md`](docs/produto/PLANOS_E_COBRANCA.md) | Planos, uso transparente e cobrança (F8) |
 | [`docs/produto/DESIGN_SYSTEM.md`](docs/produto/DESIGN_SYSTEM.md) | Sistema visual: tokens, componentes, névoa de fundo e elevação |
 | [`supabase/LEIA-ME.md`](supabase/LEIA-ME.md) | Banco: índice das migrações, cargas de dados e limpeza por prazo |
 | [`docs/deploy`](docs/deploy) | Deploy no Cloud Run, alertas e o que configurar para a IA não parar |
-| [`docs/juridico`](docs/juridico) | Minutas de termos, privacidade, cookies e IA, para revisão por advogado, e a [`AUDITORIA_BETA.md`](docs/juridico/AUDITORIA_BETA.md), que liga cada afirmação das páginas públicas à sua comprovação no código |
+| [`docs/juridico`](docs/juridico) | Minutas de termos, privacidade, cookies e IA, para revisão por advogado; o [relatório de impacto do Argumenta](docs/juridico/RIPD_ARGUMENTA.md) (LGPD, art. 38); e a [`AUDITORIA_BETA.md`](docs/juridico/AUDITORIA_BETA.md), que liga cada afirmação das páginas públicas à sua comprovação no código |
 
 ---
 
@@ -186,9 +189,9 @@ O passo a passo do Supabase (projeto, migrações, e-mail e cargas de dados) est
 | PrazoZero | Em produção. Fechado no que depende do projeto; faltam os atos de 2027 |
 | NormaViva | Em produção, com atualização diária das normas |
 | TeseMap | Em produção, com verificação semanal das fontes |
-| Argumenta | Em construção: estrutura, questões, fundamentos e selo das citações prontos; fragilidades e mapa a seguir. Corpus de avaliação em formação |
+| Argumenta | Em produção (beta): estrutura, questões, fundamentos e selo das citações, avaliados com 30 decisões. Em construção: fragilidades e mapa de argumentos. Envio de arquivos (PDF, DOCX): base pronta e **desligada**, até a leitura do texto e as condições do relatório de impacto |
 | Planos e cobrança | Planos e cota por análise em produção; **cobrança desligada** até a ativação comercial |
-| Dados e privacidade | Limpeza diária por prazo em produção; Política de Privacidade v1.2 no ar |
+| Dados e privacidade | Limpeza diária por prazo em produção; Política de Privacidade v1.2 no ar; relatório de impacto do Argumenta (minuta) confirmado pelo responsável |
 
 O roteiro completo, com o estado de cada item, está no [`PLANO.md`](docs/PLANO.md#10-roteiro-e-estado).
 
