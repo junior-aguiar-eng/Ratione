@@ -66,9 +66,9 @@ preço_mínimo = (custo_IA_máximo + custo_fixo_por_cliente
 
 | Item | Valor | Fonte |
 |---|---|---|
-| Custo médio da análise rápida (3 chamadas) | **~US$ 0,004** (cálculo com os preços do Haiku 5.5 em `politica.ts` e ~12 mil tokens de entrada e ~4,5 mil de saída por análise). O Console da Anthropic mostrou **US$ 0,01** no mês depois de 4 análises e 2 explicações, arredondado em centavos e com atraso na página de uso: confere na ordem de grandeza. **Confirmar com a média de `ia_uso`** quando houver algumas dezenas de análises | cálculo em 23/10/2026 |
+| Custo médio da análise rápida (3 chamadas) | **US$ 0,0057 medido** em 04/11/2026 com as 30 decisões do corpus (F5-05; US$ 0,172 no total; de US$ 0,0024 numa decisão de 29 parágrafos a US$ 0,0128 numa de 348), a 20 de 30 e depois a 26 de 30 acertos no dispositivo; antes disso, **~US$ 0,004** (cálculo com os preços do Haiku 5.5 em `politica.ts` e ~12 mil tokens de entrada e ~4,5 mil de saída por análise). O Console da Anthropic mostrou **US$ 0,01** no mês depois de 4 análises e 2 explicações, arredondado em centavos e com atraso na página de uso: confere na ordem de grandeza. **Confirmar com a média de `ia_uso`** quando houver algumas dezenas de análises | cálculo em 23/10/2026 |
 | Custo médio da explicação de dispositivo (1 chamada) | **~US$ 0,0005** | idem |
-| Custo médio da análise completa | **medir** (preço do Sonnet 5.5: conferir na página de preços da Anthropic e registrar em `politica.ts`) | idem, após a F5-05 |
+| Custo médio da análise completa | **Sonnet 5.5 nas mesmas 3 etapas: US$ 0,096 medido** em 03/11/2026 (17 vezes o Haiku; US$ 2,88 nas 30 decisões; preço registrado em `politica.ts`), **sem** as etapas 5 a 9, que ainda não existem e somarão custo | [relatório da rodada](../../packages/argumenta/corpus/resultados/2026-11-03T1618/relatorio.md) |
 | Taxa do Mercado Pago | **conferir na sua conta** (varia por meio de pagamento e prazo de recebimento) | painel do Mercado Pago |
 | Impostos e nota fiscal | **depende de como você vai faturar** (pessoa física, MEI ou empresa) | contador (T-01) |
 | Margem alvo | você define | — |
@@ -77,15 +77,15 @@ Pelo desenho (cotas fixas por nível), o **pior caso de custo por cliente é con
 
 ### 3.1 Pior caso de custo de IA por cliente, por mês
 
-Com US$ 0,004 por análise rápida e US$ 0,0005 por explicação:
+Com o custo **medido** de US$ 0,0057 por análise rápida (média do corpus) e US$ 0,0005 por explicação (cálculo de 23/10/2026; falta medir). A coluna "no teto" usa o maior custo visto no corpus, US$ 0,0128 (decisão de 348 parágrafos), para toda a cota:
 
 | Plano | Rápidas | Explicações | Completas | **Custo máximo** |
 |---|---|---|---|---|
-| Gratuito (4,3 semanas) | 13 × 0,004 = US$ 0,05 | 43 × 0,0005 = US$ 0,02 | — | **~US$ 0,07** (cerca de R$ 0,40) |
-| Essencial | 40 × 0,004 = US$ 0,16 | 200 × 0,0005 = US$ 0,10 | — | **~US$ 0,26** |
-| Profissional | 150 × 0,004 = US$ 0,60 | 500 × 0,0005 = US$ 0,25 | 25 × (custo da completa) | **US$ 0,85 + 25 completas** |
+| Gratuito (4,3 semanas) | 13 × 0,0057 = US$ 0,07 | 43 × 0,0005 = US$ 0,02 | — | **~US$ 0,09** (no teto: US$ 0,19) |
+| Essencial | 40 × 0,0057 = US$ 0,23 | 200 × 0,0005 = US$ 0,10 | — | **~US$ 0,33** (no teto: US$ 0,61) |
+| Profissional | 150 × 0,0057 = US$ 0,86 | 500 × 0,0005 = US$ 0,25 | 25 × (custo da completa) | **US$ 1,11 + 25 completas** (no teto: US$ 2,17 + 25 completas) |
 
-Para a completa, o custo do Sonnet ainda não está medido. **Só para dimensionar**, se ela custar de 15 a 40 vezes uma rápida (um multiplicador hipotético, não um preço), o Profissional custa no máximo de US$ 2,4 a US$ 4,9 por cliente por mês. Pelos preços que eu estimo para o plano, isso deixa uma margem folgada, mas só dá para afirmar com o preço real do Sonnet.
+Para a completa, o custo do Sonnet com as mesmas 3 etapas está medido (US$ 0,096). **Se a completa for só isso**, 25 por mês custam US$ 2,40 e o Profissional custa no máximo **cerca de US$ 3,5 por cliente por mês** (no teto de tamanho: cerca de US$ 4,6, supondo o Sonnet no maior caso a 17 vezes o Haiku). As etapas 5 a 9 ainda não existem e vão somar custo: reconferir quando existirem. O preço em reais depende do câmbio, da taxa do Mercado Pago, dos impostos e da margem (T-04), que são decisões suas.
 
 ### 3.2 Teto de gasto
 
@@ -93,7 +93,7 @@ Para a completa, o custo do Sonnet ainda não está medido. **Só para dimension
 
 | Fundo | Paga o uso de | Teto mensal hoje | O que acontece quando acaba |
 |---|---|---|---|
-| `gratuito` | quem está no plano Gratuito | **US$ 15** (cobre ~200 contas gratuitas gastando a cota inteira; muito mais com uso normal) | **Só o gratuito pausa** até o dia 1º; os pagantes seguem. A cota da semana do cliente **não é gasta** |
+| `gratuito` | quem está no plano Gratuito | **US$ 15** (cobre ~160 contas gratuitas gastando a cota inteira, com o custo medido de 04/11/2026; muito mais com uso normal) | **Só o gratuito pausa** até o dia 1º; os pagantes seguem. A cota da semana do cliente **não é gasta** |
 | `pagantes` | quem tem plano pago | **US$ 5** (o piso, igual ao teto único de antes: ainda não há receita nem pagantes) | Só os pagantes pausam; o gratuito segue |
 
 - **Quando decide:** o fundo é o do plano em vigor no momento da reserva (`ia_uso.fundo`). O mês é o de Brasília. Uma análise nova já é barrada ao iniciar, **sem reservar vaga**, com mensagem própria de cada fundo; uma análise em andamento é barrada na reserva se o custo máximo da chamada não couber no que sobra.
@@ -168,6 +168,8 @@ Migrações do painel e do tamanho aplicadas no projeto remoto Ratione em 24/10/
 1. Reunir as 30 decisões do corpus (F5-05), **incluindo acórdãos longos e complexos**, não só sentenças curtas.
 2. Rodar as mesmas decisões em Haiku e Sonnet e conferir contra o esperado validado por você (intervalo do dispositivo, questões, fundamentos, taxa de saídas descartadas).
 3. Se a diferença for pequena, o nível completa usa o Haiku com as etapas extras. Se for grande nas decisões longas, usa o Sonnet.
+
+**Resultado (04/11/2026), nas 30 decisões:** o Sonnet 5.5 custou 17 vezes mais (US$ 0,096 contra US$ 0,0057 por decisão) e **não acertou mais**: questões 82 de 101 contra 91 de 101, citações 135 de 192 contra 160 de 192, e dispositivo 22 de 30 contra 26 a 29 de 30 (o Sonnet rodou com uma versão da instrução depois corrigida; recalculado com a métrica nova). **Decisão do responsável: Haiku.** O nível completa, quando existir, parte do Haiku com as etapas extras; o Sonnet só volta se uma etapa nova (5 a 9) mostrar ganho medido.
 4. Gemini e ChatGPT ficam fora da primeira versão: exigem um cliente novo, esquema de saída próprio, contrato e RIPD por provedor (transferência internacional, LGPD art. 33). Reabrir só se os números do corpus justificarem.
 
 ## 7. Cobrança com Mercado Pago
