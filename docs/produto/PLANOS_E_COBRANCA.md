@@ -38,7 +38,7 @@ A completa **não existe até haver conteúdo que a justifique**: hoje ela seria
 | Histórico de consumo | 30 dias | 12 meses | 12 meses |
 | Exportar histórico (CSV) | — | sim | sim |
 | Ferramentas sem IA (PrazoZero, NormaViva, TeseMap) | todas, uso razoável | todas | todas |
-| Preço | R$ 0 | R$ **[A DEFINIR]**/mês | R$ **[A DEFINIR]**/mês |
+| Preço (**proposta aprovada pelo responsável em 04/11/2026**, cobrança desligada; ver §3.3) | R$ 0 | R$ **39,90**/mês | R$ **79,90**/mês no lançamento e R$ **99,90**/mês quando a análise completa existir (quem entrou antes: a decidir) |
 
 Por que subiram em relação à primeira proposta (1 por semana, 20 e 60 por mês): o custo de uma análise rápida com o Haiku é da ordem de **US$ 0,004**, então o limite deixou de ser custo e passou a ser **abuso e valor percebido**. O gratuito precisa permitir **avaliar o produto de verdade** (três análises por semana dão para testar em decisões diferentes), e os planos pagos precisam parecer folgados para quem trabalha com processos todos os dias.
 
@@ -70,7 +70,7 @@ preço_mínimo = (custo_IA_máximo + custo_fixo_por_cliente
 | Custo médio da explicação de dispositivo (1 chamada) | **~US$ 0,0005** | idem |
 | Custo médio da análise completa | **Sonnet 5.5 nas mesmas 3 etapas: US$ 0,096 medido** em 03/11/2026 (17 vezes o Haiku; US$ 2,88 nas 30 decisões; preço registrado em `politica.ts`), **sem** as etapas 5 a 9, que ainda não existem e somarão custo | [relatório da rodada](../../packages/argumenta/corpus/resultados/2026-11-03T1618/relatorio.md) |
 | Taxa do Mercado Pago | **conferir na sua conta** (varia por meio de pagamento e prazo de recebimento) | painel do Mercado Pago |
-| Impostos e nota fiscal | **depende de como você vai faturar** (pessoa física, MEI ou empresa) | contador (T-01) |
+| Impostos e nota fiscal | **Microempresa no Simples Nacional**: desenvolvimento e licenciamento de programas (SaaS) **não consta** do Anexo XI da Resolução CGSN 140/2018 (ocupações permitidas ao MEI), conferido na versão da Receita em 04/11/2026. Alíquota: percentual do faturamento (Anexo III ou V, conforme o Fator R), **a confirmar com o contador**; mais o custo do contador | contador (T-01) |
 | Margem alvo | você define | — |
 
 Pelo desenho (cotas fixas por nível), o **pior caso de custo por cliente é conhecido de antemão**: é a cota inteira usada. Isso é o que permite um preço fixo sem créditos. Créditos com pesos só entram se, depois do beta, os clientes pedirem flexibilidade entre os níveis.
@@ -86,6 +86,23 @@ Com o custo **medido** de US$ 0,0057 por análise rápida (média do corpus) e U
 | Profissional | 150 × 0,0057 = US$ 0,86 | 500 × 0,0005 = US$ 0,25 | 25 × (custo da completa) | **US$ 1,11 + 25 completas** (no teto: US$ 2,17 + 25 completas) |
 
 Para a completa, o custo do Sonnet com as mesmas 3 etapas está medido (US$ 0,096). **Se a completa for só isso**, 25 por mês custam US$ 2,40 e o Profissional custa no máximo **cerca de US$ 3,5 por cliente por mês** (no teto de tamanho: cerca de US$ 4,6, supondo o Sonnet no maior caso a 17 vezes o Haiku). As etapas 5 a 9 ainda não existem e vão somar custo: reconferir quando existirem. O preço em reais depende do câmbio, da taxa do Mercado Pago, dos impostos e da margem (T-04), que são decisões suas.
+
+### 3.3 Preços propostos (04/11/2026)
+
+Proposta **aprovada pelo responsável**; a cobrança segue **desligada** até o T-01 (CNPJ) e a confirmação dos impostos.
+
+| Plano | Preço | Custo de IA por cliente (uso normal; pior caso) | Taxa do Mercado Pago (~5%) | Sobra no pior caso, antes de imposto e custo fixo |
+|---|---|---|---|---|
+| Gratuito | R$ 0 | ~R$ 0,50 | — | custa ~R$ 0,50 |
+| Essencial | **R$ 39,90** | ~R$ 1,70; ~R$ 3,20 | ~R$ 2,00 | ~R$ 34,70 |
+| Profissional (sem a completa) | **R$ 79,90** | ~R$ 5,80; ~R$ 10 | ~R$ 4,00 | ~R$ 66 |
+| Profissional (com 25 completas, quando existirem) | **R$ 99,90** | ~R$ 18; ~R$ 40 | ~R$ 5,00 | ~R$ 55 |
+
+- **Premissas** (a conferir): dólar a ~R$ 5,20 (mediana do Focus para o fim de 2026); taxa de ~5% do Mercado Pago em assinatura (as fontes dão de 3,99% a 4,99%, conforme o prazo para receber: **confirmar no painel**); custo fixo de infraestrutura na faixa de R$ 300 por mês (estimativa, a confirmar).
+- **Referência de mercado** (fontes fragmentadas, não confirmadas na página dos fornecedores): IA jurídica para advogado autônomo entre R$ 149 e R$ 249,90 por mês, e o Astrea a partir de ~R$ 157 por mês. O Ratione é mais estreito (analisa decisões, prazos, normas e precedentes; não gerencia processos) e atende estudantes, por isso fica bem abaixo.
+- **Ponto de equilíbrio:** com contador e infraestrutura (uns R$ 500 por mês), cerca de **15 assinantes do Essencial**, antes do imposto percentual.
+- **Imposto:** o MEI **não** é opção (a atividade não consta do Anexo XI). Vale a microempresa no Simples Nacional, com alíquota percentual a confirmar. Perguntas para o contador: qual CNAE para o Ratione (o 6203-1/00 é o mais citado para software padronizado por assinatura), Anexo III ou V, e quanto custa a contabilidade. A nova lei do MEI (PLP 186/2026, sancionada em 21/10/2026, teto de R$ 110 mil em 2027 e R$ 140 mil em 2028) **não muda isso**.
+- **Plano anual** (2 meses de desconto) e **pacote avulso** ficam para depois do lançamento.
 
 ### 3.2 Teto de gasto
 
