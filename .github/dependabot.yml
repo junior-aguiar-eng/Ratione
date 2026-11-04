@@ -1,0 +1,30 @@
+# Atualizações de versão (as de segurança já vêm ligadas no repositório). Uma rodada por semana, agrupada, para não gerar um PR por pacote.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: America/Maceio
+    open-pull-requests-limit: 3
+    groups:
+      dependencias:
+        patterns: ['*']
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
