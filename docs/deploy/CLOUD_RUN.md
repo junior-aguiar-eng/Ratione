@@ -138,20 +138,20 @@ No Git Bash do Windows, rodar os comandos no PowerShell: o Git Bash reescreve ca
 
 ## Documentos enviados (F5-01) — ainda desligado
 
-O envio de documentos do Argumenta existe no código, mas **fica inerte** até os passos abaixo (e até as condições da seção 7 do [RIPD](../juridico/RIPD_ARGUMENTA.md)). Em 04/11/2026 o responsável aplicou a migração e pausou o restante: **o `deploy.yml` não referencia estes segredos**, então publicar o código não depende deles e nada quebra. Retomar quando for ligar o envio.
+O envio de documentos do Argumenta existe no código, mas **fica inerte** até os passos abaixo (e até as condições da seção 7 do [RIPD](../juridico/RIPD_ARGUMENTA.md)). Em 04/11/2026 o responsável aplicou a migração e criou os dois segredos, com permissão de leitura da conta de execução (conferidos por leitura: cada um tem uma versão ativa e o papel *Secret Accessor* só para `ratione-web`). Falta o agendador e, só depois do RIPD, ligar o envio.
 
 1. **Migração (aplicada em 04/11/2026):** `supabase/migrations/20261104000001_documentos.sql` no SQL Editor; conferir que o bucket `documentos` existe e é **privado**.
-2. **Segredos no Google Cloud (criados em 04/11/2026)**, legíveis só pela conta de execução do Cloud Run, como os de lembretes: `documentos-chave` (32 bytes aleatórios em base64) e `documentos-limpeza-segredo` (32 caracteres ou mais). Guarde uma cópia da chave fora do Git: **sem ela os arquivos guardados não decifram**.
+2. **Segredos no Google Cloud (criados em 04/11/2026)**, legíveis só pela conta de execução do Cloud Run, como os de lembretes: `documento-chave` (assim mesmo, no singular: foi o nome criado em 04/11/2026; 32 bytes aleatórios em base64) e `documentos-limpeza-segredo` (32 caracteres ou mais). Guarde uma cópia da chave fora do Git: **sem ela os arquivos guardados não decifram**.
 ```bash
-openssl rand -base64 32 | tr -d '\n' | gcloud secrets create documentos-chave --data-file=-
+openssl rand -base64 32 | tr -d '\n' | gcloud secrets create documento-chave --data-file=-
 openssl rand -base64 48 | tr -d '\n' | gcloud secrets create documentos-limpeza-segredo --data-file=-
 ```
 3. **Permissão de leitura** pela conta de execução do Cloud Run, **antes** de publicar o `deploy.yml` (sem ela a publicação falha; no PowerShell, defina `$GCP_RUNTIME_SA` antes):
 ```bash
-gcloud secrets add-iam-policy-binding documentos-chave --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+gcloud secrets add-iam-policy-binding documento-chave --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
 gcloud secrets add-iam-policy-binding documentos-limpeza-segredo --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
 ```
-4. **`deploy.yml` (a fazer, só depois dos passos 1 a 3; o responsável decidiu pausar em 04/11/2026):** deve passar **sempre** o `documentos-limpeza-segredo` (a faxina apaga o que já foi guardado, mesmo com o envio desligado) e só passa a chave de cifra e `ARGUMENTA_UPLOAD_LIGADO=sim` quando a variável do repositório `ARGUMENTA_UPLOAD` vale `sim` (*Settings → Variables*). **Só ligue depois do RIPD.**
+4. **`deploy.yml` (feito em 04/11/2026, depois dos passos 1 a 3):** passa **sempre** o `documentos-limpeza-segredo` (a faxina apaga o que já foi guardado, mesmo com o envio desligado) e só passa a chave de cifra e `ARGUMENTA_UPLOAD_LIGADO=sim` quando a variável do repositório `ARGUMENTA_UPLOAD` vale `sim` (*Settings → Variables*). **Só ligue depois do RIPD.**
 5. **Agendador** (a cada hora; a faxina funciona mesmo com o envio desligado, então crie-o **antes** de ligar e **depois** da publicação do passo 4). No PowerShell:
 ```powershell
 $segredo = (gcloud secrets versions access latest --secret=documentos-limpeza-segredo)
