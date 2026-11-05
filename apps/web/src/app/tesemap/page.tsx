@@ -187,14 +187,14 @@ export default function TeseMapPage() {
       {erro && <Notice tom="warn" titulo="Não consegui ler o TeseMap">{erro}</Notice>}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-4">
-        <section className="lg:col-span-4 flex flex-col gap-2" aria-label="Resultados" aria-live="polite">
+        <section className="lg:col-span-3 flex flex-col gap-2 lg:sticky lg:top-24" aria-label="Resultados" aria-live="polite">
           <p className="text-sm text-ink-mute">
             {buscando ? 'Pesquisando…' : `${lista.length}${lista.length === 40 ? '+' : ''} de ${total.toLocaleString('pt-BR')} · mais recentemente julgados primeiro`}
           </p>
           {!buscando && lista.length === 0 ? (
             <EmptyState titulo="Nada encontrado">Tente o número do tema (ex.: 1076) ou uma palavra da tese.</EmptyState>
           ) : (
-            <ul className="flex flex-col gap-2 lg:max-h-[720px] lg:overflow-y-auto pr-1">
+            <ul className="flex flex-col gap-2 lg:max-h-[calc(100vh-11rem)] lg:overflow-y-auto pr-1">
               {lista.map(n => (
                 <li key={n.id}>
                   <button
@@ -213,72 +213,74 @@ export default function TeseMapPage() {
           )}
         </section>
 
-        <div className="lg:col-span-8 flex flex-col gap-6">
+        <div className="lg:col-span-9 flex flex-col gap-6 min-w-0">
           {!noId && <EmptyState titulo="Escolha um precedente">Pesquise ou escolha um item da lista para ver a tese, a fonte e as relações validadas.</EmptyState>}
           {noId && abrindo && !no && <p className="text-sm text-ink-soft">Abrindo…</p>}
           {noId && !abrindo && !aberto && !erro && <Notice tom="info" titulo="Precedente não encontrado">Este precedente não está na base ou ainda não passou pela validação.</Notice>}
 
           {aberto && no && (
-            <CartaoDeLeitura aria-label="Precedente selecionado">
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="warn">{especieDoNo(no)?.curto ?? ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
-                  {no.detalhes.vinculante === true && <Badge variant="brand">Vinculante</Badge>}
-                  {texto(no.detalhes.situacao) && <Badge variant="neutral">{texto(no.detalhes.situacao)}</Badge>}
-                </div>
-                <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{no.rotulo}</h2>
-                <p className="text-sm text-ink-mute">{[no.tribunal, resumoDoNo(no, dataCurta)].filter(Boolean).join(' · ')}</p>
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 items-start">
+              <div className="xl:col-span-2 flex flex-col gap-6 min-w-0">
+                <CartaoDeLeitura aria-label="Precedente selecionado">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge variant="warn">{especieDoNo(no)?.curto ?? ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
+                      {no.detalhes.vinculante === true && <Badge variant="brand">Vinculante</Badge>}
+                      {texto(no.detalhes.situacao) && <Badge variant="neutral">{texto(no.detalhes.situacao)}</Badge>}
+                    </div>
+                    <h2 className="font-serif text-2xl font-semibold text-ink leading-snug">{no.rotulo}</h2>
+                    <p className="text-sm text-ink-mute">{[no.tribunal, resumoDoNo(no, dataCurta)].filter(Boolean).join(' · ')}</p>
+                  </div>
+    
+                  {texto(no.detalhes.questao) && (
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-sm font-semibold text-ink">Questão submetida a julgamento</h3>
+                      <p className="text-base text-ink-soft leading-relaxed">{texto(no.detalhes.questao)}</p>
+                    </div>
+                  )}
+    
+                  {no.detalhes.teseFirmada === false ? (
+                    <Notice tom="info" titulo="Sem tese firmada">
+                      O STF não informou uma tese para este tema: o mérito está pendente, a repercussão geral foi negada ou a tese não foi informada. A questão acima é a que o tribunal registra. Consulte o processo no portal do STF.
+                    </Notice>
+                  ) : (
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-sm font-semibold text-ink">{no.tipo === 'sumula' ? 'Enunciado' : 'Tese firmada'}</h3>
+                      <p className="font-serif text-lg text-ink leading-[1.7] border-l-2 border-brand pl-5 whitespace-pre-line" data-testid="tese-firmada">
+                        {no.descricao}
+                      </p>
+                    </div>
+                  )}
+    
+                  <div className="border-t border-line pt-4 flex flex-col gap-3 text-sm text-ink-mute" data-testid="fonte">
+                    {no.fontes.map(f => (
+                      <p key={f.id} className="[overflow-wrap:anywhere]">
+                        Fonte:{' '}
+                        <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-brand-text underline underline-offset-2">
+                          {f.ato}
+                        </a>
+                        . Consultada em {dataCurta(f.lidoEm)}.
+                      </p>
+                    ))}
+                    {no.validado_por && <p>Validado por {no.validado_por} em {dataCurta(no.validado_em ?? no.atualizado_em)}.</p>}
+                    <p>Confira a tese na fonte oficial do tribunal antes de citá-la.</p>
+                    <Button variant="secondary" type="button" onClick={salvar} className="w-full sm:w-auto sm:self-start">
+                      {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
+                      {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
+                    </Button>
+                  </div>
+                </CartaoDeLeitura>
+                <RelacaoComOCaso key={`relacao-${no.id}`} ferramenta="tesemap" destinoId={no.id} />
               </div>
-
-              {texto(no.detalhes.questao) && (
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-sm font-semibold text-ink">Questão submetida a julgamento</h3>
-                  <p className="text-base text-ink-soft leading-relaxed">{texto(no.detalhes.questao)}</p>
-                </div>
-              )}
-
-              {no.detalhes.teseFirmada === false ? (
-                <Notice tom="info" titulo="Sem tese firmada">
-                  O STF não informou uma tese para este tema: o mérito está pendente, a repercussão geral foi negada ou a tese não foi informada. A questão acima é a que o tribunal registra. Consulte o processo no portal do STF.
-                </Notice>
-              ) : (
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-sm font-semibold text-ink">{no.tipo === 'sumula' ? 'Enunciado' : 'Tese firmada'}</h3>
-                  <p className="font-serif text-lg text-ink leading-[1.7] border-l-2 border-brand pl-5 whitespace-pre-line" data-testid="tese-firmada">
-                    {no.descricao}
-                  </p>
-                </div>
-              )}
-
-              <div className="border-t border-line pt-4 flex flex-col gap-3 text-sm text-ink-mute" data-testid="fonte">
-                {no.fontes.map(f => (
-                  <p key={f.id} className="[overflow-wrap:anywhere]">
-                    Fonte:{' '}
-                    <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-brand-text underline underline-offset-2">
-                      {f.ato}
-                    </a>
-                    . Consultada em {dataCurta(f.lidoEm)}.
-                  </p>
-                ))}
-                {no.validado_por && <p>Validado por {no.validado_por} em {dataCurta(no.validado_em ?? no.atualizado_em)}.</p>}
-                <p>Confira a tese na fonte oficial do tribunal antes de citá-la.</p>
-                <Button variant="secondary" type="button" onClick={salvar} className="w-full sm:w-auto sm:self-start">
-                  {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                  {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
-                </Button>
-              </div>
-            </CartaoDeLeitura>
-
-          )}
-
-          {aberto && no && <RelacaoComOCaso key={`relacao-${no.id}`} ferramenta="tesemap" destinoId={no.id} />}
-
-          {aberto && no && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start" aria-label="Contexto do precedente" role="group">
-              <LigacoesEntreTribunais ligados={ligados} onAbrir={setNoId} />
-              <AplicacaoDoTema no={no} />
-              <Atalhos no={no} />
-              <DadosComplementares no={no} />
+              <aside
+                className="xl:col-span-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4 items-start xl:sticky xl:top-24 xl:max-h-[calc(100vh-7rem)] xl:overflow-y-auto xl:pb-2"
+                aria-label="Contexto do precedente"
+              >
+                <LigacoesEntreTribunais ligados={ligados} onAbrir={setNoId} />
+                <AplicacaoDoTema no={no} />
+                <Atalhos no={no} />
+                <DadosComplementares no={no} />
+              </aside>
             </div>
           )}
 
@@ -366,8 +368,8 @@ function DadosComplementares({ no }: { no: NoTese }) {
   if (rg.length > 0) linhas.push(['Repercussão geral no STF', rg.map(r => `Tema ${r.numero}${r.descricao ? `: ${r.descricao}` : ''}`).join(' | ')]);
   if (linhas.length === 0) return null;
   return (
-    <CartaoDeContexto titulo="Dados do julgamento" className="md:col-span-2 text-sm">
-      <dl className="grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-2">
+    <CartaoDeContexto titulo="Dados do julgamento" className="md:col-span-2 xl:col-span-1 text-sm">
+      <dl className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-[11rem_1fr] xl:grid-cols-1 xl:gap-y-0.5 xl:[&>dd]:mb-2">
         {linhas.map(([k, v]) => (
           <React.Fragment key={k}>
             <dt className="text-ink-mute">{k}</dt>
