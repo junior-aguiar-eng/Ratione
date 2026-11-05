@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Badge } from '@/components/ui/badge';
-import { cardClasses } from '@/components/ui/card';
+import { CartaoDeContexto, CartaoDeLeitura } from '@/components/Cartoes';
 import { cn } from '@/lib/utils';
 
 const ROTULO_TIPO: Record<string, string> = {
@@ -215,7 +215,7 @@ export default function TeseMapPage() {
           {noId && !abrindo && !aberto && !erro && <Notice tom="info" titulo="Precedente não encontrado">Este precedente não está na base ou ainda não passou pela validação.</Notice>}
 
           {aberto && no && (
-            <article className={cn(cardClasses, 'p-6 flex flex-col gap-6')} aria-label="Precedente selecionado">
+            <CartaoDeLeitura aria-label="Precedente selecionado">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="warn">{especieDoNo(no)?.curto ?? ROTULO_TIPO[no.tipo] ?? no.tipo}</Badge>
@@ -246,14 +246,6 @@ export default function TeseMapPage() {
                 </div>
               )}
 
-              <LigacoesEntreTribunais ligados={ligados} onAbrir={setNoId} />
-
-              <DadosComplementares no={no} />
-
-              <AplicacaoDoTema no={no} />
-
-              <Atalhos no={no} />
-
               <div className="border-t border-line pt-4 flex flex-col gap-3 text-sm text-ink-mute" data-testid="fonte">
                 {no.fontes.map(f => (
                   <p key={f.id} className="[overflow-wrap:anywhere]">
@@ -271,7 +263,17 @@ export default function TeseMapPage() {
                   {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
                 </Button>
               </div>
-            </article>
+            </CartaoDeLeitura>
+
+          )}
+
+          {aberto && no && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start" aria-label="Contexto do precedente" role="group">
+              <LigacoesEntreTribunais ligados={ligados} onAbrir={setNoId} />
+              <AplicacaoDoTema no={no} />
+              <Atalhos no={no} />
+              <DadosComplementares no={no} />
+            </div>
           )}
 
           {aberto && no && (
@@ -298,8 +300,7 @@ function AplicacaoDoTema({ no }: { no: NoTese }) {
   const a = aplicacaoDoNo(no);
   if (!a) return null;
   return (
-    <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="aplicacao-do-tema">
-      <h3 className="text-sm font-semibold text-ink">Aplicação pelo STF (devoluções à origem)</h3>
+    <CartaoDeContexto titulo="Aplicação pelo STF (devoluções à origem)" data-testid="aplicacao-do-tema" className="text-sm">
       <p className="text-ink">{textoDoTotalDeAplicacao(a)}</p>
       {/* A divisão por ano só aparece quando os anos são comparáveis: com um ano claramente incompleto nos dados abertos, ela confunde mais do que informa */}
       {a.total > 0 && a.anosPossivelmenteIncompletos.length === 0 && (
@@ -311,15 +312,14 @@ function AplicacaoDoTema({ no }: { no: NoTese }) {
       <p className="text-xs text-ink-mute">
         Conta as decisões dos dados abertos do STF que devolveram processos ao tribunal de origem pelo regime da repercussão geral citando este tema. Não é o total de citações do tema na jurisprudência.
       </p>
-    </div>
+    </CartaoDeContexto>
   );
 }
 
 function LigacoesEntreTribunais({ ligados, onAbrir }: { ligados: NoLigado[]; onAbrir: (id: string) => void }) {
   if (ligados.length === 0) return null;
   return (
-    <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="ligacoes-tribunais">
-      <h3 className="text-sm font-semibold text-ink">Ligações registradas pelas fontes</h3>
+    <CartaoDeContexto titulo="Ligações registradas pelas fontes" data-testid="ligacoes-tribunais" className="text-sm">
       <ul className="flex flex-wrap gap-2">
         {ligados.map(l => (
           <li key={l.id}>
@@ -330,7 +330,7 @@ function LigacoesEntreTribunais({ ligados, onAbrir }: { ligados: NoLigado[]; onA
         ))}
       </ul>
       <p className="text-xs text-ink-mute">São as ligações que o próprio tribunal registra: o STJ, no arquivo de precedentes qualificados; o STF, na observação da súmula. Não são relações validadas do mapa.</p>
-    </div>
+    </CartaoDeContexto>
   );
 }
 
@@ -360,14 +360,16 @@ function DadosComplementares({ no }: { no: NoTese }) {
   if (rg.length > 0) linhas.push(['Repercussão geral no STF', rg.map(r => `Tema ${r.numero}${r.descricao ? `: ${r.descricao}` : ''}`).join(' | ')]);
   if (linhas.length === 0) return null;
   return (
-    <dl className="grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-2 text-sm border-t border-line pt-4">
-      {linhas.map(([k, v]) => (
-        <React.Fragment key={k}>
-          <dt className="text-ink-mute">{k}</dt>
-          <dd className="text-ink">{v}</dd>
-        </React.Fragment>
-      ))}
-    </dl>
+    <CartaoDeContexto titulo="Dados do julgamento" className="md:col-span-2 text-sm">
+      <dl className="grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-2">
+        {linhas.map(([k, v]) => (
+          <React.Fragment key={k}>
+            <dt className="text-ink-mute">{k}</dt>
+            <dd className="text-ink">{v}</dd>
+          </React.Fragment>
+        ))}
+      </dl>
+    </CartaoDeContexto>
   );
 }
 
@@ -376,10 +378,9 @@ function Atalhos({ no }: { no: NoTese }) {
   const link = texto(no.detalhes.linkOficial);
   if (citacoes.length === 0 && !link) return null;
   return (
-    <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm">
+    <CartaoDeContexto titulo={citacoes.length > 0 ? 'Dispositivos citados (NormaViva)' : 'Fonte oficial'} className="text-sm">
       {citacoes.length > 0 && (
         <div className="flex flex-col gap-1">
-          <h3 className="text-sm font-semibold text-ink">Dispositivos que a tese ou a questão citam (NormaViva)</h3>
           <ul className="flex flex-wrap gap-2">
             {citacoes.map(c => (
               <li key={`${c.dispositivoId}|${c.detalhe ?? ''}`}>
@@ -399,6 +400,6 @@ function Atalhos({ no }: { no: NoTese }) {
           {texto(no.detalhes.linkOficial)?.includes('stf.jus.br') ? 'Consultar no portal do STF' : 'Consultar no site do STJ'}
         </a>
       )}
-    </div>
+    </CartaoDeContexto>
   );
 }

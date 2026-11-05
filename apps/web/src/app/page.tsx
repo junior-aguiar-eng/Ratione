@@ -72,7 +72,7 @@ export default function HomePage() {
           {[
             ['28', 'normas federais, com a redação ao longo do tempo'],
             ['7.700+', 'precedentes, temas e súmulas do STJ e do STF'],
-            ['121', 'cenários de prazo conferidos por revisão jurídica']
+            ['415', 'cenários de prazo conferidos por revisão jurídica']
           ].map(([numero, rotulo]) => (
             <div key={rotulo} className="rounded-xl border border-line bg-surface/70 backdrop-blur-sm shadow-card px-4 py-3.5">
               <dt className="font-serif text-3xl font-semibold text-ink num">{numero}</dt>

@@ -19,6 +19,7 @@ import {
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
+import { CartaoDeLeitura } from '../../components/Cartoes';
 import EmptyState from '../../components/EmptyState';
 import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
@@ -430,7 +431,7 @@ export default function PrazoZeroPage() {
                   alterar o prazo.
                 </p>
               </div>
-              <section className="flex flex-col gap-5">
+              <CartaoDeLeitura aria-label="Prazo final" className="gap-5 print:shadow-none print:border-0 print:p-0">
                 <div>
                   <p className="text-sm font-medium text-ink-mute">Prazo final</p>
                   <p className="font-serif text-4xl sm:text-5xl font-semibold text-ink leading-tight sm:leading-none mt-1">
@@ -535,11 +536,11 @@ export default function PrazoZeroPage() {
                     {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
                   </Button>
                 </div>
-              </section>
+              </CartaoDeLeitura>
 
               <AvisoPorEmail tituloPadrao={`${nomeAto} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataVencimentoFinal} />
 
-              <section className="border-t border-line pt-7 flex flex-col gap-5">
+              <section aria-label="Como foi calculado" className="bg-surface border border-line rounded-xl shadow-card p-5 sm:p-7 flex flex-col gap-5 print:shadow-none print:border-0 print:p-0">
                 <div className="flex items-end justify-between gap-4">
                   <div>
                     <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>

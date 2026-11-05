@@ -38,7 +38,11 @@ Tokens novos em `globals.css`: `--color-ia`, `--color-ia-text`, `--color-ia-tint
 
 **NormaViva (fases 1 e 2):** os resultados da pesquisa viraram fichas (`ResultadosDaBusca.tsx`): o mesmo artigo em várias normas vira uma linha de fichas pela sigla da norma (`siglaDaNorma`), e uma pesquisa por assunto vira uma lista compacta, de uma linha por resultado, com rolagem própria. O artigo aberto ocupa a tela, com a coluna de contexto ao lado.
 
-**Argumenta (fase 3):** o texto completo da decisão fica num `CartaoDeLeitura` e a análise (visão geral, estrutura, questões e fundamentos, mapa) num único `CartaoDeIA`, sem recuo, porque os dois ficam lado a lado. No computador o texto abre ao lado da análise (coluna fixa de 5/12 da largura, com rolagem própria); no celular, o texto vem em cima e a análise logo abaixo, e "Ocultar texto" continua recolhendo só a leitura, nunca a análise. Próximas fases: TeseMap e PrazoZero, e a página inicial como painel das ferramentas.
+**Argumenta (fase 3):** o texto completo da decisão fica num `CartaoDeLeitura` e a análise (visão geral, estrutura, questões e fundamentos, mapa) num único `CartaoDeIA`, sem recuo, porque os dois ficam lado a lado. No computador o texto abre ao lado da análise (coluna fixa de 5/12 da largura, com rolagem própria); no celular, o texto vem em cima e a análise logo abaixo, e "Ocultar texto" continua recolhendo só a leitura, nunca a análise.
+
+**TeseMap e PrazoZero (fase 4):** no TeseMap, a tese e a questão ficam no `CartaoDeLeitura` e o que as acompanha (ligações registradas pelas fontes, aplicação pelo STF, dispositivos citados, dados do julgamento) vira `CartaoDeContexto`, em duas colunas abaixo da tese em vez de uma lista longa dentro do mesmo cartão. No PrazoZero, o prazo final, as datas e os avisos ficam num `CartaoDeLeitura`, e "Como foi calculado" num cartão próprio (na impressão, sem sombra nem borda). Nenhum conteúdo foi recolhido.
+
+**Página inicial (fase 5):** já funcionava como painel das quatro ferramentas (demonstração, cartões por ferramenta e recentes); só o número de cenários de prazo foi corrigido, de 121 para 415, o total hoje validado.
 
 ## Componentes
 
