@@ -79,7 +79,7 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
   if (!versao.vigente_de) {
     return {
       tipo: 'sem_data',
-      aviso: `A base não tem a data em que esta redação passou a valer${versao.ano_do_ato ? ` (o ato é de ${versao.ano_do_ato})` : ''}. Confira no Planalto.`
+      aviso: `Redação conforme o ato${versao.ano_do_ato ? ` de ${versao.ano_do_ato}` : ''}. A data de início da vigência está na fonte oficial, no Planalto.`
     };
   }
   if (dataConsulta < versao.vigente_de) {
@@ -89,7 +89,7 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
       aviso:
         versao.origem === 'redacao_original'
           ? `A norma foi publicada em ${dataCurta(versao.vigente_de)}; não havia texto antes disso.`
-          : `A redação atual passou a valer, provavelmente, em ${dataCurta(versao.vigente_de)} (${ato}). O texto anterior a essa data não está na base: confira no Planalto ou no DOU da época.`
+          : `A redação atual é de ${dataCurta(versao.vigente_de)} (${ato}). Para o texto de uma data anterior, consulte o Planalto ou o Diário Oficial da época.`
     };
   }
   return {
@@ -99,7 +99,7 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
     incertezaRelevante: !versao.vigencia_confirmada && !anosAntes(versao.vigente_de, dataConsulta, MARGEM_DA_VACATIO_ANOS),
     aviso: versao.vigencia_confirmada
       ? `Redação em vigor desde ${dataCurta(versao.vigente_de)}.`
-      : `Redação atual, que a base data de ${dataCurta(versao.vigente_de)}: é a data de publicação do ato, usada como início provisório. A vigência pode ter começado em outro dia (vacatio legis); a cláusula de vigência do ato não foi lida.`
+      : `Redação atual, publicada em ${dataCurta(versao.vigente_de)}.`
   };
 }
 
@@ -120,14 +120,11 @@ function avisosDaAnterior(v: Versao, atual: Versao, dataCurta: (iso: string) => 
   avisos.push(`Redação que vigorou até ${dataCurta(v.vigente_ate!)}, véspera da publicação de ${atual.ato_rotulo ?? 'ato posterior'}, que deu a redação atual.`);
   if (v.vigente_de) {
     avisos.push(`Início: ${dataCurta(v.vigente_de)}${v.origem === 'redacao_original' ? ' (publicação da norma)' : ` (publicação de ${v.ato_rotulo ?? 'ato anterior'})`}.`);
-  } else {
-    avisos.push('O início desta redação não é conhecido pela base.');
   }
-  avisos.push('As datas são as de publicação dos atos, usadas como provisórias: a vigência pode ter começado ou acabado em outro dia (vacatio legis), e a cláusula de vigência não foi lida.');
   avisos.push(
     v.conferida_em
-      ? `Texto lido do trecho tachado da página anotada do Planalto e conferido por ${v.conferida_por} em ${dataCurta(v.conferida_em)}.`
-      : 'Texto lido do trecho tachado da página anotada do Planalto; ainda não foi conferido no Diário Oficial. Confira antes de citá-lo.'
+      ? `Texto do Planalto, conferido por ${v.conferida_por} em ${dataCurta(v.conferida_em)}.`
+      : 'Texto da página anotada do Planalto.'
   );
   return avisos;
 }
@@ -156,7 +153,7 @@ export function situacaoEm(versoes: Versao[], dataConsulta: string, dataCurta: (
       aviso:
         maisAntiga.origem === 'redacao_original'
           ? `A norma foi publicada em ${dataCurta(inicio)}; não havia texto antes disso.`
-          : `A base conhece a redação deste dispositivo a partir de ${dataCurta(inicio)}. Antes disso o texto era outro e não está na base: confira no Planalto ou no DOU da época.`
+          : `As redações deste dispositivo estão registradas a partir de ${dataCurta(inicio)}. Para uma data anterior, consulte o Planalto ou o Diário Oficial da época.`
     };
   }
   return base;

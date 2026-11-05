@@ -29,12 +29,12 @@ describe('Apresentação do NormaViva', () => {
     ]);
   });
 
-  it('data a partir da vigência provisória: texto da base com aviso de que a vigência não está confirmada', () => {
+  it('data a partir da vigência provisória: a tela mostra só a data de publicação, sem expressão de dúvida', () => {
     const s = situacaoNaData(versao({}), '2026-10-19', dc);
     assert.strictEqual(s.tipo, 'redacao_atual');
     assert.ok(s.tipo === 'redacao_atual' && s.provisoria);
     assert.match(s.aviso, /03\/06\/2022/);
-    assert.match(s.aviso, /vacatio legis/);
+    assert.doesNotMatch(s.aviso, /vacatio|provis|cláusula|não foi lida|pode ter/i);
   });
 
   it('o aviso de vigência provisória só vale perto do início: passados 3 anos da publicação, a dúvida não muda a resposta', () => {
@@ -59,7 +59,8 @@ describe('Apresentação do NormaViva', () => {
   it('data ANTES da redação atual: nunca mostra a redação atual como se fosse a da época', () => {
     const s = situacaoNaData(versao({}), '2019-05-10', dc);
     assert.strictEqual(s.tipo, 'texto_da_epoca_indisponivel');
-    assert.match(s.aviso, /não está na base/);
+    assert.match(s.aviso, /Planalto/);
+    assert.doesNotMatch(s.aviso, /provavelmente|não está na base/i);
   });
 
   it('redação original antes da publicação da norma: não havia texto', () => {

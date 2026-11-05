@@ -506,7 +506,7 @@ export default function PrazoZeroPage() {
                     ))}
                   </Notice>
                 ) : (
-                  <Notice tom="info" titulo="Calendário do tribunal em conferência">
+                  <Notice tom="info" titulo={`Calendário do ${tribunalId}`}>
                     {avisosGerais.map(a => (
                       <p key={a} className="mb-1 last:mb-0">
                         {a}

@@ -41,7 +41,7 @@ describe('Consulta temporal com várias redações (F3-04)', () => {
     assert.equal(situacaoEm(versoes, '2026-10-21', dc)?.tipo, 'redacao_atual');
   });
 
-  it('na véspera, vale a redação anterior, com texto da época, datas provisórias e aviso de não conferida', () => {
+  it('na véspera, vale a redação anterior, com o texto da época e as datas, sem expressão de dúvida', () => {
     const s = situacaoEm(versoes, '1957-08-02', dc);
     assert.equal(s?.tipo, 'texto_da_epoca');
     assert.ok(s?.tipo === 'texto_da_epoca');
@@ -51,8 +51,7 @@ describe('Consulta temporal com várias redações (F3-04)', () => {
     assert.match(t, /até 02\/08\/1957/);
     assert.match(t, /Lei nº 3\.238/);
     assert.match(t, /04\/09\/1942 \(publicação da norma\)/);
-    assert.match(t, /vacatio legis/);
-    assert.match(t, /ainda não foi conferido/);
+    assert.doesNotMatch(t, /vacatio|provis|ainda não foi conferido|não foi lida/i);
   });
 
   it('a redação anterior conferida diz por quem e quando', () => {
@@ -70,20 +69,20 @@ describe('Consulta temporal com várias redações (F3-04)', () => {
     assert.match(s.aviso, /04\/09\/1942/);
   });
 
-  it('antes do começo conhecido de uma redação que não é a original, a base diz que o texto era outro e não o tem', () => {
+  it('antes do começo conhecido de uma redação que não é a original, a tela remete ao Planalto, sem texto de outra época', () => {
     const emenda2019 = { ...atual, vigente_de: '2019-11-13', ato_rotulo: 'Emenda Constitucional nº 103 de 12/11/2019' };
     const incluida = { ...original, origem: 'incluido' as const, vigente_de: '2004-12-31', vigente_ate: '2019-11-12', ato_rotulo: 'Emenda Constitucional nº 45 de 08/12/2004' };
     const s = situacaoEm([emenda2019, incluida], '2000-01-01', dc);
     assert.ok(s?.tipo === 'texto_da_epoca_indisponivel');
     assert.match(s.aviso, /31\/12\/2004/);
-    assert.match(s.aviso, /não está na base/);
+    assert.match(s.aviso, /Planalto/);
   });
 
-  it('redação anterior sem início conhecido cobre qualquer data até o fim, avisando que o início é desconhecido', () => {
+  it('redação anterior sem início conhecido cobre qualquer data até o fim, sem comentário sobre o início', () => {
     const semInicio = { ...original, vigente_de: null, ano_do_ato: null };
     const s = situacaoEm([atual, semInicio], '1900-01-01', dc);
     assert.ok(s?.tipo === 'texto_da_epoca');
-    assert.match(s.avisos.join(' '), /início desta redação não é conhecido/);
+    assert.doesNotMatch(s.avisos.join(' '), /não é conhecido|desconhecido/);
   });
 
   it('só o ano do ato: a redação anterior começa em 1º de janeiro daquele ano', () => {

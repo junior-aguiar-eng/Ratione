@@ -231,7 +231,7 @@ export default function NormaVivaPage() {
                             Nesta data, os parágrafos, incisos e alíneas deste dispositivo podem ter sido outros. A base só tem o texto atual deles, e por isso não os mostra aqui.
                           </Notice>
                         )}
-                        <Notice tom="warn" titulo="Redação da época">
+                        <Notice tom="info" titulo="Redação da época">
                           <span className="flex flex-col gap-1">
                             {situacao.avisos.map(a => (
                               <span key={a}>{a}</span>
@@ -240,7 +240,7 @@ export default function NormaVivaPage() {
                         </Notice>
                       </>
                     ) : situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
-                      <Notice tom="warn" titulo={`A base não tem o texto de ${dataCurta(dataConsulta)}`}>
+                      <Notice tom="info" titulo="Texto anterior à redação atual">
                         {situacao.aviso}
                       </Notice>
                     ) : (
@@ -254,9 +254,8 @@ export default function NormaVivaPage() {
                             </p>
                           ))}
                         </div>
-                        {/* A dúvida sobre o início da vigência só aparece perto do início provisório; texto vigente há anos não leva aviso */}
-                        {situacao && !(situacao.tipo === 'redacao_atual' && situacao.provisoria && !situacao.incertezaRelevante) && (
-                          <Notice tom={situacao.tipo === 'redacao_atual' && !situacao.provisoria ? 'info' : 'warn'} titulo="Vigência">
+                        {situacao && (
+                          <Notice tom="info" titulo="Vigência">
                             {situacao.aviso}
                           </Notice>
                         )}
@@ -287,7 +286,6 @@ export default function NormaVivaPage() {
                         </h3>
                         <p className="text-sm text-ink-soft">
                           Da redação anterior para a atual{detalhe.versao.ato_rotulo ? ` (${detalhe.versao.ato_rotulo})` : ''}. O que saiu aparece riscado; o que entrou, destacado.
-                          {anterior.conferida_em ? '' : ' A redação anterior ainda não foi conferida no Diário Oficial.'}
                         </p>
                         <DiffTexto antes={anterior.texto} depois={detalhe.versao.texto} />
                       </section>
@@ -331,13 +329,13 @@ export default function NormaVivaPage() {
                         )}
                         {detalhe.versao.vigente_de && (
                           <div>
-                            <dt className="text-ink-mute">{detalhe.versao.vigencia_confirmada ? 'Em vigor desde' : 'Vigência (provisória)'}</dt>
+                            <dt className="text-ink-mute">{detalhe.versao.vigencia_confirmada ? 'Em vigor desde' : 'Publicada em'}</dt>
                             <dd className="text-ink num mt-0.5">{dataCurta(detalhe.versao.vigente_de)}</dd>
                           </div>
                         )}
                         <div>
                           <dt className="text-ink-mute">Texto anterior</dt>
-                          <dd className="text-ink-soft mt-0.5">{detalhe.versao.texto_anterior_disponivel ? 'Disponível' : 'Não está na base atual'}</dd>
+                          <dd className="text-ink-soft mt-0.5">{detalhe.versao.texto_anterior_disponivel ? 'Disponível' : 'Consulte o Planalto'}</dd>
                         </div>
                       </dl>
                     ) : (

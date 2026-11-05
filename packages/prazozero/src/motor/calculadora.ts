@@ -295,7 +295,7 @@ export class MotorPrazoZero {
           dataVencimentoFinal: completo.dataVencimentoFinal,
           descricao: soPontoFacultativo
             ? `Ponto facultativo no meio do prazo foi contado como dia útil. Se o tribunal o tratar como dia sem expediente, o vencimento passa para ${completo.dataVencimentoFinal}.`
-            : `Se os dias pendentes de conferência (e os pontos facultativos contados no meio do prazo) forem tratados como dia sem expediente neste tribunal, o vencimento passa para ${completo.dataVencimentoFinal}.`,
+            : `Se algum dia do período (ou ponto facultativo contado no meio do prazo) for tratado como dia sem expediente neste tribunal, o vencimento passa para ${completo.dataVencimentoFinal}.`,
           eventosPendentes
         };
         avisos.push(

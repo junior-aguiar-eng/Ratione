@@ -128,7 +128,7 @@ function acaoRescisoria(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   if (semCorrespondencia) {
     avisos.push(
       `O dia ${p.dataInicio.slice(8)}/${p.dataInicio.slice(5, 7)} não existe dois anos depois. O Código Civil, art. 132, § 3º, manda expirar "no imediato"; ` +
-        `foi adotado ${bruto.split('-').reverse().join('/')} (a data mais cedo); a leitura literal seria ${imediato!.split('-').reverse().join('/')}. Confirme com o revisor jurídico.`
+        `foi adotado ${bruto.split('-').reverse().join('/')} (a data mais cedo); a leitura literal seria ${imediato!.split('-').reverse().join('/')}.`
     );
   }
   // Prorrogação expressa (art. 975, § 1º): fim de semana, feriado, recesso/férias forenses ou dia sem expediente.

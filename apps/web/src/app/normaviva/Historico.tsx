@@ -1,4 +1,4 @@
-import { Check, Clock } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { diffPalavras } from '../../lib/diffTexto';
 import type { EtapaDaLinha } from '../../lib/linhaDoTempo';
 
@@ -40,11 +40,10 @@ export function LinhaDoTempo({ etapas }: { etapas: EtapaDaLinha[] }) {
           <p className="text-sm font-semibold text-ink">{e.titulo}</p>
           {e.periodo && <p className="text-sm text-ink num">{e.periodo}</p>}
           <p className="text-sm text-ink-soft">{e.ato}</p>
-          {e.provisoria && <p className="text-xs text-ink-mute mt-0.5">Datas provisórias (publicação do ato)</p>}
-          {e.conferida !== null && (
+          {e.conferida === true && (
             <p className="text-xs mt-0.5 inline-flex items-center gap-1 text-ink-mute">
-              {e.conferida ? <Check className="w-3 h-3 text-ok-text" aria-hidden /> : <Clock className="w-3 h-3" aria-hidden />}
-              {e.conferida ? 'Texto conferido no Diário Oficial' : 'Texto ainda não conferido no Diário Oficial'}
+              <Check className="w-3 h-3 text-ok-text" aria-hidden />
+              Texto conferido no Diário Oficial
             </p>
           )}
         </li>
