@@ -1,20 +1,22 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Bookmark, Check, ExternalLink, Search } from 'lucide-react';
+import { BookOpen, Bookmark, Check, ExternalLink, History, Link2, Quote, Search } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
+import { CartaoDeContexto, CartaoDeLeitura } from '../../components/Cartoes';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
-import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, segmentosDoTrecho, situacaoEm, textoDoAvisoFuturo } from '../../lib/normavivaApresentacao';
+import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, situacaoEm, textoDoAvisoFuturo } from '../../lib/normavivaApresentacao';
 import { avisosDoArtigo } from '@ratione/normaviva/vigencia-futura';
 import { linhaDoTempo } from '../../lib/linhaDoTempo';
 import { DiffTexto, LinhaDoTempo } from './Historico';
 import ExplicacaoIA from './ExplicacaoIA';
+import ResultadosDaBusca from './ResultadosDaBusca';
 import LigacoesDoDispositivo from './LigacoesDoDispositivo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +28,14 @@ const ultimoPasso = (rotulo: string) => {
   const p = rotulo.split(', ').pop() ?? rotulo;
   return p.startsWith('art. ') ? `Art. ${p.slice(5)}` : p;
 };
+
+function AvisoAntesDeCitar() {
+  return (
+    <Notice tom="info" titulo="Antes de citar">
+      Confira o texto na fonte oficial antes de citá-lo.
+    </Notice>
+  );
+}
 
 export default function NormaVivaPage() {
   const db = useMemo(() => obterSupabase(), []);
@@ -154,196 +164,159 @@ export default function NormaVivaPage() {
         )}
 
         {resultado.tipo === 'resultados' && (
-          <div className="flex flex-col gap-3" aria-live="polite">
-            {resultado.aviso && <p className="text-sm text-ink-soft">{resultado.aviso}</p>}
-            {resultado.itens.length === 0 ? (
-              <p className="text-sm text-ink-soft">{buscando ? 'Pesquisando…' : 'Nenhum dispositivo encontrado.'}</p>
-            ) : (
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {resultado.itens.map(r => {
-                  const ativo = r.id === itemId;
-                  return (
-                    <li key={r.id}>
-                      <button
-                        type="button"
-                        aria-pressed={ativo}
-                        onClick={() => setItemId(r.id)}
-                        className={`w-full text-left rounded-md border px-4 py-2.5 transition-colors ${
-                          ativo ? 'border-brand bg-brand-tint' : 'border-line-strong bg-surface hover:bg-surface-2'
-                        }`}
-                      >
-                        <span className="block text-sm font-semibold text-ink">
-                          {ultimoPasso(r.rotulo).startsWith('Art.') ? r.rotulo.replace(/^art\./, 'Art.') : r.rotulo}{' '}
-                          <span className="font-normal text-ink-mute">· {nomeDaNorma(r.norma_id)}</span>
-                          {r.via_sinonimo && (
-                            <Badge variant="info" className="ml-2 align-middle" data-testid="via-sinonimo">
-                              por “{r.via_sinonimo}”
-                            </Badge>
-                          )}
-                        </span>
-                        <span className="block text-sm text-ink-soft">
-                          {segmentosDoTrecho(r.trecho).map((s, i) =>
-                            s.destaque ? (
-                              <mark key={i} className="bg-brand-tint text-ink rounded-sm px-0.5">
-                                {s.texto}
-                              </mark>
-                            ) : (
-                              <span key={i}>{s.texto}</span>
-                            )
-                          )}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
+          <ResultadosDaBusca itens={resultado.itens} normas={normas} itemId={itemId} buscando={buscando} aviso={resultado.aviso} onEscolher={setItemId} />
         )}
       </section>
 
       {itemId && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mt-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mt-8 items-start">
           {abrindo && !detalhe ? (
-            <div className="lg:col-span-12 h-48 rounded-lg bg-surface-2 animate-pulse" aria-hidden />
+            <div className="lg:col-span-12 h-48 rounded-xl bg-surface-2 animate-pulse" aria-hidden />
           ) : (
             detalhe && (
               <>
-                {/* Texto normativo */}
-                <article className="lg:col-span-8 flex flex-col gap-7">
-                  <header className="flex flex-col gap-4">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <p className="text-sm text-ink-mute">{detalhe.norma.nome}</p>
-                        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink mt-1">{detalhe.dispositivo.rotulo.replace(/^art\./, 'Art.')}</h2>
-                        {detalhe.dispositivo.estrutura.length > 0 && <p className="text-sm text-ink-mute mt-1">{detalhe.dispositivo.estrutura.join(' · ')}</p>}
-                      </div>
-                      {situacao &&
-                        (situacao.tipo === 'texto_da_epoca' ? (
-                          <Badge variant="brand">Redação da época</Badge>
-                        ) : detalhe.dispositivo.revogado || detalhe.versao?.origem === 'revogado' ? (
-                          <Badge variant="warn">Revogado</Badge>
-                        ) : situacao.tipo === 'redacao_atual' ? (
-                          <Badge variant="ok">Vigente</Badge>
-                        ) : (
-                          <Badge variant="warn">Sem texto nesta data</Badge>
-                        ))}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-3 pt-1">
-                      <span className="text-sm font-medium text-ink">Ver redação em:</span>
-                      <button
-                        type="button"
-                        aria-pressed={usandoHoje}
-                        onClick={() => setDataConsulta(hoje)}
-                        className={`px-3.5 py-2 rounded-md text-sm font-medium border transition-colors ${
-                          usandoHoje ? 'border-brand bg-brand-tint text-brand-text' : 'border-line-strong bg-surface text-ink-soft hover:bg-surface-2'
-                        }`}
-                      >
-                        Hoje
-                      </button>
-                      <Input
-                        type="date"
-                        aria-label="Escolher data"
-                        value={dataConsulta}
-                        onChange={e => e.target.value && setDataConsulta(e.target.value)}
-                        className="w-auto"
-                      />
-                    </div>
-                  </header>
-
-                  {situacao?.tipo === 'texto_da_epoca' ? (
-                    <>
-                      <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6" data-testid="texto-da-epoca">
-                        <p>
-                          <span className="font-semibold">{ultimoPasso(detalhe.dispositivo.rotulo)}</span> {situacao.versao.texto}
-                        </p>
-                      </div>
-                      {detalhe.texto.length > 1 && (
-                        <Notice tom="info">
-                          Nesta data, os parágrafos, incisos e alíneas deste dispositivo podem ter sido outros. A base só tem o texto atual deles, e por isso não os mostra aqui.
-                        </Notice>
-                      )}
-                      <Notice tom="warn" titulo="Redação da época">
-                        <span className="flex flex-col gap-1">
-                          {situacao.avisos.map(a => (
-                            <span key={a}>{a}</span>
+                <div className="lg:col-span-8 flex flex-col gap-5 min-w-0">
+                  {/* Texto da lei: o cartão de leitura. O texto completo, com todos os parágrafos, incisos e alíneas, fica sempre à vista */}
+                  <CartaoDeLeitura aria-label={`${detalhe.dispositivo.rotulo} · ${detalhe.norma.nome}`}>
+                    <header className="flex flex-col gap-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm text-ink-mute">{detalhe.norma.nome}</p>
+                          <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink mt-1">{detalhe.dispositivo.rotulo.replace(/^art\./, 'Art.')}</h2>
+                          {detalhe.dispositivo.estrutura.length > 0 && <p className="text-sm text-ink-mute mt-1">{detalhe.dispositivo.estrutura.join(' · ')}</p>}
+                        </div>
+                        {situacao &&
+                          (situacao.tipo === 'texto_da_epoca' ? (
+                            <Badge variant="brand">Redação da época</Badge>
+                          ) : detalhe.dispositivo.revogado || detalhe.versao?.origem === 'revogado' ? (
+                            <Badge variant="warn">Revogado</Badge>
+                          ) : situacao.tipo === 'redacao_atual' ? (
+                            <Badge variant="ok">Vigente</Badge>
+                          ) : (
+                            <Badge variant="warn">Sem texto nesta data</Badge>
                           ))}
-                        </span>
-                      </Notice>
-                    </>
-                  ) : situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
-                    <Notice tom="warn" titulo={`A base não tem o texto de ${dataCurta(dataConsulta)}`}>
-                      {situacao.aviso}
-                    </Notice>
-                  ) : (
-                    <>
-                      <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6 flex flex-col gap-3" data-testid="texto-do-dispositivo">
-                        {detalhe.texto.map(t => (
-                          <p key={t.id} style={{ marginLeft: `${Math.min(profundidade(t.rotulo), 4) * 1.25}rem` }} className={t.revogado ? 'text-ink-mute' : ''}>
-                            <span className="font-semibold">{ultimoPasso(t.rotulo)}</span>{' '}
-                            {t.revogado && t.texto === '' ? '(Revogado)' : t.texto}
-                            {t.continuacao && <span className="block text-base text-ink-soft mt-1">{t.continuacao}</span>}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="text-sm font-medium text-ink">Ver redação em:</span>
+                        <button
+                          type="button"
+                          aria-pressed={usandoHoje}
+                          onClick={() => setDataConsulta(hoje)}
+                          className={`px-3.5 py-2 rounded-md text-sm font-medium border transition-colors ${
+                            usandoHoje ? 'border-brand bg-brand-tint text-brand-text' : 'border-line-strong bg-surface text-ink-soft hover:bg-surface-2'
+                          }`}
+                        >
+                          Hoje
+                        </button>
+                        <Input
+                          type="date"
+                          aria-label="Escolher data"
+                          value={dataConsulta}
+                          onChange={e => e.target.value && setDataConsulta(e.target.value)}
+                          className="w-auto"
+                        />
+                      </div>
+                    </header>
+
+                    {situacao?.tipo === 'texto_da_epoca' ? (
+                      <>
+                        <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6" data-testid="texto-da-epoca">
+                          <p>
+                            <span className="font-semibold">{ultimoPasso(detalhe.dispositivo.rotulo)}</span> {situacao.versao.texto}
                           </p>
-                        ))}
-                      </div>
-                      {/* A dúvida sobre o início da vigência só aparece perto do início provisório; texto vigente há anos não leva aviso */}
-                      {situacao && !(situacao.tipo === 'redacao_atual' && situacao.provisoria && !situacao.incertezaRelevante) && (
-                        <Notice tom={situacao.tipo === 'redacao_atual' && !situacao.provisoria ? 'info' : 'warn'} titulo="Vigência">
-                          {situacao.aviso}
+                        </div>
+                        {detalhe.texto.length > 1 && (
+                          <Notice tom="info">
+                            Nesta data, os parágrafos, incisos e alíneas deste dispositivo podem ter sido outros. A base só tem o texto atual deles, e por isso não os mostra aqui.
+                          </Notice>
+                        )}
+                        <Notice tom="warn" titulo="Redação da época">
+                          <span className="flex flex-col gap-1">
+                            {situacao.avisos.map(a => (
+                              <span key={a}>{a}</span>
+                            ))}
+                          </span>
                         </Notice>
-                      )}
-                    </>
-                  )}
-
-                  {avisosDoArtigo(detalhe.norma.id, detalhe.dispositivo.rotulo, hoje).map(aviso => {
-                    const t = textoDoAvisoFuturo(aviso, detalhe.norma.id, detalhe.dispositivo.rotulo, dataCurta);
-                    return (
-                      <Notice key={aviso.chave} tom="warn" titulo={t.titulo}>
-                        <span className="flex flex-col gap-1" data-testid="aviso-vigencia-futura">
-                          {t.linhas.map(l => (
-                            <span key={l}>{l}</span>
-                          ))}
-                          {t.dispositivos.length > 0 && <span>Dispositivos alterados neste artigo: {t.dispositivos.join('; ')}.</span>}
-                          <a href={t.fonteUrl} target="_blank" rel="noopener noreferrer" className="underline">
-                            Ver o ato no Planalto
-                          </a>
-                        </span>
+                      </>
+                    ) : situacao?.tipo === 'texto_da_epoca_indisponivel' ? (
+                      <Notice tom="warn" titulo={`A base não tem o texto de ${dataCurta(dataConsulta)}`}>
+                        {situacao.aviso}
                       </Notice>
-                    );
-                  })}
+                    ) : (
+                      <>
+                        <div className="font-serif text-lg leading-[1.75] text-ink border-l-2 border-brand pl-6 flex flex-col gap-3" data-testid="texto-do-dispositivo">
+                          {detalhe.texto.map(t => (
+                            <p key={t.id} style={{ marginLeft: `${Math.min(profundidade(t.rotulo), 4) * 1.25}rem` }} className={t.revogado ? 'text-ink-mute' : ''}>
+                              <span className="font-semibold">{ultimoPasso(t.rotulo)}</span>{' '}
+                              {t.revogado && t.texto === '' ? '(Revogado)' : t.texto}
+                              {t.continuacao && <span className="block text-base text-ink-soft mt-1">{t.continuacao}</span>}
+                            </p>
+                          ))}
+                        </div>
+                        {/* A dúvida sobre o início da vigência só aparece perto do início provisório; texto vigente há anos não leva aviso */}
+                        {situacao && !(situacao.tipo === 'redacao_atual' && situacao.provisoria && !situacao.incertezaRelevante) && (
+                          <Notice tom={situacao.tipo === 'redacao_atual' && !situacao.provisoria ? 'info' : 'warn'} titulo="Vigência">
+                            {situacao.aviso}
+                          </Notice>
+                        )}
+                      </>
+                    )}
 
-                  {anterior && detalhe.versao && (
-                    <section aria-labelledby="o-que-mudou" className="flex flex-col gap-3">
-                      <h3 id="o-que-mudou" className="font-serif text-xl font-semibold text-ink">
-                        O que mudou
-                      </h3>
-                      <p className="text-sm text-ink-soft">
-                        Da redação anterior para a atual{detalhe.versao.ato_rotulo ? ` (${detalhe.versao.ato_rotulo})` : ''}. O que saiu aparece riscado; o que entrou, destacado.
-                        {anterior.conferida_em ? '' : ' A redação anterior ainda não foi conferida no Diário Oficial.'}
-                      </p>
-                      <DiffTexto antes={anterior.texto} depois={detalhe.versao.texto} />
-                    </section>
-                  )}
+                    {avisosDoArtigo(detalhe.norma.id, detalhe.dispositivo.rotulo, hoje).map(aviso => {
+                      const t = textoDoAvisoFuturo(aviso, detalhe.norma.id, detalhe.dispositivo.rotulo, dataCurta);
+                      return (
+                        <Notice key={aviso.chave} tom="warn" titulo={t.titulo}>
+                          <span className="flex flex-col gap-1" data-testid="aviso-vigencia-futura">
+                            {t.linhas.map(l => (
+                              <span key={l}>{l}</span>
+                            ))}
+                            {t.dispositivos.length > 0 && <span>Dispositivos alterados neste artigo: {t.dispositivos.join('; ')}.</span>}
+                            <a href={t.fonteUrl} target="_blank" rel="noopener noreferrer" className="underline">
+                              Ver o ato no Planalto
+                            </a>
+                          </span>
+                        </Notice>
+                      );
+                    })}
 
-                  <div className="flex flex-wrap gap-2 no-print">
-                    <Button variant="secondary" type="button" onClick={salvar}>
-                      {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
-                      {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
-                    </Button>
-                    <a href={detalhe.norma.fonte_url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
-                      Fonte oficial (Planalto)
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
+                    {anterior && detalhe.versao && (
+                      <section aria-labelledby="o-que-mudou" className="flex flex-col gap-3 border-t border-line pt-5">
+                        <h3 id="o-que-mudou" className="font-serif text-xl font-semibold text-ink">
+                          O que mudou
+                        </h3>
+                        <p className="text-sm text-ink-soft">
+                          Da redação anterior para a atual{detalhe.versao.ato_rotulo ? ` (${detalhe.versao.ato_rotulo})` : ''}. O que saiu aparece riscado; o que entrou, destacado.
+                          {anterior.conferida_em ? '' : ' A redação anterior ainda não foi conferida no Diário Oficial.'}
+                        </p>
+                        <DiffTexto antes={anterior.texto} depois={detalhe.versao.texto} />
+                      </section>
+                    )}
 
+                    <div className="flex flex-wrap gap-2 no-print border-t border-line pt-5">
+                      <Button variant="secondary" type="button" onClick={salvar}>
+                        {salvo ? <Check className="w-4 h-4 text-ok-text" /> : <Bookmark className="w-4 h-4" />}
+                        {rotuloSalvar(estadoSalvo, 'Salvar em Meu espaço')}
+                      </Button>
+                      <a href={detalhe.norma.fonte_url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
+                        Fonte oficial (Planalto)
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </CartaoDeLeitura>
+
+                  {/* O que a IA gerou: cartão próprio, um passo acima e ligado ao texto, sem se misturar a ele */}
                   <ExplicacaoIA key={detalhe.dispositivo.id} dispositivoId={detalhe.dispositivo.id} />
-                </article>
 
-                {/* Histórico e relações */}
-                <aside className="lg:col-span-4 flex flex-col gap-9" aria-label="Histórico e relações do dispositivo">
-                  <section>
-                    <h3 className="font-serif text-xl font-semibold text-ink mb-3">O que mudou</h3>
+                  <AvisoAntesDeCitar />
+                </div>
+
+                {/* Contexto: acompanha a leitura numa coluna fixa, em cartões pequenos */}
+                <aside
+                  className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pb-2"
+                  aria-label="Histórico e relações do dispositivo"
+                >
+                  <CartaoDeContexto titulo="Histórico da redação" icone={<History />}>
                     {detalhe.versao ? (
                       <dl className="text-sm flex flex-col gap-3">
                         <div>
@@ -371,13 +344,13 @@ export default function NormaVivaPage() {
                       <p className="text-sm text-ink-soft">Sem versão registrada.</p>
                     )}
                     {detalhe.versoes.length > 1 && (
-                      <div className="mt-5">
+                      <div className="border-t border-line pt-3">
                         <h4 className="text-sm font-medium text-ink mb-2">Linha do tempo</h4>
                         <LinhaDoTempo etapas={linhaDoTempo(detalhe.versoes, dataCurta)} />
                       </div>
                     )}
                     {detalhe.relacoes.filter(r => r.tipo !== 'remete' && r.origem_id !== detalhe.dispositivo.id).length > 0 && (
-                      <ul className="mt-4 text-sm text-ink-soft flex flex-col gap-1.5">
+                      <ul className="border-t border-line pt-3 text-sm text-ink-soft flex flex-col gap-1.5">
                         {detalhe.relacoes
                           .filter(r => r.tipo !== 'remete' && r.origem_id !== detalhe.dispositivo.id)
                           .map(r => (
@@ -388,11 +361,10 @@ export default function NormaVivaPage() {
                           ))}
                       </ul>
                     )}
-                  </section>
+                  </CartaoDeContexto>
 
                   {detalhe.relacoes.some(r => r.tipo === 'remete') && (
-                    <section className="border-t border-line pt-6">
-                      <h3 className="font-serif text-xl font-semibold text-ink mb-3">Remissões neste texto</h3>
+                    <CartaoDeContexto titulo="Remissões neste texto" icone={<Link2 />}>
                       <ul className="flex flex-col gap-2 text-sm">
                         {detalhe.relacoes
                           .filter(r => r.tipo === 'remete')
@@ -409,12 +381,11 @@ export default function NormaVivaPage() {
                             </li>
                           ))}
                       </ul>
-                    </section>
+                    </CartaoDeContexto>
                   )}
 
                   {detalhe.citadoPor.length > 0 && (
-                    <section className="border-t border-line pt-6">
-                      <h3 className="font-serif text-xl font-semibold text-ink mb-3">Citado por</h3>
+                    <CartaoDeContexto titulo="Citado por" icone={<Quote />}>
                       <ul className="flex flex-col gap-2 text-sm">
                         {detalhe.citadoPor.map(c => (
                           <li key={c.origem_id}>
@@ -425,13 +396,12 @@ export default function NormaVivaPage() {
                           </li>
                         ))}
                       </ul>
-                    </section>
+                    </CartaoDeContexto>
                   )}
 
                   <LigacoesDoDispositivo dispositivoId={detalhe.dispositivo.id} db={db} />
 
-                  <section className="border-t border-line pt-6">
-                    <h3 className="font-serif text-xl font-semibold text-ink mb-3">Fonte</h3>
+                  <CartaoDeContexto titulo="Fonte" icone={<BookOpen />}>
                     <dl className="text-sm flex flex-col gap-2">
                       <div>
                         <dt className="text-ink-mute">Página lida</dt>
@@ -442,7 +412,7 @@ export default function NormaVivaPage() {
                         <dd className="text-ink num mt-0.5">{dataCurta(detalhe.norma.lido_em)}</dd>
                       </div>
                     </dl>
-                  </section>
+                  </CartaoDeContexto>
                 </aside>
               </>
             )
@@ -450,11 +420,11 @@ export default function NormaVivaPage() {
         </div>
       )}
 
-      <div className="mt-14 max-w-3xl">
-        <Notice tom="info" titulo="Antes de citar">
-          Confira o texto na fonte oficial antes de citá-lo.
-        </Notice>
-      </div>
+      {!(itemId && detalhe) && (
+        <div className="mt-10 max-w-3xl">
+          <AvisoAntesDeCitar />
+        </div>
+      )}
     </div>
   );
 }

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Layers } from 'lucide-react';
+import { CartaoDeContexto } from '../../components/Cartoes';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { classeDoChip } from '../../components/LigacoesDoPrazo';
 import { precedentesQueCitam, prazosDoDispositivo, type Ligacao, type PrecedentesQueCitam } from '../../lib/ligacoes';
@@ -44,10 +46,7 @@ export default function LigacoesDoDispositivo({ dispositivoId, db }: { dispositi
 
   if (prazos.length === 0 && precedentes.itens.length === 0) return null;
   return (
-    <section className="border-t border-line pt-6" aria-labelledby="nas-outras-ferramentas">
-      <h3 id="nas-outras-ferramentas" className="font-serif text-xl font-semibold text-ink mb-3">
-        Nas outras ferramentas
-      </h3>
+    <CartaoDeContexto titulo="Nas outras ferramentas" icone={<Layers />}>
       <div className="flex flex-col gap-4">
         {prazos.length > 0 && <Grupo titulo="Prazos que este dispositivo fundamenta, no PrazoZero:" itens={prazos} />}
         {precedentes.itens.length > 0 && (
@@ -57,6 +56,6 @@ export default function LigacoesDoDispositivo({ dispositivoId, db }: { dispositi
           />
         )}
       </div>
-    </section>
+    </CartaoDeContexto>
   );
 }

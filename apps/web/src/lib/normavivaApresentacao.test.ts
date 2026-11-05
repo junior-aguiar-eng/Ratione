@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { situacaoNaData, segmentosDoTrecho, textoDoAvisoFuturo } from './normavivaApresentacao';
+import { situacaoNaData, segmentosDoTrecho, siglaDaNorma, textoDoAvisoFuturo } from './normavivaApresentacao';
 import { avisosDoArtigo, type AvisoVigenciaFutura } from '@ratione/normaviva/vigencia-futura';
 import type { Versao } from './normaviva';
 
@@ -122,5 +122,15 @@ describe('Aviso de vigência futura na tela', () => {
     assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 392, § 8º', '2026-10-22', [aviso]).length, 1);
     assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 393', '2026-10-22', [aviso]).length, 0);
     assert.strictEqual(avisosDoArtigo('DL-5452-1943', 'art. 392', '2027-01-01', [aviso]).length, 0);
+  });
+});
+
+describe('Sigla da norma nas fichas da pesquisa', () => {
+  it('usa a sigla de uso corrente; sem sigla, monta "Lei N/AAAA" do identificador; em último caso, o nome', () => {
+    assert.strictEqual(siglaDaNorma('LEI-13105-2015', 'Código de Processo Civil'), 'CPC');
+    assert.strictEqual(siglaDaNorma('CF-1988', 'Constituição Federal'), 'CF');
+    assert.strictEqual(siglaDaNorma('LEI-11340-2006', 'Lei Maria da Penha'), 'Lei 11.340/2006');
+    assert.strictEqual(siglaDaNorma('LC-123-2006', 'Estatuto da Microempresa'), 'LC 123/2006');
+    assert.strictEqual(siglaDaNorma('ALGO-ESTRANHO', 'Nome inteiro'), 'Nome inteiro');
   });
 });

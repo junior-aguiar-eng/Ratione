@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import Notice from '../../components/Notice';
+import { CartaoDeIA } from '../../components/Cartoes';
 import { Button } from '@/components/ui/button';
 import { useSessao } from '../../lib/useSessao';
 import type { SaidaExplicacao } from '../../lib/ia/tarefas/explicarDispositivo';
@@ -57,17 +57,20 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
       )}
       {estado.tipo === 'erro' && <p className="text-sm text-danger-text">{estado.mensagem}</p>}
       {estado.tipo === 'pronto' && (
-        <div className="flex flex-col gap-3 rounded-md border border-line bg-surface-2 p-4 text-sm">
-          <p className="text-base text-ink">{estado.explicacao.resumo}</p>
+        <CartaoDeIA
+          titulo="Explicação por IA"
+          meta={estado.restantes !== null ? (estado.restantes === 1 ? 'Resta 1 explicação no seu plano' : `Restam ${estado.restantes} explicações no seu plano`) : undefined}
+        >
+          <p className="text-base text-ink leading-relaxed">{estado.explicacao.resumo}</p>
           {estado.explicacao.explicacao.length > 0 && (
-            <ul className="list-disc pl-5 flex flex-col gap-1 text-ink">
+            <ul className="list-disc pl-5 flex flex-col gap-1 text-sm text-ink">
               {estado.explicacao.explicacao.map((t, i) => (
                 <li key={i}>{t}</li>
               ))}
             </ul>
           )}
           {estado.explicacao.termos.length > 0 && (
-            <dl className="flex flex-col gap-1.5">
+            <dl className="flex flex-col gap-1.5 text-sm">
               {estado.explicacao.termos.map((t, i) => (
                 <div key={i}>
                   <dt className="inline font-medium text-ink">{t.termo}: </dt>
@@ -77,19 +80,17 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
             </dl>
           )}
           {estado.explicacao.atencao.length > 0 && (
-            <ul className="flex flex-col gap-1 text-ink-soft">
+            <ul className="flex flex-col gap-1 text-sm text-ink-soft">
               {estado.explicacao.atencao.map((t, i) => (
                 <li key={i}>Atenção: {t}</li>
               ))}
             </ul>
           )}
-          <Notice titulo="Explicação gerada por inteligência artificial">
-            Feita só a partir do texto acima, sem jurisprudência nem outras fontes. Pode conter erro e não substitui o texto da lei nem orientação
-            jurídica.
-            {estado.restantes !== null && ` ${estado.restantes === 1 ? 'Resta 1 explicação' : `Restam ${estado.restantes} explicações`} no seu plano neste período.`}
+          <p className="text-xs text-ink-soft leading-relaxed border-t border-ia/20 pt-3">
+            Gerada por inteligência artificial só a partir do texto acima, sem jurisprudência nem outras fontes. Pode conter erro e não substitui o texto da lei nem orientação jurídica.
             {estado.doCache && ' Esta explicação já tinha sido gerada e não contou na sua cota.'}
-          </Notice>
-        </div>
+          </p>
+        </CartaoDeIA>
       )}
     </section>
   );
