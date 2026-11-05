@@ -21,7 +21,8 @@ import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
  */
 const CHAVES_PROPRIAS: Record<string, string> = {
   'relacionar-com-o-caso': 'IA_RELACAO_LIGADA',
-  'ler-intimacao': 'IA_INTIMACAO_LIGADA'
+  'ler-intimacao': 'IA_INTIMACAO_LIGADA',
+  'explicar-precedente': 'IA_PRECEDENTE_LIGADA'
 };
 
 export async function POST(request: Request, { params }: { params: Promise<{ tarefa: string }> }) {

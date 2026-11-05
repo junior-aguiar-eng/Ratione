@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { temDadoPessoal } from '@ratione/argumenta';
 import type { TarefaIA } from '../contrato';
 import type { DispositivoParaExplicar } from '../fontes/dispositivoDoBanco';
-import type { NoParaRelacionar } from '../fontes/noDoTeseMap';
+import { idDeNoValido, type NoParaRelacionar } from '../fontes/noDoTeseMap';
 import { idDeDispositivoValido } from './explicarDispositivo';
 
 /**
@@ -45,15 +45,12 @@ export interface ContextoDaRelacao extends EntradaDaRelacao {
   textoDaFonte: string;
 }
 
-/** Id de nó do TeseMap (`STJ-TEMA-1076`): só o formato, nada de texto livre. */
-const ID_NO = /^[A-Za-z0-9._-]{1,80}$/;
-
 const campoValido = (v: unknown): v is string => typeof v === 'string' && !!v.trim() && v.length <= 400 && !temDadoPessoal(v);
 
 function entradaValida(bruta: unknown): EntradaDaRelacao | null {
   const { ferramenta, destinoId, enunciado, conclusao } = (bruta ?? {}) as Record<string, unknown>;
   if (ferramenta !== 'normaviva' && ferramenta !== 'tesemap') return null;
-  if (typeof destinoId !== 'string' || !(ferramenta === 'normaviva' ? idDeDispositivoValido(destinoId) : ID_NO.test(destinoId))) return null;
+  if (typeof destinoId !== 'string' || !(ferramenta === 'normaviva' ? idDeDispositivoValido(destinoId) : idDeNoValido(destinoId))) return null;
   if (!campoValido(enunciado) || !campoValido(conclusao)) return null;
   return { ferramenta, destinoId, enunciado: enunciado.trim(), conclusao: conclusao.trim() };
 }
@@ -108,7 +105,7 @@ export function normalizarParaComparar(s: string): string {
 }
 
 /** Afirmações que o produto não faz: dizer quem tem razão ou se a decisão está certa. */
-const VEREDITO = /\b(tem raz[ãa]o|n[ãa]o tem raz[ãa]o|est[áa] (?:certa|errada|correta|incorreta)|foi (?:acertada|equivocada)|deve ser (?:reformada|mantida|anulada)|(?:deve|devem|deveria) (?:recorrer|ajuizar|pedir))\b/i;
+export const VEREDITO = /\b(tem raz[ãa]o|n[ãa]o tem raz[ãa]o|est[áa] (?:certa|errada|correta|incorreta)|foi (?:acertada|equivocada)|deve ser (?:reformada|mantida|anulada)|(?:deve|devem|deveria) (?:recorrer|ajuizar|pedir))\b/i;
 
 /** A conferência no servidor: o trecho existe na fonte e o texto não opina sobre o acerto do caso. Devolve o motivo da recusa, ou `null`. */
 export function conferirRelacao(s: SaidaRelacao, c: ContextoDaRelacao): string | null {

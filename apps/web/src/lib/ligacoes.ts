@@ -51,17 +51,46 @@ export function idsParaBuscarCitacoes(dispositivoId: string): string[] {
 }
 
 export const LIMITE_DE_PRECEDENTES = 8;
+/** Quantos o banco devolve por busca: a tela mostra os `LIMITE_DE_PRECEDENTES` primeiros depois da ordenação (vinculantes e súmulas na frente). */
+const LIMITE_DA_BUSCA = 40;
 
 interface NoQueCita {
   id: string;
   rotulo: string;
   tipo: string;
+  tribunal: string | null;
+  descricao: string | null;
+  vinculante: boolean | null;
+  teseFirmada: boolean | null;
+}
+
+/** Um precedente, tema ou súmula do TeseMap que cita o dispositivo, com o que a lista precisa para ser lida sem abrir cada um. */
+export interface PrecedenteQueCita extends Ligacao {
+  tribunal: string | null;
+  /** A tese ou o enunciado, resumido ao tamanho de uma prévia. Vazio quando o tribunal não firmou tese. */
+  tese: string;
+  vinculante: boolean;
 }
 
 export interface PrecedentesQueCitam {
-  itens: Ligacao[];
+  itens: PrecedenteQueCita[];
   /** Há mais precedentes do que os mostrados: a tela avisa, em vez de sugerir que a lista é completa. */
   temMais: boolean;
+}
+
+/** A prévia da tese: espaços colapsados e corte numa palavra inteira. */
+export function previaDaTese(texto: string | null | undefined, max = 200): string {
+  const t = (texto ?? '').replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  const corte = t.slice(0, max);
+  return `${corte.slice(0, Math.max(corte.lastIndexOf(' '), max / 2)).replace(/[\s,;:.]+$/, '')}…`;
+}
+
+/** Vinculantes primeiro, depois súmulas, depois os temas com tese firmada e, por fim, o resto (ações de controle, temas sem tese); dentro de cada grupo, pela ordem do id. */
+function posicao(n: NoQueCita): number {
+  if (n.vinculante === true) return 0;
+  if (n.tipo === 'sumula') return 1;
+  return n.tipo === 'tema' && n.teseFirmada !== false ? 2 : 3;
 }
 
 /**
@@ -73,16 +102,22 @@ export async function precedentesQueCitam(db: SupabaseClient, dispositivoId: str
   for (const id of idsParaBuscarCitacoes(dispositivoId)) {
     const r = await db
       .from('tesemap_nos')
-      .select('id, rotulo, tipo')
+      .select('id, rotulo, tipo, tribunal, descricao, vinculante:detalhes->vinculante, teseFirmada:detalhes->teseFirmada')
       .contains('detalhes', { citacoes: [{ dispositivoId: id }] })
       .order('id')
-      .limit(LIMITE_DE_PRECEDENTES + 1);
+      .limit(LIMITE_DA_BUSCA + 1);
     if (r.error) return { itens: [], temMais: false };
     for (const n of (r.data ?? []) as NoQueCita[]) vistos.set(n.id, n);
   }
-  const todos = [...vistos.values()].sort((a, b) => a.id.localeCompare(b.id));
+  const todos = [...vistos.values()].sort((a, b) => posicao(a) - posicao(b) || a.id.localeCompare(b.id));
   return {
-    itens: todos.slice(0, LIMITE_DE_PRECEDENTES).map(n => ({ rotulo: n.rotulo, href: urlDoTeseMap({ noId: n.id }) })),
+    itens: todos.slice(0, LIMITE_DE_PRECEDENTES).map(n => ({
+      rotulo: n.rotulo,
+      href: urlDoTeseMap({ noId: n.id }),
+      tribunal: n.tribunal,
+      tese: n.teseFirmada === false ? '' : previaDaTese(n.descricao),
+      vinculante: n.vinculante === true
+    })),
     temMais: todos.length > LIMITE_DE_PRECEDENTES
   };
 }
