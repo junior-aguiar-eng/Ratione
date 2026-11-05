@@ -25,6 +25,8 @@ ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 ARG NEXT_PUBLIC_IA_EXPLICACAO
 # "sim" mostra o botão "Relacionar com a minha questão"; o servidor também precisa de IA_RELACAO_LIGADA=sim (docs/produto/IA_TAREFAS.md)
 ARG NEXT_PUBLIC_IA_RELACAO
+# "sim" mostra o campo "Colar a intimação" no PrazoZero; o servidor também precisa de IA_INTIMACAO_LIGADA=sim (docs/produto/IA_TAREFAS.md)
+ARG NEXT_PUBLIC_IA_INTIMACAO
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter web build
 

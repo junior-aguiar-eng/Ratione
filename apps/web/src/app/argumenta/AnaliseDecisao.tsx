@@ -19,7 +19,8 @@ import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/
 import { listarNormas } from '../../lib/normaviva';
 import { bancoSupabase, verificarCitacoes, type VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
 import { montarMapa } from '../../lib/argumenta/mapa';
-import { CATEGORIA, FUNDAMENTO, RESULTADO } from '../../lib/argumenta/rotulos';
+import { CATEGORIA, FUNDAMENTO, RESULTADO, TIPO_DECISAO } from '../../lib/argumenta/rotulos';
+import PrazoDoCaso from '../../components/PrazoDoCaso';
 import { guardarCaso, lerCaso, limparCaso, type Resultados } from '../../lib/caso/memoria';
 import { lerQuestaoDoCaso } from '../../lib/caso/ligacao';
 import MapaView from './MapaView';
@@ -39,14 +40,6 @@ const ETAPAS: { id: Etapa; rotulo: string }[] = [
   { id: 'questoes', rotulo: 'Identificando as questões e as conclusões' },
   { id: 'fundamentos', rotulo: 'Identificando os fundamentos de cada conclusão' }
 ];
-
-const TIPO_DECISAO: Record<SaidaEstrutura['tipo'], string> = {
-  sentenca: 'Sentença',
-  acordao: 'Acórdão',
-  decisao_monocratica: 'Decisão monocrática',
-  decisao_interlocutoria: 'Decisão interlocutória',
-  outro: 'Decisão'
-};
 
 const SECAO: Record<SaidaEstrutura['secoes'][number]['tipo'], string> = {
   cabecalho: 'Cabeçalho',
@@ -413,6 +406,8 @@ export default function AnaliseDecisao() {
           </Button>
         </div>
       </div>
+
+      {estrutura && <PrazoDoCaso />}
 
       {(andamento || erro) && (
         <Card className="p-5 flex flex-col gap-3" aria-live="polite">

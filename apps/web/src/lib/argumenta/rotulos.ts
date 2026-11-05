@@ -1,5 +1,5 @@
 import type { BadgeTom } from '@/components/ui/badge';
-import type { SaidaFundamentos, SaidaQuestoes } from '../ia/tarefas/argumenta';
+import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../ia/tarefas/argumenta';
 
 /** Como a tela chama cada categoria, resultado e tipo de fundamento. Um só lugar, para a análise, o mapa e a faixa do caso não divergirem. */
 type Questao = SaidaQuestoes['questoes'][number];
@@ -27,4 +27,12 @@ export const FUNDAMENTO: Record<SaidaFundamentos['fundamentos'][number]['tipo'],
   precedente: { rotulo: 'Precedente', tom: 'rel' },
   doutrina: { rotulo: 'Doutrina', tom: 'neutral' },
   argumento: { rotulo: 'Argumento', tom: 'brand' }
+};
+
+export const TIPO_DECISAO: Record<SaidaEstrutura['tipo'], string> = {
+  sentenca: 'Sentença',
+  acordao: 'Acórdão',
+  decisao_monocratica: 'Decisão monocrática',
+  decisao_interlocutoria: 'Decisão interlocutória',
+  outro: 'Decisão'
 };
