@@ -10,3 +10,11 @@ export function origemPublica(request: Request): string {
   const proto = primeiro(h.get('x-forwarded-proto')) ?? new URL(request.url).protocol.replace(':', '');
   return `${proto === 'http' || proto === 'https' ? proto : 'https'}://${host}`;
 }
+
+/**
+ * O pedido que ALTERA dados veio do próprio site? Navegadores sempre mandam `Origin` em POST e DELETE, então a falta do cabeçalho também é recusada
+ * (defesa contra requisição forjada de outro site). Vale para toda rota que muda algo; rotas de agendador e webhook têm segredo ou assinatura.
+ */
+export function veioDoSite(request: Request): boolean {
+  return request.headers.get('origin') === origemPublica(request);
+}

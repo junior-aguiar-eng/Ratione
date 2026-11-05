@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { abrirContexto, usuarioDaCobranca } from '../../../../lib/cobranca/contexto';
 import { aplicarSituacao, criarAssinaturaPendente, vincularAoMp } from '../../../../lib/cobranca/banco';
 import { ErroMp, criarClienteMp } from '../../../../lib/cobranca/mercadopago';
-import { origemPublica } from '../../../../lib/origem';
+import { origemPublica, veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
+import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
 
 /**
  * `POST /api/cobranca/assinar` com `{ plano }`: cria a assinatura pendente (o preço vem do banco, nunca do navegador) e a assinatura no
@@ -16,13 +17,14 @@ export async function POST(request: Request) {
   const ctx = await abrirContexto();
   if (!ctx) return NextResponse.json(INDISPONIVEL, { status: 503 });
 
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const usuario = await usuarioDaCobranca(ctx);
   if (!usuario) return NextResponse.json(INDISPONIVEL, { status: 503 });
 
-  const plano = ((await request.json().catch(() => null)) as { plano?: unknown } | null)?.plano;
+  const lido = await lerJsonLimitado(request, LIMITE_CORPO.pequeno);
+  if (!lido.ok) return NextResponse.json({ mensagem: lido.mensagem }, { status: lido.status });
+  const plano = (lido.valor as { plano?: unknown } | null)?.plano;
   if (plano !== 'essencial' && plano !== 'profissional') return NextResponse.json({ mensagem: 'Plano inválido.' }, { status: 400 });
 
   try {
