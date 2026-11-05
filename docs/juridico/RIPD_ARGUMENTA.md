@@ -1,6 +1,6 @@
 # RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS (RIPD): ARGUMENTA
 
-**Versão:** 0.1 (minuta) · **Elaborado em:** 04/11/2026 · **Vigência:** [DATA_VIGENCIA]
+**Versão:** 0.2 (minuta) · **Elaborado em:** 04/11/2026 · **Revisado em:** 05/11/2026 · **Vigência:** [DATA_VIGENCIA]
 
 > RASCUNHO PARA REVISÃO DO RESPONSÁVEL E DO ADVOGADO DE DIREITO DIGITAL. Não publicar nem tratar como definitivo sem essa revisão.
 > **Como foi feito:** a descrição do tratamento e das salvaguardas vem do código e dos documentos do produto (`docs/produto/ARGUMENTA.md`, `IA_TAREFAS.md`, `PLANOS_E_COBRANCA.md`, `docs/juridico/POLITICA_DE_USO_DE_IA.md` e `POLITICA_DE_PRIVACIDADE.md`). O texto da lei foi lido na versão compilada do Planalto (Lei 13.709/2018, em 04/11/2026). Itens marcados **[CONFIRMAR]** dependem de decisão ou conferência do responsável; **[FUTURO]** descreve o que ainda não existe.
@@ -95,33 +95,42 @@ Escala: **probabilidade** (B baixa, M média, A alta) e **gravidade** (B, M, A) 
 
 | # | Risco | Prob. | Grav. | Medidas atuais | Residual |
 |---|---|---|---|---|---|
-| R1 | **Nome sem rótulo passa pela pseudonimização** e chega à Anthropic (a detecção é por padrões e rótulos; "não pega todo nome no meio do texto") | M | M | Tela mostra o texto como será enviado; usuário acrescenta nomes a ocultar; segunda detecção no servidor; aviso nas Políticas | **Médio.** Medição parcial em 04/11/2026 (seção 7, condição 5): o que sobra no texto enviado são nomes de magistrados, ministros, relatores e doutrinadores (agentes em função pública e autores citados), nomes de lugares e logradouro sem número; a taxa real de nome de parte que passa **ainda não foi medida**, porque o corpus já tem as partes mascaradas à mão |
-| R2 | **Dado sensível, de criança ou processo em segredo de justiça** enviado pelo usuário | M | A | Aviso de que não se envia segredo de justiça; Termos transferem a base legal ao usuário; pseudonimização; sem guarda | **Médio.** Reforçar o aviso na tela antes do envio e, no upload, bloquear por padrão (seção 7) |
+| R1 | **Nome sem rótulo passa pela pseudonimização** e chega à Anthropic (a detecção é por padrões e rótulos; "não pega todo nome no meio do texto") | M | M | Tela mostra o texto como será enviado; usuário acrescenta nomes a ocultar; segunda detecção no servidor; aviso nas Políticas | **Médio.** O detector auxilia e não garante, e a tela diz isso ao usuário. Medição parcial em 04/11/2026 (seção 7.2): o que sobra no texto enviado são nomes de magistrados, ministros, relatores e doutrinadores (agentes em função pública e autores citados), nomes de lugares e logradouro sem número; a taxa real de nome de parte que passa será medida depois do lançamento, porque o corpus já tem as partes mascaradas à mão |
+| R2 | **Dado sensível, de criança ou processo em segredo de justiça** enviado pelo usuário | M | A | Aviso de que não se envia segredo de justiça; Termos transferem a base legal ao usuário; pseudonimização; sem guarda | **Médio.** Reforçar o aviso na tela antes do envio e, no upload, bloquear por padrão (seção 7.1, condição 3) |
 | R3 | **Reidentificação por contexto**: pseudonimização não é anonimização, o contexto (fatos, datas, cidade, cargo) pode identificar a pessoa | M | M | Não guardamos o texto; o provedor recebe o texto sem tabela de troca; sem perfil de titular | **Médio.** Tratar o texto enviado como dado pessoal em todo o relatório |
 | R4 | **Retenção e uso pelo provedor**: a Anthropic pode reter o conteúdo (monitoramento de política de uso, exigência legal; 30 dias conforme o artigo consultado) | M | M | Commercial Terms: sem treino por padrão; o Haiku 5.5 não está entre os modelos de retenção obrigatória (conferido em 25/10/2026) | **Médio, pendente.** **[CONFIRMAR no console e nos termos da conta]** e registrar aqui |
 | R5 | **Transferência internacional** (art. 33): o tratamento ocorre fora do Brasil, sem região brasileira | A | M | DPA com Cláusulas Contratuais Padrão incorporado aos Commercial Terms (art. 33, II, "b", **na forma informada pela Anthropic**); pseudonimização antes do envio | **Médio, pendente.** **[CONFIRMAR]** aceitação pela conta e o mecanismo aceito para a LGPD e para o regulamento da ANPD |
 | R6 | **Exposição de metadados** (`ia_uso`, `analises`, `rotulo` livre digitado pelo usuário, que pode conter nome) | B | M | RLS; sem texto; hash de 16 hex; limite de 80 caracteres no rótulo; retenção de 13 meses | **Baixo.** Avisar no campo do rótulo para não pôr nome de parte |
 | R7 | **Resultado errado** (a IA pode errar, omitir ou inventar, inclusive citações) leva o usuário a erro que prejudica um terceiro | M | M | Aviso de IA em todo resultado; parágrafo de origem; selo das citações; avaliação com 30 decisões (dispositivo 26 a 29 de 30, questões 91 de 101, citações com número ausente em 0,3%) | **Médio.** A ferramenta não decide sobre o titular (não é decisão automatizada, art. 20) |
 | R8 | **Acesso indevido** à conta do usuário ou ao painel administrativo | B | M | Sessão obrigatória; acesso administrativo restrito e registrado | **Baixo**, a confirmar |
-| R9 | **Incidente de segurança** com dados de usuários | B | M | Metadados mínimos; sem conteúdo guardado; retenção curta | **Baixo.** Falta procedimento escrito de resposta a incidente e de comunicação à ANPD e ao titular (art. 48) **[FUTURO]** |
-| R10 | **[FUTURO] Upload de arquivos**: guarda do documento integral, com dados pessoais e sensíveis de terceiros, fora do alcance da pseudonimização do navegador | A | A | Nenhuma ainda | **Alto até que as condições da seção 7 estejam cumpridas** |
+| R9 | **Incidente de segurança** com dados de usuários | B | M | Metadados mínimos; sem conteúdo guardado; retenção curta | **Baixo.** Falta o procedimento escrito de resposta a incidente e de comunicação à ANPD e ao titular (art. 48), condição 5 da seção 7.1 **[FUTURO]** |
+| R10 | **[FUTURO] Upload de arquivos**: guarda do documento integral, com dados pessoais e sensíveis de terceiros, fora do alcance da pseudonimização do navegador | A | A | Cifra AES-256-GCM antes de gravar; bucket privado; retenção de 7 dias; exclusão pelo usuário e antes da exclusão da conta; faxina por agendador (base pronta e desligada) | **Alto até que as cinco condições da seção 7.1 estejam cumpridas; depois, médio** |
 
 ## 6. Conclusão do controlador (rascunho)
 
 Com o tratamento de **hoje** (texto colado, pseudonimizado no navegador, sem guarda do conteúdo, com retenção de 13 meses só para metadados), o risco residual é **médio** e concentrado em três pontos: R1 (nome sem rótulo), R4 e R5 (provedor e transferência). Nenhum deles impede a operação em beta, **desde que** as pendências **[CONFIRMAR]** da seção 8 sejam resolvidas e que o aviso de segredo de justiça e de dado sensível apareça **antes** do envio.
 
-O **upload de arquivos (R10) não deve ser liberado** enquanto as condições da seção 7 não estiverem cumpridas e este relatório não for revisado para cobri-lo.
+O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condições da seção 7.1** estiverem cumpridas. O que está na seção 7.2 (medição do detector e o restante) acompanha o uso e não o impede.
 
 ## 7. Condições para liberar o upload (F5-01 e F5-02)
 
-1. **Armazenamento privado e criptografado**, com chave sob controle do Ratione, acesso só do dono e da rotina de exclusão. **Estado (04/11/2026):** código pronto e **desligado**: cifra AES-256-GCM no servidor antes de gravar (chave no Secret Manager, caminho como dado autenticado), bucket privado sem política, tabela só de metadados (nunca o nome nem o conteúdo). Falta aplicar a migração e criar os segredos (`docs/deploy/CLOUD_RUN.md`).
-2. **Exclusão pelo usuário** em um clique e **prazo curto de retenção** padrão (a Política de Privacidade deixa `[X] dias`: o responsável decide o número). **Estado (04/11/2026):** retenção de **7 dias** decidida pelo responsável (a variável só pode reduzir); exclusão pela rota `DELETE` e **antes da exclusão da conta**; faxina de vencidos por agendador a cada hora. Falta o botão na tela e atualizar a Política de Privacidade com o número `[X]`.
-3. **Aviso obrigatório antes do envio**: não enviar segredo de justiça, dado de criança ou dado sensível sem base legal; o usuário confirma.
-4. **Pseudonimização antes da extração** quando possível, ou tratamento do documento integral como dado de alto risco, com a Política de Privacidade atualizada **antes** (já prometido nela).
-5. **Medição da cobertura do detector** de dados pessoais com decisões reais (taxa de nomes que passam), publicada neste relatório (R1). **Estado (04/11/2026):** ferramenta pronta (`apps/web/scripts/cobertura-detector.ts`: roda a pseudonimização nas 30 decisões do corpus e lista os candidatos a nome que ficam no texto enviado). Resultado: o detector **não mascara magistrados, ministros e relatores, nem doutrinadores citados** (decisão de projeto: são agentes públicos em função ou autores; **[CONFIRMAR com o responsável e o advogado se isso basta]**), nem logradouro sem número. **Falta a taxa real:** o corpus já tem os nomes das partes mascarados à mão, então não mede o detector; é preciso um conjunto de decisões brutas com os nomes de parte marcados por jurista (gabarito de nomes) antes de liberar o upload.
-6. **DPA e retenção do provedor confirmados** (R4 e R5) e a Anthropic mantida como suboperador listado.
-7. **Procedimento de incidente** escrito (R9) e **encarregado** designado (art. 41).
-8. **Revisão deste RIPD** (nova versão) cobrindo o upload, e aprovação do responsável.
+**Revisão de 05/11/2026, por decisão do responsável.** A primeira versão tinha oito condições, e algumas pesavam mais do que a lei e o risco pedem. Agora cada item diz se vem **da lei** ou é **escolha de proteção** do responsável, e só o que a lei exige, mais os itens de baixo custo que mais reduzem o risco, impedem o lançamento.
+
+### 7.1 Condições para ligar o upload (cinco)
+
+| # | Condição | Origem | Estado (05/11/2026) | Quem |
+|---|---|---|---|---|
+| 1 | **Armazenamento privado e criptografado**, com chave sob controle do Ratione, acesso só do dono e da rotina de exclusão | Lei: medidas de segurança (art. 46) | **Feito.** Cifra AES-256-GCM no servidor antes de gravar (chave no Secret Manager, caminho como dado autenticado), bucket privado sem política, tabela só de metadados (nunca o nome nem o conteúdo). Migração aplicada, segredos criados, permissões dadas e agendador criado; upload **desligado** | Responsável (feito) |
+| 2 | **Retenção curta e exclusão pelo usuário** em um clique | Lei: término do tratamento e eliminação dos dados (arts. 15 e 16) | Retenção de **7 dias**, exclusão pela rota `DELETE` e antes da exclusão da conta, faxina de vencidos por agendador a cada hora: **feitos**. **Falta** o botão na tela e o número de dias na Política de Privacidade | Ratione (tela e texto) |
+| 3 | **Aviso antes do envio, com confirmação do usuário**: sem segredo de justiça, sem dado de criança, sem dado sensível sem base legal; e o aviso de que o detector de nomes ajuda e não garante | Escolha de proteção. A base legal do conteúdo é do usuário, que é o controlador dele (seção 3); o aviso reduz R2 e registra que ele foi avisado | **Falta** (faz parte da tela de envio) | Ratione (tela) |
+| 4 | **DPA e retenção do provedor confirmados** (R4 e R5), com a Anthropic mantida como suboperador listado | Lei: transferência internacional (art. 33) | **Pendente**: conferir no console e nos termos da conta | Responsável |
+| 5 | **Encarregado indicado e procedimento de incidente** de uma página (quem decide, quem comunica à ANPD e aos titulares) | Lei: encarregado (art. 41, cujo § 3º permite à ANPD dispensar conforme o porte **[CONFIRMAR com o advogado]**) e comunicação de incidente (art. 48) | **Pendente**: nome e canal do encarregado (seção 8); a página do procedimento é redigida pelo Ratione e aprovada pelo responsável | Responsável e Ratione |
+
+### 7.2 Acompanham o uso, sem impedir o lançamento
+
+- **Cobertura do detector de nomes (R1).** Medir a taxa real de nomes de parte que passam, com decisões brutas e a lista de nomes marcada por jurista; a ferramenta está pronta (`apps/web/scripts/cobertura-detector.ts`) e o resultado entra numa nova versão deste relatório. Enquanto isso, a tela mostra o texto como será enviado e traz o aviso da condição 3. O detector **não mascara magistrados, ministros, relatores nem doutrinadores citados** (decisão de projeto: são agentes públicos em função ou autores), nem logradouro sem número **[CONFIRMAR com o advogado se isso basta]**.
+- **Pseudonimização antes da extração.** Feita quando possível. O documento é guardado inteiro e cifrado, e o texto que vai à IA passa pelo mesmo detector; a Política de Privacidade diz isso antes de o upload ligar.
+- **Revisão por advogado de direito digital (T-03).** Confere os itens **[CONFIRMAR]** e a aplicação dos dispositivos citados. Esta versão 0.2 já cobre o upload; a aprovação do responsável a conclui.
 
 ## 8. Pendências do responsável
 
@@ -131,8 +140,9 @@ O **upload de arquivos (R10) não deve ser liberado** enquanto as condições da
 | 2 | Encarregado: nome, canal e enquadramento como agente de pequeno porte (Res. CD/ANPD nº 2/2022) |
 | 3 | Treino e retenção pela Anthropic no console e nos termos da conta (R4) e o mecanismo da transferência internacional (R5) |
 | 4 | Revisão das políticas RLS de `ia_uso` e `analises`, agendamento do `pg_cron` e escopo do acesso administrativo |
-| 5 | Prazo de retenção padrão dos arquivos (condição 2 da seção 7) |
+| 5 | Prazo de retenção dos arquivos: **decidido, 7 dias** (condição 2 da seção 7.1) |
 | 6 | Revisão desta minuta por advogado de direito digital e conferência da redação vigente de cada dispositivo citado antes de publicar |
+| 7 | Aprovar a versão 0.2, com as cinco condições da seção 7.1 |
 
 ## 9. Histórico
 
@@ -140,7 +150,8 @@ O **upload de arquivos (R10) não deve ser liberado** enquanto as condições da
 |---|---|---|---|
 | 0.1 | 04/11/2026 | Minuta redigida a partir do código e dos documentos do produto | Primeira versão |
 | 0.1 | 04/11/2026 | Responsável | Confirmou o RIPD do Argumenta como está; os itens **[CONFIRMAR]** e a revisão por advogado seguem em aberto (seção 8) |
+| 0.2 | 05/11/2026 | Responsável decidiu; minuta ajustada | Seção 7 reescrita: de oito para cinco condições para ligar o upload, cada uma com a origem (lei ou escolha de proteção); a medição do detector e a revisão passam a acompanhar o uso |
 
 **Aprovação:** [NOME_RESPONSAVEL] · [DATA]
 
-**Lei lida (versão compilada do Planalto, 04/11/2026):** Lei 13.709/2018, arts. 5º, II, VI, VII e XVII; 6º; 7º, V e §§ 3º e 4º; 20; 33; 38; 41; 46; 48. A redação vigente de cada um deve ser reconferida pelo advogado antes de publicar.
+**Lei lida (versão compilada do Planalto, 04/11/2026):** Lei 13.709/2018, arts. 5º, II, VI, VII e XVII; 6º; 7º, V e §§ 3º e 4º; 15; 16; 20; 33; 38; 41; 46; 48. A redação vigente de cada um deve ser reconferida pelo advogado antes de publicar.
