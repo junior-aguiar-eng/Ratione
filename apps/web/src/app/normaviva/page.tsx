@@ -287,7 +287,8 @@ export default function NormaVivaPage() {
                           </p>
                         ))}
                       </div>
-                      {situacao && (
+                      {/* A dúvida sobre o início da vigência só aparece perto do início provisório; texto vigente há anos não leva aviso */}
+                      {situacao && !(situacao.tipo === 'redacao_atual' && situacao.provisoria && !situacao.incertezaRelevante) && (
                         <Notice tom={situacao.tipo === 'redacao_atual' && !situacao.provisoria ? 'info' : 'warn'} titulo="Vigência">
                           {situacao.aviso}
                         </Notice>
@@ -405,7 +406,6 @@ export default function NormaVivaPage() {
                               ) : (
                                 <span className="text-ink-soft">{r.destino_texto}</span>
                               )}
-                              {r.escopo === 'presumido' && <span className="text-ink-mute"> (norma presumida)</span>}
                             </li>
                           ))}
                       </ul>

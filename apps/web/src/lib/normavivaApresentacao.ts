@@ -44,18 +44,31 @@ export const ROTULO_RELACAO: Record<string, string> = {
 
 export const ROTULO_ESCOPO: Record<string, string> = {
   mesma: 'Mesma norma (o texto diz "deste Código" ou "desta Lei")',
-  presumido: 'Mesma norma, presumida (o texto cita o artigo sem dizer de qual norma)',
+  presumido: 'Mesma norma: o texto cita o artigo sem repetir o nome da norma, o que na redação das leis significa a própria norma',
   explicito: 'Outra norma, citada pelo nome',
   externo: 'Outra norma, fora da base'
 };
 
 export type SituacaoNaData =
   /** A data é igual ou posterior ao início provisório da redação atual: o texto da base vale, com aviso de vigência não confirmada. */
-  | { tipo: 'redacao_atual'; provisoria: boolean; aviso: string }
+  | { tipo: 'redacao_atual'; provisoria: boolean; aviso: string; incertezaRelevante: boolean }
   /** A data é anterior à redação atual: a base não tem o texto da época. */
   | { tipo: 'texto_da_epoca_indisponivel'; aviso: string }
   /** Dispositivo vetado ou sem data de vigência conhecida. */
   | { tipo: 'sem_data'; aviso: string };
+
+/**
+ * A data de início de uma redação é a da publicação do ato, usada como provisória: a vigência pode ter começado depois (vacatio legis). Isso só
+ * muda a resposta para datas **perto do início**. Passados {@link MARGEM_DA_VACATIO_ANOS} anos da publicação, a data consultada está
+ * seguramente depois de qualquer vacatio comum (CPC e Código Civil tiveram um ano), e o aviso só criaria dúvida onde ela não existe.
+ */
+export const MARGEM_DA_VACATIO_ANOS = 3;
+
+/** `a` é pelo menos `anos` anos anterior a `b` (ISO AAAA-MM-DD; a comparação de strings ISO é cronológica). */
+function anosAntes(a: string, b: string, anos: number): boolean {
+  const limite = `${Number(a.slice(0, 4)) + anos}${a.slice(4)}`;
+  return b >= limite;
+}
 
 /** `dataConsulta` e `vigente_de` em ISO (AAAA-MM-DD); a comparação de strings ISO é cronológica. */
 export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: (iso: string) => string): SituacaoNaData {
@@ -81,6 +94,8 @@ export function situacaoNaData(versao: Versao, dataConsulta: string, dataCurta: 
   return {
     tipo: 'redacao_atual',
     provisoria: !versao.vigencia_confirmada,
+    // Só vale chamar a atenção para a vigência provisória quando a data consultada está perto do início provisório
+    incertezaRelevante: !versao.vigencia_confirmada && !anosAntes(versao.vigente_de, dataConsulta, MARGEM_DA_VACATIO_ANOS),
     aviso: versao.vigencia_confirmada
       ? `Redação em vigor desde ${dataCurta(versao.vigente_de)}.`
       : `Redação atual, que a base data de ${dataCurta(versao.vigente_de)}: é a data de publicação do ato, usada como início provisório. A vigência pode ter começado em outro dia (vacatio legis); a cláusula de vigência do ato não foi lida.`

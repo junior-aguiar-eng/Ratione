@@ -37,6 +37,25 @@ describe('Apresentação do NormaViva', () => {
     assert.match(s.aviso, /vacatio legis/);
   });
 
+  it('o aviso de vigência provisória só vale perto do início: passados 3 anos da publicação, a dúvida não muda a resposta', () => {
+    const v = versao({ vigente_de: '2015-03-17', origem: 'redacao_original', ato_rotulo: null }); // CPC: publicado em 17/03/2015, em vigor em 18/03/2016
+    const relevante = (data: string) => {
+      const s = situacaoNaData(v, data, dc);
+      assert.strictEqual(s.tipo, 'redacao_atual');
+      return s.tipo === 'redacao_atual' && s.incertezaRelevante;
+    };
+    assert.strictEqual(relevante('2015-06-01'), true); // dentro da vacatio possível: o aviso importa
+    assert.strictEqual(relevante('2016-03-18'), true);
+    assert.strictEqual(relevante('2018-03-16'), true); // ainda dentro de 3 anos
+    assert.strictEqual(relevante('2018-03-17'), false); // 3 anos completos
+    assert.strictEqual(relevante('2026-11-05'), false); // hoje: texto vigente há anos, sem aviso
+  });
+
+  it('vigência confirmada nunca é "incerta"', () => {
+    const s = situacaoNaData(versao({ vigente_de: '2015-03-17', vigencia_confirmada: true }), '2015-06-01', dc);
+    assert.ok(s.tipo === 'redacao_atual' && !s.incertezaRelevante);
+  });
+
   it('data ANTES da redação atual: nunca mostra a redação atual como se fosse a da época', () => {
     const s = situacaoNaData(versao({}), '2019-05-10', dc);
     assert.strictEqual(s.tipo, 'texto_da_epoca_indisponivel');
