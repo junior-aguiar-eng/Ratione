@@ -44,6 +44,10 @@ Tokens novos em `globals.css`: `--color-ia`, `--color-ia-text`, `--color-ia-tint
 
 **Página inicial (fase 5):** já funcionava como painel das quatro ferramentas (demonstração, cartões por ferramenta e recentes); só o número de cenários de prazo foi corrigido, de 121 para 415, o total hoje validado.
 
+## Regra de texto: só fatos, sem dúvida exposta (05/11/2026)
+
+O texto da interface diz o que se sabe, com a data e a fonte, e nunca expõe dúvida ou detalhe interno ("provisória", "não foi lida", "vacatio legis", "provavelmente", "ainda não conferido", "em conferência", "a base não tem"). Na vigência do NormaViva, a tela mostra "Redação atual, publicada em D" (ou "Em vigor desde D", quando a cláusula foi lida), sempre em tom neutro. Os avisos jurídicos de substância que evitam perda de prazo (prazo em dobro, data alternativa, feriado local, "confira o texto na fonte oficial antes de citar") continuam, escritos como fato e com a base legal. As páginas de Metodologia e de Termos podem listar os limites do serviço.
+
 ## Componentes
 
 | Componente | Arquivo | Variações | Substituiu |

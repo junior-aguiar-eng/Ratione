@@ -132,7 +132,7 @@ export default function TeseMapPage() {
 
       <div className="mb-6 max-w-3xl text-sm text-ink-soft" data-testid="cobertura">
         <p>
-          Reúne {declarada}. Atualizado em {atualizado ? dataCurta(atualizado) : '—'}. Não cobre toda a jurisprudência: apenas o conjunto indicado.
+          Reúne {declarada}. Atualizado em {atualizado ? dataCurta(atualizado) : '—'}.
         </p>
         <details className="mt-1">
           <summary className="cursor-pointer text-ink-mute hover:text-ink">Fontes</summary>
@@ -253,7 +253,7 @@ export default function TeseMapPage() {
                     <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-brand-text underline underline-offset-2">
                       {f.ato}
                     </a>
-                    . Lido em {dataCurta(f.lidoEm)}.
+                    . Consultada em {dataCurta(f.lidoEm)}.
                   </p>
                 ))}
                 {no.validado_por && <p>Validado por {no.validado_por} em {dataCurta(no.validado_em ?? no.atualizado_em)}.</p>}
@@ -282,8 +282,8 @@ export default function TeseMapPage() {
                 Relações validadas
               </h3>
               {aberto.arestas.length === 0 ? (
-                <Notice tom="info" titulo="Nenhuma relação validada ainda">
-                  O mapa só desenha relações (interpreta, distingue, supera…) que uma pessoa conferiu na fonte. Este precedente ainda não tem nenhuma; a tese e a fonte acima são o dado oficial.
+                <Notice tom="info" titulo="Sem relações registradas">
+                  O mapa mostra as relações (interpreta, distingue, supera…) conferidas na fonte por uma pessoa. A tese e a fonte acima são o dado oficial deste precedente.
                 </Notice>
               ) : (
                 <GrafoDaVizinhanca vizinhanca={aberto} onAbrir={setNoId} />

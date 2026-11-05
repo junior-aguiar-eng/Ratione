@@ -58,7 +58,7 @@ export default function DemoPrazoZero() {
                 <span>
                   {diaDaSemana(r.prazoFinal)} · {r.diasUteis} dias úteis · {ato.nome} · {tribunalId}
                 </span>
-                {r.calendarioConferido ? <Badge variant="ok">Calendário conferido</Badge> : <Badge variant="warn">Calendário não conferido</Badge>}
+                {r.calendarioConferido && <Badge variant="ok">Calendário conferido</Badge>}
               </p>
             </div>
 
