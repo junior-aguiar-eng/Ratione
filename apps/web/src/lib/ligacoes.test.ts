@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { idsParaBuscarCitacoes, ligacoesDoPrazo, precedentesQueCitam, prazosDoDispositivo } from './ligacoes';
+import { idsParaBuscarCitacoes, ligacoesDoPrazo, precedentesQueCitam, prazosDoDispositivo, previaDaTese } from './ligacoes';
 import { lerNormaViva } from './parametrosSalvos';
 
 describe('Ligações entre as ferramentas', () => {
@@ -54,17 +54,28 @@ describe('Ligações entre as ferramentas', () => {
       }) as never;
 
     const unico = await precedentesQueCitam(
-      banco(() => ({ data: [{ id: 'STJ-TEMA-1076', rotulo: 'Tema 1.076/STJ', tipo: 'tema' }], error: null })),
+      banco(() => ({ data: [{ id: 'STJ-TEMA-1076', rotulo: 'Tema 1.076/STJ', tipo: 'tema', tribunal: 'STJ', descricao: 'A fixação dos honorários  por apreciação equitativa só é admitida quando o valor for inestimável ou irrisório.', vinculante: null, teseFirmada: true }], error: null })),
       'LEI-13105-2015|corpo|art. 85, § 2º'
     );
     assert.strictEqual(chamadas.length, 2, 'busca o parágrafo e o artigo');
-    assert.deepStrictEqual(unico, { itens: [{ rotulo: 'Tema 1.076/STJ', href: '/tesemap?n=STJ-TEMA-1076' }], temMais: false });
+    assert.deepStrictEqual(unico, {
+      itens: [
+        {
+          rotulo: 'Tema 1.076/STJ',
+          href: '/tesemap?n=STJ-TEMA-1076',
+          tribunal: 'STJ',
+          tese: 'A fixação dos honorários por apreciação equitativa só é admitida quando o valor for inestimável ou irrisório.',
+          vinculante: false
+        }
+      ],
+      temMais: false
+    });
 
     assert.deepStrictEqual(await precedentesQueCitam(banco(() => ({ data: null, error: { message: 'x' } })), 'LEI-13105-2015|corpo|art. 85'), { itens: [], temMais: false });
   });
 
   it('precedentes que citam: com mais do que o limite, mostra os primeiros em ordem e avisa que há mais', async () => {
-    const nos = Array.from({ length: 9 }, (_, i) => ({ id: `STJ-TEMA-${100 + i}`, rotulo: `Tema ${100 + i}`, tipo: 'tema' }));
+    const nos = Array.from({ length: 9 }, (_, i) => ({ id: `STJ-TEMA-${100 + i}`, rotulo: `Tema ${100 + i}`, tipo: 'tema', tribunal: 'STJ', descricao: 'x', vinculante: null, teseFirmada: true }));
     const banco = {
       from: () => ({ select: () => ({ contains: () => ({ order: () => ({ limit: async () => ({ data: [...nos].reverse(), error: null }) }) }) }) })
     } as never;
@@ -72,5 +83,26 @@ describe('Ligações entre as ferramentas', () => {
     assert.strictEqual(r.itens.length, 8);
     assert.strictEqual(r.itens[0].rotulo, 'Tema 100');
     assert.strictEqual(r.temMais, true);
+  });
+
+  it('precedentes que citam: vinculantes e súmulas vêm na frente, e tema sem tese firmada não mostra tese', async () => {
+    const nos = [
+      { id: 'STF-TEMA-1', rotulo: 'Tema 1 do STF', tipo: 'tema', tribunal: 'STF', descricao: 'Sem tese.', vinculante: null, teseFirmada: false },
+      { id: 'STJ-SUMULA-7', rotulo: 'Súmula 7 do STJ', tipo: 'sumula', tribunal: 'STJ', descricao: 'A pretensão de simples reexame de prova não enseja recurso especial.', vinculante: null, teseFirmada: true },
+      { id: 'STF-SV-11', rotulo: 'Súmula Vinculante 11', tipo: 'sumula', tribunal: 'STF', descricao: 'Só é lícito o uso de algemas em casos de resistência.', vinculante: true, teseFirmada: true }
+    ];
+    const banco = { from: () => ({ select: () => ({ contains: () => ({ order: () => ({ limit: async () => ({ data: nos, error: null }) }) }) }) }) } as never;
+    const r = await precedentesQueCitam(banco, 'LEI-13105-2015|corpo|art. 85');
+    assert.deepStrictEqual(r.itens.map(i => i.rotulo), ['Súmula Vinculante 11', 'Súmula 7 do STJ', 'Tema 1 do STF']);
+    assert.strictEqual(r.itens[0].vinculante, true);
+    assert.strictEqual(r.itens[2].tese, '');
+  });
+
+  it('a prévia da tese corta numa palavra inteira, com reticências, e não mexe no texto curto', () => {
+    assert.strictEqual(previaDaTese('  Texto   curto. '), 'Texto curto.');
+    assert.strictEqual(previaDaTese(null), '');
+    const longa = 'palavra '.repeat(60);
+    const previa = previaDaTese(longa, 50);
+    assert.ok(previa.endsWith('palavra…') && previa.length <= 51, previa);
   });
 });

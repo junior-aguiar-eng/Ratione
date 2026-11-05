@@ -74,6 +74,7 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `explicar-precedente` | Explica em linguagem clara a tese firmada (ou o enunciado) do precedente aberto no TeseMap, só a partir do texto que o tribunal registra, com o trecho da tese que enuncia a regra | Botão "Explicar com IA" no TeseMap (logado) | Cota de explicações do plano; a resposta é guardada e serve a todos | Seção 8.3 abaixo |
 | `ler-intimacao` | Extrai da intimação colada o tribunal, o tipo e a data do evento e o prazo mencionado, só para preencher o PrazoZero | Campo "Preencher pela intimação" no PrazoZero (logado) | Cota de explicações do plano | Seção 8.2 abaixo |
 | `relacionar-com-o-caso` | Como o dispositivo ou precedente aberto a partir da análise se relaciona com a questão do caso (aplica, distingue ou trata de outro ponto), com o trecho da fonte que sustenta | Botão "Relacionar com a minha questão" no NormaViva ou no TeseMap, depois de abrir uma citação da análise (logado) | Cota de explicações do plano; a tela limita a 10 por caso | Seção 8.1 abaixo |
 
@@ -97,6 +98,16 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 - **A pessoa confere:** a tela mostra cada campo com o trecho de onde veio e só preenche o formulário quando a pessoa clica em "Usar estes dados". O "prazo mencionado" é só informação.
 - **Material do usuário:** `guardaResultado: false`; o registro de uso leva só um hash curto do texto. Conta na cota de explicações do plano (não gasta análise). Modelo `claude-haiku-5-5`, esforço baixo, até 900 tokens de saída.
 - **Desligada por padrão:** o campo só aparece com `NEXT_PUBLIC_IA_INTIMACAO=sim` (variável de repositório `IA_INTIMACAO`), e o servidor só executa com `IA_INTIMACAO_LIGADA=sim`. Só ligar depois de testada com intimações reais de alguns tribunais.
+
+### 8.3 `explicar-precedente` (decisão do responsável de 05/11/2026)
+
+- **Para quê:** o TeseMap mostra a tese como o tribunal a escreve, e ela costuma ser difícil de ler. A IA a explica em português claro (resumo, até cinco itens, até cinco termos e o que o texto não permite concluir), sem acrescentar nada que não esteja no texto.
+- **Entrada:** só o id do precedente (`STJ-TEMA-1076`); texto livre é recusado. O texto da tese o servidor lê do banco público do TeseMap; nada dele vem do navegador. Precedente sem tese firmada (só a questão registrada) não tem o que explicar: a rota responde 404 e a tela nem mostra o botão.
+- **Saída fechada:** `resumo`, `explicacao`, `termos`, `trecho` e `atencao`.
+- **Trava no servidor:** o `trecho` tem de existir, palavra por palavra (sem contar caixa, acento nem espaços), na questão ou na tese do precedente; nenhum tema, súmula, artigo ou lei pode aparecer na explicação sem estar no texto do precedente; e a explicação não pode dizer quem tem razão nem o que fazer. Saída que não passa é descartada e a cota não é gasta.
+- **Material público:** `guardaResultado: true`. A chave do cache é a mensagem inteira (inclui a tese), então a mesma explicação serve a todos e muda sozinha se o tribunal alterar a tese. Resposta guardada não gasta cota.
+- **Cota e modelo:** cota de explicações do plano (não gasta análise); `claude-haiku-5-5`, esforço baixo, até 1.800 tokens de saída; custo esperado da ordem de US$ 0,004 por precedente novo.
+- **Desligada por padrão:** o botão só aparece com `NEXT_PUBLIC_IA_PRECEDENTE=sim` (variável de repositório `IA_PRECEDENTE`), e o servidor só executa com `IA_PRECEDENTE_LIGADA=sim`. Só ligar depois de a pessoa responsável ler as explicações de uma amostra de precedentes de cada tribunal (STF e STJ, teses e súmulas) e achá-las fiéis ao texto.
 
 ## 9. Ligar e desligar
 

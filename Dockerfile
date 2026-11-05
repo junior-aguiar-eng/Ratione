@@ -27,6 +27,8 @@ ARG NEXT_PUBLIC_IA_EXPLICACAO
 ARG NEXT_PUBLIC_IA_RELACAO
 # "sim" mostra o campo "Colar a intimação" no PrazoZero; o servidor também precisa de IA_INTIMACAO_LIGADA=sim (docs/produto/IA_TAREFAS.md)
 ARG NEXT_PUBLIC_IA_INTIMACAO
+# "sim" mostra o botão "Explicar com IA" no TeseMap; o servidor também precisa de IA_PRECEDENTE_LIGADA=sim (docs/produto/IA_TAREFAS.md)
+ARG NEXT_PUBLIC_IA_PRECEDENTE
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter web build
 

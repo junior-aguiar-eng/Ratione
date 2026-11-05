@@ -55,6 +55,7 @@ jobs:
             --build-arg NEXT_PUBLIC_IA_EXPLICACAO="${{ vars.IA_EXPLICACAO }}" \
             --build-arg NEXT_PUBLIC_IA_RELACAO="${{ vars.IA_RELACAO }}" \
             --build-arg NEXT_PUBLIC_IA_INTIMACAO="${{ vars.IA_INTIMACAO }}" \
+            --build-arg NEXT_PUBLIC_IA_PRECEDENTE="${{ vars.IA_PRECEDENTE }}" \
             .
           docker push "$IMAGEM"
           echo "nome=$IMAGEM" >> "$GITHUB_OUTPUT"
@@ -80,6 +81,11 @@ jobs:
           IA="${IA}@IA_INTIMACAO_LIGADA=nao"
           if [ "${{ vars.IA_INTIMACAO }}" = "sim" ]; then
             IA="${IA%@IA_INTIMACAO_LIGADA=nao}@IA_INTIMACAO_LIGADA=sim"
+          fi
+          # Explicação do precedente (TeseMap): também desligada por padrão, com a variável IA_PRECEDENTE = sim (e IA_EXPLICACAO = sim).
+          IA="${IA}@IA_PRECEDENTE_LIGADA=nao"
+          if [ "${{ vars.IA_PRECEDENTE }}" = "sim" ]; then
+            IA="${IA%@IA_PRECEDENTE_LIGADA=nao}@IA_PRECEDENTE_LIGADA=sim"
           fi
           # Cobrança com o Mercado Pago (F8-05): DESLIGADA por padrão. Só com a variável COBRANCA = sim o servidor recebe os segredos do
           # Mercado Pago (mercadopago-access-token e mercadopago-webhook-secret, no Secret Manager) e a cobrança liga. COBRANCA_AMBIENTE

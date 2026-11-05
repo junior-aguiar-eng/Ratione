@@ -14,6 +14,7 @@ import { obterSupabase } from '../../lib/supabase/client';
 import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import FaixaDoCaso from '../../components/FaixaDoCaso';
 import RelacaoComOCaso from '../../components/RelacaoComOCaso';
+import ExplicacaoDoPrecedente from '../../components/ExplicacaoDoPrecedente';
 import ReservaTeseMap from './ReservaTeseMap';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -271,6 +272,8 @@ export default function TeseMapPage() {
                   </div>
                 </CartaoDeLeitura>
                 <RelacaoComOCaso key={`relacao-${no.id}`} ferramenta="tesemap" destinoId={no.id} />
+                {/* Sem tese firmada o tribunal só registra a questão: não há o que explicar */}
+                {no.detalhes.teseFirmada !== false && <ExplicacaoDoPrecedente key={`explicacao-${no.id}`} noId={no.id} />}
               </div>
               <aside
                 className="xl:col-span-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4 items-start xl:sticky xl:top-24 xl:max-h-[calc(100vh-7rem)] xl:overflow-y-auto xl:pb-2"
