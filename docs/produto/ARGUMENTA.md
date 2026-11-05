@@ -66,7 +66,7 @@ O código encadeia as etapas; se uma falha, "Tentar de novo" retoma dela, sem re
 - A pseudonimização acha identificadores formatados e nomes **rotulados**; um nome citado só no meio do texto, sem rótulo, passa, se o usuário não o acrescentar à lista. Por isso a tela mostra o texto como será enviado.
 - A segmentação de texto copiado de PDF usa heurística (linha mais curta terminada em ponto encerra o parágrafo; título em caixa alta e linha com rótulo ficam sozinhos). Não há página: a âncora é o parágrafo. Página e posição vêm com o Docling (F5-02).
 - A citação é a do texto. O selo da F5-04 (§8) diz se a base do Ratione a tem, mas não se ela está certa nem o que o precedente afirma.
-- Sem fragilidades, teses, mapa nem estratégias: a análise de exemplo, abaixo do formulário, mostra aonde o módulo vai chegar.
+- Sem fragilidades, teses nem estratégias. A página mostra só a análise da decisão do usuário; o exemplo ilustrativo que ficava abaixo do formulário foi retirado em 05/11/2026 (a demonstração da página inicial continua com ele).
 
 ## 6. Avaliação (F5-05)
 

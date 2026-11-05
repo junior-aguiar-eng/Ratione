@@ -189,7 +189,7 @@ export default function AnaliseDecisao() {
   if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
     return (
       <Notice tom="info" titulo="Análise de decisões">
-        A análise de uma decisão sua ainda não está disponível. Abaixo, uma análise de exemplo.
+        A análise de decisões não está habilitada nesta instalação.
       </Notice>
     );
   }
@@ -306,11 +306,11 @@ export default function AnaliseDecisao() {
           </p>
         </div>
 
-        <details className="rounded-md border border-line px-4 py-3">
-          <summary className="cursor-pointer text-sm font-medium text-ink">
-            Dados pessoais: {trocados === 0 ? 'nenhum encontrado até agora' : `${trocados} ${trocados === 1 ? 'trocado' : 'trocados'} por marcadores antes do envio`}
+        <details className="group text-sm">
+          <summary className="w-fit cursor-pointer text-brand-text hover:underline underline-offset-2">
+            {trocados === 0 ? 'Conferir o que será enviado e ocultar nomes' : `${trocados} ${trocados === 1 ? 'dado pessoal trocado' : 'dados pessoais trocados'} por marcadores · conferir e ocultar nomes`}
           </summary>
-          <div className="flex flex-col gap-4 pt-3">
+          <div className="mt-3 flex flex-col gap-4 border-l-2 border-line pl-4">
             <p className="text-sm text-ink-soft">
               Antes de sair do seu navegador, nomes das partes e dos advogados, CPF, CNPJ, RG, OAB, número do processo, endereço, CEP, telefone e
               e-mail são trocados por marcadores como [PARTE_1]. Os dados reais voltam só nesta tela. A detecção usa padrões e rótulos (como
