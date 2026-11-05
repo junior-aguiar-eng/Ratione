@@ -10,6 +10,7 @@ No `/argumenta`, a pessoa logada cola o texto de uma sentença, acórdão ou dec
 
 - **Visão geral:** tipo de decisão, resultado, resumo e pedidos;
 - **Estrutura:** as partes da decisão (cabeçalho, ementa, relatório, preliminares, fundamentação, dispositivo) com acesso aos trechos correspondentes;
+- **Mapa** (F5-03, 05/11/2026): por questão, o raciocínio na ordem em que se lê (fatos e provas → normas → doutrina → precedentes → raciocínio da decisão → conclusão) e a lista de normas e precedentes citados na decisão inteira, com a quantidade de questões em que cada um aparece e o selo de conferência. É **montado por código**, só com o que as etapas de questões e de fundamentos já extraíram: **não chama o modelo, não custa nada a mais e não avalia se a decisão está certa**. A lógica é `lib/argumenta/mapa.ts` (com testes) e a tela é `MapaView.tsx`;
 - **Questões e fundamentos:** cada questão resolvida (preliminar, prejudicial, mérito ou acessória), a conclusão, como a alegação foi tratada (acolhida, rejeitada…) e os fundamentos dela (fato, prova, norma, precedente, doutrina, argumento), com a citação como aparece no texto.
 
 Cada item permite localizar e destacar os **trechos originais** correspondentes, sem exibir a numeração técnica. O texto integral fica recolhido durante a leitura dos resultados e abre quando a pessoa escolhe “Consultar texto da decisão” ou “Ver no texto”; os trechos destacados aparecem em fluxo de leitura, sem cartões ou rótulos por fragmento. O modelo nunca escreve o trecho mostrado: só indica posições internas no texto preparado.

@@ -73,6 +73,7 @@ O **grafo de precedentes** com o corpus declarado e a data da última atualizaç
 Análise de uma decisão colada em texto. Por enquanto, sem envio de arquivos e sem guardar o documento nem o resultado.
 
 - **Visão geral, estrutura e questões:** tipo e resultado da decisão, as partes (relatório, preliminares, fundamentação, dispositivo) e, para cada questão, a conclusão, o tratamento da alegação e os fundamentos (fato, prova, norma, precedente, doutrina, argumento).
+- **Mapa de argumentos:** por questão, o raciocínio na ordem em que se lê (fatos, normas, precedentes, raciocínio) até a conclusão, e as normas e precedentes citados em toda a decisão. É montado por código, sem custo extra de IA e sem avaliar se a decisão está certa.
 - **Leitura com origem sob demanda:** cada ponto leva ao trecho original, destacado no texto da decisão.
 - **Pseudonimização sempre ligada:** os dados pessoais são substituídos no navegador e a tabela de equivalência nunca sai dele.
 - **Segmentação de PDF do PJe:** remove rodapés e junta frases cortadas.
