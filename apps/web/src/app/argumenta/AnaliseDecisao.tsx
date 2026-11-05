@@ -7,6 +7,7 @@ import { LIMITE_CARACTERES_DECISAO, MAX_PARAGRAFOS, prepararDecisao, restaurar, 
 import Notice from '../../components/Notice';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { CartaoDeIA, CartaoDeLeitura } from '../../components/Cartoes';
 import { Badge, type BadgeTom } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Input, campoClasses } from '@/components/ui/input';
@@ -118,6 +119,9 @@ interface UsoRapida {
   renovaEm: string;
 }
 
+
+/** No computador (largura de 1024 px ou mais) o texto da decisão fica ao lado da análise; no celular, recolhido. */
+const textoAbreAoLado = () => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches;
 
 export default function AnaliseDecisao() {
   const { usuario, carregando, contaDisponivel } = useSessao();
@@ -247,7 +251,7 @@ export default function AnaliseDecisao() {
     setEncerrada(false);
     setAba('geral');
     setAtivos([]);
-    setTextoAberto(false);
+    setTextoAberto(textoAbreAoLado());
     void executar(preparo, {}, null);
   };
 
@@ -453,7 +457,7 @@ export default function AnaliseDecisao() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        <Card className={`${textoAberto ? 'lg:col-span-5 lg:sticky lg:top-24' : 'hidden'} overflow-hidden`} id="texto-da-decisao">
+        <CartaoDeLeitura className={`${textoAberto ? 'lg:col-span-5 lg:sticky lg:top-24' : 'hidden'} overflow-hidden p-0 gap-0`} id="texto-da-decisao" aria-label="Texto completo da decisão">
           <h3 className="px-5 py-3 text-sm font-semibold text-ink border-b border-line bg-surface-2">Texto completo da decisão</h3>
           <div ref={listaRef} className="relative max-h-[560px] overflow-y-auto px-5 py-4 space-y-3">
             {enviada.paragrafos.map((p, i) => (
@@ -466,12 +470,13 @@ export default function AnaliseDecisao() {
               </p>
             ))}
           </div>
-        </Card>
+        </CartaoDeLeitura>
 
-        <div className={`${textoAberto ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col gap-6`}>
+        <div className={`${textoAberto ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col gap-6 min-w-0`}>
           {!estrutura ? (
             <p className="text-base text-ink-soft">{erro ? 'A análise não foi concluída.' : 'Preparando a análise…'}</p>
           ) : (
+            <CartaoDeIA titulo="Análise por IA" deslocado={false} className="p-5 sm:p-6 gap-5" meta="Gerada só a partir do texto colado">
             <Tabs value={aba} onValueChange={setAba} className="gap-8">
               <TabsList aria-label="Seções da análise">
                 <TabsTrigger value="geral">Visão geral</TabsTrigger>
@@ -584,12 +589,12 @@ export default function AnaliseDecisao() {
                 )}
               </TabsContent>
             </Tabs>
-          )}
-
-          <Notice titulo="Análise gerada por inteligência artificial">
-            Feita só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
+            <p className="text-xs text-ink-soft leading-relaxed border-t border-ia/20 pt-3">
+              Gerada por IA só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
             página, a análise se perde.
-          </Notice>
+            </p>
+            </CartaoDeIA>
+          )}
         </div>
       </div>
     </div>
