@@ -6,6 +6,7 @@
  */
 import type { Versao } from './normaviva';
 import { chaveDoArtigo, type AvisoVigenciaFutura } from '@ratione/normaviva/vigencia-futura';
+import { NORMAS_CONHECIDAS } from '@ratione/normaviva/apelidos';
 
 export interface Segmento {
   texto: string;
@@ -187,4 +188,16 @@ export function textoDoAvisoFuturo(aviso: AvisoVigenciaFutura, normaId: string, 
       : [`O texto acima é o que vale hoje. A ${aviso.ato} altera este artigo, mas a vigência dela é escalonada ou condicionada: leia a cláusula no ato antes de aplicar a nova redação.`];
   linhas.push(`Cláusula de vigência: ${aviso.clausula}.`);
   return { titulo: 'Alteração já publicada, ainda não em vigor', linhas, dispositivos, fonteUrl: aviso.fonte.url };
+}
+
+/**
+ * Nome curto da norma para as fichas da pesquisa: a sigla de uso corrente ("CPC", "CF"), ou, sem sigla, "Lei 11.340/2006" montada do identificador
+ * (`LEI-11340-2006`); em último caso, o nome inteiro.
+ */
+export function siglaDaNorma(id: string, nome: string): string {
+  const sigla = NORMAS_CONHECIDAS.find(n => n.id === id)?.siglas[0];
+  if (sigla) return sigla;
+  const m = id.match(/^(LEI|LC|DL)-(\d+)-(\d{4})$/);
+  if (m) return `${{ LEI: 'Lei', LC: 'LC', DL: 'DL' }[m[1] as 'LEI' | 'LC' | 'DL']} ${Number(m[2]).toLocaleString('pt-BR')}/${m[3]}`;
+  return nome;
 }

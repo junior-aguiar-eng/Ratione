@@ -61,6 +61,11 @@
 
   /* Elevação dos cartões: a cor da sombra vem do token --sombra (clara no tema claro, preta no escuro) */
   --shadow-card: 0 1px 2px rgb(var(--sombra) / 0.05), 0 14px 32px -18px rgb(var(--sombra) / 0.22);
+  /* Conteúdo gerado por IA: o cartão destacado, um passo acima do cartão comum. A cor é a do lilás (`--rel`), que vira a identidade da IA no site. */
+  --shadow-float: 0 2px 4px rgb(var(--sombra) / 0.06), 0 20px 40px -18px rgb(var(--sombra) / 0.3);
+  --color-ia: rgb(var(--rel));
+  --color-ia-text: rgb(var(--rel-text));
+  --color-ia-tint: rgb(var(--rel-tint));
 
   --font-sans:
     var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, sans-serif;

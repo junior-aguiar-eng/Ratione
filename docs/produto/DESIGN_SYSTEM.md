@@ -24,6 +24,20 @@ O canvas não é um cinza chapado: `body::before` (em `globals.css`) pinta, fixa
 
 Regras: **os cartões continuam opacos ou quase (`bg-surface/85`)**, para o texto manter o contraste sobre a névoa; para mudar a força da névoa, mexa só nos três `--mist-*`; cor nova de halo é um token novo, nunca um valor solto. O painel `Card` (`cardClasses`) já traz `shadow-card`. O cabeçalho é translúcido com desfoque (`bg-canvas/70 backdrop-blur-md`), então a névoa passa por ele. O logo do cabeçalho é `<Logo grande />` (símbolo de 40 px, nome em `text-xl`); o padrão (30 px) serve ao rodapé.
 
+## Cartões por tipo de conteúdo (05/11/2026)
+
+O site deixou de empilhar tudo na mesma coluna e com o mesmo peso. Cada tipo de conteúdo tem o seu cartão (`components/Cartoes.tsx`), para o cliente saber de relance **o que vale** e **o que a IA gerou**, e a tela passa a ter uma coluna de leitura e uma de contexto.
+
+| Cartão | Para quê | Aparência |
+|---|---|---|
+| `CartaoDeLeitura` | A fonte oficial: texto da lei (e, nas próximas fases, da decisão). **O texto completo fica sempre à vista**, nunca recolhido | Branco, de "papel", `rounded-xl`, `shadow-card`, texto em serifa |
+| `CartaoDeIA` | Tudo o que a IA gerou (explicação de dispositivo; depois, as análises do Argumenta) | Tom lilás (`--ia`, o mesmo lilás de `--rel`), borda inferior mais forte, `shadow-float` (um passo acima do cartão comum), recuado no computador para ficar ligado ao texto sem se misturar. Traz o título, a cota restante e o aviso curto de que foi gerado por IA |
+| `CartaoDeContexto` | O que acompanha a leitura: histórico da redação, remissões, citado por, ligações com as outras ferramentas, fonte | Pequeno e neutro (`bg-surface/85`), numa coluna lateral fixa (`lg:sticky`) |
+
+Tokens novos em `globals.css`: `--color-ia`, `--color-ia-text`, `--color-ia-tint` (alias do lilás `--rel`, no tema claro e no escuro) e `--shadow-float`. Regras: o cartão de IA é o **único** elevado acima do `shadow-card`; cor só por token; o aviso de IA continua dentro do cartão, em letra pequena, sem caixa própria.
+
+**NormaViva (fases 1 e 2):** os resultados da pesquisa viraram fichas (`ResultadosDaBusca.tsx`): o mesmo artigo em várias normas vira uma linha de fichas pela sigla da norma (`siglaDaNorma`), e uma pesquisa por assunto vira uma lista compacta, de uma linha por resultado, com rolagem própria. O artigo aberto ocupa a tela, com a coluna de contexto ao lado. Próximas fases: Argumenta, TeseMap e PrazoZero, e a página inicial como painel das ferramentas.
+
 ## Componentes
 
 | Componente | Arquivo | Variações | Substituiu |
