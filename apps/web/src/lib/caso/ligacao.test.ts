@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { comCaso, destinoDoEndereco, fundamentosQueApontamPara, lerQuestaoDoCaso, urlDeVoltaAoCaso } from './ligacao';
+import { comCaso, destinoDoEndereco, fundamentosQueApontamPara, lerQuestaoDoCaso, urlDeVoltaAoCaso, urlDoPrazoDoCaso, veioDaDecisao } from './ligacao';
 import type { CasoEmMemoria } from './memoria';
 import type { VerificacaoDaCitacao } from '../argumenta/verificarCitacoes';
 
@@ -58,5 +58,21 @@ describe('Caso entre as ferramentas: ligação', () => {
     assert.deepEqual(fundamentosQueApontamPara(caso, 'Q1', 'normaviva', 'CPC#art-345'), []);
     assert.deepEqual(fundamentosQueApontamPara(caso, 'Q1', 'tesemap', 'CPC#art-344'), []);
     assert.deepEqual(fundamentosQueApontamPara(caso, 'Q1', 'normaviva', null), []);
+  });
+});
+
+describe('Caso entre as ferramentas: da decisão ao PrazoZero', () => {
+  it('o endereço leva o ato e o caso; ato fora do formato não entra', () => {
+    assert.equal(urlDoPrazoDoCaso('apelacao'), '/prazozero?ato=apelacao&caso=D');
+    assert.equal(urlDoPrazoDoCaso('agravo-instrumento'), '/prazozero?ato=agravo-instrumento&caso=D');
+    assert.equal(urlDoPrazoDoCaso('<script>'), '/prazozero?caso=D');
+    assert.equal(urlDoPrazoDoCaso(''), '/prazozero?caso=D');
+  });
+
+  it('reconhece que a pessoa veio da decisão, e não de uma questão', () => {
+    assert.equal(veioDaDecisao('?ato=apelacao&caso=D'), true);
+    assert.equal(veioDaDecisao('?caso=Q2'), false);
+    assert.equal(veioDaDecisao(''), false);
+    assert.equal(lerQuestaoDoCaso('?caso=D'), null, 'a decisão não é uma questão');
   });
 });

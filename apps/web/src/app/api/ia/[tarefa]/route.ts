@@ -19,6 +19,11 @@ import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
  * no servidor; sem eles, responde 503 e não chama nada. A cota é do plano do usuário, por análise (`POST /api/analises`).
  * Regras: `docs/produto/IA_TAREFAS.md`.
  */
+const CHAVES_PROPRIAS: Record<string, string> = {
+  'relacionar-com-o-caso': 'IA_RELACAO_LIGADA',
+  'ler-intimacao': 'IA_INTIMACAO_LIGADA'
+};
+
 export async function POST(request: Request, { params }: { params: Promise<{ tarefa: string }> }) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publicavel = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -32,8 +37,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const { tarefa } = await params;
-  // A relação com o caso tem a própria chave: só liga depois de medida no corpus (docs/produto/IA_TAREFAS.md)
-  if (tarefa === 'relacionar-com-o-caso' && process.env.IA_RELACAO_LIGADA !== 'sim') {
+  // Tarefas com chave própria: só ligam depois de medidas (docs/produto/IA_TAREFAS.md)
+  const chaveDaTarefa = CHAVES_PROPRIAS[tarefa];
+  if (chaveDaTarefa && process.env[chaveDaTarefa] !== 'sim') {
     return NextResponse.json({ mensagem: 'Este recurso de IA não está disponível nesta instalação.' }, { status: 503 });
   }
   let corpo: { entrada?: unknown } = {};

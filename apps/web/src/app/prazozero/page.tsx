@@ -18,6 +18,8 @@ import {
 } from '@ratione/prazozero';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 import PageHeader from '../../components/PageHeader';
+import FaixaDaDecisao from '../../components/FaixaDaDecisao';
+import LerIntimacao, { type DadosDaIntimacao } from './LerIntimacao';
 import Notice from '../../components/Notice';
 import { CartaoDeLeitura } from '../../components/Cartoes';
 import EmptyState from '../../components/EmptyState';
@@ -95,6 +97,13 @@ export default function PrazoZeroPage() {
       ? prazo.ato
       : `${prazo.ato} (${prazo.grupo})`
     : nomeOutro.trim() || 'Prazo personalizado';
+
+  /** Os dados que a leitura da intimação trouxe, já conferidos pela pessoa: só o tribunal, o tipo e a data; o ato continua sendo dela. */
+  const usarDadosDaIntimacao = (d: DadosDaIntimacao) => {
+    if (d.tribunalId) setTribunalId(d.tribunalId);
+    if (d.tipoEvento) setTipoEvento(d.tipoEvento);
+    if (d.dataEvento) setDataEvento(d.dataEvento);
+  };
 
   const escolherAto = (id: string) => {
     setAtoId(id);
@@ -242,6 +251,8 @@ export default function PrazoZeroPage() {
         description="Informe o prazo, a intimação e o tribunal. O resultado mostra o prazo final e como cada dia foi contado."
       />
 
+      <FaixaDaDecisao className="mb-8 print:hidden" />
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-12 items-start print:block">
         {/* Fluxo guiado */}
         <form
@@ -249,6 +260,8 @@ export default function PrazoZeroPage() {
           onSubmit={e => e.preventDefault()}
           aria-label="Dados do cálculo"
         >
+          <LerIntimacao onUsar={usarDadosDaIntimacao} />
+
           <fieldset className="flex flex-col gap-3">
             <Legend className="mb-3">1. Qual prazo deseja calcular?</Legend>
             <NativeSelect

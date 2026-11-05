@@ -74,6 +74,7 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `ler-intimacao` | Extrai da intimação colada o tribunal, o tipo e a data do evento e o prazo mencionado, só para preencher o PrazoZero | Campo "Preencher pela intimação" no PrazoZero (logado) | Cota de explicações do plano | Seção 8.2 abaixo |
 | `relacionar-com-o-caso` | Como o dispositivo ou precedente aberto a partir da análise se relaciona com a questão do caso (aplica, distingue ou trata de outro ponto), com o trecho da fonte que sustenta | Botão "Relacionar com a minha questão" no NormaViva ou no TeseMap, depois de abrir uma citação da análise (logado) | Cota de explicações do plano; a tela limita a 10 por caso | Seção 8.1 abaixo |
 
 ### 8.1 `relacionar-com-o-caso` (decisão do responsável de 05/11/2026)
@@ -86,6 +87,16 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 - **Modelo:** `claude-haiku-5-5`, esforço baixo, até 1.200 tokens de saída. Custo esperado da ordem de US$ 0,005 por consulta.
 - **Desligada por padrão:** o botão só aparece com `NEXT_PUBLIC_IA_RELACAO=sim` (variável de repositório `IA_RELACAO`), e o servidor só executa com `IA_RELACAO_LIGADA=sim`. Só ligar depois de medida (abaixo).
 - **Medição antes de ligar:** `pnpm --filter web avaliar-relacao` usa as decisões do corpus: cada fundamento de norma ou precedente que a própria decisão usou na questão deve sair como `aplica`; cada fonte de outra questão, de assunto diferente, não deve sair como `aplica`. O relatório mostra a taxa de acerto e a de trecho descartado.
+
+### 8.2 `ler-intimacao` (decisão do responsável de 05/11/2026)
+
+- **Para quê:** a pessoa cola o texto de uma intimação ou publicação e a IA **só extrai** o tribunal, o tipo de intimação (disponibilização no DJe, publicação, portal, carga ou audiência), a data desse evento e, se o texto disser, o número de dias do prazo. Quem calcula continua sendo o motor determinístico do PrazoZero; a IA nunca escolhe o ato nem calcula data.
+- **Entrada:** só os parágrafos do texto colado, **já pseudonimizados no navegador** (nomes, CPF, CNPJ, número do processo e outros dados viram marcadores). O servidor confere de novo e recusa texto com dado pessoal detectável, mais de 60 parágrafos ou mais de 8.000 caracteres.
+- **Saída fechada:** `tribunal` (sigla da lista do Ratione, ou vazio), `tipoEvento`, `dataEvento` (AAAA-MM-DD ou vazio), `diasMencionados` (ou 0) e, para cada campo, o `trecho` copiado do texto.
+- **Trava no servidor:** o trecho de cada campo preenchido tem de existir, palavra por palavra (sem contar caixa, acento nem espaços), no texto; o tribunal tem de existir na lista; a data tem de ser válida e estar **escrita no trecho** (03/11/2026, 3.11.26 ou "3 de novembro de 2026"); o número de dias tem de estar no trecho. Saída que não passa é descartada e a cota não é gasta.
+- **A pessoa confere:** a tela mostra cada campo com o trecho de onde veio e só preenche o formulário quando a pessoa clica em "Usar estes dados". O "prazo mencionado" é só informação.
+- **Material do usuário:** `guardaResultado: false`; o registro de uso leva só um hash curto do texto. Conta na cota de explicações do plano (não gasta análise). Modelo `claude-haiku-5-5`, esforço baixo, até 900 tokens de saída.
+- **Desligada por padrão:** o campo só aparece com `NEXT_PUBLIC_IA_INTIMACAO=sim` (variável de repositório `IA_INTIMACAO`), e o servidor só executa com `IA_INTIMACAO_LIGADA=sim`. Só ligar depois de testada com intimações reais de alguns tribunais.
 
 ## 9. Ligar e desligar
 

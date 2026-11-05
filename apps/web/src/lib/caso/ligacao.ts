@@ -11,6 +11,11 @@ const QUESTAO = /^Q(?:[1-9]|10)$/;
 
 export type Ferramenta = 'normaviva' | 'tesemap';
 
+/** `?caso=D`: a pessoa veio da decisão como um todo (não de uma questão), por exemplo para calcular o prazo de um recurso. */
+const DA_DECISAO = 'D';
+
+const ATO = /^[a-z0-9-]{2,40}$/;
+
 /** Acrescenta `?caso=Q2` ao endereço da citação; endereço que já tem parâmetros os mantém. */
 export function comCaso(href: string, questaoId: string | null | undefined): string {
   if (!questaoId || !QUESTAO.test(questaoId)) return href;
@@ -52,3 +57,19 @@ export function fundamentosQueApontamPara(caso: Pick<CasoEmMemoria, 'resultados'
     });
   });
 }
+
+/** O PrazoZero com o ato já escolhido e o caso junto (`?ato=apelacao&caso=D`). O ato é validado de novo quando o PrazoZero abre. */
+export function urlDoPrazoDoCaso(atoId: string): string {
+  const q = new URLSearchParams();
+  if (ATO.test(atoId)) q.set('ato', atoId);
+  q.set(PARAM_CASO, DA_DECISAO);
+  return `/prazozero?${q.toString()}`;
+}
+
+/** A tela foi aberta a partir da decisão como um todo (`?caso=D`). */
+export function veioDaDecisao(busca: string): boolean {
+  return new URLSearchParams(busca).get(PARAM_CASO) === DA_DECISAO;
+}
+
+/** "Voltar à análise": o Argumenta restaura a análise da memória da aba; sem questão, ele não rola para nenhuma. */
+export const URL_DE_VOLTA_A_DECISAO = '/argumenta';
