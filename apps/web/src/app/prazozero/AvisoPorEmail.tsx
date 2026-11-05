@@ -50,9 +50,9 @@ export default function AvisoPorEmail({ tituloPadrao, tribunal, vencimento }: { 
   };
 
   return (
-    <section className="border-t border-line pt-7 flex flex-col gap-4 no-print" aria-labelledby="aviso-email">
+    <section className="bg-surface border border-line rounded-xl shadow-card p-5 flex flex-col gap-4 no-print" aria-labelledby="aviso-email">
       <div>
-        <h2 id="aviso-email" className="font-serif text-2xl font-semibold text-ink">
+        <h2 id="aviso-email" className="font-serif text-xl font-semibold text-ink">
           Avisar por e-mail
         </h2>
         <p className="text-sm text-ink-soft mt-1">

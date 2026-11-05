@@ -242,10 +242,10 @@ export default function PrazoZeroPage() {
         description="Informe o prazo, a intimação e o tribunal. O resultado mostra o prazo final e como cada dia foi contado."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start print:block">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-12 items-start print:block">
         {/* Fluxo guiado */}
         <form
-          className={cn(cardClasses, 'lg:col-span-5 lg:sticky lg:top-24 p-6 flex flex-col gap-7 print:hidden')}
+          className={cn(cardClasses, 'lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24 p-6 flex flex-col gap-7 print:hidden')}
           onSubmit={e => e.preventDefault()}
           aria-label="Dados do cálculo"
         >
@@ -399,7 +399,7 @@ export default function PrazoZeroPage() {
         </form>
 
         {/* Resultado */}
-        <div className="lg:col-span-7 flex flex-col gap-9 print:gap-6" aria-live="polite">
+        <div className="lg:col-span-7 xl:col-span-8 min-w-0 flex flex-col gap-8 print:gap-6" aria-live="polite">
           {material ? (
             resultadoMaterial ? (
               <ResultadoMaterial
@@ -538,101 +538,103 @@ export default function PrazoZeroPage() {
                 </div>
               </CartaoDeLeitura>
 
-              <AvisoPorEmail tituloPadrao={`${nomeAto} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataVencimentoFinal} />
-
-              <section aria-label="Como foi calculado" className="bg-surface border border-line rounded-xl shadow-card p-5 sm:p-7 flex flex-col gap-5 print:shadow-none print:border-0 print:p-0">
-                <div className="flex items-end justify-between gap-4">
-                  <div>
-                    <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>
-                    <p className="text-sm text-ink-soft mt-1">
-                      {resultado.diasCorridosTotais} dias corridos entre o evento e o prazo final;{' '}
-                      {resultado.diasTotaisComputados} dias {tipoDias} computados.
-                    </p>
+              <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 items-start print:block">
+                <section aria-label="Como foi calculado" className="@container xl:col-span-3 min-w-0 bg-surface border border-line rounded-xl shadow-card p-5 sm:p-7 flex flex-col gap-5 print:shadow-none print:border-0 print:p-0">
+                  <div className="flex items-end justify-between gap-4">
+                    <div>
+                      <h2 className="font-serif text-2xl font-semibold text-ink">Como foi calculado</h2>
+                      <p className="text-sm text-ink-soft mt-1">
+                        {resultado.diasCorridosTotais} dias corridos entre o evento e o prazo final;{' '}
+                        {resultado.diasTotaisComputados} dias {tipoDias} computados.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setMemoriaAberta(v => !v)}
+                      aria-expanded={memoriaAberta}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2 whitespace-nowrap no-print"
+                    >
+                      {memoriaAberta ? 'Ocultar cálculo' : 'Ver cálculo completo'}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${memoriaAberta ? 'rotate-180' : ''}`} />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setMemoriaAberta(v => !v)}
-                    aria-expanded={memoriaAberta}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline underline-offset-2 whitespace-nowrap no-print"
-                  >
-                    {memoriaAberta ? 'Ocultar cálculo' : 'Ver cálculo completo'}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${memoriaAberta ? 'rotate-180' : ''}`} />
-                  </button>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
-                  <div>
-                    <h3 className="font-semibold text-ink mb-2">Eventos considerados</h3>
-                    <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
-                      <li>Fins de semana: {resumo.fins || 'nenhum'}</li>
-                      <li>
-                        Recesso e férias (suspensão de prazos):{' '}
-                        {resumo.recesso ? `${resumo.recesso} ${resumo.recesso === 1 ? 'dia' : 'dias'}` : 'nenhum'}
-                      </li>
-                      {resumo.feriados.length === 0 ? (
-                        <li>Feriados: nenhum</li>
-                      ) : (
-                        resumo.feriados.map(f => <li key={f}>{f}</li>)
-                      )}
-                    </ul>
+                  <div className="grid grid-cols-1 @lg:grid-cols-2 gap-6 @lg:gap-8 text-sm">
+                    <div>
+                      <h3 className="font-semibold text-ink mb-2">Eventos considerados</h3>
+                      <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
+                        <li>Fins de semana: {resumo.fins || 'nenhum'}</li>
+                        <li>
+                          Recesso e férias (suspensão de prazos):{' '}
+                          {resumo.recesso ? `${resumo.recesso} ${resumo.recesso === 1 ? 'dia' : 'dias'}` : 'nenhum'}
+                        </li>
+                        {resumo.feriados.length === 0 ? (
+                          <li>Feriados: nenhum</li>
+                        ) : (
+                          resumo.feriados.map(f => <li key={f}>{f}</li>)
+                        )}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-ink mb-2">Base utilizada</h3>
+                      <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
+                        {resumo.base.map(b => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-ink mb-2">Base utilizada</h3>
-                    <ul className="flex flex-col gap-1.5 text-ink-soft leading-snug">
-                      {resumo.base.map(b => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
 
-                {memoriaAberta && (
-                  <div className="overflow-x-auto border border-line rounded-lg">
-                    <table className="w-full text-sm min-w-[640px]">
-                      <thead>
-                        <tr className="bg-surface-2 text-left text-ink-soft">
-                          <th className="font-medium px-4 py-2.5">Data</th>
-                          <th className="font-medium px-4 py-2.5">Dia</th>
-                          <th className="font-medium px-4 py-2.5">Contado</th>
-                          <th className="font-medium px-4 py-2.5">Descrição e fundamento</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-line">
-                        {resultado.memoriaCalculo.map((item, i) => {
-                          const final = item.status === 'termo_final' || item.status === 'vencimento_prorrogado';
-                          const contado = item.diaContadoNumero !== null;
-                          return (
-                            <tr key={i} className={final ? 'bg-brand-tint' : contado ? '' : 'text-ink-mute'}>
-                              <td className="px-4 py-2.5 num whitespace-nowrap font-medium">{dataCurta(item.data)}</td>
-                              <td className="px-4 py-2.5 whitespace-nowrap">{item.diaSemana}</td>
-                              <td className="px-4 py-2.5 whitespace-nowrap">
-                                {contado ? <Badge variant="brand">{item.diaContadoNumero}º dia</Badge> : 'Não'}
-                              </td>
-                              <td className="px-4 py-2.5">
-                                <span className={final ? 'font-semibold text-ink' : ''}>
-                                  {item.descricao.replace(/ \(não computado\)$/, '').replace('Termo Ad Quem alcançado', 'Prazo final alcançado')}
-                                </span>
-                                <span className="block text-xs text-ink-mute mt-0.5">{item.fundamentoLegal}</span>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </section>
+                  {memoriaAberta && (
+                    <div className="overflow-x-auto border border-line rounded-lg">
+                      <table className="w-full text-sm min-w-[640px]">
+                        <thead>
+                          <tr className="bg-surface-2 text-left text-ink-soft">
+                            <th className="font-medium px-4 py-2.5">Data</th>
+                            <th className="font-medium px-4 py-2.5">Dia</th>
+                            <th className="font-medium px-4 py-2.5">Contado</th>
+                            <th className="font-medium px-4 py-2.5">Descrição e fundamento</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-line">
+                          {resultado.memoriaCalculo.map((item, i) => {
+                            const final = item.status === 'termo_final' || item.status === 'vencimento_prorrogado';
+                            const contado = item.diaContadoNumero !== null;
+                            return (
+                              <tr key={i} className={final ? 'bg-brand-tint' : contado ? '' : 'text-ink-mute'}>
+                                <td className="px-4 py-2.5 num whitespace-nowrap font-medium">{dataCurta(item.data)}</td>
+                                <td className="px-4 py-2.5 whitespace-nowrap">{item.diaSemana}</td>
+                                <td className="px-4 py-2.5 whitespace-nowrap">
+                                  {contado ? <Badge variant="brand">{item.diaContadoNumero}º dia</Badge> : 'Não'}
+                                </td>
+                                <td className="px-4 py-2.5">
+                                  <span className={final ? 'font-semibold text-ink' : ''}>
+                                    {item.descricao.replace(/ \(não computado\)$/, '').replace('Termo Ad Quem alcançado', 'Prazo final alcançado')}
+                                  </span>
+                                  <span className="block text-xs text-ink-mute mt-0.5">{item.fundamentoLegal}</span>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </section>
+                <aside className="xl:col-span-2 flex flex-col gap-6 print:mt-6" aria-label="Aviso, calendário e ligações">
+                  <AvisoPorEmail tituloPadrao={`${nomeAto} · ${tribunalId}`} tribunal={tribunalId} vencimento={resultado.dataVencimentoFinal} />
+                  <Notice tom="info" titulo="Confira o calendário do tribunal">
+                    Feriados municipais e atos específicos de cada tribunal não são considerados. O feriado local deve ser
+                    comprovado no ato de interposição do recurso (CPC, art. 1.003, § 6º).{' '}
+                    <Link href="/metodologia" className="underline underline-offset-2 font-medium">
+                      Limitações conhecidas
+                    </Link>
+                    .
+                  </Notice>
 
-              <Notice tom="info" titulo="Confira o calendário do tribunal">
-                Feriados municipais e atos específicos de cada tribunal não são considerados. O feriado local deve ser
-                comprovado no ato de interposição do recurso (CPC, art. 1.003, § 6º).{' '}
-                <Link href="/metodologia" className="underline underline-offset-2 font-medium">
-                  Limitações conhecidas
-                </Link>
-                .
-              </Notice>
-
-              <LigacoesDoPrazo prazoId={atoId} em={dataEvento} />
+                  <LigacoesDoPrazo prazoId={atoId} em={dataEvento} />
+                </aside>
+              </div>
             </>
           )}
         </div>
