@@ -289,7 +289,7 @@ export default function AnaliseDecisao() {
           <p id="argumenta-tamanho" className={`mt-1.5 text-sm ${longo ? 'text-danger-text' : 'text-ink-mute'}`}>
             {vazio
               ? `Até cerca de 20 páginas (${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres).`
-              : `${preparo.paragrafos.length} parágrafo(s) · ${preparo.caracteres.toLocaleString('pt-BR')} de ${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres${
+              : `${preparo.paragrafos.length} ${preparo.paragrafos.length === 1 ? 'parágrafo' : 'parágrafos'} · ${preparo.caracteres.toLocaleString('pt-BR')} de ${LIMITE_CARACTERES_DECISAO.toLocaleString('pt-BR')} caracteres${
                   longo ? '. O texto passou do limite: analise uma parte menor (por exemplo, sem o relatório).' : ''
                 }`}
           </p>
@@ -312,7 +312,7 @@ export default function AnaliseDecisao() {
 
         <details className="rounded-md border border-line px-4 py-3">
           <summary className="cursor-pointer text-sm font-medium text-ink">
-            Dados pessoais: {trocados === 0 ? 'nenhum encontrado até agora' : `${trocados} trocado(s) por marcadores antes do envio`}
+            Dados pessoais: {trocados === 0 ? 'nenhum encontrado até agora' : `${trocados} ${trocados === 1 ? 'trocado' : 'trocados'} por marcadores antes do envio`}
           </summary>
           <div className="flex flex-col gap-4 pt-3">
             <p className="text-sm text-ink-soft">

@@ -234,8 +234,8 @@ export default function TeseMapPage() {
               )}
 
               {no.detalhes.teseFirmada === false ? (
-                <Notice tom="info" titulo="Sem tese firmada no arquivo do tribunal">
-                  O arquivo do STF não traz tese para este tema: o mérito está pendente, a repercussão geral foi negada ou a tese não foi informada. A questão acima é a que o tribunal registra. Consulte o processo no portal do STF.
+                <Notice tom="info" titulo="Sem tese firmada">
+                  O STF não informou uma tese para este tema: o mérito está pendente, a repercussão geral foi negada ou a tese não foi informada. A questão acima é a que o tribunal registra. Consulte o processo no portal do STF.
                 </Notice>
               ) : (
                 <div className="flex flex-col gap-1">
