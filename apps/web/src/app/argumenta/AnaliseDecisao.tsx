@@ -17,6 +17,8 @@ import { dataCurta } from '../../lib/uso';
 import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
 import { listarNormas } from '../../lib/normaviva';
 import { bancoSupabase, verificarCitacoes, type VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
+import { montarMapa } from '../../lib/argumenta/mapa';
+import MapaView from './MapaView';
 import SeloCitacao from './SeloCitacao';
 import { referenciaVisual } from './referencias';
 
@@ -133,6 +135,8 @@ export default function AnaliseDecisao() {
   const [rotulo, setRotulo] = useState('');
   const [uso, setUso] = useState<UsoRapida | null>(null);
   const [selos, setSelos] = useState<Map<string, VerificacaoDaCitacao>>(new Map());
+  // F5-03: o mapa é montado por código com o que as etapas 2 e 4 já trouxeram; não chama o modelo
+  const mapa = useMemo(() => (resultados.questoes ? montarMapa(resultados.questoes, resultados.fundamentos) : null), [resultados.questoes, resultados.fundamentos]);
   const listaRef = useRef<HTMLDivElement | null>(null);
 
   const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
@@ -476,6 +480,9 @@ export default function AnaliseDecisao() {
                   Questões e fundamentos
                   {questoes && <Badge className="px-1.5">{questoes.questoes.length}</Badge>}
                 </TabsTrigger>
+                <TabsTrigger value="mapa" disabled={!questoes}>
+                  Mapa
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="geral" className="flex flex-col gap-8">
@@ -562,6 +569,19 @@ export default function AnaliseDecisao() {
                     </section>
                   );
                 })}
+              </TabsContent>
+
+              <TabsContent value="mapa" className="flex flex-col gap-10">
+                {mapa && (
+                  <MapaView
+                    mapa={mapa}
+                    selos={selos}
+                    r={r}
+                    ref_={ref}
+                    carregandoFundamentos={!fundamentos && andamento === 'fundamentos'}
+                    fundamentosProntos={!!fundamentos}
+                  />
+                )}
               </TabsContent>
             </Tabs>
           )}

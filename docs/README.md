@@ -42,6 +42,7 @@ Este é o mapa da pasta `docs/`. O **estado do projeto** mora em um lugar só, o
 | [`VALIDACAO_PENDENTES.md`](produto/VALIDACAO_PENDENTES.md) | **Gerado.** Cenários ainda não validados (hoje, nenhum) |
 | [`VALIDACAO_10_CENARIOS.md`](produto/VALIDACAO_10_CENARIOS.md) | Registro (07/10/2026): os 10 cenários mais importantes, validados pelo revisor |
 | [`NORMAS_DE_TESTE.md`](produto/NORMAS_DE_TESTE.md) | **Gerado.** Normas com histórico conhecido, usadas para testar o NormaViva (57 casos validados) |
+| [`REVISAO_TECNICA_2026-11-04.md`](produto/REVISAO_TECNICA_2026-11-04.md) | Registro datado da revisão técnica de código e segurança: o que foi corrigido, o que foi verificado e as recomendações |
 | [`DEBUG_E2E_2026-10-24.md`](produto/DEBUG_E2E_2026-10-24.md) | Registro datado do teste de ponta a ponta de 24/10/2026 |
 | [`VALIDACAO_PAINEL_ADMIN.md`](produto/VALIDACAO_PAINEL_ADMIN.md) | Registro datado da validação visual do painel administrativo (24/10/2026) |
 
