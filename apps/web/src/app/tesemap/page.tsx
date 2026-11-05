@@ -12,6 +12,7 @@ import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
+import FaixaDoCaso from '../../components/FaixaDoCaso';
 import ReservaTeseMap from './ReservaTeseMap';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -129,6 +130,8 @@ export default function TeseMapPage() {
         title="Mapa da tese"
         description="Precedentes com a tese firmada, a fonte oficial e as relações conferidas entre eles."
       />
+
+      <FaixaDoCaso ferramenta="tesemap" destinoId={noId} className="mb-6" />
 
       <div className="mb-6 max-w-3xl text-sm text-ink-soft" data-testid="cobertura">
         <p>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Badge, type BadgeTom } from '@/components/ui/badge';
 import type { EstadoCitacao, VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
+import { comCaso } from '../../lib/caso/ligacao';
 
 const ESTADO: Record<EstadoCitacao, { rotulo: string; tom: BadgeTom }> = {
   encontrada: { rotulo: 'Encontrada na base', tom: 'ok' },
@@ -9,7 +10,7 @@ const ESTADO: Record<EstadoCitacao, { rotulo: string; tom: BadgeTom }> = {
 };
 
 /** Mostra se a citação do fundamento existe no NormaViva ou no TeseMap, com o link quando existe. Não opina sobre o acerto da citação. */
-export default function SeloCitacao({ verificacao }: { verificacao: VerificacaoDaCitacao }) {
+export default function SeloCitacao({ verificacao, questaoId }: { verificacao: VerificacaoDaCitacao; questaoId?: string }) {
   const { rotulo, tom } = ESTADO[verificacao.estado];
   return (
     <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -17,7 +18,7 @@ export default function SeloCitacao({ verificacao }: { verificacao: VerificacaoD
         {rotulo}
       </Badge>
       {verificacao.links.map(l => (
-        <Link key={l.href} href={l.href} className="text-sm text-brand-text underline underline-offset-2">
+        <Link key={l.href} href={comCaso(l.href, questaoId)} className="text-sm text-brand-text underline underline-offset-2">
           {l.rotulo}
         </Link>
       ))}

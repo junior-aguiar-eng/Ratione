@@ -8,7 +8,7 @@ import Notice from '../../components/Notice';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { CartaoDeIA, CartaoDeLeitura } from '../../components/Cartoes';
-import { Badge, type BadgeTom } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Input, campoClasses } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -19,6 +19,9 @@ import type { SaidaEstrutura, SaidaFundamentos, SaidaQuestoes } from '../../lib/
 import { listarNormas } from '../../lib/normaviva';
 import { bancoSupabase, verificarCitacoes, type VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
 import { montarMapa } from '../../lib/argumenta/mapa';
+import { CATEGORIA, FUNDAMENTO, RESULTADO } from '../../lib/argumenta/rotulos';
+import { guardarCaso, lerCaso, limparCaso, type Resultados } from '../../lib/caso/memoria';
+import { lerQuestaoDoCaso } from '../../lib/caso/ligacao';
 import MapaView from './MapaView';
 import SeloCitacao from './SeloCitacao';
 import { referenciaVisual } from './referencias';
@@ -30,11 +33,6 @@ import { referenciaVisual } from './referencias';
  */
 
 type Etapa = 'estrutura' | 'questoes' | 'fundamentos';
-interface Resultados {
-  estrutura?: SaidaEstrutura;
-  questoes?: SaidaQuestoes;
-  fundamentos?: SaidaFundamentos;
-}
 
 const ETAPAS: { id: Etapa; rotulo: string }[] = [
   { id: 'estrutura', rotulo: 'Identificando a estrutura da decisão' },
@@ -58,33 +56,6 @@ const SECAO: Record<SaidaEstrutura['secoes'][number]['tipo'], string> = {
   fundamentacao: 'Fundamentação',
   dispositivo: 'Dispositivo',
   outro: 'Outro trecho'
-};
-
-type Questao = SaidaQuestoes['questoes'][number];
-
-const CATEGORIA: Record<Questao['categoria'], string> = {
-  preliminar: 'Preliminar',
-  prejudicial: 'Prejudicial',
-  merito: 'Mérito',
-  acessoria: 'Acessória'
-};
-
-const RESULTADO: Record<Questao['resultado'], { rotulo: string; tom: BadgeTom }> = {
-  acolhida: { rotulo: 'Acolhida', tom: 'ok' },
-  rejeitada: { rotulo: 'Rejeitada', tom: 'danger' },
-  parcialmente_acolhida: { rotulo: 'Parcialmente acolhida', tom: 'warn' },
-  nao_conhecida: { rotulo: 'Não conhecida', tom: 'neutral' },
-  prejudicada: { rotulo: 'Prejudicada', tom: 'neutral' },
-  pendente: { rotulo: 'Pedido ainda não decidido', tom: 'neutral' }
-};
-
-const FUNDAMENTO: Record<SaidaFundamentos['fundamentos'][number]['tipo'], { rotulo: string; tom: BadgeTom }> = {
-  fato: { rotulo: 'Fato', tom: 'ok' },
-  prova: { rotulo: 'Prova', tom: 'ok' },
-  norma: { rotulo: 'Norma', tom: 'info' },
-  precedente: { rotulo: 'Precedente', tom: 'rel' },
-  doutrina: { rotulo: 'Doutrina', tom: 'neutral' },
-  argumento: { rotulo: 'Argumento', tom: 'brand' }
 };
 
 /** Erro do servidor com o motivo, para a tela decidir se pode tentar de novo. */
@@ -125,20 +96,22 @@ const textoAbreAoLado = () => typeof window !== 'undefined' && window.matchMedia
 
 export default function AnaliseDecisao() {
   const { usuario, carregando, contaDisponivel } = useSessao();
+  // Voltando de outra ferramenta (citação aberta no NormaViva ou no TeseMap), a análise reaparece: ela fica só na memória desta aba
+  const [memoria] = useState(lerCaso);
   const [texto, setTexto] = useState('');
   const [extras, setExtras] = useState('');
-  const [enviada, setEnviada] = useState<DecisaoPreparada | null>(null);
-  const [resultados, setResultados] = useState<Resultados>({});
+  const [enviada, setEnviada] = useState<DecisaoPreparada | null>(memoria?.enviada ?? null);
+  const [resultados, setResultados] = useState<Resultados>(memoria?.resultados ?? {});
   const [andamento, setAndamento] = useState<Etapa | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [aba, setAba] = useState('geral');
+  const [aba, setAba] = useState(memoria?.aba ?? 'geral');
   const [ativos, setAtivos] = useState<number[]>([]);
   const [textoAberto, setTextoAberto] = useState(false);
-  const [analiseId, setAnaliseId] = useState<string | null>(null);
+  const [analiseId, setAnaliseId] = useState<string | null>(memoria?.analiseId ?? null);
   const [encerrada, setEncerrada] = useState(false);
-  const [rotulo, setRotulo] = useState('');
+  const [rotulo, setRotulo] = useState(memoria?.rotulo ?? '');
   const [uso, setUso] = useState<UsoRapida | null>(null);
-  const [selos, setSelos] = useState<Map<string, VerificacaoDaCitacao>>(new Map());
+  const [selos, setSelos] = useState<Map<string, VerificacaoDaCitacao>>(() => memoria?.selos ?? new Map());
   // F5-03: o mapa é montado por código com o que as etapas 2 e 4 já trouxeram; não chama o modelo
   const mapa = useMemo(() => (resultados.questoes ? montarMapa(resultados.questoes, resultados.fundamentos) : null), [resultados.questoes, resultados.fundamentos]);
   const listaRef = useRef<HTMLDivElement | null>(null);
@@ -158,6 +131,8 @@ export default function AnaliseDecisao() {
   // F5-04: confere as citações no corpus público. Sai da página só a citação ("CDC, art. 14"), nunca o texto da decisão.
   const fundamentosProntos = resultados.fundamentos;
   useEffect(() => {
+    // Análise que voltou da memória já traz os selos conferidos: não confere de novo
+    if (fundamentosProntos && fundamentosProntos === memoria?.resultados.fundamentos && memoria.selos.size > 0) return;
     setSelos(new Map());
     const sb = obterSupabase();
     if (!fundamentosProntos || !sb) return;
@@ -174,7 +149,24 @@ export default function AnaliseDecisao() {
     return () => {
       ativa = false;
     };
-  }, [fundamentosProntos]);
+  }, [fundamentosProntos, memoria]);
+
+  // A análise aberta fica na memória da aba, para as outras ferramentas mostrarem a relação com o caso e para a pessoa voltar a ela
+  useEffect(() => {
+    if (enviada) guardarCaso({ enviada, resultados, analiseId, rotulo, selos, aba });
+    else limparCaso();
+  }, [enviada, resultados, analiseId, rotulo, selos, aba]);
+
+  // "Voltar à análise" (?caso=Q2): abre a aba das questões e rola até a questão de origem
+  const voltouParaQuestao = useRef<string | null>(null);
+  useEffect(() => {
+    if (!memoria || voltouParaQuestao.current !== null) return;
+    const q = lerQuestaoDoCaso(window.location.search);
+    voltouParaQuestao.current = q ?? '';
+    if (!q) return;
+    setAba('questoes');
+    requestAnimationFrame(() => document.getElementById(`questao-${q}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }, [memoria]);
 
   // O que resta da cota do plano: lido ao abrir e sempre que o formulário volta (depois de uma análise)
   const usuarioId = usuario?.id;
@@ -381,7 +373,7 @@ export default function AnaliseDecisao() {
             </Link>
           </p>
         )}
-        <p className="text-sm text-ink-mute">Nada do texto nem da resposta fica guardado no Ratione: ao sair desta página, a análise se perde. O histórico guarda só informações de uso e o tamanho da decisão.</p>
+        <p className="text-sm text-ink-mute">Nada do texto nem da resposta fica guardado no Ratione. A análise fica só nesta aba do navegador e se perde ao fechá-la ou recarregar a página. O histórico guarda só informações de uso e o tamanho da decisão.</p>
       </Card>
     );
   }
@@ -530,7 +522,7 @@ export default function AnaliseDecisao() {
                 {questoes?.questoes.map((q, i) => {
                   const desta = fundamentos?.fundamentos.filter(f => f.questao === q.id) ?? [];
                   return (
-                    <section key={q.id} className={`flex flex-col gap-4 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
+                    <section key={q.id} id={`questao-${q.id}`} className={`scroll-mt-24 flex flex-col gap-4 ${i > 0 ? 'border-t border-line pt-8' : ''}`}>
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="eyebrow">
                           Questão {i + 1} · {CATEGORIA[q.categoria]}
@@ -560,7 +552,7 @@ export default function AnaliseDecisao() {
                                     {f.citacao && <span className="text-sm text-ink-soft">{r(f.citacao)}</span>}
                                     {ref(f.paragrafos)}
                                   </div>
-                                  {selos.get(f.citacao.trim()) && <SeloCitacao verificacao={selos.get(f.citacao.trim())!} />}
+                                  {selos.get(f.citacao.trim()) && <SeloCitacao verificacao={selos.get(f.citacao.trim())!} questaoId={q.id} />}
                                 </div>
                               </li>
                             ))}
@@ -590,8 +582,7 @@ export default function AnaliseDecisao() {
               </TabsContent>
             </Tabs>
             <p className="text-xs text-ink-soft leading-relaxed border-t border-ia/20 pt-3">
-              Gerada por IA só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado; ao sair desta
-            página, a análise se perde.
+              Gerada por IA só a partir do texto colado, sem consultar leis, jurisprudência ou outras fontes. Pode conter erro: confira os pontos no texto da decisão usando “Ver no texto”. Os dados pessoais foram trocados por marcadores antes do envio. Nada do texto nem da análise fica guardado no Ratione; ela fica só nesta aba e se perde ao fechá-la ou recarregar a página.
             </p>
             </CartaoDeIA>
           )}

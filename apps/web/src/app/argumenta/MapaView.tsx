@@ -1,41 +1,14 @@
 import type { ReactNode } from 'react';
-import { Badge, type BadgeTom } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 import type { VerificacaoDaCitacao } from '../../lib/argumenta/verificarCitacoes';
-import type { MapaDaDecisao, TipoDeFundamento } from '../../lib/argumenta/mapa';
-import type { SaidaQuestoes } from '../../lib/ia/tarefas/argumenta';
+import type { MapaDaDecisao } from '../../lib/argumenta/mapa';
+import { CATEGORIA, FUNDAMENTO, RESULTADO } from '../../lib/argumenta/rotulos';
 import SeloCitacao from './SeloCitacao';
 
 /**
  * F5-03: a aba "Mapa". Mostra, por questão, o raciocínio na ordem em que ele se lê (fatos e provas, normas, doutrina, precedentes, argumento) até a
  * conclusão, e as normas e precedentes citados na decisão inteira. Só apresentação: os dados vêm de `lib/argumenta/mapa.ts`, que não chama o modelo.
  */
-type Questao = SaidaQuestoes['questoes'][number];
-
-const CATEGORIA: Record<Questao['categoria'], string> = {
-  preliminar: 'Preliminar',
-  prejudicial: 'Prejudicial',
-  merito: 'Mérito',
-  acessoria: 'Acessória'
-};
-
-const RESULTADO: Record<Questao['resultado'], { rotulo: string; tom: BadgeTom }> = {
-  acolhida: { rotulo: 'Acolhida', tom: 'ok' },
-  rejeitada: { rotulo: 'Rejeitada', tom: 'danger' },
-  parcialmente_acolhida: { rotulo: 'Parcialmente acolhida', tom: 'warn' },
-  nao_conhecida: { rotulo: 'Não conhecida', tom: 'neutral' },
-  prejudicada: { rotulo: 'Prejudicada', tom: 'neutral' },
-  pendente: { rotulo: 'Pedido ainda não decidido', tom: 'neutral' }
-};
-
-const FUNDAMENTO: Record<TipoDeFundamento, { rotulo: string; tom: BadgeTom }> = {
-  fato: { rotulo: 'Fato', tom: 'ok' },
-  prova: { rotulo: 'Prova', tom: 'ok' },
-  norma: { rotulo: 'Norma', tom: 'info' },
-  precedente: { rotulo: 'Precedente', tom: 'rel' },
-  doutrina: { rotulo: 'Doutrina', tom: 'neutral' },
-  argumento: { rotulo: 'Argumento', tom: 'brand' }
-};
-
 interface Props {
   mapa: MapaDaDecisao;
   selos: Map<string, VerificacaoDaCitacao>;
@@ -48,9 +21,10 @@ interface Props {
 }
 
 export default function MapaView({ mapa, selos, r, ref_, carregandoFundamentos, fundamentosProntos }: Props) {
-  const selo = (citacao: string) => {
+  /** `questaoId` leva o caso junto quando a citação é aberta no NormaViva ou no TeseMap. */
+  const selo = (citacao: string, questaoId?: string) => {
     const v = citacao.trim() ? selos.get(citacao.trim()) : undefined;
-    return v ? <SeloCitacao verificacao={v} /> : null;
+    return v ? <SeloCitacao verificacao={v} questaoId={questaoId} /> : null;
   };
 
   return (
@@ -76,7 +50,7 @@ export default function MapaView({ mapa, selos, r, ref_, carregandoFundamentos, 
                     {a.questoes.length === 1 ? `na questão ${a.questoes[0]}` : `em ${a.questoes.length} questões (${a.questoes.join(', ')})`}
                   </span>
                 </div>
-                {selo(a.citacao)}
+                {selo(a.citacao, mapa.questoes[a.questoes[0] - 1]?.questaoId)}
               </li>
             ))}
           </ul>
@@ -104,7 +78,7 @@ export default function MapaView({ mapa, selos, r, ref_, carregandoFundamentos, 
                         {p.citacao && <span className="text-sm text-ink-soft">{r(p.citacao)}</span>}
                         {ref_(p.paragrafos)}
                       </div>
-                      {selo(p.citacao)}
+                      {selo(p.citacao, q.questaoId)}
                     </li>
                   ))}
                 </ul>
