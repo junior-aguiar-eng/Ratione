@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { cobrancaPronta, lerConfigCobranca, usuarioPodeUsarCobranca } from './config';
 import { situacaoAposCobranca, situacaoDaAssinatura, situacaoDaCobranca } from './estados';
-import { assinarAviso, assinaturaValida, manifesto, partesDaAssinatura } from './webhook';
+import { assinarAviso, assinaturaValida, idadeDoAvisoEmSegundos, manifesto, partesDaAssinatura } from './webhook';
 import { ErroMp, criarClienteMp } from './mercadopago';
 import { processarAviso, type BancoDaCobranca, type LeituraMp } from './processar';
 
@@ -250,5 +250,19 @@ describe('Cobrança: processamento dos avisos (relê o recurso, nunca confia no 
       assert.equal(await processarAviso({ topico: 'subscription_authorized_payment', recursoId: '77' }, mp, banco), 'ignorado');
       assert.ok(!registro.some(r => r.startsWith('cobranca')));
     }
+  });
+});
+
+describe('Cobrança: idade do aviso (só informa, nunca recusa)', () => {
+  const agora = Date.UTC(2026, 10, 5, 12, 0, 0);
+  it('lê o ts em segundos ou em milissegundos', () => {
+    assert.equal(idadeDoAvisoEmSegundos(`ts=${agora / 1000 - 90},v1=abc`, agora), 90);
+    assert.equal(idadeDoAvisoEmSegundos(`ts=${agora - 120_000},v1=abc`, agora), 120);
+  });
+  it('ts no futuro dá 0; sem ts legível dá nulo', () => {
+    assert.equal(idadeDoAvisoEmSegundos(`ts=${agora / 1000 + 500},v1=abc`, agora), 0);
+    assert.equal(idadeDoAvisoEmSegundos(null, agora), null);
+    assert.equal(idadeDoAvisoEmSegundos('v1=abc', agora), null);
+    assert.equal(idadeDoAvisoEmSegundos('ts=abc,v1=abc', agora), null);
   });
 });

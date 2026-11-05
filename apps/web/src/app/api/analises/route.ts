@@ -5,9 +5,10 @@ import { createClient } from '@supabase/supabase-js';
 import { iniciarAnaliseNoBanco } from '../../../lib/ia/banco';
 import { mensagemDeCota } from '../../../lib/ia/executar';
 import { iaLigada } from '../../../lib/ia/politica';
-import { origemPublica } from '../../../lib/origem';
+import { veioDoSite } from '../../../lib/origem';
 import { paragrafosDaAnalise, rotuloDaAnalise } from '../../../lib/uso';
 import { registrar } from '../../../lib/log';
+import { LIMITE_CORPO, lerJsonLimitado } from '../../../lib/corpoJson';
 
 /**
  * Inicia uma análise: `POST /api/analises` com `{ tipo: 'rapida', rotulo?, paragrafos? }`. Só metadados; nenhum texto da decisão.
@@ -27,12 +28,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ mensagem: 'Os recursos de IA não estão disponíveis nesta instalação.' }, { status: 503 });
   }
 
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   let corpo: PedidoAnalise | null = null;
   try {
-    corpo = (await request.json()) as PedidoAnalise | null;
+    const lido = await lerJsonLimitado(request, LIMITE_CORPO.pequeno);
+    if (!lido.ok) return NextResponse.json({ mensagem: lido.mensagem }, { status: lido.status });
+    corpo = lido.valor as PedidoAnalise | null;
   } catch {
     corpo = null;
   }

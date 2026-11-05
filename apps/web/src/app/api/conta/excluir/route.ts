@@ -8,8 +8,9 @@ import { encerrarAssinaturasDoUsuario } from '../../../../lib/cobranca/encerrar'
 import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { apagarTodosDoUsuario, dependenciasPadrao } from '../../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../../lib/documentos/supabase';
-import { origemPublica } from '../../../../lib/origem';
+import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
+import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
 
 /**
  * Excluir a própria conta. Exige a chave secreta do Supabase (`SUPABASE_SERVICE_ROLE_KEY`), que existe
@@ -24,14 +25,15 @@ export async function POST(request: Request) {
   }
 
   // Só aceita pedido feito a partir do próprio site (defesa contra requisição forjada de outra origem)
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) {
+  if (!veioDoSite(request)) {
     return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
   }
 
   let corpo: { senha?: unknown } = {};
   try {
-    corpo = await request.json();
+    const lido = await lerJsonLimitado(request, LIMITE_CORPO.pequeno);
+    if (!lido.ok) return NextResponse.json({ mensagem: lido.mensagem }, { status: lido.status });
+    corpo = (lido.valor ?? {}) as { senha?: unknown };
   } catch {
     /* corpo ausente: a validação abaixo recusa */
   }

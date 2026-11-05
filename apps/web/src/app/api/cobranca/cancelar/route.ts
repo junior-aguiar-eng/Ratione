@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { abrirContexto, usuarioDaCobranca } from '../../../../lib/cobranca/contexto';
 import { aplicarSituacao, assinaturaDoUsuario } from '../../../../lib/cobranca/banco';
 import { ErroMp, criarClienteMp } from '../../../../lib/cobranca/mercadopago';
-import { origemPublica } from '../../../../lib/origem';
+import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
 /**
@@ -15,8 +15,7 @@ export async function POST(request: Request) {
   const ctx = await abrirContexto();
   if (!ctx) return NextResponse.json(INDISPONIVEL, { status: 503 });
 
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const usuario = await usuarioDaCobranca(ctx);
   if (!usuario) return NextResponse.json(INDISPONIVEL, { status: 503 });

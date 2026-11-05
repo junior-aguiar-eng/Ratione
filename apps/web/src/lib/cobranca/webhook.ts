@@ -4,8 +4,10 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
  * Validação do aviso (webhook) do Mercado Pago, como descreve a documentação deles: o cabeçalho `x-signature` traz `ts=<instante>,v1=<hash>`;
  * o hash é o HMAC-SHA256, em hexadecimal, da chave secreta da aplicação sobre o manifesto
  * `id:<data.id>;request-id:<x-request-id>;ts:<ts>;` (par ausente é omitido; `data.id` alfanumérico entra em minúsculas).
- * Aviso sem assinatura válida é recusado (401) e nada é gravado. Não há janela de validade do `ts`: o mesmo aviso reenviado é barrado
- * pelo registro de eventos (`mp_eventos`, por `x-request-id`), e todo processamento relê o recurso na API do Mercado Pago em vez de confiar no corpo.
+ * Aviso sem assinatura válida é recusado (401) e nada é gravado. O `ts` **não recusa** (o Mercado Pago pode reenviar um aviso legítimo horas depois, com a
+ * assinatura original, e recusá-lo perderia o evento): quando é antigo, a rota só registra um aviso no log (`idadeDoAvisoEmSegundos`). O mesmo aviso
+ * reenviado é barrado pelo registro de eventos (`mp_eventos`, por `x-request-id`), e todo processamento relê o recurso na API do Mercado Pago
+ * em vez de confiar no corpo.
  */
 
 export interface DadosDaAssinatura {
@@ -51,4 +53,16 @@ export function assinaturaValida(d: DadosDaAssinatura): boolean {
 export function assinarAviso(segredo: string, dataId: string | null, xRequestId: string | null, ts: string): string {
   const v1 = createHmac('sha256', segredo).update(manifesto(dataId, xRequestId, ts)).digest('hex');
   return `ts=${ts},v1=${v1}`;
+}
+
+/**
+ * Idade do aviso, em segundos, pelo `ts` da assinatura (segundos ou milissegundos desde 1970); `null` se não houver `ts` legível.
+ * Só informa: a rota usa para registrar no log um aviso antigo, sem recusá-lo.
+ */
+export function idadeDoAvisoEmSegundos(xSignature: string | null, agoraMs: number): number | null {
+  const { ts } = partesDaAssinatura(xSignature ?? '');
+  if (!ts || !/^\d+$/.test(ts)) return null;
+  const n = Number(ts);
+  const emMs = n > 1e12 ? n : n * 1000;
+  return Math.max(0, Math.round((agoraMs - emMs) / 1000));
 }

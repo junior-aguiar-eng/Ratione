@@ -6,7 +6,7 @@ import { lerConfigDeDocumentos } from '../../../lib/documentos/config';
 import { dependenciasPadrao, enviarDocumento, listarDocumentos, type DependenciasDeDocumentos } from '../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../lib/documentos/supabase';
 import { LIMITES_DE_DOCUMENTO } from '../../../lib/documentos/validar';
-import { origemPublica } from '../../../lib/origem';
+import { veioDoSite } from '../../../lib/origem';
 import { registrar } from '../../../lib/log';
 
 /**
@@ -37,8 +37,7 @@ async function contexto() {
 export async function POST(request: Request) {
   const ctx = await contexto();
   if (!ctx) return NextResponse.json(NAO_HABILITADO, { status: 503 });
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
   if (!ctx.usuario) return NextResponse.json({ mensagem: 'Entre na sua conta para enviar um documento.' }, { status: 401 });
 
   // Recusa antes de ler o corpo inteiro quando o tamanho declarado já passa do limite (com folga para o envelope multipart)

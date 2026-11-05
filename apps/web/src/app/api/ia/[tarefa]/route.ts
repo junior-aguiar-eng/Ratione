@@ -8,8 +8,9 @@ import { criarChamadaAoModelo } from '../../../../lib/ia/cliente';
 import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositivoDoBanco';
 import { iaLigada } from '../../../../lib/ia/politica';
 import { gravidadeDoAviso } from '../../../../lib/ia/gravidade';
-import { origemPublica } from '../../../../lib/origem';
+import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
+import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
 
 /**
  * Rota única dos recursos de IA: `POST /api/ia/<tarefa>` com `{ entrada }`. Só executa tarefas do catálogo (`lib/ia/catalogo.ts`),
@@ -27,13 +28,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   }
 
   // Só a partir do próprio site
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const { tarefa } = await params;
   let corpo: { entrada?: unknown } = {};
   try {
-    corpo = await request.json();
+    const lido = await lerJsonLimitado(request, LIMITE_CORPO.analiseDeIA);
+    if (!lido.ok) return NextResponse.json({ mensagem: lido.mensagem }, { status: lido.status });
+    corpo = (lido.valor ?? {}) as { entrada?: unknown };
   } catch {
     /* sem corpo: a validação da entrada recusa */
   }

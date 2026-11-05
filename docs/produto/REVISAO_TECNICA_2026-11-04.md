@@ -31,6 +31,18 @@ Registro datado. Escopo: dependências, segredos, rotas da API, banco (RLS e fun
 | Baixa | Actions por tag de versão (`@v7`) e imagem `node:24-slim` sem *digest* | Tags podem ser movidas por quem controla a Action ou a imagem | O Dependabot novo propõe atualizações; considerar fixar por SHA e por *digest* |
 | Informativa | Sem ESLint; o rigor vem do TypeScript estrito e dos testes | Regras de segurança do ESLint pegariam alguns padrões cedo | Avaliar ESLint com um conjunto enxuto de regras |
 
+## Situação das recomendações (atualizado em 05/11/2026)
+
+| Recomendação | Situação |
+|---|---|
+| Unificar a conferência de `Origin` | **Feito.** `veioDoSite` (em `lib/origem.ts`) exige o `Origin` igual ao do site em todas as rotas que alteram dados (análises, IA, cobrança, exclusão de conta, documentos); a falta do cabeçalho também é recusada, como já era no painel administrativo. Testes novos |
+| Limite de bytes no corpo JSON | **Feito.** `lerJsonLimitado` (em `lib/corpoJson.ts`) lê o corpo com limite (16 KB nas rotas pequenas, 512 KB na análise de IA, que comporta uma decisão de 70.000 caracteres) e responde 413 acima disso, antes de interpretar. Testes novos |
+| Idade do `ts` do webhook | **Feito como registro, não como recusa.** Aviso com assinatura válida e mais de 15 minutos gera um `WARNING` no log, mas é processado: o Mercado Pago pode reenviar um aviso legítimo horas depois com a assinatura original, e recusá-lo perderia o evento. A recusa fica para depois do sandbox (F8-05) |
+| Actions por SHA e imagem Docker por digest | **Feito.** As cinco Actions usadas estão fixadas pelo SHA do commit (com o `# vN` ao lado) e a imagem-base `node:24-slim` pelo digest. O Dependabot propõe as trocas |
+| CSP sem `'unsafe-inline'` | **Não feito, de propósito.** A CSP com *nonce* exige que todas as páginas sejam geradas a cada pedido (hoje a página inicial, as ferramentas e as políticas são estáticas) e aumenta custo e latência; os scripts que o próprio Next injeta também dependem do nonce. Vale quando houver uma razão concreta (por exemplo, páginas com conteúdo de terceiros). Mantida como recomendação |
+| Limite de taxa na borda | **Pendente, para antes de ligar o envio de arquivos** (exige configuração no Google Cloud) |
+| ESLint | **Pendente** (informativa) |
+
 ## Limites desta revisão
 
 - Não testei o site em produção com ferramentas de ataque, não revisei o código de terceiros além do `pnpm audit` e não li o código de todas as telas.

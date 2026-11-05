@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { cobrancaPronta, lerConfigCobranca } from '../../../../lib/cobranca/config';
-import { assinaturaValida } from '../../../../lib/cobranca/webhook';
+import { assinaturaValida, idadeDoAvisoEmSegundos } from '../../../../lib/cobranca/webhook';
 import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { processarAviso } from '../../../../lib/cobranca/processar';
 import { bancoDaCobranca, concluirEvento, descartarEvento, registrarEvento } from '../../../../lib/cobranca/banco';
@@ -13,6 +13,9 @@ import { registrar } from '../../../../lib/log';
  * não é processado duas vezes) → o recurso é RELIDO na API do Mercado Pago (o corpo do aviso só diz qual recurso mudou) → banco.
  * Falha no processamento: o registro do aviso é descartado e a resposta é 500, para o Mercado Pago reenviar.
  */
+/** Acima disto (15 minutos) o aviso é registrado no log como antigo; não é recusado. */
+const IDADE_PARA_REGISTRAR_S = 15 * 60;
+
 export async function POST(request: Request) {
   const cfg = lerConfigCobranca(process.env);
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -28,6 +31,10 @@ export async function POST(request: Request) {
     registrar('WARNING', 'Cobrança: aviso com assinatura inválida');
     return NextResponse.json({ ok: false }, { status: 401 });
   }
+
+  // Assinatura válida mas antiga: processa mesmo assim (pode ser um reenvio legítimo), só deixa o rastro no log
+  const idade = idadeDoAvisoEmSegundos(request.headers.get('x-signature'), Date.now());
+  if (idade !== null && idade > IDADE_PARA_REGISTRAR_S) registrar('WARNING', 'Cobrança: aviso com assinatura antiga', { idade_segundos: idade });
 
   const topico = consulta.get('type') ?? (typeof corpo?.type === 'string' ? corpo.type : null);
   if (!topico || !dataId) return NextResponse.json({ ok: true, resultado: 'ignorado' });

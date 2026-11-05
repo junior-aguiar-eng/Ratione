@@ -4,7 +4,8 @@
 # As NEXT_PUBLIC_* são públicas e entram no JavaScript do navegador no build; a chave de serviço
 # (SUPABASE_SERVICE_ROLE_KEY) NUNCA entra na imagem: o Cloud Run a injeta do Secret Manager ao rodar.
 
-FROM node:24-slim AS build
+# A imagem-base é fixada pelo digest (node:24-slim em 05/11/2026): a mesma imagem em todo build. O Dependabot propõe a troca (docker, mensal).
+FROM node:24-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9 AS build
 WORKDIR /repo
 # Mesma versão do pnpm fixada em package.json ("packageManager")
 RUN npm install -g pnpm@11.19.0
@@ -25,7 +26,7 @@ ARG NEXT_PUBLIC_IA_EXPLICACAO
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter web build
 
-FROM node:24-slim
+FROM node:24-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9
 WORKDIR /app
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 HOSTNAME=0.0.0.0 PORT=8080
 COPY --from=build --chown=node:node /repo/apps/web/.next/standalone ./

@@ -4,7 +4,7 @@ import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { apagarDocumento, dependenciasPadrao } from '../../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../../lib/documentos/supabase';
-import { origemPublica } from '../../../../lib/origem';
+import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
 /** F5-01: `DELETE /api/documentos/<id>` apaga um documento do próprio usuário (o arquivo cifrado e a linha). */
@@ -20,8 +20,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
   if (!url || !publicavel || !secreta) {
     return NextResponse.json({ mensagem: 'O envio de documentos ainda não está disponível.' }, { status: 503 });
   }
-  const origem = request.headers.get('origin');
-  if (origem && origem !== origemPublica(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
+  if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const { id } = await params;
   if (!UUID.test(id)) return NextResponse.json({ mensagem: 'Arquivo não encontrado.' }, { status: 404 });
