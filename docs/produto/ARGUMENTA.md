@@ -114,3 +114,13 @@ Depois que os fundamentos chegam, a tela confere a **citação** de cada um (`"C
 | Falhas | Se a linha do banco falha depois de gravar o arquivo, o arquivo é desfeito (nada órfão). O log leva só o motivo técnico, nunca nome nem conteúdo |
 
 **Para ligar (depois do RIPD):** aplicar a migração `20261104000001_documentos.sql`; criar os segredos e o agendador (`docs/deploy/CLOUD_RUN.md`, seção "Documentos enviados"); só então `ARGUMENTA_UPLOAD_LIGADO=sim`. Falta decidir a tela de envio e a pseudonimização do documento (a do navegador só vê texto colado; a extração é a F5-02).
+
+## 10. Caso em andamento: ligação com as outras ferramentas (fase 1, 05/11/2026)
+
+Antes, a citação de um fundamento abria o NormaViva ou o TeseMap sem nenhuma relação com o caso, e a análise se perdia ao sair da página.
+
+- **Memória da aba** (`lib/caso/memoria.ts`): a análise aberta (parágrafos já pseudonimizados, tabela de troca, resultados e selos das citações) fica só na memória do navegador. Não vai para `localStorage`, `sessionStorage`, cookie, URL nem servidor; recarregar ou fechar a aba apaga tudo. A navegação dentro do site não recarrega a página, e por isso a análise sobrevive a ela.
+- **Ligação** (`lib/caso/ligacao.ts`): o link da citação leva só o número da questão (`?caso=Q2`), nunca texto da decisão.
+- **Faixa "Do seu caso"** (`components/FaixaDoCaso.tsx`), no NormaViva e no TeseMap: mostra de qual questão a pessoa veio, o enunciado e, se o que está aberto é mesmo a citação de um fundamento daquela questão, como a decisão o usou. Sem texto de IA. Sem o caso na memória (outra aba, recarga), a faixa não aparece.
+- **"Voltar à análise"**: abre o Argumenta na aba das questões, rolando até a questão de origem.
+- Fase 2 (planejada): cartão de IA "como este precedente se relaciona com a sua questão", lido só da tese ou do artigo, com decisão do responsável e registro em `IA_TAREFAS.md`.

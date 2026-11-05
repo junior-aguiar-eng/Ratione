@@ -83,6 +83,7 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 | Só sob demanda e só logado; rota exige sessão (401 sem ela) | Feita |
 | Cota por plano e teto de gasto; uma chamada de cada vez | Feita (`ia_reservar`) |
 | Sem conteúdo integral em logs, nem no banco: só hashes e metadados | Feita |
+| A análise aberta fica só na **memória da aba** do navegador (para as outras ferramentas mostrarem a relação com o caso e a pessoa voltar a ela); nunca em `localStorage`, `sessionStorage`, cookie, URL nem servidor, e some ao fechar a aba ou recarregar | Feita (`lib/caso/memoria.ts`, 05/11/2026) |
 | Controle de acesso por linha (RLS) no banco: cada usuário lê o que é seu | Feita **[CONFIRMAR em revisão das políticas RLS de `ia_uso` e `analises`]** |
 | Retenção mínima: limpeza diária de 13 meses para uso e análises | Decidida em 25/10/2026; **[CONFIRMAR que o `pg_cron` está agendado em produção]** |
 | Criptografia em trânsito (HTTPS) | Padrão do Cloud Run e do Supabase **[CONFIRMAR]** |

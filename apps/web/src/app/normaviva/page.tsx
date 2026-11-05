@@ -9,6 +9,7 @@ import { dataCurta, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
+import FaixaDoCaso from '../../components/FaixaDoCaso';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
 import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, situacaoEm, textoDoAvisoFuturo } from '../../lib/normavivaApresentacao';
@@ -167,6 +168,8 @@ export default function NormaVivaPage() {
           <ResultadosDaBusca itens={resultado.itens} normas={normas} itemId={itemId} buscando={buscando} aviso={resultado.aviso} onEscolher={setItemId} />
         )}
       </section>
+
+      <FaixaDoCaso ferramenta="normaviva" destinoId={itemId} className="mt-8" />
 
       {itemId && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 mt-8 items-start">
