@@ -36,7 +36,9 @@ O site deixou de empilhar tudo na mesma coluna e com o mesmo peso. Cada tipo de 
 
 Tokens novos em `globals.css`: `--color-ia`, `--color-ia-text`, `--color-ia-tint` (alias do lilás `--rel`, no tema claro e no escuro) e `--shadow-float`. Regras: o cartão de IA é o **único** elevado acima do `shadow-card`; cor só por token; o aviso de IA continua dentro do cartão, em letra pequena, sem caixa própria.
 
-**NormaViva (fases 1 e 2):** os resultados da pesquisa viraram fichas (`ResultadosDaBusca.tsx`): o mesmo artigo em várias normas vira uma linha de fichas pela sigla da norma (`siglaDaNorma`), e uma pesquisa por assunto vira uma lista compacta, de uma linha por resultado, com rolagem própria. O artigo aberto ocupa a tela, com a coluna de contexto ao lado. Próximas fases: Argumenta, TeseMap e PrazoZero, e a página inicial como painel das ferramentas.
+**NormaViva (fases 1 e 2):** os resultados da pesquisa viraram fichas (`ResultadosDaBusca.tsx`): o mesmo artigo em várias normas vira uma linha de fichas pela sigla da norma (`siglaDaNorma`), e uma pesquisa por assunto vira uma lista compacta, de uma linha por resultado, com rolagem própria. O artigo aberto ocupa a tela, com a coluna de contexto ao lado.
+
+**Argumenta (fase 3):** o texto completo da decisão fica num `CartaoDeLeitura` e a análise (visão geral, estrutura, questões e fundamentos, mapa) num único `CartaoDeIA`, sem recuo, porque os dois ficam lado a lado. No computador o texto abre ao lado da análise (coluna fixa de 5/12 da largura, com rolagem própria); no celular, o texto vem em cima e a análise logo abaixo, e "Ocultar texto" continua recolhendo só a leitura, nunca a análise. Próximas fases: TeseMap e PrazoZero, e a página inicial como painel das ferramentas.
 
 ## Componentes
 
