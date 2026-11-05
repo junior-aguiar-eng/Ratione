@@ -452,7 +452,7 @@ export default function NormaVivaPage() {
 
       <div className="mt-14 max-w-3xl">
         <Notice tom="info" titulo="Antes de citar">
-          Confira o texto na fonte oficial antes de citá-lo. As datas de vigência são provisórias, e as redações anteriores ainda aguardam conferência no Diário Oficial.
+          Confira o texto na fonte oficial antes de citá-lo.
         </Notice>
       </div>
     </div>

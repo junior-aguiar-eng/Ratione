@@ -86,7 +86,7 @@ export default function ExplicacaoIA({ dispositivoId }: { dispositivoId: string 
           <Notice titulo="Explicação gerada por inteligência artificial">
             Feita só a partir do texto acima, sem jurisprudência nem outras fontes. Pode conter erro e não substitui o texto da lei nem orientação
             jurídica.
-            {estado.restantes !== null && ` Restam ${estado.restantes} explicação(ões) no seu plano neste período.`}
+            {estado.restantes !== null && ` ${estado.restantes === 1 ? 'Resta 1 explicação' : `Restam ${estado.restantes} explicações`} no seu plano neste período.`}
             {estado.doCache && ' Esta explicação já tinha sido gerada e não contou na sua cota.'}
           </Notice>
         </div>

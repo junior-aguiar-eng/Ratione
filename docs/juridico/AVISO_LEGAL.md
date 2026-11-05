@@ -9,7 +9,7 @@
 O prazo final é calculado com base nas regras e nos calendários cadastrados e indicados na memória de cálculo. **Feriados municipais e atos específicos do tribunal podem não estar incluídos** e devem ser conferidos. Feriado local deve ser comprovado no ato de interposição do recurso (CPC, art. 1.003, § 6º). O **calendário** de cada tribunal exibe a **data da última verificação**.
 
 ## NormaViva
-Os textos são coletados de fontes oficiais, com indicação da fonte e da data de coleta. Em caso de divergência, **prevalece a fonte oficial**. As datas de vigência são provisórias e as redações anteriores aguardam conferência no Diário Oficial. A "explicação" é **gerada por IA**, pode conter erro e não substitui o texto da lei.
+Os textos são coletados de fontes oficiais, com indicação da fonte e da data de coleta. Em caso de divergência, **prevalece a fonte oficial**. As datas de início de vigência vêm da publicação dos atos e podem diferir da data em que a norma passou a valer; as redações anteriores só são mostradas depois de conferidas no Diário Oficial. A "explicação" é **gerada por IA**, pode conter erro e não substitui o texto da lei.
 
 ## TeseMap
 As relações entre precedentes são **curadas** e podem estar **incompletas**. Confira o enunciado e a tese no site do tribunal.
