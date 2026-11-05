@@ -10,6 +10,7 @@ import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import FaixaDoCaso from '../../components/FaixaDoCaso';
+import RelacaoComOCaso from '../../components/RelacaoComOCaso';
 import { obterSupabase } from '../../lib/supabase/client';
 import { carregarDetalhe, listarNormas, pesquisar, type Detalhe, type Norma, type ResultadoDaBusca } from '../../lib/normaviva';
 import { ROTULO_ESCOPO, ROTULO_ORIGEM, ROTULO_RELACAO, situacaoEm, textoDoAvisoFuturo } from '../../lib/normavivaApresentacao';
@@ -307,6 +308,7 @@ export default function NormaVivaPage() {
                   </CartaoDeLeitura>
 
                   {/* O que a IA gerou: cartão próprio, um passo acima e ligado ao texto, sem se misturar a ele */}
+                  <RelacaoComOCaso key={`relacao-${detalhe.dispositivo.id}`} ferramenta="normaviva" destinoId={detalhe.dispositivo.id} />
                   <ExplicacaoIA key={detalhe.dispositivo.id} dispositivoId={detalhe.dispositivo.id} />
 
                   <AvisoAntesDeCitar />

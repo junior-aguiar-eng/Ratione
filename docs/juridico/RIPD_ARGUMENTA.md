@@ -36,6 +36,7 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 4. O servidor envia o texto à Anthropic (Claude Haiku 5.5), em três chamadas fechadas (estrutura, questões, fundamentos), **sem ferramentas e sem busca**.
 5. A resposta volta com marcadores; os dados reais são restaurados **só na tela**.
 6. O texto e a resposta **não ficam guardados**. Ficam só o registro de uso e os metadados da análise (seção 4).
+7. **Relação com o caso** (tarefa `relacionar-com-o-caso`, só quando a pessoa abre uma citação da análise no NormaViva ou no TeseMap e clica em "Relacionar com a minha questão"; desligada por padrão até ser medida): uma segunda chamada à mesma Anthropic, com o mesmo modelo e sem ferramentas, que leva **só a questão e a conclusão já pseudonimizadas pela análise** e o texto público do dispositivo ou do precedente, lido do banco. Não leva o texto da decisão. O servidor confere de novo a questão, descarta a resposta cujo trecho citado não esteja no texto da fonte, e nada fica guardado (só o registro de uso, com o destino e um hash curto da questão). É o mesmo tipo de tratamento das etapas acima, e os riscos R1 a R5 e R7 valem para ela.
 
 **Base legal.** Para os dados da conta e do uso: execução de contrato (art. 7º, V) **[CONFIRMAR]**. Para o conteúdo das decisões, o controlador é o usuário, que declara base legal própria (os Termos transferem a declaração ao usuário). Decisões judiciais públicas e dados tornados manifestamente públicos têm tratamento próprio (art. 7º, §§ 3º e 4º) **[CONFIRMAR com o advogado]**.
 

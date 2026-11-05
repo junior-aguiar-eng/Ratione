@@ -4,7 +4,7 @@
  * Uma etapa só roda se a anterior gerou saída válida; a que não roda não entra na taxa de descartadas.
  */
 import { paragrafosValidos } from '@ratione/argumenta';
-import type { ModeloPermitido, PedidoModelo, QualquerTarefa, ResultadoModelo, Uso } from '../ia/contrato';
+import type { Fontes, ModeloPermitido, PedidoModelo, QualquerTarefa, ResultadoModelo, Uso } from '../ia/contrato';
 import { custoUsd } from '../ia/politica';
 import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes, type SaidaEstrutura, type SaidaFundamentos, type SaidaQuestoes } from '../ia/tarefas/argumenta';
 import { paragrafosDoCaso, type Caso } from './caso';
@@ -39,17 +39,19 @@ export interface ResultadoDoCaso {
 const ENTRADA_RECUSADA = 'entrada recusada pela tarefa';
 const vazia = <T>(motivo?: string): Etapa<T> => ({ estado: 'nao_rodou', saida: null, motivo, custoUsd: 0 });
 
-/** Roda uma tarefa do catálogo sobre a entrada, sem cota nem registro, e mede quanto a etapa levou. */
-async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido): Promise<Etapa<T>> {
+const SEM_FONTES: Fontes = { lerDispositivo: async () => null, lerNoTeseMap: async () => null };
+
+/** Roda uma tarefa do catálogo sobre a entrada, sem cota nem registro, e mede quanto a etapa levou. `fontes` só importa às tarefas que leem o banco. */
+export async function etapa<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido, fontes: Fontes = SEM_FONTES): Promise<Etapa<T>> {
   const inicio = Date.now();
-  const e = await etapaSemTempo<T>(t, entrada, chamar, modelo);
+  const e = await etapaSemTempo<T>(t, entrada, chamar, modelo, fontes);
   return e.estado === 'nao_rodou' ? e : { ...e, duracaoMs: Date.now() - inicio };
 }
 
-async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido): Promise<Etapa<T>> {
+async function etapaSemTempo<T>(t: QualquerTarefa, entrada: unknown, chamar: ChamarModelo, modelo: ModeloPermitido, fontes: Fontes): Promise<Etapa<T>> {
   const valida = t.validarEntrada(entrada);
   if (valida === null) return vazia<T>(ENTRADA_RECUSADA);
-  const contexto = await t.montarContexto(valida, { lerDispositivo: async () => null });
+  const contexto = await t.montarContexto(valida, fontes);
   if (contexto === null) return vazia<T>('sem contexto');
   const mensagem = t.mensagem(contexto);
   if (mensagem.length > t.maxCaracteresMensagem) return vazia<T>('mensagem acima do limite da tarefa');

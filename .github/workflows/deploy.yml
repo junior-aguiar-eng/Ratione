@@ -53,6 +53,7 @@ jobs:
             --build-arg NEXT_PUBLIC_SUPABASE_URL="${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" \
             --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}" \
             --build-arg NEXT_PUBLIC_IA_EXPLICACAO="${{ vars.IA_EXPLICACAO }}" \
+            --build-arg NEXT_PUBLIC_IA_RELACAO="${{ vars.IA_RELACAO }}" \
             .
           docker push "$IMAGEM"
           echo "nome=$IMAGEM" >> "$GITHUB_OUTPUT"
@@ -67,6 +68,12 @@ jobs:
           if [ "${{ vars.IA_EXPLICACAO }}" = "sim" ]; then
             SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
             IA="IA_EXPLICACAO_LIGADA=sim"
+          fi
+          # Relação com o caso: tarefa própria, DESLIGADA por padrão; só com a variável IA_RELACAO = sim (e IA_EXPLICACAO = sim) e só depois de
+          # medida no corpus (docs/produto/IA_TAREFAS.md). Sem ela a rota responde 503 e o botão nem aparece.
+          IA="${IA}@IA_RELACAO_LIGADA=nao"
+          if [ "${{ vars.IA_RELACAO }}" = "sim" ]; then
+            IA="${IA%@IA_RELACAO_LIGADA=nao}@IA_RELACAO_LIGADA=sim"
           fi
           # Cobrança com o Mercado Pago (F8-05): DESLIGADA por padrão. Só com a variável COBRANCA = sim o servidor recebe os segredos do
           # Mercado Pago (mercadopago-access-token e mercadopago-webhook-secret, no Secret Manager) e a cobrança liga. COBRANCA_AMBIENTE

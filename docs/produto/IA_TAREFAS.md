@@ -74,6 +74,18 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `relacionar-com-o-caso` | Como o dispositivo ou precedente aberto a partir da análise se relaciona com a questão do caso (aplica, distingue ou trata de outro ponto), com o trecho da fonte que sustenta | Botão "Relacionar com a minha questão" no NormaViva ou no TeseMap, depois de abrir uma citação da análise (logado) | Cota de explicações do plano; a tela limita a 10 por caso | Seção 8.1 abaixo |
+
+### 8.1 `relacionar-com-o-caso` (decisão do responsável de 05/11/2026)
+
+- **Entrada:** a ferramenta (`normaviva` ou `tesemap`), o id do dispositivo ou do nó, e o enunciado e a conclusão da questão **como a análise do Argumenta os produziu, com marcadores no lugar dos dados pessoais**. O servidor confere de novo e recusa texto com dado pessoal detectável. O texto da fonte o servidor lê do banco; nada dele vem do navegador.
+- **Saída fechada:** `relacao` (`aplica`, `distingue` ou `outro_ponto`), `resumo`, `trecho` e `limite`. O modelo não conversa, não recebe ferramentas e não vê a decisão, só a questão e a fonte.
+- **Trava no servidor:** o `trecho` tem de existir, palavra por palavra (sem contar caixa, acento nem espaços), no texto da fonte; senão a saída é descartada e a cota não é gasta. O resumo e o limite não podem dizer quem tem razão nem o que fazer.
+- **Material do usuário:** `guardaResultado: false`. Nem a questão nem a resposta ficam no banco; o registro de uso leva só o destino e um hash curto da questão.
+- **Cota:** conta na **cota de explicações** do plano (não gasta análise). O limite de **10 por caso** é da tela (memória da aba), não do servidor; o teto verdadeiro é a cota do plano e o fundo de gasto.
+- **Modelo:** `claude-haiku-5-5`, esforço baixo, até 1.200 tokens de saída. Custo esperado da ordem de US$ 0,005 por consulta.
+- **Desligada por padrão:** o botão só aparece com `NEXT_PUBLIC_IA_RELACAO=sim` (variável de repositório `IA_RELACAO`), e o servidor só executa com `IA_RELACAO_LIGADA=sim`. Só ligar depois de medida (abaixo).
+- **Medição antes de ligar:** `pnpm --filter web avaliar-relacao` usa as decisões do corpus: cada fundamento de norma ou precedente que a própria decisão usou na questão deve sair como `aplica`; cada fonte de outra questão, de assunto diferente, não deve sair como `aplica`. O relatório mostra a taxa de acerto e a de trecho descartado.
 
 ## 9. Ligar e desligar
 

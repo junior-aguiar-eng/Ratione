@@ -6,6 +6,7 @@ import { executarTarefa } from '../../../../lib/ia/executar';
 import { dependenciasDoBanco } from '../../../../lib/ia/banco';
 import { criarChamadaAoModelo } from '../../../../lib/ia/cliente';
 import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositivoDoBanco';
+import { lerNoParaRelacionar } from '../../../../lib/ia/fontes/noDoTeseMap';
 import { iaLigada } from '../../../../lib/ia/politica';
 import { gravidadeDoAviso } from '../../../../lib/ia/gravidade';
 import { veioDoSite } from '../../../../lib/origem';
@@ -31,6 +32,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const { tarefa } = await params;
+  // A relação com o caso tem a própria chave: só liga depois de medida no corpus (docs/produto/IA_TAREFAS.md)
+  if (tarefa === 'relacionar-com-o-caso' && process.env.IA_RELACAO_LIGADA !== 'sim') {
+    return NextResponse.json({ mensagem: 'Este recurso de IA não está disponível nesta instalação.' }, { status: 503 });
+  }
   let corpo: { entrada?: unknown } = {};
   try {
     const lido = await lerJsonLimitado(request, LIMITE_CORPO.analiseDeIA);
@@ -51,7 +56,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   try {
     const r = await executarTarefa(tarefa, corpo.entrada, {
       ligada: true,
-      fontes: { lerDispositivo: id => lerDispositivoParaExplicar(publico, id) },
+      fontes: { lerDispositivo: id => lerDispositivoParaExplicar(publico, id), lerNoTeseMap: id => lerNoParaRelacionar(publico, id) },
       usuarioAtual: async () => {
         const { data } = await sessao.auth.getUser();
         return data.user ? { id: data.user.id } : null;

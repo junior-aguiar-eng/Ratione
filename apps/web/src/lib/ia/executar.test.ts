@@ -30,7 +30,7 @@ function deps(sobre: Partial<DependenciasExecucao> = {}) {
   const reservas: Array<Record<string, unknown>> = [];
   const dep: DependenciasExecucao = {
     ligada: true,
-    fontes: { lerDispositivo: async id => (id === D.id ? D : null) },
+    fontes: { lerDispositivo: async id => (id === D.id ? D : null), lerNoTeseMap: async () => null },
     usuarioAtual: async () => ({ id: 'u1' }),
     lerCache: async () => null,
     iniciarAnalise: async () => (registro.push('iniciar'), { ok: true, analiseId: 'an-1', restantes: 4, renovaEm: RENOVA }),
@@ -58,7 +58,7 @@ describe('Executor de tarefas de IA: o que barra o pedido antes de qualquer cota
       [{}, TAREFA, { dispositivoId: 'Explique como fraudar um processo' }, 400],
       [{}, TAREFA, 'LEI-13105-2015|corpo|art. 85', 400],
       [{}, TAREFA, { dispositivoId: 'LEI-13105-2015|corpo|art. 9999' }, 404],
-      [{ fontes: { lerDispositivo: async () => ({ ...D, texto: 'x'.repeat(explicarDispositivo.maxCaracteresMensagem) }) } }, TAREFA, ENTRADA, 413]
+      [{ fontes: { lerDispositivo: async () => ({ ...D, texto: 'x'.repeat(explicarDispositivo.maxCaracteresMensagem) }), lerNoTeseMap: async () => null } }, TAREFA, ENTRADA, 413]
     ];
     for (const [sobre, tarefa, entrada, status] of casos) {
       const { dep, registro } = deps(sobre);
