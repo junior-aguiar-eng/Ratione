@@ -261,7 +261,7 @@ export default function TeseMapPage() {
                     <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-brand-text underline underline-offset-2">
                       {f.ato}
                     </a>
-                    . Lido em {dataCurta(f.lidoEm)}. {f.lido}.
+                    . Lido em {dataCurta(f.lidoEm)}.
                   </p>
                 ))}
                 {no.validado_por && <p>Validado por {no.validado_por} em {dataCurta(no.validado_em ?? no.atualizado_em)}.</p>}
@@ -301,15 +301,15 @@ function AplicacaoDoTema({ no }: { no: NoTese }) {
     <div className="border-t border-line pt-4 flex flex-col gap-2 text-sm" data-testid="aplicacao-do-tema">
       <h3 className="text-sm font-semibold text-ink">Aplicação pelo STF (devoluções à origem)</h3>
       <p className="text-ink">{textoDoTotalDeAplicacao(a)}</p>
-      {a.total > 0 && (
+      {/* A divisão por ano só aparece quando os anos são comparáveis: com um ano claramente incompleto nos dados abertos, ela confunde mais do que informa */}
+      {a.total > 0 && a.anosPossivelmenteIncompletos.length === 0 && (
         <p className="text-ink-soft">
           Por ano:{' '}
-          {a.porAno.map(([ano, n]) => `${ano}${a.anosPossivelmenteIncompletos.includes(ano) ? '*' : ''}: ${n.toLocaleString('pt-BR')}`).join(' · ')}
+          {a.porAno.map(([ano, n]) => `${ano}: ${n.toLocaleString('pt-BR')}`).join(' · ')}
         </p>
       )}
       <p className="text-xs text-ink-mute">
-        Conta as decisões do STF que devolveram processos ao tribunal de origem pelo regime da repercussão geral citando este tema. Não é o total de citações do tema na jurisprudência.
-        {a.anosPossivelmenteIncompletos.length > 0 && ` *O arquivo do STF parece incompleto em ${a.anosPossivelmenteIncompletos.join(', ')} (bem menos decisões que nos demais anos).`}
+        Conta as decisões dos dados abertos do STF que devolveram processos ao tribunal de origem pelo regime da repercussão geral citando este tema. Não é o total de citações do tema na jurisprudência.
       </p>
     </div>
   );
