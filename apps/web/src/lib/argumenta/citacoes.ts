@@ -18,7 +18,8 @@ export type CitacaoReconhecida =
 
 const OUTRO_TRIBUNAL = /\b(TST|TSE|STM|TCU|TJ[A-Z]{2}|TRF\s?\d|TRT\s?\d+|TRE[A-Z]{2})\b/;
 const RE_SUMULA = /\bs[úu]mulas?\s+(vinculante\s+)?(?:n[ºo°.]*\s*)?(\d{1,4})\b/i;
-const RE_TEMA = /\btemas?\s+(?:n[ºo°.]*\s*)?(\d{1,2}(?:\.\d{3})+|\d{1,5})\b/i;
+// "Tema 1.076", "Tema Repetitivo nº 1150", "Tema de Repercussão Geral nº 793": a natureza do tema pode vir entre "Tema" e o número
+const RE_TEMA = /\btemas?\s+(?:repetitivos?\s+|de\s+repercuss[ãa]o\s+geral\s+|rg\s+)?(?:n[ºo°.]*\s*)?(\d{1,2}(?:\.\d{3})+|\d{1,5})\b/i;
 const RE_ACAO = /\b(ADI|ADPF|ADC|ADO)\s*(?:n[ºo°.]*\s*)?(\d{1,2}(?:\.\d{3})+|\d{1,5})\b/;
 const RE_CPC_1973 = /\bCPC\s*\/?\s*(?:de\s*)?(?:19)?73\b|\bCPC\s+(?:antigo|revogado)\b|c[óo]digo de processo civil\s*(?:de|\/)?\s*(?:19)?73\b|\blei\s*(?:n[ºo°.]*\s*)?5\.?869\b/i;
 // Os artigos 543-A a 543-C são os dos recursos repetitivos do CPC de 1973; o de 2015 não tem artigo com letra, e "CPC, art. 543-C" já foi lido como o de 2015

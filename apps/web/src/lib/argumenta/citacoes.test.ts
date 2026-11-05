@@ -92,6 +92,14 @@ describe('Argumenta F5-04: reconhecimento de citações', () => {
     assert.deepEqual(rec('Tema 339'), { tipo: 'tema', tribunais: ['STF', 'STJ'], numero: '339' });
   });
 
+  it('tema com a natureza escrita antes do número: "Tema Repetitivo nº 1150" e "Tema de Repercussão Geral nº 793"', () => {
+    // como o modelo escreveu numa análise real, com os recursos entre parênteses
+    assert.deepEqual(rec('Tema Repetitivo nº 1150 (REsp nº 1.981.439/PR e REsp nº 1.939.993/BA, Rel. Min. Herman Benjamin, Primeira Seção, j. 13.09.2023)'), { tipo: 'tema', tribunais: ['STJ'], numero: '1150' });
+    assert.deepEqual(rec('Tema Repetitivo nº 1.387 (REsp nº 2.214.879/PE, DJEN 17.12.2025)'), { tipo: 'tema', tribunais: ['STJ'], numero: '1387' });
+    assert.deepEqual(rec('Tema de Repercussão Geral nº 793'), { tipo: 'tema', tribunais: ['STF'], numero: '793' });
+    assert.deepEqual(rec('Tema RG 660 do STF'), { tipo: 'tema', tribunais: ['STF'], numero: '660' });
+  });
+
   it('ações de controle concentrado', () => {
     assert.deepEqual(rec('ADI 4.357'), { tipo: 'acao', classe: 'ADI', numero: '4357' });
     assert.deepEqual(rec('ADPF nº 54'), { tipo: 'acao', classe: 'ADPF', numero: '54' });
