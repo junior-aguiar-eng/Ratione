@@ -2,7 +2,7 @@
  * F5-01: guarda, lista e apaga os documentos que o usuário envia. A lógica fica separada das rotas para ser testada sem rede: as rotas
  * entregam o armazenamento e o banco reais (Supabase), os testes entregam simulações.
  *
- * Regras (RIPD do Argumenta, seção 7, condições 1 a 3):
+ * Regras (RIPD do Argumenta, seção 7.1, condições 1 e 2):
  * - o arquivo é **cifrado** (AES-256-GCM, chave do ambiente) antes de ir ao armazenamento privado;
  * - **nada do conteúdo nem o nome do arquivo** vai ao banco: só tipo, tamanho, caminho opaco e datas;
  * - cada arquivo **expira** (`retencaoDias`) e é apagado sozinho; o usuário também apaga quando quiser;
