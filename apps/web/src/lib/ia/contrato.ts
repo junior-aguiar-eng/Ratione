@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import type { DispositivoParaExplicar } from './fontes/dispositivoDoBanco';
+import type { NoParaRelacionar } from './fontes/noDoTeseMap';
 
 /**
  * Contrato de uma tarefa de IA do Ratione. Regra do produto (decisão do responsável, 22/10/2026): a IA nunca conversa; cada uso é uma
@@ -19,6 +20,7 @@ export type ModeloPermitido = 'claude-haiku-5-5' | 'claude-sonnet-5-5';
  */
 export interface Fontes {
   lerDispositivo: (id: string) => Promise<DispositivoParaExplicar | null>;
+  lerNoTeseMap: (id: string) => Promise<NoParaRelacionar | null>;
 }
 
 /** JSON Schema da saída: objeto fechado (`additionalProperties: false`, todos os campos obrigatórios). */

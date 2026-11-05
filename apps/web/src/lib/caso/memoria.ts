@@ -29,6 +29,11 @@ export interface CasoEmMemoria {
 let atual: CasoEmMemoria | null = null;
 const ouvintes = new Set<() => void>();
 
+/** Quantas relações com o caso a tela pede por análise: um limite de uso da tela, além da cota do plano. */
+export const MAX_RELACOES_POR_CASO = 10;
+/** As relações já geradas neste caso, pela chave `questão|ferramenta|destino`, para não pedir (nem gastar) de novo ao voltar a um item. */
+const relacoes = new Map<string, unknown>();
+
 const avisar = () => ouvintes.forEach(f => f());
 
 export function lerCaso(): CasoEmMemoria | null {
@@ -36,11 +41,14 @@ export function lerCaso(): CasoEmMemoria | null {
 }
 
 export function guardarCaso(caso: CasoEmMemoria): void {
+  // Outra análise: as relações da anterior não valem mais
+  if (atual && atual.enviada !== caso.enviada) relacoes.clear();
   atual = caso;
   avisar();
 }
 
 export function limparCaso(): void {
+  relacoes.clear();
   if (atual === null) return;
   atual = null;
   avisar();
@@ -57,3 +65,8 @@ export function assinarCaso(ouvinte: () => void): () => void {
 export function useCaso(): CasoEmMemoria | null {
   return useSyncExternalStore(assinarCaso, lerCaso, () => null);
 }
+
+export const chaveDaRelacao = (questaoId: string, ferramenta: string, destinoId: string) => `${questaoId}|${ferramenta}|${destinoId}`;
+export const relacaoGuardada = <T,>(chave: string): T | undefined => relacoes.get(chave) as T | undefined;
+export const guardarRelacao = (chave: string, resultado: unknown): void => void relacoes.set(chave, resultado);
+export const relacoesFeitas = (): number => relacoes.size;

@@ -1,6 +1,7 @@
 import type { QualquerTarefa } from './contrato';
 import { explicarDispositivo } from './tarefas/explicarDispositivo';
 import { argumentaEstrutura, argumentaFundamentos, argumentaQuestoes } from './tarefas/argumenta';
+import { relacionarComOCaso } from './tarefas/relacionarComOCaso';
 
 /**
  * Catálogo de tarefas de IA: o único lugar em que uma tarefa existe. A rota `/api/ia/<id>` só executa o que está aqui, e o teste
@@ -11,7 +12,8 @@ export const CATALOGO = {
   'explicar-dispositivo': explicarDispositivo,
   'argumenta-estrutura': argumentaEstrutura,
   'argumenta-questoes': argumentaQuestoes,
-  'argumenta-fundamentos': argumentaFundamentos
+  'argumenta-fundamentos': argumentaFundamentos,
+  'relacionar-com-o-caso': relacionarComOCaso
 } as const satisfies Record<string, QualquerTarefa>;
 
 export type IdTarefa = keyof typeof CATALOGO;

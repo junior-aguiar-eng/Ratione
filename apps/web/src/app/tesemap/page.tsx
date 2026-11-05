@@ -13,6 +13,7 @@ import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSa
 import { obterSupabase } from '../../lib/supabase/client';
 import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import FaixaDoCaso from '../../components/FaixaDoCaso';
+import RelacaoComOCaso from '../../components/RelacaoComOCaso';
 import ReservaTeseMap from './ReservaTeseMap';
 import GrafoDaVizinhanca from './GrafoDaVizinhanca';
 import { Button } from '@/components/ui/button';
@@ -269,6 +270,8 @@ export default function TeseMapPage() {
             </CartaoDeLeitura>
 
           )}
+
+          {aberto && no && <RelacaoComOCaso key={`relacao-${no.id}`} ferramenta="tesemap" destinoId={no.id} />}
 
           {aberto && no && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start" aria-label="Contexto do precedente" role="group">

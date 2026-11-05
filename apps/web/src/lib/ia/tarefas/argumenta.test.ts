@@ -26,7 +26,7 @@ function deps(json: string, sobre: Partial<DependenciasExecucao> = {}) {
   const analises: string[] = [];
   const dep: DependenciasExecucao = {
     ligada: true,
-    fontes: { lerDispositivo: async () => null },
+    fontes: { lerDispositivo: async () => null, lerNoTeseMap: async () => null },
     usuarioAtual: async () => ({ id: 'u1' }),
     lerCache: async () => (registro.push('lerCache'), null),
     iniciarAnalise: async () => (registro.push('iniciar'), { ok: true, analiseId: 'x', restantes: 0, renovaEm: '2026-10-26T03:00:00.000Z' }),

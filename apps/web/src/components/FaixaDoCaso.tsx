@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Link2 } from 'lucide-react';
 import { restaurar } from '@ratione/argumenta';
 import { Badge } from '@/components/ui/badge';
-import { useCaso } from '../lib/caso/memoria';
-import { fundamentosQueApontamPara, lerQuestaoDoCaso, urlDeVoltaAoCaso, type Ferramenta } from '../lib/caso/ligacao';
+import { useQuestaoDoCaso } from '../lib/caso/useQuestaoDoCaso';
+import { fundamentosQueApontamPara, urlDeVoltaAoCaso, type Ferramenta } from '../lib/caso/ligacao';
 import { CATEGORIA, FUNDAMENTO, RESULTADO } from '../lib/argumenta/rotulos';
 
 interface Props {
@@ -22,18 +21,9 @@ interface Props {
  * está só na memória da aba (`lib/caso/memoria.ts`); sem ele, a faixa não aparece. Sem texto de IA: tudo vem da análise que a pessoa já leu.
  */
 export default function FaixaDoCaso({ ferramenta, destinoId, className = '' }: Props) {
-  const caso = useCaso();
-  const [questaoId, setQuestaoId] = useState<string | null>(null);
+  const { caso, questao: q, posicao } = useQuestaoDoCaso();
+  if (!caso || !q) return null;
 
-  useEffect(() => {
-    setQuestaoId(lerQuestaoDoCaso(window.location.search));
-  }, []);
-
-  const questoes = caso?.resultados.questoes?.questoes;
-  const posicao = questoes && questaoId ? questoes.findIndex(q => q.id === questaoId) : -1;
-  if (!caso || !questoes || !questaoId || posicao < 0) return null;
-
-  const q = questoes[posicao];
   const r = (s: string) => restaurar(s, caso.enviada.substituicoes);
   const usos = fundamentosQueApontamPara(caso, q.id, ferramenta, destinoId);
 
