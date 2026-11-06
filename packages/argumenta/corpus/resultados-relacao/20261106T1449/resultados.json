@@ -1,0 +1,1542 @@
+[
+  {
+    "par": {
+      "casoId": "stj-resp-1104900-trib",
+      "questaoId": "Q1",
+      "enunciado": "Na execução fiscal contra a pessoa jurídica, o sócio cujo nome consta da CDA tem o ônus de provar que não incidiu no art. 135 do CTN?",
+      "conclusao": "Sim: o nome na CDA gera presunção relativa de responsabilidade, e cabe ao sócio provar a ausência de excesso de poderes ou infração de lei, contrato ou estatuto.",
+      "fonte": {
+        "citacao": "art. 135 do CTN",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-5172-1966|corpo|art. 135"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "distingue",
+        "resumo": "O art. 135 do CTN define a responsabilidade pessoal de diretores, gerentes ou representantes por atos praticados com excesso de poderes ou infração de lei, contrato social ou estatutos. O texto não trata de presunção decorrente do nome constar na CDA nem de quem tem o ônus da prova.",
+        "trecho": "São pessoalmente responsáveis pelos créditos correspondentes a obrigações tributárias resultantes de atos praticados com excesso de podêres ou infração de lei, contrato social ou estatutos",
+        "limite": "O texto não permite concluir se o nome na CDA gera presunção relativa nem a quem cabe provar a ausência de excesso de poderes ou infração no caso."
+      },
+      "uso": {
+        "input_tokens": 1471,
+        "output_tokens": 260,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000277,
+      "duracaoMs": 3406
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q1",
+      "enunciado": "O recurso especial pode ser conhecido quanto ao art. 262, § 2º, do CTB?",
+      "conclusao": "Não nessa parte: falta prequestionamento, pois o acórdão recorrido não emitiu juízo sobre o dispositivo.",
+      "fonte": {
+        "citacao": "art. 262, § 2º, do CTB",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-9503-1997|corpo|art. 262"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte é o art. 262 do CTB, indicado como revogado, sem texto normativo aplicável. Ela não trata do prequestionamento nem do conhecimento do recurso especial quanto ao § 2º do dispositivo.",
+        "trecho": "(revogado) art. 262. (revogado)",
+        "limite": "O texto da fonte não permite concluir se o acórdão recorrido se manifestou sobre o art. 262, § 2º, nem qualquer coisa sobre o cabimento do recurso especial nesse ponto."
+      },
+      "uso": {
+        "input_tokens": 1282,
+        "output_tokens": 199,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000228,
+      "duracaoMs": 2584
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q2",
+      "enunciado": "A liberação de veículo retido por transporte irregular de passageiros (CTB, art. 231, VIII) depende do pagamento de multas e despesas?",
+      "conclusao": "Não: a liberação independe do recolhimento de multas e demais despesas, orientação consolidada no STJ.",
+      "fonte": {
+        "citacao": "art. 231, VIII, do CTB",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-9503-1997|corpo|art. 231, VIII"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto da fonte apenas define a infração do art. 231, VIII, do CTB (transporte remunerado sem licença). Ele não trata da liberação do veículo retido nem do pagamento de multas e despesas, que é o ponto da questão.",
+        "trecho": "efetuando transporte remunerado de pessoas ou bens, quando não for licenciado para esse fim, salvo casos de força maior ou com permissão da autoridade competente:",
+        "limite": "O texto não diz nada sobre retenção, liberação do veículo, multas ou despesas, nem menciona o entendimento do STJ citado na conclusão."
+      },
+      "uso": {
+        "input_tokens": 1346,
+        "output_tokens": 226,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000248,
+      "duracaoMs": 2282
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q3",
+      "enunciado": "O art. 85, § 3º, do Decreto 2.521/98 autoriza condicionar a liberação do veículo?",
+      "conclusao": "Não: o decreto regulamenta a Lei 8.987/95 e não alcança a hipótese; recurso desprovido.",
+      "fonte": {
+        "citacao": "art. 262, § 2º, do CTB",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-9503-1997|corpo|art. 262"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte é o art. 262 do Código de Trânsito Brasileiro, cujo texto informado é apenas a indicação de revogação, sem conteúdo normativo. Ela não trata do art. 85, § 3º, do Decreto 2.521/98 nem da liberação de veículo condicionada.",
+        "trecho": "(revogado) art. 262. (revogado)",
+        "limite": "O texto da fonte não permite concluir nada sobre o alcance do Decreto 2.521/98, sobre a Lei 8.987/95 ou sobre a liberação do veículo no caso."
+      },
+      "uso": {
+        "input_tokens": 1284,
+        "output_tokens": 215,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000236,
+      "duracaoMs": 2166
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1267995-desistencia-acao",
+      "questaoId": "Q2",
+      "enunciado": "Pode o INSS condicionar a anuência à desistência da ação à renúncia ao direito (art. 3º da Lei 9.469/97), obstando a homologação?",
+      "conclusao": "Sim: após a resposta, a desistência exige o consentimento fundamentado do réu, e a exigência de renúncia do art. 3º da Lei 9.469/97 é justificativa suficiente; acórdão reformado e recurso provido.",
+      "fonte": {
+        "citacao": "art. 267, § 4º, do CPC",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-13105-2015|corpo|art. 267"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 267 do CPC trata da recusa de cumprimento de carta precatória ou arbitral pelo juiz deprecado. A questão trata da anuência do réu à desistência da ação e da exigência de renúncia do art. 3º da Lei 9.469/97, assunto que o texto não aborda.",
+        "trecho": "O juiz recusará cumprimento a carta precatória ou arbitral, devolvendo-a com decisão motivada quando:",
+        "limite": "O texto não permite concluir nada sobre a anuência do réu à desistência, o consentimento após a resposta ou a exigência de renúncia prevista na Lei 9.469/97."
+      },
+      "uso": {
+        "input_tokens": 1542,
+        "output_tokens": 239,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000274,
+      "duracaoMs": 2078
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q2",
+      "enunciado": "Incide a Súmula 126/STJ no caso?",
+      "conclusao": "Afastada: o acórdão recorrido não se assentou em dispositivo constitucional.",
+      "fonte": {
+        "citacao": "art. 307 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 307"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto do art. 307 do Código Penal trata do crime de falsa identidade. A questão trata da incidência da Súmula 126/STJ, que diz respeito a recurso especial e fundamento constitucional do acórdão recorrido, assunto que a fonte não aborda.",
+        "trecho": "Atribuir-se ou atribuir a terceiro falsa identidade para obter vantagem, em proveito próprio ou alheio, ou para causar dano a outrem:",
+        "limite": "O texto do artigo não permite concluir nada sobre a Súmula 126/STJ nem sobre se o acórdão recorrido se apoiou em dispositivo constitucional."
+      },
+      "uso": {
+        "input_tokens": 1293,
+        "output_tokens": 243,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000251,
+      "duracaoMs": 2701
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q2",
+      "enunciado": "Incide a Súmula 126/STJ no caso?",
+      "conclusao": "Afastada: o acórdão recorrido não se assentou em dispositivo constitucional.",
+      "fonte": {
+        "citacao": "Súmula 126/STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-SUMULA-126"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "A Súmula 126/STJ trata da inadmissibilidade do recurso especial quando o acórdão se assenta em fundamentos constitucional e infraconstitucional, cada um suficiente por si só, e não há recurso extraordinário. A questão pergunta se a súmula incide, e a conclusão afasta a incidência porque o acórdão não se assentou em dispositivo constitucional.",
+        "trecho": "quando o acordão recorrido assenta em fundamentos constitucional e infraconstitucional, qualquer deles suficiente, por si só, para mantê-lo",
+        "limite": "O texto da súmula não permite concluir, por si só, quais fundamentos o acórdão recorrido adotou no caso concreto."
+      },
+      "uso": {
+        "input_tokens": 1306,
+        "output_tokens": 260,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000261,
+      "duracaoMs": 1921
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q3",
+      "enunciado": "Atribuir-se falsa identidade à autoridade policial, ao ser preso em flagrante, é fato típico (art. 307 do CP) ou exercício de autodefesa?",
+      "conclusao": "É típico: a autodefesa não alcança a falsa identidade; recurso provido para restabelecer a condenação.",
+      "fonte": {
+        "citacao": "art. 307 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 307"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "distingue",
+        "resumo": "O art. 307 tipifica atribuir-se falsa identidade, mas condiciona a conduta à finalidade de obter vantagem ou causar dano a outrem. O texto não trata de prisão em flagrante nem de autodefesa.",
+        "trecho": "Atribuir-se ou atribuir a terceiro falsa identidade para obter vantagem, em proveito próprio ou alheio, ou para causar dano a outrem",
+        "limite": "O texto não permite concluir se a falsa identidade atribuída à autoridade policial, no caso, teve essas finalidades nem se a autodefesa afasta a tipicidade."
+      },
+      "uso": {
+        "input_tokens": 1343,
+        "output_tokens": 226,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000247,
+      "duracaoMs": 1951
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1388030-civil",
+      "questaoId": "Q1",
+      "enunciado": "Qual é o termo inicial da prescrição na ação de indenização do seguro DPVAT por invalidez permanente?",
+      "conclusao": "A data em que o segurado teve ciência inequívoca do caráter permanente da invalidez; salvo invalidez notória, isso depende de laudo médico, e a presunção de ciência é relativa.",
+      "fonte": {
+        "citacao": "Súmula 278/STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-SUMULA-278"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "distingue",
+        "resumo": "A Súmula 278 do STJ trata do termo inicial da prescrição na ação de indenização do seguro, fixado na ciência inequívoca da incapacidade laboral. A questão fala em ciência do caráter permanente da invalidez e em laudo médico, o que é assunto próximo, mas com elemento diferente.",
+        "trecho": "O termo inicial do prazo prescricional, na ação de indenização, é a data em que o segurado teve ciência inequívoca da incapacidade laboral.",
+        "limite": "O texto da súmula não diz nada sobre laudo médico, invalidez notória nem presunção relativa de ciência, por isso não permite concluir como esses pontos se aplicam ao caso."
+      },
+      "uso": {
+        "input_tokens": 1328,
+        "output_tokens": 255,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.00026,
+      "duracaoMs": 2021
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1452840-embargos-terceiro-honorarios",
+      "questaoId": "Q2",
+      "enunciado": "Nos embargos de terceiro acolhidos, quem responde pelos honorários quando a transferência do imóvel não foi registrada e a Fazenda manteve a penhora?",
+      "conclusao": "Vale o princípio da causalidade (Súmula 303/STJ): em regra o adquirente que não registrou paga, mas a Fazenda que resiste ao pedido, mesmo ciente da transmissão, responde pela sucumbência; recurso desprovido e tese firmada.",
+      "fonte": {
+        "citacao": "Súmula 303/STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-SUMULA-303"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "A Súmula 303 do STJ trata de honorários em embargos de terceiro e diz que quem deu causa à constrição indevida deve arcar com eles. Isso se relaciona com a questão, que discute quem paga a sucumbência quando a penhora indevida foi mantida pela Fazenda.",
+        "trecho": "quem deu causa à constrição indevida deve arcar com os honorários advocatícios",
+        "limite": "O texto da súmula não diz como se identifica quem deu causa à constrição nem se o adquirente que não registrou ou a Fazenda que resistiu é o responsável no caso."
+      },
+      "uso": {
+        "input_tokens": 1364,
+        "output_tokens": 219,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000246,
+      "duracaoMs": 1991
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q1",
+      "enunciado": "Há dúvida fundada sobre a imparcialidade do júri que autorize o desaforamento do julgamento (CPP, art. 427)?",
+      "conclusao": "Sim: o MP apontou motivos concretos (acusado advogado conhecido na comarca pequena, relações próximas, repercussão do fato), confirmados pelo juízo de 1º grau, o que basta, sem prova da parcialidade; desaforamento deferido.",
+      "fonte": {
+        "citacao": "art. 427 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 427"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 427 do CPP prevê o desaforamento quando houver dúvida sobre a imparcialidade do júri, a pedido do Ministério Público ou de outras partes. A fonte trata diretamente do fundamento que a questão discute.",
+        "trecho": "ou houver dúvida sobre a imparcialidade do júri ou a segurança pessoal do acusado, o Tribunal, a requerimento do Ministério Público",
+        "limite": "O texto da fonte não diz quais motivos concretos bastam para caracterizar a dúvida, nem se a confirmação pelo juízo de 1º grau é suficiente, e não trata de caso de advogado conhecido na comarca."
+      },
+      "uso": {
+        "input_tokens": 1752,
+        "output_tokens": 246,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000298,
+      "duracaoMs": 2163
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q1",
+      "enunciado": "Há dúvida fundada sobre a imparcialidade do júri que autorize o desaforamento do julgamento (CPP, art. 427)?",
+      "conclusao": "Sim: o MP apontou motivos concretos (acusado advogado conhecido na comarca pequena, relações próximas, repercussão do fato), confirmados pelo juízo de 1º grau, o que basta, sem prova da parcialidade; desaforamento deferido.",
+      "fonte": {
+        "citacao": "art. 70 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 70"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto trata da fixação da competência territorial pelo lugar da consumação ou do último ato de execução do crime, e não do desaforamento por dúvida sobre a imparcialidade do júri. Não há relação direta com o ponto da questão.",
+        "trecho": "A competência será, de regra, determinada pelo lugar em que se consumar a infração",
+        "limite": "O texto não trata de desaforamento, de imparcialidade do júri nem dos motivos que autorizam o deslocamento do julgamento, portanto nada permite concluir sobre o caso."
+      },
+      "uso": {
+        "input_tokens": 1829,
+        "output_tokens": 205,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000285,
+      "duracaoMs": 2067
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q2",
+      "enunciado": "Para qual comarca deve ser desaforado o julgamento?",
+      "conclusao": "Para uma das Varas Criminais da capital, com competência para o júri: o acusado está preso nela e deve haver equidistância entre as comarcas, onde deixem de subsistir os motivos.",
+      "fonte": {
+        "citacao": "art. 427 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 427"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 427 trata do desaforamento do júri e autoriza o Tribunal a enviar o julgamento para outra comarca da mesma região, preferindo as mais próximas, quando faltarem as condições de imparcialidade ou segurança. A conclusão do caso aplica essa regra ao escolher uma vara criminal da capital com competência para júri, por equidistância e por ser o acusado preso nela.",
+        "trecho": "poderá determinar o desaforamento do julgamento para outra comarca da mesma região, onde não existam aqueles motivos, preferindo-se as mais próximas.",
+        "limite": "O texto da fonte não permite concluir se a capital era a comarca mais próxima nem se a escolha da vara específica atende aos motivos concretos do caso."
+      },
+      "uso": {
+        "input_tokens": 1699,
+        "output_tokens": 275,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000307,
+      "duracaoMs": 2527
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-embargos-defesa",
+      "questaoId": "Q2",
+      "enunciado": "Deve ser neutralizada a circunstância judicial das consequências do crime, sem laudo complementar da perda de movimento e do tratamento psicológico?",
+      "conclusao": "Pede a neutralização: não há prova pericial complementar (CPP, arts. 158 e 168, § 2º) e o acórdão exigiu prova para outras circunstâncias mas não para esta (contradição; CP, art. 59).",
+      "fonte": {
+        "citacao": "art. 59 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 59"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 59 do Código Penal manda o juiz considerar as circunstâncias e consequências do crime na fixação da pena. A questão discute justamente se essa circunstância judicial pode ser neutralizada sem laudo complementar, o que o dispositivo trata como ponto de análise.",
+        "trecho": "atendendo à culpabilidade, aos antecedentes, à conduta social, à personalidade do agente, aos motivos, às circunstâncias e conseqüências do crime",
+        "limite": "O texto do art. 59 não diz se a consequência do crime exige prova pericial complementar, nem trata de laudo, perda de movimento, tratamento psicológico ou da alegada contradição do acórdão."
+      },
+      "uso": {
+        "input_tokens": 1564,
+        "output_tokens": 254,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000283,
+      "duracaoMs": 2248
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-razoes-apelacao",
+      "questaoId": "Q5",
+      "enunciado": "A agravante do crime contra cônjuge, aplicada junto com o feminicídio, configura bis in idem?",
+      "conclusao": "Sim, segundo a defesa: a relação conjugal já sustentou o feminicídio (violência doméstica e familiar), e usá-la de novo na segunda fase duplica a valoração; a agravante deve ser afastada.",
+      "fonte": {
+        "citacao": "Tema 1197 do STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-TEMA-1197"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "A fonte é a tese firmada pelo STJ no Tema 1197 sobre a agravante do art. 61, II, f, do CP aplicada em conjunto com a Lei Maria da Penha. Ela trata exatamente do ponto da questão, afirmando que essa aplicação conjunta não configura bis in idem.",
+        "trecho": "A aplicação da agravante do art. 61, inc. II, alínea f, do Código Penal (CP), em conjunto com as disposições da Lei Maria da Penha (Lei n. 11.340/2006), não configura bis in idem.",
+        "limite": "O texto da fonte não diz como a agravante foi valorada na dosimetria do caso concreto, nem se a relação conjugal foi usada também na primeira fase, por isso não permite concluir se houve duplicação no caso."
+      },
+      "uso": {
+        "input_tokens": 1450,
+        "output_tokens": 292,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000291,
+      "duracaoMs": 2225
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-resp",
+      "questaoId": "Q3",
+      "enunciado": "A agravante do crime contra cônjuge, aplicada junto com o feminicídio, configura bis in idem?",
+      "conclusao": "Sim, segundo o recorrente: a relação conjugal já serviu para reconhecer o feminicídio em contexto doméstico e não pode agravar a pena de novo; a agravante deve ser afastada.",
+      "fonte": {
+        "citacao": "Tema 1197 do STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-TEMA-1197"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "A fonte trata exatamente do ponto da questão: a aplicação da agravante do art. 61, II, f, do CP junto com a Lei Maria da Penha. Firma a tese de que essa aplicação conjunta não configura bis in idem.",
+        "trecho": "A aplicação da agravante do art. 61, inc. II, alínea f, do Código Penal (CP), em conjunto com as disposições da Lei Maria da Penha (Lei n. 11.340/2006), não configura bis in idem.",
+        "limite": "O texto da fonte não permite concluir, por si só, se o caso concreto envolve feminicídio ou se os fatos dele se encaixam na tese firmada, nem analisa a argumentação específica do recorrente."
+      },
+      "uso": {
+        "input_tokens": 1444,
+        "output_tokens": 263,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000276,
+      "duracaoMs": 2104
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q1",
+      "enunciado": "A culpabilidade, os antecedentes e a conduta social do réu justificam aumento da pena-base?",
+      "conclusao": "A culpabilidade (premeditação) e a conduta social (histórico de violência contra a vítima) são desfavoráveis; os antecedentes não são valorados contra o réu.",
+      "fonte": {
+        "citacao": "art. 59 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 59"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 59 manda o juiz considerar a culpabilidade, os antecedentes e a conduta social ao fixar a pena, o que trata diretamente do ponto da questão. O texto não diz, por si, como cada um desses elementos deve ser valorado no caso concreto.",
+        "trecho": "O juiz, atendendo à culpabilidade, aos antecedentes, à conduta social, à personalidade do agente",
+        "limite": "O texto da fonte não permite concluir se a premeditação ou o histórico de violência justificam o aumento da pena-base neste caso, nem qual deveria ser a fração de aumento."
+      },
+      "uso": {
+        "input_tokens": 1527,
+        "output_tokens": 224,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000265,
+      "duracaoMs": 2063
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q5",
+      "enunciado": "Qual o aumento por circunstância desfavorável e qual a pena-base?",
+      "conclusao": "Três anos para cada uma das cinco circunstâncias desfavoráveis (15 anos), somados ao mínimo de 12 anos: pena-base de 27 anos de reclusão.",
+      "fonte": {
+        "citacao": "art. 59 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 59"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 59 do Código Penal trata da fixação da pena-base, pelo juiz, com base nas circunstâncias judiciais listadas, como culpabilidade, antecedentes e circunstâncias do crime. A questão trata justamente do aumento da pena-base por circunstâncias desfavoráveis, o que o dispositivo regula em termos gerais.",
+        "trecho": "O juiz, atendendo à culpabilidade, aos antecedentes, à conduta social, à personalidade do agente, aos motivos, às circunstâncias e conseqüências do crime, bem como ao comportamento da vítima, estabelecerá, conforme seja necessário e suficiente para reprovação e prevenção do crime:",
+        "limite": "O texto da fonte não diz quantos anos cada circunstância desfavorável deve aumentar a pena, nem permite confirmar se os números da conclusão da decisão estão corretos."
+      },
+      "uso": {
+        "input_tokens": 1522,
+        "output_tokens": 325,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000315,
+      "duracaoMs": 4961
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q6",
+      "enunciado": "A agravante do crime contra cônjuge e a atenuante da confissão se compensam, e há bis in idem com o feminicídio?",
+      "conclusao": "Não há bis in idem com o feminicídio; a atenuante da confissão, preponderante para fatos até 16/09/2025, concorre com a agravante, e a pena é atenuada em 1/12: 24 anos e 9 meses.",
+      "fonte": {
+        "citacao": "art. 65, III, d, do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 65"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 65, III, d, do Código Penal prevê a atenuante de confissão espontânea perante a autoridade quanto à autoria do crime, que é o ponto da questão sobre a atenuante da confissão. O texto não trata de agravantes, de compensação entre agravante e atenuante nem de bis in idem com o feminicídio.",
+        "trecho": "confessado espontaneamente, perante a autoridade, a autoria do crime;",
+        "limite": "O texto da fonte não permite concluir sobre a preponderância da confissão, a compensação com a agravante, a fração de redução de 1/12 ou a pena fixada no caso."
+      },
+      "uso": {
+        "input_tokens": 1707,
+        "output_tokens": 230,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000286,
+      "duracaoMs": 2551
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q6",
+      "enunciado": "A agravante do crime contra cônjuge e a atenuante da confissão se compensam, e há bis in idem com o feminicídio?",
+      "conclusao": "Não há bis in idem com o feminicídio; a atenuante da confissão, preponderante para fatos até 16/09/2025, concorre com a agravante, e a pena é atenuada em 1/12: 24 anos e 9 meses.",
+      "fonte": {
+        "citacao": "art. 61, II, e, do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 61"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O texto do art. 61, II, e, do Código Penal prevê como circunstância agravante o crime cometido contra cônjuge. A questão trata dessa agravante ao lado da atenuante da confissão e de eventual bis in idem com o feminicídio.",
+        "trecho": "art. 61, II, e). contra ascendente, descendente, irmão ou cônjuge;",
+        "limite": "O texto da fonte não permite concluir sobre a compensação entre agravante e atenuante, sobre a preponderância da confissão, nem sobre a existência de bis in idem no caso."
+      },
+      "uso": {
+        "input_tokens": 1905,
+        "output_tokens": 209,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000295,
+      "duracaoMs": 2155
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q8",
+      "enunciado": "Qual o regime inicial, e cabem substituição da pena, sursis e detração?",
+      "conclusao": "Regime inicial fechado; não cabem substituição por restritivas de direitos nem suspensão condicional da pena; a detração é irrelevante porque não altera o regime.",
+      "fonte": {
+        "citacao": "art. 77 do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 77"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 77 trata da suspensão condicional da pena (sursis) e exige, entre outros requisitos, que a pena não seja superior a 2 anos, que o condenado não seja reincidente em crime doloso e que a substituição do art. 44 não seja indicada ou cabível. Ele se aplica ao ponto da questão sobre o cabimento de sursis.",
+        "trecho": "A execução da pena privativa de liberdade, não superior a 2 (dois) anos, poderá ser suspensa, por 2 (dois) a 4 (quatro) anos, desde que:",
+        "limite": "O texto da fonte não permite concluir, sem os dados do caso, se o condenado é reincidente, qual é a pena fixada nem se a substituição do art. 44 era cabível, nem trata de regime inicial ou de detração."
+      },
+      "uso": {
+        "input_tokens": 1597,
+        "output_tokens": 293,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000306,
+      "duracaoMs": 2854
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q8",
+      "enunciado": "Qual o regime inicial, e cabem substituição da pena, sursis e detração?",
+      "conclusao": "Regime inicial fechado; não cabem substituição por restritivas de direitos nem suspensão condicional da pena; a detração é irrelevante porque não altera o regime.",
+      "fonte": {
+        "citacao": "art. 387, § 2º, do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 387, § 2º"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "distingue",
+        "resumo": "O art. 387, § 2º, trata apenas do cômputo do tempo de prisão provisória, administrativa ou de internação para fins de determinação do regime inicial. A questão também envolve substituição da pena e sursis, que o texto da fonte não aborda.",
+        "trecho": "O tempo de prisão provisória, de prisão administrativa ou de internação, no Brasil ou no estrangeiro, será computado para fins de determinação do regime inicial de pena privativa de liberdade.",
+        "limite": "O texto não permite concluir qual regime inicial cabe ao caso, nem se cabem substituição por restritivas de direitos ou suspensão condicional da pena."
+      },
+      "uso": {
+        "input_tokens": 1356,
+        "output_tokens": 241,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000256,
+      "duracaoMs": 2031
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q1",
+      "enunciado": "O processo comporta julgamento antecipado, e qual o efeito da revelia do Estado, que não contestou?",
+      "conclusao": "Sim: julgamento antecipado (art. 355, II, do CPC) e revelia decretada; a presunção de veracidade é relativa contra a Fazenda Pública, mas, somada à prova documental não impugnada, autoriza reconhecer a pretensão.",
+      "fonte": {
+        "citacao": "art. 355, inciso II, do Código de Processo Civil",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-13105-2015|corpo|art. 355, II"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O art. 355, II, do CPC prevê o julgamento antecipado do mérito quando o réu é revel, ocorre o efeito do art. 344 e não há requerimento de prova. Isso trata diretamente da hipótese de julgamento antecipado pela revelia apontada na questão.",
+        "trecho": "o réu for revel, ocorrer o efeito previsto no art. 344 e não houver requerimento de prova, na forma do art. 349.",
+        "limite": "O texto da fonte não diz como se aplica a presunção de veracidade contra a Fazenda Pública nem se a prova documental não impugnada basta para reconhecer a pretensão no caso."
+      },
+      "uso": {
+        "input_tokens": 1363,
+        "output_tokens": 238,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000255,
+      "duracaoMs": 2153
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q2",
+      "enunciado": "O Estado deve custear a histeroscopia cirúrgica da autora hipossuficiente?",
+      "conclusao": "Sim: o direito à saúde (arts. 6º e 196 da CF) é de aplicabilidade imediata, o polo passivo está composto pela solidariedade do Tema 793 do STF, e laudos médicos e nota técnica do NATJUS, não impugnados, comprovam a necessidade e a urgência.",
+      "fonte": {
+        "citacao": "art. 6º da Constituição Federal",
+        "ferramenta": "normaviva",
+        "destinoId": "CF-1988|corpo|art. 6º"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 6º da Constituição lista os direitos sociais, entre eles a saúde, mas não trata de custeio de procedimento cirúrgico nem de responsabilidade do Estado no caso. A fonte apenas enuncia o direito social em abstrato.",
+        "trecho": "art. 6º. São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância, a assistência aos desamparados, na forma desta Constituição.",
+        "limite": "O texto não permite concluir que o Estado deve custear a histeroscopia, nem trata de aplicabilidade imediata, solidariedade entre entes ou necessidade e urgência comprovadas no caso."
+      },
+      "uso": {
+        "input_tokens": 1525,
+        "output_tokens": 286,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000296,
+      "duracaoMs": 2210
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q5",
+      "enunciado": "Quais os honorários advocatícios devidos pelo Estado?",
+      "conclusao": "R$ 1.500,00, por apreciação equitativa (art. 85, § 8º, do CPC).",
+      "fonte": {
+        "citacao": "art. 85, § 8º, do CPC",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-13105-2015|corpo|art. 85, § 8º"
+      },
+      "esperado": "aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "aplica",
+        "resumo": "O dispositivo trata da fixação de honorários por apreciação equitativa quando o proveito econômico é inestimável ou irrisório, ou o valor da causa é muito baixo. A questão indica que a conclusão foi fixada por apreciação equitativa com base no art. 85, § 8º.",
+        "trecho": "o juiz fixará o valor dos honorários por apreciação equitativa, observando o disposto nos incisos do § 2º",
+        "limite": "O texto não permite concluir se as hipóteses de proveito inestimável, irrisório ou valor baixo estavam presentes no caso, nem se o valor de R$ 1.500,00 é adequado."
+      },
+      "uso": {
+        "input_tokens": 1343,
+        "output_tokens": 238,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000253,
+      "duracaoMs": 2011
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1104900-trib",
+      "questaoId": "Q1",
+      "enunciado": "Na execução fiscal contra a pessoa jurídica, o sócio cujo nome consta da CDA tem o ônus de provar que não incidiu no art. 135 do CTN?",
+      "conclusao": "Sim: o nome na CDA gera presunção relativa de responsabilidade, e cabe ao sócio provar a ausência de excesso de poderes ou infração de lei, contrato ou estatuto.",
+      "fonte": {
+        "citacao": "art. 11 da Lei 6.830/80",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-6830-1980|corpo|art. 11"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte trata da ordem de penhora de bens na execução fiscal, e não da responsabilidade do sócio nem do ônus de prova do art. 135 do CTN. O texto não aborda a presunção decorrente do nome na CDA.",
+        "trecho": "A penhora ou arresto de bens obedecerá à seguinte ordem:",
+        "limite": "O texto não permite concluir nada sobre a responsabilidade do sócio, a presunção gerada pelo nome na CDA ou o ônus de provar a ausência de excesso de poderes ou infração de lei."
+      },
+      "uso": {
+        "input_tokens": 1692,
+        "output_tokens": 211,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000275,
+      "duracaoMs": 1921
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q1",
+      "enunciado": "O recurso especial pode ser conhecido quanto ao art. 262, § 2º, do CTB?",
+      "conclusao": "Não nessa parte: falta prequestionamento, pois o acórdão recorrido não emitiu juízo sobre o dispositivo.",
+      "fonte": {
+        "citacao": "art. 15, I, da Lei 6.830/80",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-6830-1980|corpo|art. 15, I"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte trata da substituição da penhora por depósito em dinheiro, fiança bancária ou seguro garantia na execução fiscal. A questão trata do prequestionamento de dispositivo do Código de Trânsito Brasileiro em recurso especial, assunto que o texto não aborda.",
+        "trecho": "ao executado, a substituição da penhora por depósito em dinheiro, fiança bancária ou seguro garantia",
+        "limite": "O texto não permite concluir nada sobre o prequestionamento do art. 262, § 2º, do CTB nem sobre o cabimento do recurso especial."
+      },
+      "uso": {
+        "input_tokens": 1310,
+        "output_tokens": 223,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000243,
+      "duracaoMs": 2571
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q2",
+      "enunciado": "A liberação de veículo retido por transporte irregular de passageiros (CTB, art. 231, VIII) depende do pagamento de multas e despesas?",
+      "conclusao": "Não: a liberação independe do recolhimento de multas e demais despesas, orientação consolidada no STJ.",
+      "fonte": {
+        "citacao": "art. 121, § 2º-A, I, do Código Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-2848-1940|corpo|art. 121"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto da fonte trata do crime de homicídio (art. 121 do Código Penal) e de suas causas de aumento e diminuição de pena. Não trata de retenção de veículo, do CTB ou do pagamento de multas e despesas para liberação de veículo.",
+        "trecho": "art. 121. Matar alguem:",
+        "limite": "O texto da fonte não permite concluir nada sobre a liberação de veículo retido por transporte irregular de passageiros nem sobre o pagamento de multas e despesas."
+      },
+      "uso": {
+        "input_tokens": 3154,
+        "output_tokens": 192,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000411,
+      "duracaoMs": 2016
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1144810-adm",
+      "questaoId": "Q3",
+      "enunciado": "O art. 85, § 3º, do Decreto 2.521/98 autoriza condicionar a liberação do veículo?",
+      "conclusao": "Não: o decreto regulamenta a Lei 8.987/95 e não alcança a hipótese; recurso desprovido.",
+      "fonte": {
+        "citacao": "Súmula 303/STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-SUMULA-303"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A Súmula 303 do STJ trata de honorários advocatícios em embargos de terceiro quando há constrição indevida, assunto diferente da autorização do art. 85, § 3º, do Decreto 2.521/98 para condicionar a liberação de veículo. Não há relação direta com a questão sobre o decreto e a Lei 8.987/95.",
+        "trecho": "Em embargos de terceiro, quem deu causa à constrição indevida deve arcar com os honorários advocatícios.",
+        "limite": "O texto da súmula não permite concluir nada sobre o Decreto 2.521/98, sobre a liberação de veículos nem sobre a Lei 8.987/95."
+      },
+      "uso": {
+        "input_tokens": 1292,
+        "output_tokens": 249,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000254,
+      "duracaoMs": 2080
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1267995-desistencia-acao",
+      "questaoId": "Q2",
+      "enunciado": "Pode o INSS condicionar a anuência à desistência da ação à renúncia ao direito (art. 3º da Lei 9.469/97), obstando a homologação?",
+      "conclusao": "Sim: após a resposta, a desistência exige o consentimento fundamentado do réu, e a exigência de renúncia do art. 3º da Lei 9.469/97 é justificativa suficiente; acórdão reformado e recurso provido.",
+      "fonte": {
+        "citacao": "art. 34 do Código de Trânsito Brasileiro",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-9503-1997|corpo|art. 34"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 34 do CTB trata de a condução certificar-se de que pode executar uma manobra sem perigo para os demais usuários da via. A questão trata de desistência de ação e exigência de renúncia prevista no art. 3º da Lei 9.469/97, assunto que o dispositivo não aborda.",
+        "trecho": "O condutor que queira executar uma manobra deverá certificar-se de que pode executá-la sem perigo para os demais usuários da via",
+        "limite": "O texto não permite concluir nada sobre desistência de ação, anuência do réu, renúncia de direito ou homologação, nem sobre a exigência do art. 3º da Lei 9.469/97."
+      },
+      "uso": {
+        "input_tokens": 1414,
+        "output_tokens": 247,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000265,
+      "duracaoMs": 2075
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q2",
+      "enunciado": "Incide a Súmula 126/STJ no caso?",
+      "conclusao": "Afastada: o acórdão recorrido não se assentou em dispositivo constitucional.",
+      "fonte": {
+        "citacao": "art. 619 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 619"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 619 do CPP trata do cabimento e do prazo de embargos de declaração contra acórdãos de tribunais de apelação. A questão trata da incidência da Súmula 126/STJ, que diz respeito a recurso especial e fundamento constitucional, assunto que o texto não aborda.",
+        "trecho": "Aos acórdãos proferidos pelos Tribunais de Apelação, câmaras ou turmas, poderão ser opostos embargos de declaração, no prazo de dois dias contados da sua publicação",
+        "limite": "O texto não diz nada sobre a Súmula 126/STJ, sobre recurso especial nem sobre se o acórdão recorrido se apoiou em dispositivo constitucional."
+      },
+      "uso": {
+        "input_tokens": 1340,
+        "output_tokens": 266,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000267,
+      "duracaoMs": 2857
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q2",
+      "enunciado": "Incide a Súmula 126/STJ no caso?",
+      "conclusao": "Afastada: o acórdão recorrido não se assentou em dispositivo constitucional.",
+      "fonte": {
+        "citacao": "art. 387, § 2º, do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 387, § 2º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "falha",
+      "saida": null,
+      "motivo": "tempo esgotado",
+      "custoUsd": 0,
+      "duracaoMs": 67827
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1362524-penal",
+      "questaoId": "Q3",
+      "enunciado": "Atribuir-se falsa identidade à autoridade policial, ao ser preso em flagrante, é fato típico (art. 307 do CP) ou exercício de autodefesa?",
+      "conclusao": "É típico: a autodefesa não alcança a falsa identidade; recurso provido para restabelecer a condenação.",
+      "fonte": {
+        "citacao": "art. 387, IV, do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 387, IV"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto trata da fixação, pelo juiz sentenciante, de valor mínimo para reparação dos danos causados pela infração. A questão discute se atribuir falsa identidade a autoridade policial configura o crime do art. 307 do CP ou exercício de autodefesa, assunto que o dispositivo não aborda.",
+        "trecho": "fixará valor mínimo para reparação dos danos causados pela infração",
+        "limite": "O texto não permite concluir nada sobre falsa identidade, o art. 307 do CP ou a alegação de autodefesa no caso."
+      },
+      "uso": {
+        "input_tokens": 1342,
+        "output_tokens": 210,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000239,
+      "duracaoMs": 2786
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1388030-civil",
+      "questaoId": "Q1",
+      "enunciado": "Qual é o termo inicial da prescrição na ação de indenização do seguro DPVAT por invalidez permanente?",
+      "conclusao": "A data em que o segurado teve ciência inequívoca do caráter permanente da invalidez; salvo invalidez notória, isso depende de laudo médico, e a presunção de ciência é relativa.",
+      "fonte": {
+        "citacao": "art. 492, I, e, do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 492"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto da fonte trata da sentença do presidente do Tribunal do Júri em processo penal, com fixação de pena e efeitos da condenação ou absolvição. Não trata de prescrição em ação de indenização do seguro DPVAT nem do termo inicial da prescrição por invalidez permanente.",
+        "trecho": "art. 492. Em seguida, o presidente proferirá sentença que:",
+        "limite": "O texto não permite concluir nada sobre o termo inicial da prescrição, a ciência da invalidez permanente, laudo médico ou o seguro DPVAT."
+      },
+      "uso": {
+        "input_tokens": 2532,
+        "output_tokens": 216,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000361,
+      "duracaoMs": 1799
+    }
+  },
+  {
+    "par": {
+      "casoId": "stj-resp-1452840-embargos-terceiro-honorarios",
+      "questaoId": "Q2",
+      "enunciado": "Nos embargos de terceiro acolhidos, quem responde pelos honorários quando a transferência do imóvel não foi registrada e a Fazenda manteve a penhora?",
+      "conclusao": "Vale o princípio da causalidade (Súmula 303/STJ): em regra o adquirente que não registrou paga, mas a Fazenda que resiste ao pedido, mesmo ciente da transmissão, responde pela sucumbência; recurso desprovido e tese firmada.",
+      "fonte": {
+        "citacao": "art. 59-B da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 59-B"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 59-B da CLT trata de compensação de jornada e de horas extras trabalhistas, assunto diferente dos honorários advocatícios em embargos de terceiro. O texto não discute sucumbência, registro de imóvel nem penhora.",
+        "trecho": "O não atendimento das exigências legais para compensação de jornada, inclusive quando estabelecida mediante acordo tácito, não implica a repetição do pagamento das horas excedentes à jornada normal diária",
+        "limite": "O texto não permite concluir nada sobre quem deve pagar honorários nos embargos de terceiro, sobre registro de transferência de imóvel ou sobre a conduta da Fazenda."
+      },
+      "uso": {
+        "input_tokens": 1514,
+        "output_tokens": 252,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000277,
+      "duracaoMs": 1819
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q1",
+      "enunciado": "Há dúvida fundada sobre a imparcialidade do júri que autorize o desaforamento do julgamento (CPP, art. 427)?",
+      "conclusao": "Sim: o MP apontou motivos concretos (acusado advogado conhecido na comarca pequena, relações próximas, repercussão do fato), confirmados pelo juízo de 1º grau, o que basta, sem prova da parcialidade; desaforamento deferido.",
+      "fonte": {
+        "citacao": "art. 5º, V, da Constituição",
+        "ferramenta": "normaviva",
+        "destinoId": "CF-1988|corpo|art. 5º, V"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O dispositivo trata do direito de resposta e da indenização por dano material, moral ou à imagem. A questão, ao contrário, trata do desaforamento do júri por dúvida sobre a imparcialidade, tema que o texto não aborda.",
+        "trecho": "é assegurado o direito de resposta, proporcional ao agravo, além da indenização por dano material, moral ou à imagem;",
+        "limite": "O texto não permite concluir nada sobre o desaforamento, a imparcialidade do júri ou se os motivos apontados no caso bastam para deferi-lo."
+      },
+      "uso": {
+        "input_tokens": 1369,
+        "output_tokens": 212,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000243,
+      "duracaoMs": 1822
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q1",
+      "enunciado": "Há dúvida fundada sobre a imparcialidade do júri que autorize o desaforamento do julgamento (CPP, art. 427)?",
+      "conclusao": "Sim: o MP apontou motivos concretos (acusado advogado conhecido na comarca pequena, relações próximas, repercussão do fato), confirmados pelo juízo de 1º grau, o que basta, sem prova da parcialidade; desaforamento deferido.",
+      "fonte": {
+        "citacao": "art. 487, § 5º, da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 487, § 5º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte trata do cálculo do aviso prévio indenizado quando há horas extraordinárias habituais, matéria trabalhista. A questão trata de desaforamento de julgamento pelo júri por dúvida sobre a imparcialidade, matéria processual penal.",
+        "trecho": "O valor das horas extraordinárias habituais integra o aviso prévio indenizado.",
+        "limite": "O texto não trata de júri, imparcialidade, desaforamento nem do art. 427 do CPP, e não permite concluir nada sobre o caso."
+      },
+      "uso": {
+        "input_tokens": 1407,
+        "output_tokens": 204,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000243,
+      "duracaoMs": 1876
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-acordao-desaforamento",
+      "questaoId": "Q2",
+      "enunciado": "Para qual comarca deve ser desaforado o julgamento?",
+      "conclusao": "Para uma das Varas Criminais da capital, com competência para o júri: o acusado está preso nela e deve haver equidistância entre as comarcas, onde deixem de subsistir os motivos.",
+      "fonte": {
+        "citacao": "art. 482, i, da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 482"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte é o art. 482 da CLT, que lista as hipóteses de justa causa para rescisão do contrato de trabalho pelo empregador. A questão trata de desaforamento de julgamento do júri em matéria penal, assunto que o texto não aborda.",
+        "trecho": "Constituem justa causa para rescisão do contrato de trabalho pelo empregador",
+        "limite": "O texto não trata de competência, desaforamento, júri nem da comarca em que deve ser julgado o caso."
+      },
+      "uso": {
+        "input_tokens": 1897,
+        "output_tokens": 187,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000283,
+      "duracaoMs": 1878
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-embargos-defesa",
+      "questaoId": "Q2",
+      "enunciado": "Deve ser neutralizada a circunstância judicial das consequências do crime, sem laudo complementar da perda de movimento e do tratamento psicológico?",
+      "conclusao": "Pede a neutralização: não há prova pericial complementar (CPP, arts. 158 e 168, § 2º) e o acórdão exigiu prova para outras circunstâncias mas não para esta (contradição; CP, art. 59).",
+      "fonte": {
+        "citacao": "art. 206 do CTN",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-5172-1966|corpo|art. 206"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 206 do CTN trata de certidão de créditos tributários não vencidos ou com exigibilidade suspensa, com efeitos de certidão negativa. A questão trata de circunstância judicial do crime (consequências) e de prova pericial complementar no processo penal, assunto que o texto não aborda.",
+        "trecho": "Tem os mesmos efeitos previstos no artigo anterior a certidão de que conste a existência de créditos não vencidos",
+        "limite": "O texto não permite concluir nada sobre dosimetria da pena, circunstâncias judiciais, laudo pericial ou prova no processo penal."
+      },
+      "uso": {
+        "input_tokens": 1408,
+        "output_tokens": 229,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000255,
+      "duracaoMs": 2032
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-razoes-apelacao",
+      "questaoId": "Q5",
+      "enunciado": "A agravante do crime contra cônjuge, aplicada junto com o feminicídio, configura bis in idem?",
+      "conclusao": "Sim, segundo a defesa: a relação conjugal já sustentou o feminicídio (violência doméstica e familiar), e usá-la de novo na segunda fase duplica a valoração; a agravante deve ser afastada.",
+      "fonte": {
+        "citacao": "art. 427 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 427"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto da fonte trata do desaforamento do julgamento pelo júri, por dúvida sobre imparcialidade ou segurança do acusado. Não trata de agravantes nem de bis in idem na dosimetria da pena.",
+        "trecho": "Se o interesse da ordem pública o reclamar ou houver dúvida sobre a imparcialidade do júri ou a segurança pessoal do acusado",
+        "limite": "O texto não permite concluir se a agravante do crime contra cônjuge pode ser aplicada junto com o feminicídio nem se há bis in idem."
+      },
+      "uso": {
+        "input_tokens": 1726,
+        "output_tokens": 213,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000279,
+      "duracaoMs": 2399
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-resp",
+      "questaoId": "Q3",
+      "enunciado": "A agravante do crime contra cônjuge, aplicada junto com o feminicídio, configura bis in idem?",
+      "conclusao": "Sim, segundo o recorrente: a relação conjugal já serviu para reconhecer o feminicídio em contexto doméstico e não pode agravar a pena de novo; a agravante deve ser afastada.",
+      "fonte": {
+        "citacao": "Súmula nº 278 do STJ",
+        "ferramenta": "tesemap",
+        "destinoId": "STJ-SUMULA-278"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte é a Súmula 278 do STJ, que trata do termo inicial do prazo prescricional em ação de indenização de segurado. A questão trata de agravante penal do crime contra cônjuge aplicada junto com feminicídio, assunto que o texto não aborda.",
+        "trecho": "O termo inicial do prazo prescricional, na ação de indenização, é a data em que o segurado teve ciência inequívoca da incapacidade laboral.",
+        "limite": "O texto não permite concluir nada sobre agravantes penais, feminicídio ou bis in idem, nem sobre se a agravante deve ser afastada no caso."
+      },
+      "uso": {
+        "input_tokens": 1329,
+        "output_tokens": 233,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000249,
+      "duracaoMs": 1756
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q1",
+      "enunciado": "A culpabilidade, os antecedentes e a conduta social do réu justificam aumento da pena-base?",
+      "conclusao": "A culpabilidade (premeditação) e a conduta social (histórico de violência contra a vítima) são desfavoráveis; os antecedentes não são valorados contra o réu.",
+      "fonte": {
+        "citacao": "art. 6º da Constituição Federal",
+        "ferramenta": "normaviva",
+        "destinoId": "CF-1988|corpo|art. 6º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 6º da Constituição trata dos direitos sociais, como educação, saúde e trabalho. O texto não menciona pena, culpabilidade, antecedentes nem conduta social do réu, por isso não trata do ponto da questão.",
+        "trecho": "São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social",
+        "limite": "O texto não permite concluir nada sobre fixação da pena-base, culpabilidade, antecedentes ou conduta social do réu neste caso."
+      },
+      "uso": {
+        "input_tokens": 1480,
+        "output_tokens": 216,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000256,
+      "duracaoMs": 1697
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q5",
+      "enunciado": "Qual o aumento por circunstância desfavorável e qual a pena-base?",
+      "conclusao": "Três anos para cada uma das cinco circunstâncias desfavoráveis (15 anos), somados ao mínimo de 12 anos: pena-base de 27 anos de reclusão.",
+      "fonte": {
+        "citacao": "art. 312 do Código de Processo Penal",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-3689-1941|corpo|art. 312"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O texto da fonte trata da prisão preventiva e de seus requisitos, e não de aumento de pena por circunstância judicial desfavorável nem de cálculo da pena-base. Por isso não trata do ponto da questão.",
+        "trecho": "A prisão preventiva poderá ser decretada como garantia da ordem pública, da ordem econômica, por conveniência da instrução criminal ou para assegurar a aplicação da lei penal",
+        "limite": "O texto não permite concluir nada sobre circunstâncias judiciais, aumento por circunstância desfavorável ou o valor da pena-base fixada no caso."
+      },
+      "uso": {
+        "input_tokens": 1918,
+        "output_tokens": 228,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000306,
+      "duracaoMs": 1738
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q6",
+      "enunciado": "A agravante do crime contra cônjuge e a atenuante da confissão se compensam, e há bis in idem com o feminicídio?",
+      "conclusao": "Não há bis in idem com o feminicídio; a atenuante da confissão, preponderante para fatos até 16/09/2025, concorre com a agravante, e a pena é atenuada em 1/12: 24 anos e 9 meses.",
+      "fonte": {
+        "citacao": "art. 85, § 8º, do CPC",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-13105-2015|corpo|art. 85, § 8º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 85, § 8º do CPC trata da fixação de honorários advocatícios por apreciação equitativa em causas de proveito econômico inestimável ou irrisório. A questão trata de agravante, atenuante e bis in idem no cálculo da pena por feminicídio, assunto que o dispositivo não aborda.",
+        "trecho": "Nas causas em que for inestimável ou irrisório o proveito econômico ou, ainda, quando o valor da causa for muito baixo, o juiz fixará o valor dos honorários por apreciação equitativa",
+        "limite": "O texto não permite concluir nada sobre agravantes, atenuantes, bis in idem ou dosimetria da pena no caso de feminicídio."
+      },
+      "uso": {
+        "input_tokens": 1409,
+        "output_tokens": 263,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000272,
+      "duracaoMs": 2290
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q6",
+      "enunciado": "A agravante do crime contra cônjuge e a atenuante da confissão se compensam, e há bis in idem com o feminicídio?",
+      "conclusao": "Não há bis in idem com o feminicídio; a atenuante da confissão, preponderante para fatos até 16/09/2025, concorre com a agravante, e a pena é atenuada em 1/12: 24 anos e 9 meses.",
+      "fonte": {
+        "citacao": "art. 38, II, do Código de Trânsito Brasileiro",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-9503-1997|corpo|art. 38, II"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 38, II, do Código de Trânsito Brasileiro trata de manobra de mudança de sentido de saída de via pelo lado esquerdo. O texto não trata de agravantes, atenuantes, compensação de pena nem de bis in idem com feminicídio.",
+        "trecho": "ao sair da via pelo lado esquerdo, aproximar-se o máximo possível de seu eixo ou da linha divisória da pista",
+        "limite": "O texto da fonte não permite concluir nada sobre agravante, atenuante, dosimetria da pena ou bis in idem no caso."
+      },
+      "uso": {
+        "input_tokens": 1423,
+        "output_tokens": 217,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000251,
+      "duracaoMs": 1732
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q8",
+      "enunciado": "Qual o regime inicial, e cabem substituição da pena, sursis e detração?",
+      "conclusao": "Regime inicial fechado; não cabem substituição por restritivas de direitos nem suspensão condicional da pena; a detração é irrelevante porque não altera o regime.",
+      "fonte": {
+        "citacao": "art. 932, III, do CPC",
+        "ferramenta": "normaviva",
+        "destinoId": "LEI-13105-2015|corpo|art. 932, III"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte trata do poder do relator do recurso de não conhecer de recurso inadmissível, prejudicado ou que não impugne especificamente a decisão recorrida, no âmbito do Código de Processo Civil. A questão trata de regime inicial de pena, substituição por restritivas de direitos, sursis e detração penal, assuntos que o texto não aborda.",
+        "trecho": "não conhecer de recurso inadmissível, prejudicado ou que não tenha impugnado especificamente os fundamentos da decisão recorrida;",
+        "limite": "O texto não permite concluir nada sobre regime inicial de pena, substituição, sursis ou detração no caso."
+      },
+      "uso": {
+        "input_tokens": 1326,
+        "output_tokens": 244,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000255,
+      "duracaoMs": 1994
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-juri-sentenca",
+      "questaoId": "Q8",
+      "enunciado": "Qual o regime inicial, e cabem substituição da pena, sursis e detração?",
+      "conclusao": "Regime inicial fechado; não cabem substituição por restritivas de direitos nem suspensão condicional da pena; a detração é irrelevante porque não altera o regime.",
+      "fonte": {
+        "citacao": "art. 60 da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 60"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O art. 60 da CLT trata de prorrogação de jornada em atividades insalubres e da licença prévia exigida para isso. A questão trata de regime inicial de pena, substituição por restritivas de direitos, sursis e detração penal, assunto que o texto não aborda.",
+        "trecho": "Nas atividades insalubres, assim consideradas as constantes dos quadros mencionados no capítulo \"Da Segurança e da Medicina do Trabalho\"",
+        "limite": "O texto não permite concluir nada sobre regime de cumprimento de pena, substituição de pena, sursis ou detração, nem sobre a decisão do caso."
+      },
+      "uso": {
+        "input_tokens": 1587,
+        "output_tokens": 237,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000277,
+      "duracaoMs": 1824
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q1",
+      "enunciado": "O processo comporta julgamento antecipado, e qual o efeito da revelia do Estado, que não contestou?",
+      "conclusao": "Sim: julgamento antecipado (art. 355, II, do CPC) e revelia decretada; a presunção de veracidade é relativa contra a Fazenda Pública, mas, somada à prova documental não impugnada, autoriza reconhecer a pretensão.",
+      "fonte": {
+        "citacao": "art. 74, § 2º, da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 74, § 2º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O dispositivo da CLT trata da obrigatoriedade de anotação da hora de entrada e saída em estabelecimentos com mais de 20 trabalhadores. Não trata de julgamento antecipado do mérito nem dos efeitos da revelia da Fazenda Pública, que são o ponto da questão.",
+        "trecho": "Para os estabelecimentos com mais de 20 (vinte) trabalhadores será obrigatória a anotação da hora de entrada e de saída",
+        "limite": "O texto não permite concluir se o processo comporta julgamento antecipado nem qual é o efeito da revelia do Estado no caso."
+      },
+      "uso": {
+        "input_tokens": 1461,
+        "output_tokens": 233,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000263,
+      "duracaoMs": 1984
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q2",
+      "enunciado": "O Estado deve custear a histeroscopia cirúrgica da autora hipossuficiente?",
+      "conclusao": "Sim: o direito à saúde (arts. 6º e 196 da CF) é de aplicabilidade imediata, o polo passivo está composto pela solidariedade do Tema 793 do STF, e laudos médicos e nota técnica do NATJUS, não impugnados, comprovam a necessidade e a urgência.",
+      "fonte": {
+        "citacao": "art. 58, § 1º, da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 58, § 1º"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "O dispositivo trata de variações de horário no registro de ponto e de jornada extraordinária trabalhista. A questão trata do dever do Estado de custear procedimento de saúde, tema que o texto não aborda.",
+        "trecho": "Não serão descontadas nem computadas como jornada extraordinária as variações de horário no registro de ponto não excedentes de cinco minutos",
+        "limite": "O texto não permite concluir nada sobre o direito à saúde, o custeio de procedimentos pelo Estado, a hipossuficiência da autora ou a necessidade e urgência do tratamento."
+      },
+      "uso": {
+        "input_tokens": 1443,
+        "output_tokens": 219,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.000254,
+      "duracaoMs": 1910
+    }
+  },
+  {
+    "par": {
+      "casoId": "tjal-sentenca-saude-revelia",
+      "questaoId": "Q5",
+      "enunciado": "Quais os honorários advocatícios devidos pelo Estado?",
+      "conclusao": "R$ 1.500,00, por apreciação equitativa (art. 85, § 8º, do CPC).",
+      "fonte": {
+        "citacao": "art. 852-A da CLT",
+        "ferramenta": "normaviva",
+        "destinoId": "DL-5452-1943|corpo|art. 852-A"
+      },
+      "esperado": "nao_aplica"
+    },
+    "etapa": {
+      "estado": "ok",
+      "saida": {
+        "relacao": "outro_ponto",
+        "resumo": "A fonte trata do procedimento sumaríssimo na Justiça do Trabalho, com limite de valor da causa e exclusão das demandas em que a Administração Pública é parte. Não trata de honorários advocatícios devidos pelo Estado nem da apreciação equitativa do art. 85, § 8º, do CPC.",
+        "trecho": "Estão excluídas do procedimento sumaríssimo as demandas em que é parte a Administração Pública direta, autárquica e fundacional.",
+        "limite": "O texto não permite concluir qual o valor de honorários devido pelo Estado nem como o juiz deve fixá-los por apreciação equitativa."
+      },
+      "uso": {
+        "input_tokens": 1393,
+        "output_tokens": 241,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0
+      },
+      "custoUsd": 0.00026,
+      "duracaoMs": 2605
+    }
+  }
+]
