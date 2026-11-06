@@ -56,7 +56,7 @@
 
 ## 9. Planos, cota de IA e pagamento
 9.1. A Plataforma possui o plano **Gratuito** e os planos pagos **Essencial** e **Profissional**, com preços, cotas e funcionalidades informados **antes da contratação**: [PRECOS]. O plano "Pro Estudo", previsto em versões anteriores, está fora da primeira versão. **[CONFIRMAR]**
-9.2. **Cota de IA.** A unidade de cota é a **análise** (Argumenta) e a **explicação de dispositivo** (NormaViva), e não a chamada ao modelo. A cota é **semanal** no Gratuito (de segunda a domingo, horário de Brasília) e **mensal** nos planos pagos (ciclo de cobrança); a data de renovação é sempre exibida. **A cota não acumula** de um período para o outro. As quantidades de cada plano ficam em [PRECOS] e podem ser ampliadas, mas não reduzidas, durante o beta. **[CONFIRMAR]**
+9.2. **Cota de IA.** A unidade de cota é a **análise** (Argumenta) e a **explicação** (de dispositivo, no NormaViva, e de precedente, no TeseMap), e não a chamada ao modelo. A cota é **semanal** no Gratuito (de segunda a domingo, horário de Brasília) e **mensal** nos planos pagos (ciclo de cobrança); a data de renovação é sempre exibida. **A cota não acumula** de um período para o outro. As quantidades de cada plano ficam em [PRECOS] e podem ser ampliadas, mas não reduzidas, durante o beta. **[CONFIRMAR]**
 9.3. **Quando a cota é consumida:**
 (a) análise concluída consome **1 análise**;
 (b) **falha do sistema ou da API, recusa do modelo ou saída descartada não consomem cota** (estorno automático);
