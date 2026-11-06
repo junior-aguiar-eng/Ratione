@@ -8,7 +8,7 @@ import { CartaoDeContexto, CartaoDeLeitura } from '../../components/Cartoes';
 import { dataCurta, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
-import { lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
+import { lerBusca, lerNormaViva, urlDoNormaViva } from '../../lib/parametrosSalvos';
 import FaixaDoCaso from '../../components/FaixaDoCaso';
 import RelacaoComOCaso from '../../components/RelacaoComOCaso';
 import { obterSupabase } from '../../lib/supabase/client';
@@ -62,6 +62,9 @@ export default function NormaVivaPage() {
     setHoje(h);
     setDataConsulta(salvo.em ?? h);
     if (salvo.dispositivoId) setItemId(salvo.dispositivoId);
+    // Vindo da busca única: a pesquisa já preenchida
+    const q = lerBusca(window.location.search);
+    if (q) setBusca(q);
   }, []);
 
   useEffect(() => {

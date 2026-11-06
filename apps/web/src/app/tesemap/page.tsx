@@ -9,7 +9,7 @@ import EmptyState from '../../components/EmptyState';
 import { dataCurta } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
-import { lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
+import { lerBusca, lerTeseMap, urlDoNormaViva, urlDoTeseMap } from '../../lib/parametrosSalvos';
 import { obterSupabase } from '../../lib/supabase/client';
 import { abrirNo, aplicacaoDoNo, buscarNos, citacoesDoNo, coberturaPorExtenso, ESPECIES, especieDoNo, especiesDoTribunal, lerCobertura, ligadosPelasFontes, resumoDoNo, textoDoTotalDeAplicacao, type Cobertura, type NoLigado, type NoTese, type Vizinhanca } from '../../lib/tesemap';
 import FaixaDoCaso from '../../components/FaixaDoCaso';
@@ -52,6 +52,9 @@ export default function TeseMapPage() {
   useEffect(() => {
     const doLink = lerTeseMap(window.location.search);
     if (doLink.noId) setNoId(doLink.noId);
+    // Vindo da busca única: a pesquisa já preenchida
+    const q = lerBusca(window.location.search);
+    if (q) setBusca(q);
   }, []);
 
   useEffect(() => {

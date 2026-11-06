@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Menu, X } from 'lucide-react';
+import { LogOut, Menu, Search, X } from 'lucide-react';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import UsuarioMenu from './UsuarioMenu';
@@ -27,7 +27,7 @@ export default function Navbar() {
           <Logo grande />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9" aria-label="Ferramentas">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-9 mx-3" aria-label="Ferramentas">
           {MODULOS.map(item => {
             const ativo = pathname.startsWith(item.href);
             return (
@@ -47,11 +47,21 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <Link
+            href="/buscar"
+            aria-label="Buscar"
+            aria-current={pathname.startsWith('/buscar') ? 'page' : undefined}
+            className={`inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors ${
+              pathname.startsWith('/buscar') ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
+            }`}
+          >
+            <Search className="w-[18px] h-[18px]" aria-hidden />
+          </Link>
           <ThemeToggle />
           <Link
             href="/meu-espaco"
             aria-current={meuEspacoAtivo ? 'page' : undefined}
-            className={`hidden md:inline-flex text-[15px] font-medium px-3 py-2 rounded-md transition-colors ${
+            className={`hidden md:inline-flex whitespace-nowrap text-[15px] font-medium px-3 py-2 rounded-md transition-colors ${
               meuEspacoAtivo ? 'text-ink bg-surface-2' : 'text-ink-soft hover:text-ink hover:bg-surface-2'
             }`}
           >
