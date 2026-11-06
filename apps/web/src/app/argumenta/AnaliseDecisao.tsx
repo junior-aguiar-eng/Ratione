@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Check, ChevronDown, Loader2, Sparkles } from 'lucide-react';
+import { Check, ChevronDown, FileDown, Loader2, Sparkles } from 'lucide-react';
 import { LIMITE_CARACTERES_DECISAO, MAX_PARAGRAFOS, prepararDecisao, restaurar, type DecisaoPreparada } from '@ratione/argumenta';
 import Notice from '../../components/Notice';
 import { Button } from '@/components/ui/button';
@@ -26,6 +26,10 @@ import { lerQuestaoDoCaso } from '../../lib/caso/ligacao';
 import MapaView from './MapaView';
 import SeloCitacao from './SeloCitacao';
 import SugeridosDaQuestao from './SugeridosDaQuestao';
+import DocumentoImpresso from './DocumentoImpresso';
+import { montarDocumento, nomeDoArquivo } from '../../lib/argumenta/documento';
+import { baixarDocx } from '../../lib/argumenta/baixarDocx';
+import { exportarPdf } from '../../lib/imprimir';
 import { referenciaVisual } from './referencias';
 
 /**
@@ -105,6 +109,7 @@ export default function AnaliseDecisao() {
   const [encerrada, setEncerrada] = useState(false);
   const [rotulo, setRotulo] = useState(memoria?.rotulo ?? '');
   const [uso, setUso] = useState<UsoRapida | null>(null);
+  const [erroDoArquivo, setErroDoArquivo] = useState<string | null>(null);
   const [selos, setSelos] = useState<Map<string, VerificacaoDaCitacao>>(() => memoria?.selos ?? new Map());
   // F5-03: o mapa é montado por código com o que as etapas 2 e 4 já trouxeram; não chama o modelo
   const mapa = useMemo(() => (resultados.questoes ? montarMapa(resultados.questoes, resultados.fundamentos) : null), [resultados.questoes, resultados.fundamentos]);
@@ -393,8 +398,26 @@ export default function AnaliseDecisao() {
     );
   };
 
+  const documento = estrutura
+    ? montarDocumento({ estrutura, questoes, fundamentos, selos, restaurar: r, geradoEm: new Date().toLocaleDateString('pt-BR') })
+    : null;
+  const hoje = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  };
+  const baixarWord = async () => {
+    if (!documento) return;
+    setErroDoArquivo(null);
+    try {
+      await baixarDocx(documento, nomeDoArquivo(hoje()));
+    } catch {
+      setErroDoArquivo('Não foi possível gerar o arquivo Word agora. Tente o PDF ou tente de novo.');
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-6">
+    <>
+    <div className="flex flex-col gap-6 print:hidden">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-serif text-2xl font-semibold text-ink">Sua decisão</h2>
         <div className="flex flex-wrap gap-2">
@@ -402,11 +425,29 @@ export default function AnaliseDecisao() {
             {textoAberto ? 'Ocultar texto' : 'Consultar texto da decisão'}
             <ChevronDown className={`w-4 h-4 transition-transform ${textoAberto ? 'rotate-180' : ''}`} aria-hidden />
           </Button>
+          {documento && (
+            <>
+              <Button variant="secondary" type="button" onClick={() => void baixarWord()} disabled={andamento !== null}>
+                <FileDown className="w-4 h-4" aria-hidden />
+                Baixar em Word
+              </Button>
+              <Button variant="secondary" type="button" onClick={() => exportarPdf(nomeDoArquivo(hoje()))} disabled={andamento !== null}>
+                <FileDown className="w-4 h-4" aria-hidden />
+                Salvar em PDF
+              </Button>
+            </>
+          )}
           <Button variant="secondary" type="button" onClick={novaAnalise} disabled={andamento !== null}>
             Nova análise
           </Button>
         </div>
       </div>
+
+      {erroDoArquivo && (
+        <p className="text-sm text-danger-text" role="alert">
+          {erroDoArquivo}
+        </p>
+      )}
 
       {estrutura && <PrazoDoCaso />}
 
@@ -592,5 +633,7 @@ export default function AnaliseDecisao() {
         </div>
       </div>
     </div>
+    {documento && <DocumentoImpresso documento={documento} />}
+    </>
   );
 }

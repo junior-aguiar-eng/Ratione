@@ -6,6 +6,7 @@ import { buttonVariants } from '@/components/ui/button';
 export default function ArgumentaPage() {
   return (
     <div>
+      <div className="print:hidden">
       <PageHeader
         eyebrow="Argumenta"
         title="Análise da decisão"
@@ -16,6 +17,7 @@ export default function ArgumentaPage() {
           </Link>
         }
       />
+      </div>
 
       <AnaliseDecisao />
     </div>
