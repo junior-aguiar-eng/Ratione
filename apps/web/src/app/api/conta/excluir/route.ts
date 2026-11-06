@@ -8,6 +8,8 @@ import { encerrarAssinaturasDoUsuario } from '../../../../lib/cobranca/encerrar'
 import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { apagarTodosDoUsuario, dependenciasPadrao } from '../../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../../lib/documentos/supabase';
+import { apagarTodasDoUsuario, dependenciasPadrao as dependenciasPadraoDeAnalises } from '../../../../lib/analisesSalvas/servico';
+import { armazenamentoEBanco as armazenamentoEBancoDeAnalises } from '../../../../lib/analisesSalvas/supabase';
 import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
@@ -61,6 +63,16 @@ export async function POST(request: Request) {
     encerrarAssinaturas: id => encerrarAssinaturasDoUsuario(createClient(url, secreta, semSessao), id, lerConfigCobranca(process.env), criarClienteMp),
     apagarDocumentos: async id => {
       await apagarTodosDoUsuario(id, { ...dependenciasPadrao(), ...armazenamentoEBanco(createClient(url, secreta, semSessao)) });
+      return true;
+    },
+    // Análises salvas (F5-10). Enquanto a migração ainda não foi aplicada, a tabela não existe e não há o que apagar: isso não pode impedir a exclusão da conta
+    apagarAnalisesSalvas: async id => {
+      try {
+        await apagarTodasDoUsuario(id, { ...dependenciasPadraoDeAnalises(), ...armazenamentoEBancoDeAnalises(createClient(url, secreta, semSessao)) });
+      } catch (e) {
+        if (/does not exist|could not find the table|schema cache|relation .* does not exist|bucket not found/i.test((e as Error).message)) return true;
+        throw e;
+      }
       return true;
     },
     apagarUsuario: async id => {

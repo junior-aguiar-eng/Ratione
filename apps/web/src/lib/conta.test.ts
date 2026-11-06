@@ -64,6 +64,10 @@ describe('Exclusão da conta (LGPD)', () => {
         chamadas.push(`documentos:${id}`);
         return true;
       },
+      apagarAnalisesSalvas: async id => {
+        chamadas.push(`analises:${id}`);
+        return true;
+      },
       apagarUsuario: async id => {
         chamadas.push(`apagar:${id}`);
         return true;
@@ -76,7 +80,7 @@ describe('Exclusão da conta (LGPD)', () => {
   it('com sessão e senha corretas, apaga o usuário da sessão', async () => {
     const { dep, chamadas } = montar();
     assert.deepStrictEqual(await excluirConta('segredo123', dep), { ok: true });
-    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'apagar:u1'], 'a assinatura é cancelada antes de a conta sumir');
+    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'analises:u1', 'apagar:u1'], 'a assinatura é cancelada antes de a conta sumir');
   });
 
   it('sem senha, ou com senha de tipo errado, recusa sem tocar em nada', async () => {
@@ -111,10 +115,19 @@ describe('Exclusão da conta (LGPD)', () => {
     }
   });
 
+  it('análises salvas: saem antes da conta; se não saírem, a conta NÃO é apagada (o conteúdo cifrado ficaria sem dono)', async () => {
+    for (const falha of [async () => false, async () => Promise.reject(new Error('armazenamento fora do ar'))]) {
+      const m = montar({ apagarAnalisesSalvas: falha });
+      const r = await excluirConta('segredo123', m.dep);
+      assert.ok(!r.ok && r.status === 500 && r.mensagem.includes('análises salvas') && r.mensagem.includes('Nada foi apagado'));
+      assert.ok(!m.chamadas.some(c => c.startsWith('apagar:')), 'a conta não foi apagada');
+    }
+  });
+
   it('documentos enviados: saem antes da conta; se não saírem, a conta NÃO é apagada (o arquivo ficaria sem dono)', async () => {
     const { dep, chamadas } = montar();
     await excluirConta('segredo123', dep);
-    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'apagar:u1']);
+    assert.deepStrictEqual(chamadas, ['senha', 'assinaturas:u1', 'documentos:u1', 'analises:u1', 'apagar:u1']);
     for (const falha of [async () => false, async () => Promise.reject(new Error('armazenamento fora do ar'))]) {
       const m = montar({ apagarDocumentos: falha });
       const r = await excluirConta('segredo123', m.dep);

@@ -182,3 +182,22 @@ gcloud alpha monitoring policies create --policy-from-file=ARQUIVO.json   # um p
 
 - E-mail: já sai pelo Resend (`nao-responda@nexojuris.ia.br`); ver `supabase/LEIA-ME.md`.
 - Trocar a chave de serviço: `printf '%s' "$NOVA" | gcloud secrets versions add supabase-service-role-key --data-file=-` e publicar de novo.
+
+## Análises salvas (F5-10) — ainda desligado
+
+"Salvar a análise" existe no código (rotas `/api/analises-salvas`), mas **fica inerte** até os passos abaixo e até as condições da seção 7.3 do [RIPD](../juridico/RIPD_ARGUMENTA.md) (versão 0.3). A decisão completa é guardada **cifrada**; o prazo é escolhido pela pessoa e o limite é de 10 por pessoa.
+
+1. **Migração:** `supabase/migrations/20261106000001_analises_salvas.sql` no SQL Editor; conferir que o bucket `analises-salvas` existe e é **privado**.
+2. **Segredo da chave de cifra** (legível só pela conta de execução do Cloud Run; **guarde uma cópia da chave fora do Google Cloud**: sem ela as análises salvas não abrem mais):
+```bash
+openssl rand -base64 32 | tr -d '
+' | gcloud secrets create analises-chave --data-file=-
+gcloud secrets add-iam-policy-binding analises-chave --member="serviceAccount:$GCP_RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+```
+3. **`deploy.yml`:** passar `ANALISES_CHAVE=analises-chave:latest` e `ARGUMENTA_SALVAR_LIGADO=sim` só com a variável de repositório `ARGUMENTA_SALVAR = sim`, no mesmo molde dos documentos (item 4 da seção acima). Entra junto com a tela de salvar.
+4. **Agendador:** a faxina dos vencidos usa o mesmo segredo dos documentos. No PowerShell, depois da publicação:
+```powershell
+$segredo = (gcloud secrets versions access latest --secret=documentos-limpeza-segredo)
+gcloud scheduler jobs create http ratione-analises-limpar --location=southamerica-east1 --schedule="17 * * * *" --time-zone="America/Sao_Paulo" --uri="https://ratione.nexojuris.ia.br/api/analises-salvas/limpar" --http-method=POST --headers="Authorization=Bearer $segredo"
+```
+5. **Teste:** `gcloud scheduler jobs run ratione-analises-limpar --location=southamerica-east1`; a resposta traz só `{ "apagadas": N }`.

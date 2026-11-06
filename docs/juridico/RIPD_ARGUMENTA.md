@@ -1,6 +1,6 @@
 # RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS (RIPD): ARGUMENTA
 
-**Versão:** 0.2 (minuta) · **Elaborado em:** 04/11/2026 · **Revisado em:** 05/11/2026 · **Vigência:** [DATA_VIGENCIA]
+**Versão:** 0.3 (minuta) · **Elaborado em:** 04/11/2026 · **Revisado em:** 06/11/2026 · **Vigência:** [DATA_VIGENCIA]
 
 > RASCUNHO PARA REVISÃO DO RESPONSÁVEL E DO ADVOGADO DE DIREITO DIGITAL. Não publicar nem tratar como definitivo sem essa revisão.
 > **Como foi feito:** a descrição do tratamento e das salvaguardas vem do código e dos documentos do produto (`docs/produto/ARGUMENTA.md`, `IA_TAREFAS.md`, `PLANOS_E_COBRANCA.md`, `docs/juridico/POLITICA_DE_USO_DE_IA.md` e `POLITICA_DE_PRIVACIDADE.md`). O texto da lei foi lido na versão compilada do Planalto (Lei 13.709/2018, em 04/11/2026). Itens marcados **[CONFIRMAR]** dependem de decisão ou conferência do responsável; **[FUTURO]** descreve o que ainda não existe.
@@ -11,7 +11,7 @@
 
 O RIPD é a documentação do controlador que descreve os processos de tratamento que podem gerar riscos às liberdades civis e aos direitos fundamentais, com as medidas, salvaguardas e mecanismos de mitigação (LGPD, art. 5º, XVII). A ANPD pode determinar sua elaboração (art. 38, *caput*). O conteúdo mínimo é: **(1)** a descrição dos tipos de dados coletados, **(2)** a metodologia usada para a coleta e para a garantia da segurança das informações e **(3)** a análise do controlador sobre as medidas, salvaguardas e mecanismos de mitigação de risco adotados (art. 38, parágrafo único). As seções 4, 5 e 6 abaixo seguem essa ordem.
 
-O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos** (F5-01). Ele cobre também o que já existe: a análise de decisão **colada** como texto.
+O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos** (F5-01) e, desde a versão 0.3, **antes de a pessoa poder salvar uma análise** (F5-10). Ele cobre também o que já existe: a análise de decisão **colada** como texto.
 
 ## 2. Identificação e escopo
 
@@ -21,7 +21,7 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 | Papel quanto ao conteúdo das decisões | **Operador**, em nome do usuário (que é o controlador do que cola). Política de Privacidade e minutas partem dessa premissa **[CONFIRMAR com o advogado: operador ou controlador conjunto, já que o Ratione decide meios e finalidade da análise]** |
 | Suboperadores | Anthropic (modelo de IA, API); Google Cloud (hospedagem, Cloud Run em São Paulo); Supabase (banco e autenticação) **[CONFIRMAR a região e o contrato de cada um]** |
 | Encarregado (art. 41) | [NOME] · [EMAIL_PRIVACIDADE] **[CONFIRMAR enquadramento como agente de pequeno porte, Res. CD/ANPD nº 2/2022, e se a dispensa vale aqui]** |
-| Tratamento coberto | **Hoje:** análise de decisão colada, sob demanda, três etapas de IA, sem guarda do texto. **[FUTURO]:** envio de arquivos com armazenamento privado e extração (F5-01 e F5-02), só depois da revisão deste relatório (seção 7) |
+| Tratamento coberto | **Hoje:** análise de decisão colada, sob demanda, três etapas de IA, sem guarda do texto. **[FUTURO]:** envio de arquivos com armazenamento privado e extração (F5-01 e F5-02) e **salvar a análise, com a decisão completa, por escolha expressa da pessoa (F5-10, versão 0.3)**, ambos só depois da revisão deste relatório (seção 7) |
 | Fora do escopo | PrazoZero, NormaViva e TeseMap, que não tratam dado pessoal de terceiros (só o do usuário, na conta) |
 
 ## 3. Descrição do tratamento
@@ -38,6 +38,8 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 6. O texto e a resposta **não ficam guardados**. Ficam só o registro de uso e os metadados da análise (seção 4).
 7. **Relação com o caso** (tarefa `relacionar-com-o-caso`, só quando a pessoa abre uma citação da análise no NormaViva ou no TeseMap e clica em "Relacionar com a minha questão"; desligada por padrão até ser medida): uma segunda chamada à mesma Anthropic, com o mesmo modelo e sem ferramentas, que leva **só a questão e a conclusão já pseudonimizadas pela análise** e o texto público do dispositivo ou do precedente, lido do banco. Não leva o texto da decisão. O servidor confere de novo a questão, descarta a resposta cujo trecho citado não esteja no texto da fonte, e nada fica guardado (só o registro de uso, com o destino e um hash curto da questão). É o mesmo tipo de tratamento das etapas acima, e os riscos R1 a R5 e R7 valem para ela.
 8. **Leitura da intimação** (tarefa `ler-intimacao`, só quando a pessoa cola o texto de uma intimação no PrazoZero e clica em "Ler a intimação"; desligada por padrão): o navegador segmenta e **pseudonimiza** o texto (nomes, CPF, CNPJ, número do processo, e-mail, telefone e endereço viram marcadores), o servidor confere de novo e recusa dado pessoal detectável, e a mesma Anthropic, com o mesmo modelo e sem ferramentas, devolve o tribunal, o tipo e a data do evento e o prazo mencionado, cada um com o trecho do texto em que se baseia. O servidor descarta a resposta cujo trecho não esteja no texto; a pessoa confere cada campo antes de usar; nada fica guardado (só o registro de uso, com um hash curto do texto). Os riscos R1 a R5 valem para ela.
+
+9. **Salvar a análise (F5-10; desligado até a aprovação deste relatório).** Por padrão nada é guardado, como antes. Só a pessoa logada que **clica em "Salvar esta análise"** e confirma, a cada vez, o que será guardado, por quanto tempo e como excluir, tem a análise gravada. Guarda-se a **decisão completa**: os parágrafos, a tabela de troca com os **dados reais**, o resultado das três etapas e o selo de cada citação. A pessoa **escolhe o prazo** (30 dias, 6 meses, 1 ano ou até excluir) e pode ter **no máximo 10 análises salvas**; para salvar outra, exclui uma. O navegador envia o conteúdo ao servidor do Ratione **uma única vez, no momento do salvamento**; o servidor o **cifra (AES-256-GCM) antes de gravar** num armazenamento privado. Esse conteúdo **nunca vai à Anthropic**: a IA continua recebendo só o texto pseudonimizado, como na etapa 4. Ao reabrir uma análise salva, o servidor a decifra só para o dono e a tela volta ao estado de antes. Também guarda, em texto aberto no banco, **a lista dos identificadores públicos das normas e precedentes citados** (por exemplo, `LEI-13105-2015|corpo|art. 85`), que não são dado pessoal, para o NormaViva e o TeseMap avisarem "citado nas suas análises". O arquivo em Word ou PDF que a pessoa baixa (F5-09) é gerado no navegador e não passa por este fluxo.
 
 **Base legal.** Para os dados da conta e do uso: execução de contrato (art. 7º, V) **[CONFIRMAR]**. Para o conteúdo das decisões, o controlador é o usuário, que declara base legal própria (os Termos transferem a declaração ao usuário). Decisões judiciais públicas e dados tornados manifestamente públicos têm tratamento próprio (art. 7º, §§ 3º e 4º) **[CONFIRMAR com o advogado]**.
 
@@ -66,13 +68,15 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 | Texto pseudonimizado da decisão | Parágrafos da decisão, com marcadores no lugar dos dados pessoais rotulados | Partes, advogados, juízes, testemunhas, vítimas, terceiros citados | Em trânsito: navegador → servidor → Anthropic. **Não é guardado** pelo Ratione | Não retido pelo Ratione; retenção na Anthropic: ver risco R4 |
 | Resposta do modelo | Estrutura, questões, fundamentos e citações, com marcadores | Idem | Só na tela do usuário | Não retida pelo Ratione |
 | Logs técnicos | Tarefa, referência (hash) e motivo; **sem conteúdo** | Usuário | Google Cloud | 30 dias, localização global (Política de Privacidade §3) |
+| **[F5-10] Análise salva: conteúdo** | **Decisão completa com dados reais** (parágrafos, tabela de troca, resultado das etapas, selos das citações) | Partes, advogados, juízes, testemunhas, vítimas, terceiros citados, e o usuário | Armazenamento privado do Supabase, **cifrado** (AES-256-GCM, chave sob controle do Ratione) | **Escolhida pela pessoa:** 30 dias, 6 meses, 1 ano ou até excluir; no máximo 10 por usuário; exclusão a qualquer momento |
+| **[F5-10] Análise salva: metadados** (`analises_salvas`) | Caminho opaco, tamanho, datas, rótulo opcional dado pela pessoa, **identificadores públicos das citações**; nunca o texto | Usuário | Supabase | Enquanto a análise existir |
 
 **Dados sensíveis possíveis (art. 5º, II).** O Ratione não pede nem busca dado sensível, mas decisões judiciais frequentemente os trazem: **saúde** (ações de saúde, previdenciárias, acidentárias), **vida sexual** (crimes sexuais, violência doméstica), **origem racial ou étnica**, **opinião política**, **filiação sindical** (trabalhista). Também podem vir **dados de crianças e adolescentes**, de **vítimas** e de **processos em segredo de justiça**. O corpus de avaliação já tem casos de violência doméstica e de saúde (os do júri do TJAL tiveram os dados pessoais trocados à mão por marcadores antes de entrar no repositório, que é público).
 
 ### 4.2 Metodologia de coleta
 
 - A coleta é **ativa e pelo próprio usuário**: o Ratione não busca decisões nem dados de terceiros. Só trata o que é colado.
-- **Sem upload e sem armazenamento do texto** hoje. Não há cache compartilhado do conteúdo (`guardaResultado: false`).
+- **Sem upload e, por padrão, sem armazenamento do texto.** Não há cache compartilhado do conteúdo (`guardaResultado: false`). **Exceção (F5-10):** a análise que a pessoa decide salvar, com confirmação expressa a cada vez.
 - Limite por análise: 70.000 caracteres e 1.500 parágrafos; acima disso, recusa em vez de cortar.
 
 ### 4.3 Garantia de segurança das informações (art. 46)
@@ -91,6 +95,7 @@ O PLANO (§8) exige este relatório **antes do Argumenta com upload de arquivos*
 | Criptografia em trânsito (HTTPS) | Padrão do Cloud Run e do Supabase **[CONFIRMAR]** |
 | Acesso administrativo registrado | Existe painel administrativo com registro de ações (12 meses) **[CONFIRMAR o escopo do acesso a `ia_uso`]** |
 | Resposta só cita parágrafos que existem; saída fora do formato é descartada | Feita (`conferirSaida`); 0 saídas descartadas em 90 chamadas na avaliação de 04/11/2026 |
+| **[F5-10]** Análise salva: cifra AES-256-GCM no servidor antes de gravar, chave em segredo próprio, caminho como dado autenticado; armazenamento privado sem política; o banco só guarda metadados; RLS (cada pessoa lê só a própria linha); limite de 10 por usuário imposto também por gatilho no banco; exclusão pela pessoa, antes da exclusão da conta e por faxina agendada dos vencidos; nada em logs; só funciona com a flag `ARGUMENTA_SALVAR_LIGADO=sim` | Feita no código (06/11/2026), **desligada** até a aprovação deste relatório |
 
 ## 5. Análise de riscos e mitigação (art. 38, parágrafo único, item 3)
 
@@ -108,12 +113,13 @@ Escala: **probabilidade** (B baixa, M média, A alta) e **gravidade** (B, M, A) 
 | R8 | **Acesso indevido** à conta do usuário ou ao painel administrativo | B | M | Sessão obrigatória; acesso administrativo restrito e registrado | **Baixo**, a confirmar |
 | R9 | **Incidente de segurança** com dados de usuários | B | M | Metadados mínimos; sem conteúdo guardado; retenção curta | **Baixo.** Falta o procedimento escrito de resposta a incidente e de comunicação à ANPD e ao titular (art. 48), condição 5 da seção 7.1 **[FUTURO]** |
 | R10 | **[FUTURO] Upload de arquivos**: guarda do documento integral, com dados pessoais e sensíveis de terceiros, fora do alcance da pseudonimização do navegador | A | A | Cifra AES-256-GCM antes de gravar; bucket privado; retenção de 7 dias; exclusão pelo usuário e antes da exclusão da conta; faxina por agendador (base pronta e desligada) | **Alto até que as cinco condições da seção 7.1 estejam cumpridas; depois, médio** |
+| R11 | **[F5-10] Guarda da decisão completa com dados reais**: o Ratione passa a manter, a pedido da pessoa, o texto com nomes e dados de terceiros (partes, vítimas, crianças, dado sensível, processo em segredo de justiça), e o servidor o recebe sem pseudonimização no momento de salvar. É o oposto do desenho original ("a tabela de troca nunca sai do navegador") | M | A | Só por ação expressa e confirmada a cada vez; aviso de que não se salva segredo de justiça nem dado de criança sem base legal; cifra com chave sob controle do Ratione; armazenamento privado; RLS; prazo escolhido pela pessoa e limite de 10; exclusão em um clique, antes da exclusão da conta e por faxina; o conteúdo nunca vai à Anthropic nem a log; a pessoa é a controladora do conteúdo e o Ratione, operador (seção 2) | **Alto até que as condições da seção 7.3 estejam cumpridas; depois, médio.** O prazo "até excluir" é escolha da pessoa e depende da avaliação do advogado sobre os arts. 15 e 16 **[CONFIRMAR]** |
 
 ## 6. Conclusão do controlador (rascunho)
 
 Com o tratamento de **hoje** (texto colado, pseudonimizado no navegador, sem guarda do conteúdo, com retenção de 13 meses só para metadados), o risco residual é **médio** e concentrado em três pontos: R1 (nome sem rótulo), R4 e R5 (provedor e transferência). Nenhum deles impede a operação em beta, **desde que** as pendências **[CONFIRMAR]** da seção 8 sejam resolvidas e que o aviso de segredo de justiça e de dado sensível apareça **antes** do envio.
 
-O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condições da seção 7.1** estiverem cumpridas. O que está na seção 7.2 (medição do detector e o restante) acompanha o uso e não o impede.
+O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condições da seção 7.1** estiverem cumpridas. **Salvar a análise (R11, versão 0.3)** só deve ser liberado quando as **condições da seção 7.3** estiverem cumpridas; é a mudança de maior impacto desta versão, porque o Ratione passa a guardar, a pedido da pessoa, a decisão completa com dados reais. O que está na seção 7.2 (medição do detector e o restante) acompanha o uso e não o impede.
 
 ## 7. Condições para liberar o upload (F5-01 e F5-02)
 
@@ -135,6 +141,20 @@ O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condiçõ
 - **Pseudonimização antes da extração.** Feita quando possível. O documento é guardado inteiro e cifrado, e o texto que vai à IA passa pelo mesmo detector; a Política de Privacidade diz isso antes de o upload ligar.
 - **Revisão por advogado de direito digital (T-03).** Confere os itens **[CONFIRMAR]** e a aplicação dos dispositivos citados. Esta versão 0.2 já cobre o upload; a aprovação do responsável a conclui.
 
+### 7.3 Condições para ligar "salvar a análise" (F5-10, versão 0.3)
+
+**Decisões do responsável (06/11/2026):** o prazo de retenção é **escolhido pela pessoa** (30 dias, 6 meses, 1 ano ou até excluir), o limite é de **10 análises salvas por usuário** (para salvar outra, exclui-se uma), e o que se guarda é a **decisão completa**. O profissional do Direito não é limitado além disso.
+
+| # | Condição | Origem | Estado (06/11/2026) | Quem |
+|---|---|---|---|---|
+| 1 | **Armazenamento privado e cifrado, com chave sob controle do Ratione, acesso só do dono, limite imposto no banco e exclusão pela pessoa, antes da conta e por faxina de vencidos** | Lei: segurança (art. 46) e eliminação (arts. 15 e 16) | **Feito no código** e coberto por testes; falta aplicar a migração, criar o segredo da chave e o agendador (docs/deploy/CLOUD_RUN.md). Desligado | Responsável (infraestrutura) |
+| 2 | **Aviso e confirmação expressa a cada salvamento**: o que será guardado (a decisão completa, com nomes reais), por quanto tempo (o prazo escolhido), que segredo de justiça e dado de criança não devem ser salvos sem base legal, e como excluir | Escolha de proteção; registra que a pessoa foi avisada (princípios da transparência e da finalidade) | **Falta** (tela de salvar) | Ratione |
+| 3 | **Política de Privacidade e Termos atualizados**: o Ratione guarda o conteúdo como operador, só a pedido, pelos prazos que a pessoa escolhe; o que é cifrado; quem acessa (ninguém, salvo ordem legal); como excluir | Lei: transparência (art. 9º) | **Falta** | Ratione, com revisão do advogado |
+| 4 | **Encarregado e procedimento de incidente** (condição 5 da seção 7.1), agora com a guarda do conteúdo | Lei: arts. 41 e 48 | **Pendente** | Responsável e Ratione |
+| 5 | **Aprovação desta versão 0.3** e conferência, com o advogado, de: papel de operador na guarda; o prazo "até excluir"; guarda de processos em segredo de justiça e de dados de crianças | Responsável | **Pendente** | Responsável e advogado |
+
+Enquanto as condições 2 a 5 não estiverem cumpridas, a flag `ARGUMENTA_SALVAR_LIGADO` fica em `nao` e a tela não mostra o botão.
+
 ## 8. Pendências do responsável
 
 | # | O que decidir ou conferir |
@@ -146,6 +166,7 @@ O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condiçõ
 | 5 | Prazo de retenção dos arquivos: **decidido, 7 dias** (condição 2 da seção 7.1) |
 | 6 | Revisão desta minuta por advogado de direito digital e conferência da redação vigente de cada dispositivo citado antes de publicar |
 | 7 | Aprovar a versão 0.2, com as cinco condições da seção 7.1 |
+| 8 | **[0.3]** Aprovar "salvar a análise" (F5-10) com as condições da seção 7.3, e decidir com o advogado: o prazo "até excluir", a guarda de processos em segredo de justiça e a redação do aviso antes de salvar |
 
 ## 9. Histórico
 
@@ -154,6 +175,7 @@ O **upload de arquivos (R10)** só deve ser liberado quando as **cinco condiçõ
 | 0.1 | 04/11/2026 | Minuta redigida a partir do código e dos documentos do produto | Primeira versão |
 | 0.1 | 04/11/2026 | Responsável | Confirmou o RIPD do Argumenta como está; os itens **[CONFIRMAR]** e a revisão por advogado seguem em aberto (seção 8) |
 | 0.2 | 05/11/2026 | Responsável decidiu; minuta ajustada | Seção 7 reescrita: de oito para cinco condições para ligar o upload, cada uma com a origem (lei ou escolha de proteção); a medição do detector e a revisão passam a acompanhar o uso |
+| 0.3 | 06/11/2026 | Responsável decidiu; minuta ajustada | Nova finalidade: salvar a análise (F5-10), com a decisão completa, por escolha expressa. Prazo de retenção escolhido pela pessoa, limite de 10 análises, exclusão em um clique. Acrescentados: item 9 do fluxo, linhas da seção 4.1, medida da seção 4.3, risco R11 e seção 7.3. Desligado até a aprovação |
 
 **Aprovação:** [NOME_RESPONSAVEL] · [DATA]
 

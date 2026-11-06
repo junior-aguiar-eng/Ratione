@@ -134,6 +134,7 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         'authenticated aceites_termos: SELECT',
         // Cada cliente lê só as próprias análises e assinaturas (RLS); quem escreve é o servidor, pelas funções da migração
         'authenticated analises: SELECT',
+        'authenticated analises_salvas: SELECT',
         'authenticated assinaturas: SELECT',
         // Casos (pastas de Meu espaço): cada pessoa cria, lê, renomeia e apaga só os próprios
         'authenticated casos: DELETE,INSERT,SELECT,UPDATE',
