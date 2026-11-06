@@ -25,6 +25,7 @@ import { guardarCaso, lerCaso, limparCaso, type Resultados } from '../../lib/cas
 import { lerQuestaoDoCaso } from '../../lib/caso/ligacao';
 import MapaView from './MapaView';
 import SeloCitacao from './SeloCitacao';
+import SugeridosDaQuestao from './SugeridosDaQuestao';
 import { referenciaVisual } from './referencias';
 
 /**
@@ -558,6 +559,13 @@ export default function AnaliseDecisao() {
                       ) : (
                         andamento === 'fundamentos' && <p className="text-sm text-ink-mute">Identificando os fundamentos…</p>
                       )}
+                      <SugeridosDaQuestao
+                        questaoId={q.id}
+                        links={desta.flatMap(f => {
+                          const selo = selos.get(f.citacao.trim());
+                          return selo?.estado === 'encontrada' ? selo.links : [];
+                        })}
+                      />
                     </section>
                   );
                 })}
