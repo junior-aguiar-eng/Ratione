@@ -2,7 +2,7 @@
  * Exclusão da conta (LGPD, art. 18, VI). A lógica fica separada da rota para ser testada sem rede:
  * a rota entrega as três operações reais do Supabase; os testes entregam simulações.
  *
- * Ordem: sessão válida → senha atual conferida → assinatura paga cancelada no Mercado Pago → documentos enviados apagados do armazenamento → só então a conta é apagada (`auth.users`),
+ * Ordem: sessão válida → senha atual conferida → assinatura paga cancelada no Mercado Pago → documentos enviados e análises salvas apagados do armazenamento → só então a conta é apagada (`auth.users`),
  * o que remove perfil e registros salvos em cascata (ver `supabase/migrations`). A assinatura vem antes porque o Mercado Pago cobra por conta
  * própria: apagar a conta sem cancelá-la deixaria o cartão sendo cobrado, sem conta nem tela para cancelar. Se o cancelamento falhar, nada é apagado.
  */
@@ -15,6 +15,8 @@ export interface DependenciasExclusao {
   encerrarAssinaturas: (id: string) => Promise<boolean>;
   /** Apaga os documentos enviados pelo usuário (arquivos cifrados e linhas) no armazenamento. `false` se algum não foi apagado. */
   apagarDocumentos: (id: string) => Promise<boolean>;
+  /** Apaga as análises que o usuário salvou (arquivos cifrados e linhas), F5-10. `false` se alguma não foi apagada. */
+  apagarAnalisesSalvas: (id: string) => Promise<boolean>;
   /** Apaga o usuário em `auth.users` com a chave de serviço; devolve `false` em caso de erro. */
   apagarUsuario: (id: string) => Promise<boolean>;
 }
@@ -44,6 +46,14 @@ export async function excluirConta(senha: unknown, dep: DependenciasExclusao): P
       ok: false,
       status: 500,
       mensagem: 'Não foi possível apagar os seus arquivos guardados agora, e por isso a conta não foi excluída. Nada foi apagado; tente de novo em instantes.'
+    };
+  }
+  // Idem para as análises salvas: o conteúdo cifrado fica no armazenamento, fora do alcance da exclusão em cascata
+  if (!(await dep.apagarAnalisesSalvas(usuario.id).catch(() => false))) {
+    return {
+      ok: false,
+      status: 500,
+      mensagem: 'Não foi possível apagar as suas análises salvas agora, e por isso a conta não foi excluída. Nada foi apagado; tente de novo em instantes.'
     };
   }
   if (!(await dep.apagarUsuario(usuario.id))) {

@@ -129,3 +129,22 @@ Antes, a citação de um fundamento abria o NormaViva ou o TeseMap sem nenhuma r
 - **Fase 3, "Para ler também" (06/11/2026):** sob cada questão (`app/argumenta/SugeridosDaQuestao.tsx`, `lib/argumenta/sugeridos.ts`), só a partir das citações já conferidas pela base. De cada artigo, os precedentes do TeseMap que o citam expressamente (`precedentesQueCitam`); de cada precedente, os que a própria fonte liga a ele (`ligadosPelasFontes`). Vinculantes na frente, sem repetir o que a decisão já citou; até 4 citações consultadas e 5 sugestões por questão. Sai do navegador apenas o identificador público do artigo ou do precedente, nunca texto da decisão ou da questão; nada é inferido por IA nem guardado. A seção não aparece sem sugestão, uma consulta que falha não vira "não há", e o texto diz que a sugestão não indica que o precedente se aplique ao caso.
 
 - **Baixar a análise (F5-09, 06/11/2026):** "Baixar em Word" (`lib/argumenta/baixarDocx.ts`, biblioteca `docx` carregada no clique) e "Salvar em PDF" (`app/argumenta/DocumentoImpresso.tsx`, folha que só aparece ao imprimir). Os dois leem o mesmo documento (`lib/argumenta/documento.ts`). Tudo no navegador: nenhuma requisição sai ao baixar e nada é guardado, por isso o RIPD não muda. O arquivo leva os nomes reais, com aviso no topo, e o nome do arquivo só a data.
+
+## 11. Análises salvas (F5-10, 06/11/2026) — base pronta e desligada
+
+> **Decisões do responsável (06/11/2026):** o prazo é **escolhido pela pessoa** (30 dias, 6 meses, 1 ano ou até excluir); **no máximo 10** análises salvas por pessoa (para salvar outra, exclui uma); guarda-se a **decisão completa**. Condições para ligar: seção 7.3 do [RIPD](../juridico/RIPD_ARGUMENTA.md) (versão 0.3).
+
+**Estado:** rotas, banco e cifra prontos e **desligados**. Sem `ARGUMENTA_SALVAR_LIGADO=sim` e `ANALISES_CHAVE`, gravar e abrir respondem 503 e nada é guardado. **Ainda não há tela** (ver "Falta" no item F5-10 do PLANO).
+
+| O que | Como |
+|---|---|
+| Rotas | `POST /api/analises-salvas` (`{ conteudo, prazo, rotulo? }`), `GET /api/analises-salvas` (lista; `?cita=normaviva:<id>` ou `tesemap:<id>` filtra as que citam aquela fonte), `GET /api/analises-salvas/<id>` (conteúdo decifrado, só para o dono), `DELETE /api/analises-salvas/<id>`, `POST /api/analises-salvas/limpar` (agendador, com o segredo da faxina de documentos) |
+| O que se guarda | `versao`, a decisão (parágrafos com marcadores **e a tabela de troca com os dados reais**), o resultado das três etapas e os selos das citações. Conferido no servidor pelos mesmos esquemas que geram as etapas |
+| Cifra | AES-256-GCM no servidor **antes** de gravar; chave `ANALISES_CHAVE` (Secret Manager); o caminho do objeto (`<usuário>/<id>`, opaco) entra como dado autenticado, então um arquivo copiado para outro caminho não decifra |
+| Banco | `analises_salvas`: caminho, tamanho, datas, rótulo opcional (até 80 caracteres; **a tela deve avisar para não pôr nome de parte**) e os **identificadores públicos** das citações encontradas (`normaviva:<dispositivo>`, `tesemap:<nó>`), que não são dado pessoal e permitem o "citado nas suas análises" sem decifrar nada. **Nunca o conteúdo.** A pessoa só lê a própria linha (RLS) |
+| Limite | 10 por pessoa: contado antes de gravar e também **imposto por gatilho no banco**, para duas gravações simultâneas não passarem. A 11ª recebe 429 com a mensagem de excluir alguma |
+| Prazo | `30d`, `6m` (183 dias), `1a` (365 dias) ou `sempre` (sem vencimento). O vencido some antes de contar o limite, não abre mais e é apagado pela faxina horária |
+| Exclusão | `DELETE` apaga o arquivo e a linha. **A exclusão da conta apaga antes todas as análises; se não conseguir, a conta não é apagada** (e, se a migração ainda não foi aplicada, isso não trava a exclusão). Apagar, listar e faxinar funcionam mesmo com o salvamento desligado |
+| Privacidade | O conteúdo **nunca vai à Anthropic nem a log**; o log leva só o motivo técnico. A IA continua recebendo só o texto pseudonimizado |
+
+**Para ligar (depois do RIPD 0.3):** aplicar a migração; criar o segredo `analises-chave` e o agendador (`docs/deploy/CLOUD_RUN.md`, seção "Análises salvas"); só então `ARGUMENTA_SALVAR_LIGADO=sim`.
