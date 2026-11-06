@@ -20,6 +20,7 @@ import { DiffTexto, LinhaDoTempo } from './Historico';
 import ExplicacaoIA from './ExplicacaoIA';
 import ResultadosDaBusca from './ResultadosDaBusca';
 import LigacoesDoDispositivo from './LigacoesDoDispositivo';
+import PrecedentesDoDispositivo from './PrecedentesDoDispositivo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -314,6 +315,8 @@ export default function NormaVivaPage() {
                   <RelacaoComOCaso key={`relacao-${detalhe.dispositivo.id}`} ferramenta="normaviva" destinoId={detalhe.dispositivo.id} />
                   <ExplicacaoIA key={detalhe.dispositivo.id} dispositivoId={detalhe.dispositivo.id} />
 
+                  {db && <PrecedentesDoDispositivo key={`precedentes-${detalhe.dispositivo.id}`} dispositivoId={detalhe.dispositivo.id} db={db} />}
+
                   <AvisoAntesDeCitar />
                 </div>
 
@@ -405,7 +408,7 @@ export default function NormaVivaPage() {
                     </CartaoDeContexto>
                   )}
 
-                  <LigacoesDoDispositivo dispositivoId={detalhe.dispositivo.id} db={db} />
+                  <LigacoesDoDispositivo dispositivoId={detalhe.dispositivo.id} />
 
                   <CartaoDeContexto titulo="Fonte" icone={<BookOpen />}>
                     <dl className="text-sm flex flex-col gap-2">

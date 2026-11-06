@@ -12,7 +12,14 @@ export interface NoParaRelacionar {
   questao: string | null;
   /** Falso quando o tribunal não firmou tese (o texto é só a questão). */
   teseFirmada: boolean;
+  /** Efeito vinculante, como o tribunal registra. */
+  vinculante?: boolean;
+  /** A situação que o tribunal registra (ex.: "Mérito julgado"), quando houver. */
+  situacao?: string | null;
 }
+
+/** Id de nó do TeseMap (`STJ-TEMA-1076`): só o formato, nada de texto livre chega ao modelo. */
+export const idDeNoValido = (id: unknown): id is string => typeof id === 'string' && /^[A-Za-z0-9._-]{1,80}$/.test(id);
 
 const texto = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);
 
@@ -30,6 +37,8 @@ export async function lerNoParaRelacionar(db: SupabaseClient, id: string): Promi
     tipo: d.tipo,
     descricao: d.descricao ?? '',
     questao: texto(detalhes.questao),
-    teseFirmada: detalhes.teseFirmada !== false
+    teseFirmada: detalhes.teseFirmada !== false,
+    vinculante: detalhes.vinculante === true,
+    situacao: texto(detalhes.situacao)
   };
 }
