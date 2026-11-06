@@ -99,3 +99,9 @@ export function lerTeseMap(busca: string): Partial<ParametrosTeseMap> {
   const n = new URLSearchParams(busca).get('n');
   return n && /^[A-Za-z0-9._-]{1,80}$/.test(n) ? { noId: n } : {};
 }
+
+/** A pesquisa que a busca única deixa na URL de uma ferramenta (`?q=`): limpa e limitada; menos de 2 caracteres não conta. */
+export function lerBusca(busca: string): string {
+  const q = (new URLSearchParams(busca).get('q') ?? '').replace(/\s+/g, ' ').trim().slice(0, 80);
+  return q.length >= 2 ? q : '';
+}

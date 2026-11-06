@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, BookOpen, CalendarClock, FileSearch, Network } from 'lucide-react';
 import RecentesHome from '../components/RecentesHome';
+import HomeAdaptativa from '../components/HomeAdaptativa';
+import CampoDeBusca from '../components/CampoDeBusca';
 import DemoHero from '../components/demo/DemoHero';
 import { MODULOS } from '../lib/modulos';
 import { buttonVariants } from '@/components/ui/button';
@@ -43,7 +45,16 @@ const FERRAMENTAS = [
   }
 ] as const;
 
+/** Quem está logado vê o painel; os demais, esta apresentação (ver `HomeAdaptativa`). */
 export default function HomePage() {
+  return (
+    <HomeAdaptativa>
+      <Apresentacao />
+    </HomeAdaptativa>
+  );
+}
+
+function Apresentacao() {
   return (
     <div>
       <section className="pt-12 sm:pt-20 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
@@ -57,6 +68,7 @@ export default function HomePage() {
           <p className="text-lg sm:text-xl text-ink-soft leading-relaxed max-w-xl">
             Ferramentas especializadas para analisar decisões, compreender normas, explorar jurisprudência e calcular prazos.
           </p>
+          <CampoDeBusca className="max-w-xl" />
           <div className="flex flex-wrap gap-3 pt-2">
             <Link href="/prazozero" className={cn(buttonVariants(), 'h-11 px-5 text-base')}>
               <span>Calcular prazo</span>
