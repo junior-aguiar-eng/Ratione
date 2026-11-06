@@ -17,10 +17,13 @@ import {
   TipoHistorico
 } from '../../lib/historico';
 import { tempoRelativo } from '../../lib/datas';
+import { apagarCaso, contarPorCaso, criarCaso, listarCasos, moverItemParaCaso, renomearCaso, type Caso } from '../../lib/casos';
 import AgendaDePrazos from './AgendaDePrazos';
+import PastasDeCasos, { type FiltroDeCaso } from './PastasDeCasos';
 import AcessoAdministrativo from './AcessoAdministrativo';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
 
 const FILTROS: { id: 'todos' | TipoHistorico; rotulo: string }[] = [
   { id: 'todos', rotulo: 'Todos' },
@@ -47,6 +50,9 @@ export default function MeuEspacoPage() {
   const [resultadoImportacao, setResultadoImportacao] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<'todos' | TipoHistorico>('todos');
   const [busca, setBusca] = useState('');
+  // Casos (pastas): só para quem tem conta; `null` enquanto carrega ou se a tabela não estiver disponível (a tela então esconde as pastas)
+  const [casos, setCasos] = useState<Caso[] | null>(null);
+  const [casoFiltro, setCasoFiltro] = useState<FiltroDeCaso>('todos');
 
   const recarregar = async () => {
     const h = await carregarHistorico();
@@ -61,6 +67,18 @@ export default function MeuEspacoPage() {
     if (carregando) return;
     void recarregar();
   }, [carregando, usuario]);
+
+  useEffect(() => {
+    if (!carregado || origem !== 'conta') {
+      setCasos(null);
+      return;
+    }
+    let ativo = true;
+    void listarCasos().then(c => ativo && setCasos(c));
+    return () => {
+      ativo = false;
+    };
+  }, [carregado, origem, usuario]);
 
   const importar = async () => {
     setImportando(true);
@@ -109,15 +127,44 @@ export default function MeuEspacoPage() {
   }, [apagar]);
 
   const restantes = useMemo(() => registros.filter(r => !removidos.some(x => x.id === r.id)), [registros, removidos]);
+  const { porCaso, soltos } = useMemo(() => contarPorCaso(restantes), [restantes]);
+
+  const criar = async (nome: string): Promise<string | null> => {
+    const r = await criarCaso(nome);
+    if (!r.ok) return r.mensagem;
+    setCasos(atuais => [...(atuais ?? []), r.caso]);
+    setCasoFiltro(r.caso.id);
+    return null;
+  };
+
+  const renomear = async (id: string, nome: string): Promise<string | null> => {
+    const r = await renomearCaso(id, nome);
+    if (!r.ok) return r.mensagem;
+    setCasos(atuais => (atuais ?? []).map(c => (c.id === id ? r.caso : c)));
+    return null;
+  };
+
+  const apagarPasta = async (id: string) => {
+    if (!(await apagarCaso(id))) return;
+    setCasos(atuais => (atuais ?? []).filter(c => c.id !== id));
+    setRegistros(atuais => atuais.map(r => (r.casoId === id ? { ...r, casoId: undefined } : r)));
+    setCasoFiltro('todos');
+  };
+
+  const mover = async (r: RegistroHistorico, casoId: string) => {
+    const destino = casoId === '' ? null : casoId;
+    if (await moverItemParaCaso(r.id, destino)) setRegistros(atuais => atuais.map(x => (x.id === r.id ? { ...x, casoId: destino ?? undefined } : x)));
+  };
 
   const visiveis = useMemo(() => {
     const q = busca.trim().toLowerCase();
     return restantes.filter(
       r =>
         (filtro === 'todos' || r.tipo === filtro) &&
+        (casoFiltro === 'todos' || (casoFiltro === 'soltos' ? !r.casoId : r.casoId === casoFiltro)) &&
         (q === '' || `${r.titulo} ${r.detalhe ?? ''} ${r.modulo}`.toLowerCase().includes(q))
     );
-  }, [restantes, filtro, busca]);
+  }, [restantes, filtro, busca, casoFiltro]);
 
   return (
     <div>
@@ -161,6 +208,20 @@ export default function MeuEspacoPage() {
       )}
 
       <AgendaDePrazos />
+
+      {origem === 'conta' && casos !== null && (
+        <PastasDeCasos
+          casos={casos}
+          porCaso={porCaso}
+          soltos={soltos}
+          total={restantes.length}
+          selecionado={casoFiltro}
+          onSelecionar={setCasoFiltro}
+          onCriar={criar}
+          onRenomear={renomear}
+          onApagar={apagarPasta}
+        />
+      )}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div className="flex flex-wrap gap-1" role="group" aria-label="Filtrar por tipo">
@@ -240,6 +301,16 @@ export default function MeuEspacoPage() {
                   {r.modulo} · {tempoRelativo(r.criadoEm)}
                 </p>
                 {r.detalhe && <p className="text-sm text-ink-soft">{r.detalhe}</p>}
+                {origem === 'conta' && casos !== null && casos.length > 0 && (
+                  <NativeSelect aria-label={`Caso de ${r.titulo}`} value={r.casoId ?? ''} onChange={e => void mover(r, e.target.value)} className="mt-1 w-auto max-w-full text-sm">
+                    <option value="">Sem caso</option>
+                    {casos.map(c => (
+                      <option key={c.id} value={c.id}>
+                        {c.nome}
+                      </option>
+                    ))}
+                  </NativeSelect>
+                )}
               </div>
               <button
                 type="button"

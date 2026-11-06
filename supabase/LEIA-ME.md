@@ -218,3 +218,7 @@ Conferência depois de aplicar (só leitura):
 - `select has_function_privilege('anon', 'public.limpar_dados_vencidos()', 'execute') as anon, has_function_privilege('service_role', 'public.limpar_dados_vencidos()', 'execute') as servidor;` deve dar `false` e `true`.
 
 A primeira execução (a agendada ou `select public.limpar_dados_vencidos();` no editor) devolve quantas linhas apagou de cada tabela. Hoje só há dados de outubro de 2026, então o esperado é zero, exceto avisos de prazo vencidos há mais de 30 dias. Depois, `select jobname, status, start_time from cron.job_run_details order by start_time desc limit 5;` mostra as execuções do agendador.
+
+## Casos: pastas de Meu espaço (05/11/2026)
+
+`supabase/migrations/20261105000001_casos.sql` cria a tabela `casos` (só o nome que a pessoa dá a cada pasta), a coluna `itens_salvos.caso_id` e as regras de acesso: cada pessoa vê, cria, renomeia e apaga só os próprios casos, só amarra um item a um caso dela e tem no máximo 50 casos. Apagar um caso não apaga os itens (`on delete set null`). **Aplique no projeto real:** *SQL Editor → New query*, cole **todo** o conteúdo do arquivo → *Run* ("Success"). Em *Table Editor*, confira que `casos` existe com o cadeado de RLS ligado e que `itens_salvos` tem a coluna `caso_id`. **Não há ordem rígida de implantação:** enquanto a migração não for aplicada, o site funciona como antes e a tela de Meu espaço não mostra as pastas; depois de aplicada, as pastas aparecem sozinhas.
