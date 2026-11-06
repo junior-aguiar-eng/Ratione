@@ -68,7 +68,7 @@ Alguns fornecedores armazenam ou processam dados **fora do Brasil**. Adotamos os
 ## 8. Retenção
 | Dado | Prazo |
 |---|---|
-| Conta e itens salvos | Enquanto a conta estiver ativa; exclusão em até [30] dias após o pedido |
+| Conta, itens salvos e casos (pastas de Meu espaço) | Enquanto a conta estiver ativa; exclusão em até [30] dias após o pedido |
 | **Registro de uso de IA e histórico de análises** | **13 meses**, depois apagados automaticamente (e antes, com a exclusão da conta) |
 | Avisos de prazo | Até 30 dias depois do vencimento, ou antes, se você os apagar |
 | Registro das ações administrativas (suspensão e reativação) | **12 meses**; se a conta é excluída antes, o registro fica sem a identificação dela |

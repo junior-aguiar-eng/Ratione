@@ -135,6 +135,8 @@ describe('RLS: um usuário nunca acessa dado de outro (F0-06)', () => {
         // Cada cliente lê só as próprias análises e assinaturas (RLS); quem escreve é o servidor, pelas funções da migração
         'authenticated analises: SELECT',
         'authenticated assinaturas: SELECT',
+        // Casos (pastas de Meu espaço): cada pessoa cria, lê, renomeia e apaga só os próprios
+        'authenticated casos: DELETE,INSERT,SELECT,UPDATE',
         // Cobranças do Mercado Pago (F8-05): o cliente lê só as próprias; quem escreve é o servidor, pelas funções da migração
         'authenticated cobrancas: SELECT',
         'authenticated dispositivos: SELECT',
@@ -173,5 +175,67 @@ describe('Teto de itens salvos por conta', () => {
     await como(db, dora, tx => tx.query(INSERIR_ITEM, [dora, 'da Dora']));
     await como(db, carlos, tx => tx.query('delete from public.itens_salvos where titulo = $1', ['i1']));
     await como(db, carlos, tx => tx.query(INSERIR_ITEM, [carlos, 'cabe de novo']));
+  });
+});
+
+describe('Casos: pastas de Meu espaço', () => {
+  let db: PGlite;
+  let ana: string;
+  let beto: string;
+  let casoDaAna: string;
+
+  before(async () => {
+    db = await criarBanco();
+    ana = await criarUsuario(db, 'ana-casos@exemplo.com');
+    beto = await criarUsuario(db, 'beto-casos@exemplo.com');
+    casoDaAna = await como(db, ana, async tx => (await tx.query<{ id: string }>("insert into public.casos (usuario_id, nome) values ($1, 'Caso A') returning id", [ana])).rows[0].id);
+  });
+
+  it('o dono lê, renomeia e o outro usuário não vê nem altera nem apaga', async () => {
+    assert.strictEqual((await como(db, ana, tx => tx.query('select id from public.casos'))).rows.length, 1);
+    assert.strictEqual((await como(db, beto, tx => tx.query('select id from public.casos'))).rows.length, 0);
+    assert.strictEqual((await como(db, beto, tx => tx.query("update public.casos set nome = 'invadido' where id = $1", [casoDaAna]))).affectedRows, 0);
+    assert.strictEqual((await como(db, beto, tx => tx.query('delete from public.casos where id = $1', [casoDaAna]))).affectedRows, 0);
+    await como(db, ana, tx => tx.query("update public.casos set nome = 'Caso A2' where id = $1", [casoDaAna]));
+    assert.strictEqual((await como(db, ana, tx => tx.query<{ nome: string }>('select nome from public.casos'))).rows[0].nome, 'Caso A2');
+  });
+
+  it('não grava caso em nome de outro, nem passa o caso para outro dono, e o nome tem de caber em 1 a 80 caracteres', async () => {
+    await assert.rejects(como(db, beto, tx => tx.query("insert into public.casos (usuario_id, nome) values ($1, 'forjado')", [ana])), /row-level security/);
+    await assert.rejects(como(db, ana, tx => tx.query('update public.casos set usuario_id = $1 where id = $2', [beto, casoDaAna])), /row-level security/);
+    await assert.rejects(como(db, ana, tx => tx.query("insert into public.casos (usuario_id, nome) values ($1, '')", [ana])), /check/);
+    await assert.rejects(como(db, ana, tx => tx.query('insert into public.casos (usuario_id, nome) values ($1, $2)', [ana, 'x'.repeat(81)])), /check/);
+  });
+
+  it('o item só pode apontar para um caso do próprio dono', async () => {
+    const item = await como(db, ana, async tx => (await tx.query<{ id: string }>("insert into public.itens_salvos (usuario_id, modulo, tipo, titulo, caso_id) values ($1, 'NormaViva', 'norma', 'art. 85', $2) returning id", [ana, casoDaAna])).rows[0].id);
+    await assert.rejects(como(db, beto, tx => tx.query("insert into public.itens_salvos (usuario_id, modulo, tipo, titulo, caso_id) values ($1, 'NormaViva', 'norma', 'x', $2)", [beto, casoDaAna])), /row-level security/);
+    const doBeto = await como(db, beto, async tx => (await tx.query<{ id: string }>(INSERIR_ITEM + ' returning id', [beto, 'item do Beto'])).rows[0].id);
+    await assert.rejects(como(db, beto, tx => tx.query('update public.itens_salvos set caso_id = $1 where id = $2', [casoDaAna, doBeto])), /row-level security/);
+    // O dono move o item para outro caso dele e o tira do caso
+    const outro = await como(db, ana, async tx => (await tx.query<{ id: string }>("insert into public.casos (usuario_id, nome) values ($1, 'Caso B') returning id", [ana])).rows[0].id);
+    await como(db, ana, tx => tx.query('update public.itens_salvos set caso_id = $1 where id = $2', [outro, item]));
+    await como(db, ana, tx => tx.query('update public.itens_salvos set caso_id = null where id = $1', [item]));
+  });
+
+  it('apagar o caso não apaga os itens: eles ficam soltos', async () => {
+    const caso = await como(db, ana, async tx => (await tx.query<{ id: string }>("insert into public.casos (usuario_id, nome) values ($1, 'Caso C') returning id", [ana])).rows[0].id);
+    const item = await como(db, ana, async tx => (await tx.query<{ id: string }>("insert into public.itens_salvos (usuario_id, modulo, tipo, titulo, caso_id) values ($1, 'TeseMap', 'tese', 'Tema 1076', $2) returning id", [ana, caso])).rows[0].id);
+    await como(db, ana, tx => tx.query('delete from public.casos where id = $1', [caso]));
+    const r = await como(db, ana, tx => tx.query<{ caso_id: string | null }>('select caso_id from public.itens_salvos where id = $1', [item]));
+    assert.strictEqual(r.rows.length, 1);
+    assert.strictEqual(r.rows[0].caso_id, null);
+  });
+
+  it('a conta aceita até 50 casos e recusa o seguinte, sem afetar outra conta', async () => {
+    const carla = await criarUsuario(db, 'carla-casos@exemplo.com');
+    const dani = await criarUsuario(db, 'dani-casos@exemplo.com');
+    await db.query("insert into public.casos (usuario_id, nome) select $1, 'c' || g from generate_series(1, 50) g", [carla]);
+    await assert.rejects(como(db, carla, tx => tx.query("insert into public.casos (usuario_id, nome) values ($1, 'a mais')", [carla])), /limite de 50 casos/);
+    await como(db, dani, tx => tx.query("insert into public.casos (usuario_id, nome) values ($1, 'da Dani')", [dani]));
+  });
+
+  it('visitante sem login não acessa os casos', async () => {
+    await assert.rejects(como(db, null, tx => tx.query('select * from public.casos')), /permission denied/);
   });
 });

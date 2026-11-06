@@ -11,6 +11,8 @@ export interface RegistroHistorico {
   detalhe?: string;
   url: string;
   criadoEm: string; // ISO completo
+  /** O caso (pasta de Meu espaço) em que o item está; ausente quando solto. Só existe para itens da conta. */
+  casoId?: string;
 }
 
 export type NovoRegistro = Omit<RegistroHistorico, 'id' | 'criadoEm'>;
@@ -25,6 +27,7 @@ export interface LinhaItemSalvo {
   detalhe: string | null;
   url: string | null;
   criado_em: string;
+  caso_id?: string | null;
 }
 
 export function linhaParaRegistro(l: LinhaItemSalvo): RegistroHistorico {
@@ -35,7 +38,8 @@ export function linhaParaRegistro(l: LinhaItemSalvo): RegistroHistorico {
     titulo: l.titulo,
     ...(l.detalhe ? { detalhe: l.detalhe } : {}),
     url: l.url ?? '/',
-    criadoEm: l.criado_em
+    criadoEm: l.criado_em,
+    ...(l.caso_id ? { casoId: l.caso_id } : {})
   };
 }
 
@@ -177,11 +181,11 @@ export async function carregarHistorico(limite = LIMITE): Promise<HistoricoCarre
     try {
       const { data: sessao } = await sb.auth.getSession();
       if (sessao.session) {
-        const { data, error } = await sb
-          .from('itens_salvos')
-          .select('id, modulo, tipo, titulo, detalhe, url, criado_em')
-          .order('criado_em', { ascending: false })
-          .limit(limite);
+        const colunas = 'id, modulo, tipo, titulo, detalhe, url, criado_em';
+        const consultar = (cols: string) => sb.from('itens_salvos').select(cols).order('criado_em', { ascending: false }).limit(limite);
+        let { data, error } = (await consultar(`${colunas}, caso_id`)) as { data: unknown; error: unknown };
+        // Banco ainda sem a migração dos casos (coluna `caso_id`): a lista sai sem as pastas, em vez de cair para o navegador
+        if (error) ({ data, error } = (await consultar(colunas)) as { data: unknown; error: unknown });
         if (!error && data) return { itens: (data as LinhaItemSalvo[]).map(linhaParaRegistro), origem: 'conta' };
       }
     } catch {

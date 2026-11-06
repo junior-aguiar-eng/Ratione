@@ -125,9 +125,10 @@ export default function ContaPage() {
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }, { data: avisos }, { data: aceites }, { data: usoDeIa }, { data: analises }, { data: assinaturas }, { data: cobrancas }] = await Promise.all([
+    const [{ data: perfilBd }, { data: itens }, { data: casos }, { data: avisos }, { data: aceites }, { data: usoDeIa }, { data: analises }, { data: assinaturas }, { data: cobrancas }] = await Promise.all([
       sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
       sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
+      sb.from('casos').select('*').order('criado_em', { ascending: true }),
       sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
       sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true }),
       sb.from('ia_uso').select('*').order('criado_em', { ascending: false }),
@@ -141,6 +142,7 @@ export default function ContaPage() {
         email: usuario.email,
         perfil: perfilBd,
         itensSalvos: itens,
+        casos,
         avisosPorEmail: avisos,
         aceitesDosTermos: aceites,
         usoDeIa,
@@ -164,11 +166,12 @@ export default function ContaPage() {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
     setConfirmando(null);
-    const [itens, avisos] = await Promise.all([
+    const [itens, avisos, casos] = await Promise.all([
       sb.from('itens_salvos').delete().eq('usuario_id', usuario.id),
-      sb.from('lembretes_prazo').delete().eq('usuario_id', usuario.id)
+      sb.from('lembretes_prazo').delete().eq('usuario_id', usuario.id),
+      sb.from('casos').delete().eq('usuario_id', usuario.id)
     ]);
-    if (itens.error || avisos.error) aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
+    if (itens.error || avisos.error || casos.error) aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
     else aviso('info', 'Todos os registros salvos e os avisos por e-mail da conta foram apagados.');
   };
 

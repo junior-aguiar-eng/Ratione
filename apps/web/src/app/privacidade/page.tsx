@@ -42,6 +42,11 @@ export default function PrivacidadePage() {
               de processo nem dado de cliente</Destaque>.
             </li>
             <li>
+              <Destaque>Casos em &ldquo;Meu espaço&rdquo;:</Destaque> o nome que você der a cada pasta e quais registros você pôs em cada uma. Para organizar o
+              que você salvou. <Destaque>Use um nome que só você entenda: não escreva nome de parte, número de processo nem dado de cliente.</Destaque>
+              O texto das decisões que você analisa não entra no caso.
+            </li>
+            <li>
               <Destaque>Uso dos recursos de inteligência artificial:</Destaque> o plano da conta e, a cada análise ou explicação, a ferramenta
               usada, a data e a hora, o resultado (gerada, falhou ou recusada), a quantidade de tokens e o custo, um código (hash) do texto
               enviado, a quantidade de parágrafos da decisão e o nome que você der à análise (opcional). <Destaque>O texto da decisão e o
