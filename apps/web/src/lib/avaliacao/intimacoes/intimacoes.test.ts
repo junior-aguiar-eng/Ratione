@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { temDadoPessoal } from '@ratione/argumenta';
 import { dataApareceNoTrecho, lerIntimacao } from '../../ia/tarefas/lerIntimacao';
 import type { PedidoModelo, ResultadoModelo } from '../../ia/contrato';
-import { CasoDeIntimacaoSchema, intimacaoValidada, paragrafosDaIntimacao } from './caso';
+import { CasoDeIntimacaoSchema, casoDeAmostraExterna, intimacaoValidada, paragrafosDaIntimacao } from './caso';
 import { CASOS } from './casos';
 import { calcularMetricas, compararCampos, executarIntimacao, gerarFolha, montarRelatorio, type ChamarModelo } from './avaliar';
 
@@ -146,5 +146,39 @@ describe('Medição: comparação e métricas', () => {
     assert.equal((folha.match(/^## int-/gm) ?? []).length, 20);
     assert.match(folha, /Validação: José Bonifácio de Aguiar Santos Júnior, em 2026-10-30/);
     assert.ok(!folha.includes('Validação: pendente'), 'os 20 casos estão validados');
+  });
+});
+
+describe('Amostra externa de intimações reais', () => {
+  const item = {
+    id: 'real-01-tjal',
+    origem: { tribunal: 'TJAL', orgao: '25ª Vara Cível da Capital', tipoDocumento: 'Intimação', comunicacaoId: 1 },
+    texto: 'ATO ORDINATÓRIO. Fica a parte autora intimada, por seu advogado, para se manifestar, no prazo de 15 (quinze) dias, acerca da contestação apresentada nos autos.',
+    esperadoProposto: { dias: 15, tipoEvento: 'nao_informado', dataEvento: '', tribunal: '' },
+    duvidas: [],
+    validacao: null
+  };
+
+  it('converte o item no caso do avaliador, com o gabarito proposto e sem validação', () => {
+    const c = casoDeAmostraExterna(item);
+    assert.equal(c.id, 'real-01-tjal');
+    assert.equal(c.descricao, 'TJAL · Intimação · 25ª Vara Cível da Capital');
+    assert.deepEqual(c.esperado, item.esperadoProposto);
+    assert.equal(c.validacao, null);
+    assert.equal(intimacaoValidada(c), false);
+  });
+
+  it('recusa item com gabarito fora do formato ou sem texto', () => {
+    assert.throws(() => casoDeAmostraExterna({ ...item, esperadoProposto: { ...item.esperadoProposto, tipoEvento: 'inventado' } }));
+    assert.throws(() => casoDeAmostraExterna({ ...item, texto: 'curto' }));
+  });
+
+  it('o relatório traz o aviso de gabarito proposto no topo, quando dado', async () => {
+    const c = casoDeAmostraExterna(item);
+    const r = await executarIntimacao(c, async () => ({ tipo: 'falha', mensagem: 'sem rede' }));
+    const sem = montarRelatorio({ rodada: 'x', modelo: 'm', casos: [c], resultados: [r] });
+    const com = montarRelatorio({ rodada: 'x', modelo: 'm', casos: [c], resultados: [r], aviso: 'Gabarito PROPOSTO, não validado.' });
+    assert.ok(!sem.includes('PROPOSTO'));
+    assert.match(com, /^# Medição[^\n]*\n\n> \*\*Gabarito PROPOSTO, não validado\.\*\*/);
   });
 });
