@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { executarTarefa, type DependenciasExecucao, type Situacao } from '../executar';
 import type { PedidoModelo, ResultadoModelo } from '../contrato';
-import { apararIntimacao, conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, prazoApareceNoTrecho, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
+import { apararIntimacao, conferirIntimacao, dataApareceNoTrecho, dataEhDeAto, lerIntimacao as t, prazoApareceNoTrecho, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
 
 const TEXTO = [
   'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO. Processo [PROCESSO_1]. Apelação cível.',
@@ -70,6 +70,45 @@ describe('Tarefa ler-intimacao: data escrita no trecho', () => {
       assert.equal(dataApareceNoTrecho('2026-11-03', trecho), false, trecho);
     }
     assert.equal(dataApareceNoTrecho('data-ruim', 'em 03/11/2026'), false);
+  });
+});
+
+describe('Tarefa ler-intimacao: data de ato do processo', () => {
+  it('reconhece a data de um ato citado no texto, que não é a da intimação', () => {
+    const atos = [
+      'Intimada do evento processual ocorrido em 29/10/2026',
+      'intimado da decisão proferida em 29/10/2026',
+      'petição juntada em 29/10/2026',
+      'ata lavrada em 29 de outubro de 2026'
+    ];
+    for (const trecho of atos) assert.equal(dataEhDeAto('2026-10-29', trecho), true, trecho);
+  });
+
+  it('não recusa a data da própria intimação, nem quando o texto cita um ato', () => {
+    const intimacoes: Array<[string, string]> = [
+      ['2026-11-03', 'Disponibilizado no DJe em 03/11/2026'],
+      ['2026-11-03', 'Intimado por meio do portal em 03/11/2026'],
+      ['2026-11-03', 'decisão proferida em 29/10/2026 e disponibilizada em 03/11/2026'],
+      ['2026-11-03', 'Decisão proferida em 29/10/2026, disponibilizada no DJe em 03/11/2026'],
+      ['2026-11-03', 'Intimada da decisão disponibilizada em 03/11/2026']
+    ];
+    for (const [iso, trecho] of intimacoes) assert.equal(dataEhDeAto(iso, trecho), false, trecho);
+  });
+
+  it('o servidor tira a data de ato e a forma junto, e mantém tribunal e prazo', () => {
+    const entrada: IntimacaoEnviada = {
+      paragrafos: [
+        'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO. Processo [PROCESSO_1].',
+        'Fica a parte [PARTE_1] intimada do evento processual ocorrido em 29/10/2026, no prazo de 15 (quinze) dias, para apresentar contrarrazões.'
+      ]
+    };
+    const saida: SaidaIntimacao = { ...OK, tipoEvento: 'intimacao_portal', dataEvento: '2026-10-29', trechoData: 'intimada do evento processual ocorrido em 29/10/2026', trechoPrazo: 'no prazo de 15 (quinze) dias' };
+    assert.equal(conferirIntimacao(saida, entrada), 'a data é a de um ato do processo, não a da intimação');
+    assert.deepEqual(apararIntimacao(saida, entrada), { ...OK, tipoEvento: 'nao_informado', dataEvento: '', trechoData: '', trechoPrazo: 'no prazo de 15 (quinze) dias' });
+  });
+
+  it('a instrução manda deixar a data vazia quando só há a de um ato', () => {
+    assert.match(t.instrucoes, /evento processual ocorrido em/);
   });
 });
 
@@ -294,5 +333,13 @@ describe('Tarefa ler-intimacao: prazo escrito no trecho', () => {
       [400, 'quatrocentos dias']
     ];
     for (const [dias, trecho] of errados) assert.equal(prazoApareceNoTrecho(dias, trecho), false, `${dias} / ${trecho}`);
+  });
+});
+
+describe('Tarefa ler-intimacao: instruções (v5)', () => {
+  it('dizem que a data de um ato do processo não é a data do evento e que vários prazos diferentes ficam em 0', () => {
+    assert.match(t.instrucoes, /data de um ato do processo NÃO é a data do evento/);
+    assert.match(t.instrucoes, /ocorrido em/);
+    assert.match(t.instrucoes, /prazos diferentes para atos diferentes[^.]*use 0/);
   });
 });
