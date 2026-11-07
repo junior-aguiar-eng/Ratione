@@ -5,7 +5,7 @@
  *   rodar [--casos a,b] [--max-usd 0.5] [--confirmar]
  *                                          roda a tarefa sobre os casos VALIDADOS e grava o relatório em `apps/web/corpus-intimacoes/rodadas/`;
  *                                          sem --confirmar só mostra a estimativa; com ele chama o modelo (precisa de ANTHROPIC_API_KEY)
- *   rodar-externa --arquivo <amostra.json> [--max-usd 0.1] [--confirmar]
+ *   rodar-externa --arquivo <amostra.json> [--casos a,b | --desde 44] [--max-usd 0.1] [--confirmar]
  *                                          mede a tarefa sobre uma amostra de intimações REAIS mantida fora do repositório (o texto traz nome de
  *                                          partes). O relatório vai para a pasta do arquivo, nunca para o repositório. Sem validação do revisor
  *                                          o gabarito é só proposto, e o relatório avisa isso no topo. Formato dos itens: `casoDeAmostraExterna`.
@@ -26,10 +26,25 @@ function opcoes(args: string[]): Map<string, string> {
   const flags = new Map<string, string>();
   for (let i = 0; i < args.length; i++) {
     if (!args[i].startsWith('--')) continue;
-    if (args[i + 1] !== undefined && !args[i + 1].startsWith('--')) flags.set(args[i].slice(2), args[++i]);
-    else flags.set(args[i].slice(2), 'sim');
+    // Valores soltos depois da opção entram juntos: o PowerShell separa `a,b,c` em argumentos distintos
+    const valores: string[] = [];
+    while (args[i + 1] !== undefined && !args[i + 1].startsWith('--')) valores.push(args[++i]);
+    flags.set(args[i - valores.length].slice(2), valores.length > 0 ? valores.join(',') : 'sim');
   }
   return flags;
+}
+
+/** `--casos a,b,c` (vírgula, espaço ou argumentos separados) e `--desde N` (casos de número N em diante); sem nenhum dos dois, todos. */
+function escolher<T extends { id: string }>(todos: readonly T[], flags: Map<string, string>): T[] {
+  const so = flags.get('casos')?.split(/[,\s]+/).filter(Boolean);
+  const desde = flags.has('desde') ? Number(flags.get('desde')) : null;
+  if (desde !== null && !Number.isInteger(desde)) sair('--desde precisa de um número inteiro, por exemplo --desde 44.');
+  const escolhidos = todos.filter(c => (!so || so.includes(c.id)) && (desde === null || Number(c.id.split('-')[1]) >= desde));
+  if (escolhidos.length === 0) {
+    const pedidos = so ? `--casos ${so.slice(0, 3).join(',')}${so.length > 3 ? ',…' : ''}` : `--desde ${desde}`;
+    sair(`Nenhum caso casou com ${pedidos}. Ids disponíveis: ${todos[0]?.id} … ${todos[todos.length - 1]?.id} (${todos.length} no total).`);
+  }
+  return escolhidos;
 }
 
 function sair(mensagem: string): never {
@@ -44,8 +59,7 @@ async function folha() {
 }
 
 async function rodar(flags: Map<string, string>) {
-  const so = flags.get('casos')?.split(',');
-  const casos = CASOS.filter(intimacaoValidada).filter(c => !so || so.includes(c.id));
+  const casos = escolher(CASOS.filter(intimacaoValidada), flags);
   if (casos.length === 0) sair('Nenhum caso validado para rodar (a validação é registrada no campo "validacao" de cada caso em casos.ts).');
   const maxUsd = Number(flags.get('max-usd') ?? '0.5');
   const teto = custoMaximoUsd(lerIntimacao);
@@ -84,8 +98,7 @@ async function rodarExterna(flags: Map<string, string>) {
   const arquivo = flags.get('arquivo') ?? sair('Informe --arquivo <caminho do JSON da amostra>.');
   const bruto: unknown = JSON.parse(await readFile(arquivo, 'utf8'));
   if (!Array.isArray(bruto) || bruto.length === 0) sair('O arquivo precisa ser uma lista de itens, com ao menos um.');
-  const so = flags.get('casos')?.split(',');
-  const casos = bruto.map(casoDeAmostraExterna).filter(c => !so || so.includes(c.id));
+  const casos = escolher(bruto.map(casoDeAmostraExterna), flags);
   const naoValidados = casos.filter(c => !intimacaoValidada(c)).length;
   const maxUsd = Number(flags.get('max-usd') ?? '0.1');
   const teto = custoMaximoUsd(lerIntimacao);
