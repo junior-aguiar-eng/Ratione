@@ -60,6 +60,13 @@ describe('Medição: comparação e métricas', () => {
     assert.equal(compararCampos(neutro, neutro).dias, 'certo');
   });
 
+  /** O nome do tribunal como o texto o escreve: a linha que o cita e a anterior, porque o estado às vezes está na linha de cima ("Poder Judiciário do Estado de…"). */
+  const trechoDoTribunal = (texto: string) => {
+    const linhas = texto.split('\n').filter(l => l.trim() !== '');
+    const i = linhas.findIndex(l => /tribunal|\bTR[TF]\d?\b|\bTJ[A-Z]{2,3}\b/i.test(l));
+    return i < 0 ? '' : linhas.slice(Math.max(0, i - 1), i + 1).join('\n');
+  };
+
   /** A saída que um modelo perfeito daria: cada campo preenchido com um trecho que existe no texto enviado. */
   const saidaCerta = (c: (typeof CASOS)[number]) => {
     const e = c.esperado;
@@ -67,7 +74,7 @@ describe('Medição: comparação e métricas', () => {
     const trecho = (re: RegExp) => texto.match(re)?.[0] ?? '';
     return {
       tribunal: e.tribunal,
-      trechoTribunal: e.tribunal ? trecho(/(tribunal[^\n]{3,80}|\bTR[TF]\d?[^\n]{0,40}|\bTJ[A-Z]{2,3}\b[^\n]{0,40})/i) : '',
+      trechoTribunal: e.tribunal ? trechoDoTribunal(texto) : '',
       tipoEvento: e.tipoEvento,
       dataEvento: e.dataEvento,
       trechoData: e.dataEvento ? (texto.split('\n').find(l => dataApareceNoTrecho(e.dataEvento, l)) ?? '') : '',
@@ -96,17 +103,16 @@ describe('Medição: comparação e métricas', () => {
     for (const [i, c] of CASOS.slice(0, 5).entries()) for (const dado of c.dadosFicticios) assert.ok(!vistas[i].includes(dado), `${c.id}: ${dado}`);
   });
 
-  it('data fora do trecho é descartada pelo servidor; tribunal errado com trecho verdadeiro chega à pessoa e conta como erro', async () => {
+  it('data fora do trecho e tribunal que o trecho não sustenta são descartados pelo servidor', async () => {
     const c = CASOS[0];
     const certa = saidaCerta(c);
     const errada = await executarIntimacao(c, modeloQue(() => ({ ...certa, dataEvento: '2026-10-06', trechoData: certa.trechoData.replace('05/10/2026', '06/10/2026') })));
     // O trecho trocado não existe no texto: a conferência do servidor recusa antes de a pessoa ver
     assert.equal(errada.estado, 'descartada');
-    // Sigla errada com um trecho verdadeiro do texto: a conferência do servidor não compara a sigla com o trecho, então a resposta chega
-    // à pessoa e só a medição a pega como erro
+    // Sigla errada com um trecho verdadeiro do texto: o trecho não identifica o tribunal, e a conferência do servidor descarta
     const outroTribunal = await executarIntimacao(c, modeloQue(() => ({ ...certa, tribunal: 'TJRJ' })));
-    assert.equal(outroTribunal.estado, 'ok');
-    assert.equal(outroTribunal.veredito?.tribunal, 'errado');
+    assert.equal(outroTribunal.estado, 'descartada');
+    assert.equal(outroTribunal.motivo, 'o trecho não identifica o tribunal');
   });
 
   it('forma da intimação errada passa pela conferência (não há trecho a checar) e entra como erro na medição', async () => {
