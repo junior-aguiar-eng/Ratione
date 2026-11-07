@@ -296,3 +296,11 @@ describe('Tarefa ler-intimacao: prazo escrito no trecho', () => {
     for (const [dias, trecho] of errados) assert.equal(prazoApareceNoTrecho(dias, trecho), false, `${dias} / ${trecho}`);
   });
 });
+
+describe('Tarefa ler-intimacao: instruções (v5)', () => {
+  it('dizem que a data de um ato do processo não é a data do evento e que vários prazos diferentes ficam em 0', () => {
+    assert.match(t.instrucoes, /data de um ato do processo NÃO é a data do evento/);
+    assert.match(t.instrucoes, /ocorrido em/);
+    assert.match(t.instrucoes, /prazos diferentes para atos diferentes[^.]*use 0/);
+  });
+});
