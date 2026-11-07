@@ -23,8 +23,8 @@ Regras:
 - Use somente o texto. Não deduza datas, tribunais nem prazos que o texto não diga. O que o texto não disser fica vazio: texto vazio, 0 ou "nao_informado".
 - tribunal: a sigla do tribunal que o texto nomeia, só se for uma destas: ${SIGLAS}. Por exemplo, "Tribunal de Justiça do Estado de São Paulo" é TJSP. Se o texto não nomear o tribunal, deixe vazio. Em trechoTribunal copie o nome do tribunal por inteiro, com o estado ou a região, mesmo que ele ocupe duas linhas (por exemplo, "Poder Judiciário do Estado de Santa Catarina" e, na linha seguinte, "Tribunal de Justiça"): o servidor recusa o trecho que sozinho não bastaria para saber de que tribunal se trata.
 - tipoEvento: escolha pela palavra que o texto usa para o evento, porque disponibilização e publicação são datas diferentes (a publicação é o dia útil seguinte à disponibilização). "disponibilizacao_dje" se o texto diz que foi "disponibilizado" ou "disponibilizada" (no DJe ou no Diário, mesmo sem citá-lo), inclusive quando também fala em publicação. "publicacao" se o texto diz que foi "publicado" ou "publicada" e não fala em disponibilização, ainda que diga "publicado no DJe": nesse caso NÃO use "disponibilizacao_dje". "intimacao_portal" se diz que a intimação foi feita pelo portal ou pelo sistema eletrônico; "carga_ou_audiencia" se foi por carga ou remessa dos autos ou em audiência; do contrário, "nao_informado".
-- dataEvento: a data desse evento, no formato AAAA-MM-DD (as datas do texto estão em dia/mês/ano). Se o texto trouxer mais de uma data (por exemplo, a da decisão e a da disponibilização), use a do evento do tipoEvento, e não a da decisão.
-- diasMencionados: o número de dias do prazo que o texto manda cumprir; 0 se não disser.
+- dataEvento: a data desse evento, no formato AAAA-MM-DD (as datas do texto estão em dia/mês/ano). Se o texto trouxer mais de uma data (por exemplo, a da decisão e a da disponibilização), use a do evento do tipoEvento, e não a da decisão. Só vale a data em que a pessoa foi intimada ou tomou ciência (disponibilização, publicação ou intimação no portal). A data de um ato do processo NÃO é a data do evento: "intimada do evento processual ocorrido em 29/10/2026", "Evento 112 - 22/10/2026", a data da decisão, do despacho, da juntada ou de uma publicação anterior que o texto apenas cita. Se a única data do texto for de um ato, deixe dataEvento vazio e tipoEvento "nao_informado".
+- diasMencionados: o número de dias do prazo que o texto manda a parte intimada cumprir; 0 se não disser. Se o texto fixar prazos diferentes para atos diferentes (por exemplo, 15 dias para contestar e 5 dias para indicar provas), use 0: a pessoa escolhe qual vale. Se o mesmo número se repete, use-o.
 - Em cada campo "trecho", copie, sem alterar nenhuma palavra, a parte do texto em que você se baseou; deixe vazio se o campo correspondente está vazio.
 - Dados pessoais foram trocados por marcadores como [PARTE_1]: ignore-os.
 - Responda no formato pedido, sem texto fora dele.`;
@@ -190,7 +190,7 @@ export const lerIntimacao: TarefaIA<IntimacaoEnviada, IntimacaoEnviada, SaidaInt
   esforco: 'low',
   maxTokensSaida: 1400,
   maxCaracteresMensagem: 12_000,
-  versao: 'v4-2026-11-07',
+  versao: 'v5-2026-11-07',
   guardaResultado: false,
   instrucoes: INSTRUCOES,
   ferramentas: [],
