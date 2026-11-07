@@ -21,7 +21,7 @@ export type Valores = z.infer<typeof ValoresSchema>;
 
 export const CasoDeIntimacaoSchema = z
   .object({
-    id: z.string().regex(/^int-\d{2}-[a-z0-9-]{3,50}$/),
+    id: z.string().regex(/^(?:int|real)-\d{2,3}-[a-z0-9-]{3,50}$/),
     descricao: z.string().min(10).max(300),
     texto: z.string().min(100),
     dadosFicticios: z.array(z.string().min(3)).max(20),
@@ -33,6 +33,33 @@ export type CasoDeIntimacao = z.infer<typeof CasoDeIntimacaoSchema>;
 
 export type CasoValidadoDeIntimacao = CasoDeIntimacao & { validacao: { por: string; em: string } };
 export const intimacaoValidada = (c: CasoDeIntimacao): c is CasoValidadoDeIntimacao => c.validacao !== null;
+
+/**
+ * Item de uma amostra de intimações REAIS mantida FORA do repositório (texto com nome de partes): `{ id, origem, texto, esperadoProposto, validacao }`.
+ * `origem` leva tribunal, tipo de documento e órgão, só para descrever o caso no relatório. `validacao` fica `null` até o revisor conferir o gabarito.
+ */
+export const ItemDeAmostraExternaSchema = z
+  .object({
+    id: z.string(),
+    origem: z.object({ tribunal: z.string(), orgao: z.string(), tipoDocumento: z.string() }).passthrough(),
+    texto: z.string(),
+    esperadoProposto: ValoresSchema,
+    validacao: z.object({ por: z.string().min(5), em: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }).strict().nullable()
+  })
+  .passthrough();
+
+/** Converte um item da amostra externa em caso do avaliador; o gabarito proposto vale como `esperado`. */
+export function casoDeAmostraExterna(bruto: unknown): CasoDeIntimacao {
+  const item = ItemDeAmostraExternaSchema.parse(bruto);
+  return CasoDeIntimacaoSchema.parse({
+    id: item.id,
+    descricao: `${item.origem.tribunal} · ${item.origem.tipoDocumento} · ${item.origem.orgao}`.slice(0, 300).padEnd(10, '.'),
+    texto: item.texto,
+    dadosFicticios: [],
+    esperado: item.esperadoProposto,
+    validacao: item.validacao
+  });
+}
 
 /** Os parágrafos como o navegador os envia (segmentados e pseudonimizados). */
 export const paragrafosDaIntimacao = (c: Pick<CasoDeIntimacao, 'texto'>): string[] => prepararDecisao(c.texto).paragrafos;

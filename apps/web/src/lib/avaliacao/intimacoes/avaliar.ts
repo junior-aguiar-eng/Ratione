@@ -119,11 +119,12 @@ const ROTULO_CAMPO: Record<Campo, string> = { dias: 'Dias do prazo', tipoEvento:
 const pct = (n: number, d: number) => (d === 0 ? '—' : `${Math.round((n / d) * 100)}%`);
 const mostra = (v: Valores[Campo]) => (v === '' ? '(vazio)' : String(v));
 
-export function montarRelatorio(args: { rodada: string; modelo: string; casos: readonly CasoDeIntimacao[]; resultados: readonly ResultadoDaIntimacao[] }): string {
+export function montarRelatorio(args: { rodada: string; modelo: string; casos: readonly CasoDeIntimacao[]; resultados: readonly ResultadoDaIntimacao[]; aviso?: string }): string {
   const m = calcularMetricas(args.resultados);
   const linhas: string[] = [
     `# Medição de ler-intimacao · rodada ${args.rodada}`,
     '',
+    ...(args.aviso ? [`> **${args.aviso}**`, ''] : []),
     `Modelo: ${args.modelo}. Casos validados: ${m.casos}. Respondidos: ${m.respondidos}. Descartados (fora do formato ou recusados pela conferência do servidor): ${m.descartados}. Custo: US$ ${m.custoUsd.toFixed(4)}.`,
     '',
     `Intimações em que os quatro campos bateram com o gabarito: **${m.perfeitos} de ${m.respondidos}** (${pct(m.perfeitos, m.respondidos)}).`,
