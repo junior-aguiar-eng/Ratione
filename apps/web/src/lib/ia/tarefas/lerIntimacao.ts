@@ -105,6 +105,39 @@ export function trechoIdentificaTribunal(sigla: string, trecho: string): boolean
   });
 }
 
+const UNIDADES = ['', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove'];
+const DE_DEZ_A_DEZENOVE = ['dez', 'onze', 'doze', 'treze', 'quatorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove'];
+const DEZENAS = ['', '', 'vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta', 'setenta', 'oitenta', 'noventa'];
+const CENTENAS = ['', 'cento', 'duzentos', 'trezentos'];
+
+/** Como um prazo de 1 a 365 dias se escreve por extenso (sem acento, em minúsculas); aceita "uma" e "duas" no fim e "catorze" ou "quatorze". */
+function numeroPorExtenso(n: number): string[] {
+  if (n < 1 || n > 365) return [];
+  let base: string;
+  if (n < 10) base = UNIDADES[n];
+  else if (n < 20) base = DE_DEZ_A_DEZENOVE[n - 10];
+  else if (n < 100) base = DEZENAS[Math.floor(n / 10)] + (n % 10 ? ` e ${UNIDADES[n % 10]}` : '');
+  else if (n === 100) base = 'cem';
+  else {
+    const resto = n % 100;
+    base = CENTENAS[Math.floor(n / 100)] + (resto ? ` e ${numeroPorExtenso(resto)[0]}` : '');
+  }
+  const formas = new Set([base, base.replace('quatorze', 'catorze'), base.replace(/\bum$/, 'uma'), base.replace(/\bdois$/, 'duas')]);
+  return [...formas].filter(Boolean);
+}
+
+/**
+ * O trecho escreve o prazo de `dias` dias: em algarismos, com ou sem zero à esquerda ("15", "05"), ou por extenso colado à palavra "dias" ("dez dias", "cinco (5) dias úteis").
+ * O extenso exige a palavra "dias" depois, para que um "um" solto no texto não valide um prazo de 1 dia.
+ */
+export function prazoApareceNoTrecho(dias: number, trecho: string): boolean {
+  if (new RegExp(`(?<![0-9])0*${dias}(?![0-9])`).test(trecho)) return true;
+  const t = normalizarParaComparar(trecho);
+  return numeroPorExtenso(dias).some(forma =>
+    new RegExp(`(?<![a-z])(?<!\\be\\s+)${forma.replace(/ /g, '\\s+')}(?![a-z])\\s*(?:\\([^)]*\\)\\s*)?(?:(?:uteis|corridos)\\s+)?dias?(?![a-z])`).test(t)
+  );
+}
+
 /** A conferência no servidor: cada campo preenchido tem o trecho no texto e o valor existe; o que não passa descarta a saída inteira. */
 export function conferirIntimacao(s: SaidaIntimacao, c: IntimacaoEnviada): string | null {
   if (s.tribunal !== '') {
@@ -120,7 +153,7 @@ export function conferirIntimacao(s: SaidaIntimacao, c: IntimacaoEnviada): strin
   }
   if (s.diasMencionados > 0) {
     if (!noTexto(s.trechoPrazo, c)) return 'trecho do prazo não está no texto';
-    if (!new RegExp(`(?<!\\d)${s.diasMencionados}(?!\\d)`).test(s.trechoPrazo)) return 'o número de dias não está no trecho';
+    if (!prazoApareceNoTrecho(s.diasMencionados, s.trechoPrazo)) return 'o número de dias não está no trecho';
   }
   return null;
 }
