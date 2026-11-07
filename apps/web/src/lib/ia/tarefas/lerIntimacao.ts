@@ -23,7 +23,7 @@ Regras:
 - Use somente o texto. Não deduza datas, tribunais nem prazos que o texto não diga. O que o texto não disser fica vazio: texto vazio, 0 ou "nao_informado".
 - tribunal: a sigla do tribunal que o texto nomeia, só se for uma destas: ${SIGLAS}. Por exemplo, "Tribunal de Justiça do Estado de São Paulo" é TJSP. Se o texto não nomear o tribunal, deixe vazio. Em trechoTribunal copie o nome do tribunal por inteiro, com o estado ou a região, mesmo que ele ocupe duas linhas (por exemplo, "Poder Judiciário do Estado de Santa Catarina" e, na linha seguinte, "Tribunal de Justiça"): o servidor recusa o trecho que sozinho não bastaria para saber de que tribunal se trata.
 - tipoEvento: escolha pela palavra que o texto usa para o evento, porque disponibilização e publicação são datas diferentes (a publicação é o dia útil seguinte à disponibilização). "disponibilizacao_dje" se o texto diz que foi "disponibilizado" ou "disponibilizada" (no DJe ou no Diário, mesmo sem citá-lo), inclusive quando também fala em publicação. "publicacao" se o texto diz que foi "publicado" ou "publicada" e não fala em disponibilização, ainda que diga "publicado no DJe": nesse caso NÃO use "disponibilizacao_dje". "intimacao_portal" se diz que a intimação foi feita pelo portal ou pelo sistema eletrônico; "carga_ou_audiencia" se foi por carga ou remessa dos autos ou em audiência; do contrário, "nao_informado".
-- dataEvento: a data desse evento, no formato AAAA-MM-DD (as datas do texto estão em dia/mês/ano). Se o texto trouxer mais de uma data (por exemplo, a da decisão e a da disponibilização), use a do evento do tipoEvento, e não a da decisão.
+- dataEvento: a data desse evento, no formato AAAA-MM-DD (as datas do texto estão em dia/mês/ano). Se o texto trouxer mais de uma data (por exemplo, a da decisão e a da disponibilização), use a do evento do tipoEvento, e não a da decisão. A data é sempre a de o texto ter sido disponibilizado, publicado ou comunicado à parte (a da intimação), nunca a de um ato do processo que o texto apenas cita: "evento processual ocorrido em", "decisão proferida em", "petição juntada em", "audiência realizada em". Se o texto só traz a data de um ato desses e não diz quando a intimação foi feita, deixe dataEvento e trechoData vazios e tipoEvento "nao_informado". No trecho da data, copie só a oração da própria data, sem a data de outro ato.
 - diasMencionados: o número de dias do prazo que o texto manda cumprir; 0 se não disser.
 - Em cada campo "trecho", copie, sem alterar nenhuma palavra, a parte do texto em que você se baseou; deixe vazio se o campo correspondente está vazio.
 - Dados pessoais foram trocados por marcadores como [PARTE_1]: ignore-os.
@@ -64,13 +64,38 @@ const MESES = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho
 
 /** A data (AAAA-MM-DD) está escrita no trecho: 03/11/2026, 3.11.26, 03-11-2026 ou "3 de novembro de 2026". */
 export function dataApareceNoTrecho(iso: string, trecho: string): boolean {
+  return posicaoDaData(iso, normalizarParaComparar(trecho)) !== null;
+}
+
+/** Onde a data (AAAA-MM-DD) começa no trecho já normalizado, ou `null` se não está escrita nele. */
+function posicaoDaData(iso: string, t: string): number | null {
   const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!m) return false;
+  if (!m) return null;
   const [ano, mes, dia] = [m[1], Number(m[2]), Number(m[3])];
-  const t = normalizarParaComparar(trecho);
   const numerica = new RegExp(`(?<!\\d)0?${dia}\\s*[/.\\-]\\s*0?${mes}\\s*[/.\\-]\\s*(?:${ano}|${ano.slice(2)})(?!\\d)`);
   const porExtenso = new RegExp(`(?<!\\d)0?${dia}\\s*(?:o|º)?\\s+de\\s+${MESES[mes - 1]}\\s+de\\s+${ano}(?!\\d)`);
-  return numerica.test(t) || porExtenso.test(t);
+  const achados = [numerica.exec(t)?.index, porExtenso.exec(t)?.index].filter((i): i is number => i !== undefined);
+  return achados.length ? Math.min(...achados) : null;
+}
+
+/** Palavras que ligam a data a um ato do processo (decisão proferida, evento ocorrido, petição juntada), e não ao ato de intimar. */
+const LIGA_A_ATO = /(?<![a-z])(?:evento\s+processual|ocorrid[oa]s?|proferid[oa]s?|juntad[oa]s?|lavrad[oa]s?|protocolad[oa]s?|assinad[oa]s?)(?![a-z])/;
+/** Onde a oração que antecede a data começa: ponto, ponto e vírgula, dois pontos, vírgula, quebra de linha, outra data ou " e ". */
+const COMECO_DA_ORACAO = /[.;:,\n]|\d{1,2}\s*[/.\-]\s*\d{1,2}\s*[/.\-]\s*\d{2,4}|\d{1,2}\s+de\s+[a-z]+\s+de\s+\d{4}|\se\s/g;
+
+/**
+ * A data do trecho é a de um ato do processo, e não a da intimação. Na medição com intimações reais, a IA tomou "intimada do evento processual ocorrido em
+ * 29/10/2026" como data da intimação, e a pessoa contaria o prazo de uma data que não é a dela. Olha só a oração que vem logo antes da data: "decisão proferida
+ * em 29/10 e disponibilizada em 03/11" não é recusada para 03/11, porque o "proferida" fica na oração anterior.
+ */
+export function dataEhDeAto(iso: string, trecho: string): boolean {
+  const t = normalizarParaComparar(trecho);
+  const pos = posicaoDaData(iso, t);
+  if (pos === null) return false;
+  const antes = t.slice(0, pos);
+  let inicio = 0;
+  for (const m of antes.matchAll(COMECO_DA_ORACAO)) inicio = m.index + m[0].length;
+  return LIGA_A_ATO.test(antes.slice(inicio));
 }
 
 const noTexto = (trecho: string, c: IntimacaoEnviada) => {
@@ -151,6 +176,7 @@ const motivoDaData = (s: SaidaIntimacao, c: IntimacaoEnviada): string | null => 
   if (!ehDataIsoValida(s.dataEvento)) return 'data inválida';
   if (!noTexto(s.trechoData, c)) return 'trecho da data não está no texto';
   if (!dataApareceNoTrecho(s.dataEvento, s.trechoData)) return 'a data não está escrita no trecho';
+  if (dataEhDeAto(s.dataEvento, s.trechoData)) return 'a data é a de um ato do processo, não a da intimação';
   return null;
 };
 const motivoDoPrazo = (s: SaidaIntimacao, c: IntimacaoEnviada): string | null => {
@@ -190,7 +216,7 @@ export const lerIntimacao: TarefaIA<IntimacaoEnviada, IntimacaoEnviada, SaidaInt
   esforco: 'low',
   maxTokensSaida: 1400,
   maxCaracteresMensagem: 12_000,
-  versao: 'v4-2026-11-07',
+  versao: 'v5-2026-11-07',
   guardaResultado: false,
   instrucoes: INSTRUCOES,
   ferramentas: [],
