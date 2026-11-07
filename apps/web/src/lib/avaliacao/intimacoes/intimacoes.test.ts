@@ -103,16 +103,21 @@ describe('Medição: comparação e métricas', () => {
     for (const [i, c] of CASOS.slice(0, 5).entries()) for (const dado of c.dadosFicticios) assert.ok(!vistas[i].includes(dado), `${c.id}: ${dado}`);
   });
 
-  it('data fora do trecho e tribunal que o trecho não sustenta são descartados pelo servidor', async () => {
+  it('data sem apoio no texto e tribunal que o trecho não sustenta saem da resposta; o resto segue e a medição conta os campos retirados', async () => {
     const c = CASOS[0];
     const certa = saidaCerta(c);
-    const errada = await executarIntimacao(c, modeloQue(() => ({ ...certa, dataEvento: '2026-10-06', trechoData: certa.trechoData.replace('05/10/2026', '06/10/2026') })));
-    // O trecho trocado não existe no texto: a conferência do servidor recusa antes de a pessoa ver
-    assert.equal(errada.estado, 'descartada');
-    // Sigla errada com um trecho verdadeiro do texto: o trecho não identifica o tribunal, e a conferência do servidor descarta
+    // O trecho trocado não existe no texto: a data sai, e a forma junto (sem data não serve)
+    const semData = await executarIntimacao(c, modeloQue(() => ({ ...certa, dataEvento: '2026-10-06', trechoData: certa.trechoData.replace('05/10/2026', '06/10/2026') })));
+    assert.equal(semData.estado, 'ok');
+    assert.deepEqual(semData.aparados, ['tipoEvento', 'dataEvento']);
+    assert.equal(semData.obtido?.dataEvento, '');
+    assert.equal(semData.obtido?.dias, c.esperado.dias);
+    // Sigla errada com um trecho verdadeiro do texto: o trecho não identifica o tribunal, e só o tribunal sai
     const outroTribunal = await executarIntimacao(c, modeloQue(() => ({ ...certa, tribunal: 'TJRJ' })));
-    assert.equal(outroTribunal.estado, 'descartada');
-    assert.equal(outroTribunal.motivo, 'o trecho não identifica o tribunal');
+    assert.equal(outroTribunal.estado, 'ok');
+    assert.deepEqual(outroTribunal.aparados, ['tribunal']);
+    assert.equal(outroTribunal.veredito?.tribunal, 'omitido');
+    assert.equal(calcularMetricas([semData, outroTribunal]).camposAparados, 3);
   });
 
   it('forma da intimação errada passa pela conferência (não há trecho a checar) e entra como erro na medição', async () => {

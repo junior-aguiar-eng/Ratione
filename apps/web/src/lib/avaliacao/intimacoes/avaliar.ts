@@ -40,6 +40,8 @@ export interface ResultadoDaIntimacao {
   motivo?: string;
   obtido: Valores | null;
   veredito: Record<Campo, Veredito> | null;
+  /** Campos que o servidor retirou da resposta por não terem apoio no texto (a resposta seguiu sem eles). */
+  aparados: Campo[];
   uso?: Uso;
   custoUsd: number;
 }
@@ -47,7 +49,7 @@ export interface ResultadoDaIntimacao {
 const valoresDe = (s: SaidaIntimacao): Valores => ({ dias: s.diasMencionados, tipoEvento: s.tipoEvento, dataEvento: s.dataEvento, tribunal: s.tribunal });
 
 export async function executarIntimacao(caso: CasoDeIntimacao, chamar: ChamarModelo): Promise<ResultadoDaIntimacao> {
-  const base = { casoId: caso.id, obtido: null, veredito: null, custoUsd: 0 };
+  const base = { casoId: caso.id, obtido: null, veredito: null, aparados: [] as Campo[], custoUsd: 0 };
   const entrada = lerIntimacao.validarEntrada({ paragrafos: paragrafosDaIntimacao(caso) });
   if (entrada === null) return { ...base, estado: 'nao_enviavel', motivo: 'entrada recusada pela tarefa (tamanho ou dado pessoal detectável)' };
   const mensagem = lerIntimacao.mensagem(entrada);
@@ -71,12 +73,14 @@ export async function executarIntimacao(caso: CasoDeIntimacao, chamar: ChamarMod
   } catch {
     json = undefined;
   }
-  const saida = lerIntimacao.saida.safeParse(json);
+  const lida = lerIntimacao.saida.safeParse(json);
+  const saida = lida.success ? { success: true as const, data: lerIntimacao.aparar?.(lida.data, entrada) ?? lida.data } : lida;
   const motivo = !saida.success ? 'fora do formato' : (lerIntimacao.conferirSaida?.(saida.data, entrada) ?? null);
   if (!saida.success || motivo) return { ...base, estado: 'descartada', motivo: motivo ?? 'fora do formato', uso: r.uso, custoUsd: custo };
 
   const obtido = valoresDe(saida.data);
-  return { casoId: caso.id, estado: 'ok', obtido, veredito: compararCampos(caso.esperado, obtido), uso: r.uso, custoUsd: custo };
+  const aparados = lida.success ? CAMPOS.filter(c => valoresDe(lida.data)[c] !== obtido[c]) : [];
+  return { casoId: caso.id, estado: 'ok', obtido, veredito: compararCampos(caso.esperado, obtido), aparados, uso: r.uso, custoUsd: custo };
 }
 
 // ─── Métricas e relatório ─────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -91,6 +95,8 @@ export interface MetricasDaRodada {
   perfeitos: number;
   /** Valores errados ou inventados: o que só a conferência da pessoa pega. */
   erros: number;
+  /** Campos retirados pelo servidor por falta de apoio no texto (a resposta seguiu sem eles). */
+  camposAparados: number;
   custoUsd: number;
 }
 
@@ -100,11 +106,13 @@ export function calcularMetricas(resultados: readonly ResultadoDaIntimacao[]): M
   let respondidos = 0;
   let perfeitos = 0;
   let erros = 0;
+  let camposAparados = 0;
   let custo = 0;
   for (const r of resultados) {
     custo += r.custoUsd;
     if (r.estado !== 'ok' || !r.veredito) continue;
     respondidos++;
+    camposAparados += r.aparados.length;
     for (const c of CAMPOS) {
       porCampo[c][r.veredito[c]]++;
       if (r.veredito[c] === 'errado' || r.veredito[c] === 'inventado') erros++;
@@ -112,7 +120,7 @@ export function calcularMetricas(resultados: readonly ResultadoDaIntimacao[]): M
     if (CAMPOS.every(c => r.veredito![c] === 'certo')) perfeitos++;
   }
   const chegaram = resultados.filter(r => r.estado !== 'nao_enviavel');
-  return { casos: resultados.length, respondidos, descartados: chegaram.length - respondidos, porCampo, perfeitos, erros, custoUsd: Math.round(custo * 1e6) / 1e6 };
+  return { casos: resultados.length, respondidos, descartados: chegaram.length - respondidos, porCampo, perfeitos, erros, camposAparados, custoUsd: Math.round(custo * 1e6) / 1e6 };
 }
 
 const ROTULO_CAMPO: Record<Campo, string> = { dias: 'Dias do prazo', tipoEvento: 'Forma da intimação', dataEvento: 'Data do evento', tribunal: 'Tribunal' };
@@ -129,6 +137,7 @@ export function montarRelatorio(args: { rodada: string; modelo: string; casos: r
     '',
     `Intimações em que os quatro campos bateram com o gabarito: **${m.perfeitos} de ${m.respondidos}** (${pct(m.perfeitos, m.respondidos)}).`,
     `Valores **errados ou inventados** (só a conferência da pessoa os pega): **${m.erros}**.`,
+    `Campos que o servidor retirou por falta de apoio no texto, sem perder o resto da resposta: **${m.camposAparados}**.`,
     '',
     '| Campo | Certo | Omitido | Errado | Inventado |',
     '|---|---|---|---|---|',

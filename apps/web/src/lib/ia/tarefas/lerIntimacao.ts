@@ -138,24 +138,48 @@ export function prazoApareceNoTrecho(dias: number, trecho: string): boolean {
   );
 }
 
+// Uma verificação por campo: devolve o motivo da recusa, ou `null`. `aparar` e `conferirIntimacao` usam as mesmas, para nunca divergirem.
+const motivoDoTribunal = (s: SaidaIntimacao, c: IntimacaoEnviada): string | null => {
+  if (s.tribunal === '') return null;
+  if (!Object.hasOwn(TRIBUNAIS_BRASIL, s.tribunal)) return 'tribunal fora da lista';
+  if (!noTexto(s.trechoTribunal, c)) return 'trecho do tribunal não está no texto';
+  if (!trechoIdentificaTribunal(s.tribunal, s.trechoTribunal)) return 'o trecho não identifica o tribunal';
+  return null;
+};
+const motivoDaData = (s: SaidaIntimacao, c: IntimacaoEnviada): string | null => {
+  if (s.dataEvento === '') return null;
+  if (!ehDataIsoValida(s.dataEvento)) return 'data inválida';
+  if (!noTexto(s.trechoData, c)) return 'trecho da data não está no texto';
+  if (!dataApareceNoTrecho(s.dataEvento, s.trechoData)) return 'a data não está escrita no trecho';
+  return null;
+};
+const motivoDoPrazo = (s: SaidaIntimacao, c: IntimacaoEnviada): string | null => {
+  if (s.diasMencionados <= 0) return null;
+  if (!noTexto(s.trechoPrazo, c)) return 'trecho do prazo não está no texto';
+  if (!prazoApareceNoTrecho(s.diasMencionados, s.trechoPrazo)) return 'o número de dias não está no trecho';
+  return null;
+};
+
+/**
+ * Tira da saída só o campo que o texto não sustenta, deixando o valor neutro, e mantém o resto. Antes, um tribunal sem trecho bom descartava também os dias e a
+ * forma, que estavam certos: na medição com 70 intimações reais, 9 de 13 respostas perdidas eram assim. Sem data, a forma da intimação não serve e também sai.
+ * O que sobra passa por `conferirIntimacao` como antes.
+ */
+export function apararIntimacao(s: SaidaIntimacao, c: IntimacaoEnviada): SaidaIntimacao {
+  const r = { ...s };
+  if (motivoDoTribunal(r, c) !== null) Object.assign(r, { tribunal: '', trechoTribunal: '' });
+  if (motivoDaData(r, c) !== null) Object.assign(r, { dataEvento: '', trechoData: '' });
+  if (r.dataEvento === '') r.tipoEvento = 'nao_informado';
+  if (motivoDoPrazo(r, c) !== null) Object.assign(r, { diasMencionados: 0, trechoPrazo: '' });
+  return r;
+}
+
 /** A conferência no servidor: cada campo preenchido tem o trecho no texto e o valor existe; o que não passa descarta a saída inteira. */
 export function conferirIntimacao(s: SaidaIntimacao, c: IntimacaoEnviada): string | null {
-  if (s.tribunal !== '') {
-    if (!Object.hasOwn(TRIBUNAIS_BRASIL, s.tribunal)) return 'tribunal fora da lista';
-    if (!noTexto(s.trechoTribunal, c)) return 'trecho do tribunal não está no texto';
-    if (!trechoIdentificaTribunal(s.tribunal, s.trechoTribunal)) return 'o trecho não identifica o tribunal';
-  }
+  const tribunal = motivoDoTribunal(s, c);
+  if (tribunal) return tribunal;
   if (s.tipoEvento !== 'nao_informado' && s.dataEvento === '') return 'tipo de evento sem data';
-  if (s.dataEvento !== '') {
-    if (!ehDataIsoValida(s.dataEvento)) return 'data inválida';
-    if (!noTexto(s.trechoData, c)) return 'trecho da data não está no texto';
-    if (!dataApareceNoTrecho(s.dataEvento, s.trechoData)) return 'a data não está escrita no trecho';
-  }
-  if (s.diasMencionados > 0) {
-    if (!noTexto(s.trechoPrazo, c)) return 'trecho do prazo não está no texto';
-    if (!prazoApareceNoTrecho(s.diasMencionados, s.trechoPrazo)) return 'o número de dias não está no trecho';
-  }
-  return null;
+  return motivoDaData(s, c) ?? motivoDoPrazo(s, c);
 }
 
 export const lerIntimacao: TarefaIA<IntimacaoEnviada, IntimacaoEnviada, SaidaIntimacao> = {
@@ -164,9 +188,9 @@ export const lerIntimacao: TarefaIA<IntimacaoEnviada, IntimacaoEnviada, SaidaInt
   gatilho: 'Botão "Ler a intimação" no PrazoZero, depois de colar o texto (pessoa logada).',
   modelo: 'claude-haiku-5-5',
   esforco: 'low',
-  maxTokensSaida: 900,
+  maxTokensSaida: 1400,
   maxCaracteresMensagem: 12_000,
-  versao: 'v3-2026-11-07',
+  versao: 'v4-2026-11-07',
   guardaResultado: false,
   instrucoes: INSTRUCOES,
   ferramentas: [],
@@ -192,5 +216,6 @@ export const lerIntimacao: TarefaIA<IntimacaoEnviada, IntimacaoEnviada, SaidaInt
     additionalProperties: false
   },
   saida: SaidaIntimacao,
+  aparar: apararIntimacao,
   conferirSaida: conferirIntimacao
 };
