@@ -80,6 +80,11 @@ export interface TarefaIA<Entrada, Contexto, Saida> {
   esquemaSaida: EsquemaSaida;
   /** Validação da saída depois do modelo; o que não passa é descartado. */
   saida: z.ZodType<Saida>;
+  /**
+   * Opcional, roda antes de `conferirSaida`: tira da saída, deixando o valor neutro, só os campos que o contexto não sustenta, em vez de descartar a
+   * resposta inteira. Serve a tarefas em que cada campo é conferido sozinho e a perda de um não invalida os outros (ex.: ler a intimação).
+   */
+  aparar?: (saida: Saida, contexto: Contexto) => Saida;
   /** Conferência adicional da saída contra o contexto (opcional): devolve o motivo da recusa, ou `null`. */
   conferirSaida?: (saida: Saida, contexto: Contexto) => string | null;
 }

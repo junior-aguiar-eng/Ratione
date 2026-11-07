@@ -193,7 +193,12 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
   } catch {
     json = undefined;
   }
-  const saida = t.saida.safeParse(json);
+  const lida = t.saida.safeParse(json);
+  // Tarefas com `aparar` perdem só o campo que o contexto não sustenta; o resto da resposta segue e é conferido do mesmo jeito
+  const saida = lida.success && t.aparar ? { success: true as const, data: t.aparar(lida.data, contexto) } : lida;
+  if (lida.success && saida.success && JSON.stringify(saida.data) !== JSON.stringify(lida.data)) {
+    dep.avisar?.('IA: campos retirados da saída', { tarefa: t.id, referencia });
+  }
   const motivo = !saida.success ? 'fora do formato' : (t.conferirSaida?.(saida.data, contexto) ?? null);
   if (!saida.success || motivo) {
     dep.avisar?.('IA: saída descartada', { tarefa: t.id, referencia, motivo });

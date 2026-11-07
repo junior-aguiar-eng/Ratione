@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { executarTarefa, type DependenciasExecucao, type Situacao } from '../executar';
 import type { PedidoModelo, ResultadoModelo } from '../contrato';
-import { conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, prazoApareceNoTrecho, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
+import { apararIntimacao, conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, prazoApareceNoTrecho, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
 
 const TEXTO = [
   'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO. Processo [PROCESSO_1]. Apelação cível.',
@@ -145,6 +145,46 @@ describe('Tarefa ler-intimacao: o trecho identifica o tribunal', () => {
   });
 });
 
+describe('Tarefa ler-intimacao: aparar o que o texto não sustenta', () => {
+  it('uma saída toda conferida passa intacta', () => {
+    assert.deepEqual(apararIntimacao(OK, ENTRADA), OK);
+  });
+
+  it('retira cada campo sem apoio e deixa os outros', () => {
+    assert.deepEqual(apararIntimacao({ ...OK, tribunal: 'TJRJ' }, ENTRADA), { ...OK, tribunal: '', trechoTribunal: '' });
+    assert.deepEqual(apararIntimacao({ ...OK, diasMencionados: 30 }, ENTRADA), { ...OK, diasMencionados: 0, trechoPrazo: '' });
+    assert.deepEqual(apararIntimacao({ ...OK, trechoPrazo: 'trecho que não está no texto' }, ENTRADA), { ...OK, diasMencionados: 0, trechoPrazo: '' });
+    assert.deepEqual(apararIntimacao({ ...OK, dataEvento: '2026-11-10', trechoData: 'Disponibilizado no DJe em 10/11/2026' }, ENTRADA), {
+      ...OK,
+      dataEvento: '',
+      trechoData: '',
+      tipoEvento: 'nao_informado'
+    });
+  });
+
+  it('forma sem data não serve: a forma também sai', () => {
+    assert.equal(apararIntimacao({ ...OK, dataEvento: '', trechoData: '' }, ENTRADA).tipoEvento, 'nao_informado');
+  });
+
+  it('o que sobra do aparo sempre passa pela conferência', () => {
+    const ruins: Partial<SaidaIntimacao>[] = [
+      { tribunal: 'XXXX' },
+      { tribunal: 'TJRJ' },
+      { trechoTribunal: 'outro trecho' },
+      { dataEvento: '2026-02-31' },
+      { dataEvento: '2026-11-10', trechoData: 'Disponibilizado no DJe em 10/11/2026' },
+      { trechoData: 'nada disso está no texto' },
+      { diasMencionados: 5 },
+      { diasMencionados: 15, trechoPrazo: 'não está' },
+      { tipoEvento: 'nao_informado', dataEvento: '' }
+    ];
+    for (const troca of ruins) {
+      const s = apararIntimacao({ ...OK, ...troca }, ENTRADA);
+      assert.equal(conferirIntimacao(s, ENTRADA), null, JSON.stringify(troca));
+    }
+  });
+});
+
 describe('Tarefa ler-intimacao: no executor', () => {
   const USO = { input_tokens: 700, output_tokens: 150 };
   const RENOVA = '2026-11-12T03:00:00.000Z';
@@ -182,8 +222,24 @@ describe('Tarefa ler-intimacao: no executor', () => {
     assert.match(pedidos[0].mensagem, /Disponibilizado no DJe em 03\/11\/2026/);
   });
 
-  it('data inventada: saída descartada (502), a cota não é gasta', async () => {
+  it('data inventada: só a data (e a forma, que sem data não serve) sai da resposta; tribunal e prazo seguem, e a cota é gasta', async () => {
     const { dep, registro, finalizados } = deps(JSON.stringify({ ...OK, dataEvento: '2026-11-10', trechoData: 'Disponibilizado no DJe em 10/11/2026' }));
+    const r = await executarTarefa('ler-intimacao', ENTRADA, dep);
+    assert.equal(r.status, 200);
+    assert.deepEqual(r.status === 200 && r.corpo.resposta, { ...OK, dataEvento: '', trechoData: '', tipoEvento: 'nao_informado' });
+    assert.deepEqual(registro, ['iniciar', 'reservar', 'modelo', 'concluir']);
+    assert.deepEqual(finalizados, [{ situacao: 'gerada' }]);
+  });
+
+  it('tribunal que o trecho não sustenta: só o tribunal sai, data e prazo seguem', async () => {
+    const { dep } = deps(JSON.stringify({ ...OK, tribunal: 'TJRJ' }));
+    const r = await executarTarefa('ler-intimacao', ENTRADA, dep);
+    assert.equal(r.status, 200);
+    assert.deepEqual(r.status === 200 && r.corpo.resposta, { ...OK, tribunal: '', trechoTribunal: '' });
+  });
+
+  it('saída fora do formato continua descartada (502), a cota não é gasta', async () => {
+    const { dep, registro, finalizados } = deps(JSON.stringify({ ...OK, tipoEvento: 'evento-inventado' }));
     const r = await executarTarefa('ler-intimacao', ENTRADA, dep);
     assert.equal(r.status, 502);
     assert.deepEqual(registro, ['iniciar', 'reservar', 'modelo', 'cancelar']);
