@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { executarTarefa, type DependenciasExecucao, type Situacao } from '../executar';
 import type { PedidoModelo, ResultadoModelo } from '../contrato';
-import { conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
+import { conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
 
 const TEXTO = [
   'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO. Processo [PROCESSO_1]. Apelação cível.',
@@ -99,6 +99,49 @@ describe('Tarefa ler-intimacao: conferência da saída', () => {
 
   it('o trecho conta mesmo com outra caixa, acento ou espaçamento', () => {
     assert.equal(conferirIntimacao({ ...OK, trechoTribunal: 'tribunal  de justica do estado de sao paulo' }, ENTRADA), null);
+  });
+});
+
+describe('Tarefa ler-intimacao: o trecho identifica o tribunal', () => {
+  it('aceita a sigla, o nome oficial e as formas usuais de escrever o tribunal', () => {
+    const certos: [string, string][] = [
+      ['TJSP', 'TJSP - Foro Central'],
+      ['TJSP', 'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO'],
+      ['TJPE', 'Tribunal de Justiça de Pernambuco'],
+      ['TJDF', 'Tribunal de Justiça do Distrito Federal e dos Territórios'],
+      ['TJMT', 'Tribunal de Justiça do Estado de Mato Grosso'],
+      ['TJMS', 'Tribunal de Justiça do Estado de Mato Grosso do Sul'],
+      ['TRT2', 'Tribunal Regional do Trabalho da 2ª Região'],
+      ['TRT2', 'TRT da 2ª Região'],
+      ['TRT2', 'TRT 2'],
+      ['TRT2', 'PJe-TRT2'],
+      ['TRF3', 'Tribunal Regional Federal da 3ª Região'],
+      ['TRF3', 'TRF da 3ª Região'],
+      ['TJSC', 'Poder Judiciário do Estado de Santa Catarina\nTribunal de Justiça']
+    ];
+    for (const [sigla, trecho] of certos) assert.equal(trechoIdentificaTribunal(sigla, trecho), true, `${sigla} / ${trecho}`);
+  });
+
+  it('recusa sigla que o trecho não sustenta: outro tribunal, outro estado, outra região, tribunal mais curto dentro do nome mais longo', () => {
+    const errados: [string, string][] = [
+      ['TJRJ', 'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO'],
+      ['TJSP', 'Tribunal de Justiça de Pernambuco'],
+      ['TJPE', 'Tribunal Regional Eleitoral de Pernambuco'],
+      ['TRT2', 'Tribunal Regional do Trabalho da 12ª Região'],
+      ['TRT2', 'TRT da 12ª Região'],
+      ['TRT1', 'TRT 12'],
+      ['TRF3', 'Tribunal Regional do Trabalho da 3ª Região'],
+      ['TJMT', 'Tribunal de Justiça do Estado de Mato Grosso do Sul'],
+      ['TJSP', 'Comarca de Campinas - 3ª Vara Cível'],
+      ['TJSC', 'Tribunal de Justiça'],
+      ['TJSC', 'Poder Judiciário do Estado de Santa Catarina']
+    ];
+    for (const [sigla, trecho] of errados) assert.equal(trechoIdentificaTribunal(sigla, trecho), false, `${sigla} / ${trecho}`);
+    assert.equal(trechoIdentificaTribunal('XXXX', 'qualquer'), false);
+  });
+
+  it('a conferência da saída descarta sigla errada com trecho que existe no texto', () => {
+    assert.equal(conferirIntimacao({ ...OK, tribunal: 'TJRJ' }, ENTRADA), 'o trecho não identifica o tribunal');
   });
 });
 
