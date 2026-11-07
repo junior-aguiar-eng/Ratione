@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { executarTarefa, type DependenciasExecucao, type Situacao } from '../executar';
 import type { PedidoModelo, ResultadoModelo } from '../contrato';
-import { conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
+import { conferirIntimacao, dataApareceNoTrecho, lerIntimacao as t, prazoApareceNoTrecho, trechoIdentificaTribunal, type IntimacaoEnviada, type SaidaIntimacao } from './lerIntimacao';
 
 const TEXTO = [
   'TRIBUNAL DE JUSTIÇA DO ESTADO DE SÃO PAULO. Processo [PROCESSO_1]. Apelação cível.',
@@ -196,5 +196,47 @@ describe('Tarefa ler-intimacao: no executor', () => {
       assert.equal((await executarTarefa('ler-intimacao', entrada, dep)).status, 400);
       assert.deepEqual(registro, []);
     }
+  });
+});
+
+describe('Tarefa ler-intimacao: prazo escrito no trecho', () => {
+  it('aceita algarismos (com ou sem zero à esquerda) e número por extenso colado a "dias"', () => {
+    const certos: [number, string][] = [
+      [15, 'no prazo de 15 (quinze) dias'],
+      [5, 'no prazo de 05 (cinco) dias'],
+      [5, 'pelo prazo de 05 dias'],
+      [10, 'no prazo de dez dias'],
+      [5, 'cinco dias úteis'],
+      [5, 'cinco (5) dias corridos'],
+      [1, 'no prazo de um dia'],
+      [2, 'por dois dias'],
+      [2, 'por duas dias'],
+      [14, 'catorze dias'],
+      [14, 'quatorze dias'],
+      [21, 'vinte e um dias'],
+      [22, 'vinte e dois dias'],
+      [30, 'TRINTA DIAS'],
+      [45, 'quarenta e cinco dias'],
+      [120, 'cento e vinte dias'],
+      [365, 'trezentos e sessenta e cinco dias']
+    ];
+    for (const [dias, trecho] of certos) assert.equal(prazoApareceNoTrecho(dias, trecho), true, `${dias} / ${trecho}`);
+  });
+
+  it('recusa quando o trecho traz outro número, um número maior que contém este, ou uma palavra solta', () => {
+    const errados: [number, string][] = [
+      [5, 'no prazo de 15 dias'],
+      [5, 'no prazo de 50 dias'],
+      [10, 'no prazo de 100 dias'],
+      [10, 'no prazo de dez'],
+      [1, 'cumpra-se um dos despachos, no prazo legal'],
+      [7, 'dezessete dias'],
+      [2, 'vinte e dois dias'],
+      [1, 'vinte e um dias'],
+      [20, 'cento e vinte dias'],
+      [5, 'cinco partes, sem prazo'],
+      [400, 'quatrocentos dias']
+    ];
+    for (const [dias, trecho] of errados) assert.equal(prazoApareceNoTrecho(dias, trecho), false, `${dias} / ${trecho}`);
   });
 });
