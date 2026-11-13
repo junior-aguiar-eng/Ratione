@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { abrirContexto, usuarioDaCobranca } from '../../../../lib/cobranca/contexto';
+import { abrirContexto, acessoUsuarioCobranca } from '../../../../lib/cobranca/contexto';
 import { aplicarSituacao, criarAssinaturaPendente, vincularAoMp } from '../../../../lib/cobranca/banco';
 import { ErroMp, criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { origemPublica, veioDoSite } from '../../../../lib/origem';
@@ -19,8 +19,13 @@ export async function POST(request: Request) {
 
   if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
-  const usuario = await usuarioDaCobranca(ctx);
-  if (!usuario) return NextResponse.json(INDISPONIVEL, { status: 503 });
+  const acesso = await acessoUsuarioCobranca(ctx);
+  if (!acesso.ok) {
+    return acesso.status === 401
+      ? NextResponse.json({ mensagem: 'Entre na sua conta para assinar um plano.' }, { status: 401 })
+      : NextResponse.json(INDISPONIVEL, { status: 503 });
+  }
+  const usuario = acesso.usuario;
 
   const lido = await lerJsonLimitado(request, LIMITE_CORPO.pequeno);
   if (!lido.ok) return NextResponse.json({ mensagem: lido.mensagem }, { status: lido.status });

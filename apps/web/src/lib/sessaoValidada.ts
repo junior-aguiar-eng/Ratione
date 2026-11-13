@@ -35,13 +35,20 @@ export async function lerSessaoValidada<T extends { id: string }>(
   }
 }
 
+export function usuarioAutenticadoNaoAnonimo(
+  user: { id: string; is_anonymous?: boolean } | null | undefined
+): { id: string } | null {
+  if (!user || user.is_anonymous) return null;
+  return { id: user.id };
+}
+
 export async function servirSessaoValidada(
   verificar: () => Promise<{ data: { user: { id: string; is_anonymous?: boolean } | null }; error: unknown }>
 ): Promise<Response> {
   const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'private, no-store', Vary: 'Cookie' };
   try {
     const { data, error } = await verificar();
-    const usuarioId = !error && data.user && !data.user.is_anonymous ? data.user.id : null;
+    const usuarioId = !error ? (usuarioAutenticadoNaoAnonimo(data.user)?.id ?? null) : null;
     return Response.json({ usuarioId }, { headers });
   } catch {
     return Response.json({ usuarioId: null }, { status: 503, headers });

@@ -6,10 +6,8 @@ import { excluirConta } from '../../../../lib/excluir-conta';
 import { lerConfigCobranca } from '../../../../lib/cobranca/config';
 import { encerrarAssinaturasDoUsuario } from '../../../../lib/cobranca/encerrar';
 import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
-import { apagarTodosDoUsuario, dependenciasPadrao } from '../../../../lib/documentos/servico';
-import { armazenamentoEBanco } from '../../../../lib/documentos/supabase';
-import { apagarTodasDoUsuario, dependenciasPadrao as dependenciasPadraoDeAnalises } from '../../../../lib/analisesSalvas/servico';
-import { armazenamentoEBanco as armazenamentoEBancoDeAnalises } from '../../../../lib/analisesSalvas/supabase';
+import { apagarAnalisesSalvas, apagarDocumentos } from '../../../../lib/conta/excluirDependencias';
+import { usuarioAutenticadoNaoAnonimo } from '../../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
@@ -48,11 +46,13 @@ export async function POST(request: Request) {
     }
   });
   const semSessao = { auth: { persistSession: false, autoRefreshToken: false } };
+  const servidor = createClient(url, secreta, semSessao);
 
   const resultado = await excluirConta(corpo.senha, {
     usuarioAtual: async () => {
       const { data } = await sessao.auth.getUser();
-      return data.user ? { id: data.user.id, email: data.user.email ?? null } : null;
+      const usuario = usuarioAutenticadoNaoAnonimo(data.user);
+      return usuario ? { id: usuario.id, email: data.user?.email ?? null } : null;
     },
     // Cliente isolado: conferir a senha não troca nem renova a sessão do usuário
     conferirSenha: async (email, senha) => {
@@ -60,23 +60,12 @@ export async function POST(request: Request) {
       return !error;
     },
     // Assinatura viva no Mercado Pago é cancelada antes de apagar a conta (lib/cobranca/encerrar.ts)
-    encerrarAssinaturas: id => encerrarAssinaturasDoUsuario(createClient(url, secreta, semSessao), id, lerConfigCobranca(process.env), criarClienteMp),
-    apagarDocumentos: async id => {
-      await apagarTodosDoUsuario(id, { ...dependenciasPadrao(), ...armazenamentoEBanco(createClient(url, secreta, semSessao)) });
-      return true;
-    },
-    // Análises salvas (F5-10). Enquanto a migração ainda não foi aplicada, a tabela não existe e não há o que apagar: isso não pode impedir a exclusão da conta
-    apagarAnalisesSalvas: async id => {
-      try {
-        await apagarTodasDoUsuario(id, { ...dependenciasPadraoDeAnalises(), ...armazenamentoEBancoDeAnalises(createClient(url, secreta, semSessao)) });
-      } catch (e) {
-        if (/does not exist|could not find the table|schema cache|relation .* does not exist|bucket not found/i.test((e as Error).message)) return true;
-        throw e;
-      }
-      return true;
-    },
+    encerrarAssinaturas: id => encerrarAssinaturasDoUsuario(servidor, id, lerConfigCobranca(process.env), criarClienteMp),
+    // Documentos e análises salvas (F5-01 / F5-10). Enquanto a migração ainda não foi aplicada, tabela/bucket ausente não pode impedir a exclusão da conta
+    apagarDocumentos: id => apagarDocumentos(servidor, id),
+    apagarAnalisesSalvas: id => apagarAnalisesSalvas(servidor, id),
     apagarUsuario: async id => {
-      const { error } = await createClient(url, secreta, semSessao).auth.admin.deleteUser(id);
+      const { error } = await servidor.auth.admin.deleteUser(id);
       // Só no log do servidor: "Invalid API key" aqui indica SUPABASE_SERVICE_ROLE_KEY errada ou revogada
       if (error) registrar('ERROR', 'Exclusão de conta: deleteUser falhou', { status: error.status, erro_mensagem: error.message });
       return !error;

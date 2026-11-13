@@ -1,6 +1,6 @@
 import {describe,it} from 'node:test';
 import assert from 'node:assert/strict';
-import {lerSessaoValidada,servirSessaoValidada} from './sessaoValidada';
+import {lerSessaoValidada,servirSessaoValidada,usuarioAutenticadoNaoAnonimo} from './sessaoValidada';
 const usuario={id:'aaaaaaaa-1111-4111-8111-111111111111',email:'local@exemplo.test'};
 const local=async()=>({data:{session:{user:usuario}}});
 describe('Sessão: cache local não determina autenticação no servidor',()=>{
@@ -29,5 +29,11 @@ describe('Sessão: cache local não determina autenticação no servidor',()=>{
  it('endpoint retorna só o ID verificado, sem metadados, e nunca permite cache',async()=>{
   const r=await servirSessaoValidada(async()=>({data:{user:{...usuario,user_metadata:{segredo:'não expor'}}},error:null}));assert.deepEqual(await r.json(),{usuarioId:usuario.id});assert.equal(r.headers.get('cache-control'),'private, no-store');assert.equal(r.headers.get('vary'),'Cookie');
   const negado=await servirSessaoValidada(async()=>({data:{user:usuario},error:new Error('recusado')}));assert.deepEqual(await negado.json(),{usuarioId:null});
+ });
+ it('usuarioAutenticadoNaoAnonimo recusa is_anonymous = true e aceita usuário autenticado',()=>{
+  assert.equal(usuarioAutenticadoNaoAnonimo(null),null);
+  assert.equal(usuarioAutenticadoNaoAnonimo({id:'u1',is_anonymous:true}),null);
+  assert.deepEqual(usuarioAutenticadoNaoAnonimo({id:'u1',is_anonymous:false}),{id:'u1'});
+  assert.deepEqual(usuarioAutenticadoNaoAnonimo({id:'u1'}),{id:'u1'});
  });
 });

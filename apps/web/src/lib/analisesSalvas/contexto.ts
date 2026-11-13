@@ -5,6 +5,7 @@
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
+import { usuarioAutenticadoNaoAnonimo } from '../sessaoValidada';
 import { lerConfigDeAnalisesSalvas } from './config';
 import { dependenciasPadrao, type DependenciasDeAnalisesSalvas, type DependenciasDeApagarAnalise } from './servico';
 import { armazenamentoEBanco } from './supabase';
@@ -33,7 +34,7 @@ export async function contextoDeAnalises(): Promise<ContextoDeAnalises | null> {
   const reais = armazenamentoEBanco(servidor);
   const config = lerConfigDeAnalisesSalvas(process.env);
   return {
-    usuario: data.user ? { id: data.user.id } : null,
+    usuario: usuarioAutenticadoNaoAnonimo(data.user),
     completo: config ? { chave: config.chave, ...dependenciasPadrao(), ...reais } : null,
     basico: { ...dependenciasPadrao(), ...reais }
   };

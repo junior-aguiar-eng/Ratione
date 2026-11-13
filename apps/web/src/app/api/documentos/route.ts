@@ -6,6 +6,7 @@ import { lerConfigDeDocumentos } from '../../../lib/documentos/config';
 import { dependenciasPadrao, enviarDocumento, listarDocumentos, type DependenciasDeDocumentos } from '../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../lib/documentos/supabase';
 import { LIMITES_DE_DOCUMENTO } from '../../../lib/documentos/validar';
+import { usuarioAutenticadoNaoAnonimo } from '../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../lib/origem';
 import { registrar } from '../../../lib/log';
 
@@ -31,7 +32,7 @@ async function contexto() {
   const { data } = await sessao.auth.getUser();
   const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
   const dep: DependenciasDeDocumentos = { chave: config.chave, retencaoDias: config.retencaoDias, ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) };
-  return { usuario: data.user, dep };
+  return { usuario: usuarioAutenticadoNaoAnonimo(data.user), dep };
 }
 
 export async function POST(request: Request) {

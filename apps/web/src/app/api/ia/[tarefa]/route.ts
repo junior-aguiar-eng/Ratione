@@ -9,6 +9,7 @@ import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositiv
 import { lerNoParaRelacionar } from '../../../../lib/ia/fontes/noDoTeseMap';
 import { iaLigada } from '../../../../lib/ia/politica';
 import { gravidadeDoAviso } from '../../../../lib/ia/gravidade';
+import { usuarioAutenticadoNaoAnonimo } from '../../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
@@ -66,7 +67,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
       fontes: { lerDispositivo: id => lerDispositivoParaExplicar(publico, id), lerNoTeseMap: id => lerNoParaRelacionar(publico, id) },
       usuarioAtual: async () => {
         const { data } = await sessao.auth.getUser();
-        return data.user ? { id: data.user.id } : null;
+        return usuarioAutenticadoNaoAnonimo(data.user);
       },
       ...dependenciasDoBanco(servidor),
       chamarModelo: criarChamadaAoModelo(chaveApi),
