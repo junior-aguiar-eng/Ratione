@@ -47,7 +47,7 @@ const MAX_ITENS_ESTRUTURA = 15;
 
 // Uma questão de peça longa (razões de apelação de 348 parágrafos) chegou a listar mais de 80 parágrafos e a etapa inteira foi descartada.
 // Guardam-se os primeiros 80 em vez de perder a etapa e o custo dela; a instrução também pede que o modelo fique dentro do limite.
-const limitar = <T>(max: number) => (v: unknown): unknown => (Array.isArray(v) ? (v as T[]).slice(0, max) : v);
+const limitar = (max: number) => (v: unknown): unknown => (Array.isArray(v) ? v.slice(0, max) : v);
 const Paragrafos = (minimo = 0) => z.preprocess(limitar(MAX_PARAGRAFOS_LISTA), z.array(z.number().int()).min(minimo).max(MAX_PARAGRAFOS_LISTA));
 const analiseDe = (d: { analiseId: string }) => d.analiseId;
 const VERSAO = 'v5-2026-11-04';

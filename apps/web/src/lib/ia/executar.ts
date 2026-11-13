@@ -217,11 +217,11 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
   await dep.finalizar(reserva.id, 'gerada', r.uso, custo).catch(registrarFalha('finalizar'));
   if (porChamada || t.cota.conclui) await dep.concluirAnalise(analiseId, usuario.id).catch(registrarFalha('concluir', true));
   else if (t.cota.consome) await dep.consumirAnalise(analiseId, usuario.id).catch(registrarFalha('consumir', true));
-  if (t.guardaResultado) {
-    await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data }).catch(registrarFalha('gravar_cache'));
-  }
   if (registroCotaFalhou) {
     return { status: 503, corpo: { mensagem: 'Não foi possível confirmar o registro desta etapa agora. Tente novamente.' } };
+  }
+  if (t.guardaResultado) {
+    await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data }).catch(registrarFalha('gravar_cache'));
   }
   return { status: 200, corpo: { resposta: saida.data, doCache: false, modelo: t.modelo, restantes } };
 }

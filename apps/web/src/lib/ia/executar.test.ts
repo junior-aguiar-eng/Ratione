@@ -167,14 +167,14 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
     const avisosConcluir: Array<{ m: string; etapa: unknown }> = [];
     const eConcluir = deps({
       concluirAnalise: quebra,
-      gravarCache: quebra,
       finalizar: quebra,
       avisar: (m, c) => void avisosConcluir.push({ m, etapa: c.etapa })
     });
     const rConcluir = await executarTarefa(TAREFA, ENTRADA, eConcluir.dep);
     assert.equal(rConcluir.status, 503);
     assert.equal(rConcluir.corpo.mensagem, 'Não foi possível confirmar o registro desta etapa agora. Tente novamente.');
-    assert.deepEqual(avisosConcluir.map(a => a.etapa), ['finalizar', 'concluir', 'gravar_cache']);
+    assert.ok(!eConcluir.registro.includes('gravar'), 'não grava no cache quando o registro de cota falha');
+    assert.deepEqual(avisosConcluir.map(a => a.etapa), ['finalizar', 'concluir']);
     assert.ok(avisosConcluir.every(a => a.m === MENSAGEM_REGISTRO_FALHOU));
 
     const avisosConsumir: Array<{ m: string; etapa: unknown }> = [];
