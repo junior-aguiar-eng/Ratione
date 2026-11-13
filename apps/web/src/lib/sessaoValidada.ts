@@ -2,34 +2,70 @@
 const JANELA_MS = 1500;
 const emVoo = new WeakMap<typeof fetch, Map<string, { quando: number; resposta: Promise<string | null> }>>();
 
-function consultarUmaVez(consultar: typeof fetch, id: string): Promise<string | null> {
-  let porId = emVoo.get(consultar);
-  if (!porId) emVoo.set(consultar, (porId = new Map()));
-  const existente = porId.get(id);
-  if (existente && Date.now() - existente.quando < JANELA_MS) return existente.resposta;
+function impressaoToken(token: string | undefined): string {
+  if (!token) return '';
+  let h1 = 0x811c9dc5;
+  let h2 = 0x9e3779b9;
+  for (let i = 0; i < token.length; i++) {
+    const c = token.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 0x01000193);
+    h2 = Math.imul(h2 ^ c, 0x85ebca6b);
+  }
+  return `${token.length}:${(h1 >>> 0).toString(36)}:${(h2 >>> 0).toString(36)}`;
+}
+
+function chaveConsulta(id: string, accessToken?: string): string {
+  const impressao = impressaoToken(accessToken);
+  return impressao ? `${id}:${impressao}` : id;
+}
+
+function consultarUmaVez(consultar: typeof fetch, id: string, accessToken?: string): Promise<string | null> {
+  let porChave = emVoo.get(consultar);
+  if (!porChave) emVoo.set(consultar, (porChave = new Map()));
+  const chave = chaveConsulta(id, accessToken);
+  const existente = porChave.get(chave);
+  const agora = Date.now();
+  if (existente && agora - existente.quando < JANELA_MS) return existente.resposta;
+  for (const [k, v] of porChave) {
+    if (agora - v.quando >= JANELA_MS) porChave.delete(k);
+  }
   const resposta = (async () => {
     const r = await consultar('/api/conta/sessao', { cache: 'no-store' });
     if (!r.ok) return null;
     const verificado = await r.json();
     return typeof verificado?.usuarioId === 'string' ? verificado.usuarioId : null;
   })();
-  const entrada = { quando: Date.now(), resposta };
-  porId.set(id, entrada);
-  // Falha não fica guardada: a próxima tentativa pergunta de novo.
-  resposta.catch(() => porId.get(id) === entrada && porId.delete(id));
+  const entrada = { quando: agora, resposta };
+  porChave.set(chave, entrada);
+  // Apenas confirmação positiva da mesma conta fica em cache; falha, null ou divergência sai imediatamente.
+  void resposta.then(
+    verificadoId => {
+      if (verificadoId !== id && porChave.get(chave) === entrada) porChave.delete(chave);
+    },
+    () => {
+      if (porChave.get(chave) === entrada) porChave.delete(chave);
+    }
+  );
   return resposta;
+}
+
+export function limparCacheSessaoValidada(
+  consultar: typeof fetch | undefined = typeof fetch !== 'undefined' ? fetch : undefined
+): void {
+  if (consultar) emVoo.delete(consultar);
 }
 
 /** O cache local só fornece dados de apresentação depois que o servidor valida a mesma conta. */
 export async function lerSessaoValidada<T extends { id: string }>(
-  lerLocal: () => Promise<{ data: { session: { user: T } | null } }>,
+  lerLocal: () => Promise<{ data: { session: { user: T; access_token?: string } | null } }>,
   consultar: typeof fetch = fetch
 ): Promise<T | null> {
   try {
     const { data } = await lerLocal();
-    const usuario = data.session?.user;
+    const sessao = data.session;
+    const usuario = sessao?.user;
     if (!usuario) return null;
-    return (await consultarUmaVez(consultar, usuario.id)) === usuario.id ? usuario : null;
+    return (await consultarUmaVez(consultar, usuario.id, sessao.access_token)) === usuario.id ? usuario : null;
   } catch {
     return null;
   }
