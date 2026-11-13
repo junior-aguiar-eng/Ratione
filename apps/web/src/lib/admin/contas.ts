@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { lerJsonLimitado } from '../corpoJson';
 import { origemPublica } from '../origem';
 
 const dataHora = z.string().datetime({ offset: true });
@@ -21,19 +22,9 @@ export type ListaContas = { total: number; contas: ContaAdministrada[] };
 type Contexto = { servidor: SupabaseClient; usuarioId: string; protegidos: string[] };
 type Abrir = () => Promise<Contexto | null>;
 
+const LIMITE_CORPO_CONTAS = 1024;
 const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'private, no-store', Vary: 'Cookie' };
 const resposta = (dados: unknown, status = 200) => new Response(JSON.stringify(dados), { status, headers });
-
-/** Lê o corpo JSON com limite de tamanho; `null` se for grande demais ou inválido. */
-async function lerCorpo(request: Request): Promise<unknown> {
-  const texto = await request.text();
-  if (texto.length > 1024) return null;
-  try {
-    return JSON.parse(texto);
-  } catch {
-    return null;
-  }
-}
 
 export async function servirContas(request: Request, abrir: Abrir): Promise<Response> {
   try {
@@ -44,10 +35,12 @@ export async function servirContas(request: Request, abrir: Abrir): Promise<Resp
     let pagina = 0;
     if (request.method === 'POST') {
       if (request.headers.get('origin') !== origemPublica(request)) return resposta({ mensagem: 'Origem não permitida.' }, 403);
+      const lido = await lerJsonLimitado(request, LIMITE_CORPO_CONTAS);
+      if (!lido.ok) return resposta({ mensagem: lido.mensagem }, lido.status);
       const parametros = z.object({
         busca: z.string().trim().max(120),
         pagina: z.number().int().min(0).max(1000000)
-      }).strict().safeParse(await lerCorpo(request));
+      }).strict().safeParse(lido.valor);
       if (!parametros.success) return resposta({ mensagem: 'Busca inválida.' }, 400);
       busca = parametros.data.busca;
       pagina = parametros.data.pagina;
@@ -84,10 +77,12 @@ export async function alterarAcessoConta(request: Request, abrir: Abrir): Promis
     if (request.headers.get('origin') !== origemPublica(request)) return resposta({ mensagem: 'Origem não permitida.' }, 403);
     if (!request.headers.get('content-type')?.startsWith('application/json')) return resposta({ mensagem: 'Pedido inválido.' }, 400);
 
+    const lido = await lerJsonLimitado(request, LIMITE_CORPO_CONTAS);
+    if (!lido.ok) return resposta({ mensagem: lido.mensagem }, lido.status);
     const pedido = z.object({
       usuarioId: z.uuid(),
       acao: z.enum(['suspender', 'reativar'])
-    }).strict().safeParse(await lerCorpo(request));
+    }).strict().safeParse(lido.valor);
     if (!pedido.success) return resposta({ mensagem: 'Pedido inválido.' }, 400);
 
     const { acao } = pedido.data;

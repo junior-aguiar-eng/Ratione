@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { LIMITE_CORPO, lerJsonLimitado } from './corpoJson';
+import { LIMITE_CORPO, lerBytesLimitados, lerFormDataLimitado, lerJsonLimitado, lerTextoLimitado } from './corpoJson';
 import { veioDoSite } from './origem';
 
 const pedido = (corpo: string | null, cabecalhos: Record<string, string> = {}) =>
@@ -40,6 +40,73 @@ describe('leitura do corpo JSON com limite', () => {
     // até 2 bytes por caractere em português, mais as aspas e o envelope JSON
     assert.ok(70_000 * 2 + 10_000 < LIMITE_CORPO.analiseDeIA);
     assert.ok(LIMITE_CORPO.pequeno < LIMITE_CORPO.analiseDeIA);
+  });
+
+  it('lerTextoLimitado lê texto UTF-8 dentro do limite e aborta stream sem content-length ao exceder maxBytes', async () => {
+    const ok = await lerTextoLimitado(pedido('olá mundo çãõ'), 1024);
+    assert.deepEqual(ok, { ok: true, texto: 'olá mundo çãõ' });
+    assert.deepEqual(await lerTextoLimitado(pedido(null), 1024), { ok: true, texto: '' });
+
+    let cancelado = false;
+    const stream = new ReadableStream({
+      start(ctrl) {
+        ctrl.enqueue(new TextEncoder().encode('x'.repeat(600)));
+        ctrl.enqueue(new TextEncoder().encode('y'.repeat(600)));
+        ctrl.enqueue(new TextEncoder().encode('z'.repeat(600)));
+        ctrl.close();
+      },
+      cancel() {
+        cancelado = true;
+      }
+    });
+    const req = new Request('http://localhost/teste', { method: 'POST', body: stream, duplex: 'half' } as RequestInit);
+    const r = await lerTextoLimitado(req, 1024);
+    assert.equal(r.ok, false);
+    if (!r.ok) assert.equal(r.status, 413);
+    assert.equal(cancelado, true);
+  });
+
+  it('lerBytesLimitados e lerFormDataLimitado respeitam o limite em streaming sem content-length', async () => {
+    const bytesOk = await lerBytesLimitados(pedido('abc'), 10);
+    assert.equal(bytesOk.ok, true);
+    if (bytesOk.ok) assert.equal(Buffer.from(bytesOk.bytes).toString('utf8'), 'abc');
+
+    const boundary = '----rationeBoundary';
+    const corpoPequeno = `--${boundary}\r\nContent-Disposition: form-data; name="arquivo"; filename="a.txt"\r\nContent-Type: text/plain\r\n\r\nola\r\n--${boundary}--\r\n`;
+    const reqOk = new Request('http://localhost/upload', {
+      method: 'POST',
+      headers: { 'content-type': `multipart/form-data; boundary=${boundary}` },
+      body: new ReadableStream({
+        start(c) {
+          c.enqueue(new TextEncoder().encode(corpoPequeno));
+          c.close();
+        }
+      }),
+      duplex: 'half'
+    } as RequestInit);
+    const formOk = await lerFormDataLimitado(reqOk, 1024);
+    assert.equal(formOk.ok, true);
+    if (formOk.ok) {
+      const f = formOk.formData?.get('arquivo');
+      assert.ok(f instanceof File);
+      assert.equal(await f.text(), 'ola');
+    }
+
+    const reqGrande = new Request('http://localhost/upload', {
+      method: 'POST',
+      headers: { 'content-type': `multipart/form-data; boundary=${boundary}` },
+      body: new ReadableStream({
+        start(c) {
+          c.enqueue(new TextEncoder().encode('a'.repeat(700)));
+          c.enqueue(new TextEncoder().encode('b'.repeat(700)));
+          c.close();
+        }
+      }),
+      duplex: 'half'
+    } as RequestInit);
+    const formGrande = await lerFormDataLimitado(reqGrande, 1024);
+    assert.equal(formGrande.ok, false);
+    if (!formGrande.ok) assert.equal(formGrande.status, 413);
   });
 });
 
