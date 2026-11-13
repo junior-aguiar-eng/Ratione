@@ -151,7 +151,7 @@ describe('Argumenta: esforço da etapa de fundamentos', () => {
 });
 
 describe('Argumenta: cota por análise nas três etapas', () => {
-  it('a 1ª etapa consome a análise; a 2ª não mexe na cota; a última conclui — todas ligadas à mesma análise', async () => {
+  it('a 1ª e a 2ª etapas garantem consumo da análise (idempotente); a última conclui — todas ligadas à mesma análise', async () => {
     const e1 = deps(JSON.stringify(ESTRUTURA));
     assert.equal((await executarTarefa('argumenta-estrutura', { analiseId: ANALISE, paragrafos }, e1.dep)).status, 200);
     assert.deepEqual(e1.registro.map(r => r.split(' ')[0]), ['reservar', 'finalizar', 'consumir']);
@@ -160,12 +160,33 @@ describe('Argumenta: cota por análise nas três etapas', () => {
 
     const e2 = deps(JSON.stringify({ questoes: [QUESTAO] }));
     assert.equal((await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, e2.dep)).status, 200);
-    assert.deepEqual(e2.registro.map(r => r.split(' ')[0]), ['reservar', 'finalizar'], 'a etapa do meio não consome nem conclui');
+    assert.deepEqual(e2.registro.map(r => r.split(' ')[0]), ['reservar', 'finalizar', 'consumir'], 'a etapa do meio garante o consumo de forma idempotente');
+    assert.deepEqual(e2.analises, [ANALISE]);
 
     const e3 = deps(JSON.stringify({ fundamentos: [FUNDAMENTO] }));
     assert.equal((await executarTarefa('argumenta-fundamentos', { analiseId: ANALISE, paragrafos, questoes: QUESTOES }, e3.dep)).status, 200);
     assert.deepEqual(e3.registro.map(r => r.split(' ')[0]), ['reservar', 'finalizar', 'concluir']);
     assert.deepEqual(e3.analises, [ANALISE]);
+  });
+
+  it('SaidaEstrutura preserva os 15 primeiros pedidos e seções em vez de descartar resposta inteira', async () => {
+    const muitosPedidos = Array.from({ length: 18 }, (_, i) => ({ descricao: `Pedido ${i + 1}`, paragrafos: [1] }));
+    const muitasSecoes = Array.from({ length: 18 }, () => ({ tipo: 'fundamentacao' as const, inicio: 1, fim: 2 }));
+    const { dep } = deps(JSON.stringify({ ...ESTRUTURA, pedidos: muitosPedidos, secoes: muitasSecoes }));
+    const r = await executarTarefa('argumenta-estrutura', { analiseId: ANALISE, paragrafos }, dep);
+    assert.equal(r.status, 200);
+    if (r.status === 200) {
+      const out = r.corpo.resposta as { pedidos: unknown[]; secoes: unknown[] };
+      assert.equal(out.pedidos.length, 15);
+      assert.equal(out.secoes.length, 15);
+    }
+  });
+
+  it('argumenta-questoes também garante consumo de cota quando executada', async () => {
+    const e2 = deps(JSON.stringify({ questoes: [QUESTAO] }));
+    const r = await executarTarefa('argumenta-questoes', { analiseId: ANALISE, paragrafos }, e2.dep);
+    assert.equal(r.status, 200);
+    assert.ok(e2.registro.includes('consumir'));
   });
 
   it('nenhuma etapa inicia análise por conta própria nem toca no cache: o texto e a resposta não ficam guardados', async () => {

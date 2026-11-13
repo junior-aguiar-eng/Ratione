@@ -43,11 +43,12 @@ function referenciaDaDecisao(d: DecisaoEnviada): string {
 }
 
 const MAX_PARAGRAFOS_LISTA = 80;
+const MAX_ITENS_ESTRUTURA = 15;
 
 // Uma questão de peça longa (razões de apelação de 348 parágrafos) chegou a listar mais de 80 parágrafos e a etapa inteira foi descartada.
 // Guardam-se os primeiros 80 em vez de perder a etapa e o custo dela; a instrução também pede que o modelo fique dentro do limite.
-const limitarLista = (v: unknown): unknown => (Array.isArray(v) ? v.slice(0, MAX_PARAGRAFOS_LISTA) : v);
-const Paragrafos = (minimo = 0) => z.preprocess(limitarLista, z.array(z.number().int()).min(minimo).max(MAX_PARAGRAFOS_LISTA));
+const limitar = <T>(max: number) => (v: unknown): unknown => (Array.isArray(v) ? (v as T[]).slice(0, max) : v);
+const Paragrafos = (minimo = 0) => z.preprocess(limitar(MAX_PARAGRAFOS_LISTA), z.array(z.number().int()).min(minimo).max(MAX_PARAGRAFOS_LISTA));
 const analiseDe = (d: { analiseId: string }) => d.analiseId;
 const VERSAO = 'v5-2026-11-04';
 const paragrafosJson = (descricao: string) => ({ type: 'array', items: { type: 'integer' }, description: descricao });
@@ -61,11 +62,17 @@ export const SaidaEstrutura = z.object({
   tipo: z.enum(TIPOS_DECISAO),
   resultado: z.string().min(1).max(300),
   resumo: z.string().min(1).max(1_200),
-  pedidos: z.array(z.object({ descricao: z.string().min(1).max(400), paragrafos: Paragrafos() })).max(15),
-  secoes: z
-    .array(z.object({ tipo: z.enum(TIPOS_SECAO), inicio: z.number().int(), fim: z.number().int() }))
-    .min(1)
-    .max(15)
+  pedidos: z.preprocess(
+    limitar(MAX_ITENS_ESTRUTURA),
+    z.array(z.object({ descricao: z.string().min(1).max(400), paragrafos: Paragrafos() })).max(MAX_ITENS_ESTRUTURA)
+  ),
+  secoes: z.preprocess(
+    limitar(MAX_ITENS_ESTRUTURA),
+    z
+      .array(z.object({ tipo: z.enum(TIPOS_SECAO), inicio: z.number().int(), fim: z.number().int() }))
+      .min(1)
+      .max(MAX_ITENS_ESTRUTURA)
+  )
 });
 export type SaidaEstrutura = z.infer<typeof SaidaEstrutura>;
 
@@ -212,7 +219,7 @@ export const argumentaQuestoes: TarefaIA<DecisaoEnviada, DecisaoEnviada, SaidaQu
   guardaResultado: false,
   instrucoes: INSTRUCOES_QUESTOES,
   ferramentas: [],
-  cota: { tipo: 'rapida', modo: 'por-analise' },
+  cota: { tipo: 'rapida', modo: 'por-analise', consome: true },
   analiseDe,
   validarEntrada: decisaoValida,
   montarContexto: async d => d,

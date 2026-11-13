@@ -207,15 +207,21 @@ export async function executarTarefa(idTarefa: unknown, entradaBruta: unknown, d
     return { status: 502, corpo: { mensagem: NAO_GEROU } };
   }
 
-  // Já gerou (e já custou): se o registro no banco falhar daqui para a frente, o cliente ainda recebe o que foi gerado. A falha vai para o log
-  // como ERROR (gravidade.ts), que dispara o alerta por e-mail: é o responsável quem precisa olhar o banco.
-  const registrarFalha = (etapa: string) => (e: unknown) =>
+  // Já gerou (e já custou): falha em `finalizar` ou `gravarCache` não impede entregar o resultado, mas vai para o log como ERROR (gravidade.ts).
+  // Falha ao registrar o consumo ou conclusão da cota impede entregar 200 para evitar bypass silencioso de cota (retorna 503).
+  let registroCotaFalhou = false;
+  const registrarFalha = (etapa: string, critica = false) => (e: unknown) => {
+    if (critica) registroCotaFalhou = true;
     dep.avisar?.(MENSAGEM_REGISTRO_FALHOU, { tarefa: t.id, referencia, etapa, erro_mensagem: e instanceof Error ? e.message : String(e) });
+  };
   await dep.finalizar(reserva.id, 'gerada', r.uso, custo).catch(registrarFalha('finalizar'));
-  if (porChamada || t.cota.conclui) await dep.concluirAnalise(analiseId, usuario.id).catch(registrarFalha('concluir'));
-  else if (t.cota.consome) await dep.consumirAnalise(analiseId, usuario.id).catch(registrarFalha('consumir'));
+  if (porChamada || t.cota.conclui) await dep.concluirAnalise(analiseId, usuario.id).catch(registrarFalha('concluir', true));
+  else if (t.cota.consome) await dep.consumirAnalise(analiseId, usuario.id).catch(registrarFalha('consumir', true));
   if (t.guardaResultado) {
     await dep.gravarCache({ tarefa: t.id, chave, referencia, versao: t.versao, modelo: t.modelo, resposta: saida.data }).catch(registrarFalha('gravar_cache'));
+  }
+  if (registroCotaFalhou) {
+    return { status: 503, corpo: { mensagem: 'Não foi possível confirmar o registro desta etapa agora. Tente novamente.' } };
   }
   return { status: 200, corpo: { resposta: saida.data, doCache: false, modelo: t.modelo, restantes } };
 }
