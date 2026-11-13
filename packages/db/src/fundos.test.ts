@@ -139,4 +139,26 @@ describe('Fundos de gasto de IA: o gratuito não derruba quem paga', () => {
     ]);
     assert.strictEqual(Number((await velho.query<{ g: string }>("select public.ia_gasto_do_fundo('gratuito')::text as g")).rows[0].g), 0.004);
   });
+
+  it('reservas presas em reservada há mais de 2 minutos não drenam o fundo mensal', async () => {
+    const u = await criarUsuario(db, 'orfa@exemplo.com');
+    const id = (await iniciar(db, u)).analise_id!;
+    const r = await reservar(db, u, id, 10.0);
+    assert.strictEqual(r.ok, true);
+    await db.query("update public.ia_uso set criado_em = now() - interval '3 minutes' where id = $1", [r.reserva_id]);
+    const situacao = await db.query<{ fundo: string; gasto_usd: string }>(
+      "select fundo, gasto_usd::text from public.ia_fundos_situacao() where fundo = 'gratuito'"
+    );
+    assert.ok(Number(situacao.rows[0].gasto_usd) < 10.0);
+
+    const nova = await reservar(db, u, id, 0.1);
+    assert.strictEqual(nova.ok, true, 'reserva órfã é expirada ao tentar nova reserva');
+    const orfa = await db.query<{ situacao: string; custo_usd: string; finalizado_em: string | null }>(
+      'select situacao, custo_usd::text, finalizado_em::text from public.ia_uso where id = $1',
+      [r.reserva_id]
+    );
+    assert.strictEqual(orfa.rows[0].situacao, 'invalida');
+    assert.strictEqual(Number(orfa.rows[0].custo_usd), 0);
+    assert.ok(orfa.rows[0].finalizado_em !== null);
+  });
 });
