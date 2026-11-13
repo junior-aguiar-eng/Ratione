@@ -24,8 +24,11 @@ create index analises_salvas_usuario on public.analises_salvas (usuario_id);
 create index analises_salvas_expira on public.analises_salvas (expira_em) where expira_em is not null;
 create index analises_salvas_citacoes on public.analises_salvas using gin (citacoes);
 
-create function public.analises_salvas_limite() returns trigger
-language plpgsql as $$
+create or replace function public.analises_salvas_limite() returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
 begin
   -- Serializa as gravações do mesmo usuário para a contagem abaixo ser confiável
   perform pg_advisory_xact_lock(hashtextextended(new.usuario_id::text, 0));
@@ -35,11 +38,24 @@ begin
   return new;
 end;
 $$;
+revoke all on function public.analises_salvas_limite() from public, anon, authenticated;
+drop trigger if exists analises_salvas_limite on public.analises_salvas;
 create trigger analises_salvas_limite before insert on public.analises_salvas
 for each row execute function public.analises_salvas_limite();
 
 alter table public.analises_salvas enable row level security;
 create policy analises_salvas_le_proprio on public.analises_salvas for select to authenticated using (usuario_id = (select auth.uid()));
+do $$
+begin
+  if to_regprocedure('public.conta_tem_acesso()') is not null then
+    drop policy if exists conta_ativa_restritiva on public.analises_salvas;
+    create policy conta_ativa_restritiva on public.analises_salvas
+      as restrictive for all to authenticated
+      using ((select public.conta_tem_acesso()))
+      with check ((select public.conta_tem_acesso()));
+  end if;
+end;
+$$;
 revoke all on public.analises_salvas from anon, authenticated;
 grant select on public.analises_salvas to authenticated;
 grant all on public.analises_salvas to service_role;

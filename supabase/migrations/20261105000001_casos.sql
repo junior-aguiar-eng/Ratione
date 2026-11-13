@@ -46,6 +46,17 @@ create policy casos_atualizacao on public.casos for update to authenticated
   using ((select auth.uid()) = usuario_id) with check ((select auth.uid()) = usuario_id);
 create policy casos_exclusao on public.casos for delete to authenticated
   using ((select auth.uid()) = usuario_id);
+do $$
+begin
+  if to_regprocedure('public.conta_tem_acesso()') is not null then
+    drop policy if exists conta_ativa_restritiva on public.casos;
+    create policy conta_ativa_restritiva on public.casos
+      as restrictive for all to authenticated
+      using ((select public.conta_tem_acesso()))
+      with check ((select public.conta_tem_acesso()));
+  end if;
+end;
+$$;
 
 -- Um item só pode apontar para um caso do próprio dono: sem isso, daria para amarrar o item a um caso de outra conta.
 drop policy itens_insercao on public.itens_salvos;

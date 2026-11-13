@@ -218,4 +218,19 @@ describe('F5-01: guardar, listar e apagar', () => {
     assert.deepEqual([...arquivos.keys()], ['u3/c']);
     assert.deepEqual(linhas.map(l => l.id), ['c']);
   });
+
+  it('faxina geral em múltiplos lotes até zerar ou atingir o teto de rodadas', async () => {
+    const vencidos = Array.from({ length: 5 }, (_, i) => registro(`v${i}`, 'u1', '2026-11-01T00:00:00Z'));
+    const vigente = registro('ok', 'u2', '2026-12-30T00:00:00Z');
+    const { dep, arquivos, linhas } = montar([...vencidos, vigente]);
+
+    // Teto de 2 lotes de 2 = 4 apagados, sobra 1 vencido + 1 vigente
+    assert.equal(await limparVencidos(dep, 2, 2), 4);
+    assert.equal(linhas.length, 2);
+
+    // Continua até zerar (teto 20, lote 2 -> apaga o 1 restante)
+    assert.equal(await limparVencidos(dep, 2, 20), 1);
+    assert.deepEqual([...arquivos.keys()], ['u2/ok']);
+    assert.deepEqual(linhas.map(l => l.id), ['ok']);
+  });
 });

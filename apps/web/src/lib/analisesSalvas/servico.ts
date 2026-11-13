@@ -173,11 +173,17 @@ export async function apagarTodasDoUsuario(usuarioId: string, dep: DependenciasD
   return todas.length;
 }
 
-/** Faxina geral dos vencidos, chamada pelo agendador. Em lotes, para o pedido não crescer sem limite. */
-export async function limparVencidas(dep: DependenciasDeApagarAnalise, lote = 200): Promise<number> {
-  const vencidas = await dep.banco.vencidas(dep.agora(), lote);
-  if (vencidas.length === 0) return 0;
-  await dep.armazenamento.remover(vencidas.map(r => r.caminho));
-  await dep.banco.remover(vencidas.map(r => r.id));
-  return vencidas.length;
+/** Faxina geral dos vencidos, chamada pelo agendador. Em lotes, até `maxLotes` rodadas por execução para o pedido não crescer sem limite. */
+export async function limparVencidas(dep: DependenciasDeApagarAnalise, lote = 200, maxLotes = 1): Promise<number> {
+  if (lote <= 0 || maxLotes <= 0) return 0;
+  let total = 0;
+  for (let i = 0; i < maxLotes; i++) {
+    const vencidas = await dep.banco.vencidas(dep.agora(), lote);
+    if (vencidas.length === 0) break;
+    await dep.armazenamento.remover(vencidas.map(r => r.caminho));
+    await dep.banco.remover(vencidas.map(r => r.id));
+    total += vencidas.length;
+    if (vencidas.length < lote) break;
+  }
+  return total;
 }
