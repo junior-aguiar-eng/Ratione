@@ -48,8 +48,8 @@ describe('Retenção fiscal: o registro financeiro sobrevive à conta, sem ident
   it('a linha sem dono é invisível para visitante e para outros usuários; só o servidor lê', async () => {
     const outro = await criarUsuario(db, 'outro@exemplo.com', { termos_versao: '1.0' });
     for (const quem of [null, outro]) {
-      assert.equal((await como(db, quem, tx => tx.query("select 1 from public.cobrancas where mp_pagamento_id = 'pg-excluida'").catch(() => ({ rows: [] })))).rows.length, 0);
-      assert.equal((await como(db, quem, tx => tx.query("select 1 from public.assinaturas where mp_assinatura_id = 'mp-pg-excluida'").catch(() => ({ rows: [] })))).rows.length, 0);
+      assert.equal((await como(db, quem, tx => tx.query("select 1 from public.cobrancas where mp_pagamento_id = 'pg-excluida'")).catch(() => ({ rows: [] }))).rows.length, 0);
+      assert.equal((await como(db, quem, tx => tx.query("select 1 from public.assinaturas where mp_assinatura_id = 'mp-pg-excluida'")).catch(() => ({ rows: [] }))).rows.length, 0);
     }
     assert.equal((await servidor(db, tx => tx.query("select 1 from public.cobrancas where mp_pagamento_id = 'pg-excluida'"))).rows.length, 1);
   });
