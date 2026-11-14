@@ -29,6 +29,8 @@ import SugeridosDaQuestao from './SugeridosDaQuestao';
 import DocumentoImpresso from './DocumentoImpresso';
 import { montarDocumento, nomeDoArquivo } from '../../lib/argumenta/documento';
 import { baixarDocx } from '../../lib/argumenta/baixarDocx';
+import { estadoInicialAnalise } from '../../lib/argumenta/estadoAnalise';
+import { argumentaIaLigada } from '../../lib/ia/politica';
 import { exportarPdf } from '../../lib/imprimir';
 import { referenciaVisual } from './referencias';
 
@@ -66,11 +68,17 @@ class ErroDeAnalise extends Error {
   }
 }
 
-async function enviar(url: string, corpo: unknown): Promise<Record<string, any>> {
+async function enviar(url: string, corpo: unknown, signal?: AbortSignal): Promise<Record<string, any>> {
   let r: Response;
   try {
-    r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
-  } catch {
+    r = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(corpo),
+      signal
+    });
+  } catch (e) {
+    if (e instanceof Error && e.name === 'AbortError') throw e;
     throw new ErroDeAnalise('Sem conexão. Tente de novo.');
   }
   const resposta = await r.json().catch(() => ({}));
@@ -78,7 +86,8 @@ async function enviar(url: string, corpo: unknown): Promise<Record<string, any>>
   return resposta;
 }
 
-const pedir = async (etapa: Etapa, entrada: unknown): Promise<unknown> => (await enviar(`/api/ia/argumenta-${etapa}`, { entrada })).resposta;
+const pedir = async (etapa: Etapa, entrada: unknown, signal?: AbortSignal): Promise<unknown> =>
+  (await enviar(`/api/ia/argumenta-${etapa}`, { entrada }, signal)).resposta;
 
 /** O que o plano do usuário ainda permite de análises rápidas no período (função `uso_resumo` do banco; só lê o próprio uso). */
 interface UsoRapida {
@@ -114,6 +123,11 @@ export default function AnaliseDecisao() {
   // F5-03: o mapa é montado por código com o que as etapas 2 e 4 já trouxeram; não chama o modelo
   const mapa = useMemo(() => (resultados.questoes ? montarMapa(resultados.questoes, resultados.fundamentos) : null), [resultados.questoes, resultados.fundamentos]);
   const listaRef = useRef<HTMLDivElement | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => () => {
+    abortControllerRef.current?.abort();
+  }, []);
 
   const preparo = useMemo(() => prepararDecisao(texto, extras.split('\n')), [texto, extras]);
   const vazio = preparo.paragrafos.length === 0 || !texto.trim();
@@ -156,16 +170,33 @@ export default function AnaliseDecisao() {
     else limparCaso();
   }, [enviada, resultados, analiseId, rotulo, selos, aba]);
 
-  // "Voltar à análise" (?caso=Q2): abre a aba das questões e rola até a questão de origem
-  const voltouParaQuestao = useRef<string | null>(null);
+  // "Voltar à análise" (?caso=Q2): abre a aba das questões e rola até a questão de origem após o painel Radix montar
+  const voltouParaQuestao = useRef(false);
+  const [questaoAlvoScroll, setQuestaoAlvoScroll] = useState<string | null>(null);
   useEffect(() => {
-    if (!memoria || voltouParaQuestao.current !== null) return;
+    if (!memoria || voltouParaQuestao.current) return;
+    voltouParaQuestao.current = true;
     const q = lerQuestaoDoCaso(window.location.search);
-    voltouParaQuestao.current = q ?? '';
     if (!q) return;
     setAba('questoes');
-    requestAnimationFrame(() => document.getElementById(`questao-${q}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    setQuestaoAlvoScroll(q);
   }, [memoria]);
+
+  useEffect(() => {
+    if (aba !== 'questoes' || !questaoAlvoScroll || !resultados.questoes) return;
+    let raf1 = 0;
+    let raf2 = 0;
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        document.getElementById(`questao-${questaoAlvoScroll}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setQuestaoAlvoScroll(null);
+      });
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
+  }, [aba, questaoAlvoScroll, resultados.questoes]);
 
   // O que resta da cota do plano: lido ao abrir e sempre que o formulário volta (depois de uma análise)
   const usuarioId = usuario?.id;
@@ -185,7 +216,29 @@ export default function AnaliseDecisao() {
     };
   }, [usuarioId, enviada]);
 
-  if (process.env.NEXT_PUBLIC_IA_EXPLICACAO !== 'sim' || (!carregando && !contaDisponivel)) {
+  const iaHabilitada = argumentaIaLigada({
+    NEXT_PUBLIC_ARGUMENTA_IA_LIGADA: process.env.NEXT_PUBLIC_ARGUMENTA_IA_LIGADA,
+    NEXT_PUBLIC_IA_EXPLICACAO: process.env.NEXT_PUBLIC_IA_EXPLICACAO
+  });
+
+  if (!iaHabilitada) {
+    return (
+      <Notice tom="info" titulo="Análise de decisões">
+        A análise de decisões não está habilitada nesta instalação.
+      </Notice>
+    );
+  }
+
+  if (carregando) {
+    return (
+      <Card className="p-6 flex items-center gap-3 text-sm text-ink-soft" aria-busy="true">
+        <Loader2 className="w-4 h-4 animate-spin" aria-hidden />
+        Verificando disponibilidade…
+      </Card>
+    );
+  }
+
+  if (!contaDisponivel) {
     return (
       <Notice tom="info" titulo="Análise de decisões">
         A análise de decisões não está habilitada nesta instalação.
@@ -198,13 +251,20 @@ export default function AnaliseDecisao() {
    * `analiseId`; "Tentar de novo" continua a mesma análise, sem gastar outra. Falha não consome a cota.
    */
   const executar = async (decisao: DecisaoPreparada, atuais: Resultados, analiseAtual: string | null) => {
+    abortControllerRef.current?.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
     setErro(null);
     let feitos = { ...atuais };
     let id = analiseAtual;
     try {
       if (!id) {
         setAndamento('estrutura');
-        const inicio = await enviar('/api/analises', { tipo: 'rapida', rotulo: rotulo.trim() || undefined, paragrafos: decisao.paragrafos.length });
+        const inicio = await enviar(
+          '/api/analises',
+          { tipo: 'rapida', rotulo: rotulo.trim() || undefined, paragrafos: decisao.paragrafos.length },
+          controller.signal
+        );
         id = inicio.analiseId as string;
         setAnaliseId(id);
         setUso(u => (u ? { ...u, restantes: inicio.restantes, renovaEm: inicio.renovaEm } : u));
@@ -212,26 +272,30 @@ export default function AnaliseDecisao() {
       const base = { analiseId: id, paragrafos: decisao.paragrafos };
       if (!feitos.estrutura) {
         setAndamento('estrutura');
-        feitos = { ...feitos, estrutura: (await pedir('estrutura', base)) as SaidaEstrutura };
+        feitos = { ...feitos, estrutura: (await pedir('estrutura', base, controller.signal)) as SaidaEstrutura };
         setResultados(feitos);
       }
       if (!feitos.questoes) {
         setAndamento('questoes');
-        feitos = { ...feitos, questoes: (await pedir('questoes', base)) as SaidaQuestoes };
+        feitos = { ...feitos, questoes: (await pedir('questoes', base, controller.signal)) as SaidaQuestoes };
         setResultados(feitos);
       }
       if (!feitos.fundamentos) {
         setAndamento('fundamentos');
         const questoes = feitos.questoes!.questoes.map(q => ({ id: q.id, enunciado: q.enunciado, conclusao: q.conclusao }));
-        feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { ...base, questoes })) as SaidaFundamentos };
+        feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { ...base, questoes }, controller.signal)) as SaidaFundamentos };
         setResultados(feitos);
       }
     } catch (e) {
+      if (controller.signal.aborted || (e instanceof Error && e.name === 'AbortError')) return;
       setErro((e as Error).message);
       // Análise que o servidor encerrou (falhas sem solução, estornada): não adianta tentar de novo, só começar outra
       if (e instanceof ErroDeAnalise && e.motivo === 'analise_invalida') setEncerrada(true);
     } finally {
-      setAndamento(null);
+      if (abortControllerRef.current === controller) {
+        abortControllerRef.current = null;
+        setAndamento(null);
+      }
     }
   };
 
@@ -247,13 +311,23 @@ export default function AnaliseDecisao() {
   };
 
   const novaAnalise = () => {
-    setEnviada(null);
-    setResultados({});
-    setAnaliseId(null);
-    setEncerrada(false);
-    setErro(null);
-    setAtivos([]);
-    setTextoAberto(false);
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+    const inicial = estadoInicialAnalise();
+    setEnviada(inicial.enviada);
+    setResultados(inicial.resultados);
+    setAnaliseId(inicial.analiseId);
+    setEncerrada(inicial.encerrada);
+    setErro(inicial.erro);
+    setErroDoArquivo(inicial.erroDoArquivo);
+    setAndamento(inicial.andamento);
+    setAba(inicial.aba);
+    setAtivos(inicial.ativos);
+    setTextoAberto(inicial.textoAberto);
+    setRotulo(inicial.rotulo);
+    setSelos(inicial.selos);
+    voltouParaQuestao.current = inicial.voltouParaQuestao;
+    setQuestaoAlvoScroll(null);
   };
 
   // Formulário
@@ -437,7 +511,7 @@ export default function AnaliseDecisao() {
               </Button>
             </>
           )}
-          <Button variant="secondary" type="button" onClick={novaAnalise} disabled={andamento !== null}>
+          <Button variant="secondary" type="button" onClick={novaAnalise}>
             Nova análise
           </Button>
         </div>
