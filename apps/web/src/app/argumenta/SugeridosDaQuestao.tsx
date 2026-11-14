@@ -6,8 +6,7 @@ import { BookOpenText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { obterSupabase } from '../../lib/supabase/client';
 import { comCaso } from '../../lib/caso/ligacao';
-import type { LinkDaCitacao } from '../../lib/argumenta/verificarCitacoes';
-import { leitorSupabase, sugeridosDaQuestao, type SugeridosDaQuestao } from '../../lib/argumenta/sugeridos';
+import { leitorSupabase, sugeridosDaQuestao, type LinkComOrigem, type SugeridosDaQuestao } from '../../lib/argumenta/sugeridos';
 
 const VAZIO: SugeridosDaQuestao = { itens: [], temMais: false };
 
@@ -15,20 +14,20 @@ const VAZIO: SugeridosDaQuestao = { itens: [], temMais: false };
  * "Para ler também": precedentes que citam os artigos da decisão nesta questão e os que as fontes ligam aos precedentes que ela citou.
  * Só sai da página o identificador público de cada citação conferida; o texto da decisão não vai a lugar nenhum. Só aparece quando há o que mostrar.
  */
-export default function SugeridosDaQuestao({ questaoId, links }: { questaoId: string; links: LinkDaCitacao[] }) {
+export default function SugeridosDaQuestao({ questaoId, links }: { questaoId: string; links: LinkComOrigem[] }) {
   const [sugeridos, setSugeridos] = useState<SugeridosDaQuestao>(VAZIO);
   // As citações mudam de objeto a cada render da análise; o que decide a busca são os endereços
-  const chave = useMemo(() => links.map(l => `${l.rotulo}|${l.href}`).join('\n'), [links]);
+  const chave = useMemo(
+    () => JSON.stringify(links.map(l => ({ rotulo: l.rotulo, href: l.href, ...(l.citacaoOriginal ? { citacaoOriginal: l.citacaoOriginal } : {}) }))),
+    [links]
+  );
 
   useEffect(() => {
     setSugeridos(VAZIO);
     const sb = obterSupabase();
-    if (!sb || !chave) return;
+    if (!sb || chave === '[]') return;
     let ativo = true;
-    const dadas = chave.split('\n').map(linha => {
-      const [rotulo, href] = linha.split('|');
-      return { rotulo, href };
-    });
+    const dadas = JSON.parse(chave) as LinkComOrigem[];
     void sugeridosDaQuestao(leitorSupabase(sb), dadas).then(r => {
       if (ativo) setSugeridos(r);
     });

@@ -603,8 +603,11 @@ export default function AnaliseDecisao() {
                       <SugeridosDaQuestao
                         questaoId={q.id}
                         links={desta.flatMap(f => {
-                          const selo = selos.get(f.citacao.trim());
-                          return selo?.estado === 'encontrada' ? selo.links : [];
+                          const citacao = f.citacao.trim();
+                          const selo = selos.get(citacao);
+                          return selo?.estado === 'encontrada'
+                            ? selo.links.map(l => ({ ...l, citacaoOriginal: citacao }))
+                            : [];
                         })}
                       />
                     </section>
