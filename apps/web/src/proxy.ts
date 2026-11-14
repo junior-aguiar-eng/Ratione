@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { destinoDeRetorno } from './lib/proximoDestino';
 
 /**
  * Conta obrigatória: as ferramentas e as áreas pessoais só abrem para quem está logado.
@@ -31,7 +32,7 @@ export async function proxy(request: NextRequest) {
   if (!user) {
     const destino = request.nextUrl.clone();
     destino.pathname = '/entrar';
-    destino.search = `?proximo=${encodeURIComponent(request.nextUrl.pathname)}`;
+    destino.search = `?proximo=${encodeURIComponent(destinoDeRetorno(request.nextUrl.pathname, request.nextUrl.search))}`;
     return NextResponse.redirect(destino);
   }
   return resposta;

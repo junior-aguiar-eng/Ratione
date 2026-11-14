@@ -26,7 +26,7 @@ export default function NovaSenhaPage() {
   const [erro, setErro] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!carregando && contaDisponivel && !usuario) router.replace('/entrar');
+    if (!carregando && contaDisponivel && !usuario) router.replace('/entrar?proximo=/conta/nova-senha');
   }, [carregando, contaDisponivel, usuario, router]);
 
   const salvar = async (e: React.FormEvent) => {

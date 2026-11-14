@@ -55,7 +55,7 @@ export default function ContaPage() {
   const [confirmando, setConfirmando] = useState<'itens' | 'conta' | null>(null);
 
   useEffect(() => {
-    if (!carregando && !usuario) router.replace('/entrar');
+    if (!carregando && !usuario) router.replace('/entrar?proximo=/conta');
   }, [carregando, usuario, router]);
 
   useEffect(() => {

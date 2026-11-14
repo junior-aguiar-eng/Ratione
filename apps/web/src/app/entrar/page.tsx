@@ -8,7 +8,7 @@ import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { irParaPagina } from '../../lib/navegacao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
-import { caminhoInterno } from '../../lib/link-email';
+import { caminhoSeguro } from '../../lib/proximoDestino';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -35,7 +35,8 @@ function Formulario() {
   }, [params]);
 
   // Depois de entrar, volta para onde o usuário queria ir (só caminhos internos)
-  const pedido = caminhoInterno(params.get('proximo'), '/prazozero');
+  const proximoParam = params.get('proximo');
+  const pedido = caminhoSeguro(proximoParam, '/prazozero');
   const proximo = pedido.startsWith('/entrar') ? '/prazozero' : pedido;
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function Formulario() {
     setAviso(null);
     setEnviando(true);
     const retorno = `${window.location.origin}/auth/callback`;
+    const retornoCadastro = proximoParam ? `${retorno}?proximo=${encodeURIComponent(proximo)}` : retorno;
     try {
       if (modo === 'entrar') {
         const { error } = await sb.auth.signInWithPassword({ email: email.trim(), password: senha });
@@ -60,7 +62,7 @@ function Formulario() {
         } else if (!aceite) {
           setErro('Para criar a conta, aceite os Termos de uso e a Política de privacidade.');
         } else {
-          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retorno, data: dadosDeAceite() } });
+          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retornoCadastro, data: dadosDeAceite() } });
           if (error) setErro(traduzirErroAuth(error.message));
           else
             setAviso(
