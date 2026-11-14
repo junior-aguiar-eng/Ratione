@@ -4,6 +4,7 @@ import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { apagarDocumento, dependenciasPadrao } from '../../../../lib/documentos/servico';
 import { armazenamentoEBanco } from '../../../../lib/documentos/supabase';
+import { usuarioAutenticadoNaoAnonimo } from '../../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
@@ -30,11 +31,12 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     cookies: { getAll: () => armazem.getAll(), setAll: lista => lista.forEach(({ name, value, options }) => armazem.set(name, value, options)) }
   });
   const { data } = await sessao.auth.getUser();
-  if (!data.user) return NextResponse.json({ mensagem: 'Entre na sua conta.' }, { status: 401 });
+  const usuario = usuarioAutenticadoNaoAnonimo(data.user);
+  if (!usuario) return NextResponse.json({ mensagem: 'Entre na sua conta.' }, { status: 401 });
 
   try {
     const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-    const apagou = await apagarDocumento(data.user.id, id, { ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) });
+    const apagou = await apagarDocumento(usuario.id, id, { ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) });
     return apagou ? NextResponse.json({ ok: true }) : NextResponse.json({ mensagem: 'Arquivo não encontrado.' }, { status: 404 });
   } catch (e) {
     registrar('ERROR', 'Documentos: erro ao apagar', { erro_mensagem: (e as Error).message });

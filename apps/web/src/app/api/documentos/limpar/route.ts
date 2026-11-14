@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   }
   try {
     const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-    const apagados = await limparVencidos({ ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) });
+    const apagados = await limparVencidos({ ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) }, 200, 20);
     return NextResponse.json({ apagados });
   } catch (e) {
     registrar('ERROR', 'Documentos: erro na limpeza', { erro_mensagem: (e as Error).message });

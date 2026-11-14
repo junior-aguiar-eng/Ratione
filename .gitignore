@@ -57,3 +57,7 @@ packages/tesemap/corpus/atualizacao-relatorio.md
 
 # F5-05: folhas de conferência são geradas do caso
 packages/argumenta/corpus/folhas/
+
+# Git worktrees locais e scratch do superpowers SDD
+.worktrees/
+.superpowers/

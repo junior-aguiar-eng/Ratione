@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { usuarioAutenticadoNaoAnonimo } from '../sessaoValidada';
 import { cobrancaPronta, lerConfigCobranca, usuarioPodeUsarCobranca, type ConfigCobranca } from './config';
 
 /**
@@ -29,10 +30,21 @@ export async function abrirContexto(): Promise<ContextoDaCobranca | null> {
   return { cfg, sessao, servidor };
 }
 
-/** O usuário logado, se a cobrança estiver liberada para ele (em teste, só quem está na lista). `null` para todos os outros casos, sem distinguir. */
-export async function usuarioDaCobranca(ctx: ContextoDaCobranca): Promise<{ id: string; email: string } | null> {
+export type AcessoCobranca =
+  | { ok: true; usuario: { id: string; email: string } }
+  | { ok: false; status: 401 | 503 };
+
+/** Verifica se há sessão real (não anônima) e se a cobrança está liberada para ela (em teste, só quem está na lista). */
+export async function acessoUsuarioCobranca(ctx: ContextoDaCobranca): Promise<AcessoCobranca> {
   const { data } = await ctx.sessao.auth.getUser();
   const u = data.user;
-  if (!u?.email || !usuarioPodeUsarCobranca(ctx.cfg, u.email)) return null;
-  return { id: u.id, email: u.email };
+  if (!usuarioAutenticadoNaoAnonimo(u)) return { ok: false, status: 401 };
+  if (!u?.email || !usuarioPodeUsarCobranca(ctx.cfg, u.email)) return { ok: false, status: 503 };
+  return { ok: true, usuario: { id: u.id, email: u.email } };
+}
+
+/** O usuário logado, se a cobrança estiver liberada para ele (em teste, só quem está na lista). `null` para todos os outros casos, sem distinguir. */
+export async function usuarioDaCobranca(ctx: ContextoDaCobranca): Promise<{ id: string; email: string } | null> {
+  const acesso = await acessoUsuarioCobranca(ctx);
+  return acesso.ok ? acesso.usuario : null;
 }

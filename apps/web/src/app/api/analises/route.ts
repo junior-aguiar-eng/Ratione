@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import { iniciarAnaliseNoBanco } from '../../../lib/ia/banco';
 import { mensagemDeCota } from '../../../lib/ia/executar';
 import { iaLigada } from '../../../lib/ia/politica';
+import { usuarioAutenticadoNaoAnonimo } from '../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../lib/origem';
 import { paragrafosDaAnalise, rotuloDaAnalise } from '../../../lib/uso';
 import { registrar } from '../../../lib/log';
@@ -53,11 +54,12 @@ export async function POST(request: Request) {
     cookies: { getAll: () => armazem.getAll(), setAll: lista => lista.forEach(({ name, value, options }) => armazem.set(name, value, options)) }
   });
   const { data } = await sessao.auth.getUser();
-  if (!data.user) return NextResponse.json({ mensagem: 'Entre na sua conta para analisar uma decisão.' }, { status: 401 });
+  const usuario = usuarioAutenticadoNaoAnonimo(data.user);
+  if (!usuario) return NextResponse.json({ mensagem: 'Entre na sua conta para analisar uma decisão.' }, { status: 401 });
 
   try {
     const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-    const r = await iniciarAnaliseNoBanco(servidor, data.user.id, tipo, rotulo.rotulo, tamanho.paragrafos);
+    const r = await iniciarAnaliseNoBanco(servidor, usuario.id, tipo, rotulo.rotulo, tamanho.paragrafos);
     if (!r.ok) {
       return NextResponse.json({ mensagem: mensagemDeCota(r.motivo, r.renovaEm), motivo: r.motivo, renovaEm: r.renovaEm, plano: r.plano }, { status: 429 });
     }

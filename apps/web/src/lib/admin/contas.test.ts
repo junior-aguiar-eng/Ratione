@@ -43,7 +43,34 @@ describe('Suporte de contas: fronteira e mutações de acesso',()=>{
    assert(chamadas.indexOf(eventos[0])<chamadas.findIndex(c=>c.method==='PUT'));
   }
  });
- it('falha do Auth fica registrada e nunca é apresentada como sucesso ou expõe detalhes',async()=>{
-  const {ctx,chamadas}=contexto(true);const r=await alterarAcessoConta(req({usuarioId:OUTRO,acao:'suspender'}),async()=>ctx);assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/segredo interno/);assert.deepEqual(chamadas.at(-1)?.body,{situacao:'falhou'});
- });
+  it('falha do Auth fica registrada e nunca é apresentada como sucesso ou expõe detalhes',async()=>{
+   const {ctx,chamadas}=contexto(true);const r=await alterarAcessoConta(req({usuarioId:OUTRO,acao:'suspender'}),async()=>ctx);assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/segredo interno/);assert.deepEqual(chamadas.at(-1)?.body,{situacao:'falhou'});
+  });
+  it('aborta stream sem content-length acima de 1024 bytes com 413 antes de consultar ou mutar',async()=>{
+   const {ctx,chamadas}=contexto();
+   const stream=(texto:string)=>new ReadableStream<Uint8Array>({
+    start(c){
+     const b=new TextEncoder().encode(texto);
+     c.enqueue(b.subarray(0,600));
+     c.enqueue(b.subarray(600));
+     c.close();
+    }
+   });
+   const rBusca=await servirContas(new Request('https://ratione.exemplo.test/api/admin/contas/busca',{
+    method:'POST',
+    headers:{Origin:'https://ratione.exemplo.test','Content-Type':'application/json'},
+    body:stream(JSON.stringify({busca:'x'.repeat(1200),pagina:0})),
+    duplex:'half'
+   } as RequestInit),async()=>ctx);
+   assert.equal(rBusca.status,413);
+
+   const rMut=await alterarAcessoConta(new Request('https://ratione.exemplo.test/api/admin/contas',{
+    method:'POST',
+    headers:{Origin:'https://ratione.exemplo.test','Content-Type':'application/json'},
+    body:stream(JSON.stringify({usuarioId:OUTRO,acao:'suspender',extra:'x'.repeat(1200)})),
+    duplex:'half'
+   } as RequestInit),async()=>ctx);
+   assert.equal(rMut.status,413);
+   assert.equal(chamadas.length,0);
+  });
 });

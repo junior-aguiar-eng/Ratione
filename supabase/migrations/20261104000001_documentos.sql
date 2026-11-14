@@ -23,9 +23,39 @@ create index documentos_expira on public.documentos (expira_em);
 
 alter table public.documentos enable row level security;
 create policy documentos_le_proprio on public.documentos for select to authenticated using (usuario_id = (select auth.uid()));
+do $$
+begin
+  if to_regprocedure('public.conta_tem_acesso()') is not null then
+    drop policy if exists conta_ativa_restritiva on public.documentos;
+    create policy conta_ativa_restritiva on public.documentos
+      as restrictive for all to authenticated
+      using ((select public.conta_tem_acesso()))
+      with check ((select public.conta_tem_acesso()));
+  end if;
+end;
+$$;
 revoke all on public.documentos from anon, authenticated;
 grant select on public.documentos to authenticated;
 grant all on public.documentos to service_role;
+
+create or replace function public.documentos_limite() returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  -- Serializa as gravações do mesmo usuário para a contagem abaixo ser confiável
+  perform pg_advisory_xact_lock(hashtextextended(new.usuario_id::text, 0));
+  if (select count(*) from public.documentos where usuario_id = new.usuario_id) >= 10 then
+    raise exception 'limite de 10 documentos por usuário' using errcode = 'P0001';
+  end if;
+  return new;
+end;
+$$;
+revoke all on function public.documentos_limite() from public, anon, authenticated;
+drop trigger if exists documentos_limite on public.documentos;
+create trigger documentos_limite before insert on public.documentos
+for each row execute function public.documentos_limite();
 
 -- Bucket privado. Onde o esquema `storage` não existe (banco de teste local), nada é criado.
 do $$

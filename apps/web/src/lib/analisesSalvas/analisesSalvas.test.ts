@@ -234,4 +234,24 @@ describe('Análises salvas (F5-10): guardar, reabrir e apagar', () => {
     assert.strictEqual(linhas.length, 0);
     assert.strictEqual(arquivos.size, 0);
   });
+
+  it('faxina das análises vencidas percorre múltiplos lotes até zerar ou atingir o teto', async () => {
+    let agora = AGORA;
+    const { dep, arquivos, linhas } = simulacao({ agora: () => agora });
+    for (let i = 0; i < 5; i++) {
+      await salvarAnalise(`u${i}`, { conteudo: conteudo(), prazo: '30d' }, dep);
+    }
+    await salvarAnalise('u-sempre', { conteudo: conteudo(), prazo: 'sempre' }, dep);
+    agora = new Date(AGORA.getTime() + 40 * DIA);
+
+    // Teto de 2 lotes de 2 = 4 apagadas, sobra 1 vencida + 1 sem vencimento
+    assert.strictEqual(await limparVencidas(dep, 2, 2), 4);
+    assert.strictEqual(linhas.length, 2);
+
+    // Teto maior apaga o restante vencido e preserva a análise sem vencimento
+    assert.strictEqual(await limparVencidas(dep, 2, 20), 1);
+    assert.strictEqual(linhas.length, 1);
+    assert.strictEqual(linhas[0].usuarioId, 'u-sempre');
+    assert.strictEqual(arquivos.size, 1);
+  });
 });

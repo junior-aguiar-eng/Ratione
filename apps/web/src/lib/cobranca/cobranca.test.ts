@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { cobrancaPronta, lerConfigCobranca, usuarioPodeUsarCobranca } from './config';
+import { acessoUsuarioCobranca, type ContextoDaCobranca } from './contexto';
 import { situacaoAposCobranca, situacaoDaAssinatura, situacaoDaCobranca } from './estados';
 import { assinarAviso, assinaturaValida, idadeDoAvisoEmSegundos, manifesto, partesDaAssinatura } from './webhook';
 import { ErroMp, criarClienteMp } from './mercadopago';
@@ -264,5 +265,30 @@ describe('Cobrança: idade do aviso (só informa, nunca recusa)', () => {
     assert.equal(idadeDoAvisoEmSegundos(null, agora), null);
     assert.equal(idadeDoAvisoEmSegundos('v1=abc', agora), null);
     assert.equal(idadeDoAvisoEmSegundos('ts=abc,v1=abc', agora), null);
+  });
+});
+
+describe('Cobrança: controle de acesso por sessão não anônima', () => {
+  const cfg = lerConfigCobranca({
+    COBRANCA_LIGADA: 'sim',
+    COBRANCA_AMBIENTE: 'teste',
+    COBRANCA_TESTE_EMAILS: 'liberado@exemplo.com',
+    MERCADOPAGO_ACCESS_TOKEN: 't',
+    MERCADOPAGO_WEBHOOK_SECRET: 's'
+  });
+  const ctxCom = (user: { id: string; email?: string; is_anonymous?: boolean } | null): ContextoDaCobranca => ({
+    cfg,
+    sessao: { auth: { getUser: async () => ({ data: { user } }) } } as unknown as ContextoDaCobranca['sessao'],
+    servidor: {} as ContextoDaCobranca['servidor']
+  });
+
+  it('recusa sessão ausente ou anônima com 401, usuário fora da lista de teste com 503 e libera conta autorizada', async () => {
+    assert.deepEqual(await acessoUsuarioCobranca(ctxCom(null)), { ok: false, status: 401 });
+    assert.deepEqual(await acessoUsuarioCobranca(ctxCom({ id: 'u1', email: 'liberado@exemplo.com', is_anonymous: true })), { ok: false, status: 401 });
+    assert.deepEqual(await acessoUsuarioCobranca(ctxCom({ id: 'u1', email: 'outro@exemplo.com', is_anonymous: false })), { ok: false, status: 503 });
+    assert.deepEqual(await acessoUsuarioCobranca(ctxCom({ id: 'u1', email: 'liberado@exemplo.com', is_anonymous: false })), {
+      ok: true,
+      usuario: { id: 'u1', email: 'liberado@exemplo.com' }
+    });
   });
 });

@@ -5,6 +5,7 @@ import { assinaturaValida, idadeDoAvisoEmSegundos } from '../../../../lib/cobran
 import { criarClienteMp } from '../../../../lib/cobranca/mercadopago';
 import { processarAviso } from '../../../../lib/cobranca/processar';
 import { bancoDaCobranca, concluirEvento, descartarEvento, registrarEvento } from '../../../../lib/cobranca/banco';
+import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
 import { registrar } from '../../../../lib/log';
 
 /**
@@ -23,14 +24,17 @@ export async function POST(request: Request) {
   if (!cobrancaPronta(cfg) || !url || !secreta) return NextResponse.json({ ok: false }, { status: 503 });
 
   const consulta = new URL(request.url).searchParams;
-  const corpo = (await request.json().catch(() => null)) as { type?: unknown; data?: { id?: unknown } } | null;
-  const dataId = consulta.get('data.id') ?? (typeof corpo?.data?.id === 'string' || typeof corpo?.data?.id === 'number' ? String(corpo.data.id) : null);
   const requestId = request.headers.get('x-request-id');
 
   if (!assinaturaValida({ xSignature: request.headers.get('x-signature'), xRequestId: requestId, dataId: consulta.get('data.id'), segredo: cfg.segredoWebhook! })) {
     registrar('WARNING', 'Cobrança: aviso com assinatura inválida');
     return NextResponse.json({ ok: false }, { status: 401 });
   }
+
+  const lido = await lerJsonLimitado(request, LIMITE_CORPO.pequeno);
+  if (!lido.ok) return NextResponse.json({ ok: false, mensagem: lido.mensagem }, { status: lido.status });
+  const corpo = lido.valor && typeof lido.valor === 'object' ? (lido.valor as { type?: unknown; data?: { id?: unknown } }) : null;
+  const dataId = consulta.get('data.id') ?? (typeof corpo?.data?.id === 'string' || typeof corpo?.data?.id === 'number' ? String(corpo.data.id) : null);
 
   // Assinatura válida mas antiga: processa mesmo assim (pode ser um reenvio legítimo), só deixa o rastro no log
   const idade = idadeDoAvisoEmSegundos(request.headers.get('x-signature'), Date.now());

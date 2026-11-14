@@ -119,6 +119,45 @@ describe('IA: chamadas dentro de uma análise, orçamento global e acesso (catá
     const depois = await comoServidor(db, tx => tx.query<{ custo_usd: string }>('select custo_usd from public.ia_uso where id = 1'));
     assert.deepStrictEqual(depois.rows, antes.rows, 'reserva já fechada não muda');
   });
+
+  it('bloqueia repetição da mesma etapa já gerada e exige sequência no pipeline do Argumenta', async () => {
+    const analise = await comoServidor(db, tx => iniciar(tx, ana, 'rapida'));
+    const pulo = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-questoes'));
+    assert.strictEqual(pulo.ok, false);
+    assert.strictEqual(pulo.motivo, 'analise_invalida');
+
+    const e1 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-estrutura'));
+    assert.strictEqual(e1.ok, true);
+    await comoServidor(db, tx => finalizar(tx, e1.reserva_id!));
+
+    const repeteE1 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-estrutura'));
+    assert.strictEqual(repeteE1.ok, false);
+    assert.strictEqual(repeteE1.motivo, 'analise_invalida');
+
+    const puloE3 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-fundamentos'));
+    assert.strictEqual(puloE3.ok, false);
+    assert.strictEqual(puloE3.motivo, 'analise_invalida');
+
+    const e2 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-questoes'));
+    assert.strictEqual(e2.ok, true);
+    await comoServidor(db, tx => tx.query("select public.ia_finalizar($1, 'falhou', 0, 0, 0, 0, 0)", [e2.reserva_id!]));
+
+    const retryE2 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-questoes'));
+    assert.strictEqual(retryE2.ok, true, 'retry após falha legítima continua permitido');
+    await comoServidor(db, tx => finalizar(tx, retryE2.reserva_id!));
+
+    const repeteE2 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-questoes'));
+    assert.strictEqual(repeteE2.ok, false);
+    assert.strictEqual(repeteE2.motivo, 'analise_invalida');
+
+    const e3 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-fundamentos'));
+    assert.strictEqual(e3.ok, true);
+    await comoServidor(db, tx => finalizar(tx, e3.reserva_id!));
+
+    const repeteE3 = await comoServidor(db, tx => reservar(tx, ana, analise, 0.01, 'argumenta-fundamentos'));
+    assert.strictEqual(repeteE3.ok, false);
+    assert.strictEqual(repeteE3.motivo, 'analise_invalida');
+  });
 });
 
 describe('Migração do catálogo de tarefas sobre o banco que já tinha a explicação por IA', () => {

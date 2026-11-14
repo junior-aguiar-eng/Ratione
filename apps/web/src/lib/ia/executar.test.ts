@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { chaveDoCache, dataDeRenovacao, executarTarefa, mensagemDeCota, type DependenciasExecucao, type Situacao } from './executar';
+import { chaveDoCache, dataDeRenovacao, executarTarefa, MENSAGEM_REGISTRO_FALHOU, mensagemDeCota, type DependenciasExecucao, type Situacao } from './executar';
 import type { PedidoModelo, ResultadoModelo } from './contrato';
 import { CATALOGO } from './catalogo';
 import { custoMaximoUsd, custoUsd, iaLigada } from './politica';
@@ -146,17 +146,58 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
     }
   });
 
-  it('o banco falhar depois de gerar não perde o resultado: o cliente recebe a resposta e o erro vai para o log', async () => {
+  it('o banco falhar ao finalizar ou gravar cache depois de gerar não perde o resultado: o cliente recebe 200 e o erro vai para o log', async () => {
     const avisos: Array<{ m: string; etapa: unknown }> = [];
     const quebra = async () => {
       throw new Error('banco fora do ar');
     };
-    const { dep } = deps({ concluirAnalise: quebra, gravarCache: quebra, finalizar: quebra, avisar: (m, c) => void avisos.push({ m, etapa: c.etapa }) });
+    const { dep } = deps({ gravarCache: quebra, finalizar: quebra, avisar: (m, c) => void avisos.push({ m, etapa: c.etapa }) });
     const r = await executarTarefa(TAREFA, ENTRADA, dep);
     assert.equal(r.status, 200);
     assert.ok(r.status === 200 && r.corpo.doCache === false && !!r.corpo.resposta);
-    assert.deepEqual(avisos.map(a => a.etapa), ['finalizar', 'concluir', 'gravar_cache']);
-    assert.ok(avisos.every(a => a.m === 'IA: resultado gerado, mas o registro falhou'));
+    assert.deepEqual(avisos.map(a => a.etapa), ['finalizar', 'gravar_cache']);
+    assert.ok(avisos.every(a => a.m === MENSAGEM_REGISTRO_FALHOU));
+  });
+
+  it('falha ao concluir ou consumir a análise retorna 503 e registra erro crítico no log', async () => {
+    const quebra = async () => {
+      throw new Error('banco fora do ar');
+    };
+
+    const avisosConcluir: Array<{ m: string; etapa: unknown }> = [];
+    const eConcluir = deps({
+      concluirAnalise: quebra,
+      finalizar: quebra,
+      avisar: (m, c) => void avisosConcluir.push({ m, etapa: c.etapa })
+    });
+    const rConcluir = await executarTarefa(TAREFA, ENTRADA, eConcluir.dep);
+    assert.equal(rConcluir.status, 503);
+    assert.equal(rConcluir.corpo.mensagem, 'Não foi possível confirmar o registro desta etapa agora. Tente novamente.');
+    assert.ok(!eConcluir.registro.includes('gravar'), 'não grava no cache quando o registro de cota falha');
+    assert.deepEqual(avisosConcluir.map(a => a.etapa), ['finalizar', 'concluir']);
+    assert.ok(avisosConcluir.every(a => a.m === MENSAGEM_REGISTRO_FALHOU));
+
+    const avisosConsumir: Array<{ m: string; etapa: unknown }> = [];
+    const estruturaJson = JSON.stringify({
+      tipo: 'sentenca',
+      resultado: 'Procedente',
+      resumo: 'Resumo.',
+      pedidos: [{ descricao: 'Restituição', paragrafos: [1] }],
+      secoes: [{ tipo: 'dispositivo', inicio: 1, fim: 1 }]
+    });
+    const eConsumir = deps({
+      consumirAnalise: quebra,
+      chamarModelo: async () => ({ tipo: 'ok', json: estruturaJson, uso: USO }),
+      avisar: (m, c) => void avisosConsumir.push({ m, etapa: c.etapa })
+    });
+    const rConsumir = await executarTarefa(
+      'argumenta-estrutura',
+      { analiseId: '6f1c2d3e-4a5b-4c6d-8e7f-0a1b2c3d4e5f', paragrafos: ['Julgo procedente o pedido.'] },
+      eConsumir.dep
+    );
+    assert.equal(rConsumir.status, 503);
+    assert.equal(rConsumir.corpo.mensagem, 'Não foi possível confirmar o registro desta etapa agora. Tente novamente.');
+    assert.deepEqual(avisosConsumir, [{ m: MENSAGEM_REGISTRO_FALHOU, etapa: 'consumir' }]);
   });
 
   it('o banco falhar entre abrir a análise e reservar libera a vaga da explicação e repassa o erro', async () => {

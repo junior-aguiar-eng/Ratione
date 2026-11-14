@@ -34,4 +34,36 @@ describe('Origem pública', () => {
   it('sem cabeçalhos, cai na URL da requisição', () => {
     assert.equal(origemPublica(new Request('http://localhost:3000/x')), 'http://localhost:3000');
   });
+  it('rejeita sintaxe inválida em X-Forwarded-Host e cai no Host válido ou URL', () => {
+    assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { host: 'ratione.nexojuris.ia.br', 'x-forwarded-host': 'evil.com/login', 'x-forwarded-proto': 'https' })), 'https://ratione.nexojuris.ia.br');
+    assert.equal(origemPublica(req('http://localhost:3000/x', { 'x-forwarded-host': 'evil.com@good.com' })), 'http://localhost:3000');
+  });
+  it('com RATIONE_HOSTS_CONFIADOS, recusa host forjado em X-Forwarded-Host e usa host confiável ou origem configurada', () => {
+    const antesHosts = process.env.RATIONE_HOSTS_CONFIADOS;
+    const antesSite = process.env.SITE_URL;
+    try {
+      process.env.RATIONE_HOSTS_CONFIADOS = 'ratione.nexojuris.ia.br, preview.ratione.nexojuris.ia.br';
+      process.env.SITE_URL = 'https://ratione.nexojuris.ia.br';
+      assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { host: 'interno', 'x-forwarded-host': 'evil.com', 'x-forwarded-proto': 'https' })), 'https://ratione.nexojuris.ia.br');
+      assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { host: 'ratione.nexojuris.ia.br', 'x-forwarded-host': 'evil.com', 'x-forwarded-proto': 'https' })), 'https://ratione.nexojuris.ia.br');
+      assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { host: 'interno', 'x-forwarded-host': 'preview.ratione.nexojuris.ia.br', 'x-forwarded-proto': 'https' })), 'https://preview.ratione.nexojuris.ia.br');
+    } finally {
+      if (antesHosts === undefined) delete process.env.RATIONE_HOSTS_CONFIADOS; else process.env.RATIONE_HOSTS_CONFIADOS = antesHosts;
+      if (antesSite === undefined) delete process.env.SITE_URL; else process.env.SITE_URL = antesSite;
+    }
+  });
+  it('prioriza SITE_URL / RATIONE_ORIGEM_PUBLICA fora de localhost contra X-Forwarded-Host forjado', () => {
+    const antesOrigem = process.env.RATIONE_ORIGEM_PUBLICA;
+    const antesSite = process.env.SITE_URL;
+    try {
+      process.env.SITE_URL = 'https://ratione.nexojuris.ia.br/qualquer';
+      assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { host: 'evil.com', 'x-forwarded-host': 'evil.com', 'x-forwarded-proto': 'https' })), 'https://ratione.nexojuris.ia.br');
+      delete process.env.SITE_URL;
+      process.env.RATIONE_ORIGEM_PUBLICA = 'https://app.ratione.exemplo';
+      assert.equal(origemPublica(req('http://0.0.0.0:8080/x', { 'x-forwarded-host': 'evil.com', 'x-forwarded-proto': 'https' })), 'https://app.ratione.exemplo');
+    } finally {
+      if (antesOrigem === undefined) delete process.env.RATIONE_ORIGEM_PUBLICA; else process.env.RATIONE_ORIGEM_PUBLICA = antesOrigem;
+      if (antesSite === undefined) delete process.env.SITE_URL; else process.env.SITE_URL = antesSite;
+    }
+  });
 });
