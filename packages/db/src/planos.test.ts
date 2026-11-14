@@ -180,7 +180,7 @@ describe('Planos e cota por análise (F8-02 e F8-03)', () => {
     );
     const exp = resumo.rows.find(r => r.tipo === 'explicacao')!;
     assert.deepStrictEqual({ plano: exp.plano, quantidade: exp.quantidade, usadas: exp.usadas, restantes: exp.restantes }, { plano: 'gratuito', quantidade: 10, usadas: 1, restantes: 9 });
-    assert.strictEqual((await como(db, null, tx => tx.query('select * from public.uso_resumo()').catch(() => ({ rows: ['negado'] })))).rows[0], 'negado', 'visitante não chama');
+    await assert.rejects(como(db, null, tx => tx.query('select * from public.uso_resumo()')), /permission denied/, 'visitante não chama');
 
     const proprias = await como(db, nina, tx => tx.query<{ usuario_id: string }>('select usuario_id from public.analises'));
     assert.ok(proprias.rows.length > 0 && proprias.rows.every(r => r.usuario_id === nina));
