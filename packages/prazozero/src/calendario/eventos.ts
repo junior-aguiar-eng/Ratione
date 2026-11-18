@@ -587,6 +587,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   // Os feriados do art. 1º que a lei federal já traz (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12) não se repetem aqui;
   // entram os que dependem do ato: Carnaval, Paixão de Cristo e Corpus Christi, além do que é próprio do tribunal.
   // Fora: 08/09 (padroeira de Curitiba, feriado municipal) e 08/12 (o Dia da Justiça foi transferido para 18/12).
+  { tribunais: ['TJPR'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense (20/12/2025 a 06/01/2026)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Resolução TJPR nº 515/2025 (comunicado oficial de 17/12/2025)', fonte: 'tjpr-recesso-2025-2026' },
   ...[
     ['2026-02-16', 'Véspera de Carnaval (suspensão do expediente, com compensação de 1 hora por dia)', 'art. 2º'],
     ['2026-02-17', 'Carnaval', 'art. 1º'],
@@ -638,8 +639,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
   { tribunais: ['TJRS'], inicio: '2027-05-27', fim: '2027-05-27', nome: 'Corpus Christi: feriado municipal em Porto Alegre e nas comarcas que o adotam (depende da comarca)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Ato 06/2026 OE (marcado com asterisco: feriado municipal de Porto Alegre)', fonte: 'tjrs-ato-06-2026' },
 
   // ---------- TJBA, 2026: Decreto Judiciário 1050/2025, art. 5º (todos "sem expediente forense", art. 8º prorroga os prazos) ----------
-  // Fora: os feriados federais do art. 5º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11) e 02/01 (já no recesso do CPC, art. 220).
+  // Fora: os feriados federais do art. 5º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 20/11); 02/01 consta como recesso 2025/2026 (sem expediente).
   ...[
+    ['2026-01-02', 'Recesso forense 2025/2026 (sem expediente forense)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, arts. 2º, 4º e 5º'],
     ['2026-02-12', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
     ['2026-02-13', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
     ['2026-02-16', 'Carnaval (art. 5º, II)', 'tjba-dj-1050-2025', 'Decreto Judiciário TJBA 1050/2025, art. 5º, II'],
@@ -731,19 +733,23 @@ const EVENTOS_BASE: EventoCalendario[] = [
   { tribunais: ['TJSC'], inicio: '2026-06-24', fim: '2026-06-24', nome: 'Jogo da Seleção na Copa do Mundo (19h): expediente das 10h às 17h; começo e vencimento dos prazos postergados', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Resolução GP TJSC 31/2026, arts. 1º, VI, e 2º', fonte: 'tjsc-res-gp-31-2026' },
 
   // ---------- TJPE, 2026: Ato Conjunto 43/2025 (art. 1º e parágrafo único) e Atos 966 e 977/2026 (PJe) ----------
-  // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 06/03 (já é regra anual conferida por lei estadual),
-  // 02 a 06/01 e 20 a 31/12 (já no recesso do CPC, art. 220) e 16/07 (feriado municipal do Recife). Corpus Christi é 22/06; 04/06 é dia normal.
+  // Fora: os feriados federais do art. 1º (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 06/03 (já é regra anual conferida por lei estadual)
+  // e 16/07 (feriado municipal do Recife). Corpus Christi é 22/06; 04/06 é dia normal.
   ...[
+    ['2026-01-02', '2026-01-06', 'Recesso forense', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, parágrafo único (COJE, art. 94, e Res. TJPE 520/2024)'],
     ['2026-02-16', '2026-02-16', 'Carnaval (segunda-feira)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, II'],
     ['2026-02-17', '2026-02-17', 'Carnaval (terça-feira)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, III'],
     ['2026-02-18', '2026-02-18', 'Quarta-feira de Cinzas (sem expediente por inteiro)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, IV'],
     ['2026-04-02', '2026-04-03', 'Semana Santa (Quinta-feira e Sexta-feira Santa)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, VI e VII'],
-    ['2026-05-11', '2026-05-15', 'Prazos suspensos por instabilidade do PJe (11 a 13/05: Ato 966; 14 e 15/05: Ato 977)', 'tjpe-ato-966-2026', 'Atos TJPE 966/2026 e 977/2026, art. 1º'],
+    ['2026-05-11', '2026-05-13', 'Prazos suspensos por instabilidade do PJe (Ato 966)', 'tjpe-ato-966-2026', 'Ato TJPE 966/2026, art. 1º'],
+    ['2026-05-14', '2026-05-15', 'Prazos suspensos por instabilidade do PJe (Ato 977)', 'tjpe-ato-977-2026', 'Ato TJPE 977/2026, art. 1º'],
     ['2026-06-22', '2026-06-22', 'Corpus Christi (transferido de 04/06)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XI'],
     ['2026-06-23', '2026-06-30', 'São João e feriados forenses de junho (23, 24 e 25 a 30)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XII, e parágrafo único (COJE, art. 94)'],
     ['2026-08-10', '2026-08-10', 'Dia dos Cursos Jurídicos (antecipado de 11/08)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XIII (COJE, art. 94)'],
     ['2026-10-30', '2026-10-30', 'Dia do Servidor Público (transferido de 28/10)', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XVI'],
-    ['2026-12-08', '2026-12-08', 'Nossa Senhora da Conceição e Dia da Justiça', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XX']
+    ['2026-12-08', '2026-12-08', 'Nossa Senhora da Conceição e Dia da Justiça', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, XX'],
+    ['2026-12-20', '2026-12-24', 'Recesso forense', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, parágrafo único (COJE, art. 94, e Res. TJPE 520/2024)'],
+    ['2026-12-26', '2026-12-31', 'Recesso forense', 'tjpe-ato-conjunto-43-2025', 'Ato Conjunto TJPE 43/2025, art. 1º, parágrafo único (COJE, art. 94, e Res. TJPE 520/2024)']
   ].map(([inicio, fim, nome, fonte, fundamento]) => ({
     tribunais: ['TJPE'],
     inicio,
@@ -756,7 +762,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJCE, 2026: Portaria 2924/2025 (Anexo Único) e Portarias 1169, 1401, 1440 e 727/2026 ----------
-  // Fora: os feriados federais do anexo (21/4, 1/5, 7/9, 12/10, 2/11, 20/11) e o recesso (20/12 a 06/01, já no CPC, art. 220).
+  // Fora: os feriados federais do anexo (21/4, 1/5, 7/9, 12/10, 2/11, 20/11); 01 a 06/01/2027 fica fora (fora de 2026).
+  { tribunais: ['TJCE'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense (sem expediente forense)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 2924/2025, art. 1º e Anexo Único (recesso 20/12/2026 a 06/01/2027)', fonte: 'tjce-portaria-2924-2025' },
+  { tribunais: ['TJCE'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense (sem expediente forense)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJCE 2924/2025, art. 1º e Anexo Único (recesso 20/12/2026 a 06/01/2027)', fonte: 'tjce-portaria-2924-2025' },
   ...[
     ['2026-02-16', 'Carnaval (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (fevereiro)'],
     ['2026-02-17', 'Carnaval (ponto facultativo, sem expediente forense)', 'tjce-portaria-2924-2025', 'Portaria TJCE 2924/2025, Anexo Único (fevereiro)'],
@@ -1024,7 +1032,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJMT, 2026: Portaria 1915/2025-PRES, Anexo I (art. 2º: suspensos o expediente e os prazos nos feriados e nos pontos facultativos) ----------
-  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12), 24 e 31/12 (recesso) e os feriados municipais do Anexo II.
+  // Fora: os feriados federais do anexo (1/1, 21/4, 1/5, 7/9, 12/10, 2/11, 15/11, 20/11, 25/12) e os feriados municipais do Anexo II.
   ...[
     ['2026-02-16', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
     ['2026-02-17', 'Carnaval (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
@@ -1037,7 +1045,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-08-11', 'Dia do Advogado (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º (Lei 5.010/1966, art. 62, IV)'],
     ['2026-10-28', 'Dia do Servidor Público (ponto facultativo, sem expediente)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
     ['2026-12-07', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)'],
-    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)']
+    ['2026-12-08', 'Dia da Justiça (feriado forense)', 'Portaria TJMT/PRES 1915/2025, Anexo I (Decreto-lei 8.292/1945, art. 1º)'],
+    ['2026-12-24', 'Recesso forense (véspera de Natal)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º'],
+    ['2026-12-31', 'Recesso forense (véspera de Ano Novo)', 'Portaria TJMT/PRES 1915/2025, Anexo I e art. 2º']
   ].map(([data, nome, fundamento]) => ({
     tribunais: ['TJMT'],
     inicio: data,
@@ -1079,7 +1089,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJMS, 2026: página oficial de feriados forenses (pontos facultativos e Cinzas só alertam, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados federais, municipais e 20 a 31/12 (recesso).
+  // Fora: feriados federais e municipais; 20 a 31/12 entra como feriado forense (art. 268 do CODJ).
+  { tribunais: ['TJMS'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Feriado forense / recesso (art. 268 do CODJ)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Página de feriados forenses do TJMS 2026 (CODJ/MS, art. 268)', fonte: 'tjms-feriados-2026' },
+  { tribunais: ['TJMS'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Feriado forense / recesso (art. 268 do CODJ)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Página de feriados forenses do TJMS 2026 (CODJ/MS, art. 268)', fonte: 'tjms-feriados-2026' },
   ...[
     ['2026-02-16', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
     ['2026-02-17', 'Carnaval (feriado)', 'Página de feriados forenses do TJMS 2026 (Portaria 983/2025, não lida)'],
@@ -1106,7 +1118,10 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJRO, 2026: Ato 2579/2025 compilado (art. 1º: sem expediente nos feriados e pontos facultativos do anexo; art. 5º: prazos prorrogados) ----------
-  // Fora: feriados federais, municipais (comarca ou Fórum Digital), 02/01 e 24 e 31/12 (recesso) e o 08/12 (transferido para 07/12; fica só o municipal de Guajará-Mirim e Candeias do Jamari).
+  // Fora: feriados federais, municipais (comarca ou Fórum Digital) e o 08/12 (transferido para 07/12; fica só o municipal de Guajará-Mirim e Candeias do Jamari).
+  { tribunais: ['TJRO'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense (sem expediente)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único (recesso de 20/12 a 06/01 e 02/01)', fonte: 'tjro-ato-2579-2025' },
+  { tribunais: ['TJRO'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense (sem expediente)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único (recesso de 20/12 a 06/01 e 24/12)', fonte: 'tjro-ato-2579-2025' },
+  { tribunais: ['TJRO'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense (sem expediente)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único (recesso de 20/12 a 06/01 e 31/12)', fonte: 'tjro-ato-2579-2025' },
   ...[
     ['2026-02-16', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
     ['2026-02-17', 'Carnaval (ponto facultativo do PJRO, sem expediente)', 'Ato TJRO 2579/2025, arts. 1º e 5º e Anexo Único'],
@@ -1132,7 +1147,10 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJPB, 2026: calendário do tribunal (pontos facultativos e dias compensados só alertam, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados federais, municipais e o recesso de 20/12 a 06/01.
+  // Fora: feriados federais e municipais; o recesso de 20/12 a 06/01 consta em 2026 sem expediente.
+  { tribunais: ['TJPB'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB (recesso de 20/12 a 06/01)', fonte: 'tjpb-calendario-2026' },
+  { tribunais: ['TJPB'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB (recesso de 20/12 a 06/01)', fonte: 'tjpb-calendario-2026' },
+  { tribunais: ['TJPB'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB (recesso de 20/12 a 06/01)', fonte: 'tjpb-calendario-2026' },
   ...[
     ['2026-02-16', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
     ['2026-02-17', 'Carnaval (ponto facultativo)', 'Calendário 2026 do TJPB'],
@@ -1166,7 +1184,10 @@ const EVENTOS_BASE: EventoCalendario[] = [
   { tribunais: ['TJPB'], inicio: '2026-04-01', fim: '2026-04-01', nome: 'Semana Santa: expediente das 7h às 13h', efeito: 'expediente_parcial', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJPB; CPC, art. 224, § 1º', fonte: 'tjpb-calendario-2026' },
 
   // ---------- TJRN, 2026: Portaria Conjunta 02/2026 (alertam 04/06, 20/04, 05/06 e 29/06, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados federais, municipais, 24 e 31/12 e o recesso de 20/12 a 06/01.
+  // Fora: feriados federais e municipais; feriado forense do recesso (20/12 a 06/01 e 24 e 31/12) entra em 2026.
+  { tribunais: ['TJRN'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense (feriado forense)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJRN 02/2026 (feriado forense de 20/12 a 06/01)', fonte: 'tjrn-pc-02-2026' },
+  { tribunais: ['TJRN'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense (feriado forense)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJRN 02/2026 (feriado forense de 20/12 a 06/01 e 24/12)', fonte: 'tjrn-pc-02-2026' },
+  { tribunais: ['TJRN'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense (feriado forense)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria Conjunta TJRN 02/2026 (feriado forense de 20/12 a 06/01 e 31/12)', fonte: 'tjrn-pc-02-2026' },
   ...[
     ['2026-02-16', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, I (LC estadual 643/2018, art. 97, § 3º, II)'],
     ['2026-02-17', 'Carnaval (feriado)', 'Portaria Conjunta TJRN 02/2026, art. 1º, II (LC estadual 643/2018, art. 97, § 3º, II; Lei 1.408/1951, art. 5º)'],
@@ -1193,7 +1214,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJAC, 2026: Portaria PRESI 6569/2025 (alertam 04/06 e 06/08, pontos facultativos estaduais, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados federais, municipais, 24 e 31/12 (recesso) e os dias em fim de semana.
+  // Fora: feriados federais, municipais e os dias em fim de semana.
   ...[
     ['2026-01-22', 'Dia do Católico (comemoração do dia 20 adiada para o dia 22; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 3.137/2016)'],
     ['2026-01-23', 'Dia do Evangélico (feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 1.538/2004)'],
@@ -1208,7 +1229,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-08-11', 'Dia do Advogado (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)'],
     ['2026-10-30', 'Dia do Servidor Público (comemoração do dia 28 adiada para o dia 30; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; LC 39/1993)'],
     ['2026-11-19', 'Tratado de Petrópolis (comemoração do dia 17 adiada para o dia 19; feriado estadual)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (Lei estadual 2.126/2009; Lei estadual 57/1965)'],
-    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)']
+    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais (LC estadual 221/2010, art. 37, § 1º, IV)'],
+    ['2026-12-24', 'Recesso forense (véspera de Natal)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais'],
+    ['2026-12-31', 'Recesso forense (véspera de Ano Novo)', 'Portaria PRESI TJAC 6569/2025, art. 1º e tabelas mensais']
   ].map(([data, nome, fundamento]) => ({
     tribunais: ['TJAC'],
     inicio: data,
@@ -1221,7 +1244,10 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJRR, 2026: Portaria 1558/2025, Anexo Único, "Todas as Comarcas" (art. 3º: suspensos o expediente e os prazos nos feriados e pontos facultativos) ----------
-  // Fora: feriados federais, as linhas só da Comarca de Boa Vista, os feriados municipais do interior e o recesso (01 a 06/01 e 20 a 31/12).
+  // Fora: feriados federais, as linhas só da Comarca de Boa Vista e os feriados municipais do interior; recesso (02 a 06/01 e 20 a 31/12) entra em 2026.
+  { tribunais: ['TJRR'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (01 a 06/01 e 20 a 31/12)', fonte: 'tjrr-pr-1558-2025' },
+  { tribunais: ['TJRR'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (01 a 06/01 e 20 a 31/12)', fonte: 'tjrr-pr-1558-2025' },
+  { tribunais: ['TJRR'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único (01 a 06/01 e 20 a 31/12)', fonte: 'tjrr-pr-1558-2025' },
   ...[
     ['2026-02-16', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
     ['2026-02-17', 'Carnaval (feriado)', 'Portaria TJRR/PR 1558/2025, art. 3º e Anexo Único'],
@@ -1250,7 +1276,7 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJAP, 2026: calendário do tribunal (pontos facultativos da legenda só alertam, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados federais, municipais, dias só de recomendação de audiência (19/05 e 14/12), fim de semana e 24 e 31/12.
+  // Fora: feriados federais, municipais, dias só de recomendação de audiência (19/05 e 14/12) e fim de semana.
   ...[
     ['2026-02-16', 'Carnaval (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
     ['2026-02-17', 'Carnaval', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
@@ -1269,7 +1295,9 @@ const EVENTOS_BASE: EventoCalendario[] = [
     ['2026-10-30', 'Dia do Servidor Público (ponto facultativo, alteração pela Portaria 77918/26)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
     ['2026-11-30', 'Dia do Evangélico (ponto facultativo)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
     ['2026-12-07', 'Expediente suspenso (Portaria 77918/2026-GP, não lida)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
-    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)']
+    ['2026-12-08', 'Dia da Justiça (feriado regimental)', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-12-24', 'Recesso forense', 'Calendário 2026 do TJAP (página de consultas do tribunal)'],
+    ['2026-12-31', 'Recesso forense', 'Calendário 2026 do TJAP (página de consultas do tribunal)']
   ].map(([data, nome, fundamento]) => ({
     tribunais: ['TJAP'],
     inicio: data,
@@ -1351,7 +1379,10 @@ const EVENTOS_BASE: EventoCalendario[] = [
   })),
 
   // ---------- TJSE, 2026: calendário do tribunal e portarias normativas dos pontos facultativos (07/12 e 14/12 só alertam, ver PONTOS_FACULTATIVOS) ----------
-  // Fora: feriados com município, 16/03 (só Aracaju e Tribunal) e o recesso.
+  // Fora: feriados com município e 16/03 (só Aracaju e Tribunal); recesso de 20/12 a 06/01 entra em 2026.
+  { tribunais: ['TJSE'], inicio: '2026-01-02', fim: '2026-01-06', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJSE (recesso de 20/12 a 06/01)', fonte: 'tjse-calendario-2026' },
+  { tribunais: ['TJSE'], inicio: '2026-12-20', fim: '2026-12-24', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJSE (recesso de 20/12 a 06/01)', fonte: 'tjse-calendario-2026' },
+  { tribunais: ['TJSE'], inicio: '2026-12-26', fim: '2026-12-31', nome: 'Recesso forense', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Calendário 2026 do TJSE (recesso de 20/12 a 06/01)', fonte: 'tjse-calendario-2026' },
   ...[
     ['2026-02-16', 'Carnaval (ponto facultativo)', 'Portaria Normativa TJSE 10/2026 (comunicado oficial)', 'tjse-portarias-normativas-2026'],
     ['2026-02-17', 'Carnaval (feriado)', 'Calendário 2026 do TJSE (Comarcas de Aracaju e do interior)'],
@@ -1438,13 +1469,13 @@ export const REGRAS_ANUAIS: RegraAnual[] = [
   { tribunais: ['TJMG'], nome: 'Dia da Justiça (8 de dezembro)', efeito: 'nao_util', verificacao: 'ato_do_tribunal', fundamento: 'Res. OE TJMG 458/2004, art. 1º, V', fonte: 'tjmg-res-458', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
 
   // Feriados civis por lei estadual (Lei 9.093/1995, art. 1º, II: data magna do Estado fixada em lei estadual); CPC, art. 216: feriados declarados em lei
-  { tribunais: ['TJPE'], nome: 'Data Magna de Pernambuco (6 de março)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual PE 16.241/2017, art. 49', fonte: 'pe-lei-16241', quando: { tipo: 'intervalo', de: [3, 6], ate: [3, 6] } },
-  { tribunais: ['TJRS'], nome: 'Data magna do Rio Grande do Sul (20 de setembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Constituição do Estado do RS, art. 6º, parágrafo único; Decreto estadual 36.180/1995', fonte: 'rs-decreto-36180', quando: { tipo: 'intervalo', de: [9, 20], ate: [9, 20] } },
+  { tribunais: ['TJPE', 'TRT6'], nome: 'Data Magna de Pernambuco (6 de março)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual PE 16.241/2017, art. 49', fonte: 'pe-lei-16241', quando: { tipo: 'intervalo', de: [3, 6], ate: [3, 6] } },
+  { tribunais: ['TJRS', 'TRT4'], nome: 'Data magna do Rio Grande do Sul (20 de setembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Constituição do Estado do RS, art. 6º, parágrafo único; Decreto estadual 36.180/1995', fonte: 'rs-decreto-36180', quando: { tipo: 'intervalo', de: [9, 20], ate: [9, 20] } },
   // Lei estadual RJ 10.633/2024, art. 83 (permanente): Carnaval de segunda a quarta-feira, Semana Santa só quinta e sexta-feira e Dia da Justiça
   { tribunais: ['TJRJ'], nome: 'Carnaval (segunda a quarta-feira)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, III', fonte: 'tjrj-lei-10633', quando: { tipo: 'pascoa', deslocamentos: [-48, -47, -46] } },
   { tribunais: ['TJRJ'], nome: 'Semana Santa (quinta e sexta-feira)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, IV', fonte: 'tjrj-lei-10633', quando: { tipo: 'pascoa', deslocamentos: [-3, -2] } },
   { tribunais: ['TJRJ'], nome: 'Dia da Justiça (8 de dezembro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual RJ 10.633/2024, art. 83, I', fonte: 'tjrj-lei-10633', quando: { tipo: 'intervalo', de: [12, 8], ate: [12, 8] } },
-  { tribunais: ['TJGO'], nome: 'Pedra fundamental de Goiânia (24 de outubro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual GO 19.850/2017, art. 1º (feriado estadual)', fonte: 'go-lei-19850', quando: { tipo: 'intervalo', de: [10, 24], ate: [10, 24] } },
+  { tribunais: ['TJGO', 'TRT18'], nome: 'Pedra fundamental de Goiânia (24 de outubro)', efeito: 'nao_util', verificacao: 'lei_estadual', fundamento: 'Lei estadual GO 19.850/2017, art. 1º (feriado estadual)', fonte: 'go-lei-19850', quando: { tipo: 'intervalo', de: [10, 24], ate: [10, 24] } },
 
   { tribunais: ['TJES'], nome: 'Nossa Senhora da Penha (segunda-feira após a oitava da Páscoa)', efeito: 'nao_util', verificacao: 'pendente', fundamento: 'Lei estadual ES 11.010/2019 (texto não lido)', fonte: 'tjes-aviso-penha-2023', quando: { tipo: 'pascoa', deslocamentos: [8] } },
 

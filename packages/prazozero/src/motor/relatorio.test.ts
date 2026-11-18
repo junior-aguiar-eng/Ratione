@@ -105,4 +105,31 @@ describe('Relatório "o que pode alterar este prazo" (F2-12)', () => {
     }
     for (const i of r.itens) assert.ok(i.titulo && i.descricao && i.fundamentoLegal, i.id);
   });
+
+  it('feriado confirmado cujo nome contém "ponto facultativo" não gera alerta de ponto facultativo', () => {
+    const trt7 = rel({ dataEvento: '2026-04-17', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'TRT7', regime: 'clt_dias_uteis' });
+    assert.strictEqual(item(trt7, 'ponto-facultativo'), undefined, 'TRT7 20/04 tem sem expediente confirmado');
+
+    const trt4 = rel({ dataEvento: '2026-04-17', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'TRT4', regime: 'clt_dias_uteis' });
+    assert.strictEqual(item(trt4, 'ponto-facultativo'), undefined, 'TRT4 20/04 tem ausência de contagem de prazos confirmada');
+
+    const tjdf = rel({ dataEvento: '2026-04-17', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'TJDF' });
+    assert.strictEqual(item(tjdf, 'ponto-facultativo'), undefined, 'TJDFT 20/04 tem suspensão confirmada');
+  });
+
+  it('STJ: ponto facultativo entre disponibilização e publicação também gera alerta no relatório', () => {
+    const p: ParametrosCalculoPrazo = { dataEvento: '2026-04-17', tipoEvento: 'disponibilizacao_dje', diasPrazo: 3, tribunalId: 'STJ' };
+    const r = rel(p);
+    assert.ok(item(r, 'ponto-facultativo'), 'deve alertar quando ponto facultativo do STJ deslocou a publicação');
+  });
+
+  it('indisponibilidade.dataSeAplicar respeita modo: "completo" (pula dia pendente no dia seguinte)', () => {
+    const base2027: ParametrosCalculoPrazo = { dataEvento: '2027-07-05', tipoEvento: 'publicacao', diasPrazo: 3, tribunalId: 'TJSP' };
+    // 06 (1º), 07 (2º), 08 (3º) -> vence quinta 08/07/2027; sexta 09/07/2027 é feriado estadual pendente.
+    const conservador = rel({ ...base2027, modo: 'conservador' });
+    assert.strictEqual(item(conservador, 'indisponibilidade')!.dataSeAplicar, '2027-07-09');
+
+    const completo = rel({ ...base2027, modo: 'completo' });
+    assert.strictEqual(item(completo, 'indisponibilidade')!.dataSeAplicar, '2027-07-12');
+  });
 });

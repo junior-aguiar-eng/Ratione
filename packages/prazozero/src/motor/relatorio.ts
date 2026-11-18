@@ -40,12 +40,13 @@ export function relatorioAlteracoes(p: ParametrosCalculoPrazo, r: ResultadoCalcu
   const regime = p.regime ?? 'cpc_dias_uteis';
   const itens: ItemAlteracao[] = [];
   const venc = r.dataVencimentoFinal;
-  const uf = p.uf ?? (p.tribunalId ? TRIBUNAIS_BRASIL[p.tribunalId]?.uf : undefined);
+  const uf = p.uf ?? (p.tribunalId ? TRIBUNAIS_BRASIL[p.tribunalId.toUpperCase()]?.uf : undefined);
   const ctx = {
     uf,
     tribunalId: p.tribunalId,
     regime,
-    suspensaoRecesso: p.suspensaoRecesso ?? (regime !== 'cpp_dias_corridos' || !p.excecaoSuspensaoCriminal)
+    suspensaoRecesso: p.suspensaoRecesso ?? (regime !== 'cpp_dias_corridos' || !p.excecaoSuspensaoCriminal),
+    incluirPendentes: p.modo === 'completo'
   };
 
   // 1. Dias do calendário ainda não conferidos (os mesmos da data alternativa)
@@ -69,9 +70,10 @@ export function relatorioAlteracoes(p: ParametrosCalculoPrazo, r: ResultadoCalcu
 
   // 1b. Ponto facultativo contado como dia sem expediente (STF e STJ: os atos alteram os prazos nesses dias).
   // Decisão do revisor (10/10/2026): considerar, mas avisar. Nos demais tribunais o ponto facultativo é dia pendente (item 1).
+  // Feriados confirmados que trazem "ponto facultativo" apenas no nome (pontoFacultativo !== true) não geram falso positivo.
   const pontosFacultativos = r.memoriaCalculo.filter(
-    i => !i.diaUtil || i.descricao.includes('expediente parcial'))
-    .filter(i => i.verificacao !== 'pendente' && /facultativ/i.test(i.descricao));
+    i => !i.diaUtil && i.verificacao !== 'pendente' && i.pontoFacultativo === true
+  );
   if (pontosFacultativos.length > 0) {
     itens.push({
       id: 'ponto-facultativo',

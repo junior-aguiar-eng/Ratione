@@ -1,4 +1,4 @@
-import { obterFeriadosAno, suspensaoDePrazos, CALENDARIO_VERIFICADO, FeriadoLegal } from '../calendario/feriados';
+import { obterFeriadosAno, suspensaoDePrazos, CALENDARIO_VERIFICADO, TRIBUNAIS_MULTIESTADUAIS, FeriadoLegal } from '../calendario/feriados';
 import { TRIBUNAIS_BRASIL } from '@ratione/core';
 
 import { anoDe, diaDaSemanaIso, diferencaDiasIso, ehDataIsoValida, somarDiasIso } from '../datas/civil';
@@ -61,6 +61,8 @@ export interface ItemMemoriaCalculo {
   verificacao?: FeriadoLegal['verificacao'];
   /** `true` quando um ponto facultativo (STF e STJ) foi contado como dia útil no meio do prazo (modo conservador). */
   pontoFacultativoContado?: boolean;
+  /** `true` quando o dia não contado decorre de ponto facultativo próprio (efeito `'ponto_facultativo'`), não de feriado com "ponto facultativo" no nome. */
+  pontoFacultativo?: boolean;
 }
 
 export interface AlternativaPrazo {
@@ -188,17 +190,74 @@ export class MotorPrazoZero {
     };
   }
 
+  private statusDeAnalise(
+    analise: ReturnType<MotorPrazoZero['verificarDiaUtil']>,
+    parcialProtraido = false
+  ): ItemMemoriaCalculo['status'] {
+    if (analise.motivoNaoUtil === 'fim_de_semana') return 'fim_de_semana';
+    if (analise.motivoNaoUtil === 'recesso_forense') return 'recesso_forense';
+    if (parcialProtraido || analise.motivoNaoUtil === 'expediente_parcial') return 'expediente_parcial';
+    return 'feriado';
+  }
+
+  private ehPontoFacultativoAnalise(analise: ReturnType<MotorPrazoZero['verificarDiaUtil']>): boolean {
+    if (analise.motivoNaoUtil === 'ponto_facultativo') return true;
+    return (
+      analise.motivoNaoUtil === 'expediente_parcial' &&
+      /ponto facultativo/i.test(analise.detalheFeriado?.nome ?? '')
+    );
+  }
+
+  private registrarAnoConsultado(
+    anosConsultados: Set<number>,
+    dataIso: string,
+    analise: ReturnType<MotorPrazoZero['verificarDiaUtil']>
+  ): void {
+    if (analise.motivoNaoUtil !== 'fim_de_semana' && analise.motivoNaoUtil !== 'recesso_forense') {
+      anosConsultados.add(anoDe(dataIso));
+    }
+  }
+
+  private avancarAteProximoDiaUtil(
+    dataIso: string,
+    params: ContextoDia,
+    memoria?: ItemMemoriaCalculo[],
+    anosConsultados?: Set<number>,
+    fundamentoPadrao = 'CPC, art. 219'
+  ): string {
+    let iso = somarDiasIso(dataIso, 1);
+    while (true) {
+      const analise = this.verificarDiaUtil(iso, params);
+      if (anosConsultados) {
+        this.registrarAnoConsultado(anosConsultados, iso, analise);
+      }
+      if (analise.diaUtil) {
+        return iso;
+      }
+      if (memoria) {
+        const verificacao = analise.detalheFeriado?.verificacao;
+        const ehPF = this.ehPontoFacultativoAnalise(analise);
+        memoria.push({
+          data: iso,
+          diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(iso)],
+          diaUtil: false,
+          status: this.statusDeAnalise(analise),
+          descricao: `${analise.descricao} (não computado)`,
+          fundamentoLegal: analise.fundamentoLegal || analise.detalheFeriado?.fundamentoLegal || fundamentoPadrao,
+          diaContadoNumero: null,
+          ...(verificacao ? { verificacao } : {}),
+          ...(ehPF ? { pontoFacultativo: true } : {})
+        });
+      }
+      iso = somarDiasIso(iso, 1);
+    }
+  }
+
   /**
    * Avança determinística até o próximo dia útil
    */
   public obterProximoDiaUtil(dataIso: string, params: ContextoDia): string {
-    let iso = somarDiasIso(dataIso, 1);
-    while (true) {
-      if (this.verificarDiaUtil(iso, params).diaUtil) {
-        return iso;
-      }
-      iso = somarDiasIso(iso, 1);
-    }
+    return this.avancarAteProximoDiaUtil(dataIso, params);
   }
 
   /**
@@ -259,18 +318,36 @@ export class MotorPrazoZero {
       );
     }
 
-    const principal = this.executar(p, modo === 'completo');
+    const tribunalChave = p.tribunalId?.toUpperCase();
+    if (tribunalChave && TRIBUNAIS_MULTIESTADUAIS[tribunalChave]) {
+      const ufsJurisdicao = TRIBUNAIS_MULTIESTADUAIS[tribunalChave];
+      const ufSede = TRIBUNAIS_BRASIL[tribunalChave]?.uf;
+      if (tribunalChave.startsWith('TRF')) {
+        avisos.push(
+          `${tribunalChave} abrange múltiplos estados (${ufsJurisdicao.join(', ')}). A Justiça Federal segue a Lei 5.010/1966, art. 62 ` +
+            '(sem aplicação automática de feriados estaduais); confira eventuais suspensões locais da seção ou subseção judiciária.'
+        );
+      } else {
+        avisos.push(
+          p.uf
+            ? `${tribunalChave} abrange múltiplos estados (${ufsJurisdicao.join(', ')}); considerados os feriados estaduais da UF informada (${p.uf.toUpperCase()}).`
+            : `${tribunalChave} abrange múltiplos estados (${ufsJurisdicao.join(', ')}); sem UF informada, foi considerada a UF da sede (${ufSede}). Informe a UF se o processo tramitar em outro estado da região.`
+        );
+      }
+    }
+
+    const { resultado: principal, anosConsultados } = this.executar(p, modo === 'completo');
     let alternativa: AlternativaPrazo | undefined;
 
     if (modo === 'conservador') {
-      const completo = this.executar(p, true);
+      const { resultado: completo } = this.executar(p, true);
       if (completo.dataVencimentoFinal !== principal.dataVencimentoFinal) {
         let recessoJaListado = false;
         const pontosFacultativos = principal.memoriaCalculo
           .filter(i => i.pontoFacultativoContado)
           .map(i => ({
             data: i.data,
-            nome: i.descricao.replace(/ — ponto facultativo contado no meio do prazo: /, ' ').replace(` (${i.fundamentoLegal})`, ''),
+            nome: i.descricao.replace(/^.*? — ponto facultativo contado no meio do prazo: /, '').replace(` (${i.fundamentoLegal})`, ''),
             fundamentoLegal: i.fundamentoLegal,
             pontoFacultativo: true as const
           }));
@@ -282,15 +359,27 @@ export class MotorPrazoZero {
               recessoJaListado = true;
               return true;
             }
-            return i.status === 'feriado' || i.status === 'expediente_parcial';
+            return i.status === 'feriado' || i.status === 'expediente_parcial' || i.status === 'termo_final';
           })
-          .map(i => ({
-            data: i.data,
-            nome: i.descricao.replace(/ \(não computado\)$/, '').replace(` (${i.fundamentoLegal})`, ''),
-            fundamentoLegal: i.fundamentoLegal
-          }));
+          .map(i => {
+            if (i.status === 'termo_final') {
+              const f = this.obterFeriados(anoDe(i.data), completo.uf, p.tribunalId).get(i.data);
+              if (f) {
+                return {
+                  data: i.data,
+                  nome: f.nome,
+                  fundamentoLegal: f.fundamentoLegal
+                };
+              }
+            }
+            return {
+              data: i.data,
+              nome: i.descricao.replace(/ \(não computado\)$/, '').replace(` (${i.fundamentoLegal})`, ''),
+              fundamentoLegal: i.fundamentoLegal
+            };
+          });
         const eventosPendentes = [...pendentes, ...pontosFacultativos].sort((a, b) => a.data.localeCompare(b.data));
-        const soPontoFacultativo = pendentes.length === 0;
+        const soPontoFacultativo = pendentes.length === 0 && pontosFacultativos.length > 0;
         alternativa = {
           dataVencimentoFinal: completo.dataVencimentoFinal,
           descricao: soPontoFacultativo
@@ -308,14 +397,19 @@ export class MotorPrazoZero {
       ? `${principal.certidaoAuditavel}\n• Atenção: ${alternativa.descricao}`
       : principal.certidaoAuditavel;
 
-    const anoInicio = parseInt(principal.dataPublicacao.slice(0, 4), 10);
-    const anoFim = parseInt(principal.dataVencimentoFinal.slice(0, 4), 10);
-    const cobertura = p.tribunalId ? CALENDARIO_VERIFICADO[p.tribunalId.toUpperCase()] : undefined;
-    const calendarioVerificado =
-      !!cobertura && Array.from({ length: anoFim - anoInicio + 1 }, (_, i) => anoInicio + i).every(a => cobertura.anos.includes(a));
+    const anoInicio = anoDe(principal.dataPublicacao);
+    const anoFim = anoDe(principal.dataVencimentoFinal);
+    for (let a = anoInicio; a <= anoFim; a++) {
+      anosConsultados.add(a);
+    }
+    const anosPercorridos = [...anosConsultados].sort((a, b) => a - b);
+    const cobertura = tribunalChave ? CALENDARIO_VERIFICADO[tribunalChave] : undefined;
+    const calendarioVerificado = !!cobertura && anosPercorridos.every(a => cobertura.anos.includes(a));
     if (cobertura && !calendarioVerificado) {
+      const menorAno = anosPercorridos[0];
+      const maiorAno = anosPercorridos[anosPercorridos.length - 1];
       avisos.push(
-        `O calendário de ${p.tribunalId} foi conferido apenas para ${cobertura.anos.join(', ')}; este cálculo percorre ${anoInicio === anoFim ? anoInicio : `${anoInicio} a ${anoFim}`}. ` +
+        `O calendário de ${p.tribunalId} foi conferido apenas para ${cobertura.anos.join(', ')}; este cálculo percorre ${menorAno === maiorAno ? menorAno : `${menorAno} a ${maiorAno}`}. ` +
           'Pontos facultativos e portarias dos demais anos não estão carregados.'
       );
     }
@@ -337,7 +431,10 @@ export class MotorPrazoZero {
   private executar(
     p: ParametrosCalculoPrazo,
     incluirPendentes: boolean
-  ): Omit<ResultadoCalculoPrazo, 'modo' | 'calendarioVerificado' | 'avisos' | 'alternativa'> {
+  ): {
+    resultado: Omit<ResultadoCalculoPrazo, 'modo' | 'calendarioVerificado' | 'avisos' | 'alternativa'>;
+    anosConsultados: Set<number>;
+  } {
     const regime = p.regime || 'cpc_dias_uteis';
     // A suspensão de 20/12 a 20/01 vale em todos os órgãos do Judiciário, inclusive no JEF (Res. CNJ 244/2016, art. 3º).
     // No CPP ela segue o art. 798-A, com as exceções de réu preso, Maria da Penha e medida urgente.
@@ -345,11 +442,13 @@ export class MotorPrazoZero {
       p.suspensaoRecesso ?? (regime !== 'cpp_dias_corridos' || !p.excecaoSuspensaoCriminal);
     const multiplicador = p.prazoEmDobro && regime !== 'jef_dias_uteis' ? 2 : 1;
     const diasPrazoEfetivo = p.diasPrazo * multiplicador;
+    const anosConsultados = new Set<number>();
 
     // Resolver UF a partir do Tribunal se não informada
+    const tribunalChave = p.tribunalId?.toUpperCase();
     let uf = p.uf;
-    if (!uf && p.tribunalId && TRIBUNAIS_BRASIL[p.tribunalId]?.uf) {
-      uf = TRIBUNAIS_BRASIL[p.tribunalId].uf;
+    if (!uf && tribunalChave && TRIBUNAIS_BRASIL[tribunalChave]?.uf) {
+      uf = TRIBUNAIS_BRASIL[tribunalChave].uf;
     }
 
     const contextConfig: ContextoDia = { uf, tribunalId: p.tribunalId, regime, suspensaoRecesso, incluirPendentes };
@@ -377,7 +476,13 @@ export class MotorPrazoZero {
       });
 
       // A publicação ocorre no 1º dia útil seguinte
-      dataPublicacao = this.obterProximoDiaUtil(dataDisponibilizacao, contextConfig);
+      dataPublicacao = this.avancarAteProximoDiaUtil(
+        dataDisponibilizacao,
+        contextConfig,
+        memoria,
+        anosConsultados,
+        viaPortal ? 'Lei 11.419/2006, art. 5º, §§ 1º a 3º' : 'CPC, art. 224, § 2º e Resolução CNJ nº 455/2022'
+      );
       memoria.push({
         data: dataPublicacao,
         diaSemana: DIAS_SEMANA_NOMES[diaDaSemanaIso(dataPublicacao)],
@@ -404,7 +509,8 @@ export class MotorPrazoZero {
     // Etapa 2: Determinação do Termo Inicial da Contagem (CPC, art. 224, § 3º)
     // "excluindo o dia do começo e incluindo o do vencimento"
     // No CPP a contagem é em dias corridos e começa no dia seguinte (art. 798, § 1º): o termo inicial sai da própria contagem, mais abaixo
-    let dataTermoInicial = this.obterProximoDiaUtil(dataPublicacao, contextConfig);
+    let dataTermoInicial =
+      regime === 'cpp_dias_corridos' ? dataPublicacao : this.obterProximoDiaUtil(dataPublicacao, contextConfig);
 
     // Etapa 3: Iteração determinística dia a dia
     let cursor = somarDiasIso(dataPublicacao, 1);
@@ -417,6 +523,7 @@ export class MotorPrazoZero {
       const dataIso = cursor;
       const diaSemana = DIAS_SEMANA_NOMES[diaDaSemanaIso(cursor)];
       const analise = this.verificarDiaUtil(dataIso, contextConfig);
+      this.registrarAnoConsultado(anosConsultados, dataIso, analise);
       const verificacao: FeriadoLegal['verificacao'] | undefined = analise.detalheFeriado?.verificacao;
 
       if (regime !== 'cpp_dias_corridos') {
@@ -459,21 +566,17 @@ export class MotorPrazoZero {
             foiProrrogadoTermoFinal = true;
             motivoProrrogacao = `Vencimento protraído por expediente parcial (${analise.detalheFeriado!.nome}), CPC, art. 224, § 1º`;
           }
+          const ehPF = this.ehPontoFacultativoAnalise(analise);
           memoria.push({
             data: dataIso,
             diaSemana,
             diaUtil: false,
-            status: analise.motivoNaoUtil === 'fim_de_semana'
-              ? 'fim_de_semana'
-              : analise.motivoNaoUtil === 'recesso_forense'
-              ? 'recesso_forense'
-              : parcialProtraido
-              ? 'expediente_parcial'
-              : 'feriado',
+            status: this.statusDeAnalise(analise, parcialProtraido),
             descricao: `${analise.descricao} (não computado)`,
             fundamentoLegal: analise.fundamentoLegal || analise.detalheFeriado?.fundamentoLegal || 'CPC, art. 219',
             diaContadoNumero: null,
-            ...(verificacao ? { verificacao } : {})
+            ...(verificacao ? { verificacao } : {}),
+            ...(ehPF ? { pontoFacultativo: true } : {})
           });
         }
       } else {
@@ -495,6 +598,7 @@ export class MotorPrazoZero {
         }
         diasContados++;
         const ehUltimo = diasContados === diasPrazoEfetivo;
+        const ehPFPenal = !analise.diaUtil && this.ehPontoFacultativoAnalise(analise);
         memoria.push({
           data: dataIso,
           diaSemana,
@@ -505,7 +609,8 @@ export class MotorPrazoZero {
             : `${diasContados}º dia corrido computado`,
           fundamentoLegal: 'CPP, art. 798, caput',
           diaContadoNumero: diasContados,
-          ...(verificacao ? { verificacao } : {})
+          ...(verificacao ? { verificacao } : {}),
+          ...(ehPFPenal ? { pontoFacultativo: true } : {})
         });
 
         if (ehUltimo) {
@@ -513,7 +618,7 @@ export class MotorPrazoZero {
           if (!analise.diaUtil) {
             foiProrrogadoTermoFinal = true;
             motivoProrrogacao = `Vencimento em dia não útil (${analise.descricao}) prorrogado nos termos do CPP, art. 798, § 3º`;
-            const proxUtil = this.obterProximoDiaUtil(dataIso, contextConfig);
+            const proxUtil = this.avancarAteProximoDiaUtil(dataIso, contextConfig, memoria, anosConsultados, 'CPP, art. 798, § 3º');
             dataFinalVencimento = proxUtil;
             memoria.push({
               data: proxUtil,
@@ -538,7 +643,7 @@ export class MotorPrazoZero {
     const diasCorridosTotais = diferencaDiasIso(p.dataEvento, dataFinalVencimento);
 
     // Certidão Textual Auditável Formatada
-    const tribunalNome = p.tribunalId ? (TRIBUNAIS_BRASIL[p.tribunalId]?.nome || p.tribunalId) : 'Poder Judiciário';
+    const tribunalNome = p.tribunalId ? (TRIBUNAIS_BRASIL[tribunalChave!]?.nome || p.tribunalId) : 'Poder Judiciário';
     const certidao = [
       `MEMÓRIA DESCRITIVA DE CÁLCULO DE TEMPESTIVIDADE FORENSE`,
       `Plataforma: Ratione — Módulo PrazoZero (Motor Determinístico)`,
@@ -554,21 +659,24 @@ export class MotorPrazoZero {
     ].filter(Boolean).join('\n');
 
     return {
-      dataEvento: p.dataEvento,
-      tipoEvento: p.tipoEvento,
-      dataDisponibilizacao,
-      dataPublicacao,
-      dataTermoInicial,
-      dataVencimentoFinal: dataFinalVencimento,
-      diasTotaisComputados: diasPrazoEfetivo,
-      diasCorridosTotais,
-      regime,
-      tribunal: p.tribunalId,
-      uf,
-      foiProrrogadoTermoFinal,
-      motivoProrrogacao,
-      memoriaCalculo: memoria,
-      certidaoAuditavel: certidao
+      resultado: {
+        dataEvento: p.dataEvento,
+        tipoEvento: p.tipoEvento,
+        dataDisponibilizacao,
+        dataPublicacao,
+        dataTermoInicial,
+        dataVencimentoFinal: dataFinalVencimento,
+        diasTotaisComputados: diasPrazoEfetivo,
+        diasCorridosTotais,
+        regime,
+        tribunal: p.tribunalId,
+        uf,
+        foiProrrogadoTermoFinal,
+        motivoProrrogacao,
+        memoriaCalculo: memoria,
+        certidaoAuditavel: certidao
+      },
+      anosConsultados
     };
   }
 }

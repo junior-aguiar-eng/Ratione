@@ -249,3 +249,110 @@ describe('Prazo criminal: termo inicial', () => {
     assert.strictEqual(r.dataTermoInicial, '2026-12-19');
   });
 });
+
+describe('Task 2.5: modo conservador entre disponibilização/publicação, virada de ano, case-insensitive e recesso 2026', () => {
+  const motor = new MotorPrazoZero();
+
+  it('evento pendente exclusivamente entre disponibilização e publicação desloca a publicação sem falso soPontoFacultativo', () => {
+    // No TJCE em 2026, 13/04/2026 (segunda) é evento pendente (Fortaleza).
+    // Disponibilização em 10/04 (sexta): modo conservador publica em 13/04 e vence em 16/04;
+    // modo completo pula 13/04, publica em 14/04 e vence em 17/04.
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-04-10',
+      tipoEvento: 'disponibilizacao_dje',
+      diasPrazo: 3,
+      tribunalId: 'TJCE'
+    });
+    assert.strictEqual(r.dataPublicacao, '2026-04-13');
+    assert.strictEqual(r.dataVencimentoFinal, '2026-04-16');
+    assert.ok(r.alternativa, 'deve informar data alternativa quando evento pendente desloca a publicação');
+    assert.strictEqual(r.alternativa!.dataVencimentoFinal, '2026-04-17');
+    assert.deepStrictEqual(r.alternativa!.eventosPendentes.map(e => e.data), ['2026-04-13']);
+    assert.notStrictEqual(r.alternativa!.eventosPendentes[0].pontoFacultativo, true);
+    assert.ok(!r.alternativa!.descricao.startsWith('Ponto facultativo no meio do prazo'), 'não pode atribuir a diferença falsamente a ponto facultativo');
+  });
+
+  it('Carnaval pendente entre disponibilização e publicação sem tribunal informado acusa os dias pendentes na alternativa', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-02-13',
+      tipoEvento: 'disponibilizacao_dje',
+      diasPrazo: 3
+    });
+    assert.strictEqual(r.dataPublicacao, '2026-02-16');
+    assert.strictEqual(r.dataVencimentoFinal, '2026-02-19');
+    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-02-24');
+    assert.deepStrictEqual(r.alternativa?.eventosPendentes.map(e => e.data), ['2026-02-16', '2026-02-17', '2026-02-18']);
+    assert.ok(!r.alternativa!.descricao.startsWith('Ponto facultativo no meio do prazo'));
+  });
+
+  it('eventosPendentes[].nome de ponto facultativo contado no meio do prazo não mantém prefixo residual da memória', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-04-16',
+      tipoEvento: 'publicacao',
+      diasPrazo: 3,
+      tribunalId: 'STJ'
+    });
+    assert.strictEqual(r.alternativa?.dataVencimentoFinal, '2026-04-23');
+    assert.strictEqual(r.alternativa?.eventosPendentes[0]?.nome, 'Ponto facultativo');
+  });
+
+  it('virada de ano: dataEvento em dezembro sem cobertura fora da suspensão legal acusa calendarioVerificado=false', () => {
+    // No STJ (coberto só em 2026), disponibilização em 30/12/2025 no CPP com exceção (sem suspensão de recesso):
+    // 31/12/2025 é consultado contra 2025 e pulado; 01 a 06/01/2026 são pulados; publicação em 07/01/2026 (2026).
+    const r = motor.calcularPrazo({
+      dataEvento: '2025-12-30',
+      tipoEvento: 'disponibilizacao_dje',
+      diasPrazo: 3,
+      tribunalId: 'STJ',
+      regime: 'cpp_dias_corridos',
+      excecaoSuspensaoCriminal: true
+    });
+    assert.strictEqual(r.dataPublicacao, '2026-01-07');
+    assert.strictEqual(r.dataVencimentoFinal, '2026-01-12');
+    assert.strictEqual(r.calendarioVerificado, false);
+    assert.ok(r.avisos.some(a => a.includes('2025 a 2026')));
+  });
+
+  it('tribunalId minúsculo ("tjsp") resolve UF, nome na certidão e selo de calendário verificado', () => {
+    const r = motor.calcularPrazo({
+      dataEvento: '2026-07-08',
+      tipoEvento: 'publicacao',
+      diasPrazo: 5,
+      tribunalId: 'tjsp'
+    });
+    assert.strictEqual(r.uf, 'SP');
+    assert.strictEqual(r.calendarioVerificado, true);
+    assert.ok(r.certidaoAuditavel.includes('Tribunal de Justiça do Estado de São Paulo'));
+    assert.ok(r.certidaoAuditavel.includes('(UF: SP)'));
+  });
+
+  it('CPP exceção no recesso de 2026 em TJ com ato lido (TJPE) prorroga como TJSP, sem inventar 2025', () => {
+    const em2026 = motor.calcularPrazo({
+      dataEvento: '2026-12-15',
+      tipoEvento: 'publicacao',
+      diasPrazo: 5,
+      tribunalId: 'TJPE',
+      regime: 'cpp_dias_corridos',
+      excecaoSuspensaoCriminal: true
+    });
+    assert.strictEqual(em2026.dataVencimentoFinal, '2027-01-04');
+
+    const em2025 = motor.calcularPrazo({
+      dataEvento: '2025-12-15',
+      tipoEvento: 'publicacao',
+      diasPrazo: 5,
+      tribunalId: 'TJPE',
+      regime: 'cpp_dias_corridos',
+      excecaoSuspensaoCriminal: true
+    });
+    assert.strictEqual(em2025.dataVencimentoFinal, '2025-12-22');
+  });
+
+  it('tribunais multiestaduais (TRT8, TRF2) emitem aviso explícito sobre abrangência estadual', () => {
+    const trt8 = motor.calcularPrazo({ dataEvento: '2026-03-10', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'TRT8', regime: 'clt_dias_uteis' });
+    assert.ok(trt8.avisos.some(a => a.includes('PA') && a.includes('AP')), 'TRT8 deve avisar sobre PA e AP');
+
+    const trf2 = motor.calcularPrazo({ dataEvento: '2026-03-10', tipoEvento: 'publicacao', diasPrazo: 5, tribunalId: 'TRF2' });
+    assert.ok(trf2.avisos.some(a => a.includes('RJ') && a.includes('ES')), 'TRF2 deve avisar sobre RJ e ES');
+  });
+});

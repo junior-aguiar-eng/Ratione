@@ -90,8 +90,18 @@ describe('PrazoZero: invariantes em entradas aleatórias', () => {
       const c = motor.calcularPrazo({ ...p, modo: 'conservador' });
       const f = motor.calcularPrazo({ ...p, modo: 'completo' });
       assert.ok(c.dataVencimentoFinal <= f.dataVencimentoFinal, JSON.stringify(p));
-      if (c.alternativa) assert.strictEqual(c.alternativa.dataVencimentoFinal, f.dataVencimentoFinal, JSON.stringify(p));
-      else assert.strictEqual(c.dataVencimentoFinal, f.dataVencimentoFinal, JSON.stringify(p));
+      if (c.alternativa) {
+        assert.strictEqual(c.alternativa.dataVencimentoFinal, f.dataVencimentoFinal, JSON.stringify(p));
+        assert.ok(c.alternativa.eventosPendentes.length > 0, `alternativa sem eventosPendentes: ${JSON.stringify(p)}`);
+        for (const e of c.alternativa.eventosPendentes) {
+          assert.ok(!/dia útil computado no prazo|Termo Ad Quem|\(não computado\)$/.test(e.nome), `prefixo/sufixo residual em nome "${e.nome}": ${JSON.stringify(p)}`);
+        }
+        if (c.alternativa.eventosPendentes.some(e => !e.pontoFacultativo)) {
+          assert.ok(!c.alternativa.descricao.startsWith('Ponto facultativo no meio do prazo'), `descrição falsa de só ponto facultativo: ${JSON.stringify(p)}`);
+        }
+      } else {
+        assert.strictEqual(c.dataVencimentoFinal, f.dataVencimentoFinal, JSON.stringify(p));
+      }
     }
   });
 

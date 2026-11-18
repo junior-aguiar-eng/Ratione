@@ -78,4 +78,20 @@ describe('Prazos materiais: UF do tribunal', () => {
     assert.strictEqual(r.dataLimite, '2027-09-16');
     assert.strictEqual(r.dataAlternativa, '2027-09-17');
   });
+
+  it('mandado de segurança no recesso de 2026 em TJ com ato lido (TJPE) mantém data-limite e sugere alternativa pós-recesso, sem inventar 2025', () => {
+    const em2026 = calcularPrazoMaterial({ tipo: 'mandado_seguranca', dataInicio: '2026-08-24', tribunalId: 'TJPE' });
+    assert.strictEqual(em2026.dataLimite, '2026-12-22');
+    assert.strictEqual(em2026.dataAlternativa, '2027-01-04');
+
+    const em2025 = calcularPrazoMaterial({ tipo: 'mandado_seguranca', dataInicio: '2025-08-24', tribunalId: 'TJPE' });
+    assert.strictEqual(em2025.dataLimite, '2025-12-22');
+    assert.strictEqual(em2025.dataAlternativa, undefined);
+  });
+
+  it('tribunalId minúsculo ("tjal") resolve UF normalmente nos prazos materiais', () => {
+    const r = calcularPrazoMaterial({ tipo: 'acao_rescisoria', dataInicio: '2025-09-16', tribunalId: 'tjal' });
+    assert.strictEqual(r.dataLimite, '2027-09-16');
+    assert.strictEqual(r.dataAlternativa, '2027-09-17');
+  });
 });
