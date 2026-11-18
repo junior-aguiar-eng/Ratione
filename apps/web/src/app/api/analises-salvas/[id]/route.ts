@@ -10,7 +10,7 @@ import { registrar } from '../../../../lib/log';
  */
 export const dynamic = 'force-dynamic';
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 type Parametros = { params: Promise<{ id: string }> };
 
@@ -21,7 +21,7 @@ export async function GET(_request: Request, { params }: Parametros) {
   const { id } = await params;
   if (!UUID.test(id)) return NextResponse.json({ mensagem: 'Análise não encontrada.' }, { status: 404 });
   try {
-    const r = await abrirAnalise(ctx.usuario.id, id, ctx.completo);
+    const r = await abrirAnalise(ctx.usuario.id, id.toLowerCase(), ctx.completo);
     if (!r.ok) return NextResponse.json({ mensagem: r.mensagem }, { status: r.status });
     return NextResponse.json({ analise: r.analise, conteudo: r.conteudo }, { headers: { 'Cache-Control': 'no-store' } });
   } catch (e) {
@@ -38,7 +38,7 @@ export async function DELETE(request: Request, { params }: Parametros) {
   const { id } = await params;
   if (!UUID.test(id)) return NextResponse.json({ mensagem: 'Análise não encontrada.' }, { status: 404 });
   try {
-    return (await apagarAnalise(ctx.usuario.id, id, ctx.basico))
+    return (await apagarAnalise(ctx.usuario.id, id.toLowerCase(), ctx.basico))
       ? NextResponse.json({ ok: true })
       : NextResponse.json({ mensagem: 'Análise não encontrada.' }, { status: 404 });
   } catch (e) {
