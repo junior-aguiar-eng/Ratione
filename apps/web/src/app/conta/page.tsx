@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { Download } from 'lucide-react';
 import PageHeader from '../../components/PageHeader';
 import Notice from '../../components/Notice';
-import EmptyState from '../../components/EmptyState';
 import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { irParaPagina } from '../../lib/navegacao';
@@ -44,7 +43,7 @@ const VAZIO: Perfil = { nome: '', profissao: '', oab: '', tribunal_padrao: '', u
 
 export default function ContaPage() {
   const router = useRouter();
-  const { usuario, carregando, contaDisponivel } = useSessao();
+  const { usuario, carregando } = useSessao();
   const [perfil, setPerfil] = useState<Perfil>(VAZIO);
   const [mensagem, setMensagem] = useState<{ tom: 'info' | 'danger'; texto: string } | null>(null);
   const avisoRef = useRef<HTMLDivElement>(null);
@@ -89,21 +88,26 @@ export default function ContaPage() {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
     setOcupado(true);
-    const { error } = await sb
-      .from('perfis')
-      .update({
-        nome: perfil.nome.trim() || null,
-        profissao: perfil.profissao || null,
-        oab: perfil.oab.trim() || null,
-        tribunal_padrao: perfil.tribunal_padrao || null,
-        uf_padrao: perfil.uf_padrao || null
-      })
-      .eq('id', usuario.id);
-    setOcupado(false);
-    if (error) aviso('danger', 'Não foi possível salvar o perfil. Confira os campos e tente de novo.');
-    else {
-      avisarPerfilAtualizado(perfil.nome.trim() || null);
-      aviso('info', 'Perfil salvo.');
+    try {
+      const { error } = await sb
+        .from('perfis')
+        .update({
+          nome: perfil.nome.trim() || null,
+          profissao: perfil.profissao || null,
+          oab: perfil.oab.trim() || null,
+          tribunal_padrao: perfil.tribunal_padrao || null,
+          uf_padrao: perfil.uf_padrao || null
+        })
+        .eq('id', usuario.id);
+      if (error) aviso('danger', 'Não foi possível salvar o perfil. Confira os campos e tente de novo.');
+      else {
+        avisarPerfilAtualizado(perfil.nome.trim() || null);
+        aviso('info', 'Perfil salvo.');
+      }
+    } catch {
+      aviso('danger', 'Não foi possível salvar o perfil. Tente de novo em instantes.');
+    } finally {
+      setOcupado(false);
     }
   };
 
@@ -113,66 +117,90 @@ export default function ContaPage() {
     if (!sb) return;
     if (novaSenha.length < 8) return aviso('danger', 'A senha precisa ter pelo menos 8 caracteres.');
     setOcupado(true);
-    const { error } = await sb.auth.updateUser({ password: novaSenha });
-    setOcupado(false);
-    if (error) aviso('danger', traduzirErroAuth(error.message));
-    else {
-      setNovaSenha('');
-      aviso('info', 'Senha alterada.');
+    try {
+      const { error } = await sb.auth.updateUser({ password: novaSenha });
+      if (error) aviso('danger', traduzirErroAuth(error.message));
+      else {
+        setNovaSenha('');
+        aviso('info', 'Senha alterada.');
+      }
+    } catch {
+      aviso('danger', 'Não foi possível alterar a senha. Tente de novo em instantes.');
+    } finally {
+      setOcupado(false);
     }
   };
 
   const exportar = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
-    const [{ data: perfilBd }, { data: itens }, { data: casos }, { data: avisos }, { data: aceites }, { data: usoDeIa }, { data: analises }, { data: assinaturas }, { data: cobrancas }] = await Promise.all([
-      sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
-      sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
-      sb.from('casos').select('*').order('criado_em', { ascending: true }),
-      sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
-      sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true }),
-      sb.from('ia_uso').select('*').order('criado_em', { ascending: false }),
-      sb.from('analises').select('*').order('criada_em', { ascending: false }),
-      sb.from('assinaturas').select('*'),
-      sb.from('cobrancas').select('*').order('criada_em', { ascending: false })
-    ]);
-    const conteudo = JSON.stringify(
-      {
-        exportadoEm: new Date().toISOString(),
-        email: usuario.email,
-        perfil: perfilBd,
-        itensSalvos: itens,
-        casos,
-        avisosPorEmail: avisos,
-        aceitesDosTermos: aceites,
-        usoDeIa,
-        analises,
-        assinaturas,
-        cobrancas
-      },
-      null,
-      2
-    );
-    const blob = new Blob([conteudo], { type: 'application/json;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ratione-meus-dados.json';
-    a.click();
-    URL.revokeObjectURL(url);
+    setOcupado(true);
+    try {
+      const respostas = await Promise.all([
+        sb.from('perfis').select('*').eq('id', usuario.id).maybeSingle(),
+        sb.from('itens_salvos').select('*').order('criado_em', { ascending: false }),
+        sb.from('casos').select('*').order('criado_em', { ascending: true }),
+        sb.from('lembretes_prazo').select('*').order('vencimento', { ascending: true }),
+        sb.from('aceites_termos').select('versao, aceito_em, origem').order('aceito_em', { ascending: true }),
+        sb.from('ia_uso').select('*').order('criado_em', { ascending: false }),
+        sb.from('analises').select('*').order('criada_em', { ascending: false }),
+        sb.from('assinaturas').select('*'),
+        sb.from('cobrancas').select('*').order('criada_em', { ascending: false })
+      ]);
+      if (respostas.some(r => r.error)) {
+        aviso('danger', 'Não foi possível reunir todos os seus dados agora. Tente de novo em instantes.');
+        return;
+      }
+      const [perfilRes, itensRes, casosRes, avisosRes, aceitesRes, usoDeIaRes, analisesRes, assinaturasRes, cobrancasRes] = respostas;
+      const conteudo = JSON.stringify(
+        {
+          exportadoEm: new Date().toISOString(),
+          email: usuario.email,
+          perfil: perfilRes.data,
+          itensSalvos: itensRes.data,
+          casos: casosRes.data,
+          avisosPorEmail: avisosRes.data,
+          aceitesDosTermos: aceitesRes.data,
+          usoDeIa: usoDeIaRes.data,
+          analises: analisesRes.data,
+          assinaturas: assinaturasRes.data,
+          cobrancas: cobrancasRes.data
+        },
+        null,
+        2
+      );
+      const blob = new Blob([conteudo], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ratione-meus-dados.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      aviso('danger', 'Não foi possível baixar os seus dados agora. Tente de novo em instantes.');
+    } finally {
+      setOcupado(false);
+    }
   };
 
   const apagarItens = async () => {
     const sb = obterSupabase();
     if (!sb || !usuario) return;
     setConfirmando(null);
-    const [itens, avisos, casos] = await Promise.all([
-      sb.from('itens_salvos').delete().eq('usuario_id', usuario.id),
-      sb.from('lembretes_prazo').delete().eq('usuario_id', usuario.id),
-      sb.from('casos').delete().eq('usuario_id', usuario.id)
-    ]);
-    if (itens.error || avisos.error || casos.error) aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
-    else aviso('info', 'Todos os registros salvos e os avisos por e-mail da conta foram apagados.');
+    setOcupado(true);
+    try {
+      const [itens, avisos, casos] = await Promise.all([
+        sb.from('itens_salvos').delete().eq('usuario_id', usuario.id),
+        sb.from('lembretes_prazo').delete().eq('usuario_id', usuario.id),
+        sb.from('casos').delete().eq('usuario_id', usuario.id)
+      ]);
+      if (itens.error || avisos.error || casos.error) aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
+      else aviso('info', 'Todos os registros salvos e os avisos por e-mail da conta foram apagados.');
+    } catch {
+      aviso('danger', 'Não foi possível apagar tudo. Tente de novo.');
+    } finally {
+      setOcupado(false);
+    }
   };
 
   const excluirConta = async (e: React.FormEvent) => {
@@ -201,14 +229,6 @@ export default function ContaPage() {
     }
   };
 
-  if (!carregando && !contaDisponivel) {
-    return (
-      <div>
-        <PageHeader eyebrow="Conta" title="Minha conta" />
-        <EmptyState titulo="Conta indisponível nesta instalação">O login ainda não está configurado neste ambiente.</EmptyState>
-      </div>
-    );
-  }
   if (carregando || !usuario) return null;
 
   const tribunais = Object.values(TRIBUNAIS_BRASIL);
@@ -319,11 +339,11 @@ export default function ContaPage() {
             .
           </p>
           <div className="flex flex-wrap gap-2">
-            <Button variant="secondary" type="button" onClick={exportar}>
+            <Button variant="secondary" type="button" onClick={exportar} disabled={ocupado}>
               <Download className="w-4 h-4" />
               Baixar meus dados
             </Button>
-            <Button variant="secondary" type="button" onClick={() => setConfirmando('itens')}>
+            <Button variant="secondary" type="button" onClick={() => setConfirmando('itens')} disabled={ocupado}>
               Apagar meus registros e avisos
             </Button>
           </div>

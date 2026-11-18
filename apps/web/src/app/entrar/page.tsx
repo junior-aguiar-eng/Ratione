@@ -141,10 +141,18 @@ function Formulario() {
         )}
 
         {modo === 'cadastrar' && (
-          <label className="flex items-start gap-3 cursor-pointer">
-            <Checkbox checked={aceite} onCheckedChange={v => setAceite(v === true)} className="mt-1" />
-            <span className="text-sm text-ink-soft leading-snug">
-              Li e aceito os{' '}
+          <div className="flex items-start gap-3">
+            <Checkbox
+              id="aceite-termos"
+              aria-labelledby="aceite-termos-rotulo"
+              checked={aceite}
+              onCheckedChange={v => setAceite(v === true)}
+              className="mt-1"
+            />
+            <span id="aceite-termos-rotulo" className="text-sm text-ink-soft leading-snug">
+              <label htmlFor="aceite-termos" className="cursor-pointer">
+                Li e aceito os
+              </label>{' '}
               <Link href="/termos" className="underline underline-offset-2" target="_blank">
                 Termos de uso
               </Link>{' '}
@@ -154,7 +162,7 @@ function Formulario() {
               </Link>
               .
             </span>
-          </label>
+          </div>
         )}
 
         <div aria-live="polite" className={cn('flex flex-col gap-3', !erro && !aviso && '-mt-5')}>

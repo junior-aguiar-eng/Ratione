@@ -12,13 +12,16 @@ import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
+import { exibeMemoriaCalculo } from '../../lib/usoApresentacao';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export default function ResultadoMaterial({ resultado, titulo, tribunalId, atoId, urlSalvo }: { resultado: ResultadoPrazoMaterial; titulo: string; tribunalId: string; atoId: string; urlSalvo: string }) {
   const [copiado, setCopiado] = useState(false);
   const { estado: estadoSalvo, salvar: salvarNaConta } = useSalvar();
   const salvo = estadoSalvo === 'salvo';
   const rotuloInicio = resultado.tipo === 'mandado_seguranca' ? 'Ciência do ato' : 'Trânsito em julgado';
+  const mostraContagem = exibeMemoriaCalculo(resultado.memoriaCalculo);
 
   const memoriaTexto = [
     `${titulo} (${resultado.baseLegal})`,
@@ -74,19 +77,21 @@ export default function ResultadoMaterial({ resultado, titulo, tribunalId, atoId
         </p>
       </div>
 
-      <dl className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line rounded-lg overflow-hidden">
+      <dl className={cn('grid grid-cols-1 gap-px bg-line border border-line rounded-lg overflow-hidden', mostraContagem && 'sm:grid-cols-2')}>
         <div className="bg-surface p-4">
           <dt className="text-sm text-ink-mute">{rotuloInicio}</dt>
           <dd className="text-lg font-semibold text-ink num mt-0.5">{dataCurta(resultado.dataInicio)}</dd>
           <dd className="text-sm text-ink-soft">{diaDaSemana(resultado.dataInicio)}</dd>
         </div>
-        <div className="bg-surface p-4">
-          <dt className="text-sm text-ink-mute">{resultado.prorrogado ? 'Vencimento antes da prorrogação' : 'Contagem'}</dt>
-          <dd className="text-lg font-semibold text-ink num mt-0.5">
-            {dataCurta(resultado.memoriaCalculo[1].data)}
-          </dd>
-          <dd className="text-sm text-ink-soft">Decadência: não se suspende nem se interrompe</dd>
-        </div>
+        {mostraContagem && (
+          <div className="bg-surface p-4">
+            <dt className="text-sm text-ink-mute">{resultado.prorrogado ? 'Vencimento antes da prorrogação' : 'Contagem'}</dt>
+            <dd className="text-lg font-semibold text-ink num mt-0.5">
+              {dataCurta(resultado.memoriaCalculo[1].data)}
+            </dd>
+            <dd className="text-sm text-ink-soft">Decadência: não se suspende nem se interrompe</dd>
+          </div>
+        )}
       </dl>
 
       {resultado.prorrogado && (
