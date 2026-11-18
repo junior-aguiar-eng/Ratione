@@ -82,6 +82,7 @@ async function enviar(url: string, corpo: unknown, signal?: AbortSignal): Promis
     throw new ErroDeAnalise('Sem conexão. Tente de novo.');
   }
   const resposta = await r.json().catch(() => ({}));
+  if (signal?.aborted) throw Object.assign(new Error('AbortError'), { name: 'AbortError' });
   if (!r.ok) throw new ErroDeAnalise(resposta.mensagem ?? 'A análise por IA falhou agora.', resposta.motivo);
   return resposta;
 }
@@ -265,6 +266,7 @@ export default function AnaliseDecisao() {
           { tipo: 'rapida', rotulo: rotulo.trim() || undefined, paragrafos: decisao.paragrafos.length },
           controller.signal
         );
+        if (controller.signal.aborted) return;
         id = inicio.analiseId as string;
         setAnaliseId(id);
         setUso(u => (u ? { ...u, restantes: inicio.restantes, renovaEm: inicio.renovaEm } : u));
@@ -273,17 +275,20 @@ export default function AnaliseDecisao() {
       if (!feitos.estrutura) {
         setAndamento('estrutura');
         feitos = { ...feitos, estrutura: (await pedir('estrutura', base, controller.signal)) as SaidaEstrutura };
+        if (controller.signal.aborted) return;
         setResultados(feitos);
       }
       if (!feitos.questoes) {
         setAndamento('questoes');
         feitos = { ...feitos, questoes: (await pedir('questoes', base, controller.signal)) as SaidaQuestoes };
+        if (controller.signal.aborted) return;
         setResultados(feitos);
       }
       if (!feitos.fundamentos) {
         setAndamento('fundamentos');
         const questoes = feitos.questoes!.questoes.map(q => ({ id: q.id, enunciado: q.enunciado, conclusao: q.conclusao }));
         feitos = { ...feitos, fundamentos: (await pedir('fundamentos', { ...base, questoes }, controller.signal)) as SaidaFundamentos };
+        if (controller.signal.aborted) return;
         setResultados(feitos);
       }
     } catch (e) {
