@@ -73,8 +73,11 @@ export default function PrivacidadePage() {
 
         <Secao numero={3} titulo="Inteligência artificial">
           <p>
-            Dois recursos usam inteligência artificial, e só quando você os aciona: a análise de uma decisão colada (Argumenta) e a explicação de
-            um dispositivo de lei (NormaViva).
+            Os recursos de inteligência artificial funcionam em tarefas fechadas (sem conversa aberta) e só quando você os aciona. Na instalação
+            padrão, quando a inteligência artificial está habilitada, estão ativos dois recursos: a análise de uma decisão colada (Argumenta) e a
+            explicação de um dispositivo de lei (NormaViva). Outras três tarefas já implementadas no código permanecem desligadas por padrão até
+            habilitação específica (explicação de precedente no TeseMap, leitura de intimação colada no PrazoZero e relação entre uma questão da
+            análise e uma fonte pública).
           </p>
           <Lista>
             <li>
@@ -83,14 +86,23 @@ export default function PrivacidadePage() {
               indicados por rótulos (&ldquo;Autor:&rdquo;, &ldquo;em face de&rdquo;) são trocados por marcadores. A tabela de troca fica só na sua tela,
               que mostra os dados reais para você, e o servidor recusa o envio se ainda detectar dado pessoal. A detecção é automática e{' '}
               <Destaque>não pega todo nome que aparece no meio do texto</Destaque>: confira o que será enviado, acrescente os nomes que faltarem à
-              lista de ocultação e <Destaque>não envie documento em segredo de justiça</Destaque>.
+              lista de ocultação e <Destaque>não envie documento em segredo de justiça</Destaque>. A conferência de citações consulta apenas a
+              citação na base pública, sem enviar a decisão à IA.
             </li>
             <li>
-              <Destaque>NormaViva:</Destaque> só o texto do dispositivo de lei, que é público, vai ao modelo. Nenhum dado seu é enviado.
+              <Destaque>Explicação por IA no NormaViva (ativa) e no TeseMap (desligada por padrão):</Destaque> para explicar um dispositivo de lei ou
+              um precedente, só o texto público da norma ou do precedente vai ao modelo. Nenhum dado seu é enviado; a explicação gerada sobre o
+              texto público pode ficar em cache para reutilização em consultas futuras ao mesmo texto.
             </li>
             <li>
-              O texto enviado serve apenas para gerar a resposta. Ele e o resultado não ficam guardados: a análise some quando você sai da
-              página. Guardamos só o registro de uso descrito no item 2.
+              <Destaque>Leitura de intimação no PrazoZero e relação com o caso (desligadas por padrão):</Destaque> quando habilitadas, a leitura de
+              intimação colada aplica a mesma pseudonimização no navegador antes do envio e recusa no servidor de dado pessoal detectável; a relação
+              com o caso envia apenas a questão e a conclusão já pseudonimizadas pela análise do Argumenta junto ao texto público da fonte.
+            </li>
+            <li>
+              O texto que você envia (na decisão colada e, quando habilitados, na intimação ou na questão do caso) serve apenas para gerar a
+              resposta. Ele e o resultado não ficam guardados no servidor: ficam só na aba do navegador e somem quando você sai ou fecha a página.
+              Guardamos só o registro de uso descrito no item 2.
             </li>
           </Lista>
           <p>

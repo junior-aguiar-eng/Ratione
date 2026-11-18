@@ -13,7 +13,6 @@ interface Achado {
   rotulo: string;
   tom: BadgeTom;
   texto: string;
-  pagina: number;
   /** Cor do grifo no trecho de origem. */
   grifo: string;
   /** Só as citações recebem o selo de conferência contra a base. */
@@ -22,30 +21,34 @@ interface Achado {
 
 /** Na ordem em que a leitura os encontra. */
 const ACHADOS: Achado[] = [
-  { id: 'tese', rotulo: 'Tese', tom: 'brand', texto: 'Responsabilidade objetiva por fortuito interno', pagina: 4, grifo: 'bg-brand-tint' },
-  { id: 'stj', rotulo: 'Fundamento', tom: 'info', texto: 'Súmula 479/STJ', pagina: 4, grifo: 'bg-info-tint', selo: true },
-  { id: 'cdc', rotulo: 'Fundamento', tom: 'info', texto: 'CDC, art. 14', pagina: 4, grifo: 'bg-info-tint', selo: true },
-  { id: 'atencao', rotulo: 'Atenção', tom: 'danger', texto: 'Argumento não enfrentado (CPC, art. 489, § 1º, IV)', pagina: 6, grifo: 'bg-danger-tint' }
+  { id: 'fato', rotulo: 'Fato', tom: 'ok', texto: 'Transações atípicas via PIX fora do horário habitual', grifo: 'bg-ok-tint' },
+  { id: 'conclusao', rotulo: 'Conclusão', tom: 'brand', texto: 'Responsabilidade objetiva por fortuito interno', grifo: 'bg-brand-tint' },
+  { id: 'stj', rotulo: 'Precedente', tom: 'rel', texto: 'Súmula 479/STJ', grifo: 'bg-rel-tint', selo: true },
+  { id: 'cdc', rotulo: 'Norma', tom: 'info', texto: 'CDC, art. 14', grifo: 'bg-info-tint', selo: true }
 ];
 
 type Trecho = string | { achado: string; texto: string };
 
-const PARAGRAFOS: { pagina: number; trechos: Trecho[] }[] = [
+const PARAGRAFOS: { id: string; trechos: Trecho[] }[] = [
   {
-    pagina: 4,
+    id: 'fatos',
+    trechos: [
+      'O sistema não bloqueou ',
+      { achado: 'fato', texto: 'transações atípicas via PIX de R$ 38.500,00 executadas de madrugada em menos de dez minutos' },
+      '.'
+    ]
+  },
+  {
+    id: 'fundamentacao',
     trechos: [
       'A instituição financeira ',
-      { achado: 'tese', texto: 'responde objetivamente pelos danos decorrentes de fraudes praticadas por terceiros' },
+      { achado: 'conclusao', texto: 'responde objetivamente pelos danos decorrentes de fraudes praticadas por terceiros' },
       ', por constituírem fortuito interno (',
       { achado: 'stj', texto: 'Súmula 479/STJ' },
       ' e ',
       { achado: 'cdc', texto: 'art. 14 do CDC' },
       ').'
     ]
-  },
-  {
-    pagina: 6,
-    trechos: [{ achado: 'atencao', texto: '“Rejeito os argumentos da defesa de que houve culpa do correntista, porquanto incide de forma irrestrita o risco da atividade financeira.”' }]
   }
 ];
 
@@ -98,8 +101,7 @@ export default function DemoArgumenta({ semMovimento }: { semMovimento: boolean 
         </p>
         <div className="flex flex-col gap-3 font-serif text-[15px] leading-relaxed text-ink">
           {PARAGRAFOS.map(p => (
-            <p key={p.pagina}>
-              <span className="mr-2 font-sans text-xs text-ink-mute align-baseline">p. {p.pagina}</span>
+            <p key={p.id}>
               {p.trechos.map((t, i) =>
                 typeof t === 'string' ? (
                   <span key={i}>{t}</span>
@@ -133,6 +135,7 @@ export default function DemoArgumenta({ semMovimento }: { semMovimento: boolean 
               <button
                 type="button"
                 tabIndex={aparece ? 0 : -1}
+                onClick={() => setFoco(f => (f === a.id ? null : a.id))}
                 onMouseEnter={() => setFoco(a.id)}
                 onMouseLeave={() => setFoco(null)}
                 onFocus={() => setFoco(a.id)}
@@ -150,7 +153,7 @@ export default function DemoArgumenta({ semMovimento }: { semMovimento: boolean 
                     <Check className="w-3.5 h-3.5" aria-hidden /> Encontrada na base
                   </span>
                 ) : (
-                  <span className="ml-auto text-xs text-ink-mute shrink-0">p. {a.pagina}</span>
+                  <span className="ml-auto text-xs text-ink-mute shrink-0">Ver no texto</span>
                 )}
               </button>
             </li>
@@ -159,7 +162,7 @@ export default function DemoArgumenta({ semMovimento }: { semMovimento: boolean 
       </ul>
 
       <p className="text-sm text-ink-mute">
-        {pronta ? 'Cada conclusão aponta para o trecho de onde veio.' : 'Lendo a decisão…'} Exemplo ilustrativo, com uma decisão fictícia: nenhum modelo foi chamado aqui.{' '}
+        {pronta ? 'Cada conclusão ou fundamento aponta para o trecho de origem.' : 'Lendo a decisão…'} Exemplo ilustrativo com texto fictício: nenhum modelo foi chamado aqui.{' '}
         <Link href="/argumenta" className="inline-flex items-center gap-1 text-brand-text underline underline-offset-2">
           Analisar uma decisão <ArrowRight className="w-3.5 h-3.5" />
         </Link>

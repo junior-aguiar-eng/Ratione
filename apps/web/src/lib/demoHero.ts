@@ -23,9 +23,9 @@ export const ATOS_DEMO: readonly AtoDemo[] = [
 /** Só tribunais com calendário de 2026 conferido contra o ato oficial. */
 export const TRIBUNAIS_DEMO = ['TJSP', 'TJMG', 'TJAL'] as const;
 
-/** A demonstração fica dentro do ano que tem calendário conferido, sem o recesso de dezembro. */
+/** A demonstração fica dentro do ano de 2026, coberto pelos calendários conferidos. */
 export const DATA_MINIMA_DEMO = '2026-01-05';
-export const DATA_MAXIMA_DEMO = '2026-10-30';
+export const DATA_MAXIMA_DEMO = '2026-12-31';
 export const DATA_INICIAL_DEMO = '2026-03-10';
 
 export interface ResultadoDemoPrazo {

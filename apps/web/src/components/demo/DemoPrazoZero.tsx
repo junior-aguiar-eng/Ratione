@@ -79,7 +79,9 @@ export default function DemoPrazoZero() {
             </div>
           </>
         ) : (
-          <p className="text-sm text-ink-soft">Escolha uma data de 2026 (de janeiro a outubro).</p>
+          <p className="text-sm text-ink-soft">
+            Escolha uma data entre {dataCurta(DATA_MINIMA_DEMO)} e {dataCurta(DATA_MAXIMA_DEMO)}.
+          </p>
         )}
       </div>
 

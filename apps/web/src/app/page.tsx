@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, BookOpen, CalendarClock, FileSearch, Network } from 'lucide-react';
+import { CENARIOS_VALIDADOS } from '@ratione/prazozero';
 import RecentesHome from '../components/RecentesHome';
 import HomeAdaptativa from '../components/HomeAdaptativa';
 import CampoDeBusca from '../components/CampoDeBusca';
@@ -16,7 +17,7 @@ const FERRAMENTAS = [
     nome: 'Argumenta',
     Icone: FileSearch,
     titulo: 'Entenda como uma decisão foi construída.',
-    descricao: 'Teses, premissas, conclusões e pontos de atenção da fundamentação, com acesso ao trecho de origem de cada um.',
+    descricao: 'Estrutura, questões, conclusões e fundamentos da decisão colada, com citações conferidas na base e acesso ao trecho de origem.',
     cta: 'Analisar decisão'
   },
   {
@@ -24,7 +25,7 @@ const FERRAMENTAS = [
     nome: 'NormaViva',
     Icone: BookOpen,
     titulo: 'Veja a lei como ela realmente vigora.',
-    descricao: 'Texto normativo, linha do tempo legislativa e a redação do dispositivo em qualquer data.',
+    descricao: 'Texto vigente, histórico de alterações, remissões entre dispositivos e redações anteriores conferidas por data.',
     cta: 'Consultar norma'
   },
   {
@@ -82,9 +83,9 @@ function Apresentacao() {
 
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-3" aria-label="O que a plataforma já reúne">
           {[
-            ['28', 'normas federais, com a redação ao longo do tempo'],
-            ['7.700+', 'precedentes, temas e súmulas do STJ e do STF'],
-            ['415', 'cenários de prazo conferidos por revisão jurídica']
+            ['28', 'normas federais, com histórico de alterações e remissões'],
+            ['7.700+', 'precedentes, súmulas e controle concentrado do STJ e do STF'],
+            [CENARIOS_VALIDADOS.toLocaleString('pt-BR'), 'cenários de prazo conferidos por revisão jurídica']
           ].map(([numero, rotulo]) => (
             <div key={rotulo} className="rounded-xl border border-line bg-surface/70 backdrop-blur-sm shadow-card px-4 py-3.5">
               <dt className="font-serif text-3xl font-semibold text-ink num">{numero}</dt>

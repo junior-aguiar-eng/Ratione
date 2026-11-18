@@ -69,16 +69,22 @@ export default function MetodologiaPage() {
               dia por dia. Quando o resultado traz o selo de calendário conferido, ele lista os atos e os links.
             </li>
             <li>
-              <strong className="text-ink">Normas:</strong> texto do CPC conforme o{' '}
+              <strong className="text-ink">Normas:</strong> texto das 28 normas federais (Constituição, códigos e principais
+              leis) conforme a versão compilada ou a página anotada (descartados os trechos tachados) no{' '}
               <a
                 className="text-brand-text underline underline-offset-2"
-                href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105compilada.htm"
+                href="https://www.planalto.gov.br/ccivil_03/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Planalto
               </a>
               .
+            </li>
+            <li>
+              <strong className="text-ink">Jurisprudência:</strong> precedentes qualificados (Dados Abertos do STJ, licença
+              CC BY) e súmulas do STJ; temas de repercussão geral, súmulas e ações de controle concentrado (Portal da
+              Transparência e base de jurisprudência do STF), com as fontes e datas de leitura registradas em cada registro.
             </li>
           </ul>
         </section>
@@ -91,9 +97,10 @@ export default function MetodologiaPage() {
           <ul className="list-disc pl-5 flex flex-col gap-2">
             <li>
               <strong className="text-ink">Calendário conferido contra o ato do tribunal:</strong> {resumoCalendarioConferido()}.
-              O TJRJ está carregado até outubro de 2026, sem selo. Nos demais tribunais entram os feriados nacionais, a Lei 5.010
-              na Justiça Federal e os feriados estaduais já conferidos por lei; o resto fica como dia pendente e aparece só como
-              data alternativa.
+              O TJRJ (ocorrências até outubro de 2026 e regras da Lei estadual 10.633/2024), o TRT13 e o TRT18 têm carga
+              parcial, sem selo. Nos demais casos (como o TSE e anos ainda não conferidos), entram os feriados nacionais, a
+              Lei 5.010 e os feriados estaduais já conferidos por lei; o resto fica como dia pendente e aparece só como data
+              alternativa.
             </li>
             <li>
               <strong className="text-ink">Anos futuros:</strong> os tribunais divulgam o calendário do ano seguinte perto
@@ -112,8 +119,9 @@ export default function MetodologiaPage() {
               sem expediente onde o ato do tribunal os prevê. Nos outros, a data alternativa mostra o efeito.
             </li>
             <li>
-              <strong className="text-ink">TST e TSE:</strong> a Lei 5.010 menciona os tribunais superiores, mas ainda
-              falta ato próprio de cada um.
+              <strong className="text-ink">TSE e férias no TST:</strong> a Lei 5.010 menciona os tribunais superiores; o
+              calendário de 2026 do TST está conferido pelo Ato Conjunto TST.CSJT.GP nº 5/2026 (sem modelar as férias
+              coletivas de julho dos ministros), e ainda falta ato próprio do TSE.
             </li>
             <li>
               <strong className="text-ink">Prazo em dobro:</strong> o sistema duplica o prazo quando você marca a opção;
@@ -129,17 +137,29 @@ export default function MetodologiaPage() {
               <strong className="text-ink">PrazoZero:</strong> disponível, com as limitações acima.
             </li>
             <li>
-              <strong className="text-ink">NormaViva:</strong> prévia, com um conjunto inicial de dispositivos do CPC.
-              Confira o texto na fonte oficial antes de citar.
+              <strong className="text-ink">NormaViva:</strong> disponível, com 28 normas federais (29.294 dispositivos da
+              Constituição, códigos e principais leis), consulta por citação, norma ou assunto, remissões entre artigos,
+              avisos de vigência futura, precedentes ligados ao dispositivo e 57 redações anteriores conferidas em 25 normas
+              (onde não há redação anterior validada, informa que o texto anterior não está na base). Confira sempre o texto
+              na fonte oficial antes de citar.
             </li>
             <li>
-              <strong className="text-ink">TeseMap:</strong> prévia, com dois temas catalogados.
+              <strong className="text-ink">TeseMap:</strong> disponível, com 7.734 nós de fontes oficiais (1.150 precedentes
+              qualificados e 646 súmulas em vigor do STJ; 1.141 temas de repercussão geral, 785 súmulas e 4.008 ações de
+              controle concentrado com mérito do STF; além de 4 dispositivos do grafo mínimo) e 5 relações validadas por
+              revisão jurídica (Tema 1.076/STJ), com ligações registradas pelos tribunais, devoluções à origem no STF e
+              atalhos para o NormaViva. Confira sempre a tese na fonte oficial antes de citar.
             </li>
             <li>
               <strong className="text-ink">Argumenta:</strong> prévia. Analisa uma decisão colada como texto (estrutura,
-              questões, conclusões e fundamentos, com o parágrafo de origem), com IA e com os dados pessoais trocados por
-              marcadores antes do envio; nada fica guardado. As citações não são verificadas e o envio de arquivos ainda não
-              está disponível. Uma análise ilustrativa mostra o restante do módulo.
+              questões, conclusões, fundamentos com acesso aos trechos originais e mapa argumentativo montado por código),
+              com IA e com os dados pessoais trocados por marcadores no navegador antes do envio; o texto e o resultado ficam
+              só na aba do navegador e não são guardados. Cada citação de norma ou precedente é conferida por código contra
+              o NormaViva e o TeseMap (recebe selo de encontrada na base, não localizada ou fora da base — o selo verifica
+              apenas a existência na base, sem atestar acerto jurídico) e permite navegar até os dispositivos e precedentes
+              relacionados. Avaliado em um corpus de 30 decisões públicas com gabarito validado. O envio de arquivos
+              (PDF/DOCX), a detecção de fragilidades da fundamentação e o salvamento de análises ainda não estão habilitados
+              na interface.
             </li>
           </ul>
         </section>
