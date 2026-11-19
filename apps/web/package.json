@@ -12,7 +12,7 @@
     "intimacoes": "tsx scripts/intimacoes.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^1.6.0",
+    "@anthropic-ai/sdk": "^1.8.0",
     "@ratione/argumenta": "workspace:*",
     "@ratione/core": "workspace:*",
     "@ratione/normaviva": "workspace:*",
@@ -23,9 +23,9 @@
     "@xyflow/react": "^12.12.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "docx": "9.15.2",
-    "lucide-react": "^1.70.0",
-    "next": "^16.4.5",
+    "docx": "9.15.3",
+    "lucide-react": "^1.72.0",
+    "next": "^16.4.6",
     "radix-ui": "^1.8.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -33,13 +33,13 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.4",
+    "@tailwindcss/postcss": "^4.3.5",
     "@types/node": "^26.6.6",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "jszip": "3.10.2",
     "postcss": "^8.5.32",
-    "tailwindcss": "^4.3.4",
+    "tailwindcss": "^4.3.5",
     "tsx": "^4.19.3",
     "typescript": "^7.0.2"
   }

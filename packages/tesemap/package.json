@@ -45,7 +45,7 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.5.15",
+    "@electric-sql/pglite": "^0.5.16",
     "@ratione/db": "workspace:*",
     "@ratione/normaviva": "workspace:*",
     "@supabase/supabase-js": "^2.119.0",
