@@ -23,6 +23,8 @@ ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 # "sim" mostra o botão da explicação por IA; o servidor também precisa estar ligado (docs/produto/EXPLICACAO_IA.md)
 ARG NEXT_PUBLIC_IA_EXPLICACAO
+# "sim" mostra a análise de decisão por IA no Argumenta; o servidor também precisa de IA_ARGUMENTA_LIGADA=sim (ou IA_EXPLICACAO_LIGADA=sim)
+ARG NEXT_PUBLIC_ARGUMENTA_IA_LIGADA
 # "sim" mostra o botão "Relacionar com a minha questão"; o servidor também precisa de IA_RELACAO_LIGADA=sim (docs/produto/IA_TAREFAS.md)
 ARG NEXT_PUBLIC_IA_RELACAO
 # "sim" mostra o campo "Colar a intimação" no PrazoZero; o servidor também precisa de IA_INTIMACAO_LIGADA=sim (docs/produto/IA_TAREFAS.md)

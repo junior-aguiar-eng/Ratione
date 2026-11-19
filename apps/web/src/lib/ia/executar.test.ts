@@ -231,10 +231,15 @@ describe('Executor de tarefas de IA: cache, chamada e registro do custo', () => 
 });
 
 describe('Política global e tarefa "explicar-dispositivo"', () => {
-  it('só liga com a chave e com IA_EXPLICACAO_LIGADA=sim', () => {
+  it('só liga com a chave e ao menos um módulo de IA=sim', () => {
     assert.equal(iaLigada({ IA_EXPLICACAO_LIGADA: 'sim', ANTHROPIC_API_KEY: 'k' }), true);
+    assert.equal(iaLigada({ IA_ARGUMENTA_LIGADA: 'sim', ANTHROPIC_API_KEY: 'k' }), true);
+    assert.equal(iaLigada({ IA_RELACAO_LIGADA: 'sim', ANTHROPIC_API_KEY: 'k' }), true);
+    assert.equal(iaLigada({ IA_INTIMACAO_LIGADA: 'sim', ANTHROPIC_API_KEY: 'k' }), true);
+    assert.equal(iaLigada({ IA_PRECEDENTE_LIGADA: 'sim', ANTHROPIC_API_KEY: 'k' }), true);
     assert.equal(iaLigada({ IA_EXPLICACAO_LIGADA: 'sim' }), false);
     assert.equal(iaLigada({ IA_EXPLICACAO_LIGADA: 'true', ANTHROPIC_API_KEY: 'k' }), false);
+    assert.equal(iaLigada({ ANTHROPIC_API_KEY: 'k' }), false);
   });
 
   it('a mensagem de fundo esgotado diz a data de volta e que a cota do cliente não foi gasta; cada fundo tem a sua', () => {

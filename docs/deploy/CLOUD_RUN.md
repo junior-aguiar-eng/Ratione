@@ -4,7 +4,7 @@ O site (`apps/web`) roda no **Cloud Run em São Paulo** (`southamerica-east1`), 
 
 | Peça | Onde fica |
 |---|---|
-| Imagem | `Dockerfile` na raiz (Next `output: 'standalone'`, Node 24, usuário sem privilégio, porta 8080) |
+| Imagem | `Dockerfile` na raiz (Next `output: 'standalone'`, Node 26, usuário sem privilégio, porta 8080) |
 | Publicação | `.github/workflows/deploy.yml`: roda depois do CI verde na `main` (ou à mão, em *Actions*) |
 | Registro de imagens | Artifact Registry `ratione` em `southamerica-east1` |
 | Chave de serviço do Supabase | Secret Manager `supabase-service-role-key`, lida só pelo Cloud Run ao rodar |

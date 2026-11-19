@@ -53,6 +53,7 @@ jobs:
             --build-arg NEXT_PUBLIC_SUPABASE_URL="${{ vars.NEXT_PUBLIC_SUPABASE_URL }}" \
             --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}" \
             --build-arg NEXT_PUBLIC_IA_EXPLICACAO="${{ vars.IA_EXPLICACAO }}" \
+            --build-arg NEXT_PUBLIC_ARGUMENTA_IA_LIGADA="${{ vars.IA_ARGUMENTA }}" \
             --build-arg NEXT_PUBLIC_IA_RELACAO="${{ vars.IA_RELACAO }}" \
             --build-arg NEXT_PUBLIC_IA_INTIMACAO="${{ vars.IA_INTIMACAO }}" \
             --build-arg NEXT_PUBLIC_IA_PRECEDENTE="${{ vars.IA_PRECEDENTE }}" \
@@ -60,32 +61,48 @@ jobs:
           docker push "$IMAGEM"
           echo "nome=$IMAGEM" >> "$GITHUB_OUTPUT"
 
-      # A chave de serviço do Supabase vem do Secret Manager, nunca do repositório nem da imagem
-      # Explicação por IA (F3-08): só com a variável IA_EXPLICACAO = sim o servidor recebe a chave da Anthropic (segredo anthropic-api-key)
-      # e a rota liga; com qualquer outro valor o segredo nem é referenciado e a rota responde 503 (docs/produto/EXPLICACAO_IA.md).
+      # A chave de serviço do Supabase vem do Secret Manager, nunca do repositório nem da imagem.
+      # Os módulos de IA recebem ANTHROPIC_API_KEY (segredo anthropic-api-key) sempre que ao menos um módulo estiver com = sim;
+      # quando nenhum estiver ativo, o segredo nem é referenciado e as rotas respondem 503.
       - name: Cloud Run
         run: |
           SEGREDOS="SUPABASE_SERVICE_ROLE_KEY=supabase-service-role-key:latest,RESEND_API_KEY=resend-api-key-lembretes:latest,LEMBRETES_SEGREDO=lembretes-segredo:latest,DOCUMENTOS_LIMPEZA_SEGREDO=documentos-limpeza-segredo:latest"
+          TEM_IA=nao
+          # Explicação de dispositivos (F3-08): IA_EXPLICACAO = sim
           IA="IA_EXPLICACAO_LIGADA=nao"
           if [ "${{ vars.IA_EXPLICACAO }}" = "sim" ]; then
-            SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
             IA="IA_EXPLICACAO_LIGADA=sim"
+            TEM_IA=sim
           fi
-          # Relação com o caso: tarefa própria, DESLIGADA por padrão; só com a variável IA_RELACAO = sim (e IA_EXPLICACAO = sim) e só depois de
-          # medida no corpus (docs/produto/IA_TAREFAS.md). Sem ela a rota responde 503 e o botão nem aparece.
+          # Argumenta (F5-03): usa IA_ARGUMENTA quando definida; se vazia, mantém vazio no ambiente para cair no legado IA_EXPLICACAO_LIGADA
+          if [ "${{ vars.IA_ARGUMENTA }}" = "sim" ]; then
+            IA="${IA}@IA_ARGUMENTA_LIGADA=sim"
+            TEM_IA=sim
+          elif [ -n "${{ vars.IA_ARGUMENTA }}" ]; then
+            IA="${IA}@IA_ARGUMENTA_LIGADA=nao"
+          else
+            IA="${IA}@IA_ARGUMENTA_LIGADA="
+          fi
+          # Relação com o caso: tarefa própria, DESLIGADA por padrão; só com IA_RELACAO = sim (docs/produto/IA_TAREFAS.md).
           IA="${IA}@IA_RELACAO_LIGADA=nao"
           if [ "${{ vars.IA_RELACAO }}" = "sim" ]; then
             IA="${IA%@IA_RELACAO_LIGADA=nao}@IA_RELACAO_LIGADA=sim"
+            TEM_IA=sim
           fi
-          # Leitura da intimação (PrazoZero): também desligada por padrão, com a variável IA_INTIMACAO = sim (e IA_EXPLICACAO = sim).
+          # Leitura da intimação (PrazoZero): também desligada por padrão, com IA_INTIMACAO = sim.
           IA="${IA}@IA_INTIMACAO_LIGADA=nao"
           if [ "${{ vars.IA_INTIMACAO }}" = "sim" ]; then
             IA="${IA%@IA_INTIMACAO_LIGADA=nao}@IA_INTIMACAO_LIGADA=sim"
+            TEM_IA=sim
           fi
-          # Explicação do precedente (TeseMap): também desligada por padrão, com a variável IA_PRECEDENTE = sim (e IA_EXPLICACAO = sim).
+          # Explicação do precedente (TeseMap): também desligada por padrão, com IA_PRECEDENTE = sim.
           IA="${IA}@IA_PRECEDENTE_LIGADA=nao"
           if [ "${{ vars.IA_PRECEDENTE }}" = "sim" ]; then
             IA="${IA%@IA_PRECEDENTE_LIGADA=nao}@IA_PRECEDENTE_LIGADA=sim"
+            TEM_IA=sim
+          fi
+          if [ "$TEM_IA" = "sim" ]; then
+            SEGREDOS="$SEGREDOS,ANTHROPIC_API_KEY=anthropic-api-key:latest"
           fi
           # Cobrança com o Mercado Pago (F8-05): DESLIGADA por padrão. Só com a variável COBRANCA = sim o servidor recebe os segredos do
           # Mercado Pago (mercadopago-access-token e mercadopago-webhook-secret, no Secret Manager) e a cobrança liga. COBRANCA_AMBIENTE
@@ -105,13 +122,26 @@ jobs:
             SEGREDOS="$SEGREDOS,DOCUMENTOS_CHAVE=documento-chave:latest"
             DOCUMENTOS="ARGUMENTA_UPLOAD_LIGADO=sim"
           fi
+          # Análises salvas (F5-10): desligadas por padrão; só com ARGUMENTA_SALVAR = sim o servidor recebe ANALISES_CHAVE.
+          ANALISES_SALVAR="ARGUMENTA_SALVAR_LIGADO=nao"
+          if [ "${{ vars.ARGUMENTA_SALVAR }}" = "sim" ]; then
+            SEGREDOS="$SEGREDOS,ANALISES_CHAVE=analises-chave:latest"
+            ANALISES_SALVAR="ARGUMENTA_SALVAR_LIGADO=sim"
+          fi
+          EXTRAS=""
+          if [ -n "${{ vars.LEMBRETES_REMETENTE }}" ]; then
+            EXTRAS="${EXTRAS}@LEMBRETES_REMETENTE=${{ vars.LEMBRETES_REMETENTE }}"
+          fi
+          if [ -n "${{ vars.DOCUMENTOS_RETENCAO_DIAS }}" ]; then
+            EXTRAS="${EXTRAS}@DOCUMENTOS_RETENCAO_DIAS=${{ vars.DOCUMENTOS_RETENCAO_DIAS }}"
+          fi
           gcloud run deploy "$SERVICO" \
             --project "${{ vars.GCP_PROJECT_ID }}" \
             --region "$REGIAO" \
             --image "${{ steps.imagem.outputs.nome }}" \
             --service-account "${{ vars.GCP_RUNTIME_SA }}" \
             --set-secrets "$SEGREDOS" \
-            --update-env-vars "^@^${IA}@${COBRANCA}@${ADMIN}@${DOCUMENTOS}" \
+            --update-env-vars "^@^${IA}@${COBRANCA}@${ADMIN}@${DOCUMENTOS}@${ANALISES_SALVAR}${EXTRAS}" \
             --allow-unauthenticated \
             --ingress internal-and-cloud-load-balancing \
             --port 8080 --memory 512Mi --cpu 1 \
