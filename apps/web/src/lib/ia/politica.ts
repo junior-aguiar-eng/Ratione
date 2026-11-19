@@ -26,6 +26,19 @@ export function iaLigada(env: Record<string, string | undefined>): boolean {
   return env.IA_EXPLICACAO_LIGADA === 'sim' && !!env.ANTHROPIC_API_KEY;
 }
 
+/**
+ * Flag client-safe do Argumenta (`NEXT_PUBLIC_ARGUMENTA_IA_LIGADA`), com fallback legado para
+ * `NEXT_PUBLIC_IA_EXPLICACAO` apenas quando a flag dedicada não foi definida no build.
+ */
+export function argumentaIaLigada(env: {
+  NEXT_PUBLIC_ARGUMENTA_IA_LIGADA?: string;
+  NEXT_PUBLIC_IA_EXPLICACAO?: string;
+}): boolean {
+  const dedicada = env.NEXT_PUBLIC_ARGUMENTA_IA_LIGADA;
+  if (dedicada !== undefined && dedicada !== '') return dedicada === 'sim';
+  return env.NEXT_PUBLIC_IA_EXPLICACAO === 'sim';
+}
+
 /** Custo de uma chamada em US$, pelo `usage` que a API devolve. */
 export function custoUsd(modelo: ModeloPermitido, u: Uso): number {
   const p = PRECO_USD_POR_MILHAO[modelo];

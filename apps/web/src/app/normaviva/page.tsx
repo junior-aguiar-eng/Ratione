@@ -94,13 +94,30 @@ export default function NormaVivaPage() {
   }, [db, busca, normas]);
 
   useEffect(() => {
-    if (!db || !itemId || normas.length === 0) return;
+    if (!itemId) {
+      setDetalhe(null);
+      setAbrindo(false);
+      return;
+    }
+    if (!db || normas.length === 0) return;
     let vivo = true;
+    setDetalhe(null);
+    setErro(null);
     setAbrindo(true);
     carregarDetalhe(db, itemId, normas)
-      .then(d => vivo && (setDetalhe(d), setErro(null)))
-      .catch(e => vivo && setErro((e as Error).message))
-      .finally(() => vivo && setAbrindo(false));
+      .then(d => {
+        if (!vivo) return;
+        setDetalhe(d);
+        setErro(null);
+      })
+      .catch(e => {
+        if (!vivo) return;
+        setDetalhe(null);
+        setErro((e as Error).message);
+      })
+      .finally(() => {
+        if (vivo) setAbrindo(false);
+      });
     return () => {
       vivo = false;
     };

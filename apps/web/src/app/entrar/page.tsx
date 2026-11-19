@@ -8,7 +8,7 @@ import { obterSupabase } from '../../lib/supabase/client';
 import { useSessao } from '../../lib/useSessao';
 import { irParaPagina } from '../../lib/navegacao';
 import { traduzirErroAuth } from '../../lib/erros-auth';
-import { caminhoInterno } from '../../lib/link-email';
+import { caminhoSeguro } from '../../lib/proximoDestino';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -35,7 +35,8 @@ function Formulario() {
   }, [params]);
 
   // Depois de entrar, volta para onde o usuário queria ir (só caminhos internos)
-  const pedido = caminhoInterno(params.get('proximo'), '/prazozero');
+  const proximoParam = params.get('proximo');
+  const pedido = caminhoSeguro(proximoParam, '/prazozero');
   const proximo = pedido.startsWith('/entrar') ? '/prazozero' : pedido;
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function Formulario() {
     setAviso(null);
     setEnviando(true);
     const retorno = `${window.location.origin}/auth/callback`;
+    const retornoCadastro = proximoParam ? `${retorno}?proximo=${encodeURIComponent(proximo)}` : retorno;
     try {
       if (modo === 'entrar') {
         const { error } = await sb.auth.signInWithPassword({ email: email.trim(), password: senha });
@@ -60,7 +62,7 @@ function Formulario() {
         } else if (!aceite) {
           setErro('Para criar a conta, aceite os Termos de uso e a Política de privacidade.');
         } else {
-          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retorno, data: dadosDeAceite() } });
+          const { error } = await sb.auth.signUp({ email: email.trim(), password: senha, options: { emailRedirectTo: retornoCadastro, data: dadosDeAceite() } });
           if (error) setErro(traduzirErroAuth(error.message));
           else
             setAviso(
@@ -139,10 +141,18 @@ function Formulario() {
         )}
 
         {modo === 'cadastrar' && (
-          <label className="flex items-start gap-3 cursor-pointer">
-            <Checkbox checked={aceite} onCheckedChange={v => setAceite(v === true)} className="mt-1" />
-            <span className="text-sm text-ink-soft leading-snug">
-              Li e aceito os{' '}
+          <div className="flex items-start gap-3">
+            <Checkbox
+              id="aceite-termos"
+              aria-labelledby="aceite-termos-rotulo"
+              checked={aceite}
+              onCheckedChange={v => setAceite(v === true)}
+              className="mt-1"
+            />
+            <span id="aceite-termos-rotulo" className="text-sm text-ink-soft leading-snug">
+              <label htmlFor="aceite-termos" className="cursor-pointer">
+                Li e aceito os
+              </label>{' '}
               <Link href="/termos" className="underline underline-offset-2" target="_blank">
                 Termos de uso
               </Link>{' '}
@@ -152,7 +162,7 @@ function Formulario() {
               </Link>
               .
             </span>
-          </label>
+          </div>
         )}
 
         <div aria-live="polite" className={cn('flex flex-col gap-3', !erro && !aviso && '-mt-5')}>

@@ -25,11 +25,13 @@ const RE_CPC_1973 = /\bCPC\s*\/?\s*(?:de\s*)?(?:19)?73\b|\bCPC\s+(?:antigo|revog
 // Os artigos 543-A a 543-C são os dos recursos repetitivos do CPC de 1973; o de 2015 não tem artigo com letra, e "CPC, art. 543-C" já foi lido como o de 2015
 const RE_CPC_1973_REPETITIVOS = /\b543-[A-C]\b/;
 // Norma da base nomeada na citação (sigla ou nome por extenso). Se a citação a nomeia e o formato não se encaixa, a tela não diz nada: "fora da base" seria falso
-const RE_NORMA_DA_BASE = /\b(?:CF|CRFB|CC|CPC|CP|CPP|CLT|CDC|LINDB|CTN|ECA|LGPD|CTB|LEP)\b|constitui[çc][ãa]o|c[óo]digo (?:civil|penal|de processo|de defesa|tribut[áa]rio|de tr[âa]nsito)|consolida[çc][ãa]o das leis|lei de execu[çc][ãa]o penal/i;
+const RE_NORMA_DA_BASE = /\b(?:CF|CRFB|CC|CPC|CP|CPP|CLT|CDC|LINDB|CTN|ECA|LGPD|CTB|LEP)\b|constitui[çc][ãa]o(?!\s+(?:estadual|do\s+estado))|c[óo]digo (?:civil|penal|de processo|de defesa|tribut[áa]rio|de tr[âa]nsito)|consolida[çc][ãa]o das leis|lei de execu[çc][ãa]o penal/i;
 // Mais de um artigo, parágrafo ou inciso na mesma citação ("arts. 59 e 68", "§ 6º e § 8º", "II e III", "art. 14; art. 15"): conferir só o primeiro seria afirmar demais
 const RE_VARIOS = /;|\barts\.?\s|§§|\be\s*(?:§|art\.?\s*\d|\d|[IVXLCDM]{1,4}\b)/;
-// Alínea ("II, e", "III, \"a\"", "alíneas a e c"): o artigo e o inciso são conferidos, e a alínea fica como não conferida
-const RE_ALINEA = /,?\s*al[íi]neas?\s+["“”]?[a-z]["“”]?(?:\s*(?:e|,)\s*["“”]?[a-z]["“”]?)*|,\s*["“”]?([a-z])["“”]?(?=\s*(?:,|;|$|\s+d[aoe]s?\s|\s+n[aoe]s?\s))/;
+// Alínea ("II, e", "III, \"a\"", "alínea A", "alíneas a e c"): o artigo e o inciso são conferidos, e a alínea fica como não conferida.
+// Sem a palavra "alínea", só letra minúscula ou entre aspas conta, para não confundir incisos romanos ("I", "V", "X", "L") com alínea.
+const RE_ALINEA = /,?\s*al[íi]neas?\s+["“”]?[a-z]\b["“”]?(?:\s*(?:e|,)\s*["“”]?[a-z]\b["“”]?)*/i;
+const RE_ALINEA_IMPLICITA = /,\s*(?:[a-z]|["“”][a-zA-Z]["“”])(?=\s*(?:,|;|$|\s+d[aoe]s?\s|\s+n[aoe]s?\s))/;
 const RE_LEI_FORA = /^\s*(lei|decreto|emenda|medida provisória|resolução|portaria|instrução normativa)\b/i;
 
 /** Tribunais que o texto nomeia, pelas siglas ou por extenso; vazio se não nomeia nenhum dos dois. */
@@ -62,7 +64,8 @@ export function reconhecerCitacao(entrada: string, normasConhecidas: string[]): 
     const vinculante = !!sumula[1];
     const citados = tribunaisCitados(texto);
     const tribunais: Tribunal[] = vinculante ? ['STF'] : citados.length > 0 ? citados : ['STF', 'STJ'];
-    return { tipo: 'sumula', tribunais, numero: sumula[2], vinculante };
+    const numero = sumula[2].replace(/^0+(?=\d)/, '');
+    return { tipo: 'sumula', tribunais, numero, vinculante };
   }
 
   const tema = texto.match(RE_TEMA);
@@ -91,20 +94,20 @@ export function reconhecerCitacao(entrada: string, normasConhecidas: string[]): 
     .replace(/\bCPC\s*\/\s*(?:20)?15\b/gi, 'CPC')
     .replace(/\bCF\s*\/\s*(?:19)?88\b/gi, 'CF')
     .replace(/\bCC\s*\/\s*(?:20)?02\b|\bCCB\b/g, 'CC')
-    .replace(/\bConstitui[çc][ãa]o\b(?!\s+(?:Federal|da Rep))/gi, 'Constituição Federal')
+    .replace(/\bConstitui[çc][ãa]o\b(?!\s+(?:Federal|da\s+Rep|Estadual|do\s+Estado))/gi, 'Constituição Federal')
     // "inciso I" vale como "I"; "da Lei de Execução Fiscal (Lei nº 6.830/80)" vale como "da Lei nº 6.830/80"
-    .replace(/\bincisos?\s+(?=[IVXLCDM]+\b)/g, '')
+    .replace(/\b[Ii]ncisos?\s+(?=[IVXLCDM]+\b)/g, '')
     .replace(/\bd([aoe]s?)\s+[A-ZÀ-Ú][^()]*?\s*\(\s*((?:Lei|Decreto)[^)]*)\)/g, 'd$1 $2');
-  // Norma da base com mais de um artigo, parágrafo ou inciso na mesma citação: sem selo, em vez de conferir só o primeiro
-  if (ehArtigo && RE_NORMA_DA_BASE.test(t) && RE_VARIOS.test(t)) return null;
   let alinea: string | null = null;
   if (ehArtigo) {
-    const m = t.match(RE_ALINEA);
+    const m = RE_ALINEA.exec(t) ?? RE_ALINEA_IMPLICITA.exec(t);
     if (m) {
       alinea = m[0].replace(/^[,\s]+/, '').replace(/["“”]/g, '').replace(/^al[íi]neas?\s+/i, '').trim();
-      t = t.replace(RE_ALINEA, '');
+      t = t.slice(0, m.index) + t.slice(m.index + m[0].length);
     }
   }
+  // Norma da base com mais de um artigo, parágrafo ou inciso na mesma citação: sem selo, em vez de conferir só o primeiro
+  if (ehArtigo && RE_NORMA_DA_BASE.test(t) && RE_VARIOS.test(t)) return null;
 
   const consulta = interpretarConsulta(normaAntesDoArtigo(t), normasConhecidas);
   if (consulta.tipo === 'dispositivo') {

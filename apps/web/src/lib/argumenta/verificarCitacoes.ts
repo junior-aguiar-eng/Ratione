@@ -67,13 +67,25 @@ async function conferir(c: CitacaoReconhecida, normasConhecidas: string[], banco
       if (!artigo) return { estado: 'nao_localizada', links: [], aviso: NAO_LOCALIZADA };
       if (!c.detalhe) return { estado: 'encontrada', links: [{ rotulo: 'Abrir no NormaViva', href: urlDoNormaViva({ dispositivoId: artigo }) }] };
       const detalhado = await banco.dispositivoId(c.normaId, `art. ${c.artigo}, ${c.detalhe}`);
-      return detalhado
-        ? { estado: 'encontrada', links: [{ rotulo: 'Abrir no NormaViva', href: urlDoNormaViva({ dispositivoId: detalhado }) }] }
-        : {
+      if (detalhado) return { estado: 'encontrada', links: [{ rotulo: 'Abrir no NormaViva', href: urlDoNormaViva({ dispositivoId: detalhado }) }] };
+
+      const detalhePai = c.detalhe.replace(/,\s*al[íi]neas?\s+.+$/i, '').trim();
+      if (detalhePai && detalhePai !== c.detalhe) {
+        const pai = await banco.dispositivoId(c.normaId, `art. ${c.artigo}, ${detalhePai}`);
+        if (pai) {
+          return {
             estado: 'encontrada',
-            links: [{ rotulo: 'Abrir o artigo no NormaViva', href: urlDoNormaViva({ dispositivoId: artigo }) }],
-            aviso: 'O artigo existe na base. O parágrafo, inciso ou alínea citado não foi conferido.'
+            links: [{ rotulo: 'Abrir o dispositivo no NormaViva', href: urlDoNormaViva({ dispositivoId: pai }) }],
+            aviso: 'O inciso ou parágrafo existe na base. A alínea citada não foi conferida individualmente.'
           };
+        }
+      }
+
+      return {
+        estado: 'encontrada',
+        links: [{ rotulo: 'Abrir o artigo no NormaViva', href: urlDoNormaViva({ dispositivoId: artigo }) }],
+        aviso: 'O artigo existe na base. O parágrafo, inciso ou alínea citado não foi conferido.'
+      };
     }
 
     case 'sumula': {

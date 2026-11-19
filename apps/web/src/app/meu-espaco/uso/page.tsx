@@ -26,6 +26,7 @@ import {
   type LinhaAnalise,
   type LinhaResumo
 } from '../../../lib/uso';
+import { percentualDeUso } from '../../../lib/usoApresentacao';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -146,7 +147,7 @@ export default function MeuUsoPage() {
             </div>
             <Card className="divide-y divide-line">
               {cotas.map(c => {
-                const pct = Math.min(100, Math.round((c.usadas / c.quantidade) * 100));
+                const pct = percentualDeUso(c.usadas, c.quantidade);
                 return (
                   <div key={c.tipo} className="p-5 flex flex-col gap-2">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">

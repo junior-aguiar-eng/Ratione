@@ -14,7 +14,7 @@ const COR_TIPO: Record<string, string> = {
 
 export default function GrafoDaVizinhanca({ vizinhanca, onAbrir }: { vizinhanca: Vizinhanca; onAbrir: (id: string) => void }) {
   const { no, arestas, vizinhos } = vizinhanca;
-  const mostrados = vizinhos.slice(0, MAXIMO_DE_VIZINHOS);
+  const mostrados = useMemo(() => vizinhos.slice(0, MAXIMO_DE_VIZINHOS), [vizinhos]);
 
   const nodes: Node[] = useMemo(() => {
     const estilo = (n: NoTese, central: boolean) => ({
@@ -71,7 +71,7 @@ export default function GrafoDaVizinhanca({ vizinhanca, onAbrir }: { vizinhanca:
           nodesConnectable={false}
           aria-label="Mapa de relações do precedente"
         >
-          <Background gap={20} size={1} color="rgb(217 222 229 / 0.7)" />
+          <Background gap={20} size={1} color="rgb(var(--line) / 0.7)" />
           <Controls showInteractive={false} />
         </ReactFlow>
       </div>

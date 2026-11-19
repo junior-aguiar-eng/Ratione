@@ -117,4 +117,70 @@ describe('Argumenta F5-04: reconhecimento de citações', () => {
   it('espaços estranhos e quebras não atrapalham', () => {
     assert.equal(rec('Súmula 479   do\nSTJ')?.tipo, 'sumula');
   });
+
+  it('normaliza zero à esquerda em Súmula sem afetar "0" nem outras citações', () => {
+    assert.deepEqual(rec('Súmula 07 do STJ'), { tipo: 'sumula', tribunais: ['STJ'], numero: '7', vinculante: false });
+    assert.deepEqual(rec('Súmula nº 007/STJ'), { tipo: 'sumula', tribunais: ['STJ'], numero: '7', vinculante: false });
+    assert.deepEqual(rec('Súmula Vinculante 01'), { tipo: 'sumula', tribunais: ['STF'], numero: '1', vinculante: true });
+    assert.deepEqual(rec('Súmula 0 do STJ'), { tipo: 'sumula', tribunais: ['STJ'], numero: '0', vinculante: false });
+    assert.deepEqual(rec('Tema 07 do STJ'), { tipo: 'tema', tribunais: ['STJ'], numero: '07' });
+  });
+
+  it('suporta alínea case-insensitive preservando o vínculo ao inciso ou parágrafo pai', () => {
+    assert.deepEqual(rec('art. 5º, inciso XXXV, alínea A, da CF'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '5º',
+      detalhe: 'XXXV, alínea A'
+    });
+    assert.deepEqual(rec('art. 5º, inciso XXXV, Alínea B, da CF'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '5º',
+      detalhe: 'XXXV, alínea B'
+    });
+    assert.deepEqual(rec('art. 5º, § 1º, Alínea A, da CF'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '5º',
+      detalhe: '§ 1º, alínea A'
+    });
+    assert.deepEqual(rec('art. 5º, inciso I, alínea A, da CF'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '5º',
+      detalhe: 'I, alínea A'
+    });
+    assert.deepEqual(rec('CF, art. 105, III, alíneas A e C'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '105',
+      detalhe: 'III, alínea A e C'
+    });
+    assert.deepEqual(rec('CF, art. 105, III, "A"'), {
+      tipo: 'dispositivo',
+      normaId: 'CF-1988',
+      artigo: '105',
+      detalhe: 'III, alínea A'
+    });
+    assert.deepEqual(rec('art. 5º, X, da Constituição'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '5º', detalhe: 'X' });
+    assert.deepEqual(rec('art. 5º, L, da CF'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '5º', detalhe: 'L' });
+    assert.deepEqual(rec('CC/2002, art. 206, § 3º, V'), { tipo: 'dispositivo', normaId: 'LEI-10406-2002', artigo: '206', detalhe: '§ 3º, V' });
+  });
+
+  it('preserva Constituição Estadual e CE como fora da base sem expandir para Constituição Federal', () => {
+    for (const t of [
+      'art. 10 da Constituição Estadual',
+      'Constituição Estadual, art. 10',
+      'art. 10 da constituição estadual',
+      'CONSTITUIÇÃO ESTADUAL, art. 10',
+      'art. 10 da Constituição do Estado de São Paulo',
+      'art. 37 da CE',
+      'CE, art. 37'
+    ]) {
+      assert.deepEqual(rec(t), { tipo: 'fora', motivo: 'Norma que a base ainda não cobre.' }, t);
+    }
+    assert.equal(rec('Constituição Estadual'), null);
+    assert.deepEqual(rec('art. 5º da Constituição de 1988'), { tipo: 'dispositivo', normaId: 'CF-1988', artigo: '5º', detalhe: null });
+  });
 });

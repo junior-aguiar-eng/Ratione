@@ -28,9 +28,31 @@ describe('Demonstrações da página inicial: PrazoZero', () => {
     }
   });
 
+  it('calcula normalmente para datas de novembro e dezembro de 2026 dentro da janela vigente', () => {
+    const nov = calcularDemoPrazo({ data: '2026-11-16', atoId: 'apelacao', tribunalId: 'TJSP' });
+    assert.ok(nov);
+    assert.equal(nov.diasUteis, 15);
+    assert.equal(nov.calendarioConferido, true);
+
+    const dezCurto = calcularDemoPrazo({ data: '2026-12-10', atoId: 'embargos', tribunalId: 'TJSP' });
+    assert.ok(dezCurto);
+    assert.equal(dezCurto.diasUteis, 5);
+    assert.equal(dezCurto.calendarioConferido, true);
+
+    const dezCruzaAno = calcularDemoPrazo({ data: '2026-12-10', atoId: 'apelacao', tribunalId: 'TJSP' });
+    assert.ok(dezCruzaAno);
+    assert.equal(dezCruzaAno.diasUteis, 15);
+    assert.equal(dezCruzaAno.calendarioConferido, false);
+
+    const ultimoDia = calcularDemoPrazo({ data: '2026-12-31', atoId: 'embargos', tribunalId: 'TJSP' });
+    assert.ok(ultimoDia);
+    assert.equal(ultimoDia.diasUteis, 5);
+    assert.equal(ultimoDia.calendarioConferido, false);
+  });
+
   it('recusa o que está fora da demonstração: data fora do ano conferido, ato ou tribunal desconhecido', () => {
     assert.equal(calcularDemoPrazo({ data: '2025-12-30', atoId: 'apelacao', tribunalId: 'TJSP' }), null);
-    assert.equal(calcularDemoPrazo({ data: '2026-12-10', atoId: 'apelacao', tribunalId: 'TJSP' }), null);
+    assert.equal(calcularDemoPrazo({ data: '2027-01-05', atoId: 'apelacao', tribunalId: 'TJSP' }), null);
     assert.equal(calcularDemoPrazo({ data: '2026-03-10', atoId: 'inexistente', tribunalId: 'TJSP' }), null);
     assert.equal(calcularDemoPrazo({ data: '2026-03-10', atoId: 'apelacao', tribunalId: 'TJRJ' }), null);
     assert.equal(calcularDemoPrazo({ data: 'lixo', atoId: 'apelacao', tribunalId: 'TJSP' }), null);

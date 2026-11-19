@@ -84,4 +84,26 @@ describe('Sugeridos sob a questão (F5-08, fase 3)', () => {
     await sugeridosDaQuestao(leitor({ citamODispositivo: async () => { chamadas++; return { itens: [], temMais: false }; } }), [...links, links[0]]);
     assert.strictEqual(chamadas, 4);
   });
+
+  it('nunca usa "Abrir no NormaViva" como origem de sugestão de leitura', async () => {
+    const r = await sugeridosDaQuestao(
+      leitor({
+        citamODispositivo: async id => ({
+          itens: [prec(id.includes('art. 85') ? 'STJ-TEMA-9' : 'STJ-TEMA-10')],
+          temMais: false
+        })
+      }),
+      [
+        { rotulo: 'Abrir no NormaViva', href: '/normaviva?d=LEI-13105-2015%7Ccorpo%7Cart.+85' },
+        { rotulo: 'Abrir o artigo no NormaViva', href: '/normaviva?d=LEI-13105-2015%7Ccorpo%7Cart.+489', citacaoOriginal: 'CPC, art. 489, § 1º' }
+      ]
+    );
+    assert.strictEqual(r.itens.length, 2);
+    for (const item of r.itens) {
+      assert.ok(!item.origem.includes('Abrir'), `origem não pode conter "Abrir": ${item.origem}`);
+      assert.ok(!item.origem.includes('NormaViva'), `origem não pode conter "NormaViva": ${item.origem}`);
+    }
+    assert.strictEqual(r.itens[0].origem, 'CPC, art. 85');
+    assert.strictEqual(r.itens[1].origem, 'CPC, art. 489, § 1º');
+  });
 });

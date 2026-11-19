@@ -1,10 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import Notice from '../../../components/Notice';
 import HistoricoCobrancas from './HistoricoCobrancas';
 import { dataCurta, precoEmReais } from '../../../lib/uso';
+import { urlSemParametroAssinatura } from '../../../lib/usoApresentacao';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -39,35 +40,77 @@ export default function Assinatura({ usuarioId, aoMudar, aoSaberSeHaPlanos }: { 
   const [erro, setErro] = useState<string | null>(null);
   const [confirmando, setConfirmando] = useState(false);
   const [voltouDoPagamento, setVoltouDoPagamento] = useState(false);
+  const montadoRef = useRef(true);
+
+  useEffect(() => {
+    montadoRef.current = true;
+    return () => {
+      montadoRef.current = false;
+    };
+  }, []);
+
+  const limparRetornoDaUrl = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    const limpa = urlSemParametroAssinatura(`${window.location.pathname}${window.location.search}${window.location.hash}`);
+    if (limpa !== null) window.history.replaceState(null, '', limpa);
+  }, []);
 
   const carregar = useCallback(async () => {
     const r = await chamar('/api/cobranca/situacao');
     const nova = (r.ok ? r.dados : { disponivel: false }) as Situacao;
-    setS(nova);
-    aoSaberSeHaPlanos(nova.disponivel === true);
+    if (montadoRef.current) {
+      setS(nova);
+      aoSaberSeHaPlanos(nova.disponivel === true);
+    }
     return nova;
   }, [aoSaberSeHaPlanos]);
 
   useEffect(() => {
-    setVoltouDoPagamento(new URLSearchParams(window.location.search).get('assinatura') === 'retorno');
-    void carregar();
-  }, [carregar]);
+    let ativo = true;
+    const retorno = new URLSearchParams(window.location.search).get('assinatura') === 'retorno';
+    if (retorno) setVoltouDoPagamento(true);
+    void carregar().then(nova => {
+      if (!ativo || !montadoRef.current) return;
+      if (retorno && (!nova.disponivel || nova.assinatura?.situacao === 'ativa')) {
+        limparRetornoDaUrl();
+        setVoltouDoPagamento(false);
+        if (nova.assinatura?.situacao === 'ativa') aoMudar();
+      }
+    });
+    return () => {
+      ativo = false;
+    };
+  }, [carregar, limparRetornoDaUrl, aoMudar]);
 
   // Voltou da página de pagamento: o Mercado Pago avisa o servidor (webhook), que pode demorar alguns segundos. Confere por até ~30 s.
   useEffect(() => {
     if (!voltouDoPagamento) return;
+    let ativo = true;
     let tentativas = 0;
-    const id = setInterval(async () => {
-      tentativas += 1;
-      const nova = await carregar();
-      if (nova.assinatura?.situacao === 'ativa' || tentativas >= 10) {
-        clearInterval(id);
-        setVoltouDoPagamento(false);
-        if (nova.assinatura?.situacao === 'ativa') aoMudar();
-      }
-    }, 3000);
-    return () => clearInterval(id);
-  }, [voltouDoPagamento, carregar, aoMudar]);
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const agendar = () => {
+      timer = setTimeout(async () => {
+        if (!ativo || !montadoRef.current) return;
+        tentativas += 1;
+        const nova = await carregar();
+        if (!ativo || !montadoRef.current) return;
+        if (!nova.disponivel || nova.assinatura?.situacao === 'ativa' || tentativas >= 10) {
+          limparRetornoDaUrl();
+          setVoltouDoPagamento(false);
+          if (nova.assinatura?.situacao === 'ativa') aoMudar();
+          return;
+        }
+        agendar();
+      }, 3000);
+    };
+
+    agendar();
+    return () => {
+      ativo = false;
+      if (timer !== undefined) clearTimeout(timer);
+    };
+  }, [voltouDoPagamento, carregar, limparRetornoDaUrl, aoMudar]);
 
   if (!s?.disponivel) return null;
 
@@ -79,6 +122,7 @@ export default function Assinatura({ usuarioId, aoMudar, aoSaberSeHaPlanos }: { 
     setOcupado(plano);
     setErro(null);
     const r = await chamar('/api/cobranca/assinar', { plano });
+    if (!montadoRef.current) return;
     if (r.ok && typeof r.dados.url === 'string') {
       window.location.assign(r.dados.url);
       return;
@@ -91,6 +135,7 @@ export default function Assinatura({ usuarioId, aoMudar, aoSaberSeHaPlanos }: { 
     setOcupado('cancelar');
     setErro(null);
     const r = await chamar('/api/cobranca/cancelar', {});
+    if (!montadoRef.current) return;
     setOcupado(null);
     setConfirmando(false);
     if (!r.ok) {
@@ -98,7 +143,7 @@ export default function Assinatura({ usuarioId, aoMudar, aoSaberSeHaPlanos }: { 
       return;
     }
     await carregar();
-    aoMudar();
+    if (montadoRef.current) aoMudar();
   };
 
   return (

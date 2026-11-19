@@ -35,6 +35,7 @@ const texto = (v: unknown): string | null => (typeof v === 'string' && v.trim() 
 export default function TeseMapPage() {
   const db = useMemo(() => obterSupabase(), []);
   const [cobertura, setCobertura] = useState<{ itens: Cobertura[]; indisponivel: boolean } | null>(null);
+  const [coberturaFalhou, setCoberturaFalhou] = useState(false);
   const [busca, setBusca] = useState('');
   const [tribunal, setTribunal] = useState('');
   const [especieId, setEspecieId] = useState('');
@@ -59,10 +60,21 @@ export default function TeseMapPage() {
 
   useEffect(() => {
     if (!db) return;
-    lerCobertura(db).then(setCobertura).catch(e => setErro(String(e.message ?? e)));
+    let vivo = true;
+    setCoberturaFalhou(false);
+    lerCobertura(db)
+      .then(c => {
+        if (vivo) setCobertura(c);
+      })
+      .catch(() => {
+        if (vivo) setCoberturaFalhou(true);
+      });
+    return () => {
+      vivo = false;
+    };
   }, [db]);
 
-  const semDados = !db || (cobertura !== null && (cobertura.indisponivel || cobertura.itens.length === 0));
+  const semDados = !db || coberturaFalhou || (cobertura !== null && (cobertura.indisponivel || cobertura.itens.length === 0));
 
   // Pesquisa com pequena espera depois da última tecla; só vale a resposta da pesquisa mais recente
   useEffect(() => {
@@ -87,13 +99,30 @@ export default function TeseMapPage() {
   }, [db, cobertura, semDados, busca, tribunal, especieId]);
 
   useEffect(() => {
-    if (!db || !noId || semDados) return;
+    if (!noId) {
+      setAberto(null);
+      setAbrindo(false);
+      return;
+    }
+    if (!db || semDados) return;
     let vivo = true;
+    setAberto(null);
+    setErro(null);
     setAbrindo(true);
     abrirNo(db, noId)
-      .then(v => vivo && (setAberto(v), setErro(null)))
-      .catch(e => vivo && setErro(String(e.message ?? e)))
-      .finally(() => vivo && setAbrindo(false));
+      .then(v => {
+        if (!vivo) return;
+        setAberto(v);
+        setErro(null);
+      })
+      .catch(e => {
+        if (!vivo) return;
+        setAberto(null);
+        setErro(String((e as Error)?.message ?? e));
+      })
+      .finally(() => {
+        if (vivo) setAbrindo(false);
+      });
     return () => {
       vivo = false;
     };
@@ -112,9 +141,20 @@ export default function TeseMapPage() {
     };
   }, [db, aberto]);
 
-  // Sem Supabase, sem tabelas (migração por aplicar) ou sem nenhum dado: o grafo mínimo validado, que vem do repositório
+  // Sem Supabase, sem tabelas (migração por aplicar), sem nenhum dado ou falha de leitura: o grafo mínimo validado, que vem do repositório
   if (semDados) return <ReservaTeseMap />;
-  if (db && !cobertura) return <p className="text-sm text-ink-soft py-10">{erro ?? 'Carregando o TeseMap…'}</p>;
+  if (db && !cobertura) {
+    return (
+      <div>
+        <PageHeader
+          eyebrow="TeseMap"
+          title="Mapa da tese"
+          description="Precedentes com a tese firmada, a fonte oficial e as relações conferidas entre eles."
+        />
+        <p className="text-sm text-ink-soft py-4">Carregando o TeseMap…</p>
+      </div>
+    );
+  }
 
   const tribunais = [...new Set((cobertura?.itens ?? []).map(c => c.tribunal).filter(Boolean))].sort();
   const especies = especiesDoTribunal(tribunal);

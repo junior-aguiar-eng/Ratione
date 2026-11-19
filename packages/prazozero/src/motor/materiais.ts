@@ -57,7 +57,8 @@ function validar(iso: string): void {
 const motor = new MotorPrazoZero();
 
 /** UF informada ou a do tribunal (como no motor processual), para os feriados estaduais entrarem no calendário. */
-const ufDe = (p: ParametrosPrazoMaterial) => p.uf ?? (p.tribunalId ? TRIBUNAIS_BRASIL[p.tribunalId]?.uf : undefined);
+const ufDe = (p: ParametrosPrazoMaterial) =>
+  p.uf ?? (p.tribunalId ? TRIBUNAIS_BRASIL[p.tribunalId.toUpperCase()]?.uf : undefined);
 
 export function calcularPrazoMaterial(p: ParametrosPrazoMaterial): ResultadoPrazoMaterial {
   validar(p.dataInicio);

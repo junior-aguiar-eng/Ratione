@@ -235,19 +235,57 @@ export async function emLotes<T>(ids: string[], consulta: (lote: string[]) => Pr
   return { data: respostas.flatMap(r => r.data ?? []), error: erro };
 }
 
+const TAMANHO_PAGINA_DETALHE = 500;
+const LIMITE_SUBDISPOSITIVOS_DETALHE = 2000;
+
+/**
+ * Lê o dispositivo e os que vêm abaixo dele em páginas de 500 itens até encontrar o próximo artigo (ou irmão do mesmo nível),
+ * esgotar os registros ou atingir o teto seguro de 2.000 itens, evitando truncar artigos extensos como a Lei 14.133, art. 6º.
+ */
+async function lerSubdispositivos(
+  db: SupabaseClient,
+  dispositivo: Dispositivo,
+  tamanhoPagina = TAMANHO_PAGINA_DETALHE,
+  limiteMaximo = LIMITE_SUBDISPOSITIVOS_DETALHE
+): Promise<Dispositivo[]> {
+  const texto: Dispositivo[] = [];
+  const nivelBase = dispositivo.rotulo.split(', ').length;
+
+  for (let inicio = 0; inicio < limiteMaximo; inicio += tamanhoPagina) {
+    const fim = Math.min(inicio + tamanhoPagina, limiteMaximo) - 1;
+    const pagina = await db
+      .from('dispositivos')
+      .select(COLUNAS_DISPOSITIVO)
+      .eq('norma_id', dispositivo.norma_id)
+      .eq('escopo', dispositivo.escopo)
+      .gte('ordem', dispositivo.ordem)
+      .order('ordem')
+      .order('id')
+      .range(inicio, fim);
+
+    if (pagina.error) falhou(pagina.error, 'ler o texto do dispositivo');
+    const linhas = (pagina.data ?? []) as Dispositivo[];
+
+    for (const d of linhas) {
+      if (d.ordem > dispositivo.ordem && (d.tipo === 'artigo' || d.rotulo.split(', ').length <= nivelBase)) {
+        return texto;
+      }
+      texto.push(d);
+      if (texto.length >= limiteMaximo) return texto;
+    }
+
+    if (linhas.length < fim - inicio + 1) break;
+  }
+
+  return texto;
+}
+
 export async function carregarDetalhe(db: SupabaseClient, id: string, normas: Norma[]): Promise<Detalhe> {
   const base = await db.from('dispositivos').select(COLUNAS_DISPOSITIVO).eq('id', id).single();
   if (base.error) falhou(base.error, 'abrir dispositivo');
   const dispositivo = base.data as Dispositivo;
 
-  // O artigo e o que vem abaixo dele: do próprio até o próximo artigo (ou do próprio até o próximo do mesmo nível)
-  const abaixo = await db.from('dispositivos').select(COLUNAS_DISPOSITIVO).eq('norma_id', dispositivo.norma_id).eq('escopo', dispositivo.escopo).gte('ordem', dispositivo.ordem).order('ordem').limit(400);
-  if (abaixo.error) falhou(abaixo.error, 'ler o texto do dispositivo');
-  const texto: Dispositivo[] = [];
-  for (const d of abaixo.data as Dispositivo[]) {
-    if (d.ordem > dispositivo.ordem && (d.tipo === 'artigo' || d.rotulo.split(', ').length <= dispositivo.rotulo.split(', ').length)) break;
-    texto.push(d);
-  }
+  const texto = await lerSubdispositivos(db, dispositivo);
 
   const norma = normas.find(n => n.id === dispositivo.norma_id);
   if (!norma) throw new Error(`norma ${dispositivo.norma_id} não encontrada`);

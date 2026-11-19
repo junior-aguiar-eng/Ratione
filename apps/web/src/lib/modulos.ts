@@ -7,7 +7,7 @@ export interface Modulo {
 }
 
 export const MODULOS: Modulo[] = [
-  { href: '/argumenta', nome: 'Argumenta', status: 'Demonstração' },
+  { href: '/argumenta', nome: 'Argumenta', status: 'Prévia' },
   { href: '/normaviva', nome: 'NormaViva', status: 'Disponível' },
   { href: '/tesemap', nome: 'TeseMap', status: 'Disponível' },
   { href: '/prazozero', nome: 'PrazoZero', status: 'Disponível' }

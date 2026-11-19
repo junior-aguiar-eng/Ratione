@@ -61,15 +61,57 @@ function jaCitados(links: readonly LinkDaCitacao[]): Set<string> {
   return ids;
 }
 
+export interface LinkComOrigem extends LinkDaCitacao {
+  /** Texto da citação original na decisão (ex.: "CPC, art. 85"), usado quando `rotulo` é genérico ("Abrir no NormaViva"). */
+  citacaoOriginal?: string;
+}
+
+const SIGLA_DA_NORMA: Record<string, string> = {
+  'CF-1988': 'CF/1988',
+  'LEI-13105-2015': 'CPC',
+  'LEI-10406-2002': 'CC',
+  'LEI-8078-1990': 'CDC',
+  'DL-2848-1940': 'CP',
+  'DL-3689-1941': 'CPP',
+  'DL-5452-1943': 'CLT',
+  'LEI-5172-1966': 'CTN',
+  'LEI-8069-1990': 'ECA',
+  'LEI-9099-1995': 'Lei 9.099/1995',
+  'LEI-11340-2006': 'Lei 11.340/2006',
+  'LEI-6830-1980': 'LEF',
+  'LEI-12016-2009': 'Lei 12.016/2009',
+  'LEI-14133-2021': 'Lei 14.133/2021'
+};
+
+function rotuloLegivelDoDestino(destino: NonNullable<ReturnType<typeof destinoDoEndereco>>): string {
+  if (destino.ferramenta === 'normaviva') {
+    const [normaId, , dispositivo] = destino.id.split('|');
+    const norma = SIGLA_DA_NORMA[normaId] ?? normaId;
+    return dispositivo ? `${norma}, ${dispositivo}` : norma;
+  }
+  return destino.id;
+}
+
+function rotuloDaOrigem(link: LinkComOrigem, destino: NonNullable<ReturnType<typeof destinoDoEndereco>>): string {
+  const original = link.citacaoOriginal?.trim();
+  if (original) return original;
+  const rotulo = link.rotulo.trim();
+  if (rotulo && !/^Abrir\b.*\bNormaViva$/i.test(rotulo)) return rotulo;
+  return rotuloLegivelDoDestino(destino);
+}
+
 /**
  * Sugestões para uma questão a partir dos links das suas citações conferidas. Uma consulta que falha não derruba as outras e nunca vira
  * "não há sugestão": a seção só aparece quando há o que mostrar.
  */
-export async function sugeridosDaQuestao(leitor: LeitorDeSugeridos, links: readonly LinkDaCitacao[]): Promise<SugeridosDaQuestao> {
+export async function sugeridosDaQuestao(leitor: LeitorDeSugeridos, links: readonly LinkComOrigem[]): Promise<SugeridosDaQuestao> {
   const citados = jaCitados(links);
   const origens = links
-    .map(l => ({ rotulo: l.rotulo, destino: destinoDoEndereco(l.href) }))
-    .filter((o): o is { rotulo: string; destino: NonNullable<ReturnType<typeof destinoDoEndereco>> } => o.destino !== null)
+    .map(l => {
+      const destino = destinoDoEndereco(l.href);
+      return destino ? { rotulo: rotuloDaOrigem(l, destino), destino } : null;
+    })
+    .filter((o): o is { rotulo: string; destino: NonNullable<ReturnType<typeof destinoDoEndereco>> } => o !== null)
     .filter((o, i, todas) => todas.findIndex(x => x.destino.ferramenta === o.destino.ferramenta && x.destino.id === o.destino.id) === i)
     .slice(0, LIMITE_DE_ORIGENS);
 

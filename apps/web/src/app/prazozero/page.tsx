@@ -27,6 +27,7 @@ import { dataCurta, dataLonga, diaDaSemana, hojeIso } from '../../lib/datas';
 import { useSalvar } from '../../lib/useSalvar';
 import { rotuloSalvar } from '../../lib/rotuloSalvar';
 import { lerPrazoZero, urlDoPrazoZero } from '../../lib/parametrosSalvos';
+import { editarCampoNumerico, resolverNumeroNoIntervalo, temOpcoesAvancadasNaUrl } from '../../lib/usoApresentacao';
 import AvisoPorEmail from './AvisoPorEmail';
 import { gerarIcs } from '../../lib/ics';
 import { exportarPdf, nomeArquivoSeguro } from '../../lib/imprimir';
@@ -55,7 +56,7 @@ export default function PrazoZeroPage() {
   const motor = useMemo(() => new MotorPrazoZero(), []);
 
   const [atoId, setAtoId] = useState<string>('apelacao');
-  const [diasOutro, setDiasOutro] = useState(15);
+  const [diasOutroTexto, setDiasOutroTexto] = useState('15');
   const [nomeOutro, setNomeOutro] = useState('');
   const [tipoEvento, setTipoEvento] = useState<TipoEventoOrigem>('disponibilizacao_dje');
   const [dataEvento, setDataEvento] = useState('');
@@ -64,6 +65,7 @@ export default function PrazoZeroPage() {
   const [prazoEmDobro, setPrazoEmDobro] = useState(false);
   const [litisconsortes, setLitisconsortes] = useState(false);
   const [excecaoCriminal, setExcecaoCriminal] = useState(false);
+  const [avancadasAbertas, setAvancadasAbertas] = useState(false);
 
   const [memoriaAberta, setMemoriaAberta] = useState(false);
   const [copiado, setCopiado] = useState(false);
@@ -74,12 +76,13 @@ export default function PrazoZeroPage() {
   useEffect(() => {
     const salvo = lerPrazoZero(window.location.search);
     setDataEvento(salvo.data ?? hojeIso());
+    const atoInicial = salvo.atoId ?? 'apelacao';
+    const catalogado = atoInicial === 'outro' ? undefined : buscarPrazo(atoInicial);
     if (salvo.atoId) {
       setAtoId(salvo.atoId);
-      const catalogado = buscarPrazo(salvo.atoId);
       if (catalogado?.regime) setRegime(catalogado.regime);
     }
-    if (salvo.dias) setDiasOutro(salvo.dias);
+    if (salvo.dias) setDiasOutroTexto(String(salvo.dias));
     if (salvo.nome) setNomeOutro(salvo.nome);
     if (salvo.tipoEvento) setTipoEvento(salvo.tipoEvento);
     if (salvo.tribunalId) setTribunalId(salvo.tribunalId);
@@ -87,11 +90,15 @@ export default function PrazoZeroPage() {
     if (salvo.dobro) setPrazoEmDobro(true);
     if (salvo.litisconsortes) setLitisconsortes(true);
     if (salvo.excecaoCriminal) setExcecaoCriminal(true);
+    if (temOpcoesAvancadasNaUrl(salvo, catalogado?.regime ?? 'cpc_dias_uteis')) {
+      setAvancadasAbertas(true);
+    }
   }, []);
 
   const prazo = atoId === 'outro' ? undefined : buscarPrazo(atoId);
   const material = prazo?.natureza === 'material' ? MATERIAL[prazo.id] : undefined;
-  const dias = prazo ? prazo.dias : Math.min(Math.max(Math.trunc(diasOutro) || 1, 1), 365);
+  const dias = prazo ? prazo.dias : resolverNumeroNoIntervalo(diasOutroTexto, 1, 365, 1);
+  const confirmarDiasOutro = () => setDiasOutroTexto(prev => String(resolverNumeroNoIntervalo(prev, 1, 365, 1)));
   const nomeAto = prazo
     ? prazo.grupo.startsWith('Cível') || prazo.natureza === 'material'
       ? prazo.ato
@@ -256,8 +263,11 @@ export default function PrazoZeroPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-12 items-start print:block">
         {/* Fluxo guiado */}
         <form
-          className={cn(cardClasses, 'lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24 p-6 flex flex-col gap-7 print:hidden')}
-          onSubmit={e => e.preventDefault()}
+          className={cn(cardClasses, 'lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto p-6 flex flex-col gap-7 print:hidden')}
+          onSubmit={e => {
+            e.preventDefault();
+            if (atoId === 'outro') confirmarDiasOutro();
+          }}
           aria-label="Dados do cálculo"
         >
           <LerIntimacao onUsar={usarDadosDaIntimacao} />
@@ -298,8 +308,9 @@ export default function PrazoZeroPage() {
                     type="number"
                     min={1}
                     max={365}
-                    value={diasOutro}
-                    onChange={e => setDiasOutro(parseInt(e.target.value, 10) || 1)}
+                    value={diasOutroTexto}
+                    onChange={e => setDiasOutroTexto(editarCampoNumerico(e.target.value))}
+                    onBlur={confirmarDiasOutro}
                   />
                 </div>
                 <div className="col-span-2">
@@ -362,7 +373,11 @@ export default function PrazoZeroPage() {
           </div>
 
           {!material && (
-          <details className="group border-t border-line pt-4">
+          <details
+            open={avancadasAbertas}
+            onToggle={e => setAvancadasAbertas(e.currentTarget.open)}
+            className="group border-t border-line pt-4"
+          >
             <summary className="flex items-center justify-between cursor-pointer text-sm font-medium text-ink-soft hover:text-ink list-none">
               <span>Opções avançadas</span>
               <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />

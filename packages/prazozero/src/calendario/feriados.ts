@@ -46,8 +46,22 @@ export const calcularPascoa = pascoaIso;
  * A Lei 9.093/1995, art. 1º, II, só reconhece como feriado civil estadual a data magna fixada em lei estadual.
  * Saíram desta lista, por erro de fato verificado em 07/10/2026: PR (a Lei 18.384/2014 diz que 19/12 não é feriado civil),
  * DF (o TJDFT, órgão federal, não observa o Dia do Evangélico) e SC (a data magna se transfere para o domingo).
- * Itens ainda suspeitos: MT 20/11 já é nacional desde 2024.
+ * Regra de precedência/sombreado (MT 20/11): desde 2024 (Lei Federal 14.759/2023), o feriado nacional confirmado (`lei_federal`)
+ * sobrepõe e sombreia `MT` histórico (`Lei Estadual nº 7.879/2002`); antes de 2024, o registro estadual histórico tem precedência sobre o marcador nacional pré-vigência.
  */
+/** Tribunais com jurisdição sobre mais de uma UF. Em TRTs multiestaduais, sem `uf` explícita o motor usa a UF da sede; em TRFs aplica-se a Lei 5.010/1966, art. 62 (sem tabela estadual). */
+export const TRIBUNAIS_MULTIESTADUAIS: Record<string, readonly string[]> = {
+  TRT8: ['PA', 'AP'],
+  TRT10: ['DF', 'TO'],
+  TRT11: ['AM', 'RR'],
+  TRT14: ['RO', 'AC'],
+  TRF1: ['DF', 'AC', 'AM', 'AP', 'BA', 'GO', 'MA', 'MT', 'PA', 'PI', 'RO', 'RR', 'TO'],
+  TRF2: ['RJ', 'ES'],
+  TRF3: ['SP', 'MS'],
+  TRF4: ['RS', 'SC', 'PR'],
+  TRF5: ['PE', 'CE', 'AL', 'SE', 'RN', 'PB']
+};
+
 const FERIADOS_ESTADUAIS_TABELA: Record<string, Array<{ mes: number; dia: number; nome: string; fundamento: string }>> = {
   SP: [{ mes: 7, dia: 9, nome: 'Revolução Constitucionalista de 1932', fundamento: 'Lei Estadual nº 9.497/1997' }],
   RJ: [{ mes: 4, dia: 23, nome: 'Dia de São Jorge', fundamento: 'Lei Estadual nº 5.198/2008' }],
@@ -248,7 +262,10 @@ export function obterFeriadosAno(ano: number, uf?: string, tribunalSigla?: strin
   if (uf && !aplica5010 && !calendarioLidoPorInteiro && FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
     for (const fe of FERIADOS_ESTADUAIS_TABELA[uf.toUpperCase()]) {
       const dataIso = `${ano}-${String(fe.mes).padStart(2, '0')}-${String(fe.dia).padStart(2, '0')}`;
-      if (!mapa.has(dataIso)) {
+      const atual = mapa.get(dataIso);
+      const mtHistoricoPreNacional =
+        !!atual && atual.verificacao === 'pendente' && dataIso.endsWith('-11-20') && ano < 2024;
+      if (!atual || mtHistoricoPreNacional) {
         registrar(dataIso, {
           nome: fe.nome,
           tipo: 'estadual',

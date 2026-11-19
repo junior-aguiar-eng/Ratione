@@ -35,6 +35,7 @@ export default function BuscarPage() {
   // Pequena espera depois da última tecla; só vale a resposta da pesquisa mais recente; a URL guarda só a pesquisa, sem empilhar histórico
   useEffect(() => {
     if (!buscaValida(q)) {
+      sequencia.current += 1;
       setGrupos(null);
       setBuscando(false);
       return;
@@ -42,13 +43,26 @@ export default function BuscarPage() {
     const minha = ++sequencia.current;
     setBuscando(true);
     const t = setTimeout(async () => {
-      const r = await buscarEmTudo(db, q);
-      if (minha !== sequencia.current) return;
-      setGrupos(r);
-      setBuscando(false);
-      window.history.replaceState(null, '', `/buscar?${new URLSearchParams({ q: limparBusca(q) }).toString()}`);
+      try {
+        const r = await buscarEmTudo(db, q);
+        if (minha !== sequencia.current) return;
+        setGrupos(r);
+        window.history.replaceState(null, '', `/buscar?${new URLSearchParams({ q: limparBusca(q) }).toString()}`);
+      } catch {
+        if (minha !== sequencia.current) return;
+        setGrupos([
+          { ferramenta: 'normaviva', titulo: 'NormaViva', itens: [], temMais: false, verTodos: '/normaviva', indisponivel: true },
+          { ferramenta: 'tesemap', titulo: 'TeseMap', itens: [], temMais: false, verTodos: '/tesemap', indisponivel: true },
+          { ferramenta: 'prazozero', titulo: 'PrazoZero', itens: [], temMais: false, verTodos: '/prazozero', indisponivel: true }
+        ]);
+      } finally {
+        if (minha === sequencia.current) setBuscando(false);
+      }
     }, 300);
-    return () => clearTimeout(t);
+    return () => {
+      sequencia.current += 1;
+      clearTimeout(t);
+    };
   }, [db, q]);
 
   const semNada = grupos !== null && grupos.every(g => g.itens.length === 0 && !g.indisponivel);

@@ -11,7 +11,7 @@ import { registrar } from '../../../../lib/log';
 /** F5-01: `DELETE /api/documentos/<id>` apaga um documento do próprio usuário (o arquivo cifrado e a linha). */
 export const dynamic = 'force-dynamic';
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -36,7 +36,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 
   try {
     const servidor = createClient(url, secreta, { auth: { persistSession: false, autoRefreshToken: false } });
-    const apagou = await apagarDocumento(usuario.id, id, { ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) });
+    const apagou = await apagarDocumento(usuario.id, id.toLowerCase(), { ...dependenciasPadrao(), ...armazenamentoEBanco(servidor) });
     return apagou ? NextResponse.json({ ok: true }) : NextResponse.json({ mensagem: 'Arquivo não encontrado.' }, { status: 404 });
   } catch (e) {
     registrar('ERROR', 'Documentos: erro ao apagar', { erro_mensagem: (e as Error).message });
