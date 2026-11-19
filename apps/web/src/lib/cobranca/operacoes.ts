@@ -1,3 +1,4 @@
+import type { Campos } from '../log';
 import { situacaoDaAssinatura } from './estados';
 import { ErroMp, ehErroJaCanceladaOuInexistenteNoMp, type ClienteMp, type NovaAssinatura } from './mercadopago';
 
@@ -52,7 +53,7 @@ export async function criarEVincularAssinatura(p: {
   nova: NovaAssinatura;
   vincular: (mpId: string) => Promise<unknown>;
   cancelarLocal: () => Promise<unknown>;
-  registrarErro: (mensagem: string, campos: Record<string, unknown>) => void;
+  registrarErro: (mensagem: string, campos: Campos) => void;
 }): Promise<{ url: string }> {
   let mpCriadaId: string | null = null;
   try {
@@ -85,7 +86,7 @@ export async function cancelarAssinaturaDoUsuario(p: {
   assinatura: { id: string; mpId: string; cicloFim: string | null };
   mp: Pick<ClienteMp, 'buscarAssinatura' | 'cancelarAssinatura'>;
   aplicarCancelada: (fim: string | null) => Promise<unknown>;
-  registrarErro: (mensagem: string, campos: Record<string, unknown>) => void;
+  registrarErro: (mensagem: string, campos: Campos) => void;
 }): Promise<
   | { ok: true; status: 200; cicloFim: string | null }
   | { ok: false; status: 500 | 502; mensagem: string }

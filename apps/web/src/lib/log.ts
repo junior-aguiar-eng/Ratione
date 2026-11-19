@@ -9,7 +9,7 @@
  */
 export type Gravidade = 'INFO' | 'WARNING' | 'ERROR';
 
-type Campos = Record<string, string | number | boolean | null | undefined>;
+export type Campos = Record<string, string | number | boolean | null | undefined>;
 
 export function caminhoSemQuery(caminho: string): string {
   const i = caminho.search(/[?#]/);
