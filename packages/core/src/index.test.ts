@@ -12,10 +12,16 @@ describe('Núcleo: tribunais', () => {
     }
   });
 
-  it('tribunais estaduais e regionais têm UF; superiores não', () => {
+  it('tribunais estaduais e regionais têm UF; TRFs multiestaduais têm ufs', () => {
     for (const t of Object.values(TRIBUNAIS_BRASIL)) {
       if (t.esfera === 'estadual') assert.ok(t.uf, `${t.id}: sem UF`);
     }
+    assert.ok(TRIBUNAIS_BRASIL.TRF1.ufs?.includes('DF'));
+    assert.ok(TRIBUNAIS_BRASIL.TRF1.ufs?.includes('GO'));
+    assert.deepEqual(TRIBUNAIS_BRASIL.TRF2.ufs, ['RJ', 'ES']);
+    assert.deepEqual(TRIBUNAIS_BRASIL.TRF3.ufs, ['SP', 'MS']);
+    assert.deepEqual(TRIBUNAIS_BRASIL.TRF4.ufs, ['RS', 'SC', 'PR']);
+    assert.deepEqual(TRIBUNAIS_BRASIL.TRF5.ufs, ['PE', 'CE', 'AL', 'SE', 'RN', 'PB']);
   });
 });
 
@@ -43,6 +49,24 @@ describe('Núcleo: procedência', () => {
       situacaoProcedencia({ origem: 'sugerido_ia', fontes: [FONTE], validacao: { por: 'Junior', em: '2026-10-10' } }),
       'sugestao_validada'
     );
+  });
+
+  it('DispositivoLegalSchema valida vigenteEm como DataIsoSchema', () => {
+    const base = {
+      id: 'X',
+      normaId: 'LEI-13105-2015',
+      rotulo: 'art. 219',
+      tipo: 'artigo' as const,
+      numero: '219',
+      texto: 't',
+      procedencia: {
+        origem: 'curado' as const,
+        fontes: [{ id: 'planalto', ato: 'CPC', url: 'https://www.planalto.gov.br', lido: 'texto integral', lidoEm: '2026-01-01' }]
+      }
+    };
+    assert.ok(DispositivoLegalSchema.safeParse({ ...base, vigenteEm: '2016-03-18' }).success);
+    assert.equal(DispositivoLegalSchema.safeParse({ ...base, vigenteEm: '2026-02-30' }).success, false);
+    assert.equal(DispositivoLegalSchema.safeParse({ ...base, vigenteEm: 'invalida' }).success, false);
   });
 
   it('dispositivo e precedente não existem sem procedência', () => {

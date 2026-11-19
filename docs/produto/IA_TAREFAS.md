@@ -56,7 +56,7 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 | Orçamento de gasto do mês | **dois fundos** na tabela `ia_fundos` do banco, somando todas as tarefas de cada grupo: `gratuito` US$ 15 (quem está no plano Gratuito) e `pagantes` US$ 5 (quem tem plano pago). Um fundo que acaba não derruba o outro. Ajuste: `update public.ia_fundos set orcamento_mes_usd = … where fundo = …`; situação: `select * from public.ia_fundos_situacao();` ([`PLANOS_E_COBRANCA.md`](PLANOS_E_COBRANCA.md) §3.2). A variável `IA_ORCAMENTO_MES_USD` deixou de existir |
 | Uma chamada de cada vez por usuário | em todas as tarefas |
 | Cota de uso | **do plano do usuário**, por análise e por período (Gratuito: semana; pagos: ciclo de cobrança), conferida uma vez ao iniciar a análise; quantidades em `plano_cotas` (migração `20261023000001`). As variáveis `IA_LIMITE_DIA` e `IA_LIMITE_MES` deixaram de existir |
-| Teto de resposta / mensagem | 7.000 tokens (a etapa de fundamentos; as outras usam 3.000 e 4.000) / 85.000 caracteres (tempo máximo por chamada: 45 s) |
+| Teto de resposta / mensagem | `argumenta-estrutura` até 6.000 tokens, `argumenta-questoes` até 4.000, `argumenta-fundamentos` até 7.000 e demais tarefas entre 1.200 e 2.000 tokens / até 85.000 caracteres por mensagem (tempo máximo por chamada: 45 s) |
 | Modelos | só com preço registrado (hoje, Claude Haiku 5.5) |
 
 ## 7. Como acrescentar uma tarefa
@@ -70,10 +70,10 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 
 | Tarefa | O que faz | Gatilho | Limite | Especificação |
 |---|---|---|---|---|
-| `explicar-dispositivo` | Explica o dispositivo aberto no NormaViva, só a partir do texto oficial | Botão "Explicar com IA" (logado) | 5/dia, 60/mês | [`EXPLICACAO_IA.md`](EXPLICACAO_IA.md) |
-| `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
-| `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
-| `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | 5/dia, 40/mês | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `explicar-dispositivo` | Explica o dispositivo aberto no NormaViva, só a partir do texto oficial | Botão "Explicar com IA" (logado) | Cota de explicações do plano | [`EXPLICACAO_IA.md`](EXPLICACAO_IA.md) |
+| `argumenta-estrutura` | Partes da decisão colada, resultado, resumo e pedidos | Botão "Analisar decisão" (logado), 1ª etapa | Cota de análises rápidas do plano | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `argumenta-questoes` | Questões jurídicas resolvidas e a conclusão de cada uma | Mesmo botão, 2ª etapa | Cota de análises rápidas do plano | [`ARGUMENTA.md`](ARGUMENTA.md) |
+| `argumenta-fundamentos` | Fundamentos de cada conclusão (fato, prova, norma, precedente, doutrina, argumento) | Mesmo botão, 3ª etapa | Cota de análises rápidas do plano | [`ARGUMENTA.md`](ARGUMENTA.md) |
 | `explicar-precedente` | Explica em linguagem clara a tese firmada (ou o enunciado) do precedente aberto no TeseMap, só a partir do texto que o tribunal registra, com o trecho da tese que enuncia a regra | Botão "Explicar com IA" no TeseMap (logado) | Cota de explicações do plano; a resposta é guardada e serve a todos | Seção 8.3 abaixo |
 | `ler-intimacao` | Extrai da intimação colada o tribunal, o tipo e a data do evento e o prazo mencionado, só para preencher o PrazoZero | Campo "Preencher pela intimação" no PrazoZero (logado) | Cota de explicações do plano | Seção 8.2 abaixo |
 | `relacionar-com-o-caso` | Como o dispositivo ou precedente aberto a partir da análise se relaciona com a questão do caso (aplica, distingue ou trata de outro ponto), com o trecho da fonte que sustenta | Botão "Relacionar com a minha questão" no NormaViva ou no TeseMap, depois de abrir uma citação da análise (logado) | Cota de explicações do plano; a tela limita a 10 por caso | Seção 8.1 abaixo |
@@ -119,4 +119,4 @@ O veredito sobre cada citação vem da base, nunca do modelo.
 
 ## 9. Ligar e desligar
 
-A IA inteira fica desligada até o responsável: (1) aplicar as migrações `20261022000001_explicacao_ia.sql` e `20261022000002_ia_tarefas.sql`; (2) guardar a chave da Anthropic no Secret Manager (`anthropic-api-key`) com acesso da conta de serviço do Cloud Run; (3) criar a variável de repositório `IA_EXPLICACAO = sim` e fazer o deploy. Desligar: `IA_EXPLICACAO = nao` e novo deploy, ou, na hora, `gcloud run services update <serviço> --update-env-vars IA_EXPLICACAO_LIGADA=nao`.
+Os módulos de IA ficam desligados até o responsável: (1) aplicar as migrações `20261022000001_explicacao_ia.sql` e `20261022000002_ia_tarefas.sql`; (2) guardar a chave da Anthropic no Secret Manager (`anthropic-api-key`) com acesso da conta de serviço do Cloud Run; (3) ligar apenas os módulos desejados nas variáveis de repositório (`IA_EXPLICACAO`, `IA_ARGUMENTA`, `IA_RELACAO`, `IA_INTIMACAO`, `IA_PRECEDENTE`, cada uma com `sim`) e fazer o deploy. O workflow anexa `ANTHROPIC_API_KEY` ao Cloud Run sempre que qualquer módulo estiver com `sim`; cada módulo liga e desliga de forma independente no servidor e no navegador (quando `IA_ARGUMENTA` não é definida ou fica vazia, o Argumenta herda `IA_EXPLICACAO` por compatibilidade). Desligar: ajustar a variável do módulo para `nao` e refazer o deploy, ou atualizar direto no Cloud Run com `gcloud run services update <serviço> --update-env-vars IA_EXPLICACAO_LIGADA=nao,...`.

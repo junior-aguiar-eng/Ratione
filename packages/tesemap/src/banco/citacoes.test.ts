@@ -8,13 +8,18 @@ import { citacoesNoTexto } from './citacoes';
 import { nosDosPrecedentesStj } from './nos-stj';
 
 describe('Citações a dispositivos do NormaViva (F4-04)', () => {
-  const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus'), ['CF-1988', 'LEI-13105-2015']).flatMap(l => l.dispositivos.map(d => d.id)));
+  const ids = new Set(linhasDoCorpus(join(__dirname, '..', '..', '..', 'normaviva', 'corpus'), ['CF-1988', 'LEI-13105-2015', 'LEI-8078-1990']).flatMap(l => l.dispositivos.map(d => d.id)));
   const citar = (t: string) => citacoesNoTexto(t, extrairRemissoes, id => ids.has(id));
 
   it('só a norma nomeada no texto e que existe no corpus; repetição e artigo inexistente ficam de fora', () => {
     const c = citar('Compete à Justiça Federal (art. 109 da Constituição Federal) e vale o art. 85, § 8º, do CPC. De novo o art. 109 da Constituição Federal. Cita o art. 99999 do CPC.');
     assert.deepEqual(c.map(x => x.dispositivoId), ['CF-1988|corpo|art. 109', 'LEI-13105-2015|corpo|art. 85']);
     assert.equal(c[1].detalhe, '§ 8º');
+  });
+
+  it('citação por número de lei do corpus e escopo fora de corpo (ADCT) também geram atalho', () => {
+    const c = citar('Aplica-se o art. 5º da Lei nº 8.078/1990 e o art. 10 do ADCT.');
+    assert.deepEqual(c.map(x => x.dispositivoId), ['LEI-8078-1990|corpo|art. 5º', 'CF-1988|ADCT|art. 10']);
   });
 
   it('artigo sem norma nomeada ("o art. 5º") não vira atalho: o texto não diz de que lei é', () => {

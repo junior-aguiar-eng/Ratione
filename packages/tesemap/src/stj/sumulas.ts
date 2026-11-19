@@ -44,6 +44,17 @@ export function temasRepetitivosNoTexto(texto: string): number[] {
 }
 
 
+const OUTROS_TRIBUNAIS =
+  '(?:STF|TFR|TST|TSE|TCU|STM|TNU|TRF\\s*(?:d[aeo]\\s*)?\\d*(?:[ªº°]?\\s*Regi[ãa]o)?|Supremo\\s+Tribunal\\s+Federal|Tribunal\\s+Federal\\s+de\\s+Recursos|Tribunal\\s+Superior\\s+do\\s+Trabalho|Tribunal\\s+Superior\\s+Eleitoral)';
+const RE_SUMULA_OUTRO_DEPOIS = new RegExp(
+  String.raw`S[úu]mulas?\s+(?:Vinculantes?\s+)?(?:n[ºo°.]*\s*)?\d+(?:\s*(?:,|e|ou)\s*(?:n[ºo°.]*\s*)?\d+)*\s*(?:\/|[-–—]|,?\s*d[aoe]\s+)${OUTROS_TRIBUNAIS}(?![\p{L}\p{N}])`,
+  'giu'
+);
+const RE_SUMULA_OUTRO_ANTES = new RegExp(
+  String.raw`(?<![\p{L}\p{N}])${OUTROS_TRIBUNAIS}\s*[,:\-–—]?\s*(?:d[aoe]\s+)?S[úu]mulas?\s+(?:Vinculantes?\s+)?(?:n[ºo°.]*\s*)?\d+|S[úu]mulas?\s+(?:Vinculantes?\s+)?d[aoe]\s+${OUTROS_TRIBUNAIS}\s*(?:n[ºo°.]*\s*)?\d+`,
+  'giu'
+);
+
 const CABECALHO = /^\s*(?:q\s+)?S[ÚU]MULA (\d+)(?:\s*\(S[ÚU]MULA (CANCELADA|ALTERADA|REVOGADA)\))?\s*(?:VEJA MAIS)?\s*$/;
 const RODAPE = /^\s*scon\.stj\.jus\.br\/SCON\/sumstj\/\s+\d+\s*$/;
 // "(SÚMULA 221, SEGUNDA SEÇÃO, julgado em 12/05/1999, DJ 26/05/1999, p. 68)", "(TERCEIRA SEÇÃO, julgado em 11/12/2024, DJe de 17/12/2024)",
@@ -89,8 +100,8 @@ export function lerSumulasStj(texto: string): SumulaStj[] {
       dataJulgamento: p[2] ? dataIso(p[2]) : null,
       publicacao: espacos(p[3]),
       nota,
-      // Súmula "do STF" citada no texto do STJ não é súmula do STJ: só entram as citações sem tribunal ou "do STJ"
-      sumulasCitadas: sumulasCitadasNoTexto(citado.replace(/S[úu]mulas?\s+(?:Vinculantes?\s+)?n?\.?\s*\d+\s*(?:\/|do\s+)STF/gi, ''))
+      // Súmula de outro tribunal (STF, TFR, TST, TSE, TRF, TCU, STM, TNU) citada no texto não é súmula do STJ
+      sumulasCitadas: sumulasCitadasNoTexto(citado.replace(RE_SUMULA_OUTRO_DEPOIS, '').replace(RE_SUMULA_OUTRO_ANTES, ''))
         .filter(x => /^STF-SUMULA-/.test(x))
         .map(x => idDaSumulaStj(Number(x.replace('STF-SUMULA-', ''))))
         .filter(x => x !== id),

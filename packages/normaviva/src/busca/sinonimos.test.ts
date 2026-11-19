@@ -12,9 +12,17 @@ describe('Variantes de pesquisa por sinônimo (F3-05)', () => {
     assert.deepEqual(v, [{ consulta: 'prazo do locação residencial', termo: 'locação' }]);
   });
 
-  it('acentos e maiúsculas não impedem o casamento; palavra inteira, não pedaço', () => {
+  it('acentos e maiúsculas não impedem o casamento; palavra inteira, não pedaço; entrada NFD mantém offsets exatos', () => {
     assert.equal(variantesDaConsulta('Escuta Telefônica ilegal')[0].termo, 'grampo');
     assert.deepEqual(variantesDaConsulta('desalugueis'), [], '"aluguel" dentro de outra palavra não conta');
+    assert.deepEqual(variantesDaConsulta('Escuta Telefônica ilegal'.normalize('NFD'))[0], {
+      consulta: 'grampo ilegal',
+      termo: 'grampo'
+    });
+    assert.deepEqual(variantesDaConsulta('prazo da pensão alimentícia atrasada'.normalize('NFD'))[0], {
+      consulta: 'prazo da alimentos atrasada',
+      termo: 'alimentos'
+    });
   });
 
   it('expressão longa cobre a curta: "demissão sem justa causa" não vira também uma troca de "justa causa"', () => {

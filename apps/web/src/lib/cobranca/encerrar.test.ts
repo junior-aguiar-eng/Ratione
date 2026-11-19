@@ -3,20 +3,32 @@ import assert from 'node:assert/strict';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { encerrarAssinaturasDoUsuario } from './encerrar';
 import { lerConfigCobranca } from './config';
+import { ErroMp } from './mercadopago';
 
 const PRONTA = lerConfigCobranca({ COBRANCA_LIGADA: 'sim', MERCADOPAGO_ACCESS_TOKEN: 'tok', MERCADOPAGO_WEBHOOK_SECRET: 'seg' });
 const DESLIGADA = lerConfigCobranca({});
 
-/** Só o que a função usa: from('assinaturas').select().eq().neq(). */
-function banco(linhas: Array<{ id: string; mp_assinatura_id: string | null }>, erro: { message: string } | null = null) {
+/** Só o que a função usa: from('assinaturas').select().eq().neq() e rpc('assinatura_aplicar', ...). */
+function banco(
+  linhas: Array<{ id: string; mp_assinatura_id: string | null }>,
+  erro: { message: string } | null = null,
+  aoRpc?: (fn: string, args: Record<string, unknown>) => Promise<{ error: { message: string } | null }>
+) {
   const filtros: string[] = [];
+  const rpcs: Array<{ fn: string; args: Record<string, unknown> }> = [];
   const consulta = {
     select: () => consulta,
     eq: (c: string, v: string) => (filtros.push(`${c}=${v}`), consulta),
     neq: (c: string, v: string) => (filtros.push(`${c}!=${v}`), consulta),
     then: (ok: (r: unknown) => void) => ok({ data: erro ? null : linhas, error: erro })
   };
-  return { servidor: { from: () => consulta } as unknown as SupabaseClient, filtros };
+  const rpc = aoRpc
+    ? async (fn: string, args: Record<string, unknown>) => {
+        rpcs.push({ fn, args });
+        return aoRpc(fn, args);
+      }
+    : undefined;
+  return { servidor: { from: () => consulta, ...(rpc ? { rpc } : {}) } as unknown as SupabaseClient, filtros, rpcs };
 }
 
 describe('Exclusão da conta: assinatura viva no Mercado Pago', () => {
@@ -60,5 +72,33 @@ describe('Exclusão da conta: assinatura viva no Mercado Pago', () => {
   it('erro ao ler as assinaturas: recusa em vez de apagar às cegas', async () => {
     const { servidor } = banco([], { message: 'banco fora do ar' });
     assert.equal(await encerrarAssinaturasDoUsuario(servidor, 'u1', PRONTA, () => assert.fail('não chega ao Mercado Pago')), false);
+  });
+
+  it('marca cancelada localmente e não bloqueia exclusão se o MP responder já cancelada ou 404', async () => {
+    const { servidor, rpcs } = banco(
+      [{ id: 'a1', mp_assinatura_id: 'mp-404' }, { id: 'a2', mp_assinatura_id: 'mp-ja-cancelada' }],
+      null,
+      async () => ({ error: null })
+    );
+    const ok = await encerrarAssinaturasDoUsuario(servidor, 'u1', PRONTA, () => ({
+      cancelarAssinatura: async id => {
+        if (id === 'mp-404') throw new ErroMp('Mercado Pago respondeu 404: not found', 404);
+        throw new ErroMp('Mercado Pago respondeu 400: cannot cancel already cancelled preapproval', 400);
+      }
+    }));
+    assert.equal(ok, true);
+    assert.deepEqual(
+      rpcs.map(r => r.args),
+      [
+        { p_assinatura: 'a1', p_situacao: 'cancelada', p_mp_situacao: 'cancelled', p_fim_do_ciclo: null },
+        { p_assinatura: 'a2', p_situacao: 'cancelada', p_mp_situacao: 'cancelled', p_fim_do_ciclo: null }
+      ]
+    );
+  });
+
+  it('falha local ao gravar cancelada depois de cancelar no MP não bloqueia a exclusão da conta', async () => {
+    const { servidor } = banco([{ id: 'a1', mp_assinatura_id: 'mp-1' }], null, async () => ({ error: { message: 'falha transitória' } }));
+    const ok = await encerrarAssinaturasDoUsuario(servidor, 'u1', PRONTA, () => ({ cancelarAssinatura: async () => undefined }));
+    assert.equal(ok, true);
   });
 });

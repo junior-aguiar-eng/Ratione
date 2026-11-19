@@ -9,7 +9,7 @@
  * - `externo`: nomeia outra norma que não está no corpus.
  */
 import { atosDoTexto } from '../coleta/conferir';
-import { idDeNormaPelaChave, normaPorNomeNoInicio, normaPorSigla } from './apelidos';
+import { escopoEspecialNoInicio, estaNoCorpus, idDeNormaPelaChave, normaPorNomeNoInicio, normaPorSigla } from './apelidos';
 import { numeroComoNoParser } from './numero';
 
 export type EscopoRemissao = 'mesma' | 'explicito' | 'presumido' | 'externo';
@@ -24,6 +24,8 @@ export interface Remissao {
   escopo: EscopoRemissao;
   /** Id da norma de destino; nulo em `externo` e quando o nome não é reconhecido. */
   normaDestinoId: string | null;
+  /** Escopo de destino quando o texto nomeia uma parte específica da norma (ex.: `ADCT` na CF-1988). */
+  escopoDestino?: string | null;
   /** Para `externo`: o que o texto diz ("Lei nº 9.099, de 1995"). */
   normaDestinoTexto: string | null;
 }
@@ -61,6 +63,7 @@ export function extrairRemissoes(texto: string): Remissao[] {
 
     let escopo: EscopoRemissao = 'presumido';
     let normaDestinoId: string | null = null;
+    let escopoDestino: string | null = null;
     let normaDestinoTexto: string | null = null;
 
     if (RE_MESMA.test(depois)) {
@@ -69,11 +72,16 @@ export function extrairRemissoes(texto: string): Remissao[] {
       const o = depois.match(RE_OUTRA);
       if (o) {
         const resto = depois.slice(o[0].length);
+        const especial = escopoEspecialNoInicio(resto);
         const porNome = normaPorNomeNoInicio(resto);
         const sigla = resto.match(/^([A-Z]{2,6}(?:\d{2})?)\b/)?.[1];
         const ato = atosDoTexto(resto.slice(0, 80))[0];
         const comecaComAto = /^(Lei|Lcp|Decreto|Medida|Emenda|Ato)\b/i.test(resto);
-        if (porNome) {
+        if (especial) {
+          escopo = 'explicito';
+          normaDestinoId = especial.normaId;
+          escopoDestino = especial.escopoDestino;
+        } else if (porNome) {
           escopo = 'explicito';
           normaDestinoId = porNome;
         } else if (sigla && normaPorSigla(sigla)) {
@@ -81,14 +89,25 @@ export function extrairRemissoes(texto: string): Remissao[] {
           normaDestinoId = normaPorSigla(sigla)!;
         } else if (comecaComAto && ato) {
           const id = idDeNormaPelaChave(ato.chave);
-          escopo = 'externo';
+          const noCorpus = id !== undefined && estaNoCorpus(id);
+          escopo = noCorpus ? 'explicito' : 'externo';
           normaDestinoId = id ?? null;
-          normaDestinoTexto = resto.slice(0, 60).replace(/\s+/g, ' ').trim();
+          normaDestinoTexto = noCorpus ? null : resto.slice(0, 60).replace(/\s+/g, ' ').trim();
         }
       }
     }
     const trecho = texto.slice(Math.max(0, (m.index ?? 0) - 10), Math.min(texto.length, fim + 70)).replace(/\s+/g, ' ').trim();
-    for (const artigo of artigos) saida.push({ trecho, artigo, detalhe: artigo === artigos[0] ? detalhe : null, escopo, normaDestinoId, normaDestinoTexto });
+    for (const artigo of artigos) {
+      saida.push({
+        trecho,
+        artigo,
+        detalhe: artigo === artigos[0] ? detalhe : null,
+        escopo,
+        normaDestinoId,
+        ...(escopoDestino ? { escopoDestino } : {}),
+        normaDestinoTexto
+      });
+    }
   }
   return saida;
 }

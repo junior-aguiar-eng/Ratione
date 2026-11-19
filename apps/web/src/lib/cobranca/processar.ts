@@ -37,6 +37,10 @@ export async function processarAviso(aviso: Aviso, mp: LeituraMp, banco: BancoDa
     if (!nossa) return 'sem_assinatura';
     const situacao = situacaoDaAssinatura(a.status);
     if (!situacao) return 'ignorado';
+    // Aviso atrasado (`pending`) nunca pode rebaixar assinatura que já avançou além de pendente.
+    if (situacao === 'pendente' && (nossa.situacao === 'ativa' || nossa.situacao === 'em_atraso' || nossa.situacao === 'pausada')) {
+      return 'ignorado';
+    }
     // Assinatura autorizada que estava "em atraso" só volta a "ativa" por uma cobrança aprovada, não por este aviso
     const final = situacao === 'ativa' && nossa.situacao === 'em_atraso' ? 'em_atraso' : situacao;
     await banco.aplicar(nossa.id, final, a.status, a.proximaCobranca);
@@ -46,7 +50,16 @@ export async function processarAviso(aviso: Aviso, mp: LeituraMp, banco: BancoDa
   if (aviso.topico === 'subscription_authorized_payment') {
     const c = await mp.buscarCobranca(aviso.recursoId);
     if (!c) return 'recurso_inexistente';
-    const nossa = await banco.acharAssinatura({ referencia: null, mpId: c.assinaturaMpId });
+    let nossa = c.assinaturaMpId ? await banco.acharAssinatura({ referencia: null, mpId: c.assinaturaMpId }) : null;
+    if (!nossa) {
+      // Fallback: se o id do Mercado Pago ainda não foi vinculado localmente, resolve via external_reference da cobrança ou da assinatura no MP.
+      let referencia = c.referencia && UUID.test(c.referencia) ? c.referencia : null;
+      if (!referencia && c.assinaturaMpId) {
+        const a = await mp.buscarAssinatura(c.assinaturaMpId);
+        referencia = a?.referencia && UUID.test(a.referencia) ? a.referencia : null;
+      }
+      if (referencia) nossa = await banco.acharAssinatura({ referencia, mpId: c.assinaturaMpId });
+    }
     if (!nossa) return 'sem_assinatura';
     const situacao = situacaoDaCobranca(c.status);
     if (!situacao || !c.pagamentoId || c.valorCentavos === null) return 'ignorado';

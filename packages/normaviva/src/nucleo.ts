@@ -20,27 +20,56 @@ export const PROCEDENCIA_HISTORICO_EXEMPLO: Procedencia = {
 
 const ALTERACOES_QUE_ENCERRAM = new Set<VersaoDispositivo['tipoAlteracao']>(['revogado_expressamente', 'declarado_inconstitucional']);
 
-/** "Lei nº 13.105/2015" ou "Lei Federal nº 14.365/2022" → "LEI-13105-2015". */
+/**
+ * "Lei nº 13.105/2015", "Decreto-Lei nº 2.848/1940", "Emenda Constitucional nº 132/2023", "CF/88" ou "Constituição Federal" → id canônico.
+ */
 function normaIdDe(normaNome: string): string {
-  const m = normaNome.match(/Lei(?: Complementar)?(?: Federal)?\s+n[ºo.]?\s*([\d.]+)\/(\d{4})/i);
+  const nome = normaNome.trim();
+  if (/^(?:CF(?:\/(?:19)?88)?|Constitui[çc][ãa]o(?:\s+Federal|\s+da\s+Rep[úu]blica.*)?)$/i.test(nome)) return 'CF-1988';
+  const ec = nome.match(/^(?:Emenda\s+Constitucional|EC)\s+(?:n[ºo°.]?\s*)?([\d.]+)\/(\d{4})/i);
+  if (ec) return `EC-${ec[1].replace(/\./g, '')}-${ec[2]}`;
+  const dl = nome.match(/^(?:Decreto[- ]Lei|DL)\s+(?:n[ºo°.]?\s*)?([\d.]+)\/(\d{4})/i);
+  if (dl) return `DL-${dl[1].replace(/\./g, '')}-${dl[2]}`;
+  const m = nome.match(/Lei(?: Complementar)?(?: Federal)?\s+n[ºo.]?\s*([\d.]+)\/(\d{4})/i);
   if (!m) throw new Error(`Não foi possível identificar a lei em "${normaNome}".`);
-  const prefixo = /Complementar/i.test(normaNome) ? 'LC' : 'LEI';
+  const prefixo = /Complementar/i.test(nome) ? 'LC' : 'LEI';
   return `${prefixo}-${m[1].replace(/\./g, '')}-${m[2]}`;
 }
 
 /**
- * "art. 85, § 6º-A" → { tipo: 'paragrafo', numero: '6º-A' }. Vale o nível mais fundo do rótulo
- * (artigo, parágrafo, inciso). Rótulo que não segue a LC 95/1998 é recusado, não adivinhado.
+ * "art. 85, § 6º-A" → { tipo: 'paragrafo', numero: '6º-A' }; também cobre incisos com letra (`IV-A`), alíneas (`a)` / `alínea a`)
+ * e itens (`1.` / `item 1`). Vale sempre o nível mais fundo do rótulo; rótulo fora da LC 95/1998 é recusado, não adivinhado.
  */
 export function classificarRotulo(rotulo: string): { tipo: TipoDispositivo; numero: string } {
-  const m = rotulo.trim().match(/^art\.\s*([\d.]+(?:º)?(?:-[A-Z])?)(?:,\s*(parágrafo único|§\s*[\d.]+º?(?:-[A-Z])?))?(?:,\s*([IVXLCDM]+))?$/i);
-  if (!m) throw new Error(`Rótulo de dispositivo não reconhecido: "${rotulo}".`);
-  const [, artigo, paragrafo, inciso] = m;
-  if (inciso) return { tipo: 'inciso', numero: inciso.toUpperCase() };
-  if (paragrafo) {
-    return /único/i.test(paragrafo) ? { tipo: 'paragrafo_unico', numero: 'único' } : { tipo: 'paragrafo', numero: paragrafo.replace(/^§\s*/, '') };
+  const partes = rotulo.trim().split(/\s*,\s*/);
+  const primeiro = partes[0]?.match(/^art\.\s*([\d.]+(?:º)?(?:-[A-Z]{1,2}(?:-[A-Z])?)?)$/i);
+  if (!primeiro) throw new Error(`Rótulo de dispositivo não reconhecido: "${rotulo}".`);
+
+  let resultado: { tipo: TipoDispositivo; numero: string } = { tipo: 'artigo', numero: primeiro[1] };
+  let nivel = 1;
+
+  for (const parte of partes.slice(1)) {
+    let m: RegExpMatchArray | null;
+    if (nivel < 2 && (m = parte.match(/^(?:par[áa]grafo\s+[úu]nico|§\s*([\d.]+º?(?:-[A-Z]{1,2})?))$/i))) {
+      nivel = 2;
+      resultado = /único/i.test(parte) ? { tipo: 'paragrafo_unico', numero: 'único' } : { tipo: 'paragrafo', numero: m[1] };
+    } else if (nivel < 3 && (m = parte.match(/^(?:inciso\s+)?([IVXLCDM]+(?:-[A-Z]{1,2})?)$/))) {
+      nivel = 3;
+      resultado = { tipo: 'inciso', numero: m[1] };
+    } else if (nivel < 3 && (m = parte.match(/^inciso\s+([ivxlcdm]+(?:-[a-z]{1,2})?)$/i))) {
+      nivel = 3;
+      resultado = { tipo: 'inciso', numero: m[1].toUpperCase() };
+    } else if (nivel < 4 && (m = parte.match(/^(?:al[íi]nea\s+["']?([a-z])["']?|([a-z])\))$/i))) {
+      nivel = 4;
+      resultado = { tipo: 'alinea', numero: (m[1] ?? m[2]).toLowerCase() };
+    } else if (nivel < 5 && (m = parte.match(/^(?:item\s+(\d+)|(\d+)\.)$/i))) {
+      nivel = 5;
+      resultado = { tipo: 'item', numero: m[1] ?? m[2] };
+    } else {
+      throw new Error(`Rótulo de dispositivo não reconhecido: "${rotulo}".`);
+    }
   }
-  return { tipo: 'artigo', numero: artigo };
+  return resultado;
 }
 
 /**

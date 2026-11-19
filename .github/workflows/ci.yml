@@ -52,5 +52,8 @@ jobs:
           python packages/prazozero/cenarios/oraculo.py
           git diff --exit-code -- packages/prazozero/cenarios/cenarios.json packages/prazozero/cenarios/cenarios_aleatorios.json docs/produto/REVISAO_CENARIOS.md docs/produto/VALIDACAO_PENDENTES.md
 
+      - name: Higiene de diff
+        run: git diff --check
+
       - name: Build
         run: pnpm build

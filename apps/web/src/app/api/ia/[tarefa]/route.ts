@@ -7,7 +7,8 @@ import { dependenciasDoBanco } from '../../../../lib/ia/banco';
 import { criarChamadaAoModelo } from '../../../../lib/ia/cliente';
 import { lerDispositivoParaExplicar } from '../../../../lib/ia/fontes/dispositivoDoBanco';
 import { lerNoParaRelacionar } from '../../../../lib/ia/fontes/noDoTeseMap';
-import { iaLigada } from '../../../../lib/ia/politica';
+import { tarefaDoCatalogo } from '../../../../lib/ia/catalogo';
+import { iaLigada, tarefaIaLigada } from '../../../../lib/ia/politica';
 import { gravidadeDoAviso } from '../../../../lib/ia/gravidade';
 import { usuarioAutenticadoNaoAnonimo } from '../../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../../lib/origem';
@@ -16,16 +17,10 @@ import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
 
 /**
  * Rota única dos recursos de IA: `POST /api/ia/<tarefa>` com `{ entrada }`. Só executa tarefas do catálogo (`lib/ia/catalogo.ts`),
- * pelo executor único (`lib/ia/executar.ts`). Precisa de `IA_EXPLICACAO_LIGADA=sim`, `ANTHROPIC_API_KEY` e `SUPABASE_SERVICE_ROLE_KEY`
- * no servidor; sem eles, responde 503 e não chama nada. A cota é do plano do usuário, por análise (`POST /api/analises`).
- * Regras: `docs/produto/IA_TAREFAS.md`.
+ * pelo executor único (`lib/ia/executar.ts`). Precisa de `ANTHROPIC_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY` e ao menos um módulo de IA
+ * ligado no servidor; cada tarefa também confere a própria flag em `tarefaIaLigada`. Sem eles, responde 503 e não chama nada. A cota
+ * é do plano do usuário, por análise (`POST /api/analises`). Regras: `docs/produto/IA_TAREFAS.md`.
  */
-const CHAVES_PROPRIAS: Record<string, string> = {
-  'relacionar-com-o-caso': 'IA_RELACAO_LIGADA',
-  'ler-intimacao': 'IA_INTIMACAO_LIGADA',
-  'explicar-precedente': 'IA_PRECEDENTE_LIGADA'
-};
-
 export async function POST(request: Request, { params }: { params: Promise<{ tarefa: string }> }) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publicavel = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -39,9 +34,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ tar
   if (!veioDoSite(request)) return NextResponse.json({ mensagem: 'Origem não permitida.' }, { status: 403 });
 
   const { tarefa } = await params;
-  // Tarefas com chave própria: só ligam depois de medidas (docs/produto/IA_TAREFAS.md)
-  const chaveDaTarefa = CHAVES_PROPRIAS[tarefa];
-  if (chaveDaTarefa && process.env[chaveDaTarefa] !== 'sim') {
+  // Cada tarefa do catálogo depende da própria flag no servidor (tarefas fora do catálogo seguem para o executor devolver 404)
+  if (tarefaDoCatalogo(tarefa) && !tarefaIaLigada(tarefa, process.env)) {
     return NextResponse.json({ mensagem: 'Este recurso de IA não está disponível nesta instalação.' }, { status: 503 });
   }
   let corpo: { entrada?: unknown } = {};

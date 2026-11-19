@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { lerCsv } from './csv';
-import { lerPrecedentes, temTeseFirmada } from './precedentes';
+import { ehSituacaoCancelada, lerPrecedentes, temTeseFirmada } from './precedentes';
 import { carregarPrecedentesStj, manifestoStj, paraPrecedenteDoNucleo } from './corpus';
 
 const TEMAS_CAB =
@@ -73,6 +73,16 @@ describe('Precedentes qualificados do STJ (F4-01)', () => {
     assert.equal(temTeseFirmada({ tese: 'É legítima a cobrança.' }), true);
     assert.equal(temTeseFirmada({ tese: null }), false);
   });
+  it('variantes de cancelado reconhecem qualificadores sem falso positivo em situações ativas', () => {
+    assert.equal(ehSituacaoCancelada('Cancelada'), true);
+    assert.equal(ehSituacaoCancelada('Cancelado (Parcial)'), true);
+    assert.equal(ehSituacaoCancelada('Cancelada - revisão'), true);
+    assert.equal(ehSituacaoCancelada('Acórdão Publicado'), false);
+    const csv = `${TEMAS_CAB}\n${tema({ ...base, sequencialPrecedente: '11', numeroPrecedente: '70', situacao: 'Cancelado (Parcial)' })}\n`;
+    const [p] = lerPrecedentes(csv, procs);
+    assert.equal(p.cancelado, true);
+    assert.equal(paraPrecedenteDoNucleo(p, manifestoStj()), null);
+  });
 });
 
 describe('Corpus do STJ no repositório (F4-01)', () => {
@@ -91,7 +101,7 @@ describe('Corpus do STJ no repositório (F4-01)', () => {
     assert.equal(new Set(todos.map(p => p.id)).size, todos.length);
     assert.ok(todos.every(p => /^STJ-(TEMA|CONTROVERSIA|IAC|SIRDR|PUIL)-\d+$/.test(p.id)));
     assert.ok(todos.every(p => p.tese === null || p.tese.length > 0));
-    assert.ok(todos.every(p => p.cancelado === /^cancelad[oa]$/i.test(p.situacao)));
+    assert.ok(todos.every(p => p.cancelado === ehSituacaoCancelada(p.situacao)));
   });
 
   it('Tema 1076 (honorários por equidade): tese, órgão, repercussão geral 1255 e processos, como no grafo curado do TeseMap', () => {

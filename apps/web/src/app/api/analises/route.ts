@@ -4,7 +4,7 @@ import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { iniciarAnaliseNoBanco } from '../../../lib/ia/banco';
 import { mensagemDeCota } from '../../../lib/ia/executar';
-import { iaLigada } from '../../../lib/ia/politica';
+import { tarefaIaLigada } from '../../../lib/ia/politica';
 import { usuarioAutenticadoNaoAnonimo } from '../../../lib/sessaoValidada';
 import { veioDoSite } from '../../../lib/origem';
 import { paragrafosDaAnalise, rotuloDaAnalise } from '../../../lib/uso';
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publicavel = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   const secreta = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !publicavel || !secreta || !iaLigada(process.env)) {
+  if (!url || !publicavel || !secreta || !tarefaIaLigada('argumenta-estrutura', process.env)) {
     return NextResponse.json({ mensagem: 'Os recursos de IA não estão disponíveis nesta instalação.' }, { status: 503 });
   }
 

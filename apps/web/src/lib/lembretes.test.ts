@@ -175,6 +175,44 @@ describe('Lembretes de prazo: o envio diário', () => {
     await executarEnvio(dep);
     assert.strictEqual(buscas, 1);
   });
+
+  it('envia em lotes concorrentes limitando itens simultâneos e deduplicando busca de e-mail concorrente', async () => {
+    let buscas = 0;
+    let emVoo = 0;
+    let pico = 0;
+    const itens = Array.from({ length: 12 }, (_, i) => lembrete({ id: `l-${i}` }));
+    const { dep } = simulacoes(itens, {
+      emailDe: async () => {
+        buscas++;
+        await new Promise(r => setTimeout(r, 15));
+        return 'u1@exemplo.com';
+      },
+      enviar: async () => {
+        emVoo++;
+        pico = Math.max(pico, emVoo);
+        await new Promise(r => setTimeout(r, 15));
+        emVoo--;
+        return true;
+      }
+    });
+    const resumo = await executarEnvio(dep, { concorrencia: 4 });
+    assert.strictEqual(resumo.enviados, 12);
+    assert.strictEqual(resumo.falhas, 0);
+    assert.strictEqual(buscas, 1);
+    assert.ok(pico <= 4 && pico > 1, `pico inesperado: ${pico}`);
+  });
+
+  it('não interrompe o lote quando dep.liberar rejeita após falha no envio', async () => {
+    const { dep } = simulacoes([lembrete({ id: 'a' }), lembrete({ id: 'b' })], {
+      enviar: async () => false,
+      liberar: async () => {
+        throw new Error('erro de rede ao liberar');
+      }
+    });
+    const resumo = await executarEnvio(dep);
+    assert.strictEqual(resumo.enviados, 0);
+    assert.strictEqual(resumo.falhas, 2);
+  });
 });
 
 describe('Lembretes de prazo: o que o formulário oferece', () => {

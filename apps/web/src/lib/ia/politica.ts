@@ -21,9 +21,44 @@ export const TENTATIVAS_EXTRAS = 1;
 
 /** O teto de gasto do mês não fica aqui: são dois fundos (gratuito e pagantes) na tabela `ia_fundos` do banco, que o responsável ajusta com uma linha de SQL. */
 
-/** Liga a IA: sem `IA_EXPLICACAO_LIGADA=sim` e sem a chave da API, nenhuma tarefa chama o modelo. */
+const CHAVES_IA_MODULOS = [
+  'IA_EXPLICACAO_LIGADA',
+  'IA_ARGUMENTA_LIGADA',
+  'IA_RELACAO_LIGADA',
+  'IA_INTIMACAO_LIGADA',
+  'IA_PRECEDENTE_LIGADA'
+] as const;
+
+/** Liga a IA: precisa de `ANTHROPIC_API_KEY` e de ao menos um módulo de IA ligado no ambiente. */
 export function iaLigada(env: Record<string, string | undefined>): boolean {
-  return env.IA_EXPLICACAO_LIGADA === 'sim' && !!env.ANTHROPIC_API_KEY;
+  return !!env.ANTHROPIC_API_KEY && CHAVES_IA_MODULOS.some(chave => env[chave] === 'sim');
+}
+
+function argumentaServidorLigada(env: Record<string, string | undefined>): boolean {
+  const dedicada = env.IA_ARGUMENTA_LIGADA;
+  if (dedicada !== undefined && dedicada !== '') return dedicada === 'sim';
+  return env.IA_EXPLICACAO_LIGADA === 'sim';
+}
+
+/** Confere se a tarefa específica do catálogo está habilitada no servidor. */
+export function tarefaIaLigada(tarefa: string, env: Record<string, string | undefined>): boolean {
+  if (!env.ANTHROPIC_API_KEY) return false;
+  switch (tarefa) {
+    case 'explicar-dispositivo':
+      return env.IA_EXPLICACAO_LIGADA === 'sim';
+    case 'argumenta-estrutura':
+    case 'argumenta-questoes':
+    case 'argumenta-fundamentos':
+      return argumentaServidorLigada(env);
+    case 'relacionar-com-o-caso':
+      return env.IA_RELACAO_LIGADA === 'sim';
+    case 'ler-intimacao':
+      return env.IA_INTIMACAO_LIGADA === 'sim';
+    case 'explicar-precedente':
+      return env.IA_PRECEDENTE_LIGADA === 'sim';
+    default:
+      return false;
+  }
 }
 
 /**

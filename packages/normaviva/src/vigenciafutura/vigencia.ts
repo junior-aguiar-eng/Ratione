@@ -18,19 +18,25 @@ const NUMEROS: Record<string, number> = {
 
 const semAcento = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
+/** Normaliza espaçamento e pontuação como em `clausulaDeVigencia` para localizar a cláusula no texto bruto. */
+const normalizarTexto = (t: string) => t.replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1').trim();
+
 /** A sentença de vigência do próprio ato ("Esta Lei entra em vigor..."), a última do texto; vazio se não houver. */
 export function clausulaDeVigencia(textoPlano: string): string {
   const todas = [...textoPlano.matchAll(/Art\.\s*\d+[ºo°]?\.?\s+Esta\s+Lei(?:\s+Complementar)?\s+(?:entra|entrar[áa])\s+em\s+vigor[^.;]{0,300}/gi)];
-  return todas.length > 0 ? todas[todas.length - 1][0].replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1').trim() : '';
+  return todas.length > 0 ? normalizarTexto(todas[todas.length - 1][0]) : '';
 }
 
 /** Interpreta a cláusula. `textoPlano` inteiro serve para reconhecer vigência escalonada ("produzindo efeitos a partir de"). */
 export function lerVigencia(clausula: string, textoPlano = ''): Vigencia {
   if (!clausula) return { tipo: 'complexa' };
   const c = semAcento(clausula);
-  const depois = semAcento(textoPlano.slice(textoPlano.lastIndexOf(clausula.slice(0, 20)) + clausula.length));
+  const planoNorm = normalizarTexto(textoPlano);
+  const posExata = planoNorm ? planoNorm.lastIndexOf(clausula) : -1;
+  const pos = posExata >= 0 ? posExata : planoNorm ? semAcento(planoNorm).lastIndexOf(c) : -1;
+  const depois = pos >= 0 ? semAcento(planoNorm.slice(pos + clausula.length)) : '';
   // "produz efeitos" depois da cláusula, ou dentro dela: efeitos escalonados, que não cabem numa data só
-  if (/produz(?:indo|ir|irao)?\s+efeitos|a partir d[eo]\b.*\bproduz/.test(c) || /^[^]{0,400}?produz(?:indo|ir|irao)?\s+efeitos/.test(depois.slice(0, 400))) return { tipo: 'complexa' };
+  if (/produz(?:indo|ir|ira|irao)?\s+efeitos|a partir d[eo]\b.*\bproduz/.test(c) || /^[^]{0,400}?produz(?:indo|ir|ira|irao)?\s+efeitos/.test(depois.slice(0, 400))) return { tipo: 'complexa' };
 
   if (/\bna\s+data\s+(?:de\s+sua|da\s+sua|da)\s+publicacao\b/.test(c) && !/\bdias?\b|\bmeses\b|\banos?\b.*publicacao/.test(c.replace(/ano de \d+/g, ''))) return { tipo: 'publicacao' };
 

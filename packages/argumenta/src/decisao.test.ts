@@ -140,6 +140,80 @@ describe('Argumenta: pseudonimização', () => {
   it('não troca pedaço de palavra', () => {
     assert.equal(pseudonimizar('Autor: Ana\n\nA banana e a Ana.').texto, 'Autor: [PARTE_1]\n\nA banana e a [PARTE_1].');
   });
+
+  it('oculta testemunha, vítima, menor, perito, sócio, fiador e qualificado inline', () => {
+    const entrada = [
+      'Testemunha - João Pedro Silva',
+      'Vítima — Maria Eduarda Lima',
+      'Menor: Lucas Ferreira',
+      'Perito: Carlos Alberto Souza',
+      'Sócio: Beatriz Nogueira',
+      'Fiador: Marcos Antônio Dias',
+      'Inventariante: Paula Cristina Mendes',
+      'Espólio: José Roberto Gomes',
+      'Foi ouvida a testemunha Sr. Ricardo Oliveira e o perito André Tavares.'
+    ].join('\n');
+    const r = pseudonimizar(entrada);
+    assert.ok(!r.texto.includes('João Pedro Silva'));
+    assert.ok(!r.texto.includes('Maria Eduarda Lima'));
+    assert.ok(!r.texto.includes('Lucas Ferreira'));
+    assert.ok(!r.texto.includes('Carlos Alberto Souza'));
+    assert.ok(!r.texto.includes('Beatriz Nogueira'));
+    assert.ok(!r.texto.includes('Marcos Antônio Dias'));
+    assert.ok(!r.texto.includes('Paula Cristina Mendes'));
+    assert.ok(!r.texto.includes('José Roberto Gomes'));
+    assert.ok(!r.texto.includes('Ricardo Oliveira'));
+    assert.ok(!r.texto.includes('André Tavares'));
+  });
+
+  it('oculta empresas com prefixo de ente público mas preserva entes públicos reais', () => {
+    const entrada = [
+      'Autor: Fazenda Santa Clara Ltda.',
+      'Réu: Fazenda Pública Ltda.',
+      'Interessado: União Comércio e Serviços Ltda.',
+      '',
+      'Autor: Fazenda Pública do Estado de São Paulo',
+      'Réu: Ministério Público Federal',
+      'Interessado: Estado de São Paulo'
+    ].join('\n');
+    const r = pseudonimizar(entrada);
+    assert.ok(!r.texto.includes('Fazenda Santa Clara Ltda'));
+    assert.ok(!r.texto.includes('Fazenda Pública Ltda'));
+    assert.ok(!r.texto.includes('União Comércio e Serviços Ltda'));
+    assert.ok(r.texto.includes('Fazenda Pública do Estado de São Paulo'));
+    assert.ok(r.texto.includes('Ministério Público Federal'));
+    assert.ok(r.texto.includes('Estado de São Paulo'));
+  });
+
+  it('oculta OAB sem barra, RG com órgão/UF, telefone +55 e endereço s/n ou quadra/lote', () => {
+    const entrada =
+      'Advogado: Fulano, OAB 12345/SP, RG MG-12.345.678, RG SSP/SP 98.765.432-1, tel +55 (11) 99999-1234, Rua das Acácias, s/n, apto 302 e Quadra 104, Lote 12.';
+    const r = pseudonimizar(entrada);
+    assert.ok(!r.texto.includes('12345/SP'));
+    assert.ok(!r.texto.includes('12.345.678'));
+    assert.ok(!r.texto.includes('98.765.432-1'));
+    assert.ok(!r.texto.includes('99999-1234'));
+    assert.ok(!r.texto.includes('Rua das Acácias'));
+    assert.ok(!r.texto.includes('Quadra 104, Lote 12'));
+  });
+});
+
+describe('Argumenta: segmentação com linha longa adjacente', () => {
+  it('linha individual acima de 200 caracteres não impede reagrupar linhas curtas vizinhas no mesmo bloco', () => {
+    const longa = 'x'.repeat(215) + '.';
+    const texto = [
+      'Primeira linha curta do bloco que continua',
+      'na segunda linha curta antes da longa.',
+      longa,
+      'Terceira linha curta que continua na quarta linha',
+      'para formar um único parágrafo após a linha longa.'
+    ].join('\n');
+    const p = segmentar(texto);
+    assert.equal(p.length, 3);
+    assert.equal(p[0], 'Primeira linha curta do bloco que continua na segunda linha curta antes da longa.');
+    assert.equal(p[1], longa);
+    assert.equal(p[2], 'Terceira linha curta que continua na quarta linha para formar um único parágrafo após a linha longa.');
+  });
 });
 
 describe('Argumenta: decisão preparada para envio', () => {

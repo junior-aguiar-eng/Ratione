@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { abrirContexto, acessoUsuarioCobranca } from '../../../../lib/cobranca/contexto';
 import { aplicarSituacao, assinaturaDoUsuario } from '../../../../lib/cobranca/banco';
 import { ErroMp, criarClienteMp } from '../../../../lib/cobranca/mercadopago';
+import { cancelarAssinaturaDoUsuario } from '../../../../lib/cobranca/operacoes';
 import { veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 
@@ -34,12 +35,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true, cicloFim: null });
     }
 
-    const mp = criarClienteMp(ctx.cfg.tokenMp!);
-    const atual = await mp.buscarAssinatura(a.mpId);
-    await mp.cancelarAssinatura(a.mpId);
-    const fim = atual?.proximaCobranca ?? null;
-    await aplicarSituacao(ctx.servidor, a.id, 'cancelada', 'cancelled', fim);
-    return NextResponse.json({ ok: true, cicloFim: fim ?? a.cicloFim });
+    const res = await cancelarAssinaturaDoUsuario({
+      assinatura: { id: a.id, mpId: a.mpId, cicloFim: a.cicloFim },
+      mp: criarClienteMp(ctx.cfg.tokenMp!),
+      aplicarCancelada: fim => aplicarSituacao(ctx.servidor, a.id, 'cancelada', 'cancelled', fim),
+      registrarErro: (msg, campos) => registrar('ERROR', msg, campos)
+    });
+    if (!res.ok) return NextResponse.json({ mensagem: res.mensagem }, { status: res.status });
+    return NextResponse.json({ ok: true, cicloFim: res.cicloFim });
   } catch (e) {
     registrar('ERROR', 'Cobrança: erro ao cancelar', { erro_mensagem: (e as Error).message.slice(0, 300), status_mp: e instanceof ErroMp ? e.status : null });
     return NextResponse.json({ mensagem: 'Não foi possível cancelar agora. Tente de novo em alguns minutos.' }, { status: 502 });

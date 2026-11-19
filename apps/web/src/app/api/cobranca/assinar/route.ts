@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { abrirContexto, acessoUsuarioCobranca } from '../../../../lib/cobranca/contexto';
 import { aplicarSituacao, criarAssinaturaPendente, vincularAoMp } from '../../../../lib/cobranca/banco';
 import { ErroMp, criarClienteMp } from '../../../../lib/cobranca/mercadopago';
+import { criarEVincularAssinatura } from '../../../../lib/cobranca/operacoes';
 import { origemPublica, veioDoSite } from '../../../../lib/origem';
 import { registrar } from '../../../../lib/log';
 import { LIMITE_CORPO, lerJsonLimitado } from '../../../../lib/corpoJson';
@@ -49,19 +50,22 @@ export async function POST(request: Request) {
 
     try {
       const nome = plano === 'essencial' ? 'Essencial' : 'Profissional';
-      const criada = await mp.criarAssinatura({
-        motivo: `Ratione, plano ${nome}`,
-        referencia: pendente.assinaturaId,
-        email: usuario.email,
-        valorCentavos: pendente.valorCentavos,
-        backUrl: `${origemPublica(request)}/meu-espaco/uso?assinatura=retorno`,
-        fim: new Date(Date.now() + CINCO_ANOS_MS)
+      const { url: link } = await criarEVincularAssinatura({
+        mp,
+        nova: {
+          motivo: `Ratione, plano ${nome}`,
+          referencia: pendente.assinaturaId,
+          email: usuario.email,
+          valorCentavos: pendente.valorCentavos,
+          backUrl: `${origemPublica(request)}/meu-espaco/uso?assinatura=retorno`,
+          fim: new Date(Date.now() + CINCO_ANOS_MS)
+        },
+        vincular: mpId => vincularAoMp(ctx.servidor, pendente.assinaturaId, mpId),
+        cancelarLocal: () => aplicarSituacao(ctx.servidor, pendente.assinaturaId, 'cancelada', 'falha_ao_criar', null),
+        registrarErro: (msg, campos) => registrar('ERROR', msg, campos)
       });
-      await vincularAoMp(ctx.servidor, pendente.assinaturaId, criada.id);
-      return NextResponse.json({ url: criada.linkDePagamento });
+      return NextResponse.json({ url: link });
     } catch (e) {
-      // Não conseguiu criar lá: a pendente local não serve para nada
-      await aplicarSituacao(ctx.servidor, pendente.assinaturaId, 'cancelada', 'falha_ao_criar', null).catch(() => undefined);
       registrar('ERROR', 'Cobrança: não criou a assinatura no Mercado Pago', { erro_mensagem: (e as Error).message.slice(0, 300), status_mp: e instanceof ErroMp ? e.status : null });
       return NextResponse.json({ mensagem: 'Não foi possível iniciar a assinatura agora. Tente de novo em alguns minutos.' }, { status: 502 });
     }

@@ -56,11 +56,33 @@ describe('NormaViva: adaptador para o núcleo', () => {
     assert.strictEqual(original.alteradoPor, undefined);
   });
 
-  it('classifica pelo nível mais fundo e recusa rótulo fora do padrão', () => {
+  it('classifica pelo nível mais fundo (inclusive inciso com letra, alínea e item) e recusa rótulo fora do padrão', () => {
     assert.deepStrictEqual(classificarRotulo('art. 85'), { tipo: 'artigo', numero: '85' });
     assert.deepStrictEqual(classificarRotulo('art. 489, § 1º, IV'), { tipo: 'inciso', numero: 'IV' });
+    assert.deepStrictEqual(classificarRotulo('art. 489, § 1º, IV-A'), { tipo: 'inciso', numero: 'IV-A' });
+    assert.deepStrictEqual(classificarRotulo('art. 5º, LV, a)'), { tipo: 'alinea', numero: 'a' });
+    assert.deepStrictEqual(classificarRotulo('art. 5º, alínea "c"'), { tipo: 'alinea', numero: 'c' });
+    assert.deepStrictEqual(classificarRotulo('art. 5º, § 2º, III, b), 1.'), { tipo: 'item', numero: '1' });
+    assert.deepStrictEqual(classificarRotulo('art. 5º, item 2'), { tipo: 'item', numero: '2' });
     assert.deepStrictEqual(classificarRotulo('art. 219, parágrafo único'), { tipo: 'paragrafo_unico', numero: 'único' });
     assert.throws(() => classificarRotulo('artigo oitenta e cinco'));
+  });
+
+  it('adaptador reconhece CF, Decreto-Lei (DL) e Emenda Constitucional (EC)', () => {
+    const base = HISTORICO_DISPOSITIVOS_EXEMPLO[0];
+    assert.strictEqual(versaoParaDispositivo({ ...base, dispositivoRotulo: 'art. 5º', normaNome: 'CF' }, PROCEDENCIA_HISTORICO_EXEMPLO).normaId, 'CF-1988');
+    assert.strictEqual(
+      versaoParaDispositivo({ ...base, dispositivoRotulo: 'art. 121', normaNome: 'Decreto-Lei nº 2.848/1940' }, PROCEDENCIA_HISTORICO_EXEMPLO).normaId,
+      'DL-2848-1940'
+    );
+    assert.strictEqual(
+      versaoParaDispositivo({ ...base, dispositivoRotulo: 'art. 1º', normaNome: 'DL 5.452/1943' }, PROCEDENCIA_HISTORICO_EXEMPLO).normaId,
+      'DL-5452-1943'
+    );
+    assert.strictEqual(
+      versaoParaDispositivo({ ...base, dispositivoRotulo: 'art. 1º', normaNome: 'EC 132/2023' }, PROCEDENCIA_HISTORICO_EXEMPLO).normaId,
+      'EC-132-2023'
+    );
   });
 
   it('revogação e declaração de inconstitucionalidade marcam o dispositivo como revogado', () => {
