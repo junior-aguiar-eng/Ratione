@@ -107,8 +107,12 @@ const PALAVRAS_DO_NOME_QUE_NAO_IDENTIFICAM = new Set(['de', 'do', 'da', 'dos', '
 const palavrasDe = (s: string) => normalizarParaComparar(s).replace(/[ªº°]/g, '').split(/[^a-z0-9]+/).filter(Boolean);
 const palavrasDoNome = (nome: string) => palavrasDe(nome).filter(p => !PALAVRAS_DO_NOME_QUE_NAO_IDENTIFICAM.has(p));
 
+const ALIAS_SIGLA_TRIBUNAL: Record<string, readonly string[]> = {
+  TJDF: ['tjdft']
+};
+
 /**
- * O trecho identifica o tribunal da sigla: traz a própria sigla ("TJSP"; "TRT2", "TRT 2" ou "TRT da 2ª Região"), ou traz todas as palavras do nome oficial
+ * O trecho identifica o tribunal da sigla: traz a própria sigla ("TJSP", "TJDFT"; "TRT2", "TRT 2" ou "TRT da 2ª Região"), ou traz todas as palavras do nome oficial
  * ("Tribunal de Justiça de Pernambuco" serve para o TJPE, com ou sem "do Estado"). Quando o nome de outro tribunal contém o deste e também casa com o trecho
  * ("Mato Grosso" dentro de "Mato Grosso do Sul"), o trecho não identifica o tribunal mais curto. Sem isso, uma sigla errada com um trecho verdadeiro do texto passaria.
  */
@@ -118,7 +122,8 @@ export function trechoIdentificaTribunal(sigla: string, trecho: string): boolean
   const t = normalizarParaComparar(trecho);
   const [, letras = '', numero = ''] = sigla.toLowerCase().match(/^([a-z]+)(\d*)$/) ?? [];
   const pelaSigla = new RegExp(`(?<![a-z0-9])${letras}\\s*${numero ? `(?:d[ao]\\s*)?0?${numero}\\s*[ªº°]?(?![0-9])` : '(?![a-z0-9])'}`).test(t);
-  if (pelaSigla) return true;
+  const peloAlias = ALIAS_SIGLA_TRIBUNAL[sigla]?.some(a => new RegExp(`(?<![a-z0-9])${a}(?![a-z0-9])`).test(t)) ?? false;
+  if (pelaSigla || peloAlias) return true;
   const palavras = new Set(palavrasDe(trecho));
   const casaComONome = (nome: string) => palavrasDoNome(nome).every(p => palavras.has(p));
   if (!casaComONome(alvo.nome)) return false;

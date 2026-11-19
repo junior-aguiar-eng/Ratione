@@ -156,7 +156,9 @@ describe('Tarefa ler-intimacao: o trecho identifica o tribunal', () => {
       ['TRT2', 'PJe-TRT2'],
       ['TRF3', 'Tribunal Regional Federal da 3ª Região'],
       ['TRF3', 'TRF da 3ª Região'],
-      ['TJSC', 'Poder Judiciário do Estado de Santa Catarina\nTribunal de Justiça']
+      ['TJSC', 'Poder Judiciário do Estado de Santa Catarina\nTribunal de Justiça'],
+      ['TJDF', 'TJDFT - 2ª Vara Cível'],
+      ['TJDF', 'PJe-TJDFT']
     ];
     for (const [sigla, trecho] of certos) assert.equal(trechoIdentificaTribunal(sigla, trecho), true, `${sigla} / ${trecho}`);
   });

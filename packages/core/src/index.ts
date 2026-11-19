@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProcedenciaSchema } from './procedencia';
+import { DataIsoSchema, ProcedenciaSchema } from './procedencia';
 
 export * from './procedencia';
 export * from './texto';
@@ -25,7 +25,8 @@ export const TribunalSchema = z.object({
   nome: z.string(),
   sigla: z.string(),
   esfera: EsferaJudicialSchema,
-  uf: z.string().optional(), // ex: "SP" (opcional para tribunais superiores)
+  uf: z.string().optional(), // ex: "SP" (UF única ou da sede)
+  ufs: z.array(z.string().length(2)).optional(), // UFs abrangidas quando o tribunal é multiestadual (TRFs e TRTs regionais)
   sede: z.string(),
   horarioExpedienteFim: z.string().default('19:00'), // Prazos eletrônicos terminam às 23:59:59 (Lei 11.419/06, art. 3º, par. ún.)
   fusoHorario: z.string().default('America/Sao_Paulo'),
@@ -44,11 +45,22 @@ export const TRIBUNAIS_BRASIL: Record<string, Tribunal> = {
   TSE: { id: 'TSE', nome: 'Tribunal Superior Eleitoral', sigla: 'TSE', esfera: 'superior', sede: 'Brasília/DF', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
 
   // Tribunais Regionais Federais
-  TRF1: { id: 'TRF1', nome: 'Tribunal Regional Federal da 1ª Região', sigla: 'TRF1', esfera: 'federal', sede: 'Brasília/DF', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
-  TRF2: { id: 'TRF2', nome: 'Tribunal Regional Federal da 2ª Região', sigla: 'TRF2', esfera: 'federal', uf: 'RJ', sede: 'Rio de Janeiro/RJ', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '17:00', peticionamentoEletronicoFim: '23:59:59' },
-  TRF3: { id: 'TRF3', nome: 'Tribunal Regional Federal da 3ª Região', sigla: 'TRF3', esfera: 'federal', uf: 'SP', sede: 'São Paulo/SP', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
-  TRF4: { id: 'TRF4', nome: 'Tribunal Regional Federal da 4ª Região', sigla: 'TRF4', esfera: 'federal', uf: 'RS', sede: 'Porto Alegre/RS', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
-  TRF5: { id: 'TRF5', nome: 'Tribunal Regional Federal da 5ª Região', sigla: 'TRF5', esfera: 'federal', uf: 'PE', sede: 'Recife/PE', fusoHorario: 'America/Recife', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
+  TRF1: {
+    id: 'TRF1',
+    nome: 'Tribunal Regional Federal da 1ª Região',
+    sigla: 'TRF1',
+    esfera: 'federal',
+    uf: 'DF',
+    ufs: ['DF', 'AC', 'AM', 'AP', 'BA', 'GO', 'MA', 'MT', 'PA', 'PI', 'RO', 'RR', 'TO'],
+    sede: 'Brasília/DF',
+    fusoHorario: 'America/Sao_Paulo',
+    horarioExpedienteFim: '19:00',
+    peticionamentoEletronicoFim: '23:59:59'
+  },
+  TRF2: { id: 'TRF2', nome: 'Tribunal Regional Federal da 2ª Região', sigla: 'TRF2', esfera: 'federal', uf: 'RJ', ufs: ['RJ', 'ES'], sede: 'Rio de Janeiro/RJ', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '17:00', peticionamentoEletronicoFim: '23:59:59' },
+  TRF3: { id: 'TRF3', nome: 'Tribunal Regional Federal da 3ª Região', sigla: 'TRF3', esfera: 'federal', uf: 'SP', ufs: ['SP', 'MS'], sede: 'São Paulo/SP', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
+  TRF4: { id: 'TRF4', nome: 'Tribunal Regional Federal da 4ª Região', sigla: 'TRF4', esfera: 'federal', uf: 'RS', ufs: ['RS', 'SC', 'PR'], sede: 'Porto Alegre/RS', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
+  TRF5: { id: 'TRF5', nome: 'Tribunal Regional Federal da 5ª Região', sigla: 'TRF5', esfera: 'federal', uf: 'PE', ufs: ['PE', 'CE', 'AL', 'SE', 'RN', 'PB'], sede: 'Recife/PE', fusoHorario: 'America/Recife', horarioExpedienteFim: '18:00', peticionamentoEletronicoFim: '23:59:59' },
   TRF6: { id: 'TRF6', nome: 'Tribunal Regional Federal da 6ª Região', sigla: 'TRF6', esfera: 'federal', uf: 'MG', sede: 'Belo Horizonte/MG', fusoHorario: 'America/Sao_Paulo', horarioExpedienteFim: '19:00', peticionamentoEletronicoFim: '23:59:59' },
 
   // Tribunais Regionais do Trabalho (a sede é a do Tribunal; alguns atendem mais de um Estado: TRT8 PA e AP, TRT10 DF e TO, TRT11 AM e RR, TRT14 RO e AC)
@@ -130,7 +142,7 @@ export const DispositivoLegalSchema = z.object({
   tipo: TipoDispositivoSchema,
   numero: z.string(),
   texto: z.string(),
-  vigenteEm: z.string(), // ISO Date
+  vigenteEm: DataIsoSchema,
   revogado: z.boolean().default(false),
   alteradoPor: z.string().optional(),
   procedencia: ProcedenciaSchema

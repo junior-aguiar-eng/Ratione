@@ -19,19 +19,12 @@ const titulo = (l: string) => l.length < 100 && /\p{Lu}/u.test(l) && !/\p{Ll}/u.
 /** Linha de cabeçalho com rótulo ("Autora: …", "Advogado(s): …"): começa parágrafo novo. */
 const rotulo = (l: string) => /^\p{Lu}[\p{L}() ]{1,30}:\s/u.test(l);
 
-/**
- * Junta as linhas de um bloco. Texto copiado de PDF chega quebrado no fim de cada linha: lá, uma linha termina o parágrafo quando
- * acaba em fim de frase e é visivelmente mais curta que as outras, e título e linha com rótulo ficam separados.
- * Texto copiado de editor chega com uma linha por parágrafo.
- */
-function paragrafosDoBloco(linhas: string[]): string[] {
-  const maior = Math.max(...linhas.map(l => l.length));
-  // Linhas longas: cada uma já é um parágrafo (cópia de editor de texto)
-  if (linhas.length === 1 || maior > 200) return linhas;
-
+function reagruparCurtas(curtas: string[]): string[] {
+  if (curtas.length <= 1) return curtas;
+  const maior = Math.max(...curtas.map(l => l.length));
   const saida: string[] = [];
   let atual = '';
-  for (const linha of linhas) {
+  for (const linha of curtas) {
     if (atual && (titulo(linha) || rotulo(linha) || titulo(atual))) {
       saida.push(atual);
       atual = '';
@@ -45,6 +38,31 @@ function paragrafosDoBloco(linhas: string[]): string[] {
     }
   }
   if (atual) saida.push(atual);
+  return saida;
+}
+
+/**
+ * Junta as linhas de um bloco. Texto copiado de PDF chega quebrado no fim de cada linha: lá, uma linha termina o parágrafo quando
+ * acaba em fim de frase e é visivelmente mais curta que as outras, e título e linha com rótulo ficam separados.
+ * Uma linha individual > 200 caracteres sai intacta sem impedir o reagrupamento das linhas curtas vizinhas.
+ */
+function paragrafosDoBloco(linhas: string[]): string[] {
+  if (linhas.length === 1) return linhas;
+
+  const saida: string[] = [];
+  let curtas: string[] = [];
+  for (const linha of linhas) {
+    if (linha.length > 200) {
+      if (curtas.length) {
+        saida.push(...reagruparCurtas(curtas));
+        curtas = [];
+      }
+      saida.push(linha);
+    } else {
+      curtas.push(linha);
+    }
+  }
+  if (curtas.length) saida.push(...reagruparCurtas(curtas));
   return saida;
 }
 

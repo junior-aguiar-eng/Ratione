@@ -65,7 +65,14 @@ export async function POST(request: Request) {
       return !error && (data?.length ?? 0) === 1;
     },
     liberar: async (id, momento) => {
-      await sb.from('lembretes_prazo').update({ [coluna(momento)]: null }).eq('id', id);
+      const { error } = await sb.from('lembretes_prazo').update({ [coluna(momento)]: null }).eq('id', id);
+      if (error) {
+        registrar('ERROR', 'Lembretes: falha ao liberar reserva após erro no envio', {
+          lembrete_id: id,
+          momento,
+          erro_mensagem: error.message
+        });
+      }
     },
     enviar: async (para, email) => {
       const resposta = await fetch('https://api.resend.com/emails', {

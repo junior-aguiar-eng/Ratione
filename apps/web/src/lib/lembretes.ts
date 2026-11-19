@@ -103,11 +103,13 @@ export interface ResumoEnvio {
   falhas: number;
 }
 
-export async function executarEnvio(dep: DependenciasEnvio): Promise<ResumoEnvio> {
+const CONCORRENCIA_PADRAO = 8;
+
+export async function executarEnvio(dep: DependenciasEnvio, opcoes: { concorrencia?: number } = {}): Promise<ResumoEnvio> {
   const hoje = dep.hoje();
   const lembretes = await dep.listarProximos(hoje, somarDiasIso(hoje, 3));
   const resumo: ResumoEnvio = { analisados: lembretes.length, enviados: 0, simulados: 0, semEmail: 0, falhas: 0 };
-  const emails = new Map<string, string | null>();
+  const pendentes: Array<{ l: Lembrete; momento: Momento }> = [];
 
   for (const l of lembretes) {
     const momento = avisoDevido(l, hoje);
@@ -116,24 +118,46 @@ export async function executarEnvio(dep: DependenciasEnvio): Promise<ResumoEnvio
       resumo.simulados++;
       continue;
     }
-    if (!emails.has(l.usuario_id)) emails.set(l.usuario_id, await dep.emailDe(l.usuario_id));
-    const para = emails.get(l.usuario_id);
+    pendentes.push({ l, momento });
+  }
+
+  const concorrencia = Math.max(1, Math.floor(opcoes.concorrencia ?? CONCORRENCIA_PADRAO));
+  // Cacheia a Promise para que lembretes do mesmo usuário no mesmo lote consultem `emailDe` uma única vez.
+  const emails = new Map<string, Promise<string | null>>();
+  const emailDe = (usuarioId: string): Promise<string | null> => {
+    let promessa = emails.get(usuarioId);
+    if (!promessa) {
+      promessa = Promise.resolve()
+        .then(() => dep.emailDe(usuarioId))
+        .catch(() => null);
+      emails.set(usuarioId, promessa);
+    }
+    return promessa;
+  };
+
+  const processar = async ({ l, momento }: { l: Lembrete; momento: Momento }) => {
+    const para = await emailDe(l.usuario_id);
     if (!para) {
       resumo.semEmail++;
-      continue;
+      return;
     }
-    if (!(await dep.reservar(l.id, momento))) continue; // outro envio já cuidou deste aviso
+    if (!(await dep.reservar(l.id, momento))) return; // outro envio já cuidou deste aviso
     let ok = false;
     try {
       ok = await dep.enviar(para, montarEmail(l, hoje));
     } catch {
       ok = false;
     }
-    if (ok) resumo.enviados++;
-    else {
+    if (ok) {
+      resumo.enviados++;
+    } else {
       resumo.falhas++;
-      await dep.liberar(l.id, momento);
+      await dep.liberar(l.id, momento).catch(() => undefined);
     }
+  };
+
+  for (let i = 0; i < pendentes.length; i += concorrencia) {
+    await Promise.allSettled(pendentes.slice(i, i + concorrencia).map(processar));
   }
   return resumo;
 }
