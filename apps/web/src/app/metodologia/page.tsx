@@ -99,7 +99,7 @@ export default function MetodologiaPage() {
               <strong className="text-ink">Calendário conferido contra o ato do tribunal:</strong> {resumoCalendarioConferido()}.
               O TJRJ (ocorrências até outubro de 2026 e regras da Lei estadual 10.633/2024), o TRT13 e o TRT18 têm carga
               parcial, sem selo. Nos demais casos (como o TSE e anos ainda não conferidos), entram os feriados nacionais, a
-              Lei 5.010 e os feriados estaduais já conferidos por lei; o resto fica como dia pendente e aparece só como data
+              Lei 5.010 na Justiça Federal e nos tribunais superiores e os feriados estaduais já conferidos por lei; o resto fica como dia pendente e aparece só como data
               alternativa.
             </li>
             <li>
@@ -154,9 +154,9 @@ export default function MetodologiaPage() {
               <strong className="text-ink">Argumenta:</strong> prévia. Analisa uma decisão colada como texto (estrutura,
               questões, conclusões, fundamentos com acesso aos trechos originais e mapa argumentativo montado por código),
               com IA e com os dados pessoais trocados por marcadores no navegador antes do envio; o texto e o resultado ficam
-              só na aba do navegador e não são guardados. Cada citação de norma ou precedente é conferida por código contra
-              o NormaViva e o TeseMap (recebe selo de encontrada na base, não localizada ou fora da base — o selo verifica
-              apenas a existência na base, sem atestar acerto jurídico) e permite navegar até os dispositivos e precedentes
+              só na aba do navegador e não são guardados. As citações reconhecidas de normas e precedentes são conferidas por código contra
+              o NormaViva e o TeseMap (recebem selo de encontrada na base, não localizada na base ou fora da base — o selo verifica
+              apenas a existência na base, sem atestar acerto jurídico) e permitem navegar até os dispositivos e precedentes
               relacionados. Avaliado em um corpus de 30 decisões públicas com gabarito validado. O envio de arquivos
               (PDF/DOCX), a detecção de fragilidades da fundamentação e o salvamento de análises ainda não estão habilitados
               na interface.

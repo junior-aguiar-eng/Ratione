@@ -96,7 +96,7 @@ export default function PrivacidadePage() {
             </li>
             <li>
               <Destaque>Leitura de intimação no PrazoZero e relação com o caso (desligadas por padrão):</Destaque> quando habilitadas, a leitura de
-              intimação colada aplica a mesma pseudonimização no navegador antes do envio e recusa no servidor de dado pessoal detectável; a relação
+              intimação colada aplica a mesma pseudonimização no navegador antes do envio e recusa no servidor texto com dado pessoal detectável; a relação
               com o caso envia apenas a questão e a conclusão já pseudonimizadas pela análise do Argumenta junto ao texto público da fonte.
             </li>
             <li>

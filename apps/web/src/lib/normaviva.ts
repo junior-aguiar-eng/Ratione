@@ -260,6 +260,7 @@ async function lerSubdispositivos(
       .eq('escopo', dispositivo.escopo)
       .gte('ordem', dispositivo.ordem)
       .order('ordem')
+      .order('id')
       .range(inicio, fim);
 
     if (pagina.error) falhou(pagina.error, 'ler o texto do dispositivo');

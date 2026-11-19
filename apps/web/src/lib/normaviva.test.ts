@@ -95,13 +95,14 @@ function criarDbFalso(opcoes: {
   erroNaPagina?: (inicio: number, fim: number) => { message: string; code?: string } | null;
 }) {
   const paginasSolicitadas: Array<[number, number]> = [];
+  const ordensSolicitadas: string[][] = [];
   const lotesRelacoes: number[] = [];
 
   function consulta(tabela: string) {
     const filtrosEq: Array<[string, unknown]> = [];
     const filtrosGte: Array<[string, number]> = [];
     const filtrosIn: Array<[string, unknown[]]> = [];
-    let ordenarPor: string | null = null;
+    const ordenacoes: string[] = [];
     let limite: number | null = null;
     let intervalo: [number, number] | null = null;
     let unico = false;
@@ -112,6 +113,7 @@ function criarDbFalso(opcoes: {
       }
       if (tabela === 'dispositivos' && intervalo) {
         paginasSolicitadas.push(intervalo);
+        ordensSolicitadas.push([...ordenacoes]);
         const erro = opcoes.erroNaPagina?.(intervalo[0], intervalo[1]);
         if (erro) return { data: null, error: erro };
       }
@@ -130,12 +132,33 @@ function criarDbFalso(opcoes: {
         );
       });
 
-      if (ordenarPor) {
-        const col = ordenarPor;
+      if (ordenacoes.length > 0) {
+        // Sem desempate explícito por `id`, consultas paginadas no Postgres podem devolver empates em ordem diferente entre páginas
+        const desempateInstavel = tabela === 'dispositivos' && intervalo !== null && !ordenacoes.includes('id');
+        const inverterEmpate = desempateInstavel && paginasSolicitadas.length % 2 === 0;
         linhas = [...linhas].sort((a, b) => {
-          const va = Number((a as unknown as Record<string, unknown>)[col]);
-          const vb = Number((b as unknown as Record<string, unknown>)[col]);
-          return va - vb;
+          const regA = a as unknown as Record<string, unknown>;
+          const regB = b as unknown as Record<string, unknown>;
+          for (const col of ordenacoes) {
+            const va = regA[col];
+            const vb = regB[col];
+            const cmp =
+              typeof va === 'number' && typeof vb === 'number'
+                ? va - vb
+                : String(va) < String(vb)
+                  ? -1
+                  : String(va) > String(vb)
+                    ? 1
+                    : 0;
+            if (cmp !== 0) return cmp;
+          }
+          if (desempateInstavel) {
+            const idA = String(regA.id);
+            const idB = String(regB.id);
+            const cmpId = idA < idB ? -1 : idA > idB ? 1 : 0;
+            return inverterEmpate ? -cmpId : cmpId;
+          }
+          return 0;
         });
       }
       if (intervalo) linhas = linhas.slice(intervalo[0], intervalo[1] + 1);
@@ -153,7 +176,7 @@ function criarDbFalso(opcoes: {
       eq: (col: string, val: unknown) => (filtrosEq.push([col, val]), cadeia),
       gte: (col: string, val: number) => (filtrosGte.push([col, val]), cadeia),
       in: (col: string, vals: unknown[]) => (filtrosIn.push([col, vals]), cadeia),
-      order: (col: string) => ((ordenarPor = col), cadeia),
+      order: (col: string) => (ordenacoes.push(col), cadeia),
       limit: (n: number) => ((limite = n), cadeia),
       range: (inicio: number, fim: number) => ((intervalo = [inicio, fim]), cadeia),
       single: () => ((unico = true), cadeia),
@@ -165,6 +188,7 @@ function criarDbFalso(opcoes: {
   return {
     db: { from: consulta } as unknown as SupabaseClient,
     paginasSolicitadas,
+    ordensSolicitadas,
     lotesRelacoes
   };
 }
@@ -304,5 +328,37 @@ describe('carregarDetalhe: paginação de subdispositivos', () => {
     });
 
     await assert.rejects(() => carregarDetalhe(db, dispositivos[0].id, [NORMA_TESTE]), /ler o texto do dispositivo: timeout/);
+  });
+
+  it('mantém paginação determinística entre fronteiras de página quando há empate em ordem', async () => {
+    const empatados = Array.from({ length: 10 }, (_, i) =>
+      criarDispositivo(497, `art. 6º, empate-${String(i + 1).padStart(2, '0')}`, 'inciso')
+    ).reverse();
+    const dispositivos: Dispositivo[] = [
+      criarDispositivo(1, 'art. 6º', 'artigo'),
+      ...Array.from({ length: 495 }, (_, i) => criarDispositivo(i + 2, `art. 6º, ${i + 1}`, 'inciso')),
+      ...empatados,
+      criarDispositivo(498, 'art. 7º', 'artigo')
+    ];
+    const { db, paginasSolicitadas, ordensSolicitadas } = criarDbFalso({ dispositivos });
+
+    const detalhe = await carregarDetalhe(db, dispositivos[0].id, [NORMA_TESTE]);
+    const ids = detalhe.texto.map(d => d.id);
+    const idsEmpatadosEsperados = Array.from(
+      { length: 10 },
+      (_, i) => `${NORMA_TESTE.id}|corpo|art. 6º, empate-${String(i + 1).padStart(2, '0')}`
+    );
+
+    assert.equal(detalhe.texto.length, 506);
+    assert.equal(new Set(ids).size, 506);
+    assert.deepEqual(ids.slice(496), idsEmpatadosEsperados);
+    assert.deepEqual(paginasSolicitadas, [
+      [0, 499],
+      [500, 999]
+    ]);
+    assert.deepEqual(ordensSolicitadas, [
+      ['ordem', 'id'],
+      ['ordem', 'id']
+    ]);
   });
 });

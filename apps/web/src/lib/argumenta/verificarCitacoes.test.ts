@@ -2,9 +2,12 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { verificarCitacoes, type BancoDeCitacoes } from './verificarCitacoes';
 
-const NORMAS = ['LEI-13105-2015', 'LEI-8078-1990', 'LEI-14133-2021'];
+const NORMAS = ['CF-1988', 'LEI-13105-2015', 'LEI-8078-1990', 'LEI-14133-2021'];
 
 const DISPOSITIVOS: Record<string, string> = {
+  'CF-1988|art. 5º': 'CF-1988-art-5',
+  'CF-1988|art. 5º, XXXV': 'CF-1988-art-5-XXXV',
+  'CF-1988|art. 5º, § 1º': 'CF-1988-art-5-p-1',
   'LEI-8078-1990|art. 14': 'LEI-8078-1990|corpo|art. 14',
   'LEI-13105-2015|art. 85': 'LEI-13105-2015|corpo|art. 85',
   'LEI-13105-2015|art. 85, § 2º': 'LEI-13105-2015|corpo|art. 85, § 2º'
@@ -49,6 +52,23 @@ describe('Argumenta F5-04: verificação das citações no banco', () => {
     const sem = await um('art. 85, § 9º, do CPC');
     assert.equal(sem?.estado, 'encontrada');
     assert.match(sem?.aviso ?? '', /não foi conferido/);
+  });
+
+  it('alínea com inciso ou parágrafo pai na base resolve o link para o pai em vez de truncar no artigo', async () => {
+    const incisoAlinea = await um('art. 5º, inciso XXXV, alínea A, da CF');
+    assert.equal(incisoAlinea?.estado, 'encontrada');
+    assert.equal(incisoAlinea?.links[0].href, '/normaviva?d=CF-1988-art-5-XXXV');
+    assert.match(incisoAlinea?.aviso ?? '', /alínea/i);
+    assert.match(incisoAlinea?.aviso ?? '', /não foi conferida/i);
+
+    const paragrafoAlinea = await um('art. 5º, § 1º, alínea a, da CF');
+    assert.equal(paragrafoAlinea?.estado, 'encontrada');
+    assert.equal(paragrafoAlinea?.links[0].href, '/normaviva?d=CF-1988-art-5-p-1');
+
+    const semPai = await um('art. 5º, inciso LX, alínea a, da CF');
+    assert.equal(semPai?.estado, 'encontrada');
+    assert.equal(semPai?.links[0].href, '/normaviva?d=CF-1988-art-5');
+    assert.match(semPai?.aviso ?? '', /não foi conferido/);
   });
 
   it('lei da base é encontrada; lei fora da base é "fora", não "não localizada"', async () => {
