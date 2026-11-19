@@ -194,6 +194,53 @@ describe('Planos e cota por análise (F8-02 e F8-03)', () => {
     await assert.rejects(como(db, nina, tx => tx.query("update public.plano_cotas set quantidade = 9999")), /permission denied/);
   });
 
+  it('janela mensal para assinaturas iniciadas nos dias 29, 30 ou 31 mantém inicio <= agora < fim em meses curtos e bissextos', async () => {
+    const casos: Array<[string, string, string, string]> = [
+      // Ciclo em 31/01: antes da virada de fevereiro
+      ['2026-01-31T15:00:00Z', '2026-02-28T14:59:59Z', '2026-01-31T15:00:00.000Z', '2026-02-28T15:00:00.000Z'],
+      // Exatamente no aniversário ajustado de fevereiro -> janela [28/02, 31/03)
+      ['2026-01-31T15:00:00Z', '2026-02-28T15:00:00Z', '2026-02-28T15:00:00.000Z', '2026-03-31T15:00:00.000Z'],
+      // Caso crítico reportado (31/01 consultado em 29/03): nunca pode devolver [28/02, 28/03) no passado
+      ['2026-01-31T15:00:00Z', '2026-03-29T15:00:00Z', '2026-02-28T15:00:00.000Z', '2026-03-31T15:00:00.000Z'],
+      // Ao cruzar 31/03 -> recupera a âncora 31 até o último dia de abril (30/04)
+      ['2026-01-31T15:00:00Z', '2026-03-31T15:00:00Z', '2026-03-31T15:00:00.000Z', '2026-04-30T15:00:00.000Z'],
+      // Ano bissexto: 31/01/2024 consultado em 01/03/2024 -> janela [29/02/2024, 31/03/2024)
+      ['2024-01-31T15:00:00Z', '2024-03-01T15:00:00Z', '2024-02-29T15:00:00.000Z', '2024-03-31T15:00:00.000Z'],
+      // Âncora 29/02 em ano não bissexto -> ajusta para 28/02 e recupera dia 29 em março
+      ['2024-02-29T15:00:00Z', '2025-02-28T15:00:00Z', '2025-02-28T15:00:00.000Z', '2025-03-29T15:00:00.000Z']
+    ];
+    for (const [cicloInicio, agora, espInicio, espFim] of casos) {
+      const r = await comoServidor(db, tx =>
+        tx.query<{ inicio: string; fim: string }>(
+          'select inicio, fim from public.janela_mensal_do_ciclo($1::timestamptz, $2::timestamptz)',
+          [cicloInicio, agora]
+        )
+      );
+      const inicioIso = new Date(r.rows[0].inicio).toISOString();
+      const fimIso = new Date(r.rows[0].fim).toISOString();
+      const agoraMs = new Date(agora).getTime();
+      assert.strictEqual(inicioIso, espInicio, `inicio para ${cicloInicio} em ${agora}`);
+      assert.strictEqual(fimIso, espFim, `fim para ${cicloInicio} em ${agora}`);
+      assert.ok(new Date(inicioIso).getTime() <= agoraMs && agoraMs < new Date(fimIso).getTime(), `agora deve estar em [inicio, fim) para ${agora}`);
+    }
+
+    const rafa = await criarUsuario(db, 'rafa@exemplo.com');
+    await db.query("insert into public.assinaturas (usuario_id, plano_id, situacao, ciclo_inicio) values ($1, 'essencial', 'ativa', '2026-01-31T15:00:00Z')", [rafa]);
+    const vigente = await comoServidor(db, tx =>
+      tx.query<{ inicio: string; fim: string; ok_agora: boolean }>(
+        'select inicio, fim, (inicio <= now() and now() < fim) as ok_agora from public.plano_vigente($1)',
+        [rafa]
+      )
+    );
+    assert.strictEqual(vigente.rows[0].ok_agora, true, 'plano_vigente sempre devolve janela contendo now()');
+    const a1 = await iniciar(db, rafa);
+    assert.strictEqual(a1.ok, true);
+    assert.strictEqual(a1.restantes, 39, 'análise recém-iniciada entra na janela do ciclo');
+
+    await assert.rejects(como(db, null, tx => tx.query("select * from public.janela_mensal_do_ciclo('2026-01-31T15:00:00Z', now())")), /permission denied/);
+    await assert.rejects(como(db, rafa, tx => tx.query("select * from public.janela_mensal_do_ciclo('2026-01-31T15:00:00Z', now())")), /permission denied/);
+  });
+
   it('um usuário não lê as análises nem as assinaturas de outro', async () => {
     const otto = await criarUsuario(db, 'otto@exemplo.com');
     const paula = await criarUsuario(db, 'paula@exemplo.com');
