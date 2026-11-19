@@ -4,14 +4,15 @@
 
 **Plataforma de Inteligência e Rigor Jurídico**
 
-Quatro ferramentas para a prática forense: cálculo determinístico onde há regra e fonte à vista onde há dado.
+*Cálculo determinístico onde há regra. Fonte oficial à vista onde há dado. IA apenas onde agrega leitura.*
 
 [![CI](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml/badge.svg)](https://github.com/junior-aguiar-eng/Ratione/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6.svg)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000.svg)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6.svg)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL%20%2B%20RLS-3ECF8E.svg)](https://supabase.com/)
 
-[**Acessar o site**](https://ratione.nexojuris.ia.br) · [Plano do projeto](docs/PLANO.md) · [Documentação](docs/README.md) · [Metodologia](apps/web/src/app/metodologia)
+[**Acessar o site**](https://ratione.nexojuris.ia.br) · [**Metodologia**](apps/web/src/app/metodologia) · [**Documentação**](docs/README.md) · [**Plano**](docs/PLANO.md)
 
 </div>
 
@@ -19,91 +20,60 @@ Quatro ferramentas para a prática forense: cálculo determinístico onde há re
 
 ## O que é
 
-O Ratione não é um assistente genérico de chat. A pergunta do produto é **"o que você quer fazer?"**, e cada resposta é uma ferramenta com escopo, método e responsabilidade próprios. A IA é um recurso opcional e medido, e só entra onde o dado jurídico já está resolvido.
+O **Ratione** não é um chat jurídico genérico. Cada necessidade do dia a dia forense tem uma **ferramenta própria**, com método explícito, vínculo à fonte oficial e separação rigorosa entre código determinístico e inteligência artificial:
 
-| Ferramenta | Pergunta que responde | Natureza |
+| Módulo | Pergunta que responde | Motor |
 |---|---|---|
-| [**PrazoZero**](#-prazozero) | Qual é o prazo e como foi calculado? | 100% determinística, **sem IA** |
-| [**NormaViva**](#-normaviva) | Qual era o texto desta norma em tal data? | Bitemporal determinística (IA só para explicar) |
-| [**TeseMap**](#-tesemap) | Como esta tese se liga a outras autoridades? | Grafo curado, com validação humana |
-| [**Argumenta**](#-argumenta) | Como esta decisão argumenta? | Estrutural, com IA |
-
-Na página inicial, uma **janela interativa** demonstra cada ferramenta: o PrazoZero e o NormaViva rodam os motores reais no navegador, o TeseMap mostra as relações validadas do Tema 1.076/STJ e o Argumenta, um exemplo ilustrativo (rotulado como tal).
+| ⏱️ [**PrazoZero**](#%EF%B8%8F-prazozero) | *Qual é o prazo final e por que cada dia contou?* | **100% determinístico** (sem IA) |
+| 📜 [**NormaViva**](#-normaviva) | *Qual era o texto exato desta lei em determinada data?* | **Bitemporal determinístico** |
+| 🕸️ [**TeseMap**](#%EF%B8%8F-tesemap) | *Como este precedente se relaciona com outras autoridades?* | **Grafo curado** (validação humana) |
+| ⚖️ [**Argumenta**](#%EF%B8%8F-argumenta) | *Como esta decisão estrutura questões, fundamentos e citações?* | **Pipeline híbrido** (privacidade local + IA) |
 
 ---
 
-## Funcionalidades
+## Os 4 módulos
 
 ### ⏱️ PrazoZero
-
-Cálculo de prazos processuais com **memória auditável**: o resultado mostra a data final, o dia a dia da contagem e o ato que excluiu cada dia não útil.
-
-- **Regimes:** CPC (dias úteis), CLT (arts. 775 e 775-A), Juizados Especiais (Lei 9.099, art. 12-A) e CPP (dias corridos, arts. 798 e 798-A), além dos prazos próprios de STF e STJ (recesso e férias coletivas).
-- **Prazos materiais** (mandado de segurança e ação rescisória) calculados à parte: decadência não se suspende.
-- **Calendário forense em camadas:** regras de contagem, prazos diferenciados (Fazenda, MP, Defensoria, litisconsortes), feriados nacionais, suspensões, recesso e eventos locais. Cada dia não útil aponta o ato de origem (ato, URL e data).
-- **Modo conservador:** mostra a data mais cedo, com base verificada, e avisa qual dia pendente poderia alterá-la.
-- **Calendários de 2026 carregados** para STF, STJ, TST, os 6 TRFs, os 27 Tribunais de Justiça e os 24 TRTs, cada um com a fonte registrada. Onde o ato do tribunal ainda não foi lido por inteiro, o calendário fica sem selo e aparece apenas como data alternativa. Os atos de 2027 dependem das portarias que ainda vão sair.
-- **Feriado municipal:** não é calculado por padrão; o sistema avisa e exige comprovação (CPC, art. 1.003, § 6º).
-- Adição do prazo ao calendário e lembretes por conta.
+Contagem de prazos processuais com **memória de cálculo auditável dia a dia**: cada feriado, suspensão ou recesso aponta o ato oficial de origem.
+- **Regimes suportados:** CPC (dias úteis), CLT, Juizados Especiais (Lei 9.099/1995), CPP (dias corridos), além de prazos materiais (MS e ação rescisória).
+- **Cobertura 2026:** STF, STJ, TST, 6 TRFs, 27 TJs e 24 TRTs com fonte registrada e modo conservador para dias pendentes.
+- **Confiabilidade:** validado contra um **oráculo independente em Python** com **415 cenários** revisados juridicamente e **600 entradas aleatórias**.
 
 ### 📜 NormaViva
-
-A **linha do tempo de cada norma**. "Como era o art. X em maio de 2019?" é um resultado determinístico, nunca gerado por IA.
-
-- **28 normas** (CF, códigos e leis de maior uso), com cerca de **29 mil dispositivos** fragmentados em artigo, parágrafo, inciso e alínea (parser LC 95/1998), com texto lido da versão compilada do Planalto.
-- **Pesquisa** por lei, artigo ou assunto (`art. 489 CPC`, `honorários advocatícios`), sem acento e por proximidade.
-- **Texto vigente, redações anteriores e o que mudou**, com a alteração legislativa que causou a mudança. As redações anteriores só aparecem depois de conferidas por revisor jurídico (57 casos validados).
-- **Relações entre dispositivos** (remissões) com ligação ao artigo de destino.
-- **Explicar com IA** o dispositivo, com cota e custo controlados.
-- **Atualização diária:** um workflow relê as normas no Planalto e confere os feeds do Senado; se o texto mudou, abre um alerta para o revisor. Nada é alterado sem aprovação humana.
-- Todo texto exibido traz o link da fonte oficial e a data de leitura.
+Linha do tempo da legislação brasileira compilada diretamente do Planalto, estruturada segundo a LC nº 95/1998.
+- **Acervo:** **28 normas** essenciais (~**29 mil dispositivos** em artigo, parágrafo, inciso e alínea), nunca usando texto tachado como regra.
+- **Consulta temporal e busca:** pesquisa tolerante a acentos, remissões navegáveis e histórico de redações revisado por humano.
+- **Sincronia contínua:** verificação diária contra Planalto e Senado com aprovação humana antes de publicar alterações.
 
 ### 🕸️ TeseMap
-
-O **grafo de precedentes** com o corpus declarado e a data da última atualização visível.
-
-- **7.734 nós** a partir de fontes oficiais: precedentes qualificados e súmulas do STJ, temas de repercussão geral, súmulas e controle concentrado (ADI, ADPF, ADC e ADO com mérito) do STF.
-- **Pesquisa por assunto** (todas as palavras, sem acento) e navegação por um mapa interativo (React Flow).
-- **Relações só aparecem depois de validadas por uma pessoa**, cada uma com trecho literal conferido.
-- **Atalho para o NormaViva** a partir dos dispositivos citados pelos precedentes.
-- **Verificação semanal das fontes:** um workflow avisa quando os dados abertos do STJ mudam ou quando uma entrada manual passa de 90 dias.
+Mapa interativo de precedentes qualificados e súmulas do **STF** e do **STJ**, com pesquisa textual e navegação em grafo (`React Flow`).
+- **Acervo:** **7.734 nós** oficiais (temas repetitivos, repercussão geral, controle concentrado e súmulas).
+- **Rigor nas conexões:** ligações entre precedentes e normas só são exibidas após validação humana com trecho literal conferido.
 
 ### ⚖️ Argumenta
-
-Análise de uma decisão colada em texto. Por enquanto, sem envio de arquivos e sem guardar o documento nem o resultado.
-
-- **Visão geral, estrutura e questões:** tipo e resultado da decisão, as partes (relatório, preliminares, fundamentação, dispositivo) e, para cada questão, a conclusão, o tratamento da alegação e os fundamentos (fato, prova, norma, precedente, doutrina, argumento).
-- **Mapa de argumentos:** por questão, o raciocínio na ordem em que se lê (fatos, normas, precedentes, raciocínio) até a conclusão, e as normas e precedentes citados em toda a decisão. É montado por código, sem custo extra de IA e sem avaliar se a decisão está certa.
-- **Leitura com origem sob demanda:** cada ponto leva ao trecho original, destacado no texto da decisão.
-- **Pseudonimização sempre ligada:** os dados pessoais são substituídos no navegador e a tabela de equivalência nunca sai dele.
-- **Segmentação de PDF do PJe:** remove rodapés e junta frases cortadas.
-- **Selo das citações:** cada norma ou precedente citado é conferido por código contra o NormaViva e o TeseMap e recebe **Encontrada na base** (com link), **Não localizada na base** ou **Fora da base**. O selo diz só se a citação existe na base; não atesta que esteja correta, e só a citação (nunca o texto da decisão) é consultada.
-- **Medido, não presumido:** em 30 decisões públicas com gabarito conferido por revisor jurídico, o modelo acertou o dispositivo em **26**, achou **91 de 101** questões e **160 de 192** citações esperadas, com **0 de 90** saídas descartadas, a cerca de **US$ 0,006 por análise** ([avaliação](docs/produto/ARGUMENTA_AVALIACAO.md)). A amostra é pequena e o resultado oscila entre rodadas: serve para decidir o que melhorar, não é garantia de acerto.
-- **Envio de arquivos (PDF, DOCX) em preparação, desligado:** a base de armazenamento (cifrado, apagado sozinho em 7 dias, excluído com a conta) está pronta, mas só vai ao ar depois de a leitura do texto e das condições do [relatório de impacto](docs/juridico/RIPD_ARGUMENTA.md) estarem cumpridas.
-- Em construção: fragilidades da fundamentação (CPC, art. 489, § 1º) e mapa de argumentos.
+Leitura estruturada de decisões judiciais coladas em texto, sem guardar o documento nem o resultado no servidor.
+- **Privacidade por padrão:** **pseudonimização no navegador** antes de qualquer envio (nomes, OAB, CPF/CNPJ, processos e endereços são trocados localmente).
+- **Rastreabilidade:** separa relatório, preliminares, questões, fundamentos e monta o **mapa de argumentos**, com selo automático conferindo cada citação contra o **NormaViva** e o **TeseMap**.
+- **Avaliação objetiva:** medido em corpus próprio de 30 decisões públicas revisadas ([relatório](docs/produto/ARGUMENTA_AVALIACAO.md)).
 
 ---
 
-## Sua conta
+## Como a confiança funciona
 
-- **Login por e-mail** com confirmação, recuperação de senha e sessão validada no servidor. Logado, o cabeçalho mostra o seu primeiro nome, com um menu para **Minha conta** e **Sair**.
-- **Meu espaço:** normas, teses e cálculos salvos, com limite por conta.
-- **Meu uso:** o que foi consumido, em análises e não em tokens; histórico, falhas que não gastam cota e exportação em CSV.
-- **Planos e cota por análise** (Gratuito, Essencial e Profissional): análise com falha não consome cota. A **cobrança pelo Mercado Pago está implementada em modo de teste e desligada**, até a ativação comercial.
-- **Painel administrativo**, restrito às contas definidas no servidor: estatísticas de uso e custo, margem e gestão de acesso (suspender e reativar), com trilha de auditoria.
-- **Privacidade e retenção mínima:** isolamento por usuário com RLS testada automaticamente; o texto das decisões e o resultado das análises **não ficam guardados**; e uma limpeza diária apaga o que passou do prazo (uso de IA e análises em 13 meses, ações administrativas em 12 meses, avisos de prazo 30 dias depois do vencimento). Conta, perfil e registros salvos ficam até o usuário excluir a conta, o que ele faz sozinho. Política de Privacidade v1.2 e minutas de termos, cookies e IA em [`docs/juridico`](docs/juridico).
-- **IA que não para sem aviso:** se a conta do provedor ficar sem saldo ou a chave for recusada, o servidor registra erro e o alerta por e-mail dispara ([`docs/deploy/CLOUD_RUN.md`](docs/deploy/CLOUD_RUN.md)).
+```mermaid
+flowchart LR
+    A["Entrada do usuário"] --> B{"Há regra exata?"}
+    B -- "Sim (Prazos / Leis / Grafo)" --> C["Motor Determinístico + Banco Curado"]
+    B -- "Leitura estrutural (Argumenta)" --> D["Pseudonimização Local no Navegador"]
+    D --> E["IA com Esquema Fechado (Zod)"]
+    E --> F["Conferência por Código no NormaViva / TeseMap"]
+    C --> G["Resultado com Fonte Oficial e Data"]
+    F --> G
+```
 
----
-
-## Por que confiar nos resultados
-
-- **Prazos conferidos por um oráculo independente.** Um programa em Python, sem código em comum com o motor, confere **415 cenários fixos** e **600 entradas aleatórias**, além de testes de propriedades. Os 415 cenários foram validados um a um por revisão jurídica ([`REVISAO_CENARIOS.md`](docs/produto/REVISAO_CENARIOS.md)).
-- **Sem mock.** NormaViva e TeseMap leem dados reais; cada registro guarda a fonte oficial e a data de leitura.
-- **Validação humana no que é jurídico.** Redação anterior, relação do grafo e calendário só entram depois de conferidos por uma pessoa e registrados em [`VERIFICACAO_FONTES.md`](docs/produto/VERIFICACAO_FONTES.md).
-- **Só a versão compilada da lei.** Trecho tachado nunca é fonte de regra.
-- **A IA não decide o direito.** Ela converte, explica e resume; quem soma os dias e escolhe a redação vigente é código.
-- **A IA é medida, não presumida.** A extração do Argumenta (dispositivo, questões e citações) é avaliada contra 30 decisões públicas com gabarito conferido por revisor jurídico, e os resultados, com o custo por análise, estão publicados com seus limites ([`ARGUMENTA_AVALIACAO.md`](docs/produto/ARGUMENTA_AVALIACAO.md); fluxo em [`corpus/LEIA-ME.md`](packages/argumenta/corpus/LEIA-ME.md)). Cada resultado de IA traz o parágrafo de origem, e cada citação recebe um selo de conferência por código.
+- **Sem caixas-pretas:** IA nunca calcula prazo nem escolhe redação vigente de lei.
+- **Isolamento e LGPD:** autenticação via Supabase com **RLS em todas as tabelas**, retenção mínima com limpeza diária automática e exclusão autônoma da conta.
+- **Conta e uso transparentes:** histórico em análises (não em tokens), exportação CSV e painel administrativo isolado no servidor.
 
 ---
 
@@ -111,93 +81,71 @@ Análise de uma decisão colada em texto. Por enquanto, sem envio de arquivos e 
 
 ```text
 Ratione/
-├── apps/
-│   └── web/             # Next.js 16 (App Router), React 19, Tailwind 4, xyflow
+├── apps/web/          # Next.js 16 (App Router), React 19, Tailwind CSS 4, React Flow
 ├── packages/
-│   ├── core/            # Entidades compartilhadas (tribunais, normas, dispositivos, precedentes)
-│   ├── prazozero/       # Motor determinístico de contagem, calendário e memória de cálculo
-│   ├── normaviva/       # Parser LC 95/98, motor temporal e carga do corpus
-│   ├── tesemap/         # Grafo de precedentes, coleta e carga
-│   ├── argumenta/       # Contratos e pipeline de análise da decisão
-│   └── db/              # Testes de segurança por linha (RLS) do esquema Supabase
-├── supabase/
-│   ├── migrations/      # Esquema do banco, aplicado à mão no SQL Editor
-│   └── correcoes/       # Correções de dados do NormaViva
-├── docs/                # Plano, método, fontes, IA, cobrança, operação e minutas jurídicas (índice em docs/README.md)
-└── .github/workflows/   # CI, deploy e atualização diária de normas e TeseMap
+│   ├── core/          # Tipos, tribunais e procedência compartilhada
+│   ├── prazozero/     # Motor de prazos, calendários e oráculo em Python
+│   ├── normaviva/     # Parser LC 95/98, busca e vigência bitemporal
+│   ├── tesemap/       # Coleta e grafo de precedentes (STF/STJ)
+│   ├── argumenta/     # Segmentação, pseudonimização e contratos de análise
+│   └── db/            # Testes de RLS e segurança no PostgreSQL (PGlite)
+├── supabase/          # Migrações SQL versionadas e correções de dados
+├── docs/              # Metodologia, fontes, plano, deploy e documentos jurídicos
+└── .github/workflows/ # CI, deploy no Cloud Run e rotinas de atualização
 ```
 
-| Camada | Tecnologia |
+| Camada | Tecnologias |
 |---|---|
-| Web | Next.js 16, React 19, TypeScript, Tailwind CSS 4 |
-| Grafo | React Flow (`@xyflow/react`) |
-| Banco e login | PostgreSQL no Supabase (São Paulo), RLS em todas as tabelas |
-| IA | Claude (Anthropic SDK), saída estruturada validada com Zod |
-| Cobrança | Mercado Pago (assinaturas e webhook assinado), desligada |
-| Hospedagem | Google Cloud Run |
-| Testes | `node:test` + tsx, PGlite para o banco |
+| **Aplicação** | Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS 4, shadcn/ui, React Flow |
+| **Dados & Auth** | PostgreSQL no Supabase (São Paulo) com Row Level Security (RLS) |
+| **IA** | Anthropic Claude SDK com saída estruturada validada via Zod |
+| **Infra & Testes** | Google Cloud Run, `node:test` + `tsx`, PGlite, Python 3.12 (oráculo) |
 
 ---
 
-## Como executar
+## Como executar localmente
 
-Pré-requisitos: Node.js e [pnpm](https://pnpm.io) 11.
+Pré-requisitos: **Node.js 26** e **[pnpm 11](https://pnpm.io)**.
 
 ```bash
 pnpm install
-cp apps/web/.env.example apps/web/.env.local   # preencha a URL e a chave publicável do Supabase
+cp apps/web/.env.example apps/web/.env.local   # preencha URL e chave publicável do Supabase
 pnpm dev
 ```
 
+<details>
+<summary><strong>Comandos principais de verificação e avaliação</strong></summary>
+
 ```bash
-pnpm test         # todos os pacotes (motor, oráculo, RLS, web)
-pnpm typecheck    # checagem de tipos
-pnpm build        # pacotes e aplicação
-
-# Regenerar o gabarito do oráculo (Python 3), depois de mudar regra ou calendário
-python packages/prazozero/cenarios/oraculo.py
-
-# Corpus de avaliação do Argumenta (criar caso, validar gabarito, rodar e medir)
-pnpm --filter web avaliacao
+pnpm test                                  # suíte completa (motores, oráculo, RLS e web)
+pnpm typecheck                             # verificação de tipos em todo o monorepo
+pnpm build                                 # build dos pacotes e da aplicação web
+python packages/prazozero/cenarios/oraculo.py  # regenera/confere o gabarito do PrazoZero
+pnpm --filter web avaliacao                # executa avaliação do corpus do Argumenta
 ```
 
-O passo a passo do Supabase (projeto, migrações, e-mail e cargas de dados) está em [`supabase/LEIA-ME.md`](supabase/LEIA-ME.md). O deploy está em [`docs/deploy`](docs/deploy).
+</details>
 
 ---
 
-## Documentação
+## Estado atual e documentação
 
-| Documento | Conteúdo |
-|---|---|
-| [`docs/README.md`](docs/README.md) | **Mapa da documentação:** o que cada documento é e como mantê-los |
-| [`docs/PLANO.md`](docs/PLANO.md) | **Plano único:** produto, decisões, roteiro e estado de cada item |
-| [`docs/produto/METODO_CALENDARIO_FORENSE.md`](docs/produto/METODO_CALENDARIO_FORENSE.md) | Método do calendário forense e checklist por tribunal |
-| [`docs/produto/VERIFICACAO_FONTES.md`](docs/produto/VERIFICACAO_FONTES.md) | Fontes lidas e o que ainda falta conferir |
-| [`docs/produto/ARGUMENTA.md`](docs/produto/ARGUMENTA.md) · [`ARGUMENTA_AVALIACAO.md`](docs/produto/ARGUMENTA_AVALIACAO.md) | Análise de decisão (fluxo, etapas e privacidade) e a avaliação com 30 decisões |
-| [`docs/produto/IA_TAREFAS.md`](docs/produto/IA_TAREFAS.md) · [`IA_E_PRECIFICACAO.md`](docs/produto/IA_E_PRECIFICACAO.md) | Catálogo de tarefas de IA, custos e cotas |
-| [`docs/produto/PLANOS_E_COBRANCA.md`](docs/produto/PLANOS_E_COBRANCA.md) | Planos, uso transparente e cobrança (F8) |
-| [`docs/produto/DESIGN_SYSTEM.md`](docs/produto/DESIGN_SYSTEM.md) | Sistema visual: tokens, componentes, névoa de fundo e elevação |
-| [`supabase/LEIA-ME.md`](supabase/LEIA-ME.md) | Banco: índice das migrações, cargas de dados e limpeza por prazo |
-| [`docs/deploy`](docs/deploy) | Deploy no Cloud Run, alertas e o que configurar para a IA não parar |
-| [`docs/juridico`](docs/juridico) | Minutas de termos, privacidade, cookies e IA, para revisão por advogado; o [relatório de impacto do Argumenta](docs/juridico/RIPD_ARGUMENTA.md) (LGPD, art. 38); e a [`AUDITORIA_BETA.md`](docs/juridico/AUDITORIA_BETA.md), que liga cada afirmação das páginas públicas à sua comprovação no código |
+| Módulo | Estado | Detalhes |
+|---|---|---|
+| **PrazoZero, NormaViva, TeseMap** | 🟢 Em produção | Atualizações diárias/semanais e fontes auditadas |
+| **Argumenta** | 🟢 Em produção (beta) | Análise de texto no ar; envio/salvamento de arquivos prontos e desligados |
+| **Planos e Cobrança** | 🟡 Parcial | Cotas por análise ativas; cobrança Mercado Pago desligada até ativação comercial |
+
+- **Índice completo da documentação:** [`docs/README.md`](docs/README.md)
+- **Plano único e roteiro:** [`docs/PLANO.md`](docs/PLANO.md)
+- **Banco e migrações:** [`supabase/LEIA-ME.md`](supabase/LEIA-ME.md)
+- **Deploy e operação:** [`docs/deploy/CLOUD_RUN.md`](docs/deploy/CLOUD_RUN.md)
+- **Conformidade e minutas:** [`docs/juridico`](docs/juridico)
 
 ---
 
-## Estado atual
+<div align="center">
 
-| Módulo | Estado |
-|---|---|
-| PrazoZero | Em produção. Fechado no que depende do projeto; faltam os atos de 2027 |
-| NormaViva | Em produção, com atualização diária das normas |
-| TeseMap | Em produção, com verificação semanal das fontes |
-| Argumenta | Em produção (beta): estrutura, questões, fundamentos e selo das citações, avaliados com 30 decisões. Em construção: fragilidades e mapa de argumentos. Envio de arquivos (PDF, DOCX): base pronta e **desligada**, até a leitura do texto e as condições do relatório de impacto |
-| Planos e cobrança | Planos e cota por análise em produção; **cobrança desligada** até a ativação comercial |
-| Dados e privacidade | Limpeza diária por prazo em produção; Política de Privacidade v1.2 no ar; relatório de impacto do Argumenta (minuta) confirmado pelo responsável |
+Licença [MIT](LICENSE) © Junior Aguiar
 
-O roteiro completo, com o estado de cada item, está no [`PLANO.md`](docs/PLANO.md#10-roteiro-e-estado).
-
----
-
-## Licença
-
-[MIT](LICENSE) © Junior Aguiar
+</div>
