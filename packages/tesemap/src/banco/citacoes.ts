@@ -18,16 +18,21 @@ export interface RemissaoBruta {
   detalhe: string | null;
   escopo: string;
   normaDestinoId: string | null;
+  escopoDestino?: string | null;
 }
+
+const ESCOPOS_BUSCA = ['corpo', 'ADCT', 'decreto', 'anexo-1', 'anexo-2', 'anexo-3'] as const;
 
 export function citacoesNoTexto(texto: string, extrair: (t: string) => RemissaoBruta[], existeDispositivo: (id: string) => boolean): CitacaoNormativa[] {
   const vistas = new Set<string>();
   const saida: CitacaoNormativa[] = [];
   for (const r of extrair(texto)) {
     if (r.escopo !== 'explicito' || !r.normaDestinoId) continue;
-    const dispositivoId = `${r.normaDestinoId}|corpo|art. ${r.artigo}`;
+    const escopos = r.escopoDestino ? [r.escopoDestino, ...ESCOPOS_BUSCA.filter(e => e !== r.escopoDestino)] : ESCOPOS_BUSCA;
+    const dispositivoId = escopos.map(e => `${r.normaDestinoId}|${e}|art. ${r.artigo}`).find(id => existeDispositivo(id));
+    if (!dispositivoId) continue;
     const chave = `${dispositivoId}|${r.detalhe ?? ''}`;
-    if (vistas.has(chave) || !existeDispositivo(dispositivoId)) continue;
+    if (vistas.has(chave)) continue;
     vistas.add(chave);
     saida.push({ normaId: r.normaDestinoId, artigo: r.artigo, detalhe: r.detalhe, dispositivoId });
   }

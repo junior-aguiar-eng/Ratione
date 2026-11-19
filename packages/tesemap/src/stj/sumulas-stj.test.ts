@@ -49,6 +49,15 @@ describe('Súmulas do STJ: leitura do texto do PDF (F4-01)', () => {
     assert.deepEqual(temasRepetitivosNoTexto('ao julgar o REsp (tema repetitivo 1194) e o Tema Repetitivo n. 1.076'), [1076, 1194]);
     assert.deepEqual(temasRepetitivosNoTexto('Tema 6 da repercussão geral'), []);
   });
+
+  it('ignora súmulas atribuídas a outros tribunais (TFR, TST, TSE, TRF, STF) em sumulasCitadas', () => {
+    const texto = bloco(
+      1,
+      'Superada a Súmula 247 do TFR, a Súmula 331/TST, a Súmula 10 do TRF1 e TSE, Súmula 5; aplicam-se a Súmula 83 do STJ e a Súmula 7. (CORTE ESPECIAL, julgado em 01/02/2020, DJe 05/02/2020)'
+    );
+    const [s] = lerSumulasStj(texto);
+    assert.deepEqual(s.sumulasCitadas, ['STJ-SUMULA-83', 'STJ-SUMULA-7']);
+  });
 });
 
 describe('Súmulas do STJ no corpus (PDF do SCON de 22/10/2026)', () => {

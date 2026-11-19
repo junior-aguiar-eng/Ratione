@@ -64,13 +64,14 @@ export function numeroEAno(doc: DocumentoDaLista): { numero: string; ano: string
   return n ? { numero: n[1].replace(/\./g, ''), ano: n[2] } : null;
 }
 
-const PERIODOS: Array<[number, number]> = [[2023, 2026], [2019, 2022], [2015, 2018], [2011, 2014], [2007, 2010], [2004, 2006]];
-
 /** URL do ato no Planalto (lei e lei complementar), ou nulo para ano anterior a 2004, que o corpus de vigência não cobre. */
 export function urlPlanaltoDoAto(tipo: string, numero: string, ano: string): string | null {
   if (tipo === 'LCP') return `https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp${numero}.htm`;
-  const p = PERIODOS.find(([a, b]) => Number(ano) >= a && Number(ano) <= b);
-  return p ? `https://www.planalto.gov.br/ccivil_03/_ato${p[0]}-${p[1]}/${ano}/lei/L${numero}.htm` : null;
+  const n = Number(ano);
+  if (!Number.isInteger(n) || n < 2004) return null;
+  const ini = n <= 2006 ? 2004 : 2007 + Math.floor((n - 2007) / 4) * 4;
+  const fim = ini === 2004 ? 2006 : ini + 3;
+  return `https://www.planalto.gov.br/ccivil_03/_ato${ini}-${fim}/${ano}/lei/L${numero}.htm`;
 }
 
 /** Ação do Senado que não muda o texto: o dispositivo foi vetado ("Acréscimo Vetado", "Alteração Vetada", "Vetado"). */

@@ -43,26 +43,52 @@ export interface Variante {
 
 const semAcento = (t: string) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
+/**
+ * Remove acentos mantendo um mapa caractere-a-caractere com os offsets exatos na string original (UTF-16),
+ * evitando deslocamento quando a entrada chega decomposta (NFD).
+ */
+function mapearSemAcento(consulta: string): { base: string; posicoes: Array<{ ini: number; fim: number }> } {
+  const posicoes: Array<{ ini: number; fim: number }> = [];
+  let base = '';
+  for (let i = 0; i < consulta.length; ) {
+    const cp = consulta.codePointAt(i)!;
+    const step = cp > 0xffff ? 2 : 1;
+    const limpo = consulta.slice(i, i + step).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    if (limpo.length === 0) {
+      if (posicoes.length > 0) posicoes[posicoes.length - 1].fim = i + step;
+    } else {
+      for (let k = 0; k < limpo.length; k++) {
+        base += limpo[k];
+        posicoes.push({ ini: i, fim: i + step });
+      }
+    }
+    i += step;
+  }
+  return { base, posicoes };
+}
+
 /** Troca, uma expressão por vez, o trecho da consulta que casa com um grupo. Expressões mais longas casam antes das curtas. */
 export function variantesDaConsulta(consulta: string, grupos: string[][] = GRUPOS_DE_SINONIMOS): Variante[] {
-  const base = semAcento(consulta);
+  const { base, posicoes } = mapearSemAcento(consulta);
   const achadas = grupos
     .flatMap(g => g.map(termo => ({ g, termo })))
     .sort((a, b) => b.termo.length - a.termo.length);
   const variantes: Variante[] = [];
   const cobertos: Array<[number, number]> = [];
-  const vistos = new Set<string>([semAcento(consulta).trim()]);
+  const vistos = new Set<string>([base.trim()]);
   for (const { g, termo } of achadas) {
     const re = new RegExp(String.raw`(^|[^\p{L}\p{N}])(${semAcento(termo).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(?![\p{L}\p{N}])`, 'u');
     const m = re.exec(base);
     if (!m) continue;
     const ini = m.index + m[1].length;
     const fim = ini + m[2].length;
-    if (cobertos.some(([a, b]) => ini < b && fim > a)) continue; // "demissão por justa causa" já cobriu "justa causa"
+    if (ini >= fim || cobertos.some(([a, b]) => ini < b && fim > a)) continue; // "demissão por justa causa" já cobriu "justa causa"
     cobertos.push([ini, fim]);
+    const origIni = posicoes[ini].ini;
+    const origFim = posicoes[fim - 1].fim;
     for (const outro of g) {
       if (outro === termo) continue;
-      const nova = `${consulta.slice(0, ini)}${outro}${consulta.slice(fim)}`;
+      const nova = `${consulta.slice(0, origIni)}${outro}${consulta.slice(origFim)}`;
       const chave = semAcento(nova).trim();
       if (vistos.has(chave)) continue;
       vistos.add(chave);

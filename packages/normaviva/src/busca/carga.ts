@@ -253,12 +253,18 @@ async function gravar(db: ExecutorSql, tabela: keyof typeof COLUNAS, linhas: unk
 
 /**
  * Liga cada remissão ao dispositivo de destino quando a norma e o artigo existem no corpus (rodar depois de carregar as normas).
- * Pega a primeira ocorrência do rótulo no corpo, que é a numeração original quando a página repete um bloco.
+ * 1) Remissões internas (`mesma`, `presumido`) ligam primeiro no mesmo escopo da origem (ex.: ADCT -> ADCT).
+ * 2) Demais remissões ligam em qualquer escopo (`corpo` tem preferência sobre `ADCT`, `decreto`, `anexo-N`).
  */
 export async function resolverDestinos(db: ExecutorSql): Promise<void> {
   await db.query(`
     update public.relacoes r set destino_id = d.id
-    from (select distinct on (norma_id, rotulo) id, norma_id, rotulo from public.dispositivos where escopo = 'corpo' order by norma_id, rotulo, ordem) d
+    from (select distinct on (norma_id, escopo, rotulo) id, norma_id, escopo, rotulo from public.dispositivos order by norma_id, escopo, rotulo, ordem) d
+    where r.tipo = 'remete' and r.destino_id is null and r.escopo in ('mesma', 'presumido')
+      and r.destino_norma_id = d.norma_id and d.escopo = split_part(r.origem_id, '|', 2) and r.destino_rotulo = d.rotulo`);
+  await db.query(`
+    update public.relacoes r set destino_id = d.id
+    from (select distinct on (norma_id, rotulo) id, norma_id, rotulo from public.dispositivos order by norma_id, rotulo, (escopo <> 'corpo'), ordem) d
     where r.tipo = 'remete' and r.destino_id is null and r.destino_norma_id = d.norma_id and r.destino_rotulo = d.rotulo`);
 }
 

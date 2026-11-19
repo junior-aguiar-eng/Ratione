@@ -114,6 +114,11 @@ export function lerProcessos(csv: string): Map<string, ProcessoDoPrecedente[]> {
   return porSeq;
 }
 
+/** Reconhece situação de cancelamento do STJ, inclusive qualificadores ("Cancelado", "Cancelada", "Cancelado (Parcial)"). */
+export function ehSituacaoCancelada(situacao: string): boolean {
+  return /^cancelad[oa](?:\s|$|[-–—(/])/i.test(situacao.trim());
+}
+
 /** Junta as linhas repetidas de cada precedente, somando os Temas de Repercussão Geral ligados, e anexa os processos. */
 export function lerPrecedentes(temasCsv: string, processosCsv: string): PrecedenteStj[] {
   const linhas = lerCsv(temasCsv);
@@ -141,7 +146,7 @@ export function lerPrecedentes(temasCsv: string, processosCsv: string): Preceden
       dataJulgamento: dataOuNula(l.dataJulgamento),
       dataPublicacaoAcordao: dataOuNula(l.dataPublicacaoAcordao),
       situacao,
-      cancelado: /^cancelad[oa]$/i.test(situacao),
+      cancelado: ehSituacaoCancelada(situacao),
       questao: textoOuNulo(l.questaoSubmetidaAJulgamento),
       tese: textoOuNulo(l.teseFirmada),
       informacoesComplementares: textoOuNulo(l.informacoesComplementares),

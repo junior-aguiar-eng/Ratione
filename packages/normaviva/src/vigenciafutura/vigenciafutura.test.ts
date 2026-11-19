@@ -53,6 +53,13 @@ describe('Cláusula de vigência', () => {
     const texto = 'Art. 3º O art. 10 passa a ter a redação: "Art. 10. A norma entra em vigor em 1º de março de 2030." (NR) Art. 4º Esta Lei entra em vigor na data de sua publicação.';
     assert.deepEqual(lerVigencia(clausulaDeVigencia(texto), texto), { tipo: 'publicacao' });
   });
+
+  it('cláusula com quebras de linha no texto bruto não falha no slice nem deixa de detectar efeitos futuros', () => {
+    const bruto = 'Art. 14.\n  Esta Lei\nentra em vigor na data de sua publicação.\nParágrafo único. Esta Lei produzirá efeitos a partir de 2027.';
+    const clausula = clausulaDeVigencia(bruto);
+    assert.equal(lerVigencia(clausula, bruto).tipo, 'complexa');
+    assert.deepEqual(lerVigencia('Art. 2º Esta Lei entra em vigor na data de sua publicação.', ''), { tipo: 'publicacao' });
+  });
 });
 
 describe('Aviso por artigo', () => {
@@ -80,8 +87,10 @@ describe('Aviso por artigo', () => {
 });
 
 describe('Endereço do ato no Planalto', () => {
-  it('lei e lei complementar do período atual', () => {
+  it('lei e lei complementar do período atual e quadriênios futuros (2027+)', () => {
     assert.equal(urlPlanaltoDoAto('LEI-n', '15371', '2026'), 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/L15371.htm');
+    assert.equal(urlPlanaltoDoAto('LEI-n', '16000', '2027'), 'https://www.planalto.gov.br/ccivil_03/_ato2027-2030/2027/lei/L16000.htm');
+    assert.equal(urlPlanaltoDoAto('LEI-n', '17000', '2031'), 'https://www.planalto.gov.br/ccivil_03/_ato2031-2034/2031/lei/L17000.htm');
     assert.equal(urlPlanaltoDoAto('LCP', '214', '2025'), 'https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp214.htm');
     assert.equal(urlPlanaltoDoAto('LEI-n', '13105', '2015'), 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/L13105.htm');
     assert.equal(urlPlanaltoDoAto('LEI-n', '1', '1999'), null);

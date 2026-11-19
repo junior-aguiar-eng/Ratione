@@ -28,11 +28,46 @@ export const NORMAS_CONHECIDAS: NormaConhecida[] = [
   { id: 'LEI-11340-2006', siglas: [], nomes: ['lei maria da penha'] },
   { id: 'LEI-9503-1997', siglas: ['CTB'], nomes: ['código de trânsito brasileiro'] },
   { id: 'LEI-7210-1984', siglas: ['LEP'], nomes: ['lei de execução penal'] },
-  { id: 'LEI-9099-1995', siglas: [], nomes: ['lei dos juizados especiais'] }
+  { id: 'LEI-9099-1995', siglas: [], nomes: ['lei dos juizados especiais'] },
+  {
+    id: 'LEI-8112-1990',
+    siglas: ['RJU'],
+    nomes: [
+      'regime jurídico dos servidores públicos civis da união',
+      'estatuto dos servidores públicos civis da união',
+      'estatuto dos servidores públicos federais'
+    ]
+  },
+  { id: 'LEI-8213-1991', siglas: ['PBPS'], nomes: ['planos de benefícios da previdência social', 'lei de benefícios da previdência social'] },
+  { id: 'LEI-8245-1991', siglas: [], nomes: ['lei do inquilinato', 'lei de locações', 'lei das locações'] },
+  { id: 'LEI-9307-1996', siglas: [], nomes: ['lei de arbitragem', 'lei da arbitragem'] },
+  { id: 'LEI-6830-1980', siglas: ['LEF'], nomes: ['lei de execução fiscal', 'lei das execuções fiscais'] },
+  { id: 'LEI-7347-1985', siglas: ['LACP'], nomes: ['lei da ação civil pública', 'lei de ação civil pública'] },
+  {
+    id: 'LEI-11101-2005',
+    siglas: ['LREF'],
+    nomes: ['lei de recuperação judicial, extrajudicial e falência', 'lei de recuperação judicial', 'lei de falências', 'lei de recuperação e falências']
+  },
+  { id: 'LEI-11343-2006', siglas: [], nomes: ['lei de drogas', 'lei antidrogas', 'lei de tóxicos'] },
+  { id: 'LEI-11419-2006', siglas: [], nomes: ['lei do processo eletrônico', 'lei de informatização do processo judicial'] },
+  { id: 'LEI-12016-2009', siglas: ['LMS'], nomes: ['lei do mandado de segurança'] }
 ];
 
+const IDS_CONHECIDOS = new Set(NORMAS_CONHECIDAS.map(n => n.id));
 const POR_SIGLA = new Map(NORMAS_CONHECIDAS.flatMap(n => n.siglas.map(s => [s, n.id] as const)));
 const POR_NOME = NORMAS_CONHECIDAS.flatMap(n => n.nomes.map(nome => [nome, n.id] as const)).sort((a, b) => b[0].length - a[0].length);
+
+export function estaNoCorpus(normaId: string): boolean {
+  return IDS_CONHECIDOS.has(normaId);
+}
+
+/** Reconhece citação a escopo específico de uma norma do corpus (hoje: ADCT da Constituição Federal). */
+export function escopoEspecialNoInicio(trecho: string): { normaId: string; escopoDestino: string } | undefined {
+  if (/^ADCT(?![\p{L}\p{N}])/u.test(trecho) || /^ato\s+das\s+disposi[çc][õo]es\s+constitucionais\s+transit[óo]rias\b/i.test(trecho)) {
+    return { normaId: 'CF-1988', escopoDestino: 'ADCT' };
+  }
+  return undefined;
+}
 
 export function normaPorSigla(texto: string): string | undefined {
   return POR_SIGLA.get(texto.replace(/[.\s]/g, '').toUpperCase());

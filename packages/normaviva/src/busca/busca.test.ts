@@ -4,7 +4,9 @@ import { join } from 'node:path';
 import type { PGlite } from '@electric-sql/pglite';
 import { criarBanco, como } from '@ratione/db/harness';
 import { interpretarConsulta } from './consulta';
+import { NORMAS_CONHECIDAS } from './apelidos';
 import { extrairRemissoes } from './referencias';
+import { NORMAS_PLANALTO } from '../coleta/normas';
 import { inserirNorma, linhasDoCorpus, resolverDestinos } from './carga';
 
 describe('Remissões expressas (F3-05)', () => {
@@ -13,13 +15,27 @@ describe('Remissões expressas (F3-05)', () => {
     assert.deepStrictEqual(r.map(x => [x.artigo, x.detalhe, x.escopo]), [['85', '§ 2º', 'mesma'], ['86', null, 'presumido']]);
   });
 
-  it('norma citada por nome, por sigla ou por número é explícita ou externa', () => {
-    const r = extrairRemissoes('Nos termos do art. 5º da Constituição Federal, do art. 489 do CPC e do art. 7º da Lei nº 9.099, de 1995.');
+  it('norma citada por nome, sigla ou número no corpus é explícita; lei fora do corpus é externa', () => {
+    const r = extrairRemissoes(
+      'Nos termos do art. 5º da Constituição Federal, do art. 489 do CPC, do art. 7º da Lei nº 9.099, de 1995, do art. 5º da Lei nº 8.078/1990 e do art. 2º da Lei nº 9.784, de 1999.'
+    );
     assert.deepStrictEqual(r.map(x => [x.artigo, x.escopo, x.normaDestinoId]), [
       ['5º', 'explicito', 'CF-1988'],
       ['489', 'explicito', 'LEI-13105-2015'],
-      ['7º', 'externo', 'LEI-9099-1995']
+      ['7º', 'explicito', 'LEI-9099-1995'],
+      ['5º', 'explicito', 'LEI-8078-1990'],
+      ['2º', 'externo', 'LEI-9784-1999']
     ]);
+  });
+
+  it('citação ao ADCT aponta para CF-1988 com escopoDestino ADCT e NORMAS_CONHECIDAS cobre as 28 normas', () => {
+    const r = extrairRemissoes('Conforme art. 10 do ADCT e art. 1º da Lei nº 14.133/2021.');
+    assert.deepStrictEqual(r.map(x => [x.artigo, x.escopo, x.normaDestinoId, x.escopoDestino ?? null]), [
+      ['10', 'explicito', 'CF-1988', 'ADCT'],
+      ['1º', 'explicito', 'LEI-14133-2021', null]
+    ]);
+    const conhecidas = new Set(NORMAS_CONHECIDAS.map(n => n.id));
+    for (const n of NORMAS_PLANALTO) assert.ok(conhecidas.has(n.id), `falta ${n.id} em NORMAS_CONHECIDAS`);
   });
 
   it('artigo com letra e milhar: "art. 1.015" e "art. 22-A"', () => {
@@ -171,6 +187,10 @@ describe('Banco do NormaViva com o corpus do Planalto (F3-05)', () => {
     await assert.rejects(como(db, null, tx => tx.query('select resolver_destinos_relacoes()')), /permission denied/);
     const r = await db.query<{ n: number }>('select resolver_destinos_relacoes() as n');
     assert.strictEqual(r.rows[0].n, 0, 'a carga já resolveu tudo o que dava para resolver');
+    const naoCorpo = await db.query<{ n: string }>(
+      "select count(*) as n from relacoes r join dispositivos d on d.id = r.destino_id where r.tipo = 'remete' and d.escopo <> 'corpo'"
+    );
+    assert.ok(Number(naoCorpo.rows[0].n) > 0, 'remissões que apontam para fora do corpo (como ADCT/decreto/anexo) também ligam');
   });
 
   it('visitante lê, mas não escreve (RLS e privilégios)', async () => {
