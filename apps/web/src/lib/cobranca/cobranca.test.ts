@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { cobrancaPronta, lerConfigCobranca, usuarioPodeUsarCobranca } from './config';
 import { acessoUsuarioCobranca, type ContextoDaCobranca } from './contexto';
 import { situacaoAposCobranca, situacaoDaAssinatura, situacaoDaCobranca } from './estados';
-import { assinarAviso, assinaturaValida, idadeDoAvisoEmSegundos, manifesto, partesDaAssinatura } from './webhook';
-import { ErroMp, criarClienteMp } from './mercadopago';
+import { assinarAviso, assinaturaValida, idadeDoAvisoEmSegundos, manifesto, partesDaAssinatura, resolverDataIdAssinado } from './webhook';
+import { ErroMp, criarClienteMp, ehErroJaCanceladaOuInexistenteNoMp } from './mercadopago';
 import { processarAviso, type BancoDaCobranca, type LeituraMp } from './processar';
+import { cancelarAssinaturaDoUsuario, criarEVincularAssinatura } from './operacoes';
 
 describe('Cobrança: configuração (desligada por padrão; em teste, só a lista)', () => {
   it('sem COBRANCA_LIGADA=sim nada funciona, mesmo com credenciais', () => {
@@ -111,6 +112,14 @@ describe('Cobrança: assinatura do webhook (HMAC-SHA256 do manifesto)', () => {
     }
     assert.equal(assinaturaValida(dados({ segredo: '' })), false);
   });
+
+  it('resolverDataIdAssinado exige coerência entre query string assinada e corpo JSON', () => {
+    assert.deepEqual(resolverDataIdAssinado('mp-1', 'mp-1'), { ok: true, dataId: 'mp-1' });
+    assert.deepEqual(resolverDataIdAssinado('mp-1', null), { ok: true, dataId: 'mp-1' });
+    assert.deepEqual(resolverDataIdAssinado(null, null), { ok: true, dataId: null });
+    assert.deepEqual(resolverDataIdAssinado('mp-1', 'mp-2'), { ok: false, motivo: 'divergente' });
+    assert.deepEqual(resolverDataIdAssinado(null, 'mp-2'), { ok: false, motivo: 'nao_assinado' });
+  });
 });
 
 describe('Cobrança: cliente do Mercado Pago', () => {
@@ -168,7 +177,11 @@ describe('Cobrança: cliente do Mercado Pago', () => {
     const put = chamadas.find(c => c.init.method === 'PUT')!;
     assert.deepEqual(JSON.parse(put.init.body as string), { status: 'cancelled' });
     const c = await mp.buscarCobranca('77');
-    assert.deepEqual(c, { id: '77', assinaturaMpId: 'mp-1', status: 'approved', valorCentavos: 2990, pagamentoId: '5551', meio: 'visa', pagaEm: '2026-10-23T10:00:00.000-03:00' });
+    assert.deepEqual(c, { id: '77', assinaturaMpId: 'mp-1', referencia: null, status: 'approved', valorCentavos: 2990, pagamentoId: '5551', meio: 'visa', pagaEm: '2026-10-23T10:00:00.000-03:00' });
+    const cComRef = await cliente(() =>
+      resposta({ id: 78, preapproval_id: 'mp-2', external_reference: 'ref-2', transaction_amount: 79, status: 'approved', payment: { id: 5552, status: 'approved' } })
+    ).mp.buscarCobranca('78');
+    assert.equal(cComRef?.referencia, 'ref-2');
   });
 
   it('o id vai codificado na URL (não dá para injetar caminho)', async () => {
@@ -251,6 +264,109 @@ describe('Cobrança: processamento dos avisos (relê o recurso, nunca confia no 
       assert.equal(await processarAviso({ topico: 'subscription_authorized_payment', recursoId: '77' }, mp, banco), 'ignorado');
       assert.ok(!registro.some(r => r.startsWith('cobranca')));
     }
+  });
+
+  it('aviso pending fora de ordem não rebaixa assinatura ativa, em_atraso ou pausada', async () => {
+    for (const atual of ['ativa', 'em_atraso', 'pausada'] as const) {
+      const { mp, banco, registro } = montar({ id: 'a1', situacao: atual }, assinatura('pending'));
+      assert.equal(await processarAviso({ topico: 'subscription_preapproval', recursoId: 'mp-1' }, mp, banco), 'ignorado');
+      assert.deepEqual(registro, [`achar ${REF} mp-1`]);
+    }
+  });
+
+  it('subscription_authorized_payment faz fallback por external_reference quando mpId não está vinculado', async () => {
+    const registro: string[] = [];
+    const mp: LeituraMp = {
+      buscarAssinatura: async id => (registro.push(`buscarAssinatura ${id}`), assinatura('authorized')),
+      buscarCobranca: async () => ({ ...cobranca('approved'), referencia: null })
+    };
+    const banco: BancoDaCobranca = {
+      acharAssinatura: async p => {
+        registro.push(`achar ${p.referencia ?? '-'} ${p.mpId ?? '-'}`);
+        return p.referencia === REF ? { id: 'a1', situacao: 'em_atraso' } : null;
+      },
+      aplicar: async (id, sit, mpSit) => void registro.push(`aplicar ${id} ${sit} ${mpSit}`),
+      registrarCobranca: async p => void registro.push(`cobranca ${p.assinaturaId} ${p.pagamentoId}`)
+    };
+    assert.equal(await processarAviso({ topico: 'subscription_authorized_payment', recursoId: '77' }, mp, banco), 'aplicado');
+    assert.deepEqual(registro, ['achar - mp-1', 'buscarAssinatura mp-1', `achar ${REF} mp-1`, 'cobranca a1 5551', 'aplicar a1 ativa authorized']);
+
+    const registroDireto: string[] = [];
+    const mpDireto: LeituraMp = {
+      buscarAssinatura: async () => assert.fail('não precisa chamar buscarAssinatura quando a cobrança já traz referencia'),
+      buscarCobranca: async () => ({ ...cobranca('approved'), referencia: REF })
+    };
+    const bancoDireto: BancoDaCobranca = {
+      acharAssinatura: async p => {
+        registroDireto.push(`achar ${p.referencia ?? '-'} ${p.mpId ?? '-'}`);
+        return p.referencia === REF ? { id: 'a1', situacao: 'ativa' } : null;
+      },
+      aplicar: async () => undefined,
+      registrarCobranca: async p => void registroDireto.push(`cobranca ${p.assinaturaId} ${p.pagamentoId}`)
+    };
+    assert.equal(await processarAviso({ topico: 'subscription_authorized_payment', recursoId: '77' }, mpDireto, bancoDireto), 'aplicado');
+    assert.deepEqual(registroDireto, ['achar - mp-1', `achar ${REF} mp-1`, 'cobranca a1 5551']);
+  });
+});
+
+describe('Cobrança: compensação simétrica em assinar e cancelar', () => {
+  const nova = { motivo: 'Ratione', referencia: 'a1', email: 'ana@exemplo.com', valorCentavos: 2900, backUrl: 'https://x', fim: new Date() };
+
+  it('criarEVincularAssinatura cancela a assinatura recém-criada no MP se vincularAoMp falhar', async () => {
+    const passos: string[] = [];
+    const erros: string[] = [];
+    await assert.rejects(
+      criarEVincularAssinatura({
+        mp: {
+          criarAssinatura: async () => ({ id: 'mp-nova', status: 'pending', referencia: 'a1', proximaCobranca: null, linkDePagamento: 'https://mp/pay' }),
+          cancelarAssinatura: async id => void passos.push(`cancelarMp:${id}`)
+        },
+        nova,
+        vincular: async () => {
+          throw new Error('falha no banco');
+        },
+        cancelarLocal: async () => void passos.push('cancelarLocal'),
+        registrarErro: m => erros.push(m)
+      }),
+      /falha no banco/
+    );
+    assert.deepEqual(passos, ['cancelarMp:mp-nova', 'cancelarLocal']);
+    assert.deepEqual(erros, []);
+  });
+
+  it('cancelarAssinaturaDoUsuario aceita assinatura já cancelada/404 no MP e registra erro 500 se banco falhar após cancelar lá fora', async () => {
+    const eventos: string[] = [];
+    const ok404 = await cancelarAssinaturaDoUsuario({
+      assinatura: { id: 'a1', mpId: 'mp-1', cicloFim: '2026-12-01T00:00:00Z' },
+      mp: {
+        buscarAssinatura: async () => ({ id: 'mp-1', status: 'authorized', referencia: 'a1', proximaCobranca: '2026-12-01T00:00:00Z', linkDePagamento: null }),
+        cancelarAssinatura: async () => {
+          throw new ErroMp('Mercado Pago respondeu 404: not found', 404);
+        }
+      },
+      aplicarCancelada: async fim => void eventos.push(`local:${fim}`),
+      registrarErro: () => assert.fail('404 já cancelado não deve falhar')
+    });
+    assert.deepEqual(ok404, { ok: true, status: 200, cicloFim: '2026-12-01T00:00:00Z' });
+    assert.deepEqual(eventos, ['local:2026-12-01T00:00:00Z']);
+    assert.equal(ehErroJaCanceladaOuInexistenteNoMp(new ErroMp('Mercado Pago respondeu 400: preapproval already cancelled', 400)), true);
+    assert.equal(ehErroJaCanceladaOuInexistenteNoMp(new ErroMp('Mercado Pago respondeu 500', 500)), false);
+
+    const falhasBanco: string[] = [];
+    const res500 = await cancelarAssinaturaDoUsuario({
+      assinatura: { id: 'a1', mpId: 'mp-1', cicloFim: null },
+      mp: {
+        buscarAssinatura: async () => ({ id: 'mp-1', status: 'authorized', referencia: 'a1', proximaCobranca: null, linkDePagamento: null }),
+        cancelarAssinatura: async () => undefined
+      },
+      aplicarCancelada: async () => {
+        throw new Error('timeout DB');
+      },
+      registrarErro: m => falhasBanco.push(m)
+    });
+    assert.equal(res500.ok, false);
+    if (!res500.ok) assert.equal(res500.status, 500);
+    assert.equal(falhasBanco.length, 1);
   });
 });
 

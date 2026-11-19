@@ -49,6 +49,21 @@ export function assinaturaValida(d: DadosDaAssinatura): boolean {
   return recebido.length === esperado.length && timingSafeEqual(recebido, esperado);
 }
 
+/**
+ * Confere coerência entre o `data.id` da query string (validado no manifesto HMAC) e eventual `data.id` do corpo JSON:
+ * se o corpo trouxer um id diferente ou se não houver `data.id` assinado na query, recusa em vez de consultar outro recurso.
+ */
+export function resolverDataIdAssinado(
+  dataIdConsulta: string | null,
+  dataIdCorpo: string | null
+): { ok: true; dataId: string | null } | { ok: false; motivo: 'divergente' | 'nao_assinado' } {
+  const q = dataIdConsulta?.trim() || null;
+  const b = dataIdCorpo?.trim() || null;
+  if (q && b && q !== b) return { ok: false, motivo: 'divergente' };
+  if (!q && b) return { ok: false, motivo: 'nao_assinado' };
+  return { ok: true, dataId: q };
+}
+
 /** Gera a assinatura que o Mercado Pago geraria (para os testes e para simular um aviso em ambiente de teste). */
 export function assinarAviso(segredo: string, dataId: string | null, xRequestId: string | null, ts: string): string {
   const v1 = createHmac('sha256', segredo).update(manifesto(dataId, xRequestId, ts)).digest('hex');

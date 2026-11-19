@@ -18,6 +18,13 @@ export class ErroMp extends Error {
   }
 }
 
+/** Indica resposta do Mercado Pago em que a assinatura já foi cancelada ou não existe mais lá. */
+export function ehErroJaCanceladaOuInexistenteNoMp(erro: unknown): boolean {
+  if (!(erro instanceof ErroMp)) return false;
+  if (erro.status === 404) return true;
+  return (erro.status === 400 || erro.status === 409) && /cancel|not\s*found|inexist|n[aã]o\s*encontrad/i.test(erro.message);
+}
+
 export interface AssinaturaMp {
   id: string;
   status: string;
@@ -32,6 +39,8 @@ export interface AssinaturaMp {
 export interface CobrancaMp {
   id: string;
   assinaturaMpId: string | null;
+  /** Referência externa (`external_reference`) se devolvida pelo Mercado Pago na cobrança. */
+  referencia?: string | null;
   status: string | null;
   valorCentavos: number | null;
   pagamentoId: string | null;
@@ -82,6 +91,7 @@ function lerCobranca(bruta: unknown): CobrancaMp {
   return {
     id,
     assinaturaMpId: texto(o.preapproval_id),
+    referencia: texto(o.external_reference) ?? texto(pagamento.external_reference),
     status: texto(pagamento.status) ?? texto(o.status),
     valorCentavos: valor === null ? null : Math.round(valor * 100),
     pagamentoId,

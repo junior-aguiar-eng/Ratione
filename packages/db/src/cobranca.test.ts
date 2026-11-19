@@ -174,4 +174,19 @@ describe('Cobrança com o Mercado Pago: banco (F8-05)', () => {
     const preco = await como(db, null, tx => tx.query<{ preco: number }>("select preco_mensal_centavos as preco from public.planos where id = 'essencial'"));
     assert.strictEqual(preco.rows[0].preco, 2900);
   });
+
+  it('assinatura_aplicar impede regressão fora de ordem de ativa, em_atraso ou pausada para pendente', async () => {
+    for (const situacaoInicial of ['ativa', 'em_atraso', 'pausada'] as const) {
+      const u = await criarUsuario(db, `reg-${situacaoInicial}@exemplo.com`);
+      const p = await criarPendente(db, u);
+      await aplicar(db, p.assinatura_id, 'ativa', 'authorized', emDias(30));
+      if (situacaoInicial !== 'ativa') await aplicar(db, p.assinatura_id, situacaoInicial, situacaoInicial === 'pausada' ? 'paused' : 'authorized', null);
+      const antes = await linha(db, p.assinatura_id);
+      const retorno = await aplicar(db, p.assinatura_id, 'pendente', 'pending', null);
+      const depois = await linha(db, p.assinatura_id);
+      assert.strictEqual(retorno, situacaoInicial, `deve preservar ${situacaoInicial}`);
+      assert.strictEqual(depois.situacao, situacaoInicial);
+      assert.strictEqual(depois.mp_situacao, antes.mp_situacao);
+    }
+  });
 });
