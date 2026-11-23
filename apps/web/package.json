@@ -12,24 +12,24 @@
     "intimacoes": "tsx scripts/intimacoes.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^1.8.0",
+    "@anthropic-ai/sdk": "^1.11.0",
     "@ratione/argumenta": "workspace:*",
     "@ratione/core": "workspace:*",
     "@ratione/normaviva": "workspace:*",
     "@ratione/prazozero": "workspace:*",
     "@ratione/tesemap": "workspace:*",
     "@supabase/ssr": "^0.12.7",
-    "@supabase/supabase-js": "^2.119.0",
+    "@supabase/supabase-js": "^2.119.2",
     "@xyflow/react": "^12.12.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "docx": "9.15.3",
-    "lucide-react": "^1.72.0",
+    "docx": "9.16.0",
+    "lucide-react": "^1.77.0",
     "next": "^16.4.6",
     "radix-ui": "^1.8.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "tailwind-merge": "^3.0.2",
+    "tailwind-merge": "^3.7.1",
     "zod": "^4.6.6"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "jszip": "3.10.2",
-    "postcss": "^8.5.32",
+    "postcss": "^8.5.33",
     "tailwindcss": "^4.3.5",
     "tsx": "^4.19.3",
     "typescript": "^7.0.2"
